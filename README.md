@@ -12,53 +12,30 @@ yarn add docspace-typescript-sdk
 
 ## Usage
 
-### Example: Working with Account Information
+### Browser
 
 ```typescript
-import { Configuration } from 'docspace-typescript-sdk';
-import { AccountInfoApi } from 'docspace-typescript-sdk';
-import axios from 'axios';
+import { Configuration, ApiClient } from 'docspace-typescript-sdk';
 
-// Create configuration
 const config = new Configuration({
-    basePath: 'https://your-docspace-instance',
-    apiKey: 'your-api-key',
-    baseOptions: {
-        headers: {
-            'Accept': 'application/json'
-        }
-    }
+  basePath: 'https://your-api-endpoint',
+  apiKey: 'your-api-key'
 });
 
-// Create API instance
-const accountApi = new AccountInfoApi(config);
-
-// Get all accounts
-try {
-    const response = await accountApi.getAccounts();
-    console.log('Total accounts:', response.data.count);
-    
-    // Process account information
-    response.data.response?.forEach(account => {
-        console.log(`Account: ${account.displayName} (${account.email})`);
-    });
-} catch (error) {
-    if (axios.isAxiosError(error)) {
-        console.error('API Error:', error.response?.data);
-    }
-}
+const client = new ApiClient(config);
 ```
 
-### Browser Usage
-
-For browser usage, you might want to use environment variables or a configuration service:
+### Node.js
 
 ```typescript
+const { Configuration, ApiClient } = require('docspace-typescript-sdk');
+
 const config = new Configuration({
-    basePath: process.env.DOCSPACE_API_URL,
-    apiKey: process.env.DOCSPACE_API_KEY
+  basePath: 'https://your-api-endpoint',
+  apiKey: 'your-api-key'
 });
-```
+
+const client = new ApiClient(config);```
 
 ## Development
 
