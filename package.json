@@ -1,0 +1,35 @@
+{
+  "name": "docspace-typescript-sdk",
+  "version": "1.0.0",
+  "description": "Universal TypeScript SDK for ASC.Web.Api that works in both browser and Node.js environments",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsup"
+  },
+  "keywords": [
+    "docspace",
+    "sdk",
+    "typescript",
+    "api"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.0.0",
+    "form-data": "^4.0.0"
+  }
+}
