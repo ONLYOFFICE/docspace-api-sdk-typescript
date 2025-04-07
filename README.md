@@ -1,6 +1,6 @@
 # DocSpace TypeScript SDK
 
-A universal TypeScript SDK for ASC.Web.Api that works in both browser and Node.js environments.
+A universal TypeScript SDK for Docspace api that works in both browser and Node.js environments.
 
 ## Installation
 
