@@ -1,14 +1,14 @@
 {
-  "name": "docspace-typescript-sdk",
+  "name": "@onlyoffice/docspace-typescript-sdk",
   "version": "0.0.1",
-  "description": "OpenAPI client for docspace-typescript-sdk",
+  "description": "OpenAPI client for @onlyoffice/docspace-typescript-sdk",
   "author": "OpenAPI-Generator Contributors",
   "keywords": [
     "axios",
     "typescript",
     "openapi-client",
     "openapi-generator",
-    "docspace-typescript-sdk"
+    "@onlyoffice/docspace-typescript-sdk"
   ],
   "license": "Apache-2.0",
   "main": "./dist/index.js",
