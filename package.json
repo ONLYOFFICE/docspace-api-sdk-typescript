@@ -1,6 +1,6 @@
 {
   "name": "docspace-typescript-sdk",
-  "version": "v2",
+  "version": "0.0.1",
   "description": "OpenAPI client for docspace-typescript-sdk",
   "author": "OpenAPI-Generator Contributors",
   "keywords": [
