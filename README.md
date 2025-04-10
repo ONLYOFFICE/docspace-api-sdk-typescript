@@ -1,49 +1,46 @@
-# DocSpace TypeScript SDK
+## docspace-typescript-sdk@v2
 
-A universal TypeScript SDK for ASC.Web.Api that works in both browser and Node.js environments.
+This generator creates TypeScript/JavaScript client that utilizes [axios](https://github.com/axios/axios). The generated Node module can be used in the following environments:
 
-## Installation
+Environment
+* Node.js
+* Webpack
+* Browserify
 
-```bash
-npm install docspace-typescript-sdk
-# or
-yarn add docspace-typescript-sdk
+Language level
+* ES5 - you must have a Promises/A+ library installed
+* ES6
+
+Module system
+* CommonJS
+* ES6 module system
+
+It can be used in both TypeScript and JavaScript. In TypeScript, the definition will be automatically resolved via `package.json`. ([Reference](https://www.typescriptlang.org/docs/handbook/declaration-files/consumption.html))
+
+### Building
+
+To build and compile the typescript sources to javascript use:
 ```
-
-## Usage
-
-### Browser
-
-```typescript
-import { Configuration, ApiClient } from 'docspace-typescript-sdk';
-
-const config = new Configuration({
-  basePath: 'https://your-api-endpoint',
-  apiKey: 'your-api-key'
-});
-
-const client = new ApiClient(config);
-```
-
-### Node.js
-
-```typescript
-const { Configuration, ApiClient } = require('docspace-typescript-sdk');
-
-const config = new Configuration({
-  basePath: 'https://your-api-endpoint',
-  apiKey: 'your-api-key'
-});
-
-const client = new ApiClient(config);```
-
-## Development
-
-1. Build the project:
-```bash
+npm install
 npm run build
 ```
 
-## License
+### Publishing
 
-MIT
+First build the package then run `npm publish`
+
+### Consuming
+
+navigate to the folder of your consuming project and run one of the following commands.
+
+_published:_
+
+```
+npm install docspace-typescript-sdk@v2 --save
+```
+
+_unPublished (not recommended):_
+
+```
+npm install PATH_TO_GENERATED_PACKAGE --save
+```
