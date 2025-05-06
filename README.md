@@ -45,6 +45,66 @@ _unPublished (not recommended):_
 npm install PATH_TO_GENERATED_PACKAGE --save
 ```
 
+<a id="documentation-for-authorization"></a>
+## Documentation For Authorization
+
+
+Authentication schemes defined for the API:
+<a id="asc_auth_key"></a>
+### asc_auth_key
+
+- **Type**: API key
+- **API key parameter name**: asc_auth_key
+- **Location**: Cookie
+
+
+<a id="Basic"></a>
+### Basic
+
+- **Type**: HTTP basic authentication
+
+
+<a id="Bearer"></a>
+### Bearer
+
+- **Type**: Bearer authentication (JWT)
+
+
+<a id="ApiKeyBearer"></a>
+### ApiKeyBearer
+
+- **Type**: API key
+- **API key parameter name**: ApiKeyBearer
+- **Location**: HTTP header
+
+
+<a id="OAuth2"></a>
+### OAuth2
+
+- **Type**: OAuth
+- **Flow**: accessCode
+- **Authorization URL**: 
+- **Scopes**: 
+ - **read**: Read access to protected resources
+ - **write**: Write access to protected resources
+
+
+<a id="OpenId"></a>
+### OpenId
+
+- **Type**: OpenId Connect
+- **OpenId Connect URL**: 
+
+
+<a id="x-signature"></a>
+### x-signature
+
+- **Type**: API key
+- **API key parameter name**: x-signature
+- **Location**: Cookie
+
+
+
 ### Documentation for API Endpoints
 
 All URIs are relative to *http://localhost:8092*
@@ -997,64 +1057,5 @@ Class | Method | HTTP request | Description
  - [WizardRequestsDto](docs/WizardRequestsDto.md)
  - [WizardSettings](docs/WizardSettings.md)
  - [WizardSettingsWrapper](docs/WizardSettingsWrapper.md)
-
-
-<a id="documentation-for-authorization"></a>
-## Documentation For Authorization
-
-
-Authentication schemes defined for the API:
-<a id="asc_auth_key"></a>
-### asc_auth_key
-
-- **Type**: API key
-- **API key parameter name**: asc_auth_key
-- **Location**: Cookie
-
-
-<a id="Basic"></a>
-### Basic
-
-- **Type**: HTTP basic authentication
-
-
-<a id="Bearer"></a>
-### Bearer
-
-- **Type**: Bearer authentication (JWT)
-
-
-<a id="ApiKeyBearer"></a>
-### ApiKeyBearer
-
-- **Type**: API key
-- **API key parameter name**: ApiKeyBearer
-- **Location**: HTTP header
-
-
-<a id="OAuth2"></a>
-### OAuth2
-
-- **Type**: OAuth
-- **Flow**: accessCode
-- **Authorization URL**: 
-- **Scopes**: 
- - **read**: Read access to protected resources
- - **write**: Write access to protected resources
-
-
-<a id="OpenId"></a>
-### OpenId
-
-- **Type**: OpenId Connect
-- **OpenId Connect URL**: 
-
-
-<a id="x-signature"></a>
-### x-signature
-
-- **Type**: API key
-- **API key parameter name**: x-signature
-- **Location**: Cookie
 
 
