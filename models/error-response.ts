@@ -15,13 +15,13 @@
 
 
 /**
- * Error response containing a human-readable explanation of the error
+ * The error response containing the human-readable error explanation.
  * @export
  * @interface ErrorResponse
  */
 export interface ErrorResponse {
     /**
-     * 
+     * The human-readable error explanation.
      * @type {string}
      * @memberof ErrorResponse
      */

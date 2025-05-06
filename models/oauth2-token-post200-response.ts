@@ -21,25 +21,25 @@
  */
 export interface Oauth2TokenPost200Response {
     /**
-     * 
+     * The access token issued by the authorization server.
      * @type {string}
      * @memberof Oauth2TokenPost200Response
      */
     'access_token'?: string;
     /**
-     * 
+     * The type of token issued, typically \'Bearer\'.
      * @type {string}
      * @memberof Oauth2TokenPost200Response
      */
     'token_type'?: string;
     /**
-     * 
+     * The number of seconds until the access token expires.
      * @type {number}
      * @memberof Oauth2TokenPost200Response
      */
     'expires_in'?: number;
     /**
-     * 
+     * The token used to obtain a new access token when the current one expires.
      * @type {string}
      * @memberof Oauth2TokenPost200Response
      */

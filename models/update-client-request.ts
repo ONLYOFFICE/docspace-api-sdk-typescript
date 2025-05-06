@@ -15,43 +15,43 @@
 
 
 /**
- * Client update request containing modified client details
+ * The request for updating client details.
  * @export
  * @interface UpdateClientRequest
  */
 export interface UpdateClientRequest {
     /**
-     * The name of the client
+     * The client name.
      * @type {string}
      * @memberof UpdateClientRequest
      */
     'name'?: string;
     /**
-     * The description of the client
+     * The client description
      * @type {string}
      * @memberof UpdateClientRequest
      */
     'description'?: string;
     /**
-     * The logo of the client in base64 format
+     * The client logo in base64 format.
      * @type {string}
      * @memberof UpdateClientRequest
      */
     'logo'?: string;
     /**
-     * Indicates whether PKCE is allowed for the client
+     * Indicates whether PKCE is allowed for the client.
      * @type {boolean}
      * @memberof UpdateClientRequest
      */
     'allow_pkce'?: boolean;
     /**
-     * Indicates whether client is accessible by third-party tenants
+     * Indicates whether the client is accessible by third-party tenants.
      * @type {boolean}
      * @memberof UpdateClientRequest
      */
     'is_public'?: boolean;
     /**
-     * The allowed origins for the client
+     * The allowed origins for the client.
      * @type {Set<string>}
      * @memberof UpdateClientRequest
      */

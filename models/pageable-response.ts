@@ -15,31 +15,31 @@
 
 
 /**
- * 
+ * The response containing paginated data.
  * @export
  * @interface PageableResponse
  */
 export interface PageableResponse {
     /**
-     * 
+     * The paginated data.
      * @type {object}
      * @memberof PageableResponse
      */
     'data'?: object;
     /**
-     * 
+     * The maximum number of results returned per page.
      * @type {number}
      * @memberof PageableResponse
      */
     'limit'?: number;
     /**
-     * 
+     * The identifier of the last retrieved client.
      * @type {string}
      * @memberof PageableResponse
      */
     'last_client_id'?: string;
     /**
-     * 
+     * The creation date of the last retrieved client.
      * @type {string}
      * @memberof PageableResponse
      */

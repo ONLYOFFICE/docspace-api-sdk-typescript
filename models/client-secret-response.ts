@@ -15,13 +15,13 @@
 
 
 /**
- * 
+ * The response containing the regenerated client secret.
  * @export
  * @interface ClientSecretResponse
  */
 export interface ClientSecretResponse {
     /**
-     * 
+     * The newly generated client secret.
      * @type {string}
      * @memberof ClientSecretResponse
      */

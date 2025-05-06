@@ -15,79 +15,79 @@
 
 
 /**
- * Client creation request containing client details
+ * The request parameters for creating a client.
  * @export
  * @interface CreateClientRequest
  */
 export interface CreateClientRequest {
     /**
-     * The name of the client
+     * The client name.
      * @type {string}
      * @memberof CreateClientRequest
      */
     'name'?: string;
     /**
-     * The description of the client
+     * The client description.
      * @type {string}
      * @memberof CreateClientRequest
      */
     'description'?: string;
     /**
-     * The logo of the client in base64 format
+     * The client logo in base64 format.
      * @type {string}
      * @memberof CreateClientRequest
      */
     'logo'?: string;
     /**
-     * The scopes for the client
+     * The client scopes.
      * @type {Set<string>}
      * @memberof CreateClientRequest
      */
     'scopes'?: Set<string>;
     /**
-     * Indicates whether PKCE is allowed for the client
+     * Indicates whether PKCE is allowed for the client.
      * @type {boolean}
      * @memberof CreateClientRequest
      */
     'allow_pkce'?: boolean;
     /**
-     * Indicates if the client is public
+     * Indicates whether the client is accessible by third-party tenants.
      * @type {boolean}
      * @memberof CreateClientRequest
      */
     'is_public'?: boolean;
     /**
-     * The website URL of the client
+     * The URL to the client\'s website.
      * @type {string}
      * @memberof CreateClientRequest
      */
     'website_url'?: string;
     /**
-     * The terms URL of the client
+     * The URL to the client\'s terms of service.
      * @type {string}
      * @memberof CreateClientRequest
      */
     'terms_url'?: string;
     /**
-     * The policy URL of the client
+     * The URL to the client\'s privacy policy.
      * @type {string}
      * @memberof CreateClientRequest
      */
     'policy_url'?: string;
     /**
-     * The redirect URIs for the client
+     * The list of allowed redirect URIs.
      * @type {Set<string>}
      * @memberof CreateClientRequest
      */
     'redirect_uris': Set<string>;
     /**
-     * The allowed origins for the client
+     * The list of allowed CORS origins.
      * @type {Set<string>}
      * @memberof CreateClientRequest
      */
     'allowed_origins': Set<string>;
     /**
-     * The logout redirect URI for the client
+     * The list of allowed logout redirect URIs.
      * @type {string}
      * @memberof CreateClientRequest
      */

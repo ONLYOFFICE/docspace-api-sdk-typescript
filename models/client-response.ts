@@ -21,121 +21,121 @@
  */
 export interface ClientResponse {
     /**
-     * 
+     * The client name.
      * @type {string}
      * @memberof ClientResponse
      */
     'name'?: string;
     /**
-     * 
+     * The client description.
      * @type {string}
      * @memberof ClientResponse
      */
     'description'?: string;
     /**
-     * 
+     * The tenant ID associated with the client.
      * @type {number}
      * @memberof ClientResponse
      */
     'tenant'?: number;
     /**
-     * 
+     * The client scopes.
      * @type {Set<string>}
      * @memberof ClientResponse
      */
     'scopes'?: Set<string>;
     /**
-     * 
+     * Specifies if the client is currently enabled or not.
      * @type {boolean}
      * @memberof ClientResponse
      */
     'enabled'?: boolean;
     /**
-     * 
+     * The client identifier issued to the client during registration.
      * @type {string}
      * @memberof ClientResponse
      */
     'client_id'?: string;
     /**
-     * 
+     * The client secret issued to the client during registration.
      * @type {string}
      * @memberof ClientResponse
      */
     'client_secret'?: string;
     /**
-     * 
+     * The URL to the client\'s website.
      * @type {string}
      * @memberof ClientResponse
      */
     'website_url'?: string;
     /**
-     * 
+     * The URL to the client\'s terms of service.
      * @type {string}
      * @memberof ClientResponse
      */
     'terms_url'?: string;
     /**
-     * 
+     * The URL to the client\'s privacy policy.
      * @type {string}
      * @memberof ClientResponse
      */
     'policy_url'?: string;
     /**
-     * 
+     * The URL to the client\'s logo.
      * @type {string}
      * @memberof ClientResponse
      */
     'logo'?: string;
     /**
-     * 
+     * The authentication methods supported by the client.
      * @type {Set<string>}
      * @memberof ClientResponse
      */
     'authentication_methods'?: Set<string>;
     /**
-     * 
+     * The list of allowed redirect URIs.
      * @type {Set<string>}
      * @memberof ClientResponse
      */
     'redirect_uris'?: Set<string>;
     /**
-     * 
+     * The list of allowed CORS origins.
      * @type {Set<string>}
      * @memberof ClientResponse
      */
     'allowed_origins'?: Set<string>;
     /**
-     * 
+     * The list of allowed logout redirect URIs.
      * @type {Set<string>}
      * @memberof ClientResponse
      */
     'logout_redirect_uris'?: Set<string>;
     /**
-     * 
+     * The date and time when the client was created.
      * @type {string}
      * @memberof ClientResponse
      */
     'created_on'?: string;
     /**
-     * 
+     * The user who created the client.
      * @type {string}
      * @memberof ClientResponse
      */
     'created_by'?: string;
     /**
-     * 
+     * The date and time when the client was last modified.
      * @type {string}
      * @memberof ClientResponse
      */
     'modified_on'?: string;
     /**
-     * 
+     * The user who last modified the client.
      * @type {string}
      * @memberof ClientResponse
      */
     'modified_by'?: string;
     /**
-     * 
+     * Indicates whether the client is accessible by third-party tenants.
      * @type {boolean}
      * @memberof ClientResponse
      */

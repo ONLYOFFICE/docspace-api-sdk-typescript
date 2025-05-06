@@ -15,13 +15,13 @@
 
 
 /**
- * Client activation change request
+ * The request parameters for changing the client activation status.
  * @export
  * @interface ChangeClientActivationRequest
  */
 export interface ChangeClientActivationRequest {
     /**
-     * The activation status of the client
+     * The client activation status.
      * @type {boolean}
      * @memberof ChangeClientActivationRequest
      */
