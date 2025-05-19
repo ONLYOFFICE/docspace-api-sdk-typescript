@@ -320,6 +320,12 @@ export interface EmployeeFullDto {
      * @memberof EmployeeFullDto
      */
     'hasPersonalFolder'?: boolean;
+    /**
+     * Indicates whether the user has enabled two-factor authentication (TFA) using an authentication app.
+     * @type {boolean}
+     * @memberof EmployeeFullDto
+     */
+    'tfaAppEnabled'?: boolean | null;
 }
 
 

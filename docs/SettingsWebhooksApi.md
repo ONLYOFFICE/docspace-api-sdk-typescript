@@ -25,16 +25,16 @@ Creates a new tenant webhook with the parameters specified in the request.
 import {
     SettingsWebhooksApi,
     Configuration,
-    WebhooksConfigRequestsDto
+    CreateWebhooksConfigRequestsDto
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsWebhooksApi(configuration);
 
-let webhooksConfigRequestsDto: WebhooksConfigRequestsDto; // (optional)
+let createWebhooksConfigRequestsDto: CreateWebhooksConfigRequestsDto; // (optional)
 
 const { status, data } = await apiInstance.createWebhook(
-    webhooksConfigRequestsDto
+    createWebhooksConfigRequestsDto
 );
 ```
 
@@ -42,7 +42,7 @@ const { status, data } = await apiInstance.createWebhook(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **webhooksConfigRequestsDto** | **WebhooksConfigRequestsDto**|  | |
+| **createWebhooksConfigRequestsDto** | **CreateWebhooksConfigRequestsDto**|  | |
 
 
 ### Return type
@@ -78,16 +78,16 @@ Enables or disables a tenant webhook with the parameters specified in the reques
 import {
     SettingsWebhooksApi,
     Configuration,
-    WebhooksConfigRequestsDto
+    UpdateWebhooksConfigRequestsDto
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsWebhooksApi(configuration);
 
-let webhooksConfigRequestsDto: WebhooksConfigRequestsDto; // (optional)
+let updateWebhooksConfigRequestsDto: UpdateWebhooksConfigRequestsDto; // (optional)
 
 const { status, data } = await apiInstance.enableWebhook(
-    webhooksConfigRequestsDto
+    updateWebhooksConfigRequestsDto
 );
 ```
 
@@ -95,7 +95,7 @@ const { status, data } = await apiInstance.enableWebhook(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **webhooksConfigRequestsDto** | **WebhooksConfigRequestsDto**|  | |
+| **updateWebhooksConfigRequestsDto** | **UpdateWebhooksConfigRequestsDto**|  | |
 
 
 ### Return type
@@ -453,16 +453,16 @@ Updates a tenant webhook with the parameters specified in the request.
 import {
     SettingsWebhooksApi,
     Configuration,
-    WebhooksConfigRequestsDto
+    UpdateWebhooksConfigRequestsDto
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsWebhooksApi(configuration);
 
-let webhooksConfigRequestsDto: WebhooksConfigRequestsDto; // (optional)
+let updateWebhooksConfigRequestsDto: UpdateWebhooksConfigRequestsDto; // (optional)
 
 const { status, data } = await apiInstance.updateWebhook(
-    webhooksConfigRequestsDto
+    updateWebhooksConfigRequestsDto
 );
 ```
 
@@ -470,7 +470,7 @@ const { status, data } = await apiInstance.updateWebhook(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **webhooksConfigRequestsDto** | **WebhooksConfigRequestsDto**|  | |
+| **updateWebhooksConfigRequestsDto** | **UpdateWebhooksConfigRequestsDto**|  | |
 
 
 ### Return type

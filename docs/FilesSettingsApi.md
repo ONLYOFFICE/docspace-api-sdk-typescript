@@ -15,6 +15,7 @@ All URIs are relative to *http://localhost:8092*
 |[**externalShareSocialMedia**](#externalsharesocialmedia) | **PUT** /api/2.0/files/settings/externalsocialmedia | Change the external sharing ability on social networks|
 |[**forcesave**](#forcesave) | **PUT** /api/2.0/files/forcesave | Change the forcesaving ability|
 |[**getAutomaticallyCleanUp**](#getautomaticallycleanup) | **GET** /api/2.0/files/settings/autocleanup | Get the trash bin auto-clearing setting|
+|[**getDocServiceUrl**](#getdocserviceurl) | **GET** /api/2.0/files/docservice | Get the document service URL|
 |[**getFilesModule**](#getfilesmodule) | **GET** /api/2.0/files/info | Get the \&quot;Documents\&quot; information|
 |[**getFilesSettings**](#getfilessettings) | **GET** /api/2.0/files/settings | Get file settings|
 |[**hideConfirmCancelOperation**](#hideconfirmcanceloperation) | **PUT** /api/2.0/files/hideconfirmcanceloperation | Hide confirmation dialog when canceling operations|
@@ -591,6 +592,57 @@ This endpoint does not have any parameters.
 |-------------|-------------|------------------|
 |**200** | The auto-clearing setting properties: auto-clearing or not, a time interval when the auto-clearing will be performed |  -  |
 |**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getDocServiceUrl**
+> DocServiceUrlWrapper getDocServiceUrl()
+
+Returns the URL address of the connected editors.
+
+### Example
+
+```typescript
+import {
+    FilesSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-typescript';
+
+const configuration = new Configuration();
+const apiInstance = new FilesSettingsApi(configuration);
+
+let version: boolean; //Specifies whether to return the editor version or not. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getDocServiceUrl(
+    version
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **version** | [**boolean**] | Specifies whether to return the editor version or not. | (optional) defaults to undefined|
+
+
+### Return type
+
+**DocServiceUrlWrapper**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The document service URL with the editor version specified |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

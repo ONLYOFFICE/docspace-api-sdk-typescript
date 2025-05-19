@@ -52,6 +52,7 @@ Name | Type | Description | Notes
 **createdBy** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] [default to undefined]
 **registrationDate** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
 **hasPersonalFolder** | **boolean** | Specifies if the user has a personal folder or not. | [optional] [default to undefined]
+**tfaAppEnabled** | **boolean** | Indicates whether the user has enabled two-factor authentication (TFA) using an authentication app. | [optional] [default to undefined]
 
 ## Example
 
@@ -105,6 +106,7 @@ const instance: EmployeeFullDto = {
     createdBy,
     registrationDate,
     hasPersonalFolder,
+    tfaAppEnabled,
 };
 ```
 

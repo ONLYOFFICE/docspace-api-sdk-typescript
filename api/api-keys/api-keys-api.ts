@@ -195,6 +195,55 @@ export const ApiKeysApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * Returns current user API key info.
+         * @summary Get user API key info
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getApiKey: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/keys/@self`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns a list of all API keys for the current user.
          * @summary Get user API keys
          * @param {*} [options] Override http request option.
@@ -349,6 +398,18 @@ export const ApiKeysApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns current user API key info.
+         * @summary Get user API key info
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getApiKey(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApiKeyResponseWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getApiKey(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ApiKeysApi.getApiKey']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns a list of all API keys for the current user.
          * @summary Get user API keys
          * @param {*} [options] Override http request option.
@@ -414,6 +475,15 @@ export const ApiKeysApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getAllPermissions(options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns current user API key info.
+         * @summary Get user API key info
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getApiKey(options?: RawAxiosRequestConfig): AxiosPromise<ApiKeyResponseWrapper> {
+            return localVarFp.getApiKey(options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns a list of all API keys for the current user.
          * @summary Get user API keys
          * @param {*} [options] Override http request option.
@@ -476,6 +546,17 @@ export class ApiKeysApi extends BaseAPI {
      */
     public getAllPermissions(options?: RawAxiosRequestConfig) {
         return ApiKeysApiFp(this.configuration).getAllPermissions(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns current user API key info.
+     * @summary Get user API key info
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ApiKeysApi
+     */
+    public getApiKey(options?: RawAxiosRequestConfig) {
+        return ApiKeysApiFp(this.configuration).getApiKey(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

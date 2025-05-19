@@ -16,6 +16,12 @@
 // May contain unused imports in some cases
 // @ts-ignore
 import type { LogoRequest } from './logo-request';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { RoomDataLifetimeDto } from './room-data-lifetime-dto';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { WatermarkRequestDto } from './watermark-request-dto';
 
 /**
  * The parameters for creating a room from a template.
@@ -66,10 +72,40 @@ export interface CreateRoomFromTemplateDto {
      */
     'cover'?: string | null;
     /**
-     * Room quota
+     * The room quota.
      * @type {number}
      * @memberof CreateRoomFromTemplateDto
      */
     'quota'?: number | null;
+    /**
+     * Specifies whether to create a room with indexing.
+     * @type {boolean}
+     * @memberof CreateRoomFromTemplateDto
+     */
+    'indexing'?: boolean | null;
+    /**
+     * Specifies whether to deny downloads from the room.
+     * @type {boolean}
+     * @memberof CreateRoomFromTemplateDto
+     */
+    'denyDownload'?: boolean | null;
+    /**
+     * 
+     * @type {RoomDataLifetimeDto}
+     * @memberof CreateRoomFromTemplateDto
+     */
+    'lifetime'?: RoomDataLifetimeDto;
+    /**
+     * 
+     * @type {WatermarkRequestDto}
+     * @memberof CreateRoomFromTemplateDto
+     */
+    'watermark'?: WatermarkRequestDto;
+    /**
+     * Specifies whether the room to be created is private or not.
+     * @type {boolean}
+     * @memberof CreateRoomFromTemplateDto
+     */
+    'private'?: boolean | null;
 }
 

@@ -39,7 +39,7 @@ export const PortalQuotaApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getQuota: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getPortalQuota: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/portal/quota`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -250,10 +250,10 @@ export const PortalQuotaApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getQuota(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantQuotaWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getQuota(options);
+        async getPortalQuota(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantQuotaWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPortalQuota(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalQuotaApi.getQuota']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PortalQuotaApi.getPortalQuota']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -309,8 +309,8 @@ export const PortalQuotaApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getQuota(options?: RawAxiosRequestConfig): AxiosPromise<TenantQuotaWrapper> {
-            return localVarFp.getQuota(options).then((request) => request(axios, basePath));
+        getPortalQuota(options?: RawAxiosRequestConfig): AxiosPromise<TenantQuotaWrapper> {
+            return localVarFp.getPortalQuota(options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the recommended quota for the current portal.
@@ -357,8 +357,8 @@ export class PortalQuotaApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PortalQuotaApi
      */
-    public getQuota(options?: RawAxiosRequestConfig) {
-        return PortalQuotaApiFp(this.configuration).getQuota(options).then((request) => request(this.axios, this.basePath));
+    public getPortalQuota(options?: RawAxiosRequestConfig) {
+        return PortalQuotaApiFp(this.configuration).getPortalQuota(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -627,6 +627,41 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
+         * Returns the URL address of the connected editors.
+         * @summary Get the document service URL
+         * @param {boolean} [version] Specifies whether to return the editor version or not.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getDocServiceUrl: async (version?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/files/docservice`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (version !== undefined) {
+                localVarQueryParameter['version'] = version;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns the information about the \"Documents\" module.
          * @summary Get the \"Documents\" information
          * @param {*} [options] Override http request option.
@@ -1326,6 +1361,19 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns the URL address of the connected editors.
+         * @summary Get the document service URL
+         * @param {boolean} [version] Specifies whether to return the editor version or not.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getDocServiceUrl(version?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocServiceUrlWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getDocServiceUrl(version, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesSettingsApi.getDocServiceUrl']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns the information about the \"Documents\" module.
          * @summary Get the \"Documents\" information
          * @param {*} [options] Override http request option.
@@ -1583,6 +1631,16 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.getAutomaticallyCleanUp(options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns the URL address of the connected editors.
+         * @summary Get the document service URL
+         * @param {boolean} [version] Specifies whether to return the editor version or not.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getDocServiceUrl(version?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<DocServiceUrlWrapper> {
+            return localVarFp.getDocServiceUrl(version, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns the information about the \"Documents\" module.
          * @summary Get the \"Documents\" information
          * @param {*} [options] Override http request option.
@@ -1826,6 +1884,18 @@ export class FilesSettingsApi extends BaseAPI {
      */
     public getAutomaticallyCleanUp(options?: RawAxiosRequestConfig) {
         return FilesSettingsApiFp(this.configuration).getAutomaticallyCleanUp(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the URL address of the connected editors.
+     * @summary Get the document service URL
+     * @param {boolean} [version] Specifies whether to return the editor version or not.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesSettingsApi
+     */
+    public getDocServiceUrl(version?: boolean, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).getDocServiceUrl(version, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

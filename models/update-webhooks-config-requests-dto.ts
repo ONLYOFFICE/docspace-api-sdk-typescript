@@ -18,59 +18,59 @@
 import type { WebhookTrigger } from './webhook-trigger';
 
 /**
- * The request parameters for creating or updating the webhook configuration.
+ * The request parameters for updating the webhook configuration.
  * @export
- * @interface WebhooksConfigRequestsDto
+ * @interface UpdateWebhooksConfigRequestsDto
  */
-export interface WebhooksConfigRequestsDto {
-    /**
-     * The webhook configuration ID.
-     * @type {number}
-     * @memberof WebhooksConfigRequestsDto
-     */
-    'id'?: number;
+export interface UpdateWebhooksConfigRequestsDto {
     /**
      * The human-readable name of the webhook configuration.
      * @type {string}
-     * @memberof WebhooksConfigRequestsDto
+     * @memberof UpdateWebhooksConfigRequestsDto
      */
     'name': string;
     /**
      * The destination URL where the webhook events will be sent.
      * @type {string}
-     * @memberof WebhooksConfigRequestsDto
+     * @memberof UpdateWebhooksConfigRequestsDto
      */
     'uri': string;
     /**
      * The webhook secret key used to sign the webhook payloads for the security verification.
      * @type {string}
-     * @memberof WebhooksConfigRequestsDto
+     * @memberof UpdateWebhooksConfigRequestsDto
      */
     'secretKey'?: string | null;
     /**
      * Specifies whether the webhook configuration is active or not.
      * @type {boolean}
-     * @memberof WebhooksConfigRequestsDto
+     * @memberof UpdateWebhooksConfigRequestsDto
      */
     'enabled'?: boolean;
     /**
      * Specifies whether the SSL certificate verification is required or not.
      * @type {boolean}
-     * @memberof WebhooksConfigRequestsDto
+     * @memberof UpdateWebhooksConfigRequestsDto
      */
     'ssl'?: boolean;
     /**
      * 
      * @type {WebhookTrigger}
-     * @memberof WebhooksConfigRequestsDto
+     * @memberof UpdateWebhooksConfigRequestsDto
      */
     'triggers'?: WebhookTrigger;
     /**
      * Target ID
      * @type {string}
-     * @memberof WebhooksConfigRequestsDto
+     * @memberof UpdateWebhooksConfigRequestsDto
      */
     'targetId'?: string | null;
+    /**
+     * The webhook configuration ID.
+     * @type {number}
+     * @memberof UpdateWebhooksConfigRequestsDto
+     */
+    'id'?: number;
 }
 
 

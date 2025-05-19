@@ -22,15 +22,17 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
+import type { CreateWebhooksConfigRequestsDto } from '../../models';
+// @ts-ignore
 import type { UnknownWrapper } from '../../models';
+// @ts-ignore
+import type { UpdateWebhooksConfigRequestsDto } from '../../models';
 // @ts-ignore
 import type { WebhookGroupStatus } from '../../models';
 // @ts-ignore
 import type { WebhookRetryRequestsDto } from '../../models';
 // @ts-ignore
 import type { WebhookTrigger } from '../../models';
-// @ts-ignore
-import type { WebhooksConfigRequestsDto } from '../../models';
 // @ts-ignore
 import type { WebhooksConfigWithStatusArrayWrapper } from '../../models';
 // @ts-ignore
@@ -48,11 +50,11 @@ export const SettingsWebhooksApiAxiosParamCreator = function (configuration?: Co
         /**
          * Creates a new tenant webhook with the parameters specified in the request.
          * @summary Create a webhook
-         * @param {WebhooksConfigRequestsDto} [webhooksConfigRequestsDto] 
+         * @param {CreateWebhooksConfigRequestsDto} [createWebhooksConfigRequestsDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createWebhook: async (webhooksConfigRequestsDto?: WebhooksConfigRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createWebhook: async (createWebhooksConfigRequestsDto?: CreateWebhooksConfigRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/settings/webhook`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -91,7 +93,7 @@ export const SettingsWebhooksApiAxiosParamCreator = function (configuration?: Co
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(webhooksConfigRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(createWebhooksConfigRequestsDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -101,11 +103,11 @@ export const SettingsWebhooksApiAxiosParamCreator = function (configuration?: Co
         /**
          * Enables or disables a tenant webhook with the parameters specified in the request.
          * @summary Enable a webhook
-         * @param {WebhooksConfigRequestsDto} [webhooksConfigRequestsDto] 
+         * @param {UpdateWebhooksConfigRequestsDto} [updateWebhooksConfigRequestsDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        enableWebhook: async (webhooksConfigRequestsDto?: WebhooksConfigRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        enableWebhook: async (updateWebhooksConfigRequestsDto?: UpdateWebhooksConfigRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/settings/webhook/enable`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -144,7 +146,7 @@ export const SettingsWebhooksApiAxiosParamCreator = function (configuration?: Co
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(webhooksConfigRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(updateWebhooksConfigRequestsDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -504,11 +506,11 @@ export const SettingsWebhooksApiAxiosParamCreator = function (configuration?: Co
         /**
          * Updates a tenant webhook with the parameters specified in the request.
          * @summary Update a webhook
-         * @param {WebhooksConfigRequestsDto} [webhooksConfigRequestsDto] 
+         * @param {UpdateWebhooksConfigRequestsDto} [updateWebhooksConfigRequestsDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateWebhook: async (webhooksConfigRequestsDto?: WebhooksConfigRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateWebhook: async (updateWebhooksConfigRequestsDto?: UpdateWebhooksConfigRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/settings/webhook`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -547,7 +549,7 @@ export const SettingsWebhooksApiAxiosParamCreator = function (configuration?: Co
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(webhooksConfigRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(updateWebhooksConfigRequestsDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -567,12 +569,12 @@ export const SettingsWebhooksApiFp = function(configuration?: Configuration) {
         /**
          * Creates a new tenant webhook with the parameters specified in the request.
          * @summary Create a webhook
-         * @param {WebhooksConfigRequestsDto} [webhooksConfigRequestsDto] 
+         * @param {CreateWebhooksConfigRequestsDto} [createWebhooksConfigRequestsDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createWebhook(webhooksConfigRequestsDto?: WebhooksConfigRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksConfigWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createWebhook(webhooksConfigRequestsDto, options);
+        async createWebhook(createWebhooksConfigRequestsDto?: CreateWebhooksConfigRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksConfigWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createWebhook(createWebhooksConfigRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SettingsWebhooksApi.createWebhook']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -580,12 +582,12 @@ export const SettingsWebhooksApiFp = function(configuration?: Configuration) {
         /**
          * Enables or disables a tenant webhook with the parameters specified in the request.
          * @summary Enable a webhook
-         * @param {WebhooksConfigRequestsDto} [webhooksConfigRequestsDto] 
+         * @param {UpdateWebhooksConfigRequestsDto} [updateWebhooksConfigRequestsDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async enableWebhook(webhooksConfigRequestsDto?: WebhooksConfigRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksConfigWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.enableWebhook(webhooksConfigRequestsDto, options);
+        async enableWebhook(updateWebhooksConfigRequestsDto?: UpdateWebhooksConfigRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksConfigWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.enableWebhook(updateWebhooksConfigRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SettingsWebhooksApi.enableWebhook']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -676,12 +678,12 @@ export const SettingsWebhooksApiFp = function(configuration?: Configuration) {
         /**
          * Updates a tenant webhook with the parameters specified in the request.
          * @summary Update a webhook
-         * @param {WebhooksConfigRequestsDto} [webhooksConfigRequestsDto] 
+         * @param {UpdateWebhooksConfigRequestsDto} [updateWebhooksConfigRequestsDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateWebhook(webhooksConfigRequestsDto?: WebhooksConfigRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksConfigWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateWebhook(webhooksConfigRequestsDto, options);
+        async updateWebhook(updateWebhooksConfigRequestsDto?: UpdateWebhooksConfigRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksConfigWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateWebhook(updateWebhooksConfigRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SettingsWebhooksApi.updateWebhook']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -699,22 +701,22 @@ export const SettingsWebhooksApiFactory = function (configuration?: Configuratio
         /**
          * Creates a new tenant webhook with the parameters specified in the request.
          * @summary Create a webhook
-         * @param {WebhooksConfigRequestsDto} [webhooksConfigRequestsDto] 
+         * @param {CreateWebhooksConfigRequestsDto} [createWebhooksConfigRequestsDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createWebhook(webhooksConfigRequestsDto?: WebhooksConfigRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksConfigWrapper> {
-            return localVarFp.createWebhook(webhooksConfigRequestsDto, options).then((request) => request(axios, basePath));
+        createWebhook(createWebhooksConfigRequestsDto?: CreateWebhooksConfigRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksConfigWrapper> {
+            return localVarFp.createWebhook(createWebhooksConfigRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Enables or disables a tenant webhook with the parameters specified in the request.
          * @summary Enable a webhook
-         * @param {WebhooksConfigRequestsDto} [webhooksConfigRequestsDto] 
+         * @param {UpdateWebhooksConfigRequestsDto} [updateWebhooksConfigRequestsDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        enableWebhook(webhooksConfigRequestsDto?: WebhooksConfigRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksConfigWrapper> {
-            return localVarFp.enableWebhook(webhooksConfigRequestsDto, options).then((request) => request(axios, basePath));
+        enableWebhook(updateWebhooksConfigRequestsDto?: UpdateWebhooksConfigRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksConfigWrapper> {
+            return localVarFp.enableWebhook(updateWebhooksConfigRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the logs of the webhook activities.
@@ -784,12 +786,12 @@ export const SettingsWebhooksApiFactory = function (configuration?: Configuratio
         /**
          * Updates a tenant webhook with the parameters specified in the request.
          * @summary Update a webhook
-         * @param {WebhooksConfigRequestsDto} [webhooksConfigRequestsDto] 
+         * @param {UpdateWebhooksConfigRequestsDto} [updateWebhooksConfigRequestsDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateWebhook(webhooksConfigRequestsDto?: WebhooksConfigRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksConfigWrapper> {
-            return localVarFp.updateWebhook(webhooksConfigRequestsDto, options).then((request) => request(axios, basePath));
+        updateWebhook(updateWebhooksConfigRequestsDto?: UpdateWebhooksConfigRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksConfigWrapper> {
+            return localVarFp.updateWebhook(updateWebhooksConfigRequestsDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -804,25 +806,25 @@ export class SettingsWebhooksApi extends BaseAPI {
     /**
      * Creates a new tenant webhook with the parameters specified in the request.
      * @summary Create a webhook
-     * @param {WebhooksConfigRequestsDto} [webhooksConfigRequestsDto] 
+     * @param {CreateWebhooksConfigRequestsDto} [createWebhooksConfigRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SettingsWebhooksApi
      */
-    public createWebhook(webhooksConfigRequestsDto?: WebhooksConfigRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsWebhooksApiFp(this.configuration).createWebhook(webhooksConfigRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public createWebhook(createWebhooksConfigRequestsDto?: CreateWebhooksConfigRequestsDto, options?: RawAxiosRequestConfig) {
+        return SettingsWebhooksApiFp(this.configuration).createWebhook(createWebhooksConfigRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Enables or disables a tenant webhook with the parameters specified in the request.
      * @summary Enable a webhook
-     * @param {WebhooksConfigRequestsDto} [webhooksConfigRequestsDto] 
+     * @param {UpdateWebhooksConfigRequestsDto} [updateWebhooksConfigRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SettingsWebhooksApi
      */
-    public enableWebhook(webhooksConfigRequestsDto?: WebhooksConfigRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsWebhooksApiFp(this.configuration).enableWebhook(webhooksConfigRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public enableWebhook(updateWebhooksConfigRequestsDto?: UpdateWebhooksConfigRequestsDto, options?: RawAxiosRequestConfig) {
+        return SettingsWebhooksApiFp(this.configuration).enableWebhook(updateWebhooksConfigRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -905,13 +907,13 @@ export class SettingsWebhooksApi extends BaseAPI {
     /**
      * Updates a tenant webhook with the parameters specified in the request.
      * @summary Update a webhook
-     * @param {WebhooksConfigRequestsDto} [webhooksConfigRequestsDto] 
+     * @param {UpdateWebhooksConfigRequestsDto} [updateWebhooksConfigRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SettingsWebhooksApi
      */
-    public updateWebhook(webhooksConfigRequestsDto?: WebhooksConfigRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsWebhooksApiFp(this.configuration).updateWebhook(webhooksConfigRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public updateWebhook(updateWebhooksConfigRequestsDto?: UpdateWebhooksConfigRequestsDto, options?: RawAxiosRequestConfig) {
+        return SettingsWebhooksApiFp(this.configuration).updateWebhook(updateWebhooksConfigRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

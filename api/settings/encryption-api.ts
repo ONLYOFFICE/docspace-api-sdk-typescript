@@ -26,6 +26,8 @@ import type { BooleanWrapper } from '../../models';
 // @ts-ignore
 import type { DoubleWrapper } from '../../models';
 // @ts-ignore
+import type { EncryptionSettingsWrapper } from '../../models';
+// @ts-ignore
 import type { StorageEncryptionRequestsDto } from '../../models';
 /**
  * SettingsEncryptionApi - axios parameter creator
@@ -41,6 +43,55 @@ export const SettingsEncryptionApiAxiosParamCreator = function (configuration?: 
          */
         getStorageEncryptionProgress: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/settings/encryption/progress`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the storage encryption settings.
+         * @summary Get the storage encryption settings
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getStorageEncryptionSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/settings/encryption/settings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -158,6 +209,18 @@ export const SettingsEncryptionApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns the storage encryption settings.
+         * @summary Get the storage encryption settings
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getStorageEncryptionSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EncryptionSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getStorageEncryptionSettings(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SettingsEncryptionApi.getStorageEncryptionSettings']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Starts the storage encryption process.
          * @summary Start the storage encryption process
          * @param {StorageEncryptionRequestsDto} [storageEncryptionRequestsDto] 
@@ -190,6 +253,15 @@ export const SettingsEncryptionApiFactory = function (configuration?: Configurat
             return localVarFp.getStorageEncryptionProgress(options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns the storage encryption settings.
+         * @summary Get the storage encryption settings
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getStorageEncryptionSettings(options?: RawAxiosRequestConfig): AxiosPromise<EncryptionSettingsWrapper> {
+            return localVarFp.getStorageEncryptionSettings(options).then((request) => request(axios, basePath));
+        },
+        /**
          * Starts the storage encryption process.
          * @summary Start the storage encryption process
          * @param {StorageEncryptionRequestsDto} [storageEncryptionRequestsDto] 
@@ -218,6 +290,17 @@ export class SettingsEncryptionApi extends BaseAPI {
      */
     public getStorageEncryptionProgress(options?: RawAxiosRequestConfig) {
         return SettingsEncryptionApiFp(this.configuration).getStorageEncryptionProgress(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the storage encryption settings.
+     * @summary Get the storage encryption settings
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SettingsEncryptionApi
+     */
+    public getStorageEncryptionSettings(options?: RawAxiosRequestConfig) {
+        return SettingsEncryptionApiFp(this.configuration).getStorageEncryptionSettings(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

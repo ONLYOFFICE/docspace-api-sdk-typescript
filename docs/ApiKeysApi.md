@@ -7,6 +7,7 @@ All URIs are relative to *http://localhost:8092*
 |[**createApiKey**](#createapikey) | **POST** /api/2.0/keys | Create a user API key|
 |[**deleteApiKey**](#deleteapikey) | **DELETE** /api/2.0/keys/{keyId} | Delete a user API key|
 |[**getAllPermissions**](#getallpermissions) | **GET** /api/2.0/keys/permissions | Get API key permissions|
+|[**getApiKey**](#getapikey) | **GET** /api/2.0/keys/@self | Get user API key info|
 |[**getApiKeys**](#getapikeys) | **GET** /api/2.0/keys | Get user API keys|
 |[**updateApiKey**](#updateapikey) | **PUT** /api/2.0/keys/{keyId} | Update an API key|
 
@@ -156,6 +157,51 @@ This endpoint does not have any parameters.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of all available permissions for key |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getApiKey**
+> ApiKeyResponseWrapper getApiKey()
+
+Returns current user API key info.
+
+### Example
+
+```typescript
+import {
+    ApiKeysApi,
+    Configuration
+} from '@onlyoffice/docspace-api-typescript';
+
+const configuration = new Configuration();
+const apiInstance = new ApiKeysApi(configuration);
+
+const { status, data } = await apiInstance.getApiKey();
+```
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**ApiKeyResponseWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | List of api keys for user |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

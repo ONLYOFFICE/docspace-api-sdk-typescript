@@ -114,6 +114,7 @@ Class | Method | HTTP request | Description
 *ApiKeysApi* | [**createApiKey**](docs/ApiKeysApi.md#createapikey) | **POST** /api/2.0/keys | Create a user API key
 *ApiKeysApi* | [**deleteApiKey**](docs/ApiKeysApi.md#deleteapikey) | **DELETE** /api/2.0/keys/{keyId} | Delete a user API key
 *ApiKeysApi* | [**getAllPermissions**](docs/ApiKeysApi.md#getallpermissions) | **GET** /api/2.0/keys/permissions | Get API key permissions
+*ApiKeysApi* | [**getApiKey**](docs/ApiKeysApi.md#getapikey) | **GET** /api/2.0/keys/@self | Get user API key info
 *ApiKeysApi* | [**getApiKeys**](docs/ApiKeysApi.md#getapikeys) | **GET** /api/2.0/keys | Get user API keys
 *ApiKeysApi* | [**updateApiKey**](docs/ApiKeysApi.md#updateapikey) | **PUT** /api/2.0/keys/{keyId} | Update an API key
 *AuthenticationApi* | [**authenticateMe**](docs/AuthenticationApi.md#authenticateme) | **POST** /api/2.0/authentication | Authenticate a user
@@ -269,6 +270,7 @@ Class | Method | HTTP request | Description
 *FilesSettingsApi* | [**externalShareSocialMedia**](docs/FilesSettingsApi.md#externalsharesocialmedia) | **PUT** /api/2.0/files/settings/externalsocialmedia | Change the external sharing ability on social networks
 *FilesSettingsApi* | [**forcesave**](docs/FilesSettingsApi.md#forcesave) | **PUT** /api/2.0/files/forcesave | Change the forcesaving ability
 *FilesSettingsApi* | [**getAutomaticallyCleanUp**](docs/FilesSettingsApi.md#getautomaticallycleanup) | **GET** /api/2.0/files/settings/autocleanup | Get the trash bin auto-clearing setting
+*FilesSettingsApi* | [**getDocServiceUrl**](docs/FilesSettingsApi.md#getdocserviceurl) | **GET** /api/2.0/files/docservice | Get the document service URL
 *FilesSettingsApi* | [**getFilesModule**](docs/FilesSettingsApi.md#getfilesmodule) | **GET** /api/2.0/files/info | Get the \&quot;Documents\&quot; information
 *FilesSettingsApi* | [**getFilesSettings**](docs/FilesSettingsApi.md#getfilessettings) | **GET** /api/2.0/files/settings | Get file settings
 *FilesSettingsApi* | [**hideConfirmCancelOperation**](docs/FilesSettingsApi.md#hideconfirmcanceloperation) | **PUT** /api/2.0/files/hideconfirmcanceloperation | Hide confirmation dialog when canceling operations
@@ -280,6 +282,11 @@ Class | Method | HTTP request | Description
 *FilesSettingsApi* | [**storeForcesave**](docs/FilesSettingsApi.md#storeforcesave) | **PUT** /api/2.0/files/storeforcesave | Change the ability to store the forcesaved files
 *FilesSettingsApi* | [**storeOriginal**](docs/FilesSettingsApi.md#storeoriginal) | **PUT** /api/2.0/files/storeoriginal | Change the ability to upload original formats
 *FilesSettingsApi* | [**updateIfExist**](docs/FilesSettingsApi.md#updateifexist) | **PUT** /api/2.0/files/updateifexist | Update a file version if it exists
+*FilesSharingApi* | [**applyExternalSharePassword**](docs/FilesSharingApi.md#applyexternalsharepassword) | **POST** /api/2.0/files/share/{key}/password | Apply external data password
+*FilesSharingApi* | [**changeOwner**](docs/FilesSharingApi.md#changeowner) | **POST** /api/2.0/files/owner | Change the file owner
+*FilesSharingApi* | [**getExternalShareData**](docs/FilesSharingApi.md#getexternalsharedata) | **GET** /api/2.0/files/share/{key} | Get the external data
+*FilesSharingApi* | [**sendEditorNotify**](docs/FilesSharingApi.md#sendeditornotify) | **POST** /api/2.0/files/file/{fileId}/sendeditornotify | Send the mention message
+*FilesSharingApi* | [**sharedUsers**](docs/FilesSharingApi.md#sharedusers) | **GET** /api/2.0/files/file/{fileId}/sharedusers | Get user access rights by file ID
 *FilesThirdPartyIntegrationApi* | [**capabilities**](docs/FilesThirdPartyIntegrationApi.md#capabilities) | **GET** /api/2.0/files/thirdparty/capabilities | Get providers
 *FilesThirdPartyIntegrationApi* | [**deleteThirdParty**](docs/FilesThirdPartyIntegrationApi.md#deletethirdparty) | **DELETE** /api/2.0/files/thirdparty/{providerId} | Remove a third-party account
 *FilesThirdPartyIntegrationApi* | [**getAllProviders**](docs/FilesThirdPartyIntegrationApi.md#getallproviders) | **GET** /api/2.0/files/thirdparty/providers | Get all providers
@@ -300,6 +307,14 @@ Class | Method | HTTP request | Description
 *GroupApi* | [**transferMembersTo**](docs/GroupApi.md#transfermembersto) | **PUT** /api/2.0/group/{fromId}/members/{toId} | Move group members
 *GroupApi* | [**updateGroup**](docs/GroupApi.md#updategroup) | **PUT** /api/2.0/group/{id} | Update a group
 *GroupRoomsApi* | [**getGroupsWithShared**](docs/GroupRoomsApi.md#getgroupswithshared) | **GET** /api/2.0/group/room/{id} | Get groups with sharing settings
+*MigrationApi* | [**cancel**](docs/MigrationApi.md#cancel) | **POST** /api/2.0/migration/cancel | Cancel migration
+*MigrationApi* | [**clear**](docs/MigrationApi.md#clear) | **POST** /api/2.0/migration/clear | Clear migration
+*MigrationApi* | [**finish**](docs/MigrationApi.md#finish) | **POST** /api/2.0/migration/finish | Finish migration
+*MigrationApi* | [**list**](docs/MigrationApi.md#list) | **GET** /api/2.0/migration/list | Get migrations
+*MigrationApi* | [**logs**](docs/MigrationApi.md#logs) | **GET** /api/2.0/migration/logs | Get migration logs
+*MigrationApi* | [**migrate**](docs/MigrationApi.md#migrate) | **POST** /api/2.0/migration/migrate | Start migration
+*MigrationApi* | [**status**](docs/MigrationApi.md#status) | **GET** /api/2.0/migration/status | Get migration status
+*MigrationApi* | [**uploadAndInit**](docs/MigrationApi.md#uploadandinit) | **POST** /api/2.0/migration/init/{migratorName} | Upload and initialize migration
 *OAuth20AuthorizationApi* | [**oauth2AuthorizeGet**](docs/OAuth20AuthorizationApi.md#oauth2authorizeget) | **GET** /oauth2/authorize | OAuth2 authorization endpoint
 *OAuth20AuthorizationApi* | [**oauth2AuthorizePost**](docs/OAuth20AuthorizationApi.md#oauth2authorizepost) | **POST** /oauth2/authorize | OAuth2 consent endpoint
 *OAuth20AuthorizationApi* | [**oauth2TokenPost**](docs/OAuth20AuthorizationApi.md#oauth2tokenpost) | **POST** /oauth2/token | OAuth2 token endpoint
@@ -375,7 +390,15 @@ Class | Method | HTTP request | Description
 *PeopleUserTypeApi* | [**terminateChangeType**](docs/PeopleUserTypeApi.md#terminatechangetype) | **PUT** /api/2.0/people/type/terminate | Terminate update user type
 *PeopleUserTypeApi* | [**updateUserType**](docs/PeopleUserTypeApi.md#updateusertype) | **PUT** /api/2.0/people/type/{type} | Change a user type
 *PortalGuestsApi* | [**getGuestShareLink**](docs/PortalGuestsApi.md#getguestsharelink) | **GET** /api/2.0/people/guests/{userid}/share | Get a guest sharing link
-*PortalQuotaApi* | [**getQuota**](docs/PortalQuotaApi.md#getquota) | **GET** /api/2.0/portal/quota | Get a portal quota
+*PortalPaymentApi* | [**getCurrencies**](docs/PortalPaymentApi.md#getcurrencies) | **GET** /api/2.0/portal/payment/currencies | Get currencies
+*PortalPaymentApi* | [**getPaymentAccount**](docs/PortalPaymentApi.md#getpaymentaccount) | **GET** /api/2.0/portal/payment/account | Get the payment account
+*PortalPaymentApi* | [**getPaymentUrl**](docs/PortalPaymentApi.md#getpaymenturl) | **PUT** /api/2.0/portal/payment/url | Get the payment page URL
+*PortalPaymentApi* | [**getPrices**](docs/PortalPaymentApi.md#getprices) | **GET** /api/2.0/portal/payment/prices | Get prices
+*PortalPaymentApi* | [**getQuota**](docs/PortalPaymentApi.md#getquota) | **GET** /api/2.0/portal/payment/quota | Get quota payment information
+*PortalPaymentApi* | [**getQuotas**](docs/PortalPaymentApi.md#getquotas) | **GET** /api/2.0/portal/payment/quotas | Get quotas
+*PortalPaymentApi* | [**paymentUpdate**](docs/PortalPaymentApi.md#paymentupdate) | **PUT** /api/2.0/portal/payment/update | Update the payment quantity
+*PortalPaymentApi* | [**sendSalesRequest**](docs/PortalPaymentApi.md#sendsalesrequest) | **POST** /api/2.0/portal/payment/request | Send a payment request
+*PortalQuotaApi* | [**getPortalQuota**](docs/PortalQuotaApi.md#getportalquota) | **GET** /api/2.0/portal/quota | Get a portal quota
 *PortalQuotaApi* | [**getRightQuota**](docs/PortalQuotaApi.md#getrightquota) | **GET** /api/2.0/portal/quota/right | Get the recommended quota
 *PortalQuotaApi* | [**getTariff**](docs/PortalQuotaApi.md#gettariff) | **GET** /api/2.0/portal/tariff | Get a portal tariff
 *PortalQuotaApi* | [**getUsedSpace**](docs/PortalQuotaApi.md#getusedspace) | **GET** /api/2.0/portal/usedspace | Get the portal used space
@@ -411,6 +434,7 @@ Class | Method | HTTP request | Description
 *SecurityLoginHistoryApi* | [**createLoginHistoryReport**](docs/SecurityLoginHistoryApi.md#createloginhistoryreport) | **POST** /api/2.0/security/audit/login/report | Generate the login history report
 *SecurityLoginHistoryApi* | [**getLastLoginEvents**](docs/SecurityLoginHistoryApi.md#getlastloginevents) | **GET** /api/2.0/security/audit/login/last | Get login history
 *SecurityLoginHistoryApi* | [**getLoginEventsByFilter**](docs/SecurityLoginHistoryApi.md#getlogineventsbyfilter) | **GET** /api/2.0/security/audit/login/filter | Get filtered login events
+*SecurityOAuth2Api* | [**generateJwtToken**](docs/SecurityOAuth2Api.md#generatejwttoken) | **GET** /api/2.0/security/oauth2/token | Generate JWT token
 *SecuritySMTPSettingsApi* | [**getSmtpOperationStatus**](docs/SecuritySMTPSettingsApi.md#getsmtpoperationstatus) | **GET** /api/2.0/smtpsettings/smtp/test/status | Get the SMTP testing process status
 *SecuritySMTPSettingsApi* | [**getSmtpSettings**](docs/SecuritySMTPSettingsApi.md#getsmtpsettings) | **GET** /api/2.0/smtpsettings/smtp | Get the SMTP settings
 *SecuritySMTPSettingsApi* | [**resetSmtpSettings**](docs/SecuritySMTPSettingsApi.md#resetsmtpsettings) | **DELETE** /api/2.0/smtpsettings/smtp | Reset the SMTP settings
@@ -444,6 +468,7 @@ Class | Method | HTTP request | Description
 *SettingsCustomNavigationApi* | [**getCustomNavigationItemSample**](docs/SettingsCustomNavigationApi.md#getcustomnavigationitemsample) | **GET** /api/2.0/settings/customnavigation/getsample | Get a custom navigation item sample
 *SettingsCustomNavigationApi* | [**getCustomNavigationItems**](docs/SettingsCustomNavigationApi.md#getcustomnavigationitems) | **GET** /api/2.0/settings/customnavigation/getall | Get the custom navigation items
 *SettingsEncryptionApi* | [**getStorageEncryptionProgress**](docs/SettingsEncryptionApi.md#getstorageencryptionprogress) | **GET** /api/2.0/settings/encryption/progress | Get the storage encryption progress
+*SettingsEncryptionApi* | [**getStorageEncryptionSettings**](docs/SettingsEncryptionApi.md#getstorageencryptionsettings) | **GET** /api/2.0/settings/encryption/settings | Get the storage encryption settings
 *SettingsEncryptionApi* | [**startStorageEncryption**](docs/SettingsEncryptionApi.md#startstorageencryption) | **POST** /api/2.0/settings/encryption/start | Start the storage encryption process
 *SettingsGreetingSettingsApi* | [**getGreetingSettings**](docs/SettingsGreetingSettingsApi.md#getgreetingsettings) | **GET** /api/2.0/settings/greetingsettings | Get greeting settings
 *SettingsGreetingSettingsApi* | [**isDefault**](docs/SettingsGreetingSettingsApi.md#isdefault) | **GET** /api/2.0/settings/greetingsettings/isdefault | Check the default greeting settings
@@ -537,6 +562,7 @@ Class | Method | HTTP request | Description
 *SettingsWebpluginsApi* | [**getWebPlugin**](docs/SettingsWebpluginsApi.md#getwebplugin) | **GET** /api/2.0/settings/webplugins/{name} | Get a web plugin by name
 *SettingsWebpluginsApi* | [**getWebPlugins**](docs/SettingsWebpluginsApi.md#getwebplugins) | **GET** /api/2.0/settings/webplugins | Get web plugins
 *SettingsWebpluginsApi* | [**updateWebPlugin**](docs/SettingsWebpluginsApi.md#updatewebplugin) | **PUT** /api/2.0/settings/webplugins/{name} | Update a web plugin
+*ThirdPartyApi* | [**getCodeRequest**](docs/ThirdPartyApi.md#getcoderequest) | **GET** /api/2.0/thirdparty/{provider} | Get the code request
 
 
 ### Documentation For Models
@@ -545,6 +571,9 @@ Class | Method | HTTP request | Description
  - [AccountInfoDto](docs/AccountInfoDto.md)
  - [AccountLoginType](docs/AccountLoginType.md)
  - [AceShortWrapper](docs/AceShortWrapper.md)
+ - [AceShortWrapperArrayWrapper](docs/AceShortWrapperArrayWrapper.md)
+ - [ActionConfig](docs/ActionConfig.md)
+ - [ActionLinkConfig](docs/ActionLinkConfig.md)
  - [ActionType](docs/ActionType.md)
  - [ActiveConnectionsDto](docs/ActiveConnectionsDto.md)
  - [ActiveConnectionsItemDto](docs/ActiveConnectionsItemDto.md)
@@ -598,6 +627,7 @@ Class | Method | HTTP request | Description
  - [CdnStorageSettingsWrapper](docs/CdnStorageSettingsWrapper.md)
  - [ChangeClientActivationRequest](docs/ChangeClientActivationRequest.md)
  - [ChangeHistory](docs/ChangeHistory.md)
+ - [ChangeOwnerRequestDto](docs/ChangeOwnerRequestDto.md)
  - [CheckConversionRequestDtoInteger](docs/CheckConversionRequestDtoInteger.md)
  - [CheckDestFolderDto](docs/CheckDestFolderDto.md)
  - [CheckDestFolderResult](docs/CheckDestFolderResult.md)
@@ -644,6 +674,7 @@ Class | Method | HTTP request | Description
  - [CreateTagRequestDto](docs/CreateTagRequestDto.md)
  - [CreateTextOrHtmlFile](docs/CreateTextOrHtmlFile.md)
  - [CreateThirdPartyRoom](docs/CreateThirdPartyRoom.md)
+ - [CreateWebhooksConfigRequestsDto](docs/CreateWebhooksConfigRequestsDto.md)
  - [Cron](docs/Cron.md)
  - [CronParams](docs/CronParams.md)
  - [CspDto](docs/CspDto.md)
@@ -652,6 +683,8 @@ Class | Method | HTTP request | Description
  - [Culture](docs/Culture.md)
  - [CultureSpecificExternalResource](docs/CultureSpecificExternalResource.md)
  - [CultureSpecificExternalResources](docs/CultureSpecificExternalResources.md)
+ - [CurrenciesArrayWrapper](docs/CurrenciesArrayWrapper.md)
+ - [CurrenciesDto](docs/CurrenciesDto.md)
  - [CurrentLicenseInfo](docs/CurrentLicenseInfo.md)
  - [CustomColorThemesSettingsColorItem](docs/CustomColorThemesSettingsColorItem.md)
  - [CustomColorThemesSettingsDto](docs/CustomColorThemesSettingsDto.md)
@@ -715,9 +748,16 @@ Class | Method | HTTP request | Description
  - [EmployeeFullWrapper](docs/EmployeeFullWrapper.md)
  - [EmployeeStatus](docs/EmployeeStatus.md)
  - [EmployeeType](docs/EmployeeType.md)
+ - [EncryprtionStatus](docs/EncryprtionStatus.md)
  - [EncryptionKeysConfig](docs/EncryptionKeysConfig.md)
+ - [EncryptionSettings](docs/EncryptionSettings.md)
+ - [EncryptionSettingsWrapper](docs/EncryptionSettingsWrapper.md)
  - [EntryType](docs/EntryType.md)
  - [ErrorResponse](docs/ErrorResponse.md)
+ - [ExternalShareDto](docs/ExternalShareDto.md)
+ - [ExternalShareRequestParam](docs/ExternalShareRequestParam.md)
+ - [ExternalShareWrapper](docs/ExternalShareWrapper.md)
+ - [FeatureUsedDto](docs/FeatureUsedDto.md)
  - [FeedbackConfig](docs/FeedbackConfig.md)
  - [FileConflictResolveType](docs/FileConflictResolveType.md)
  - [FileDtoInteger](docs/FileDtoInteger.md)
@@ -757,6 +797,7 @@ Class | Method | HTTP request | Description
  - [FillingFormResultDtoInteger](docs/FillingFormResultDtoInteger.md)
  - [FillingFormResultIntegerWrapper](docs/FillingFormResultIntegerWrapper.md)
  - [FilterType](docs/FilterType.md)
+ - [FinishDto](docs/FinishDto.md)
  - [FireBaseUser](docs/FireBaseUser.md)
  - [FireBaseUserWrapper](docs/FireBaseUserWrapper.md)
  - [FirebaseDto](docs/FirebaseDto.md)
@@ -820,6 +861,7 @@ Class | Method | HTTP request | Description
  - [LockFileParameters](docs/LockFileParameters.md)
  - [LoginEventArrayWrapper](docs/LoginEventArrayWrapper.md)
  - [LoginEventDto](docs/LoginEventDto.md)
+ - [LoginProvider](docs/LoginProvider.md)
  - [LoginSettingsDto](docs/LoginSettingsDto.md)
  - [LoginSettingsRequestDto](docs/LoginSettingsRequestDto.md)
  - [LoginSettingsWrapper](docs/LoginSettingsWrapper.md)
@@ -833,9 +875,16 @@ Class | Method | HTTP request | Description
  - [MemberBaseRequestDto](docs/MemberBaseRequestDto.md)
  - [MemberRequestDto](docs/MemberRequestDto.md)
  - [MembersRequest](docs/MembersRequest.md)
+ - [MentionMessageWrapper](docs/MentionMessageWrapper.md)
  - [MentionWrapper](docs/MentionWrapper.md)
  - [MentionWrapperArrayWrapper](docs/MentionWrapperArrayWrapper.md)
  - [MessageAction](docs/MessageAction.md)
+ - [MigratingApiFiles](docs/MigratingApiFiles.md)
+ - [MigratingApiGroup](docs/MigratingApiGroup.md)
+ - [MigratingApiUser](docs/MigratingApiUser.md)
+ - [MigrationApiInfo](docs/MigrationApiInfo.md)
+ - [MigrationStatusDto](docs/MigrationStatusDto.md)
+ - [MigrationStatusWrapper](docs/MigrationStatusWrapper.md)
  - [MobilePhoneActivationStatus](docs/MobilePhoneActivationStatus.md)
  - [MobileRequestsDto](docs/MobileRequestsDto.md)
  - [Module](docs/Module.md)
@@ -873,20 +922,26 @@ Class | Method | HTTP request | Description
  - [PasswordSettingsWrapper](docs/PasswordSettingsWrapper.md)
  - [PaymentSettingsDto](docs/PaymentSettingsDto.md)
  - [PaymentSettingsWrapper](docs/PaymentSettingsWrapper.md)
+ - [PaymentUrlRequestsDto](docs/PaymentUrlRequestsDto.md)
  - [Payments](docs/Payments.md)
  - [PermissionsConfig](docs/PermissionsConfig.md)
  - [PluginsConfig](docs/PluginsConfig.md)
  - [PluginsDto](docs/PluginsDto.md)
+ - [PriceDto](docs/PriceDto.md)
  - [ProductAdministratorDto](docs/ProductAdministratorDto.md)
  - [ProductAdministratorWrapper](docs/ProductAdministratorWrapper.md)
  - [ProductType](docs/ProductType.md)
  - [ProviderArrayWrapper](docs/ProviderArrayWrapper.md)
  - [ProviderDto](docs/ProviderDto.md)
  - [ProviderFilter](docs/ProviderFilter.md)
+ - [QuantityRequestDto](docs/QuantityRequestDto.md)
  - [Quota](docs/Quota.md)
+ - [QuotaArrayWrapper](docs/QuotaArrayWrapper.md)
+ - [QuotaDto](docs/QuotaDto.md)
  - [QuotaFilter](docs/QuotaFilter.md)
  - [QuotaSettingsRequestsDto](docs/QuotaSettingsRequestsDto.md)
  - [QuotaSettingsRequestsDtoDefaultQuota](docs/QuotaSettingsRequestsDtoDefaultQuota.md)
+ - [QuotaWrapper](docs/QuotaWrapper.md)
  - [RecaptchaType](docs/RecaptchaType.md)
  - [RecentConfig](docs/RecentConfig.md)
  - [RoomDataLifetimeDto](docs/RoomDataLifetimeDto.md)
@@ -909,6 +964,7 @@ Class | Method | HTTP request | Description
  - [RoomsNotificationsSettingsRequestDto](docs/RoomsNotificationsSettingsRequestDto.md)
  - [Run](docs/Run.md)
  - [STRINGArrayWrapper](docs/STRINGArrayWrapper.md)
+ - [SalesRequestsDto](docs/SalesRequestsDto.md)
  - [SaveAsPdfInteger](docs/SaveAsPdfInteger.md)
  - [SaveFormRoleMappingDtoInteger](docs/SaveFormRoleMappingDtoInteger.md)
  - [Schedule](docs/Schedule.md)
@@ -947,6 +1003,7 @@ Class | Method | HTTP request | Description
  - [StartFillingMode](docs/StartFillingMode.md)
  - [StartReassignRequestDto](docs/StartReassignRequestDto.md)
  - [StartUpdateUserTypeDto](docs/StartUpdateUserTypeDto.md)
+ - [Status](docs/Status.md)
  - [StorageArrayWrapper](docs/StorageArrayWrapper.md)
  - [StorageDto](docs/StorageDto.md)
  - [StorageEncryptionRequestsDto](docs/StorageEncryptionRequestsDto.md)
@@ -974,8 +1031,10 @@ Class | Method | HTTP request | Description
  - [TenantDevToolsAccessSettingsWrapper](docs/TenantDevToolsAccessSettingsWrapper.md)
  - [TenantDomainValidator](docs/TenantDomainValidator.md)
  - [TenantDto](docs/TenantDto.md)
+ - [TenantEntityQuotaSettings](docs/TenantEntityQuotaSettings.md)
  - [TenantIndustry](docs/TenantIndustry.md)
  - [TenantQuota](docs/TenantQuota.md)
+ - [TenantQuotaFeatureDto](docs/TenantQuotaFeatureDto.md)
  - [TenantQuotaSettings](docs/TenantQuotaSettings.md)
  - [TenantQuotaSettingsRequestsDto](docs/TenantQuotaSettingsRequestsDto.md)
  - [TenantQuotaSettingsWrapper](docs/TenantQuotaSettingsWrapper.md)
@@ -1018,6 +1077,7 @@ Class | Method | HTTP request | Description
  - [UpdateRoomRequest](docs/UpdateRoomRequest.md)
  - [UpdateRoomsQuotaRequestDtoInteger](docs/UpdateRoomsQuotaRequestDtoInteger.md)
  - [UpdateRoomsRoomIdsRequestDtoInteger](docs/UpdateRoomsRoomIdsRequestDtoInteger.md)
+ - [UpdateWebhooksConfigRequestsDto](docs/UpdateWebhooksConfigRequestsDto.md)
  - [UploadRequestDto](docs/UploadRequestDto.md)
  - [UploadResultDto](docs/UploadResultDto.md)
  - [UploadResultWrapper](docs/UploadResultWrapper.md)
@@ -1043,7 +1103,6 @@ Class | Method | HTTP request | Description
  - [WebhookRetryRequestsDto](docs/WebhookRetryRequestsDto.md)
  - [WebhookTrigger](docs/WebhookTrigger.md)
  - [WebhooksConfigDto](docs/WebhooksConfigDto.md)
- - [WebhooksConfigRequestsDto](docs/WebhooksConfigRequestsDto.md)
  - [WebhooksConfigWithStatusArrayWrapper](docs/WebhooksConfigWithStatusArrayWrapper.md)
  - [WebhooksConfigWithStatusDto](docs/WebhooksConfigWithStatusDto.md)
  - [WebhooksConfigWrapper](docs/WebhooksConfigWrapper.md)
