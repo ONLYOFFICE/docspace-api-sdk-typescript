@@ -6,8 +6,8 @@ All URIs are relative to *http://localhost:8092*
 |------------- | ------------- | -------------|
 |[**continuePortal**](#continueportal) | **PUT** /api/2.0/portal/continue | Restore a portal|
 |[**deletePortal**](#deleteportal) | **DELETE** /api/2.0/portal/delete | Delete a portal|
-|[**get**](#get) | **GET** /api/2.0/portal | Get a portal|
 |[**getFullAbsolutePath**](#getfullabsolutepath) | **GET** /api/2.0/portal/path | Get a path to the portal|
+|[**getPortalInformation**](#getportalinformation) | **GET** /api/2.0/portal | Get a portal|
 |[**sendDeleteInstructions**](#senddeleteinstructions) | **POST** /api/2.0/portal/delete | Send removal instructions|
 |[**sendSuspendInstructions**](#sendsuspendinstructions) | **POST** /api/2.0/portal/suspend | Send suspension instructions|
 |[**suspendPortal**](#suspendportal) | **PUT** /api/2.0/portal/suspend | Deactivate a portal|
@@ -102,51 +102,6 @@ This endpoint does not have any parameters.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get**
-> TenantWrapper get()
-
-Returns the current portal information.
-
-### Example
-
-```typescript
-import {
-    PortalSettingsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PortalSettingsApi(configuration);
-
-const { status, data } = await apiInstance.get();
-```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**TenantWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Current portal information |  -  |
-|**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **getFullAbsolutePath**
 > ObjectWrapper getFullAbsolutePath()
 
@@ -195,6 +150,51 @@ const { status, data } = await apiInstance.getFullAbsolutePath(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Portal path |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getPortalInformation**
+> TenantWrapper getPortalInformation()
+
+Returns the current portal information.
+
+### Example
+
+```typescript
+import {
+    PortalSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-typescript';
+
+const configuration = new Configuration();
+const apiInstance = new PortalSettingsApi(configuration);
+
+const { status, data } = await apiInstance.getPortalInformation();
+```
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**TenantWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Current portal information |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

@@ -4,13 +4,13 @@ All URIs are relative to *http://localhost:8092*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**getPortalQuota**](#getportalquota) | **GET** /api/2.0/portal/quota | Get a portal quota|
+|[**getQuota**](#getquota) | **GET** /api/2.0/portal/quota | Get a portal quota|
 |[**getRightQuota**](#getrightquota) | **GET** /api/2.0/portal/quota/right | Get the recommended quota|
 |[**getTariff**](#gettariff) | **GET** /api/2.0/portal/tariff | Get a portal tariff|
 |[**getUsedSpace**](#getusedspace) | **GET** /api/2.0/portal/usedspace | Get the portal used space|
 
-# **getPortalQuota**
-> TenantQuotaWrapper getPortalQuota()
+# **getQuota**
+> TenantQuotaWrapper getQuota()
 
 Returns the current portal quota.
 
@@ -25,7 +25,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new PortalQuotaApi(configuration);
 
-const { status, data } = await apiInstance.getPortalQuota();
+const { status, data } = await apiInstance.getQuota();
 ```
 
 ### Parameters

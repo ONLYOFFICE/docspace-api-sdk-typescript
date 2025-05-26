@@ -47,7 +47,7 @@ const { status, data } = await apiInstance.getClient(
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
 
 ### HTTP request headers
 
@@ -103,7 +103,7 @@ const { status, data } = await apiInstance.getClientInfo(
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
 
 ### HTTP request headers
 
@@ -163,7 +163,7 @@ const { status, data } = await apiInstance.getClients(
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
 
 ### HTTP request headers
 
@@ -224,7 +224,7 @@ const { status, data } = await apiInstance.getClientsInfo(
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
 
 ### HTTP request headers
 
@@ -281,7 +281,7 @@ const { status, data } = await apiInstance.getConsents(
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
 
 ### HTTP request headers
 

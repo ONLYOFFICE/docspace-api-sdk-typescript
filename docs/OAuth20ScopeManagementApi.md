@@ -35,7 +35,7 @@ This endpoint does not have any parameters.
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
 
 ### HTTP request headers
 

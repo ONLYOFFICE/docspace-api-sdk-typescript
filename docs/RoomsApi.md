@@ -1,4 +1,4 @@
-# FilesRoomsApi
+# RoomsApi
 
 All URIs are relative to *http://localhost:8092*
 
@@ -52,13 +52,13 @@ Adds the tags to a room with the ID specified in the request.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration,
     BatchTagsRequestDto
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let id: number; //The room Id. (default to undefined)
 let batchTagsRequestDto: BatchTagsRequestDto; //The parameters for adding tags. (optional)
@@ -109,13 +109,13 @@ Moves a room with the ID specified in the request to the \"Archive\" section.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration,
     ArchiveRoomRequest
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let id: number; //The room ID. (default to undefined)
 let archiveRoomRequest: ArchiveRoomRequest; //The parameters for archiving a room. (optional)
@@ -165,13 +165,13 @@ Changes a cover of a room with the ID specified in the request.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration,
     CoverRequestDto
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let id: number; //The room ID. (default to undefined)
 let coverRequestDto: CoverRequestDto; //The request parameters to change the room cover. (optional)
@@ -223,13 +223,13 @@ Creates a room in the \"Rooms\" section.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration,
     CreateRoomRequestDto
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let createRoomRequestDto: CreateRoomRequestDto; // (optional)
 
@@ -276,13 +276,13 @@ Creates a room in the \"Rooms\" section based on the template.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration,
     CreateRoomFromTemplateDto
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let createRoomFromTemplateDto: CreateRoomFromTemplateDto; // (optional)
 
@@ -329,13 +329,13 @@ Creates a logo for a room with the ID specified in the request.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration,
     LogoRequest
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let id: number; //The room ID. (default to undefined)
 let logoRequest: LogoRequest; //The logo request parameters. (optional)
@@ -386,13 +386,13 @@ Creates a room in the \"Rooms\" section stored in a third-party storage.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration,
     CreateThirdPartyRoom
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let id: string; //The ID of the folder in the third-party storage in which the contents of the room will be stored. (default to undefined)
 let createThirdPartyRoom: CreateThirdPartyRoom; //The third-party room information. (optional)
@@ -442,13 +442,13 @@ Creates a custom tag with the parameters specified in the request.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration,
     CreateTagRequestDto
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let createTagRequestDto: CreateTagRequestDto; // (optional)
 
@@ -496,13 +496,13 @@ Starts creating the room template.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration,
     RoomTemplateDto
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let roomTemplateDto: RoomTemplateDto; // (optional)
 
@@ -549,13 +549,13 @@ Deletes a bunch of custom tags specified in the request.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration,
     BatchTagsRequestDto
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let batchTagsRequestDto: BatchTagsRequestDto; // (optional)
 
@@ -603,13 +603,13 @@ Removes a room with the ID specified in the request.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration,
     DeleteRoomRequest
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let id: number; //The room ID. (default to undefined)
 let deleteRoomRequest: DeleteRoomRequest; //The parameters for deleting a room. (optional)
@@ -659,12 +659,12 @@ Removes a logo from a room with the ID specified in the request.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let id: number; //The room ID of the request. (default to undefined)
 
@@ -711,13 +711,13 @@ Removes the tags from a room with the ID specified in the request.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration,
     BatchTagsRequestDto
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let id: number; //The room Id. (default to undefined)
 let batchTagsRequestDto: BatchTagsRequestDto; //The parameters for adding tags. (optional)
@@ -768,12 +768,12 @@ Returns a list of all covers.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 const { status, data } = await apiInstance.getCovers();
 ```
@@ -813,12 +813,12 @@ Returns a list of all the new items from a room with the ID specified in the req
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let id: number; //The room ID of the request. (default to undefined)
 
@@ -865,12 +865,12 @@ Returns the progress of creating a room from the template.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 const { status, data } = await apiInstance.getRoomCreatingStatus();
 ```
@@ -910,12 +910,12 @@ Returns the room index export.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 const { status, data } = await apiInstance.getRoomIndexExport();
 ```
@@ -955,12 +955,12 @@ Returns the room information.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let id: number; //The room ID of the request. (default to undefined)
 
@@ -1006,12 +1006,12 @@ Returns the links of the room with the ID specified in the request.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let id: number; //The room ID. (default to undefined)
 let type: LinkType; //The link type. (optional) (default to undefined)
@@ -1061,12 +1061,12 @@ Returns the access rights of a room with the ID specified in the request.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let id: number; //The room ID. (default to undefined)
 let filterType: ShareFilterType; //The filter type of the access rights. (optional) (default to undefined)
@@ -1116,12 +1116,12 @@ Returns the contents of the \"Rooms\" section by the parameters specified in the
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let type: Array<RoomType>; //The filter by room type. (optional) (default to undefined)
 let subjectId: string; //The filter by user ID. (optional) (default to undefined)
@@ -1196,12 +1196,12 @@ Returns the room new items.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 const { status, data } = await apiInstance.getRoomsNewItems();
 ```
@@ -1241,12 +1241,12 @@ Returns the primary external link of the room with the ID specified in the reque
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let id: number; //The room ID of the request. (default to undefined)
 
@@ -1294,12 +1294,12 @@ Returns a list of custom tags.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 const { status, data } = await apiInstance.getTagsInfo();
 ```
@@ -1339,12 +1339,12 @@ Returns the progress status of the room template creation process.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 const { status, data } = await apiInstance.getTemplateCreatingStatus();
 ```
@@ -1384,12 +1384,12 @@ Returns the public settings of the room template with the ID specified in the re
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let id: number; //The room template ID. (default to undefined)
 
@@ -1436,12 +1436,12 @@ Pins a room with the ID specified in the request to the top of the list.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let id: number; //The room ID of the request. (default to undefined)
 
@@ -1488,12 +1488,12 @@ Reorders the room with ID specified in the request.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let id: number; //The room ID of the request. (default to undefined)
 
@@ -1540,13 +1540,13 @@ Resends the email invitations to a room with the ID specified in the request to 
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration,
     UserInvitation
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let id: number; //The room ID. (default to undefined)
 let userInvitation: UserInvitation; //The user invitation parameters. (optional)
@@ -1596,13 +1596,13 @@ Sets the room external or invitation link with the ID specified in the request.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration,
     RoomLinkRequest
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let id: number; //The room ID. (default to undefined)
 let roomLinkRequest: RoomLinkRequest; //The room link parameters. (optional)
@@ -1652,13 +1652,13 @@ Sets the public settings for the room template with the ID specified in the requ
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration,
     SetPublicDto
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let setPublicDto: SetPublicDto; // (optional)
 
@@ -1705,13 +1705,13 @@ Sets the access rights to the room with the ID specified in the request.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration,
     RoomInvitationRequest
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let id: number; //The room ID. (default to undefined)
 let roomInvitationRequest: RoomInvitationRequest; //The room invitation request. (optional)
@@ -1761,12 +1761,12 @@ Starts the index export of a room with the ID specified in the request.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let id: number; //The room ID of the request. (default to undefined)
 
@@ -1814,12 +1814,12 @@ Terminates the room index export.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 const { status, data } = await apiInstance.terminateRoomIndexExport();
 ```
@@ -1859,13 +1859,13 @@ Moves a room with the ID specified in the request from the \"Archive\" section t
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration,
     ArchiveRoomRequest
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let id: number; //The room ID. (default to undefined)
 let archiveRoomRequest: ArchiveRoomRequest; //The parameters for archiving a room. (optional)
@@ -1915,12 +1915,12 @@ Unpins a room with the ID specified in the request from the top of the list.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let id: number; //The room ID of the request. (default to undefined)
 
@@ -1967,13 +1967,13 @@ Updates a room with the ID specified in the request.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration,
     UpdateRoomRequest
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let id: number; //The room ID. (default to undefined)
 let updateRoomRequest: UpdateRoomRequest; //The request parameters for updating a room. (optional)
@@ -2023,12 +2023,12 @@ Uploads a temporary image to create a room logo.
 
 ```typescript
 import {
-    FilesRoomsApi,
+    RoomsApi,
     Configuration
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
-const apiInstance = new FilesRoomsApi(configuration);
+const apiInstance = new RoomsApi(configuration);
 
 let formCollection: Array<KeyValuePairStringStringValues>; //The image data. (optional) (default to undefined)
 

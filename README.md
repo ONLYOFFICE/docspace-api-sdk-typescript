@@ -1,4 +1,4 @@
-## @onlyoffice/docspace-api-typescript@3.1.0
+## @onlyoffice/docspace-api-typescript@3.2.0
 
 This generator creates TypeScript/JavaScript client that utilizes [axios](https://github.com/axios/axios). The generated Node module can be used in the following environments:
 
@@ -36,7 +36,7 @@ navigate to the folder of your consuming project and run one of the following co
 _published:_
 
 ```
-npm install @onlyoffice/docspace-api-typescript@3.1.0 --save
+npm install @onlyoffice/docspace-api-typescript@3.2.0 --save
 ```
 
 _unPublished (not recommended):_
@@ -221,44 +221,6 @@ Class | Method | HTTP request | Description
 *FilesOperationsApi* | [**updateComment**](docs/FilesOperationsApi.md#updatecomment) | **PUT** /api/2.0/files/file/{fileId}/comment | Update a comment
 *FilesQuotaApi* | [**resetRoomQuota**](docs/FilesQuotaApi.md#resetroomquota) | **PUT** /api/2.0/files/rooms/resetquota | Reset the room quota limit
 *FilesQuotaApi* | [**updateRoomsQuota**](docs/FilesQuotaApi.md#updateroomsquota) | **PUT** /api/2.0/files/rooms/roomquota | Change the room quota limit
-*FilesRoomsApi* | [**addTags**](docs/FilesRoomsApi.md#addtags) | **PUT** /api/2.0/files/rooms/{id}/tags | Add the room tags
-*FilesRoomsApi* | [**archiveRoom**](docs/FilesRoomsApi.md#archiveroom) | **PUT** /api/2.0/files/rooms/{id}/archive | Archive a room
-*FilesRoomsApi* | [**changeRoomCover**](docs/FilesRoomsApi.md#changeroomcover) | **POST** /api/2.0/files/rooms/{id}/cover | Change the room cover
-*FilesRoomsApi* | [**createRoom**](docs/FilesRoomsApi.md#createroom) | **POST** /api/2.0/files/rooms | Create a room
-*FilesRoomsApi* | [**createRoomFromTemplate**](docs/FilesRoomsApi.md#createroomfromtemplate) | **POST** /api/2.0/files/rooms/fromtemplate | Create a room from the template
-*FilesRoomsApi* | [**createRoomLogo**](docs/FilesRoomsApi.md#createroomlogo) | **POST** /api/2.0/files/rooms/{id}/logo | Create a room logo
-*FilesRoomsApi* | [**createRoomThirdParty**](docs/FilesRoomsApi.md#createroomthirdparty) | **POST** /api/2.0/files/rooms/thirdparty/{id} | Create a third-party room
-*FilesRoomsApi* | [**createTag**](docs/FilesRoomsApi.md#createtag) | **POST** /api/2.0/files/tags | Create a tag
-*FilesRoomsApi* | [**createTemplate**](docs/FilesRoomsApi.md#createtemplate) | **POST** /api/2.0/files/roomtemplate | Start creating room template
-*FilesRoomsApi* | [**deleteCustomTags**](docs/FilesRoomsApi.md#deletecustomtags) | **DELETE** /api/2.0/files/tags | Delete tags
-*FilesRoomsApi* | [**deleteRoom**](docs/FilesRoomsApi.md#deleteroom) | **DELETE** /api/2.0/files/rooms/{id} | Remove a room
-*FilesRoomsApi* | [**deleteRoomLogo**](docs/FilesRoomsApi.md#deleteroomlogo) | **DELETE** /api/2.0/files/rooms/{id}/logo | Remove a room logo
-*FilesRoomsApi* | [**deleteTags**](docs/FilesRoomsApi.md#deletetags) | **DELETE** /api/2.0/files/rooms/{id}/tags | Remove the room tags
-*FilesRoomsApi* | [**getCovers**](docs/FilesRoomsApi.md#getcovers) | **GET** /api/2.0/files/rooms/covers | Get covers
-*FilesRoomsApi* | [**getNewRoomItems**](docs/FilesRoomsApi.md#getnewroomitems) | **GET** /api/2.0/files/rooms/{id}/news | Get the new room items
-*FilesRoomsApi* | [**getRoomCreatingStatus**](docs/FilesRoomsApi.md#getroomcreatingstatus) | **GET** /api/2.0/files/rooms/fromtemplate/status | Get the room creation progress
-*FilesRoomsApi* | [**getRoomIndexExport**](docs/FilesRoomsApi.md#getroomindexexport) | **GET** /api/2.0/files/rooms/indexexport | Get the room index export
-*FilesRoomsApi* | [**getRoomInfo**](docs/FilesRoomsApi.md#getroominfo) | **GET** /api/2.0/files/rooms/{id} | Get room information
-*FilesRoomsApi* | [**getRoomLinks**](docs/FilesRoomsApi.md#getroomlinks) | **GET** /api/2.0/files/rooms/{id}/links | Get the room links
-*FilesRoomsApi* | [**getRoomSecurityInfo**](docs/FilesRoomsApi.md#getroomsecurityinfo) | **GET** /api/2.0/files/rooms/{id}/share | Get the room access rights
-*FilesRoomsApi* | [**getRoomsFolder**](docs/FilesRoomsApi.md#getroomsfolder) | **GET** /api/2.0/files/rooms | Get rooms
-*FilesRoomsApi* | [**getRoomsNewItems**](docs/FilesRoomsApi.md#getroomsnewitems) | **GET** /api/2.0/files/rooms/news | Get the room new items
-*FilesRoomsApi* | [**getRoomsPrimaryExternalLink**](docs/FilesRoomsApi.md#getroomsprimaryexternallink) | **GET** /api/2.0/files/rooms/{id}/link | Get the room primary external link
-*FilesRoomsApi* | [**getTagsInfo**](docs/FilesRoomsApi.md#gettagsinfo) | **GET** /api/2.0/files/tags | Get tags
-*FilesRoomsApi* | [**getTemplateCreatingStatus**](docs/FilesRoomsApi.md#gettemplatecreatingstatus) | **GET** /api/2.0/files/roomtemplate/status | Get status of room template creation
-*FilesRoomsApi* | [**isPublic**](docs/FilesRoomsApi.md#ispublic) | **GET** /api/2.0/files/roomtemplate/{id}/public | Get public settings
-*FilesRoomsApi* | [**pinRoom**](docs/FilesRoomsApi.md#pinroom) | **PUT** /api/2.0/files/rooms/{id}/pin | Pin a room
-*FilesRoomsApi* | [**reorder**](docs/FilesRoomsApi.md#reorder) | **PUT** /api/2.0/files/rooms/{id}/reorder | Reorder the room
-*FilesRoomsApi* | [**resendEmailInvitations**](docs/FilesRoomsApi.md#resendemailinvitations) | **POST** /api/2.0/files/rooms/{id}/resend | Resend the room invitations
-*FilesRoomsApi* | [**setLink**](docs/FilesRoomsApi.md#setlink) | **PUT** /api/2.0/files/rooms/{id}/links | Set the room external or invitation link
-*FilesRoomsApi* | [**setPublic**](docs/FilesRoomsApi.md#setpublic) | **PUT** /api/2.0/files/roomtemplate/public | Set public settings
-*FilesRoomsApi* | [**setRoomSecurity**](docs/FilesRoomsApi.md#setroomsecurity) | **PUT** /api/2.0/files/rooms/{id}/share | Set the room access rights
-*FilesRoomsApi* | [**startRoomIndexExport**](docs/FilesRoomsApi.md#startroomindexexport) | **POST** /api/2.0/files/rooms/{id}/indexexport | Start the room index export
-*FilesRoomsApi* | [**terminateRoomIndexExport**](docs/FilesRoomsApi.md#terminateroomindexexport) | **DELETE** /api/2.0/files/rooms/indexexport | Terminate the room index export
-*FilesRoomsApi* | [**unarchiveRoom**](docs/FilesRoomsApi.md#unarchiveroom) | **PUT** /api/2.0/files/rooms/{id}/unarchive | Unarchive a room
-*FilesRoomsApi* | [**unpinRoom**](docs/FilesRoomsApi.md#unpinroom) | **PUT** /api/2.0/files/rooms/{id}/unpin | Unpin a room
-*FilesRoomsApi* | [**updateRoom**](docs/FilesRoomsApi.md#updateroom) | **PUT** /api/2.0/files/rooms/{id} | Update a room
-*FilesRoomsApi* | [**uploadRoomLogo**](docs/FilesRoomsApi.md#uploadroomlogo) | **POST** /api/2.0/files/logos | Upload a room logo image
 *FilesSettingsApi* | [**changeAccessToThirdparty**](docs/FilesSettingsApi.md#changeaccesstothirdparty) | **PUT** /api/2.0/files/thirdparty | Change the third-party settings access
 *FilesSettingsApi* | [**changeAutomaticallyCleanUp**](docs/FilesSettingsApi.md#changeautomaticallycleanup) | **PUT** /api/2.0/files/settings/autocleanup | Update the trash bin auto-clearing setting
 *FilesSettingsApi* | [**changeDefaultAccessRights**](docs/FilesSettingsApi.md#changedefaultaccessrights) | **PUT** /api/2.0/files/settings/dafaultaccessrights | Change the default access rights
@@ -390,22 +352,34 @@ Class | Method | HTTP request | Description
 *PeopleUserTypeApi* | [**terminateChangeType**](docs/PeopleUserTypeApi.md#terminatechangetype) | **PUT** /api/2.0/people/type/terminate | Terminate update user type
 *PeopleUserTypeApi* | [**updateUserType**](docs/PeopleUserTypeApi.md#updateusertype) | **PUT** /api/2.0/people/type/{type} | Change a user type
 *PortalGuestsApi* | [**getGuestShareLink**](docs/PortalGuestsApi.md#getguestsharelink) | **GET** /api/2.0/people/guests/{userid}/share | Get a guest sharing link
+*PortalPaymentApi* | [**createCustomerOperationsReport**](docs/PortalPaymentApi.md#createcustomeroperationsreport) | **POST** /api/2.0/portal/payment/customer/operationsreport | Generate the customer operations report
+*PortalPaymentApi* | [**getAllCurrencies**](docs/PortalPaymentApi.md#getallcurrencies) | **GET** /api/2.0/portal/payment/accounting/currencies | Get list of currencies
+*PortalPaymentApi* | [**getChechoutSetupUrl**](docs/PortalPaymentApi.md#getchechoutsetupurl) | **GET** /api/2.0/portal/payment/chechoutsetupurl | Get the chechout setup page URL
 *PortalPaymentApi* | [**getCurrencies**](docs/PortalPaymentApi.md#getcurrencies) | **GET** /api/2.0/portal/payment/currencies | Get currencies
+*PortalPaymentApi* | [**getCustomerBalance**](docs/PortalPaymentApi.md#getcustomerbalance) | **GET** /api/2.0/portal/payment/customer/balance | Get the customer balance
+*PortalPaymentApi* | [**getCustomerInfo**](docs/PortalPaymentApi.md#getcustomerinfo) | **GET** /api/2.0/portal/payment/customerinfo | Get the customer info
+*PortalPaymentApi* | [**getCustomerOperations**](docs/PortalPaymentApi.md#getcustomeroperations) | **GET** /api/2.0/portal/payment/customer/operations | Get the customer operations
 *PortalPaymentApi* | [**getPaymentAccount**](docs/PortalPaymentApi.md#getpaymentaccount) | **GET** /api/2.0/portal/payment/account | Get the payment account
 *PortalPaymentApi* | [**getPaymentUrl**](docs/PortalPaymentApi.md#getpaymenturl) | **PUT** /api/2.0/portal/payment/url | Get the payment page URL
 *PortalPaymentApi* | [**getPrices**](docs/PortalPaymentApi.md#getprices) | **GET** /api/2.0/portal/payment/prices | Get prices
-*PortalPaymentApi* | [**getQuota**](docs/PortalPaymentApi.md#getquota) | **GET** /api/2.0/portal/payment/quota | Get quota payment information
+*PortalPaymentApi* | [**getQuotaInformation**](docs/PortalPaymentApi.md#getquotainformation) | **GET** /api/2.0/portal/payment/quota | Get quota payment information
 *PortalPaymentApi* | [**getQuotas**](docs/PortalPaymentApi.md#getquotas) | **GET** /api/2.0/portal/payment/quotas | Get quotas
+*PortalPaymentApi* | [**getTenantWalletSettings**](docs/PortalPaymentApi.md#gettenantwalletsettings) | **GET** /api/2.0/portal/payment/topupsettings | Get wallet auto top up settings
+*PortalPaymentApi* | [**openCustomerSession**](docs/PortalPaymentApi.md#opencustomersession) | **POST** /api/2.0/portal/payment/customer/opensession | Open customer session
 *PortalPaymentApi* | [**paymentUpdate**](docs/PortalPaymentApi.md#paymentupdate) | **PUT** /api/2.0/portal/payment/update | Update the payment quantity
+*PortalPaymentApi* | [**paymentUpdateWallet**](docs/PortalPaymentApi.md#paymentupdatewallet) | **PUT** /api/2.0/portal/payment/updatewallet | Update the wallet payment quantity
+*PortalPaymentApi* | [**performCustomerOperation**](docs/PortalPaymentApi.md#performcustomeroperation) | **POST** /api/2.0/portal/payment/customer/performoperation | Perform customer operation
 *PortalPaymentApi* | [**sendSalesRequest**](docs/PortalPaymentApi.md#sendsalesrequest) | **POST** /api/2.0/portal/payment/request | Send a payment request
-*PortalQuotaApi* | [**getPortalQuota**](docs/PortalQuotaApi.md#getportalquota) | **GET** /api/2.0/portal/quota | Get a portal quota
+*PortalPaymentApi* | [**setTenantWalletSettings**](docs/PortalPaymentApi.md#settenantwalletsettings) | **POST** /api/2.0/portal/payment/topupsettings | Set wallet auto top up settings
+*PortalPaymentApi* | [**topUpDeposit**](docs/PortalPaymentApi.md#topupdeposit) | **POST** /api/2.0/portal/payment/deposit | Put money on deposit
+*PortalQuotaApi* | [**getQuota**](docs/PortalQuotaApi.md#getquota) | **GET** /api/2.0/portal/quota | Get a portal quota
 *PortalQuotaApi* | [**getRightQuota**](docs/PortalQuotaApi.md#getrightquota) | **GET** /api/2.0/portal/quota/right | Get the recommended quota
 *PortalQuotaApi* | [**getTariff**](docs/PortalQuotaApi.md#gettariff) | **GET** /api/2.0/portal/tariff | Get a portal tariff
 *PortalQuotaApi* | [**getUsedSpace**](docs/PortalQuotaApi.md#getusedspace) | **GET** /api/2.0/portal/usedspace | Get the portal used space
 *PortalSettingsApi* | [**continuePortal**](docs/PortalSettingsApi.md#continueportal) | **PUT** /api/2.0/portal/continue | Restore a portal
 *PortalSettingsApi* | [**deletePortal**](docs/PortalSettingsApi.md#deleteportal) | **DELETE** /api/2.0/portal/delete | Delete a portal
-*PortalSettingsApi* | [**get**](docs/PortalSettingsApi.md#get) | **GET** /api/2.0/portal | Get a portal
 *PortalSettingsApi* | [**getFullAbsolutePath**](docs/PortalSettingsApi.md#getfullabsolutepath) | **GET** /api/2.0/portal/path | Get a path to the portal
+*PortalSettingsApi* | [**getPortalInformation**](docs/PortalSettingsApi.md#getportalinformation) | **GET** /api/2.0/portal | Get a portal
 *PortalSettingsApi* | [**sendDeleteInstructions**](docs/PortalSettingsApi.md#senddeleteinstructions) | **POST** /api/2.0/portal/delete | Send removal instructions
 *PortalSettingsApi* | [**sendSuspendInstructions**](docs/PortalSettingsApi.md#sendsuspendinstructions) | **POST** /api/2.0/portal/suspend | Send suspension instructions
 *PortalSettingsApi* | [**suspendPortal**](docs/PortalSettingsApi.md#suspendportal) | **PUT** /api/2.0/portal/suspend | Deactivate a portal
@@ -414,6 +388,44 @@ Class | Method | HTTP request | Description
 *PortalUsersApi* | [**getUsersCount**](docs/PortalUsersApi.md#getuserscount) | **GET** /api/2.0/portal/userscount | Get a number of portal users
 *PortalUsersApi* | [**markPresentAsReaded**](docs/PortalUsersApi.md#markpresentasreaded) | **POST** /api/2.0/portal/present/mark | Mark a gift message as read
 *PortalUsersApi* | [**sendCongratulations**](docs/PortalUsersApi.md#sendcongratulations) | **POST** /api/2.0/portal/sendcongratulations | Send congratulations
+*RoomsApi* | [**addTags**](docs/RoomsApi.md#addtags) | **PUT** /api/2.0/files/rooms/{id}/tags | Add the room tags
+*RoomsApi* | [**archiveRoom**](docs/RoomsApi.md#archiveroom) | **PUT** /api/2.0/files/rooms/{id}/archive | Archive a room
+*RoomsApi* | [**changeRoomCover**](docs/RoomsApi.md#changeroomcover) | **POST** /api/2.0/files/rooms/{id}/cover | Change the room cover
+*RoomsApi* | [**createRoom**](docs/RoomsApi.md#createroom) | **POST** /api/2.0/files/rooms | Create a room
+*RoomsApi* | [**createRoomFromTemplate**](docs/RoomsApi.md#createroomfromtemplate) | **POST** /api/2.0/files/rooms/fromtemplate | Create a room from the template
+*RoomsApi* | [**createRoomLogo**](docs/RoomsApi.md#createroomlogo) | **POST** /api/2.0/files/rooms/{id}/logo | Create a room logo
+*RoomsApi* | [**createRoomThirdParty**](docs/RoomsApi.md#createroomthirdparty) | **POST** /api/2.0/files/rooms/thirdparty/{id} | Create a third-party room
+*RoomsApi* | [**createTag**](docs/RoomsApi.md#createtag) | **POST** /api/2.0/files/tags | Create a tag
+*RoomsApi* | [**createTemplate**](docs/RoomsApi.md#createtemplate) | **POST** /api/2.0/files/roomtemplate | Start creating room template
+*RoomsApi* | [**deleteCustomTags**](docs/RoomsApi.md#deletecustomtags) | **DELETE** /api/2.0/files/tags | Delete tags
+*RoomsApi* | [**deleteRoom**](docs/RoomsApi.md#deleteroom) | **DELETE** /api/2.0/files/rooms/{id} | Remove a room
+*RoomsApi* | [**deleteRoomLogo**](docs/RoomsApi.md#deleteroomlogo) | **DELETE** /api/2.0/files/rooms/{id}/logo | Remove a room logo
+*RoomsApi* | [**deleteTags**](docs/RoomsApi.md#deletetags) | **DELETE** /api/2.0/files/rooms/{id}/tags | Remove the room tags
+*RoomsApi* | [**getCovers**](docs/RoomsApi.md#getcovers) | **GET** /api/2.0/files/rooms/covers | Get covers
+*RoomsApi* | [**getNewRoomItems**](docs/RoomsApi.md#getnewroomitems) | **GET** /api/2.0/files/rooms/{id}/news | Get the new room items
+*RoomsApi* | [**getRoomCreatingStatus**](docs/RoomsApi.md#getroomcreatingstatus) | **GET** /api/2.0/files/rooms/fromtemplate/status | Get the room creation progress
+*RoomsApi* | [**getRoomIndexExport**](docs/RoomsApi.md#getroomindexexport) | **GET** /api/2.0/files/rooms/indexexport | Get the room index export
+*RoomsApi* | [**getRoomInfo**](docs/RoomsApi.md#getroominfo) | **GET** /api/2.0/files/rooms/{id} | Get room information
+*RoomsApi* | [**getRoomLinks**](docs/RoomsApi.md#getroomlinks) | **GET** /api/2.0/files/rooms/{id}/links | Get the room links
+*RoomsApi* | [**getRoomSecurityInfo**](docs/RoomsApi.md#getroomsecurityinfo) | **GET** /api/2.0/files/rooms/{id}/share | Get the room access rights
+*RoomsApi* | [**getRoomsFolder**](docs/RoomsApi.md#getroomsfolder) | **GET** /api/2.0/files/rooms | Get rooms
+*RoomsApi* | [**getRoomsNewItems**](docs/RoomsApi.md#getroomsnewitems) | **GET** /api/2.0/files/rooms/news | Get the room new items
+*RoomsApi* | [**getRoomsPrimaryExternalLink**](docs/RoomsApi.md#getroomsprimaryexternallink) | **GET** /api/2.0/files/rooms/{id}/link | Get the room primary external link
+*RoomsApi* | [**getTagsInfo**](docs/RoomsApi.md#gettagsinfo) | **GET** /api/2.0/files/tags | Get tags
+*RoomsApi* | [**getTemplateCreatingStatus**](docs/RoomsApi.md#gettemplatecreatingstatus) | **GET** /api/2.0/files/roomtemplate/status | Get status of room template creation
+*RoomsApi* | [**isPublic**](docs/RoomsApi.md#ispublic) | **GET** /api/2.0/files/roomtemplate/{id}/public | Get public settings
+*RoomsApi* | [**pinRoom**](docs/RoomsApi.md#pinroom) | **PUT** /api/2.0/files/rooms/{id}/pin | Pin a room
+*RoomsApi* | [**reorder**](docs/RoomsApi.md#reorder) | **PUT** /api/2.0/files/rooms/{id}/reorder | Reorder the room
+*RoomsApi* | [**resendEmailInvitations**](docs/RoomsApi.md#resendemailinvitations) | **POST** /api/2.0/files/rooms/{id}/resend | Resend the room invitations
+*RoomsApi* | [**setLink**](docs/RoomsApi.md#setlink) | **PUT** /api/2.0/files/rooms/{id}/links | Set the room external or invitation link
+*RoomsApi* | [**setPublic**](docs/RoomsApi.md#setpublic) | **PUT** /api/2.0/files/roomtemplate/public | Set public settings
+*RoomsApi* | [**setRoomSecurity**](docs/RoomsApi.md#setroomsecurity) | **PUT** /api/2.0/files/rooms/{id}/share | Set the room access rights
+*RoomsApi* | [**startRoomIndexExport**](docs/RoomsApi.md#startroomindexexport) | **POST** /api/2.0/files/rooms/{id}/indexexport | Start the room index export
+*RoomsApi* | [**terminateRoomIndexExport**](docs/RoomsApi.md#terminateroomindexexport) | **DELETE** /api/2.0/files/rooms/indexexport | Terminate the room index export
+*RoomsApi* | [**unarchiveRoom**](docs/RoomsApi.md#unarchiveroom) | **PUT** /api/2.0/files/rooms/{id}/unarchive | Unarchive a room
+*RoomsApi* | [**unpinRoom**](docs/RoomsApi.md#unpinroom) | **PUT** /api/2.0/files/rooms/{id}/unpin | Unpin a room
+*RoomsApi* | [**updateRoom**](docs/RoomsApi.md#updateroom) | **PUT** /api/2.0/files/rooms/{id} | Update a room
+*RoomsApi* | [**uploadRoomLogo**](docs/RoomsApi.md#uploadroomlogo) | **POST** /api/2.0/files/logos | Upload a room logo image
 *SecurityAccessToDevToolsApi* | [**setTenantDevToolsAccessSettings**](docs/SecurityAccessToDevToolsApi.md#settenantdevtoolsaccesssettings) | **POST** /api/2.0/settings/devtoolsaccess | Set the Developer Tools access settings
 *SecurityActiveConnectionsApi* | [**getAllActiveConnections**](docs/SecurityActiveConnectionsApi.md#getallactiveconnections) | **GET** /api/2.0/security/activeconnections | Get active connections
 *SecurityActiveConnectionsApi* | [**logOutActiveConnection**](docs/SecurityActiveConnectionsApi.md#logoutactiveconnection) | **PUT** /api/2.0/security/activeconnections/logout/{loginEventId} | Log out from the connection
@@ -452,6 +464,7 @@ Class | Method | HTTP request | Description
 *SettingsCommonSettingsApi* | [**getSettings**](docs/SettingsCommonSettingsApi.md#getsettings) | **GET** /api/2.0/settings | Get the portal settings
 *SettingsCommonSettingsApi* | [**getSocketSettings**](docs/SettingsCommonSettingsApi.md#getsocketsettings) | **GET** /api/2.0/settings/socket | Get the socket settings
 *SettingsCommonSettingsApi* | [**getSupportedCultures**](docs/SettingsCommonSettingsApi.md#getsupportedcultures) | **GET** /api/2.0/settings/cultures | Get supported languages
+*SettingsCommonSettingsApi* | [**getTenantUserInvitationSettings**](docs/SettingsCommonSettingsApi.md#gettenantuserinvitationsettings) | **GET** /api/2.0/settings/invitationsettings | Get the user invitation settings
 *SettingsCommonSettingsApi* | [**getTimeZonesAsync**](docs/SettingsCommonSettingsApi.md#gettimezonesasync) | **GET** /api/2.0/settings/timezones | Get time zones
 *SettingsCommonSettingsApi* | [**gettDeepLinkSettings**](docs/SettingsCommonSettingsApi.md#gettdeeplinksettings) | **GET** /api/2.0/settings/deeplink | Get the deep link settings
 *SettingsCommonSettingsApi* | [**paymentSettings**](docs/SettingsCommonSettingsApi.md#paymentsettings) | **GET** /api/2.0/settings/payment | Get the payment settings
@@ -460,6 +473,7 @@ Class | Method | HTTP request | Description
 *SettingsCommonSettingsApi* | [**saveDnsSettings**](docs/SettingsCommonSettingsApi.md#savednssettings) | **PUT** /api/2.0/settings/dns | Save the DNS settings
 *SettingsCommonSettingsApi* | [**saveMailDomainSettings**](docs/SettingsCommonSettingsApi.md#savemaildomainsettings) | **POST** /api/2.0/settings/maildomainsettings | Save the mail domain settings
 *SettingsCommonSettingsApi* | [**updateEmailActivationSettings**](docs/SettingsCommonSettingsApi.md#updateemailactivationsettings) | **PUT** /api/2.0/settings/emailactivation | Update the email activation settings
+*SettingsCommonSettingsApi* | [**updateInvitationSettings**](docs/SettingsCommonSettingsApi.md#updateinvitationsettings) | **PUT** /api/2.0/settings/invitationsettings | Update user invitation settings
 *SettingsCookiesApi* | [**getCookieSettings**](docs/SettingsCookiesApi.md#getcookiesettings) | **GET** /api/2.0/settings/cookiesettings | Get cookies lifetime
 *SettingsCookiesApi* | [**updateCookieSettings**](docs/SettingsCookiesApi.md#updatecookiesettings) | **PUT** /api/2.0/settings/cookiesettings | Update cookies lifetime
 *SettingsCustomNavigationApi* | [**createCustomNavigationItem**](docs/SettingsCustomNavigationApi.md#createcustomnavigationitem) | **POST** /api/2.0/settings/customnavigation/create | Add a custom navigation item
@@ -562,7 +576,7 @@ Class | Method | HTTP request | Description
 *SettingsWebpluginsApi* | [**getWebPlugin**](docs/SettingsWebpluginsApi.md#getwebplugin) | **GET** /api/2.0/settings/webplugins/{name} | Get a web plugin by name
 *SettingsWebpluginsApi* | [**getWebPlugins**](docs/SettingsWebpluginsApi.md#getwebplugins) | **GET** /api/2.0/settings/webplugins | Get web plugins
 *SettingsWebpluginsApi* | [**updateWebPlugin**](docs/SettingsWebpluginsApi.md#updatewebplugin) | **PUT** /api/2.0/settings/webplugins/{name} | Update a web plugin
-*ThirdPartyApi* | [**getCodeRequest**](docs/ThirdPartyApi.md#getcoderequest) | **GET** /api/2.0/thirdparty/{provider} | Get the code request
+*ThirdPartyApi* | [**get**](docs/ThirdPartyApi.md#get) | **GET** /api/2.0/thirdparty/{provider} | Get the code request
 
 
 ### Documentation For Models
@@ -615,6 +629,8 @@ Class | Method | HTTP request | Description
  - [BackupRestoreDto](docs/BackupRestoreDto.md)
  - [BackupScheduleDto](docs/BackupScheduleDto.md)
  - [BackupStorageType](docs/BackupStorageType.md)
+ - [Balance](docs/Balance.md)
+ - [BalanceWrapper](docs/BalanceWrapper.md)
  - [BaseBatchRequestDto](docs/BaseBatchRequestDto.md)
  - [BaseBatchRequestDtoFolderIdsInner](docs/BaseBatchRequestDtoFolderIdsInner.md)
  - [BatchRequestDto](docs/BatchRequestDto.md)
@@ -685,6 +701,8 @@ Class | Method | HTTP request | Description
  - [CultureSpecificExternalResources](docs/CultureSpecificExternalResources.md)
  - [CurrenciesArrayWrapper](docs/CurrenciesArrayWrapper.md)
  - [CurrenciesDto](docs/CurrenciesDto.md)
+ - [Currency](docs/Currency.md)
+ - [CurrencyArrayWrapper](docs/CurrencyArrayWrapper.md)
  - [CurrentLicenseInfo](docs/CurrentLicenseInfo.md)
  - [CustomColorThemesSettingsColorItem](docs/CustomColorThemesSettingsColorItem.md)
  - [CustomColorThemesSettingsDto](docs/CustomColorThemesSettingsDto.md)
@@ -696,6 +714,9 @@ Class | Method | HTTP request | Description
  - [CustomNavigationItemArrayWrapper](docs/CustomNavigationItemArrayWrapper.md)
  - [CustomNavigationItemWrapper](docs/CustomNavigationItemWrapper.md)
  - [CustomerConfigDto](docs/CustomerConfigDto.md)
+ - [CustomerInfo](docs/CustomerInfo.md)
+ - [CustomerInfoWrapper](docs/CustomerInfoWrapper.md)
+ - [CustomerOperationsReportDto](docs/CustomerOperationsReportDto.md)
  - [CustomizationConfigDto](docs/CustomizationConfigDto.md)
  - [DarkThemeSettings](docs/DarkThemeSettings.md)
  - [DarkThemeSettingsRequestDto](docs/DarkThemeSettingsRequestDto.md)
@@ -904,6 +925,8 @@ Class | Method | HTTP request | Description
  - [Oauth2TokenPost200Response](docs/Oauth2TokenPost200Response.md)
  - [ObjectArrayWrapper](docs/ObjectArrayWrapper.md)
  - [ObjectWrapper](docs/ObjectWrapper.md)
+ - [OpenCustomerSessionRequestDto](docs/OpenCustomerSessionRequestDto.md)
+ - [Operation](docs/Operation.md)
  - [Options](docs/Options.md)
  - [OrderBy](docs/OrderBy.md)
  - [OrderRequestDto](docs/OrderRequestDto.md)
@@ -920,16 +943,19 @@ Class | Method | HTTP request | Description
  - [PasswordSettingsDto](docs/PasswordSettingsDto.md)
  - [PasswordSettingsRequestsDto](docs/PasswordSettingsRequestsDto.md)
  - [PasswordSettingsWrapper](docs/PasswordSettingsWrapper.md)
+ - [PaymentMethodStatus](docs/PaymentMethodStatus.md)
  - [PaymentSettingsDto](docs/PaymentSettingsDto.md)
  - [PaymentSettingsWrapper](docs/PaymentSettingsWrapper.md)
  - [PaymentUrlRequestsDto](docs/PaymentUrlRequestsDto.md)
  - [Payments](docs/Payments.md)
+ - [PerformCustomerOperationRequestDto](docs/PerformCustomerOperationRequestDto.md)
  - [PermissionsConfig](docs/PermissionsConfig.md)
  - [PluginsConfig](docs/PluginsConfig.md)
  - [PluginsDto](docs/PluginsDto.md)
  - [PriceDto](docs/PriceDto.md)
  - [ProductAdministratorDto](docs/ProductAdministratorDto.md)
  - [ProductAdministratorWrapper](docs/ProductAdministratorWrapper.md)
+ - [ProductQuantityType](docs/ProductQuantityType.md)
  - [ProductType](docs/ProductType.md)
  - [ProviderArrayWrapper](docs/ProviderArrayWrapper.md)
  - [ProviderDto](docs/ProviderDto.md)
@@ -944,6 +970,8 @@ Class | Method | HTTP request | Description
  - [QuotaWrapper](docs/QuotaWrapper.md)
  - [RecaptchaType](docs/RecaptchaType.md)
  - [RecentConfig](docs/RecentConfig.md)
+ - [Report](docs/Report.md)
+ - [ReportWrapper](docs/ReportWrapper.md)
  - [RoomDataLifetimeDto](docs/RoomDataLifetimeDto.md)
  - [RoomDataLifetimePeriod](docs/RoomDataLifetimePeriod.md)
  - [RoomFromTemplateStatusDto](docs/RoomFromTemplateStatusDto.md)
@@ -974,7 +1002,9 @@ Class | Method | HTTP request | Description
  - [SecurityArrayWrapper](docs/SecurityArrayWrapper.md)
  - [SecurityDto](docs/SecurityDto.md)
  - [SecurityRequestsDto](docs/SecurityRequestsDto.md)
+ - [Session](docs/Session.md)
  - [SessionRequest](docs/SessionRequest.md)
+ - [SessionWrapper](docs/SessionWrapper.md)
  - [SetManagerRequest](docs/SetManagerRequest.md)
  - [SetPublicDto](docs/SetPublicDto.md)
  - [SettingsDto](docs/SettingsDto.md)
@@ -1012,6 +1042,7 @@ Class | Method | HTTP request | Description
  - [StorageSettings](docs/StorageSettings.md)
  - [StorageSettingsWrapper](docs/StorageSettingsWrapper.md)
  - [StringWrapper](docs/StringWrapper.md)
+ - [SubAccount](docs/SubAccount.md)
  - [SubjectFilter](docs/SubjectFilter.md)
  - [SubjectType](docs/SubjectType.md)
  - [SubmitForm](docs/SubmitForm.md)
@@ -1043,8 +1074,13 @@ Class | Method | HTTP request | Description
  - [TenantRoomQuotaSettingsWrapper](docs/TenantRoomQuotaSettingsWrapper.md)
  - [TenantStatus](docs/TenantStatus.md)
  - [TenantTrustedDomainsType](docs/TenantTrustedDomainsType.md)
+ - [TenantUserInvitationSettingsDto](docs/TenantUserInvitationSettingsDto.md)
+ - [TenantUserInvitationSettingsRequestDto](docs/TenantUserInvitationSettingsRequestDto.md)
+ - [TenantUserInvitationSettingsWrapper](docs/TenantUserInvitationSettingsWrapper.md)
  - [TenantUserQuotaSettings](docs/TenantUserQuotaSettings.md)
  - [TenantUserQuotaSettingsWrapper](docs/TenantUserQuotaSettingsWrapper.md)
+ - [TenantWalletSettings](docs/TenantWalletSettings.md)
+ - [TenantWalletSettingsWrapper](docs/TenantWalletSettingsWrapper.md)
  - [TenantWrapper](docs/TenantWrapper.md)
  - [TerminateRequestDto](docs/TerminateRequestDto.md)
  - [TfaRequestsDto](docs/TfaRequestsDto.md)
@@ -1062,6 +1098,7 @@ Class | Method | HTTP request | Description
  - [ThumbnailsRequest](docs/ThumbnailsRequest.md)
  - [TimezonesRequestsArrayWrapper](docs/TimezonesRequestsArrayWrapper.md)
  - [TimezonesRequestsDto](docs/TimezonesRequestsDto.md)
+ - [TopUpDepositRequestDto](docs/TopUpDepositRequestDto.md)
  - [TurnOnAdminMessageSettingsRequestDto](docs/TurnOnAdminMessageSettingsRequestDto.md)
  - [UnknownWrapper](docs/UnknownWrapper.md)
  - [UpdateApiKeyRequest](docs/UpdateApiKeyRequest.md)
@@ -1089,6 +1126,7 @@ Class | Method | HTTP request | Description
  - [UserInvitation](docs/UserInvitation.md)
  - [UserInvitationRequestDto](docs/UserInvitationRequestDto.md)
  - [ValidationResult](docs/ValidationResult.md)
+ - [WalletQuantityRequestDto](docs/WalletQuantityRequestDto.md)
  - [WatermarkAdditions](docs/WatermarkAdditions.md)
  - [WatermarkDto](docs/WatermarkDto.md)
  - [WatermarkOnDraw](docs/WatermarkOnDraw.md)

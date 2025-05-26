@@ -53,7 +53,7 @@ void (empty response body)
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
 
 ### HTTP request headers
 
@@ -111,7 +111,7 @@ void (empty response body)
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
 
 ### HTTP request headers
 

@@ -51,7 +51,7 @@ const { status, data } = await apiInstance.changeActivation(
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
 
 ### HTTP request headers
 
@@ -108,7 +108,7 @@ const { status, data } = await apiInstance.createClient(
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
 
 ### HTTP request headers
 
@@ -163,7 +163,7 @@ const { status, data } = await apiInstance.deleteClient(
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
 
 ### HTTP request headers
 
@@ -219,7 +219,7 @@ const { status, data } = await apiInstance.regenerateSecret(
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
 
 ### HTTP request headers
 
@@ -275,7 +275,7 @@ const { status, data } = await apiInstance.revokeUserClient(
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
 
 ### HTTP request headers
 
@@ -336,7 +336,7 @@ const { status, data } = await apiInstance.updateClient(
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
 
 ### HTTP request headers
 

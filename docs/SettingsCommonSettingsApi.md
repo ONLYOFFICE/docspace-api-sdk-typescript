@@ -13,6 +13,7 @@ All URIs are relative to *http://localhost:8092*
 |[**getSettings**](#getsettings) | **GET** /api/2.0/settings | Get the portal settings|
 |[**getSocketSettings**](#getsocketsettings) | **GET** /api/2.0/settings/socket | Get the socket settings|
 |[**getSupportedCultures**](#getsupportedcultures) | **GET** /api/2.0/settings/cultures | Get supported languages|
+|[**getTenantUserInvitationSettings**](#gettenantuserinvitationsettings) | **GET** /api/2.0/settings/invitationsettings | Get the user invitation settings|
 |[**getTimeZonesAsync**](#gettimezonesasync) | **GET** /api/2.0/settings/timezones | Get time zones|
 |[**gettDeepLinkSettings**](#gettdeeplinksettings) | **GET** /api/2.0/settings/deeplink | Get the deep link settings|
 |[**paymentSettings**](#paymentsettings) | **GET** /api/2.0/settings/payment | Get the payment settings|
@@ -21,6 +22,7 @@ All URIs are relative to *http://localhost:8092*
 |[**saveDnsSettings**](#savednssettings) | **PUT** /api/2.0/settings/dns | Save the DNS settings|
 |[**saveMailDomainSettings**](#savemaildomainsettings) | **POST** /api/2.0/settings/maildomainsettings | Save the mail domain settings|
 |[**updateEmailActivationSettings**](#updateemailactivationsettings) | **PUT** /api/2.0/settings/emailactivation | Update the email activation settings|
+|[**updateInvitationSettings**](#updateinvitationsettings) | **PUT** /api/2.0/settings/invitationsettings | Update user invitation settings|
 
 # **closeAdminHelper**
 > closeAdminHelper()
@@ -449,6 +451,50 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **getTenantUserInvitationSettings**
+> TenantUserInvitationSettingsWrapper getTenantUserInvitationSettings()
+
+Returns the portal user invitation settings.
+
+### Example
+
+```typescript
+import {
+    SettingsCommonSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-typescript';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsCommonSettingsApi(configuration);
+
+const { status, data } = await apiInstance.getTenantUserInvitationSettings();
+```
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**TenantUserInvitationSettingsWrapper**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | portal user invitation settings |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **getTimeZonesAsync**
 > TimezonesRequestsArrayWrapper getTimeZonesAsync()
 
@@ -849,6 +895,59 @@ const { status, data } = await apiInstance.updateEmailActivationSettings(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Updated email activation settings |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **updateInvitationSettings**
+> TenantUserInvitationSettingsWrapper updateInvitationSettings()
+
+Updates the portal user invitation settings.
+
+### Example
+
+```typescript
+import {
+    SettingsCommonSettingsApi,
+    Configuration,
+    TenantUserInvitationSettingsRequestDto
+} from '@onlyoffice/docspace-api-typescript';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsCommonSettingsApi(configuration);
+
+let tenantUserInvitationSettingsRequestDto: TenantUserInvitationSettingsRequestDto; // (optional)
+
+const { status, data } = await apiInstance.updateInvitationSettings(
+    tenantUserInvitationSettingsRequestDto
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **tenantUserInvitationSettingsRequestDto** | **TenantUserInvitationSettingsRequestDto**|  | |
+
+
+### Return type
+
+**TenantUserInvitationSettingsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Updated user invitation settings |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

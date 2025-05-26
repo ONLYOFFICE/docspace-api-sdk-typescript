@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **usersQuota** | [**TenantEntityQuotaSettings**](TenantEntityQuotaSettings.md) |  | [optional] [default to undefined]
 **roomsQuota** | [**TenantEntityQuotaSettings**](TenantEntityQuotaSettings.md) |  | [optional] [default to undefined]
 **tenantCustomQuota** | [**TenantQuotaSettings**](TenantQuotaSettings.md) |  | [optional] [default to undefined]
+**dueDate** | **string** | The due date. | [optional] [default to undefined]
 
 ## Example
 
@@ -33,6 +34,7 @@ const instance: QuotaDto = {
     usersQuota,
     roomsQuota,
     tenantCustomQuota,
+    dueDate,
 };
 ```
 

@@ -237,9 +237,11 @@ const configuration = new Configuration();
 const apiInstance = new PeopleProfilesApi(configuration);
 
 let email: string; //The user email address. (optional) (default to undefined)
+let culture: string; //Culture (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getByEmail(
-    email
+    email,
+    culture
 );
 ```
 
@@ -248,6 +250,7 @@ const { status, data } = await apiInstance.getByEmail(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **email** | [**string**] | The user email address. | (optional) defaults to undefined|
+| **culture** | [**string**] | Culture | (optional) defaults to undefined|
 
 
 ### Return type

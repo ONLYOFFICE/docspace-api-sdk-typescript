@@ -10,8 +10,11 @@ Name | Type | Description | Notes
 **name** | **string** | The tenant name. | [optional] [default to undefined]
 **price** | **number** | The tenant price. | [optional] [default to undefined]
 **priceCurrencySymbol** | **string** | The tenant price currency symbol. | [optional] [default to undefined]
+**priceISOCurrencySymbol** | **string** | The tenant price three-character ISO 4217 currency symbol. | [optional] [default to undefined]
 **productId** | **string** | The tenant product ID. | [optional] [default to undefined]
 **visible** | **boolean** | Specifies if the tenant quota is visible or not. | [optional] [default to undefined]
+**wallet** | **boolean** | Specifies if the tenant quota applies to the wallet or not | [optional] [default to undefined]
+**dueDate** | **string** | The quota due date. | [optional] [default to undefined]
 **features** | **string** | The tenant quota features. | [optional] [default to undefined]
 **maxFileSize** | **number** | The tenant maximum file size. | [optional] [default to undefined]
 **maxTotalSize** | **number** | The tenant maximum total size. | [optional] [default to undefined]
@@ -48,8 +51,11 @@ const instance: TenantQuota = {
     name,
     price,
     priceCurrencySymbol,
+    priceISOCurrencySymbol,
     productId,
     visible,
+    wallet,
+    dueDate,
     features,
     maxFileSize,
     maxTotalSize,

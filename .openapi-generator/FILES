@@ -11,7 +11,6 @@ api/files/files-api.ts
 api/files/folders-api.ts
 api/files/operations-api.ts
 api/files/quota-api.ts
-api/files/rooms-api.ts
 api/files/settings-api.ts
 api/files/sharing-api.ts
 api/files/third-party-integration-api.ts
@@ -39,6 +38,7 @@ api/portal/payment-api.ts
 api/portal/quota-api.ts
 api/portal/settings-api.ts
 api/portal/users-api.ts
+api/rooms/rooms-api.ts
 api/security/access-to-devtools-api.ts
 api/security/active-connections-api.ts
 api/security/audit-trail-data-api.ts
@@ -124,6 +124,8 @@ docs/BackupProgressWrapper.md
 docs/BackupRestoreDto.md
 docs/BackupScheduleDto.md
 docs/BackupStorageType.md
+docs/Balance.md
+docs/BalanceWrapper.md
 docs/BaseBatchRequestDto.md
 docs/BaseBatchRequestDtoFolderIdsInner.md
 docs/BatchRequestDto.md
@@ -195,6 +197,8 @@ docs/CultureSpecificExternalResource.md
 docs/CultureSpecificExternalResources.md
 docs/CurrenciesArrayWrapper.md
 docs/CurrenciesDto.md
+docs/Currency.md
+docs/CurrencyArrayWrapper.md
 docs/CurrentLicenseInfo.md
 docs/CustomColorThemesSettingsColorItem.md
 docs/CustomColorThemesSettingsDto.md
@@ -206,6 +210,9 @@ docs/CustomNavigationItem.md
 docs/CustomNavigationItemArrayWrapper.md
 docs/CustomNavigationItemWrapper.md
 docs/CustomerConfigDto.md
+docs/CustomerInfo.md
+docs/CustomerInfoWrapper.md
+docs/CustomerOperationsReportDto.md
 docs/CustomizationConfigDto.md
 docs/DarkThemeSettings.md
 docs/DarkThemeSettingsRequestDto.md
@@ -302,7 +309,6 @@ docs/FilesFilesApi.md
 docs/FilesFoldersApi.md
 docs/FilesOperationsApi.md
 docs/FilesQuotaApi.md
-docs/FilesRoomsApi.md
 docs/FilesSettingsApi.md
 docs/FilesSettingsDto.md
 docs/FilesSettingsDtoInternalFormats.md
@@ -429,6 +435,8 @@ docs/OAuth20Token.md
 docs/Oauth2TokenPost200Response.md
 docs/ObjectArrayWrapper.md
 docs/ObjectWrapper.md
+docs/OpenCustomerSessionRequestDto.md
+docs/Operation.md
 docs/Options.md
 docs/OrderBy.md
 docs/OrderRequestDto.md
@@ -445,6 +453,7 @@ docs/PasswordHasher.md
 docs/PasswordSettingsDto.md
 docs/PasswordSettingsRequestsDto.md
 docs/PasswordSettingsWrapper.md
+docs/PaymentMethodStatus.md
 docs/PaymentSettingsDto.md
 docs/PaymentSettingsWrapper.md
 docs/PaymentUrlRequestsDto.md
@@ -461,6 +470,7 @@ docs/PeopleThirdPartyAccountsApi.md
 docs/PeopleUserDataApi.md
 docs/PeopleUserStatusApi.md
 docs/PeopleUserTypeApi.md
+docs/PerformCustomerOperationRequestDto.md
 docs/PermissionsConfig.md
 docs/PluginsConfig.md
 docs/PluginsDto.md
@@ -472,6 +482,7 @@ docs/PortalUsersApi.md
 docs/PriceDto.md
 docs/ProductAdministratorDto.md
 docs/ProductAdministratorWrapper.md
+docs/ProductQuantityType.md
 docs/ProductType.md
 docs/ProviderArrayWrapper.md
 docs/ProviderDto.md
@@ -486,6 +497,8 @@ docs/QuotaSettingsRequestsDtoDefaultQuota.md
 docs/QuotaWrapper.md
 docs/RecaptchaType.md
 docs/RecentConfig.md
+docs/Report.md
+docs/ReportWrapper.md
 docs/RoomDataLifetimeDto.md
 docs/RoomDataLifetimePeriod.md
 docs/RoomFromTemplateStatusDto.md
@@ -501,6 +514,7 @@ docs/RoomTemplateDto.md
 docs/RoomTemplateStatusDto.md
 docs/RoomTemplateStatusWrapper.md
 docs/RoomType.md
+docs/RoomsApi.md
 docs/RoomsNotificationSettingsDto.md
 docs/RoomsNotificationSettingsWrapper.md
 docs/RoomsNotificationsSettingsRequestDto.md
@@ -524,7 +538,9 @@ docs/SecurityLoginHistoryApi.md
 docs/SecurityOAuth2Api.md
 docs/SecurityRequestsDto.md
 docs/SecuritySMTPSettingsApi.md
+docs/Session.md
 docs/SessionRequest.md
+docs/SessionWrapper.md
 docs/SetManagerRequest.md
 docs/SetPublicDto.md
 docs/SettingsAccessToDevToolsApi.md
@@ -584,6 +600,7 @@ docs/StorageRequestsDto.md
 docs/StorageSettings.md
 docs/StorageSettingsWrapper.md
 docs/StringWrapper.md
+docs/SubAccount.md
 docs/SubjectFilter.md
 docs/SubjectType.md
 docs/SubmitForm.md
@@ -615,8 +632,13 @@ docs/TenantRoomQuotaSettings.md
 docs/TenantRoomQuotaSettingsWrapper.md
 docs/TenantStatus.md
 docs/TenantTrustedDomainsType.md
+docs/TenantUserInvitationSettingsDto.md
+docs/TenantUserInvitationSettingsRequestDto.md
+docs/TenantUserInvitationSettingsWrapper.md
 docs/TenantUserQuotaSettings.md
 docs/TenantUserQuotaSettingsWrapper.md
+docs/TenantWalletSettings.md
+docs/TenantWalletSettingsWrapper.md
 docs/TenantWrapper.md
 docs/TerminateRequestDto.md
 docs/TfaRequestsDto.md
@@ -635,6 +657,7 @@ docs/ThumbnailsDataWrapper.md
 docs/ThumbnailsRequest.md
 docs/TimezonesRequestsArrayWrapper.md
 docs/TimezonesRequestsDto.md
+docs/TopUpDepositRequestDto.md
 docs/TurnOnAdminMessageSettingsRequestDto.md
 docs/UnknownWrapper.md
 docs/UpdateApiKeyRequest.md
@@ -662,6 +685,7 @@ docs/UserInfoWrapper.md
 docs/UserInvitation.md
 docs/UserInvitationRequestDto.md
 docs/ValidationResult.md
+docs/WalletQuantityRequestDto.md
 docs/WatermarkAdditions.md
 docs/WatermarkDto.md
 docs/WatermarkOnDraw.md
@@ -739,6 +763,8 @@ models/backup-progress.ts
 models/backup-restore-dto.ts
 models/backup-schedule-dto.ts
 models/backup-storage-type.ts
+models/balance-wrapper.ts
+models/balance.ts
 models/base-batch-request-dto-folder-ids-inner.ts
 models/base-batch-request-dto.ts
 models/batch-request-dto-dest-folder-id.ts
@@ -809,6 +835,8 @@ models/culture-specific-external-resources.ts
 models/culture.ts
 models/currencies-array-wrapper.ts
 models/currencies-dto.ts
+models/currency-array-wrapper.ts
+models/currency.ts
 models/current-license-info.ts
 models/custom-color-themes-settings-color-item.ts
 models/custom-color-themes-settings-dto.ts
@@ -820,6 +848,9 @@ models/custom-navigation-item-array-wrapper.ts
 models/custom-navigation-item-wrapper.ts
 models/custom-navigation-item.ts
 models/customer-config-dto.ts
+models/customer-info-wrapper.ts
+models/customer-info.ts
+models/customer-operations-report-dto.ts
 models/customization-config-dto.ts
 models/dark-theme-settings-request-dto.ts
 models/dark-theme-settings-type.ts
@@ -1029,6 +1060,8 @@ models/oauth2-token-post200-response.ts
 models/oauth20-token.ts
 models/object-array-wrapper.ts
 models/object-wrapper.ts
+models/open-customer-session-request-dto.ts
+models/operation.ts
 models/options.ts
 models/order-by.ts
 models/order-request-dto.ts
@@ -1045,16 +1078,19 @@ models/password-hasher.ts
 models/password-settings-dto.ts
 models/password-settings-requests-dto.ts
 models/password-settings-wrapper.ts
+models/payment-method-status.ts
 models/payment-settings-dto.ts
 models/payment-settings-wrapper.ts
 models/payment-url-requests-dto.ts
 models/payments.ts
+models/perform-customer-operation-request-dto.ts
 models/permissions-config.ts
 models/plugins-config.ts
 models/plugins-dto.ts
 models/price-dto.ts
 models/product-administrator-dto.ts
 models/product-administrator-wrapper.ts
+models/product-quantity-type.ts
 models/product-type.ts
 models/provider-array-wrapper.ts
 models/provider-dto.ts
@@ -1069,6 +1105,8 @@ models/quota-wrapper.ts
 models/quota.ts
 models/recaptcha-type.ts
 models/recent-config.ts
+models/report-wrapper.ts
+models/report.ts
 models/room-data-lifetime-dto.ts
 models/room-data-lifetime-period.ts
 models/room-from-template-status-dto.ts
@@ -1099,6 +1137,8 @@ models/security-array-wrapper.ts
 models/security-dto.ts
 models/security-requests-dto.ts
 models/session-request.ts
+models/session-wrapper.ts
+models/session.ts
 models/set-manager-request.ts
 models/set-public-dto.ts
 models/settings-dto.ts
@@ -1137,6 +1177,7 @@ models/storage-settings-wrapper.ts
 models/storage-settings.ts
 models/string-wrapper.ts
 models/stringarray-wrapper.ts
+models/sub-account.ts
 models/subject-filter.ts
 models/subject-type.ts
 models/submit-form.ts
@@ -1168,8 +1209,13 @@ models/tenant-room-quota-settings-wrapper.ts
 models/tenant-room-quota-settings.ts
 models/tenant-status.ts
 models/tenant-trusted-domains-type.ts
+models/tenant-user-invitation-settings-dto.ts
+models/tenant-user-invitation-settings-request-dto.ts
+models/tenant-user-invitation-settings-wrapper.ts
 models/tenant-user-quota-settings-wrapper.ts
 models/tenant-user-quota-settings.ts
+models/tenant-wallet-settings-wrapper.ts
+models/tenant-wallet-settings.ts
 models/tenant-wrapper.ts
 models/terminate-request-dto.ts
 models/tfa-requests-dto-type.ts
@@ -1187,6 +1233,7 @@ models/thumbnails-data-wrapper.ts
 models/thumbnails-request.ts
 models/timezones-requests-array-wrapper.ts
 models/timezones-requests-dto.ts
+models/top-up-deposit-request-dto.ts
 models/turn-on-admin-message-settings-request-dto.ts
 models/unknown-wrapper.ts
 models/update-api-key-request.ts
@@ -1214,6 +1261,7 @@ models/user-info.ts
 models/user-invitation-request-dto.ts
 models/user-invitation.ts
 models/validation-result.ts
+models/wallet-quantity-request-dto.ts
 models/watermark-additions.ts
 models/watermark-dto.ts
 models/watermark-on-draw.ts
