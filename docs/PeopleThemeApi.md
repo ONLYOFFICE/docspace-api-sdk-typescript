@@ -4,11 +4,11 @@ All URIs are relative to *http://localhost:8092*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**changeTheme**](#changetheme) | **PUT** /api/2.0/people/theme | Change the portal theme|
-|[**getTheme**](#gettheme) | **GET** /api/2.0/people/theme | Get the portal theme|
+|[**changePortalTheme**](#changeportaltheme) | **PUT** /api/2.0/people/theme | Change the portal theme|
+|[**getPortalTheme**](#getportaltheme) | **GET** /api/2.0/people/theme | Get the portal theme|
 
-# **changeTheme**
-> DarkThemeSettingsWrapper changeTheme()
+# **changePortalTheme**
+> DarkThemeSettingsWrapper changePortalTheme()
 
 Changes the current portal theme.
 
@@ -26,7 +26,7 @@ const apiInstance = new PeopleThemeApi(configuration);
 
 let darkThemeSettingsRequestDto: DarkThemeSettingsRequestDto; // (optional)
 
-const { status, data } = await apiInstance.changeTheme(
+const { status, data } = await apiInstance.changePortalTheme(
     darkThemeSettingsRequestDto
 );
 ```
@@ -60,8 +60,8 @@ const { status, data } = await apiInstance.changeTheme(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getTheme**
-> DarkThemeSettingsWrapper getTheme()
+# **getPortalTheme**
+> DarkThemeSettingsWrapper getPortalTheme()
 
 Returns a theme which is set to the current portal.
 
@@ -76,7 +76,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new PeopleThemeApi(configuration);
 
-const { status, data } = await apiInstance.getTheme();
+const { status, data } = await apiInstance.getPortalTheme();
 ```
 
 ### Parameters

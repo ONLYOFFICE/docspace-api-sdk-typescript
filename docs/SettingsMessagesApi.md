@@ -5,7 +5,7 @@ All URIs are relative to *http://localhost:8092*
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**enableAdminMessageSettings**](#enableadminmessagesettings) | **POST** /api/2.0/settings/messagesettings | Enable the administrator message settings|
-|[**sendAdmMail**](#sendadmmail) | **POST** /api/2.0/settings/sendadmmail | Send a message to the administrator|
+|[**sendAdminMail**](#sendadminmail) | **POST** /api/2.0/settings/sendadmmail | Send a message to the administrator|
 |[**sendJoinInviteMail**](#sendjoininvitemail) | **POST** /api/2.0/settings/sendjoininvite | Sends an invitation email|
 
 # **enableAdminMessageSettings**
@@ -61,8 +61,8 @@ const { status, data } = await apiInstance.enableAdminMessageSettings(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **sendAdmMail**
-> StringWrapper sendAdmMail()
+# **sendAdminMail**
+> StringWrapper sendAdminMail()
 
 Sends a message to the administrator email when unauthorized users encounter issues accessing DocSpace.
 
@@ -80,7 +80,7 @@ const apiInstance = new SettingsMessagesApi(configuration);
 
 let adminMessageSettingsRequestsDto: AdminMessageSettingsRequestsDto; // (optional)
 
-const { status, data } = await apiInstance.sendAdmMail(
+const { status, data } = await apiInstance.sendAdminMail(
     adminMessageSettingsRequestsDto
 );
 ```

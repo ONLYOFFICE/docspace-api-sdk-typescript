@@ -141,237 +141,6 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
             };
         },
         /**
-         * Returns a list of users matching the status filter and search query.
-         * @summary Search users by status filter
-         * @param {EmployeeStatus} status The user status.
-         * @param {string} [query] The advanced search query.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAdvanced: async (status: EmployeeStatus, query?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'status' is not null or undefined
-            assertParamExists('getAdvanced', 'status', status)
-            const localVarPath = `/api/2.0/people/status/{status}/search`
-                .replace(`{${"status"}}`, encodeURIComponent(String(status)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-            if (query !== undefined) {
-                localVarQueryParameter['query'] = query;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns a list of users with full information about them matching the parameters specified in the request.
-         * @summary Search users with detaailed information by extended filter
-         * @param {EmployeeStatus} [employeeStatus] The user status.
-         * @param {string} [groupId] The group ID.
-         * @param {EmployeeActivationStatus} [activationStatus] The user activation status.
-         * @param {EmployeeType} [employeeType] The user type.
-         * @param {Array<GetFullByFilterEmployeeTypesEnum>} [employeeTypes] The list of user types.
-         * @param {boolean} [isAdministrator] Specifies if the user is an administrator or not.
-         * @param {Payments} [payments] The user payment status.
-         * @param {AccountLoginType} [accountLoginType] The account login type.
-         * @param {QuotaFilter} [quotaFilter] The quota filter (All - 0, Default - 1, Custom - 2).
-         * @param {boolean} [withoutGroup] Specifies whether the user should be a member of a group or not.
-         * @param {boolean} [excludeGroup] Specifies whether the user should be a member of the group with the specified ID.
-         * @param {boolean} [invitedByMe] Specifies whether the user is invited by the current user or not.
-         * @param {string} [inviterId] The inviter ID.
-         * @param {Area} [area] The filter area.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getFullByFilter: async (employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<GetFullByFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/people/filter`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-            if (employeeStatus !== undefined) {
-                localVarQueryParameter['employeeStatus'] = employeeStatus;
-            }
-
-            if (groupId !== undefined) {
-                localVarQueryParameter['groupId'] = groupId;
-            }
-
-            if (activationStatus !== undefined) {
-                localVarQueryParameter['activationStatus'] = activationStatus;
-            }
-
-            if (employeeType !== undefined) {
-                localVarQueryParameter['employeeType'] = employeeType;
-            }
-
-            if (employeeTypes) {
-                localVarQueryParameter['employeeTypes'] = employeeTypes.join(COLLECTION_FORMATS.csv);
-            }
-
-            if (isAdministrator !== undefined) {
-                localVarQueryParameter['isAdministrator'] = isAdministrator;
-            }
-
-            if (payments !== undefined) {
-                localVarQueryParameter['payments'] = payments;
-            }
-
-            if (accountLoginType !== undefined) {
-                localVarQueryParameter['accountLoginType'] = accountLoginType;
-            }
-
-            if (quotaFilter !== undefined) {
-                localVarQueryParameter['quotaFilter'] = quotaFilter;
-            }
-
-            if (withoutGroup !== undefined) {
-                localVarQueryParameter['withoutGroup'] = withoutGroup;
-            }
-
-            if (excludeGroup !== undefined) {
-                localVarQueryParameter['excludeGroup'] = excludeGroup;
-            }
-
-            if (invitedByMe !== undefined) {
-                localVarQueryParameter['invitedByMe'] = invitedByMe;
-            }
-
-            if (inviterId !== undefined) {
-                localVarQueryParameter['inviterId'] = inviterId;
-            }
-
-            if (area !== undefined) {
-                localVarQueryParameter['area'] = area;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns a list of users matching the search query. This method uses the query parameters.
-         * @summary Search users (using query parameters)
-         * @param {string} [query] The search query.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getPeopleSearch: async (query?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/people/search`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-            if (query !== undefined) {
-                localVarQueryParameter['query'] = query;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Returns a list of users matching the search query.
          * @summary Search users
          * @param {string} query The search query.
@@ -636,6 +405,237 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Returns a list of users with full information about them matching the parameters specified in the request.
+         * @summary Search users with detaailed information by extended filter
+         * @param {EmployeeStatus} [employeeStatus] The user status.
+         * @param {string} [groupId] The group ID.
+         * @param {EmployeeActivationStatus} [activationStatus] The user activation status.
+         * @param {EmployeeType} [employeeType] The user type.
+         * @param {Array<SearchUsersByExtendedFilterEmployeeTypesEnum>} [employeeTypes] The list of user types.
+         * @param {boolean} [isAdministrator] Specifies if the user is an administrator or not.
+         * @param {Payments} [payments] The user payment status.
+         * @param {AccountLoginType} [accountLoginType] The account login type.
+         * @param {QuotaFilter} [quotaFilter] The quota filter (All - 0, Default - 1, Custom - 2).
+         * @param {boolean} [withoutGroup] Specifies whether the user should be a member of a group or not.
+         * @param {boolean} [excludeGroup] Specifies whether the user should be a member of the group with the specified ID.
+         * @param {boolean} [invitedByMe] Specifies whether the user is invited by the current user or not.
+         * @param {string} [inviterId] The inviter ID.
+         * @param {Area} [area] The filter area.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchUsersByExtendedFilter: async (employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<SearchUsersByExtendedFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/people/filter`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (employeeStatus !== undefined) {
+                localVarQueryParameter['employeeStatus'] = employeeStatus;
+            }
+
+            if (groupId !== undefined) {
+                localVarQueryParameter['groupId'] = groupId;
+            }
+
+            if (activationStatus !== undefined) {
+                localVarQueryParameter['activationStatus'] = activationStatus;
+            }
+
+            if (employeeType !== undefined) {
+                localVarQueryParameter['employeeType'] = employeeType;
+            }
+
+            if (employeeTypes) {
+                localVarQueryParameter['employeeTypes'] = employeeTypes.join(COLLECTION_FORMATS.csv);
+            }
+
+            if (isAdministrator !== undefined) {
+                localVarQueryParameter['isAdministrator'] = isAdministrator;
+            }
+
+            if (payments !== undefined) {
+                localVarQueryParameter['payments'] = payments;
+            }
+
+            if (accountLoginType !== undefined) {
+                localVarQueryParameter['accountLoginType'] = accountLoginType;
+            }
+
+            if (quotaFilter !== undefined) {
+                localVarQueryParameter['quotaFilter'] = quotaFilter;
+            }
+
+            if (withoutGroup !== undefined) {
+                localVarQueryParameter['withoutGroup'] = withoutGroup;
+            }
+
+            if (excludeGroup !== undefined) {
+                localVarQueryParameter['excludeGroup'] = excludeGroup;
+            }
+
+            if (invitedByMe !== undefined) {
+                localVarQueryParameter['invitedByMe'] = invitedByMe;
+            }
+
+            if (inviterId !== undefined) {
+                localVarQueryParameter['inviterId'] = inviterId;
+            }
+
+            if (area !== undefined) {
+                localVarQueryParameter['area'] = area;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns a list of users matching the search query. This method uses the query parameters.
+         * @summary Search users (using query parameters)
+         * @param {string} [query] The search query.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchUsersByQuery: async (query?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/people/search`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (query !== undefined) {
+                localVarQueryParameter['query'] = query;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns a list of users matching the status filter and search query.
+         * @summary Search users by status filter
+         * @param {EmployeeStatus} status The user status.
+         * @param {string} [query] The advanced search query.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchUsersByStatus: async (status: EmployeeStatus, query?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'status' is not null or undefined
+            assertParamExists('searchUsersByStatus', 'status', status)
+            const localVarPath = `/api/2.0/people/status/{status}/search`
+                .replace(`{${"status"}}`, encodeURIComponent(String(status)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (query !== undefined) {
+                localVarQueryParameter['query'] = query;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -665,59 +665,6 @@ export const PeopleSearchApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountsEntriesWithShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getAccountsEntriesWithShared']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns a list of users matching the status filter and search query.
-         * @summary Search users by status filter
-         * @param {EmployeeStatus} status The user status.
-         * @param {string} [query] The advanced search query.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getAdvanced(status: EmployeeStatus, query?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAdvanced(status, query, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getAdvanced']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns a list of users with full information about them matching the parameters specified in the request.
-         * @summary Search users with detaailed information by extended filter
-         * @param {EmployeeStatus} [employeeStatus] The user status.
-         * @param {string} [groupId] The group ID.
-         * @param {EmployeeActivationStatus} [activationStatus] The user activation status.
-         * @param {EmployeeType} [employeeType] The user type.
-         * @param {Array<GetFullByFilterEmployeeTypesEnum>} [employeeTypes] The list of user types.
-         * @param {boolean} [isAdministrator] Specifies if the user is an administrator or not.
-         * @param {Payments} [payments] The user payment status.
-         * @param {AccountLoginType} [accountLoginType] The account login type.
-         * @param {QuotaFilter} [quotaFilter] The quota filter (All - 0, Default - 1, Custom - 2).
-         * @param {boolean} [withoutGroup] Specifies whether the user should be a member of a group or not.
-         * @param {boolean} [excludeGroup] Specifies whether the user should be a member of the group with the specified ID.
-         * @param {boolean} [invitedByMe] Specifies whether the user is invited by the current user or not.
-         * @param {string} [inviterId] The inviter ID.
-         * @param {Area} [area] The filter area.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getFullByFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<GetFullByFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getFullByFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getFullByFilter']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns a list of users matching the search query. This method uses the query parameters.
-         * @summary Search users (using query parameters)
-         * @param {string} [query] The search query.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getPeopleSearch(query?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getPeopleSearch(query, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getPeopleSearch']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -780,6 +727,59 @@ export const PeopleSearchApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getUsersWithRoomShared']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * Returns a list of users with full information about them matching the parameters specified in the request.
+         * @summary Search users with detaailed information by extended filter
+         * @param {EmployeeStatus} [employeeStatus] The user status.
+         * @param {string} [groupId] The group ID.
+         * @param {EmployeeActivationStatus} [activationStatus] The user activation status.
+         * @param {EmployeeType} [employeeType] The user type.
+         * @param {Array<SearchUsersByExtendedFilterEmployeeTypesEnum>} [employeeTypes] The list of user types.
+         * @param {boolean} [isAdministrator] Specifies if the user is an administrator or not.
+         * @param {Payments} [payments] The user payment status.
+         * @param {AccountLoginType} [accountLoginType] The account login type.
+         * @param {QuotaFilter} [quotaFilter] The quota filter (All - 0, Default - 1, Custom - 2).
+         * @param {boolean} [withoutGroup] Specifies whether the user should be a member of a group or not.
+         * @param {boolean} [excludeGroup] Specifies whether the user should be a member of the group with the specified ID.
+         * @param {boolean} [invitedByMe] Specifies whether the user is invited by the current user or not.
+         * @param {string} [inviterId] The inviter ID.
+         * @param {Area} [area] The filter area.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async searchUsersByExtendedFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<SearchUsersByExtendedFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.searchUsersByExtendedFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.searchUsersByExtendedFilter']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns a list of users matching the search query. This method uses the query parameters.
+         * @summary Search users (using query parameters)
+         * @param {string} [query] The search query.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async searchUsersByQuery(query?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.searchUsersByQuery(query, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.searchUsersByQuery']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns a list of users matching the status filter and search query.
+         * @summary Search users by status filter
+         * @param {EmployeeStatus} status The user status.
+         * @param {string} [query] The advanced search query.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async searchUsersByStatus(status: EmployeeStatus, query?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.searchUsersByStatus(status, query, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.searchUsersByStatus']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -807,50 +807,6 @@ export const PeopleSearchApiFactory = function (configuration?: Configuration, b
          */
         getAccountsEntriesWithShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, options?: RawAxiosRequestConfig): AxiosPromise<ObjectArrayWrapper> {
             return localVarFp.getAccountsEntriesWithShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns a list of users matching the status filter and search query.
-         * @summary Search users by status filter
-         * @param {EmployeeStatus} status The user status.
-         * @param {string} [query] The advanced search query.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAdvanced(status: EmployeeStatus, query?: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
-            return localVarFp.getAdvanced(status, query, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns a list of users with full information about them matching the parameters specified in the request.
-         * @summary Search users with detaailed information by extended filter
-         * @param {EmployeeStatus} [employeeStatus] The user status.
-         * @param {string} [groupId] The group ID.
-         * @param {EmployeeActivationStatus} [activationStatus] The user activation status.
-         * @param {EmployeeType} [employeeType] The user type.
-         * @param {Array<GetFullByFilterEmployeeTypesEnum>} [employeeTypes] The list of user types.
-         * @param {boolean} [isAdministrator] Specifies if the user is an administrator or not.
-         * @param {Payments} [payments] The user payment status.
-         * @param {AccountLoginType} [accountLoginType] The account login type.
-         * @param {QuotaFilter} [quotaFilter] The quota filter (All - 0, Default - 1, Custom - 2).
-         * @param {boolean} [withoutGroup] Specifies whether the user should be a member of a group or not.
-         * @param {boolean} [excludeGroup] Specifies whether the user should be a member of the group with the specified ID.
-         * @param {boolean} [invitedByMe] Specifies whether the user is invited by the current user or not.
-         * @param {string} [inviterId] The inviter ID.
-         * @param {Area} [area] The filter area.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getFullByFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<GetFullByFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
-            return localVarFp.getFullByFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns a list of users matching the search query. This method uses the query parameters.
-         * @summary Search users (using query parameters)
-         * @param {string} [query] The search query.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getPeopleSearch(query?: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeArrayWrapper> {
-            return localVarFp.getPeopleSearch(query, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of users matching the search query.
@@ -903,6 +859,50 @@ export const PeopleSearchApiFactory = function (configuration?: Configuration, b
         getUsersWithRoomShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
             return localVarFp.getUsersWithRoomShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, options).then((request) => request(axios, basePath));
         },
+        /**
+         * Returns a list of users with full information about them matching the parameters specified in the request.
+         * @summary Search users with detaailed information by extended filter
+         * @param {EmployeeStatus} [employeeStatus] The user status.
+         * @param {string} [groupId] The group ID.
+         * @param {EmployeeActivationStatus} [activationStatus] The user activation status.
+         * @param {EmployeeType} [employeeType] The user type.
+         * @param {Array<SearchUsersByExtendedFilterEmployeeTypesEnum>} [employeeTypes] The list of user types.
+         * @param {boolean} [isAdministrator] Specifies if the user is an administrator or not.
+         * @param {Payments} [payments] The user payment status.
+         * @param {AccountLoginType} [accountLoginType] The account login type.
+         * @param {QuotaFilter} [quotaFilter] The quota filter (All - 0, Default - 1, Custom - 2).
+         * @param {boolean} [withoutGroup] Specifies whether the user should be a member of a group or not.
+         * @param {boolean} [excludeGroup] Specifies whether the user should be a member of the group with the specified ID.
+         * @param {boolean} [invitedByMe] Specifies whether the user is invited by the current user or not.
+         * @param {string} [inviterId] The inviter ID.
+         * @param {Area} [area] The filter area.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchUsersByExtendedFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<SearchUsersByExtendedFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
+            return localVarFp.searchUsersByExtendedFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns a list of users matching the search query. This method uses the query parameters.
+         * @summary Search users (using query parameters)
+         * @param {string} [query] The search query.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchUsersByQuery(query?: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeArrayWrapper> {
+            return localVarFp.searchUsersByQuery(query, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns a list of users matching the status filter and search query.
+         * @summary Search users by status filter
+         * @param {EmployeeStatus} status The user status.
+         * @param {string} [query] The advanced search query.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchUsersByStatus(status: EmployeeStatus, query?: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
+            return localVarFp.searchUsersByStatus(status, query, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -931,56 +931,6 @@ export class PeopleSearchApi extends BaseAPI {
      */
     public getAccountsEntriesWithShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, options?: RawAxiosRequestConfig) {
         return PeopleSearchApiFp(this.configuration).getAccountsEntriesWithShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns a list of users matching the status filter and search query.
-     * @summary Search users by status filter
-     * @param {EmployeeStatus} status The user status.
-     * @param {string} [query] The advanced search query.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PeopleSearchApi
-     */
-    public getAdvanced(status: EmployeeStatus, query?: string, options?: RawAxiosRequestConfig) {
-        return PeopleSearchApiFp(this.configuration).getAdvanced(status, query, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns a list of users with full information about them matching the parameters specified in the request.
-     * @summary Search users with detaailed information by extended filter
-     * @param {EmployeeStatus} [employeeStatus] The user status.
-     * @param {string} [groupId] The group ID.
-     * @param {EmployeeActivationStatus} [activationStatus] The user activation status.
-     * @param {EmployeeType} [employeeType] The user type.
-     * @param {Array<GetFullByFilterEmployeeTypesEnum>} [employeeTypes] The list of user types.
-     * @param {boolean} [isAdministrator] Specifies if the user is an administrator or not.
-     * @param {Payments} [payments] The user payment status.
-     * @param {AccountLoginType} [accountLoginType] The account login type.
-     * @param {QuotaFilter} [quotaFilter] The quota filter (All - 0, Default - 1, Custom - 2).
-     * @param {boolean} [withoutGroup] Specifies whether the user should be a member of a group or not.
-     * @param {boolean} [excludeGroup] Specifies whether the user should be a member of the group with the specified ID.
-     * @param {boolean} [invitedByMe] Specifies whether the user is invited by the current user or not.
-     * @param {string} [inviterId] The inviter ID.
-     * @param {Area} [area] The filter area.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PeopleSearchApi
-     */
-    public getFullByFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<GetFullByFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, options?: RawAxiosRequestConfig) {
-        return PeopleSearchApiFp(this.configuration).getFullByFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns a list of users matching the search query. This method uses the query parameters.
-     * @summary Search users (using query parameters)
-     * @param {string} [query] The search query.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PeopleSearchApi
-     */
-    public getPeopleSearch(query?: string, options?: RawAxiosRequestConfig) {
-        return PeopleSearchApiFp(this.configuration).getPeopleSearch(query, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1039,19 +989,58 @@ export class PeopleSearchApi extends BaseAPI {
     public getUsersWithRoomShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, options?: RawAxiosRequestConfig) {
         return PeopleSearchApiFp(this.configuration).getUsersWithRoomShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, options).then((request) => request(this.axios, this.basePath));
     }
+
+    /**
+     * Returns a list of users with full information about them matching the parameters specified in the request.
+     * @summary Search users with detaailed information by extended filter
+     * @param {EmployeeStatus} [employeeStatus] The user status.
+     * @param {string} [groupId] The group ID.
+     * @param {EmployeeActivationStatus} [activationStatus] The user activation status.
+     * @param {EmployeeType} [employeeType] The user type.
+     * @param {Array<SearchUsersByExtendedFilterEmployeeTypesEnum>} [employeeTypes] The list of user types.
+     * @param {boolean} [isAdministrator] Specifies if the user is an administrator or not.
+     * @param {Payments} [payments] The user payment status.
+     * @param {AccountLoginType} [accountLoginType] The account login type.
+     * @param {QuotaFilter} [quotaFilter] The quota filter (All - 0, Default - 1, Custom - 2).
+     * @param {boolean} [withoutGroup] Specifies whether the user should be a member of a group or not.
+     * @param {boolean} [excludeGroup] Specifies whether the user should be a member of the group with the specified ID.
+     * @param {boolean} [invitedByMe] Specifies whether the user is invited by the current user or not.
+     * @param {string} [inviterId] The inviter ID.
+     * @param {Area} [area] The filter area.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PeopleSearchApi
+     */
+    public searchUsersByExtendedFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<SearchUsersByExtendedFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, options?: RawAxiosRequestConfig) {
+        return PeopleSearchApiFp(this.configuration).searchUsersByExtendedFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns a list of users matching the search query. This method uses the query parameters.
+     * @summary Search users (using query parameters)
+     * @param {string} [query] The search query.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PeopleSearchApi
+     */
+    public searchUsersByQuery(query?: string, options?: RawAxiosRequestConfig) {
+        return PeopleSearchApiFp(this.configuration).searchUsersByQuery(query, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns a list of users matching the status filter and search query.
+     * @summary Search users by status filter
+     * @param {EmployeeStatus} status The user status.
+     * @param {string} [query] The advanced search query.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PeopleSearchApi
+     */
+    public searchUsersByStatus(status: EmployeeStatus, query?: string, options?: RawAxiosRequestConfig) {
+        return PeopleSearchApiFp(this.configuration).searchUsersByStatus(status, query, options).then((request) => request(this.axios, this.basePath));
+    }
 }
 
-/**
- * @export
- */
-export const GetFullByFilterEmployeeTypesEnum = {
-    All: 0,
-    RoomAdmin: 1,
-    Guest: 2,
-    DocSpaceAdmin: 3,
-    User: 4
-} as const;
-export type GetFullByFilterEmployeeTypesEnum = typeof GetFullByFilterEmployeeTypesEnum[keyof typeof GetFullByFilterEmployeeTypesEnum];
 /**
  * @export
  */
@@ -1063,3 +1052,14 @@ export const GetSimpleByFilterEmployeeTypesEnum = {
     User: 4
 } as const;
 export type GetSimpleByFilterEmployeeTypesEnum = typeof GetSimpleByFilterEmployeeTypesEnum[keyof typeof GetSimpleByFilterEmployeeTypesEnum];
+/**
+ * @export
+ */
+export const SearchUsersByExtendedFilterEmployeeTypesEnum = {
+    All: 0,
+    RoomAdmin: 1,
+    Guest: 2,
+    DocSpaceAdmin: 3,
+    User: 4
+} as const;
+export type SearchUsersByExtendedFilterEmployeeTypesEnum = typeof SearchUsersByExtendedFilterEmployeeTypesEnum[keyof typeof SearchUsersByExtendedFilterEmployeeTypesEnum];

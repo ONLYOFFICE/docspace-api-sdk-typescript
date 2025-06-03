@@ -27,6 +27,12 @@ import type { DownloadRequestItemDto } from './download-request-item-dto';
  */
 export interface DownloadRequestDto {
     /**
+     * Specifies whether to return only the current operation
+     * @type {boolean}
+     * @memberof DownloadRequestDto
+     */
+    'returnSingleOperation'?: boolean;
+    /**
      * The list of folder IDs to be downloaded.
      * @type {Array<BaseBatchRequestDtoFolderIdsInner>}
      * @memberof DownloadRequestDto

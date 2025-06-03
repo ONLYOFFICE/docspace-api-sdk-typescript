@@ -42,6 +42,104 @@ import type { TfaValidateRequestsDto } from '../../models';
 export const SettingsTFASettingsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
+         * Returns the two-factor authentication application codes.
+         * @summary Get the TFA codes
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTfaAppCodes: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/settings/tfaappcodes`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the confirmation email URL for authorization via SMS or TFA application.
+         * @summary Get confirmation email
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTfaConfirmUrl: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/settings/tfaapp/confirm`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns the current two-factor authentication settings.
          * @summary Get the TFA settings
          * @param {*} [options] Override http request option.
@@ -140,312 +238,6 @@ export const SettingsTFASettingsApiAxiosParamCreator = function (configuration?:
             };
         },
         /**
-         * Returns the two-factor authentication application codes.
-         * @summary Get the TFA codes
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tfaAppGetCodes: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/settings/tfaappcodes`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Unlinks the current two-factor authentication application from the user account specified in the request.
-         * @summary Unlink the TFA application
-         * @param {TfaRequestsDto} [tfaRequestsDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tfaAppNewApp: async (tfaRequestsDto?: TfaRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/settings/tfaappnewapp`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(tfaRequestsDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Requests the new backup codes for the two-factor authentication application.
-         * @summary Update the TFA codes
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tfaAppRequestNewCodes: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/settings/tfaappnewcodes`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns the confirmation email URL for authorization via SMS or TFA application.
-         * @summary Get confirmation email
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tfaConfirmUrl: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/settings/tfaapp/confirm`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Updates the two-factor authentication settings with the parameters specified in the request.
-         * @summary Update the TFA settings
-         * @param {TfaRequestsDto} [tfaRequestsDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tfaSettings: async (tfaRequestsDto?: TfaRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/settings/tfaapp`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(tfaRequestsDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns the confirmation email URL for updating TFA settings.
-         * @summary Get confirmation email for updating TFA settings
-         * @param {TfaRequestsDto} [tfaRequestsDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tfaSettingsLink: async (tfaRequestsDto?: TfaRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/settings/tfaappwithlink`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(tfaRequestsDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Validates the two-factor authentication code specified in the request.
          * @summary Validate the TFA code
          * @param {TfaValidateRequestsDto} [tfaValidateRequestsDto] 
@@ -498,6 +290,214 @@ export const SettingsTFASettingsApiAxiosParamCreator = function (configuration?:
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Unlinks the current two-factor authentication application from the user account specified in the request.
+         * @summary Unlink the TFA application
+         * @param {TfaRequestsDto} [tfaRequestsDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        unlinkTfaApp: async (tfaRequestsDto?: TfaRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/settings/tfaappnewapp`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tfaRequestsDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Requests the new backup codes for the two-factor authentication application.
+         * @summary Update the TFA codes
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateTfaAppCodes: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/settings/tfaappnewcodes`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Updates the two-factor authentication settings with the parameters specified in the request.
+         * @summary Update the TFA settings
+         * @param {TfaRequestsDto} [tfaRequestsDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateTfaSettings: async (tfaRequestsDto?: TfaRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/settings/tfaapp`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tfaRequestsDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the confirmation email URL for updating TFA settings.
+         * @summary Get confirmation email for updating TFA settings
+         * @param {TfaRequestsDto} [tfaRequestsDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateTfaSettingsLink: async (tfaRequestsDto?: TfaRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/settings/tfaappwithlink`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tfaRequestsDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -508,6 +508,30 @@ export const SettingsTFASettingsApiAxiosParamCreator = function (configuration?:
 export const SettingsTFASettingsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = SettingsTFASettingsApiAxiosParamCreator(configuration)
     return {
+        /**
+         * Returns the two-factor authentication application codes.
+         * @summary Get the TFA codes
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getTfaAppCodes(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getTfaAppCodes(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SettingsTFASettingsApi.getTfaAppCodes']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the confirmation email URL for authorization via SMS or TFA application.
+         * @summary Get confirmation email
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getTfaConfirmUrl(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getTfaConfirmUrl(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SettingsTFASettingsApi.getTfaConfirmUrl']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
         /**
          * Returns the current two-factor authentication settings.
          * @summary Get the TFA settings
@@ -533,81 +557,6 @@ export const SettingsTFASettingsApiFp = function(configuration?: Configuration) 
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the two-factor authentication application codes.
-         * @summary Get the TFA codes
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async tfaAppGetCodes(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.tfaAppGetCodes(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsTFASettingsApi.tfaAppGetCodes']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Unlinks the current two-factor authentication application from the user account specified in the request.
-         * @summary Unlink the TFA application
-         * @param {TfaRequestsDto} [tfaRequestsDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async tfaAppNewApp(tfaRequestsDto?: TfaRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.tfaAppNewApp(tfaRequestsDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsTFASettingsApi.tfaAppNewApp']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Requests the new backup codes for the two-factor authentication application.
-         * @summary Update the TFA codes
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async tfaAppRequestNewCodes(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.tfaAppRequestNewCodes(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsTFASettingsApi.tfaAppRequestNewCodes']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns the confirmation email URL for authorization via SMS or TFA application.
-         * @summary Get confirmation email
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async tfaConfirmUrl(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.tfaConfirmUrl(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsTFASettingsApi.tfaConfirmUrl']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Updates the two-factor authentication settings with the parameters specified in the request.
-         * @summary Update the TFA settings
-         * @param {TfaRequestsDto} [tfaRequestsDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async tfaSettings(tfaRequestsDto?: TfaRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.tfaSettings(tfaRequestsDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsTFASettingsApi.tfaSettings']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns the confirmation email URL for updating TFA settings.
-         * @summary Get confirmation email for updating TFA settings
-         * @param {TfaRequestsDto} [tfaRequestsDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async tfaSettingsLink(tfaRequestsDto?: TfaRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.tfaSettingsLink(tfaRequestsDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsTFASettingsApi.tfaSettingsLink']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
          * Validates the two-factor authentication code specified in the request.
          * @summary Validate the TFA code
          * @param {TfaValidateRequestsDto} [tfaValidateRequestsDto] 
@@ -620,6 +569,57 @@ export const SettingsTFASettingsApiFp = function(configuration?: Configuration) 
             const localVarOperationServerBasePath = operationServerMap['SettingsTFASettingsApi.tfaValidateAuthCode']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * Unlinks the current two-factor authentication application from the user account specified in the request.
+         * @summary Unlink the TFA application
+         * @param {TfaRequestsDto} [tfaRequestsDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async unlinkTfaApp(tfaRequestsDto?: TfaRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.unlinkTfaApp(tfaRequestsDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SettingsTFASettingsApi.unlinkTfaApp']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Requests the new backup codes for the two-factor authentication application.
+         * @summary Update the TFA codes
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateTfaAppCodes(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateTfaAppCodes(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SettingsTFASettingsApi.updateTfaAppCodes']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Updates the two-factor authentication settings with the parameters specified in the request.
+         * @summary Update the TFA settings
+         * @param {TfaRequestsDto} [tfaRequestsDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateTfaSettings(tfaRequestsDto?: TfaRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateTfaSettings(tfaRequestsDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SettingsTFASettingsApi.updateTfaSettings']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the confirmation email URL for updating TFA settings.
+         * @summary Get confirmation email for updating TFA settings
+         * @param {TfaRequestsDto} [tfaRequestsDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateTfaSettingsLink(tfaRequestsDto?: TfaRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateTfaSettingsLink(tfaRequestsDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SettingsTFASettingsApi.updateTfaSettingsLink']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -630,6 +630,24 @@ export const SettingsTFASettingsApiFp = function(configuration?: Configuration) 
 export const SettingsTFASettingsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = SettingsTFASettingsApiFp(configuration)
     return {
+        /**
+         * Returns the two-factor authentication application codes.
+         * @summary Get the TFA codes
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTfaAppCodes(options?: RawAxiosRequestConfig): AxiosPromise<ObjectArrayWrapper> {
+            return localVarFp.getTfaAppCodes(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the confirmation email URL for authorization via SMS or TFA application.
+         * @summary Get confirmation email
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTfaConfirmUrl(options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.getTfaConfirmUrl(options).then((request) => request(axios, basePath));
+        },
         /**
          * Returns the current two-factor authentication settings.
          * @summary Get the TFA settings
@@ -649,63 +667,6 @@ export const SettingsTFASettingsApiFactory = function (configuration?: Configura
             return localVarFp.tfaAppGenerateSetupCode(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the two-factor authentication application codes.
-         * @summary Get the TFA codes
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tfaAppGetCodes(options?: RawAxiosRequestConfig): AxiosPromise<ObjectArrayWrapper> {
-            return localVarFp.tfaAppGetCodes(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Unlinks the current two-factor authentication application from the user account specified in the request.
-         * @summary Unlink the TFA application
-         * @param {TfaRequestsDto} [tfaRequestsDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tfaAppNewApp(tfaRequestsDto?: TfaRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.tfaAppNewApp(tfaRequestsDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Requests the new backup codes for the two-factor authentication application.
-         * @summary Update the TFA codes
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tfaAppRequestNewCodes(options?: RawAxiosRequestConfig): AxiosPromise<ObjectArrayWrapper> {
-            return localVarFp.tfaAppRequestNewCodes(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns the confirmation email URL for authorization via SMS or TFA application.
-         * @summary Get confirmation email
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tfaConfirmUrl(options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.tfaConfirmUrl(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Updates the two-factor authentication settings with the parameters specified in the request.
-         * @summary Update the TFA settings
-         * @param {TfaRequestsDto} [tfaRequestsDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tfaSettings(tfaRequestsDto?: TfaRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.tfaSettings(tfaRequestsDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns the confirmation email URL for updating TFA settings.
-         * @summary Get confirmation email for updating TFA settings
-         * @param {TfaRequestsDto} [tfaRequestsDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tfaSettingsLink(tfaRequestsDto?: TfaRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.tfaSettingsLink(tfaRequestsDto, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Validates the two-factor authentication code specified in the request.
          * @summary Validate the TFA code
          * @param {TfaValidateRequestsDto} [tfaValidateRequestsDto] 
@@ -714,6 +675,45 @@ export const SettingsTFASettingsApiFactory = function (configuration?: Configura
          */
         tfaValidateAuthCode(tfaValidateRequestsDto?: TfaValidateRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
             return localVarFp.tfaValidateAuthCode(tfaValidateRequestsDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Unlinks the current two-factor authentication application from the user account specified in the request.
+         * @summary Unlink the TFA application
+         * @param {TfaRequestsDto} [tfaRequestsDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        unlinkTfaApp(tfaRequestsDto?: TfaRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.unlinkTfaApp(tfaRequestsDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Requests the new backup codes for the two-factor authentication application.
+         * @summary Update the TFA codes
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateTfaAppCodes(options?: RawAxiosRequestConfig): AxiosPromise<ObjectArrayWrapper> {
+            return localVarFp.updateTfaAppCodes(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Updates the two-factor authentication settings with the parameters specified in the request.
+         * @summary Update the TFA settings
+         * @param {TfaRequestsDto} [tfaRequestsDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateTfaSettings(tfaRequestsDto?: TfaRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.updateTfaSettings(tfaRequestsDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the confirmation email URL for updating TFA settings.
+         * @summary Get confirmation email for updating TFA settings
+         * @param {TfaRequestsDto} [tfaRequestsDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateTfaSettingsLink(tfaRequestsDto?: TfaRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.updateTfaSettingsLink(tfaRequestsDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -725,6 +725,28 @@ export const SettingsTFASettingsApiFactory = function (configuration?: Configura
  * @extends {BaseAPI}
  */
 export class SettingsTFASettingsApi extends BaseAPI {
+    /**
+     * Returns the two-factor authentication application codes.
+     * @summary Get the TFA codes
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SettingsTFASettingsApi
+     */
+    public getTfaAppCodes(options?: RawAxiosRequestConfig) {
+        return SettingsTFASettingsApiFp(this.configuration).getTfaAppCodes(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the confirmation email URL for authorization via SMS or TFA application.
+     * @summary Get confirmation email
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SettingsTFASettingsApi
+     */
+    public getTfaConfirmUrl(options?: RawAxiosRequestConfig) {
+        return SettingsTFASettingsApiFp(this.configuration).getTfaConfirmUrl(options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * Returns the current two-factor authentication settings.
      * @summary Get the TFA settings
@@ -748,14 +770,15 @@ export class SettingsTFASettingsApi extends BaseAPI {
     }
 
     /**
-     * Returns the two-factor authentication application codes.
-     * @summary Get the TFA codes
+     * Validates the two-factor authentication code specified in the request.
+     * @summary Validate the TFA code
+     * @param {TfaValidateRequestsDto} [tfaValidateRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SettingsTFASettingsApi
      */
-    public tfaAppGetCodes(options?: RawAxiosRequestConfig) {
-        return SettingsTFASettingsApiFp(this.configuration).tfaAppGetCodes(options).then((request) => request(this.axios, this.basePath));
+    public tfaValidateAuthCode(tfaValidateRequestsDto?: TfaValidateRequestsDto, options?: RawAxiosRequestConfig) {
+        return SettingsTFASettingsApiFp(this.configuration).tfaValidateAuthCode(tfaValidateRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -766,8 +789,8 @@ export class SettingsTFASettingsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SettingsTFASettingsApi
      */
-    public tfaAppNewApp(tfaRequestsDto?: TfaRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsTFASettingsApiFp(this.configuration).tfaAppNewApp(tfaRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public unlinkTfaApp(tfaRequestsDto?: TfaRequestsDto, options?: RawAxiosRequestConfig) {
+        return SettingsTFASettingsApiFp(this.configuration).unlinkTfaApp(tfaRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -777,19 +800,8 @@ export class SettingsTFASettingsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SettingsTFASettingsApi
      */
-    public tfaAppRequestNewCodes(options?: RawAxiosRequestConfig) {
-        return SettingsTFASettingsApiFp(this.configuration).tfaAppRequestNewCodes(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns the confirmation email URL for authorization via SMS or TFA application.
-     * @summary Get confirmation email
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SettingsTFASettingsApi
-     */
-    public tfaConfirmUrl(options?: RawAxiosRequestConfig) {
-        return SettingsTFASettingsApiFp(this.configuration).tfaConfirmUrl(options).then((request) => request(this.axios, this.basePath));
+    public updateTfaAppCodes(options?: RawAxiosRequestConfig) {
+        return SettingsTFASettingsApiFp(this.configuration).updateTfaAppCodes(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -800,8 +812,8 @@ export class SettingsTFASettingsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SettingsTFASettingsApi
      */
-    public tfaSettings(tfaRequestsDto?: TfaRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsTFASettingsApiFp(this.configuration).tfaSettings(tfaRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public updateTfaSettings(tfaRequestsDto?: TfaRequestsDto, options?: RawAxiosRequestConfig) {
+        return SettingsTFASettingsApiFp(this.configuration).updateTfaSettings(tfaRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -812,20 +824,8 @@ export class SettingsTFASettingsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SettingsTFASettingsApi
      */
-    public tfaSettingsLink(tfaRequestsDto?: TfaRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsTFASettingsApiFp(this.configuration).tfaSettingsLink(tfaRequestsDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Validates the two-factor authentication code specified in the request.
-     * @summary Validate the TFA code
-     * @param {TfaValidateRequestsDto} [tfaValidateRequestsDto] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SettingsTFASettingsApi
-     */
-    public tfaValidateAuthCode(tfaValidateRequestsDto?: TfaValidateRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsTFASettingsApiFp(this.configuration).tfaValidateAuthCode(tfaValidateRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public updateTfaSettingsLink(tfaRequestsDto?: TfaRequestsDto, options?: RawAxiosRequestConfig) {
+        return SettingsTFASettingsApiFp(this.configuration).updateTfaSettingsLink(tfaRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

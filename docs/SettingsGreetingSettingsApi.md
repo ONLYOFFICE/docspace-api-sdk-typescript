@@ -5,7 +5,7 @@ All URIs are relative to *http://localhost:8092*
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**getGreetingSettings**](#getgreetingsettings) | **GET** /api/2.0/settings/greetingsettings | Get greeting settings|
-|[**isDefault**](#isdefault) | **GET** /api/2.0/settings/greetingsettings/isdefault | Check the default greeting settings|
+|[**getIsDefaultGreetingSettings**](#getisdefaultgreetingsettings) | **GET** /api/2.0/settings/greetingsettings/isdefault | Check the default greeting settings|
 |[**restoreGreetingSettings**](#restoregreetingsettings) | **POST** /api/2.0/settings/greetingsettings/restore | Restore the greeting settings|
 |[**saveGreetingSettings**](#savegreetingsettings) | **POST** /api/2.0/settings/greetingsettings | Save the greeting settings|
 
@@ -54,8 +54,8 @@ This endpoint does not have any parameters.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **isDefault**
-> BooleanWrapper isDefault()
+# **getIsDefaultGreetingSettings**
+> BooleanWrapper getIsDefaultGreetingSettings()
 
 Checks if the greeting settings of the current portal are set to default or not.
 
@@ -70,7 +70,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new SettingsGreetingSettingsApi(configuration);
 
-const { status, data } = await apiInstance.isDefault();
+const { status, data } = await apiInstance.getIsDefaultGreetingSettings();
 ```
 
 ### Parameters

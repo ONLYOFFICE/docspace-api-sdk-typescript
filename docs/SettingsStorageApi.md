@@ -11,7 +11,7 @@ All URIs are relative to *http://localhost:8092*
 |[**getStorageProgress**](#getstorageprogress) | **GET** /api/2.0/settings/storage/progress | Get the storage progress|
 |[**resetCdnToDefault**](#resetcdntodefault) | **DELETE** /api/2.0/settings/storage/cdn | Reset the CDN storage settings|
 |[**resetStorageToDefault**](#resetstoragetodefault) | **DELETE** /api/2.0/settings/storage | Reset the storage settings|
-|[**updateCdn**](#updatecdn) | **PUT** /api/2.0/settings/storage/cdn | Update the CDN storage|
+|[**updateCdnStorage**](#updatecdnstorage) | **PUT** /api/2.0/settings/storage/cdn | Update the CDN storage|
 |[**updateStorage**](#updatestorage) | **PUT** /api/2.0/settings/storage | Update a storage|
 
 # **getAllBackupStorages**
@@ -341,8 +341,8 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **updateCdn**
-> CdnStorageSettingsWrapper updateCdn()
+# **updateCdnStorage**
+> CdnStorageSettingsWrapper updateCdnStorage()
 
 Updates the CDN storage with the parameters specified in the request.
 
@@ -360,7 +360,7 @@ const apiInstance = new SettingsStorageApi(configuration);
 
 let storageRequestsDto: StorageRequestsDto; // (optional)
 
-const { status, data } = await apiInstance.updateCdn(
+const { status, data } = await apiInstance.updateCdnStorage(
     storageRequestsDto
 );
 ```

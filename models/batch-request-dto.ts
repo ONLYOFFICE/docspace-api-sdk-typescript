@@ -30,6 +30,12 @@ import type { FileConflictResolveType } from './file-conflict-resolve-type';
  */
 export interface BatchRequestDto {
     /**
+     * Specifies whether to return only the current operation
+     * @type {boolean}
+     * @memberof BatchRequestDto
+     */
+    'returnSingleOperation'?: boolean;
+    /**
      * The list of folder IDs to be copied/moved.
      * @type {Array<BaseBatchRequestDtoFolderIdsInner>}
      * @memberof BatchRequestDto

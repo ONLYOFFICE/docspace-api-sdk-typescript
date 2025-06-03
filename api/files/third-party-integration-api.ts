@@ -44,55 +44,6 @@ import type { ThirdPartyRequestDto } from '../../models';
 export const FilesThirdPartyIntegrationApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Returns the list of the available providers.   **Note**: Available provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
-         * @summary Get providers
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        capabilities: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/files/thirdparty/capabilities`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Removes the third-party storage service account with the ID specified in the request.
          * @summary Remove a third-party account
          * @param {number} providerId The provider ID.
@@ -202,6 +153,55 @@ export const FilesThirdPartyIntegrationApiAxiosParamCreator = function (configur
          */
         getBackupThirdPartyAccount: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/files/thirdparty/backup`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the list of the available providers.   **Note**: Available provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
+         * @summary Get providers
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCapabilities: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/files/thirdparty/capabilities`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -458,18 +458,6 @@ export const FilesThirdPartyIntegrationApiFp = function(configuration?: Configur
     const localVarAxiosParamCreator = FilesThirdPartyIntegrationApiAxiosParamCreator(configuration)
     return {
         /**
-         * Returns the list of the available providers.   **Note**: Available provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
-         * @summary Get providers
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async capabilities(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ArrayArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.capabilities(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesThirdPartyIntegrationApi.capabilities']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
          * Removes the third-party storage service account with the ID specified in the request.
          * @summary Remove a third-party account
          * @param {number} providerId The provider ID.
@@ -504,6 +492,18 @@ export const FilesThirdPartyIntegrationApiFp = function(configuration?: Configur
             const localVarAxiosArgs = await localVarAxiosParamCreator.getBackupThirdPartyAccount(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesThirdPartyIntegrationApi.getBackupThirdPartyAccount']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the list of the available providers.   **Note**: Available provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
+         * @summary Get providers
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getCapabilities(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ArrayArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCapabilities(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesThirdPartyIntegrationApi.getCapabilities']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -567,15 +567,6 @@ export const FilesThirdPartyIntegrationApiFactory = function (configuration?: Co
     const localVarFp = FilesThirdPartyIntegrationApiFp(configuration)
     return {
         /**
-         * Returns the list of the available providers.   **Note**: Available provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
-         * @summary Get providers
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        capabilities(options?: RawAxiosRequestConfig): AxiosPromise<ArrayArrayWrapper> {
-            return localVarFp.capabilities(options).then((request) => request(axios, basePath));
-        },
-        /**
          * Removes the third-party storage service account with the ID specified in the request.
          * @summary Remove a third-party account
          * @param {number} providerId The provider ID.
@@ -602,6 +593,15 @@ export const FilesThirdPartyIntegrationApiFactory = function (configuration?: Co
          */
         getBackupThirdPartyAccount(options?: RawAxiosRequestConfig): AxiosPromise<FolderStringWrapper> {
             return localVarFp.getBackupThirdPartyAccount(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the list of the available providers.   **Note**: Available provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
+         * @summary Get providers
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCapabilities(options?: RawAxiosRequestConfig): AxiosPromise<ArrayArrayWrapper> {
+            return localVarFp.getCapabilities(options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of the third-party services connected to the \"Common\" section.
@@ -652,17 +652,6 @@ export const FilesThirdPartyIntegrationApiFactory = function (configuration?: Co
  */
 export class FilesThirdPartyIntegrationApi extends BaseAPI {
     /**
-     * Returns the list of the available providers.   **Note**: Available provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
-     * @summary Get providers
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesThirdPartyIntegrationApi
-     */
-    public capabilities(options?: RawAxiosRequestConfig) {
-        return FilesThirdPartyIntegrationApiFp(this.configuration).capabilities(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Removes the third-party storage service account with the ID specified in the request.
      * @summary Remove a third-party account
      * @param {number} providerId The provider ID.
@@ -694,6 +683,17 @@ export class FilesThirdPartyIntegrationApi extends BaseAPI {
      */
     public getBackupThirdPartyAccount(options?: RawAxiosRequestConfig) {
         return FilesThirdPartyIntegrationApiFp(this.configuration).getBackupThirdPartyAccount(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the list of the available providers.   **Note**: Available provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
+     * @summary Get providers
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesThirdPartyIntegrationApi
+     */
+    public getCapabilities(options?: RawAxiosRequestConfig) {
+        return FilesThirdPartyIntegrationApiFp(this.configuration).getCapabilities(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

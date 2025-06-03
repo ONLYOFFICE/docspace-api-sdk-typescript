@@ -5,7 +5,7 @@ All URIs are relative to *http://localhost:8092*
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**getByStatus**](#getbystatus) | **GET** /api/2.0/people/status/{status} | Get profiles by status|
-|[**updateEmployeeActivationStatus**](#updateemployeeactivationstatus) | **PUT** /api/2.0/people/activationstatus/{activationstatus} | Set an activation status to the users|
+|[**updateUserActivationStatus**](#updateuseractivationstatus) | **PUT** /api/2.0/people/activationstatus/{activationstatus} | Set an activation status to the users|
 |[**updateUserStatus**](#updateuserstatus) | **PUT** /api/2.0/people/status/{status} | Change a user status|
 
 # **getByStatus**
@@ -60,8 +60,8 @@ const { status, data } = await apiInstance.getByStatus(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **updateEmployeeActivationStatus**
-> EmployeeFullArrayWrapper updateEmployeeActivationStatus()
+# **updateUserActivationStatus**
+> EmployeeFullArrayWrapper updateUserActivationStatus()
 
 Sets the required activation status to the list of users with the IDs specified in the request.
 
@@ -80,7 +80,7 @@ const apiInstance = new PeopleUserStatusApi(configuration);
 let activationstatus: EmployeeActivationStatus; //The new user activation status. (default to undefined)
 let updateMembersRequestDto: UpdateMembersRequestDto; //The request parameters for updating the user information. (optional)
 
-const { status, data } = await apiInstance.updateEmployeeActivationStatus(
+const { status, data } = await apiInstance.updateUserActivationStatus(
     activationstatus,
     updateMembersRequestDto
 );

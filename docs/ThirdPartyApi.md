@@ -4,10 +4,10 @@ All URIs are relative to *http://localhost:8092*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**get**](#get) | **GET** /api/2.0/thirdparty/{provider} | Get the code request|
+|[**getThirdPartyCode**](#getthirdpartycode) | **GET** /api/2.0/thirdparty/{provider} | Get the code request|
 
-# **get**
-> ObjectWrapper get()
+# **getThirdPartyCode**
+> ObjectWrapper getThirdPartyCode()
 
 Returns a request to get the confirmation code from URL.   **Note**: List of providers: Google, Dropbox, Docusign, Box, OneDrive, Wordpress.
 
@@ -24,7 +24,7 @@ const apiInstance = new ThirdPartyApi(configuration);
 
 let provider: LoginProvider; //The identity provider used for authentication. (default to undefined)
 
-const { status, data } = await apiInstance.get(
+const { status, data } = await apiInstance.getThirdPartyCode(
     provider
 );
 ```

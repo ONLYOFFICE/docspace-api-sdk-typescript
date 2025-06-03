@@ -95,7 +95,7 @@ export const SettingsMessagesApiAxiosParamCreator = function (configuration?: Co
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        sendAdmMail: async (adminMessageSettingsRequestsDto?: AdminMessageSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        sendAdminMail: async (adminMessageSettingsRequestsDto?: AdminMessageSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/settings/sendadmmail`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -186,10 +186,10 @@ export const SettingsMessagesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async sendAdmMail(adminMessageSettingsRequestsDto?: AdminMessageSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.sendAdmMail(adminMessageSettingsRequestsDto, options);
+        async sendAdminMail(adminMessageSettingsRequestsDto?: AdminMessageSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.sendAdminMail(adminMessageSettingsRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsMessagesApi.sendAdmMail']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SettingsMessagesApi.sendAdminMail']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -232,8 +232,8 @@ export const SettingsMessagesApiFactory = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        sendAdmMail(adminMessageSettingsRequestsDto?: AdminMessageSettingsRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.sendAdmMail(adminMessageSettingsRequestsDto, options).then((request) => request(axios, basePath));
+        sendAdminMail(adminMessageSettingsRequestsDto?: AdminMessageSettingsRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.sendAdminMail(adminMessageSettingsRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Sends an invitation email with a link to the DocSpace.
@@ -275,8 +275,8 @@ export class SettingsMessagesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SettingsMessagesApi
      */
-    public sendAdmMail(adminMessageSettingsRequestsDto?: AdminMessageSettingsRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsMessagesApiFp(this.configuration).sendAdmMail(adminMessageSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public sendAdminMail(adminMessageSettingsRequestsDto?: AdminMessageSettingsRequestsDto, options?: RawAxiosRequestConfig) {
+        return SettingsMessagesApiFp(this.configuration).sendAdminMail(adminMessageSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

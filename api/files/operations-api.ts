@@ -103,9 +103,9 @@ export const FilesOperationsApiAxiosParamCreator = function (configuration?: Con
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        checkConversion: async (fileId: number, start?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        checkConversionStatus: async (fileId: number, start?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('checkConversion', 'fileId', fileId)
+            assertParamExists('checkConversionStatus', 'fileId', fileId)
             const localVarPath = `/api/2.0/files/file/{fileId}/checkconversion`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -140,6 +140,118 @@ export const FilesOperationsApiAxiosParamCreator = function (configuration?: Con
 
             if (start !== undefined) {
                 localVarQueryParameter['start'] = start;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
+         * @summary Check and move or copy to a folder
+         * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        checkMoveOrCopyBatchItems: async (inDto?: BatchRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/files/fileops/move`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (inDto !== undefined) {
+                for (const [key, value] of Object.entries(inDto)) {
+                    localVarQueryParameter[key] = value;
+                }
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Checks if files can be moved or copied to the specified folder.
+         * @summary Check for moving or copying to a folder
+         * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        checkMoveOrCopyDestFolder: async (inDto?: BatchRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/files/fileops/checkdestfolder`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (inDto !== undefined) {
+                for (const [key, value] of Object.entries(inDto)) {
+                    localVarQueryParameter[key] = value;
+                }
             }
 
 
@@ -425,10 +537,11 @@ export const FilesOperationsApiAxiosParamCreator = function (configuration?: Con
         /**
          * Deletes all the files and folders from the \"Trash\" folder.
          * @summary Empty the \"Trash\" folder
+         * @param {boolean} [single] Specifies whether to return only the current operation
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        emptyTrash: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        emptyTrash: async (single?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/files/fileops/emptytrash`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -460,6 +573,10 @@ export const FilesOperationsApiAxiosParamCreator = function (configuration?: Con
 
             // authentication OpenId required
 
+            if (single !== undefined) {
+                localVarQueryParameter['Single'] = single;
+            }
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -474,10 +591,11 @@ export const FilesOperationsApiAxiosParamCreator = function (configuration?: Con
         /**
          * Returns a list of all the active file operations.
          * @summary Get active file operations
+         * @param {string} [id] The ID of the file operation.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOperationStatuses: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getOperationStatuses: async (id?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/files/fileops`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -489,6 +607,10 @@ export const FilesOperationsApiAxiosParamCreator = function (configuration?: Con
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (id !== undefined) {
+                localVarQueryParameter['id'] = id;
+            }
 
 
     
@@ -505,10 +627,11 @@ export const FilesOperationsApiAxiosParamCreator = function (configuration?: Con
          * Retrieves the statuses of operations filtered by the specified operation type.
          * @summary Get file operation statuses
          * @param {FileOperationType} operationType Specifies the type of file operation to be retrieved.
+         * @param {string} [id] The ID of the file operation.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOperationStatusesByType: async (operationType: FileOperationType, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getOperationStatusesByType: async (operationType: FileOperationType, id?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'operationType' is not null or undefined
             assertParamExists('getOperationStatusesByType', 'operationType', operationType)
             const localVarPath = `/api/2.0/files/fileops/{operationType}`
@@ -523,6 +646,10 @@ export const FilesOperationsApiAxiosParamCreator = function (configuration?: Con
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (id !== undefined) {
+                localVarQueryParameter['id'] = id;
+            }
 
 
     
@@ -642,118 +769,6 @@ export const FilesOperationsApiAxiosParamCreator = function (configuration?: Con
             };
         },
         /**
-         * Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
-         * @summary Check and move or copy to a folder
-         * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        moveOrCopyBatchCheck: async (inDto?: BatchRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/files/fileops/move`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-            if (inDto !== undefined) {
-                for (const [key, value] of Object.entries(inDto)) {
-                    localVarQueryParameter[key] = value;
-                }
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Checks if files can be moved or copied to the specified folder.
-         * @summary Check for moving or copying to a folder
-         * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        moveOrCopyDestFolderCheck: async (inDto?: BatchRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/files/fileops/checkdestfolder`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-            if (inDto !== undefined) {
-                for (const [key, value] of Object.entries(inDto)) {
-                    localVarQueryParameter[key] = value;
-                }
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Starts a conversion operation of a file with the ID specified in the request.
          * @summary Start file conversion
          * @param {number} fileId The file ID to start conversion proccess.
@@ -761,9 +776,9 @@ export const FilesOperationsApiAxiosParamCreator = function (configuration?: Con
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        startConversion: async (fileId: number, checkConversionRequestDtoInteger?: CheckConversionRequestDtoInteger, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        startFileConversion: async (fileId: number, checkConversionRequestDtoInteger?: CheckConversionRequestDtoInteger, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('startConversion', 'fileId', fileId)
+            assertParamExists('startFileConversion', 'fileId', fileId)
             const localVarPath = `/api/2.0/files/file/{fileId}/checkconversion`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -852,9 +867,9 @@ export const FilesOperationsApiAxiosParamCreator = function (configuration?: Con
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateComment: async (fileId: number, updateComment?: UpdateComment, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateFileComment: async (fileId: number, updateComment?: UpdateComment, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('updateComment', 'fileId', fileId)
+            assertParamExists('updateFileComment', 'fileId', fileId)
             const localVarPath = `/api/2.0/files/file/{fileId}/comment`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -932,10 +947,36 @@ export const FilesOperationsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async checkConversion(fileId: number, start?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ConversationResultArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.checkConversion(fileId, start, options);
+        async checkConversionStatus(fileId: number, start?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ConversationResultArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.checkConversionStatus(fileId, start, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesOperationsApi.checkConversion']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['FilesOperationsApi.checkConversionStatus']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
+         * @summary Check and move or copy to a folder
+         * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async checkMoveOrCopyBatchItems(inDto?: BatchRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileEntryArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.checkMoveOrCopyBatchItems(inDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesOperationsApi.checkMoveOrCopyBatchItems']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Checks if files can be moved or copied to the specified folder.
+         * @summary Check for moving or copying to a folder
+         * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async checkMoveOrCopyDestFolder(inDto?: BatchRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CheckDestFolderWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.checkMoveOrCopyDestFolder(inDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesOperationsApi.checkMoveOrCopyDestFolder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1007,11 +1048,12 @@ export const FilesOperationsApiFp = function(configuration?: Configuration) {
         /**
          * Deletes all the files and folders from the \"Trash\" folder.
          * @summary Empty the \"Trash\" folder
+         * @param {boolean} [single] Specifies whether to return only the current operation
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async emptyTrash(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.emptyTrash(options);
+        async emptyTrash(single?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.emptyTrash(single, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesOperationsApi.emptyTrash']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1019,11 +1061,12 @@ export const FilesOperationsApiFp = function(configuration?: Configuration) {
         /**
          * Returns a list of all the active file operations.
          * @summary Get active file operations
+         * @param {string} [id] The ID of the file operation.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getOperationStatuses(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getOperationStatuses(options);
+        async getOperationStatuses(id?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getOperationStatuses(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesOperationsApi.getOperationStatuses']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1032,11 +1075,12 @@ export const FilesOperationsApiFp = function(configuration?: Configuration) {
          * Retrieves the statuses of operations filtered by the specified operation type.
          * @summary Get file operation statuses
          * @param {FileOperationType} operationType Specifies the type of file operation to be retrieved.
+         * @param {string} [id] The ID of the file operation.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getOperationStatusesByType(operationType: FileOperationType, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getOperationStatusesByType(operationType, options);
+        async getOperationStatusesByType(operationType: FileOperationType, id?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getOperationStatusesByType(operationType, id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesOperationsApi.getOperationStatusesByType']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1068,32 +1112,6 @@ export const FilesOperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
-         * @summary Check and move or copy to a folder
-         * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async moveOrCopyBatchCheck(inDto?: BatchRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileEntryArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.moveOrCopyBatchCheck(inDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesOperationsApi.moveOrCopyBatchCheck']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Checks if files can be moved or copied to the specified folder.
-         * @summary Check for moving or copying to a folder
-         * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async moveOrCopyDestFolderCheck(inDto?: BatchRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CheckDestFolderWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.moveOrCopyDestFolderCheck(inDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesOperationsApi.moveOrCopyDestFolderCheck']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
          * Starts a conversion operation of a file with the ID specified in the request.
          * @summary Start file conversion
          * @param {number} fileId The file ID to start conversion proccess.
@@ -1101,10 +1119,10 @@ export const FilesOperationsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async startConversion(fileId: number, checkConversionRequestDtoInteger?: CheckConversionRequestDtoInteger, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ConversationResultArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.startConversion(fileId, checkConversionRequestDtoInteger, options);
+        async startFileConversion(fileId: number, checkConversionRequestDtoInteger?: CheckConversionRequestDtoInteger, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ConversationResultArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.startFileConversion(fileId, checkConversionRequestDtoInteger, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesOperationsApi.startConversion']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['FilesOperationsApi.startFileConversion']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1128,10 +1146,10 @@ export const FilesOperationsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateComment(fileId: number, updateComment?: UpdateComment, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateComment(fileId, updateComment, options);
+        async updateFileComment(fileId: number, updateComment?: UpdateComment, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateFileComment(fileId, updateComment, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesOperationsApi.updateComment']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['FilesOperationsApi.updateFileComment']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -1162,8 +1180,28 @@ export const FilesOperationsApiFactory = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        checkConversion(fileId: number, start?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<ConversationResultArrayWrapper> {
-            return localVarFp.checkConversion(fileId, start, options).then((request) => request(axios, basePath));
+        checkConversionStatus(fileId: number, start?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<ConversationResultArrayWrapper> {
+            return localVarFp.checkConversionStatus(fileId, start, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
+         * @summary Check and move or copy to a folder
+         * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        checkMoveOrCopyBatchItems(inDto?: BatchRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FileEntryArrayWrapper> {
+            return localVarFp.checkMoveOrCopyBatchItems(inDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Checks if files can be moved or copied to the specified folder.
+         * @summary Check for moving or copying to a folder
+         * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        checkMoveOrCopyDestFolder(inDto?: BatchRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<CheckDestFolderWrapper> {
+            return localVarFp.checkMoveOrCopyDestFolder(inDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Copies all the selected files and folders to the folder with the ID specified in the request.
@@ -1219,30 +1257,33 @@ export const FilesOperationsApiFactory = function (configuration?: Configuration
         /**
          * Deletes all the files and folders from the \"Trash\" folder.
          * @summary Empty the \"Trash\" folder
+         * @param {boolean} [single] Specifies whether to return only the current operation
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        emptyTrash(options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
-            return localVarFp.emptyTrash(options).then((request) => request(axios, basePath));
+        emptyTrash(single?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
+            return localVarFp.emptyTrash(single, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of all the active file operations.
          * @summary Get active file operations
+         * @param {string} [id] The ID of the file operation.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOperationStatuses(options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
-            return localVarFp.getOperationStatuses(options).then((request) => request(axios, basePath));
+        getOperationStatuses(id?: string, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
+            return localVarFp.getOperationStatuses(id, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieves the statuses of operations filtered by the specified operation type.
          * @summary Get file operation statuses
          * @param {FileOperationType} operationType Specifies the type of file operation to be retrieved.
+         * @param {string} [id] The ID of the file operation.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOperationStatusesByType(operationType: FileOperationType, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
-            return localVarFp.getOperationStatusesByType(operationType, options).then((request) => request(axios, basePath));
+        getOperationStatusesByType(operationType: FileOperationType, id?: string, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
+            return localVarFp.getOperationStatusesByType(operationType, id, options).then((request) => request(axios, basePath));
         },
         /**
          * Marks the files and folders with the IDs specified in the request as read.
@@ -1265,26 +1306,6 @@ export const FilesOperationsApiFactory = function (configuration?: Configuration
             return localVarFp.moveBatchItems(batchRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
-         * @summary Check and move or copy to a folder
-         * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        moveOrCopyBatchCheck(inDto?: BatchRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FileEntryArrayWrapper> {
-            return localVarFp.moveOrCopyBatchCheck(inDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Checks if files can be moved or copied to the specified folder.
-         * @summary Check for moving or copying to a folder
-         * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        moveOrCopyDestFolderCheck(inDto?: BatchRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<CheckDestFolderWrapper> {
-            return localVarFp.moveOrCopyDestFolderCheck(inDto, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Starts a conversion operation of a file with the ID specified in the request.
          * @summary Start file conversion
          * @param {number} fileId The file ID to start conversion proccess.
@@ -1292,8 +1313,8 @@ export const FilesOperationsApiFactory = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        startConversion(fileId: number, checkConversionRequestDtoInteger?: CheckConversionRequestDtoInteger, options?: RawAxiosRequestConfig): AxiosPromise<ConversationResultArrayWrapper> {
-            return localVarFp.startConversion(fileId, checkConversionRequestDtoInteger, options).then((request) => request(axios, basePath));
+        startFileConversion(fileId: number, checkConversionRequestDtoInteger?: CheckConversionRequestDtoInteger, options?: RawAxiosRequestConfig): AxiosPromise<ConversationResultArrayWrapper> {
+            return localVarFp.startFileConversion(fileId, checkConversionRequestDtoInteger, options).then((request) => request(axios, basePath));
         },
         /**
          * Finishes an operation with the ID specified in the request or all the active operations.
@@ -1313,8 +1334,8 @@ export const FilesOperationsApiFactory = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateComment(fileId: number, updateComment?: UpdateComment, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.updateComment(fileId, updateComment, options).then((request) => request(axios, basePath));
+        updateFileComment(fileId: number, updateComment?: UpdateComment, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.updateFileComment(fileId, updateComment, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1347,8 +1368,32 @@ export class FilesOperationsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesOperationsApi
      */
-    public checkConversion(fileId: number, start?: boolean, options?: RawAxiosRequestConfig) {
-        return FilesOperationsApiFp(this.configuration).checkConversion(fileId, start, options).then((request) => request(this.axios, this.basePath));
+    public checkConversionStatus(fileId: number, start?: boolean, options?: RawAxiosRequestConfig) {
+        return FilesOperationsApiFp(this.configuration).checkConversionStatus(fileId, start, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
+     * @summary Check and move or copy to a folder
+     * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesOperationsApi
+     */
+    public checkMoveOrCopyBatchItems(inDto?: BatchRequestDto, options?: RawAxiosRequestConfig) {
+        return FilesOperationsApiFp(this.configuration).checkMoveOrCopyBatchItems(inDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Checks if files can be moved or copied to the specified folder.
+     * @summary Check for moving or copying to a folder
+     * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesOperationsApi
+     */
+    public checkMoveOrCopyDestFolder(inDto?: BatchRequestDto, options?: RawAxiosRequestConfig) {
+        return FilesOperationsApiFp(this.configuration).checkMoveOrCopyDestFolder(inDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1415,35 +1460,38 @@ export class FilesOperationsApi extends BaseAPI {
     /**
      * Deletes all the files and folders from the \"Trash\" folder.
      * @summary Empty the \"Trash\" folder
+     * @param {boolean} [single] Specifies whether to return only the current operation
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesOperationsApi
      */
-    public emptyTrash(options?: RawAxiosRequestConfig) {
-        return FilesOperationsApiFp(this.configuration).emptyTrash(options).then((request) => request(this.axios, this.basePath));
+    public emptyTrash(single?: boolean, options?: RawAxiosRequestConfig) {
+        return FilesOperationsApiFp(this.configuration).emptyTrash(single, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns a list of all the active file operations.
      * @summary Get active file operations
+     * @param {string} [id] The ID of the file operation.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesOperationsApi
      */
-    public getOperationStatuses(options?: RawAxiosRequestConfig) {
-        return FilesOperationsApiFp(this.configuration).getOperationStatuses(options).then((request) => request(this.axios, this.basePath));
+    public getOperationStatuses(id?: string, options?: RawAxiosRequestConfig) {
+        return FilesOperationsApiFp(this.configuration).getOperationStatuses(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Retrieves the statuses of operations filtered by the specified operation type.
      * @summary Get file operation statuses
      * @param {FileOperationType} operationType Specifies the type of file operation to be retrieved.
+     * @param {string} [id] The ID of the file operation.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesOperationsApi
      */
-    public getOperationStatusesByType(operationType: FileOperationType, options?: RawAxiosRequestConfig) {
-        return FilesOperationsApiFp(this.configuration).getOperationStatusesByType(operationType, options).then((request) => request(this.axios, this.basePath));
+    public getOperationStatusesByType(operationType: FileOperationType, id?: string, options?: RawAxiosRequestConfig) {
+        return FilesOperationsApiFp(this.configuration).getOperationStatusesByType(operationType, id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1471,30 +1519,6 @@ export class FilesOperationsApi extends BaseAPI {
     }
 
     /**
-     * Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
-     * @summary Check and move or copy to a folder
-     * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesOperationsApi
-     */
-    public moveOrCopyBatchCheck(inDto?: BatchRequestDto, options?: RawAxiosRequestConfig) {
-        return FilesOperationsApiFp(this.configuration).moveOrCopyBatchCheck(inDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Checks if files can be moved or copied to the specified folder.
-     * @summary Check for moving or copying to a folder
-     * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesOperationsApi
-     */
-    public moveOrCopyDestFolderCheck(inDto?: BatchRequestDto, options?: RawAxiosRequestConfig) {
-        return FilesOperationsApiFp(this.configuration).moveOrCopyDestFolderCheck(inDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Starts a conversion operation of a file with the ID specified in the request.
      * @summary Start file conversion
      * @param {number} fileId The file ID to start conversion proccess.
@@ -1503,8 +1527,8 @@ export class FilesOperationsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesOperationsApi
      */
-    public startConversion(fileId: number, checkConversionRequestDtoInteger?: CheckConversionRequestDtoInteger, options?: RawAxiosRequestConfig) {
-        return FilesOperationsApiFp(this.configuration).startConversion(fileId, checkConversionRequestDtoInteger, options).then((request) => request(this.axios, this.basePath));
+    public startFileConversion(fileId: number, checkConversionRequestDtoInteger?: CheckConversionRequestDtoInteger, options?: RawAxiosRequestConfig) {
+        return FilesOperationsApiFp(this.configuration).startFileConversion(fileId, checkConversionRequestDtoInteger, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1528,8 +1552,8 @@ export class FilesOperationsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesOperationsApi
      */
-    public updateComment(fileId: number, updateComment?: UpdateComment, options?: RawAxiosRequestConfig) {
-        return FilesOperationsApiFp(this.configuration).updateComment(fileId, updateComment, options).then((request) => request(this.axios, this.basePath));
+    public updateFileComment(fileId: number, updateComment?: UpdateComment, options?: RawAxiosRequestConfig) {
+        return FilesOperationsApiFp(this.configuration).updateFileComment(fileId, updateComment, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -26,7 +26,7 @@ All URIs are relative to *http://localhost:8092*
 |[**setOpenEditorInSameTab**](#setopeneditorinsametab) | **PUT** /api/2.0/files/settings/openeditorinsametab | Open document in the same browser tab|
 |[**storeForcesave**](#storeforcesave) | **PUT** /api/2.0/files/storeforcesave | Change the ability to store the forcesaved files|
 |[**storeOriginal**](#storeoriginal) | **PUT** /api/2.0/files/storeoriginal | Change the ability to upload original formats|
-|[**updateIfExist**](#updateifexist) | **PUT** /api/2.0/files/updateifexist | Update a file version if it exists|
+|[**updateFileIfExist**](#updatefileifexist) | **PUT** /api/2.0/files/updateifexist | Update a file version if it exists|
 
 # **changeAccessToThirdparty**
 > BooleanWrapper changeAccessToThirdparty()
@@ -1143,8 +1143,8 @@ const { status, data } = await apiInstance.storeOriginal(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **updateIfExist**
-> BooleanWrapper updateIfExist()
+# **updateFileIfExist**
+> BooleanWrapper updateFileIfExist()
 
 Updates a file version if a file with such a name already exists.
 
@@ -1162,7 +1162,7 @@ const apiInstance = new FilesSettingsApi(configuration);
 
 let settingsRequestDto: SettingsRequestDto; // (optional)
 
-const { status, data } = await apiInstance.updateIfExist(
+const { status, data } = await apiInstance.updateFileIfExist(
     settingsRequestDto
 );
 ```

@@ -1163,7 +1163,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateIfExist: async (settingsRequestDto?: SettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateFileIfExist: async (settingsRequestDto?: SettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/files/updateifexist`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1506,10 +1506,10 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateIfExist(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateIfExist(settingsRequestDto, options);
+        async updateFileIfExist(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateFileIfExist(settingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesSettingsApi.updateIfExist']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['FilesSettingsApi.updateFileIfExist']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -1743,8 +1743,8 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateIfExist(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.updateIfExist(settingsRequestDto, options).then((request) => request(axios, basePath));
+        updateFileIfExist(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.updateFileIfExist(settingsRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -2022,8 +2022,8 @@ export class FilesSettingsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesSettingsApi
      */
-    public updateIfExist(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig) {
-        return FilesSettingsApiFp(this.configuration).updateIfExist(settingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public updateFileIfExist(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).updateFileIfExist(settingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

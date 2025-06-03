@@ -4,10 +4,10 @@ All URIs are relative to *http://localhost:8092*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**getGuestShareLink**](#getguestsharelink) | **GET** /api/2.0/people/guests/{userid}/share | Get a guest sharing link|
+|[**getGuestSharingLink**](#getguestsharinglink) | **GET** /api/2.0/people/guests/{userid}/share | Get a guest sharing link|
 
-# **getGuestShareLink**
-> StringWrapper getGuestShareLink()
+# **getGuestSharingLink**
+> StringWrapper getGuestSharingLink()
 
 Returns a link to share a guest with another user.
 
@@ -24,7 +24,7 @@ const apiInstance = new PortalGuestsApi(configuration);
 
 let userid: string; //The user ID. (default to undefined)
 
-const { status, data } = await apiInstance.getGuestShareLink(
+const { status, data } = await apiInstance.getGuestSharingLink(
     userid
 );
 ```

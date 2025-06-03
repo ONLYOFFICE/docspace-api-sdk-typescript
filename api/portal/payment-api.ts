@@ -38,6 +38,8 @@ import type { ObjectWrapper } from '../../models';
 // @ts-ignore
 import type { OpenCustomerSessionRequestDto } from '../../models';
 // @ts-ignore
+import type { PaymentCalculationWrapper } from '../../models';
+// @ts-ignore
 import type { PaymentUrlRequestsDto } from '../../models';
 // @ts-ignore
 import type { PerformCustomerOperationRequestDto } from '../../models';
@@ -67,6 +69,59 @@ import type { WalletQuantityRequestDto } from '../../models';
  */
 export const PortalPaymentApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * Calculate amount of the wallet payment with the parameters specified in the request.
+         * @summary Calculate amount of the wallet payment
+         * @param {WalletQuantityRequestDto} [walletQuantityRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        calculateWalletPayment: async (walletQuantityRequestDto?: WalletQuantityRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/portal/payment/calculatewallet`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(walletQuantityRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * Generates the customer operations report as csv file and save in Documents.
          * @summary Generate the customer operations report
@@ -170,13 +225,13 @@ export const PortalPaymentApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Returns the URL to the chechout setup page.
-         * @summary Get the chechout setup page URL
+         * Returns the URL to the checkout setup page.
+         * @summary Get the checkout setup page URL
          * @param {string} [backUrl] Back URL
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getChechoutSetupUrl: async (backUrl?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getCheckoutSetupUrl: async (backUrl?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/portal/payment/chechoutsetupurl`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -211,55 +266,6 @@ export const PortalPaymentApiAxiosParamCreator = function (configuration?: Confi
             if (backUrl !== undefined) {
                 localVarQueryParameter['BackUrl'] = backUrl;
             }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns the available portal currencies.
-         * @summary Get currencies
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getCurrencies: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/portal/payment/currencies`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
 
 
     
@@ -518,6 +524,109 @@ export const PortalPaymentApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
+         * Returns the available portal currencies.
+         * @summary Get currencies
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPaymentCurrencies: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/portal/payment/currencies`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the available portal quotas.
+         * @summary Get quotas
+         * @param {boolean} [wallet] Get wallet quotas only
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPaymentQuotas: async (wallet?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/portal/payment/quotas`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (wallet !== undefined) {
+                localVarQueryParameter['wallet'] = wallet;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns the URL to the payment page.
          * @summary Get the payment page URL
          * @param {PaymentUrlRequestsDto} [paymentUrlRequestsDto] 
@@ -576,7 +685,7 @@ export const PortalPaymentApiAxiosParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPrices: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getPortalPrices: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/portal/payment/prices`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -626,7 +735,7 @@ export const PortalPaymentApiAxiosParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getQuotaInformation: async (refresh?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getQuotaPaymentInformation: async (refresh?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/portal/payment/quota`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -660,60 +769,6 @@ export const PortalPaymentApiAxiosParamCreator = function (configuration?: Confi
 
             if (refresh !== undefined) {
                 localVarQueryParameter['refresh'] = refresh;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns the available portal quotas.
-         * @summary Get quotas
-         * @param {boolean} [wallet] Get wallet quotas only
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getQuotas: async (wallet?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/portal/payment/quotas`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-            if (wallet !== undefined) {
-                localVarQueryParameter['wallet'] = wallet;
             }
 
 
@@ -830,112 +885,6 @@ export const PortalPaymentApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Updates the payment quantity with the parameters specified in the request.
-         * @summary Update the payment quantity
-         * @param {QuantityRequestDto} [quantityRequestDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        paymentUpdate: async (quantityRequestDto?: QuantityRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/portal/payment/update`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(quantityRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Updates the wallet payment quantity with the parameters specified in the request.
-         * @summary Update the wallet payment quantity
-         * @param {WalletQuantityRequestDto} [walletQuantityRequestDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        paymentUpdateWallet: async (walletQuantityRequestDto?: WalletQuantityRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/portal/payment/updatewallet`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(walletQuantityRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Perform customer operation and return true if the operation is succesfully provided.
          * @summary Perform customer operation
          * @param {PerformCustomerOperationRequestDto} [performCustomerOperationRequestDto] 
@@ -995,7 +944,7 @@ export const PortalPaymentApiAxiosParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        sendSalesRequest: async (salesRequestsDto?: SalesRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        sendPaymentRequest: async (salesRequestsDto?: SalesRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/portal/payment/request`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1147,6 +1096,112 @@ export const PortalPaymentApiAxiosParamCreator = function (configuration?: Confi
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Updates the payment quantity with the parameters specified in the request.
+         * @summary Update the payment quantity
+         * @param {QuantityRequestDto} [quantityRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updatePayment: async (quantityRequestDto?: QuantityRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/portal/payment/update`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(quantityRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Updates the wallet payment quantity with the parameters specified in the request.
+         * @summary Update the wallet payment quantity
+         * @param {WalletQuantityRequestDto} [walletQuantityRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateWalletPayment: async (walletQuantityRequestDto?: WalletQuantityRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/portal/payment/updatewallet`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(walletQuantityRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -1157,6 +1212,19 @@ export const PortalPaymentApiAxiosParamCreator = function (configuration?: Confi
 export const PortalPaymentApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = PortalPaymentApiAxiosParamCreator(configuration)
     return {
+        /**
+         * Calculate amount of the wallet payment with the parameters specified in the request.
+         * @summary Calculate amount of the wallet payment
+         * @param {WalletQuantityRequestDto} [walletQuantityRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async calculateWalletPayment(walletQuantityRequestDto?: WalletQuantityRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentCalculationWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.calculateWalletPayment(walletQuantityRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.calculateWalletPayment']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
         /**
          * Generates the customer operations report as csv file and save in Documents.
          * @summary Generate the customer operations report
@@ -1183,28 +1251,16 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the URL to the chechout setup page.
-         * @summary Get the chechout setup page URL
+         * Returns the URL to the checkout setup page.
+         * @summary Get the checkout setup page URL
          * @param {string} [backUrl] Back URL
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getChechoutSetupUrl(backUrl?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getChechoutSetupUrl(backUrl, options);
+        async getCheckoutSetupUrl(backUrl?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCheckoutSetupUrl(backUrl, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.getChechoutSetupUrl']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns the available portal currencies.
-         * @summary Get currencies
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getCurrencies(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CurrenciesArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getCurrencies(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.getCurrencies']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.getCheckoutSetupUrl']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1265,6 +1321,31 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns the available portal currencies.
+         * @summary Get currencies
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPaymentCurrencies(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CurrenciesArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPaymentCurrencies(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.getPaymentCurrencies']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the available portal quotas.
+         * @summary Get quotas
+         * @param {boolean} [wallet] Get wallet quotas only
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPaymentQuotas(wallet?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QuotaArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPaymentQuotas(wallet, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.getPaymentQuotas']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns the URL to the payment page.
          * @summary Get the payment page URL
          * @param {PaymentUrlRequestsDto} [paymentUrlRequestsDto] 
@@ -1283,10 +1364,10 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getPrices(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getPrices(options);
+        async getPortalPrices(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPortalPrices(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.getPrices']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.getPortalPrices']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1296,23 +1377,10 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getQuotaInformation(refresh?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QuotaWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getQuotaInformation(refresh, options);
+        async getQuotaPaymentInformation(refresh?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QuotaWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getQuotaPaymentInformation(refresh, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.getQuotaInformation']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns the available portal quotas.
-         * @summary Get quotas
-         * @param {boolean} [wallet] Get wallet quotas only
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getQuotas(wallet?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QuotaArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getQuotas(wallet, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.getQuotas']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.getQuotaPaymentInformation']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1341,32 +1409,6 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Updates the payment quantity with the parameters specified in the request.
-         * @summary Update the payment quantity
-         * @param {QuantityRequestDto} [quantityRequestDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async paymentUpdate(quantityRequestDto?: QuantityRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.paymentUpdate(quantityRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.paymentUpdate']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Updates the wallet payment quantity with the parameters specified in the request.
-         * @summary Update the wallet payment quantity
-         * @param {WalletQuantityRequestDto} [walletQuantityRequestDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async paymentUpdateWallet(walletQuantityRequestDto?: WalletQuantityRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.paymentUpdateWallet(walletQuantityRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.paymentUpdateWallet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
          * Perform customer operation and return true if the operation is succesfully provided.
          * @summary Perform customer operation
          * @param {PerformCustomerOperationRequestDto} [performCustomerOperationRequestDto] 
@@ -1386,10 +1428,10 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async sendSalesRequest(salesRequestsDto?: SalesRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.sendSalesRequest(salesRequestsDto, options);
+        async sendPaymentRequest(salesRequestsDto?: SalesRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.sendPaymentRequest(salesRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.sendSalesRequest']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.sendPaymentRequest']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1418,6 +1460,32 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.topUpDeposit']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * Updates the payment quantity with the parameters specified in the request.
+         * @summary Update the payment quantity
+         * @param {QuantityRequestDto} [quantityRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updatePayment(quantityRequestDto?: QuantityRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updatePayment(quantityRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.updatePayment']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Updates the wallet payment quantity with the parameters specified in the request.
+         * @summary Update the wallet payment quantity
+         * @param {WalletQuantityRequestDto} [walletQuantityRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateWalletPayment(walletQuantityRequestDto?: WalletQuantityRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateWalletPayment(walletQuantityRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.updateWalletPayment']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -1428,6 +1496,16 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
 export const PortalPaymentApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = PortalPaymentApiFp(configuration)
     return {
+        /**
+         * Calculate amount of the wallet payment with the parameters specified in the request.
+         * @summary Calculate amount of the wallet payment
+         * @param {WalletQuantityRequestDto} [walletQuantityRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        calculateWalletPayment(walletQuantityRequestDto?: WalletQuantityRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<PaymentCalculationWrapper> {
+            return localVarFp.calculateWalletPayment(walletQuantityRequestDto, options).then((request) => request(axios, basePath));
+        },
         /**
          * Generates the customer operations report as csv file and save in Documents.
          * @summary Generate the customer operations report
@@ -1448,23 +1526,14 @@ export const PortalPaymentApiFactory = function (configuration?: Configuration, 
             return localVarFp.getAllCurrencies(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the URL to the chechout setup page.
-         * @summary Get the chechout setup page URL
+         * Returns the URL to the checkout setup page.
+         * @summary Get the checkout setup page URL
          * @param {string} [backUrl] Back URL
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getChechoutSetupUrl(backUrl?: string, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.getChechoutSetupUrl(backUrl, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns the available portal currencies.
-         * @summary Get currencies
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getCurrencies(options?: RawAxiosRequestConfig): AxiosPromise<CurrenciesArrayWrapper> {
-            return localVarFp.getCurrencies(options).then((request) => request(axios, basePath));
+        getCheckoutSetupUrl(backUrl?: string, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.getCheckoutSetupUrl(backUrl, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the customer balance from the accounting service.
@@ -1512,6 +1581,25 @@ export const PortalPaymentApiFactory = function (configuration?: Configuration, 
             return localVarFp.getPaymentAccount(backUrl, options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns the available portal currencies.
+         * @summary Get currencies
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPaymentCurrencies(options?: RawAxiosRequestConfig): AxiosPromise<CurrenciesArrayWrapper> {
+            return localVarFp.getPaymentCurrencies(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the available portal quotas.
+         * @summary Get quotas
+         * @param {boolean} [wallet] Get wallet quotas only
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPaymentQuotas(wallet?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<QuotaArrayWrapper> {
+            return localVarFp.getPaymentQuotas(wallet, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns the URL to the payment page.
          * @summary Get the payment page URL
          * @param {PaymentUrlRequestsDto} [paymentUrlRequestsDto] 
@@ -1527,8 +1615,8 @@ export const PortalPaymentApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPrices(options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
-            return localVarFp.getPrices(options).then((request) => request(axios, basePath));
+        getPortalPrices(options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
+            return localVarFp.getPortalPrices(options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the payment information about the current portal quota.
@@ -1537,18 +1625,8 @@ export const PortalPaymentApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getQuotaInformation(refresh?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<QuotaWrapper> {
-            return localVarFp.getQuotaInformation(refresh, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns the available portal quotas.
-         * @summary Get quotas
-         * @param {boolean} [wallet] Get wallet quotas only
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getQuotas(wallet?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<QuotaArrayWrapper> {
-            return localVarFp.getQuotas(wallet, options).then((request) => request(axios, basePath));
+        getQuotaPaymentInformation(refresh?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<QuotaWrapper> {
+            return localVarFp.getQuotaPaymentInformation(refresh, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the wallet auto top up settings.
@@ -1570,26 +1648,6 @@ export const PortalPaymentApiFactory = function (configuration?: Configuration, 
             return localVarFp.openCustomerSession(openCustomerSessionRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Updates the payment quantity with the parameters specified in the request.
-         * @summary Update the payment quantity
-         * @param {QuantityRequestDto} [quantityRequestDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        paymentUpdate(quantityRequestDto?: QuantityRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.paymentUpdate(quantityRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Updates the wallet payment quantity with the parameters specified in the request.
-         * @summary Update the wallet payment quantity
-         * @param {WalletQuantityRequestDto} [walletQuantityRequestDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        paymentUpdateWallet(walletQuantityRequestDto?: WalletQuantityRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.paymentUpdateWallet(walletQuantityRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Perform customer operation and return true if the operation is succesfully provided.
          * @summary Perform customer operation
          * @param {PerformCustomerOperationRequestDto} [performCustomerOperationRequestDto] 
@@ -1606,8 +1664,8 @@ export const PortalPaymentApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        sendSalesRequest(salesRequestsDto?: SalesRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.sendSalesRequest(salesRequestsDto, options).then((request) => request(axios, basePath));
+        sendPaymentRequest(salesRequestsDto?: SalesRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.sendPaymentRequest(salesRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Set the wallet auto top up settings.
@@ -1629,6 +1687,26 @@ export const PortalPaymentApiFactory = function (configuration?: Configuration, 
         topUpDeposit(topUpDepositRequestDto?: TopUpDepositRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
             return localVarFp.topUpDeposit(topUpDepositRequestDto, options).then((request) => request(axios, basePath));
         },
+        /**
+         * Updates the payment quantity with the parameters specified in the request.
+         * @summary Update the payment quantity
+         * @param {QuantityRequestDto} [quantityRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updatePayment(quantityRequestDto?: QuantityRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.updatePayment(quantityRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Updates the wallet payment quantity with the parameters specified in the request.
+         * @summary Update the wallet payment quantity
+         * @param {WalletQuantityRequestDto} [walletQuantityRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateWalletPayment(walletQuantityRequestDto?: WalletQuantityRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.updateWalletPayment(walletQuantityRequestDto, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -1639,6 +1717,18 @@ export const PortalPaymentApiFactory = function (configuration?: Configuration, 
  * @extends {BaseAPI}
  */
 export class PortalPaymentApi extends BaseAPI {
+    /**
+     * Calculate amount of the wallet payment with the parameters specified in the request.
+     * @summary Calculate amount of the wallet payment
+     * @param {WalletQuantityRequestDto} [walletQuantityRequestDto] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortalPaymentApi
+     */
+    public calculateWalletPayment(walletQuantityRequestDto?: WalletQuantityRequestDto, options?: RawAxiosRequestConfig) {
+        return PortalPaymentApiFp(this.configuration).calculateWalletPayment(walletQuantityRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * Generates the customer operations report as csv file and save in Documents.
      * @summary Generate the customer operations report
@@ -1663,26 +1753,15 @@ export class PortalPaymentApi extends BaseAPI {
     }
 
     /**
-     * Returns the URL to the chechout setup page.
-     * @summary Get the chechout setup page URL
+     * Returns the URL to the checkout setup page.
+     * @summary Get the checkout setup page URL
      * @param {string} [backUrl] Back URL
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PortalPaymentApi
      */
-    public getChechoutSetupUrl(backUrl?: string, options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).getChechoutSetupUrl(backUrl, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns the available portal currencies.
-     * @summary Get currencies
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortalPaymentApi
-     */
-    public getCurrencies(options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).getCurrencies(options).then((request) => request(this.axios, this.basePath));
+    public getCheckoutSetupUrl(backUrl?: string, options?: RawAxiosRequestConfig) {
+        return PortalPaymentApiFp(this.configuration).getCheckoutSetupUrl(backUrl, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1739,6 +1818,29 @@ export class PortalPaymentApi extends BaseAPI {
     }
 
     /**
+     * Returns the available portal currencies.
+     * @summary Get currencies
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortalPaymentApi
+     */
+    public getPaymentCurrencies(options?: RawAxiosRequestConfig) {
+        return PortalPaymentApiFp(this.configuration).getPaymentCurrencies(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the available portal quotas.
+     * @summary Get quotas
+     * @param {boolean} [wallet] Get wallet quotas only
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortalPaymentApi
+     */
+    public getPaymentQuotas(wallet?: boolean, options?: RawAxiosRequestConfig) {
+        return PortalPaymentApiFp(this.configuration).getPaymentQuotas(wallet, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Returns the URL to the payment page.
      * @summary Get the payment page URL
      * @param {PaymentUrlRequestsDto} [paymentUrlRequestsDto] 
@@ -1757,8 +1859,8 @@ export class PortalPaymentApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PortalPaymentApi
      */
-    public getPrices(options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).getPrices(options).then((request) => request(this.axios, this.basePath));
+    public getPortalPrices(options?: RawAxiosRequestConfig) {
+        return PortalPaymentApiFp(this.configuration).getPortalPrices(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1769,20 +1871,8 @@ export class PortalPaymentApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PortalPaymentApi
      */
-    public getQuotaInformation(refresh?: boolean, options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).getQuotaInformation(refresh, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns the available portal quotas.
-     * @summary Get quotas
-     * @param {boolean} [wallet] Get wallet quotas only
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortalPaymentApi
-     */
-    public getQuotas(wallet?: boolean, options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).getQuotas(wallet, options).then((request) => request(this.axios, this.basePath));
+    public getQuotaPaymentInformation(refresh?: boolean, options?: RawAxiosRequestConfig) {
+        return PortalPaymentApiFp(this.configuration).getQuotaPaymentInformation(refresh, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1809,30 +1899,6 @@ export class PortalPaymentApi extends BaseAPI {
     }
 
     /**
-     * Updates the payment quantity with the parameters specified in the request.
-     * @summary Update the payment quantity
-     * @param {QuantityRequestDto} [quantityRequestDto] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortalPaymentApi
-     */
-    public paymentUpdate(quantityRequestDto?: QuantityRequestDto, options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).paymentUpdate(quantityRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Updates the wallet payment quantity with the parameters specified in the request.
-     * @summary Update the wallet payment quantity
-     * @param {WalletQuantityRequestDto} [walletQuantityRequestDto] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortalPaymentApi
-     */
-    public paymentUpdateWallet(walletQuantityRequestDto?: WalletQuantityRequestDto, options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).paymentUpdateWallet(walletQuantityRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Perform customer operation and return true if the operation is succesfully provided.
      * @summary Perform customer operation
      * @param {PerformCustomerOperationRequestDto} [performCustomerOperationRequestDto] 
@@ -1852,8 +1918,8 @@ export class PortalPaymentApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PortalPaymentApi
      */
-    public sendSalesRequest(salesRequestsDto?: SalesRequestsDto, options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).sendSalesRequest(salesRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public sendPaymentRequest(salesRequestsDto?: SalesRequestsDto, options?: RawAxiosRequestConfig) {
+        return PortalPaymentApiFp(this.configuration).sendPaymentRequest(salesRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1878,6 +1944,30 @@ export class PortalPaymentApi extends BaseAPI {
      */
     public topUpDeposit(topUpDepositRequestDto?: TopUpDepositRequestDto, options?: RawAxiosRequestConfig) {
         return PortalPaymentApiFp(this.configuration).topUpDeposit(topUpDepositRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Updates the payment quantity with the parameters specified in the request.
+     * @summary Update the payment quantity
+     * @param {QuantityRequestDto} [quantityRequestDto] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortalPaymentApi
+     */
+    public updatePayment(quantityRequestDto?: QuantityRequestDto, options?: RawAxiosRequestConfig) {
+        return PortalPaymentApiFp(this.configuration).updatePayment(quantityRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Updates the wallet payment quantity with the parameters specified in the request.
+     * @summary Update the wallet payment quantity
+     * @param {WalletQuantityRequestDto} [walletQuantityRequestDto] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortalPaymentApi
+     */
+    public updateWalletPayment(walletQuantityRequestDto?: WalletQuantityRequestDto, options?: RawAxiosRequestConfig) {
+        return PortalPaymentApiFp(this.configuration).updateWalletPayment(walletQuantityRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

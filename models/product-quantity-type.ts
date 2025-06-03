@@ -15,7 +15,7 @@
 
 
 /**
- * 
+ * The product quantity type.
  * @export
  * @enum {number}
  */

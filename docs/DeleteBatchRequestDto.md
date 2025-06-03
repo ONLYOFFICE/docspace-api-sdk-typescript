@@ -6,6 +6,7 @@ The request parameters for deleting files.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**returnSingleOperation** | **boolean** | Specifies whether to return only the current operation | [optional] [default to undefined]
 **folderIds** | [**Array&lt;BaseBatchRequestDtoFolderIdsInner&gt;**](BaseBatchRequestDtoFolderIdsInner.md) | The list of folder IDs to be deleted. | [optional] [default to undefined]
 **fileIds** | [**Array&lt;BaseBatchRequestDtoFolderIdsInner&gt;**](BaseBatchRequestDtoFolderIdsInner.md) | The list of file IDs to be deleted. | [optional] [default to undefined]
 **deleteAfter** | **boolean** | Specifies whether to delete a file after the editing session is finished or not | [optional] [default to undefined]
@@ -17,6 +18,7 @@ Name | Type | Description | Notes
 import { DeleteBatchRequestDto } from '@onlyoffice/docspace-api-typescript';
 
 const instance: DeleteBatchRequestDto = {
+    returnSingleOperation,
     folderIds,
     fileIds,
     deleteAfter,

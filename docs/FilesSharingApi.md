@@ -5,10 +5,10 @@ All URIs are relative to *http://localhost:8092*
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**applyExternalSharePassword**](#applyexternalsharepassword) | **POST** /api/2.0/files/share/{key}/password | Apply external data password|
-|[**changeOwner**](#changeowner) | **POST** /api/2.0/files/owner | Change the file owner|
+|[**changeFileOwner**](#changefileowner) | **POST** /api/2.0/files/owner | Change the file owner|
 |[**getExternalShareData**](#getexternalsharedata) | **GET** /api/2.0/files/share/{key} | Get the external data|
+|[**getSharedUsers**](#getsharedusers) | **GET** /api/2.0/files/file/{fileId}/sharedusers | Get user access rights by file ID|
 |[**sendEditorNotify**](#sendeditornotify) | **POST** /api/2.0/files/file/{fileId}/sendeditornotify | Send the mention message|
-|[**sharedUsers**](#sharedusers) | **GET** /api/2.0/files/file/{fileId}/sharedusers | Get user access rights by file ID|
 
 # **applyExternalSharePassword**
 > ExternalShareWrapper applyExternalSharePassword()
@@ -66,8 +66,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **changeOwner**
-> FileEntryArrayWrapper changeOwner()
+# **changeFileOwner**
+> FileEntryArrayWrapper changeFileOwner()
 
 Changes the owner of the file with the ID specified in the request.
 
@@ -85,7 +85,7 @@ const apiInstance = new FilesSharingApi(configuration);
 
 let changeOwnerRequestDto: ChangeOwnerRequestDto; // (optional)
 
-const { status, data } = await apiInstance.changeOwner(
+const { status, data } = await apiInstance.changeFileOwner(
     changeOwnerRequestDto
 );
 ```
@@ -173,6 +173,58 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **getSharedUsers**
+> MentionWrapperArrayWrapper getSharedUsers()
+
+Returns a list of users with their access rights to the file with the ID specified in the request.
+
+### Example
+
+```typescript
+import {
+    FilesSharingApi,
+    Configuration
+} from '@onlyoffice/docspace-api-typescript';
+
+const configuration = new Configuration();
+const apiInstance = new FilesSharingApi(configuration);
+
+let fileId: number; //The file ID of the request. (default to undefined)
+
+const { status, data } = await apiInstance.getSharedUsers(
+    fileId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
+
+
+### Return type
+
+**MentionWrapperArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | List of users with their access rights to the file |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **sendEditorNotify**
 > AceShortWrapperArrayWrapper sendEditorNotify()
 
@@ -225,58 +277,6 @@ const { status, data } = await apiInstance.sendEditorNotify(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of access rights information |  -  |
-|**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **sharedUsers**
-> MentionWrapperArrayWrapper sharedUsers()
-
-Returns a list of users with their access rights to the file with the ID specified in the request.
-
-### Example
-
-```typescript
-import {
-    FilesSharingApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new FilesSharingApi(configuration);
-
-let fileId: number; //The file ID of the request. (default to undefined)
-
-const { status, data } = await apiInstance.sharedUsers(
-    fileId
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
-
-
-### Return type
-
-**MentionWrapperArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | List of users with their access rights to the file |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

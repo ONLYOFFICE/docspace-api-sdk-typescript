@@ -81,6 +81,36 @@ export const SettingsLicenseApiAxiosParamCreator = function (configuration?: Con
             };
         },
         /**
+         * Requests a portal license if necessary.
+         * @summary Request a license
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getIsLicenseRequired: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/settings/license/required`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Refreshes the portal license.
          * @summary Refresh the license
          * @param {*} [options] Override http request option.
@@ -117,36 +147,6 @@ export const SettingsLicenseApiAxiosParamCreator = function (configuration?: Con
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Requests a portal license if necessary.
-         * @summary Request a license
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        requestLicense: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/settings/license/required`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
 
     
@@ -244,6 +244,18 @@ export const SettingsLicenseApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Requests a portal license if necessary.
+         * @summary Request a license
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getIsLicenseRequired(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getIsLicenseRequired(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SettingsLicenseApi.getIsLicenseRequired']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Refreshes the portal license.
          * @summary Refresh the license
          * @param {*} [options] Override http request option.
@@ -253,18 +265,6 @@ export const SettingsLicenseApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.refreshLicense(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SettingsLicenseApi.refreshLicense']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Requests a portal license if necessary.
-         * @summary Request a license
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async requestLicense(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.requestLicense(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsLicenseApi.requestLicense']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -300,6 +300,15 @@ export const SettingsLicenseApiFactory = function (configuration?: Configuration
             return localVarFp.acceptLicense(options).then((request) => request(axios, basePath));
         },
         /**
+         * Requests a portal license if necessary.
+         * @summary Request a license
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getIsLicenseRequired(options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.getIsLicenseRequired(options).then((request) => request(axios, basePath));
+        },
+        /**
          * Refreshes the portal license.
          * @summary Refresh the license
          * @param {*} [options] Override http request option.
@@ -307,15 +316,6 @@ export const SettingsLicenseApiFactory = function (configuration?: Configuration
          */
         refreshLicense(options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
             return localVarFp.refreshLicense(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Requests a portal license if necessary.
-         * @summary Request a license
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        requestLicense(options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.requestLicense(options).then((request) => request(axios, basePath));
         },
         /**
          * Uploads a portal license specified in the request.
@@ -349,6 +349,17 @@ export class SettingsLicenseApi extends BaseAPI {
     }
 
     /**
+     * Requests a portal license if necessary.
+     * @summary Request a license
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SettingsLicenseApi
+     */
+    public getIsLicenseRequired(options?: RawAxiosRequestConfig) {
+        return SettingsLicenseApiFp(this.configuration).getIsLicenseRequired(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Refreshes the portal license.
      * @summary Refresh the license
      * @param {*} [options] Override http request option.
@@ -357,17 +368,6 @@ export class SettingsLicenseApi extends BaseAPI {
      */
     public refreshLicense(options?: RawAxiosRequestConfig) {
         return SettingsLicenseApiFp(this.configuration).refreshLicense(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Requests a portal license if necessary.
-     * @summary Request a license
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SettingsLicenseApi
-     */
-    public requestLicense(options?: RawAxiosRequestConfig) {
-        return SettingsLicenseApiFp(this.configuration).requestLicense(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

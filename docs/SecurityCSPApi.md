@@ -4,11 +4,11 @@ All URIs are relative to *http://localhost:8092*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**csp**](#csp) | **POST** /api/2.0/security/csp | Configure CSP settings|
-|[**getCsp**](#getcsp) | **GET** /api/2.0/security/csp | Get CSP settings|
+|[**configureCsp**](#configurecsp) | **POST** /api/2.0/security/csp | Configure CSP settings|
+|[**getCspSettings**](#getcspsettings) | **GET** /api/2.0/security/csp | Get CSP settings|
 
-# **csp**
-> CspWrapper csp()
+# **configureCsp**
+> CspWrapper configureCsp()
 
 Configures the CSP (Content Security Policy) settings for the current portal.
 
@@ -26,7 +26,7 @@ const apiInstance = new SecurityCSPApi(configuration);
 
 let cspRequestsDto: CspRequestsDto; // (optional)
 
-const { status, data } = await apiInstance.csp(
+const { status, data } = await apiInstance.configureCsp(
     cspRequestsDto
 );
 ```
@@ -61,8 +61,8 @@ const { status, data } = await apiInstance.csp(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getCsp**
-> CspWrapper getCsp()
+# **getCspSettings**
+> CspWrapper getCspSettings()
 
 Returns the CSP (Content Security Policy) settings for the current portal.
 
@@ -77,7 +77,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new SecurityCSPApi(configuration);
 
-const { status, data } = await apiInstance.getCsp();
+const { status, data } = await apiInstance.getCspSettings();
 ```
 
 ### Parameters

@@ -32,59 +32,6 @@ import type { OwnerIdSettingsRequestDto } from '../../models';
 export const SettingsOwnerApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Updates the current portal owner with a new one specified in the request.
-         * @summary Update the portal owner
-         * @param {OwnerIdSettingsRequestDto} [ownerIdSettingsRequestDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        owner: async (ownerIdSettingsRequestDto?: OwnerIdSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/settings/owner`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(ownerIdSettingsRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Sends the instructions to change the DocSpace owner.
          * @summary Send the owner change instructions
          * @param {OwnerIdSettingsRequestDto} [ownerIdSettingsRequestDto] 
@@ -137,6 +84,59 @@ export const SettingsOwnerApiAxiosParamCreator = function (configuration?: Confi
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Updates the current portal owner with a new one specified in the request.
+         * @summary Update the portal owner
+         * @param {OwnerIdSettingsRequestDto} [ownerIdSettingsRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updatePortalOwner: async (ownerIdSettingsRequestDto?: OwnerIdSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/settings/owner`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(ownerIdSettingsRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -147,19 +147,6 @@ export const SettingsOwnerApiAxiosParamCreator = function (configuration?: Confi
 export const SettingsOwnerApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = SettingsOwnerApiAxiosParamCreator(configuration)
     return {
-        /**
-         * Updates the current portal owner with a new one specified in the request.
-         * @summary Update the portal owner
-         * @param {OwnerIdSettingsRequestDto} [ownerIdSettingsRequestDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async owner(ownerIdSettingsRequestDto?: OwnerIdSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.owner(ownerIdSettingsRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsOwnerApi.owner']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
         /**
          * Sends the instructions to change the DocSpace owner.
          * @summary Send the owner change instructions
@@ -173,6 +160,19 @@ export const SettingsOwnerApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['SettingsOwnerApi.sendOwnerChangeInstructions']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * Updates the current portal owner with a new one specified in the request.
+         * @summary Update the portal owner
+         * @param {OwnerIdSettingsRequestDto} [ownerIdSettingsRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updatePortalOwner(ownerIdSettingsRequestDto?: OwnerIdSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updatePortalOwner(ownerIdSettingsRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SettingsOwnerApi.updatePortalOwner']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -184,16 +184,6 @@ export const SettingsOwnerApiFactory = function (configuration?: Configuration, 
     const localVarFp = SettingsOwnerApiFp(configuration)
     return {
         /**
-         * Updates the current portal owner with a new one specified in the request.
-         * @summary Update the portal owner
-         * @param {OwnerIdSettingsRequestDto} [ownerIdSettingsRequestDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        owner(ownerIdSettingsRequestDto?: OwnerIdSettingsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.owner(ownerIdSettingsRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Sends the instructions to change the DocSpace owner.
          * @summary Send the owner change instructions
          * @param {OwnerIdSettingsRequestDto} [ownerIdSettingsRequestDto] 
@@ -202,6 +192,16 @@ export const SettingsOwnerApiFactory = function (configuration?: Configuration, 
          */
         sendOwnerChangeInstructions(ownerIdSettingsRequestDto?: OwnerIdSettingsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<OwnerChangeInstructionsWrapper> {
             return localVarFp.sendOwnerChangeInstructions(ownerIdSettingsRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Updates the current portal owner with a new one specified in the request.
+         * @summary Update the portal owner
+         * @param {OwnerIdSettingsRequestDto} [ownerIdSettingsRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updatePortalOwner(ownerIdSettingsRequestDto?: OwnerIdSettingsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.updatePortalOwner(ownerIdSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -214,18 +214,6 @@ export const SettingsOwnerApiFactory = function (configuration?: Configuration, 
  */
 export class SettingsOwnerApi extends BaseAPI {
     /**
-     * Updates the current portal owner with a new one specified in the request.
-     * @summary Update the portal owner
-     * @param {OwnerIdSettingsRequestDto} [ownerIdSettingsRequestDto] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SettingsOwnerApi
-     */
-    public owner(ownerIdSettingsRequestDto?: OwnerIdSettingsRequestDto, options?: RawAxiosRequestConfig) {
-        return SettingsOwnerApiFp(this.configuration).owner(ownerIdSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Sends the instructions to change the DocSpace owner.
      * @summary Send the owner change instructions
      * @param {OwnerIdSettingsRequestDto} [ownerIdSettingsRequestDto] 
@@ -235,6 +223,18 @@ export class SettingsOwnerApi extends BaseAPI {
      */
     public sendOwnerChangeInstructions(ownerIdSettingsRequestDto?: OwnerIdSettingsRequestDto, options?: RawAxiosRequestConfig) {
         return SettingsOwnerApiFp(this.configuration).sendOwnerChangeInstructions(ownerIdSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Updates the current portal owner with a new one specified in the request.
+     * @summary Update the portal owner
+     * @param {OwnerIdSettingsRequestDto} [ownerIdSettingsRequestDto] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SettingsOwnerApi
+     */
+    public updatePortalOwner(ownerIdSettingsRequestDto?: OwnerIdSettingsRequestDto, options?: RawAxiosRequestConfig) {
+        return SettingsOwnerApiFp(this.configuration).updatePortalOwner(ownerIdSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

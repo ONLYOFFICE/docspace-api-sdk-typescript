@@ -24,6 +24,12 @@ import type { BaseBatchRequestDtoFolderIdsInner } from './base-batch-request-dto
  */
 export interface BaseBatchRequestDto {
     /**
+     * Specifies whether to return only the current operation
+     * @type {boolean}
+     * @memberof BaseBatchRequestDto
+     */
+    'returnSingleOperation'?: boolean;
+    /**
      * The list of folder IDs of the base batch request.
      * @type {Array<BaseBatchRequestDtoFolderIdsInner>}
      * @memberof BaseBatchRequestDto

@@ -90,7 +90,7 @@ export const SettingsGreetingSettingsApiAxiosParamCreator = function (configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        isDefault: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getIsDefaultGreetingSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/settings/greetingsettings/isdefault`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -263,10 +263,10 @@ export const SettingsGreetingSettingsApiFp = function(configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async isDefault(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.isDefault(options);
+        async getIsDefaultGreetingSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getIsDefaultGreetingSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsGreetingSettingsApi.isDefault']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SettingsGreetingSettingsApi.getIsDefaultGreetingSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -319,8 +319,8 @@ export const SettingsGreetingSettingsApiFactory = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        isDefault(options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.isDefault(options).then((request) => request(axios, basePath));
+        getIsDefaultGreetingSettings(options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.getIsDefaultGreetingSettings(options).then((request) => request(axios, basePath));
         },
         /**
          * Restores the current portal greeting settings.
@@ -369,8 +369,8 @@ export class SettingsGreetingSettingsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SettingsGreetingSettingsApi
      */
-    public isDefault(options?: RawAxiosRequestConfig) {
-        return SettingsGreetingSettingsApiFp(this.configuration).isDefault(options).then((request) => request(this.axios, this.basePath));
+    public getIsDefaultGreetingSettings(options?: RawAxiosRequestConfig) {
+        return SettingsGreetingSettingsApiFp(this.configuration).getIsDefaultGreetingSettings(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

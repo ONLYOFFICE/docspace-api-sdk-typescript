@@ -96,9 +96,9 @@ export const PeopleUserStatusApiAxiosParamCreator = function (configuration?: Co
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateEmployeeActivationStatus: async (activationstatus: EmployeeActivationStatus, updateMembersRequestDto?: UpdateMembersRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateUserActivationStatus: async (activationstatus: EmployeeActivationStatus, updateMembersRequestDto?: UpdateMembersRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'activationstatus' is not null or undefined
-            assertParamExists('updateEmployeeActivationStatus', 'activationstatus', activationstatus)
+            assertParamExists('updateUserActivationStatus', 'activationstatus', activationstatus)
             const localVarPath = `/api/2.0/people/activationstatus/{activationstatus}`
                 .replace(`{${"activationstatus"}}`, encodeURIComponent(String(activationstatus)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -233,10 +233,10 @@ export const PeopleUserStatusApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateEmployeeActivationStatus(activationstatus: EmployeeActivationStatus, updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateEmployeeActivationStatus(activationstatus, updateMembersRequestDto, options);
+        async updateUserActivationStatus(activationstatus: EmployeeActivationStatus, updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateUserActivationStatus(activationstatus, updateMembersRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleUserStatusApi.updateEmployeeActivationStatus']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PeopleUserStatusApi.updateUserActivationStatus']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -281,8 +281,8 @@ export const PeopleUserStatusApiFactory = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateEmployeeActivationStatus(activationstatus: EmployeeActivationStatus, updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
-            return localVarFp.updateEmployeeActivationStatus(activationstatus, updateMembersRequestDto, options).then((request) => request(axios, basePath));
+        updateUserActivationStatus(activationstatus: EmployeeActivationStatus, updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
+            return localVarFp.updateUserActivationStatus(activationstatus, updateMembersRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Changes a status of the users with the IDs specified in the request.
@@ -326,8 +326,8 @@ export class PeopleUserStatusApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PeopleUserStatusApi
      */
-    public updateEmployeeActivationStatus(activationstatus: EmployeeActivationStatus, updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig) {
-        return PeopleUserStatusApiFp(this.configuration).updateEmployeeActivationStatus(activationstatus, updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public updateUserActivationStatus(activationstatus: EmployeeActivationStatus, updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig) {
+        return PeopleUserStatusApiFp(this.configuration).updateUserActivationStatus(activationstatus, updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

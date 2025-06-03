@@ -252,6 +252,55 @@ export const PeopleProfilesApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
+         * Returns the user claims.
+         * @summary Returns the user claims.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getClaims: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/people/tokendiagnostics`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns the detailed information about a profile of the user with the email specified in the request.
          * @summary Get a profile by user email
          * @param {string} [email] The user email address.
@@ -259,7 +308,7 @@ export const PeopleProfilesApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getByEmail: async (email?: string, culture?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getProfileByEmail: async (email?: string, culture?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/people/email`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -317,9 +366,9 @@ export const PeopleProfilesApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getById: async (userid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getProfileByUserId: async (userid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userid' is not null or undefined
-            assertParamExists('getById', 'userid', userid)
+            assertParamExists('getProfileByUserId', 'userid', userid)
             const localVarPath = `/api/2.0/people/{userid}`
                 .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -364,13 +413,13 @@ export const PeopleProfilesApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Returns the user claims.
-         * @summary Returns the user claims.
+         * Returns the detailed information about the current user profile.
+         * @summary Get my profile
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getClaims: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/people/tokendiagnostics`;
+        getSelfProfile: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/people/@self`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -565,55 +614,6 @@ export const PeopleProfilesApiAxiosParamCreator = function (configuration?: Conf
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(updateMembersRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns the detailed information about the current user profile.
-         * @summary Get my profile
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        self: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/people/@self`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -848,33 +848,6 @@ export const PeopleProfilesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the detailed information about a profile of the user with the email specified in the request.
-         * @summary Get a profile by user email
-         * @param {string} [email] The user email address.
-         * @param {string} [culture] Culture
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getByEmail(email?: string, culture?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getByEmail(email, culture, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleProfilesApi.getByEmail']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns the detailed information about a profile of the user with the name specified in the request.
-         * @summary Get a profile by user name
-         * @param {string} userid The user ID.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getById(userid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getById(userid, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleProfilesApi.getById']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
          * Returns the user claims.
          * @summary Returns the user claims.
          * @param {*} [options] Override http request option.
@@ -884,6 +857,45 @@ export const PeopleProfilesApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getClaims(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PeopleProfilesApi.getClaims']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the detailed information about a profile of the user with the email specified in the request.
+         * @summary Get a profile by user email
+         * @param {string} [email] The user email address.
+         * @param {string} [culture] Culture
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getProfileByEmail(email?: string, culture?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getProfileByEmail(email, culture, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PeopleProfilesApi.getProfileByEmail']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the detailed information about a profile of the user with the name specified in the request.
+         * @summary Get a profile by user name
+         * @param {string} userid The user ID.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getProfileByUserId(userid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getProfileByUserId(userid, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PeopleProfilesApi.getProfileByUserId']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the detailed information about the current user profile.
+         * @summary Get my profile
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getSelfProfile(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSelfProfile(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PeopleProfilesApi.getSelfProfile']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -923,18 +935,6 @@ export const PeopleProfilesApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.resendUserInvites(updateMembersRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PeopleProfilesApi.resendUserInvites']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns the detailed information about the current user profile.
-         * @summary Get my profile
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async self(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.self(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleProfilesApi.self']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1027,6 +1027,15 @@ export const PeopleProfilesApiFactory = function (configuration?: Configuration,
             return localVarFp.getAllProfiles(options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns the user claims.
+         * @summary Returns the user claims.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getClaims(options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
+            return localVarFp.getClaims(options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns the detailed information about a profile of the user with the email specified in the request.
          * @summary Get a profile by user email
          * @param {string} [email] The user email address.
@@ -1034,8 +1043,8 @@ export const PeopleProfilesApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getByEmail(email?: string, culture?: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
-            return localVarFp.getByEmail(email, culture, options).then((request) => request(axios, basePath));
+        getProfileByEmail(email?: string, culture?: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
+            return localVarFp.getProfileByEmail(email, culture, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the detailed information about a profile of the user with the name specified in the request.
@@ -1044,17 +1053,17 @@ export const PeopleProfilesApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getById(userid: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
-            return localVarFp.getById(userid, options).then((request) => request(axios, basePath));
+        getProfileByUserId(userid: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
+            return localVarFp.getProfileByUserId(userid, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the user claims.
-         * @summary Returns the user claims.
+         * Returns the detailed information about the current user profile.
+         * @summary Get my profile
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getClaims(options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
-            return localVarFp.getClaims(options).then((request) => request(axios, basePath));
+        getSelfProfile(options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
+            return localVarFp.getSelfProfile(options).then((request) => request(axios, basePath));
         },
         /**
          * Invites users specified in the request to the current portal.
@@ -1085,15 +1094,6 @@ export const PeopleProfilesApiFactory = function (configuration?: Configuration,
          */
         resendUserInvites(updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
             return localVarFp.resendUserInvites(updateMembersRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns the detailed information about the current user profile.
-         * @summary Get my profile
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        self(options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
-            return localVarFp.self(options).then((request) => request(axios, basePath));
         },
         /**
          * Sends a message to the user email with the instructions to change the email address connected to the portal.
@@ -1184,6 +1184,17 @@ export class PeopleProfilesApi extends BaseAPI {
     }
 
     /**
+     * Returns the user claims.
+     * @summary Returns the user claims.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PeopleProfilesApi
+     */
+    public getClaims(options?: RawAxiosRequestConfig) {
+        return PeopleProfilesApiFp(this.configuration).getClaims(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Returns the detailed information about a profile of the user with the email specified in the request.
      * @summary Get a profile by user email
      * @param {string} [email] The user email address.
@@ -1192,8 +1203,8 @@ export class PeopleProfilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PeopleProfilesApi
      */
-    public getByEmail(email?: string, culture?: string, options?: RawAxiosRequestConfig) {
-        return PeopleProfilesApiFp(this.configuration).getByEmail(email, culture, options).then((request) => request(this.axios, this.basePath));
+    public getProfileByEmail(email?: string, culture?: string, options?: RawAxiosRequestConfig) {
+        return PeopleProfilesApiFp(this.configuration).getProfileByEmail(email, culture, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1204,19 +1215,19 @@ export class PeopleProfilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PeopleProfilesApi
      */
-    public getById(userid: string, options?: RawAxiosRequestConfig) {
-        return PeopleProfilesApiFp(this.configuration).getById(userid, options).then((request) => request(this.axios, this.basePath));
+    public getProfileByUserId(userid: string, options?: RawAxiosRequestConfig) {
+        return PeopleProfilesApiFp(this.configuration).getProfileByUserId(userid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Returns the user claims.
-     * @summary Returns the user claims.
+     * Returns the detailed information about the current user profile.
+     * @summary Get my profile
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PeopleProfilesApi
      */
-    public getClaims(options?: RawAxiosRequestConfig) {
-        return PeopleProfilesApiFp(this.configuration).getClaims(options).then((request) => request(this.axios, this.basePath));
+    public getSelfProfile(options?: RawAxiosRequestConfig) {
+        return PeopleProfilesApiFp(this.configuration).getSelfProfile(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1253,17 +1264,6 @@ export class PeopleProfilesApi extends BaseAPI {
      */
     public resendUserInvites(updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig) {
         return PeopleProfilesApiFp(this.configuration).resendUserInvites(updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns the detailed information about the current user profile.
-     * @summary Get my profile
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PeopleProfilesApi
-     */
-    public self(options?: RawAxiosRequestConfig) {
-        return PeopleProfilesApiFp(this.configuration).self(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

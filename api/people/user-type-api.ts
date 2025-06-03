@@ -46,9 +46,9 @@ export const PeopleUserTypeApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getChangeTypeProgress: async (userid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUserTypeUpdateProgress: async (userid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userid' is not null or undefined
-            assertParamExists('getChangeTypeProgress', 'userid', userid)
+            assertParamExists('getUserTypeUpdateProgress', 'userid', userid)
             const localVarPath = `/api/2.0/people/type/progress/{userid}`
                 .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -99,7 +99,7 @@ export const PeopleUserTypeApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        startUpdateUserType: async (startUpdateUserTypeDto?: StartUpdateUserTypeDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        starUserTypetUpdate: async (startUpdateUserTypeDto?: StartUpdateUserTypeDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/people/type`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -152,7 +152,7 @@ export const PeopleUserTypeApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        terminateChangeType: async (terminateRequestDto?: TerminateRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        terminateUserTypeUpdate: async (terminateRequestDto?: TerminateRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/people/type/terminate`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -272,10 +272,10 @@ export const PeopleUserTypeApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getChangeTypeProgress(userid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskProgressResponseWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getChangeTypeProgress(userid, options);
+        async getUserTypeUpdateProgress(userid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskProgressResponseWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserTypeUpdateProgress(userid, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleUserTypeApi.getChangeTypeProgress']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PeopleUserTypeApi.getUserTypeUpdateProgress']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -285,10 +285,10 @@ export const PeopleUserTypeApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async startUpdateUserType(startUpdateUserTypeDto?: StartUpdateUserTypeDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskProgressResponseWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.startUpdateUserType(startUpdateUserTypeDto, options);
+        async starUserTypetUpdate(startUpdateUserTypeDto?: StartUpdateUserTypeDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskProgressResponseWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.starUserTypetUpdate(startUpdateUserTypeDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleUserTypeApi.startUpdateUserType']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PeopleUserTypeApi.starUserTypetUpdate']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -298,10 +298,10 @@ export const PeopleUserTypeApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async terminateChangeType(terminateRequestDto?: TerminateRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskProgressResponseWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.terminateChangeType(terminateRequestDto, options);
+        async terminateUserTypeUpdate(terminateRequestDto?: TerminateRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskProgressResponseWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.terminateUserTypeUpdate(terminateRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleUserTypeApi.terminateChangeType']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PeopleUserTypeApi.terminateUserTypeUpdate']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -335,8 +335,8 @@ export const PeopleUserTypeApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getChangeTypeProgress(userid: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskProgressResponseWrapper> {
-            return localVarFp.getChangeTypeProgress(userid, options).then((request) => request(axios, basePath));
+        getUserTypeUpdateProgress(userid: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskProgressResponseWrapper> {
+            return localVarFp.getUserTypeUpdateProgress(userid, options).then((request) => request(axios, basePath));
         },
         /**
          * Starts updating the type of the user or guest when reassigning rooms and shared files.
@@ -345,8 +345,8 @@ export const PeopleUserTypeApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        startUpdateUserType(startUpdateUserTypeDto?: StartUpdateUserTypeDto, options?: RawAxiosRequestConfig): AxiosPromise<TaskProgressResponseWrapper> {
-            return localVarFp.startUpdateUserType(startUpdateUserTypeDto, options).then((request) => request(axios, basePath));
+        starUserTypetUpdate(startUpdateUserTypeDto?: StartUpdateUserTypeDto, options?: RawAxiosRequestConfig): AxiosPromise<TaskProgressResponseWrapper> {
+            return localVarFp.starUserTypetUpdate(startUpdateUserTypeDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Terminates the process of updating the type of the user or guest.
@@ -355,8 +355,8 @@ export const PeopleUserTypeApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        terminateChangeType(terminateRequestDto?: TerminateRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<TaskProgressResponseWrapper> {
-            return localVarFp.terminateChangeType(terminateRequestDto, options).then((request) => request(axios, basePath));
+        terminateUserTypeUpdate(terminateRequestDto?: TerminateRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<TaskProgressResponseWrapper> {
+            return localVarFp.terminateUserTypeUpdate(terminateRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Changes a type of the users with the IDs specified in the request.
@@ -387,8 +387,8 @@ export class PeopleUserTypeApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PeopleUserTypeApi
      */
-    public getChangeTypeProgress(userid: string, options?: RawAxiosRequestConfig) {
-        return PeopleUserTypeApiFp(this.configuration).getChangeTypeProgress(userid, options).then((request) => request(this.axios, this.basePath));
+    public getUserTypeUpdateProgress(userid: string, options?: RawAxiosRequestConfig) {
+        return PeopleUserTypeApiFp(this.configuration).getUserTypeUpdateProgress(userid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -399,8 +399,8 @@ export class PeopleUserTypeApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PeopleUserTypeApi
      */
-    public startUpdateUserType(startUpdateUserTypeDto?: StartUpdateUserTypeDto, options?: RawAxiosRequestConfig) {
-        return PeopleUserTypeApiFp(this.configuration).startUpdateUserType(startUpdateUserTypeDto, options).then((request) => request(this.axios, this.basePath));
+    public starUserTypetUpdate(startUpdateUserTypeDto?: StartUpdateUserTypeDto, options?: RawAxiosRequestConfig) {
+        return PeopleUserTypeApiFp(this.configuration).starUserTypetUpdate(startUpdateUserTypeDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -411,8 +411,8 @@ export class PeopleUserTypeApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PeopleUserTypeApi
      */
-    public terminateChangeType(terminateRequestDto?: TerminateRequestDto, options?: RawAxiosRequestConfig) {
-        return PeopleUserTypeApiFp(this.configuration).terminateChangeType(terminateRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public terminateUserTypeUpdate(terminateRequestDto?: TerminateRequestDto, options?: RawAxiosRequestConfig) {
+        return PeopleUserTypeApiFp(this.configuration).terminateUserTypeUpdate(terminateRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -5,17 +5,17 @@ All URIs are relative to *http://localhost:8092*
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**addTemplates**](#addtemplates) | **POST** /api/2.0/files/templates | Add template files|
-|[**changeHistory**](#changehistory) | **PUT** /api/2.0/files/file/{fileId}/history | Change version history|
+|[**changeVersionHistory**](#changeversionhistory) | **PUT** /api/2.0/files/file/{fileId}/history | Change version history|
 |[**checkFillFormDraft**](#checkfillformdraft) | **POST** /api/2.0/files/masterform/{fileId}/checkfillformdraft | Check the form draft filling|
 |[**copyFileAs**](#copyfileas) | **POST** /api/2.0/files/file/{fileId}/copyas | Copy a file|
 |[**createEditSession**](#createeditsession) | **POST** /api/2.0/files/file/{fileId}/edit_session | Create the editing session|
 |[**createFile**](#createfile) | **POST** /api/2.0/files/{folderId}/file | Create a file|
-|[**createFileMyDocuments**](#createfilemydocuments) | **POST** /api/2.0/files/@my/file | Create a file in the \&quot;My documents\&quot; section|
+|[**createFileInMyDocuments**](#createfileinmydocuments) | **POST** /api/2.0/files/@my/file | Create a file in the \&quot;My documents\&quot; section|
 |[**createHtmlFile**](#createhtmlfile) | **POST** /api/2.0/files/{folderId}/html | Create an HTML file|
-|[**createHtmlFileInMy**](#createhtmlfileinmy) | **POST** /api/2.0/files/@my/html | Create an HTML file in the \&quot;My documents\&quot; section|
+|[**createHtmlFileInMyDocuments**](#createhtmlfileinmydocuments) | **POST** /api/2.0/files/@my/html | Create an HTML file in the \&quot;My documents\&quot; section|
 |[**createPrimaryExternalLink**](#createprimaryexternallink) | **POST** /api/2.0/files/file/{id}/link | Create primary external link|
 |[**createTextFile**](#createtextfile) | **POST** /api/2.0/files/{folderId}/text | Create a text file|
-|[**createTextFileInMy**](#createtextfileinmy) | **POST** /api/2.0/files/@my/text | Create a text file in the \&quot;My documents\&quot; section|
+|[**createTextFileInMyDocuments**](#createtextfileinmydocuments) | **POST** /api/2.0/files/@my/text | Create a text file in the \&quot;My documents\&quot; section|
 |[**createThumbnails**](#createthumbnails) | **POST** /api/2.0/files/thumbnails | Create file thumbnails|
 |[**deleteFile**](#deletefile) | **DELETE** /api/2.0/files/file/{fileId} | Delete a file|
 |[**deleteRecent**](#deleterecent) | **DELETE** /api/2.0/files/recent | Delete recent files|
@@ -25,28 +25,28 @@ All URIs are relative to *http://localhost:8092*
 |[**getEditHistory**](#getedithistory) | **GET** /api/2.0/files/file/{fileId}/edit/history | Get version history|
 |[**getFileHistory**](#getfilehistory) | **GET** /api/2.0/files/file/{fileId}/log | Get file history|
 |[**getFileInfo**](#getfileinfo) | **GET** /api/2.0/files/file/{fileId} | Get file information|
+|[**getFileLinks**](#getfilelinks) | **GET** /api/2.0/files/file/{id}/links | Get file external links|
 |[**getFilePrimaryExternalLink**](#getfileprimaryexternallink) | **GET** /api/2.0/files/file/{id}/link | Get primary external link|
 |[**getFileVersionInfo**](#getfileversioninfo) | **GET** /api/2.0/files/file/{fileId}/history | Get file versions|
 |[**getFillResult**](#getfillresult) | **GET** /api/2.0/files/file/fillresult | Get form-filling result|
-|[**getLinks**](#getlinks) | **GET** /api/2.0/files/file/{id}/links | Get file external links|
 |[**getPresignedFileUri**](#getpresignedfileuri) | **GET** /api/2.0/files/file/{fileId}/presigned | Get file download link asynchronously|
 |[**getPresignedUri**](#getpresigneduri) | **GET** /api/2.0/files/file/{fileId}/presigneduri | Get file download link|
+|[**getProtectedFileUsers**](#getprotectedfileusers) | **GET** /api/2.0/files/file/{fileId}/protectusers | Get users access rights to the protected file|
 |[**getReferenceData**](#getreferencedata) | **POST** /api/2.0/files/file/referencedata | Get reference data|
 |[**isFormPDF**](#isformpdf) | **GET** /api/2.0/files/file/{fileId}/isformpdf | Check the PDF file|
 |[**lockFile**](#lockfile) | **PUT** /api/2.0/files/file/{fileId}/lock | Lock a file|
 |[**manageFormFilling**](#manageformfilling) | **PUT** /api/2.0/files/file/{fileId}/manageformfilling | Perform form filling action|
-|[**openEdit**](#openedit) | **GET** /api/2.0/files/file/{fileId}/openedit | Open a file configuration|
-|[**protectUsers**](#protectusers) | **GET** /api/2.0/files/file/{fileId}/protectusers | Get users access rights to the protected file|
-|[**restoreVersion**](#restoreversion) | **GET** /api/2.0/files/file/{fileId}/restoreversion | Restore a file version|
-|[**saveAsPdf**](#saveaspdf) | **POST** /api/2.0/files/file/{id}/saveaspdf | Save a file as PDF|
-|[**saveEditingFromForm**](#saveeditingfromform) | **PUT** /api/2.0/files/file/{fileId}/saveediting | Save file edits|
+|[**openEditFile**](#openeditfile) | **GET** /api/2.0/files/file/{fileId}/openedit | Open a file configuration|
+|[**restoreFileVersion**](#restorefileversion) | **GET** /api/2.0/files/file/{fileId}/restoreversion | Restore a file version|
+|[**saveEditingFileFromForm**](#saveeditingfilefromform) | **PUT** /api/2.0/files/file/{fileId}/saveediting | Save file edits|
+|[**saveFileAsPdf**](#savefileaspdf) | **POST** /api/2.0/files/file/{id}/saveaspdf | Save a file as PDF|
 |[**saveFormRoleMapping**](#saveformrolemapping) | **POST** /api/2.0/files/file/{fileId}/formrolemapping | Save form role mapping|
 |[**setCustomFilterTag**](#setcustomfiltertag) | **PUT** /api/2.0/files/file/{fileId}/customfilter | Set the Custom Filter editing mode|
 |[**setExternalLink**](#setexternallink) | **PUT** /api/2.0/files/file/{id}/links | Set an external link|
+|[**setFileOrder**](#setfileorder) | **PUT** /api/2.0/files/{fileId}/order | Set file order|
 |[**setFilesOrder**](#setfilesorder) | **PUT** /api/2.0/files/order | Set order of files|
-|[**setOrderFile**](#setorderfile) | **PUT** /api/2.0/files/{fileId}/order | Set file order|
-|[**startEdit**](#startedit) | **POST** /api/2.0/files/file/{fileId}/startedit | Start file editing|
-|[**startFilling**](#startfilling) | **PUT** /api/2.0/files/file/{fileId}/startfilling | Start file filling|
+|[**startEditFile**](#starteditfile) | **POST** /api/2.0/files/file/{fileId}/startedit | Start file editing|
+|[**startFillingFile**](#startfillingfile) | **PUT** /api/2.0/files/file/{fileId}/startfilling | Start file filling|
 |[**trackEditFile**](#trackeditfile) | **GET** /api/2.0/files/file/{fileId}/trackeditfile | Track file editing|
 |[**updateFile**](#updatefile) | **PUT** /api/2.0/files/file/{fileId} | Update a file|
 
@@ -103,8 +103,8 @@ const { status, data } = await apiInstance.addTemplates(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **changeHistory**
-> FileIntegerArrayWrapper changeHistory()
+# **changeVersionHistory**
+> FileIntegerArrayWrapper changeVersionHistory()
 
 Changes the version history of a file with the ID specified in the request.
 
@@ -123,7 +123,7 @@ const apiInstance = new FilesFilesApi(configuration);
 let fileId: number; //The file Id to change its version history. (default to undefined)
 let changeHistory: ChangeHistory; //The parameters for changing version history. (optional)
 
-const { status, data } = await apiInstance.changeHistory(
+const { status, data } = await apiInstance.changeVersionHistory(
     fileId,
     changeHistory
 );
@@ -387,8 +387,8 @@ const { status, data } = await apiInstance.createFile(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **createFileMyDocuments**
-> FileIntegerWrapper createFileMyDocuments()
+# **createFileInMyDocuments**
+> FileIntegerWrapper createFileInMyDocuments()
 
 Creates a new file in the \"My documents\" section with the title specified in the request.   **Note**: If a file extension is different from DOCX/XLSX/PPTX and refers to one of the known text, spreadsheet, or presentation formats, it will be changed to DOCX/XLSX/PPTX accordingly. If the file extension is not specified or is unknown, the DOCX extension will be added to the file title.
 
@@ -406,7 +406,7 @@ const apiInstance = new FilesFilesApi(configuration);
 
 let createFileJsonElement: CreateFileJsonElement; // (optional)
 
-const { status, data } = await apiInstance.createFileMyDocuments(
+const { status, data } = await apiInstance.createFileInMyDocuments(
     createFileJsonElement
 );
 ```
@@ -497,8 +497,8 @@ const { status, data } = await apiInstance.createHtmlFile(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **createHtmlFileInMy**
-> FileIntegerWrapper createHtmlFileInMy()
+# **createHtmlFileInMyDocuments**
+> FileIntegerWrapper createHtmlFileInMyDocuments()
 
 Creates an HTML (.html) file in the \"My documents\" section with the title and contents specified in the request.
 
@@ -516,7 +516,7 @@ const apiInstance = new FilesFilesApi(configuration);
 
 let createTextOrHtmlFile: CreateTextOrHtmlFile; // (optional)
 
-const { status, data } = await apiInstance.createHtmlFileInMy(
+const { status, data } = await apiInstance.createHtmlFileInMyDocuments(
     createTextOrHtmlFile
 );
 ```
@@ -664,8 +664,8 @@ const { status, data } = await apiInstance.createTextFile(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **createTextFileInMy**
-> FileIntegerWrapper createTextFileInMy()
+# **createTextFileInMyDocuments**
+> FileIntegerWrapper createTextFileInMyDocuments()
 
 Creates a text (.txt) file in the \"My documents\" section with the title and contents specified in the request.
 
@@ -683,7 +683,7 @@ const apiInstance = new FilesFilesApi(configuration);
 
 let createTextOrHtmlFile: CreateTextOrHtmlFile; // (optional)
 
-const { status, data } = await apiInstance.createTextFileInMy(
+const { status, data } = await apiInstance.createTextFileInMyDocuments(
     createTextOrHtmlFile
 );
 ```
@@ -1204,6 +1204,58 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **getFileLinks**
+> FileShareArrayWrapper getFileLinks()
+
+Returns the external links of a file with the ID specified in the request.
+
+### Example
+
+```typescript
+import {
+    FilesFilesApi,
+    Configuration
+} from '@onlyoffice/docspace-api-typescript';
+
+const configuration = new Configuration();
+const apiInstance = new FilesFilesApi(configuration);
+
+let id: number; //The file ID of the request. (default to undefined)
+
+const { status, data } = await apiInstance.getFileLinks(
+    id
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**number**] | The file ID of the request. | defaults to undefined|
+
+
+### Return type
+
+**FileShareArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | File security information |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **getFilePrimaryExternalLink**
 > FileShareWrapper getFilePrimaryExternalLink()
 
@@ -1358,58 +1410,6 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getLinks**
-> FileShareArrayWrapper getLinks()
-
-Returns the external links of a file with the ID specified in the request.
-
-### Example
-
-```typescript
-import {
-    FilesFilesApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new FilesFilesApi(configuration);
-
-let id: number; //The file ID of the request. (default to undefined)
-
-const { status, data } = await apiInstance.getLinks(
-    id
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] | The file ID of the request. | defaults to undefined|
-
-
-### Return type
-
-**FileShareArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | File security information |  -  |
-|**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **getPresignedFileUri**
 > FileLinkWrapper getPresignedFileUri()
 
@@ -1510,6 +1510,58 @@ const { status, data } = await apiInstance.getPresignedUri(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | File download link |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getProtectedFileUsers**
+> MentionWrapperArrayWrapper getProtectedFileUsers()
+
+Returns a list of users with their access rights to the protected file with the ID specified in the request.
+
+### Example
+
+```typescript
+import {
+    FilesFilesApi,
+    Configuration
+} from '@onlyoffice/docspace-api-typescript';
+
+const configuration = new Configuration();
+const apiInstance = new FilesFilesApi(configuration);
+
+let fileId: number; //The file ID of the request. (default to undefined)
+
+const { status, data } = await apiInstance.getProtectedFileUsers(
+    fileId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
+
+
+### Return type
+
+**MentionWrapperArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | List of users with their access rights to the protected file |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1732,8 +1784,8 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **openEdit**
-> ConfigurationIntegerWrapper openEdit()
+# **openEditFile**
+> ConfigurationIntegerWrapper openEditFile()
 
 Returns the initialization configuration of a file to open it in the editor.
 
@@ -1755,7 +1807,7 @@ let editorType: EditorType; //The editor type to open the file. (optional) (defa
 let edit: boolean; //Specifies if the document is opened in the editing mode or not. (optional) (default to undefined)
 let fill: boolean; //Specifies if the document is opened in the form-filling mode or not. (optional) (default to undefined)
 
-const { status, data } = await apiInstance.openEdit(
+const { status, data } = await apiInstance.openEditFile(
     fileId,
     version,
     view,
@@ -1799,60 +1851,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **protectUsers**
-> MentionWrapperArrayWrapper protectUsers()
-
-Returns a list of users with their access rights to the protected file with the ID specified in the request.
-
-### Example
-
-```typescript
-import {
-    FilesFilesApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new FilesFilesApi(configuration);
-
-let fileId: number; //The file ID of the request. (default to undefined)
-
-const { status, data } = await apiInstance.protectUsers(
-    fileId
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
-
-
-### Return type
-
-**MentionWrapperArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | List of users with their access rights to the protected file |  -  |
-|**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **restoreVersion**
-> EditHistoryArrayWrapper restoreVersion()
+# **restoreFileVersion**
+> EditHistoryArrayWrapper restoreFileVersion()
 
 Restores a file version specified in the request.
 
@@ -1871,7 +1871,7 @@ let fileId: number; //The file ID of the restore version. (default to undefined)
 let version: number; //The file version of the restore. (optional) (default to undefined)
 let url: string; //The file version URL of the restore. (optional) (default to undefined)
 
-const { status, data } = await apiInstance.restoreVersion(
+const { status, data } = await apiInstance.restoreFileVersion(
     fileId,
     version,
     url
@@ -1910,65 +1910,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **saveAsPdf**
-> FileIntegerWrapper saveAsPdf()
-
-Saves a file with the identifier specified in the request as a PDF document.
-
-### Example
-
-```typescript
-import {
-    FilesFilesApi,
-    Configuration,
-    SaveAsPdfInteger
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new FilesFilesApi(configuration);
-
-let id: number; //The file ID to save as PDF. (default to undefined)
-let saveAsPdfInteger: SaveAsPdfInteger; //The parameters for saving file as PDF. (optional)
-
-const { status, data } = await apiInstance.saveAsPdf(
-    id,
-    saveAsPdfInteger
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **saveAsPdfInteger** | **SaveAsPdfInteger**| The parameters for saving file as PDF. | |
-| **id** | [**number**] | The file ID to save as PDF. | defaults to undefined|
-
-
-### Return type
-
-**FileIntegerWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | New file information |  -  |
-|**401** | Unauthorized |  -  |
-|**404** | File not found |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **saveEditingFromForm**
-> FileIntegerWrapper saveEditingFromForm()
+# **saveEditingFileFromForm**
+> FileIntegerWrapper saveEditingFileFromForm()
 
 Saves edits to a file with the ID specified in the request.
 
@@ -1989,7 +1932,7 @@ let downloadUri: string; //The URI to download the editing file. (optional) (def
 let file: File; //The request file stream. (optional) (default to undefined)
 let forcesave: boolean; //Specifies whether to force save the file or not. (optional) (default to undefined)
 
-const { status, data } = await apiInstance.saveEditingFromForm(
+const { status, data } = await apiInstance.saveEditingFileFromForm(
     fileId,
     fileExtension,
     downloadUri,
@@ -2030,6 +1973,63 @@ const { status, data } = await apiInstance.saveEditingFromForm(
 |**400** | No file id or folder id toFolderId determine provider |  -  |
 |**401** | Unauthorized |  -  |
 |**403** | You do not have enough permissions to edit the file |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **saveFileAsPdf**
+> FileIntegerWrapper saveFileAsPdf()
+
+Saves a file with the identifier specified in the request as a PDF document.
+
+### Example
+
+```typescript
+import {
+    FilesFilesApi,
+    Configuration,
+    SaveAsPdfInteger
+} from '@onlyoffice/docspace-api-typescript';
+
+const configuration = new Configuration();
+const apiInstance = new FilesFilesApi(configuration);
+
+let id: number; //The file ID to save as PDF. (default to undefined)
+let saveAsPdfInteger: SaveAsPdfInteger; //The parameters for saving file as PDF. (optional)
+
+const { status, data } = await apiInstance.saveFileAsPdf(
+    id,
+    saveAsPdfInteger
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **saveAsPdfInteger** | **SaveAsPdfInteger**| The parameters for saving file as PDF. | |
+| **id** | [**number**] | The file ID to save as PDF. | defaults to undefined|
+
+
+### Return type
+
+**FileIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | New file information |  -  |
+|**401** | Unauthorized |  -  |
+|**404** | File not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2202,6 +2202,64 @@ const { status, data } = await apiInstance.setExternalLink(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **setFileOrder**
+> FileIntegerWrapper setFileOrder()
+
+Sets order of the file with ID specified in the request.
+
+### Example
+
+```typescript
+import {
+    FilesFilesApi,
+    Configuration,
+    OrderRequestDto
+} from '@onlyoffice/docspace-api-typescript';
+
+const configuration = new Configuration();
+const apiInstance = new FilesFilesApi(configuration);
+
+let fileId: number; //The file unique identifier. (default to undefined)
+let orderRequestDto: OrderRequestDto; //The file order information. (optional)
+
+const { status, data } = await apiInstance.setFileOrder(
+    fileId,
+    orderRequestDto
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **orderRequestDto** | **OrderRequestDto**| The file order information. | |
+| **fileId** | [**number**] | The file unique identifier. | defaults to undefined|
+
+
+### Return type
+
+**FileIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Updated file information |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**404** | Not Found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **setFilesOrder**
 > FileIntegerArrayWrapper setFilesOrder()
 
@@ -2255,66 +2313,8 @@ const { status, data } = await apiInstance.setFilesOrder(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **setOrderFile**
-> FileIntegerWrapper setOrderFile()
-
-Sets order of the file with ID specified in the request.
-
-### Example
-
-```typescript
-import {
-    FilesFilesApi,
-    Configuration,
-    OrderRequestDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new FilesFilesApi(configuration);
-
-let fileId: number; //The file unique identifier. (default to undefined)
-let orderRequestDto: OrderRequestDto; //The file order information. (optional)
-
-const { status, data } = await apiInstance.setOrderFile(
-    fileId,
-    orderRequestDto
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **orderRequestDto** | **OrderRequestDto**| The file order information. | |
-| **fileId** | [**number**] | The file unique identifier. | defaults to undefined|
-
-
-### Return type
-
-**FileIntegerWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Updated file information |  -  |
-|**401** | Unauthorized |  -  |
-|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
-|**404** | Not Found |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **startEdit**
-> StringWrapper startEdit()
+# **startEditFile**
+> StringWrapper startEditFile()
 
 Informs about opening a file with the ID specified in the request for editing, locking it from being deleted or moved (this method is called by the mobile editors).
 
@@ -2333,7 +2333,7 @@ const apiInstance = new FilesFilesApi(configuration);
 let fileId: number; //The file ID to start editing. (default to undefined)
 let startEdit: StartEdit; //The file parameters to start editing. (optional)
 
-const { status, data } = await apiInstance.startEdit(
+const { status, data } = await apiInstance.startEditFile(
     fileId,
     startEdit
 );
@@ -2369,8 +2369,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **startFilling**
-> FileIntegerWrapper startFilling()
+# **startFillingFile**
+> FileIntegerWrapper startFillingFile()
 
 Starts filling a file with the ID specified in the request.
 
@@ -2387,7 +2387,7 @@ const apiInstance = new FilesFilesApi(configuration);
 
 let fileId: number; //The file ID to start filling. (default to undefined)
 
-const { status, data } = await apiInstance.startFilling(
+const { status, data } = await apiInstance.startFillingFile(
     fileId
 );
 ```

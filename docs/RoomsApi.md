@@ -4,37 +4,37 @@ All URIs are relative to *http://localhost:8092*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**addTags**](#addtags) | **PUT** /api/2.0/files/rooms/{id}/tags | Add the room tags|
+|[**addRoomTags**](#addroomtags) | **PUT** /api/2.0/files/rooms/{id}/tags | Add the room tags|
 |[**archiveRoom**](#archiveroom) | **PUT** /api/2.0/files/rooms/{id}/archive | Archive a room|
 |[**changeRoomCover**](#changeroomcover) | **POST** /api/2.0/files/rooms/{id}/cover | Change the room cover|
 |[**createRoom**](#createroom) | **POST** /api/2.0/files/rooms | Create a room|
 |[**createRoomFromTemplate**](#createroomfromtemplate) | **POST** /api/2.0/files/rooms/fromtemplate | Create a room from the template|
 |[**createRoomLogo**](#createroomlogo) | **POST** /api/2.0/files/rooms/{id}/logo | Create a room logo|
+|[**createRoomTag**](#createroomtag) | **POST** /api/2.0/files/tags | Create a tag|
+|[**createRoomTemplate**](#createroomtemplate) | **POST** /api/2.0/files/roomtemplate | Start creating room template|
 |[**createRoomThirdParty**](#createroomthirdparty) | **POST** /api/2.0/files/rooms/thirdparty/{id} | Create a third-party room|
-|[**createTag**](#createtag) | **POST** /api/2.0/files/tags | Create a tag|
-|[**createTemplate**](#createtemplate) | **POST** /api/2.0/files/roomtemplate | Start creating room template|
 |[**deleteCustomTags**](#deletecustomtags) | **DELETE** /api/2.0/files/tags | Delete tags|
 |[**deleteRoom**](#deleteroom) | **DELETE** /api/2.0/files/rooms/{id} | Remove a room|
 |[**deleteRoomLogo**](#deleteroomlogo) | **DELETE** /api/2.0/files/rooms/{id}/logo | Remove a room logo|
-|[**deleteTags**](#deletetags) | **DELETE** /api/2.0/files/rooms/{id}/tags | Remove the room tags|
-|[**getCovers**](#getcovers) | **GET** /api/2.0/files/rooms/covers | Get covers|
+|[**deleteRoomTags**](#deleteroomtags) | **DELETE** /api/2.0/files/rooms/{id}/tags | Remove the room tags|
 |[**getNewRoomItems**](#getnewroomitems) | **GET** /api/2.0/files/rooms/{id}/news | Get the new room items|
+|[**getPublicSettings**](#getpublicsettings) | **GET** /api/2.0/files/roomtemplate/{id}/public | Get public settings|
+|[**getRoomCovers**](#getroomcovers) | **GET** /api/2.0/files/rooms/covers | Get covers|
 |[**getRoomCreatingStatus**](#getroomcreatingstatus) | **GET** /api/2.0/files/rooms/fromtemplate/status | Get the room creation progress|
 |[**getRoomIndexExport**](#getroomindexexport) | **GET** /api/2.0/files/rooms/indexexport | Get the room index export|
 |[**getRoomInfo**](#getroominfo) | **GET** /api/2.0/files/rooms/{id} | Get room information|
 |[**getRoomLinks**](#getroomlinks) | **GET** /api/2.0/files/rooms/{id}/links | Get the room links|
 |[**getRoomSecurityInfo**](#getroomsecurityinfo) | **GET** /api/2.0/files/rooms/{id}/share | Get the room access rights|
+|[**getRoomTagsInfo**](#getroomtagsinfo) | **GET** /api/2.0/files/tags | Get tags|
+|[**getRoomTemplateCreatingStatus**](#getroomtemplatecreatingstatus) | **GET** /api/2.0/files/roomtemplate/status | Get status of room template creation|
 |[**getRoomsFolder**](#getroomsfolder) | **GET** /api/2.0/files/rooms | Get rooms|
 |[**getRoomsNewItems**](#getroomsnewitems) | **GET** /api/2.0/files/rooms/news | Get the room new items|
 |[**getRoomsPrimaryExternalLink**](#getroomsprimaryexternallink) | **GET** /api/2.0/files/rooms/{id}/link | Get the room primary external link|
-|[**getTagsInfo**](#gettagsinfo) | **GET** /api/2.0/files/tags | Get tags|
-|[**getTemplateCreatingStatus**](#gettemplatecreatingstatus) | **GET** /api/2.0/files/roomtemplate/status | Get status of room template creation|
-|[**isPublic**](#ispublic) | **GET** /api/2.0/files/roomtemplate/{id}/public | Get public settings|
 |[**pinRoom**](#pinroom) | **PUT** /api/2.0/files/rooms/{id}/pin | Pin a room|
-|[**reorder**](#reorder) | **PUT** /api/2.0/files/rooms/{id}/reorder | Reorder the room|
+|[**reorderRoom**](#reorderroom) | **PUT** /api/2.0/files/rooms/{id}/reorder | Reorder the room|
 |[**resendEmailInvitations**](#resendemailinvitations) | **POST** /api/2.0/files/rooms/{id}/resend | Resend the room invitations|
-|[**setLink**](#setlink) | **PUT** /api/2.0/files/rooms/{id}/links | Set the room external or invitation link|
-|[**setPublic**](#setpublic) | **PUT** /api/2.0/files/roomtemplate/public | Set public settings|
+|[**setPublicSettings**](#setpublicsettings) | **PUT** /api/2.0/files/roomtemplate/public | Set public settings|
+|[**setRoomLink**](#setroomlink) | **PUT** /api/2.0/files/rooms/{id}/links | Set the room external or invitation link|
 |[**setRoomSecurity**](#setroomsecurity) | **PUT** /api/2.0/files/rooms/{id}/share | Set the room access rights|
 |[**startRoomIndexExport**](#startroomindexexport) | **POST** /api/2.0/files/rooms/{id}/indexexport | Start the room index export|
 |[**terminateRoomIndexExport**](#terminateroomindexexport) | **DELETE** /api/2.0/files/rooms/indexexport | Terminate the room index export|
@@ -43,8 +43,8 @@ All URIs are relative to *http://localhost:8092*
 |[**updateRoom**](#updateroom) | **PUT** /api/2.0/files/rooms/{id} | Update a room|
 |[**uploadRoomLogo**](#uploadroomlogo) | **POST** /api/2.0/files/logos | Upload a room logo image|
 
-# **addTags**
-> FolderIntegerWrapper addTags()
+# **addRoomTags**
+> FolderIntegerWrapper addRoomTags()
 
 Adds the tags to a room with the ID specified in the request.
 
@@ -63,7 +63,7 @@ const apiInstance = new RoomsApi(configuration);
 let id: number; //The room Id. (default to undefined)
 let batchTagsRequestDto: BatchTagsRequestDto; //The parameters for adding tags. (optional)
 
-const { status, data } = await apiInstance.addTags(
+const { status, data } = await apiInstance.addRoomTags(
     id,
     batchTagsRequestDto
 );
@@ -377,6 +377,113 @@ const { status, data } = await apiInstance.createRoomLogo(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **createRoomTag**
+> ObjectWrapper createRoomTag()
+
+Creates a custom tag with the parameters specified in the request.
+
+### Example
+
+```typescript
+import {
+    RoomsApi,
+    Configuration,
+    CreateTagRequestDto
+} from '@onlyoffice/docspace-api-typescript';
+
+const configuration = new Configuration();
+const apiInstance = new RoomsApi(configuration);
+
+let createTagRequestDto: CreateTagRequestDto; // (optional)
+
+const { status, data } = await apiInstance.createRoomTag(
+    createTagRequestDto
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **createTagRequestDto** | **CreateTagRequestDto**|  | |
+
+
+### Return type
+
+**ObjectWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | New tag name |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **createRoomTemplate**
+> RoomTemplateStatusWrapper createRoomTemplate()
+
+Starts creating the room template.
+
+### Example
+
+```typescript
+import {
+    RoomsApi,
+    Configuration,
+    RoomTemplateDto
+} from '@onlyoffice/docspace-api-typescript';
+
+const configuration = new Configuration();
+const apiInstance = new RoomsApi(configuration);
+
+let roomTemplateDto: RoomTemplateDto; // (optional)
+
+const { status, data } = await apiInstance.createRoomTemplate(
+    roomTemplateDto
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **roomTemplateDto** | **RoomTemplateDto**|  | |
+
+
+### Return type
+
+**RoomTemplateStatusWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Status |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **createRoomThirdParty**
 > FolderStringWrapper createRoomThirdParty()
 
@@ -429,113 +536,6 @@ const { status, data } = await apiInstance.createRoomThirdParty(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Room information |  -  |
-|**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **createTag**
-> ObjectWrapper createTag()
-
-Creates a custom tag with the parameters specified in the request.
-
-### Example
-
-```typescript
-import {
-    RoomsApi,
-    Configuration,
-    CreateTagRequestDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new RoomsApi(configuration);
-
-let createTagRequestDto: CreateTagRequestDto; // (optional)
-
-const { status, data } = await apiInstance.createTag(
-    createTagRequestDto
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **createTagRequestDto** | **CreateTagRequestDto**|  | |
-
-
-### Return type
-
-**ObjectWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | New tag name |  -  |
-|**401** | Unauthorized |  -  |
-|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **createTemplate**
-> RoomTemplateStatusWrapper createTemplate()
-
-Starts creating the room template.
-
-### Example
-
-```typescript
-import {
-    RoomsApi,
-    Configuration,
-    RoomTemplateDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new RoomsApi(configuration);
-
-let roomTemplateDto: RoomTemplateDto; // (optional)
-
-const { status, data } = await apiInstance.createTemplate(
-    roomTemplateDto
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **roomTemplateDto** | **RoomTemplateDto**|  | |
-
-
-### Return type
-
-**RoomTemplateStatusWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Status |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -702,8 +702,8 @@ const { status, data } = await apiInstance.deleteRoomLogo(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **deleteTags**
-> FolderIntegerWrapper deleteTags()
+# **deleteRoomTags**
+> FolderIntegerWrapper deleteRoomTags()
 
 Removes the tags from a room with the ID specified in the request.
 
@@ -722,7 +722,7 @@ const apiInstance = new RoomsApi(configuration);
 let id: number; //The room Id. (default to undefined)
 let batchTagsRequestDto: BatchTagsRequestDto; //The parameters for adding tags. (optional)
 
-const { status, data } = await apiInstance.deleteTags(
+const { status, data } = await apiInstance.deleteRoomTags(
     id,
     batchTagsRequestDto
 );
@@ -756,51 +756,6 @@ const { status, data } = await apiInstance.deleteTags(
 |**200** | Room information |  -  |
 |**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have permission to edit the room |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **getCovers**
-> CoversResultArrayWrapper getCovers()
-
-Returns a list of all covers.
-
-### Example
-
-```typescript
-import {
-    RoomsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new RoomsApi(configuration);
-
-const { status, data } = await apiInstance.getCovers();
-```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**CoversResultArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Gets room cover |  -  |
-|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -852,6 +807,103 @@ const { status, data } = await apiInstance.getNewRoomItems(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of file entry information |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getPublicSettings**
+> BooleanWrapper getPublicSettings()
+
+Returns the public settings of the room template with the ID specified in the request.
+
+### Example
+
+```typescript
+import {
+    RoomsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-typescript';
+
+const configuration = new Configuration();
+const apiInstance = new RoomsApi(configuration);
+
+let id: number; //The room template ID. (default to undefined)
+
+const { status, data } = await apiInstance.getPublicSettings(
+    id
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**number**] | The room template ID. | defaults to undefined|
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | OK |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getRoomCovers**
+> CoversResultArrayWrapper getRoomCovers()
+
+Returns a list of all covers.
+
+### Example
+
+```typescript
+import {
+    RoomsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-typescript';
+
+const configuration = new Configuration();
+const apiInstance = new RoomsApi(configuration);
+
+const { status, data } = await apiInstance.getRoomCovers();
+```
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**CoversResultArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Gets room cover |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1107,6 +1159,96 @@ const { status, data } = await apiInstance.getRoomSecurityInfo(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **getRoomTagsInfo**
+> ObjectArrayWrapper getRoomTagsInfo()
+
+Returns a list of custom tags.
+
+### Example
+
+```typescript
+import {
+    RoomsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-typescript';
+
+const configuration = new Configuration();
+const apiInstance = new RoomsApi(configuration);
+
+const { status, data } = await apiInstance.getRoomTagsInfo();
+```
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**ObjectArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | List of tag names |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getRoomTemplateCreatingStatus**
+> RoomTemplateStatusWrapper getRoomTemplateCreatingStatus()
+
+Returns the progress status of the room template creation process.
+
+### Example
+
+```typescript
+import {
+    RoomsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-typescript';
+
+const configuration = new Configuration();
+const apiInstance = new RoomsApi(configuration);
+
+const { status, data } = await apiInstance.getRoomTemplateCreatingStatus();
+```
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**RoomTemplateStatusWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Status |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **getRoomsFolder**
 > FolderContentIntegerWrapper getRoomsFolder()
 
@@ -1285,148 +1427,6 @@ const { status, data } = await apiInstance.getRoomsPrimaryExternalLink(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getTagsInfo**
-> ObjectArrayWrapper getTagsInfo()
-
-Returns a list of custom tags.
-
-### Example
-
-```typescript
-import {
-    RoomsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new RoomsApi(configuration);
-
-const { status, data } = await apiInstance.getTagsInfo();
-```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**ObjectArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | List of tag names |  -  |
-|**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **getTemplateCreatingStatus**
-> RoomTemplateStatusWrapper getTemplateCreatingStatus()
-
-Returns the progress status of the room template creation process.
-
-### Example
-
-```typescript
-import {
-    RoomsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new RoomsApi(configuration);
-
-const { status, data } = await apiInstance.getTemplateCreatingStatus();
-```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**RoomTemplateStatusWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Status |  -  |
-|**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **isPublic**
-> BooleanWrapper isPublic()
-
-Returns the public settings of the room template with the ID specified in the request.
-
-### Example
-
-```typescript
-import {
-    RoomsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new RoomsApi(configuration);
-
-let id: number; //The room template ID. (default to undefined)
-
-const { status, data } = await apiInstance.isPublic(
-    id
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] | The room template ID. | defaults to undefined|
-
-
-### Return type
-
-**BooleanWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | OK |  -  |
-|**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **pinRoom**
 > FolderIntegerWrapper pinRoom()
 
@@ -1479,8 +1479,8 @@ const { status, data } = await apiInstance.pinRoom(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **reorder**
-> FolderIntegerWrapper reorder()
+# **reorderRoom**
+> FolderIntegerWrapper reorderRoom()
 
 Reorders the room with ID specified in the request.
 
@@ -1497,7 +1497,7 @@ const apiInstance = new RoomsApi(configuration);
 
 let id: number; //The room ID of the request. (default to undefined)
 
-const { status, data } = await apiInstance.reorder(
+const { status, data } = await apiInstance.reorderRoom(
     id
 );
 ```
@@ -1587,8 +1587,61 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **setLink**
-> FileShareWrapper setLink()
+# **setPublicSettings**
+> setPublicSettings()
+
+Sets the public settings for the room template with the ID specified in the request.
+
+### Example
+
+```typescript
+import {
+    RoomsApi,
+    Configuration,
+    SetPublicDto
+} from '@onlyoffice/docspace-api-typescript';
+
+const configuration = new Configuration();
+const apiInstance = new RoomsApi(configuration);
+
+let setPublicDto: SetPublicDto; // (optional)
+
+const { status, data } = await apiInstance.setPublicSettings(
+    setPublicDto
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **setPublicDto** | **SetPublicDto**|  | |
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | OK |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **setRoomLink**
+> FileShareWrapper setRoomLink()
 
 Sets the room external or invitation link with the ID specified in the request.
 
@@ -1607,7 +1660,7 @@ const apiInstance = new RoomsApi(configuration);
 let id: number; //The room ID. (default to undefined)
 let roomLinkRequest: RoomLinkRequest; //The room link parameters. (optional)
 
-const { status, data } = await apiInstance.setLink(
+const { status, data } = await apiInstance.setRoomLink(
     id,
     roomLinkRequest
 );
@@ -1639,59 +1692,6 @@ const { status, data } = await apiInstance.setLink(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Room security information |  -  |
-|**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **setPublic**
-> setPublic()
-
-Sets the public settings for the room template with the ID specified in the request.
-
-### Example
-
-```typescript
-import {
-    RoomsApi,
-    Configuration,
-    SetPublicDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new RoomsApi(configuration);
-
-let setPublicDto: SetPublicDto; // (optional)
-
-const { status, data } = await apiInstance.setPublic(
-    setPublicDto
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **setPublicDto** | **SetPublicDto**|  | |
-
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: Not defined
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | OK |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

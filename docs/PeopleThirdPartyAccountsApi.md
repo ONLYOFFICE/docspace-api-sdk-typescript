@@ -4,13 +4,13 @@ All URIs are relative to *http://localhost:8092*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**getAuthProviders**](#getauthproviders) | **GET** /api/2.0/people/thirdparty/providers | Get third-party accounts|
-|[**linkAccount**](#linkaccount) | **PUT** /api/2.0/people/thirdparty/linkaccount | Link a third-pary account|
-|[**signupAccount**](#signupaccount) | **POST** /api/2.0/people/thirdparty/signup | Create a third-pary account|
-|[**unlinkAccount**](#unlinkaccount) | **DELETE** /api/2.0/people/thirdparty/unlinkaccount | Unlink a third-pary account|
+|[**getThirdPartyAuthProviders**](#getthirdpartyauthproviders) | **GET** /api/2.0/people/thirdparty/providers | Get third-party accounts|
+|[**linkThirdPartyAccount**](#linkthirdpartyaccount) | **PUT** /api/2.0/people/thirdparty/linkaccount | Link a third-pary account|
+|[**signupThirdPartyAccount**](#signupthirdpartyaccount) | **POST** /api/2.0/people/thirdparty/signup | Create a third-pary account|
+|[**unlinkThirdPartyAccount**](#unlinkthirdpartyaccount) | **DELETE** /api/2.0/people/thirdparty/unlinkaccount | Unlink a third-pary account|
 
-# **getAuthProviders**
-> AccountInfoArrayWrapper getAuthProviders()
+# **getThirdPartyAuthProviders**
+> AccountInfoArrayWrapper getThirdPartyAuthProviders()
 
 Returns a list of the available third-party accounts.
 
@@ -30,7 +30,7 @@ let settingsView: boolean; //Specifies whether to display the provider settings 
 let clientCallback: string; //The method that is called after authentication. (optional) (default to undefined)
 let fromOnly: string; //The provider name if a response is required only from this provider. (optional) (default to undefined)
 
-const { status, data } = await apiInstance.getAuthProviders(
+const { status, data } = await apiInstance.getThirdPartyAuthProviders(
     inviteView,
     settingsView,
     clientCallback,
@@ -69,8 +69,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **linkAccount**
-> linkAccount()
+# **linkThirdPartyAccount**
+> linkThirdPartyAccount()
 
 Links a third-party account specified in the request to the user profile.
 
@@ -88,7 +88,7 @@ const apiInstance = new PeopleThirdPartyAccountsApi(configuration);
 
 let linkAccountRequestDto: LinkAccountRequestDto; // (optional)
 
-const { status, data } = await apiInstance.linkAccount(
+const { status, data } = await apiInstance.linkThirdPartyAccount(
     linkAccountRequestDto
 );
 ```
@@ -123,8 +123,8 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **signupAccount**
-> signupAccount()
+# **signupThirdPartyAccount**
+> signupThirdPartyAccount()
 
 Creates a third-party account with the parameters specified in the request.
 
@@ -142,7 +142,7 @@ const apiInstance = new PeopleThirdPartyAccountsApi(configuration);
 
 let signupAccountRequestDto: SignupAccountRequestDto; // (optional)
 
-const { status, data } = await apiInstance.signupAccount(
+const { status, data } = await apiInstance.signupThirdPartyAccount(
     signupAccountRequestDto
 );
 ```
@@ -177,8 +177,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **unlinkAccount**
-> unlinkAccount()
+# **unlinkThirdPartyAccount**
+> unlinkThirdPartyAccount()
 
 Unlinks a third-party account specified in the request from the user profile.
 
@@ -195,7 +195,7 @@ const apiInstance = new PeopleThirdPartyAccountsApi(configuration);
 
 let provider: string; //The provider name. (optional) (default to undefined)
 
-const { status, data } = await apiInstance.unlinkAccount(
+const { status, data } = await apiInstance.unlinkThirdPartyAccount(
     provider
 );
 ```

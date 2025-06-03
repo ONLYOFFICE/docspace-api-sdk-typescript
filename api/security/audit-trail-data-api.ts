@@ -244,55 +244,6 @@ export const SecurityAuditTrailDataApiAxiosParamCreator = function (configuratio
             };
         },
         /**
-         * Returns a list of the latest changes (creation, modification, deletion, etc.) made by users to the entities on the portal.
-         * @summary Get audit trail data
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getLastAuditEvents: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/security/audit/events/last`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Returns the mappers for the audit trail types.
          * @summary Get audit trail mappers
          * @param {ProductType} [productType] The type of product related to the audit trail.
@@ -300,7 +251,7 @@ export const SecurityAuditTrailDataApiAxiosParamCreator = function (configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMappers: async (productType?: ProductType, moduleType?: ModuleType, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAuditTrailMappers: async (productType?: ProductType, moduleType?: ModuleType, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/security/audit/mappers`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -338,7 +289,7 @@ export const SecurityAuditTrailDataApiAxiosParamCreator = function (configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTypes: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAuditTrailTypes: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/security/audit/types`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -350,6 +301,55 @@ export const SecurityAuditTrailDataApiAxiosParamCreator = function (configuratio
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns a list of the latest changes (creation, modification, deletion, etc.) made by users to the entities on the portal.
+         * @summary Get audit trail data
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getLastAuditEvents: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/security/audit/events/last`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
 
 
     
@@ -471,6 +471,32 @@ export const SecurityAuditTrailDataApiFp = function(configuration?: Configuratio
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns the mappers for the audit trail types.
+         * @summary Get audit trail mappers
+         * @param {ProductType} [productType] The type of product related to the audit trail.
+         * @param {ModuleType} [moduleType] The module within the product associated with the audit trail.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAuditTrailMappers(productType?: ProductType, moduleType?: ModuleType, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAuditTrailMappers(productType, moduleType, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SecurityAuditTrailDataApi.getAuditTrailMappers']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns all the available audit trail types.
+         * @summary Get audit trail types
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAuditTrailTypes(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAuditTrailTypes(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SecurityAuditTrailDataApi.getAuditTrailTypes']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns a list of the latest changes (creation, modification, deletion, etc.) made by users to the entities on the portal.
          * @summary Get audit trail data
          * @param {*} [options] Override http request option.
@@ -480,32 +506,6 @@ export const SecurityAuditTrailDataApiFp = function(configuration?: Configuratio
             const localVarAxiosArgs = await localVarAxiosParamCreator.getLastAuditEvents(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SecurityAuditTrailDataApi.getLastAuditEvents']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns the mappers for the audit trail types.
-         * @summary Get audit trail mappers
-         * @param {ProductType} [productType] The type of product related to the audit trail.
-         * @param {ModuleType} [moduleType] The module within the product associated with the audit trail.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getMappers(productType?: ProductType, moduleType?: ModuleType, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getMappers(productType, moduleType, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SecurityAuditTrailDataApi.getMappers']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns all the available audit trail types.
-         * @summary Get audit trail types
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getTypes(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getTypes(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SecurityAuditTrailDataApi.getTypes']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -568,15 +568,6 @@ export const SecurityAuditTrailDataApiFactory = function (configuration?: Config
             return localVarFp.getAuditSettings(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of the latest changes (creation, modification, deletion, etc.) made by users to the entities on the portal.
-         * @summary Get audit trail data
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getLastAuditEvents(options?: RawAxiosRequestConfig): AxiosPromise<AuditEventArrayWrapper> {
-            return localVarFp.getLastAuditEvents(options).then((request) => request(axios, basePath));
-        },
-        /**
          * Returns the mappers for the audit trail types.
          * @summary Get audit trail mappers
          * @param {ProductType} [productType] The type of product related to the audit trail.
@@ -584,8 +575,8 @@ export const SecurityAuditTrailDataApiFactory = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMappers(productType?: ProductType, moduleType?: ModuleType, options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
-            return localVarFp.getMappers(productType, moduleType, options).then((request) => request(axios, basePath));
+        getAuditTrailMappers(productType?: ProductType, moduleType?: ModuleType, options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
+            return localVarFp.getAuditTrailMappers(productType, moduleType, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns all the available audit trail types.
@@ -593,8 +584,17 @@ export const SecurityAuditTrailDataApiFactory = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTypes(options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
-            return localVarFp.getTypes(options).then((request) => request(axios, basePath));
+        getAuditTrailTypes(options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
+            return localVarFp.getAuditTrailTypes(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns a list of the latest changes (creation, modification, deletion, etc.) made by users to the entities on the portal.
+         * @summary Get audit trail data
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getLastAuditEvents(options?: RawAxiosRequestConfig): AxiosPromise<AuditEventArrayWrapper> {
+            return localVarFp.getLastAuditEvents(options).then((request) => request(axios, basePath));
         },
         /**
          * Sets the audit trail settings for the current portal.
@@ -659,17 +659,6 @@ export class SecurityAuditTrailDataApi extends BaseAPI {
     }
 
     /**
-     * Returns a list of the latest changes (creation, modification, deletion, etc.) made by users to the entities on the portal.
-     * @summary Get audit trail data
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SecurityAuditTrailDataApi
-     */
-    public getLastAuditEvents(options?: RawAxiosRequestConfig) {
-        return SecurityAuditTrailDataApiFp(this.configuration).getLastAuditEvents(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Returns the mappers for the audit trail types.
      * @summary Get audit trail mappers
      * @param {ProductType} [productType] The type of product related to the audit trail.
@@ -678,8 +667,8 @@ export class SecurityAuditTrailDataApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SecurityAuditTrailDataApi
      */
-    public getMappers(productType?: ProductType, moduleType?: ModuleType, options?: RawAxiosRequestConfig) {
-        return SecurityAuditTrailDataApiFp(this.configuration).getMappers(productType, moduleType, options).then((request) => request(this.axios, this.basePath));
+    public getAuditTrailMappers(productType?: ProductType, moduleType?: ModuleType, options?: RawAxiosRequestConfig) {
+        return SecurityAuditTrailDataApiFp(this.configuration).getAuditTrailMappers(productType, moduleType, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -689,8 +678,19 @@ export class SecurityAuditTrailDataApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SecurityAuditTrailDataApi
      */
-    public getTypes(options?: RawAxiosRequestConfig) {
-        return SecurityAuditTrailDataApiFp(this.configuration).getTypes(options).then((request) => request(this.axios, this.basePath));
+    public getAuditTrailTypes(options?: RawAxiosRequestConfig) {
+        return SecurityAuditTrailDataApiFp(this.configuration).getAuditTrailTypes(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns a list of the latest changes (creation, modification, deletion, etc.) made by users to the entities on the portal.
+     * @summary Get audit trail data
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SecurityAuditTrailDataApi
+     */
+    public getLastAuditEvents(options?: RawAxiosRequestConfig) {
+        return SecurityAuditTrailDataApiFp(this.configuration).getLastAuditEvents(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

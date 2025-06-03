@@ -174,9 +174,9 @@ export const FilesFilesApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        changeHistory: async (fileId: number, changeHistory?: ChangeHistory, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        changeVersionHistory: async (fileId: number, changeHistory?: ChangeHistory, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('changeHistory', 'fileId', fileId)
+            assertParamExists('changeVersionHistory', 'fileId', fileId)
             const localVarPath = `/api/2.0/files/file/{fileId}/history`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -440,7 +440,7 @@ export const FilesFilesApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createFileMyDocuments: async (createFileJsonElement?: CreateFileJsonElement, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createFileInMyDocuments: async (createFileJsonElement?: CreateFileJsonElement, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/files/@my/file`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -550,7 +550,7 @@ export const FilesFilesApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createHtmlFileInMy: async (createTextOrHtmlFile?: CreateTextOrHtmlFile, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createHtmlFileInMyDocuments: async (createTextOrHtmlFile?: CreateTextOrHtmlFile, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/files/@my/html`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -717,7 +717,7 @@ export const FilesFilesApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createTextFileInMy: async (createTextOrHtmlFile?: CreateTextOrHtmlFile, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createTextFileInMyDocuments: async (createTextOrHtmlFile?: CreateTextOrHtmlFile, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/files/@my/text`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1195,6 +1195,59 @@ export const FilesFilesApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
+         * Returns the external links of a file with the ID specified in the request.
+         * @summary Get file external links
+         * @param {number} id The file ID of the request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getFileLinks: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getFileLinks', 'id', id)
+            const localVarPath = `/api/2.0/files/file/{id}/links`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns the primary external link by the identifier specified in the request.
          * @summary Get primary external link
          * @param {number} id The file ID of the request.
@@ -1298,59 +1351,6 @@ export const FilesFilesApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Returns the external links of a file with the ID specified in the request.
-         * @summary Get file external links
-         * @param {number} id The file ID of the request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getLinks: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('getLinks', 'id', id)
-            const localVarPath = `/api/2.0/files/file/{id}/links`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Returns a link to download a file with the ID specified in the request asynchronously.
          * @summary Get file download link asynchronously
          * @param {number} fileId The file ID of the request.
@@ -1414,6 +1414,59 @@ export const FilesFilesApiAxiosParamCreator = function (configuration?: Configur
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('getPresignedUri', 'fileId', fileId)
             const localVarPath = `/api/2.0/files/file/{fileId}/presigneduri`
+                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns a list of users with their access rights to the protected file with the ID specified in the request.
+         * @summary Get users access rights to the protected file
+         * @param {number} fileId The file ID of the request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getProtectedFileUsers: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'fileId' is not null or undefined
+            assertParamExists('getProtectedFileUsers', 'fileId', fileId)
+            const localVarPath = `/api/2.0/files/file/{fileId}/protectusers`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1688,9 +1741,9 @@ export const FilesFilesApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        openEdit: async (fileId: number, version?: number, view?: boolean, editorType?: EditorType, edit?: boolean, fill?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        openEditFile: async (fileId: number, version?: number, view?: boolean, editorType?: EditorType, edit?: boolean, fill?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('openEdit', 'fileId', fileId)
+            assertParamExists('openEditFile', 'fileId', fileId)
             const localVarPath = `/api/2.0/files/file/{fileId}/openedit`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1736,59 +1789,6 @@ export const FilesFilesApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Returns a list of users with their access rights to the protected file with the ID specified in the request.
-         * @summary Get users access rights to the protected file
-         * @param {number} fileId The file ID of the request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        protectUsers: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('protectUsers', 'fileId', fileId)
-            const localVarPath = `/api/2.0/files/file/{fileId}/protectusers`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Restores a file version specified in the request.
          * @summary Restore a file version
          * @param {number} fileId The file ID of the restore version.
@@ -1797,9 +1797,9 @@ export const FilesFilesApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        restoreVersion: async (fileId: number, version?: number, url?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        restoreFileVersion: async (fileId: number, version?: number, url?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('restoreVersion', 'fileId', fileId)
+            assertParamExists('restoreFileVersion', 'fileId', fileId)
             const localVarPath = `/api/2.0/files/file/{fileId}/restoreversion`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1833,63 +1833,6 @@ export const FilesFilesApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Saves a file with the identifier specified in the request as a PDF document.
-         * @summary Save a file as PDF
-         * @param {number} id The file ID to save as PDF.
-         * @param {SaveAsPdfInteger} [saveAsPdfInteger] The parameters for saving file as PDF.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        saveAsPdf: async (id: number, saveAsPdfInteger?: SaveAsPdfInteger, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('saveAsPdf', 'id', id)
-            const localVarPath = `/api/2.0/files/file/{id}/saveaspdf`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(saveAsPdfInteger, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Saves edits to a file with the ID specified in the request.
          * @summary Save file edits
          * @param {number} fileId The editing file ID from the request.
@@ -1900,9 +1843,9 @@ export const FilesFilesApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        saveEditingFromForm: async (fileId: number, fileExtension?: string, downloadUri?: string, file?: File, forcesave?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        saveEditingFileFromForm: async (fileId: number, fileExtension?: string, downloadUri?: string, file?: File, forcesave?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('saveEditingFromForm', 'fileId', fileId)
+            assertParamExists('saveEditingFileFromForm', 'fileId', fileId)
             const localVarPath = `/api/2.0/files/file/{fileId}/saveediting`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1960,6 +1903,63 @@ export const FilesFilesApiAxiosParamCreator = function (configuration?: Configur
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Saves a file with the identifier specified in the request as a PDF document.
+         * @summary Save a file as PDF
+         * @param {number} id The file ID to save as PDF.
+         * @param {SaveAsPdfInteger} [saveAsPdfInteger] The parameters for saving file as PDF.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        saveFileAsPdf: async (id: number, saveAsPdfInteger?: SaveAsPdfInteger, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('saveFileAsPdf', 'id', id)
+            const localVarPath = `/api/2.0/files/file/{id}/saveaspdf`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(saveAsPdfInteger, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -2138,6 +2138,63 @@ export const FilesFilesApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
+         * Sets order of the file with ID specified in the request.
+         * @summary Set file order
+         * @param {number} fileId The file unique identifier.
+         * @param {OrderRequestDto} [orderRequestDto] The file order information.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        setFileOrder: async (fileId: number, orderRequestDto?: OrderRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'fileId' is not null or undefined
+            assertParamExists('setFileOrder', 'fileId', fileId)
+            const localVarPath = `/api/2.0/files/{fileId}/order`
+                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(orderRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Sets order of the files.
          * @summary Set order of files
          * @param {OrdersRequestDtoInteger} [ordersRequestDtoInteger] 
@@ -2191,63 +2248,6 @@ export const FilesFilesApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Sets order of the file with ID specified in the request.
-         * @summary Set file order
-         * @param {number} fileId The file unique identifier.
-         * @param {OrderRequestDto} [orderRequestDto] The file order information.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        setOrderFile: async (fileId: number, orderRequestDto?: OrderRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('setOrderFile', 'fileId', fileId)
-            const localVarPath = `/api/2.0/files/{fileId}/order`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(orderRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Informs about opening a file with the ID specified in the request for editing, locking it from being deleted or moved (this method is called by the mobile editors).
          * @summary Start file editing
          * @param {number} fileId The file ID to start editing.
@@ -2255,9 +2255,9 @@ export const FilesFilesApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        startEdit: async (fileId: number, startEdit?: StartEdit, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        startEditFile: async (fileId: number, startEdit?: StartEdit, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('startEdit', 'fileId', fileId)
+            assertParamExists('startEditFile', 'fileId', fileId)
             const localVarPath = `/api/2.0/files/file/{fileId}/startedit`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2292,9 +2292,9 @@ export const FilesFilesApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        startFilling: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        startFillingFile: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('startFilling', 'fileId', fileId)
+            assertParamExists('startFillingFile', 'fileId', fileId)
             const localVarPath = `/api/2.0/files/file/{fileId}/startfilling`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2456,10 +2456,10 @@ export const FilesFilesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async changeHistory(fileId: number, changeHistory?: ChangeHistory, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.changeHistory(fileId, changeHistory, options);
+        async changeVersionHistory(fileId: number, changeHistory?: ChangeHistory, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.changeVersionHistory(fileId, changeHistory, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.changeHistory']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.changeVersionHistory']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2525,10 +2525,10 @@ export const FilesFilesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createFileMyDocuments(createFileJsonElement?: CreateFileJsonElement, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createFileMyDocuments(createFileJsonElement, options);
+        async createFileInMyDocuments(createFileJsonElement?: CreateFileJsonElement, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createFileInMyDocuments(createFileJsonElement, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.createFileMyDocuments']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.createFileInMyDocuments']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2552,10 +2552,10 @@ export const FilesFilesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createHtmlFileInMy(createTextOrHtmlFile?: CreateTextOrHtmlFile, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createHtmlFileInMy(createTextOrHtmlFile, options);
+        async createHtmlFileInMyDocuments(createTextOrHtmlFile?: CreateTextOrHtmlFile, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createHtmlFileInMyDocuments(createTextOrHtmlFile, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.createHtmlFileInMy']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.createHtmlFileInMyDocuments']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2593,10 +2593,10 @@ export const FilesFilesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createTextFileInMy(createTextOrHtmlFile?: CreateTextOrHtmlFile, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createTextFileInMy(createTextOrHtmlFile, options);
+        async createTextFileInMyDocuments(createTextOrHtmlFile?: CreateTextOrHtmlFile, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createTextFileInMyDocuments(createTextOrHtmlFile, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.createTextFileInMy']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.createTextFileInMyDocuments']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2722,6 +2722,19 @@ export const FilesFilesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns the external links of a file with the ID specified in the request.
+         * @summary Get file external links
+         * @param {number} id The file ID of the request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getFileLinks(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getFileLinks(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.getFileLinks']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns the primary external link by the identifier specified in the request.
          * @summary Get primary external link
          * @param {number} id The file ID of the request.
@@ -2761,19 +2774,6 @@ export const FilesFilesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the external links of a file with the ID specified in the request.
-         * @summary Get file external links
-         * @param {number} id The file ID of the request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getLinks(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getLinks(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.getLinks']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
          * Returns a link to download a file with the ID specified in the request asynchronously.
          * @summary Get file download link asynchronously
          * @param {number} fileId The file ID of the request.
@@ -2797,6 +2797,19 @@ export const FilesFilesApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPresignedUri(fileId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.getPresignedUri']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns a list of users with their access rights to the protected file with the ID specified in the request.
+         * @summary Get users access rights to the protected file
+         * @param {number} fileId The file ID of the request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getProtectedFileUsers(fileId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MentionWrapperArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getProtectedFileUsers(fileId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.getProtectedFileUsers']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2865,23 +2878,10 @@ export const FilesFilesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async openEdit(fileId: number, version?: number, view?: boolean, editorType?: EditorType, edit?: boolean, fill?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ConfigurationIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.openEdit(fileId, version, view, editorType, edit, fill, options);
+        async openEditFile(fileId: number, version?: number, view?: boolean, editorType?: EditorType, edit?: boolean, fill?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ConfigurationIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.openEditFile(fileId, version, view, editorType, edit, fill, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.openEdit']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns a list of users with their access rights to the protected file with the ID specified in the request.
-         * @summary Get users access rights to the protected file
-         * @param {number} fileId The file ID of the request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async protectUsers(fileId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MentionWrapperArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.protectUsers(fileId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.protectUsers']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.openEditFile']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2893,24 +2893,10 @@ export const FilesFilesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async restoreVersion(fileId: number, version?: number, url?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EditHistoryArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.restoreVersion(fileId, version, url, options);
+        async restoreFileVersion(fileId: number, version?: number, url?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EditHistoryArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.restoreFileVersion(fileId, version, url, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.restoreVersion']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Saves a file with the identifier specified in the request as a PDF document.
-         * @summary Save a file as PDF
-         * @param {number} id The file ID to save as PDF.
-         * @param {SaveAsPdfInteger} [saveAsPdfInteger] The parameters for saving file as PDF.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async saveAsPdf(id: number, saveAsPdfInteger?: SaveAsPdfInteger, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.saveAsPdf(id, saveAsPdfInteger, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.saveAsPdf']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.restoreFileVersion']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2924,10 +2910,24 @@ export const FilesFilesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async saveEditingFromForm(fileId: number, fileExtension?: string, downloadUri?: string, file?: File, forcesave?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.saveEditingFromForm(fileId, fileExtension, downloadUri, file, forcesave, options);
+        async saveEditingFileFromForm(fileId: number, fileExtension?: string, downloadUri?: string, file?: File, forcesave?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.saveEditingFileFromForm(fileId, fileExtension, downloadUri, file, forcesave, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.saveEditingFromForm']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.saveEditingFileFromForm']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Saves a file with the identifier specified in the request as a PDF document.
+         * @summary Save a file as PDF
+         * @param {number} id The file ID to save as PDF.
+         * @param {SaveAsPdfInteger} [saveAsPdfInteger] The parameters for saving file as PDF.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async saveFileAsPdf(id: number, saveAsPdfInteger?: SaveAsPdfInteger, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.saveFileAsPdf(id, saveAsPdfInteger, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.saveFileAsPdf']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2973,6 +2973,20 @@ export const FilesFilesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Sets order of the file with ID specified in the request.
+         * @summary Set file order
+         * @param {number} fileId The file unique identifier.
+         * @param {OrderRequestDto} [orderRequestDto] The file order information.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async setFileOrder(fileId: number, orderRequestDto?: OrderRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setFileOrder(fileId, orderRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.setFileOrder']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Sets order of the files.
          * @summary Set order of files
          * @param {OrdersRequestDtoInteger} [ordersRequestDtoInteger] 
@@ -2986,20 +3000,6 @@ export const FilesFilesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Sets order of the file with ID specified in the request.
-         * @summary Set file order
-         * @param {number} fileId The file unique identifier.
-         * @param {OrderRequestDto} [orderRequestDto] The file order information.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async setOrderFile(fileId: number, orderRequestDto?: OrderRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setOrderFile(fileId, orderRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.setOrderFile']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
          * Informs about opening a file with the ID specified in the request for editing, locking it from being deleted or moved (this method is called by the mobile editors).
          * @summary Start file editing
          * @param {number} fileId The file ID to start editing.
@@ -3007,10 +3007,10 @@ export const FilesFilesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async startEdit(fileId: number, startEdit?: StartEdit, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.startEdit(fileId, startEdit, options);
+        async startEditFile(fileId: number, startEdit?: StartEdit, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.startEditFile(fileId, startEdit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.startEdit']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.startEditFile']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -3020,10 +3020,10 @@ export const FilesFilesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async startFilling(fileId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.startFilling(fileId, options);
+        async startFillingFile(fileId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.startFillingFile(fileId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.startFilling']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.startFillingFile']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -3084,8 +3084,8 @@ export const FilesFilesApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        changeHistory(fileId: number, changeHistory?: ChangeHistory, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerArrayWrapper> {
-            return localVarFp.changeHistory(fileId, changeHistory, options).then((request) => request(axios, basePath));
+        changeVersionHistory(fileId: number, changeHistory?: ChangeHistory, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerArrayWrapper> {
+            return localVarFp.changeVersionHistory(fileId, changeHistory, options).then((request) => request(axios, basePath));
         },
         /**
          * Checks if the current file is a form draft which can be filled out.
@@ -3138,8 +3138,8 @@ export const FilesFilesApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createFileMyDocuments(createFileJsonElement?: CreateFileJsonElement, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
-            return localVarFp.createFileMyDocuments(createFileJsonElement, options).then((request) => request(axios, basePath));
+        createFileInMyDocuments(createFileJsonElement?: CreateFileJsonElement, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
+            return localVarFp.createFileInMyDocuments(createFileJsonElement, options).then((request) => request(axios, basePath));
         },
         /**
          * Creates an HTML (.html) file in the selected folder with the title and contents specified in the request.
@@ -3159,8 +3159,8 @@ export const FilesFilesApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createHtmlFileInMy(createTextOrHtmlFile?: CreateTextOrHtmlFile, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
-            return localVarFp.createHtmlFileInMy(createTextOrHtmlFile, options).then((request) => request(axios, basePath));
+        createHtmlFileInMyDocuments(createTextOrHtmlFile?: CreateTextOrHtmlFile, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
+            return localVarFp.createHtmlFileInMyDocuments(createTextOrHtmlFile, options).then((request) => request(axios, basePath));
         },
         /**
          * Creates a primary external link by the identifier specified in the request.
@@ -3191,8 +3191,8 @@ export const FilesFilesApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createTextFileInMy(createTextOrHtmlFile?: CreateTextOrHtmlFile, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
-            return localVarFp.createTextFileInMy(createTextOrHtmlFile, options).then((request) => request(axios, basePath));
+        createTextFileInMyDocuments(createTextOrHtmlFile?: CreateTextOrHtmlFile, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
+            return localVarFp.createTextFileInMyDocuments(createTextOrHtmlFile, options).then((request) => request(axios, basePath));
         },
         /**
          * Creates thumbnails for the files with the IDs specified in the request.
@@ -3290,6 +3290,16 @@ export const FilesFilesApiFactory = function (configuration?: Configuration, bas
             return localVarFp.getFileInfo(fileId, version, options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns the external links of a file with the ID specified in the request.
+         * @summary Get file external links
+         * @param {number} id The file ID of the request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getFileLinks(id: number, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
+            return localVarFp.getFileLinks(id, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns the primary external link by the identifier specified in the request.
          * @summary Get primary external link
          * @param {number} id The file ID of the request.
@@ -3320,16 +3330,6 @@ export const FilesFilesApiFactory = function (configuration?: Configuration, bas
             return localVarFp.getFillResult(fillingSessionId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the external links of a file with the ID specified in the request.
-         * @summary Get file external links
-         * @param {number} id The file ID of the request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getLinks(id: number, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
-            return localVarFp.getLinks(id, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Returns a link to download a file with the ID specified in the request asynchronously.
          * @summary Get file download link asynchronously
          * @param {number} fileId The file ID of the request.
@@ -3348,6 +3348,16 @@ export const FilesFilesApiFactory = function (configuration?: Configuration, bas
          */
         getPresignedUri(fileId: number, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
             return localVarFp.getPresignedUri(fileId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns a list of users with their access rights to the protected file with the ID specified in the request.
+         * @summary Get users access rights to the protected file
+         * @param {number} fileId The file ID of the request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getProtectedFileUsers(fileId: number, options?: RawAxiosRequestConfig): AxiosPromise<MentionWrapperArrayWrapper> {
+            return localVarFp.getProtectedFileUsers(fileId, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the reference data to uniquely identify a file in its system and check the availability of insering data into the destination spreadsheet by the external link.
@@ -3403,18 +3413,8 @@ export const FilesFilesApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        openEdit(fileId: number, version?: number, view?: boolean, editorType?: EditorType, edit?: boolean, fill?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<ConfigurationIntegerWrapper> {
-            return localVarFp.openEdit(fileId, version, view, editorType, edit, fill, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns a list of users with their access rights to the protected file with the ID specified in the request.
-         * @summary Get users access rights to the protected file
-         * @param {number} fileId The file ID of the request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        protectUsers(fileId: number, options?: RawAxiosRequestConfig): AxiosPromise<MentionWrapperArrayWrapper> {
-            return localVarFp.protectUsers(fileId, options).then((request) => request(axios, basePath));
+        openEditFile(fileId: number, version?: number, view?: boolean, editorType?: EditorType, edit?: boolean, fill?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<ConfigurationIntegerWrapper> {
+            return localVarFp.openEditFile(fileId, version, view, editorType, edit, fill, options).then((request) => request(axios, basePath));
         },
         /**
          * Restores a file version specified in the request.
@@ -3425,19 +3425,8 @@ export const FilesFilesApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        restoreVersion(fileId: number, version?: number, url?: string, options?: RawAxiosRequestConfig): AxiosPromise<EditHistoryArrayWrapper> {
-            return localVarFp.restoreVersion(fileId, version, url, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Saves a file with the identifier specified in the request as a PDF document.
-         * @summary Save a file as PDF
-         * @param {number} id The file ID to save as PDF.
-         * @param {SaveAsPdfInteger} [saveAsPdfInteger] The parameters for saving file as PDF.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        saveAsPdf(id: number, saveAsPdfInteger?: SaveAsPdfInteger, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
-            return localVarFp.saveAsPdf(id, saveAsPdfInteger, options).then((request) => request(axios, basePath));
+        restoreFileVersion(fileId: number, version?: number, url?: string, options?: RawAxiosRequestConfig): AxiosPromise<EditHistoryArrayWrapper> {
+            return localVarFp.restoreFileVersion(fileId, version, url, options).then((request) => request(axios, basePath));
         },
         /**
          * Saves edits to a file with the ID specified in the request.
@@ -3450,8 +3439,19 @@ export const FilesFilesApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        saveEditingFromForm(fileId: number, fileExtension?: string, downloadUri?: string, file?: File, forcesave?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
-            return localVarFp.saveEditingFromForm(fileId, fileExtension, downloadUri, file, forcesave, options).then((request) => request(axios, basePath));
+        saveEditingFileFromForm(fileId: number, fileExtension?: string, downloadUri?: string, file?: File, forcesave?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
+            return localVarFp.saveEditingFileFromForm(fileId, fileExtension, downloadUri, file, forcesave, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Saves a file with the identifier specified in the request as a PDF document.
+         * @summary Save a file as PDF
+         * @param {number} id The file ID to save as PDF.
+         * @param {SaveAsPdfInteger} [saveAsPdfInteger] The parameters for saving file as PDF.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        saveFileAsPdf(id: number, saveAsPdfInteger?: SaveAsPdfInteger, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
+            return localVarFp.saveFileAsPdf(id, saveAsPdfInteger, options).then((request) => request(axios, basePath));
         },
         /**
          * Saves the form role mapping.
@@ -3487,6 +3487,17 @@ export const FilesFilesApiFactory = function (configuration?: Configuration, bas
             return localVarFp.setExternalLink(id, fileLinkRequest, options).then((request) => request(axios, basePath));
         },
         /**
+         * Sets order of the file with ID specified in the request.
+         * @summary Set file order
+         * @param {number} fileId The file unique identifier.
+         * @param {OrderRequestDto} [orderRequestDto] The file order information.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        setFileOrder(fileId: number, orderRequestDto?: OrderRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
+            return localVarFp.setFileOrder(fileId, orderRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Sets order of the files.
          * @summary Set order of files
          * @param {OrdersRequestDtoInteger} [ordersRequestDtoInteger] 
@@ -3497,17 +3508,6 @@ export const FilesFilesApiFactory = function (configuration?: Configuration, bas
             return localVarFp.setFilesOrder(ordersRequestDtoInteger, options).then((request) => request(axios, basePath));
         },
         /**
-         * Sets order of the file with ID specified in the request.
-         * @summary Set file order
-         * @param {number} fileId The file unique identifier.
-         * @param {OrderRequestDto} [orderRequestDto] The file order information.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        setOrderFile(fileId: number, orderRequestDto?: OrderRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
-            return localVarFp.setOrderFile(fileId, orderRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Informs about opening a file with the ID specified in the request for editing, locking it from being deleted or moved (this method is called by the mobile editors).
          * @summary Start file editing
          * @param {number} fileId The file ID to start editing.
@@ -3515,8 +3515,8 @@ export const FilesFilesApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        startEdit(fileId: number, startEdit?: StartEdit, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.startEdit(fileId, startEdit, options).then((request) => request(axios, basePath));
+        startEditFile(fileId: number, startEdit?: StartEdit, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.startEditFile(fileId, startEdit, options).then((request) => request(axios, basePath));
         },
         /**
          * Starts filling a file with the ID specified in the request.
@@ -3525,8 +3525,8 @@ export const FilesFilesApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        startFilling(fileId: number, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
-            return localVarFp.startFilling(fileId, options).then((request) => request(axios, basePath));
+        startFillingFile(fileId: number, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
+            return localVarFp.startFillingFile(fileId, options).then((request) => request(axios, basePath));
         },
         /**
          * Tracks file changes when editing.
@@ -3583,8 +3583,8 @@ export class FilesFilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesFilesApi
      */
-    public changeHistory(fileId: number, changeHistory?: ChangeHistory, options?: RawAxiosRequestConfig) {
-        return FilesFilesApiFp(this.configuration).changeHistory(fileId, changeHistory, options).then((request) => request(this.axios, this.basePath));
+    public changeVersionHistory(fileId: number, changeHistory?: ChangeHistory, options?: RawAxiosRequestConfig) {
+        return FilesFilesApiFp(this.configuration).changeVersionHistory(fileId, changeHistory, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3647,8 +3647,8 @@ export class FilesFilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesFilesApi
      */
-    public createFileMyDocuments(createFileJsonElement?: CreateFileJsonElement, options?: RawAxiosRequestConfig) {
-        return FilesFilesApiFp(this.configuration).createFileMyDocuments(createFileJsonElement, options).then((request) => request(this.axios, this.basePath));
+    public createFileInMyDocuments(createFileJsonElement?: CreateFileJsonElement, options?: RawAxiosRequestConfig) {
+        return FilesFilesApiFp(this.configuration).createFileInMyDocuments(createFileJsonElement, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3672,8 +3672,8 @@ export class FilesFilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesFilesApi
      */
-    public createHtmlFileInMy(createTextOrHtmlFile?: CreateTextOrHtmlFile, options?: RawAxiosRequestConfig) {
-        return FilesFilesApiFp(this.configuration).createHtmlFileInMy(createTextOrHtmlFile, options).then((request) => request(this.axios, this.basePath));
+    public createHtmlFileInMyDocuments(createTextOrHtmlFile?: CreateTextOrHtmlFile, options?: RawAxiosRequestConfig) {
+        return FilesFilesApiFp(this.configuration).createHtmlFileInMyDocuments(createTextOrHtmlFile, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3710,8 +3710,8 @@ export class FilesFilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesFilesApi
      */
-    public createTextFileInMy(createTextOrHtmlFile?: CreateTextOrHtmlFile, options?: RawAxiosRequestConfig) {
-        return FilesFilesApiFp(this.configuration).createTextFileInMy(createTextOrHtmlFile, options).then((request) => request(this.axios, this.basePath));
+    public createTextFileInMyDocuments(createTextOrHtmlFile?: CreateTextOrHtmlFile, options?: RawAxiosRequestConfig) {
+        return FilesFilesApiFp(this.configuration).createTextFileInMyDocuments(createTextOrHtmlFile, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3828,6 +3828,18 @@ export class FilesFilesApi extends BaseAPI {
     }
 
     /**
+     * Returns the external links of a file with the ID specified in the request.
+     * @summary Get file external links
+     * @param {number} id The file ID of the request.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesFilesApi
+     */
+    public getFileLinks(id: number, options?: RawAxiosRequestConfig) {
+        return FilesFilesApiFp(this.configuration).getFileLinks(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Returns the primary external link by the identifier specified in the request.
      * @summary Get primary external link
      * @param {number} id The file ID of the request.
@@ -3864,18 +3876,6 @@ export class FilesFilesApi extends BaseAPI {
     }
 
     /**
-     * Returns the external links of a file with the ID specified in the request.
-     * @summary Get file external links
-     * @param {number} id The file ID of the request.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesFilesApi
-     */
-    public getLinks(id: number, options?: RawAxiosRequestConfig) {
-        return FilesFilesApiFp(this.configuration).getLinks(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Returns a link to download a file with the ID specified in the request asynchronously.
      * @summary Get file download link asynchronously
      * @param {number} fileId The file ID of the request.
@@ -3897,6 +3897,18 @@ export class FilesFilesApi extends BaseAPI {
      */
     public getPresignedUri(fileId: number, options?: RawAxiosRequestConfig) {
         return FilesFilesApiFp(this.configuration).getPresignedUri(fileId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns a list of users with their access rights to the protected file with the ID specified in the request.
+     * @summary Get users access rights to the protected file
+     * @param {number} fileId The file ID of the request.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesFilesApi
+     */
+    public getProtectedFileUsers(fileId: number, options?: RawAxiosRequestConfig) {
+        return FilesFilesApiFp(this.configuration).getProtectedFileUsers(fileId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3962,20 +3974,8 @@ export class FilesFilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesFilesApi
      */
-    public openEdit(fileId: number, version?: number, view?: boolean, editorType?: EditorType, edit?: boolean, fill?: boolean, options?: RawAxiosRequestConfig) {
-        return FilesFilesApiFp(this.configuration).openEdit(fileId, version, view, editorType, edit, fill, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns a list of users with their access rights to the protected file with the ID specified in the request.
-     * @summary Get users access rights to the protected file
-     * @param {number} fileId The file ID of the request.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesFilesApi
-     */
-    public protectUsers(fileId: number, options?: RawAxiosRequestConfig) {
-        return FilesFilesApiFp(this.configuration).protectUsers(fileId, options).then((request) => request(this.axios, this.basePath));
+    public openEditFile(fileId: number, version?: number, view?: boolean, editorType?: EditorType, edit?: boolean, fill?: boolean, options?: RawAxiosRequestConfig) {
+        return FilesFilesApiFp(this.configuration).openEditFile(fileId, version, view, editorType, edit, fill, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3988,21 +3988,8 @@ export class FilesFilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesFilesApi
      */
-    public restoreVersion(fileId: number, version?: number, url?: string, options?: RawAxiosRequestConfig) {
-        return FilesFilesApiFp(this.configuration).restoreVersion(fileId, version, url, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Saves a file with the identifier specified in the request as a PDF document.
-     * @summary Save a file as PDF
-     * @param {number} id The file ID to save as PDF.
-     * @param {SaveAsPdfInteger} [saveAsPdfInteger] The parameters for saving file as PDF.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesFilesApi
-     */
-    public saveAsPdf(id: number, saveAsPdfInteger?: SaveAsPdfInteger, options?: RawAxiosRequestConfig) {
-        return FilesFilesApiFp(this.configuration).saveAsPdf(id, saveAsPdfInteger, options).then((request) => request(this.axios, this.basePath));
+    public restoreFileVersion(fileId: number, version?: number, url?: string, options?: RawAxiosRequestConfig) {
+        return FilesFilesApiFp(this.configuration).restoreFileVersion(fileId, version, url, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4017,8 +4004,21 @@ export class FilesFilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesFilesApi
      */
-    public saveEditingFromForm(fileId: number, fileExtension?: string, downloadUri?: string, file?: File, forcesave?: boolean, options?: RawAxiosRequestConfig) {
-        return FilesFilesApiFp(this.configuration).saveEditingFromForm(fileId, fileExtension, downloadUri, file, forcesave, options).then((request) => request(this.axios, this.basePath));
+    public saveEditingFileFromForm(fileId: number, fileExtension?: string, downloadUri?: string, file?: File, forcesave?: boolean, options?: RawAxiosRequestConfig) {
+        return FilesFilesApiFp(this.configuration).saveEditingFileFromForm(fileId, fileExtension, downloadUri, file, forcesave, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Saves a file with the identifier specified in the request as a PDF document.
+     * @summary Save a file as PDF
+     * @param {number} id The file ID to save as PDF.
+     * @param {SaveAsPdfInteger} [saveAsPdfInteger] The parameters for saving file as PDF.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesFilesApi
+     */
+    public saveFileAsPdf(id: number, saveAsPdfInteger?: SaveAsPdfInteger, options?: RawAxiosRequestConfig) {
+        return FilesFilesApiFp(this.configuration).saveFileAsPdf(id, saveAsPdfInteger, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4061,6 +4061,19 @@ export class FilesFilesApi extends BaseAPI {
     }
 
     /**
+     * Sets order of the file with ID specified in the request.
+     * @summary Set file order
+     * @param {number} fileId The file unique identifier.
+     * @param {OrderRequestDto} [orderRequestDto] The file order information.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesFilesApi
+     */
+    public setFileOrder(fileId: number, orderRequestDto?: OrderRequestDto, options?: RawAxiosRequestConfig) {
+        return FilesFilesApiFp(this.configuration).setFileOrder(fileId, orderRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Sets order of the files.
      * @summary Set order of files
      * @param {OrdersRequestDtoInteger} [ordersRequestDtoInteger] 
@@ -4073,19 +4086,6 @@ export class FilesFilesApi extends BaseAPI {
     }
 
     /**
-     * Sets order of the file with ID specified in the request.
-     * @summary Set file order
-     * @param {number} fileId The file unique identifier.
-     * @param {OrderRequestDto} [orderRequestDto] The file order information.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesFilesApi
-     */
-    public setOrderFile(fileId: number, orderRequestDto?: OrderRequestDto, options?: RawAxiosRequestConfig) {
-        return FilesFilesApiFp(this.configuration).setOrderFile(fileId, orderRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Informs about opening a file with the ID specified in the request for editing, locking it from being deleted or moved (this method is called by the mobile editors).
      * @summary Start file editing
      * @param {number} fileId The file ID to start editing.
@@ -4094,8 +4094,8 @@ export class FilesFilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesFilesApi
      */
-    public startEdit(fileId: number, startEdit?: StartEdit, options?: RawAxiosRequestConfig) {
-        return FilesFilesApiFp(this.configuration).startEdit(fileId, startEdit, options).then((request) => request(this.axios, this.basePath));
+    public startEditFile(fileId: number, startEdit?: StartEdit, options?: RawAxiosRequestConfig) {
+        return FilesFilesApiFp(this.configuration).startEditFile(fileId, startEdit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4106,8 +4106,8 @@ export class FilesFilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesFilesApi
      */
-    public startFilling(fileId: number, options?: RawAxiosRequestConfig) {
-        return FilesFilesApiFp(this.configuration).startFilling(fileId, options).then((request) => request(this.axios, this.basePath));
+    public startFillingFile(fileId: number, options?: RawAxiosRequestConfig) {
+        return FilesFilesApiFp(this.configuration).startFillingFile(fileId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

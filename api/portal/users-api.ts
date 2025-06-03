@@ -42,11 +42,60 @@ export const PortalUsersApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        geInviteLink: async (employeeType: EmployeeType, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getInvitationLink: async (employeeType: EmployeeType, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'employeeType' is not null or undefined
-            assertParamExists('geInviteLink', 'employeeType', employeeType)
+            assertParamExists('getInvitationLink', 'employeeType', employeeType)
             const localVarPath = `/api/2.0/portal/users/invite/{employeeType}`
                 .replace(`{${"employeeType"}}`, encodeURIComponent(String(employeeType)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns a number of portal users.
+         * @summary Get a number of portal users
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPortalUsersCount: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/portal/userscount`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -95,60 +144,11 @@ export const PortalUsersApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUser: async (userID: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUserById: async (userID: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userID' is not null or undefined
-            assertParamExists('getUser', 'userID', userID)
+            assertParamExists('getUserById', 'userID', userID)
             const localVarPath = `/api/2.0/portal/users/{userID}`
                 .replace(`{${"userID"}}`, encodeURIComponent(String(userID)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns a number of portal users.
-         * @summary Get a number of portal users
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getUsersCount: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/portal/userscount`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -196,7 +196,7 @@ export const PortalUsersApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        markPresentAsReaded: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        markGiftMessageAsRead: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/portal/present/mark`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -296,10 +296,22 @@ export const PortalUsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async geInviteLink(employeeType: EmployeeType, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.geInviteLink(employeeType, options);
+        async getInvitationLink(employeeType: EmployeeType, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getInvitationLink(employeeType, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalUsersApi.geInviteLink']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PortalUsersApi.getInvitationLink']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns a number of portal users.
+         * @summary Get a number of portal users
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPortalUsersCount(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Int64Wrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPortalUsersCount(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PortalUsersApi.getPortalUsersCount']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -309,22 +321,10 @@ export const PortalUsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUser(userID: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserInfoWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getUser(userID, options);
+        async getUserById(userID: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserInfoWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserById(userID, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalUsersApi.getUser']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns a number of portal users.
-         * @summary Get a number of portal users
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getUsersCount(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Int64Wrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getUsersCount(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalUsersApi.getUsersCount']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PortalUsersApi.getUserById']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -333,10 +333,10 @@ export const PortalUsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async markPresentAsReaded(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.markPresentAsReaded(options);
+        async markGiftMessageAsRead(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.markGiftMessageAsRead(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalUsersApi.markPresentAsReaded']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PortalUsersApi.markGiftMessageAsRead']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -370,8 +370,17 @@ export const PortalUsersApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        geInviteLink(employeeType: EmployeeType, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.geInviteLink(employeeType, options).then((request) => request(axios, basePath));
+        getInvitationLink(employeeType: EmployeeType, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.getInvitationLink(employeeType, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns a number of portal users.
+         * @summary Get a number of portal users
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPortalUsersCount(options?: RawAxiosRequestConfig): AxiosPromise<Int64Wrapper> {
+            return localVarFp.getPortalUsersCount(options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a user with the ID specified in the request from the current portal.
@@ -380,17 +389,8 @@ export const PortalUsersApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUser(userID: string, options?: RawAxiosRequestConfig): AxiosPromise<UserInfoWrapper> {
-            return localVarFp.getUser(userID, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns a number of portal users.
-         * @summary Get a number of portal users
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getUsersCount(options?: RawAxiosRequestConfig): AxiosPromise<Int64Wrapper> {
-            return localVarFp.getUsersCount(options).then((request) => request(axios, basePath));
+        getUserById(userID: string, options?: RawAxiosRequestConfig): AxiosPromise<UserInfoWrapper> {
+            return localVarFp.getUserById(userID, options).then((request) => request(axios, basePath));
         },
         /**
          * Marks a gift message as read.
@@ -398,8 +398,8 @@ export const PortalUsersApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        markPresentAsReaded(options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.markPresentAsReaded(options).then((request) => request(axios, basePath));
+        markGiftMessageAsRead(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.markGiftMessageAsRead(options).then((request) => request(axios, basePath));
         },
         /**
          * Sends congratulations to the user after registering a portal.
@@ -430,8 +430,19 @@ export class PortalUsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PortalUsersApi
      */
-    public geInviteLink(employeeType: EmployeeType, options?: RawAxiosRequestConfig) {
-        return PortalUsersApiFp(this.configuration).geInviteLink(employeeType, options).then((request) => request(this.axios, this.basePath));
+    public getInvitationLink(employeeType: EmployeeType, options?: RawAxiosRequestConfig) {
+        return PortalUsersApiFp(this.configuration).getInvitationLink(employeeType, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns a number of portal users.
+     * @summary Get a number of portal users
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortalUsersApi
+     */
+    public getPortalUsersCount(options?: RawAxiosRequestConfig) {
+        return PortalUsersApiFp(this.configuration).getPortalUsersCount(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -442,19 +453,8 @@ export class PortalUsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PortalUsersApi
      */
-    public getUser(userID: string, options?: RawAxiosRequestConfig) {
-        return PortalUsersApiFp(this.configuration).getUser(userID, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns a number of portal users.
-     * @summary Get a number of portal users
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortalUsersApi
-     */
-    public getUsersCount(options?: RawAxiosRequestConfig) {
-        return PortalUsersApiFp(this.configuration).getUsersCount(options).then((request) => request(this.axios, this.basePath));
+    public getUserById(userID: string, options?: RawAxiosRequestConfig) {
+        return PortalUsersApiFp(this.configuration).getUserById(userID, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -464,8 +464,8 @@ export class PortalUsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PortalUsersApi
      */
-    public markPresentAsReaded(options?: RawAxiosRequestConfig) {
-        return PortalUsersApiFp(this.configuration).markPresentAsReaded(options).then((request) => request(this.axios, this.basePath));
+    public markGiftMessageAsRead(options?: RawAxiosRequestConfig) {
+        return PortalUsersApiFp(this.configuration).markGiftMessageAsRead(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

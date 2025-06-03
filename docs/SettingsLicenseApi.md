@@ -5,8 +5,8 @@ All URIs are relative to *http://localhost:8092*
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**acceptLicense**](#acceptlicense) | **POST** /api/2.0/settings/license/accept | Activate a license|
+|[**getIsLicenseRequired**](#getislicenserequired) | **GET** /api/2.0/settings/license/required | Request a license|
 |[**refreshLicense**](#refreshlicense) | **GET** /api/2.0/settings/license/refresh | Refresh the license|
-|[**requestLicense**](#requestlicense) | **GET** /api/2.0/settings/license/required | Request a license|
 |[**uploadLicense**](#uploadlicense) | **POST** /api/2.0/settings/license | Upload a license|
 
 # **acceptLicense**
@@ -54,6 +54,50 @@ This endpoint does not have any parameters.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **getIsLicenseRequired**
+> BooleanWrapper getIsLicenseRequired()
+
+Requests a portal license if necessary.
+
+### Example
+
+```typescript
+import {
+    SettingsLicenseApi,
+    Configuration
+} from '@onlyoffice/docspace-api-typescript';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsLicenseApi(configuration);
+
+const { status, data } = await apiInstance.getIsLicenseRequired();
+```
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Boolean value: true if the license is required |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **refreshLicense**
 > BooleanWrapper refreshLicense()
 
@@ -96,50 +140,6 @@ This endpoint does not have any parameters.
 |-------------|-------------|------------------|
 |**200** | Boolean value: true if the operation is successful |  -  |
 |**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **requestLicense**
-> BooleanWrapper requestLicense()
-
-Requests a portal license if necessary.
-
-### Example
-
-```typescript
-import {
-    SettingsLicenseApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsLicenseApi(configuration);
-
-const { status, data } = await apiInstance.requestLicense();
-```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**BooleanWrapper**
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Boolean value: true if the license is required |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

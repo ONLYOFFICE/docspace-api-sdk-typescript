@@ -21,6 +21,12 @@
  */
 export interface DeleteVersionBatchRequestDto {
     /**
+     * Specifies whether to return only the current operation
+     * @type {boolean}
+     * @memberof DeleteVersionBatchRequestDto
+     */
+    'returnSingleOperation'?: boolean;
+    /**
      * Specifies whether to delete a file after the editing session is finished or not.
      * @type {boolean}
      * @memberof DeleteVersionBatchRequestDto

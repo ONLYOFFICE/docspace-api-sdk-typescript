@@ -166,13 +166,66 @@ export const SettingsCommonSettingsApiAxiosParamCreator = function (configuratio
             };
         },
         /**
+         * Saves the deep link configuration settings for the portal.
+         * @summary Configure the deep link settings
+         * @param {DeepLinkConfigurationRequestsDto} [deepLinkConfigurationRequestsDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configureDeepLink: async (deepLinkConfigurationRequestsDto?: DeepLinkConfigurationRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/settings/deeplink`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(deepLinkConfigurationRequestsDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Deletes the portal color theme with the ID specified in the request.
          * @summary Delete a color theme
          * @param {number} [id] The ID of the portal theme to delete.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteColorTheme: async (id?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deletePortalColorTheme: async (id?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/settings/colortheme`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -220,43 +273,13 @@ export const SettingsCommonSettingsApiAxiosParamCreator = function (configuratio
             };
         },
         /**
-         * Returns the portal color theme.
-         * @summary Get a color theme
+         * Returns the deep link settings.
+         * @summary Get the deep link settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getColorTheme: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/settings/colortheme`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns the portal logo image URL.
-         * @summary Get a portal logo
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getLogo: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/settings/logo`;
+        getDeepLinkSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/settings/deeplink`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -299,13 +322,141 @@ export const SettingsCommonSettingsApiAxiosParamCreator = function (configuratio
             };
         },
         /**
+         * Returns the portal payment settings.
+         * @summary Get the payment settings
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPaymentSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/settings/payment`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the portal color theme.
+         * @summary Get a color theme
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPortalColorTheme: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/settings/colortheme`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns the portal hostname.
          * @summary Get hostname
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMachineName: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getPortalHostname: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/settings/machine`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the portal logo image URL.
+         * @summary Get a portal logo
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPortalLogo: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/settings/logo`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -354,7 +505,7 @@ export const SettingsCommonSettingsApiAxiosParamCreator = function (configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSettings: async (withpassword?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getPortalSettings: async (withpassword?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/settings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -497,7 +648,7 @@ export const SettingsCommonSettingsApiAxiosParamCreator = function (configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTimeZonesAsync: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTimeZones: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/settings/timezones`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -534,210 +685,6 @@ export const SettingsCommonSettingsApiAxiosParamCreator = function (configuratio
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns the deep link settings.
-         * @summary Get the deep link settings
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        gettDeepLinkSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/settings/deeplink`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns the portal payment settings.
-         * @summary Get the payment settings
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        paymentSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/settings/payment`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Saves the portal color theme specified in the request.
-         * @summary Save a color theme
-         * @param {CustomColorThemesSettingsRequestsDto} [customColorThemesSettingsRequestsDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        saveColorTheme: async (customColorThemesSettingsRequestsDto?: CustomColorThemesSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/settings/colortheme`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(customColorThemesSettingsRequestsDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Saves the deep link configuration settings for the portal.
-         * @summary Configure the deep link settings
-         * @param {DeepLinkConfigurationRequestsDto} [deepLinkConfigurationRequestsDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        saveConfigureDeepLink: async (deepLinkConfigurationRequestsDto?: DeepLinkConfigurationRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/settings/deeplink`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(deepLinkConfigurationRequestsDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -844,6 +791,59 @@ export const SettingsCommonSettingsApiAxiosParamCreator = function (configuratio
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(mailDomainSettingsRequestsDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Saves the portal color theme specified in the request.
+         * @summary Save a color theme
+         * @param {CustomColorThemesSettingsRequestsDto} [customColorThemesSettingsRequestsDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        savePortalColorTheme: async (customColorThemesSettingsRequestsDto?: CustomColorThemesSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/settings/colortheme`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(customColorThemesSettingsRequestsDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -992,16 +992,53 @@ export const SettingsCommonSettingsApiFp = function(configuration?: Configuratio
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Saves the deep link configuration settings for the portal.
+         * @summary Configure the deep link settings
+         * @param {DeepLinkConfigurationRequestsDto} [deepLinkConfigurationRequestsDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async configureDeepLink(deepLinkConfigurationRequestsDto?: DeepLinkConfigurationRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantDeepLinkSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.configureDeepLink(deepLinkConfigurationRequestsDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.configureDeepLink']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Deletes the portal color theme with the ID specified in the request.
          * @summary Delete a color theme
          * @param {number} [id] The ID of the portal theme to delete.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteColorTheme(id?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomColorThemesSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteColorTheme(id, options);
+        async deletePortalColorTheme(id?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomColorThemesSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deletePortalColorTheme(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.deleteColorTheme']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.deletePortalColorTheme']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the deep link settings.
+         * @summary Get the deep link settings
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getDeepLinkSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantDeepLinkSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getDeepLinkSettings(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.getDeepLinkSettings']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the portal payment settings.
+         * @summary Get the payment settings
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPaymentSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPaymentSettings(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.getPaymentSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1010,22 +1047,10 @@ export const SettingsCommonSettingsApiFp = function(configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getColorTheme(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomColorThemesSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getColorTheme(options);
+        async getPortalColorTheme(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomColorThemesSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPortalColorTheme(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.getColorTheme']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns the portal logo image URL.
-         * @summary Get a portal logo
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getLogo(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getLogo(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.getLogo']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.getPortalColorTheme']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1034,10 +1059,22 @@ export const SettingsCommonSettingsApiFp = function(configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getMachineName(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getMachineName(options);
+        async getPortalHostname(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPortalHostname(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.getMachineName']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.getPortalHostname']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the portal logo image URL.
+         * @summary Get a portal logo
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPortalLogo(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPortalLogo(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.getPortalLogo']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1047,10 +1084,10 @@ export const SettingsCommonSettingsApiFp = function(configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getSettings(withpassword?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getSettings(withpassword, options);
+        async getPortalSettings(withpassword?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPortalSettings(withpassword, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.getSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.getPortalSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1095,60 +1132,10 @@ export const SettingsCommonSettingsApiFp = function(configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTimeZonesAsync(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimezonesRequestsArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getTimeZonesAsync(options);
+        async getTimeZones(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimezonesRequestsArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getTimeZones(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.getTimeZonesAsync']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns the deep link settings.
-         * @summary Get the deep link settings
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async gettDeepLinkSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantDeepLinkSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.gettDeepLinkSettings(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.gettDeepLinkSettings']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns the portal payment settings.
-         * @summary Get the payment settings
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async paymentSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.paymentSettings(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.paymentSettings']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Saves the portal color theme specified in the request.
-         * @summary Save a color theme
-         * @param {CustomColorThemesSettingsRequestsDto} [customColorThemesSettingsRequestsDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async saveColorTheme(customColorThemesSettingsRequestsDto?: CustomColorThemesSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomColorThemesSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.saveColorTheme(customColorThemesSettingsRequestsDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.saveColorTheme']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Saves the deep link configuration settings for the portal.
-         * @summary Configure the deep link settings
-         * @param {DeepLinkConfigurationRequestsDto} [deepLinkConfigurationRequestsDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async saveConfigureDeepLink(deepLinkConfigurationRequestsDto?: DeepLinkConfigurationRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantDeepLinkSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.saveConfigureDeepLink(deepLinkConfigurationRequestsDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.saveConfigureDeepLink']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.getTimeZones']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1175,6 +1162,19 @@ export const SettingsCommonSettingsApiFp = function(configuration?: Configuratio
             const localVarAxiosArgs = await localVarAxiosParamCreator.saveMailDomainSettings(mailDomainSettingsRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.saveMailDomainSettings']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Saves the portal color theme specified in the request.
+         * @summary Save a color theme
+         * @param {CustomColorThemesSettingsRequestsDto} [customColorThemesSettingsRequestsDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async savePortalColorTheme(customColorThemesSettingsRequestsDto?: CustomColorThemesSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomColorThemesSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.savePortalColorTheme(customColorThemesSettingsRequestsDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.savePortalColorTheme']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1233,14 +1233,42 @@ export const SettingsCommonSettingsApiFactory = function (configuration?: Config
             return localVarFp.completeWizard(wizardRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
+         * Saves the deep link configuration settings for the portal.
+         * @summary Configure the deep link settings
+         * @param {DeepLinkConfigurationRequestsDto} [deepLinkConfigurationRequestsDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configureDeepLink(deepLinkConfigurationRequestsDto?: DeepLinkConfigurationRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<TenantDeepLinkSettingsWrapper> {
+            return localVarFp.configureDeepLink(deepLinkConfigurationRequestsDto, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Deletes the portal color theme with the ID specified in the request.
          * @summary Delete a color theme
          * @param {number} [id] The ID of the portal theme to delete.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteColorTheme(id?: number, options?: RawAxiosRequestConfig): AxiosPromise<CustomColorThemesSettingsWrapper> {
-            return localVarFp.deleteColorTheme(id, options).then((request) => request(axios, basePath));
+        deletePortalColorTheme(id?: number, options?: RawAxiosRequestConfig): AxiosPromise<CustomColorThemesSettingsWrapper> {
+            return localVarFp.deletePortalColorTheme(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the deep link settings.
+         * @summary Get the deep link settings
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getDeepLinkSettings(options?: RawAxiosRequestConfig): AxiosPromise<TenantDeepLinkSettingsWrapper> {
+            return localVarFp.getDeepLinkSettings(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the portal payment settings.
+         * @summary Get the payment settings
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPaymentSettings(options?: RawAxiosRequestConfig): AxiosPromise<PaymentSettingsWrapper> {
+            return localVarFp.getPaymentSettings(options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the portal color theme.
@@ -1248,17 +1276,8 @@ export const SettingsCommonSettingsApiFactory = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getColorTheme(options?: RawAxiosRequestConfig): AxiosPromise<CustomColorThemesSettingsWrapper> {
-            return localVarFp.getColorTheme(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns the portal logo image URL.
-         * @summary Get a portal logo
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getLogo(options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.getLogo(options).then((request) => request(axios, basePath));
+        getPortalColorTheme(options?: RawAxiosRequestConfig): AxiosPromise<CustomColorThemesSettingsWrapper> {
+            return localVarFp.getPortalColorTheme(options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the portal hostname.
@@ -1266,8 +1285,17 @@ export const SettingsCommonSettingsApiFactory = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMachineName(options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
-            return localVarFp.getMachineName(options).then((request) => request(axios, basePath));
+        getPortalHostname(options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
+            return localVarFp.getPortalHostname(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the portal logo image URL.
+         * @summary Get a portal logo
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPortalLogo(options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.getPortalLogo(options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of all the available portal settings with the current values for each parameter.
@@ -1276,8 +1304,8 @@ export const SettingsCommonSettingsApiFactory = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSettings(withpassword?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<SettingsWrapper> {
-            return localVarFp.getSettings(withpassword, options).then((request) => request(axios, basePath));
+        getPortalSettings(withpassword?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<SettingsWrapper> {
+            return localVarFp.getPortalSettings(withpassword, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the socket settings.
@@ -1312,46 +1340,8 @@ export const SettingsCommonSettingsApiFactory = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTimeZonesAsync(options?: RawAxiosRequestConfig): AxiosPromise<TimezonesRequestsArrayWrapper> {
-            return localVarFp.getTimeZonesAsync(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns the deep link settings.
-         * @summary Get the deep link settings
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        gettDeepLinkSettings(options?: RawAxiosRequestConfig): AxiosPromise<TenantDeepLinkSettingsWrapper> {
-            return localVarFp.gettDeepLinkSettings(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns the portal payment settings.
-         * @summary Get the payment settings
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        paymentSettings(options?: RawAxiosRequestConfig): AxiosPromise<PaymentSettingsWrapper> {
-            return localVarFp.paymentSettings(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Saves the portal color theme specified in the request.
-         * @summary Save a color theme
-         * @param {CustomColorThemesSettingsRequestsDto} [customColorThemesSettingsRequestsDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        saveColorTheme(customColorThemesSettingsRequestsDto?: CustomColorThemesSettingsRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<CustomColorThemesSettingsWrapper> {
-            return localVarFp.saveColorTheme(customColorThemesSettingsRequestsDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Saves the deep link configuration settings for the portal.
-         * @summary Configure the deep link settings
-         * @param {DeepLinkConfigurationRequestsDto} [deepLinkConfigurationRequestsDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        saveConfigureDeepLink(deepLinkConfigurationRequestsDto?: DeepLinkConfigurationRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<TenantDeepLinkSettingsWrapper> {
-            return localVarFp.saveConfigureDeepLink(deepLinkConfigurationRequestsDto, options).then((request) => request(axios, basePath));
+        getTimeZones(options?: RawAxiosRequestConfig): AxiosPromise<TimezonesRequestsArrayWrapper> {
+            return localVarFp.getTimeZones(options).then((request) => request(axios, basePath));
         },
         /**
          * Saves the DNS settings specified in the request to the current portal.
@@ -1372,6 +1362,16 @@ export const SettingsCommonSettingsApiFactory = function (configuration?: Config
          */
         saveMailDomainSettings(mailDomainSettingsRequestsDto?: MailDomainSettingsRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
             return localVarFp.saveMailDomainSettings(mailDomainSettingsRequestsDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Saves the portal color theme specified in the request.
+         * @summary Save a color theme
+         * @param {CustomColorThemesSettingsRequestsDto} [customColorThemesSettingsRequestsDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        savePortalColorTheme(customColorThemesSettingsRequestsDto?: CustomColorThemesSettingsRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<CustomColorThemesSettingsWrapper> {
+            return localVarFp.savePortalColorTheme(customColorThemesSettingsRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates the email activation settings.
@@ -1427,6 +1427,18 @@ export class SettingsCommonSettingsApi extends BaseAPI {
     }
 
     /**
+     * Saves the deep link configuration settings for the portal.
+     * @summary Configure the deep link settings
+     * @param {DeepLinkConfigurationRequestsDto} [deepLinkConfigurationRequestsDto] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SettingsCommonSettingsApi
+     */
+    public configureDeepLink(deepLinkConfigurationRequestsDto?: DeepLinkConfigurationRequestsDto, options?: RawAxiosRequestConfig) {
+        return SettingsCommonSettingsApiFp(this.configuration).configureDeepLink(deepLinkConfigurationRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Deletes the portal color theme with the ID specified in the request.
      * @summary Delete a color theme
      * @param {number} [id] The ID of the portal theme to delete.
@@ -1434,8 +1446,30 @@ export class SettingsCommonSettingsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SettingsCommonSettingsApi
      */
-    public deleteColorTheme(id?: number, options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).deleteColorTheme(id, options).then((request) => request(this.axios, this.basePath));
+    public deletePortalColorTheme(id?: number, options?: RawAxiosRequestConfig) {
+        return SettingsCommonSettingsApiFp(this.configuration).deletePortalColorTheme(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the deep link settings.
+     * @summary Get the deep link settings
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SettingsCommonSettingsApi
+     */
+    public getDeepLinkSettings(options?: RawAxiosRequestConfig) {
+        return SettingsCommonSettingsApiFp(this.configuration).getDeepLinkSettings(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the portal payment settings.
+     * @summary Get the payment settings
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SettingsCommonSettingsApi
+     */
+    public getPaymentSettings(options?: RawAxiosRequestConfig) {
+        return SettingsCommonSettingsApiFp(this.configuration).getPaymentSettings(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1445,19 +1479,8 @@ export class SettingsCommonSettingsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SettingsCommonSettingsApi
      */
-    public getColorTheme(options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).getColorTheme(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns the portal logo image URL.
-     * @summary Get a portal logo
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SettingsCommonSettingsApi
-     */
-    public getLogo(options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).getLogo(options).then((request) => request(this.axios, this.basePath));
+    public getPortalColorTheme(options?: RawAxiosRequestConfig) {
+        return SettingsCommonSettingsApiFp(this.configuration).getPortalColorTheme(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1467,8 +1490,19 @@ export class SettingsCommonSettingsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SettingsCommonSettingsApi
      */
-    public getMachineName(options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).getMachineName(options).then((request) => request(this.axios, this.basePath));
+    public getPortalHostname(options?: RawAxiosRequestConfig) {
+        return SettingsCommonSettingsApiFp(this.configuration).getPortalHostname(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the portal logo image URL.
+     * @summary Get a portal logo
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SettingsCommonSettingsApi
+     */
+    public getPortalLogo(options?: RawAxiosRequestConfig) {
+        return SettingsCommonSettingsApiFp(this.configuration).getPortalLogo(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1479,8 +1513,8 @@ export class SettingsCommonSettingsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SettingsCommonSettingsApi
      */
-    public getSettings(withpassword?: boolean, options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).getSettings(withpassword, options).then((request) => request(this.axios, this.basePath));
+    public getPortalSettings(withpassword?: boolean, options?: RawAxiosRequestConfig) {
+        return SettingsCommonSettingsApiFp(this.configuration).getPortalSettings(withpassword, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1523,54 +1557,8 @@ export class SettingsCommonSettingsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SettingsCommonSettingsApi
      */
-    public getTimeZonesAsync(options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).getTimeZonesAsync(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns the deep link settings.
-     * @summary Get the deep link settings
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SettingsCommonSettingsApi
-     */
-    public gettDeepLinkSettings(options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).gettDeepLinkSettings(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns the portal payment settings.
-     * @summary Get the payment settings
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SettingsCommonSettingsApi
-     */
-    public paymentSettings(options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).paymentSettings(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Saves the portal color theme specified in the request.
-     * @summary Save a color theme
-     * @param {CustomColorThemesSettingsRequestsDto} [customColorThemesSettingsRequestsDto] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SettingsCommonSettingsApi
-     */
-    public saveColorTheme(customColorThemesSettingsRequestsDto?: CustomColorThemesSettingsRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).saveColorTheme(customColorThemesSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Saves the deep link configuration settings for the portal.
-     * @summary Configure the deep link settings
-     * @param {DeepLinkConfigurationRequestsDto} [deepLinkConfigurationRequestsDto] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SettingsCommonSettingsApi
-     */
-    public saveConfigureDeepLink(deepLinkConfigurationRequestsDto?: DeepLinkConfigurationRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).saveConfigureDeepLink(deepLinkConfigurationRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public getTimeZones(options?: RawAxiosRequestConfig) {
+        return SettingsCommonSettingsApiFp(this.configuration).getTimeZones(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1595,6 +1583,18 @@ export class SettingsCommonSettingsApi extends BaseAPI {
      */
     public saveMailDomainSettings(mailDomainSettingsRequestsDto?: MailDomainSettingsRequestsDto, options?: RawAxiosRequestConfig) {
         return SettingsCommonSettingsApiFp(this.configuration).saveMailDomainSettings(mailDomainSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Saves the portal color theme specified in the request.
+     * @summary Save a color theme
+     * @param {CustomColorThemesSettingsRequestsDto} [customColorThemesSettingsRequestsDto] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SettingsCommonSettingsApi
+     */
+    public savePortalColorTheme(customColorThemesSettingsRequestsDto?: CustomColorThemesSettingsRequestsDto, options?: RawAxiosRequestConfig) {
+        return SettingsCommonSettingsApiFp(this.configuration).savePortalColorTheme(customColorThemesSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

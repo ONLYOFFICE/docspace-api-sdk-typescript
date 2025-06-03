@@ -140,6 +140,59 @@ export const SettingsNotificationsApiAxiosParamCreator = function (configuration
             };
         },
         /**
+         * Enables the notification type specified in the request.
+         * @summary Enable notifications
+         * @param {NotificationSettingsRequestsDto} [notificationSettingsRequestsDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        setNotificationSettings: async (notificationSettingsRequestsDto?: NotificationSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/settings/notification`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(notificationSettingsRequestsDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Sets a notification status for a room with the ID specified in the request.
          * @summary Set room notification status
          * @param {RoomsNotificationsSettingsRequestDto} [roomsNotificationsSettingsRequestDto] 
@@ -192,59 +245,6 @@ export const SettingsNotificationsApiAxiosParamCreator = function (configuration
                 options: localVarRequestOptions,
             };
         },
-        /**
-         * Enables the notification type specified in the request.
-         * @summary Enable notifications
-         * @param {NotificationSettingsRequestsDto} [notificationSettingsRequestsDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        setSettings: async (notificationSettingsRequestsDto?: NotificationSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/settings/notification`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(notificationSettingsRequestsDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
     }
 };
 
@@ -281,6 +281,19 @@ export const SettingsNotificationsApiFp = function(configuration?: Configuration
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Enables the notification type specified in the request.
+         * @summary Enable notifications
+         * @param {NotificationSettingsRequestsDto} [notificationSettingsRequestsDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async setNotificationSettings(notificationSettingsRequestsDto?: NotificationSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NotificationSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setNotificationSettings(notificationSettingsRequestsDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SettingsNotificationsApi.setNotificationSettings']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Sets a notification status for a room with the ID specified in the request.
          * @summary Set room notification status
          * @param {RoomsNotificationsSettingsRequestDto} [roomsNotificationsSettingsRequestDto] 
@@ -291,19 +304,6 @@ export const SettingsNotificationsApiFp = function(configuration?: Configuration
             const localVarAxiosArgs = await localVarAxiosParamCreator.setRoomsNotificationStatus(roomsNotificationsSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SettingsNotificationsApi.setRoomsNotificationStatus']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Enables the notification type specified in the request.
-         * @summary Enable notifications
-         * @param {NotificationSettingsRequestsDto} [notificationSettingsRequestsDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async setSettings(notificationSettingsRequestsDto?: NotificationSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NotificationSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setSettings(notificationSettingsRequestsDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsNotificationsApi.setSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -336,6 +336,16 @@ export const SettingsNotificationsApiFactory = function (configuration?: Configu
             return localVarFp.getRoomsNotificationSettings(options).then((request) => request(axios, basePath));
         },
         /**
+         * Enables the notification type specified in the request.
+         * @summary Enable notifications
+         * @param {NotificationSettingsRequestsDto} [notificationSettingsRequestsDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        setNotificationSettings(notificationSettingsRequestsDto?: NotificationSettingsRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<NotificationSettingsWrapper> {
+            return localVarFp.setNotificationSettings(notificationSettingsRequestsDto, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Sets a notification status for a room with the ID specified in the request.
          * @summary Set room notification status
          * @param {RoomsNotificationsSettingsRequestDto} [roomsNotificationsSettingsRequestDto] 
@@ -344,16 +354,6 @@ export const SettingsNotificationsApiFactory = function (configuration?: Configu
          */
         setRoomsNotificationStatus(roomsNotificationsSettingsRequestDto?: RoomsNotificationsSettingsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<RoomsNotificationSettingsWrapper> {
             return localVarFp.setRoomsNotificationStatus(roomsNotificationsSettingsRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Enables the notification type specified in the request.
-         * @summary Enable notifications
-         * @param {NotificationSettingsRequestsDto} [notificationSettingsRequestsDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        setSettings(notificationSettingsRequestsDto?: NotificationSettingsRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<NotificationSettingsWrapper> {
-            return localVarFp.setSettings(notificationSettingsRequestsDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -389,6 +389,18 @@ export class SettingsNotificationsApi extends BaseAPI {
     }
 
     /**
+     * Enables the notification type specified in the request.
+     * @summary Enable notifications
+     * @param {NotificationSettingsRequestsDto} [notificationSettingsRequestsDto] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SettingsNotificationsApi
+     */
+    public setNotificationSettings(notificationSettingsRequestsDto?: NotificationSettingsRequestsDto, options?: RawAxiosRequestConfig) {
+        return SettingsNotificationsApiFp(this.configuration).setNotificationSettings(notificationSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Sets a notification status for a room with the ID specified in the request.
      * @summary Set room notification status
      * @param {RoomsNotificationsSettingsRequestDto} [roomsNotificationsSettingsRequestDto] 
@@ -398,18 +410,6 @@ export class SettingsNotificationsApi extends BaseAPI {
      */
     public setRoomsNotificationStatus(roomsNotificationsSettingsRequestDto?: RoomsNotificationsSettingsRequestDto, options?: RawAxiosRequestConfig) {
         return SettingsNotificationsApiFp(this.configuration).setRoomsNotificationStatus(roomsNotificationsSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Enables the notification type specified in the request.
-     * @summary Enable notifications
-     * @param {NotificationSettingsRequestsDto} [notificationSettingsRequestsDto] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SettingsNotificationsApi
-     */
-    public setSettings(notificationSettingsRequestsDto?: NotificationSettingsRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsNotificationsApiFp(this.configuration).setSettings(notificationSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

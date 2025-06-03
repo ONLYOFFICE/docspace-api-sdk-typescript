@@ -5,11 +5,11 @@ All URIs are relative to *http://localhost:8092*
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**getEnabledModules**](#getenabledmodules) | **GET** /api/2.0/settings/security/modules | Get the enabled modules|
+|[**getIsProductAdministrator**](#getisproductadministrator) | **GET** /api/2.0/settings/security/administrator | Check a product administrator|
 |[**getPasswordSettings**](#getpasswordsettings) | **GET** /api/2.0/settings/security/password | Get the password settings|
 |[**getProductAdministrators**](#getproductadministrators) | **GET** /api/2.0/settings/security/administrator/{productid} | Get the product administrators|
 |[**getWebItemSecurityInfo**](#getwebitemsecurityinfo) | **GET** /api/2.0/settings/security/{id} | Get the module availability|
 |[**getWebItemSettingsSecurityInfo**](#getwebitemsettingssecurityinfo) | **GET** /api/2.0/settings/security | Get the security settings|
-|[**isProductAdministrator**](#isproductadministrator) | **GET** /api/2.0/settings/security/administrator | Check a product administrator|
 |[**setAccessToWebItems**](#setaccesstowebitems) | **PUT** /api/2.0/settings/security/access | Set the security settings to modules|
 |[**setProductAdministrator**](#setproductadministrator) | **PUT** /api/2.0/settings/security/administrator | Set a product administrator|
 |[**setWebItemSecurity**](#setwebitemsecurity) | **PUT** /api/2.0/settings/security | Set the module security settings|
@@ -56,6 +56,61 @@ This endpoint does not have any parameters.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of enabled modules |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getIsProductAdministrator**
+> ProductAdministratorWrapper getIsProductAdministrator()
+
+Checks if the selected user is an administrator of a product with the ID specified in the request.
+
+### Example
+
+```typescript
+import {
+    SettingsSecurityApi,
+    Configuration
+} from '@onlyoffice/docspace-api-typescript';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsSecurityApi(configuration);
+
+let productid: string; //The ID of the product extracted from the query parameters. (optional) (default to undefined)
+let userid: string; //The user ID extracted from the query parameters. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getIsProductAdministrator(
+    productid,
+    userid
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **productid** | [**string**] | The ID of the product extracted from the query parameters. | (optional) defaults to undefined|
+| **userid** | [**string**] | The user ID extracted from the query parameters. | (optional) defaults to undefined|
+
+
+### Return type
+
+**ProductAdministratorWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Object with the user security information: product ID, user ID, administrator or not |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -257,61 +312,6 @@ const { status, data } = await apiInstance.getWebItemSettingsSecurityInfo(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Security settings |  -  |
-|**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **isProductAdministrator**
-> ProductAdministratorWrapper isProductAdministrator()
-
-Checks if the selected user is an administrator of a product with the ID specified in the request.
-
-### Example
-
-```typescript
-import {
-    SettingsSecurityApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsSecurityApi(configuration);
-
-let productid: string; //The ID of the product extracted from the query parameters. (optional) (default to undefined)
-let userid: string; //The user ID extracted from the query parameters. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.isProductAdministrator(
-    productid,
-    userid
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **productid** | [**string**] | The ID of the product extracted from the query parameters. | (optional) defaults to undefined|
-| **userid** | [**string**] | The user ID extracted from the query parameters. | (optional) defaults to undefined|
-
-
-### Return type
-
-**ProductAdministratorWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Object with the user security information: product ID, user ID, administrator or not |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

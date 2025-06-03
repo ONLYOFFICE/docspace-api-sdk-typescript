@@ -207,59 +207,6 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Returns a list of groups for the user with the ID specified in the request.
-         * @summary Get user groups
-         * @param {string} userid The user ID.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getByUserId: async (userid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userid' is not null or undefined
-            assertParamExists('getByUserId', 'userid', userid)
-            const localVarPath = `/api/2.0/group/user/{userid}`
-                .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Returns the detailed information about the selected group.   **Note**: This method returns full group information.
          * @summary Get a group
          * @param {string} id The group ID.
@@ -305,6 +252,59 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
             if (includeMembers !== undefined) {
                 localVarQueryParameter['includeMembers'] = includeMembers;
             }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns a list of groups for the user with the ID specified in the request.
+         * @summary Get user groups
+         * @param {string} userid The user ID.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getGroupByUserId: async (userid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userid' is not null or undefined
+            assertParamExists('getGroupByUserId', 'userid', userid)
+            const localVarPath = `/api/2.0/group/user/{userid}`
+                .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
 
 
     
@@ -364,6 +364,63 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
             if (manager !== undefined) {
                 localVarQueryParameter['manager'] = manager;
             }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Moves all the members from the selected group to another one specified in the request.
+         * @summary Move group members
+         * @param {string} fromId The group ID to move from.
+         * @param {string} toId The group ID to move to.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        moveMembersTo: async (fromId: string, toId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'fromId' is not null or undefined
+            assertParamExists('moveMembersTo', 'fromId', fromId)
+            // verify required parameter 'toId' is not null or undefined
+            assertParamExists('moveMembersTo', 'toId', toId)
+            const localVarPath = `/api/2.0/group/{fromId}/members/{toId}`
+                .replace(`{${"fromId"}}`, encodeURIComponent(String(fromId)))
+                .replace(`{${"toId"}}`, encodeURIComponent(String(toId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
 
 
     
@@ -441,9 +498,9 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        setManager: async (id: string, setManagerRequest?: SetManagerRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setGroupManager: async (id: string, setManagerRequest?: SetManagerRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('setManager', 'id', id)
+            assertParamExists('setGroupManager', 'id', id)
             const localVarPath = `/api/2.0/group/{id}/manager`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -541,63 +598,6 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(membersRequest, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Moves all the members from the selected group to another one specified in the request.
-         * @summary Move group members
-         * @param {string} fromId The group ID to move from.
-         * @param {string} toId The group ID to move to.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        transferMembersTo: async (fromId: string, toId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fromId' is not null or undefined
-            assertParamExists('transferMembersTo', 'fromId', fromId)
-            // verify required parameter 'toId' is not null or undefined
-            assertParamExists('transferMembersTo', 'toId', toId)
-            const localVarPath = `/api/2.0/group/{fromId}/members/{toId}`
-                .replace(`{${"fromId"}}`, encodeURIComponent(String(fromId)))
-                .replace(`{${"toId"}}`, encodeURIComponent(String(toId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -712,19 +712,6 @@ export const GroupApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns a list of groups for the user with the ID specified in the request.
-         * @summary Get user groups
-         * @param {string} userid The user ID.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getByUserId(userid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupSummaryArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getByUserId(userid, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GroupApi.getByUserId']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
          * Returns the detailed information about the selected group.   **Note**: This method returns full group information.
          * @summary Get a group
          * @param {string} id The group ID.
@@ -739,6 +726,19 @@ export const GroupApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns a list of groups for the user with the ID specified in the request.
+         * @summary Get user groups
+         * @param {string} userid The user ID.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getGroupByUserId(userid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupSummaryArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getGroupByUserId(userid, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GroupApi.getGroupByUserId']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns the general information about all the groups, such as group ID and group manager.   **Note**: This method returns partial group information.
          * @summary Get groups
          * @param {string} [userId] The user ID.
@@ -750,6 +750,20 @@ export const GroupApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getGroups(userId, manager, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupApi.getGroups']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Moves all the members from the selected group to another one specified in the request.
+         * @summary Move group members
+         * @param {string} fromId The group ID to move from.
+         * @param {string} toId The group ID to move to.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async moveMembersTo(fromId: string, toId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.moveMembersTo(fromId, toId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GroupApi.moveMembersTo']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -774,10 +788,10 @@ export const GroupApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async setManager(id: string, setManagerRequest?: SetManagerRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setManager(id, setManagerRequest, options);
+        async setGroupManager(id: string, setManagerRequest?: SetManagerRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setGroupManager(id, setManagerRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GroupApi.setManager']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['GroupApi.setGroupManager']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -792,20 +806,6 @@ export const GroupApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setMembersTo(id, membersRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupApi.setMembersTo']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Moves all the members from the selected group to another one specified in the request.
-         * @summary Move group members
-         * @param {string} fromId The group ID to move from.
-         * @param {string} toId The group ID to move to.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async transferMembersTo(fromId: string, toId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.transferMembersTo(fromId, toId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GroupApi.transferMembersTo']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -864,16 +864,6 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.deleteGroup(id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of groups for the user with the ID specified in the request.
-         * @summary Get user groups
-         * @param {string} userid The user ID.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getByUserId(userid: string, options?: RawAxiosRequestConfig): AxiosPromise<GroupSummaryArrayWrapper> {
-            return localVarFp.getByUserId(userid, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Returns the detailed information about the selected group.   **Note**: This method returns full group information.
          * @summary Get a group
          * @param {string} id The group ID.
@@ -885,6 +875,16 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.getGroup(id, includeMembers, options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns a list of groups for the user with the ID specified in the request.
+         * @summary Get user groups
+         * @param {string} userid The user ID.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getGroupByUserId(userid: string, options?: RawAxiosRequestConfig): AxiosPromise<GroupSummaryArrayWrapper> {
+            return localVarFp.getGroupByUserId(userid, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns the general information about all the groups, such as group ID and group manager.   **Note**: This method returns partial group information.
          * @summary Get groups
          * @param {string} [userId] The user ID.
@@ -894,6 +894,17 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
          */
         getGroups(userId?: string, manager?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<GroupArrayWrapper> {
             return localVarFp.getGroups(userId, manager, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Moves all the members from the selected group to another one specified in the request.
+         * @summary Move group members
+         * @param {string} fromId The group ID to move from.
+         * @param {string} toId The group ID to move to.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        moveMembersTo(fromId: string, toId: string, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
+            return localVarFp.moveMembersTo(fromId, toId, options).then((request) => request(axios, basePath));
         },
         /**
          * Removes the group members specified in the request from the selected group.
@@ -914,8 +925,8 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        setManager(id: string, setManagerRequest?: SetManagerRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
-            return localVarFp.setManager(id, setManagerRequest, options).then((request) => request(axios, basePath));
+        setGroupManager(id: string, setManagerRequest?: SetManagerRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
+            return localVarFp.setGroupManager(id, setManagerRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Replaces the group members with those specified in the request.
@@ -927,17 +938,6 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
          */
         setMembersTo(id: string, membersRequest?: MembersRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
             return localVarFp.setMembersTo(id, membersRequest, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Moves all the members from the selected group to another one specified in the request.
-         * @summary Move group members
-         * @param {string} fromId The group ID to move from.
-         * @param {string} toId The group ID to move to.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        transferMembersTo(fromId: string, toId: string, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
-            return localVarFp.transferMembersTo(fromId, toId, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates the existing group changing the group manager, name, and/or members.
@@ -998,18 +998,6 @@ export class GroupApi extends BaseAPI {
     }
 
     /**
-     * Returns a list of groups for the user with the ID specified in the request.
-     * @summary Get user groups
-     * @param {string} userid The user ID.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof GroupApi
-     */
-    public getByUserId(userid: string, options?: RawAxiosRequestConfig) {
-        return GroupApiFp(this.configuration).getByUserId(userid, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Returns the detailed information about the selected group.   **Note**: This method returns full group information.
      * @summary Get a group
      * @param {string} id The group ID.
@@ -1023,6 +1011,18 @@ export class GroupApi extends BaseAPI {
     }
 
     /**
+     * Returns a list of groups for the user with the ID specified in the request.
+     * @summary Get user groups
+     * @param {string} userid The user ID.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupApi
+     */
+    public getGroupByUserId(userid: string, options?: RawAxiosRequestConfig) {
+        return GroupApiFp(this.configuration).getGroupByUserId(userid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Returns the general information about all the groups, such as group ID and group manager.   **Note**: This method returns partial group information.
      * @summary Get groups
      * @param {string} [userId] The user ID.
@@ -1033,6 +1033,19 @@ export class GroupApi extends BaseAPI {
      */
     public getGroups(userId?: string, manager?: boolean, options?: RawAxiosRequestConfig) {
         return GroupApiFp(this.configuration).getGroups(userId, manager, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Moves all the members from the selected group to another one specified in the request.
+     * @summary Move group members
+     * @param {string} fromId The group ID to move from.
+     * @param {string} toId The group ID to move to.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupApi
+     */
+    public moveMembersTo(fromId: string, toId: string, options?: RawAxiosRequestConfig) {
+        return GroupApiFp(this.configuration).moveMembersTo(fromId, toId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1057,8 +1070,8 @@ export class GroupApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupApi
      */
-    public setManager(id: string, setManagerRequest?: SetManagerRequest, options?: RawAxiosRequestConfig) {
-        return GroupApiFp(this.configuration).setManager(id, setManagerRequest, options).then((request) => request(this.axios, this.basePath));
+    public setGroupManager(id: string, setManagerRequest?: SetManagerRequest, options?: RawAxiosRequestConfig) {
+        return GroupApiFp(this.configuration).setGroupManager(id, setManagerRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1072,19 +1085,6 @@ export class GroupApi extends BaseAPI {
      */
     public setMembersTo(id: string, membersRequest?: MembersRequest, options?: RawAxiosRequestConfig) {
         return GroupApiFp(this.configuration).setMembersTo(id, membersRequest, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Moves all the members from the selected group to another one specified in the request.
-     * @summary Move group members
-     * @param {string} fromId The group ID to move from.
-     * @param {string} toId The group ID to move to.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof GroupApi
-     */
-    public transferMembersTo(fromId: string, toId: string, options?: RawAxiosRequestConfig) {
-        return GroupApiFp(this.configuration).transferMembersTo(fromId, toId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

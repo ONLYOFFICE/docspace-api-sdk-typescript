@@ -6,6 +6,7 @@ The request parameters for deleting file versions.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**returnSingleOperation** | **boolean** | Specifies whether to return only the current operation | [optional] [default to undefined]
 **deleteAfter** | **boolean** | Specifies whether to delete a file after the editing session is finished or not. | [optional] [default to undefined]
 **fileId** | **number** | The file ID to delete. | [default to undefined]
 **versions** | **Array&lt;number&gt;** | The collection of file versions to be deleted. | [default to undefined]
@@ -16,6 +17,7 @@ Name | Type | Description | Notes
 import { DeleteVersionBatchRequestDto } from '@onlyoffice/docspace-api-typescript';
 
 const instance: DeleteVersionBatchRequestDto = {
+    returnSingleOperation,
     deleteAfter,
     fileId,
     versions,

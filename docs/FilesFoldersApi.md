@@ -16,14 +16,14 @@ All URIs are relative to *http://localhost:8092*
 |[**getFolderPrimaryExternalLink**](#getfolderprimaryexternallink) | **GET** /api/2.0/files/folder/{id}/link | Get primary external link|
 |[**getFolders**](#getfolders) | **GET** /api/2.0/files/{folderId}/subfolders | Get subfolders|
 |[**getMyFolder**](#getmyfolder) | **GET** /api/2.0/files/@my | Get the \&quot;My documents\&quot; section|
-|[**getNewItems**](#getnewitems) | **GET** /api/2.0/files/{folderId}/news | Get new folder items|
+|[**getNewFolderItems**](#getnewfolderitems) | **GET** /api/2.0/files/{folderId}/news | Get new folder items|
 |[**getPrivacyFolder**](#getprivacyfolder) | **GET** /api/2.0/files/@privacy | Get the \&quot;Private Room\&quot; section|
 |[**getRootFolders**](#getrootfolders) | **GET** /api/2.0/files/@root | Get filtered sections|
 |[**getTrashFolder**](#gettrashfolder) | **GET** /api/2.0/files/@trash | Get the \&quot;Trash\&quot; section|
 |[**insertFile**](#insertfile) | **POST** /api/2.0/files/{folderId}/insert | Insert a file|
 |[**insertFileToMyFromBody**](#insertfiletomyfrombody) | **POST** /api/2.0/files/@my/insert | Insert a file to the \&quot;My documents\&quot; section|
 |[**renameFolder**](#renamefolder) | **PUT** /api/2.0/files/folder/{folderId} | Rename a folder|
-|[**setFileOrder**](#setfileorder) | **PUT** /api/2.0/files/folder/{folderId}/order | Set file order|
+|[**setFolderOrder**](#setfolderorder) | **PUT** /api/2.0/files/folder/{folderId}/order | Set folder order|
 |[**uploadFile**](#uploadfile) | **POST** /api/2.0/files/{folderId}/upload | Upload a file|
 |[**uploadFileToMy**](#uploadfiletomy) | **POST** /api/2.0/files/@my/upload | Upload a file to the \&quot;My documents\&quot; section|
 
@@ -702,8 +702,8 @@ const { status, data } = await apiInstance.getMyFolder(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getNewItems**
-> FileEntryArrayWrapper getNewItems()
+# **getNewFolderItems**
+> FileEntryArrayWrapper getNewFolderItems()
 
 Returns a list of all the new items from a folder with the ID specified in the request.
 
@@ -720,7 +720,7 @@ const apiInstance = new FilesFoldersApi(configuration);
 
 let folderId: number; //The request folder ID. (default to undefined)
 
-const { status, data } = await apiInstance.getNewItems(
+const { status, data } = await apiInstance.getNewFolderItems(
     folderId
 );
 ```
@@ -1166,8 +1166,8 @@ const { status, data } = await apiInstance.renameFolder(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **setFileOrder**
-> FolderIntegerWrapper setFileOrder()
+# **setFolderOrder**
+> FolderIntegerWrapper setFolderOrder()
 
 Sets the file order in the folder with ID specified in the request.
 
@@ -1186,7 +1186,7 @@ const apiInstance = new FilesFoldersApi(configuration);
 let folderId: number; //The folder unique identifier. (default to undefined)
 let orderRequestDto: OrderRequestDto; //The folder order information. (optional)
 
-const { status, data } = await apiInstance.setFileOrder(
+const { status, data } = await apiInstance.setFolderOrder(
     folderId,
     orderRequestDto
 );

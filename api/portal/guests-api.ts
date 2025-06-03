@@ -36,9 +36,9 @@ export const PortalGuestsApiAxiosParamCreator = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getGuestShareLink: async (userid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getGuestSharingLink: async (userid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userid' is not null or undefined
-            assertParamExists('getGuestShareLink', 'userid', userid)
+            assertParamExists('getGuestSharingLink', 'userid', userid)
             const localVarPath = `/api/2.0/people/guests/{userid}/share`
                 .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -99,10 +99,10 @@ export const PortalGuestsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getGuestShareLink(userid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getGuestShareLink(userid, options);
+        async getGuestSharingLink(userid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getGuestSharingLink(userid, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalGuestsApi.getGuestShareLink']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PortalGuestsApi.getGuestSharingLink']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -122,8 +122,8 @@ export const PortalGuestsApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getGuestShareLink(userid: string, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.getGuestShareLink(userid, options).then((request) => request(axios, basePath));
+        getGuestSharingLink(userid: string, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.getGuestSharingLink(userid, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -143,8 +143,8 @@ export class PortalGuestsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PortalGuestsApi
      */
-    public getGuestShareLink(userid: string, options?: RawAxiosRequestConfig) {
-        return PortalGuestsApiFp(this.configuration).getGuestShareLink(userid, options).then((request) => request(this.axios, this.basePath));
+    public getGuestSharingLink(userid: string, options?: RawAxiosRequestConfig) {
+        return PortalGuestsApiFp(this.configuration).getGuestSharingLink(userid, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

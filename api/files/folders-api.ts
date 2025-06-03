@@ -714,9 +714,9 @@ export const FilesFoldersApiAxiosParamCreator = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getNewItems: async (folderId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getNewFolderItems: async (folderId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
-            assertParamExists('getNewItems', 'folderId', folderId)
+            assertParamExists('getNewFolderItems', 'folderId', folderId)
             const localVarPath = `/api/2.0/files/{folderId}/news`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1236,15 +1236,15 @@ export const FilesFoldersApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * Sets the file order in the folder with ID specified in the request.
-         * @summary Set file order
+         * @summary Set folder order
          * @param {number} folderId The folder unique identifier.
          * @param {OrderRequestDto} [orderRequestDto] The folder order information.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        setFileOrder: async (folderId: number, orderRequestDto?: OrderRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setFolderOrder: async (folderId: number, orderRequestDto?: OrderRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
-            assertParamExists('setFileOrder', 'folderId', folderId)
+            assertParamExists('setFolderOrder', 'folderId', folderId)
             const localVarPath = `/api/2.0/files/folder/{folderId}/order`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1592,10 +1592,10 @@ export const FilesFoldersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getNewItems(folderId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileEntryArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getNewItems(folderId, options);
+        async getNewFolderItems(folderId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileEntryArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getNewFolderItems(folderId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesFoldersApi.getNewItems']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['FilesFoldersApi.getNewFolderItems']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1707,16 +1707,16 @@ export const FilesFoldersApiFp = function(configuration?: Configuration) {
         },
         /**
          * Sets the file order in the folder with ID specified in the request.
-         * @summary Set file order
+         * @summary Set folder order
          * @param {number} folderId The folder unique identifier.
          * @param {OrderRequestDto} [orderRequestDto] The folder order information.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async setFileOrder(folderId: number, orderRequestDto?: OrderRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setFileOrder(folderId, orderRequestDto, options);
+        async setFolderOrder(folderId: number, orderRequestDto?: OrderRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setFolderOrder(folderId, orderRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesFoldersApi.setFileOrder']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['FilesFoldersApi.setFolderOrder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1898,8 +1898,8 @@ export const FilesFoldersApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getNewItems(folderId: number, options?: RawAxiosRequestConfig): AxiosPromise<FileEntryArrayWrapper> {
-            return localVarFp.getNewItems(folderId, options).then((request) => request(axios, basePath));
+        getNewFolderItems(folderId: number, options?: RawAxiosRequestConfig): AxiosPromise<FileEntryArrayWrapper> {
+            return localVarFp.getNewFolderItems(folderId, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the detailed list of files and folders located in the \"Private Room\" section.
@@ -1992,14 +1992,14 @@ export const FilesFoldersApiFactory = function (configuration?: Configuration, b
         },
         /**
          * Sets the file order in the folder with ID specified in the request.
-         * @summary Set file order
+         * @summary Set folder order
          * @param {number} folderId The folder unique identifier.
          * @param {OrderRequestDto} [orderRequestDto] The folder order information.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        setFileOrder(folderId: number, orderRequestDto?: OrderRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
-            return localVarFp.setFileOrder(folderId, orderRequestDto, options).then((request) => request(axios, basePath));
+        setFolderOrder(folderId: number, orderRequestDto?: OrderRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
+            return localVarFp.setFolderOrder(folderId, orderRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
@@ -2199,8 +2199,8 @@ export class FilesFoldersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesFoldersApi
      */
-    public getNewItems(folderId: number, options?: RawAxiosRequestConfig) {
-        return FilesFoldersApiFp(this.configuration).getNewItems(folderId, options).then((request) => request(this.axios, this.basePath));
+    public getNewFolderItems(folderId: number, options?: RawAxiosRequestConfig) {
+        return FilesFoldersApiFp(this.configuration).getNewFolderItems(folderId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2306,15 +2306,15 @@ export class FilesFoldersApi extends BaseAPI {
 
     /**
      * Sets the file order in the folder with ID specified in the request.
-     * @summary Set file order
+     * @summary Set folder order
      * @param {number} folderId The folder unique identifier.
      * @param {OrderRequestDto} [orderRequestDto] The folder order information.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesFoldersApi
      */
-    public setFileOrder(folderId: number, orderRequestDto?: OrderRequestDto, options?: RawAxiosRequestConfig) {
-        return FilesFoldersApiFp(this.configuration).setFileOrder(folderId, orderRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public setFolderOrder(folderId: number, orderRequestDto?: OrderRequestDto, options?: RawAxiosRequestConfig) {
+        return FilesFoldersApiFp(this.configuration).setFolderOrder(folderId, orderRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

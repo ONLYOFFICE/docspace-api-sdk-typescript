@@ -8,13 +8,13 @@ All URIs are relative to *http://localhost:8092*
 |[**deleteMember**](#deletemember) | **DELETE** /api/2.0/people/{userid} | Delete a user|
 |[**deleteProfile**](#deleteprofile) | **DELETE** /api/2.0/people/@self | Delete my profile|
 |[**getAllProfiles**](#getallprofiles) | **GET** /api/2.0/people | Get profiles|
-|[**getByEmail**](#getbyemail) | **GET** /api/2.0/people/email | Get a profile by user email|
-|[**getById**](#getbyid) | **GET** /api/2.0/people/{userid} | Get a profile by user name|
 |[**getClaims**](#getclaims) | **GET** /api/2.0/people/tokendiagnostics | Returns the user claims.|
+|[**getProfileByEmail**](#getprofilebyemail) | **GET** /api/2.0/people/email | Get a profile by user email|
+|[**getProfileByUserId**](#getprofilebyuserid) | **GET** /api/2.0/people/{userid} | Get a profile by user name|
+|[**getSelfProfile**](#getselfprofile) | **GET** /api/2.0/people/@self | Get my profile|
 |[**inviteUsers**](#inviteusers) | **POST** /api/2.0/people/invite | Invite users|
 |[**removeUsers**](#removeusers) | **PUT** /api/2.0/people/delete | Delete users|
 |[**resendUserInvites**](#resenduserinvites) | **PUT** /api/2.0/people/invite | Resend activation emails|
-|[**self**](#self) | **GET** /api/2.0/people/@self | Get my profile|
 |[**sendEmailChangeInstructions**](#sendemailchangeinstructions) | **POST** /api/2.0/people/email | Send instructions to change email|
 |[**updateMember**](#updatemember) | **PUT** /api/2.0/people/{userid} | Update a user|
 |[**updateMemberCulture**](#updatememberculture) | **PUT** /api/2.0/people/{userid}/culture | Update a user culture code|
@@ -220,116 +220,6 @@ This endpoint does not have any parameters.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getByEmail**
-> EmployeeFullWrapper getByEmail()
-
-Returns the detailed information about a profile of the user with the email specified in the request.
-
-### Example
-
-```typescript
-import {
-    PeopleProfilesApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleProfilesApi(configuration);
-
-let email: string; //The user email address. (optional) (default to undefined)
-let culture: string; //Culture (optional) (default to undefined)
-
-const { status, data } = await apiInstance.getByEmail(
-    email,
-    culture
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **email** | [**string**] | The user email address. | (optional) defaults to undefined|
-| **culture** | [**string**] | Culture | (optional) defaults to undefined|
-
-
-### Return type
-
-**EmployeeFullWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Detailed profile information |  -  |
-|**401** | Unauthorized |  -  |
-|**404** | User not found |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **getById**
-> EmployeeFullWrapper getById()
-
-Returns the detailed information about a profile of the user with the name specified in the request.
-
-### Example
-
-```typescript
-import {
-    PeopleProfilesApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleProfilesApi(configuration);
-
-let userid: string; //The user ID. (default to undefined)
-
-const { status, data } = await apiInstance.getById(
-    userid
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **userid** | [**string**] | The user ID. | defaults to undefined|
-
-
-### Return type
-
-**EmployeeFullWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Detailed profile information |  -  |
-|**400** | Incorect UserId |  -  |
-|**401** | Unauthorized |  -  |
-|**404** | User not found |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **getClaims**
 > ObjectWrapper getClaims()
 
@@ -371,6 +261,161 @@ This endpoint does not have any parameters.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Claims |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getProfileByEmail**
+> EmployeeFullWrapper getProfileByEmail()
+
+Returns the detailed information about a profile of the user with the email specified in the request.
+
+### Example
+
+```typescript
+import {
+    PeopleProfilesApi,
+    Configuration
+} from '@onlyoffice/docspace-api-typescript';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleProfilesApi(configuration);
+
+let email: string; //The user email address. (optional) (default to undefined)
+let culture: string; //Culture (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getProfileByEmail(
+    email,
+    culture
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **email** | [**string**] | The user email address. | (optional) defaults to undefined|
+| **culture** | [**string**] | Culture | (optional) defaults to undefined|
+
+
+### Return type
+
+**EmployeeFullWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Detailed profile information |  -  |
+|**401** | Unauthorized |  -  |
+|**404** | User not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getProfileByUserId**
+> EmployeeFullWrapper getProfileByUserId()
+
+Returns the detailed information about a profile of the user with the name specified in the request.
+
+### Example
+
+```typescript
+import {
+    PeopleProfilesApi,
+    Configuration
+} from '@onlyoffice/docspace-api-typescript';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleProfilesApi(configuration);
+
+let userid: string; //The user ID. (default to undefined)
+
+const { status, data } = await apiInstance.getProfileByUserId(
+    userid
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **userid** | [**string**] | The user ID. | defaults to undefined|
+
+
+### Return type
+
+**EmployeeFullWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Detailed profile information |  -  |
+|**400** | Incorect UserId |  -  |
+|**401** | Unauthorized |  -  |
+|**404** | User not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getSelfProfile**
+> EmployeeFullWrapper getSelfProfile()
+
+Returns the detailed information about the current user profile.
+
+### Example
+
+```typescript
+import {
+    PeopleProfilesApi,
+    Configuration
+} from '@onlyoffice/docspace-api-typescript';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleProfilesApi(configuration);
+
+const { status, data } = await apiInstance.getSelfProfile();
+```
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**EmployeeFullWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Detailed information about my profile |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -534,51 +579,6 @@ const { status, data } = await apiInstance.resendUserInvites(
 |**200** | List of users with the detailed information |  -  |
 |**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **self**
-> EmployeeFullWrapper self()
-
-Returns the detailed information about the current user profile.
-
-### Example
-
-```typescript
-import {
-    PeopleProfilesApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleProfilesApi(configuration);
-
-const { status, data } = await apiInstance.self();
-```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**EmployeeFullWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Detailed information about my profile |  -  |
-|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

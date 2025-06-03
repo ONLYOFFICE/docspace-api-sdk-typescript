@@ -360,6 +360,8 @@ export * from './password-hasher';
 export * from './password-settings-dto';
 export * from './password-settings-requests-dto';
 export * from './password-settings-wrapper';
+export * from './payment-calculation';
+export * from './payment-calculation-wrapper';
 export * from './payment-method-status';
 export * from './payment-settings-dto';
 export * from './payment-settings-wrapper';

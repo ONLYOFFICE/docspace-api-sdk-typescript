@@ -117,9 +117,9 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addTags: async (id: number, batchTagsRequestDto?: BatchTagsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        addRoomTags: async (id: number, batchTagsRequestDto?: BatchTagsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('addTags', 'id', id)
+            assertParamExists('addRoomTags', 'id', id)
             const localVarPath = `/api/2.0/files/rooms/{id}/tags`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -444,70 +444,13 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Creates a room in the \"Rooms\" section stored in a third-party storage.
-         * @summary Create a third-party room
-         * @param {string} id The ID of the folder in the third-party storage in which the contents of the room will be stored.
-         * @param {CreateThirdPartyRoom} [createThirdPartyRoom] The third-party room information.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createRoomThirdParty: async (id: string, createThirdPartyRoom?: CreateThirdPartyRoom, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('createRoomThirdParty', 'id', id)
-            const localVarPath = `/api/2.0/files/rooms/thirdparty/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createThirdPartyRoom, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Creates a custom tag with the parameters specified in the request.
          * @summary Create a tag
          * @param {CreateTagRequestDto} [createTagRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createTag: async (createTagRequestDto?: CreateTagRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createRoomTag: async (createTagRequestDto?: CreateTagRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/files/tags`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -560,7 +503,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createTemplate: async (roomTemplateDto?: RoomTemplateDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createRoomTemplate: async (roomTemplateDto?: RoomTemplateDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/files/roomtemplate`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -600,6 +543,63 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(roomTemplateDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Creates a room in the \"Rooms\" section stored in a third-party storage.
+         * @summary Create a third-party room
+         * @param {string} id The ID of the folder in the third-party storage in which the contents of the room will be stored.
+         * @param {CreateThirdPartyRoom} [createThirdPartyRoom] The third-party room information.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createRoomThirdParty: async (id: string, createThirdPartyRoom?: CreateThirdPartyRoom, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('createRoomThirdParty', 'id', id)
+            const localVarPath = `/api/2.0/files/rooms/thirdparty/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createThirdPartyRoom, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -777,9 +777,9 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteTags: async (id: number, batchTagsRequestDto?: BatchTagsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteRoomTags: async (id: number, batchTagsRequestDto?: BatchTagsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('deleteTags', 'id', id)
+            assertParamExists('deleteRoomTags', 'id', id)
             const localVarPath = `/api/2.0/files/rooms/{id}/tags`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -827,13 +827,17 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Returns a list of all covers.
-         * @summary Get covers
+         * Returns a list of all the new items from a room with the ID specified in the request.
+         * @summary Get the new room items
+         * @param {number} id The room ID of the request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCovers: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/files/rooms/covers`;
+        getNewRoomItems: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getNewRoomItems', 'id', id)
+            const localVarPath = `/api/2.0/files/rooms/{id}/news`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -876,17 +880,66 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Returns a list of all the new items from a room with the ID specified in the request.
-         * @summary Get the new room items
-         * @param {number} id The room ID of the request.
+         * Returns the public settings of the room template with the ID specified in the request.
+         * @summary Get public settings
+         * @param {number} id The room template ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getNewRoomItems: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getPublicSettings: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('getNewRoomItems', 'id', id)
-            const localVarPath = `/api/2.0/files/rooms/{id}/news`
+            assertParamExists('getPublicSettings', 'id', id)
+            const localVarPath = `/api/2.0/files/roomtemplate/{id}/public`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns a list of all covers.
+         * @summary Get covers
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRoomCovers: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/files/rooms/covers`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1177,6 +1230,104 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
+         * Returns a list of custom tags.
+         * @summary Get tags
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRoomTagsInfo: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/files/tags`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the progress status of the room template creation process.
+         * @summary Get status of room template creation
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRoomTemplateCreatingStatus: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/files/roomtemplate/status`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns the contents of the \"Rooms\" section by the parameters specified in the request.
          * @summary Get rooms
          * @param {Array<RoomType>} [type] The filter by room type.
@@ -1378,157 +1529,6 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Returns a list of custom tags.
-         * @summary Get tags
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getTagsInfo: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/files/tags`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns the progress status of the room template creation process.
-         * @summary Get status of room template creation
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getTemplateCreatingStatus: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/files/roomtemplate/status`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns the public settings of the room template with the ID specified in the request.
-         * @summary Get public settings
-         * @param {number} id The room template ID.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        isPublic: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('isPublic', 'id', id)
-            const localVarPath = `/api/2.0/files/roomtemplate/{id}/public`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Pins a room with the ID specified in the request to the top of the list.
          * @summary Pin a room
          * @param {number} id The room ID of the request.
@@ -1588,9 +1588,9 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reorder: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        reorderRoom: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('reorder', 'id', id)
+            assertParamExists('reorderRoom', 'id', id)
             const localVarPath = `/api/2.0/files/rooms/{id}/reorder`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1692,6 +1692,59 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
+         * Sets the public settings for the room template with the ID specified in the request.
+         * @summary Set public settings
+         * @param {SetPublicDto} [setPublicDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        setPublicSettings: async (setPublicDto?: SetPublicDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/files/roomtemplate/public`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(setPublicDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Sets the room external or invitation link with the ID specified in the request.
          * @summary Set the room external or invitation link
          * @param {number} id The room ID.
@@ -1699,9 +1752,9 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        setLink: async (id: number, roomLinkRequest?: RoomLinkRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setRoomLink: async (id: number, roomLinkRequest?: RoomLinkRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('setLink', 'id', id)
+            assertParamExists('setRoomLink', 'id', id)
             const localVarPath = `/api/2.0/files/rooms/{id}/links`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1742,59 +1795,6 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(roomLinkRequest, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Sets the public settings for the room template with the ID specified in the request.
-         * @summary Set public settings
-         * @param {SetPublicDto} [setPublicDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        setPublic: async (setPublicDto?: SetPublicDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/files/roomtemplate/public`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(setPublicDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -2205,10 +2205,10 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addTags(id: number, batchTagsRequestDto?: BatchTagsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.addTags(id, batchTagsRequestDto, options);
+        async addRoomTags(id: number, batchTagsRequestDto?: BatchTagsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addRoomTags(id, batchTagsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.addTags']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.addRoomTags']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2280,6 +2280,32 @@ export const RoomsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Creates a custom tag with the parameters specified in the request.
+         * @summary Create a tag
+         * @param {CreateTagRequestDto} [createTagRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createRoomTag(createTagRequestDto?: CreateTagRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createRoomTag(createTagRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.createRoomTag']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Starts creating the room template.
+         * @summary Start creating room template
+         * @param {RoomTemplateDto} [roomTemplateDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createRoomTemplate(roomTemplateDto?: RoomTemplateDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RoomTemplateStatusWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createRoomTemplate(roomTemplateDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.createRoomTemplate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Creates a room in the \"Rooms\" section stored in a third-party storage.
          * @summary Create a third-party room
          * @param {string} id The ID of the folder in the third-party storage in which the contents of the room will be stored.
@@ -2291,32 +2317,6 @@ export const RoomsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createRoomThirdParty(id, createThirdPartyRoom, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.createRoomThirdParty']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Creates a custom tag with the parameters specified in the request.
-         * @summary Create a tag
-         * @param {CreateTagRequestDto} [createTagRequestDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async createTag(createTagRequestDto?: CreateTagRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createTag(createTagRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.createTag']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Starts creating the room template.
-         * @summary Start creating room template
-         * @param {RoomTemplateDto} [roomTemplateDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async createTemplate(roomTemplateDto?: RoomTemplateDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RoomTemplateStatusWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createTemplate(roomTemplateDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.createTemplate']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2367,22 +2367,10 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteTags(id: number, batchTagsRequestDto?: BatchTagsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteTags(id, batchTagsRequestDto, options);
+        async deleteRoomTags(id: number, batchTagsRequestDto?: BatchTagsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteRoomTags(id, batchTagsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.deleteTags']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns a list of all covers.
-         * @summary Get covers
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getCovers(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CoversResultArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getCovers(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getCovers']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.deleteRoomTags']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2396,6 +2384,31 @@ export const RoomsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getNewRoomItems(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.getNewRoomItems']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the public settings of the room template with the ID specified in the request.
+         * @summary Get public settings
+         * @param {number} id The room template ID.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPublicSettings(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPublicSettings(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getPublicSettings']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns a list of all covers.
+         * @summary Get covers
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getRoomCovers(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CoversResultArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomCovers(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomCovers']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2464,6 +2477,30 @@ export const RoomsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns a list of custom tags.
+         * @summary Get tags
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getRoomTagsInfo(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomTagsInfo(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomTagsInfo']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the progress status of the room template creation process.
+         * @summary Get status of room template creation
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getRoomTemplateCreatingStatus(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RoomTemplateStatusWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomTemplateCreatingStatus(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomTemplateCreatingStatus']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns the contents of the \"Rooms\" section by the parameters specified in the request.
          * @summary Get rooms
          * @param {Array<RoomType>} [type] The filter by room type.
@@ -2511,43 +2548,6 @@ export const RoomsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns a list of custom tags.
-         * @summary Get tags
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getTagsInfo(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getTagsInfo(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getTagsInfo']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns the progress status of the room template creation process.
-         * @summary Get status of room template creation
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getTemplateCreatingStatus(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RoomTemplateStatusWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getTemplateCreatingStatus(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getTemplateCreatingStatus']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns the public settings of the room template with the ID specified in the request.
-         * @summary Get public settings
-         * @param {number} id The room template ID.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async isPublic(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.isPublic(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.isPublic']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
          * Pins a room with the ID specified in the request to the top of the list.
          * @summary Pin a room
          * @param {number} id The room ID of the request.
@@ -2567,10 +2567,10 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async reorder(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.reorder(id, options);
+        async reorderRoom(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.reorderRoom(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.reorder']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.reorderRoom']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2588,6 +2588,19 @@ export const RoomsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Sets the public settings for the room template with the ID specified in the request.
+         * @summary Set public settings
+         * @param {SetPublicDto} [setPublicDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async setPublicSettings(setPublicDto?: SetPublicDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setPublicSettings(setPublicDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.setPublicSettings']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Sets the room external or invitation link with the ID specified in the request.
          * @summary Set the room external or invitation link
          * @param {number} id The room ID.
@@ -2595,23 +2608,10 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async setLink(id: number, roomLinkRequest?: RoomLinkRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setLink(id, roomLinkRequest, options);
+        async setRoomLink(id: number, roomLinkRequest?: RoomLinkRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setRoomLink(id, roomLinkRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.setLink']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Sets the public settings for the room template with the ID specified in the request.
-         * @summary Set public settings
-         * @param {SetPublicDto} [setPublicDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async setPublic(setPublicDto?: SetPublicDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setPublic(setPublicDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.setPublic']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.setRoomLink']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2725,8 +2725,8 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addTags(id: number, batchTagsRequestDto?: BatchTagsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
-            return localVarFp.addTags(id, batchTagsRequestDto, options).then((request) => request(axios, basePath));
+        addRoomTags(id: number, batchTagsRequestDto?: BatchTagsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
+            return localVarFp.addRoomTags(id, batchTagsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Moves a room with the ID specified in the request to the \"Archive\" section.
@@ -2782,6 +2782,26 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.createRoomLogo(id, logoRequest, options).then((request) => request(axios, basePath));
         },
         /**
+         * Creates a custom tag with the parameters specified in the request.
+         * @summary Create a tag
+         * @param {CreateTagRequestDto} [createTagRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createRoomTag(createTagRequestDto?: CreateTagRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
+            return localVarFp.createRoomTag(createTagRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Starts creating the room template.
+         * @summary Start creating room template
+         * @param {RoomTemplateDto} [roomTemplateDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createRoomTemplate(roomTemplateDto?: RoomTemplateDto, options?: RawAxiosRequestConfig): AxiosPromise<RoomTemplateStatusWrapper> {
+            return localVarFp.createRoomTemplate(roomTemplateDto, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Creates a room in the \"Rooms\" section stored in a third-party storage.
          * @summary Create a third-party room
          * @param {string} id The ID of the folder in the third-party storage in which the contents of the room will be stored.
@@ -2791,26 +2811,6 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          */
         createRoomThirdParty(id: string, createThirdPartyRoom?: CreateThirdPartyRoom, options?: RawAxiosRequestConfig): AxiosPromise<FolderStringWrapper> {
             return localVarFp.createRoomThirdParty(id, createThirdPartyRoom, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Creates a custom tag with the parameters specified in the request.
-         * @summary Create a tag
-         * @param {CreateTagRequestDto} [createTagRequestDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createTag(createTagRequestDto?: CreateTagRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
-            return localVarFp.createTag(createTagRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Starts creating the room template.
-         * @summary Start creating room template
-         * @param {RoomTemplateDto} [roomTemplateDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createTemplate(roomTemplateDto?: RoomTemplateDto, options?: RawAxiosRequestConfig): AxiosPromise<RoomTemplateStatusWrapper> {
-            return localVarFp.createTemplate(roomTemplateDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Deletes a bunch of custom tags specified in the request.
@@ -2851,17 +2851,8 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteTags(id: number, batchTagsRequestDto?: BatchTagsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
-            return localVarFp.deleteTags(id, batchTagsRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns a list of all covers.
-         * @summary Get covers
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getCovers(options?: RawAxiosRequestConfig): AxiosPromise<CoversResultArrayWrapper> {
-            return localVarFp.getCovers(options).then((request) => request(axios, basePath));
+        deleteRoomTags(id: number, batchTagsRequestDto?: BatchTagsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
+            return localVarFp.deleteRoomTags(id, batchTagsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of all the new items from a room with the ID specified in the request.
@@ -2872,6 +2863,25 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          */
         getNewRoomItems(id: number, options?: RawAxiosRequestConfig): AxiosPromise<NewItemsFileEntryArrayWrapper> {
             return localVarFp.getNewRoomItems(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the public settings of the room template with the ID specified in the request.
+         * @summary Get public settings
+         * @param {number} id The room template ID.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPublicSettings(id: number, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.getPublicSettings(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns a list of all covers.
+         * @summary Get covers
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRoomCovers(options?: RawAxiosRequestConfig): AxiosPromise<CoversResultArrayWrapper> {
+            return localVarFp.getRoomCovers(options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the progress of creating a room from the template.
@@ -2924,6 +2934,24 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.getRoomSecurityInfo(id, filterType, options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns a list of custom tags.
+         * @summary Get tags
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRoomTagsInfo(options?: RawAxiosRequestConfig): AxiosPromise<ObjectArrayWrapper> {
+            return localVarFp.getRoomTagsInfo(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the progress status of the room template creation process.
+         * @summary Get status of room template creation
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRoomTemplateCreatingStatus(options?: RawAxiosRequestConfig): AxiosPromise<RoomTemplateStatusWrapper> {
+            return localVarFp.getRoomTemplateCreatingStatus(options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns the contents of the \"Rooms\" section by the parameters specified in the request.
          * @summary Get rooms
          * @param {Array<RoomType>} [type] The filter by room type.
@@ -2962,34 +2990,6 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.getRoomsPrimaryExternalLink(id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of custom tags.
-         * @summary Get tags
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getTagsInfo(options?: RawAxiosRequestConfig): AxiosPromise<ObjectArrayWrapper> {
-            return localVarFp.getTagsInfo(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns the progress status of the room template creation process.
-         * @summary Get status of room template creation
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getTemplateCreatingStatus(options?: RawAxiosRequestConfig): AxiosPromise<RoomTemplateStatusWrapper> {
-            return localVarFp.getTemplateCreatingStatus(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns the public settings of the room template with the ID specified in the request.
-         * @summary Get public settings
-         * @param {number} id The room template ID.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        isPublic(id: number, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.isPublic(id, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Pins a room with the ID specified in the request to the top of the list.
          * @summary Pin a room
          * @param {number} id The room ID of the request.
@@ -3006,8 +3006,8 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reorder(id: number, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
-            return localVarFp.reorder(id, options).then((request) => request(axios, basePath));
+        reorderRoom(id: number, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
+            return localVarFp.reorderRoom(id, options).then((request) => request(axios, basePath));
         },
         /**
          * Resends the email invitations to a room with the ID specified in the request to the selected users.
@@ -3021,6 +3021,16 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.resendEmailInvitations(id, userInvitation, options).then((request) => request(axios, basePath));
         },
         /**
+         * Sets the public settings for the room template with the ID specified in the request.
+         * @summary Set public settings
+         * @param {SetPublicDto} [setPublicDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        setPublicSettings(setPublicDto?: SetPublicDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.setPublicSettings(setPublicDto, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Sets the room external or invitation link with the ID specified in the request.
          * @summary Set the room external or invitation link
          * @param {number} id The room ID.
@@ -3028,18 +3038,8 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        setLink(id: number, roomLinkRequest?: RoomLinkRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
-            return localVarFp.setLink(id, roomLinkRequest, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Sets the public settings for the room template with the ID specified in the request.
-         * @summary Set public settings
-         * @param {SetPublicDto} [setPublicDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        setPublic(setPublicDto?: SetPublicDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.setPublic(setPublicDto, options).then((request) => request(axios, basePath));
+        setRoomLink(id: number, roomLinkRequest?: RoomLinkRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
+            return localVarFp.setRoomLink(id, roomLinkRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Sets the access rights to the room with the ID specified in the request.
@@ -3132,8 +3132,8 @@ export class RoomsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public addTags(id: number, batchTagsRequestDto?: BatchTagsRequestDto, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).addTags(id, batchTagsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public addRoomTags(id: number, batchTagsRequestDto?: BatchTagsRequestDto, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).addRoomTags(id, batchTagsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3200,19 +3200,6 @@ export class RoomsApi extends BaseAPI {
     }
 
     /**
-     * Creates a room in the \"Rooms\" section stored in a third-party storage.
-     * @summary Create a third-party room
-     * @param {string} id The ID of the folder in the third-party storage in which the contents of the room will be stored.
-     * @param {CreateThirdPartyRoom} [createThirdPartyRoom] The third-party room information.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RoomsApi
-     */
-    public createRoomThirdParty(id: string, createThirdPartyRoom?: CreateThirdPartyRoom, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).createRoomThirdParty(id, createThirdPartyRoom, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Creates a custom tag with the parameters specified in the request.
      * @summary Create a tag
      * @param {CreateTagRequestDto} [createTagRequestDto] 
@@ -3220,8 +3207,8 @@ export class RoomsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public createTag(createTagRequestDto?: CreateTagRequestDto, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).createTag(createTagRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public createRoomTag(createTagRequestDto?: CreateTagRequestDto, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).createRoomTag(createTagRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3232,8 +3219,21 @@ export class RoomsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public createTemplate(roomTemplateDto?: RoomTemplateDto, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).createTemplate(roomTemplateDto, options).then((request) => request(this.axios, this.basePath));
+    public createRoomTemplate(roomTemplateDto?: RoomTemplateDto, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).createRoomTemplate(roomTemplateDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Creates a room in the \"Rooms\" section stored in a third-party storage.
+     * @summary Create a third-party room
+     * @param {string} id The ID of the folder in the third-party storage in which the contents of the room will be stored.
+     * @param {CreateThirdPartyRoom} [createThirdPartyRoom] The third-party room information.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RoomsApi
+     */
+    public createRoomThirdParty(id: string, createThirdPartyRoom?: CreateThirdPartyRoom, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).createRoomThirdParty(id, createThirdPartyRoom, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3282,19 +3282,8 @@ export class RoomsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public deleteTags(id: number, batchTagsRequestDto?: BatchTagsRequestDto, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).deleteTags(id, batchTagsRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns a list of all covers.
-     * @summary Get covers
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RoomsApi
-     */
-    public getCovers(options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).getCovers(options).then((request) => request(this.axios, this.basePath));
+    public deleteRoomTags(id: number, batchTagsRequestDto?: BatchTagsRequestDto, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).deleteRoomTags(id, batchTagsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3307,6 +3296,29 @@ export class RoomsApi extends BaseAPI {
      */
     public getNewRoomItems(id: number, options?: RawAxiosRequestConfig) {
         return RoomsApiFp(this.configuration).getNewRoomItems(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the public settings of the room template with the ID specified in the request.
+     * @summary Get public settings
+     * @param {number} id The room template ID.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RoomsApi
+     */
+    public getPublicSettings(id: number, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).getPublicSettings(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns a list of all covers.
+     * @summary Get covers
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RoomsApi
+     */
+    public getRoomCovers(options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).getRoomCovers(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3370,6 +3382,28 @@ export class RoomsApi extends BaseAPI {
     }
 
     /**
+     * Returns a list of custom tags.
+     * @summary Get tags
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RoomsApi
+     */
+    public getRoomTagsInfo(options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).getRoomTagsInfo(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the progress status of the room template creation process.
+     * @summary Get status of room template creation
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RoomsApi
+     */
+    public getRoomTemplateCreatingStatus(options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).getRoomTemplateCreatingStatus(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Returns the contents of the \"Rooms\" section by the parameters specified in the request.
      * @summary Get rooms
      * @param {Array<RoomType>} [type] The filter by room type.
@@ -3414,40 +3448,6 @@ export class RoomsApi extends BaseAPI {
     }
 
     /**
-     * Returns a list of custom tags.
-     * @summary Get tags
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RoomsApi
-     */
-    public getTagsInfo(options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).getTagsInfo(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns the progress status of the room template creation process.
-     * @summary Get status of room template creation
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RoomsApi
-     */
-    public getTemplateCreatingStatus(options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).getTemplateCreatingStatus(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns the public settings of the room template with the ID specified in the request.
-     * @summary Get public settings
-     * @param {number} id The room template ID.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RoomsApi
-     */
-    public isPublic(id: number, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).isPublic(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Pins a room with the ID specified in the request to the top of the list.
      * @summary Pin a room
      * @param {number} id The room ID of the request.
@@ -3467,8 +3467,8 @@ export class RoomsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public reorder(id: number, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).reorder(id, options).then((request) => request(this.axios, this.basePath));
+    public reorderRoom(id: number, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).reorderRoom(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3485,6 +3485,18 @@ export class RoomsApi extends BaseAPI {
     }
 
     /**
+     * Sets the public settings for the room template with the ID specified in the request.
+     * @summary Set public settings
+     * @param {SetPublicDto} [setPublicDto] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RoomsApi
+     */
+    public setPublicSettings(setPublicDto?: SetPublicDto, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).setPublicSettings(setPublicDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Sets the room external or invitation link with the ID specified in the request.
      * @summary Set the room external or invitation link
      * @param {number} id The room ID.
@@ -3493,20 +3505,8 @@ export class RoomsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public setLink(id: number, roomLinkRequest?: RoomLinkRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).setLink(id, roomLinkRequest, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Sets the public settings for the room template with the ID specified in the request.
-     * @summary Set public settings
-     * @param {SetPublicDto} [setPublicDto] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RoomsApi
-     */
-    public setPublic(setPublicDto?: SetPublicDto, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).setPublic(setPublicDto, options).then((request) => request(this.axios, this.basePath));
+    public setRoomLink(id: number, roomLinkRequest?: RoomLinkRequest, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).setRoomLink(id, roomLinkRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

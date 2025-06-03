@@ -41,7 +41,7 @@ export const MigrationApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cancel: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        cancelMigration: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/migration/cancel`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -90,7 +90,7 @@ export const MigrationApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clear: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        clearMigration: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/migration/clear`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -140,7 +140,7 @@ export const MigrationApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        finish: async (finishDto?: FinishDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        finishMigration: async (finishDto?: FinishDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/migration/finish`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -187,13 +187,13 @@ export const MigrationApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * Returns a list of available migrations.
-         * @summary Get migrations
+         * Returns the migration logs.
+         * @summary Get migration logs
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        list: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/migration/list`;
+        getMigrationLogs: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/migration/logs`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -236,13 +236,62 @@ export const MigrationApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * Returns the migration logs.
-         * @summary Get migration logs
+         * Returns the migration status.
+         * @summary Get migration status
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        logs: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/migration/logs`;
+        getMigrationStatus: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/migration/status`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns a list of available migrations.
+         * @summary Get migrations
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listMigrations: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/migration/list`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -291,7 +340,7 @@ export const MigrationApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        migrate: async (migrationApiInfo?: MigrationApiInfo, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        startMigration: async (migrationApiInfo?: MigrationApiInfo, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/migration/migrate`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -338,64 +387,15 @@ export const MigrationApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * Returns the migration status.
-         * @summary Get migration status
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        status: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/migration/status`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Uploads and initializes a migration with a migrator name specified in the request.
          * @summary Upload and initialize migration
          * @param {string} migratorName The migrator name extracted from the route parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadAndInit: async (migratorName: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        uploadAndInitializeMigration: async (migratorName: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'migratorName' is not null or undefined
-            assertParamExists('uploadAndInit', 'migratorName', migratorName)
+            assertParamExists('uploadAndInitializeMigration', 'migratorName', migratorName)
             const localVarPath = `/api/2.0/migration/init/{migratorName}`
                 .replace(`{${"migratorName"}}`, encodeURIComponent(String(migratorName)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -455,10 +455,10 @@ export const MigrationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async cancel(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.cancel(options);
+        async cancelMigration(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.cancelMigration(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['MigrationApi.cancel']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['MigrationApi.cancelMigration']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -467,10 +467,10 @@ export const MigrationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async clear(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.clear(options);
+        async clearMigration(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.clearMigration(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['MigrationApi.clear']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['MigrationApi.clearMigration']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -480,22 +480,10 @@ export const MigrationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async finish(finishDto?: FinishDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.finish(finishDto, options);
+        async finishMigration(finishDto?: FinishDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.finishMigration(finishDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['MigrationApi.finish']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns a list of available migrations.
-         * @summary Get migrations
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async list(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<STRINGArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.list(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['MigrationApi.list']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['MigrationApi.finishMigration']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -504,10 +492,34 @@ export const MigrationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async logs(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.logs(options);
+        async getMigrationLogs(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getMigrationLogs(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['MigrationApi.logs']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['MigrationApi.getMigrationLogs']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the migration status.
+         * @summary Get migration status
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getMigrationStatus(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MigrationStatusWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getMigrationStatus(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['MigrationApi.getMigrationStatus']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns a list of available migrations.
+         * @summary Get migrations
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listMigrations(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<STRINGArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listMigrations(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['MigrationApi.listMigrations']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -517,22 +529,10 @@ export const MigrationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async migrate(migrationApiInfo?: MigrationApiInfo, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.migrate(migrationApiInfo, options);
+        async startMigration(migrationApiInfo?: MigrationApiInfo, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.startMigration(migrationApiInfo, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['MigrationApi.migrate']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns the migration status.
-         * @summary Get migration status
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async status(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MigrationStatusWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.status(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['MigrationApi.status']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['MigrationApi.startMigration']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -542,10 +542,10 @@ export const MigrationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadAndInit(migratorName: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadAndInit(migratorName, options);
+        async uploadAndInitializeMigration(migratorName: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadAndInitializeMigration(migratorName, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['MigrationApi.uploadAndInit']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['MigrationApi.uploadAndInitializeMigration']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -564,8 +564,8 @@ export const MigrationApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cancel(options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.cancel(options).then((request) => request(axios, basePath));
+        cancelMigration(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.cancelMigration(options).then((request) => request(axios, basePath));
         },
         /**
          * Clears the migration.
@@ -573,8 +573,8 @@ export const MigrationApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clear(options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.clear(options).then((request) => request(axios, basePath));
+        clearMigration(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.clearMigration(options).then((request) => request(axios, basePath));
         },
         /**
          * Finishes the migration process.
@@ -583,17 +583,8 @@ export const MigrationApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        finish(finishDto?: FinishDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.finish(finishDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns a list of available migrations.
-         * @summary Get migrations
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        list(options?: RawAxiosRequestConfig): AxiosPromise<STRINGArrayWrapper> {
-            return localVarFp.list(options).then((request) => request(axios, basePath));
+        finishMigration(finishDto?: FinishDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.finishMigration(finishDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the migration logs.
@@ -601,8 +592,26 @@ export const MigrationApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        logs(options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.logs(options).then((request) => request(axios, basePath));
+        getMigrationLogs(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.getMigrationLogs(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the migration status.
+         * @summary Get migration status
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMigrationStatus(options?: RawAxiosRequestConfig): AxiosPromise<MigrationStatusWrapper> {
+            return localVarFp.getMigrationStatus(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns a list of available migrations.
+         * @summary Get migrations
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listMigrations(options?: RawAxiosRequestConfig): AxiosPromise<STRINGArrayWrapper> {
+            return localVarFp.listMigrations(options).then((request) => request(axios, basePath));
         },
         /**
          * Starts the migration process.
@@ -611,17 +620,8 @@ export const MigrationApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        migrate(migrationApiInfo?: MigrationApiInfo, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.migrate(migrationApiInfo, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns the migration status.
-         * @summary Get migration status
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        status(options?: RawAxiosRequestConfig): AxiosPromise<MigrationStatusWrapper> {
-            return localVarFp.status(options).then((request) => request(axios, basePath));
+        startMigration(migrationApiInfo?: MigrationApiInfo, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.startMigration(migrationApiInfo, options).then((request) => request(axios, basePath));
         },
         /**
          * Uploads and initializes a migration with a migrator name specified in the request.
@@ -630,8 +630,8 @@ export const MigrationApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadAndInit(migratorName: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.uploadAndInit(migratorName, options).then((request) => request(axios, basePath));
+        uploadAndInitializeMigration(migratorName: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.uploadAndInitializeMigration(migratorName, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -650,8 +650,8 @@ export class MigrationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MigrationApi
      */
-    public cancel(options?: RawAxiosRequestConfig) {
-        return MigrationApiFp(this.configuration).cancel(options).then((request) => request(this.axios, this.basePath));
+    public cancelMigration(options?: RawAxiosRequestConfig) {
+        return MigrationApiFp(this.configuration).cancelMigration(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -661,8 +661,8 @@ export class MigrationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MigrationApi
      */
-    public clear(options?: RawAxiosRequestConfig) {
-        return MigrationApiFp(this.configuration).clear(options).then((request) => request(this.axios, this.basePath));
+    public clearMigration(options?: RawAxiosRequestConfig) {
+        return MigrationApiFp(this.configuration).clearMigration(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -673,19 +673,8 @@ export class MigrationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MigrationApi
      */
-    public finish(finishDto?: FinishDto, options?: RawAxiosRequestConfig) {
-        return MigrationApiFp(this.configuration).finish(finishDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns a list of available migrations.
-     * @summary Get migrations
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof MigrationApi
-     */
-    public list(options?: RawAxiosRequestConfig) {
-        return MigrationApiFp(this.configuration).list(options).then((request) => request(this.axios, this.basePath));
+    public finishMigration(finishDto?: FinishDto, options?: RawAxiosRequestConfig) {
+        return MigrationApiFp(this.configuration).finishMigration(finishDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -695,8 +684,30 @@ export class MigrationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MigrationApi
      */
-    public logs(options?: RawAxiosRequestConfig) {
-        return MigrationApiFp(this.configuration).logs(options).then((request) => request(this.axios, this.basePath));
+    public getMigrationLogs(options?: RawAxiosRequestConfig) {
+        return MigrationApiFp(this.configuration).getMigrationLogs(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the migration status.
+     * @summary Get migration status
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MigrationApi
+     */
+    public getMigrationStatus(options?: RawAxiosRequestConfig) {
+        return MigrationApiFp(this.configuration).getMigrationStatus(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns a list of available migrations.
+     * @summary Get migrations
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MigrationApi
+     */
+    public listMigrations(options?: RawAxiosRequestConfig) {
+        return MigrationApiFp(this.configuration).listMigrations(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -707,19 +718,8 @@ export class MigrationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MigrationApi
      */
-    public migrate(migrationApiInfo?: MigrationApiInfo, options?: RawAxiosRequestConfig) {
-        return MigrationApiFp(this.configuration).migrate(migrationApiInfo, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns the migration status.
-     * @summary Get migration status
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof MigrationApi
-     */
-    public status(options?: RawAxiosRequestConfig) {
-        return MigrationApiFp(this.configuration).status(options).then((request) => request(this.axios, this.basePath));
+    public startMigration(migrationApiInfo?: MigrationApiInfo, options?: RawAxiosRequestConfig) {
+        return MigrationApiFp(this.configuration).startMigration(migrationApiInfo, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -730,8 +730,8 @@ export class MigrationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MigrationApi
      */
-    public uploadAndInit(migratorName: string, options?: RawAxiosRequestConfig) {
-        return MigrationApiFp(this.configuration).uploadAndInit(migratorName, options).then((request) => request(this.axios, this.basePath));
+    public uploadAndInitializeMigration(migratorName: string, options?: RawAxiosRequestConfig) {
+        return MigrationApiFp(this.configuration).uploadAndInitializeMigration(migratorName, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

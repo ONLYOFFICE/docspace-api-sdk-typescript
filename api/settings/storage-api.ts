@@ -394,7 +394,7 @@ export const SettingsStorageApiAxiosParamCreator = function (configuration?: Con
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateCdn: async (storageRequestsDto?: StorageRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateCdnStorage: async (storageRequestsDto?: StorageRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/settings/storage/cdn`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -595,10 +595,10 @@ export const SettingsStorageApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateCdn(storageRequestsDto?: StorageRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CdnStorageSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateCdn(storageRequestsDto, options);
+        async updateCdnStorage(storageRequestsDto?: StorageRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CdnStorageSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateCdnStorage(storageRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsStorageApi.updateCdn']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SettingsStorageApi.updateCdnStorage']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -695,8 +695,8 @@ export const SettingsStorageApiFactory = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateCdn(storageRequestsDto?: StorageRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<CdnStorageSettingsWrapper> {
-            return localVarFp.updateCdn(storageRequestsDto, options).then((request) => request(axios, basePath));
+        updateCdnStorage(storageRequestsDto?: StorageRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<CdnStorageSettingsWrapper> {
+            return localVarFp.updateCdnStorage(storageRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates a storage with the parameters specified in the request.
@@ -804,8 +804,8 @@ export class SettingsStorageApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SettingsStorageApi
      */
-    public updateCdn(storageRequestsDto?: StorageRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsStorageApiFp(this.configuration).updateCdn(storageRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public updateCdnStorage(storageRequestsDto?: StorageRequestsDto, options?: RawAxiosRequestConfig) {
+        return SettingsStorageApiFp(this.configuration).updateCdnStorage(storageRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

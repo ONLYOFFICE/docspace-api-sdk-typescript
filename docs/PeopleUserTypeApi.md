@@ -4,13 +4,13 @@ All URIs are relative to *http://localhost:8092*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**getChangeTypeProgress**](#getchangetypeprogress) | **GET** /api/2.0/people/type/progress/{userid} | Get the progress of updating user type|
-|[**startUpdateUserType**](#startupdateusertype) | **POST** /api/2.0/people/type | Update user type|
-|[**terminateChangeType**](#terminatechangetype) | **PUT** /api/2.0/people/type/terminate | Terminate update user type|
+|[**getUserTypeUpdateProgress**](#getusertypeupdateprogress) | **GET** /api/2.0/people/type/progress/{userid} | Get the progress of updating user type|
+|[**starUserTypetUpdate**](#starusertypetupdate) | **POST** /api/2.0/people/type | Update user type|
+|[**terminateUserTypeUpdate**](#terminateusertypeupdate) | **PUT** /api/2.0/people/type/terminate | Terminate update user type|
 |[**updateUserType**](#updateusertype) | **PUT** /api/2.0/people/type/{type} | Change a user type|
 
-# **getChangeTypeProgress**
-> TaskProgressResponseWrapper getChangeTypeProgress()
+# **getUserTypeUpdateProgress**
+> TaskProgressResponseWrapper getUserTypeUpdateProgress()
 
 Returns the progress of updating the user type.
 
@@ -27,7 +27,7 @@ const apiInstance = new PeopleUserTypeApi(configuration);
 
 let userid: string; //The user ID. (default to undefined)
 
-const { status, data } = await apiInstance.getChangeTypeProgress(
+const { status, data } = await apiInstance.getUserTypeUpdateProgress(
     userid
 );
 ```
@@ -61,8 +61,8 @@ const { status, data } = await apiInstance.getChangeTypeProgress(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **startUpdateUserType**
-> TaskProgressResponseWrapper startUpdateUserType()
+# **starUserTypetUpdate**
+> TaskProgressResponseWrapper starUserTypetUpdate()
 
 Starts updating the type of the user or guest when reassigning rooms and shared files.
 
@@ -80,7 +80,7 @@ const apiInstance = new PeopleUserTypeApi(configuration);
 
 let startUpdateUserTypeDto: StartUpdateUserTypeDto; // (optional)
 
-const { status, data } = await apiInstance.startUpdateUserType(
+const { status, data } = await apiInstance.starUserTypetUpdate(
     startUpdateUserTypeDto
 );
 ```
@@ -115,8 +115,8 @@ const { status, data } = await apiInstance.startUpdateUserType(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **terminateChangeType**
-> TaskProgressResponseWrapper terminateChangeType()
+# **terminateUserTypeUpdate**
+> TaskProgressResponseWrapper terminateUserTypeUpdate()
 
 Terminates the process of updating the type of the user or guest.
 
@@ -134,7 +134,7 @@ const apiInstance = new PeopleUserTypeApi(configuration);
 
 let terminateRequestDto: TerminateRequestDto; // (optional)
 
-const { status, data } = await apiInstance.terminateChangeType(
+const { status, data } = await apiInstance.terminateUserTypeUpdate(
     terminateRequestDto
 );
 ```

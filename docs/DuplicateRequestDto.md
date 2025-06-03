@@ -6,6 +6,7 @@ The duplicate request parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**returnSingleOperation** | **boolean** | Specifies whether to return only the current operation | [optional] [default to undefined]
 **folderIds** | [**Array&lt;BaseBatchRequestDtoFolderIdsInner&gt;**](BaseBatchRequestDtoFolderIdsInner.md) | The list of folder IDs. | [optional] [default to undefined]
 **fileIds** | [**Array&lt;BaseBatchRequestDtoFolderIdsInner&gt;**](BaseBatchRequestDtoFolderIdsInner.md) | The list of file IDs. | [optional] [default to undefined]
 
@@ -15,6 +16,7 @@ Name | Type | Description | Notes
 import { DuplicateRequestDto } from '@onlyoffice/docspace-api-typescript';
 
 const instance: DuplicateRequestDto = {
+    returnSingleOperation,
     folderIds,
     fileIds,
 };

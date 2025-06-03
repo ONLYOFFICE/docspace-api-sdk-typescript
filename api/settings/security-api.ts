@@ -97,6 +97,65 @@ export const SettingsSecurityApiAxiosParamCreator = function (configuration?: Co
             };
         },
         /**
+         * Checks if the selected user is an administrator of a product with the ID specified in the request.
+         * @summary Check a product administrator
+         * @param {string} [productid] The ID of the product extracted from the query parameters.
+         * @param {string} [userid] The user ID extracted from the query parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getIsProductAdministrator: async (productid?: string, userid?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/settings/security/administrator`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (productid !== undefined) {
+                localVarQueryParameter['productid'] = productid;
+            }
+
+            if (userid !== undefined) {
+                localVarQueryParameter['userid'] = userid;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns the portal password settings.
          * @summary Get the password settings
          * @param {*} [options] Override http request option.
@@ -292,65 +351,6 @@ export const SettingsSecurityApiAxiosParamCreator = function (configuration?: Co
 
             if (ids) {
                 localVarQueryParameter['ids'] = ids.join(COLLECTION_FORMATS.csv);
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Checks if the selected user is an administrator of a product with the ID specified in the request.
-         * @summary Check a product administrator
-         * @param {string} [productid] The ID of the product extracted from the query parameters.
-         * @param {string} [userid] The user ID extracted from the query parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        isProductAdministrator: async (productid?: string, userid?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/settings/security/administrator`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-            if (productid !== undefined) {
-                localVarQueryParameter['productid'] = productid;
-            }
-
-            if (userid !== undefined) {
-                localVarQueryParameter['userid'] = userid;
             }
 
 
@@ -599,6 +599,20 @@ export const SettingsSecurityApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Checks if the selected user is an administrator of a product with the ID specified in the request.
+         * @summary Check a product administrator
+         * @param {string} [productid] The ID of the product extracted from the query parameters.
+         * @param {string} [userid] The user ID extracted from the query parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getIsProductAdministrator(productid?: string, userid?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductAdministratorWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getIsProductAdministrator(productid, userid, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SettingsSecurityApi.getIsProductAdministrator']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns the portal password settings.
          * @summary Get the password settings
          * @param {*} [options] Override http request option.
@@ -647,20 +661,6 @@ export const SettingsSecurityApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getWebItemSettingsSecurityInfo(ids, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SettingsSecurityApi.getWebItemSettingsSecurityInfo']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Checks if the selected user is an administrator of a product with the ID specified in the request.
-         * @summary Check a product administrator
-         * @param {string} [productid] The ID of the product extracted from the query parameters.
-         * @param {string} [userid] The user ID extracted from the query parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async isProductAdministrator(productid?: string, userid?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductAdministratorWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.isProductAdministrator(productid, userid, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsSecurityApi.isProductAdministrator']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -735,6 +735,17 @@ export const SettingsSecurityApiFactory = function (configuration?: Configuratio
             return localVarFp.getEnabledModules(options).then((request) => request(axios, basePath));
         },
         /**
+         * Checks if the selected user is an administrator of a product with the ID specified in the request.
+         * @summary Check a product administrator
+         * @param {string} [productid] The ID of the product extracted from the query parameters.
+         * @param {string} [userid] The user ID extracted from the query parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getIsProductAdministrator(productid?: string, userid?: string, options?: RawAxiosRequestConfig): AxiosPromise<ProductAdministratorWrapper> {
+            return localVarFp.getIsProductAdministrator(productid, userid, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns the portal password settings.
          * @summary Get the password settings
          * @param {*} [options] Override http request option.
@@ -772,17 +783,6 @@ export const SettingsSecurityApiFactory = function (configuration?: Configuratio
          */
         getWebItemSettingsSecurityInfo(ids?: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<SecurityArrayWrapper> {
             return localVarFp.getWebItemSettingsSecurityInfo(ids, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Checks if the selected user is an administrator of a product with the ID specified in the request.
-         * @summary Check a product administrator
-         * @param {string} [productid] The ID of the product extracted from the query parameters.
-         * @param {string} [userid] The user ID extracted from the query parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        isProductAdministrator(productid?: string, userid?: string, options?: RawAxiosRequestConfig): AxiosPromise<ProductAdministratorWrapper> {
-            return localVarFp.isProductAdministrator(productid, userid, options).then((request) => request(axios, basePath));
         },
         /**
          * Sets the security settings to the modules with the IDs specified in the request.
@@ -846,6 +846,19 @@ export class SettingsSecurityApi extends BaseAPI {
     }
 
     /**
+     * Checks if the selected user is an administrator of a product with the ID specified in the request.
+     * @summary Check a product administrator
+     * @param {string} [productid] The ID of the product extracted from the query parameters.
+     * @param {string} [userid] The user ID extracted from the query parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SettingsSecurityApi
+     */
+    public getIsProductAdministrator(productid?: string, userid?: string, options?: RawAxiosRequestConfig) {
+        return SettingsSecurityApiFp(this.configuration).getIsProductAdministrator(productid, userid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Returns the portal password settings.
      * @summary Get the password settings
      * @param {*} [options] Override http request option.
@@ -890,19 +903,6 @@ export class SettingsSecurityApi extends BaseAPI {
      */
     public getWebItemSettingsSecurityInfo(ids?: Array<string>, options?: RawAxiosRequestConfig) {
         return SettingsSecurityApiFp(this.configuration).getWebItemSettingsSecurityInfo(ids, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Checks if the selected user is an administrator of a product with the ID specified in the request.
-     * @summary Check a product administrator
-     * @param {string} [productid] The ID of the product extracted from the query parameters.
-     * @param {string} [userid] The user ID extracted from the query parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SettingsSecurityApi
-     */
-    public isProductAdministrator(productid?: string, userid?: string, options?: RawAxiosRequestConfig) {
-        return SettingsSecurityApiFp(this.configuration).isProductAdministrator(productid, userid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

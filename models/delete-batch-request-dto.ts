@@ -24,6 +24,12 @@ import type { BaseBatchRequestDtoFolderIdsInner } from './base-batch-request-dto
  */
 export interface DeleteBatchRequestDto {
     /**
+     * Specifies whether to return only the current operation
+     * @type {boolean}
+     * @memberof DeleteBatchRequestDto
+     */
+    'returnSingleOperation'?: boolean;
+    /**
      * The list of folder IDs to be deleted.
      * @type {Array<BaseBatchRequestDtoFolderIdsInner>}
      * @memberof DeleteBatchRequestDto

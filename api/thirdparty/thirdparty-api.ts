@@ -38,9 +38,9 @@ export const ThirdPartyApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        get: async (provider: LoginProvider, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getThirdPartyCode: async (provider: LoginProvider, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'provider' is not null or undefined
-            assertParamExists('get', 'provider', provider)
+            assertParamExists('getThirdPartyCode', 'provider', provider)
             const localVarPath = `/api/2.0/thirdparty/{provider}`
                 .replace(`{${"provider"}}`, encodeURIComponent(String(provider)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -101,10 +101,10 @@ export const ThirdPartyApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async get(provider: LoginProvider, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.get(provider, options);
+        async getThirdPartyCode(provider: LoginProvider, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getThirdPartyCode(provider, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ThirdPartyApi.get']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ThirdPartyApi.getThirdPartyCode']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -124,8 +124,8 @@ export const ThirdPartyApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        get(provider: LoginProvider, options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
-            return localVarFp.get(provider, options).then((request) => request(axios, basePath));
+        getThirdPartyCode(provider: LoginProvider, options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
+            return localVarFp.getThirdPartyCode(provider, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -145,8 +145,8 @@ export class ThirdPartyApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ThirdPartyApi
      */
-    public get(provider: LoginProvider, options?: RawAxiosRequestConfig) {
-        return ThirdPartyApiFp(this.configuration).get(provider, options).then((request) => request(this.axios, this.basePath));
+    public getThirdPartyCode(provider: LoginProvider, options?: RawAxiosRequestConfig) {
+        return ThirdPartyApiFp(this.configuration).getThirdPartyCode(provider, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -5,7 +5,9 @@ All URIs are relative to *http://localhost:8092*
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**bulkDownload**](#bulkdownload) | **PUT** /api/2.0/files/fileops/bulkdownload | Bulk download|
-|[**checkConversion**](#checkconversion) | **GET** /api/2.0/files/file/{fileId}/checkconversion | Get conversion status|
+|[**checkConversionStatus**](#checkconversionstatus) | **GET** /api/2.0/files/file/{fileId}/checkconversion | Get conversion status|
+|[**checkMoveOrCopyBatchItems**](#checkmoveorcopybatchitems) | **GET** /api/2.0/files/fileops/move | Check and move or copy to a folder|
+|[**checkMoveOrCopyDestFolder**](#checkmoveorcopydestfolder) | **GET** /api/2.0/files/fileops/checkdestfolder | Check for moving or copying to a folder|
 |[**copyBatchItems**](#copybatchitems) | **PUT** /api/2.0/files/fileops/copy | Copy to the folder|
 |[**createUploadSession**](#createuploadsession) | **POST** /api/2.0/files/{folderId}/upload/create_session | Chunked upload|
 |[**deleteBatchItems**](#deletebatchitems) | **PUT** /api/2.0/files/fileops/delete | Delete files and folders|
@@ -16,11 +18,9 @@ All URIs are relative to *http://localhost:8092*
 |[**getOperationStatusesByType**](#getoperationstatusesbytype) | **GET** /api/2.0/files/fileops/{operationType} | Get file operation statuses|
 |[**markAsRead**](#markasread) | **PUT** /api/2.0/files/fileops/markasread | Mark as read|
 |[**moveBatchItems**](#movebatchitems) | **PUT** /api/2.0/files/fileops/move | Move or copy to a folder|
-|[**moveOrCopyBatchCheck**](#moveorcopybatchcheck) | **GET** /api/2.0/files/fileops/move | Check and move or copy to a folder|
-|[**moveOrCopyDestFolderCheck**](#moveorcopydestfoldercheck) | **GET** /api/2.0/files/fileops/checkdestfolder | Check for moving or copying to a folder|
-|[**startConversion**](#startconversion) | **PUT** /api/2.0/files/file/{fileId}/checkconversion | Start file conversion|
+|[**startFileConversion**](#startfileconversion) | **PUT** /api/2.0/files/file/{fileId}/checkconversion | Start file conversion|
 |[**terminateTasks**](#terminatetasks) | **PUT** /api/2.0/files/fileops/terminate/{id} | Finish active operations|
-|[**updateComment**](#updatecomment) | **PUT** /api/2.0/files/file/{fileId}/comment | Update a comment|
+|[**updateFileComment**](#updatefilecomment) | **PUT** /api/2.0/files/file/{fileId}/comment | Update a comment|
 
 # **bulkDownload**
 > FileOperationArrayWrapper bulkDownload()
@@ -75,8 +75,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **checkConversion**
-> ConversationResultArrayWrapper checkConversion()
+# **checkConversionStatus**
+> ConversationResultArrayWrapper checkConversionStatus()
 
 Checks the conversion status of a file with the ID specified in the request.
 
@@ -94,7 +94,7 @@ const apiInstance = new FilesOperationsApi(configuration);
 let fileId: number; //The file ID to check conversion status. (default to undefined)
 let start: boolean; //Specifies whether a conversion operation is started or not. (optional) (default to undefined)
 
-const { status, data } = await apiInstance.checkConversion(
+const { status, data } = await apiInstance.checkConversionStatus(
     fileId,
     start
 );
@@ -127,6 +127,114 @@ const { status, data } = await apiInstance.checkConversion(
 |-------------|-------------|------------------|
 |**200** | Conversion result |  -  |
 |**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **checkMoveOrCopyBatchItems**
+> FileEntryArrayWrapper checkMoveOrCopyBatchItems()
+
+Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
+
+### Example
+
+```typescript
+import {
+    FilesOperationsApi,
+    Configuration,
+    BatchRequestDto
+} from '@onlyoffice/docspace-api-typescript';
+
+const configuration = new Configuration();
+const apiInstance = new FilesOperationsApi(configuration);
+
+let inDto: BatchRequestDto; //The request parameters for copying/moving files. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.checkMoveOrCopyBatchItems(
+    inDto
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **inDto** | **BatchRequestDto** | The request parameters for copying/moving files. | (optional) defaults to undefined|
+
+
+### Return type
+
+**FileEntryArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | List of file entry information |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | You don\&#39;t have enough permission to create |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **checkMoveOrCopyDestFolder**
+> CheckDestFolderWrapper checkMoveOrCopyDestFolder()
+
+Checks if files can be moved or copied to the specified folder.
+
+### Example
+
+```typescript
+import {
+    FilesOperationsApi,
+    Configuration,
+    BatchRequestDto
+} from '@onlyoffice/docspace-api-typescript';
+
+const configuration = new Configuration();
+const apiInstance = new FilesOperationsApi(configuration);
+
+let inDto: BatchRequestDto; //The request parameters for copying/moving files. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.checkMoveOrCopyDestFolder(
+    inDto
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **inDto** | **BatchRequestDto** | The request parameters for copying/moving files. | (optional) defaults to undefined|
+
+
+### Return type
+
+**CheckDestFolderWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Result |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | You don\&#39;t have enough permission to create |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -418,11 +526,18 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
 
-const { status, data } = await apiInstance.emptyTrash();
+let single: boolean; //Specifies whether to return only the current operation (optional) (default to undefined)
+
+const { status, data } = await apiInstance.emptyTrash(
+    single
+);
 ```
 
 ### Parameters
-This endpoint does not have any parameters.
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **single** | [**boolean**] | Specifies whether to return only the current operation | (optional) defaults to undefined|
 
 
 ### Return type
@@ -463,11 +578,18 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
 
-const { status, data } = await apiInstance.getOperationStatuses();
+let id: string; //The ID of the file operation. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getOperationStatuses(
+    id
+);
 ```
 
 ### Parameters
-This endpoint does not have any parameters.
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**string**] | The ID of the file operation. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -508,9 +630,11 @@ const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
 
 let operationType: FileOperationType; //Specifies the type of file operation to be retrieved. (default to undefined)
+let id: string; //The ID of the file operation. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getOperationStatusesByType(
-    operationType
+    operationType,
+    id
 );
 ```
 
@@ -519,6 +643,7 @@ const { status, data } = await apiInstance.getOperationStatusesByType(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **operationType** | **FileOperationType** | Specifies the type of file operation to be retrieved. | defaults to undefined|
+| **id** | [**string**] | The ID of the file operation. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -649,116 +774,8 @@ const { status, data } = await apiInstance.moveBatchItems(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **moveOrCopyBatchCheck**
-> FileEntryArrayWrapper moveOrCopyBatchCheck()
-
-Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
-
-### Example
-
-```typescript
-import {
-    FilesOperationsApi,
-    Configuration,
-    BatchRequestDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new FilesOperationsApi(configuration);
-
-let inDto: BatchRequestDto; //The request parameters for copying/moving files. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.moveOrCopyBatchCheck(
-    inDto
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **inDto** | **BatchRequestDto** | The request parameters for copying/moving files. | (optional) defaults to undefined|
-
-
-### Return type
-
-**FileEntryArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | List of file entry information |  -  |
-|**401** | Unauthorized |  -  |
-|**403** | You don\&#39;t have enough permission to create |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **moveOrCopyDestFolderCheck**
-> CheckDestFolderWrapper moveOrCopyDestFolderCheck()
-
-Checks if files can be moved or copied to the specified folder.
-
-### Example
-
-```typescript
-import {
-    FilesOperationsApi,
-    Configuration,
-    BatchRequestDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new FilesOperationsApi(configuration);
-
-let inDto: BatchRequestDto; //The request parameters for copying/moving files. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.moveOrCopyDestFolderCheck(
-    inDto
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **inDto** | **BatchRequestDto** | The request parameters for copying/moving files. | (optional) defaults to undefined|
-
-
-### Return type
-
-**CheckDestFolderWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Result |  -  |
-|**401** | Unauthorized |  -  |
-|**403** | You don\&#39;t have enough permission to create |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **startConversion**
-> ConversationResultArrayWrapper startConversion()
+# **startFileConversion**
+> ConversationResultArrayWrapper startFileConversion()
 
 Starts a conversion operation of a file with the ID specified in the request.
 
@@ -777,7 +794,7 @@ const apiInstance = new FilesOperationsApi(configuration);
 let fileId: number; //The file ID to start conversion proccess. (default to undefined)
 let checkConversionRequestDtoInteger: CheckConversionRequestDtoInteger; //The parameters for checking file conversion. (optional)
 
-const { status, data } = await apiInstance.startConversion(
+const { status, data } = await apiInstance.startFileConversion(
     fileId,
     checkConversionRequestDtoInteger
 );
@@ -864,8 +881,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **updateComment**
-> StringWrapper updateComment()
+# **updateFileComment**
+> StringWrapper updateFileComment()
 
 Updates a comment in a file with the ID specified in the request.
 
@@ -884,7 +901,7 @@ const apiInstance = new FilesOperationsApi(configuration);
 let fileId: number; //The file ID where the comment is located. (default to undefined)
 let updateComment: UpdateComment; //The parameters for updating a comment. (optional)
 
-const { status, data } = await apiInstance.updateComment(
+const { status, data } = await apiInstance.updateFileComment(
     fileId,
     updateComment
 );

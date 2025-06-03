@@ -154,6 +154,104 @@ export const SettingsWebhooksApiAxiosParamCreator = function (configuration?: Co
             };
         },
         /**
+         * Returns a list of the tenant webhooks.
+         * @summary Get webhooks
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTenantWebhooks: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/settings/webhook`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns a list of triggers for a webhook.
+         * @summary Get webhook triggers
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getWebhookTriggers: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/settings/webhook/triggers`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns the logs of the webhook activities.
          * @summary Get webhook logs
          * @param {string} [deliveryFrom] The delivery start time for filtering webhook logs.
@@ -167,7 +265,7 @@ export const SettingsWebhooksApiAxiosParamCreator = function (configuration?: Co
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getJournal: async (deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getWebhooksLogs: async (deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/settings/webhooks/log`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -234,55 +332,6 @@ export const SettingsWebhooksApiAxiosParamCreator = function (configuration?: Co
             if (trigger !== undefined) {
                 localVarQueryParameter['trigger'] = trigger;
             }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns a list of the tenant webhooks.
-         * @summary Get webhooks
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getTenantWebhooks: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/settings/webhook`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
 
 
     
@@ -455,55 +504,6 @@ export const SettingsWebhooksApiAxiosParamCreator = function (configuration?: Co
             };
         },
         /**
-         * Returns a list of triggers for a webhook.
-         * @summary Get webhook triggers
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        triggers: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/settings/webhook/triggers`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Updates a tenant webhook with the parameters specified in the request.
          * @summary Update a webhook
          * @param {UpdateWebhooksConfigRequestsDto} [updateWebhooksConfigRequestsDto] 
@@ -593,6 +593,30 @@ export const SettingsWebhooksApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns a list of the tenant webhooks.
+         * @summary Get webhooks
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getTenantWebhooks(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksConfigWithStatusArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getTenantWebhooks(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SettingsWebhooksApi.getTenantWebhooks']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns a list of triggers for a webhook.
+         * @summary Get webhook triggers
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getWebhookTriggers(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UnknownWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getWebhookTriggers(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SettingsWebhooksApi.getWebhookTriggers']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns the logs of the webhook activities.
          * @summary Get webhook logs
          * @param {string} [deliveryFrom] The delivery start time for filtering webhook logs.
@@ -606,22 +630,10 @@ export const SettingsWebhooksApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getJournal(deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksLogArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getJournal(deliveryFrom, deliveryTo, hookUri, configId, eventId, groupStatus, userId, trigger, options);
+        async getWebhooksLogs(deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksLogArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getWebhooksLogs(deliveryFrom, deliveryTo, hookUri, configId, eventId, groupStatus, userId, trigger, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsWebhooksApi.getJournal']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns a list of the tenant webhooks.
-         * @summary Get webhooks
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getTenantWebhooks(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksConfigWithStatusArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getTenantWebhooks(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsWebhooksApi.getTenantWebhooks']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SettingsWebhooksApi.getWebhooksLogs']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -661,18 +673,6 @@ export const SettingsWebhooksApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.retryWebhooks(webhookRetryRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SettingsWebhooksApi.retryWebhooks']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns a list of triggers for a webhook.
-         * @summary Get webhook triggers
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async triggers(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UnknownWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.triggers(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsWebhooksApi.triggers']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -719,6 +719,24 @@ export const SettingsWebhooksApiFactory = function (configuration?: Configuratio
             return localVarFp.enableWebhook(updateWebhooksConfigRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns a list of the tenant webhooks.
+         * @summary Get webhooks
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTenantWebhooks(options?: RawAxiosRequestConfig): AxiosPromise<WebhooksConfigWithStatusArrayWrapper> {
+            return localVarFp.getTenantWebhooks(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns a list of triggers for a webhook.
+         * @summary Get webhook triggers
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getWebhookTriggers(options?: RawAxiosRequestConfig): AxiosPromise<UnknownWrapper> {
+            return localVarFp.getWebhookTriggers(options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns the logs of the webhook activities.
          * @summary Get webhook logs
          * @param {string} [deliveryFrom] The delivery start time for filtering webhook logs.
@@ -732,17 +750,8 @@ export const SettingsWebhooksApiFactory = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getJournal(deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksLogArrayWrapper> {
-            return localVarFp.getJournal(deliveryFrom, deliveryTo, hookUri, configId, eventId, groupStatus, userId, trigger, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns a list of the tenant webhooks.
-         * @summary Get webhooks
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getTenantWebhooks(options?: RawAxiosRequestConfig): AxiosPromise<WebhooksConfigWithStatusArrayWrapper> {
-            return localVarFp.getTenantWebhooks(options).then((request) => request(axios, basePath));
+        getWebhooksLogs(deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksLogArrayWrapper> {
+            return localVarFp.getWebhooksLogs(deliveryFrom, deliveryTo, hookUri, configId, eventId, groupStatus, userId, trigger, options).then((request) => request(axios, basePath));
         },
         /**
          * Removes a tenant webhook with the ID specified in the request.
@@ -773,15 +782,6 @@ export const SettingsWebhooksApiFactory = function (configuration?: Configuratio
          */
         retryWebhooks(webhookRetryRequestsDto?: WebhookRetryRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksLogArrayWrapper> {
             return localVarFp.retryWebhooks(webhookRetryRequestsDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns a list of triggers for a webhook.
-         * @summary Get webhook triggers
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        triggers(options?: RawAxiosRequestConfig): AxiosPromise<UnknownWrapper> {
-            return localVarFp.triggers(options).then((request) => request(axios, basePath));
         },
         /**
          * Updates a tenant webhook with the parameters specified in the request.
@@ -828,6 +828,28 @@ export class SettingsWebhooksApi extends BaseAPI {
     }
 
     /**
+     * Returns a list of the tenant webhooks.
+     * @summary Get webhooks
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SettingsWebhooksApi
+     */
+    public getTenantWebhooks(options?: RawAxiosRequestConfig) {
+        return SettingsWebhooksApiFp(this.configuration).getTenantWebhooks(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns a list of triggers for a webhook.
+     * @summary Get webhook triggers
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SettingsWebhooksApi
+     */
+    public getWebhookTriggers(options?: RawAxiosRequestConfig) {
+        return SettingsWebhooksApiFp(this.configuration).getWebhookTriggers(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Returns the logs of the webhook activities.
      * @summary Get webhook logs
      * @param {string} [deliveryFrom] The delivery start time for filtering webhook logs.
@@ -842,19 +864,8 @@ export class SettingsWebhooksApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SettingsWebhooksApi
      */
-    public getJournal(deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, options?: RawAxiosRequestConfig) {
-        return SettingsWebhooksApiFp(this.configuration).getJournal(deliveryFrom, deliveryTo, hookUri, configId, eventId, groupStatus, userId, trigger, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns a list of the tenant webhooks.
-     * @summary Get webhooks
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SettingsWebhooksApi
-     */
-    public getTenantWebhooks(options?: RawAxiosRequestConfig) {
-        return SettingsWebhooksApiFp(this.configuration).getTenantWebhooks(options).then((request) => request(this.axios, this.basePath));
+    public getWebhooksLogs(deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, options?: RawAxiosRequestConfig) {
+        return SettingsWebhooksApiFp(this.configuration).getWebhooksLogs(deliveryFrom, deliveryTo, hookUri, configId, eventId, groupStatus, userId, trigger, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -891,17 +902,6 @@ export class SettingsWebhooksApi extends BaseAPI {
      */
     public retryWebhooks(webhookRetryRequestsDto?: WebhookRetryRequestsDto, options?: RawAxiosRequestConfig) {
         return SettingsWebhooksApiFp(this.configuration).retryWebhooks(webhookRetryRequestsDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns a list of triggers for a webhook.
-     * @summary Get webhook triggers
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SettingsWebhooksApi
-     */
-    public triggers(options?: RawAxiosRequestConfig) {
-        return SettingsWebhooksApiFp(this.configuration).triggers(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

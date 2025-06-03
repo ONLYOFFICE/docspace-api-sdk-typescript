@@ -132,60 +132,6 @@ export const PortalSettingsApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Returns the full absolute path to the current portal.
-         * @summary Get a path to the portal
-         * @param {string} [virtualPath] The virtual path for the portal resource access.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getFullAbsolutePath: async (virtualPath?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/portal/path`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-            if (virtualPath !== undefined) {
-                localVarQueryParameter['virtualPath'] = virtualPath;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Returns the current portal information.
          * @summary Get a portal
          * @param {*} [options] Override http request option.
@@ -222,6 +168,60 @@ export const PortalSettingsApiAxiosParamCreator = function (configuration?: Conf
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the full absolute path to the current portal.
+         * @summary Get a path to the portal
+         * @param {string} [virtualPath] The virtual path for the portal resource access.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPortalPath: async (virtualPath?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/portal/path`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (virtualPath !== undefined) {
+                localVarQueryParameter['virtualPath'] = virtualPath;
+            }
 
 
     
@@ -416,19 +416,6 @@ export const PortalSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the full absolute path to the current portal.
-         * @summary Get a path to the portal
-         * @param {string} [virtualPath] The virtual path for the portal resource access.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getFullAbsolutePath(virtualPath?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getFullAbsolutePath(virtualPath, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalSettingsApi.getFullAbsolutePath']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
          * Returns the current portal information.
          * @summary Get a portal
          * @param {*} [options] Override http request option.
@@ -438,6 +425,19 @@ export const PortalSettingsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPortalInformation(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PortalSettingsApi.getPortalInformation']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the full absolute path to the current portal.
+         * @summary Get a path to the portal
+         * @param {string} [virtualPath] The virtual path for the portal resource access.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPortalPath(virtualPath?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPortalPath(virtualPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PortalSettingsApi.getPortalPath']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -505,16 +505,6 @@ export const PortalSettingsApiFactory = function (configuration?: Configuration,
             return localVarFp.deletePortal(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the full absolute path to the current portal.
-         * @summary Get a path to the portal
-         * @param {string} [virtualPath] The virtual path for the portal resource access.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getFullAbsolutePath(virtualPath?: string, options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
-            return localVarFp.getFullAbsolutePath(virtualPath, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Returns the current portal information.
          * @summary Get a portal
          * @param {*} [options] Override http request option.
@@ -522,6 +512,16 @@ export const PortalSettingsApiFactory = function (configuration?: Configuration,
          */
         getPortalInformation(options?: RawAxiosRequestConfig): AxiosPromise<TenantWrapper> {
             return localVarFp.getPortalInformation(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the full absolute path to the current portal.
+         * @summary Get a path to the portal
+         * @param {string} [virtualPath] The virtual path for the portal resource access.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPortalPath(virtualPath?: string, options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
+            return localVarFp.getPortalPath(virtualPath, options).then((request) => request(axios, basePath));
         },
         /**
          * Sends the instructions to remove the current portal.
@@ -583,18 +583,6 @@ export class PortalSettingsApi extends BaseAPI {
     }
 
     /**
-     * Returns the full absolute path to the current portal.
-     * @summary Get a path to the portal
-     * @param {string} [virtualPath] The virtual path for the portal resource access.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortalSettingsApi
-     */
-    public getFullAbsolutePath(virtualPath?: string, options?: RawAxiosRequestConfig) {
-        return PortalSettingsApiFp(this.configuration).getFullAbsolutePath(virtualPath, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Returns the current portal information.
      * @summary Get a portal
      * @param {*} [options] Override http request option.
@@ -603,6 +591,18 @@ export class PortalSettingsApi extends BaseAPI {
      */
     public getPortalInformation(options?: RawAxiosRequestConfig) {
         return PortalSettingsApiFp(this.configuration).getPortalInformation(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the full absolute path to the current portal.
+     * @summary Get a path to the portal
+     * @param {string} [virtualPath] The virtual path for the portal resource access.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortalSettingsApi
+     */
+    public getPortalPath(virtualPath?: string, options?: RawAxiosRequestConfig) {
+        return PortalSettingsApiFp(this.configuration).getPortalPath(virtualPath, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

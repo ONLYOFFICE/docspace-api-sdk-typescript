@@ -7,9 +7,9 @@ All URIs are relative to *http://localhost:8092*
 |[**createAuditTrailReport**](#createaudittrailreport) | **POST** /api/2.0/security/audit/events/report | Generate the audit trail report|
 |[**getAuditEventsByFilter**](#getauditeventsbyfilter) | **GET** /api/2.0/security/audit/events/filter | Get filtered audit trail data|
 |[**getAuditSettings**](#getauditsettings) | **GET** /api/2.0/security/audit/settings/lifetime | Get the audit trail settings|
+|[**getAuditTrailMappers**](#getaudittrailmappers) | **GET** /api/2.0/security/audit/mappers | Get audit trail mappers|
+|[**getAuditTrailTypes**](#getaudittrailtypes) | **GET** /api/2.0/security/audit/types | Get audit trail types|
 |[**getLastAuditEvents**](#getlastauditevents) | **GET** /api/2.0/security/audit/events/last | Get audit trail data|
-|[**getMappers**](#getmappers) | **GET** /api/2.0/security/audit/mappers | Get audit trail mappers|
-|[**getTypes**](#gettypes) | **GET** /api/2.0/security/audit/types | Get audit trail types|
 |[**setAuditSettings**](#setauditsettings) | **POST** /api/2.0/security/audit/settings/lifetime | Set the audit trail settings|
 
 # **createAuditTrailReport**
@@ -184,6 +184,104 @@ This endpoint does not have any parameters.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **getAuditTrailMappers**
+> ObjectWrapper getAuditTrailMappers()
+
+Returns the mappers for the audit trail types.
+
+### Example
+
+```typescript
+import {
+    SecurityAuditTrailDataApi,
+    Configuration
+} from '@onlyoffice/docspace-api-typescript';
+
+const configuration = new Configuration();
+const apiInstance = new SecurityAuditTrailDataApi(configuration);
+
+let productType: ProductType; //The type of product related to the audit trail. (optional) (default to undefined)
+let moduleType: ModuleType; //The module within the product associated with the audit trail. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getAuditTrailMappers(
+    productType,
+    moduleType
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **productType** | **ProductType** | The type of product related to the audit trail. | (optional) defaults to undefined|
+| **moduleType** | **ModuleType** | The module within the product associated with the audit trail. | (optional) defaults to undefined|
+
+
+### Return type
+
+**ObjectWrapper**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Audit trail mappers |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getAuditTrailTypes**
+> ObjectWrapper getAuditTrailTypes()
+
+Returns all the available audit trail types.
+
+### Example
+
+```typescript
+import {
+    SecurityAuditTrailDataApi,
+    Configuration
+} from '@onlyoffice/docspace-api-typescript';
+
+const configuration = new Configuration();
+const apiInstance = new SecurityAuditTrailDataApi(configuration);
+
+const { status, data } = await apiInstance.getAuditTrailTypes();
+```
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**ObjectWrapper**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Audit trail types |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **getLastAuditEvents**
 > AuditEventArrayWrapper getLastAuditEvents()
 
@@ -227,104 +325,6 @@ This endpoint does not have any parameters.
 |**200** | List of audit trail data |  -  |
 |**401** | Unauthorized |  -  |
 |**402** | Your pricing plan does not support this option |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **getMappers**
-> ObjectWrapper getMappers()
-
-Returns the mappers for the audit trail types.
-
-### Example
-
-```typescript
-import {
-    SecurityAuditTrailDataApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SecurityAuditTrailDataApi(configuration);
-
-let productType: ProductType; //The type of product related to the audit trail. (optional) (default to undefined)
-let moduleType: ModuleType; //The module within the product associated with the audit trail. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.getMappers(
-    productType,
-    moduleType
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **productType** | **ProductType** | The type of product related to the audit trail. | (optional) defaults to undefined|
-| **moduleType** | **ModuleType** | The module within the product associated with the audit trail. | (optional) defaults to undefined|
-
-
-### Return type
-
-**ObjectWrapper**
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Audit trail mappers |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **getTypes**
-> ObjectWrapper getTypes()
-
-Returns all the available audit trail types.
-
-### Example
-
-```typescript
-import {
-    SecurityAuditTrailDataApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SecurityAuditTrailDataApi(configuration);
-
-const { status, data } = await apiInstance.getTypes();
-```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**ObjectWrapper**
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Audit trail types |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

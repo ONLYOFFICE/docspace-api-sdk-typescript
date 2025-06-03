@@ -38,7 +38,7 @@ export const SecurityCSPApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        csp: async (cspRequestsDto?: CspRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        configureCsp: async (cspRequestsDto?: CspRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/security/csp`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -90,7 +90,7 @@ export const SecurityCSPApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCsp: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getCspSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/security/csp`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -131,10 +131,10 @@ export const SecurityCSPApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async csp(cspRequestsDto?: CspRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CspWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.csp(cspRequestsDto, options);
+        async configureCsp(cspRequestsDto?: CspRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CspWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.configureCsp(cspRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SecurityCSPApi.csp']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SecurityCSPApi.configureCsp']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -143,10 +143,10 @@ export const SecurityCSPApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCsp(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CspWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getCsp(options);
+        async getCspSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CspWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCspSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SecurityCSPApi.getCsp']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SecurityCSPApi.getCspSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -166,8 +166,8 @@ export const SecurityCSPApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        csp(cspRequestsDto?: CspRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<CspWrapper> {
-            return localVarFp.csp(cspRequestsDto, options).then((request) => request(axios, basePath));
+        configureCsp(cspRequestsDto?: CspRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<CspWrapper> {
+            return localVarFp.configureCsp(cspRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the CSP (Content Security Policy) settings for the current portal.
@@ -175,8 +175,8 @@ export const SecurityCSPApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCsp(options?: RawAxiosRequestConfig): AxiosPromise<CspWrapper> {
-            return localVarFp.getCsp(options).then((request) => request(axios, basePath));
+        getCspSettings(options?: RawAxiosRequestConfig): AxiosPromise<CspWrapper> {
+            return localVarFp.getCspSettings(options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -196,8 +196,8 @@ export class SecurityCSPApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SecurityCSPApi
      */
-    public csp(cspRequestsDto?: CspRequestsDto, options?: RawAxiosRequestConfig) {
-        return SecurityCSPApiFp(this.configuration).csp(cspRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public configureCsp(cspRequestsDto?: CspRequestsDto, options?: RawAxiosRequestConfig) {
+        return SecurityCSPApiFp(this.configuration).configureCsp(cspRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -207,8 +207,8 @@ export class SecurityCSPApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SecurityCSPApi
      */
-    public getCsp(options?: RawAxiosRequestConfig) {
-        return SecurityCSPApiFp(this.configuration).getCsp(options).then((request) => request(this.axios, this.basePath));
+    public getCspSettings(options?: RawAxiosRequestConfig) {
+        return SecurityCSPApiFp(this.configuration).getCspSettings(options).then((request) => request(this.axios, this.basePath));
     }
 }
 
