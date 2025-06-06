@@ -36,6 +36,8 @@ import type { MemberRequestDto } from '../../models';
 // @ts-ignore
 import type { ObjectWrapper } from '../../models';
 // @ts-ignore
+import type { SortOrder } from '../../models';
+// @ts-ignore
 import type { StringWrapper } from '../../models';
 // @ts-ignore
 import type { UpdateMemberRequestDto } from '../../models';
@@ -205,10 +207,17 @@ export const PeopleProfilesApiAxiosParamCreator = function (configuration?: Conf
         /**
          * Returns a list of profiles for all the portal users.
          * @summary Get profiles
+         * @param {number} [count] The maximum number of items to be retrieved in the response.
+         * @param {number} [startIndex] The zero-based index of the first item to be retrieved in a filtered result set.
+         * @param {string} [filterBy] Specifies the filter criteria for user-related queries.
+         * @param {string} [sortBy] Specifies the property or field name by which the results should be sorted.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterSeparator] The character or string used to separate multiple filter values in a filtering query.
+         * @param {string} [filterValue] The text value used as an additional filter criterion for profiles retrieval.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAllProfiles: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAllProfiles: async (count?: number, startIndex?: number, filterBy?: string, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/people`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -239,6 +248,34 @@ export const PeopleProfilesApiAxiosParamCreator = function (configuration?: Conf
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             // authentication OpenId required
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (filterBy !== undefined) {
+                localVarQueryParameter['filterBy'] = filterBy;
+            }
+
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sortBy'] = sortBy;
+            }
+
+            if (sortOrder !== undefined) {
+                localVarQueryParameter['sortOrder'] = sortOrder;
+            }
+
+            if (filterSeparator !== undefined) {
+                localVarQueryParameter['filterSeparator'] = filterSeparator;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
+            }
 
 
     
@@ -838,11 +875,18 @@ export const PeopleProfilesApiFp = function(configuration?: Configuration) {
         /**
          * Returns a list of profiles for all the portal users.
          * @summary Get profiles
+         * @param {number} [count] The maximum number of items to be retrieved in the response.
+         * @param {number} [startIndex] The zero-based index of the first item to be retrieved in a filtered result set.
+         * @param {string} [filterBy] Specifies the filter criteria for user-related queries.
+         * @param {string} [sortBy] Specifies the property or field name by which the results should be sorted.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterSeparator] The character or string used to separate multiple filter values in a filtering query.
+         * @param {string} [filterValue] The text value used as an additional filter criterion for profiles retrieval.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAllProfiles(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllProfiles(options);
+        async getAllProfiles(count?: number, startIndex?: number, filterBy?: string, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllProfiles(count, startIndex, filterBy, sortBy, sortOrder, filterSeparator, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PeopleProfilesApi.getAllProfiles']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1020,11 +1064,18 @@ export const PeopleProfilesApiFactory = function (configuration?: Configuration,
         /**
          * Returns a list of profiles for all the portal users.
          * @summary Get profiles
+         * @param {number} [count] The maximum number of items to be retrieved in the response.
+         * @param {number} [startIndex] The zero-based index of the first item to be retrieved in a filtered result set.
+         * @param {string} [filterBy] Specifies the filter criteria for user-related queries.
+         * @param {string} [sortBy] Specifies the property or field name by which the results should be sorted.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterSeparator] The character or string used to separate multiple filter values in a filtering query.
+         * @param {string} [filterValue] The text value used as an additional filter criterion for profiles retrieval.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAllProfiles(options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
-            return localVarFp.getAllProfiles(options).then((request) => request(axios, basePath));
+        getAllProfiles(count?: number, startIndex?: number, filterBy?: string, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
+            return localVarFp.getAllProfiles(count, startIndex, filterBy, sortBy, sortOrder, filterSeparator, filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the user claims.
@@ -1175,12 +1226,19 @@ export class PeopleProfilesApi extends BaseAPI {
     /**
      * Returns a list of profiles for all the portal users.
      * @summary Get profiles
+     * @param {number} [count] The maximum number of items to be retrieved in the response.
+     * @param {number} [startIndex] The zero-based index of the first item to be retrieved in a filtered result set.
+     * @param {string} [filterBy] Specifies the filter criteria for user-related queries.
+     * @param {string} [sortBy] Specifies the property or field name by which the results should be sorted.
+     * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+     * @param {string} [filterSeparator] The character or string used to separate multiple filter values in a filtering query.
+     * @param {string} [filterValue] The text value used as an additional filter criterion for profiles retrieval.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PeopleProfilesApi
      */
-    public getAllProfiles(options?: RawAxiosRequestConfig) {
-        return PeopleProfilesApiFp(this.configuration).getAllProfiles(options).then((request) => request(this.axios, this.basePath));
+    public getAllProfiles(count?: number, startIndex?: number, filterBy?: string, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return PeopleProfilesApiFp(this.configuration).getAllProfiles(count, startIndex, filterBy, sortBy, sortOrder, filterSeparator, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

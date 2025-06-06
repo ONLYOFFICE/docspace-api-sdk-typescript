@@ -41,6 +41,8 @@ import type { ObjectArrayWrapper } from '../../models';
 import type { Payments } from '../../models';
 // @ts-ignore
 import type { QuotaFilter } from '../../models';
+// @ts-ignore
+import type { SortOrder } from '../../models';
 /**
  * PeopleSearchApi - axios parameter creator
  * @export
@@ -59,10 +61,14 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
          * @param {string} [inviterId] The inviter ID.
          * @param {Area} [area] The area of the account entries.
          * @param {Array<EmployeeType>} [employeeTypes] The list of the user types.
+         * @param {number} [count] The number of items to retrieve in a request.
+         * @param {number} [startIndex] The starting index for the query results.
+         * @param {string} [filterSeparator] Specifies the separator used in filter expressions.
+         * @param {string} [filterValue] The text filter applied to the accounts search query.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAccountsEntriesWithShared: async (id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAccountsEntriesWithShared: async (id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getAccountsEntriesWithShared', 'id', id)
             const localVarPath = `/api/2.0/accounts/room/{id}/search`
@@ -129,6 +135,22 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
                 localVarQueryParameter['employeeTypes'] = employeeTypes.join(COLLECTION_FORMATS.csv);
             }
 
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (filterSeparator !== undefined) {
+                localVarQueryParameter['filterSeparator'] = filterSeparator;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
+            }
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -144,10 +166,12 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
          * Returns a list of users matching the search query.
          * @summary Search users
          * @param {string} query The search query.
+         * @param {string} [filterBy] Specifies a filter criteria for the user search query.
+         * @param {string} [filterValue] The value used for filtering users, allowing additional constraints for the query.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSearch: async (query: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getSearch: async (query: string, filterBy?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'query' is not null or undefined
             assertParamExists('getSearch', 'query', query)
             const localVarPath = `/api/2.0/people/@search/{query}`
@@ -182,6 +206,14 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
 
             // authentication OpenId required
 
+            if (filterBy !== undefined) {
+                localVarQueryParameter['filterBy'] = filterBy;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
+            }
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -210,10 +242,16 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
          * @param {boolean} [invitedByMe] Specifies whether the user is invited by the current user or not.
          * @param {string} [inviterId] The inviter ID.
          * @param {Area} [area] The filter area.
+         * @param {number} [count] The maximum number of items to be retrieved in the response.
+         * @param {number} [startIndex] The zero-based index of the first item to be retrieved in a filtered result set.
+         * @param {string} [sortBy] Specifies the property or field name by which the results should be sorted.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterSeparator] Represents the separator used to split filter criteria in query parameters.
+         * @param {string} [filterValue] The search text used to filter results based on user input.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSimpleByFilter: async (employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<GetSimpleByFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getSimpleByFilter: async (employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<GetSimpleByFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/people/simple/filter`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -301,6 +339,30 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
                 localVarQueryParameter['area'] = area;
             }
 
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sortBy'] = sortBy;
+            }
+
+            if (sortOrder !== undefined) {
+                localVarQueryParameter['sortOrder'] = sortOrder;
+            }
+
+            if (filterSeparator !== undefined) {
+                localVarQueryParameter['filterSeparator'] = filterSeparator;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
+            }
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -324,10 +386,14 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
          * @param {string} [inviterId] The inviter ID.
          * @param {Area} [area] The user area.
          * @param {Array<EmployeeType>} [employeeTypes] The list of user types.
+         * @param {number} [count] The maximum number of users to be retrieved in the request.
+         * @param {number} [startIndex] The zero-based index of the first record to retrieve in a paged query.
+         * @param {string} [filterSeparator] The character or string used to separate multiple filter values in a filtering query.
+         * @param {string} [filterValue] The filter text value used for searching or filtering user results.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUsersWithRoomShared: async (id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUsersWithRoomShared: async (id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getUsersWithRoomShared', 'id', id)
             const localVarPath = `/api/2.0/people/room/{id}`
@@ -394,6 +460,22 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
                 localVarQueryParameter['employeeTypes'] = employeeTypes.join(COLLECTION_FORMATS.csv);
             }
 
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (filterSeparator !== undefined) {
+                localVarQueryParameter['filterSeparator'] = filterSeparator;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
+            }
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -422,10 +504,16 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
          * @param {boolean} [invitedByMe] Specifies whether the user is invited by the current user or not.
          * @param {string} [inviterId] The inviter ID.
          * @param {Area} [area] The filter area.
+         * @param {number} [count] The maximum number of items to be retrieved in the response.
+         * @param {number} [startIndex] The zero-based index of the first item to be retrieved in a filtered result set.
+         * @param {string} [sortBy] Specifies the property or field name by which the results should be sorted.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterSeparator] Represents the separator used to split filter criteria in query parameters.
+         * @param {string} [filterValue] The search text used to filter results based on user input.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        searchUsersByExtendedFilter: async (employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<SearchUsersByExtendedFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        searchUsersByExtendedFilter: async (employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<SearchUsersByExtendedFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/people/filter`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -513,6 +601,30 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
                 localVarQueryParameter['area'] = area;
             }
 
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sortBy'] = sortBy;
+            }
+
+            if (sortOrder !== undefined) {
+                localVarQueryParameter['sortOrder'] = sortOrder;
+            }
+
+            if (filterSeparator !== undefined) {
+                localVarQueryParameter['filterSeparator'] = filterSeparator;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
+            }
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -583,10 +695,12 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
          * @summary Search users by status filter
          * @param {EmployeeStatus} status The user status.
          * @param {string} [query] The advanced search query.
+         * @param {string} [filterBy] Specifies the criteria used to filter search results in advanced queries.
+         * @param {string} [filterValue] The value used to filter the search query.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        searchUsersByStatus: async (status: EmployeeStatus, query?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        searchUsersByStatus: async (status: EmployeeStatus, query?: string, filterBy?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'status' is not null or undefined
             assertParamExists('searchUsersByStatus', 'status', status)
             const localVarPath = `/api/2.0/people/status/{status}/search`
@@ -625,6 +739,14 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
                 localVarQueryParameter['query'] = query;
             }
 
+            if (filterBy !== undefined) {
+                localVarQueryParameter['filterBy'] = filterBy;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
+            }
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -658,11 +780,15 @@ export const PeopleSearchApiFp = function(configuration?: Configuration) {
          * @param {string} [inviterId] The inviter ID.
          * @param {Area} [area] The area of the account entries.
          * @param {Array<EmployeeType>} [employeeTypes] The list of the user types.
+         * @param {number} [count] The number of items to retrieve in a request.
+         * @param {number} [startIndex] The starting index for the query results.
+         * @param {string} [filterSeparator] Specifies the separator used in filter expressions.
+         * @param {string} [filterValue] The text filter applied to the accounts search query.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAccountsEntriesWithShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountsEntriesWithShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, options);
+        async getAccountsEntriesWithShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountsEntriesWithShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getAccountsEntriesWithShared']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -671,11 +797,13 @@ export const PeopleSearchApiFp = function(configuration?: Configuration) {
          * Returns a list of users matching the search query.
          * @summary Search users
          * @param {string} query The search query.
+         * @param {string} [filterBy] Specifies a filter criteria for the user search query.
+         * @param {string} [filterValue] The value used for filtering users, allowing additional constraints for the query.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getSearch(query: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getSearch(query, options);
+        async getSearch(query: string, filterBy?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSearch(query, filterBy, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getSearch']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -697,11 +825,17 @@ export const PeopleSearchApiFp = function(configuration?: Configuration) {
          * @param {boolean} [invitedByMe] Specifies whether the user is invited by the current user or not.
          * @param {string} [inviterId] The inviter ID.
          * @param {Area} [area] The filter area.
+         * @param {number} [count] The maximum number of items to be retrieved in the response.
+         * @param {number} [startIndex] The zero-based index of the first item to be retrieved in a filtered result set.
+         * @param {string} [sortBy] Specifies the property or field name by which the results should be sorted.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterSeparator] Represents the separator used to split filter criteria in query parameters.
+         * @param {string} [filterValue] The search text used to filter results based on user input.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getSimpleByFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<GetSimpleByFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getSimpleByFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, options);
+        async getSimpleByFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<GetSimpleByFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSimpleByFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, count, startIndex, sortBy, sortOrder, filterSeparator, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getSimpleByFilter']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -718,11 +852,15 @@ export const PeopleSearchApiFp = function(configuration?: Configuration) {
          * @param {string} [inviterId] The inviter ID.
          * @param {Area} [area] The user area.
          * @param {Array<EmployeeType>} [employeeTypes] The list of user types.
+         * @param {number} [count] The maximum number of users to be retrieved in the request.
+         * @param {number} [startIndex] The zero-based index of the first record to retrieve in a paged query.
+         * @param {string} [filterSeparator] The character or string used to separate multiple filter values in a filtering query.
+         * @param {string} [filterValue] The filter text value used for searching or filtering user results.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUsersWithRoomShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getUsersWithRoomShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, options);
+        async getUsersWithRoomShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUsersWithRoomShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getUsersWithRoomShared']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -744,11 +882,17 @@ export const PeopleSearchApiFp = function(configuration?: Configuration) {
          * @param {boolean} [invitedByMe] Specifies whether the user is invited by the current user or not.
          * @param {string} [inviterId] The inviter ID.
          * @param {Area} [area] The filter area.
+         * @param {number} [count] The maximum number of items to be retrieved in the response.
+         * @param {number} [startIndex] The zero-based index of the first item to be retrieved in a filtered result set.
+         * @param {string} [sortBy] Specifies the property or field name by which the results should be sorted.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterSeparator] Represents the separator used to split filter criteria in query parameters.
+         * @param {string} [filterValue] The search text used to filter results based on user input.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async searchUsersByExtendedFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<SearchUsersByExtendedFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.searchUsersByExtendedFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, options);
+        async searchUsersByExtendedFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<SearchUsersByExtendedFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.searchUsersByExtendedFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, count, startIndex, sortBy, sortOrder, filterSeparator, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.searchUsersByExtendedFilter']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -771,11 +915,13 @@ export const PeopleSearchApiFp = function(configuration?: Configuration) {
          * @summary Search users by status filter
          * @param {EmployeeStatus} status The user status.
          * @param {string} [query] The advanced search query.
+         * @param {string} [filterBy] Specifies the criteria used to filter search results in advanced queries.
+         * @param {string} [filterValue] The value used to filter the search query.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async searchUsersByStatus(status: EmployeeStatus, query?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.searchUsersByStatus(status, query, options);
+        async searchUsersByStatus(status: EmployeeStatus, query?: string, filterBy?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.searchUsersByStatus(status, query, filterBy, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.searchUsersByStatus']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -802,21 +948,27 @@ export const PeopleSearchApiFactory = function (configuration?: Configuration, b
          * @param {string} [inviterId] The inviter ID.
          * @param {Area} [area] The area of the account entries.
          * @param {Array<EmployeeType>} [employeeTypes] The list of the user types.
+         * @param {number} [count] The number of items to retrieve in a request.
+         * @param {number} [startIndex] The starting index for the query results.
+         * @param {string} [filterSeparator] Specifies the separator used in filter expressions.
+         * @param {string} [filterValue] The text filter applied to the accounts search query.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAccountsEntriesWithShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, options?: RawAxiosRequestConfig): AxiosPromise<ObjectArrayWrapper> {
-            return localVarFp.getAccountsEntriesWithShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, options).then((request) => request(axios, basePath));
+        getAccountsEntriesWithShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<ObjectArrayWrapper> {
+            return localVarFp.getAccountsEntriesWithShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of users matching the search query.
          * @summary Search users
          * @param {string} query The search query.
+         * @param {string} [filterBy] Specifies a filter criteria for the user search query.
+         * @param {string} [filterValue] The value used for filtering users, allowing additional constraints for the query.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSearch(query: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
-            return localVarFp.getSearch(query, options).then((request) => request(axios, basePath));
+        getSearch(query: string, filterBy?: string, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
+            return localVarFp.getSearch(query, filterBy, filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of users matching the parameters specified in the request.
@@ -835,11 +987,17 @@ export const PeopleSearchApiFactory = function (configuration?: Configuration, b
          * @param {boolean} [invitedByMe] Specifies whether the user is invited by the current user or not.
          * @param {string} [inviterId] The inviter ID.
          * @param {Area} [area] The filter area.
+         * @param {number} [count] The maximum number of items to be retrieved in the response.
+         * @param {number} [startIndex] The zero-based index of the first item to be retrieved in a filtered result set.
+         * @param {string} [sortBy] Specifies the property or field name by which the results should be sorted.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterSeparator] Represents the separator used to split filter criteria in query parameters.
+         * @param {string} [filterValue] The search text used to filter results based on user input.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSimpleByFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<GetSimpleByFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeArrayWrapper> {
-            return localVarFp.getSimpleByFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, options).then((request) => request(axios, basePath));
+        getSimpleByFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<GetSimpleByFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeArrayWrapper> {
+            return localVarFp.getSimpleByFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, count, startIndex, sortBy, sortOrder, filterSeparator, filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the users with the sharing settings in a room with the ID specified in request.
@@ -853,11 +1011,15 @@ export const PeopleSearchApiFactory = function (configuration?: Configuration, b
          * @param {string} [inviterId] The inviter ID.
          * @param {Area} [area] The user area.
          * @param {Array<EmployeeType>} [employeeTypes] The list of user types.
+         * @param {number} [count] The maximum number of users to be retrieved in the request.
+         * @param {number} [startIndex] The zero-based index of the first record to retrieve in a paged query.
+         * @param {string} [filterSeparator] The character or string used to separate multiple filter values in a filtering query.
+         * @param {string} [filterValue] The filter text value used for searching or filtering user results.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUsersWithRoomShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
-            return localVarFp.getUsersWithRoomShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, options).then((request) => request(axios, basePath));
+        getUsersWithRoomShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
+            return localVarFp.getUsersWithRoomShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of users with full information about them matching the parameters specified in the request.
@@ -876,11 +1038,17 @@ export const PeopleSearchApiFactory = function (configuration?: Configuration, b
          * @param {boolean} [invitedByMe] Specifies whether the user is invited by the current user or not.
          * @param {string} [inviterId] The inviter ID.
          * @param {Area} [area] The filter area.
+         * @param {number} [count] The maximum number of items to be retrieved in the response.
+         * @param {number} [startIndex] The zero-based index of the first item to be retrieved in a filtered result set.
+         * @param {string} [sortBy] Specifies the property or field name by which the results should be sorted.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterSeparator] Represents the separator used to split filter criteria in query parameters.
+         * @param {string} [filterValue] The search text used to filter results based on user input.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        searchUsersByExtendedFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<SearchUsersByExtendedFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
-            return localVarFp.searchUsersByExtendedFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, options).then((request) => request(axios, basePath));
+        searchUsersByExtendedFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<SearchUsersByExtendedFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
+            return localVarFp.searchUsersByExtendedFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, count, startIndex, sortBy, sortOrder, filterSeparator, filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of users matching the search query. This method uses the query parameters.
@@ -897,11 +1065,13 @@ export const PeopleSearchApiFactory = function (configuration?: Configuration, b
          * @summary Search users by status filter
          * @param {EmployeeStatus} status The user status.
          * @param {string} [query] The advanced search query.
+         * @param {string} [filterBy] Specifies the criteria used to filter search results in advanced queries.
+         * @param {string} [filterValue] The value used to filter the search query.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        searchUsersByStatus(status: EmployeeStatus, query?: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
-            return localVarFp.searchUsersByStatus(status, query, options).then((request) => request(axios, basePath));
+        searchUsersByStatus(status: EmployeeStatus, query?: string, filterBy?: string, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
+            return localVarFp.searchUsersByStatus(status, query, filterBy, filterValue, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -925,24 +1095,30 @@ export class PeopleSearchApi extends BaseAPI {
      * @param {string} [inviterId] The inviter ID.
      * @param {Area} [area] The area of the account entries.
      * @param {Array<EmployeeType>} [employeeTypes] The list of the user types.
+     * @param {number} [count] The number of items to retrieve in a request.
+     * @param {number} [startIndex] The starting index for the query results.
+     * @param {string} [filterSeparator] Specifies the separator used in filter expressions.
+     * @param {string} [filterValue] The text filter applied to the accounts search query.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PeopleSearchApi
      */
-    public getAccountsEntriesWithShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, options?: RawAxiosRequestConfig) {
-        return PeopleSearchApiFp(this.configuration).getAccountsEntriesWithShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, options).then((request) => request(this.axios, this.basePath));
+    public getAccountsEntriesWithShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return PeopleSearchApiFp(this.configuration).getAccountsEntriesWithShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns a list of users matching the search query.
      * @summary Search users
      * @param {string} query The search query.
+     * @param {string} [filterBy] Specifies a filter criteria for the user search query.
+     * @param {string} [filterValue] The value used for filtering users, allowing additional constraints for the query.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PeopleSearchApi
      */
-    public getSearch(query: string, options?: RawAxiosRequestConfig) {
-        return PeopleSearchApiFp(this.configuration).getSearch(query, options).then((request) => request(this.axios, this.basePath));
+    public getSearch(query: string, filterBy?: string, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return PeopleSearchApiFp(this.configuration).getSearch(query, filterBy, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -962,12 +1138,18 @@ export class PeopleSearchApi extends BaseAPI {
      * @param {boolean} [invitedByMe] Specifies whether the user is invited by the current user or not.
      * @param {string} [inviterId] The inviter ID.
      * @param {Area} [area] The filter area.
+     * @param {number} [count] The maximum number of items to be retrieved in the response.
+     * @param {number} [startIndex] The zero-based index of the first item to be retrieved in a filtered result set.
+     * @param {string} [sortBy] Specifies the property or field name by which the results should be sorted.
+     * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+     * @param {string} [filterSeparator] Represents the separator used to split filter criteria in query parameters.
+     * @param {string} [filterValue] The search text used to filter results based on user input.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PeopleSearchApi
      */
-    public getSimpleByFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<GetSimpleByFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, options?: RawAxiosRequestConfig) {
-        return PeopleSearchApiFp(this.configuration).getSimpleByFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, options).then((request) => request(this.axios, this.basePath));
+    public getSimpleByFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<GetSimpleByFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return PeopleSearchApiFp(this.configuration).getSimpleByFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, count, startIndex, sortBy, sortOrder, filterSeparator, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -982,12 +1164,16 @@ export class PeopleSearchApi extends BaseAPI {
      * @param {string} [inviterId] The inviter ID.
      * @param {Area} [area] The user area.
      * @param {Array<EmployeeType>} [employeeTypes] The list of user types.
+     * @param {number} [count] The maximum number of users to be retrieved in the request.
+     * @param {number} [startIndex] The zero-based index of the first record to retrieve in a paged query.
+     * @param {string} [filterSeparator] The character or string used to separate multiple filter values in a filtering query.
+     * @param {string} [filterValue] The filter text value used for searching or filtering user results.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PeopleSearchApi
      */
-    public getUsersWithRoomShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, options?: RawAxiosRequestConfig) {
-        return PeopleSearchApiFp(this.configuration).getUsersWithRoomShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, options).then((request) => request(this.axios, this.basePath));
+    public getUsersWithRoomShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return PeopleSearchApiFp(this.configuration).getUsersWithRoomShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1007,12 +1193,18 @@ export class PeopleSearchApi extends BaseAPI {
      * @param {boolean} [invitedByMe] Specifies whether the user is invited by the current user or not.
      * @param {string} [inviterId] The inviter ID.
      * @param {Area} [area] The filter area.
+     * @param {number} [count] The maximum number of items to be retrieved in the response.
+     * @param {number} [startIndex] The zero-based index of the first item to be retrieved in a filtered result set.
+     * @param {string} [sortBy] Specifies the property or field name by which the results should be sorted.
+     * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+     * @param {string} [filterSeparator] Represents the separator used to split filter criteria in query parameters.
+     * @param {string} [filterValue] The search text used to filter results based on user input.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PeopleSearchApi
      */
-    public searchUsersByExtendedFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<SearchUsersByExtendedFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, options?: RawAxiosRequestConfig) {
-        return PeopleSearchApiFp(this.configuration).searchUsersByExtendedFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, options).then((request) => request(this.axios, this.basePath));
+    public searchUsersByExtendedFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<SearchUsersByExtendedFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return PeopleSearchApiFp(this.configuration).searchUsersByExtendedFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, count, startIndex, sortBy, sortOrder, filterSeparator, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1032,12 +1224,14 @@ export class PeopleSearchApi extends BaseAPI {
      * @summary Search users by status filter
      * @param {EmployeeStatus} status The user status.
      * @param {string} [query] The advanced search query.
+     * @param {string} [filterBy] Specifies the criteria used to filter search results in advanced queries.
+     * @param {string} [filterValue] The value used to filter the search query.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PeopleSearchApi
      */
-    public searchUsersByStatus(status: EmployeeStatus, query?: string, options?: RawAxiosRequestConfig) {
-        return PeopleSearchApiFp(this.configuration).searchUsersByStatus(status, query, options).then((request) => request(this.axios, this.basePath));
+    public searchUsersByStatus(status: EmployeeStatus, query?: string, filterBy?: string, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return PeopleSearchApiFp(this.configuration).searchUsersByStatus(status, query, filterBy, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

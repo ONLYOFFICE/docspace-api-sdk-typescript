@@ -34,10 +34,13 @@ export const GroupRoomsApiAxiosParamCreator = function (configuration?: Configur
          * @summary Get groups with sharing settings
          * @param {number} id The group ID.
          * @param {boolean} [excludeShared] Specifies whether to exclude the group sharing settings from the response.
+         * @param {number} [count] The number of groups to retrieve in the request.
+         * @param {number} [startIndex] The starting index from which to begin retrieving groups with their sharing settings.
+         * @param {string} [filterValue] The text used as a filter for retrieving groups with their sharing settings.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getGroupsWithShared: async (id: number, excludeShared?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getGroupsWithShared: async (id: number, excludeShared?: boolean, count?: number, startIndex?: number, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getGroupsWithShared', 'id', id)
             const localVarPath = `/api/2.0/group/room/{id}`
@@ -76,6 +79,18 @@ export const GroupRoomsApiAxiosParamCreator = function (configuration?: Configur
                 localVarQueryParameter['excludeShared'] = excludeShared;
             }
 
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
+            }
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -102,11 +117,14 @@ export const GroupRoomsApiFp = function(configuration?: Configuration) {
          * @summary Get groups with sharing settings
          * @param {number} id The group ID.
          * @param {boolean} [excludeShared] Specifies whether to exclude the group sharing settings from the response.
+         * @param {number} [count] The number of groups to retrieve in the request.
+         * @param {number} [startIndex] The starting index from which to begin retrieving groups with their sharing settings.
+         * @param {string} [filterValue] The text used as a filter for retrieving groups with their sharing settings.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getGroupsWithShared(id: number, excludeShared?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getGroupsWithShared(id, excludeShared, options);
+        async getGroupsWithShared(id: number, excludeShared?: boolean, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getGroupsWithShared(id, excludeShared, count, startIndex, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupRoomsApi.getGroupsWithShared']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -126,11 +144,14 @@ export const GroupRoomsApiFactory = function (configuration?: Configuration, bas
          * @summary Get groups with sharing settings
          * @param {number} id The group ID.
          * @param {boolean} [excludeShared] Specifies whether to exclude the group sharing settings from the response.
+         * @param {number} [count] The number of groups to retrieve in the request.
+         * @param {number} [startIndex] The starting index from which to begin retrieving groups with their sharing settings.
+         * @param {string} [filterValue] The text used as a filter for retrieving groups with their sharing settings.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getGroupsWithShared(id: number, excludeShared?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<GroupArrayWrapper> {
-            return localVarFp.getGroupsWithShared(id, excludeShared, options).then((request) => request(axios, basePath));
+        getGroupsWithShared(id: number, excludeShared?: boolean, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<GroupArrayWrapper> {
+            return localVarFp.getGroupsWithShared(id, excludeShared, count, startIndex, filterValue, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -147,12 +168,15 @@ export class GroupRoomsApi extends BaseAPI {
      * @summary Get groups with sharing settings
      * @param {number} id The group ID.
      * @param {boolean} [excludeShared] Specifies whether to exclude the group sharing settings from the response.
+     * @param {number} [count] The number of groups to retrieve in the request.
+     * @param {number} [startIndex] The starting index from which to begin retrieving groups with their sharing settings.
+     * @param {string} [filterValue] The text used as a filter for retrieving groups with their sharing settings.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupRoomsApi
      */
-    public getGroupsWithShared(id: number, excludeShared?: boolean, options?: RawAxiosRequestConfig) {
-        return GroupRoomsApiFp(this.configuration).getGroupsWithShared(id, excludeShared, options).then((request) => request(this.axios, this.basePath));
+    public getGroupsWithShared(id: number, excludeShared?: boolean, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return GroupRoomsApiFp(this.configuration).getGroupsWithShared(id, excludeShared, count, startIndex, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

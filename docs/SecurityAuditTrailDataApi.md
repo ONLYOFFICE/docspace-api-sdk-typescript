@@ -86,6 +86,8 @@ let entryType: EntryType; //The type of audit entry (e.g., Folder, User, File). 
 let target: string; //The target object affected by the audit event (e.g., document ID, user account). (optional) (default to undefined)
 let from: ApiDateTime; //The starting date and time for filtering audit events. (optional) (default to undefined)
 let to: ApiDateTime; //The ending date and time for filtering audit events. (optional) (default to undefined)
+let count: number; //The maximum number of audit event records to retrieve. (optional) (default to undefined)
+let startIndex: number; //The index of the first audit event record to retrieve in a paged query. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getAuditEventsByFilter(
     userId,
@@ -96,7 +98,9 @@ const { status, data } = await apiInstance.getAuditEventsByFilter(
     entryType,
     target,
     from,
-    to
+    to,
+    count,
+    startIndex
 );
 ```
 
@@ -113,6 +117,8 @@ const { status, data } = await apiInstance.getAuditEventsByFilter(
 | **target** | [**string**] | The target object affected by the audit event (e.g., document ID, user account). | (optional) defaults to undefined|
 | **from** | **ApiDateTime** | The starting date and time for filtering audit events. | (optional) defaults to undefined|
 | **to** | **ApiDateTime** | The ending date and time for filtering audit events. | (optional) defaults to undefined|
+| **count** | [**number**] | The maximum number of audit event records to retrieve. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The index of the first audit event record to retrieve in a paged query. | (optional) defaults to undefined|
 
 
 ### Return type

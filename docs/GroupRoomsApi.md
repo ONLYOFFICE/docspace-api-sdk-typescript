@@ -24,10 +24,16 @@ const apiInstance = new GroupRoomsApi(configuration);
 
 let id: number; //The group ID. (default to undefined)
 let excludeShared: boolean; //Specifies whether to exclude the group sharing settings from the response. (optional) (default to undefined)
+let count: number; //The number of groups to retrieve in the request. (optional) (default to undefined)
+let startIndex: number; //The starting index from which to begin retrieving groups with their sharing settings. (optional) (default to undefined)
+let filterValue: string; //The text used as a filter for retrieving groups with their sharing settings. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getGroupsWithShared(
     id,
-    excludeShared
+    excludeShared,
+    count,
+    startIndex,
+    filterValue
 );
 ```
 
@@ -37,6 +43,9 @@ const { status, data } = await apiInstance.getGroupsWithShared(
 |------------- | ------------- | ------------- | -------------|
 | **id** | [**number**] | The group ID. | defaults to undefined|
 | **excludeShared** | [**boolean**] | Specifies whether to exclude the group sharing settings from the response. | (optional) defaults to undefined|
+| **count** | [**number**] | The number of groups to retrieve in the request. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting index from which to begin retrieving groups with their sharing settings. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The text used as a filter for retrieving groups with their sharing settings. | (optional) defaults to undefined|
 
 
 ### Return type

@@ -191,11 +191,36 @@ import {
 const configuration = new Configuration();
 const apiInstance = new PeopleProfilesApi(configuration);
 
-const { status, data } = await apiInstance.getAllProfiles();
+let count: number; //The maximum number of items to be retrieved in the response. (optional) (default to undefined)
+let startIndex: number; //The zero-based index of the first item to be retrieved in a filtered result set. (optional) (default to undefined)
+let filterBy: string; //Specifies the filter criteria for user-related queries. (optional) (default to undefined)
+let sortBy: string; //Specifies the property or field name by which the results should be sorted. (optional) (default to undefined)
+let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
+let filterSeparator: string; //The character or string used to separate multiple filter values in a filtering query. (optional) (default to undefined)
+let filterValue: string; //The text value used as an additional filter criterion for profiles retrieval. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getAllProfiles(
+    count,
+    startIndex,
+    filterBy,
+    sortBy,
+    sortOrder,
+    filterSeparator,
+    filterValue
+);
 ```
 
 ### Parameters
-This endpoint does not have any parameters.
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **count** | [**number**] | The maximum number of items to be retrieved in the response. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The zero-based index of the first item to be retrieved in a filtered result set. | (optional) defaults to undefined|
+| **filterBy** | [**string**] | Specifies the filter criteria for user-related queries. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | Specifies the property or field name by which the results should be sorted. | (optional) defaults to undefined|
+| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
+| **filterSeparator** | [**string**] | The character or string used to separate multiple filter values in a filtering query. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The text value used as an additional filter criterion for profiles retrieval. | (optional) defaults to undefined|
 
 
 ### Return type

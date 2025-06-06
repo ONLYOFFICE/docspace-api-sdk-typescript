@@ -36,6 +36,8 @@ import type { NoContentResultWrapper } from '../../models';
 // @ts-ignore
 import type { SetManagerRequest } from '../../models';
 // @ts-ignore
+import type { SortOrder } from '../../models';
+// @ts-ignore
 import type { UpdateGroupRequest } from '../../models';
 /**
  * GroupApi - axios parameter creator
@@ -322,10 +324,15 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
          * @summary Get groups
          * @param {string} [userId] The user ID.
          * @param {boolean} [manager] Specifies if the user is a manager or not.
+         * @param {number} [count] The number of records to retrieve.
+         * @param {number} [startIndex] The starting index for paginated results.
+         * @param {string} [sortBy] Specifies the property used to sort the query results.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterValue] The text used for filtering or searching group data.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getGroups: async (userId?: string, manager?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getGroups: async (userId?: string, manager?: boolean, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/group`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -363,6 +370,26 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
 
             if (manager !== undefined) {
                 localVarQueryParameter['manager'] = manager;
+            }
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sortBy'] = sortBy;
+            }
+
+            if (sortOrder !== undefined) {
+                localVarQueryParameter['sortOrder'] = sortOrder;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
             }
 
 
@@ -743,11 +770,16 @@ export const GroupApiFp = function(configuration?: Configuration) {
          * @summary Get groups
          * @param {string} [userId] The user ID.
          * @param {boolean} [manager] Specifies if the user is a manager or not.
+         * @param {number} [count] The number of records to retrieve.
+         * @param {number} [startIndex] The starting index for paginated results.
+         * @param {string} [sortBy] Specifies the property used to sort the query results.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterValue] The text used for filtering or searching group data.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getGroups(userId?: string, manager?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getGroups(userId, manager, options);
+        async getGroups(userId?: string, manager?: boolean, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getGroups(userId, manager, count, startIndex, sortBy, sortOrder, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupApi.getGroups']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -889,11 +921,16 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
          * @summary Get groups
          * @param {string} [userId] The user ID.
          * @param {boolean} [manager] Specifies if the user is a manager or not.
+         * @param {number} [count] The number of records to retrieve.
+         * @param {number} [startIndex] The starting index for paginated results.
+         * @param {string} [sortBy] Specifies the property used to sort the query results.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterValue] The text used for filtering or searching group data.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getGroups(userId?: string, manager?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<GroupArrayWrapper> {
-            return localVarFp.getGroups(userId, manager, options).then((request) => request(axios, basePath));
+        getGroups(userId?: string, manager?: boolean, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<GroupArrayWrapper> {
+            return localVarFp.getGroups(userId, manager, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Moves all the members from the selected group to another one specified in the request.
@@ -1027,12 +1064,17 @@ export class GroupApi extends BaseAPI {
      * @summary Get groups
      * @param {string} [userId] The user ID.
      * @param {boolean} [manager] Specifies if the user is a manager or not.
+     * @param {number} [count] The number of records to retrieve.
+     * @param {number} [startIndex] The starting index for paginated results.
+     * @param {string} [sortBy] Specifies the property used to sort the query results.
+     * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+     * @param {string} [filterValue] The text used for filtering or searching group data.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupApi
      */
-    public getGroups(userId?: string, manager?: boolean, options?: RawAxiosRequestConfig) {
-        return GroupApiFp(this.configuration).getGroups(userId, manager, options).then((request) => request(this.axios, this.basePath));
+    public getGroups(userId?: string, manager?: boolean, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return GroupApiFp(this.configuration).getGroups(userId, manager, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -140,10 +140,12 @@ export const SecurityLoginHistoryApiAxiosParamCreator = function (configuration?
          * @param {MessageAction} [action] The login-related action to filter events by.
          * @param {ApiDateTime} [from] The starting date and time for filtering login events.
          * @param {ApiDateTime} [to] The ending date and time for filtering login events.
+         * @param {number} [count] The number of login events to retrieve in the query.
+         * @param {number} [startIndex] The starting index for fetching a subset of login events from the query results.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getLoginEventsByFilter: async (userId?: string, action?: MessageAction, from?: ApiDateTime, to?: ApiDateTime, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getLoginEventsByFilter: async (userId?: string, action?: MessageAction, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/security/audit/login/filter`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -193,6 +195,14 @@ export const SecurityLoginHistoryApiAxiosParamCreator = function (configuration?
                 for (const [key, value] of Object.entries(to)) {
                     localVarQueryParameter[key] = value;
                 }
+            }
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
             }
 
 
@@ -247,11 +257,13 @@ export const SecurityLoginHistoryApiFp = function(configuration?: Configuration)
          * @param {MessageAction} [action] The login-related action to filter events by.
          * @param {ApiDateTime} [from] The starting date and time for filtering login events.
          * @param {ApiDateTime} [to] The ending date and time for filtering login events.
+         * @param {number} [count] The number of login events to retrieve in the query.
+         * @param {number} [startIndex] The starting index for fetching a subset of login events from the query results.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getLoginEventsByFilter(userId?: string, action?: MessageAction, from?: ApiDateTime, to?: ApiDateTime, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoginEventArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getLoginEventsByFilter(userId, action, from, to, options);
+        async getLoginEventsByFilter(userId?: string, action?: MessageAction, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoginEventArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getLoginEventsByFilter(userId, action, from, to, count, startIndex, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SecurityLoginHistoryApi.getLoginEventsByFilter']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -291,11 +303,13 @@ export const SecurityLoginHistoryApiFactory = function (configuration?: Configur
          * @param {MessageAction} [action] The login-related action to filter events by.
          * @param {ApiDateTime} [from] The starting date and time for filtering login events.
          * @param {ApiDateTime} [to] The ending date and time for filtering login events.
+         * @param {number} [count] The number of login events to retrieve in the query.
+         * @param {number} [startIndex] The starting index for fetching a subset of login events from the query results.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getLoginEventsByFilter(userId?: string, action?: MessageAction, from?: ApiDateTime, to?: ApiDateTime, options?: RawAxiosRequestConfig): AxiosPromise<LoginEventArrayWrapper> {
-            return localVarFp.getLoginEventsByFilter(userId, action, from, to, options).then((request) => request(axios, basePath));
+        getLoginEventsByFilter(userId?: string, action?: MessageAction, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): AxiosPromise<LoginEventArrayWrapper> {
+            return localVarFp.getLoginEventsByFilter(userId, action, from, to, count, startIndex, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -336,12 +350,14 @@ export class SecurityLoginHistoryApi extends BaseAPI {
      * @param {MessageAction} [action] The login-related action to filter events by.
      * @param {ApiDateTime} [from] The starting date and time for filtering login events.
      * @param {ApiDateTime} [to] The ending date and time for filtering login events.
+     * @param {number} [count] The number of login events to retrieve in the query.
+     * @param {number} [startIndex] The starting index for fetching a subset of login events from the query results.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SecurityLoginHistoryApi
      */
-    public getLoginEventsByFilter(userId?: string, action?: MessageAction, from?: ApiDateTime, to?: ApiDateTime, options?: RawAxiosRequestConfig) {
-        return SecurityLoginHistoryApiFp(this.configuration).getLoginEventsByFilter(userId, action, from, to, options).then((request) => request(this.axios, this.basePath));
+    public getLoginEventsByFilter(userId?: string, action?: MessageAction, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, options?: RawAxiosRequestConfig) {
+        return SecurityLoginHistoryApiFp(this.configuration).getLoginEventsByFilter(userId, action, from, to, count, startIndex, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

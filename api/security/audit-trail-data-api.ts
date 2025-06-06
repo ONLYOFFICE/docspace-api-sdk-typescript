@@ -108,10 +108,12 @@ export const SecurityAuditTrailDataApiAxiosParamCreator = function (configuratio
          * @param {string} [target] The target object affected by the audit event (e.g., document ID, user account).
          * @param {ApiDateTime} [from] The starting date and time for filtering audit events.
          * @param {ApiDateTime} [to] The ending date and time for filtering audit events.
+         * @param {number} [count] The maximum number of audit event records to retrieve.
+         * @param {number} [startIndex] The index of the first audit event record to retrieve in a paged query.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAuditEventsByFilter: async (userId?: string, productType?: ProductType, moduleType?: ModuleType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAuditEventsByFilter: async (userId?: string, productType?: ProductType, moduleType?: ModuleType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/security/audit/events/filter`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -181,6 +183,14 @@ export const SecurityAuditTrailDataApiAxiosParamCreator = function (configuratio
                 for (const [key, value] of Object.entries(to)) {
                     localVarQueryParameter[key] = value;
                 }
+            }
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
             }
 
 
@@ -449,11 +459,13 @@ export const SecurityAuditTrailDataApiFp = function(configuration?: Configuratio
          * @param {string} [target] The target object affected by the audit event (e.g., document ID, user account).
          * @param {ApiDateTime} [from] The starting date and time for filtering audit events.
          * @param {ApiDateTime} [to] The ending date and time for filtering audit events.
+         * @param {number} [count] The maximum number of audit event records to retrieve.
+         * @param {number} [startIndex] The index of the first audit event record to retrieve in a paged query.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAuditEventsByFilter(userId?: string, productType?: ProductType, moduleType?: ModuleType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuditEventArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAuditEventsByFilter(userId, productType, moduleType, actionType, action, entryType, target, from, to, options);
+        async getAuditEventsByFilter(userId?: string, productType?: ProductType, moduleType?: ModuleType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuditEventArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAuditEventsByFilter(userId, productType, moduleType, actionType, action, entryType, target, from, to, count, startIndex, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SecurityAuditTrailDataApi.getAuditEventsByFilter']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -552,11 +564,13 @@ export const SecurityAuditTrailDataApiFactory = function (configuration?: Config
          * @param {string} [target] The target object affected by the audit event (e.g., document ID, user account).
          * @param {ApiDateTime} [from] The starting date and time for filtering audit events.
          * @param {ApiDateTime} [to] The ending date and time for filtering audit events.
+         * @param {number} [count] The maximum number of audit event records to retrieve.
+         * @param {number} [startIndex] The index of the first audit event record to retrieve in a paged query.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAuditEventsByFilter(userId?: string, productType?: ProductType, moduleType?: ModuleType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, options?: RawAxiosRequestConfig): AxiosPromise<AuditEventArrayWrapper> {
-            return localVarFp.getAuditEventsByFilter(userId, productType, moduleType, actionType, action, entryType, target, from, to, options).then((request) => request(axios, basePath));
+        getAuditEventsByFilter(userId?: string, productType?: ProductType, moduleType?: ModuleType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): AxiosPromise<AuditEventArrayWrapper> {
+            return localVarFp.getAuditEventsByFilter(userId, productType, moduleType, actionType, action, entryType, target, from, to, count, startIndex, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the audit trail settings.
@@ -639,12 +653,14 @@ export class SecurityAuditTrailDataApi extends BaseAPI {
      * @param {string} [target] The target object affected by the audit event (e.g., document ID, user account).
      * @param {ApiDateTime} [from] The starting date and time for filtering audit events.
      * @param {ApiDateTime} [to] The ending date and time for filtering audit events.
+     * @param {number} [count] The maximum number of audit event records to retrieve.
+     * @param {number} [startIndex] The index of the first audit event record to retrieve in a paged query.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SecurityAuditTrailDataApi
      */
-    public getAuditEventsByFilter(userId?: string, productType?: ProductType, moduleType?: ModuleType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, options?: RawAxiosRequestConfig) {
-        return SecurityAuditTrailDataApiFp(this.configuration).getAuditEventsByFilter(userId, productType, moduleType, actionType, action, entryType, target, from, to, options).then((request) => request(this.axios, this.basePath));
+    public getAuditEventsByFilter(userId?: string, productType?: ProductType, moduleType?: ModuleType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, options?: RawAxiosRequestConfig) {
+        return SecurityAuditTrailDataApiFp(this.configuration).getAuditEventsByFilter(userId, productType, moduleType, actionType, action, entryType, target, from, to, count, startIndex, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

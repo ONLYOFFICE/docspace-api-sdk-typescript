@@ -234,6 +234,8 @@ let eventId: number; //The unique identifier of the event that triggered the web
 let groupStatus: WebhookGroupStatus; //The status of the webhook delivery group. (optional) (default to undefined)
 let userId: string; //The identifier of the user associated with the webhook event. (optional) (default to undefined)
 let trigger: WebhookTrigger; //The type of event that triggered the webhook. (optional) (default to undefined)
+let count: number; //The maximum number of webhook log records to return in the query response. (optional) (default to undefined)
+let startIndex: number; //Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getWebhooksLogs(
     deliveryFrom,
@@ -243,7 +245,9 @@ const { status, data } = await apiInstance.getWebhooksLogs(
     eventId,
     groupStatus,
     userId,
-    trigger
+    trigger,
+    count,
+    startIndex
 );
 ```
 
@@ -259,6 +263,8 @@ const { status, data } = await apiInstance.getWebhooksLogs(
 | **groupStatus** | **WebhookGroupStatus** | The status of the webhook delivery group. | (optional) defaults to undefined|
 | **userId** | [**string**] | The identifier of the user associated with the webhook event. | (optional) defaults to undefined|
 | **trigger** | **WebhookTrigger** | The type of event that triggered the webhook. | (optional) defaults to undefined|
+| **count** | [**number**] | The maximum number of webhook log records to return in the query response. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries. | (optional) defaults to undefined|
 
 
 ### Return type

@@ -37,6 +37,10 @@ let invitedByMe: boolean; //Specifies whether the user is invited by the current
 let inviterId: string; //The inviter ID. (optional) (default to undefined)
 let area: Area; //The area of the account entries. (optional) (default to undefined)
 let employeeTypes: Array<EmployeeType>; //The list of the user types. (optional) (default to undefined)
+let count: number; //The number of items to retrieve in a request. (optional) (default to undefined)
+let startIndex: number; //The starting index for the query results. (optional) (default to undefined)
+let filterSeparator: string; //Specifies the separator used in filter expressions. (optional) (default to undefined)
+let filterValue: string; //The text filter applied to the accounts search query. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getAccountsEntriesWithShared(
     id,
@@ -47,7 +51,11 @@ const { status, data } = await apiInstance.getAccountsEntriesWithShared(
     invitedByMe,
     inviterId,
     area,
-    employeeTypes
+    employeeTypes,
+    count,
+    startIndex,
+    filterSeparator,
+    filterValue
 );
 ```
 
@@ -64,6 +72,10 @@ const { status, data } = await apiInstance.getAccountsEntriesWithShared(
 | **inviterId** | [**string**] | The inviter ID. | (optional) defaults to undefined|
 | **area** | **Area** | The area of the account entries. | (optional) defaults to undefined|
 | **employeeTypes** | **Array&lt;EmployeeType&gt;** | The list of the user types. | (optional) defaults to undefined|
+| **count** | [**number**] | The number of items to retrieve in a request. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting index for the query results. | (optional) defaults to undefined|
+| **filterSeparator** | [**string**] | Specifies the separator used in filter expressions. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The text filter applied to the accounts search query. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -106,9 +118,13 @@ const configuration = new Configuration();
 const apiInstance = new PeopleSearchApi(configuration);
 
 let query: string; //The search query. (default to undefined)
+let filterBy: string; //Specifies a filter criteria for the user search query. (optional) (default to undefined)
+let filterValue: string; //The value used for filtering users, allowing additional constraints for the query. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getSearch(
-    query
+    query,
+    filterBy,
+    filterValue
 );
 ```
 
@@ -117,6 +133,8 @@ const { status, data } = await apiInstance.getSearch(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **query** | [**string**] | The search query. | defaults to undefined|
+| **filterBy** | [**string**] | Specifies a filter criteria for the user search query. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The value used for filtering users, allowing additional constraints for the query. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -172,6 +190,12 @@ let excludeGroup: boolean; //Specifies whether the user should be a member of th
 let invitedByMe: boolean; //Specifies whether the user is invited by the current user or not. (optional) (default to undefined)
 let inviterId: string; //The inviter ID. (optional) (default to undefined)
 let area: Area; //The filter area. (optional) (default to undefined)
+let count: number; //The maximum number of items to be retrieved in the response. (optional) (default to undefined)
+let startIndex: number; //The zero-based index of the first item to be retrieved in a filtered result set. (optional) (default to undefined)
+let sortBy: string; //Specifies the property or field name by which the results should be sorted. (optional) (default to undefined)
+let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
+let filterSeparator: string; //Represents the separator used to split filter criteria in query parameters. (optional) (default to undefined)
+let filterValue: string; //The search text used to filter results based on user input. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getSimpleByFilter(
     employeeStatus,
@@ -187,7 +211,13 @@ const { status, data } = await apiInstance.getSimpleByFilter(
     excludeGroup,
     invitedByMe,
     inviterId,
-    area
+    area,
+    count,
+    startIndex,
+    sortBy,
+    sortOrder,
+    filterSeparator,
+    filterValue
 );
 ```
 
@@ -209,6 +239,12 @@ const { status, data } = await apiInstance.getSimpleByFilter(
 | **invitedByMe** | [**boolean**] | Specifies whether the user is invited by the current user or not. | (optional) defaults to undefined|
 | **inviterId** | [**string**] | The inviter ID. | (optional) defaults to undefined|
 | **area** | **Area** | The filter area. | (optional) defaults to undefined|
+| **count** | [**number**] | The maximum number of items to be retrieved in the response. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The zero-based index of the first item to be retrieved in a filtered result set. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | Specifies the property or field name by which the results should be sorted. | (optional) defaults to undefined|
+| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
+| **filterSeparator** | [**string**] | Represents the separator used to split filter criteria in query parameters. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The search text used to filter results based on user input. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -259,6 +295,10 @@ let invitedByMe: boolean; //Specifies whether the user was invited by the curren
 let inviterId: string; //The inviter ID. (optional) (default to undefined)
 let area: Area; //The user area. (optional) (default to undefined)
 let employeeTypes: Array<EmployeeType>; //The list of user types. (optional) (default to undefined)
+let count: number; //The maximum number of users to be retrieved in the request. (optional) (default to undefined)
+let startIndex: number; //The zero-based index of the first record to retrieve in a paged query. (optional) (default to undefined)
+let filterSeparator: string; //The character or string used to separate multiple filter values in a filtering query. (optional) (default to undefined)
+let filterValue: string; //The filter text value used for searching or filtering user results. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getUsersWithRoomShared(
     id,
@@ -269,7 +309,11 @@ const { status, data } = await apiInstance.getUsersWithRoomShared(
     invitedByMe,
     inviterId,
     area,
-    employeeTypes
+    employeeTypes,
+    count,
+    startIndex,
+    filterSeparator,
+    filterValue
 );
 ```
 
@@ -286,6 +330,10 @@ const { status, data } = await apiInstance.getUsersWithRoomShared(
 | **inviterId** | [**string**] | The inviter ID. | (optional) defaults to undefined|
 | **area** | **Area** | The user area. | (optional) defaults to undefined|
 | **employeeTypes** | **Array&lt;EmployeeType&gt;** | The list of user types. | (optional) defaults to undefined|
+| **count** | [**number**] | The maximum number of users to be retrieved in the request. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The zero-based index of the first record to retrieve in a paged query. | (optional) defaults to undefined|
+| **filterSeparator** | [**string**] | The character or string used to separate multiple filter values in a filtering query. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The filter text value used for searching or filtering user results. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -341,6 +389,12 @@ let excludeGroup: boolean; //Specifies whether the user should be a member of th
 let invitedByMe: boolean; //Specifies whether the user is invited by the current user or not. (optional) (default to undefined)
 let inviterId: string; //The inviter ID. (optional) (default to undefined)
 let area: Area; //The filter area. (optional) (default to undefined)
+let count: number; //The maximum number of items to be retrieved in the response. (optional) (default to undefined)
+let startIndex: number; //The zero-based index of the first item to be retrieved in a filtered result set. (optional) (default to undefined)
+let sortBy: string; //Specifies the property or field name by which the results should be sorted. (optional) (default to undefined)
+let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
+let filterSeparator: string; //Represents the separator used to split filter criteria in query parameters. (optional) (default to undefined)
+let filterValue: string; //The search text used to filter results based on user input. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.searchUsersByExtendedFilter(
     employeeStatus,
@@ -356,7 +410,13 @@ const { status, data } = await apiInstance.searchUsersByExtendedFilter(
     excludeGroup,
     invitedByMe,
     inviterId,
-    area
+    area,
+    count,
+    startIndex,
+    sortBy,
+    sortOrder,
+    filterSeparator,
+    filterValue
 );
 ```
 
@@ -378,6 +438,12 @@ const { status, data } = await apiInstance.searchUsersByExtendedFilter(
 | **invitedByMe** | [**boolean**] | Specifies whether the user is invited by the current user or not. | (optional) defaults to undefined|
 | **inviterId** | [**string**] | The inviter ID. | (optional) defaults to undefined|
 | **area** | **Area** | The filter area. | (optional) defaults to undefined|
+| **count** | [**number**] | The maximum number of items to be retrieved in the response. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The zero-based index of the first item to be retrieved in a filtered result set. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | Specifies the property or field name by which the results should be sorted. | (optional) defaults to undefined|
+| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
+| **filterSeparator** | [**string**] | Represents the separator used to split filter criteria in query parameters. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The search text used to filter results based on user input. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -473,10 +539,14 @@ const apiInstance = new PeopleSearchApi(configuration);
 
 let status: EmployeeStatus; //The user status. (default to undefined)
 let query: string; //The advanced search query. (optional) (default to undefined)
+let filterBy: string; //Specifies the criteria used to filter search results in advanced queries. (optional) (default to undefined)
+let filterValue: string; //The value used to filter the search query. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.searchUsersByStatus(
     status,
-    query
+    query,
+    filterBy,
+    filterValue
 );
 ```
 
@@ -486,6 +556,8 @@ const { status, data } = await apiInstance.searchUsersByStatus(
 |------------- | ------------- | ------------- | -------------|
 | **status** | **EmployeeStatus** | The user status. | defaults to undefined|
 | **query** | [**string**] | The advanced search query. | (optional) defaults to undefined|
+| **filterBy** | [**string**] | Specifies the criteria used to filter search results in advanced queries. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The value used to filter the search query. | (optional) defaults to undefined|
 
 
 ### Return type

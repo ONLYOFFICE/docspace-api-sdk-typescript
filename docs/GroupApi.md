@@ -305,10 +305,20 @@ const apiInstance = new GroupApi(configuration);
 
 let userId: string; //The user ID. (optional) (default to undefined)
 let manager: boolean; //Specifies if the user is a manager or not. (optional) (default to undefined)
+let count: number; //The number of records to retrieve. (optional) (default to undefined)
+let startIndex: number; //The starting index for paginated results. (optional) (default to undefined)
+let sortBy: string; //Specifies the property used to sort the query results. (optional) (default to undefined)
+let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
+let filterValue: string; //The text used for filtering or searching group data. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getGroups(
     userId,
-    manager
+    manager,
+    count,
+    startIndex,
+    sortBy,
+    sortOrder,
+    filterValue
 );
 ```
 
@@ -318,6 +328,11 @@ const { status, data } = await apiInstance.getGroups(
 |------------- | ------------- | ------------- | -------------|
 | **userId** | [**string**] | The user ID. | (optional) defaults to undefined|
 | **manager** | [**boolean**] | Specifies if the user is a manager or not. | (optional) defaults to undefined|
+| **count** | [**number**] | The number of records to retrieve. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting index for paginated results. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | Specifies the property used to sort the query results. | (optional) defaults to undefined|
+| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The text used for filtering or searching group data. | (optional) defaults to undefined|
 
 
 ### Return type

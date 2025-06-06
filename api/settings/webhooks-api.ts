@@ -262,10 +262,12 @@ export const SettingsWebhooksApiAxiosParamCreator = function (configuration?: Co
          * @param {WebhookGroupStatus} [groupStatus] The status of the webhook delivery group.
          * @param {string} [userId] The identifier of the user associated with the webhook event.
          * @param {WebhookTrigger} [trigger] The type of event that triggered the webhook.
+         * @param {number} [count] The maximum number of webhook log records to return in the query response.
+         * @param {number} [startIndex] Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getWebhooksLogs: async (deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getWebhooksLogs: async (deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/settings/webhooks/log`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -331,6 +333,14 @@ export const SettingsWebhooksApiAxiosParamCreator = function (configuration?: Co
 
             if (trigger !== undefined) {
                 localVarQueryParameter['trigger'] = trigger;
+            }
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
             }
 
 
@@ -627,11 +637,13 @@ export const SettingsWebhooksApiFp = function(configuration?: Configuration) {
          * @param {WebhookGroupStatus} [groupStatus] The status of the webhook delivery group.
          * @param {string} [userId] The identifier of the user associated with the webhook event.
          * @param {WebhookTrigger} [trigger] The type of event that triggered the webhook.
+         * @param {number} [count] The maximum number of webhook log records to return in the query response.
+         * @param {number} [startIndex] Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getWebhooksLogs(deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksLogArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getWebhooksLogs(deliveryFrom, deliveryTo, hookUri, configId, eventId, groupStatus, userId, trigger, options);
+        async getWebhooksLogs(deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksLogArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getWebhooksLogs(deliveryFrom, deliveryTo, hookUri, configId, eventId, groupStatus, userId, trigger, count, startIndex, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SettingsWebhooksApi.getWebhooksLogs']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -747,11 +759,13 @@ export const SettingsWebhooksApiFactory = function (configuration?: Configuratio
          * @param {WebhookGroupStatus} [groupStatus] The status of the webhook delivery group.
          * @param {string} [userId] The identifier of the user associated with the webhook event.
          * @param {WebhookTrigger} [trigger] The type of event that triggered the webhook.
+         * @param {number} [count] The maximum number of webhook log records to return in the query response.
+         * @param {number} [startIndex] Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getWebhooksLogs(deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksLogArrayWrapper> {
-            return localVarFp.getWebhooksLogs(deliveryFrom, deliveryTo, hookUri, configId, eventId, groupStatus, userId, trigger, options).then((request) => request(axios, basePath));
+        getWebhooksLogs(deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksLogArrayWrapper> {
+            return localVarFp.getWebhooksLogs(deliveryFrom, deliveryTo, hookUri, configId, eventId, groupStatus, userId, trigger, count, startIndex, options).then((request) => request(axios, basePath));
         },
         /**
          * Removes a tenant webhook with the ID specified in the request.
@@ -860,12 +874,14 @@ export class SettingsWebhooksApi extends BaseAPI {
      * @param {WebhookGroupStatus} [groupStatus] The status of the webhook delivery group.
      * @param {string} [userId] The identifier of the user associated with the webhook event.
      * @param {WebhookTrigger} [trigger] The type of event that triggered the webhook.
+     * @param {number} [count] The maximum number of webhook log records to return in the query response.
+     * @param {number} [startIndex] Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SettingsWebhooksApi
      */
-    public getWebhooksLogs(deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, options?: RawAxiosRequestConfig) {
-        return SettingsWebhooksApiFp(this.configuration).getWebhooksLogs(deliveryFrom, deliveryTo, hookUri, configId, eventId, groupStatus, userId, trigger, options).then((request) => request(this.axios, this.basePath));
+    public getWebhooksLogs(deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, count?: number, startIndex?: number, options?: RawAxiosRequestConfig) {
+        return SettingsWebhooksApiFp(this.configuration).getWebhooksLogs(deliveryFrom, deliveryTo, hookUri, configId, eventId, groupStatus, userId, trigger, count, startIndex, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -438,6 +438,7 @@ export * from './smtp-operation-status-requests-dto';
 export * from './smtp-operation-status-requests-wrapper';
 export * from './smtp-settings-dto';
 export * from './smtp-settings-wrapper';
+export * from './sort-order';
 export * from './sorted-by-type';
 export * from './sso-certificate';
 export * from './sso-field-mapping';

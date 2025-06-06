@@ -25,9 +25,23 @@ const configuration = new Configuration();
 const apiInstance = new PeopleUserStatusApi(configuration);
 
 let status: EmployeeStatus; //The user status. (default to undefined)
+let filterBy: string; //Specifies the criteria used to filter the profiles in the request. (optional) (default to undefined)
+let count: number; //The maximum number of user profiles to retrieve. (optional) (default to undefined)
+let startIndex: number; //The starting index for retrieving data in a paginated request. (optional) (default to undefined)
+let sortBy: string; //Specifies the property or field name by which the results should be sorted. (optional) (default to undefined)
+let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
+let filterSeparator: string; //Represents the separator used to split multiple filter criteria in a query string. (optional) (default to undefined)
+let filterValue: string; //A string value representing additional filter criteria used in query parameters. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getByStatus(
-    status
+    status,
+    filterBy,
+    count,
+    startIndex,
+    sortBy,
+    sortOrder,
+    filterSeparator,
+    filterValue
 );
 ```
 
@@ -36,6 +50,13 @@ const { status, data } = await apiInstance.getByStatus(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **status** | **EmployeeStatus** | The user status. | defaults to undefined|
+| **filterBy** | [**string**] | Specifies the criteria used to filter the profiles in the request. | (optional) defaults to undefined|
+| **count** | [**number**] | The maximum number of user profiles to retrieve. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting index for retrieving data in a paginated request. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | Specifies the property or field name by which the results should be sorted. | (optional) defaults to undefined|
+| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
+| **filterSeparator** | [**string**] | Represents the separator used to split multiple filter criteria in a query string. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | A string value representing additional filter criteria used in query parameters. | (optional) defaults to undefined|
 
 
 ### Return type

@@ -122,12 +122,16 @@ let userId: string; //The ID of the user whose login events are being queried. (
 let action: MessageAction; //The login-related action to filter events by. (optional) (default to undefined)
 let from: ApiDateTime; //The starting date and time for filtering login events. (optional) (default to undefined)
 let to: ApiDateTime; //The ending date and time for filtering login events. (optional) (default to undefined)
+let count: number; //The number of login events to retrieve in the query. (optional) (default to undefined)
+let startIndex: number; //The starting index for fetching a subset of login events from the query results. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getLoginEventsByFilter(
     userId,
     action,
     from,
-    to
+    to,
+    count,
+    startIndex
 );
 ```
 
@@ -139,6 +143,8 @@ const { status, data } = await apiInstance.getLoginEventsByFilter(
 | **action** | **MessageAction** | The login-related action to filter events by. | (optional) defaults to undefined|
 | **from** | **ApiDateTime** | The starting date and time for filtering login events. | (optional) defaults to undefined|
 | **to** | **ApiDateTime** | The ending date and time for filtering login events. | (optional) defaults to undefined|
+| **count** | [**number**] | The number of login events to retrieve in the query. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting index for fetching a subset of login events from the query results. | (optional) defaults to undefined|
 
 
 ### Return type

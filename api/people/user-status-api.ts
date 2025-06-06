@@ -28,6 +28,8 @@ import type { EmployeeFullArrayWrapper } from '../../models';
 // @ts-ignore
 import type { EmployeeStatus } from '../../models';
 // @ts-ignore
+import type { SortOrder } from '../../models';
+// @ts-ignore
 import type { UpdateMembersRequestDto } from '../../models';
 /**
  * PeopleUserStatusApi - axios parameter creator
@@ -39,10 +41,17 @@ export const PeopleUserStatusApiAxiosParamCreator = function (configuration?: Co
          * Returns a list of profiles filtered by the user status.
          * @summary Get profiles by status
          * @param {EmployeeStatus} status The user status.
+         * @param {string} [filterBy] Specifies the criteria used to filter the profiles in the request.
+         * @param {number} [count] The maximum number of user profiles to retrieve.
+         * @param {number} [startIndex] The starting index for retrieving data in a paginated request.
+         * @param {string} [sortBy] Specifies the property or field name by which the results should be sorted.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterSeparator] Represents the separator used to split multiple filter criteria in a query string.
+         * @param {string} [filterValue] A string value representing additional filter criteria used in query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getByStatus: async (status: EmployeeStatus, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getByStatus: async (status: EmployeeStatus, filterBy?: string, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'status' is not null or undefined
             assertParamExists('getByStatus', 'status', status)
             const localVarPath = `/api/2.0/people/status/{status}`
@@ -76,6 +85,34 @@ export const PeopleUserStatusApiAxiosParamCreator = function (configuration?: Co
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             // authentication OpenId required
+
+            if (filterBy !== undefined) {
+                localVarQueryParameter['filterBy'] = filterBy;
+            }
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sortBy'] = sortBy;
+            }
+
+            if (sortOrder !== undefined) {
+                localVarQueryParameter['sortOrder'] = sortOrder;
+            }
+
+            if (filterSeparator !== undefined) {
+                localVarQueryParameter['filterSeparator'] = filterSeparator;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
+            }
 
 
     
@@ -216,11 +253,18 @@ export const PeopleUserStatusApiFp = function(configuration?: Configuration) {
          * Returns a list of profiles filtered by the user status.
          * @summary Get profiles by status
          * @param {EmployeeStatus} status The user status.
+         * @param {string} [filterBy] Specifies the criteria used to filter the profiles in the request.
+         * @param {number} [count] The maximum number of user profiles to retrieve.
+         * @param {number} [startIndex] The starting index for retrieving data in a paginated request.
+         * @param {string} [sortBy] Specifies the property or field name by which the results should be sorted.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterSeparator] Represents the separator used to split multiple filter criteria in a query string.
+         * @param {string} [filterValue] A string value representing additional filter criteria used in query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getByStatus(status: EmployeeStatus, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getByStatus(status, options);
+        async getByStatus(status: EmployeeStatus, filterBy?: string, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getByStatus(status, filterBy, count, startIndex, sortBy, sortOrder, filterSeparator, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PeopleUserStatusApi.getByStatus']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -267,11 +311,18 @@ export const PeopleUserStatusApiFactory = function (configuration?: Configuratio
          * Returns a list of profiles filtered by the user status.
          * @summary Get profiles by status
          * @param {EmployeeStatus} status The user status.
+         * @param {string} [filterBy] Specifies the criteria used to filter the profiles in the request.
+         * @param {number} [count] The maximum number of user profiles to retrieve.
+         * @param {number} [startIndex] The starting index for retrieving data in a paginated request.
+         * @param {string} [sortBy] Specifies the property or field name by which the results should be sorted.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterSeparator] Represents the separator used to split multiple filter criteria in a query string.
+         * @param {string} [filterValue] A string value representing additional filter criteria used in query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getByStatus(status: EmployeeStatus, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
-            return localVarFp.getByStatus(status, options).then((request) => request(axios, basePath));
+        getByStatus(status: EmployeeStatus, filterBy?: string, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
+            return localVarFp.getByStatus(status, filterBy, count, startIndex, sortBy, sortOrder, filterSeparator, filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Sets the required activation status to the list of users with the IDs specified in the request.
@@ -309,12 +360,19 @@ export class PeopleUserStatusApi extends BaseAPI {
      * Returns a list of profiles filtered by the user status.
      * @summary Get profiles by status
      * @param {EmployeeStatus} status The user status.
+     * @param {string} [filterBy] Specifies the criteria used to filter the profiles in the request.
+     * @param {number} [count] The maximum number of user profiles to retrieve.
+     * @param {number} [startIndex] The starting index for retrieving data in a paginated request.
+     * @param {string} [sortBy] Specifies the property or field name by which the results should be sorted.
+     * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+     * @param {string} [filterSeparator] Represents the separator used to split multiple filter criteria in a query string.
+     * @param {string} [filterValue] A string value representing additional filter criteria used in query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PeopleUserStatusApi
      */
-    public getByStatus(status: EmployeeStatus, options?: RawAxiosRequestConfig) {
-        return PeopleUserStatusApiFp(this.configuration).getByStatus(status, options).then((request) => request(this.axios, this.basePath));
+    public getByStatus(status: EmployeeStatus, filterBy?: string, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return PeopleUserStatusApiFp(this.configuration).getByStatus(status, filterBy, count, startIndex, sortBy, sortOrder, filterSeparator, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
