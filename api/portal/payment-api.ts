@@ -181,7 +181,7 @@ export const PortalPaymentApiAxiosParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAllCurrencies: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAccountingCurrencies: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/portal/payment/accounting/currencies`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1244,10 +1244,10 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAllCurrencies(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CurrencyArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllCurrencies(options);
+        async getAccountingCurrencies(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CurrencyArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountingCurrencies(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.getAllCurrencies']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.getAccountingCurrencies']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1522,8 +1522,8 @@ export const PortalPaymentApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAllCurrencies(options?: RawAxiosRequestConfig): AxiosPromise<CurrencyArrayWrapper> {
-            return localVarFp.getAllCurrencies(options).then((request) => request(axios, basePath));
+        getAccountingCurrencies(options?: RawAxiosRequestConfig): AxiosPromise<CurrencyArrayWrapper> {
+            return localVarFp.getAccountingCurrencies(options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the URL to the checkout setup page.
@@ -1748,8 +1748,8 @@ export class PortalPaymentApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PortalPaymentApi
      */
-    public getAllCurrencies(options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).getAllCurrencies(options).then((request) => request(this.axios, this.basePath));
+    public getAccountingCurrencies(options?: RawAxiosRequestConfig) {
+        return PortalPaymentApiFp(this.configuration).getAccountingCurrencies(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -94,6 +94,8 @@ import type { SetPublicDto } from '../../models';
 // @ts-ignore
 import type { ShareFilterType } from '../../models';
 // @ts-ignore
+import type { SortOrder } from '../../models';
+// @ts-ignore
 import type { StorageFilter } from '../../models';
 // @ts-ignore
 import type { SubjectFilter } from '../../models';
@@ -1176,10 +1178,13 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * @summary Get the room access rights
          * @param {number} id The room ID.
          * @param {ShareFilterType} [filterType] The filter type of the access rights.
+         * @param {number} [count] The number of items to be retrieved or processed.
+         * @param {number} [startIndex] The starting index of the items to retrieve in a paginated request.
+         * @param {string} [filterValue] The text filter value used for filtering room security information.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRoomSecurityInfo: async (id: number, filterType?: ShareFilterType, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getRoomSecurityInfo: async (id: number, filterType?: ShareFilterType, count?: number, startIndex?: number, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getRoomSecurityInfo', 'id', id)
             const localVarPath = `/api/2.0/files/rooms/{id}/share`
@@ -1218,6 +1223,18 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
                 localVarQueryParameter['filterType'] = filterType;
             }
 
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
+            }
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -1232,10 +1249,13 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * Returns a list of custom tags.
          * @summary Get tags
+         * @param {number} [count] Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.
+         * @param {number} [startIndex] Represents the starting index from which the tags\&#39; information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.
+         * @param {string} [filterValue] Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRoomTagsInfo: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getRoomTagsInfo: async (count?: number, startIndex?: number, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/files/tags`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1266,6 +1286,18 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             // authentication OpenId required
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
+            }
 
 
     
@@ -1340,10 +1372,15 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * @param {SubjectFilter} [subjectFilter] The filter by user (Owner - 0, Member - 1).
          * @param {QuotaFilter} [quotaFilter] The filter by quota (All - 0, Default - 1, Custom - 2).
          * @param {StorageFilter} [storageFilter] The filter by storage (None - 0, Internal - 1, ThirdParty - 2).
+         * @param {number} [count] Specifies the maximum number of items to retrieve.
+         * @param {number} [startIndex] The index from which to start retrieving the room content.
+         * @param {string} [sortBy] Specifies the field by which the room content should be sorted.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterValue] The text filter value used to refine search or query operations.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRoomsFolder: async (type?: Array<RoomType>, subjectId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getRoomsFolder: async (type?: Array<RoomType>, subjectId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/files/rooms`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1413,6 +1450,26 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
 
             if (storageFilter !== undefined) {
                 localVarQueryParameter['storageFilter'] = storageFilter;
+            }
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sortBy'] = sortBy;
+            }
+
+            if (sortOrder !== undefined) {
+                localVarQueryParameter['sortOrder'] = sortOrder;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
             }
 
 
@@ -2467,11 +2524,14 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * @summary Get the room access rights
          * @param {number} id The room ID.
          * @param {ShareFilterType} [filterType] The filter type of the access rights.
+         * @param {number} [count] The number of items to be retrieved or processed.
+         * @param {number} [startIndex] The starting index of the items to retrieve in a paginated request.
+         * @param {string} [filterValue] The text filter value used for filtering room security information.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getRoomSecurityInfo(id: number, filterType?: ShareFilterType, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomSecurityInfo(id, filterType, options);
+        async getRoomSecurityInfo(id: number, filterType?: ShareFilterType, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomSecurityInfo(id, filterType, count, startIndex, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomSecurityInfo']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -2479,11 +2539,14 @@ export const RoomsApiFp = function(configuration?: Configuration) {
         /**
          * Returns a list of custom tags.
          * @summary Get tags
+         * @param {number} [count] Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.
+         * @param {number} [startIndex] Represents the starting index from which the tags\&#39; information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.
+         * @param {string} [filterValue] Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getRoomTagsInfo(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomTagsInfo(options);
+        async getRoomTagsInfo(count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomTagsInfo(count, startIndex, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomTagsInfo']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -2513,11 +2576,16 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * @param {SubjectFilter} [subjectFilter] The filter by user (Owner - 0, Member - 1).
          * @param {QuotaFilter} [quotaFilter] The filter by quota (All - 0, Default - 1, Custom - 2).
          * @param {StorageFilter} [storageFilter] The filter by storage (None - 0, Internal - 1, ThirdParty - 2).
+         * @param {number} [count] Specifies the maximum number of items to retrieve.
+         * @param {number} [startIndex] The index from which to start retrieving the room content.
+         * @param {string} [sortBy] Specifies the field by which the room content should be sorted.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterValue] The text filter value used to refine search or query operations.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getRoomsFolder(type?: Array<RoomType>, subjectId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomsFolder(type, subjectId, searchArea, withoutTags, tags, excludeSubject, provider, subjectFilter, quotaFilter, storageFilter, options);
+        async getRoomsFolder(type?: Array<RoomType>, subjectId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomsFolder(type, subjectId, searchArea, withoutTags, tags, excludeSubject, provider, subjectFilter, quotaFilter, storageFilter, count, startIndex, sortBy, sortOrder, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomsFolder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -2927,20 +2995,26 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          * @summary Get the room access rights
          * @param {number} id The room ID.
          * @param {ShareFilterType} [filterType] The filter type of the access rights.
+         * @param {number} [count] The number of items to be retrieved or processed.
+         * @param {number} [startIndex] The starting index of the items to retrieve in a paginated request.
+         * @param {string} [filterValue] The text filter value used for filtering room security information.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRoomSecurityInfo(id: number, filterType?: ShareFilterType, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
-            return localVarFp.getRoomSecurityInfo(id, filterType, options).then((request) => request(axios, basePath));
+        getRoomSecurityInfo(id: number, filterType?: ShareFilterType, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
+            return localVarFp.getRoomSecurityInfo(id, filterType, count, startIndex, filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of custom tags.
          * @summary Get tags
+         * @param {number} [count] Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.
+         * @param {number} [startIndex] Represents the starting index from which the tags\&#39; information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.
+         * @param {string} [filterValue] Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRoomTagsInfo(options?: RawAxiosRequestConfig): AxiosPromise<ObjectArrayWrapper> {
-            return localVarFp.getRoomTagsInfo(options).then((request) => request(axios, basePath));
+        getRoomTagsInfo(count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<ObjectArrayWrapper> {
+            return localVarFp.getRoomTagsInfo(count, startIndex, filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the progress status of the room template creation process.
@@ -2964,11 +3038,16 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          * @param {SubjectFilter} [subjectFilter] The filter by user (Owner - 0, Member - 1).
          * @param {QuotaFilter} [quotaFilter] The filter by quota (All - 0, Default - 1, Custom - 2).
          * @param {StorageFilter} [storageFilter] The filter by storage (None - 0, Internal - 1, ThirdParty - 2).
+         * @param {number} [count] Specifies the maximum number of items to retrieve.
+         * @param {number} [startIndex] The index from which to start retrieving the room content.
+         * @param {string} [sortBy] Specifies the field by which the room content should be sorted.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterValue] The text filter value used to refine search or query operations.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRoomsFolder(type?: Array<RoomType>, subjectId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
-            return localVarFp.getRoomsFolder(type, subjectId, searchArea, withoutTags, tags, excludeSubject, provider, subjectFilter, quotaFilter, storageFilter, options).then((request) => request(axios, basePath));
+        getRoomsFolder(type?: Array<RoomType>, subjectId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
+            return localVarFp.getRoomsFolder(type, subjectId, searchArea, withoutTags, tags, excludeSubject, provider, subjectFilter, quotaFilter, storageFilter, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the room new items.
@@ -3373,23 +3452,29 @@ export class RoomsApi extends BaseAPI {
      * @summary Get the room access rights
      * @param {number} id The room ID.
      * @param {ShareFilterType} [filterType] The filter type of the access rights.
+     * @param {number} [count] The number of items to be retrieved or processed.
+     * @param {number} [startIndex] The starting index of the items to retrieve in a paginated request.
+     * @param {string} [filterValue] The text filter value used for filtering room security information.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public getRoomSecurityInfo(id: number, filterType?: ShareFilterType, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).getRoomSecurityInfo(id, filterType, options).then((request) => request(this.axios, this.basePath));
+    public getRoomSecurityInfo(id: number, filterType?: ShareFilterType, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).getRoomSecurityInfo(id, filterType, count, startIndex, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns a list of custom tags.
      * @summary Get tags
+     * @param {number} [count] Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.
+     * @param {number} [startIndex] Represents the starting index from which the tags\&#39; information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.
+     * @param {string} [filterValue] Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public getRoomTagsInfo(options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).getRoomTagsInfo(options).then((request) => request(this.axios, this.basePath));
+    public getRoomTagsInfo(count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).getRoomTagsInfo(count, startIndex, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3416,12 +3501,17 @@ export class RoomsApi extends BaseAPI {
      * @param {SubjectFilter} [subjectFilter] The filter by user (Owner - 0, Member - 1).
      * @param {QuotaFilter} [quotaFilter] The filter by quota (All - 0, Default - 1, Custom - 2).
      * @param {StorageFilter} [storageFilter] The filter by storage (None - 0, Internal - 1, ThirdParty - 2).
+     * @param {number} [count] Specifies the maximum number of items to retrieve.
+     * @param {number} [startIndex] The index from which to start retrieving the room content.
+     * @param {string} [sortBy] Specifies the field by which the room content should be sorted.
+     * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+     * @param {string} [filterValue] The text filter value used to refine search or query operations.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public getRoomsFolder(type?: Array<RoomType>, subjectId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).getRoomsFolder(type, subjectId, searchArea, withoutTags, tags, excludeSubject, provider, subjectFilter, quotaFilter, storageFilter, options).then((request) => request(this.axios, this.basePath));
+    public getRoomsFolder(type?: Array<RoomType>, subjectId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).getRoomsFolder(type, subjectId, searchArea, withoutTags, tags, excludeSubject, provider, subjectFilter, quotaFilter, storageFilter, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

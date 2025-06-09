@@ -27,7 +27,7 @@ export interface TopUpDepositRequestDto {
      */
     'amount'?: number;
     /**
-     * Currency
+     * The three-character ISO 4217 currency symbol
      * @type {string}
      * @memberof TopUpDepositRequestDto
      */

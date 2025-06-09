@@ -6,7 +6,7 @@ All URIs are relative to *http://localhost:8092*
 |------------- | ------------- | -------------|
 |[**calculateWalletPayment**](#calculatewalletpayment) | **PUT** /api/2.0/portal/payment/calculatewallet | Calculate amount of the wallet payment|
 |[**createCustomerOperationsReport**](#createcustomeroperationsreport) | **POST** /api/2.0/portal/payment/customer/operationsreport | Generate the customer operations report|
-|[**getAllCurrencies**](#getallcurrencies) | **GET** /api/2.0/portal/payment/accounting/currencies | Get list of currencies|
+|[**getAccountingCurrencies**](#getaccountingcurrencies) | **GET** /api/2.0/portal/payment/accounting/currencies | Get list of currencies|
 |[**getCheckoutSetupUrl**](#getcheckoutsetupurl) | **GET** /api/2.0/portal/payment/chechoutsetupurl | Get the checkout setup page URL|
 |[**getCustomerBalance**](#getcustomerbalance) | **GET** /api/2.0/portal/payment/customer/balance | Get the customer balance|
 |[**getCustomerInfo**](#getcustomerinfo) | **GET** /api/2.0/portal/payment/customerinfo | Get the customer info|
@@ -133,8 +133,8 @@ const { status, data } = await apiInstance.createCustomerOperationsReport(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getAllCurrencies**
-> CurrencyArrayWrapper getAllCurrencies()
+# **getAccountingCurrencies**
+> CurrencyArrayWrapper getAccountingCurrencies()
 
 Returns the list of currencies from accounting service.
 
@@ -149,7 +149,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
 
-const { status, data } = await apiInstance.getAllCurrencies();
+const { status, data } = await apiInstance.getAccountingCurrencies();
 ```
 
 ### Parameters

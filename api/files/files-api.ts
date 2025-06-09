@@ -1094,10 +1094,12 @@ export const FilesFilesApiAxiosParamCreator = function (configuration?: Configur
          * @param {number} fileId The file ID of the history request.
          * @param {ApiDateTime} [fromDate] The start date of the history.
          * @param {ApiDateTime} [toDate] The end date of the history.
+         * @param {number} [count] The number of history entries to retrieve for the file log.
+         * @param {number} [startIndex] The starting index for retrieving a subset of file history entries.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getFileHistory: async (fileId: number, fromDate?: ApiDateTime, toDate?: ApiDateTime, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getFileHistory: async (fileId: number, fromDate?: ApiDateTime, toDate?: ApiDateTime, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('getFileHistory', 'fileId', fileId)
             const localVarPath = `/api/2.0/files/file/{fileId}/log`
@@ -1142,6 +1144,14 @@ export const FilesFilesApiAxiosParamCreator = function (configuration?: Configur
                 for (const [key, value] of Object.entries(toDate)) {
                     localVarQueryParameter[key] = value;
                 }
+            }
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
             }
 
 
@@ -1198,10 +1208,12 @@ export const FilesFilesApiAxiosParamCreator = function (configuration?: Configur
          * Returns the external links of a file with the ID specified in the request.
          * @summary Get file external links
          * @param {number} id The file ID of the request.
+         * @param {number} [count] The number of items to retrieve in the request.
+         * @param {number} [startIndex] The starting index for the query results.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getFileLinks: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getFileLinks: async (id: number, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getFileLinks', 'id', id)
             const localVarPath = `/api/2.0/files/file/{id}/links`
@@ -1236,6 +1248,14 @@ export const FilesFilesApiAxiosParamCreator = function (configuration?: Configur
 
             // authentication OpenId required
 
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -1251,10 +1271,12 @@ export const FilesFilesApiAxiosParamCreator = function (configuration?: Configur
          * Returns the primary external link by the identifier specified in the request.
          * @summary Get primary external link
          * @param {number} id The file ID of the request.
+         * @param {number} [count] The number of items to retrieve in the request.
+         * @param {number} [startIndex] The starting index for the query results.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getFilePrimaryExternalLink: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getFilePrimaryExternalLink: async (id: number, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getFilePrimaryExternalLink', 'id', id)
             const localVarPath = `/api/2.0/files/file/{id}/link`
@@ -1269,6 +1291,14 @@ export const FilesFilesApiAxiosParamCreator = function (configuration?: Configur
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
 
 
     
@@ -2698,11 +2728,13 @@ export const FilesFilesApiFp = function(configuration?: Configuration) {
          * @param {number} fileId The file ID of the history request.
          * @param {ApiDateTime} [fromDate] The start date of the history.
          * @param {ApiDateTime} [toDate] The end date of the history.
+         * @param {number} [count] The number of history entries to retrieve for the file log.
+         * @param {number} [startIndex] The starting index for retrieving a subset of file history entries.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getFileHistory(fileId: number, fromDate?: ApiDateTime, toDate?: ApiDateTime, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<HistoryArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getFileHistory(fileId, fromDate, toDate, options);
+        async getFileHistory(fileId: number, fromDate?: ApiDateTime, toDate?: ApiDateTime, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<HistoryArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getFileHistory(fileId, fromDate, toDate, count, startIndex, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.getFileHistory']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -2725,11 +2757,13 @@ export const FilesFilesApiFp = function(configuration?: Configuration) {
          * Returns the external links of a file with the ID specified in the request.
          * @summary Get file external links
          * @param {number} id The file ID of the request.
+         * @param {number} [count] The number of items to retrieve in the request.
+         * @param {number} [startIndex] The starting index for the query results.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getFileLinks(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getFileLinks(id, options);
+        async getFileLinks(id: number, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getFileLinks(id, count, startIndex, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.getFileLinks']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -2738,11 +2772,13 @@ export const FilesFilesApiFp = function(configuration?: Configuration) {
          * Returns the primary external link by the identifier specified in the request.
          * @summary Get primary external link
          * @param {number} id The file ID of the request.
+         * @param {number} [count] The number of items to retrieve in the request.
+         * @param {number} [startIndex] The starting index for the query results.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getFilePrimaryExternalLink(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getFilePrimaryExternalLink(id, options);
+        async getFilePrimaryExternalLink(id: number, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getFilePrimaryExternalLink(id, count, startIndex, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesFilesApi.getFilePrimaryExternalLink']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3272,11 +3308,13 @@ export const FilesFilesApiFactory = function (configuration?: Configuration, bas
          * @param {number} fileId The file ID of the history request.
          * @param {ApiDateTime} [fromDate] The start date of the history.
          * @param {ApiDateTime} [toDate] The end date of the history.
+         * @param {number} [count] The number of history entries to retrieve for the file log.
+         * @param {number} [startIndex] The starting index for retrieving a subset of file history entries.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getFileHistory(fileId: number, fromDate?: ApiDateTime, toDate?: ApiDateTime, options?: RawAxiosRequestConfig): AxiosPromise<HistoryArrayWrapper> {
-            return localVarFp.getFileHistory(fileId, fromDate, toDate, options).then((request) => request(axios, basePath));
+        getFileHistory(fileId: number, fromDate?: ApiDateTime, toDate?: ApiDateTime, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): AxiosPromise<HistoryArrayWrapper> {
+            return localVarFp.getFileHistory(fileId, fromDate, toDate, count, startIndex, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the detailed information about a file with the ID specified in the request.
@@ -3293,21 +3331,25 @@ export const FilesFilesApiFactory = function (configuration?: Configuration, bas
          * Returns the external links of a file with the ID specified in the request.
          * @summary Get file external links
          * @param {number} id The file ID of the request.
+         * @param {number} [count] The number of items to retrieve in the request.
+         * @param {number} [startIndex] The starting index for the query results.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getFileLinks(id: number, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
-            return localVarFp.getFileLinks(id, options).then((request) => request(axios, basePath));
+        getFileLinks(id: number, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
+            return localVarFp.getFileLinks(id, count, startIndex, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the primary external link by the identifier specified in the request.
          * @summary Get primary external link
          * @param {number} id The file ID of the request.
+         * @param {number} [count] The number of items to retrieve in the request.
+         * @param {number} [startIndex] The starting index for the query results.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getFilePrimaryExternalLink(id: number, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
-            return localVarFp.getFilePrimaryExternalLink(id, options).then((request) => request(axios, basePath));
+        getFilePrimaryExternalLink(id: number, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
+            return localVarFp.getFilePrimaryExternalLink(id, count, startIndex, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the detailed information about all the available file versions with the ID specified in the request.
@@ -3806,12 +3848,14 @@ export class FilesFilesApi extends BaseAPI {
      * @param {number} fileId The file ID of the history request.
      * @param {ApiDateTime} [fromDate] The start date of the history.
      * @param {ApiDateTime} [toDate] The end date of the history.
+     * @param {number} [count] The number of history entries to retrieve for the file log.
+     * @param {number} [startIndex] The starting index for retrieving a subset of file history entries.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesFilesApi
      */
-    public getFileHistory(fileId: number, fromDate?: ApiDateTime, toDate?: ApiDateTime, options?: RawAxiosRequestConfig) {
-        return FilesFilesApiFp(this.configuration).getFileHistory(fileId, fromDate, toDate, options).then((request) => request(this.axios, this.basePath));
+    public getFileHistory(fileId: number, fromDate?: ApiDateTime, toDate?: ApiDateTime, count?: number, startIndex?: number, options?: RawAxiosRequestConfig) {
+        return FilesFilesApiFp(this.configuration).getFileHistory(fileId, fromDate, toDate, count, startIndex, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3831,24 +3875,28 @@ export class FilesFilesApi extends BaseAPI {
      * Returns the external links of a file with the ID specified in the request.
      * @summary Get file external links
      * @param {number} id The file ID of the request.
+     * @param {number} [count] The number of items to retrieve in the request.
+     * @param {number} [startIndex] The starting index for the query results.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesFilesApi
      */
-    public getFileLinks(id: number, options?: RawAxiosRequestConfig) {
-        return FilesFilesApiFp(this.configuration).getFileLinks(id, options).then((request) => request(this.axios, this.basePath));
+    public getFileLinks(id: number, count?: number, startIndex?: number, options?: RawAxiosRequestConfig) {
+        return FilesFilesApiFp(this.configuration).getFileLinks(id, count, startIndex, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the primary external link by the identifier specified in the request.
      * @summary Get primary external link
      * @param {number} id The file ID of the request.
+     * @param {number} [count] The number of items to retrieve in the request.
+     * @param {number} [startIndex] The starting index for the query results.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesFilesApi
      */
-    public getFilePrimaryExternalLink(id: number, options?: RawAxiosRequestConfig) {
-        return FilesFilesApiFp(this.configuration).getFilePrimaryExternalLink(id, options).then((request) => request(this.axios, this.basePath));
+    public getFilePrimaryExternalLink(id: number, count?: number, startIndex?: number, options?: RawAxiosRequestConfig) {
+        return FilesFilesApiFp(this.configuration).getFilePrimaryExternalLink(id, count, startIndex, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

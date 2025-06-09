@@ -15,7 +15,7 @@
 
 
 /**
- * [1 - Form filling room, 2 - Collaboration room, 5 - Custom room, 6 - Public room, 8 - Virtual data room, 9 - AI room]
+ * [1 - Form filling room, 2 - Collaboration room, 5 - Custom room, 6 - Public room, 8 - Virtual data room]
  * @export
  * @enum {number}
  */
@@ -40,11 +40,7 @@ export const RoomType = {
     /**
     * Virtual data room
     */
-    VirtualDataRoom: 8,
-    /**
-    * AI room
-    */
-    AiRoom: 9
+    VirtualDataRoom: 8
 } as const;
 
 export type RoomType = typeof RoomType[keyof typeof RoomType];

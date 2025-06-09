@@ -1109,11 +1109,15 @@ const apiInstance = new FilesFilesApi(configuration);
 let fileId: number; //The file ID of the history request. (default to undefined)
 let fromDate: ApiDateTime; //The start date of the history. (optional) (default to undefined)
 let toDate: ApiDateTime; //The end date of the history. (optional) (default to undefined)
+let count: number; //The number of history entries to retrieve for the file log. (optional) (default to undefined)
+let startIndex: number; //The starting index for retrieving a subset of file history entries. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getFileHistory(
     fileId,
     fromDate,
-    toDate
+    toDate,
+    count,
+    startIndex
 );
 ```
 
@@ -1124,6 +1128,8 @@ const { status, data } = await apiInstance.getFileHistory(
 | **fileId** | [**number**] | The file ID of the history request. | defaults to undefined|
 | **fromDate** | **ApiDateTime** | The start date of the history. | (optional) defaults to undefined|
 | **toDate** | **ApiDateTime** | The end date of the history. | (optional) defaults to undefined|
+| **count** | [**number**] | The number of history entries to retrieve for the file log. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting index for retrieving a subset of file history entries. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -1221,9 +1227,13 @@ const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
 let id: number; //The file ID of the request. (default to undefined)
+let count: number; //The number of items to retrieve in the request. (optional) (default to undefined)
+let startIndex: number; //The starting index for the query results. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getFileLinks(
-    id
+    id,
+    count,
+    startIndex
 );
 ```
 
@@ -1232,6 +1242,8 @@ const { status, data } = await apiInstance.getFileLinks(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **id** | [**number**] | The file ID of the request. | defaults to undefined|
+| **count** | [**number**] | The number of items to retrieve in the request. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting index for the query results. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -1273,9 +1285,13 @@ const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
 let id: number; //The file ID of the request. (default to undefined)
+let count: number; //The number of items to retrieve in the request. (optional) (default to undefined)
+let startIndex: number; //The starting index for the query results. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getFilePrimaryExternalLink(
-    id
+    id,
+    count,
+    startIndex
 );
 ```
 
@@ -1284,6 +1300,8 @@ const { status, data } = await apiInstance.getFilePrimaryExternalLink(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **id** | [**number**] | The file ID of the request. | defaults to undefined|
+| **count** | [**number**] | The number of items to retrieve in the request. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting index for the query results. | (optional) defaults to undefined|
 
 
 ### Return type

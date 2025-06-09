@@ -1122,10 +1122,16 @@ const apiInstance = new RoomsApi(configuration);
 
 let id: number; //The room ID. (default to undefined)
 let filterType: ShareFilterType; //The filter type of the access rights. (optional) (default to undefined)
+let count: number; //The number of items to be retrieved or processed. (optional) (default to undefined)
+let startIndex: number; //The starting index of the items to retrieve in a paginated request. (optional) (default to undefined)
+let filterValue: string; //The text filter value used for filtering room security information. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getRoomSecurityInfo(
     id,
-    filterType
+    filterType,
+    count,
+    startIndex,
+    filterValue
 );
 ```
 
@@ -1135,6 +1141,9 @@ const { status, data } = await apiInstance.getRoomSecurityInfo(
 |------------- | ------------- | ------------- | -------------|
 | **id** | [**number**] | The room ID. | defaults to undefined|
 | **filterType** | **ShareFilterType** | The filter type of the access rights. | (optional) defaults to undefined|
+| **count** | [**number**] | The number of items to be retrieved or processed. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting index of the items to retrieve in a paginated request. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The text filter value used for filtering room security information. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -1175,11 +1184,24 @@ import {
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
 
-const { status, data } = await apiInstance.getRoomTagsInfo();
+let count: number; //Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set. (optional) (default to undefined)
+let startIndex: number; //Represents the starting index from which the tags\' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins. (optional) (default to undefined)
+let filterValue: string; //Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getRoomTagsInfo(
+    count,
+    startIndex,
+    filterValue
+);
 ```
 
 ### Parameters
-This endpoint does not have any parameters.
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **count** | [**number**] | Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | Represents the starting index from which the tags\&#39; information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -1275,6 +1297,11 @@ let provider: ProviderFilter; //The filter by provider name (None, Box, DropBox,
 let subjectFilter: SubjectFilter; //The filter by user (Owner - 0, Member - 1). (optional) (default to undefined)
 let quotaFilter: QuotaFilter; //The filter by quota (All - 0, Default - 1, Custom - 2). (optional) (default to undefined)
 let storageFilter: StorageFilter; //The filter by storage (None - 0, Internal - 1, ThirdParty - 2). (optional) (default to undefined)
+let count: number; //Specifies the maximum number of items to retrieve. (optional) (default to undefined)
+let startIndex: number; //The index from which to start retrieving the room content. (optional) (default to undefined)
+let sortBy: string; //Specifies the field by which the room content should be sorted. (optional) (default to undefined)
+let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
+let filterValue: string; //The text filter value used to refine search or query operations. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getRoomsFolder(
     type,
@@ -1286,7 +1313,12 @@ const { status, data } = await apiInstance.getRoomsFolder(
     provider,
     subjectFilter,
     quotaFilter,
-    storageFilter
+    storageFilter,
+    count,
+    startIndex,
+    sortBy,
+    sortOrder,
+    filterValue
 );
 ```
 
@@ -1304,6 +1336,11 @@ const { status, data } = await apiInstance.getRoomsFolder(
 | **subjectFilter** | **SubjectFilter** | The filter by user (Owner - 0, Member - 1). | (optional) defaults to undefined|
 | **quotaFilter** | **QuotaFilter** | The filter by quota (All - 0, Default - 1, Custom - 2). | (optional) defaults to undefined|
 | **storageFilter** | **StorageFilter** | The filter by storage (None - 0, Internal - 1, ThirdParty - 2). | (optional) defaults to undefined|
+| **count** | [**number**] | Specifies the maximum number of items to retrieve. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The index from which to start retrieving the room content. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | Specifies the field by which the room content should be sorted. | (optional) defaults to undefined|
+| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The text filter value used to refine search or query operations. | (optional) defaults to undefined|
 
 
 ### Return type

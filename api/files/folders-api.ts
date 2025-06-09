@@ -62,6 +62,8 @@ import type { STRINGArrayWrapper } from '../../models';
 // @ts-ignore
 import type { SearchArea } from '../../models';
 // @ts-ignore
+import type { SortOrder } from '../../models';
+// @ts-ignore
 import type { UploadRequestDto } from '../../models';
 /**
  * FilesFoldersApi - axios parameter creator
@@ -336,10 +338,15 @@ export const FilesFoldersApiAxiosParamCreator = function (configuration?: Config
          * @param {SearchArea} [searchArea] The search area.
          * @param {string} [formsItemKey] The forms item key.
          * @param {string} [formsItemType] The forms item type.
+         * @param {number} [count] The maximum number of items to retrieve in the request.
+         * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated request.
+         * @param {string} [sortBy] Specifies the property used for sorting the folder request results.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterValue] The text value used as a filter parameter for folder content queries.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getFolderByFolderId: async (folderId: number, userIdOrGroupId?: string, filterType?: FilterType, roomId?: number, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, extension?: string, searchArea?: SearchArea, formsItemKey?: string, formsItemType?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getFolderByFolderId: async (folderId: number, userIdOrGroupId?: string, filterType?: FilterType, roomId?: number, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, extension?: string, searchArea?: SearchArea, formsItemKey?: string, formsItemType?: string, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('getFolderByFolderId', 'folderId', folderId)
             const localVarPath = `/api/2.0/files/{folderId}`
@@ -391,6 +398,26 @@ export const FilesFoldersApiAxiosParamCreator = function (configuration?: Config
                 localVarQueryParameter['formsItemType'] = formsItemType;
             }
 
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sortBy'] = sortBy;
+            }
+
+            if (sortOrder !== undefined) {
+                localVarQueryParameter['sortOrder'] = sortOrder;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
+            }
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -408,10 +435,12 @@ export const FilesFoldersApiAxiosParamCreator = function (configuration?: Config
          * @param {number} folderId The folder ID of the history request.
          * @param {ApiDateTime} [fromDate] The start date of the history request.
          * @param {ApiDateTime} [toDate] The end date of the history request.
+         * @param {number} [count] The number of records to retrieve for the folder history.
+         * @param {number} [startIndex] The starting index from which the history records are retrieved in the request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getFolderHistory: async (folderId: number, fromDate?: ApiDateTime, toDate?: ApiDateTime, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getFolderHistory: async (folderId: number, fromDate?: ApiDateTime, toDate?: ApiDateTime, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('getFolderHistory', 'folderId', folderId)
             const localVarPath = `/api/2.0/files/folder/{folderId}/log`
@@ -456,6 +485,14 @@ export const FilesFoldersApiAxiosParamCreator = function (configuration?: Config
                 for (const [key, value] of Object.entries(toDate)) {
                     localVarQueryParameter[key] = value;
                 }
+            }
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
             }
 
 
@@ -649,10 +686,15 @@ export const FilesFoldersApiAxiosParamCreator = function (configuration?: Config
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
          * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
+         * @param {number} [count] The maximum number of items to retrieve in the response.
+         * @param {number} [startIndex] The starting position of the items to be retrieved.
+         * @param {string} [sortBy] The property used to specify the sorting criteria for folder contents.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterValue] The text used for filtering or searching folder contents.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMyFolder: async (userIdOrGroupId?: string, filterType?: FilterType, applyFilterOption?: ApplyFilterOption, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getMyFolder: async (userIdOrGroupId?: string, filterType?: FilterType, applyFilterOption?: ApplyFilterOption, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/files/@my`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -694,6 +736,26 @@ export const FilesFoldersApiAxiosParamCreator = function (configuration?: Config
 
             if (applyFilterOption !== undefined) {
                 localVarQueryParameter['applyFilterOption'] = applyFilterOption;
+            }
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sortBy'] = sortBy;
+            }
+
+            if (sortOrder !== undefined) {
+                localVarQueryParameter['sortOrder'] = sortOrder;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
             }
 
 
@@ -765,10 +827,15 @@ export const FilesFoldersApiAxiosParamCreator = function (configuration?: Config
          * @summary Get the \"Private Room\" section
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
+         * @param {number} [count] The maximum number of items to retrieve in the request.
+         * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated list.
+         * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterValue] The text used as a filter or search criterion for folder content queries.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPrivacyFolder: async (userIdOrGroupId?: string, filterType?: FilterType, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getPrivacyFolder: async (userIdOrGroupId?: string, filterType?: FilterType, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/files/@privacy`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -808,6 +875,26 @@ export const FilesFoldersApiAxiosParamCreator = function (configuration?: Config
                 localVarQueryParameter['filterType'] = filterType;
             }
 
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sortBy'] = sortBy;
+            }
+
+            if (sortOrder !== undefined) {
+                localVarQueryParameter['sortOrder'] = sortOrder;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
+            }
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -825,10 +912,15 @@ export const FilesFoldersApiAxiosParamCreator = function (configuration?: Config
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
          * @param {boolean} [withoutTrash] Specifies whether to return the \&quot;Trash\&quot; section or not.
+         * @param {number} [count] The maximum number of items to retrieve in the response.
+         * @param {number} [startIndex] The starting position of the items to be retrieved.
+         * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterValue] The text used as a filter for searching or retrieving folder contents.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRootFolders: async (userIdOrGroupId?: string, filterType?: FilterType, withoutTrash?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getRootFolders: async (userIdOrGroupId?: string, filterType?: FilterType, withoutTrash?: boolean, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/files/@root`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -872,6 +964,26 @@ export const FilesFoldersApiAxiosParamCreator = function (configuration?: Config
                 localVarQueryParameter['withoutTrash'] = withoutTrash;
             }
 
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sortBy'] = sortBy;
+            }
+
+            if (sortOrder !== undefined) {
+                localVarQueryParameter['sortOrder'] = sortOrder;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
+            }
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -889,10 +1001,15 @@ export const FilesFoldersApiAxiosParamCreator = function (configuration?: Config
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
          * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
+         * @param {number} [count] The maximum number of items to retrieve in the response.
+         * @param {number} [startIndex] The starting position of the items to be retrieved.
+         * @param {string} [sortBy] The property used to specify the sorting criteria for folder contents.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterValue] The text used for filtering or searching folder contents.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTrashFolder: async (userIdOrGroupId?: string, filterType?: FilterType, applyFilterOption?: ApplyFilterOption, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTrashFolder: async (userIdOrGroupId?: string, filterType?: FilterType, applyFilterOption?: ApplyFilterOption, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/files/@trash`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -934,6 +1051,26 @@ export const FilesFoldersApiAxiosParamCreator = function (configuration?: Config
 
             if (applyFilterOption !== undefined) {
                 localVarQueryParameter['applyFilterOption'] = applyFilterOption;
+            }
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sortBy'] = sortBy;
+            }
+
+            if (sortOrder !== undefined) {
+                localVarQueryParameter['sortOrder'] = sortOrder;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
             }
 
 
@@ -1494,11 +1631,16 @@ export const FilesFoldersApiFp = function(configuration?: Configuration) {
          * @param {SearchArea} [searchArea] The search area.
          * @param {string} [formsItemKey] The forms item key.
          * @param {string} [formsItemType] The forms item type.
+         * @param {number} [count] The maximum number of items to retrieve in the request.
+         * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated request.
+         * @param {string} [sortBy] Specifies the property used for sorting the folder request results.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterValue] The text value used as a filter parameter for folder content queries.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getFolderByFolderId(folderId: number, userIdOrGroupId?: string, filterType?: FilterType, roomId?: number, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, extension?: string, searchArea?: SearchArea, formsItemKey?: string, formsItemType?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getFolderByFolderId(folderId, userIdOrGroupId, filterType, roomId, excludeSubject, applyFilterOption, extension, searchArea, formsItemKey, formsItemType, options);
+        async getFolderByFolderId(folderId: number, userIdOrGroupId?: string, filterType?: FilterType, roomId?: number, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, extension?: string, searchArea?: SearchArea, formsItemKey?: string, formsItemType?: string, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getFolderByFolderId(folderId, userIdOrGroupId, filterType, roomId, excludeSubject, applyFilterOption, extension, searchArea, formsItemKey, formsItemType, count, startIndex, sortBy, sortOrder, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesFoldersApi.getFolderByFolderId']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1509,11 +1651,13 @@ export const FilesFoldersApiFp = function(configuration?: Configuration) {
          * @param {number} folderId The folder ID of the history request.
          * @param {ApiDateTime} [fromDate] The start date of the history request.
          * @param {ApiDateTime} [toDate] The end date of the history request.
+         * @param {number} [count] The number of records to retrieve for the folder history.
+         * @param {number} [startIndex] The starting index from which the history records are retrieved in the request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getFolderHistory(folderId: number, fromDate?: ApiDateTime, toDate?: ApiDateTime, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<HistoryArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getFolderHistory(folderId, fromDate, toDate, options);
+        async getFolderHistory(folderId: number, fromDate?: ApiDateTime, toDate?: ApiDateTime, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<HistoryArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getFolderHistory(folderId, fromDate, toDate, count, startIndex, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesFoldersApi.getFolderHistory']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1576,11 +1720,16 @@ export const FilesFoldersApiFp = function(configuration?: Configuration) {
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
          * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
+         * @param {number} [count] The maximum number of items to retrieve in the response.
+         * @param {number} [startIndex] The starting position of the items to be retrieved.
+         * @param {string} [sortBy] The property used to specify the sorting criteria for folder contents.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterValue] The text used for filtering or searching folder contents.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getMyFolder(userIdOrGroupId?: string, filterType?: FilterType, applyFilterOption?: ApplyFilterOption, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getMyFolder(userIdOrGroupId, filterType, applyFilterOption, options);
+        async getMyFolder(userIdOrGroupId?: string, filterType?: FilterType, applyFilterOption?: ApplyFilterOption, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getMyFolder(userIdOrGroupId, filterType, applyFilterOption, count, startIndex, sortBy, sortOrder, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesFoldersApi.getMyFolder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1603,11 +1752,16 @@ export const FilesFoldersApiFp = function(configuration?: Configuration) {
          * @summary Get the \"Private Room\" section
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
+         * @param {number} [count] The maximum number of items to retrieve in the request.
+         * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated list.
+         * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterValue] The text used as a filter or search criterion for folder content queries.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getPrivacyFolder(userIdOrGroupId?: string, filterType?: FilterType, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getPrivacyFolder(userIdOrGroupId, filterType, options);
+        async getPrivacyFolder(userIdOrGroupId?: string, filterType?: FilterType, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPrivacyFolder(userIdOrGroupId, filterType, count, startIndex, sortBy, sortOrder, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesFoldersApi.getPrivacyFolder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1618,11 +1772,16 @@ export const FilesFoldersApiFp = function(configuration?: Configuration) {
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
          * @param {boolean} [withoutTrash] Specifies whether to return the \&quot;Trash\&quot; section or not.
+         * @param {number} [count] The maximum number of items to retrieve in the response.
+         * @param {number} [startIndex] The starting position of the items to be retrieved.
+         * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterValue] The text used as a filter for searching or retrieving folder contents.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getRootFolders(userIdOrGroupId?: string, filterType?: FilterType, withoutTrash?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getRootFolders(userIdOrGroupId, filterType, withoutTrash, options);
+        async getRootFolders(userIdOrGroupId?: string, filterType?: FilterType, withoutTrash?: boolean, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRootFolders(userIdOrGroupId, filterType, withoutTrash, count, startIndex, sortBy, sortOrder, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesFoldersApi.getRootFolders']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1633,11 +1792,16 @@ export const FilesFoldersApiFp = function(configuration?: Configuration) {
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
          * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
+         * @param {number} [count] The maximum number of items to retrieve in the response.
+         * @param {number} [startIndex] The starting position of the items to be retrieved.
+         * @param {string} [sortBy] The property used to specify the sorting criteria for folder contents.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterValue] The text used for filtering or searching folder contents.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTrashFolder(userIdOrGroupId?: string, filterType?: FilterType, applyFilterOption?: ApplyFilterOption, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getTrashFolder(userIdOrGroupId, filterType, applyFilterOption, options);
+        async getTrashFolder(userIdOrGroupId?: string, filterType?: FilterType, applyFilterOption?: ApplyFilterOption, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getTrashFolder(userIdOrGroupId, filterType, applyFilterOption, count, startIndex, sortBy, sortOrder, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesFoldersApi.getTrashFolder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1821,11 +1985,16 @@ export const FilesFoldersApiFactory = function (configuration?: Configuration, b
          * @param {SearchArea} [searchArea] The search area.
          * @param {string} [formsItemKey] The forms item key.
          * @param {string} [formsItemType] The forms item type.
+         * @param {number} [count] The maximum number of items to retrieve in the request.
+         * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated request.
+         * @param {string} [sortBy] Specifies the property used for sorting the folder request results.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterValue] The text value used as a filter parameter for folder content queries.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getFolderByFolderId(folderId: number, userIdOrGroupId?: string, filterType?: FilterType, roomId?: number, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, extension?: string, searchArea?: SearchArea, formsItemKey?: string, formsItemType?: string, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
-            return localVarFp.getFolderByFolderId(folderId, userIdOrGroupId, filterType, roomId, excludeSubject, applyFilterOption, extension, searchArea, formsItemKey, formsItemType, options).then((request) => request(axios, basePath));
+        getFolderByFolderId(folderId: number, userIdOrGroupId?: string, filterType?: FilterType, roomId?: number, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, extension?: string, searchArea?: SearchArea, formsItemKey?: string, formsItemType?: string, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
+            return localVarFp.getFolderByFolderId(folderId, userIdOrGroupId, filterType, roomId, excludeSubject, applyFilterOption, extension, searchArea, formsItemKey, formsItemType, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the activity history of a folder with a specified identifier.
@@ -1833,11 +2002,13 @@ export const FilesFoldersApiFactory = function (configuration?: Configuration, b
          * @param {number} folderId The folder ID of the history request.
          * @param {ApiDateTime} [fromDate] The start date of the history request.
          * @param {ApiDateTime} [toDate] The end date of the history request.
+         * @param {number} [count] The number of records to retrieve for the folder history.
+         * @param {number} [startIndex] The starting index from which the history records are retrieved in the request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getFolderHistory(folderId: number, fromDate?: ApiDateTime, toDate?: ApiDateTime, options?: RawAxiosRequestConfig): AxiosPromise<HistoryArrayWrapper> {
-            return localVarFp.getFolderHistory(folderId, fromDate, toDate, options).then((request) => request(axios, basePath));
+        getFolderHistory(folderId: number, fromDate?: ApiDateTime, toDate?: ApiDateTime, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): AxiosPromise<HistoryArrayWrapper> {
+            return localVarFp.getFolderHistory(folderId, fromDate, toDate, count, startIndex, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the detailed information about a folder with the ID specified in the request.
@@ -1885,11 +2056,16 @@ export const FilesFoldersApiFactory = function (configuration?: Configuration, b
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
          * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
+         * @param {number} [count] The maximum number of items to retrieve in the response.
+         * @param {number} [startIndex] The starting position of the items to be retrieved.
+         * @param {string} [sortBy] The property used to specify the sorting criteria for folder contents.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterValue] The text used for filtering or searching folder contents.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMyFolder(userIdOrGroupId?: string, filterType?: FilterType, applyFilterOption?: ApplyFilterOption, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
-            return localVarFp.getMyFolder(userIdOrGroupId, filterType, applyFilterOption, options).then((request) => request(axios, basePath));
+        getMyFolder(userIdOrGroupId?: string, filterType?: FilterType, applyFilterOption?: ApplyFilterOption, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
+            return localVarFp.getMyFolder(userIdOrGroupId, filterType, applyFilterOption, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of all the new items from a folder with the ID specified in the request.
@@ -1906,11 +2082,16 @@ export const FilesFoldersApiFactory = function (configuration?: Configuration, b
          * @summary Get the \"Private Room\" section
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
+         * @param {number} [count] The maximum number of items to retrieve in the request.
+         * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated list.
+         * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterValue] The text used as a filter or search criterion for folder content queries.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPrivacyFolder(userIdOrGroupId?: string, filterType?: FilterType, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
-            return localVarFp.getPrivacyFolder(userIdOrGroupId, filterType, options).then((request) => request(axios, basePath));
+        getPrivacyFolder(userIdOrGroupId?: string, filterType?: FilterType, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
+            return localVarFp.getPrivacyFolder(userIdOrGroupId, filterType, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns all the sections matching the parameters specified in the request.
@@ -1918,11 +2099,16 @@ export const FilesFoldersApiFactory = function (configuration?: Configuration, b
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
          * @param {boolean} [withoutTrash] Specifies whether to return the \&quot;Trash\&quot; section or not.
+         * @param {number} [count] The maximum number of items to retrieve in the response.
+         * @param {number} [startIndex] The starting position of the items to be retrieved.
+         * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterValue] The text used as a filter for searching or retrieving folder contents.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRootFolders(userIdOrGroupId?: string, filterType?: FilterType, withoutTrash?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerArrayWrapper> {
-            return localVarFp.getRootFolders(userIdOrGroupId, filterType, withoutTrash, options).then((request) => request(axios, basePath));
+        getRootFolders(userIdOrGroupId?: string, filterType?: FilterType, withoutTrash?: boolean, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerArrayWrapper> {
+            return localVarFp.getRootFolders(userIdOrGroupId, filterType, withoutTrash, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the detailed list of files and folders located in the \"Trash\" section.
@@ -1930,11 +2116,16 @@ export const FilesFoldersApiFactory = function (configuration?: Configuration, b
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
          * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
+         * @param {number} [count] The maximum number of items to retrieve in the response.
+         * @param {number} [startIndex] The starting position of the items to be retrieved.
+         * @param {string} [sortBy] The property used to specify the sorting criteria for folder contents.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterValue] The text used for filtering or searching folder contents.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTrashFolder(userIdOrGroupId?: string, filterType?: FilterType, applyFilterOption?: ApplyFilterOption, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
-            return localVarFp.getTrashFolder(userIdOrGroupId, filterType, applyFilterOption, options).then((request) => request(axios, basePath));
+        getTrashFolder(userIdOrGroupId?: string, filterType?: FilterType, applyFilterOption?: ApplyFilterOption, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
+            return localVarFp.getTrashFolder(userIdOrGroupId, filterType, applyFilterOption, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Inserts a file specified in the request to the selected folder by single file uploading.
@@ -2107,12 +2298,17 @@ export class FilesFoldersApi extends BaseAPI {
      * @param {SearchArea} [searchArea] The search area.
      * @param {string} [formsItemKey] The forms item key.
      * @param {string} [formsItemType] The forms item type.
+     * @param {number} [count] The maximum number of items to retrieve in the request.
+     * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated request.
+     * @param {string} [sortBy] Specifies the property used for sorting the folder request results.
+     * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+     * @param {string} [filterValue] The text value used as a filter parameter for folder content queries.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesFoldersApi
      */
-    public getFolderByFolderId(folderId: number, userIdOrGroupId?: string, filterType?: FilterType, roomId?: number, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, extension?: string, searchArea?: SearchArea, formsItemKey?: string, formsItemType?: string, options?: RawAxiosRequestConfig) {
-        return FilesFoldersApiFp(this.configuration).getFolderByFolderId(folderId, userIdOrGroupId, filterType, roomId, excludeSubject, applyFilterOption, extension, searchArea, formsItemKey, formsItemType, options).then((request) => request(this.axios, this.basePath));
+    public getFolderByFolderId(folderId: number, userIdOrGroupId?: string, filterType?: FilterType, roomId?: number, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, extension?: string, searchArea?: SearchArea, formsItemKey?: string, formsItemType?: string, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return FilesFoldersApiFp(this.configuration).getFolderByFolderId(folderId, userIdOrGroupId, filterType, roomId, excludeSubject, applyFilterOption, extension, searchArea, formsItemKey, formsItemType, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2121,12 +2317,14 @@ export class FilesFoldersApi extends BaseAPI {
      * @param {number} folderId The folder ID of the history request.
      * @param {ApiDateTime} [fromDate] The start date of the history request.
      * @param {ApiDateTime} [toDate] The end date of the history request.
+     * @param {number} [count] The number of records to retrieve for the folder history.
+     * @param {number} [startIndex] The starting index from which the history records are retrieved in the request.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesFoldersApi
      */
-    public getFolderHistory(folderId: number, fromDate?: ApiDateTime, toDate?: ApiDateTime, options?: RawAxiosRequestConfig) {
-        return FilesFoldersApiFp(this.configuration).getFolderHistory(folderId, fromDate, toDate, options).then((request) => request(this.axios, this.basePath));
+    public getFolderHistory(folderId: number, fromDate?: ApiDateTime, toDate?: ApiDateTime, count?: number, startIndex?: number, options?: RawAxiosRequestConfig) {
+        return FilesFoldersApiFp(this.configuration).getFolderHistory(folderId, fromDate, toDate, count, startIndex, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2183,12 +2381,17 @@ export class FilesFoldersApi extends BaseAPI {
      * @param {string} [userIdOrGroupId] The user or group ID.
      * @param {FilterType} [filterType] The filter type.
      * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
+     * @param {number} [count] The maximum number of items to retrieve in the response.
+     * @param {number} [startIndex] The starting position of the items to be retrieved.
+     * @param {string} [sortBy] The property used to specify the sorting criteria for folder contents.
+     * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+     * @param {string} [filterValue] The text used for filtering or searching folder contents.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesFoldersApi
      */
-    public getMyFolder(userIdOrGroupId?: string, filterType?: FilterType, applyFilterOption?: ApplyFilterOption, options?: RawAxiosRequestConfig) {
-        return FilesFoldersApiFp(this.configuration).getMyFolder(userIdOrGroupId, filterType, applyFilterOption, options).then((request) => request(this.axios, this.basePath));
+    public getMyFolder(userIdOrGroupId?: string, filterType?: FilterType, applyFilterOption?: ApplyFilterOption, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return FilesFoldersApiFp(this.configuration).getMyFolder(userIdOrGroupId, filterType, applyFilterOption, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2208,12 +2411,17 @@ export class FilesFoldersApi extends BaseAPI {
      * @summary Get the \"Private Room\" section
      * @param {string} [userIdOrGroupId] The user or group ID.
      * @param {FilterType} [filterType] The filter type.
+     * @param {number} [count] The maximum number of items to retrieve in the request.
+     * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated list.
+     * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
+     * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+     * @param {string} [filterValue] The text used as a filter or search criterion for folder content queries.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesFoldersApi
      */
-    public getPrivacyFolder(userIdOrGroupId?: string, filterType?: FilterType, options?: RawAxiosRequestConfig) {
-        return FilesFoldersApiFp(this.configuration).getPrivacyFolder(userIdOrGroupId, filterType, options).then((request) => request(this.axios, this.basePath));
+    public getPrivacyFolder(userIdOrGroupId?: string, filterType?: FilterType, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return FilesFoldersApiFp(this.configuration).getPrivacyFolder(userIdOrGroupId, filterType, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2222,12 +2430,17 @@ export class FilesFoldersApi extends BaseAPI {
      * @param {string} [userIdOrGroupId] The user or group ID.
      * @param {FilterType} [filterType] The filter type.
      * @param {boolean} [withoutTrash] Specifies whether to return the \&quot;Trash\&quot; section or not.
+     * @param {number} [count] The maximum number of items to retrieve in the response.
+     * @param {number} [startIndex] The starting position of the items to be retrieved.
+     * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
+     * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+     * @param {string} [filterValue] The text used as a filter for searching or retrieving folder contents.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesFoldersApi
      */
-    public getRootFolders(userIdOrGroupId?: string, filterType?: FilterType, withoutTrash?: boolean, options?: RawAxiosRequestConfig) {
-        return FilesFoldersApiFp(this.configuration).getRootFolders(userIdOrGroupId, filterType, withoutTrash, options).then((request) => request(this.axios, this.basePath));
+    public getRootFolders(userIdOrGroupId?: string, filterType?: FilterType, withoutTrash?: boolean, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return FilesFoldersApiFp(this.configuration).getRootFolders(userIdOrGroupId, filterType, withoutTrash, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2236,12 +2449,17 @@ export class FilesFoldersApi extends BaseAPI {
      * @param {string} [userIdOrGroupId] The user or group ID.
      * @param {FilterType} [filterType] The filter type.
      * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
+     * @param {number} [count] The maximum number of items to retrieve in the response.
+     * @param {number} [startIndex] The starting position of the items to be retrieved.
+     * @param {string} [sortBy] The property used to specify the sorting criteria for folder contents.
+     * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+     * @param {string} [filterValue] The text used for filtering or searching folder contents.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesFoldersApi
      */
-    public getTrashFolder(userIdOrGroupId?: string, filterType?: FilterType, applyFilterOption?: ApplyFilterOption, options?: RawAxiosRequestConfig) {
-        return FilesFoldersApiFp(this.configuration).getTrashFolder(userIdOrGroupId, filterType, applyFilterOption, options).then((request) => request(this.axios, this.basePath));
+    public getTrashFolder(userIdOrGroupId?: string, filterType?: FilterType, applyFilterOption?: ApplyFilterOption, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return FilesFoldersApiFp(this.configuration).getTrashFolder(userIdOrGroupId, filterType, applyFilterOption, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

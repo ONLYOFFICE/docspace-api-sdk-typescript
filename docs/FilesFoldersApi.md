@@ -317,6 +317,11 @@ let extension: string; //Specifies whether to search for the specific file exten
 let searchArea: SearchArea; //The search area. (optional) (default to undefined)
 let formsItemKey: string; //The forms item key. (optional) (default to undefined)
 let formsItemType: string; //The forms item type. (optional) (default to undefined)
+let count: number; //The maximum number of items to retrieve in the request. (optional) (default to undefined)
+let startIndex: number; //The zero-based index of the first item to retrieve in a paginated request. (optional) (default to undefined)
+let sortBy: string; //Specifies the property used for sorting the folder request results. (optional) (default to undefined)
+let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
+let filterValue: string; //The text value used as a filter parameter for folder content queries. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getFolderByFolderId(
     folderId,
@@ -328,7 +333,12 @@ const { status, data } = await apiInstance.getFolderByFolderId(
     extension,
     searchArea,
     formsItemKey,
-    formsItemType
+    formsItemType,
+    count,
+    startIndex,
+    sortBy,
+    sortOrder,
+    filterValue
 );
 ```
 
@@ -346,6 +356,11 @@ const { status, data } = await apiInstance.getFolderByFolderId(
 | **searchArea** | **SearchArea** | The search area. | (optional) defaults to undefined|
 | **formsItemKey** | [**string**] | The forms item key. | (optional) defaults to undefined|
 | **formsItemType** | [**string**] | The forms item type. | (optional) defaults to undefined|
+| **count** | [**number**] | The maximum number of items to retrieve in the request. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The zero-based index of the first item to retrieve in a paginated request. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | Specifies the property used for sorting the folder request results. | (optional) defaults to undefined|
+| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The text value used as a filter parameter for folder content queries. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -392,11 +407,15 @@ const apiInstance = new FilesFoldersApi(configuration);
 let folderId: number; //The folder ID of the history request. (default to undefined)
 let fromDate: ApiDateTime; //The start date of the history request. (optional) (default to undefined)
 let toDate: ApiDateTime; //The end date of the history request. (optional) (default to undefined)
+let count: number; //The number of records to retrieve for the folder history. (optional) (default to undefined)
+let startIndex: number; //The starting index from which the history records are retrieved in the request. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getFolderHistory(
     folderId,
     fromDate,
-    toDate
+    toDate,
+    count,
+    startIndex
 );
 ```
 
@@ -407,6 +426,8 @@ const { status, data } = await apiInstance.getFolderHistory(
 | **folderId** | [**number**] | The folder ID of the history request. | defaults to undefined|
 | **fromDate** | **ApiDateTime** | The start date of the history request. | (optional) defaults to undefined|
 | **toDate** | **ApiDateTime** | The end date of the history request. | (optional) defaults to undefined|
+| **count** | [**number**] | The number of records to retrieve for the folder history. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting index from which the history records are retrieved in the request. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -661,11 +682,21 @@ const apiInstance = new FilesFoldersApi(configuration);
 let userIdOrGroupId: string; //The user or group ID. (optional) (default to undefined)
 let filterType: FilterType; //The filter type. (optional) (default to undefined)
 let applyFilterOption: ApplyFilterOption; //Specifies whether to return only files, only folders or all elements. (optional) (default to undefined)
+let count: number; //The maximum number of items to retrieve in the response. (optional) (default to undefined)
+let startIndex: number; //The starting position of the items to be retrieved. (optional) (default to undefined)
+let sortBy: string; //The property used to specify the sorting criteria for folder contents. (optional) (default to undefined)
+let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
+let filterValue: string; //The text used for filtering or searching folder contents. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getMyFolder(
     userIdOrGroupId,
     filterType,
-    applyFilterOption
+    applyFilterOption,
+    count,
+    startIndex,
+    sortBy,
+    sortOrder,
+    filterValue
 );
 ```
 
@@ -676,6 +707,11 @@ const { status, data } = await apiInstance.getMyFolder(
 | **userIdOrGroupId** | [**string**] | The user or group ID. | (optional) defaults to undefined|
 | **filterType** | **FilterType** | The filter type. | (optional) defaults to undefined|
 | **applyFilterOption** | **ApplyFilterOption** | Specifies whether to return only files, only folders or all elements. | (optional) defaults to undefined|
+| **count** | [**number**] | The maximum number of items to retrieve in the response. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting position of the items to be retrieved. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | The property used to specify the sorting criteria for folder contents. | (optional) defaults to undefined|
+| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The text used for filtering or searching folder contents. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -773,10 +809,20 @@ const apiInstance = new FilesFoldersApi(configuration);
 
 let userIdOrGroupId: string; //The user or group ID. (optional) (default to undefined)
 let filterType: FilterType; //The filter type. (optional) (default to undefined)
+let count: number; //The maximum number of items to retrieve in the request. (optional) (default to undefined)
+let startIndex: number; //The zero-based index of the first item to retrieve in a paginated list. (optional) (default to undefined)
+let sortBy: string; //Specifies the field by which the folder content should be sorted. (optional) (default to undefined)
+let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
+let filterValue: string; //The text used as a filter or search criterion for folder content queries. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getPrivacyFolder(
     userIdOrGroupId,
-    filterType
+    filterType,
+    count,
+    startIndex,
+    sortBy,
+    sortOrder,
+    filterValue
 );
 ```
 
@@ -786,6 +832,11 @@ const { status, data } = await apiInstance.getPrivacyFolder(
 |------------- | ------------- | ------------- | -------------|
 | **userIdOrGroupId** | [**string**] | The user or group ID. | (optional) defaults to undefined|
 | **filterType** | **FilterType** | The filter type. | (optional) defaults to undefined|
+| **count** | [**number**] | The maximum number of items to retrieve in the request. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The zero-based index of the first item to retrieve in a paginated list. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | Specifies the field by which the folder content should be sorted. | (optional) defaults to undefined|
+| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The text used as a filter or search criterion for folder content queries. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -831,11 +882,21 @@ const apiInstance = new FilesFoldersApi(configuration);
 let userIdOrGroupId: string; //The user or group ID. (optional) (default to undefined)
 let filterType: FilterType; //The filter type. (optional) (default to undefined)
 let withoutTrash: boolean; //Specifies whether to return the \"Trash\" section or not. (optional) (default to undefined)
+let count: number; //The maximum number of items to retrieve in the response. (optional) (default to undefined)
+let startIndex: number; //The starting position of the items to be retrieved. (optional) (default to undefined)
+let sortBy: string; //Specifies the field by which the folder content should be sorted. (optional) (default to undefined)
+let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
+let filterValue: string; //The text used as a filter for searching or retrieving folder contents. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getRootFolders(
     userIdOrGroupId,
     filterType,
-    withoutTrash
+    withoutTrash,
+    count,
+    startIndex,
+    sortBy,
+    sortOrder,
+    filterValue
 );
 ```
 
@@ -846,6 +907,11 @@ const { status, data } = await apiInstance.getRootFolders(
 | **userIdOrGroupId** | [**string**] | The user or group ID. | (optional) defaults to undefined|
 | **filterType** | **FilterType** | The filter type. | (optional) defaults to undefined|
 | **withoutTrash** | [**boolean**] | Specifies whether to return the \&quot;Trash\&quot; section or not. | (optional) defaults to undefined|
+| **count** | [**number**] | The maximum number of items to retrieve in the response. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting position of the items to be retrieved. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | Specifies the field by which the folder content should be sorted. | (optional) defaults to undefined|
+| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The text used as a filter for searching or retrieving folder contents. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -891,11 +957,21 @@ const apiInstance = new FilesFoldersApi(configuration);
 let userIdOrGroupId: string; //The user or group ID. (optional) (default to undefined)
 let filterType: FilterType; //The filter type. (optional) (default to undefined)
 let applyFilterOption: ApplyFilterOption; //Specifies whether to return only files, only folders or all elements. (optional) (default to undefined)
+let count: number; //The maximum number of items to retrieve in the response. (optional) (default to undefined)
+let startIndex: number; //The starting position of the items to be retrieved. (optional) (default to undefined)
+let sortBy: string; //The property used to specify the sorting criteria for folder contents. (optional) (default to undefined)
+let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
+let filterValue: string; //The text used for filtering or searching folder contents. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getTrashFolder(
     userIdOrGroupId,
     filterType,
-    applyFilterOption
+    applyFilterOption,
+    count,
+    startIndex,
+    sortBy,
+    sortOrder,
+    filterValue
 );
 ```
 
@@ -906,6 +982,11 @@ const { status, data } = await apiInstance.getTrashFolder(
 | **userIdOrGroupId** | [**string**] | The user or group ID. | (optional) defaults to undefined|
 | **filterType** | **FilterType** | The filter type. | (optional) defaults to undefined|
 | **applyFilterOption** | **ApplyFilterOption** | Specifies whether to return only files, only folders or all elements. | (optional) defaults to undefined|
+| **count** | [**number**] | The maximum number of items to retrieve in the response. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting position of the items to be retrieved. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | The property used to specify the sorting criteria for folder contents. | (optional) defaults to undefined|
+| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The text used for filtering or searching folder contents. | (optional) defaults to undefined|
 
 
 ### Return type

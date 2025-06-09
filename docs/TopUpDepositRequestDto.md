@@ -7,7 +7,7 @@ Put money on deposit request parameters
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **amount** | **number** | Amount | [optional] [default to undefined]
-**currency** | **string** | Currency | [optional] [default to undefined]
+**currency** | **string** | The three-character ISO 4217 currency symbol | [optional] [default to undefined]
 
 ## Example
 
