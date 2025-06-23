@@ -277,9 +277,9 @@ Class | Method | HTTP request | Description
 *MigrationApi* | [**listMigrations**](docs/MigrationApi.md#listmigrations) | **GET** /api/2.0/migration/list | Get migrations
 *MigrationApi* | [**startMigration**](docs/MigrationApi.md#startmigration) | **POST** /api/2.0/migration/migrate | Start migration
 *MigrationApi* | [**uploadAndInitializeMigration**](docs/MigrationApi.md#uploadandinitializemigration) | **POST** /api/2.0/migration/init/{migratorName} | Upload and initialize migration
-*OAuth20AuthorizationApi* | [**oauth2AuthorizeGet**](docs/OAuth20AuthorizationApi.md#oauth2authorizeget) | **GET** /oauth2/authorize | OAuth2 authorization endpoint
-*OAuth20AuthorizationApi* | [**oauth2AuthorizePost**](docs/OAuth20AuthorizationApi.md#oauth2authorizepost) | **POST** /oauth2/authorize | OAuth2 consent endpoint
-*OAuth20AuthorizationApi* | [**oauth2TokenPost**](docs/OAuth20AuthorizationApi.md#oauth2tokenpost) | **POST** /oauth2/token | OAuth2 token endpoint
+*OAuth20AuthorizationApi* | [**authorizeOAuth**](docs/OAuth20AuthorizationApi.md#authorizeoauth) | **GET** /oauth2/authorize | OAuth2 authorization endpoint
+*OAuth20AuthorizationApi* | [**exchangeToken**](docs/OAuth20AuthorizationApi.md#exchangetoken) | **POST** /oauth2/token | OAuth2 token endpoint
+*OAuth20AuthorizationApi* | [**submitConsent**](docs/OAuth20AuthorizationApi.md#submitconsent) | **POST** /oauth2/authorize | OAuth2 consent endpoint
 *OAuth20ClientManagementApi* | [**changeActivation**](docs/OAuth20ClientManagementApi.md#changeactivation) | **PATCH** /api/2.0/clients/{clientId}/activation | Change the client activation status
 *OAuth20ClientManagementApi* | [**createClient**](docs/OAuth20ClientManagementApi.md#createclient) | **POST** /api/2.0/clients | Create a new OAuth2 client
 *OAuth20ClientManagementApi* | [**deleteClient**](docs/OAuth20ClientManagementApi.md#deleteclient) | **DELETE** /api/2.0/clients/{clientId} | Delete an OAuth2 client
@@ -776,6 +776,7 @@ Class | Method | HTTP request | Description
  - [EncryptionSettingsWrapper](docs/EncryptionSettingsWrapper.md)
  - [EntryType](docs/EntryType.md)
  - [ErrorResponse](docs/ErrorResponse.md)
+ - [ExchangeToken200Response](docs/ExchangeToken200Response.md)
  - [ExternalShareDto](docs/ExternalShareDto.md)
  - [ExternalShareRequestParam](docs/ExternalShareRequestParam.md)
  - [ExternalShareWrapper](docs/ExternalShareWrapper.md)
@@ -923,7 +924,6 @@ Class | Method | HTTP request | Description
  - [NotificationSettingsWrapper](docs/NotificationSettingsWrapper.md)
  - [NotificationType](docs/NotificationType.md)
  - [OAuth20Token](docs/OAuth20Token.md)
- - [Oauth2TokenPost200Response](docs/Oauth2TokenPost200Response.md)
  - [ObjectArrayWrapper](docs/ObjectArrayWrapper.md)
  - [ObjectWrapper](docs/ObjectWrapper.md)
  - [OpenCustomerSessionRequestDto](docs/OpenCustomerSessionRequestDto.md)

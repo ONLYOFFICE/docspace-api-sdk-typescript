@@ -1,4 +1,4 @@
-# Oauth2TokenPost200Response
+# ExchangeToken200Response
 
 
 ## Properties
@@ -13,9 +13,9 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { Oauth2TokenPost200Response } from '@onlyoffice/docspace-api-typescript';
+import { ExchangeToken200Response } from '@onlyoffice/docspace-api-typescript';
 
-const instance: Oauth2TokenPost200Response = {
+const instance: ExchangeToken200Response = {
     access_token,
     token_type,
     expires_in,
