@@ -29,43 +29,43 @@
 import type { Operation } from './operation';
 
 /**
- * 
+ * Represents a report containing a collection of operations.
  * @export
  * @interface Report
  */
 export interface Report {
     /**
-     * 
+     * Collection of operations.
      * @type {Array<Operation>}
      * @memberof Report
      */
     'collection'?: Array<Operation> | null;
     /**
-     * 
+     * Offset of the report data.
      * @type {number}
      * @memberof Report
      */
     'offset'?: number;
     /**
-     * 
+     * Limit of the report data.
      * @type {number}
      * @memberof Report
      */
     'limit'?: number;
     /**
-     * 
+     * Total quantity of operations in the report.
      * @type {number}
      * @memberof Report
      */
     'totalQuantity'?: number;
     /**
-     * 
+     * Total number of pages in the report.
      * @type {number}
      * @memberof Report
      */
     'totalPage'?: number;
     /**
-     * 
+     * Current page number of the report.
      * @type {number}
      * @memberof Report
      */

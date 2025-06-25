@@ -6,10 +6,10 @@ The payment calculation.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**operationId** | **number** |  | [optional] [default to undefined]
-**amount** | **number** |  | [optional] [default to undefined]
-**currency** | **string** |  | [optional] [default to undefined]
-**quantity** | **number** |  | [optional] [default to undefined]
+**operationId** | **number** | Unique identifier of the operation. | [optional] [default to undefined]
+**amount** | **number** | The amount of the payment calculation. | [optional] [default to undefined]
+**currency** | **string** | The three-character ISO 4217 currency symbol of the payment calculation. | [optional] [default to undefined]
+**quantity** | **number** | The quantity associated with the payment calculation. | [optional] [default to undefined]
 
 ## Example
 

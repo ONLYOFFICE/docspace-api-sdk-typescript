@@ -26,40 +26,23 @@
 
 
 /**
- * 
+ * [0 - Active, 1 - Overdue]
  * @export
- * @interface TenantWalletSettings
+ * @enum {number}
  */
-export interface TenantWalletSettings {
+
+export const QuotaState = {
     /**
-     * Enabled
-     * @type {boolean}
-     * @memberof TenantWalletSettings
-     */
-    'enabled'?: boolean;
+    * Active
+    */
+    Active: 0,
     /**
-     * Minimun balance
-     * @type {number}
-     * @memberof TenantWalletSettings
-     */
-    'minBalance'?: number;
-    /**
-     * Up to balance
-     * @type {number}
-     * @memberof TenantWalletSettings
-     */
-    'upToBalance'?: number;
-    /**
-     * The three-character ISO 4217 currency symbol.
-     * @type {string}
-     * @memberof TenantWalletSettings
-     */
-    'currency'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof TenantWalletSettings
-     */
-    'lastModified'?: string;
-}
+    * Overdue
+    */
+    Overdue: 1
+} as const;
+
+export type QuotaState = typeof QuotaState[keyof typeof QuotaState];
+
+
 

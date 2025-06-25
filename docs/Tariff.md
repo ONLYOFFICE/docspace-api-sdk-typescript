@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **licenseDate** | **string** | The tariff license date. | [optional] [default to undefined]
 **customerId** | **string** | The tariff customer ID. | [optional] [default to undefined]
 **quotas** | [**Array&lt;Quota&gt;**](Quota.md) | The list of tariff quotas. | [optional] [default to undefined]
+**overdueQuotas** | [**Array&lt;Quota&gt;**](Quota.md) | The list of overdue tariff quotas. | [optional] [default to undefined]
 
 ## Example
 
@@ -27,6 +28,7 @@ const instance: Tariff = {
     licenseDate,
     customerId,
     quotas,
+    overdueQuotas,
 };
 ```
 

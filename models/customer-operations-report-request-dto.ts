@@ -28,31 +28,31 @@
 /**
  * Parameters of the request for generating the report on client operations
  * @export
- * @interface CustomerOperationsReportDto
+ * @interface CustomerOperationsReportRequestDto
  */
-export interface CustomerOperationsReportDto {
+export interface CustomerOperationsReportRequestDto {
     /**
      * Start date
      * @type {string}
-     * @memberof CustomerOperationsReportDto
+     * @memberof CustomerOperationsReportRequestDto
      */
     'startDate'?: string | null;
     /**
      * End date
      * @type {string}
-     * @memberof CustomerOperationsReportDto
+     * @memberof CustomerOperationsReportRequestDto
      */
     'endDate'?: string | null;
     /**
      * Include credit operations
      * @type {boolean}
-     * @memberof CustomerOperationsReportDto
+     * @memberof CustomerOperationsReportRequestDto
      */
     'credit'?: boolean | null;
     /**
      * Include withdrawal operations
      * @type {boolean}
-     * @memberof CustomerOperationsReportDto
+     * @memberof CustomerOperationsReportRequestDto
      */
     'withdrawal'?: boolean | null;
 }

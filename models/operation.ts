@@ -26,49 +26,55 @@
 
 
 /**
- * 
+ * Represents an operation.
  * @export
  * @interface Operation
  */
 export interface Operation {
     /**
-     * 
+     * Date of the operation.
      * @type {string}
      * @memberof Operation
      */
     'date'?: string;
     /**
-     * 
+     * Service related to the operation.
      * @type {string}
      * @memberof Operation
      */
     'service'?: string | null;
     /**
-     * 
+     * Brief description of the operation.
+     * @type {string}
+     * @memberof Operation
+     */
+    'description'?: string | null;
+    /**
+     * Unit of the service.
      * @type {string}
      * @memberof Operation
      */
     'serviceUnit'?: string | null;
     /**
-     * 
+     * Quantity of the service used.
      * @type {number}
      * @memberof Operation
      */
     'quantity'?: number;
     /**
-     * 
+     * The three-character ISO 4217 currency symbol of the operation.
      * @type {string}
      * @memberof Operation
      */
     'currency'?: string | null;
     /**
-     * 
+     * Credit amount of the operation.
      * @type {number}
      * @memberof Operation
      */
     'credit'?: number;
     /**
-     * 
+     * Withdrawal amount of the operation.
      * @type {number}
      * @memberof Operation
      */

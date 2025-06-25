@@ -24,6 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { QuotaState } from './quota-state';
 
 /**
  * The quota parameters.
@@ -61,5 +64,13 @@ export interface Quota {
      * @memberof Quota
      */
     'nextQuantity'?: number | null;
+    /**
+     * 
+     * @type {QuotaState}
+     * @memberof Quota
+     */
+    'state'?: QuotaState;
 }
+
+
 

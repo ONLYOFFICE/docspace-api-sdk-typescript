@@ -26,15 +26,24 @@
 
 
 /**
- * 
+ * [0 - None, 1 - Set, 2 - Expired]
  * @export
  * @enum {number}
  */
 
 export const PaymentMethodStatus = {
-    NUMBER_0: 0,
-    NUMBER_1: 1,
-    NUMBER_2: 2
+    /**
+    * None
+    */
+    None: 0,
+    /**
+    * Set
+    */
+    Set: 1,
+    /**
+    * Expired
+    */
+    Expired: 2
 } as const;
 
 export type PaymentMethodStatus = typeof PaymentMethodStatus[keyof typeof PaymentMethodStatus];

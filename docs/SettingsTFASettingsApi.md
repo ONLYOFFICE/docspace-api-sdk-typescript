@@ -12,7 +12,7 @@ All URIs are relative to *http://localhost:8092*
 |[**unlinkTfaApp**](#unlinktfaapp) | **PUT** /api/2.0/settings/tfaappnewapp | Unlink the TFA application|
 |[**updateTfaAppCodes**](#updatetfaappcodes) | **PUT** /api/2.0/settings/tfaappnewcodes | Update the TFA codes|
 |[**updateTfaSettings**](#updatetfasettings) | **PUT** /api/2.0/settings/tfaapp | Update the TFA settings|
-|[**updateTfaSettingsLink**](#updatetfasettingslink) | **PUT** /api/2.0/settings/tfaappwithlink | Get confirmation email for updating TFA settings|
+|[**updateTfaSettingsLink**](#updatetfasettingslink) | **PUT** /api/2.0/settings/tfaappwithlink | Get a confirmation email for updating TFA settings|
 
 # **getTfaAppCodes**
 > ObjectArrayWrapper getTfaAppCodes()
@@ -454,6 +454,8 @@ const { status, data } = await apiInstance.updateTfaSettingsLink(
 |-------------|-------------|------------------|
 |**200** | Confirmation email URL |  -  |
 |**401** | Unauthorized |  -  |
+|**403** | No permissions to perform this action |  -  |
+|**405** | SMS settings are not available/TFA application settings are not available |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

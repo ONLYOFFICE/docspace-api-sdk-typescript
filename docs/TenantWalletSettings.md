@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **enabled** | **boolean** | Enabled | [optional] [default to undefined]
 **minBalance** | **number** | Minimun balance | [optional] [default to undefined]
 **upToBalance** | **number** | Up to balance | [optional] [default to undefined]
-**currency** | **string** | Currency | [optional] [default to undefined]
+**currency** | **string** | The three-character ISO 4217 currency symbol. | [optional] [default to undefined]
 **lastModified** | **string** |  | [optional] [default to undefined]
 
 ## Example

@@ -1,13 +1,14 @@
 # CustomerInfo
 
+The customer information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**portalId** | **string** |  | [optional] [default to undefined]
+**portalId** | **string** | The portal ID. | [optional] [default to undefined]
 **paymentMethodStatus** | [**PaymentMethodStatus**](PaymentMethodStatus.md) |  | [optional] [default to undefined]
-**email** | **string** |  | [optional] [default to undefined]
+**email** | **string** | The email address of the customer. | [optional] [default to undefined]
 
 ## Example
 

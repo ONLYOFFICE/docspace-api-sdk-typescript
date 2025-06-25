@@ -1,12 +1,13 @@
 # Balance
 
+Represents a balance with an account number and a list of sub-accounts.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**accountNumber** | **number** |  | [optional] [default to undefined]
-**subAccounts** | [**Array&lt;SubAccount&gt;**](SubAccount.md) |  | [optional] [default to undefined]
+**accountNumber** | **number** | The account number. | [optional] [default to undefined]
+**subAccounts** | [**Array&lt;SubAccount&gt;**](SubAccount.md) | A list of sub-accounts. | [optional] [default to undefined]
 
 ## Example
 

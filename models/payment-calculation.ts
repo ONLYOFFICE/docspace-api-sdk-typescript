@@ -32,25 +32,25 @@
  */
 export interface PaymentCalculation {
     /**
-     * 
+     * Unique identifier of the operation.
      * @type {number}
      * @memberof PaymentCalculation
      */
     'operationId'?: number;
     /**
-     * 
+     * The amount of the payment calculation.
      * @type {number}
      * @memberof PaymentCalculation
      */
     'amount'?: number;
     /**
-     * 
+     * The three-character ISO 4217 currency symbol of the payment calculation.
      * @type {string}
      * @memberof PaymentCalculation
      */
     'currency'?: string | null;
     /**
-     * 
+     * The quantity associated with the payment calculation.
      * @type {number}
      * @memberof PaymentCalculation
      */

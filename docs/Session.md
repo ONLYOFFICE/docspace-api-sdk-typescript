@@ -1,13 +1,14 @@
 # Session
 
+Represents a session with reserved amount and currency.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**sessionId** | **number** |  | [optional] [default to undefined]
-**reservedAmount** | **number** |  | [optional] [default to undefined]
-**currency** | **string** |  | [optional] [default to undefined]
+**sessionId** | **number** | Unique identifier of the session. | [optional] [default to undefined]
+**reservedAmount** | **number** | Amount reserved for the session. | [optional] [default to undefined]
+**currency** | **string** | The three-character ISO 4217 currency symbol of the reserved amount. | [optional] [default to undefined]
 
 ## Example
 

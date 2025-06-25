@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **wallet** | **boolean** | The quota applies to the wallet or not | [optional] [default to undefined]
 **dueDate** | **string** | The quota due date. | [optional] [default to undefined]
 **nextQuantity** | **number** | The quota next quantity. | [optional] [default to undefined]
+**state** | [**QuotaState**](QuotaState.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -23,6 +24,7 @@ const instance: Quota = {
     wallet,
     dueDate,
     nextQuantity,
+    state,
 };
 ```
 

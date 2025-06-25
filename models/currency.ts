@@ -26,19 +26,19 @@
 
 
 /**
- * 
+ * Represents a currency.
  * @export
  * @interface Currency
  */
 export interface Currency {
     /**
-     * 
+     * Unique identifier of the currency.
      * @type {number}
      * @memberof Currency
      */
     'id'?: number;
     /**
-     * 
+     * The three-character ISO 4217 currency symbol.
      * @type {string}
      * @memberof Currency
      */

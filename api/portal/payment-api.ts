@@ -43,7 +43,7 @@ import type { CurrencyArrayWrapper } from '../../models';
 // @ts-ignore
 import type { CustomerInfoWrapper } from '../../models';
 // @ts-ignore
-import type { CustomerOperationsReportDto } from '../../models';
+import type { CustomerOperationsReportRequestDto } from '../../models';
 // @ts-ignore
 import type { ObjectWrapper } from '../../models';
 // @ts-ignore
@@ -138,13 +138,13 @@ export const PortalPaymentApiAxiosParamCreator = function (configuration?: Confi
         /**
          * Generates the customer operations report as csv file and save in Documents.
          * @summary Generate the customer operations report
-         * @param {CustomerOperationsReportDto} [customerOperationsReportDto] 
+         * @param {CustomerOperationsReportRequestDto} [customerOperationsReportRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createCustomerOperationsReport operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-customer-operations-report/
          */
-        createCustomerOperationsReport: async (customerOperationsReportDto?: CustomerOperationsReportDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createCustomerOperationsReport: async (customerOperationsReportRequestDto?: CustomerOperationsReportRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/portal/payment/customer/operationsreport`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -183,7 +183,7 @@ export const PortalPaymentApiAxiosParamCreator = function (configuration?: Confi
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(customerOperationsReportDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(customerOperationsReportRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1283,14 +1283,14 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
         /**
          * Generates the customer operations report as csv file and save in Documents.
          * @summary Generate the customer operations report
-         * @param {CustomerOperationsReportDto} [customerOperationsReportDto] 
+         * @param {CustomerOperationsReportRequestDto} [customerOperationsReportRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createCustomerOperationsReport operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-customer-operations-report/
          */
-        async createCustomerOperationsReport(customerOperationsReportDto?: CustomerOperationsReportDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createCustomerOperationsReport(customerOperationsReportDto, options);
+        async createCustomerOperationsReport(customerOperationsReportRequestDto?: CustomerOperationsReportRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createCustomerOperationsReport(customerOperationsReportRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.createCustomerOperationsReport']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1545,7 +1545,7 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
          * REST API Reference for topUpDeposit operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/top-up-deposit/
          */
-        async topUpDeposit(topUpDepositRequestDto?: TopUpDepositRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+        async topUpDeposit(topUpDepositRequestDto?: TopUpDepositRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.topUpDeposit(topUpDepositRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.topUpDeposit']?.[localVarOperationServerIndex]?.url;
@@ -1606,14 +1606,14 @@ export const PortalPaymentApiFactory = function (configuration?: Configuration, 
         /**
          * Generates the customer operations report as csv file and save in Documents.
          * @summary Generate the customer operations report
-         * @param {CustomerOperationsReportDto} [customerOperationsReportDto] 
+         * @param {CustomerOperationsReportRequestDto} [customerOperationsReportRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for createCustomerOperationsReport operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-customer-operations-report/
          * @throws {RequiredError}
          */
-        createCustomerOperationsReport(customerOperationsReportDto?: CustomerOperationsReportDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.createCustomerOperationsReport(customerOperationsReportDto, options).then((request) => request(axios, basePath));
+        createCustomerOperationsReport(customerOperationsReportRequestDto?: CustomerOperationsReportRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.createCustomerOperationsReport(customerOperationsReportRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the list of currencies from accounting service.
@@ -1817,7 +1817,7 @@ export const PortalPaymentApiFactory = function (configuration?: Configuration, 
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/top-up-deposit/
          * @throws {RequiredError}
          */
-        topUpDeposit(topUpDepositRequestDto?: TopUpDepositRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+        topUpDeposit(topUpDepositRequestDto?: TopUpDepositRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
             return localVarFp.topUpDeposit(topUpDepositRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1869,13 +1869,13 @@ export class PortalPaymentApi extends BaseAPI {
     /**
      * Generates the customer operations report as csv file and save in Documents.
      * @summary Generate the customer operations report
-     * @param {CustomerOperationsReportDto} [customerOperationsReportDto] 
+     * @param {CustomerOperationsReportRequestDto} [customerOperationsReportRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PortalPaymentApi
      */
-    public createCustomerOperationsReport(customerOperationsReportDto?: CustomerOperationsReportDto, options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).createCustomerOperationsReport(customerOperationsReportDto, options).then((request) => request(this.axios, this.basePath));
+    public createCustomerOperationsReport(customerOperationsReportRequestDto?: CustomerOperationsReportRequestDto, options?: RawAxiosRequestConfig) {
+        return PortalPaymentApiFp(this.configuration).createCustomerOperationsReport(customerOperationsReportRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -91,16 +91,16 @@ Generates the customer operations report as csv file and save in Documents.
 import {
     PortalPaymentApi,
     Configuration,
-    CustomerOperationsReportDto
+    CustomerOperationsReportRequestDto
 } from '@onlyoffice/docspace-api-typescript';
 
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
 
-let customerOperationsReportDto: CustomerOperationsReportDto; // (optional)
+let customerOperationsReportRequestDto: CustomerOperationsReportRequestDto; // (optional)
 
 const { status, data } = await apiInstance.createCustomerOperationsReport(
-    customerOperationsReportDto
+    customerOperationsReportRequestDto
 );
 ```
 
@@ -108,7 +108,7 @@ const { status, data } = await apiInstance.createCustomerOperationsReport(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **customerOperationsReportDto** | **CustomerOperationsReportDto**|  | |
+| **customerOperationsReportRequestDto** | **CustomerOperationsReportRequestDto**|  | |
 
 
 ### Return type
@@ -972,7 +972,7 @@ const { status, data } = await apiInstance.setTenantWalletSettings(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **topUpDeposit**
-> StringWrapper topUpDeposit()
+> BooleanWrapper topUpDeposit()
 
 Returns result of putting money on deposit.
 
@@ -1004,7 +1004,7 @@ const { status, data } = await apiInstance.topUpDeposit(
 
 ### Return type
 
-**StringWrapper**
+**BooleanWrapper**
 
 ### Authorization
 
@@ -1019,7 +1019,7 @@ const { status, data } = await apiInstance.topUpDeposit(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Success status |  -  |
+|**200** | Boolean value: true if the operation is successful |  -  |
 |**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
 

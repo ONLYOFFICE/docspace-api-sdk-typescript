@@ -474,7 +474,7 @@ export const SettingsTFASettingsApiAxiosParamCreator = function (configuration?:
         },
         /**
          * Returns the confirmation email URL for updating TFA settings.
-         * @summary Get confirmation email for updating TFA settings
+         * @summary Get a confirmation email for updating TFA settings
          * @param {TfaRequestsDto} [tfaRequestsDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -654,7 +654,7 @@ export const SettingsTFASettingsApiFp = function(configuration?: Configuration) 
         },
         /**
          * Returns the confirmation email URL for updating TFA settings.
-         * @summary Get confirmation email for updating TFA settings
+         * @summary Get a confirmation email for updating TFA settings
          * @param {TfaRequestsDto} [tfaRequestsDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -770,7 +770,7 @@ export const SettingsTFASettingsApiFactory = function (configuration?: Configura
         },
         /**
          * Returns the confirmation email URL for updating TFA settings.
-         * @summary Get confirmation email for updating TFA settings
+         * @summary Get a confirmation email for updating TFA settings
          * @param {TfaRequestsDto} [tfaRequestsDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for updateTfaSettingsLink operation
@@ -883,7 +883,7 @@ export class SettingsTFASettingsApi extends BaseAPI {
 
     /**
      * Returns the confirmation email URL for updating TFA settings.
-     * @summary Get confirmation email for updating TFA settings
+     * @summary Get a confirmation email for updating TFA settings
      * @param {TfaRequestsDto} [tfaRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

@@ -79,6 +79,12 @@ export interface Tariff {
      * @memberof Tariff
      */
     'quotas'?: Array<Quota> | null;
+    /**
+     * The list of overdue tariff quotas.
+     * @type {Array<Quota>}
+     * @memberof Tariff
+     */
+    'overdueQuotas'?: Array<Quota> | null;
 }
 
 

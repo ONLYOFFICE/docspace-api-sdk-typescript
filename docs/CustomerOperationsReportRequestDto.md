@@ -1,4 +1,4 @@
-# CustomerOperationsReportDto
+# CustomerOperationsReportRequestDto
 
 Parameters of the request for generating the report on client operations
 
@@ -14,9 +14,9 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CustomerOperationsReportDto } from '@onlyoffice/docspace-api-typescript';
+import { CustomerOperationsReportRequestDto } from '@onlyoffice/docspace-api-typescript';
 
-const instance: CustomerOperationsReportDto = {
+const instance: CustomerOperationsReportRequestDto = {
     startDate,
     endDate,
     credit,

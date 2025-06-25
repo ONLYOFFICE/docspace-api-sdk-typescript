@@ -1,16 +1,17 @@
 # Report
 
+Represents a report containing a collection of operations.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**collection** | [**Array&lt;Operation&gt;**](Operation.md) |  | [optional] [default to undefined]
-**offset** | **number** |  | [optional] [default to undefined]
-**limit** | **number** |  | [optional] [default to undefined]
-**totalQuantity** | **number** |  | [optional] [default to undefined]
-**totalPage** | **number** |  | [optional] [default to undefined]
-**currentPage** | **number** |  | [optional] [default to undefined]
+**collection** | [**Array&lt;Operation&gt;**](Operation.md) | Collection of operations. | [optional] [default to undefined]
+**offset** | **number** | Offset of the report data. | [optional] [default to undefined]
+**limit** | **number** | Limit of the report data. | [optional] [default to undefined]
+**totalQuantity** | **number** | Total quantity of operations in the report. | [optional] [default to undefined]
+**totalPage** | **number** | Total number of pages in the report. | [optional] [default to undefined]
+**currentPage** | **number** | Current page number of the report. | [optional] [default to undefined]
 
 ## Example
 

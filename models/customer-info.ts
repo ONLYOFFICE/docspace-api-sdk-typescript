@@ -29,13 +29,13 @@
 import type { PaymentMethodStatus } from './payment-method-status';
 
 /**
- * 
+ * The customer information.
  * @export
  * @interface CustomerInfo
  */
 export interface CustomerInfo {
     /**
-     * 
+     * The portal ID.
      * @type {string}
      * @memberof CustomerInfo
      */
@@ -47,7 +47,7 @@ export interface CustomerInfo {
      */
     'paymentMethodStatus'?: PaymentMethodStatus;
     /**
-     * 
+     * The email address of the customer.
      * @type {string}
      * @memberof CustomerInfo
      */

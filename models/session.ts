@@ -26,25 +26,25 @@
 
 
 /**
- * 
+ * Represents a session with reserved amount and currency.
  * @export
  * @interface Session
  */
 export interface Session {
     /**
-     * 
+     * Unique identifier of the session.
      * @type {number}
      * @memberof Session
      */
     'sessionId'?: number;
     /**
-     * 
+     * Amount reserved for the session.
      * @type {number}
      * @memberof Session
      */
     'reservedAmount'?: number;
     /**
-     * 
+     * The three-character ISO 4217 currency symbol of the reserved amount.
      * @type {string}
      * @memberof Session
      */

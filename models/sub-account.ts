@@ -26,19 +26,19 @@
 
 
 /**
- * 
+ * Represents a sub-account with a specific currency and amount.
  * @export
  * @interface SubAccount
  */
 export interface SubAccount {
     /**
-     * 
+     * The three-character ISO 4217 currency symbol of the sub-account.
      * @type {string}
      * @memberof SubAccount
      */
     'currency'?: string | null;
     /**
-     * 
+     * The amount of the sub-account.
      * @type {number}
      * @memberof SubAccount
      */

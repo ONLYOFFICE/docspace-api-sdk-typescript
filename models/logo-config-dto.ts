@@ -44,6 +44,12 @@ export interface LogoConfigDto {
      */
     'imageDark'?: string | null;
     /**
+     * The light image of the logo.
+     * @type {string}
+     * @memberof LogoConfigDto
+     */
+    'imageLight'?: string | null;
+    /**
      * The embedded image of the logo.
      * @type {string}
      * @memberof LogoConfigDto
