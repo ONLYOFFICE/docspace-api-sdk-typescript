@@ -1,6 +1,6 @@
 ## @onlyoffice/docspace-api-typescript@3.1.0
 
-This generator creates TypeScript/JavaScript client that utilizes [axios](https://github.com/axios/axios). The generated Node module can be used in the following environments:
+A universal TypeScript SDK for Docspace api that works in both browser and Node.js environments.
 
 Environment
 * Node.js
