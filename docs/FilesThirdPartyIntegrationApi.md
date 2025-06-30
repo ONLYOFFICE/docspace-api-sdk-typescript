@@ -18,6 +18,23 @@ All URIs are relative to *http://localhost:8092*
 
 Removes the third-party storage service account with the ID specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-third-party/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **providerId** | [**number**] | The provider ID. | defaults to undefined|
+
+
+### Return type
+
+**StringWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -35,21 +52,6 @@ const { status, data } = await apiInstance.deleteThirdParty(
     providerId
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **providerId** | [**number**] | The provider ID. | defaults to undefined|
-
-
-### Return type
-
-**StringWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -70,6 +72,20 @@ const { status, data } = await apiInstance.deleteThirdParty(
 
 Returns a list of all providers.   **Note**: Available provider keys: Dropbox, Box, WebDav, OneDrive, GoogleDrive, kDrive, ownCloud, Nextcloud.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-providers/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**ProviderArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -83,18 +99,6 @@ const apiInstance = new FilesThirdPartyIntegrationApi(configuration);
 
 const { status, data } = await apiInstance.getAllProviders();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**ProviderArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -115,6 +119,20 @@ This endpoint does not have any parameters.
 
 Returns a backup of the connected third-party account.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backup-third-party-account/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**FolderStringWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -128,18 +146,6 @@ const apiInstance = new FilesThirdPartyIntegrationApi(configuration);
 
 const { status, data } = await apiInstance.getBackupThirdPartyAccount();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**FolderStringWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -160,6 +166,20 @@ This endpoint does not have any parameters.
 
 Returns the list of the available providers.   **Note**: Available provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-capabilities/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**ArrayArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -173,18 +193,6 @@ const apiInstance = new FilesThirdPartyIntegrationApi(configuration);
 
 const { status, data } = await apiInstance.getCapabilities();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**ArrayArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -205,6 +213,20 @@ This endpoint does not have any parameters.
 
 Returns a list of the third-party services connected to the \"Common\" section.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-common-third-party-folders/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**FolderStringArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -218,18 +240,6 @@ const apiInstance = new FilesThirdPartyIntegrationApi(configuration);
 
 const { status, data } = await apiInstance.getCommonThirdPartyFolders();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**FolderStringArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -250,6 +260,20 @@ This endpoint does not have any parameters.
 
 Returns a list of all the connected third-party accounts.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-third-party-accounts/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**ThirdPartyParamsArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -263,18 +287,6 @@ const apiInstance = new FilesThirdPartyIntegrationApi(configuration);
 
 const { status, data } = await apiInstance.getThirdPartyAccounts();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**ThirdPartyParamsArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -295,6 +307,23 @@ This endpoint does not have any parameters.
 
 Saves the third-party storage service account. For WebDav, Yandex, kDrive and SharePoint, the login and password are used for authentication. For other providers, the authentication is performed using a token received via OAuth 2.0.   **Note**: List of provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-third-party/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **thirdPartyRequestDto** | **ThirdPartyRequestDto**|  | |
+
+
+### Return type
+
+**FolderStringWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -313,21 +342,6 @@ const { status, data } = await apiInstance.saveThirdParty(
     thirdPartyRequestDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **thirdPartyRequestDto** | **ThirdPartyRequestDto**|  | |
-
-
-### Return type
-
-**FolderStringWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -348,6 +362,23 @@ const { status, data } = await apiInstance.saveThirdParty(
 
 Saves a backup of the connected third-party account.   **Note**: List of provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-third-party-backup/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **thirdPartyBackupRequestDto** | **ThirdPartyBackupRequestDto**|  | |
+
+
+### Return type
+
+**FolderStringWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -366,21 +397,6 @@ const { status, data } = await apiInstance.saveThirdPartyBackup(
     thirdPartyBackupRequestDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **thirdPartyBackupRequestDto** | **ThirdPartyBackupRequestDto**|  | |
-
-
-### Return type
-
-**FolderStringWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

@@ -31,6 +31,23 @@ All URIs are relative to *http://localhost:8092*
 
 Calculate amount of the wallet payment with the parameters specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/calculate-wallet-payment/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **walletQuantityRequestDto** | **WalletQuantityRequestDto**|  | |
+
+
+### Return type
+
+**PaymentCalculationWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -49,21 +66,6 @@ const { status, data } = await apiInstance.calculateWalletPayment(
     walletQuantityRequestDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **walletQuantityRequestDto** | **WalletQuantityRequestDto**|  | |
-
-
-### Return type
-
-**PaymentCalculationWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -85,6 +87,23 @@ const { status, data } = await apiInstance.calculateWalletPayment(
 
 Generates the customer operations report as csv file and save in Documents.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-customer-operations-report/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **customerOperationsReportRequestDto** | **CustomerOperationsReportRequestDto**|  | |
+
+
+### Return type
+
+**StringWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -103,21 +122,6 @@ const { status, data } = await apiInstance.createCustomerOperationsReport(
     customerOperationsReportRequestDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **customerOperationsReportRequestDto** | **CustomerOperationsReportRequestDto**|  | |
-
-
-### Return type
-
-**StringWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -138,6 +142,20 @@ const { status, data } = await apiInstance.createCustomerOperationsReport(
 
 Returns the list of currencies from accounting service.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounting-currencies/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**CurrencyArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -151,18 +169,6 @@ const apiInstance = new PortalPaymentApi(configuration);
 
 const { status, data } = await apiInstance.getAccountingCurrencies();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**CurrencyArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -184,6 +190,23 @@ This endpoint does not have any parameters.
 
 Returns the URL to the checkout setup page.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-checkout-setup-url/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **backUrl** | [**string**] | Back URL | (optional) defaults to undefined|
+
+
+### Return type
+
+**StringWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -201,21 +224,6 @@ const { status, data } = await apiInstance.getCheckoutSetupUrl(
     backUrl
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **backUrl** | [**string**] | Back URL | (optional) defaults to undefined|
-
-
-### Return type
-
-**StringWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -237,6 +245,23 @@ const { status, data } = await apiInstance.getCheckoutSetupUrl(
 
 Returns the customer balance from the accounting service.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-balance/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **refresh** | [**boolean**] | Specifies whether to refresh the payment information cache or not. | (optional) defaults to undefined|
+
+
+### Return type
+
+**BalanceWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -254,21 +279,6 @@ const { status, data } = await apiInstance.getCustomerBalance(
     refresh
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **refresh** | [**boolean**] | Specifies whether to refresh the payment information cache or not. | (optional) defaults to undefined|
-
-
-### Return type
-
-**BalanceWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -290,6 +300,23 @@ const { status, data } = await apiInstance.getCustomerBalance(
 
 Returns the customer info.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-info/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **refresh** | [**boolean**] | Specifies whether to refresh the payment information cache or not. | (optional) defaults to undefined|
+
+
+### Return type
+
+**CustomerInfoWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -307,21 +334,6 @@ const { status, data } = await apiInstance.getCustomerInfo(
     refresh
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **refresh** | [**boolean**] | Specifies whether to refresh the payment information cache or not. | (optional) defaults to undefined|
-
-
-### Return type
-
-**CustomerInfoWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -342,6 +354,28 @@ const { status, data } = await apiInstance.getCustomerInfo(
 > ReportWrapper getCustomerOperations()
 
 Returns the report of customer operations from the accounting service.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-operations/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **startDate** | [**string**] | Start date | (optional) defaults to undefined|
+| **endDate** | [**string**] | End date | (optional) defaults to undefined|
+| **credit** | [**boolean**] | Include credit operations (true by default) | (optional) defaults to undefined|
+| **withdrawal** | [**boolean**] | Include withdrawal operations (true by default) | (optional) defaults to undefined|
+| **offset** | [**number**] | Offset (0 by default) | (optional) defaults to undefined|
+| **limit** | [**number**] | Limit (25 by default) | (optional) defaults to undefined|
+
+
+### Return type
+
+**ReportWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -371,26 +405,6 @@ const { status, data } = await apiInstance.getCustomerOperations(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **startDate** | [**string**] | Start date | (optional) defaults to undefined|
-| **endDate** | [**string**] | End date | (optional) defaults to undefined|
-| **credit** | [**boolean**] | Include credit operations (true by default) | (optional) defaults to undefined|
-| **withdrawal** | [**boolean**] | Include withdrawal operations (true by default) | (optional) defaults to undefined|
-| **offset** | [**number**] | Offset (0 by default) | (optional) defaults to undefined|
-| **limit** | [**number**] | Limit (25 by default) | (optional) defaults to undefined|
-
-
-### Return type
-
-**ReportWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -411,6 +425,23 @@ const { status, data } = await apiInstance.getCustomerOperations(
 
 Returns the URL to the payment account.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-account/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **backUrl** | [**string**] | The URL where the user will be redirected after payment processing. | (optional) defaults to undefined|
+
+
+### Return type
+
+**StringWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -428,21 +459,6 @@ const { status, data } = await apiInstance.getPaymentAccount(
     backUrl
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **backUrl** | [**string**] | The URL where the user will be redirected after payment processing. | (optional) defaults to undefined|
-
-
-### Return type
-
-**StringWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -464,6 +480,20 @@ const { status, data } = await apiInstance.getPaymentAccount(
 
 Returns the available portal currencies.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-currencies/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**CurrenciesArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -477,18 +507,6 @@ const apiInstance = new PortalPaymentApi(configuration);
 
 const { status, data } = await apiInstance.getPaymentCurrencies();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**CurrenciesArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -509,6 +527,23 @@ This endpoint does not have any parameters.
 
 Returns the available portal quotas.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-quotas/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **wallet** | [**boolean**] | Get wallet quotas only | (optional) defaults to undefined|
+
+
+### Return type
+
+**QuotaArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -526,21 +561,6 @@ const { status, data } = await apiInstance.getPaymentQuotas(
     wallet
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **wallet** | [**boolean**] | Get wallet quotas only | (optional) defaults to undefined|
-
-
-### Return type
-
-**QuotaArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -561,6 +581,23 @@ const { status, data } = await apiInstance.getPaymentQuotas(
 
 Returns the URL to the payment page.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-url/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **paymentUrlRequestsDto** | **PaymentUrlRequestsDto**|  | |
+
+
+### Return type
+
+**StringWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -579,21 +616,6 @@ const { status, data } = await apiInstance.getPaymentUrl(
     paymentUrlRequestsDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **paymentUrlRequestsDto** | **PaymentUrlRequestsDto**|  | |
-
-
-### Return type
-
-**StringWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -615,6 +637,20 @@ const { status, data } = await apiInstance.getPaymentUrl(
 
 Returns the available portal prices.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-prices/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**ObjectWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -628,18 +664,6 @@ const apiInstance = new PortalPaymentApi(configuration);
 
 const { status, data } = await apiInstance.getPortalPrices();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**ObjectWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -660,6 +684,23 @@ This endpoint does not have any parameters.
 
 Returns the payment information about the current portal quota.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-quota-payment-information/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **refresh** | [**boolean**] | Specifies whether to refresh the payment information cache or not. | (optional) defaults to undefined|
+
+
+### Return type
+
+**QuotaWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -677,21 +718,6 @@ const { status, data } = await apiInstance.getQuotaPaymentInformation(
     refresh
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **refresh** | [**boolean**] | Specifies whether to refresh the payment information cache or not. | (optional) defaults to undefined|
-
-
-### Return type
-
-**QuotaWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -713,6 +739,20 @@ const { status, data } = await apiInstance.getQuotaPaymentInformation(
 
 Returns the wallet auto top up settings.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-wallet-settings/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**TenantWalletSettingsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -726,18 +766,6 @@ const apiInstance = new PortalPaymentApi(configuration);
 
 const { status, data } = await apiInstance.getTenantWalletSettings();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**TenantWalletSettingsWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -759,6 +787,23 @@ This endpoint does not have any parameters.
 
 Trying to open a customer session and block amount money on the balance.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/open-customer-session/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **openCustomerSessionRequestDto** | **OpenCustomerSessionRequestDto**|  | |
+
+
+### Return type
+
+**SessionWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -777,21 +822,6 @@ const { status, data } = await apiInstance.openCustomerSession(
     openCustomerSessionRequestDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **openCustomerSessionRequestDto** | **OpenCustomerSessionRequestDto**|  | |
-
-
-### Return type
-
-**SessionWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -813,6 +843,23 @@ const { status, data } = await apiInstance.openCustomerSession(
 
 Perform customer operation and return true if the operation is succesfully provided.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/perform-customer-operation/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **performCustomerOperationRequestDto** | **PerformCustomerOperationRequestDto**|  | |
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -831,21 +878,6 @@ const { status, data } = await apiInstance.performCustomerOperation(
     performCustomerOperationRequestDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **performCustomerOperationRequestDto** | **PerformCustomerOperationRequestDto**|  | |
-
-
-### Return type
-
-**BooleanWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -867,6 +899,23 @@ const { status, data } = await apiInstance.performCustomerOperation(
 
 Sends a request for the portal payment.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-payment-request/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **salesRequestsDto** | **SalesRequestsDto**|  | |
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -885,21 +934,6 @@ const { status, data } = await apiInstance.sendPaymentRequest(
     salesRequestsDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **salesRequestsDto** | **SalesRequestsDto**|  | |
-
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -922,6 +956,23 @@ void (empty response body)
 
 Set the wallet auto top up settings.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-wallet-settings/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **tenantWalletSettingsWrapper** | **TenantWalletSettingsWrapper**|  | |
+
+
+### Return type
+
+**TenantWalletSettingsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -940,21 +991,6 @@ const { status, data } = await apiInstance.setTenantWalletSettings(
     tenantWalletSettingsWrapper
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **tenantWalletSettingsWrapper** | **TenantWalletSettingsWrapper**|  | |
-
-
-### Return type
-
-**TenantWalletSettingsWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -976,6 +1012,23 @@ const { status, data } = await apiInstance.setTenantWalletSettings(
 
 Returns result of putting money on deposit.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/top-up-deposit/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **topUpDepositRequestDto** | **TopUpDepositRequestDto**|  | |
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -994,21 +1047,6 @@ const { status, data } = await apiInstance.topUpDeposit(
     topUpDepositRequestDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **topUpDepositRequestDto** | **TopUpDepositRequestDto**|  | |
-
-
-### Return type
-
-**BooleanWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1030,6 +1068,23 @@ const { status, data } = await apiInstance.topUpDeposit(
 
 Updates the payment quantity with the parameters specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-payment/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **quantityRequestDto** | **QuantityRequestDto**|  | |
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -1048,21 +1103,6 @@ const { status, data } = await apiInstance.updatePayment(
     quantityRequestDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **quantityRequestDto** | **QuantityRequestDto**|  | |
-
-
-### Return type
-
-**BooleanWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1084,6 +1124,23 @@ const { status, data } = await apiInstance.updatePayment(
 
 Updates the wallet payment quantity with the parameters specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-wallet-payment/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **walletQuantityRequestDto** | **WalletQuantityRequestDto**|  | |
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -1102,21 +1159,6 @@ const { status, data } = await apiInstance.updateWalletPayment(
     walletQuantityRequestDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **walletQuantityRequestDto** | **WalletQuantityRequestDto**|  | |
-
-
-### Return type
-
-**BooleanWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

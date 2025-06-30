@@ -11,6 +11,20 @@ All URIs are relative to *http://localhost:8092*
 
 Generates a JWT token for communication between login (client) and identity services.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/generate-jwt-token/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**StringWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -24,18 +38,6 @@ const apiInstance = new SecurityOAuth2Api(configuration);
 
 const { status, data } = await apiInstance.generateJwtToken();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**StringWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

@@ -20,6 +20,20 @@ All URIs are relative to *http://localhost:8092*
 
 Returns the progress of deleting the personal folder.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-delete-personal-folder-progress/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**TaskProgressResponseWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -33,18 +47,6 @@ const apiInstance = new PeopleUserDataApi(configuration);
 
 const { status, data } = await apiInstance.getDeletePersonalFolderProgress();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**TaskProgressResponseWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -65,6 +67,23 @@ This endpoint does not have any parameters.
 
 Returns the progress of the started data reassignment for the user with the ID specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-reassign-progress/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **userid** | [**string**] | The user ID. | defaults to undefined|
+
+
+### Return type
+
+**TaskProgressResponseWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -82,21 +101,6 @@ const { status, data } = await apiInstance.getReassignProgress(
     userid
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **userid** | [**string**] | The user ID. | defaults to undefined|
-
-
-### Return type
-
-**TaskProgressResponseWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -117,6 +121,23 @@ const { status, data } = await apiInstance.getReassignProgress(
 
 Returns the progress of the started data deletion for the user with the ID specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-remove-progress/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **userid** | [**string**] | The user ID. | defaults to undefined|
+
+
+### Return type
+
+**TaskProgressResponseWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -134,21 +155,6 @@ const { status, data } = await apiInstance.getRemoveProgress(
     userid
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **userid** | [**string**] | The user ID. | defaults to undefined|
-
-
-### Return type
-
-**TaskProgressResponseWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -168,6 +174,24 @@ const { status, data } = await apiInstance.getRemoveProgress(
 > BooleanWrapper necessaryReassign()
 
 Checks if the reassignment of rooms and shared files is necessary or not.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/necessary-reassign/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **userId** | [**string**] | The user ID. | (optional) defaults to undefined|
+| **type** | **EmployeeType** | The expected user type. | (optional) defaults to undefined|
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -189,22 +213,6 @@ const { status, data } = await apiInstance.necessaryReassign(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **userId** | [**string**] | The user ID. | (optional) defaults to undefined|
-| **type** | **EmployeeType** | The expected user type. | (optional) defaults to undefined|
-
-
-### Return type
-
-**BooleanWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -224,6 +232,20 @@ const { status, data } = await apiInstance.necessaryReassign(
 
 Sends the instructions for deleting a user profile.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-instructions-to-delete/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**StringWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -237,18 +259,6 @@ const apiInstance = new PeopleUserDataApi(configuration);
 
 const { status, data } = await apiInstance.sendInstructionsToDelete();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**StringWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -270,6 +280,20 @@ This endpoint does not have any parameters.
 
 Starts deleting the personal folder.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-delete-personal-folder/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**TaskProgressResponseWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -283,18 +307,6 @@ const apiInstance = new PeopleUserDataApi(configuration);
 
 const { status, data } = await apiInstance.startDeletePersonalFolder();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**TaskProgressResponseWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -316,6 +328,23 @@ This endpoint does not have any parameters.
 
 Starts the data reassignment for the user with the ID specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-reassign/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **startReassignRequestDto** | **StartReassignRequestDto**|  | |
+
+
+### Return type
+
+**TaskProgressResponseWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -334,21 +363,6 @@ const { status, data } = await apiInstance.startReassign(
     startReassignRequestDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **startReassignRequestDto** | **StartReassignRequestDto**|  | |
-
-
-### Return type
-
-**TaskProgressResponseWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -370,6 +384,23 @@ const { status, data } = await apiInstance.startReassign(
 
 Starts the data deletion for the user with the ID specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-remove/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **terminateRequestDto** | **TerminateRequestDto**|  | |
+
+
+### Return type
+
+**TaskProgressResponseWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -388,21 +419,6 @@ const { status, data } = await apiInstance.startRemove(
     terminateRequestDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **terminateRequestDto** | **TerminateRequestDto**|  | |
-
-
-### Return type
-
-**TaskProgressResponseWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -426,6 +442,23 @@ const { status, data } = await apiInstance.startRemove(
 
 Terminates the data reassignment for the user with the ID specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-reassign/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **terminateRequestDto** | **TerminateRequestDto**|  | |
+
+
+### Return type
+
+**TaskProgressResponseWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -444,21 +477,6 @@ const { status, data } = await apiInstance.terminateReassign(
     terminateRequestDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **terminateRequestDto** | **TerminateRequestDto**|  | |
-
-
-### Return type
-
-**TaskProgressResponseWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -479,6 +497,23 @@ const { status, data } = await apiInstance.terminateReassign(
 
 Terminates the data deletion for the user with the ID specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-remove/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **terminateRequestDto** | **TerminateRequestDto**|  | |
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -497,21 +532,6 @@ const { status, data } = await apiInstance.terminateRemove(
     terminateRequestDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **terminateRequestDto** | **TerminateRequestDto**|  | |
-
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

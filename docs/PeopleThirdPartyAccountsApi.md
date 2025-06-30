@@ -14,6 +14,26 @@ All URIs are relative to *http://localhost:8092*
 
 Returns a list of the available third-party accounts.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-third-party-auth-providers/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **inviteView** | [**boolean**] | Specifies whether to return providers that are available for invitation links, i.e. the user can login or register through these providers. | (optional) defaults to undefined|
+| **settingsView** | [**boolean**] | Specifies whether to display the provider settings in a pop-up window (true) or redirect them to the desktop application (false). | (optional) defaults to undefined|
+| **clientCallback** | [**string**] | The method that is called after authentication. | (optional) defaults to undefined|
+| **fromOnly** | [**string**] | The provider name if a response is required only from this provider. | (optional) defaults to undefined|
+
+
+### Return type
+
+**AccountInfoArrayWrapper**
+
+### Authorization
+
+No authorization required
+
 ### Example
 
 ```typescript
@@ -38,24 +58,6 @@ const { status, data } = await apiInstance.getThirdPartyAuthProviders(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **inviteView** | [**boolean**] | Specifies whether to return providers that are available for invitation links, i.e. the user can login or register through these providers. | (optional) defaults to undefined|
-| **settingsView** | [**boolean**] | Specifies whether to display the provider settings in a pop-up window (true) or redirect them to the desktop application (false). | (optional) defaults to undefined|
-| **clientCallback** | [**string**] | The method that is called after authentication. | (optional) defaults to undefined|
-| **fromOnly** | [**string**] | The provider name if a response is required only from this provider. | (optional) defaults to undefined|
-
-
-### Return type
-
-**AccountInfoArrayWrapper**
-
-### Authorization
-
-No authorization required
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -73,6 +75,23 @@ No authorization required
 > linkThirdPartyAccount()
 
 Links a third-party account specified in the request to the user profile.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/link-third-party-account/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **linkAccountRequestDto** | **LinkAccountRequestDto**|  | |
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -92,21 +111,6 @@ const { status, data } = await apiInstance.linkThirdPartyAccount(
     linkAccountRequestDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **linkAccountRequestDto** | **LinkAccountRequestDto**|  | |
-
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -128,6 +132,23 @@ void (empty response body)
 
 Creates a third-party account with the parameters specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/signup-third-party-account/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **signupAccountRequestDto** | **SignupAccountRequestDto**|  | |
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
 ### Example
 
 ```typescript
@@ -146,21 +167,6 @@ const { status, data } = await apiInstance.signupThirdPartyAccount(
     signupAccountRequestDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **signupAccountRequestDto** | **SignupAccountRequestDto**|  | |
-
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-No authorization required
 
 ### HTTP request headers
 
@@ -182,6 +188,23 @@ No authorization required
 
 Unlinks a third-party account specified in the request from the user profile.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/unlink-third-party-account/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **provider** | [**string**] | The provider name. | (optional) defaults to undefined|
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -199,21 +222,6 @@ const { status, data } = await apiInstance.unlinkThirdPartyAccount(
     provider
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **provider** | [**string**] | The provider name. | (optional) defaults to undefined|
-
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

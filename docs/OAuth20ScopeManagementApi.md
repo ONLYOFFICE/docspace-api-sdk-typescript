@@ -11,6 +11,20 @@ All URIs are relative to *http://localhost:8092*
 
 Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the \'openid\' scope always appearing first.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-scopes/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**ScopeResponse**
+
+### Authorization
+
+[asc_auth_key](../README.md#asc_auth_key)
+
 ### Example
 
 ```typescript
@@ -24,18 +38,6 @@ const apiInstance = new OAuth20ScopeManagementApi(configuration);
 
 const { status, data } = await apiInstance.getScopes();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**ScopeResponse**
-
-### Authorization
-
-[asc_auth_key](../README.md#asc_auth_key)
 
 ### HTTP request headers
 

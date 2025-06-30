@@ -13,6 +13,20 @@ All URIs are relative to *http://localhost:8092*
 
 Returns the storage encryption progress.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-storage-encryption-progress/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**DoubleWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -26,18 +40,6 @@ const apiInstance = new SettingsEncryptionApi(configuration);
 
 const { status, data } = await apiInstance.getStorageEncryptionProgress();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**DoubleWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -59,6 +61,20 @@ This endpoint does not have any parameters.
 
 Returns the storage encryption settings.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-storage-encryption-settings/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**EncryptionSettingsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -72,18 +88,6 @@ const apiInstance = new SettingsEncryptionApi(configuration);
 
 const { status, data } = await apiInstance.getStorageEncryptionSettings();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**EncryptionSettingsWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -106,6 +110,23 @@ This endpoint does not have any parameters.
 
 Starts the storage encryption process.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-storage-encryption/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **storageEncryptionRequestsDto** | **StorageEncryptionRequestsDto**|  | |
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -124,21 +145,6 @@ const { status, data } = await apiInstance.startStorageEncryption(
     storageEncryptionRequestsDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **storageEncryptionRequestsDto** | **StorageEncryptionRequestsDto**|  | |
-
-
-### Return type
-
-**BooleanWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

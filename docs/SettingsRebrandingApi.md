@@ -27,6 +27,20 @@ All URIs are relative to *http://localhost:8092*
 
 Deletes the additional white label settings.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-additional-white-label-settings/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**AdditionalWhiteLabelSettingsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -40,18 +54,6 @@ const apiInstance = new SettingsRebrandingApi(configuration);
 
 const { status, data } = await apiInstance.deleteAdditionalWhiteLabelSettings();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**AdditionalWhiteLabelSettingsWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -73,6 +75,20 @@ This endpoint does not have any parameters.
 
 Deletes the company white label settings.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-company-white-label-settings/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**CompanyWhiteLabelSettingsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -86,18 +102,6 @@ const apiInstance = new SettingsRebrandingApi(configuration);
 
 const { status, data } = await apiInstance.deleteCompanyWhiteLabelSettings();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**CompanyWhiteLabelSettingsWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -119,6 +123,20 @@ This endpoint does not have any parameters.
 
 Returns the additional white label settings.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-additional-white-label-settings/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**AdditionalWhiteLabelSettingsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -132,18 +150,6 @@ const apiInstance = new SettingsRebrandingApi(configuration);
 
 const { status, data } = await apiInstance.getAdditionalWhiteLabelSettings();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**AdditionalWhiteLabelSettingsWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -164,6 +170,20 @@ This endpoint does not have any parameters.
 
 Returns the company white label settings.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-company-white-label-settings/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**CompanyWhiteLabelSettingsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -177,18 +197,6 @@ const apiInstance = new SettingsRebrandingApi(configuration);
 
 const { status, data } = await apiInstance.getCompanyWhiteLabelSettings();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**CompanyWhiteLabelSettingsWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -209,6 +217,20 @@ This endpoint does not have any parameters.
 
 Checks if the white label is enabled or not.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-enable-whitelabel/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -222,18 +244,6 @@ const apiInstance = new SettingsRebrandingApi(configuration);
 
 const { status, data } = await apiInstance.getEnableWhitelabel();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**BooleanWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -253,6 +263,24 @@ This endpoint does not have any parameters.
 > IsDefaultWhiteLabelLogosWrapper getIsDefaultWhiteLabelLogoText()
 
 Specifies if the white label logo text are default or not.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-default-white-label-logo-text/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **isDark** | [**boolean**] | Specifies if the white label logo is for the dark theme or not. | (optional) defaults to undefined|
+| **isDefault** | [**boolean**] | Specifies if the logo is for a default tenant or not. | (optional) defaults to undefined|
+
+
+### Return type
+
+**IsDefaultWhiteLabelLogosWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -274,22 +302,6 @@ const { status, data } = await apiInstance.getIsDefaultWhiteLabelLogoText(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **isDark** | [**boolean**] | Specifies if the white label logo is for the dark theme or not. | (optional) defaults to undefined|
-| **isDefault** | [**boolean**] | Specifies if the logo is for a default tenant or not. | (optional) defaults to undefined|
-
-
-### Return type
-
-**IsDefaultWhiteLabelLogosWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -308,6 +320,24 @@ const { status, data } = await apiInstance.getIsDefaultWhiteLabelLogoText(
 > IsDefaultWhiteLabelLogosArrayWrapper getIsDefaultWhiteLabelLogos()
 
 Specifies if the white label logos are default or not.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-default-white-label-logos/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **isDark** | [**boolean**] | Specifies if the white label logo is for the dark theme or not. | (optional) defaults to undefined|
+| **isDefault** | [**boolean**] | Specifies if the logo is for a default tenant or not. | (optional) defaults to undefined|
+
+
+### Return type
+
+**IsDefaultWhiteLabelLogosArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -329,22 +359,6 @@ const { status, data } = await apiInstance.getIsDefaultWhiteLabelLogos(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **isDark** | [**boolean**] | Specifies if the white label logo is for the dark theme or not. | (optional) defaults to undefined|
-| **isDefault** | [**boolean**] | Specifies if the logo is for a default tenant or not. | (optional) defaults to undefined|
-
-
-### Return type
-
-**IsDefaultWhiteLabelLogosArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -364,6 +378,20 @@ const { status, data } = await apiInstance.getIsDefaultWhiteLabelLogos(
 
 Returns the licensor data.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-licensor-data/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**CompanyWhiteLabelSettingsArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -377,18 +405,6 @@ const apiInstance = new SettingsRebrandingApi(configuration);
 
 const { status, data } = await apiInstance.getLicensorData();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**CompanyWhiteLabelSettingsArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -408,6 +424,24 @@ This endpoint does not have any parameters.
 > StringWrapper getWhiteLabelLogoText()
 
 Returns the white label logo text.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-white-label-logo-text/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **isDark** | [**boolean**] | Specifies if the white label logo is for the dark theme or not. | (optional) defaults to undefined|
+| **isDefault** | [**boolean**] | Specifies if the logo is for a default tenant or not. | (optional) defaults to undefined|
+
+
+### Return type
+
+**StringWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -429,22 +463,6 @@ const { status, data } = await apiInstance.getWhiteLabelLogoText(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **isDark** | [**boolean**] | Specifies if the white label logo is for the dark theme or not. | (optional) defaults to undefined|
-| **isDefault** | [**boolean**] | Specifies if the logo is for a default tenant or not. | (optional) defaults to undefined|
-
-
-### Return type
-
-**StringWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -463,6 +481,24 @@ const { status, data } = await apiInstance.getWhiteLabelLogoText(
 > WhiteLabelItemArrayWrapper getWhiteLabelLogos()
 
 Returns the white label logos.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-white-label-logos/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **isDark** | [**boolean**] | Specifies if the white label logo is for the dark theme or not. | (optional) defaults to undefined|
+| **isDefault** | [**boolean**] | Specifies if the logo is for a default tenant or not. | (optional) defaults to undefined|
+
+
+### Return type
+
+**WhiteLabelItemArrayWrapper**
+
+### Authorization
+
+No authorization required
 
 ### Example
 
@@ -484,22 +520,6 @@ const { status, data } = await apiInstance.getWhiteLabelLogos(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **isDark** | [**boolean**] | Specifies if the white label logo is for the dark theme or not. | (optional) defaults to undefined|
-| **isDefault** | [**boolean**] | Specifies if the logo is for a default tenant or not. | (optional) defaults to undefined|
-
-
-### Return type
-
-**WhiteLabelItemArrayWrapper**
-
-### Authorization
-
-No authorization required
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -517,6 +537,24 @@ No authorization required
 > BooleanWrapper restoreWhiteLabelLogoText()
 
 Restores the white label logo text.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/restore-white-label-logo-text/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **isDark** | [**boolean**] | Specifies if the white label logo is for the dark theme or not. | (optional) defaults to undefined|
+| **isDefault** | [**boolean**] | Specifies if the logo is for a default tenant or not. | (optional) defaults to undefined|
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -538,22 +576,6 @@ const { status, data } = await apiInstance.restoreWhiteLabelLogoText(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **isDark** | [**boolean**] | Specifies if the white label logo is for the dark theme or not. | (optional) defaults to undefined|
-| **isDefault** | [**boolean**] | Specifies if the logo is for a default tenant or not. | (optional) defaults to undefined|
-
-
-### Return type
-
-**BooleanWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -573,6 +595,24 @@ const { status, data } = await apiInstance.restoreWhiteLabelLogoText(
 > BooleanWrapper restoreWhiteLabelLogos()
 
 Restores the white label logos.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/restore-white-label-logos/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **isDark** | [**boolean**] | Specifies if the white label logo is for the dark theme or not. | (optional) defaults to undefined|
+| **isDefault** | [**boolean**] | Specifies if the logo is for a default tenant or not. | (optional) defaults to undefined|
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -594,22 +634,6 @@ const { status, data } = await apiInstance.restoreWhiteLabelLogos(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **isDark** | [**boolean**] | Specifies if the white label logo is for the dark theme or not. | (optional) defaults to undefined|
-| **isDefault** | [**boolean**] | Specifies if the logo is for a default tenant or not. | (optional) defaults to undefined|
-
-
-### Return type
-
-**BooleanWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -630,6 +654,23 @@ const { status, data } = await apiInstance.restoreWhiteLabelLogos(
 
 Saves the additional white label settings specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-additional-white-label-settings/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **additionalWhiteLabelSettingsWrapper** | **AdditionalWhiteLabelSettingsWrapper**|  | |
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -648,21 +689,6 @@ const { status, data } = await apiInstance.saveAdditionalWhiteLabelSettings(
     additionalWhiteLabelSettingsWrapper
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **additionalWhiteLabelSettingsWrapper** | **AdditionalWhiteLabelSettingsWrapper**|  | |
-
-
-### Return type
-
-**BooleanWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -685,6 +711,23 @@ const { status, data } = await apiInstance.saveAdditionalWhiteLabelSettings(
 
 Saves the company white label settings specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-company-white-label-settings/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **companyWhiteLabelSettingsWrapper** | **CompanyWhiteLabelSettingsWrapper**|  | |
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -703,21 +746,6 @@ const { status, data } = await apiInstance.saveCompanyWhiteLabelSettings(
     companyWhiteLabelSettingsWrapper
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **companyWhiteLabelSettingsWrapper** | **CompanyWhiteLabelSettingsWrapper**|  | |
-
-
-### Return type
-
-**BooleanWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -739,6 +767,25 @@ const { status, data } = await apiInstance.saveCompanyWhiteLabelSettings(
 > BooleanWrapper saveWhiteLabelLogoText()
 
 Saves the white label logo text specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-white-label-logo-text/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **whiteLabelRequestsDto** | **WhiteLabelRequestsDto**|  | |
+| **isDark** | [**boolean**] | Specifies if the white label logo is for the dark theme or not. | (optional) defaults to undefined|
+| **isDefault** | [**boolean**] | Specifies if the logo is for a default tenant or not. | (optional) defaults to undefined|
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -763,23 +810,6 @@ const { status, data } = await apiInstance.saveWhiteLabelLogoText(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **whiteLabelRequestsDto** | **WhiteLabelRequestsDto**|  | |
-| **isDark** | [**boolean**] | Specifies if the white label logo is for the dark theme or not. | (optional) defaults to undefined|
-| **isDefault** | [**boolean**] | Specifies if the logo is for a default tenant or not. | (optional) defaults to undefined|
-
-
-### Return type
-
-**BooleanWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -799,6 +829,25 @@ const { status, data } = await apiInstance.saveWhiteLabelLogoText(
 > BooleanWrapper saveWhiteLabelSettings()
 
 Saves the white label logos specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-white-label-settings/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **whiteLabelRequestsDto** | **WhiteLabelRequestsDto**|  | |
+| **isDark** | [**boolean**] | Specifies if the white label logo is for the dark theme or not. | (optional) defaults to undefined|
+| **isDefault** | [**boolean**] | Specifies if the logo is for a default tenant or not. | (optional) defaults to undefined|
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -823,23 +872,6 @@ const { status, data } = await apiInstance.saveWhiteLabelSettings(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **whiteLabelRequestsDto** | **WhiteLabelRequestsDto**|  | |
-| **isDark** | [**boolean**] | Specifies if the white label logo is for the dark theme or not. | (optional) defaults to undefined|
-| **isDefault** | [**boolean**] | Specifies if the logo is for a default tenant or not. | (optional) defaults to undefined|
-
-
-### Return type
-
-**BooleanWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -860,6 +892,24 @@ const { status, data } = await apiInstance.saveWhiteLabelSettings(
 
 Saves the white label logos from files.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-white-label-settings-from-files/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **isDark** | [**boolean**] | Specifies if the white label logo is for the dark theme or not. | (optional) defaults to undefined|
+| **isDefault** | [**boolean**] | Specifies if the logo is for a default tenant or not. | (optional) defaults to undefined|
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -879,22 +929,6 @@ const { status, data } = await apiInstance.saveWhiteLabelSettingsFromFiles(
     isDefault
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **isDark** | [**boolean**] | Specifies if the white label logo is for the dark theme or not. | (optional) defaults to undefined|
-| **isDefault** | [**boolean**] | Specifies if the logo is for a default tenant or not. | (optional) defaults to undefined|
-
-
-### Return type
-
-**BooleanWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

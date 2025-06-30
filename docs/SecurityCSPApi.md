@@ -12,6 +12,23 @@ All URIs are relative to *http://localhost:8092*
 
 Configures the CSP (Content Security Policy) settings for the current portal.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/configure-csp/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **cspRequestsDto** | **CspRequestsDto**|  | |
+
+
+### Return type
+
+**CspWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -30,21 +47,6 @@ const { status, data } = await apiInstance.configureCsp(
     cspRequestsDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **cspRequestsDto** | **CspRequestsDto**|  | |
-
-
-### Return type
-
-**CspWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -66,6 +68,20 @@ const { status, data } = await apiInstance.configureCsp(
 
 Returns the CSP (Content Security Policy) settings for the current portal.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-csp-settings/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**CspWrapper**
+
+### Authorization
+
+No authorization required
+
 ### Example
 
 ```typescript
@@ -79,18 +95,6 @@ const apiInstance = new SecurityCSPApi(configuration);
 
 const { status, data } = await apiInstance.getCspSettings();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**CspWrapper**
-
-### Authorization
-
-No authorization required
 
 ### HTTP request headers
 

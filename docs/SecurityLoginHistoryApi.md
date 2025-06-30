@@ -13,6 +13,20 @@ All URIs are relative to *http://localhost:8092*
 
 Generates the login history report.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-login-history-report/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**StringWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -26,18 +40,6 @@ const apiInstance = new SecurityLoginHistoryApi(configuration);
 
 const { status, data } = await apiInstance.createLoginHistoryReport();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**StringWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -59,6 +61,20 @@ This endpoint does not have any parameters.
 
 Returns all the latest user login activity, including successful logins and error logs.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-last-login-events/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**LoginEventArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -72,18 +88,6 @@ const apiInstance = new SecurityLoginHistoryApi(configuration);
 
 const { status, data } = await apiInstance.getLastLoginEvents();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**LoginEventArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -104,6 +108,28 @@ This endpoint does not have any parameters.
 > LoginEventArrayWrapper getLoginEventsByFilter()
 
 Returns a list of the login events by the parameters specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-login-events-by-filter/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **userId** | [**string**] | The ID of the user whose login events are being queried. | (optional) defaults to undefined|
+| **action** | **MessageAction** | The login-related action to filter events by. | (optional) defaults to undefined|
+| **from** | **ApiDateTime** | The starting date and time for filtering login events. | (optional) defaults to undefined|
+| **to** | **ApiDateTime** | The ending date and time for filtering login events. | (optional) defaults to undefined|
+| **count** | [**number**] | The number of login events to retrieve in the query. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting index for fetching a subset of login events from the query results. | (optional) defaults to undefined|
+
+
+### Return type
+
+**LoginEventArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -134,26 +160,6 @@ const { status, data } = await apiInstance.getLoginEventsByFilter(
     startIndex
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **userId** | [**string**] | The ID of the user whose login events are being queried. | (optional) defaults to undefined|
-| **action** | **MessageAction** | The login-related action to filter events by. | (optional) defaults to undefined|
-| **from** | **ApiDateTime** | The starting date and time for filtering login events. | (optional) defaults to undefined|
-| **to** | **ApiDateTime** | The ending date and time for filtering login events. | (optional) defaults to undefined|
-| **count** | [**number**] | The number of login events to retrieve in the query. | (optional) defaults to undefined|
-| **startIndex** | [**number**] | The starting index for fetching a subset of login events from the query results. | (optional) defaults to undefined|
-
-
-### Return type
-
-**LoginEventArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

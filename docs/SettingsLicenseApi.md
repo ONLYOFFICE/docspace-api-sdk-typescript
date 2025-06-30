@@ -14,6 +14,20 @@ All URIs are relative to *http://localhost:8092*
 
 Activates a license for the portal.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/accept-license/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**StringWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -27,18 +41,6 @@ const apiInstance = new SettingsLicenseApi(configuration);
 
 const { status, data } = await apiInstance.acceptLicense();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**StringWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -59,6 +61,20 @@ This endpoint does not have any parameters.
 
 Requests a portal license if necessary.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-license-required/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+No authorization required
+
 ### Example
 
 ```typescript
@@ -72,18 +88,6 @@ const apiInstance = new SettingsLicenseApi(configuration);
 
 const { status, data } = await apiInstance.getIsLicenseRequired();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**BooleanWrapper**
-
-### Authorization
-
-No authorization required
 
 ### HTTP request headers
 
@@ -103,6 +107,20 @@ No authorization required
 
 Refreshes the portal license.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/refresh-license/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -116,18 +134,6 @@ const apiInstance = new SettingsLicenseApi(configuration);
 
 const { status, data } = await apiInstance.refreshLicense();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**BooleanWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -148,6 +154,23 @@ This endpoint does not have any parameters.
 
 Uploads a portal license specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-license/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **files** | **Array&lt;File&gt;** | The list of license files to be uploaded. | defaults to undefined|
+
+
+### Return type
+
+**StringWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -165,21 +188,6 @@ const { status, data } = await apiInstance.uploadLicense(
     files
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **files** | **Array&lt;File&gt;** | The list of license files to be uploaded. | defaults to undefined|
-
-
-### Return type
-
-**StringWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

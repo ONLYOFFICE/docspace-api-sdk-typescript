@@ -15,6 +15,20 @@ All URIs are relative to *http://localhost:8092*
 
 Returns the status of the SMTP testing process.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-smtp-operation-status/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**SmtpOperationStatusRequestsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -28,18 +42,6 @@ const apiInstance = new SecuritySMTPSettingsApi(configuration);
 
 const { status, data } = await apiInstance.getSmtpOperationStatus();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**SmtpOperationStatusRequestsWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -61,6 +63,20 @@ This endpoint does not have any parameters.
 
 Returns the current portal SMTP settings.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-smtp-settings/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**SmtpSettingsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -74,18 +90,6 @@ const apiInstance = new SecuritySMTPSettingsApi(configuration);
 
 const { status, data } = await apiInstance.getSmtpSettings();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**SmtpSettingsWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -107,6 +111,20 @@ This endpoint does not have any parameters.
 
 Resets the SMTP settings of the current portal.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-smtp-settings/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**SmtpSettingsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -120,18 +138,6 @@ const apiInstance = new SecuritySMTPSettingsApi(configuration);
 
 const { status, data } = await apiInstance.resetSmtpSettings();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**SmtpSettingsWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -153,6 +159,23 @@ This endpoint does not have any parameters.
 
 Saves the SMTP settings for the current portal.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-smtp-settings/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **smtpSettingsDto** | **SmtpSettingsDto**|  | |
+
+
+### Return type
+
+**SmtpSettingsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -171,21 +194,6 @@ const { status, data } = await apiInstance.saveSmtpSettings(
     smtpSettingsDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **smtpSettingsDto** | **SmtpSettingsDto**|  | |
-
-
-### Return type
-
-**SmtpSettingsWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -207,6 +215,20 @@ const { status, data } = await apiInstance.saveSmtpSettings(
 
 Tests the SMTP settings for the current portal (sends test message to the user email).
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/test-smtp-settings/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**SmtpOperationStatusRequestsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -220,18 +242,6 @@ const apiInstance = new SecuritySMTPSettingsApi(configuration);
 
 const { status, data } = await apiInstance.testSmtpSettings();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**SmtpOperationStatusRequestsWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

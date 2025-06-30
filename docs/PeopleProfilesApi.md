@@ -24,6 +24,23 @@ All URIs are relative to *http://localhost:8092*
 
 Adds a new portal user with the first name, last name, email address, and several optional parameters specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/add-member/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **memberRequestDto** | **MemberRequestDto**|  | |
+
+
+### Return type
+
+**EmployeeFullWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -42,21 +59,6 @@ const { status, data } = await apiInstance.addMember(
     memberRequestDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **memberRequestDto** | **MemberRequestDto**|  | |
-
-
-### Return type
-
-**EmployeeFullWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -78,6 +80,23 @@ const { status, data } = await apiInstance.addMember(
 
 Deletes a user with the ID specified in the request from the portal.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-member/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **userid** | [**string**] | The user ID. | defaults to undefined|
+
+
+### Return type
+
+**EmployeeFullWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -95,21 +114,6 @@ const { status, data } = await apiInstance.deleteMember(
     userid
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **userid** | [**string**] | The user ID. | defaults to undefined|
-
-
-### Return type
-
-**EmployeeFullWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -133,6 +137,20 @@ const { status, data } = await apiInstance.deleteMember(
 
 Deletes the current user profile.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-profile/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**EmployeeFullWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -146,18 +164,6 @@ const apiInstance = new PeopleProfilesApi(configuration);
 
 const { status, data } = await apiInstance.deleteProfile();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**EmployeeFullWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -179,6 +185,29 @@ This endpoint does not have any parameters.
 > EmployeeFullArrayWrapper getAllProfiles()
 
 Returns a list of profiles for all the portal users.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-profiles/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **count** | [**number**] | The maximum number of items to be retrieved in the response. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The zero-based index of the first item to be retrieved in a filtered result set. | (optional) defaults to undefined|
+| **filterBy** | [**string**] | Specifies the filter criteria for user-related queries. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | Specifies the property or field name by which the results should be sorted. | (optional) defaults to undefined|
+| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
+| **filterSeparator** | [**string**] | The character or string used to separate multiple filter values in a filtering query. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The text value used as an additional filter criterion for profiles retrieval. | (optional) defaults to undefined|
+
+
+### Return type
+
+**EmployeeFullArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -210,27 +239,6 @@ const { status, data } = await apiInstance.getAllProfiles(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **count** | [**number**] | The maximum number of items to be retrieved in the response. | (optional) defaults to undefined|
-| **startIndex** | [**number**] | The zero-based index of the first item to be retrieved in a filtered result set. | (optional) defaults to undefined|
-| **filterBy** | [**string**] | Specifies the filter criteria for user-related queries. | (optional) defaults to undefined|
-| **sortBy** | [**string**] | Specifies the property or field name by which the results should be sorted. | (optional) defaults to undefined|
-| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
-| **filterSeparator** | [**string**] | The character or string used to separate multiple filter values in a filtering query. | (optional) defaults to undefined|
-| **filterValue** | [**string**] | The text value used as an additional filter criterion for profiles retrieval. | (optional) defaults to undefined|
-
-
-### Return type
-
-**EmployeeFullArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -250,6 +258,20 @@ const { status, data } = await apiInstance.getAllProfiles(
 
 Returns the user claims.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-claims/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**ObjectWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -263,18 +285,6 @@ const apiInstance = new PeopleProfilesApi(configuration);
 
 const { status, data } = await apiInstance.getClaims();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**ObjectWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -294,6 +304,24 @@ This endpoint does not have any parameters.
 > EmployeeFullWrapper getProfileByEmail()
 
 Returns the detailed information about a profile of the user with the email specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-profile-by-email/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **email** | [**string**] | The user email address. | (optional) defaults to undefined|
+| **culture** | [**string**] | Culture | (optional) defaults to undefined|
+
+
+### Return type
+
+**EmployeeFullWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -315,22 +343,6 @@ const { status, data } = await apiInstance.getProfileByEmail(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **email** | [**string**] | The user email address. | (optional) defaults to undefined|
-| **culture** | [**string**] | Culture | (optional) defaults to undefined|
-
-
-### Return type
-
-**EmployeeFullWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -351,6 +363,23 @@ const { status, data } = await apiInstance.getProfileByEmail(
 
 Returns the detailed information about a profile of the user with the name specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-profile-by-user-id/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **userid** | [**string**] | The user ID. | defaults to undefined|
+
+
+### Return type
+
+**EmployeeFullWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -368,21 +397,6 @@ const { status, data } = await apiInstance.getProfileByUserId(
     userid
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **userid** | [**string**] | The user ID. | defaults to undefined|
-
-
-### Return type
-
-**EmployeeFullWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -405,6 +419,20 @@ const { status, data } = await apiInstance.getProfileByUserId(
 
 Returns the detailed information about the current user profile.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-self-profile/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**EmployeeFullWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -418,18 +446,6 @@ const apiInstance = new PeopleProfilesApi(configuration);
 
 const { status, data } = await apiInstance.getSelfProfile();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**EmployeeFullWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -450,6 +466,23 @@ This endpoint does not have any parameters.
 
 Invites users specified in the request to the current portal.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/invite-users/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **inviteUsersRequestDto** | **InviteUsersRequestDto**|  | |
+
+
+### Return type
+
+**EmployeeArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -468,21 +501,6 @@ const { status, data } = await apiInstance.inviteUsers(
     inviteUsersRequestDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **inviteUsersRequestDto** | **InviteUsersRequestDto**|  | |
-
-
-### Return type
-
-**EmployeeArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -504,6 +522,23 @@ const { status, data } = await apiInstance.inviteUsers(
 
 Deletes a list of the users with the IDs specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/remove-users/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **updateMembersRequestDto** | **UpdateMembersRequestDto**|  | |
+
+
+### Return type
+
+**EmployeeFullArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -522,21 +557,6 @@ const { status, data } = await apiInstance.removeUsers(
     updateMembersRequestDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **updateMembersRequestDto** | **UpdateMembersRequestDto**|  | |
-
-
-### Return type
-
-**EmployeeFullArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -558,6 +578,23 @@ const { status, data } = await apiInstance.removeUsers(
 
 Resends emails to the users who have not activated their emails.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/resend-user-invites/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **updateMembersRequestDto** | **UpdateMembersRequestDto**|  | |
+
+
+### Return type
+
+**EmployeeFullArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -576,21 +613,6 @@ const { status, data } = await apiInstance.resendUserInvites(
     updateMembersRequestDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **updateMembersRequestDto** | **UpdateMembersRequestDto**|  | |
-
-
-### Return type
-
-**EmployeeFullArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -612,6 +634,23 @@ const { status, data } = await apiInstance.resendUserInvites(
 
 Sends a message to the user email with the instructions to change the email address connected to the portal.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-email-change-instructions/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **updateMemberRequestDto** | **UpdateMemberRequestDto**|  | |
+
+
+### Return type
+
+**StringWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -630,21 +669,6 @@ const { status, data } = await apiInstance.sendEmailChangeInstructions(
     updateMemberRequestDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **updateMemberRequestDto** | **UpdateMemberRequestDto**|  | |
-
-
-### Return type
-
-**StringWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -668,6 +692,24 @@ const { status, data } = await apiInstance.sendEmailChangeInstructions(
 
 Updates the data for the selected portal user with the first name, last name, email address, and/or optional parameters specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-member/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **updateMemberRequestDto** | **UpdateMemberRequestDto**| The request parameters for updating the user information. | |
+| **userid** | [**string**] | The user ID. | defaults to undefined|
+
+
+### Return type
+
+**EmployeeFullWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -688,22 +730,6 @@ const { status, data } = await apiInstance.updateMember(
     updateMemberRequestDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **updateMemberRequestDto** | **UpdateMemberRequestDto**| The request parameters for updating the user information. | |
-| **userid** | [**string**] | The user ID. | defaults to undefined|
-
-
-### Return type
-
-**EmployeeFullWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -727,6 +753,24 @@ const { status, data } = await apiInstance.updateMember(
 
 Updates the user culture code with the parameters specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-member-culture/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **culture** | **Culture**| The culture code parameters. | |
+| **userid** | [**string**] | The user ID. | defaults to undefined|
+
+
+### Return type
+
+**EmployeeFullWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -747,22 +791,6 @@ const { status, data } = await apiInstance.updateMemberCulture(
     culture
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **culture** | **Culture**| The culture code parameters. | |
-| **userid** | [**string**] | The user ID. | defaults to undefined|
-
-
-### Return type
-
-**EmployeeFullWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

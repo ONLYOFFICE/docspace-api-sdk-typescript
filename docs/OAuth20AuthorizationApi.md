@@ -13,6 +13,26 @@ All URIs are relative to *http://localhost:8092*
 
 Initiates the OAuth2 authorization flow.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/authorize-oauth/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **responseType** | [**string**] | The OAuth 2.0 response type, must be \&#39;code\&#39; for authorization code flow. | defaults to undefined|
+| **clientId** | [**string**] | The client identifier issued to the client during registration. | defaults to undefined|
+| **redirectUri** | [**string**] | The URL to redirect to after authorization is complete. | defaults to undefined|
+| **scope** | [**string**] | The space-separated list of requested scope permissions. | defaults to undefined|
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[asc_auth_key](../README.md#asc_auth_key)
+
 ### Example
 
 ```typescript
@@ -37,24 +57,6 @@ const { status, data } = await apiInstance.authorizeOAuth(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **responseType** | [**string**] | The OAuth 2.0 response type, must be \&#39;code\&#39; for authorization code flow. | defaults to undefined|
-| **clientId** | [**string**] | The client identifier issued to the client during registration. | defaults to undefined|
-| **redirectUri** | [**string**] | The URL to redirect to after authorization is complete. | defaults to undefined|
-| **scope** | [**string**] | The space-separated list of requested scope permissions. | defaults to undefined|
-
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[asc_auth_key](../README.md#asc_auth_key)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -73,6 +75,27 @@ void (empty response body)
 > ExchangeToken200Response exchangeToken()
 
 Exchanges an authorization code specified in the request for the access token.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/exchange-token/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **grantType** | [**string**] | The OAuth2 grant type, must be \\\&#39;authorization_code\\\&#39; for the authorization code flow. | (optional) defaults to undefined|
+| **code** | [**string**] | A temporary authorization code that is sent to the client to be exchanged for a token. | (optional) defaults to undefined|
+| **redirectUri** | [**string**] | The URL where the user will be redirected after successful or unsuccessful authentication. | (optional) defaults to undefined|
+| **clientId** | [**string**] | The client identifier issued to the client during registration. | (optional) defaults to undefined|
+| **clientSecret** | [**string**] | The client secret issued to the client during registration. | (optional) defaults to undefined|
+
+
+### Return type
+
+**ExchangeToken200Response**
+
+### Authorization
+
+No authorization required
 
 ### Example
 
@@ -100,25 +123,6 @@ const { status, data } = await apiInstance.exchangeToken(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **grantType** | [**string**] | The OAuth2 grant type, must be \\\&#39;authorization_code\\\&#39; for the authorization code flow. | (optional) defaults to undefined|
-| **code** | [**string**] | A temporary authorization code that is sent to the client to be exchanged for a token. | (optional) defaults to undefined|
-| **redirectUri** | [**string**] | The URL where the user will be redirected after successful or unsuccessful authentication. | (optional) defaults to undefined|
-| **clientId** | [**string**] | The client identifier issued to the client during registration. | (optional) defaults to undefined|
-| **clientSecret** | [**string**] | The client secret issued to the client during registration. | (optional) defaults to undefined|
-
-
-### Return type
-
-**ExchangeToken200Response**
-
-### Authorization
-
-No authorization required
-
 ### HTTP request headers
 
  - **Content-Type**: application/x-www-form-urlencoded
@@ -137,6 +141,25 @@ No authorization required
 > submitConsent()
 
 Sends a consent request with the specified parameters.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/submit-consent/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **clientId** | [**string**] | The client identifier issued to the client during registration. | (optional) defaults to undefined|
+| **state** | [**string**] | The random string used to solve the CSRF vulnerability problem. | (optional) defaults to undefined|
+| **scope** | [**string**] | The space-separated list of requested scope permissions. | (optional) defaults to undefined|
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[asc_auth_key](../README.md#asc_auth_key)
 
 ### Example
 
@@ -159,23 +182,6 @@ const { status, data } = await apiInstance.submitConsent(
     scope
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **clientId** | [**string**] | The client identifier issued to the client during registration. | (optional) defaults to undefined|
-| **state** | [**string**] | The random string used to solve the CSRF vulnerability problem. | (optional) defaults to undefined|
-| **scope** | [**string**] | The space-separated list of requested scope permissions. | (optional) defaults to undefined|
-
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[asc_auth_key](../README.md#asc_auth_key)
 
 ### HTTP request headers
 

@@ -27,6 +27,23 @@ All URIs are relative to *http://localhost:8092*
 
 Starts the download process of files and folders with the IDs specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/bulk-download/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **downloadRequestDto** | **DownloadRequestDto**|  | |
+
+
+### Return type
+
+**FileOperationArrayWrapper**
+
+### Authorization
+
+No authorization required
+
 ### Example
 
 ```typescript
@@ -46,21 +63,6 @@ const { status, data } = await apiInstance.bulkDownload(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **downloadRequestDto** | **DownloadRequestDto**|  | |
-
-
-### Return type
-
-**FileOperationArrayWrapper**
-
-### Authorization
-
-No authorization required
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -79,6 +81,24 @@ No authorization required
 > ConversationResultArrayWrapper checkConversionStatus()
 
 Checks the conversion status of a file with the ID specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/check-conversion-status/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fileId** | [**number**] | The file ID to check conversion status. | defaults to undefined|
+| **start** | [**boolean**] | Specifies whether a conversion operation is started or not. | (optional) defaults to undefined|
+
+
+### Return type
+
+**ConversationResultArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -100,22 +120,6 @@ const { status, data } = await apiInstance.checkConversionStatus(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID to check conversion status. | defaults to undefined|
-| **start** | [**boolean**] | Specifies whether a conversion operation is started or not. | (optional) defaults to undefined|
-
-
-### Return type
-
-**ConversationResultArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -135,6 +139,23 @@ const { status, data } = await apiInstance.checkConversionStatus(
 
 Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/check-move-or-copy-batch-items/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **inDto** | **BatchRequestDto** | The request parameters for copying/moving files. | (optional) defaults to undefined|
+
+
+### Return type
+
+**FileEntryArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -153,21 +174,6 @@ const { status, data } = await apiInstance.checkMoveOrCopyBatchItems(
     inDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **inDto** | **BatchRequestDto** | The request parameters for copying/moving files. | (optional) defaults to undefined|
-
-
-### Return type
-
-**FileEntryArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -189,6 +195,23 @@ const { status, data } = await apiInstance.checkMoveOrCopyBatchItems(
 
 Checks if files can be moved or copied to the specified folder.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/check-move-or-copy-dest-folder/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **inDto** | **BatchRequestDto** | The request parameters for copying/moving files. | (optional) defaults to undefined|
+
+
+### Return type
+
+**CheckDestFolderWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -207,21 +230,6 @@ const { status, data } = await apiInstance.checkMoveOrCopyDestFolder(
     inDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **inDto** | **BatchRequestDto** | The request parameters for copying/moving files. | (optional) defaults to undefined|
-
-
-### Return type
-
-**CheckDestFolderWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -243,6 +251,23 @@ const { status, data } = await apiInstance.checkMoveOrCopyDestFolder(
 
 Copies all the selected files and folders to the folder with the ID specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/copy-batch-items/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **batchRequestDto** | **BatchRequestDto**|  | |
+
+
+### Return type
+
+**FileOperationArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -261,21 +286,6 @@ const { status, data } = await apiInstance.copyBatchItems(
     batchRequestDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **batchRequestDto** | **BatchRequestDto**|  | |
-
-
-### Return type
-
-**FileOperationArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -296,6 +306,24 @@ const { status, data } = await apiInstance.copyBatchItems(
 > ObjectWrapper createUploadSession()
 
 Creates the session to upload large files in multiple chunks to the folder with the ID specified in the request.   **Note**: Each chunk can have different length but the length should be multiple of <b>512</b> and greater or equal to <b>10 mb</b>. Last chunk can have any size.  After the initial response to the request with the <b>200 OK</b> status, you must get the <em>location</em> field value from the response. Send all your chunks to this location.  Each chunk must be sent in the exact order the chunks appear in the file.  After receiving each chunk, the server will respond with the current information about the upload session if no errors occurred.  When the number of bytes uploaded is equal to the number of bytes you sent in the initial request, the server responds with the <b>201 Created</b> status and sends you information about the uploaded file.  Information about created session which includes:  <ul>  <li><b>id:</b> unique ID of this upload session,</li>  <li><b>created:</b> UTC time when the session was created,</li>  <li><b>expired:</b> UTC time when the session will expire if no chunks are sent before that time,</li>  <li><b>location:</b> URL where you should send your next chunk,</li>  <li><b>bytes_uploaded:</b> number of bytes uploaded for the specific upload ID,</li>  <li><b>bytes_total:</b> total number of bytes which will be uploaded.</li>  </ul>
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **sessionRequest** | **SessionRequest**| The session parameters. | |
+| **folderId** | [**number**] | The folder ID of the session. | defaults to undefined|
+
+
+### Return type
+
+**ObjectWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -318,22 +346,6 @@ const { status, data } = await apiInstance.createUploadSession(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **sessionRequest** | **SessionRequest**| The session parameters. | |
-| **folderId** | [**number**] | The folder ID of the session. | defaults to undefined|
-
-
-### Return type
-
-**ObjectWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -354,6 +366,23 @@ const { status, data } = await apiInstance.createUploadSession(
 
 Deletes the files and folders with the IDs specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-batch-items/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **deleteBatchRequestDto** | **DeleteBatchRequestDto**|  | |
+
+
+### Return type
+
+**FileOperationArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -372,21 +401,6 @@ const { status, data } = await apiInstance.deleteBatchItems(
     deleteBatchRequestDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **deleteBatchRequestDto** | **DeleteBatchRequestDto**|  | |
-
-
-### Return type
-
-**FileOperationArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -408,6 +422,23 @@ const { status, data } = await apiInstance.deleteBatchItems(
 
 Deletes the file versions with the IDs specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-file-versions/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **deleteVersionBatchRequestDto** | **DeleteVersionBatchRequestDto**|  | |
+
+
+### Return type
+
+**FileOperationWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -426,21 +457,6 @@ const { status, data } = await apiInstance.deleteFileVersions(
     deleteVersionBatchRequestDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **deleteVersionBatchRequestDto** | **DeleteVersionBatchRequestDto**|  | |
-
-
-### Return type
-
-**FileOperationWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -461,6 +477,23 @@ const { status, data } = await apiInstance.deleteFileVersions(
 
 Duplicates all the selected files and folders.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/duplicate-batch-items/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **duplicateRequestDto** | **DuplicateRequestDto**|  | |
+
+
+### Return type
+
+**FileOperationArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -479,21 +512,6 @@ const { status, data } = await apiInstance.duplicateBatchItems(
     duplicateRequestDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **duplicateRequestDto** | **DuplicateRequestDto**|  | |
-
-
-### Return type
-
-**FileOperationArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -515,6 +533,23 @@ const { status, data } = await apiInstance.duplicateBatchItems(
 
 Deletes all the files and folders from the \"Trash\" folder.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/empty-trash/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **single** | [**boolean**] | Specifies whether to return only the current operation | (optional) defaults to undefined|
+
+
+### Return type
+
+**FileOperationArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -532,21 +567,6 @@ const { status, data } = await apiInstance.emptyTrash(
     single
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **single** | [**boolean**] | Specifies whether to return only the current operation | (optional) defaults to undefined|
-
-
-### Return type
-
-**FileOperationArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -567,6 +587,23 @@ const { status, data } = await apiInstance.emptyTrash(
 
 Returns a list of all the active file operations.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-operation-statuses/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**string**] | The ID of the file operation. | (optional) defaults to undefined|
+
+
+### Return type
+
+**FileOperationArrayWrapper**
+
+### Authorization
+
+No authorization required
+
 ### Example
 
 ```typescript
@@ -585,21 +622,6 @@ const { status, data } = await apiInstance.getOperationStatuses(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **id** | [**string**] | The ID of the file operation. | (optional) defaults to undefined|
-
-
-### Return type
-
-**FileOperationArrayWrapper**
-
-### Authorization
-
-No authorization required
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -617,6 +639,24 @@ No authorization required
 > FileOperationArrayWrapper getOperationStatusesByType()
 
 Retrieves the statuses of operations filtered by the specified operation type.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-operation-statuses-by-type/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **operationType** | **FileOperationType** | Specifies the type of file operation to be retrieved. | defaults to undefined|
+| **id** | [**string**] | The ID of the file operation. | (optional) defaults to undefined|
+
+
+### Return type
+
+**FileOperationArrayWrapper**
+
+### Authorization
+
+No authorization required
 
 ### Example
 
@@ -638,22 +678,6 @@ const { status, data } = await apiInstance.getOperationStatusesByType(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **operationType** | **FileOperationType** | Specifies the type of file operation to be retrieved. | defaults to undefined|
-| **id** | [**string**] | The ID of the file operation. | (optional) defaults to undefined|
-
-
-### Return type
-
-**FileOperationArrayWrapper**
-
-### Authorization
-
-No authorization required
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -671,6 +695,23 @@ No authorization required
 > FileOperationArrayWrapper markAsRead()
 
 Marks the files and folders with the IDs specified in the request as read.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/mark-as-read/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **baseBatchRequestDto** | **BaseBatchRequestDto**|  | |
+
+
+### Return type
+
+**FileOperationArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -691,21 +732,6 @@ const { status, data } = await apiInstance.markAsRead(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **baseBatchRequestDto** | **BaseBatchRequestDto**|  | |
-
-
-### Return type
-
-**FileOperationArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -724,6 +750,23 @@ const { status, data } = await apiInstance.markAsRead(
 > FileOperationArrayWrapper moveBatchItems()
 
 Moves or copies all the selected files and folders to the folder with the ID specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/move-batch-items/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **batchRequestDto** | **BatchRequestDto**|  | |
+
+
+### Return type
+
+**FileOperationArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -744,21 +787,6 @@ const { status, data } = await apiInstance.moveBatchItems(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **batchRequestDto** | **BatchRequestDto**|  | |
-
-
-### Return type
-
-**FileOperationArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -778,6 +806,24 @@ const { status, data } = await apiInstance.moveBatchItems(
 > ConversationResultArrayWrapper startFileConversion()
 
 Starts a conversion operation of a file with the ID specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-file-conversion/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **checkConversionRequestDtoInteger** | **CheckConversionRequestDtoInteger**| The parameters for checking file conversion. | |
+| **fileId** | [**number**] | The file ID to start conversion proccess. | defaults to undefined|
+
+
+### Return type
+
+**ConversationResultArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -800,22 +846,6 @@ const { status, data } = await apiInstance.startFileConversion(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **checkConversionRequestDtoInteger** | **CheckConversionRequestDtoInteger**| The parameters for checking file conversion. | |
-| **fileId** | [**number**] | The file ID to start conversion proccess. | defaults to undefined|
-
-
-### Return type
-
-**ConversationResultArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -835,6 +865,23 @@ const { status, data } = await apiInstance.startFileConversion(
 
 Finishes an operation with the ID specified in the request or all the active operations.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-tasks/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**string**] | The operation ID of the request. | defaults to undefined|
+
+
+### Return type
+
+**FileOperationArrayWrapper**
+
+### Authorization
+
+No authorization required
+
 ### Example
 
 ```typescript
@@ -853,21 +900,6 @@ const { status, data } = await apiInstance.terminateTasks(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **id** | [**string**] | The operation ID of the request. | defaults to undefined|
-
-
-### Return type
-
-**FileOperationArrayWrapper**
-
-### Authorization
-
-No authorization required
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -885,6 +917,24 @@ No authorization required
 > StringWrapper updateFileComment()
 
 Updates a comment in a file with the ID specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file-comment/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **updateComment** | **UpdateComment**| The parameters for updating a comment. | |
+| **fileId** | [**number**] | The file ID where the comment is located. | defaults to undefined|
+
+
+### Return type
+
+**StringWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -906,22 +956,6 @@ const { status, data } = await apiInstance.updateFileComment(
     updateComment
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **updateComment** | **UpdateComment**| The parameters for updating a comment. | |
-| **fileId** | [**number**] | The file ID where the comment is located. | defaults to undefined|
-
-
-### Return type
-
-**StringWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

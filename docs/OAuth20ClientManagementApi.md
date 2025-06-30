@@ -16,6 +16,24 @@ All URIs are relative to *http://localhost:8092*
 
 Activates or deactivates an OAuth2 client. When deactivated, the client cannot request new access tokens, but existing tokens will remain valid until they expire.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-activation/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **changeClientActivationRequest** | **ChangeClientActivationRequest**|  | |
+| **clientId** | [**string**] | The client identifier. | defaults to undefined|
+
+
+### Return type
+
+**object**
+
+### Authorization
+
+[asc_auth_key](../README.md#asc_auth_key)
+
 ### Example
 
 ```typescript
@@ -36,22 +54,6 @@ const { status, data } = await apiInstance.changeActivation(
     changeClientActivationRequest
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **changeClientActivationRequest** | **ChangeClientActivationRequest**|  | |
-| **clientId** | [**string**] | The client identifier. | defaults to undefined|
-
-
-### Return type
-
-**object**
-
-### Authorization
-
-[asc_auth_key](../README.md#asc_auth_key)
 
 ### HTTP request headers
 
@@ -76,6 +78,23 @@ const { status, data } = await apiInstance.changeActivation(
 
 Creates a new OAuth2 client with the specified configuration. The client will be created with the provided scopes, redirect URIs, and other settings. Returns the created client details including the generated client ID.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-client/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **createClientRequest** | **CreateClientRequest**|  | |
+
+
+### Return type
+
+**ClientResponse**
+
+### Authorization
+
+[asc_auth_key](../README.md#asc_auth_key)
+
 ### Example
 
 ```typescript
@@ -94,21 +113,6 @@ const { status, data } = await apiInstance.createClient(
     createClientRequest
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **createClientRequest** | **CreateClientRequest**|  | |
-
-
-### Return type
-
-**ClientResponse**
-
-### Authorization
-
-[asc_auth_key](../README.md#asc_auth_key)
 
 ### HTTP request headers
 
@@ -132,6 +136,23 @@ const { status, data } = await apiInstance.createClient(
 
 Permanently deletes an OAuth2 client and all associated data. All access and refresh tokens issued to this client will be invalidated. This operation cannot be undone.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-client/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **clientId** | [**string**] | The client identifier. | defaults to undefined|
+
+
+### Return type
+
+**object**
+
+### Authorization
+
+[asc_auth_key](../README.md#asc_auth_key)
+
 ### Example
 
 ```typescript
@@ -149,21 +170,6 @@ const { status, data } = await apiInstance.deleteClient(
     clientId
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **clientId** | [**string**] | The client identifier. | defaults to undefined|
-
-
-### Return type
-
-**object**
-
-### Authorization
-
-[asc_auth_key](../README.md#asc_auth_key)
 
 ### HTTP request headers
 
@@ -188,6 +194,23 @@ const { status, data } = await apiInstance.deleteClient(
 
 Generates a new client secret for the specified OAuth2 client. The old secret will be immediately invalidated. This operation should be used with caution as it requires updating the secret in all client applications.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/regenerate-secret/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **clientId** | [**string**] | The client identifier. | defaults to undefined|
+
+
+### Return type
+
+**ClientSecretResponse**
+
+### Authorization
+
+[asc_auth_key](../README.md#asc_auth_key)
+
 ### Example
 
 ```typescript
@@ -205,21 +228,6 @@ const { status, data } = await apiInstance.regenerateSecret(
     clientId
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **clientId** | [**string**] | The client identifier. | defaults to undefined|
-
-
-### Return type
-
-**ClientSecretResponse**
-
-### Authorization
-
-[asc_auth_key](../README.md#asc_auth_key)
 
 ### HTTP request headers
 
@@ -244,6 +252,23 @@ const { status, data } = await apiInstance.regenerateSecret(
 
 Revokes all user consents for the specified OAuth2 client. This will invalidate all access tokens and refresh tokens issued to this client for the current user. The user will need to re-authorize the client to access their resources.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/revoke-user-client/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **clientId** | [**string**] | The client identifier. | defaults to undefined|
+
+
+### Return type
+
+**object**
+
+### Authorization
+
+[asc_auth_key](../README.md#asc_auth_key)
+
 ### Example
 
 ```typescript
@@ -261,21 +286,6 @@ const { status, data } = await apiInstance.revokeUserClient(
     clientId
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **clientId** | [**string**] | The client identifier. | defaults to undefined|
-
-
-### Return type
-
-**object**
-
-### Authorization
-
-[asc_auth_key](../README.md#asc_auth_key)
 
 ### HTTP request headers
 
@@ -301,6 +311,24 @@ const { status, data } = await apiInstance.revokeUserClient(
 
 Updates the configuration of an existing OAuth2 client, allowing modifications to the client name, description, redirect URIs, and other settings. The client ID cannot be modified.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-client/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **updateClientRequest** | **UpdateClientRequest**|  | |
+| **clientId** | [**string**] | The client identifier. | defaults to undefined|
+
+
+### Return type
+
+**object**
+
+### Authorization
+
+[asc_auth_key](../README.md#asc_auth_key)
+
 ### Example
 
 ```typescript
@@ -321,22 +349,6 @@ const { status, data } = await apiInstance.updateClient(
     updateClientRequest
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **updateClientRequest** | **UpdateClientRequest**|  | |
-| **clientId** | [**string**] | The client identifier. | defaults to undefined|
-
-
-### Return type
-
-**object**
-
-### Authorization
-
-[asc_auth_key](../README.md#asc_auth_key)
 
 ### HTTP request headers
 

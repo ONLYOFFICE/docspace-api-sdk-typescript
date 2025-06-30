@@ -1,47 +1,58 @@
 ## @onlyoffice/docspace-api-typescript@3.2.0
 
-This generator creates TypeScript/JavaScript client that utilizes [axios](https://github.com/axios/axios). The generated Node module can be used in the following environments:
+The ONLYOFFICE DocSpace SDK for TypeScript is a library that provides tools for integrating and managing DocSpace features within your applications. It simplifies interaction with the DocSpace API by offering ready-to-use methods and models.
 
-Environment
-* Node.js
-* Webpack
-* Browserify
+- API version: 3.2.0
+- SDK version: 
 
-Language level
+For more information, please visit [https://helpdesk.onlyoffice.com/hc/en-us](https://helpdesk.onlyoffice.com/hc/en-us)
+
+This SDK utilizes axios for HTTP communication. The resulting Node module can be used in various environments:
+
+* [Node.js](https://nodejs.org/en)
+* [Webpack](https://webpack.js.org/)
+* [Browserify](https://browserify.org/)
+
+#### Language levels
 * ES5 - you must have a Promises/A+ library installed
 * ES6
 
-Module system
+#### Module systems
 * CommonJS
 * ES6 module system
 
-It can be used in both TypeScript and JavaScript. In TypeScript, the definition will be automatically resolved via `package.json`. ([Reference](https://www.typescriptlang.org/docs/handbook/declaration-files/consumption.html))
+This SDK can be used in both TypeScript and JavaScript projects. In TypeScript, definitions are automatically resolved via `package.json`. ([Reference](https://www.typescriptlang.org/docs/handbook/declaration-files/consumption.html))
 
 ### Building
 
-To build and compile the typescript sources to javascript use:
-```
+To build and compile the TypeScript sources to JavaScript, use the following commands:
+
+```bash
 npm install
 npm run build
 ```
 
 ### Publishing
 
-First build the package then run `npm publish`
+To publish the package to the npm registry:
+
+```bash
+npm publish
+```
 
 ### Consuming
 
-navigate to the folder of your consuming project and run one of the following commands.
+To use the SDK in your project, navigate to the root folder of your consuming project and run one of the following commands:
 
-_published:_
+#### From published package (recommended)
 
-```
+```bash
 npm install @onlyoffice/docspace-api-typescript@3.2.0 --save
 ```
 
-_unPublished (not recommended):_
+#### From local build (not recommended)
 
-```
+```bash
 npm install PATH_TO_GENERATED_PACKAGE --save
 ```
 
@@ -83,7 +94,8 @@ Authentication schemes defined for the API:
 
 - **Type**: OAuth
 - **Flow**: accessCode
-- **Authorization URL**: 
+- **Authorization URL**: {{authBaseUrl}}/oauth2/authorize
+- **Token Url**: {{authBaseUrl}}/oauth2/token
 - **Scopes**: 
  - **read**: Read access to protected resources
  - **write**: Write access to protected resources
@@ -93,7 +105,7 @@ Authentication schemes defined for the API:
 ### OpenId
 
 - **Type**: OpenId Connect
-- **OpenId Connect URL**: 
+- **OpenId Connect URL**: {{authBaseUrl}}/.well-known/openid-configuration
 
 
 <a id="x-signature"></a>

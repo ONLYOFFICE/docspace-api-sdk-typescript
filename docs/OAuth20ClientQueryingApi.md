@@ -16,6 +16,23 @@ All URIs are relative to *http://localhost:8092*
 
 Retrieves detailed information about a specific OAuth2 client including its name, description, redirect URIs, and scopes.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-client/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **clientId** | [**string**] | The client identifier. | defaults to undefined|
+
+
+### Return type
+
+**ClientResponse**
+
+### Authorization
+
+[asc_auth_key](../README.md#asc_auth_key)
+
 ### Example
 
 ```typescript
@@ -33,21 +50,6 @@ const { status, data } = await apiInstance.getClient(
     clientId
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **clientId** | [**string**] | The client identifier. | defaults to undefined|
-
-
-### Return type
-
-**ClientResponse**
-
-### Authorization
-
-[asc_auth_key](../README.md#asc_auth_key)
 
 ### HTTP request headers
 
@@ -72,6 +74,23 @@ const { status, data } = await apiInstance.getClient(
 
 Retrieves the detailed information for a client with the ID specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-client-info/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **clientId** | [**string**] | The client identifier. | defaults to undefined|
+
+
+### Return type
+
+**ClientInfoResponse**
+
+### Authorization
+
+[asc_auth_key](../README.md#asc_auth_key)
+
 ### Example
 
 ```typescript
@@ -89,21 +108,6 @@ const { status, data } = await apiInstance.getClientInfo(
     clientId
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **clientId** | [**string**] | The client identifier. | defaults to undefined|
-
-
-### Return type
-
-**ClientInfoResponse**
-
-### Authorization
-
-[asc_auth_key](../README.md#asc_auth_key)
 
 ### HTTP request headers
 
@@ -125,6 +129,25 @@ const { status, data } = await apiInstance.getClientInfo(
 > PageableResponse getClients()
 
 Retrieves a paginated list of OAuth2 clients. The results can be paginated using the \'limit\' parameter and the last seen client ID or creation date.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-clients/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **limit** | [**number**] | The maximum number of results returned per page. | defaults to undefined|
+| **lastClientId** | [**string**] | The ID of the last retrieved client. | (optional) defaults to undefined|
+| **lastCreatedOn** | [**string**] | The creation date of the last retrieved client. | (optional) defaults to undefined|
+
+
+### Return type
+
+**PageableResponse**
+
+### Authorization
+
+[asc_auth_key](../README.md#asc_auth_key)
 
 ### Example
 
@@ -148,23 +171,6 @@ const { status, data } = await apiInstance.getClients(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **limit** | [**number**] | The maximum number of results returned per page. | defaults to undefined|
-| **lastClientId** | [**string**] | The ID of the last retrieved client. | (optional) defaults to undefined|
-| **lastCreatedOn** | [**string**] | The creation date of the last retrieved client. | (optional) defaults to undefined|
-
-
-### Return type
-
-**PageableResponse**
-
-### Authorization
-
-[asc_auth_key](../README.md#asc_auth_key)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -186,6 +192,25 @@ const { status, data } = await apiInstance.getClients(
 > PageableResponseClientInfoResponse getClientsInfo()
 
 Retrieves a paginated list of information for all clients.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-clients-info/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **limit** | [**number**] | The maximum number of results returned per page. | defaults to undefined|
+| **lastClientId** | [**string**] | The identifier of the last retrieved client. | (optional) defaults to undefined|
+| **lastCreatedOn** | [**string**] | The creation date of the last retrieved client. | (optional) defaults to undefined|
+
+
+### Return type
+
+**PageableResponseClientInfoResponse**
+
+### Authorization
+
+[asc_auth_key](../README.md#asc_auth_key)
 
 ### Example
 
@@ -209,23 +234,6 @@ const { status, data } = await apiInstance.getClientsInfo(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **limit** | [**number**] | The maximum number of results returned per page. | defaults to undefined|
-| **lastClientId** | [**string**] | The identifier of the last retrieved client. | (optional) defaults to undefined|
-| **lastCreatedOn** | [**string**] | The creation date of the last retrieved client. | (optional) defaults to undefined|
-
-
-### Return type
-
-**PageableResponseClientInfoResponse**
-
-### Authorization
-
-[asc_auth_key](../README.md#asc_auth_key)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -247,6 +255,24 @@ const { status, data } = await apiInstance.getClientsInfo(
 
 Retrieves a paginated list of user consents.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-consents/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **limit** | [**number**] | The maximum number of results returned per page. | defaults to undefined|
+| **lastModifiedOn** | [**string**] | The date when the user consent was last modified. | (optional) defaults to undefined|
+
+
+### Return type
+
+**PageableModificationResponse**
+
+### Authorization
+
+[asc_auth_key](../README.md#asc_auth_key)
+
 ### Example
 
 ```typescript
@@ -267,22 +293,6 @@ const { status, data } = await apiInstance.getConsents(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **limit** | [**number**] | The maximum number of results returned per page. | defaults to undefined|
-| **lastModifiedOn** | [**string**] | The date when the user consent was last modified. | (optional) defaults to undefined|
-
-
-### Return type
-
-**PageableModificationResponse**
-
-### Authorization
-
-[asc_auth_key](../README.md#asc_auth_key)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -301,6 +311,23 @@ const { status, data } = await apiInstance.getConsents(
 
 Returns the public information for a client with the ID secified din the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-public-client-info/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **clientId** | [**string**] | The client identifier. | defaults to undefined|
+
+
+### Return type
+
+**ClientInfoResponse**
+
+### Authorization
+
+No authorization required
+
 ### Example
 
 ```typescript
@@ -318,21 +345,6 @@ const { status, data } = await apiInstance.getPublicClientInfo(
     clientId
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **clientId** | [**string**] | The client identifier. | defaults to undefined|
-
-
-### Return type
-
-**ClientInfoResponse**
-
-### Authorization
-
-No authorization required
 
 ### HTTP request headers
 

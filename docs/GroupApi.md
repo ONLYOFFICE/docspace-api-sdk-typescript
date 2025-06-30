@@ -21,6 +21,23 @@ All URIs are relative to *http://localhost:8092*
 
 Adds a new group with the group manager, name, and members specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/add-group/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **groupRequestDto** | **GroupRequestDto**|  | |
+
+
+### Return type
+
+**GroupWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -40,21 +57,6 @@ const { status, data } = await apiInstance.addGroup(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **groupRequestDto** | **GroupRequestDto**|  | |
-
-
-### Return type
-
-**GroupWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -73,6 +75,24 @@ const { status, data } = await apiInstance.addGroup(
 > GroupWrapper addMembersTo()
 
 Adds new group members to the group with the ID specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/add-members-to/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **membersRequest** | **MembersRequest**| The member request. | |
+| **id** | [**string**] | The group ID. | defaults to undefined|
+
+
+### Return type
+
+**GroupWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -95,22 +115,6 @@ const { status, data } = await apiInstance.addMembersTo(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **membersRequest** | **MembersRequest**| The member request. | |
-| **id** | [**string**] | The group ID. | defaults to undefined|
-
-
-### Return type
-
-**GroupWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -131,6 +135,23 @@ const { status, data } = await apiInstance.addMembersTo(
 
 Deletes a group with the ID specified in the request from the list of groups on the portal.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-group/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**string**] | The group ID. | defaults to undefined|
+
+
+### Return type
+
+**NoContentResultWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -148,21 +169,6 @@ const { status, data } = await apiInstance.deleteGroup(
     id
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **id** | [**string**] | The group ID. | defaults to undefined|
-
-
-### Return type
-
-**NoContentResultWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -184,6 +190,24 @@ const { status, data } = await apiInstance.deleteGroup(
 
 Returns the detailed information about the selected group.   **Note**: This method returns full group information.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-group/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**string**] | The group ID. | defaults to undefined|
+| **includeMembers** | [**boolean**] | Specifies whether to include the group members or not. | (optional) defaults to undefined|
+
+
+### Return type
+
+**GroupWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -203,22 +227,6 @@ const { status, data } = await apiInstance.getGroup(
     includeMembers
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **id** | [**string**] | The group ID. | defaults to undefined|
-| **includeMembers** | [**boolean**] | Specifies whether to include the group members or not. | (optional) defaults to undefined|
-
-
-### Return type
-
-**GroupWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -240,6 +248,23 @@ const { status, data } = await apiInstance.getGroup(
 
 Returns a list of groups for the user with the ID specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-group-by-user-id/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **userid** | [**string**] | The user ID. | defaults to undefined|
+
+
+### Return type
+
+**GroupSummaryArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -257,21 +282,6 @@ const { status, data } = await apiInstance.getGroupByUserId(
     userid
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **userid** | [**string**] | The user ID. | defaults to undefined|
-
-
-### Return type
-
-**GroupSummaryArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -291,6 +301,29 @@ const { status, data } = await apiInstance.getGroupByUserId(
 > GroupArrayWrapper getGroups()
 
 Returns the general information about all the groups, such as group ID and group manager.   **Note**: This method returns partial group information.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **userId** | [**string**] | The user ID. | (optional) defaults to undefined|
+| **manager** | [**boolean**] | Specifies if the user is a manager or not. | (optional) defaults to undefined|
+| **count** | [**number**] | The number of records to retrieve. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting index for paginated results. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | Specifies the property used to sort the query results. | (optional) defaults to undefined|
+| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The text used for filtering or searching group data. | (optional) defaults to undefined|
+
+
+### Return type
+
+**GroupArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -322,27 +355,6 @@ const { status, data } = await apiInstance.getGroups(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **userId** | [**string**] | The user ID. | (optional) defaults to undefined|
-| **manager** | [**boolean**] | Specifies if the user is a manager or not. | (optional) defaults to undefined|
-| **count** | [**number**] | The number of records to retrieve. | (optional) defaults to undefined|
-| **startIndex** | [**number**] | The starting index for paginated results. | (optional) defaults to undefined|
-| **sortBy** | [**string**] | Specifies the property used to sort the query results. | (optional) defaults to undefined|
-| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
-| **filterValue** | [**string**] | The text used for filtering or searching group data. | (optional) defaults to undefined|
-
-
-### Return type
-
-**GroupArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -361,6 +373,24 @@ const { status, data } = await apiInstance.getGroups(
 > GroupWrapper moveMembersTo()
 
 Moves all the members from the selected group to another one specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/move-members-to/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fromId** | [**string**] | The group ID to move from. | defaults to undefined|
+| **toId** | [**string**] | The group ID to move to. | defaults to undefined|
+
+
+### Return type
+
+**GroupWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -382,22 +412,6 @@ const { status, data } = await apiInstance.moveMembersTo(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **fromId** | [**string**] | The group ID to move from. | defaults to undefined|
-| **toId** | [**string**] | The group ID to move to. | defaults to undefined|
-
-
-### Return type
-
-**GroupWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -417,6 +431,24 @@ const { status, data } = await apiInstance.moveMembersTo(
 > GroupWrapper removeMembersFrom()
 
 Removes the group members specified in the request from the selected group.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/remove-members-from/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **membersRequest** | **MembersRequest**| The member request. | |
+| **id** | [**string**] | The group ID. | defaults to undefined|
+
+
+### Return type
+
+**GroupWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -439,22 +471,6 @@ const { status, data } = await apiInstance.removeMembersFrom(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **membersRequest** | **MembersRequest**| The member request. | |
-| **id** | [**string**] | The group ID. | defaults to undefined|
-
-
-### Return type
-
-**GroupWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -474,6 +490,24 @@ const { status, data } = await apiInstance.removeMembersFrom(
 > GroupWrapper setGroupManager()
 
 Sets a user with the ID specified in the request as a group manager.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-group-manager/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **setManagerRequest** | **SetManagerRequest**| The request for setting a group manager. | |
+| **id** | [**string**] | The group ID. | defaults to undefined|
+
+
+### Return type
+
+**GroupWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -496,22 +530,6 @@ const { status, data } = await apiInstance.setGroupManager(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **setManagerRequest** | **SetManagerRequest**| The request for setting a group manager. | |
-| **id** | [**string**] | The group ID. | defaults to undefined|
-
-
-### Return type
-
-**GroupWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -531,6 +549,24 @@ const { status, data } = await apiInstance.setGroupManager(
 > GroupWrapper setMembersTo()
 
 Replaces the group members with those specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-members-to/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **membersRequest** | **MembersRequest**| The member request. | |
+| **id** | [**string**] | The group ID. | defaults to undefined|
+
+
+### Return type
+
+**GroupWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -553,22 +589,6 @@ const { status, data } = await apiInstance.setMembersTo(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **membersRequest** | **MembersRequest**| The member request. | |
-| **id** | [**string**] | The group ID. | defaults to undefined|
-
-
-### Return type
-
-**GroupWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -587,6 +607,24 @@ const { status, data } = await apiInstance.setMembersTo(
 > GroupWrapper updateGroup()
 
 Updates the existing group changing the group manager, name, and/or members.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-group/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **updateGroupRequest** | **UpdateGroupRequest**| The request for updating a group. | |
+| **id** | [**string**] | The group ID. | defaults to undefined|
+
+
+### Return type
+
+**GroupWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -608,22 +646,6 @@ const { status, data } = await apiInstance.updateGroup(
     updateGroupRequest
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **updateGroupRequest** | **UpdateGroupRequest**| The request for updating a group. | |
-| **id** | [**string**] | The group ID. | defaults to undefined|
-
-
-### Return type
-
-**GroupWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

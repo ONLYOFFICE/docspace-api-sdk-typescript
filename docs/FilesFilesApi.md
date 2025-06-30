@@ -55,6 +55,23 @@ All URIs are relative to *http://localhost:8092*
 
 Adds files with the IDs specified in the request to the template list.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/add-templates/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **templatesRequestDto** | **TemplatesRequestDto**|  | |
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -74,21 +91,6 @@ const { status, data } = await apiInstance.addTemplates(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **templatesRequestDto** | **TemplatesRequestDto**|  | |
-
-
-### Return type
-
-**BooleanWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -107,6 +109,24 @@ const { status, data } = await apiInstance.addTemplates(
 > FileIntegerArrayWrapper changeVersionHistory()
 
 Changes the version history of a file with the ID specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-version-history/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **changeHistory** | **ChangeHistory**| The parameters for changing version history. | |
+| **fileId** | [**number**] | The file Id to change its version history. | defaults to undefined|
+
+
+### Return type
+
+**FileIntegerArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -129,22 +149,6 @@ const { status, data } = await apiInstance.changeVersionHistory(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **changeHistory** | **ChangeHistory**| The parameters for changing version history. | |
-| **fileId** | [**number**] | The file Id to change its version history. | defaults to undefined|
-
-
-### Return type
-
-**FileIntegerArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -164,6 +168,24 @@ const { status, data } = await apiInstance.changeVersionHistory(
 > StringWrapper checkFillFormDraft()
 
 Checks if the current file is a form draft which can be filled out.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/check-fill-form-draft/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **checkFillFormDraft** | **CheckFillFormDraft**| The parameters for checking the form draft filling. | |
+| **fileId** | [**number**] | The file ID of the form draft. | defaults to undefined|
+
+
+### Return type
+
+**StringWrapper**
+
+### Authorization
+
+No authorization required
 
 ### Example
 
@@ -186,22 +208,6 @@ const { status, data } = await apiInstance.checkFillFormDraft(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **checkFillFormDraft** | **CheckFillFormDraft**| The parameters for checking the form draft filling. | |
-| **fileId** | [**number**] | The file ID of the form draft. | defaults to undefined|
-
-
-### Return type
-
-**StringWrapper**
-
-### Authorization
-
-No authorization required
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -220,6 +226,24 @@ No authorization required
 > FileEntryWrapper copyFileAs()
 
 Copies (and converts if possible) an existing file to the specified folder.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/copy-file-as/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **copyAsJsonElement** | **CopyAsJsonElement**| The parameters for copying a file. | |
+| **fileId** | [**number**] | The file ID to copy. | defaults to undefined|
+
+
+### Return type
+
+**FileEntryWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -241,22 +265,6 @@ const { status, data } = await apiInstance.copyFileAs(
     copyAsJsonElement
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **copyAsJsonElement** | **CopyAsJsonElement**| The parameters for copying a file. | |
-| **fileId** | [**number**] | The file ID to copy. | defaults to undefined|
-
-
-### Return type
-
-**FileEntryWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -280,6 +288,24 @@ const { status, data } = await apiInstance.copyFileAs(
 
 Creates a session to edit the existing file with multiple chunks (needed for WebDAV).   **Note**: Information about created session which includes:  <ul>  <li><b>id:</b> unique ID of this upload session,</li>  <li><b>created:</b> UTC time when the session was created,</li>  <li><b>expired:</b> UTC time when the session will expire if no chunks are sent before that time,</li>  <li><b>location:</b> URL where you should send your next chunk,</li>  <li><b>bytes_uploaded:</b> number of bytes uploaded for the specific upload ID,</li>  <li><b>bytes_total:</b> total number of bytes which will be uploaded.</li>  </ul>
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-edit-session/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fileId** | [**number**] | The file ID. | defaults to undefined|
+| **fileSize** | [**number**] | The file size in bytes. | (optional) defaults to undefined|
+
+
+### Return type
+
+**ObjectWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -300,22 +326,6 @@ const { status, data } = await apiInstance.createEditSession(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID. | defaults to undefined|
-| **fileSize** | [**number**] | The file size in bytes. | (optional) defaults to undefined|
-
-
-### Return type
-
-**ObjectWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -335,6 +345,24 @@ const { status, data } = await apiInstance.createEditSession(
 > FileIntegerWrapper createFile()
 
 Creates a new file in the specified folder with the title specified in the request.   **Note**: If a file extension is different from DOCX/XLSX/PPTX and refers to one of the known text, spreadsheet, or presentation formats, it will be changed to DOCX/XLSX/PPTX accordingly. If the file extension is not specified or is unknown, the DOCX extension will be added to the file title.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **createFileJsonElement** | **CreateFileJsonElement**| The parameters for creating a file. | |
+| **folderId** | [**number**] | The folder ID for the file creation. | defaults to undefined|
+
+
+### Return type
+
+**FileIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -357,22 +385,6 @@ const { status, data } = await apiInstance.createFile(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **createFileJsonElement** | **CreateFileJsonElement**| The parameters for creating a file. | |
-| **folderId** | [**number**] | The folder ID for the file creation. | defaults to undefined|
-
-
-### Return type
-
-**FileIntegerWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -391,6 +403,23 @@ const { status, data } = await apiInstance.createFile(
 > FileIntegerWrapper createFileInMyDocuments()
 
 Creates a new file in the \"My documents\" section with the title specified in the request.   **Note**: If a file extension is different from DOCX/XLSX/PPTX and refers to one of the known text, spreadsheet, or presentation formats, it will be changed to DOCX/XLSX/PPTX accordingly. If the file extension is not specified or is unknown, the DOCX extension will be added to the file title.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file-in-my-documents/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **createFileJsonElement** | **CreateFileJsonElement**|  | |
+
+
+### Return type
+
+**FileIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -411,21 +440,6 @@ const { status, data } = await apiInstance.createFileInMyDocuments(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **createFileJsonElement** | **CreateFileJsonElement**|  | |
-
-
-### Return type
-
-**FileIntegerWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -444,6 +458,24 @@ const { status, data } = await apiInstance.createFileInMyDocuments(
 > FileIntegerWrapper createHtmlFile()
 
 Creates an HTML (.html) file in the selected folder with the title and contents specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-html-file/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **createTextOrHtmlFile** | **CreateTextOrHtmlFile**| The parameters for creating an HTML or text file. | |
+| **folderId** | [**number**] | The folder ID to create the text or HTML file. | defaults to undefined|
+
+
+### Return type
+
+**FileIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -466,22 +498,6 @@ const { status, data } = await apiInstance.createHtmlFile(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **createTextOrHtmlFile** | **CreateTextOrHtmlFile**| The parameters for creating an HTML or text file. | |
-| **folderId** | [**number**] | The folder ID to create the text or HTML file. | defaults to undefined|
-
-
-### Return type
-
-**FileIntegerWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -502,6 +518,23 @@ const { status, data } = await apiInstance.createHtmlFile(
 
 Creates an HTML (.html) file in the \"My documents\" section with the title and contents specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-html-file-in-my-documents/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **createTextOrHtmlFile** | **CreateTextOrHtmlFile**|  | |
+
+
+### Return type
+
+**FileIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -520,21 +553,6 @@ const { status, data } = await apiInstance.createHtmlFileInMyDocuments(
     createTextOrHtmlFile
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **createTextOrHtmlFile** | **CreateTextOrHtmlFile**|  | |
-
-
-### Return type
-
-**FileIntegerWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -555,6 +573,24 @@ const { status, data } = await apiInstance.createHtmlFileInMyDocuments(
 > FileShareWrapper createPrimaryExternalLink()
 
 Creates a primary external link by the identifier specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-primary-external-link/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fileLinkRequest** | **FileLinkRequest**| The file external link parameters. | |
+| **id** | [**number**] | The file ID. | defaults to undefined|
+
+
+### Return type
+
+**FileShareWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -577,22 +613,6 @@ const { status, data } = await apiInstance.createPrimaryExternalLink(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **fileLinkRequest** | **FileLinkRequest**| The file external link parameters. | |
-| **id** | [**number**] | The file ID. | defaults to undefined|
-
-
-### Return type
-
-**FileShareWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -612,6 +632,24 @@ const { status, data } = await apiInstance.createPrimaryExternalLink(
 > FileIntegerWrapper createTextFile()
 
 Creates a text (.txt) file in the selected folder with the title and contents specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-text-file/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **createTextOrHtmlFile** | **CreateTextOrHtmlFile**| The parameters for creating an HTML or text file. | |
+| **folderId** | [**number**] | The folder ID to create the text or HTML file. | defaults to undefined|
+
+
+### Return type
+
+**FileIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -634,22 +672,6 @@ const { status, data } = await apiInstance.createTextFile(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **createTextOrHtmlFile** | **CreateTextOrHtmlFile**| The parameters for creating an HTML or text file. | |
-| **folderId** | [**number**] | The folder ID to create the text or HTML file. | defaults to undefined|
-
-
-### Return type
-
-**FileIntegerWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -668,6 +690,23 @@ const { status, data } = await apiInstance.createTextFile(
 > FileIntegerWrapper createTextFileInMyDocuments()
 
 Creates a text (.txt) file in the \"My documents\" section with the title and contents specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-text-file-in-my-documents/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **createTextOrHtmlFile** | **CreateTextOrHtmlFile**|  | |
+
+
+### Return type
+
+**FileIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -688,21 +727,6 @@ const { status, data } = await apiInstance.createTextFileInMyDocuments(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **createTextOrHtmlFile** | **CreateTextOrHtmlFile**|  | |
-
-
-### Return type
-
-**FileIntegerWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -721,6 +745,23 @@ const { status, data } = await apiInstance.createTextFileInMyDocuments(
 > ObjectArrayWrapper createThumbnails()
 
 Creates thumbnails for the files with the IDs specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-thumbnails/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **baseBatchRequestDto** | **BaseBatchRequestDto**|  | |
+
+
+### Return type
+
+**ObjectArrayWrapper**
+
+### Authorization
+
+No authorization required
 
 ### Example
 
@@ -741,21 +782,6 @@ const { status, data } = await apiInstance.createThumbnails(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **baseBatchRequestDto** | **BaseBatchRequestDto**|  | |
-
-
-### Return type
-
-**ObjectArrayWrapper**
-
-### Authorization
-
-No authorization required
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -773,6 +799,24 @@ No authorization required
 > FileOperationArrayWrapper deleteFile(_delete)
 
 Deletes a file with the ID specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-file/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **_delete** | **Delete**| The parameters for deleting a file. | |
+| **fileId** | [**number**] | The file ID to delete. | defaults to undefined|
+
+
+### Return type
+
+**FileOperationArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -795,22 +839,6 @@ const { status, data } = await apiInstance.deleteFile(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **_delete** | **Delete**| The parameters for deleting a file. | |
-| **fileId** | [**number**] | The file ID to delete. | defaults to undefined|
-
-
-### Return type
-
-**FileOperationArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -829,6 +857,23 @@ const { status, data } = await apiInstance.deleteFile(
 > NoContentResultWrapper deleteRecent()
 
 Removes files with the IDs specified in the request from the \"Recent\" section.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-recent/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **baseBatchRequestDto** | **BaseBatchRequestDto**|  | |
+
+
+### Return type
+
+**NoContentResultWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -849,21 +894,6 @@ const { status, data } = await apiInstance.deleteRecent(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **baseBatchRequestDto** | **BaseBatchRequestDto**|  | |
-
-
-### Return type
-
-**NoContentResultWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -883,6 +913,23 @@ const { status, data } = await apiInstance.deleteRecent(
 
 Removes files with the IDs specified in the request from the template list.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-templates/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **requestBody** | **Array<number>**| The file IDs. | |
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -900,21 +947,6 @@ const { status, data } = await apiInstance.deleteTemplates(
     requestBody
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **requestBody** | **Array<number>**| The file IDs. | |
-
-
-### Return type
-
-**BooleanWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -935,6 +967,23 @@ const { status, data } = await apiInstance.deleteTemplates(
 
 Returns all roles for the specified form.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-form-roles/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
+
+
+### Return type
+
+**FormRoleArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -952,21 +1001,6 @@ const { status, data } = await apiInstance.getAllFormRoles(
     fileId
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
-
-
-### Return type
-
-**FormRoleArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -988,6 +1022,24 @@ const { status, data } = await apiInstance.getAllFormRoles(
 
 Returns a URL to the changes of a file version specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-edit-diff-url/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fileId** | [**number**] | The file ID. | defaults to undefined|
+| **version** | [**number**] | The file version. | (optional) defaults to undefined|
+
+
+### Return type
+
+**EditHistoryDataWrapper**
+
+### Authorization
+
+No authorization required
+
 ### Example
 
 ```typescript
@@ -1008,22 +1060,6 @@ const { status, data } = await apiInstance.getEditDiffUrl(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID. | defaults to undefined|
-| **version** | [**number**] | The file version. | (optional) defaults to undefined|
-
-
-### Return type
-
-**EditHistoryDataWrapper**
-
-### Authorization
-
-No authorization required
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -1041,6 +1077,23 @@ No authorization required
 > EditHistoryArrayWrapper getEditHistory()
 
 Returns the version history of a file with the ID specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-edit-history/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
+
+
+### Return type
+
+**EditHistoryArrayWrapper**
+
+### Authorization
+
+No authorization required
 
 ### Example
 
@@ -1060,21 +1113,6 @@ const { status, data } = await apiInstance.getEditHistory(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
-
-
-### Return type
-
-**EditHistoryArrayWrapper**
-
-### Authorization
-
-No authorization required
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -1092,6 +1130,27 @@ No authorization required
 > HistoryArrayWrapper getFileHistory()
 
 Returns the list of actions performed on the file with the specified identifier.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-history/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fileId** | [**number**] | The file ID of the history request. | defaults to undefined|
+| **fromDate** | **ApiDateTime** | The start date of the history. | (optional) defaults to undefined|
+| **toDate** | **ApiDateTime** | The end date of the history. | (optional) defaults to undefined|
+| **count** | [**number**] | The number of history entries to retrieve for the file log. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting index for retrieving a subset of file history entries. | (optional) defaults to undefined|
+
+
+### Return type
+
+**HistoryArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1121,25 +1180,6 @@ const { status, data } = await apiInstance.getFileHistory(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID of the history request. | defaults to undefined|
-| **fromDate** | **ApiDateTime** | The start date of the history. | (optional) defaults to undefined|
-| **toDate** | **ApiDateTime** | The end date of the history. | (optional) defaults to undefined|
-| **count** | [**number**] | The number of history entries to retrieve for the file log. | (optional) defaults to undefined|
-| **startIndex** | [**number**] | The starting index for retrieving a subset of file history entries. | (optional) defaults to undefined|
-
-
-### Return type
-
-**HistoryArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -1161,6 +1201,24 @@ const { status, data } = await apiInstance.getFileHistory(
 
 Returns the detailed information about a file with the ID specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-info/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fileId** | [**number**] | The file ID. | defaults to undefined|
+| **version** | [**number**] | The file version. | (optional) defaults to undefined|
+
+
+### Return type
+
+**FileIntegerWrapper**
+
+### Authorization
+
+No authorization required
+
 ### Example
 
 ```typescript
@@ -1181,22 +1239,6 @@ const { status, data } = await apiInstance.getFileInfo(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID. | defaults to undefined|
-| **version** | [**number**] | The file version. | (optional) defaults to undefined|
-
-
-### Return type
-
-**FileIntegerWrapper**
-
-### Authorization
-
-No authorization required
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -1214,6 +1256,25 @@ No authorization required
 > FileShareArrayWrapper getFileLinks()
 
 Returns the external links of a file with the ID specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-links/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**number**] | The file ID of the request. | defaults to undefined|
+| **count** | [**number**] | The number of items to retrieve in the request. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting index for the query results. | (optional) defaults to undefined|
+
+
+### Return type
+
+**FileShareArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1237,23 +1298,6 @@ const { status, data } = await apiInstance.getFileLinks(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] | The file ID of the request. | defaults to undefined|
-| **count** | [**number**] | The number of items to retrieve in the request. | (optional) defaults to undefined|
-| **startIndex** | [**number**] | The starting index for the query results. | (optional) defaults to undefined|
-
-
-### Return type
-
-**FileShareArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -1272,6 +1316,25 @@ const { status, data } = await apiInstance.getFileLinks(
 > FileShareWrapper getFilePrimaryExternalLink()
 
 Returns the primary external link by the identifier specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-primary-external-link/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**number**] | The file ID of the request. | defaults to undefined|
+| **count** | [**number**] | The number of items to retrieve in the request. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting index for the query results. | (optional) defaults to undefined|
+
+
+### Return type
+
+**FileShareWrapper**
+
+### Authorization
+
+No authorization required
 
 ### Example
 
@@ -1295,23 +1358,6 @@ const { status, data } = await apiInstance.getFilePrimaryExternalLink(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] | The file ID of the request. | defaults to undefined|
-| **count** | [**number**] | The number of items to retrieve in the request. | (optional) defaults to undefined|
-| **startIndex** | [**number**] | The starting index for the query results. | (optional) defaults to undefined|
-
-
-### Return type
-
-**FileShareWrapper**
-
-### Authorization
-
-No authorization required
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -1331,6 +1377,23 @@ No authorization required
 
 Returns the detailed information about all the available file versions with the ID specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-version-info/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
+
+
+### Return type
+
+**FileIntegerArrayWrapper**
+
+### Authorization
+
+No authorization required
+
 ### Example
 
 ```typescript
@@ -1348,21 +1411,6 @@ const { status, data } = await apiInstance.getFileVersionInfo(
     fileId
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
-
-
-### Return type
-
-**FileIntegerArrayWrapper**
-
-### Authorization
-
-No authorization required
 
 ### HTTP request headers
 
@@ -1382,6 +1430,23 @@ No authorization required
 
 Retrieves the result of a form-filling session.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-fill-result/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fillingSessionId** | [**string**] | The form-filling session ID. | (optional) defaults to undefined|
+
+
+### Return type
+
+**FillingFormResultIntegerWrapper**
+
+### Authorization
+
+No authorization required
+
 ### Example
 
 ```typescript
@@ -1399,21 +1464,6 @@ const { status, data } = await apiInstance.getFillResult(
     fillingSessionId
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **fillingSessionId** | [**string**] | The form-filling session ID. | (optional) defaults to undefined|
-
-
-### Return type
-
-**FillingFormResultIntegerWrapper**
-
-### Authorization
-
-No authorization required
 
 ### HTTP request headers
 
@@ -1433,6 +1483,23 @@ No authorization required
 
 Returns a link to download a file with the ID specified in the request asynchronously.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-presigned-file-uri/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
+
+
+### Return type
+
+**FileLinkWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -1450,21 +1517,6 @@ const { status, data } = await apiInstance.getPresignedFileUri(
     fileId
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
-
-
-### Return type
-
-**FileLinkWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1485,6 +1537,23 @@ const { status, data } = await apiInstance.getPresignedFileUri(
 
 Returns a pre-signed URL to download a file with the specified ID.  This temporary link provides secure access to the file.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-presigned-uri/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
+
+
+### Return type
+
+**StringWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -1502,21 +1571,6 @@ const { status, data } = await apiInstance.getPresignedUri(
     fileId
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
-
-
-### Return type
-
-**StringWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1537,6 +1591,23 @@ const { status, data } = await apiInstance.getPresignedUri(
 
 Returns a list of users with their access rights to the protected file with the ID specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-protected-file-users/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
+
+
+### Return type
+
+**MentionWrapperArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -1554,21 +1625,6 @@ const { status, data } = await apiInstance.getProtectedFileUsers(
     fileId
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
-
-
-### Return type
-
-**MentionWrapperArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1589,6 +1645,23 @@ const { status, data } = await apiInstance.getProtectedFileUsers(
 
 Returns the reference data to uniquely identify a file in its system and check the availability of insering data into the destination spreadsheet by the external link.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-reference-data/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **getReferenceDataDtoInteger** | **GetReferenceDataDtoInteger**|  | |
+
+
+### Return type
+
+**FileReferenceWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -1607,21 +1680,6 @@ const { status, data } = await apiInstance.getReferenceData(
     getReferenceDataDtoInteger
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **getReferenceDataDtoInteger** | **GetReferenceDataDtoInteger**|  | |
-
-
-### Return type
-
-**FileReferenceWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1642,6 +1700,23 @@ const { status, data } = await apiInstance.getReferenceData(
 
 Checks if the PDF file is a form or not.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/is-form-pdf/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -1659,21 +1734,6 @@ const { status, data } = await apiInstance.isFormPDF(
     fileId
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
-
-
-### Return type
-
-**BooleanWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -1693,6 +1753,24 @@ const { status, data } = await apiInstance.isFormPDF(
 > FileIntegerWrapper lockFile()
 
 Locks a file with the ID specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/lock-file/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **lockFileParameters** | **LockFileParameters**| The parameters for locking a file. | |
+| **fileId** | [**number**] | The file ID for locking. | defaults to undefined|
+
+
+### Return type
+
+**FileIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1715,22 +1793,6 @@ const { status, data } = await apiInstance.lockFile(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **lockFileParameters** | **LockFileParameters**| The parameters for locking a file. | |
-| **fileId** | [**number**] | The file ID for locking. | defaults to undefined|
-
-
-### Return type
-
-**FileIntegerWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -1749,6 +1811,24 @@ const { status, data } = await apiInstance.lockFile(
 > manageFormFilling()
 
 Performs the specified form filling action.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/manage-form-filling/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **manageFormFillingDtoInteger** | **ManageFormFillingDtoInteger**|  | |
+| **fileId** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1771,22 +1851,6 @@ const { status, data } = await apiInstance.manageFormFilling(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **manageFormFillingDtoInteger** | **ManageFormFillingDtoInteger**|  | |
-| **fileId** | [**string**] |  | defaults to undefined|
-
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -1806,6 +1870,28 @@ void (empty response body)
 > ConfigurationIntegerWrapper openEditFile()
 
 Returns the initialization configuration of a file to open it in the editor.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/open-edit-file/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fileId** | [**number**] | The file ID to open. | defaults to undefined|
+| **version** | [**number**] | The file version to open. | (optional) defaults to undefined|
+| **view** | [**boolean**] | Specifies if the document will be opened for viewing only or not. | (optional) defaults to undefined|
+| **editorType** | **EditorType** | The editor type to open the file. | (optional) defaults to undefined|
+| **edit** | [**boolean**] | Specifies if the document is opened in the editing mode or not. | (optional) defaults to undefined|
+| **fill** | [**boolean**] | Specifies if the document is opened in the form-filling mode or not. | (optional) defaults to undefined|
+
+
+### Return type
+
+**ConfigurationIntegerWrapper**
+
+### Authorization
+
+No authorization required
 
 ### Example
 
@@ -1835,26 +1921,6 @@ const { status, data } = await apiInstance.openEditFile(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID to open. | defaults to undefined|
-| **version** | [**number**] | The file version to open. | (optional) defaults to undefined|
-| **view** | [**boolean**] | Specifies if the document will be opened for viewing only or not. | (optional) defaults to undefined|
-| **editorType** | **EditorType** | The editor type to open the file. | (optional) defaults to undefined|
-| **edit** | [**boolean**] | Specifies if the document is opened in the editing mode or not. | (optional) defaults to undefined|
-| **fill** | [**boolean**] | Specifies if the document is opened in the form-filling mode or not. | (optional) defaults to undefined|
-
-
-### Return type
-
-**ConfigurationIntegerWrapper**
-
-### Authorization
-
-No authorization required
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -1873,6 +1939,25 @@ No authorization required
 > EditHistoryArrayWrapper restoreFileVersion()
 
 Restores a file version specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/restore-file-version/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fileId** | [**number**] | The file ID of the restore version. | defaults to undefined|
+| **version** | [**number**] | The file version of the restore. | (optional) defaults to undefined|
+| **url** | [**string**] | The file version URL of the restore. | (optional) defaults to undefined|
+
+
+### Return type
+
+**EditHistoryArrayWrapper**
+
+### Authorization
+
+No authorization required
 
 ### Example
 
@@ -1896,23 +1981,6 @@ const { status, data } = await apiInstance.restoreFileVersion(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID of the restore version. | defaults to undefined|
-| **version** | [**number**] | The file version of the restore. | (optional) defaults to undefined|
-| **url** | [**string**] | The file version URL of the restore. | (optional) defaults to undefined|
-
-
-### Return type
-
-**EditHistoryArrayWrapper**
-
-### Authorization
-
-No authorization required
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -1932,6 +2000,27 @@ No authorization required
 > FileIntegerWrapper saveEditingFileFromForm()
 
 Saves edits to a file with the ID specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-editing-file-from-form/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fileId** | [**number**] | The editing file ID from the request. | defaults to undefined|
+| **fileExtension** | [**string**] | The editing file extension from the request. | (optional) defaults to undefined|
+| **downloadUri** | [**string**] | The URI to download the editing file. | (optional) defaults to undefined|
+| **file** | [**File**] | The request file stream. | (optional) defaults to undefined|
+| **forcesave** | [**boolean**] | Specifies whether to force save the file or not. | (optional) defaults to undefined|
+
+
+### Return type
+
+**FileIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1959,25 +2048,6 @@ const { status, data } = await apiInstance.saveEditingFileFromForm(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The editing file ID from the request. | defaults to undefined|
-| **fileExtension** | [**string**] | The editing file extension from the request. | (optional) defaults to undefined|
-| **downloadUri** | [**string**] | The URI to download the editing file. | (optional) defaults to undefined|
-| **file** | [**File**] | The request file stream. | (optional) defaults to undefined|
-| **forcesave** | [**boolean**] | Specifies whether to force save the file or not. | (optional) defaults to undefined|
-
-
-### Return type
-
-**FileIntegerWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: multipart/form-data
@@ -1998,6 +2068,24 @@ const { status, data } = await apiInstance.saveEditingFileFromForm(
 > FileIntegerWrapper saveFileAsPdf()
 
 Saves a file with the identifier specified in the request as a PDF document.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-file-as-pdf/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **saveAsPdfInteger** | **SaveAsPdfInteger**| The parameters for saving file as PDF. | |
+| **id** | [**number**] | The file ID to save as PDF. | defaults to undefined|
+
+
+### Return type
+
+**FileIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2020,22 +2108,6 @@ const { status, data } = await apiInstance.saveFileAsPdf(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **saveAsPdfInteger** | **SaveAsPdfInteger**| The parameters for saving file as PDF. | |
-| **id** | [**number**] | The file ID to save as PDF. | defaults to undefined|
-
-
-### Return type
-
-**FileIntegerWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -2055,6 +2127,24 @@ const { status, data } = await apiInstance.saveFileAsPdf(
 > FormRoleWrapper saveFormRoleMapping()
 
 Saves the form role mapping.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-form-role-mapping/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **saveFormRoleMappingDtoInteger** | **SaveFormRoleMappingDtoInteger**|  | |
+| **fileId** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**FormRoleWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2077,22 +2167,6 @@ const { status, data } = await apiInstance.saveFormRoleMapping(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **saveFormRoleMappingDtoInteger** | **SaveFormRoleMappingDtoInteger**|  | |
-| **fileId** | [**string**] |  | defaults to undefined|
-
-
-### Return type
-
-**FormRoleWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -2112,6 +2186,24 @@ const { status, data } = await apiInstance.saveFormRoleMapping(
 > FileIntegerWrapper setCustomFilterTag()
 
 Sets the Custom Filter editing mode to a file with the ID specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-custom-filter-tag/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **customFilterParameters** | **CustomFilterParameters**| The parameters for setting the Custom Filter editing mode. | |
+| **fileId** | [**number**] | The file ID. | defaults to undefined|
+
+
+### Return type
+
+**FileIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2134,22 +2226,6 @@ const { status, data } = await apiInstance.setCustomFilterTag(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **customFilterParameters** | **CustomFilterParameters**| The parameters for setting the Custom Filter editing mode. | |
-| **fileId** | [**number**] | The file ID. | defaults to undefined|
-
-
-### Return type
-
-**FileIntegerWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -2168,6 +2244,24 @@ const { status, data } = await apiInstance.setCustomFilterTag(
 > FileShareWrapper setExternalLink()
 
 Sets an external link to a file with the ID specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-external-link/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fileLinkRequest** | **FileLinkRequest**| The file external link parameters. | |
+| **id** | [**number**] | The file ID. | defaults to undefined|
+
+
+### Return type
+
+**FileShareWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2190,22 +2284,6 @@ const { status, data } = await apiInstance.setExternalLink(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **fileLinkRequest** | **FileLinkRequest**| The file external link parameters. | |
-| **id** | [**number**] | The file ID. | defaults to undefined|
-
-
-### Return type
-
-**FileShareWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -2224,6 +2302,24 @@ const { status, data } = await apiInstance.setExternalLink(
 > FileIntegerWrapper setFileOrder()
 
 Sets order of the file with ID specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-order/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **orderRequestDto** | **OrderRequestDto**| The file order information. | |
+| **fileId** | [**number**] | The file unique identifier. | defaults to undefined|
+
+
+### Return type
+
+**FileIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2246,22 +2342,6 @@ const { status, data } = await apiInstance.setFileOrder(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **orderRequestDto** | **OrderRequestDto**| The file order information. | |
-| **fileId** | [**number**] | The file unique identifier. | defaults to undefined|
-
-
-### Return type
-
-**FileIntegerWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -2283,6 +2363,23 @@ const { status, data } = await apiInstance.setFileOrder(
 
 Sets order of the files.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-files-order/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **ordersRequestDtoInteger** | **OrdersRequestDtoInteger**|  | |
+
+
+### Return type
+
+**FileIntegerArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -2302,21 +2399,6 @@ const { status, data } = await apiInstance.setFilesOrder(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **ordersRequestDtoInteger** | **OrdersRequestDtoInteger**|  | |
-
-
-### Return type
-
-**FileIntegerArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -2335,6 +2417,24 @@ const { status, data } = await apiInstance.setFilesOrder(
 > StringWrapper startEditFile()
 
 Informs about opening a file with the ID specified in the request for editing, locking it from being deleted or moved (this method is called by the mobile editors).
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-edit-file/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **startEdit** | **StartEdit**| The file parameters to start editing. | |
+| **fileId** | [**number**] | The file ID to start editing. | defaults to undefined|
+
+
+### Return type
+
+**StringWrapper**
+
+### Authorization
+
+No authorization required
 
 ### Example
 
@@ -2357,22 +2457,6 @@ const { status, data } = await apiInstance.startEditFile(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **startEdit** | **StartEdit**| The file parameters to start editing. | |
-| **fileId** | [**number**] | The file ID to start editing. | defaults to undefined|
-
-
-### Return type
-
-**StringWrapper**
-
-### Authorization
-
-No authorization required
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -2392,6 +2476,23 @@ No authorization required
 
 Starts filling a file with the ID specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-filling-file/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fileId** | [**number**] | The file ID to start filling. | defaults to undefined|
+
+
+### Return type
+
+**FileIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -2409,21 +2510,6 @@ const { status, data } = await apiInstance.startFillingFile(
     fileId
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID to start filling. | defaults to undefined|
-
-
-### Return type
-
-**FileIntegerWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -2444,6 +2530,26 @@ const { status, data } = await apiInstance.startFillingFile(
 > KeyValuePairBooleanStringWrapper trackEditFile()
 
 Tracks file changes when editing.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/track-edit-file/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fileId** | [**number**] | The file ID to track editing changes. | defaults to undefined|
+| **tabId** | [**string**] | The tab ID to track editing changes. | (optional) defaults to undefined|
+| **docKeyForTrack** | [**string**] | The document key for tracking changes. | (optional) defaults to undefined|
+| **isFinish** | [**boolean**] | Specifies whether to finish file tracking or not. | (optional) defaults to undefined|
+
+
+### Return type
+
+**KeyValuePairBooleanStringWrapper**
+
+### Authorization
+
+No authorization required
 
 ### Example
 
@@ -2469,24 +2575,6 @@ const { status, data } = await apiInstance.trackEditFile(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID to track editing changes. | defaults to undefined|
-| **tabId** | [**string**] | The tab ID to track editing changes. | (optional) defaults to undefined|
-| **docKeyForTrack** | [**string**] | The document key for tracking changes. | (optional) defaults to undefined|
-| **isFinish** | [**boolean**] | Specifies whether to finish file tracking or not. | (optional) defaults to undefined|
-
-
-### Return type
-
-**KeyValuePairBooleanStringWrapper**
-
-### Authorization
-
-No authorization required
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -2505,6 +2593,24 @@ No authorization required
 > FileIntegerWrapper updateFile()
 
 Updates the information of the selected file with the parameters specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **updateFile** | **UpdateFile**| The parameters for updating a file. | |
+| **fileId** | [**number**] | The file ID to update. | defaults to undefined|
+
+
+### Return type
+
+**FileIntegerWrapper**
+
+### Authorization
+
+No authorization required
 
 ### Example
 
@@ -2526,22 +2632,6 @@ const { status, data } = await apiInstance.updateFile(
     updateFile
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **updateFile** | **UpdateFile**| The parameters for updating a file. | |
-| **fileId** | [**number**] | The file ID to update. | defaults to undefined|
-
-
-### Return type
-
-**FileIntegerWrapper**
-
-### Authorization
-
-No authorization required
 
 ### HTTP request headers
 

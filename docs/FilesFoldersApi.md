@@ -32,6 +32,24 @@ All URIs are relative to *http://localhost:8092*
 
 Checks the file uploads to the folder with the ID specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/check-upload/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **checkUploadRequest** | **CheckUploadRequest**| The request parameters for checking file uploads. | |
+| **folderId** | [**number**] | The folder ID. | defaults to undefined|
+
+
+### Return type
+
+**STRINGArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -53,22 +71,6 @@ const { status, data } = await apiInstance.checkUpload(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **checkUploadRequest** | **CheckUploadRequest**| The request parameters for checking file uploads. | |
-| **folderId** | [**number**] | The folder ID. | defaults to undefined|
-
-
-### Return type
-
-**STRINGArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -87,6 +89,24 @@ const { status, data } = await apiInstance.checkUpload(
 > FolderIntegerWrapper createFolder()
 
 Creates a new folder with the title specified in the request. The parent folder ID can be also specified.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-folder/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **createFolder** | **CreateFolder**| The parameters for creating a folder. | |
+| **folderId** | [**number**] | The folder ID for the folder creation. | defaults to undefined|
+
+
+### Return type
+
+**FolderIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -109,22 +129,6 @@ const { status, data } = await apiInstance.createFolder(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **createFolder** | **CreateFolder**| The parameters for creating a folder. | |
-| **folderId** | [**number**] | The folder ID for the folder creation. | defaults to undefined|
-
-
-### Return type
-
-**FolderIntegerWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -143,6 +147,24 @@ const { status, data } = await apiInstance.createFolder(
 > FileOperationArrayWrapper deleteFolder()
 
 Deletes a folder with the ID specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-folder/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **deleteFolder** | **DeleteFolder**| The parameters for deleting a folder. | |
+| **folderId** | [**number**] | The folder ID to delete. | defaults to undefined|
+
+
+### Return type
+
+**FileOperationArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -165,22 +187,6 @@ const { status, data } = await apiInstance.deleteFolder(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **deleteFolder** | **DeleteFolder**| The parameters for deleting a folder. | |
-| **folderId** | [**number**] | The folder ID to delete. | defaults to undefined|
-
-
-### Return type
-
-**FileOperationArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -200,6 +206,20 @@ const { status, data } = await apiInstance.deleteFolder(
 
 Returns the used space of files in the root folders.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-files-used-space/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**FilesStatisticsResultWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -213,18 +233,6 @@ const apiInstance = new FilesFoldersApi(configuration);
 
 const { status, data } = await apiInstance.getFilesUsedSpace();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**FilesStatisticsResultWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -245,6 +253,23 @@ This endpoint does not have any parameters.
 
 Returns the form filter of a folder with the ID specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **folderId** | [**number**] | The request folder ID. | defaults to undefined|
+
+
+### Return type
+
+**FormsItemArrayWrapper**
+
+### Authorization
+
+No authorization required
+
 ### Example
 
 ```typescript
@@ -263,21 +288,6 @@ const { status, data } = await apiInstance.getFolder(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **folderId** | [**number**] | The request folder ID. | defaults to undefined|
-
-
-### Return type
-
-**FormsItemArrayWrapper**
-
-### Authorization
-
-No authorization required
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -295,6 +305,37 @@ No authorization required
 > FolderContentIntegerWrapper getFolderByFolderId()
 
 Returns the detailed list of files and folders located in the folder with the ID specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-by-folder-id/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **folderId** | [**number**] | The folder ID of the request. | defaults to undefined|
+| **userIdOrGroupId** | [**string**] | The user or group ID. | (optional) defaults to undefined|
+| **filterType** | **FilterType** | The filter type. | (optional) defaults to undefined|
+| **roomId** | [**number**] | The room ID. | (optional) defaults to undefined|
+| **excludeSubject** | [**boolean**] | Specifies whether to exclude search by user or group ID. | (optional) defaults to undefined|
+| **applyFilterOption** | **ApplyFilterOption** | Specifies whether to return only files, only folders or all elements from the specified folder. | (optional) defaults to undefined|
+| **extension** | [**string**] | Specifies whether to search for the specific file extension. | (optional) defaults to undefined|
+| **searchArea** | **SearchArea** | The search area. | (optional) defaults to undefined|
+| **formsItemKey** | [**string**] | The forms item key. | (optional) defaults to undefined|
+| **formsItemType** | [**string**] | The forms item type. | (optional) defaults to undefined|
+| **count** | [**number**] | The maximum number of items to retrieve in the request. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The zero-based index of the first item to retrieve in a paginated request. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | Specifies the property used for sorting the folder request results. | (optional) defaults to undefined|
+| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The text value used as a filter parameter for folder content queries. | (optional) defaults to undefined|
+
+
+### Return type
+
+**FolderContentIntegerWrapper**
+
+### Authorization
+
+No authorization required
 
 ### Example
 
@@ -342,35 +383,6 @@ const { status, data } = await apiInstance.getFolderByFolderId(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **folderId** | [**number**] | The folder ID of the request. | defaults to undefined|
-| **userIdOrGroupId** | [**string**] | The user or group ID. | (optional) defaults to undefined|
-| **filterType** | **FilterType** | The filter type. | (optional) defaults to undefined|
-| **roomId** | [**number**] | The room ID. | (optional) defaults to undefined|
-| **excludeSubject** | [**boolean**] | Specifies whether to exclude search by user or group ID. | (optional) defaults to undefined|
-| **applyFilterOption** | **ApplyFilterOption** | Specifies whether to return only files, only folders or all elements from the specified folder. | (optional) defaults to undefined|
-| **extension** | [**string**] | Specifies whether to search for the specific file extension. | (optional) defaults to undefined|
-| **searchArea** | **SearchArea** | The search area. | (optional) defaults to undefined|
-| **formsItemKey** | [**string**] | The forms item key. | (optional) defaults to undefined|
-| **formsItemType** | [**string**] | The forms item type. | (optional) defaults to undefined|
-| **count** | [**number**] | The maximum number of items to retrieve in the request. | (optional) defaults to undefined|
-| **startIndex** | [**number**] | The zero-based index of the first item to retrieve in a paginated request. | (optional) defaults to undefined|
-| **sortBy** | [**string**] | Specifies the property used for sorting the folder request results. | (optional) defaults to undefined|
-| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
-| **filterValue** | [**string**] | The text value used as a filter parameter for folder content queries. | (optional) defaults to undefined|
-
-
-### Return type
-
-**FolderContentIntegerWrapper**
-
-### Authorization
-
-No authorization required
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -390,6 +402,27 @@ No authorization required
 > HistoryArrayWrapper getFolderHistory()
 
 Returns the activity history of a folder with a specified identifier.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-history/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **folderId** | [**number**] | The folder ID of the history request. | defaults to undefined|
+| **fromDate** | **ApiDateTime** | The start date of the history request. | (optional) defaults to undefined|
+| **toDate** | **ApiDateTime** | The end date of the history request. | (optional) defaults to undefined|
+| **count** | [**number**] | The number of records to retrieve for the folder history. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting index from which the history records are retrieved in the request. | (optional) defaults to undefined|
+
+
+### Return type
+
+**HistoryArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -419,25 +452,6 @@ const { status, data } = await apiInstance.getFolderHistory(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **folderId** | [**number**] | The folder ID of the history request. | defaults to undefined|
-| **fromDate** | **ApiDateTime** | The start date of the history request. | (optional) defaults to undefined|
-| **toDate** | **ApiDateTime** | The end date of the history request. | (optional) defaults to undefined|
-| **count** | [**number**] | The number of records to retrieve for the folder history. | (optional) defaults to undefined|
-| **startIndex** | [**number**] | The starting index from which the history records are retrieved in the request. | (optional) defaults to undefined|
-
-
-### Return type
-
-**HistoryArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -459,6 +473,23 @@ const { status, data } = await apiInstance.getFolderHistory(
 
 Returns the detailed information about a folder with the ID specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-info/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **folderId** | [**number**] | The request folder ID. | defaults to undefined|
+
+
+### Return type
+
+**FolderIntegerWrapper**
+
+### Authorization
+
+No authorization required
+
 ### Example
 
 ```typescript
@@ -476,21 +507,6 @@ const { status, data } = await apiInstance.getFolderInfo(
     folderId
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **folderId** | [**number**] | The request folder ID. | defaults to undefined|
-
-
-### Return type
-
-**FolderIntegerWrapper**
-
-### Authorization
-
-No authorization required
 
 ### HTTP request headers
 
@@ -510,6 +526,23 @@ No authorization required
 
 Returns a path to the folder with the ID specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-path/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **folderId** | [**number**] | The request folder ID. | defaults to undefined|
+
+
+### Return type
+
+**FileEntryArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -527,21 +560,6 @@ const { status, data } = await apiInstance.getFolderPath(
     folderId
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **folderId** | [**number**] | The request folder ID. | defaults to undefined|
-
-
-### Return type
-
-**FileEntryArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -563,6 +581,23 @@ const { status, data } = await apiInstance.getFolderPath(
 
 Returns the primary external link by the identifier specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-primary-external-link/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**number**] | The request folder ID. | defaults to undefined|
+
+
+### Return type
+
+**FileShareWrapper**
+
+### Authorization
+
+No authorization required
+
 ### Example
 
 ```typescript
@@ -580,21 +615,6 @@ const { status, data } = await apiInstance.getFolderPrimaryExternalLink(
     id
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] | The request folder ID. | defaults to undefined|
-
-
-### Return type
-
-**FileShareWrapper**
-
-### Authorization
-
-No authorization required
 
 ### HTTP request headers
 
@@ -615,6 +635,23 @@ No authorization required
 
 Returns a list of all the subfolders from a folder with the ID specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folders/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **folderId** | [**number**] | The request folder ID. | defaults to undefined|
+
+
+### Return type
+
+**FileEntryArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -632,21 +669,6 @@ const { status, data } = await apiInstance.getFolders(
     folderId
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **folderId** | [**number**] | The request folder ID. | defaults to undefined|
-
-
-### Return type
-
-**FileEntryArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -667,6 +689,30 @@ const { status, data } = await apiInstance.getFolders(
 > FolderContentIntegerWrapper getMyFolder()
 
 Returns the detailed list of files and folders located in the \"My documents\" section.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-my-folder/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **userIdOrGroupId** | [**string**] | The user or group ID. | (optional) defaults to undefined|
+| **filterType** | **FilterType** | The filter type. | (optional) defaults to undefined|
+| **applyFilterOption** | **ApplyFilterOption** | Specifies whether to return only files, only folders or all elements. | (optional) defaults to undefined|
+| **count** | [**number**] | The maximum number of items to retrieve in the response. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting position of the items to be retrieved. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | The property used to specify the sorting criteria for folder contents. | (optional) defaults to undefined|
+| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The text used for filtering or searching folder contents. | (optional) defaults to undefined|
+
+
+### Return type
+
+**FolderContentIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -700,28 +746,6 @@ const { status, data } = await apiInstance.getMyFolder(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **userIdOrGroupId** | [**string**] | The user or group ID. | (optional) defaults to undefined|
-| **filterType** | **FilterType** | The filter type. | (optional) defaults to undefined|
-| **applyFilterOption** | **ApplyFilterOption** | Specifies whether to return only files, only folders or all elements. | (optional) defaults to undefined|
-| **count** | [**number**] | The maximum number of items to retrieve in the response. | (optional) defaults to undefined|
-| **startIndex** | [**number**] | The starting position of the items to be retrieved. | (optional) defaults to undefined|
-| **sortBy** | [**string**] | The property used to specify the sorting criteria for folder contents. | (optional) defaults to undefined|
-| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
-| **filterValue** | [**string**] | The text used for filtering or searching folder contents. | (optional) defaults to undefined|
-
-
-### Return type
-
-**FolderContentIntegerWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -743,6 +767,23 @@ const { status, data } = await apiInstance.getMyFolder(
 
 Returns a list of all the new items from a folder with the ID specified in the request.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-new-folder-items/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **folderId** | [**number**] | The request folder ID. | defaults to undefined|
+
+
+### Return type
+
+**FileEntryArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -760,21 +801,6 @@ const { status, data } = await apiInstance.getNewFolderItems(
     folderId
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **folderId** | [**number**] | The request folder ID. | defaults to undefined|
-
-
-### Return type
-
-**FileEntryArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -795,6 +821,29 @@ const { status, data } = await apiInstance.getNewFolderItems(
 > FolderContentIntegerWrapper getPrivacyFolder()
 
 Returns the detailed list of files and folders located in the \"Private Room\" section.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-privacy-folder/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **userIdOrGroupId** | [**string**] | The user or group ID. | (optional) defaults to undefined|
+| **filterType** | **FilterType** | The filter type. | (optional) defaults to undefined|
+| **count** | [**number**] | The maximum number of items to retrieve in the request. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The zero-based index of the first item to retrieve in a paginated list. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | Specifies the field by which the folder content should be sorted. | (optional) defaults to undefined|
+| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The text used as a filter or search criterion for folder content queries. | (optional) defaults to undefined|
+
+
+### Return type
+
+**FolderContentIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -826,27 +875,6 @@ const { status, data } = await apiInstance.getPrivacyFolder(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **userIdOrGroupId** | [**string**] | The user or group ID. | (optional) defaults to undefined|
-| **filterType** | **FilterType** | The filter type. | (optional) defaults to undefined|
-| **count** | [**number**] | The maximum number of items to retrieve in the request. | (optional) defaults to undefined|
-| **startIndex** | [**number**] | The zero-based index of the first item to retrieve in a paginated list. | (optional) defaults to undefined|
-| **sortBy** | [**string**] | Specifies the field by which the folder content should be sorted. | (optional) defaults to undefined|
-| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
-| **filterValue** | [**string**] | The text used as a filter or search criterion for folder content queries. | (optional) defaults to undefined|
-
-
-### Return type
-
-**FolderContentIntegerWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -867,6 +895,30 @@ const { status, data } = await apiInstance.getPrivacyFolder(
 > FolderContentIntegerArrayWrapper getRootFolders()
 
 Returns all the sections matching the parameters specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-root-folders/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **userIdOrGroupId** | [**string**] | The user or group ID. | (optional) defaults to undefined|
+| **filterType** | **FilterType** | The filter type. | (optional) defaults to undefined|
+| **withoutTrash** | [**boolean**] | Specifies whether to return the \&quot;Trash\&quot; section or not. | (optional) defaults to undefined|
+| **count** | [**number**] | The maximum number of items to retrieve in the response. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting position of the items to be retrieved. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | Specifies the field by which the folder content should be sorted. | (optional) defaults to undefined|
+| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The text used as a filter for searching or retrieving folder contents. | (optional) defaults to undefined|
+
+
+### Return type
+
+**FolderContentIntegerArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -900,28 +952,6 @@ const { status, data } = await apiInstance.getRootFolders(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **userIdOrGroupId** | [**string**] | The user or group ID. | (optional) defaults to undefined|
-| **filterType** | **FilterType** | The filter type. | (optional) defaults to undefined|
-| **withoutTrash** | [**boolean**] | Specifies whether to return the \&quot;Trash\&quot; section or not. | (optional) defaults to undefined|
-| **count** | [**number**] | The maximum number of items to retrieve in the response. | (optional) defaults to undefined|
-| **startIndex** | [**number**] | The starting position of the items to be retrieved. | (optional) defaults to undefined|
-| **sortBy** | [**string**] | Specifies the field by which the folder content should be sorted. | (optional) defaults to undefined|
-| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
-| **filterValue** | [**string**] | The text used as a filter for searching or retrieving folder contents. | (optional) defaults to undefined|
-
-
-### Return type
-
-**FolderContentIntegerArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -942,6 +972,30 @@ const { status, data } = await apiInstance.getRootFolders(
 > FolderContentIntegerWrapper getTrashFolder()
 
 Returns the detailed list of files and folders located in the \"Trash\" section.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-trash-folder/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **userIdOrGroupId** | [**string**] | The user or group ID. | (optional) defaults to undefined|
+| **filterType** | **FilterType** | The filter type. | (optional) defaults to undefined|
+| **applyFilterOption** | **ApplyFilterOption** | Specifies whether to return only files, only folders or all elements. | (optional) defaults to undefined|
+| **count** | [**number**] | The maximum number of items to retrieve in the response. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting position of the items to be retrieved. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | The property used to specify the sorting criteria for folder contents. | (optional) defaults to undefined|
+| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The text used for filtering or searching folder contents. | (optional) defaults to undefined|
+
+
+### Return type
+
+**FolderContentIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -975,28 +1029,6 @@ const { status, data } = await apiInstance.getTrashFolder(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **userIdOrGroupId** | [**string**] | The user or group ID. | (optional) defaults to undefined|
-| **filterType** | **FilterType** | The filter type. | (optional) defaults to undefined|
-| **applyFilterOption** | **ApplyFilterOption** | Specifies whether to return only files, only folders or all elements. | (optional) defaults to undefined|
-| **count** | [**number**] | The maximum number of items to retrieve in the response. | (optional) defaults to undefined|
-| **startIndex** | [**number**] | The starting position of the items to be retrieved. | (optional) defaults to undefined|
-| **sortBy** | [**string**] | The property used to specify the sorting criteria for folder contents. | (optional) defaults to undefined|
-| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
-| **filterValue** | [**string**] | The text used for filtering or searching folder contents. | (optional) defaults to undefined|
-
-
-### Return type
-
-**FolderContentIntegerWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -1017,6 +1049,35 @@ const { status, data } = await apiInstance.getTrashFolder(
 > FileIntegerWrapper insertFile()
 
 Inserts a file specified in the request to the selected folder by single file uploading.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/insert-file/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **folderId** | [**number**] | The folder ID for inserting a file. | defaults to undefined|
+| **insertFileFile** | [**File**] | The file to be inserted. | (optional) defaults to undefined|
+| **insertFileTitle** | [**string**] | The file title to be inserted. | (optional) defaults to undefined|
+| **insertFileCreateNewIfExist** | [**boolean**] | Specifies whether to create a new file if it already exists or not. | (optional) defaults to undefined|
+| **insertFileKeepConvertStatus** | [**boolean**] | Specifies whether to keep the file converting status or not. | (optional) defaults to undefined|
+| **insertFileStreamCanRead** | [**boolean**] |  | (optional) defaults to undefined|
+| **insertFileStreamCanWrite** | [**boolean**] |  | (optional) defaults to undefined|
+| **insertFileStreamCanSeek** | [**boolean**] |  | (optional) defaults to undefined|
+| **insertFileStreamCanTimeout** | [**boolean**] |  | (optional) defaults to undefined|
+| **insertFileStreamLength** | [**number**] |  | (optional) defaults to undefined|
+| **insertFileStreamPosition** | [**number**] |  | (optional) defaults to undefined|
+| **insertFileStreamReadTimeout** | [**number**] |  | (optional) defaults to undefined|
+| **insertFileStreamWriteTimeout** | [**number**] |  | (optional) defaults to undefined|
+
+
+### Return type
+
+**FileIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1060,33 +1121,6 @@ const { status, data } = await apiInstance.insertFile(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **folderId** | [**number**] | The folder ID for inserting a file. | defaults to undefined|
-| **insertFileFile** | [**File**] | The file to be inserted. | (optional) defaults to undefined|
-| **insertFileTitle** | [**string**] | The file title to be inserted. | (optional) defaults to undefined|
-| **insertFileCreateNewIfExist** | [**boolean**] | Specifies whether to create a new file if it already exists or not. | (optional) defaults to undefined|
-| **insertFileKeepConvertStatus** | [**boolean**] | Specifies whether to keep the file converting status or not. | (optional) defaults to undefined|
-| **insertFileStreamCanRead** | [**boolean**] |  | (optional) defaults to undefined|
-| **insertFileStreamCanWrite** | [**boolean**] |  | (optional) defaults to undefined|
-| **insertFileStreamCanSeek** | [**boolean**] |  | (optional) defaults to undefined|
-| **insertFileStreamCanTimeout** | [**boolean**] |  | (optional) defaults to undefined|
-| **insertFileStreamLength** | [**number**] |  | (optional) defaults to undefined|
-| **insertFileStreamPosition** | [**number**] |  | (optional) defaults to undefined|
-| **insertFileStreamReadTimeout** | [**number**] |  | (optional) defaults to undefined|
-| **insertFileStreamWriteTimeout** | [**number**] |  | (optional) defaults to undefined|
-
-
-### Return type
-
-**FileIntegerWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: multipart/form-data
@@ -1107,6 +1141,34 @@ const { status, data } = await apiInstance.insertFile(
 > FileIntegerWrapper insertFileToMyFromBody()
 
 Inserts a file specified in the request to the \"My documents\" section by single file uploading.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/insert-file-to-my-from-body/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **file** | [**File**] | The file to be inserted. | (optional) defaults to undefined|
+| **title** | [**string**] | The file title to be inserted. | (optional) defaults to undefined|
+| **createNewIfExist** | [**boolean**] | Specifies whether to create a new file if it already exists or not. | (optional) defaults to undefined|
+| **keepConvertStatus** | [**boolean**] | Specifies whether to keep the file converting status or not. | (optional) defaults to undefined|
+| **streamCanRead** | [**boolean**] |  | (optional) defaults to undefined|
+| **streamCanWrite** | [**boolean**] |  | (optional) defaults to undefined|
+| **streamCanSeek** | [**boolean**] |  | (optional) defaults to undefined|
+| **streamCanTimeout** | [**boolean**] |  | (optional) defaults to undefined|
+| **streamLength** | [**number**] |  | (optional) defaults to undefined|
+| **streamPosition** | [**number**] |  | (optional) defaults to undefined|
+| **streamReadTimeout** | [**number**] |  | (optional) defaults to undefined|
+| **streamWriteTimeout** | [**number**] |  | (optional) defaults to undefined|
+
+
+### Return type
+
+**FileIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1148,32 +1210,6 @@ const { status, data } = await apiInstance.insertFileToMyFromBody(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **file** | [**File**] | The file to be inserted. | (optional) defaults to undefined|
-| **title** | [**string**] | The file title to be inserted. | (optional) defaults to undefined|
-| **createNewIfExist** | [**boolean**] | Specifies whether to create a new file if it already exists or not. | (optional) defaults to undefined|
-| **keepConvertStatus** | [**boolean**] | Specifies whether to keep the file converting status or not. | (optional) defaults to undefined|
-| **streamCanRead** | [**boolean**] |  | (optional) defaults to undefined|
-| **streamCanWrite** | [**boolean**] |  | (optional) defaults to undefined|
-| **streamCanSeek** | [**boolean**] |  | (optional) defaults to undefined|
-| **streamCanTimeout** | [**boolean**] |  | (optional) defaults to undefined|
-| **streamLength** | [**number**] |  | (optional) defaults to undefined|
-| **streamPosition** | [**number**] |  | (optional) defaults to undefined|
-| **streamReadTimeout** | [**number**] |  | (optional) defaults to undefined|
-| **streamWriteTimeout** | [**number**] |  | (optional) defaults to undefined|
-
-
-### Return type
-
-**FileIntegerWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: multipart/form-data
@@ -1194,6 +1230,24 @@ const { status, data } = await apiInstance.insertFileToMyFromBody(
 > FolderIntegerWrapper renameFolder()
 
 Renames the selected folder with a new title specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/rename-folder/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **createFolder** | **CreateFolder**| The parameters for creating a folder. | |
+| **folderId** | [**number**] | The folder ID for the folder creation. | defaults to undefined|
+
+
+### Return type
+
+**FolderIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1216,22 +1270,6 @@ const { status, data } = await apiInstance.renameFolder(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **createFolder** | **CreateFolder**| The parameters for creating a folder. | |
-| **folderId** | [**number**] | The folder ID for the folder creation. | defaults to undefined|
-
-
-### Return type
-
-**FolderIntegerWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -1251,6 +1289,24 @@ const { status, data } = await apiInstance.renameFolder(
 > FolderIntegerWrapper setFolderOrder()
 
 Sets the file order in the folder with ID specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-order/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **orderRequestDto** | **OrderRequestDto**| The folder order information. | |
+| **folderId** | [**number**] | The folder unique identifier. | defaults to undefined|
+
+
+### Return type
+
+**FolderIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1273,22 +1329,6 @@ const { status, data } = await apiInstance.setFolderOrder(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **orderRequestDto** | **OrderRequestDto**| The folder order information. | |
-| **folderId** | [**number**] | The folder unique identifier. | defaults to undefined|
-
-
-### Return type
-
-**FolderIntegerWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -1307,6 +1347,24 @@ const { status, data } = await apiInstance.setFolderOrder(
 > ObjectWrapper uploadFile()
 
 Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **uploadRequestDto** | **UploadRequestDto**| The request parameters for uploading a file. | |
+| **folderId** | [**number**] | The folder ID to upload a file. | defaults to undefined|
+
+
+### Return type
+
+**ObjectWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1329,22 +1387,6 @@ const { status, data } = await apiInstance.uploadFile(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **uploadRequestDto** | **UploadRequestDto**| The request parameters for uploading a file. | |
-| **folderId** | [**number**] | The folder ID to upload a file. | defaults to undefined|
-
-
-### Return type
-
-**ObjectWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -1366,6 +1408,23 @@ const { status, data } = await apiInstance.uploadFile(
 
 Uploads a file specified in the request to the \"My documents\" section by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file-to-my/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **inDto** | **UploadRequestDto** | The request parameters for uploading a file. | (optional) defaults to undefined|
+
+
+### Return type
+
+**ObjectWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -1384,21 +1443,6 @@ const { status, data } = await apiInstance.uploadFileToMy(
     inDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **inDto** | **UploadRequestDto** | The request parameters for uploading a file. | (optional) defaults to undefined|
-
-
-### Return type
-
-**ObjectWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

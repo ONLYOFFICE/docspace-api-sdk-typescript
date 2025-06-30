@@ -14,6 +14,20 @@ All URIs are relative to *http://localhost:8092*
 
 Returns the current portal quota.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-quota/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**TenantQuotaWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -27,18 +41,6 @@ const apiInstance = new PortalQuotaApi(configuration);
 
 const { status, data } = await apiInstance.getPortalQuota();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**TenantQuotaWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -60,6 +62,23 @@ This endpoint does not have any parameters.
 
 Returns the current portal tariff.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-tariff/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **refresh** | [**boolean**] | The value indicating whether the current portal tariff information should be refreshed. | (optional) defaults to undefined|
+
+
+### Return type
+
+**TariffWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -77,21 +96,6 @@ const { status, data } = await apiInstance.getPortalTariff(
     refresh
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **refresh** | [**boolean**] | The value indicating whether the current portal tariff information should be refreshed. | (optional) defaults to undefined|
-
-
-### Return type
-
-**TariffWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -112,6 +116,20 @@ const { status, data } = await apiInstance.getPortalTariff(
 
 Returns the used space of the current portal.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-used-space/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**DoubleWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -125,18 +143,6 @@ const apiInstance = new PortalQuotaApi(configuration);
 
 const { status, data } = await apiInstance.getPortalUsedSpace();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**DoubleWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -157,6 +163,20 @@ This endpoint does not have any parameters.
 
 Returns the recommended quota for the current portal.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-right-quota/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**TenantQuotaWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -170,18 +190,6 @@ const apiInstance = new PortalQuotaApi(configuration);
 
 const { status, data } = await apiInstance.getRightQuota();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**TenantQuotaWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

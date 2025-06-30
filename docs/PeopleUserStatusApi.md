@@ -13,6 +13,30 @@ All URIs are relative to *http://localhost:8092*
 
 Returns a list of profiles filtered by the user status.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-by-status/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **status** | **EmployeeStatus** | The user status. | defaults to undefined|
+| **filterBy** | [**string**] | Specifies the criteria used to filter the profiles in the request. | (optional) defaults to undefined|
+| **count** | [**number**] | The maximum number of user profiles to retrieve. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting index for retrieving data in a paginated request. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | Specifies the property or field name by which the results should be sorted. | (optional) defaults to undefined|
+| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
+| **filterSeparator** | [**string**] | Represents the separator used to split multiple filter criteria in a query string. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | A string value representing additional filter criteria used in query parameters. | (optional) defaults to undefined|
+
+
+### Return type
+
+**EmployeeFullArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -45,28 +69,6 @@ const { status, data } = await apiInstance.getByStatus(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **status** | **EmployeeStatus** | The user status. | defaults to undefined|
-| **filterBy** | [**string**] | Specifies the criteria used to filter the profiles in the request. | (optional) defaults to undefined|
-| **count** | [**number**] | The maximum number of user profiles to retrieve. | (optional) defaults to undefined|
-| **startIndex** | [**number**] | The starting index for retrieving data in a paginated request. | (optional) defaults to undefined|
-| **sortBy** | [**string**] | Specifies the property or field name by which the results should be sorted. | (optional) defaults to undefined|
-| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
-| **filterSeparator** | [**string**] | Represents the separator used to split multiple filter criteria in a query string. | (optional) defaults to undefined|
-| **filterValue** | [**string**] | A string value representing additional filter criteria used in query parameters. | (optional) defaults to undefined|
-
-
-### Return type
-
-**EmployeeFullArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -85,6 +87,24 @@ const { status, data } = await apiInstance.getByStatus(
 > EmployeeFullArrayWrapper updateUserActivationStatus()
 
 Sets the required activation status to the list of users with the IDs specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-user-activation-status/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **updateMembersRequestDto** | **UpdateMembersRequestDto**| The request parameters for updating the user information. | |
+| **activationstatus** | **EmployeeActivationStatus** | The new user activation status. | defaults to undefined|
+
+
+### Return type
+
+**EmployeeFullArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -107,22 +127,6 @@ const { status, data } = await apiInstance.updateUserActivationStatus(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **updateMembersRequestDto** | **UpdateMembersRequestDto**| The request parameters for updating the user information. | |
-| **activationstatus** | **EmployeeActivationStatus** | The new user activation status. | defaults to undefined|
-
-
-### Return type
-
-**EmployeeFullArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -141,6 +145,24 @@ const { status, data } = await apiInstance.updateUserActivationStatus(
 > EmployeeFullArrayWrapper updateUserStatus()
 
 Changes a status of the users with the IDs specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-user-status/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **updateMembersRequestDto** | **UpdateMembersRequestDto**| The request parameters for updating the user information. | |
+| **status** | **EmployeeStatus** | The new user status. | defaults to undefined|
+
+
+### Return type
+
+**EmployeeFullArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -162,22 +184,6 @@ const { status, data } = await apiInstance.updateUserStatus(
     updateMembersRequestDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **updateMembersRequestDto** | **UpdateMembersRequestDto**| The request parameters for updating the user information. | |
-| **status** | **EmployeeStatus** | The new user status. | defaults to undefined|
-
-
-### Return type
-
-**EmployeeFullArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

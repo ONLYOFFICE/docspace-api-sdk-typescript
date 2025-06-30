@@ -17,6 +17,35 @@ All URIs are relative to *http://localhost:8092*
 
 Returns the account entries with their sharing settings.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-shared/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**number**] | The user ID. | defaults to undefined|
+| **employeeStatus** | **EmployeeStatus** | The user status. | (optional) defaults to undefined|
+| **activationStatus** | **EmployeeActivationStatus** | The user activation status. | (optional) defaults to undefined|
+| **excludeShared** | [**boolean**] | Specifies whether to exclude the account sharing settings from the response. | (optional) defaults to undefined|
+| **includeShared** | [**boolean**] | Specifies whether to include the account sharing settings in the response. | (optional) defaults to undefined|
+| **invitedByMe** | [**boolean**] | Specifies whether the user is invited by the current user or not. | (optional) defaults to undefined|
+| **inviterId** | [**string**] | The inviter ID. | (optional) defaults to undefined|
+| **area** | **Area** | The area of the account entries. | (optional) defaults to undefined|
+| **employeeTypes** | **Array&lt;EmployeeType&gt;** | The list of the user types. | (optional) defaults to undefined|
+| **count** | [**number**] | The number of items to retrieve in a request. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting index for the query results. | (optional) defaults to undefined|
+| **filterSeparator** | [**string**] | Specifies the separator used in filter expressions. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The text filter applied to the accounts search query. | (optional) defaults to undefined|
+
+
+### Return type
+
+**ObjectArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -59,33 +88,6 @@ const { status, data } = await apiInstance.getAccountsEntriesWithShared(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] | The user ID. | defaults to undefined|
-| **employeeStatus** | **EmployeeStatus** | The user status. | (optional) defaults to undefined|
-| **activationStatus** | **EmployeeActivationStatus** | The user activation status. | (optional) defaults to undefined|
-| **excludeShared** | [**boolean**] | Specifies whether to exclude the account sharing settings from the response. | (optional) defaults to undefined|
-| **includeShared** | [**boolean**] | Specifies whether to include the account sharing settings in the response. | (optional) defaults to undefined|
-| **invitedByMe** | [**boolean**] | Specifies whether the user is invited by the current user or not. | (optional) defaults to undefined|
-| **inviterId** | [**string**] | The inviter ID. | (optional) defaults to undefined|
-| **area** | **Area** | The area of the account entries. | (optional) defaults to undefined|
-| **employeeTypes** | **Array&lt;EmployeeType&gt;** | The list of the user types. | (optional) defaults to undefined|
-| **count** | [**number**] | The number of items to retrieve in a request. | (optional) defaults to undefined|
-| **startIndex** | [**number**] | The starting index for the query results. | (optional) defaults to undefined|
-| **filterSeparator** | [**string**] | Specifies the separator used in filter expressions. | (optional) defaults to undefined|
-| **filterValue** | [**string**] | The text filter applied to the accounts search query. | (optional) defaults to undefined|
-
-
-### Return type
-
-**ObjectArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -105,6 +107,25 @@ const { status, data } = await apiInstance.getAccountsEntriesWithShared(
 > EmployeeFullArrayWrapper getSearch()
 
 Returns a list of users matching the search query.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-search/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **query** | [**string**] | The search query. | defaults to undefined|
+| **filterBy** | [**string**] | Specifies a filter criteria for the user search query. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The value used for filtering users, allowing additional constraints for the query. | (optional) defaults to undefined|
+
+
+### Return type
+
+**EmployeeFullArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -128,23 +149,6 @@ const { status, data } = await apiInstance.getSearch(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **query** | [**string**] | The search query. | defaults to undefined|
-| **filterBy** | [**string**] | Specifies a filter criteria for the user search query. | (optional) defaults to undefined|
-| **filterValue** | [**string**] | The value used for filtering users, allowing additional constraints for the query. | (optional) defaults to undefined|
-
-
-### Return type
-
-**EmployeeFullArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -164,6 +168,42 @@ const { status, data } = await apiInstance.getSearch(
 > EmployeeArrayWrapper getSimpleByFilter()
 
 Returns a list of users matching the parameters specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-simple-by-filter/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **employeeStatus** | **EmployeeStatus** | The user status. | (optional) defaults to undefined|
+| **groupId** | [**string**] | The group ID. | (optional) defaults to undefined|
+| **activationStatus** | **EmployeeActivationStatus** | The user activation status. | (optional) defaults to undefined|
+| **employeeType** | **EmployeeType** | The user type. | (optional) defaults to undefined|
+| **employeeTypes** | **Array<0 &#124; 1 &#124; 2 &#124; 3 &#124; 4>** | The list of user types. | (optional) defaults to undefined|
+| **isAdministrator** | [**boolean**] | Specifies if the user is an administrator or not. | (optional) defaults to undefined|
+| **payments** | **Payments** | The user payment status. | (optional) defaults to undefined|
+| **accountLoginType** | **AccountLoginType** | The account login type. | (optional) defaults to undefined|
+| **quotaFilter** | **QuotaFilter** | The quota filter (All - 0, Default - 1, Custom - 2). | (optional) defaults to undefined|
+| **withoutGroup** | [**boolean**] | Specifies whether the user should be a member of a group or not. | (optional) defaults to undefined|
+| **excludeGroup** | [**boolean**] | Specifies whether the user should be a member of the group with the specified ID. | (optional) defaults to undefined|
+| **invitedByMe** | [**boolean**] | Specifies whether the user is invited by the current user or not. | (optional) defaults to undefined|
+| **inviterId** | [**string**] | The inviter ID. | (optional) defaults to undefined|
+| **area** | **Area** | The filter area. | (optional) defaults to undefined|
+| **count** | [**number**] | The maximum number of items to be retrieved in the response. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The zero-based index of the first item to be retrieved in a filtered result set. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | Specifies the property or field name by which the results should be sorted. | (optional) defaults to undefined|
+| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
+| **filterSeparator** | [**string**] | Represents the separator used to split filter criteria in query parameters. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The search text used to filter results based on user input. | (optional) defaults to undefined|
+
+
+### Return type
+
+**EmployeeArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -221,40 +261,6 @@ const { status, data } = await apiInstance.getSimpleByFilter(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **employeeStatus** | **EmployeeStatus** | The user status. | (optional) defaults to undefined|
-| **groupId** | [**string**] | The group ID. | (optional) defaults to undefined|
-| **activationStatus** | **EmployeeActivationStatus** | The user activation status. | (optional) defaults to undefined|
-| **employeeType** | **EmployeeType** | The user type. | (optional) defaults to undefined|
-| **employeeTypes** | **Array<0 &#124; 1 &#124; 2 &#124; 3 &#124; 4>** | The list of user types. | (optional) defaults to undefined|
-| **isAdministrator** | [**boolean**] | Specifies if the user is an administrator or not. | (optional) defaults to undefined|
-| **payments** | **Payments** | The user payment status. | (optional) defaults to undefined|
-| **accountLoginType** | **AccountLoginType** | The account login type. | (optional) defaults to undefined|
-| **quotaFilter** | **QuotaFilter** | The quota filter (All - 0, Default - 1, Custom - 2). | (optional) defaults to undefined|
-| **withoutGroup** | [**boolean**] | Specifies whether the user should be a member of a group or not. | (optional) defaults to undefined|
-| **excludeGroup** | [**boolean**] | Specifies whether the user should be a member of the group with the specified ID. | (optional) defaults to undefined|
-| **invitedByMe** | [**boolean**] | Specifies whether the user is invited by the current user or not. | (optional) defaults to undefined|
-| **inviterId** | [**string**] | The inviter ID. | (optional) defaults to undefined|
-| **area** | **Area** | The filter area. | (optional) defaults to undefined|
-| **count** | [**number**] | The maximum number of items to be retrieved in the response. | (optional) defaults to undefined|
-| **startIndex** | [**number**] | The zero-based index of the first item to be retrieved in a filtered result set. | (optional) defaults to undefined|
-| **sortBy** | [**string**] | Specifies the property or field name by which the results should be sorted. | (optional) defaults to undefined|
-| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
-| **filterSeparator** | [**string**] | Represents the separator used to split filter criteria in query parameters. | (optional) defaults to undefined|
-| **filterValue** | [**string**] | The search text used to filter results based on user input. | (optional) defaults to undefined|
-
-
-### Return type
-
-**EmployeeArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -274,6 +280,35 @@ const { status, data } = await apiInstance.getSimpleByFilter(
 > EmployeeFullArrayWrapper getUsersWithRoomShared()
 
 Returns the users with the sharing settings in a room with the ID specified in request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-users-with-room-shared/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**number**] | The user ID. | defaults to undefined|
+| **employeeStatus** | **EmployeeStatus** | The user status. | (optional) defaults to undefined|
+| **activationStatus** | **EmployeeActivationStatus** | The user activation status. | (optional) defaults to undefined|
+| **excludeShared** | [**boolean**] | Specifies whether to exclude the user sharing settings or not. | (optional) defaults to undefined|
+| **includeShared** | [**boolean**] | Specifies whether to include the user sharing settings or not. | (optional) defaults to undefined|
+| **invitedByMe** | [**boolean**] | Specifies whether the user was invited by the current user or not. | (optional) defaults to undefined|
+| **inviterId** | [**string**] | The inviter ID. | (optional) defaults to undefined|
+| **area** | **Area** | The user area. | (optional) defaults to undefined|
+| **employeeTypes** | **Array&lt;EmployeeType&gt;** | The list of user types. | (optional) defaults to undefined|
+| **count** | [**number**] | The maximum number of users to be retrieved in the request. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The zero-based index of the first record to retrieve in a paged query. | (optional) defaults to undefined|
+| **filterSeparator** | [**string**] | The character or string used to separate multiple filter values in a filtering query. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The filter text value used for searching or filtering user results. | (optional) defaults to undefined|
+
+
+### Return type
+
+**EmployeeFullArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -317,33 +352,6 @@ const { status, data } = await apiInstance.getUsersWithRoomShared(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] | The user ID. | defaults to undefined|
-| **employeeStatus** | **EmployeeStatus** | The user status. | (optional) defaults to undefined|
-| **activationStatus** | **EmployeeActivationStatus** | The user activation status. | (optional) defaults to undefined|
-| **excludeShared** | [**boolean**] | Specifies whether to exclude the user sharing settings or not. | (optional) defaults to undefined|
-| **includeShared** | [**boolean**] | Specifies whether to include the user sharing settings or not. | (optional) defaults to undefined|
-| **invitedByMe** | [**boolean**] | Specifies whether the user was invited by the current user or not. | (optional) defaults to undefined|
-| **inviterId** | [**string**] | The inviter ID. | (optional) defaults to undefined|
-| **area** | **Area** | The user area. | (optional) defaults to undefined|
-| **employeeTypes** | **Array&lt;EmployeeType&gt;** | The list of user types. | (optional) defaults to undefined|
-| **count** | [**number**] | The maximum number of users to be retrieved in the request. | (optional) defaults to undefined|
-| **startIndex** | [**number**] | The zero-based index of the first record to retrieve in a paged query. | (optional) defaults to undefined|
-| **filterSeparator** | [**string**] | The character or string used to separate multiple filter values in a filtering query. | (optional) defaults to undefined|
-| **filterValue** | [**string**] | The filter text value used for searching or filtering user results. | (optional) defaults to undefined|
-
-
-### Return type
-
-**EmployeeFullArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -363,6 +371,42 @@ const { status, data } = await apiInstance.getUsersWithRoomShared(
 > EmployeeFullArrayWrapper searchUsersByExtendedFilter()
 
 Returns a list of users with full information about them matching the parameters specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/search-users-by-extended-filter/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **employeeStatus** | **EmployeeStatus** | The user status. | (optional) defaults to undefined|
+| **groupId** | [**string**] | The group ID. | (optional) defaults to undefined|
+| **activationStatus** | **EmployeeActivationStatus** | The user activation status. | (optional) defaults to undefined|
+| **employeeType** | **EmployeeType** | The user type. | (optional) defaults to undefined|
+| **employeeTypes** | **Array<0 &#124; 1 &#124; 2 &#124; 3 &#124; 4>** | The list of user types. | (optional) defaults to undefined|
+| **isAdministrator** | [**boolean**] | Specifies if the user is an administrator or not. | (optional) defaults to undefined|
+| **payments** | **Payments** | The user payment status. | (optional) defaults to undefined|
+| **accountLoginType** | **AccountLoginType** | The account login type. | (optional) defaults to undefined|
+| **quotaFilter** | **QuotaFilter** | The quota filter (All - 0, Default - 1, Custom - 2). | (optional) defaults to undefined|
+| **withoutGroup** | [**boolean**] | Specifies whether the user should be a member of a group or not. | (optional) defaults to undefined|
+| **excludeGroup** | [**boolean**] | Specifies whether the user should be a member of the group with the specified ID. | (optional) defaults to undefined|
+| **invitedByMe** | [**boolean**] | Specifies whether the user is invited by the current user or not. | (optional) defaults to undefined|
+| **inviterId** | [**string**] | The inviter ID. | (optional) defaults to undefined|
+| **area** | **Area** | The filter area. | (optional) defaults to undefined|
+| **count** | [**number**] | The maximum number of items to be retrieved in the response. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The zero-based index of the first item to be retrieved in a filtered result set. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | Specifies the property or field name by which the results should be sorted. | (optional) defaults to undefined|
+| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
+| **filterSeparator** | [**string**] | Represents the separator used to split filter criteria in query parameters. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The search text used to filter results based on user input. | (optional) defaults to undefined|
+
+
+### Return type
+
+**EmployeeFullArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -420,40 +464,6 @@ const { status, data } = await apiInstance.searchUsersByExtendedFilter(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **employeeStatus** | **EmployeeStatus** | The user status. | (optional) defaults to undefined|
-| **groupId** | [**string**] | The group ID. | (optional) defaults to undefined|
-| **activationStatus** | **EmployeeActivationStatus** | The user activation status. | (optional) defaults to undefined|
-| **employeeType** | **EmployeeType** | The user type. | (optional) defaults to undefined|
-| **employeeTypes** | **Array<0 &#124; 1 &#124; 2 &#124; 3 &#124; 4>** | The list of user types. | (optional) defaults to undefined|
-| **isAdministrator** | [**boolean**] | Specifies if the user is an administrator or not. | (optional) defaults to undefined|
-| **payments** | **Payments** | The user payment status. | (optional) defaults to undefined|
-| **accountLoginType** | **AccountLoginType** | The account login type. | (optional) defaults to undefined|
-| **quotaFilter** | **QuotaFilter** | The quota filter (All - 0, Default - 1, Custom - 2). | (optional) defaults to undefined|
-| **withoutGroup** | [**boolean**] | Specifies whether the user should be a member of a group or not. | (optional) defaults to undefined|
-| **excludeGroup** | [**boolean**] | Specifies whether the user should be a member of the group with the specified ID. | (optional) defaults to undefined|
-| **invitedByMe** | [**boolean**] | Specifies whether the user is invited by the current user or not. | (optional) defaults to undefined|
-| **inviterId** | [**string**] | The inviter ID. | (optional) defaults to undefined|
-| **area** | **Area** | The filter area. | (optional) defaults to undefined|
-| **count** | [**number**] | The maximum number of items to be retrieved in the response. | (optional) defaults to undefined|
-| **startIndex** | [**number**] | The zero-based index of the first item to be retrieved in a filtered result set. | (optional) defaults to undefined|
-| **sortBy** | [**string**] | Specifies the property or field name by which the results should be sorted. | (optional) defaults to undefined|
-| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
-| **filterSeparator** | [**string**] | Represents the separator used to split filter criteria in query parameters. | (optional) defaults to undefined|
-| **filterValue** | [**string**] | The search text used to filter results based on user input. | (optional) defaults to undefined|
-
-
-### Return type
-
-**EmployeeFullArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -474,6 +484,23 @@ const { status, data } = await apiInstance.searchUsersByExtendedFilter(
 
 Returns a list of users matching the search query. This method uses the query parameters.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/search-users-by-query/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **query** | [**string**] | The search query. | (optional) defaults to undefined|
+
+
+### Return type
+
+**EmployeeArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -491,21 +518,6 @@ const { status, data } = await apiInstance.searchUsersByQuery(
     query
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **query** | [**string**] | The search query. | (optional) defaults to undefined|
-
-
-### Return type
-
-**EmployeeArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -525,6 +537,26 @@ const { status, data } = await apiInstance.searchUsersByQuery(
 > EmployeeFullArrayWrapper searchUsersByStatus()
 
 Returns a list of users matching the status filter and search query.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/search-users-by-status/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **status** | **EmployeeStatus** | The user status. | defaults to undefined|
+| **query** | [**string**] | The advanced search query. | (optional) defaults to undefined|
+| **filterBy** | [**string**] | Specifies the criteria used to filter search results in advanced queries. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The value used to filter the search query. | (optional) defaults to undefined|
+
+
+### Return type
+
+**EmployeeFullArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -549,24 +581,6 @@ const { status, data } = await apiInstance.searchUsersByStatus(
     filterValue
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **status** | **EmployeeStatus** | The user status. | defaults to undefined|
-| **query** | [**string**] | The advanced search query. | (optional) defaults to undefined|
-| **filterBy** | [**string**] | Specifies the criteria used to filter search results in advanced queries. | (optional) defaults to undefined|
-| **filterValue** | [**string**] | The value used to filter the search query. | (optional) defaults to undefined|
-
-
-### Return type
-
-**EmployeeFullArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

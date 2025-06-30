@@ -11,6 +11,27 @@ All URIs are relative to *http://localhost:8092*
 
 Returns groups with their sharing settings.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-with-shared/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**number**] | The group ID. | defaults to undefined|
+| **excludeShared** | [**boolean**] | Specifies whether to exclude the group sharing settings from the response. | (optional) defaults to undefined|
+| **count** | [**number**] | The number of groups to retrieve in the request. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting index from which to begin retrieving groups with their sharing settings. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The text used as a filter for retrieving groups with their sharing settings. | (optional) defaults to undefined|
+
+
+### Return type
+
+**GroupArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -36,25 +57,6 @@ const { status, data } = await apiInstance.getGroupsWithShared(
     filterValue
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] | The group ID. | defaults to undefined|
-| **excludeShared** | [**boolean**] | Specifies whether to exclude the group sharing settings from the response. | (optional) defaults to undefined|
-| **count** | [**number**] | The number of groups to retrieve in the request. | (optional) defaults to undefined|
-| **startIndex** | [**number**] | The starting index from which to begin retrieving groups with their sharing settings. | (optional) defaults to undefined|
-| **filterValue** | [**string**] | The text used as a filter for retrieving groups with their sharing settings. | (optional) defaults to undefined|
-
-
-### Return type
-
-**GroupArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

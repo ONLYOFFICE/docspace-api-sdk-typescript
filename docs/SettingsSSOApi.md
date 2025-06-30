@@ -15,6 +15,20 @@ All URIs are relative to *http://localhost:8092*
 
 Returns the default portal SSO settings.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-default-sso-settings-v2/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**SsoSettingsV2Wrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -28,18 +42,6 @@ const apiInstance = new SettingsSSOApi(configuration);
 
 const { status, data } = await apiInstance.getDefaultSsoSettingsV2();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**SsoSettingsV2Wrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -60,6 +62,20 @@ This endpoint does not have any parameters.
 
 Returns the current portal SSO settings.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-sso-settings-v2/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**SsoSettingsV2Wrapper**
+
+### Authorization
+
+No authorization required
+
 ### Example
 
 ```typescript
@@ -73,18 +89,6 @@ const apiInstance = new SettingsSSOApi(configuration);
 
 const { status, data } = await apiInstance.getSsoSettingsV2();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**SsoSettingsV2Wrapper**
-
-### Authorization
-
-No authorization required
 
 ### HTTP request headers
 
@@ -104,6 +108,20 @@ No authorization required
 
 Returns the SSO settings constants.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-sso-settings-v2-constants/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**ObjectWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -117,18 +135,6 @@ const apiInstance = new SettingsSSOApi(configuration);
 
 const { status, data } = await apiInstance.getSsoSettingsV2Constants();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**ObjectWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -149,6 +155,20 @@ This endpoint does not have any parameters.
 
 Resets the SSO settings of the current portal.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-sso-settings-v2/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**SsoSettingsV2Wrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -162,18 +182,6 @@ const apiInstance = new SettingsSSOApi(configuration);
 
 const { status, data } = await apiInstance.resetSsoSettingsV2();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**SsoSettingsV2Wrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -194,6 +202,23 @@ This endpoint does not have any parameters.
 
 Saves the SSO settings for the current portal.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-sso-settings-v2/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **ssoSettingsRequestsDto** | **SsoSettingsRequestsDto**|  | |
+
+
+### Return type
+
+**SsoSettingsV2Wrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -212,21 +237,6 @@ const { status, data } = await apiInstance.saveSsoSettingsV2(
     ssoSettingsRequestsDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **ssoSettingsRequestsDto** | **SsoSettingsRequestsDto**|  | |
-
-
-### Return type
-
-**SsoSettingsV2Wrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

@@ -17,6 +17,20 @@ All URIs are relative to *http://localhost:8092*
 
 Generates the audit trail report.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-audit-trail-report/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**StringWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -30,18 +44,6 @@ const apiInstance = new SecurityAuditTrailDataApi(configuration);
 
 const { status, data } = await apiInstance.createAuditTrailReport();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**StringWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -63,6 +65,33 @@ This endpoint does not have any parameters.
 > AuditEventArrayWrapper getAuditEventsByFilter()
 
 Returns a list of the audit events by the parameters specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-events-by-filter/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **userId** | [**string**] | The ID of the user who triggered the audit event. | (optional) defaults to undefined|
+| **productType** | **ProductType** | The type of product related to the audit event. | (optional) defaults to undefined|
+| **moduleType** | **ModuleType** | The module within the product where the audit event occurred. | (optional) defaults to undefined|
+| **actionType** | **ActionType** | The type of action performed in the audit event (e.g., Create, Update, Delete). | (optional) defaults to undefined|
+| **action** | **MessageAction** | The specific action that occurred within the audit event. | (optional) defaults to undefined|
+| **entryType** | **EntryType** | The type of audit entry (e.g., Folder, User, File). | (optional) defaults to undefined|
+| **target** | [**string**] | The target object affected by the audit event (e.g., document ID, user account). | (optional) defaults to undefined|
+| **from** | **ApiDateTime** | The starting date and time for filtering audit events. | (optional) defaults to undefined|
+| **to** | **ApiDateTime** | The ending date and time for filtering audit events. | (optional) defaults to undefined|
+| **count** | [**number**] | The maximum number of audit event records to retrieve. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The index of the first audit event record to retrieve in a paged query. | (optional) defaults to undefined|
+
+
+### Return type
+
+**AuditEventArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -104,31 +133,6 @@ const { status, data } = await apiInstance.getAuditEventsByFilter(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **userId** | [**string**] | The ID of the user who triggered the audit event. | (optional) defaults to undefined|
-| **productType** | **ProductType** | The type of product related to the audit event. | (optional) defaults to undefined|
-| **moduleType** | **ModuleType** | The module within the product where the audit event occurred. | (optional) defaults to undefined|
-| **actionType** | **ActionType** | The type of action performed in the audit event (e.g., Create, Update, Delete). | (optional) defaults to undefined|
-| **action** | **MessageAction** | The specific action that occurred within the audit event. | (optional) defaults to undefined|
-| **entryType** | **EntryType** | The type of audit entry (e.g., Folder, User, File). | (optional) defaults to undefined|
-| **target** | [**string**] | The target object affected by the audit event (e.g., document ID, user account). | (optional) defaults to undefined|
-| **from** | **ApiDateTime** | The starting date and time for filtering audit events. | (optional) defaults to undefined|
-| **to** | **ApiDateTime** | The ending date and time for filtering audit events. | (optional) defaults to undefined|
-| **count** | [**number**] | The maximum number of audit event records to retrieve. | (optional) defaults to undefined|
-| **startIndex** | [**number**] | The index of the first audit event record to retrieve in a paged query. | (optional) defaults to undefined|
-
-
-### Return type
-
-**AuditEventArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -149,6 +153,20 @@ const { status, data } = await apiInstance.getAuditEventsByFilter(
 
 Returns the audit trail settings.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-settings/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**TenantAuditSettingsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -162,18 +180,6 @@ const apiInstance = new SecurityAuditTrailDataApi(configuration);
 
 const { status, data } = await apiInstance.getAuditSettings();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**TenantAuditSettingsWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -195,6 +201,24 @@ This endpoint does not have any parameters.
 
 Returns the mappers for the audit trail types.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-trail-mappers/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **productType** | **ProductType** | The type of product related to the audit trail. | (optional) defaults to undefined|
+| **moduleType** | **ModuleType** | The module within the product associated with the audit trail. | (optional) defaults to undefined|
+
+
+### Return type
+
+**ObjectWrapper**
+
+### Authorization
+
+No authorization required
+
 ### Example
 
 ```typescript
@@ -215,22 +239,6 @@ const { status, data } = await apiInstance.getAuditTrailMappers(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **productType** | **ProductType** | The type of product related to the audit trail. | (optional) defaults to undefined|
-| **moduleType** | **ModuleType** | The module within the product associated with the audit trail. | (optional) defaults to undefined|
-
-
-### Return type
-
-**ObjectWrapper**
-
-### Authorization
-
-No authorization required
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -249,6 +257,20 @@ No authorization required
 
 Returns all the available audit trail types.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-trail-types/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**ObjectWrapper**
+
+### Authorization
+
+No authorization required
+
 ### Example
 
 ```typescript
@@ -262,18 +284,6 @@ const apiInstance = new SecurityAuditTrailDataApi(configuration);
 
 const { status, data } = await apiInstance.getAuditTrailTypes();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**ObjectWrapper**
-
-### Authorization
-
-No authorization required
 
 ### HTTP request headers
 
@@ -293,6 +303,20 @@ No authorization required
 
 Returns a list of the latest changes (creation, modification, deletion, etc.) made by users to the entities on the portal.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-last-audit-events/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**AuditEventArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -306,18 +330,6 @@ const apiInstance = new SecurityAuditTrailDataApi(configuration);
 
 const { status, data } = await apiInstance.getLastAuditEvents();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**AuditEventArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -339,6 +351,23 @@ This endpoint does not have any parameters.
 
 Sets the audit trail settings for the current portal.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-audit-settings/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **tenantAuditSettingsWrapper** | **TenantAuditSettingsWrapper**|  | |
+
+
+### Return type
+
+**TenantAuditSettingsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
 ### Example
 
 ```typescript
@@ -357,21 +386,6 @@ const { status, data } = await apiInstance.setAuditSettings(
     tenantAuditSettingsWrapper
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **tenantAuditSettingsWrapper** | **TenantAuditSettingsWrapper**|  | |
-
-
-### Return type
-
-**TenantAuditSettingsWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

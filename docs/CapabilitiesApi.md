@@ -11,6 +11,20 @@ All URIs are relative to *http://localhost:8092*
 
 Returns the information about portal capabilities.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-capabilities/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**CapabilitiesWrapper**
+
+### Authorization
+
+No authorization required
+
 ### Example
 
 ```typescript
@@ -24,18 +38,6 @@ const apiInstance = new CapabilitiesApi(configuration);
 
 const { status, data } = await apiInstance.getPortalCapabilities();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**CapabilitiesWrapper**
-
-### Authorization
-
-No authorization required
 
 ### HTTP request headers
 

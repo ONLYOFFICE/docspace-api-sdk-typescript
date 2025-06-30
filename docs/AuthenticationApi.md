@@ -17,6 +17,23 @@ All URIs are relative to *http://localhost:8092*
 
 Authenticates the current user by SMS, authenticator app, or without two-factor authentication.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/authenticate-me/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **authRequestsDto** | **AuthRequestsDto**|  | |
+
+
+### Return type
+
+**AuthenticationTokenWrapper**
+
+### Authorization
+
+No authorization required
+
 ### Example
 
 ```typescript
@@ -35,21 +52,6 @@ const { status, data } = await apiInstance.authenticateMe(
     authRequestsDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **authRequestsDto** | **AuthRequestsDto**|  | |
-
-
-### Return type
-
-**AuthenticationTokenWrapper**
-
-### Authorization
-
-No authorization required
 
 ### HTTP request headers
 
@@ -73,6 +75,24 @@ No authorization required
 
 Authenticates the current user by SMS or two-factor authentication code.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/authenticate-me-from-body-with-code/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **authRequestsDto** | **AuthRequestsDto**|  | |
+| **code** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**AuthenticationTokenWrapper**
+
+### Authorization
+
+No authorization required
+
 ### Example
 
 ```typescript
@@ -93,22 +113,6 @@ const { status, data } = await apiInstance.authenticateMeFromBodyWithCode(
     authRequestsDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **authRequestsDto** | **AuthRequestsDto**|  | |
-| **code** | [**string**] |  | defaults to undefined|
-
-
-### Return type
-
-**AuthenticationTokenWrapper**
-
-### Authorization
-
-No authorization required
 
 ### HTTP request headers
 
@@ -132,6 +136,23 @@ No authorization required
 
 Opens a confirmation email URL to validate a certain action (employee invitation, portal removal, phone activation, etc.).
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/check-confirm/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **emailValidationKeyModel** | **EmailValidationKeyModel**|  | |
+
+
+### Return type
+
+**ConfirmWrapper**
+
+### Authorization
+
+No authorization required
+
 ### Example
 
 ```typescript
@@ -151,21 +172,6 @@ const { status, data } = await apiInstance.checkConfirm(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **emailValidationKeyModel** | **EmailValidationKeyModel**|  | |
-
-
-### Return type
-
-**ConfirmWrapper**
-
-### Authorization
-
-No authorization required
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -184,6 +190,20 @@ No authorization required
 
 Checks if the current user is authenticated or not.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-authentificated/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+No authorization required
+
 ### Example
 
 ```typescript
@@ -197,18 +217,6 @@ const apiInstance = new AuthenticationApi(configuration);
 
 const { status, data } = await apiInstance.getIsAuthentificated();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**BooleanWrapper**
-
-### Authorization
-
-No authorization required
 
 ### HTTP request headers
 
@@ -228,6 +236,20 @@ No authorization required
 
 Logs out of the current user account.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/logout/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**StringWrapper**
+
+### Authorization
+
+No authorization required
+
 ### Example
 
 ```typescript
@@ -241,18 +263,6 @@ const apiInstance = new AuthenticationApi(configuration);
 
 const { status, data } = await apiInstance.logout();
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**StringWrapper**
-
-### Authorization
-
-No authorization required
 
 ### HTTP request headers
 
@@ -271,6 +281,23 @@ No authorization required
 > AuthenticationTokenWrapper saveMobilePhone()
 
 Sets a mobile phone for the current user.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-mobile-phone/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **mobileRequestsDto** | **MobileRequestsDto**|  | |
+
+
+### Return type
+
+**AuthenticationTokenWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -291,21 +318,6 @@ const { status, data } = await apiInstance.saveMobilePhone(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **mobileRequestsDto** | **MobileRequestsDto**|  | |
-
-
-### Return type
-
-**AuthenticationTokenWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -325,6 +337,23 @@ const { status, data } = await apiInstance.saveMobilePhone(
 
 Sends SMS with an authentication code.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-sms-code/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **authRequestsDto** | **AuthRequestsDto**|  | |
+
+
+### Return type
+
+**AuthenticationTokenWrapper**
+
+### Authorization
+
+No authorization required
+
 ### Example
 
 ```typescript
@@ -343,21 +372,6 @@ const { status, data } = await apiInstance.sendSmsCode(
     authRequestsDto
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **authRequestsDto** | **AuthRequestsDto**|  | |
-
-
-### Return type
-
-**AuthenticationTokenWrapper**
-
-### Authorization
-
-No authorization required
 
 ### HTTP request headers
 

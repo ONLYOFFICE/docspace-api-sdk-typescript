@@ -15,6 +15,24 @@ All URIs are relative to *http://localhost:8092*
 
 Applies a password specified in the request to get the external data.
 
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/apply-external-share-password/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **externalShareRequestParam** | **ExternalShareRequestParam**| The external data share request parameters. | |
+| **key** | [**string**] | The unique document identifier. | defaults to undefined|
+
+
+### Return type
+
+**ExternalShareWrapper**
+
+### Authorization
+
+No authorization required
+
 ### Example
 
 ```typescript
@@ -36,22 +54,6 @@ const { status, data } = await apiInstance.applyExternalSharePassword(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **externalShareRequestParam** | **ExternalShareRequestParam**| The external data share request parameters. | |
-| **key** | [**string**] | The unique document identifier. | defaults to undefined|
-
-
-### Return type
-
-**ExternalShareWrapper**
-
-### Authorization
-
-No authorization required
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -70,6 +72,23 @@ No authorization required
 > FileEntryArrayWrapper changeFileOwner()
 
 Changes the owner of the file with the ID specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-file-owner/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **changeOwnerRequestDto** | **ChangeOwnerRequestDto**|  | |
+
+
+### Return type
+
+**FileEntryArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -90,21 +109,6 @@ const { status, data } = await apiInstance.changeFileOwner(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **changeOwnerRequestDto** | **ChangeOwnerRequestDto**|  | |
-
-
-### Return type
-
-**FileEntryArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -123,6 +127,24 @@ const { status, data } = await apiInstance.changeFileOwner(
 > ExternalShareWrapper getExternalShareData()
 
 Returns the external data by the key specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-external-share-data/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **key** | [**string**] | The unique key of the external shared data. | defaults to undefined|
+| **fileId** | [**string**] | The unique document identifier. | (optional) defaults to undefined|
+
+
+### Return type
+
+**ExternalShareWrapper**
+
+### Authorization
+
+No authorization required
 
 ### Example
 
@@ -144,22 +166,6 @@ const { status, data } = await apiInstance.getExternalShareData(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **key** | [**string**] | The unique key of the external shared data. | defaults to undefined|
-| **fileId** | [**string**] | The unique document identifier. | (optional) defaults to undefined|
-
-
-### Return type
-
-**ExternalShareWrapper**
-
-### Authorization
-
-No authorization required
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -177,6 +183,23 @@ No authorization required
 > MentionWrapperArrayWrapper getSharedUsers()
 
 Returns a list of users with their access rights to the file with the ID specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-shared-users/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
+
+
+### Return type
+
+**MentionWrapperArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -196,21 +219,6 @@ const { status, data } = await apiInstance.getSharedUsers(
 );
 ```
 
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
-
-
-### Return type
-
-**MentionWrapperArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -229,6 +237,24 @@ const { status, data } = await apiInstance.getSharedUsers(
 > AceShortWrapperArrayWrapper sendEditorNotify()
 
 Sends a message to the users who are mentioned in the file with the ID specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-editor-notify/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **mentionMessageWrapper** | **MentionMessageWrapper**| The mention message. | |
+| **fileId** | [**number**] | The file ID of the mention message. | defaults to undefined|
+
+
+### Return type
+
+**AceShortWrapperArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -250,22 +276,6 @@ const { status, data } = await apiInstance.sendEditorNotify(
     mentionMessageWrapper
 );
 ```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **mentionMessageWrapper** | **MentionMessageWrapper**| The mention message. | |
-| **fileId** | [**number**] | The file ID of the mention message. | defaults to undefined|
-
-
-### Return type
-
-**AceShortWrapperArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
