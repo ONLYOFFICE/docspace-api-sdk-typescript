@@ -1,20 +1,19 @@
-# ContactsRequest
+# ReviewConfig
 
-The contacts request.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**contacts** | [**Array&lt;Contact&gt;**](Contact.md) | The list of user contacts. | [optional] [default to undefined]
+**reviewDisplay** | **string** |  | [optional] [readonly] [default to undefined]
 
 ## Example
 
 ```typescript
-import { ContactsRequest } from '@onlyoffice/docspace-api-typescript';
+import { ReviewConfig } from '@onlyoffice/docspace-api-typescript';
 
-const instance: ContactsRequest = {
-    contacts,
+const instance: ReviewConfig = {
+    reviewDisplay,
 };
 ```
 

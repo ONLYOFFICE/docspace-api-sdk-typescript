@@ -1,4 +1,4 @@
-# CustomerInfo
+# CustomerInfoDto
 
 The customer information.
 
@@ -6,19 +6,21 @@ The customer information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**portalId** | **string** | The portal ID. | [optional] [default to undefined]
+**portalId** | **string** | The portal ID. | [optional] [readonly] [default to undefined]
 **paymentMethodStatus** | [**PaymentMethodStatus**](PaymentMethodStatus.md) |  | [optional] [default to undefined]
-**email** | **string** | The email address of the customer. | [optional] [default to undefined]
+**email** | **string** | The email address of the customer. | [optional] [readonly] [default to undefined]
+**payer** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { CustomerInfo } from '@onlyoffice/docspace-api-typescript';
+import { CustomerInfoDto } from '@onlyoffice/docspace-api-typescript';
 
-const instance: CustomerInfo = {
+const instance: CustomerInfoDto = {
     portalId,
     paymentMethodStatus,
     email,
+    payer,
 };
 ```
 

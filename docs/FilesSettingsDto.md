@@ -27,6 +27,7 @@ Name | Type | Description | Notes
 **extsSpreadsheet** | **Array&lt;string&gt;** | The list of the spreadsheet extensions. | [optional] [default to undefined]
 **extsPresentation** | **Array&lt;string&gt;** | The list of the presentation extensions. | [optional] [default to undefined]
 **extsDocument** | **Array&lt;string&gt;** | The list of the text document extensions. | [optional] [default to undefined]
+**extsDiagram** | **Array&lt;string&gt;** | The list of the diagram extensions. | [optional] [default to undefined]
 **internalFormats** | [**FilesSettingsDtoInternalFormats**](FilesSettingsDtoInternalFormats.md) |  | [optional] [default to undefined]
 **masterFormExtension** | **string** | The master form extension. | [optional] [default to undefined]
 **paramVersion** | **string** | The URL parameter which specifies the file version. | [optional] [default to undefined]
@@ -91,6 +92,7 @@ const instance: FilesSettingsDto = {
     extsSpreadsheet,
     extsPresentation,
     extsDocument,
+    extsDiagram,
     internalFormats,
     masterFormExtension,
     paramVersion,

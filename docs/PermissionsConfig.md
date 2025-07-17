@@ -6,7 +6,6 @@ The permissions configuration parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**changeHistory** | **boolean** | Specifies whether to display the \&quot;Restore\&quot; button when using the \&quot;onRequestRestore\&quot; event. | [optional] [default to undefined]
 **comment** | **boolean** | Defines if the document can be commented or not. | [optional] [default to undefined]
 **chat** | **boolean** | Defines if the chat functionality is enabled in the document or not. | [optional] [default to undefined]
 **download** | **boolean** | Defines if the document can be downloaded or only viewed or edited online. | [optional] [default to undefined]
@@ -25,7 +24,6 @@ Name | Type | Description | Notes
 import { PermissionsConfig } from '@onlyoffice/docspace-api-typescript';
 
 const instance: PermissionsConfig = {
-    changeHistory,
     comment,
     chat,
     download,

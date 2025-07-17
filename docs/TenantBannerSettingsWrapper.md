@@ -1,11 +1,11 @@
-# SessionWrapper
+# TenantBannerSettingsWrapper
 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**Session**](Session.md) |  | [optional] [default to undefined]
+**response** | [**TenantBannerSettings**](TenantBannerSettings.md) |  | [optional] [default to undefined]
 **count** | **number** |  | [optional] [default to undefined]
 **links** | [**Array&lt;ActiveConnectionsWrapperLinksInner&gt;**](ActiveConnectionsWrapperLinksInner.md) |  | [optional] [default to undefined]
 **status** | **number** |  | [optional] [default to undefined]
@@ -14,9 +14,9 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { SessionWrapper } from '@onlyoffice/docspace-api-typescript';
+import { TenantBannerSettingsWrapper } from '@onlyoffice/docspace-api-typescript';
 
-const instance: SessionWrapper = {
+const instance: TenantBannerSettingsWrapper = {
     response,
     count,
     links,

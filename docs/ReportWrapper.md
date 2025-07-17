@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**Report**](Report.md) |  | [optional] [default to undefined]
+**response** | [**ReportDto**](ReportDto.md) |  | [optional] [default to undefined]
 **count** | **number** |  | [optional] [default to undefined]
 **links** | [**Array&lt;ActiveConnectionsWrapperLinksInner&gt;**](ActiveConnectionsWrapperLinksInner.md) |  | [optional] [default to undefined]
 **status** | **number** |  | [optional] [default to undefined]

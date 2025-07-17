@@ -1,4 +1,4 @@
-# Operation
+# OperationDto
 
 Represents an operation.
 
@@ -6,7 +6,7 @@ Represents an operation.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**date** | **string** | Date of the operation. | [optional] [default to undefined]
+**date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
 **service** | **string** | Service related to the operation. | [optional] [default to undefined]
 **description** | **string** | Brief description of the operation. | [optional] [default to undefined]
 **serviceUnit** | **string** | Unit of the service. | [optional] [default to undefined]
@@ -18,9 +18,9 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { Operation } from '@onlyoffice/docspace-api-typescript';
+import { OperationDto } from '@onlyoffice/docspace-api-typescript';
 
-const instance: Operation = {
+const instance: OperationDto = {
     date,
     service,
     description,

@@ -3,7 +3,7 @@
 The ONLYOFFICE DocSpace SDK for TypeScript is a library that provides tools for integrating and managing DocSpace features within your applications. It simplifies interaction with the DocSpace API by offering ready-to-use methods and models.
 
 - API version: 3.2.0
-- SDK version: 
+- SDK version: 1.0.0
 
 For more information, please visit [https://helpdesk.onlyoffice.com/hc/en-us](https://helpdesk.onlyoffice.com/hc/en-us)
 
@@ -305,9 +305,6 @@ Class | Method | HTTP request | Description
 *OAuth20ClientQueryingApi* | [**getConsents**](docs/OAuth20ClientQueryingApi.md#getconsents) | **GET** /api/2.0/clients/consents | Get user consents
 *OAuth20ClientQueryingApi* | [**getPublicClientInfo**](docs/OAuth20ClientQueryingApi.md#getpublicclientinfo) | **GET** /api/2.0/clients/{clientId}/public/info | Get public client information
 *OAuth20ScopeManagementApi* | [**getScopes**](docs/OAuth20ScopeManagementApi.md#getscopes) | **GET** /api/2.0/scopes | Get available OAuth2 scopes
-*PeopleContactsApi* | [**deleteMemberContacts**](docs/PeopleContactsApi.md#deletemembercontacts) | **DELETE** /api/2.0/people/{userid}/contacts | Delete user contacts
-*PeopleContactsApi* | [**setMemberContacts**](docs/PeopleContactsApi.md#setmembercontacts) | **POST** /api/2.0/people/{userid}/contacts | Set user contacts
-*PeopleContactsApi* | [**updateMemberContacts**](docs/PeopleContactsApi.md#updatemembercontacts) | **PUT** /api/2.0/people/{userid}/contacts | Update user contacts
 *PeopleGuestsApi* | [**approveGuestShareLink**](docs/PeopleGuestsApi.md#approveguestsharelink) | **POST** /api/2.0/people/guests/share/approve | Approve a guest sharing link
 *PeopleGuestsApi* | [**deleteGuests**](docs/PeopleGuestsApi.md#deleteguests) | **DELETE** /api/2.0/people/guests | Delete guests
 *PeoplePasswordApi* | [**changeUserPassword**](docs/PeoplePasswordApi.md#changeuserpassword) | **PUT** /api/2.0/people/{userid}/password | Change a user password
@@ -366,7 +363,6 @@ Class | Method | HTTP request | Description
 *PortalGuestsApi* | [**getGuestSharingLink**](docs/PortalGuestsApi.md#getguestsharinglink) | **GET** /api/2.0/people/guests/{userid}/share | Get a guest sharing link
 *PortalPaymentApi* | [**calculateWalletPayment**](docs/PortalPaymentApi.md#calculatewalletpayment) | **PUT** /api/2.0/portal/payment/calculatewallet | Calculate amount of the wallet payment
 *PortalPaymentApi* | [**createCustomerOperationsReport**](docs/PortalPaymentApi.md#createcustomeroperationsreport) | **POST** /api/2.0/portal/payment/customer/operationsreport | Generate the customer operations report
-*PortalPaymentApi* | [**getAccountingCurrencies**](docs/PortalPaymentApi.md#getaccountingcurrencies) | **GET** /api/2.0/portal/payment/accounting/currencies | Get list of currencies
 *PortalPaymentApi* | [**getCheckoutSetupUrl**](docs/PortalPaymentApi.md#getcheckoutsetupurl) | **GET** /api/2.0/portal/payment/chechoutsetupurl | Get the checkout setup page URL
 *PortalPaymentApi* | [**getCustomerBalance**](docs/PortalPaymentApi.md#getcustomerbalance) | **GET** /api/2.0/portal/payment/customer/balance | Get the customer balance
 *PortalPaymentApi* | [**getCustomerInfo**](docs/PortalPaymentApi.md#getcustomerinfo) | **GET** /api/2.0/portal/payment/customerinfo | Get the customer info
@@ -378,8 +374,6 @@ Class | Method | HTTP request | Description
 *PortalPaymentApi* | [**getPortalPrices**](docs/PortalPaymentApi.md#getportalprices) | **GET** /api/2.0/portal/payment/prices | Get prices
 *PortalPaymentApi* | [**getQuotaPaymentInformation**](docs/PortalPaymentApi.md#getquotapaymentinformation) | **GET** /api/2.0/portal/payment/quota | Get quota payment information
 *PortalPaymentApi* | [**getTenantWalletSettings**](docs/PortalPaymentApi.md#gettenantwalletsettings) | **GET** /api/2.0/portal/payment/topupsettings | Get wallet auto top up settings
-*PortalPaymentApi* | [**openCustomerSession**](docs/PortalPaymentApi.md#opencustomersession) | **POST** /api/2.0/portal/payment/customer/opensession | Open customer session
-*PortalPaymentApi* | [**performCustomerOperation**](docs/PortalPaymentApi.md#performcustomeroperation) | **POST** /api/2.0/portal/payment/customer/performoperation | Perform customer operation
 *PortalPaymentApi* | [**sendPaymentRequest**](docs/PortalPaymentApi.md#sendpaymentrequest) | **POST** /api/2.0/portal/payment/request | Send a payment request
 *PortalPaymentApi* | [**setTenantWalletSettings**](docs/PortalPaymentApi.md#settenantwalletsettings) | **POST** /api/2.0/portal/payment/topupsettings | Set wallet auto top up settings
 *PortalPaymentApi* | [**topUpDeposit**](docs/PortalPaymentApi.md#topupdeposit) | **POST** /api/2.0/portal/payment/deposit | Put money on deposit
@@ -452,6 +446,7 @@ Class | Method | HTTP request | Description
 *SecurityAuditTrailDataApi* | [**getAuditTrailTypes**](docs/SecurityAuditTrailDataApi.md#getaudittrailtypes) | **GET** /api/2.0/security/audit/types | Get audit trail types
 *SecurityAuditTrailDataApi* | [**getLastAuditEvents**](docs/SecurityAuditTrailDataApi.md#getlastauditevents) | **GET** /api/2.0/security/audit/events/last | Get audit trail data
 *SecurityAuditTrailDataApi* | [**setAuditSettings**](docs/SecurityAuditTrailDataApi.md#setauditsettings) | **POST** /api/2.0/security/audit/settings/lifetime | Set the audit trail settings
+*SecurityBannersVisibilityApi* | [**setTenantBannerSettings**](docs/SecurityBannersVisibilityApi.md#settenantbannersettings) | **POST** /api/2.0/settings/banner | Set the promotional banners visibility settings
 *SecurityCSPApi* | [**configureCsp**](docs/SecurityCSPApi.md#configurecsp) | **POST** /api/2.0/security/csp | Configure CSP settings
 *SecurityCSPApi* | [**getCspSettings**](docs/SecurityCSPApi.md#getcspsettings) | **GET** /api/2.0/security/csp | Get CSP settings
 *SecurityFirebaseApi* | [**docRegisterPusnNotificationDevice**](docs/SecurityFirebaseApi.md#docregisterpusnnotificationdevice) | **POST** /api/2.0/settings/push/docregisterdevice | Save the Documents Firebase device token
@@ -468,6 +463,7 @@ Class | Method | HTTP request | Description
 *SettingsAccessToDevToolsApi* | [**getTenantAccessDevToolsSettings**](docs/SettingsAccessToDevToolsApi.md#gettenantaccessdevtoolssettings) | **GET** /api/2.0/settings/devtoolsaccess | Get the Developer Tools access settings
 *SettingsAuthorizationApi* | [**getAuthServices**](docs/SettingsAuthorizationApi.md#getauthservices) | **GET** /api/2.0/settings/authservice | Get the authorization services
 *SettingsAuthorizationApi* | [**saveAuthKeys**](docs/SettingsAuthorizationApi.md#saveauthkeys) | **POST** /api/2.0/settings/authservice | Save the authorization keys
+*SettingsBannersVisibilityApi* | [**getTenantBannerSettings**](docs/SettingsBannersVisibilityApi.md#gettenantbannersettings) | **GET** /api/2.0/settings/banner | Get the promotional banners visibility settings
 *SettingsCommonSettingsApi* | [**closeAdminHelper**](docs/SettingsCommonSettingsApi.md#closeadminhelper) | **PUT** /api/2.0/settings/closeadminhelper | Close the admin helper
 *SettingsCommonSettingsApi* | [**completeWizard**](docs/SettingsCommonSettingsApi.md#completewizard) | **PUT** /api/2.0/settings/wizard/complete | Complete the Wizard settings
 *SettingsCommonSettingsApi* | [**configureDeepLink**](docs/SettingsCommonSettingsApi.md#configuredeeplink) | **POST** /api/2.0/settings/deeplink | Configure the deep link settings
@@ -680,7 +676,6 @@ Class | Method | HTTP request | Description
  - [ConfirmType](docs/ConfirmType.md)
  - [ConfirmWrapper](docs/ConfirmWrapper.md)
  - [Contact](docs/Contact.md)
- - [ContactsRequest](docs/ContactsRequest.md)
  - [ContentDisposition](docs/ContentDisposition.md)
  - [ContentType](docs/ContentType.md)
  - [ConversationResultArrayWrapper](docs/ConversationResultArrayWrapper.md)
@@ -714,8 +709,6 @@ Class | Method | HTTP request | Description
  - [CultureSpecificExternalResources](docs/CultureSpecificExternalResources.md)
  - [CurrenciesArrayWrapper](docs/CurrenciesArrayWrapper.md)
  - [CurrenciesDto](docs/CurrenciesDto.md)
- - [Currency](docs/Currency.md)
- - [CurrencyArrayWrapper](docs/CurrencyArrayWrapper.md)
  - [CurrentLicenseInfo](docs/CurrentLicenseInfo.md)
  - [CustomColorThemesSettingsColorItem](docs/CustomColorThemesSettingsColorItem.md)
  - [CustomColorThemesSettingsDto](docs/CustomColorThemesSettingsDto.md)
@@ -727,7 +720,7 @@ Class | Method | HTTP request | Description
  - [CustomNavigationItemArrayWrapper](docs/CustomNavigationItemArrayWrapper.md)
  - [CustomNavigationItemWrapper](docs/CustomNavigationItemWrapper.md)
  - [CustomerConfigDto](docs/CustomerConfigDto.md)
- - [CustomerInfo](docs/CustomerInfo.md)
+ - [CustomerInfoDto](docs/CustomerInfoDto.md)
  - [CustomerInfoWrapper](docs/CustomerInfoWrapper.md)
  - [CustomerOperationsReportRequestDto](docs/CustomerOperationsReportRequestDto.md)
  - [CustomizationConfigDto](docs/CustomizationConfigDto.md)
@@ -938,8 +931,7 @@ Class | Method | HTTP request | Description
  - [OAuth20Token](docs/OAuth20Token.md)
  - [ObjectArrayWrapper](docs/ObjectArrayWrapper.md)
  - [ObjectWrapper](docs/ObjectWrapper.md)
- - [OpenCustomerSessionRequestDto](docs/OpenCustomerSessionRequestDto.md)
- - [Operation](docs/Operation.md)
+ - [OperationDto](docs/OperationDto.md)
  - [Options](docs/Options.md)
  - [OrderBy](docs/OrderBy.md)
  - [OrderRequestDto](docs/OrderRequestDto.md)
@@ -963,7 +955,6 @@ Class | Method | HTTP request | Description
  - [PaymentSettingsWrapper](docs/PaymentSettingsWrapper.md)
  - [PaymentUrlRequestsDto](docs/PaymentUrlRequestsDto.md)
  - [Payments](docs/Payments.md)
- - [PerformCustomerOperationRequestDto](docs/PerformCustomerOperationRequestDto.md)
  - [PermissionsConfig](docs/PermissionsConfig.md)
  - [PluginsConfig](docs/PluginsConfig.md)
  - [PluginsDto](docs/PluginsDto.md)
@@ -986,8 +977,9 @@ Class | Method | HTTP request | Description
  - [QuotaWrapper](docs/QuotaWrapper.md)
  - [RecaptchaType](docs/RecaptchaType.md)
  - [RecentConfig](docs/RecentConfig.md)
- - [Report](docs/Report.md)
+ - [ReportDto](docs/ReportDto.md)
  - [ReportWrapper](docs/ReportWrapper.md)
+ - [ReviewConfig](docs/ReviewConfig.md)
  - [RoomDataLifetimeDto](docs/RoomDataLifetimeDto.md)
  - [RoomDataLifetimePeriod](docs/RoomDataLifetimePeriod.md)
  - [RoomFromTemplateStatusDto](docs/RoomFromTemplateStatusDto.md)
@@ -1018,9 +1010,7 @@ Class | Method | HTTP request | Description
  - [SecurityArrayWrapper](docs/SecurityArrayWrapper.md)
  - [SecurityDto](docs/SecurityDto.md)
  - [SecurityRequestsDto](docs/SecurityRequestsDto.md)
- - [Session](docs/Session.md)
  - [SessionRequest](docs/SessionRequest.md)
- - [SessionWrapper](docs/SessionWrapper.md)
  - [SetManagerRequest](docs/SetManagerRequest.md)
  - [SetPublicDto](docs/SetPublicDto.md)
  - [SettingsDto](docs/SettingsDto.md)
@@ -1072,6 +1062,9 @@ Class | Method | HTTP request | Description
  - [TemplatesRequestDto](docs/TemplatesRequestDto.md)
  - [TenantAuditSettings](docs/TenantAuditSettings.md)
  - [TenantAuditSettingsWrapper](docs/TenantAuditSettingsWrapper.md)
+ - [TenantBannerSettings](docs/TenantBannerSettings.md)
+ - [TenantBannerSettingsDto](docs/TenantBannerSettingsDto.md)
+ - [TenantBannerSettingsWrapper](docs/TenantBannerSettingsWrapper.md)
  - [TenantDeepLinkSettings](docs/TenantDeepLinkSettings.md)
  - [TenantDeepLinkSettingsWrapper](docs/TenantDeepLinkSettingsWrapper.md)
  - [TenantDevToolsAccessSettings](docs/TenantDevToolsAccessSettings.md)

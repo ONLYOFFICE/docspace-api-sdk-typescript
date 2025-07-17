@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **Presentation** | **string** |  | [optional] [default to undefined]
 **Document** | **string** |  | [optional] [default to undefined]
 **Pdf** | **string** |  | [optional] [default to undefined]
+**Diagram** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -31,6 +32,7 @@ const instance: FilesSettingsDtoInternalFormats = {
     Presentation,
     Document,
     Pdf,
+    Diagram,
 };
 ```
 

@@ -1,28 +1,20 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-// 
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-// 
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-// 
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-// 
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-// 
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-// 
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/**
+ *
+ * (c) Copyright Ascensio System SIA 2025
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
 
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
@@ -39,21 +31,15 @@ import type { BooleanWrapper } from '../../models';
 // @ts-ignore
 import type { CurrenciesArrayWrapper } from '../../models';
 // @ts-ignore
-import type { CurrencyArrayWrapper } from '../../models';
-// @ts-ignore
 import type { CustomerInfoWrapper } from '../../models';
 // @ts-ignore
 import type { CustomerOperationsReportRequestDto } from '../../models';
 // @ts-ignore
 import type { ObjectWrapper } from '../../models';
 // @ts-ignore
-import type { OpenCustomerSessionRequestDto } from '../../models';
-// @ts-ignore
 import type { PaymentCalculationWrapper } from '../../models';
 // @ts-ignore
 import type { PaymentUrlRequestsDto } from '../../models';
-// @ts-ignore
-import type { PerformCustomerOperationRequestDto } from '../../models';
 // @ts-ignore
 import type { QuantityRequestDto } from '../../models';
 // @ts-ignore
@@ -64,8 +50,6 @@ import type { QuotaWrapper } from '../../models';
 import type { ReportWrapper } from '../../models';
 // @ts-ignore
 import type { SalesRequestsDto } from '../../models';
-// @ts-ignore
-import type { SessionWrapper } from '../../models';
 // @ts-ignore
 import type { StringWrapper } from '../../models';
 // @ts-ignore
@@ -184,57 +168,6 @@ export const PortalPaymentApiAxiosParamCreator = function (configuration?: Confi
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(customerOperationsReportRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns the list of currencies from accounting service.
-         * @summary Get list of currencies
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getAccountingCurrencies operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounting-currencies/
-         */
-        getAccountingCurrencies: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/portal/payment/accounting/currencies`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -871,116 +804,6 @@ export const PortalPaymentApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Trying to open a customer session and block amount money on the balance.
-         * @summary Open customer session
-         * @param {OpenCustomerSessionRequestDto} [openCustomerSessionRequestDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for openCustomerSession operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/open-customer-session/
-         */
-        openCustomerSession: async (openCustomerSessionRequestDto?: OpenCustomerSessionRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/portal/payment/customer/opensession`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(openCustomerSessionRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Perform customer operation and return true if the operation is succesfully provided.
-         * @summary Perform customer operation
-         * @param {PerformCustomerOperationRequestDto} [performCustomerOperationRequestDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for performCustomerOperation operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/perform-customer-operation/
-         */
-        performCustomerOperation: async (performCustomerOperationRequestDto?: PerformCustomerOperationRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/portal/payment/customer/performoperation`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(performCustomerOperationRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Sends a request for the portal payment.
          * @summary Send a payment request
          * @param {SalesRequestsDto} [salesRequestsDto] 
@@ -1296,20 +1119,6 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the list of currencies from accounting service.
-         * @summary Get list of currencies
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getAccountingCurrencies operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounting-currencies/
-         */
-        async getAccountingCurrencies(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CurrencyArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountingCurrencies(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.getAccountingCurrencies']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
          * Returns the URL to the checkout setup page.
          * @summary Get the checkout setup page URL
          * @param {string} [backUrl] Back URL
@@ -1477,36 +1286,6 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Trying to open a customer session and block amount money on the balance.
-         * @summary Open customer session
-         * @param {OpenCustomerSessionRequestDto} [openCustomerSessionRequestDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for openCustomerSession operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/open-customer-session/
-         */
-        async openCustomerSession(openCustomerSessionRequestDto?: OpenCustomerSessionRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SessionWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.openCustomerSession(openCustomerSessionRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.openCustomerSession']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Perform customer operation and return true if the operation is succesfully provided.
-         * @summary Perform customer operation
-         * @param {PerformCustomerOperationRequestDto} [performCustomerOperationRequestDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for performCustomerOperation operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/perform-customer-operation/
-         */
-        async performCustomerOperation(performCustomerOperationRequestDto?: PerformCustomerOperationRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.performCustomerOperation(performCustomerOperationRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.performCustomerOperation']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
          * Sends a request for the portal payment.
          * @summary Send a payment request
          * @param {SalesRequestsDto} [salesRequestsDto] 
@@ -1614,17 +1393,6 @@ export const PortalPaymentApiFactory = function (configuration?: Configuration, 
          */
         createCustomerOperationsReport(customerOperationsReportRequestDto?: CustomerOperationsReportRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
             return localVarFp.createCustomerOperationsReport(customerOperationsReportRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns the list of currencies from accounting service.
-         * @summary Get list of currencies
-         * @param {*} [options] Override http request option.
-         * REST API Reference for getAccountingCurrencies operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounting-currencies/
-         * @throws {RequiredError}
-         */
-        getAccountingCurrencies(options?: RawAxiosRequestConfig): AxiosPromise<CurrencyArrayWrapper> {
-            return localVarFp.getAccountingCurrencies(options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the URL to the checkout setup page.
@@ -1761,30 +1529,6 @@ export const PortalPaymentApiFactory = function (configuration?: Configuration, 
             return localVarFp.getTenantWalletSettings(options).then((request) => request(axios, basePath));
         },
         /**
-         * Trying to open a customer session and block amount money on the balance.
-         * @summary Open customer session
-         * @param {OpenCustomerSessionRequestDto} [openCustomerSessionRequestDto] 
-         * @param {*} [options] Override http request option.
-         * REST API Reference for openCustomerSession operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/open-customer-session/
-         * @throws {RequiredError}
-         */
-        openCustomerSession(openCustomerSessionRequestDto?: OpenCustomerSessionRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<SessionWrapper> {
-            return localVarFp.openCustomerSession(openCustomerSessionRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Perform customer operation and return true if the operation is succesfully provided.
-         * @summary Perform customer operation
-         * @param {PerformCustomerOperationRequestDto} [performCustomerOperationRequestDto] 
-         * @param {*} [options] Override http request option.
-         * REST API Reference for performCustomerOperation operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/perform-customer-operation/
-         * @throws {RequiredError}
-         */
-        performCustomerOperation(performCustomerOperationRequestDto?: PerformCustomerOperationRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.performCustomerOperation(performCustomerOperationRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Sends a request for the portal payment.
          * @summary Send a payment request
          * @param {SalesRequestsDto} [salesRequestsDto] 
@@ -1876,17 +1620,6 @@ export class PortalPaymentApi extends BaseAPI {
      */
     public createCustomerOperationsReport(customerOperationsReportRequestDto?: CustomerOperationsReportRequestDto, options?: RawAxiosRequestConfig) {
         return PortalPaymentApiFp(this.configuration).createCustomerOperationsReport(customerOperationsReportRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns the list of currencies from accounting service.
-     * @summary Get list of currencies
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortalPaymentApi
-     */
-    public getAccountingCurrencies(options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).getAccountingCurrencies(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2021,30 +1754,6 @@ export class PortalPaymentApi extends BaseAPI {
      */
     public getTenantWalletSettings(options?: RawAxiosRequestConfig) {
         return PortalPaymentApiFp(this.configuration).getTenantWalletSettings(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Trying to open a customer session and block amount money on the balance.
-     * @summary Open customer session
-     * @param {OpenCustomerSessionRequestDto} [openCustomerSessionRequestDto] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortalPaymentApi
-     */
-    public openCustomerSession(openCustomerSessionRequestDto?: OpenCustomerSessionRequestDto, options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).openCustomerSession(openCustomerSessionRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Perform customer operation and return true if the operation is succesfully provided.
-     * @summary Perform customer operation
-     * @param {PerformCustomerOperationRequestDto} [performCustomerOperationRequestDto] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortalPaymentApi
-     */
-    public performCustomerOperation(performCustomerOperationRequestDto?: PerformCustomerOperationRequestDto, options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).performCustomerOperation(performCustomerOperationRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

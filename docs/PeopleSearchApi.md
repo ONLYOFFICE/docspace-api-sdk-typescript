@@ -175,6 +175,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
+| **fields** | **string**| Comma-separated list of fields to include in the response | |
 | **employeeStatus** | **EmployeeStatus** | The user status. | (optional) defaults to undefined|
 | **groupId** | [**string**] | The group ID. | (optional) defaults to undefined|
 | **activationStatus** | **EmployeeActivationStatus** | The user activation status. | (optional) defaults to undefined|
@@ -236,6 +237,7 @@ let sortBy: string; //Specifies the property or field name by which the results 
 let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
 let filterSeparator: string; //Represents the separator used to split filter criteria in query parameters. (optional) (default to undefined)
 let filterValue: string; //The search text used to filter results based on user input. (optional) (default to undefined)
+let fields: string; //Comma-separated list of fields to include in the response (optional)
 
 const { status, data } = await apiInstance.getSimpleByFilter(
     employeeStatus,
@@ -257,7 +259,8 @@ const { status, data } = await apiInstance.getSimpleByFilter(
     sortBy,
     sortOrder,
     filterSeparator,
-    filterValue
+    filterValue,
+    fields
 );
 ```
 
@@ -378,6 +381,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
+| **fields** | **string**| Comma-separated list of fields to include in the response | |
 | **employeeStatus** | **EmployeeStatus** | The user status. | (optional) defaults to undefined|
 | **groupId** | [**string**] | The group ID. | (optional) defaults to undefined|
 | **activationStatus** | **EmployeeActivationStatus** | The user activation status. | (optional) defaults to undefined|
@@ -439,6 +443,7 @@ let sortBy: string; //Specifies the property or field name by which the results 
 let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
 let filterSeparator: string; //Represents the separator used to split filter criteria in query parameters. (optional) (default to undefined)
 let filterValue: string; //The search text used to filter results based on user input. (optional) (default to undefined)
+let fields: string; //Comma-separated list of fields to include in the response (optional)
 
 const { status, data } = await apiInstance.searchUsersByExtendedFilter(
     employeeStatus,
@@ -460,7 +465,8 @@ const { status, data } = await apiInstance.searchUsersByExtendedFilter(
     sortBy,
     sortOrder,
     filterSeparator,
-    filterValue
+    filterValue,
+    fields
 );
 ```
 

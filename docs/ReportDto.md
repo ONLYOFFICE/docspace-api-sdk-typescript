@@ -1,4 +1,4 @@
-# Report
+# ReportDto
 
 Represents a report containing a collection of operations.
 
@@ -6,7 +6,7 @@ Represents a report containing a collection of operations.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**collection** | [**Array&lt;Operation&gt;**](Operation.md) | Collection of operations. | [optional] [default to undefined]
+**collection** | [**Array&lt;OperationDto&gt;**](OperationDto.md) | Collection of operations. | [optional] [default to undefined]
 **offset** | **number** | Offset of the report data. | [optional] [default to undefined]
 **limit** | **number** | Limit of the report data. | [optional] [default to undefined]
 **totalQuantity** | **number** | Total quantity of operations in the report. | [optional] [default to undefined]
@@ -16,9 +16,9 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { Report } from '@onlyoffice/docspace-api-typescript';
+import { ReportDto } from '@onlyoffice/docspace-api-typescript';
 
-const instance: Report = {
+const instance: ReportDto = {
     collection,
     offset,
     limit,

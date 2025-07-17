@@ -115,6 +115,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
+| **fields** | **string**| Comma-separated list of fields to include in the response | |
 | **userId** | [**string**] | The ID of the user whose login events are being queried. | (optional) defaults to undefined|
 | **action** | **MessageAction** | The login-related action to filter events by. | (optional) defaults to undefined|
 | **from** | **ApiDateTime** | The starting date and time for filtering login events. | (optional) defaults to undefined|
@@ -150,6 +151,7 @@ let from: ApiDateTime; //The starting date and time for filtering login events. 
 let to: ApiDateTime; //The ending date and time for filtering login events. (optional) (default to undefined)
 let count: number; //The number of login events to retrieve in the query. (optional) (default to undefined)
 let startIndex: number; //The starting index for fetching a subset of login events from the query results. (optional) (default to undefined)
+let fields: string; //Comma-separated list of fields to include in the response (optional)
 
 const { status, data } = await apiInstance.getLoginEventsByFilter(
     userId,
@@ -157,7 +159,8 @@ const { status, data } = await apiInstance.getLoginEventsByFilter(
     from,
     to,
     count,
-    startIndex
+    startIndex,
+    fields
 );
 ```
 

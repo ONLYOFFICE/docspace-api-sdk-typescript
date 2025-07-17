@@ -6,7 +6,6 @@ All URIs are relative to *http://localhost:8092*
 |------------- | ------------- | -------------|
 |[**calculateWalletPayment**](#calculatewalletpayment) | **PUT** /api/2.0/portal/payment/calculatewallet | Calculate amount of the wallet payment|
 |[**createCustomerOperationsReport**](#createcustomeroperationsreport) | **POST** /api/2.0/portal/payment/customer/operationsreport | Generate the customer operations report|
-|[**getAccountingCurrencies**](#getaccountingcurrencies) | **GET** /api/2.0/portal/payment/accounting/currencies | Get list of currencies|
 |[**getCheckoutSetupUrl**](#getcheckoutsetupurl) | **GET** /api/2.0/portal/payment/chechoutsetupurl | Get the checkout setup page URL|
 |[**getCustomerBalance**](#getcustomerbalance) | **GET** /api/2.0/portal/payment/customer/balance | Get the customer balance|
 |[**getCustomerInfo**](#getcustomerinfo) | **GET** /api/2.0/portal/payment/customerinfo | Get the customer info|
@@ -18,8 +17,6 @@ All URIs are relative to *http://localhost:8092*
 |[**getPortalPrices**](#getportalprices) | **GET** /api/2.0/portal/payment/prices | Get prices|
 |[**getQuotaPaymentInformation**](#getquotapaymentinformation) | **GET** /api/2.0/portal/payment/quota | Get quota payment information|
 |[**getTenantWalletSettings**](#gettenantwalletsettings) | **GET** /api/2.0/portal/payment/topupsettings | Get wallet auto top up settings|
-|[**openCustomerSession**](#opencustomersession) | **POST** /api/2.0/portal/payment/customer/opensession | Open customer session|
-|[**performCustomerOperation**](#performcustomeroperation) | **POST** /api/2.0/portal/payment/customer/performoperation | Perform customer operation|
 |[**sendPaymentRequest**](#sendpaymentrequest) | **POST** /api/2.0/portal/payment/request | Send a payment request|
 |[**setTenantWalletSettings**](#settenantwalletsettings) | **POST** /api/2.0/portal/payment/topupsettings | Set wallet auto top up settings|
 |[**topUpDeposit**](#topupdeposit) | **POST** /api/2.0/portal/payment/deposit | Put money on deposit|
@@ -134,54 +131,6 @@ const { status, data } = await apiInstance.createCustomerOperationsReport(
 |-------------|-------------|------------------|
 |**200** | URL to the csv report file |  -  |
 |**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **getAccountingCurrencies**
-> CurrencyArrayWrapper getAccountingCurrencies()
-
-Returns the list of currencies from accounting service.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounting-currencies/).
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**CurrencyArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-```typescript
-import {
-    PortalPaymentApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PortalPaymentApi(configuration);
-
-const { status, data } = await apiInstance.getAccountingCurrencies();
-```
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | The list of currencies |  -  |
-|**401** | Unauthorized |  -  |
-|**403** | No permissions to perform this action |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -777,118 +726,6 @@ const { status, data } = await apiInstance.getTenantWalletSettings();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The wallet auto top up settings |  -  |
-|**401** | Unauthorized |  -  |
-|**403** | No permissions to perform this action |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **openCustomerSession**
-> SessionWrapper openCustomerSession()
-
-Trying to open a customer session and block amount money on the balance.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/open-customer-session/).
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **openCustomerSessionRequestDto** | **OpenCustomerSessionRequestDto**|  | |
-
-
-### Return type
-
-**SessionWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-```typescript
-import {
-    PortalPaymentApi,
-    Configuration,
-    OpenCustomerSessionRequestDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PortalPaymentApi(configuration);
-
-let openCustomerSessionRequestDto: OpenCustomerSessionRequestDto; // (optional)
-
-const { status, data } = await apiInstance.openCustomerSession(
-    openCustomerSessionRequestDto
-);
-```
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | The customer session |  -  |
-|**401** | Unauthorized |  -  |
-|**403** | No permissions to perform this action |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **performCustomerOperation**
-> BooleanWrapper performCustomerOperation()
-
-Perform customer operation and return true if the operation is succesfully provided.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/perform-customer-operation/).
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **performCustomerOperationRequestDto** | **PerformCustomerOperationRequestDto**|  | |
-
-
-### Return type
-
-**BooleanWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-```typescript
-import {
-    PortalPaymentApi,
-    Configuration,
-    PerformCustomerOperationRequestDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PortalPaymentApi(configuration);
-
-let performCustomerOperationRequestDto: PerformCustomerOperationRequestDto; // (optional)
-
-const { status, data } = await apiInstance.performCustomerOperation(
-    performCustomerOperationRequestDto
-);
-```
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Boolean value: true if the operation is succesfully provided |  -  |
 |**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
 

@@ -696,6 +696,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
+| **fields** | **string**| Comma-separated list of fields to include in the response | |
 | **userIdOrGroupId** | [**string**] | The user or group ID. | (optional) defaults to undefined|
 | **filterType** | **FilterType** | The filter type. | (optional) defaults to undefined|
 | **applyFilterOption** | **ApplyFilterOption** | Specifies whether to return only files, only folders or all elements. | (optional) defaults to undefined|
@@ -733,6 +734,7 @@ let startIndex: number; //The starting position of the items to be retrieved. (o
 let sortBy: string; //The property used to specify the sorting criteria for folder contents. (optional) (default to undefined)
 let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
 let filterValue: string; //The text used for filtering or searching folder contents. (optional) (default to undefined)
+let fields: string; //Comma-separated list of fields to include in the response (optional)
 
 const { status, data } = await apiInstance.getMyFolder(
     userIdOrGroupId,
@@ -742,7 +744,8 @@ const { status, data } = await apiInstance.getMyFolder(
     startIndex,
     sortBy,
     sortOrder,
-    filterValue
+    filterValue,
+    fields
 );
 ```
 
@@ -828,6 +831,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
+| **fields** | **string**| Comma-separated list of fields to include in the response | |
 | **userIdOrGroupId** | [**string**] | The user or group ID. | (optional) defaults to undefined|
 | **filterType** | **FilterType** | The filter type. | (optional) defaults to undefined|
 | **count** | [**number**] | The maximum number of items to retrieve in the request. | (optional) defaults to undefined|
@@ -863,6 +867,7 @@ let startIndex: number; //The zero-based index of the first item to retrieve in 
 let sortBy: string; //Specifies the field by which the folder content should be sorted. (optional) (default to undefined)
 let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
 let filterValue: string; //The text used as a filter or search criterion for folder content queries. (optional) (default to undefined)
+let fields: string; //Comma-separated list of fields to include in the response (optional)
 
 const { status, data } = await apiInstance.getPrivacyFolder(
     userIdOrGroupId,
@@ -871,7 +876,8 @@ const { status, data } = await apiInstance.getPrivacyFolder(
     startIndex,
     sortBy,
     sortOrder,
-    filterValue
+    filterValue,
+    fields
 );
 ```
 
@@ -902,6 +908,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
+| **fields** | **string**| Comma-separated list of fields to include in the response | |
 | **userIdOrGroupId** | [**string**] | The user or group ID. | (optional) defaults to undefined|
 | **filterType** | **FilterType** | The filter type. | (optional) defaults to undefined|
 | **withoutTrash** | [**boolean**] | Specifies whether to return the \&quot;Trash\&quot; section or not. | (optional) defaults to undefined|
@@ -939,6 +946,7 @@ let startIndex: number; //The starting position of the items to be retrieved. (o
 let sortBy: string; //Specifies the field by which the folder content should be sorted. (optional) (default to undefined)
 let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
 let filterValue: string; //The text used as a filter for searching or retrieving folder contents. (optional) (default to undefined)
+let fields: string; //Comma-separated list of fields to include in the response (optional)
 
 const { status, data } = await apiInstance.getRootFolders(
     userIdOrGroupId,
@@ -948,7 +956,8 @@ const { status, data } = await apiInstance.getRootFolders(
     startIndex,
     sortBy,
     sortOrder,
-    filterValue
+    filterValue,
+    fields
 );
 ```
 
@@ -979,6 +988,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
+| **fields** | **string**| Comma-separated list of fields to include in the response | |
 | **userIdOrGroupId** | [**string**] | The user or group ID. | (optional) defaults to undefined|
 | **filterType** | **FilterType** | The filter type. | (optional) defaults to undefined|
 | **applyFilterOption** | **ApplyFilterOption** | Specifies whether to return only files, only folders or all elements. | (optional) defaults to undefined|
@@ -1016,6 +1026,7 @@ let startIndex: number; //The starting position of the items to be retrieved. (o
 let sortBy: string; //The property used to specify the sorting criteria for folder contents. (optional) (default to undefined)
 let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
 let filterValue: string; //The text used for filtering or searching folder contents. (optional) (default to undefined)
+let fields: string; //Comma-separated list of fields to include in the response (optional)
 
 const { status, data } = await apiInstance.getTrashFolder(
     userIdOrGroupId,
@@ -1025,7 +1036,8 @@ const { status, data } = await apiInstance.getTrashFolder(
     startIndex,
     sortBy,
     sortOrder,
-    filterValue
+    filterValue,
+    fields
 );
 ```
 

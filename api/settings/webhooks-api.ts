@@ -1,28 +1,20 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-// 
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-// 
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-// 
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-// 
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-// 
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-// 
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/**
+ *
+ * (c) Copyright Ascensio System SIA 2025
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
 
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
@@ -283,12 +275,13 @@ export const SettingsWebhooksApiAxiosParamCreator = function (configuration?: Co
          * @param {WebhookTrigger} [trigger] The type of event that triggered the webhook.
          * @param {number} [count] The maximum number of webhook log records to return in the query response.
          * @param {number} [startIndex] Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries.
+         * @param {string | null} [fields] Comma-separated list of fields to include in the response
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getWebhooksLogs operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-webhooks-logs/
          */
-        getWebhooksLogs: async (deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getWebhooksLogs: async (deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, count?: number, startIndex?: number, fields?: string | null, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/settings/webhooks/log`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -362,6 +355,10 @@ export const SettingsWebhooksApiAxiosParamCreator = function (configuration?: Co
 
             if (startIndex !== undefined) {
                 localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (fields !== undefined) {
+                localVarQueryParameter['fields'] = fields;
             }
 
 
@@ -676,13 +673,14 @@ export const SettingsWebhooksApiFp = function(configuration?: Configuration) {
          * @param {WebhookTrigger} [trigger] The type of event that triggered the webhook.
          * @param {number} [count] The maximum number of webhook log records to return in the query response.
          * @param {number} [startIndex] Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries.
+         * @param {string | null} [fields] Comma-separated list of fields to include in the response
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getWebhooksLogs operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-webhooks-logs/
          */
-        async getWebhooksLogs(deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksLogArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getWebhooksLogs(deliveryFrom, deliveryTo, hookUri, configId, eventId, groupStatus, userId, trigger, count, startIndex, options);
+        async getWebhooksLogs(deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, count?: number, startIndex?: number, fields?: string | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksLogArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getWebhooksLogs(deliveryFrom, deliveryTo, hookUri, configId, eventId, groupStatus, userId, trigger, count, startIndex, fields, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SettingsWebhooksApi.getWebhooksLogs']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -816,13 +814,14 @@ export const SettingsWebhooksApiFactory = function (configuration?: Configuratio
          * @param {WebhookTrigger} [trigger] The type of event that triggered the webhook.
          * @param {number} [count] The maximum number of webhook log records to return in the query response.
          * @param {number} [startIndex] Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries.
+         * @param {string | null} [fields] Comma-separated list of fields to include in the response
          * @param {*} [options] Override http request option.
          * REST API Reference for getWebhooksLogs operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-webhooks-logs/
          * @throws {RequiredError}
          */
-        getWebhooksLogs(deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksLogArrayWrapper> {
-            return localVarFp.getWebhooksLogs(deliveryFrom, deliveryTo, hookUri, configId, eventId, groupStatus, userId, trigger, count, startIndex, options).then((request) => request(axios, basePath));
+        getWebhooksLogs(deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, count?: number, startIndex?: number, fields?: string | null, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksLogArrayWrapper> {
+            return localVarFp.getWebhooksLogs(deliveryFrom, deliveryTo, hookUri, configId, eventId, groupStatus, userId, trigger, count, startIndex, fields, options).then((request) => request(axios, basePath));
         },
         /**
          * Removes a tenant webhook with the ID specified in the request.
@@ -941,12 +940,13 @@ export class SettingsWebhooksApi extends BaseAPI {
      * @param {WebhookTrigger} [trigger] The type of event that triggered the webhook.
      * @param {number} [count] The maximum number of webhook log records to return in the query response.
      * @param {number} [startIndex] Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries.
+     * @param {string | null} [fields] Comma-separated list of fields to include in the response
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SettingsWebhooksApi
      */
-    public getWebhooksLogs(deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, count?: number, startIndex?: number, options?: RawAxiosRequestConfig) {
-        return SettingsWebhooksApiFp(this.configuration).getWebhooksLogs(deliveryFrom, deliveryTo, hookUri, configId, eventId, groupStatus, userId, trigger, count, startIndex, options).then((request) => request(this.axios, this.basePath));
+    public getWebhooksLogs(deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, count?: number, startIndex?: number, fields?: string | null, options?: RawAxiosRequestConfig) {
+        return SettingsWebhooksApiFp(this.configuration).getWebhooksLogs(deliveryFrom, deliveryTo, hookUri, configId, eventId, groupStatus, userId, trigger, count, startIndex, fields, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
