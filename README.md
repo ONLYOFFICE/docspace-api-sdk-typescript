@@ -32,14 +32,6 @@ npm install
 npm run build
 ```
 
-### Publishing
-
-To publish the package to the npm registry:
-
-```bash
-npm publish
-```
-
 ### Consuming
 
 To use the SDK in your project, navigate to the root folder of your consuming project and run one of the following commands:
@@ -68,18 +60,15 @@ Authentication schemes defined for the API:
 - **API key parameter name**: asc_auth_key
 - **Location**: Cookie
 
-
 <a id="Basic"></a>
 ### Basic
 
 - **Type**: HTTP basic authentication
 
-
 <a id="Bearer"></a>
 ### Bearer
 
 - **Type**: Bearer authentication (JWT)
-
 
 <a id="ApiKeyBearer"></a>
 ### ApiKeyBearer
@@ -87,7 +76,6 @@ Authentication schemes defined for the API:
 - **Type**: API key
 - **API key parameter name**: ApiKeyBearer
 - **Location**: HTTP header
-
 
 <a id="OAuth2"></a>
 ### OAuth2
@@ -100,13 +88,11 @@ Authentication schemes defined for the API:
  - **read**: Read access to protected resources
  - **write**: Write access to protected resources
 
-
 <a id="OpenId"></a>
 ### OpenId
 
 - **Type**: OpenId Connect
 - **OpenId Connect URL**: {{authBaseUrl}}/.well-known/openid-configuration
-
 
 <a id="x-signature"></a>
 ### x-signature
@@ -116,11 +102,11 @@ Authentication schemes defined for the API:
 - **Location**: Cookie
 
 
-
 ### Documentation for API Endpoints
 
 All URIs are relative to *http://localhost:8092*
 
+<details><summary>API Endoints table</summary>
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ApiKeysApi* | [**createApiKey**](docs/ApiKeysApi.md#createapikey) | **POST** /api/2.0/keys | Create a user API key
@@ -587,9 +573,11 @@ Class | Method | HTTP request | Description
 *SettingsWebpluginsApi* | [**updateWebPlugin**](docs/SettingsWebpluginsApi.md#updatewebplugin) | **PUT** /api/2.0/settings/webplugins/{name} | Update a web plugin
 *ThirdPartyApi* | [**getThirdPartyCode**](docs/ThirdPartyApi.md#getthirdpartycode) | **GET** /api/2.0/thirdparty/{provider} | Get the code request
 
+</details>
 
 ### Documentation For Models
 
+<details><summary>Models list</summary>
  - [AccountInfoArrayWrapper](docs/AccountInfoArrayWrapper.md)
  - [AccountInfoDto](docs/AccountInfoDto.md)
  - [AccountLoginType](docs/AccountLoginType.md)
@@ -1165,4 +1153,4 @@ Class | Method | HTTP request | Description
  - [WizardSettings](docs/WizardSettings.md)
  - [WizardSettingsWrapper](docs/WizardSettingsWrapper.md)
 
-
+</details>
