@@ -1,4 +1,4 @@
-## @onlyoffice/docspace-api-typescript@3.2.0
+# @onlyoffice/docspace-api-typescript
 
 The ONLYOFFICE DocSpace SDK for TypeScript is a library that provides tools for integrating and managing DocSpace features within your applications. It simplifies interaction with the DocSpace API by offering ready-to-use methods and models.
 
@@ -39,7 +39,7 @@ To use the SDK in your project, navigate to the root folder of your consuming pr
 #### From published package (recommended)
 
 ```bash
-npm install @onlyoffice/docspace-api-typescript@3.2.0 --save
+npm install @onlyoffice/docspace-api-typescript --save
 ```
 
 #### From local build (not recommended)
