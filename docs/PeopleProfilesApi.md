@@ -48,7 +48,7 @@ import {
     PeopleProfilesApi,
     Configuration,
     MemberRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PeopleProfilesApi(configuration);
@@ -103,7 +103,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     PeopleProfilesApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PeopleProfilesApi(configuration);
@@ -157,7 +157,7 @@ This endpoint does not have any parameters.
 import {
     PeopleProfilesApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PeopleProfilesApi(configuration);
@@ -216,7 +216,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     PeopleProfilesApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PeopleProfilesApi(configuration);
@@ -281,7 +281,7 @@ This endpoint does not have any parameters.
 import {
     PeopleProfilesApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PeopleProfilesApi(configuration);
@@ -332,7 +332,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     PeopleProfilesApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PeopleProfilesApi(configuration);
@@ -389,7 +389,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     PeopleProfilesApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PeopleProfilesApi(configuration);
@@ -442,7 +442,7 @@ This endpoint does not have any parameters.
 import {
     PeopleProfilesApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PeopleProfilesApi(configuration);
@@ -493,7 +493,7 @@ import {
     PeopleProfilesApi,
     Configuration,
     InviteUsersRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PeopleProfilesApi(configuration);
@@ -549,7 +549,7 @@ import {
     PeopleProfilesApi,
     Configuration,
     UpdateMembersRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PeopleProfilesApi(configuration);
@@ -605,7 +605,7 @@ import {
     PeopleProfilesApi,
     Configuration,
     UpdateMembersRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PeopleProfilesApi(configuration);
@@ -661,7 +661,7 @@ import {
     PeopleProfilesApi,
     Configuration,
     UpdateMemberRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PeopleProfilesApi(configuration);
@@ -720,7 +720,7 @@ import {
     PeopleProfilesApi,
     Configuration,
     UpdateMemberRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PeopleProfilesApi(configuration);
@@ -781,7 +781,7 @@ import {
     PeopleProfilesApi,
     Configuration,
     Culture
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PeopleProfilesApi(configuration);

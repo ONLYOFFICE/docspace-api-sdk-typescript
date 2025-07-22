@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { BooleanWrapper } from '@onlyoffice/docspace-api-typescript';
+import { BooleanWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: BooleanWrapper = {
     response,

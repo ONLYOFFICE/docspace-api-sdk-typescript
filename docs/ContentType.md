@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ContentType } from '@onlyoffice/docspace-api-typescript';
+import { ContentType } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ContentType = {
     boundary,

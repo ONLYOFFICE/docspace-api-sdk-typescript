@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CheckFillFormDraft } from '@onlyoffice/docspace-api-typescript';
+import { CheckFillFormDraft } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CheckFillFormDraft = {
     version,

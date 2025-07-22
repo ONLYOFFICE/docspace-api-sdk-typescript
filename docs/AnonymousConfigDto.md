@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { AnonymousConfigDto } from '@onlyoffice/docspace-api-typescript';
+import { AnonymousConfigDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: AnonymousConfigDto = {
     request,

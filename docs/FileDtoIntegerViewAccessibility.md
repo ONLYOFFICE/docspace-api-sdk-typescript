@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FileDtoIntegerViewAccessibility } from '@onlyoffice/docspace-api-typescript';
+import { FileDtoIntegerViewAccessibility } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FileDtoIntegerViewAccessibility = {
     ImageView,

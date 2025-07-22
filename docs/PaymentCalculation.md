@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { PaymentCalculation } from '@onlyoffice/docspace-api-typescript';
+import { PaymentCalculation } from '@onlyoffice/docspace-api-sdk';
 
 const instance: PaymentCalculation = {
     operationId,

@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { IPRestriction } from '@onlyoffice/docspace-api-typescript';
+import { IPRestriction } from '@onlyoffice/docspace-api-sdk';
 
 const instance: IPRestriction = {
     ip,

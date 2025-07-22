@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CreateThirdPartyRoom } from '@onlyoffice/docspace-api-typescript';
+import { CreateThirdPartyRoom } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CreateThirdPartyRoom = {
     createAsNewFolder,

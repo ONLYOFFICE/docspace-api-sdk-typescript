@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CoEditingConfig } from '@onlyoffice/docspace-api-typescript';
+import { CoEditingConfig } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CoEditingConfig = {
     change,

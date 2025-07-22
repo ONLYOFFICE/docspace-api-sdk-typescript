@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { TemplatesConfig } from '@onlyoffice/docspace-api-typescript';
+import { TemplatesConfig } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TemplatesConfig = {
     image,

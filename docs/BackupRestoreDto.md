@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { BackupRestoreDto } from '@onlyoffice/docspace-api-typescript';
+import { BackupRestoreDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: BackupRestoreDto = {
     backupId,

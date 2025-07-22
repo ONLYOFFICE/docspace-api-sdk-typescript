@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CurrentLicenseInfo } from '@onlyoffice/docspace-api-typescript';
+import { CurrentLicenseInfo } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CurrentLicenseInfo = {
     trial,

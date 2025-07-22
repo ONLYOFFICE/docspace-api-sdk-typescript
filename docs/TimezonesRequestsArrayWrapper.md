@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { TimezonesRequestsArrayWrapper } from '@onlyoffice/docspace-api-typescript';
+import { TimezonesRequestsArrayWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TimezonesRequestsArrayWrapper = {
     response,

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { KeyValuePairBooleanStringWrapper } from '@onlyoffice/docspace-api-typescript';
+import { KeyValuePairBooleanStringWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: KeyValuePairBooleanStringWrapper = {
     response,

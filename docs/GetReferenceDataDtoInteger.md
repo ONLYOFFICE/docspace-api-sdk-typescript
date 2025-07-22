@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { GetReferenceDataDtoInteger } from '@onlyoffice/docspace-api-typescript';
+import { GetReferenceDataDtoInteger } from '@onlyoffice/docspace-api-sdk';
 
 const instance: GetReferenceDataDtoInteger = {
     fileKey,

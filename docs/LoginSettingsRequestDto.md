@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { LoginSettingsRequestDto } from '@onlyoffice/docspace-api-typescript';
+import { LoginSettingsRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: LoginSettingsRequestDto = {
     attemptCount,

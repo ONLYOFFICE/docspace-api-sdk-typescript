@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { MailDomainSettingsRequestsDto } from '@onlyoffice/docspace-api-typescript';
+import { MailDomainSettingsRequestsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: MailDomainSettingsRequestsDto = {
     type,

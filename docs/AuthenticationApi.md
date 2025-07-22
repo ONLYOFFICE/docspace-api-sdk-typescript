@@ -41,7 +41,7 @@ import {
     AuthenticationApi,
     Configuration,
     AuthRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new AuthenticationApi(configuration);
@@ -100,7 +100,7 @@ import {
     AuthenticationApi,
     Configuration,
     AuthRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new AuthenticationApi(configuration);
@@ -160,7 +160,7 @@ import {
     AuthenticationApi,
     Configuration,
     EmailValidationKeyModel
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new AuthenticationApi(configuration);
@@ -210,7 +210,7 @@ No authorization required
 import {
     AuthenticationApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new AuthenticationApi(configuration);
@@ -256,7 +256,7 @@ No authorization required
 import {
     AuthenticationApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new AuthenticationApi(configuration);
@@ -306,7 +306,7 @@ import {
     AuthenticationApi,
     Configuration,
     MobileRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new AuthenticationApi(configuration);
@@ -361,7 +361,7 @@ import {
     AuthenticationApi,
     Configuration,
     AuthRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new AuthenticationApi(configuration);

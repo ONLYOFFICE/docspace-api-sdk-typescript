@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ConfigurationIntegerWrapper } from '@onlyoffice/docspace-api-typescript';
+import { ConfigurationIntegerWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ConfigurationIntegerWrapper = {
     response,

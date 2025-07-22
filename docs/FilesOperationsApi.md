@@ -51,7 +51,7 @@ import {
     FilesOperationsApi,
     Configuration,
     DownloadRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
@@ -106,7 +106,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     FilesOperationsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
@@ -163,7 +163,7 @@ import {
     FilesOperationsApi,
     Configuration,
     BatchRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
@@ -219,7 +219,7 @@ import {
     FilesOperationsApi,
     Configuration,
     BatchRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
@@ -275,7 +275,7 @@ import {
     FilesOperationsApi,
     Configuration,
     BatchRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
@@ -332,7 +332,7 @@ import {
     FilesOperationsApi,
     Configuration,
     SessionRequest
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
@@ -390,7 +390,7 @@ import {
     FilesOperationsApi,
     Configuration,
     DeleteBatchRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
@@ -446,7 +446,7 @@ import {
     FilesOperationsApi,
     Configuration,
     DeleteVersionBatchRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
@@ -501,7 +501,7 @@ import {
     FilesOperationsApi,
     Configuration,
     DuplicateRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
@@ -556,7 +556,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     FilesOperationsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
@@ -610,7 +610,7 @@ No authorization required
 import {
     FilesOperationsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
@@ -664,7 +664,7 @@ No authorization required
 import {
     FilesOperationsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
@@ -720,7 +720,7 @@ import {
     FilesOperationsApi,
     Configuration,
     BaseBatchRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
@@ -775,7 +775,7 @@ import {
     FilesOperationsApi,
     Configuration,
     BatchRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
@@ -832,7 +832,7 @@ import {
     FilesOperationsApi,
     Configuration,
     CheckConversionRequestDtoInteger
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
@@ -888,7 +888,7 @@ No authorization required
 import {
     FilesOperationsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
@@ -943,7 +943,7 @@ import {
     FilesOperationsApi,
     Configuration,
     UpdateComment
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);

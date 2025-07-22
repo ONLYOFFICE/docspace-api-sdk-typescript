@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { TaskProgressResponseWrapper } from '@onlyoffice/docspace-api-typescript';
+import { TaskProgressResponseWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TaskProgressResponseWrapper = {
     response,

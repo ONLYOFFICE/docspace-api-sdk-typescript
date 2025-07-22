@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { LoginEventDto } from '@onlyoffice/docspace-api-typescript';
+import { LoginEventDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: LoginEventDto = {
     id,

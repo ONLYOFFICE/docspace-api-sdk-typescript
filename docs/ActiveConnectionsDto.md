@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ActiveConnectionsDto } from '@onlyoffice/docspace-api-typescript';
+import { ActiveConnectionsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ActiveConnectionsDto = {
     loginEvent,

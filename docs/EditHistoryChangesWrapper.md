@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { EditHistoryChangesWrapper } from '@onlyoffice/docspace-api-typescript';
+import { EditHistoryChangesWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: EditHistoryChangesWrapper = {
     user,

@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { SsoIdpCertificateAdvanced } from '@onlyoffice/docspace-api-typescript';
+import { SsoIdpCertificateAdvanced } from '@onlyoffice/docspace-api-sdk';
 
 const instance: SsoIdpCertificateAdvanced = {
     verifyAlgorithm,

@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FolderContentDtoInteger } from '@onlyoffice/docspace-api-typescript';
+import { FolderContentDtoInteger } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FolderContentDtoInteger = {
     files,

@@ -58,7 +58,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FolderDtoString } from '@onlyoffice/docspace-api-typescript';
+import { FolderDtoString } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FolderDtoString = {
     title,

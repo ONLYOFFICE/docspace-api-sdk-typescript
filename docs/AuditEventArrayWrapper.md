@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { AuditEventArrayWrapper } from '@onlyoffice/docspace-api-typescript';
+import { AuditEventArrayWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: AuditEventArrayWrapper = {
     response,

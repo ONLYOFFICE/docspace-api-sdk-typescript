@@ -49,7 +49,7 @@ void (empty response body)
 import {
     SettingsCommonSettingsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
@@ -101,7 +101,7 @@ import {
     SettingsCommonSettingsApi,
     Configuration,
     WizardRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
@@ -158,7 +158,7 @@ import {
     SettingsCommonSettingsApi,
     Configuration,
     DeepLinkConfigurationRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
@@ -213,7 +213,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsCommonSettingsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
@@ -264,7 +264,7 @@ This endpoint does not have any parameters.
 import {
     SettingsCommonSettingsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
@@ -311,7 +311,7 @@ This endpoint does not have any parameters.
 import {
     SettingsCommonSettingsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
@@ -358,7 +358,7 @@ No authorization required
 import {
     SettingsCommonSettingsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
@@ -404,7 +404,7 @@ This endpoint does not have any parameters.
 import {
     SettingsCommonSettingsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
@@ -451,7 +451,7 @@ This endpoint does not have any parameters.
 import {
     SettingsCommonSettingsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
@@ -501,7 +501,7 @@ No authorization required
 import {
     SettingsCommonSettingsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
@@ -551,7 +551,7 @@ This endpoint does not have any parameters.
 import {
     SettingsCommonSettingsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
@@ -598,7 +598,7 @@ No authorization required
 import {
     SettingsCommonSettingsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
@@ -644,7 +644,7 @@ No authorization required
 import {
     SettingsCommonSettingsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
@@ -690,7 +690,7 @@ This endpoint does not have any parameters.
 import {
     SettingsCommonSettingsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
@@ -741,7 +741,7 @@ import {
     SettingsCommonSettingsApi,
     Configuration,
     DnsSettingsRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
@@ -799,7 +799,7 @@ import {
     SettingsCommonSettingsApi,
     Configuration,
     MailDomainSettingsRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
@@ -854,7 +854,7 @@ import {
     SettingsCommonSettingsApi,
     Configuration,
     CustomColorThemesSettingsRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
@@ -909,7 +909,7 @@ import {
     SettingsCommonSettingsApi,
     Configuration,
     EmailActivationSettings
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
@@ -964,7 +964,7 @@ import {
     SettingsCommonSettingsApi,
     Configuration,
     TenantUserInvitationSettingsRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);

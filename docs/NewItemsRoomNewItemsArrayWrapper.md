@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { NewItemsRoomNewItemsArrayWrapper } from '@onlyoffice/docspace-api-typescript';
+import { NewItemsRoomNewItemsArrayWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: NewItemsRoomNewItemsArrayWrapper = {
     response,

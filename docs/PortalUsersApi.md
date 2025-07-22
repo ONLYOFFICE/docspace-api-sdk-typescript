@@ -38,7 +38,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     PortalUsersApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalUsersApi(configuration);
@@ -89,7 +89,7 @@ This endpoint does not have any parameters.
 import {
     PortalUsersApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalUsersApi(configuration);
@@ -139,7 +139,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     PortalUsersApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalUsersApi(configuration);
@@ -190,7 +190,7 @@ void (empty response body)
 import {
     PortalUsersApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalUsersApi(configuration);
@@ -241,7 +241,7 @@ No authorization required
 import {
     PortalUsersApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalUsersApi(configuration);

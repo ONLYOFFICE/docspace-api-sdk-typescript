@@ -33,7 +33,7 @@ This endpoint does not have any parameters.
 import {
     SecurityLoginHistoryApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SecurityLoginHistoryApi(configuration);
@@ -81,7 +81,7 @@ This endpoint does not have any parameters.
 import {
     SecurityLoginHistoryApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SecurityLoginHistoryApi(configuration);
@@ -140,7 +140,7 @@ import {
     Configuration,
     ApiDateTime,
     ApiDateTime
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SecurityLoginHistoryApi(configuration);

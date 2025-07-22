@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { TenantBannerSettingsDto } from '@onlyoffice/docspace-api-typescript';
+import { TenantBannerSettingsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TenantBannerSettingsDto = {
     hidden,

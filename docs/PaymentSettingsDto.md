@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { PaymentSettingsDto } from '@onlyoffice/docspace-api-typescript';
+import { PaymentSettingsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: PaymentSettingsDto = {
     salesEmail,

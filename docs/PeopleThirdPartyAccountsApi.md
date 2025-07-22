@@ -40,7 +40,7 @@ No authorization required
 import {
     PeopleThirdPartyAccountsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PeopleThirdPartyAccountsApi(configuration);
@@ -100,7 +100,7 @@ import {
     PeopleThirdPartyAccountsApi,
     Configuration,
     LinkAccountRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PeopleThirdPartyAccountsApi(configuration);
@@ -156,7 +156,7 @@ import {
     PeopleThirdPartyAccountsApi,
     Configuration,
     SignupAccountRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PeopleThirdPartyAccountsApi(configuration);
@@ -211,7 +211,7 @@ void (empty response body)
 import {
     PeopleThirdPartyAccountsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PeopleThirdPartyAccountsApi(configuration);

@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { UpdateApiKeyRequest } from '@onlyoffice/docspace-api-typescript';
+import { UpdateApiKeyRequest } from '@onlyoffice/docspace-api-sdk';
 
 const instance: UpdateApiKeyRequest = {
     name,

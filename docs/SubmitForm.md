@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { SubmitForm } from '@onlyoffice/docspace-api-typescript';
+import { SubmitForm } from '@onlyoffice/docspace-api-sdk';
 
 const instance: SubmitForm = {
     visible,

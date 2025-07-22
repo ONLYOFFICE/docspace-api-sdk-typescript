@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { TenantBannerSettings } from '@onlyoffice/docspace-api-typescript';
+import { TenantBannerSettings } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TenantBannerSettings = {
     hidden,

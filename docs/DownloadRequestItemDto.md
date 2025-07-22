@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { DownloadRequestItemDto } from '@onlyoffice/docspace-api-typescript';
+import { DownloadRequestItemDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: DownloadRequestItemDto = {
     key,

@@ -42,7 +42,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsStorageApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsStorageApi(configuration);
@@ -94,7 +94,7 @@ This endpoint does not have any parameters.
 import {
     SettingsStorageApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsStorageApi(configuration);
@@ -142,7 +142,7 @@ This endpoint does not have any parameters.
 import {
     SettingsStorageApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsStorageApi(configuration);
@@ -190,7 +190,7 @@ This endpoint does not have any parameters.
 import {
     SettingsStorageApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsStorageApi(configuration);
@@ -237,7 +237,7 @@ This endpoint does not have any parameters.
 import {
     SettingsStorageApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsStorageApi(configuration);
@@ -284,7 +284,7 @@ void (empty response body)
 import {
     SettingsStorageApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsStorageApi(configuration);
@@ -332,7 +332,7 @@ void (empty response body)
 import {
     SettingsStorageApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsStorageApi(configuration);
@@ -384,7 +384,7 @@ import {
     SettingsStorageApi,
     Configuration,
     StorageRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsStorageApi(configuration);
@@ -441,7 +441,7 @@ import {
     SettingsStorageApi,
     Configuration,
     StorageRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsStorageApi(configuration);

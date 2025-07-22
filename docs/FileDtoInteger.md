@@ -65,7 +65,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FileDtoInteger } from '@onlyoffice/docspace-api-typescript';
+import { FileDtoInteger } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FileDtoInteger = {
     title,

@@ -36,7 +36,7 @@ import {
     PeopleGuestsApi,
     Configuration,
     EmailMemberRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PeopleGuestsApi(configuration);
@@ -93,7 +93,7 @@ import {
     PeopleGuestsApi,
     Configuration,
     UpdateMembersRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PeopleGuestsApi(configuration);

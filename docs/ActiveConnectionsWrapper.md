@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ActiveConnectionsWrapper } from '@onlyoffice/docspace-api-typescript';
+import { ActiveConnectionsWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ActiveConnectionsWrapper = {
     response,

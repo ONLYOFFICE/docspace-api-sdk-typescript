@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FileShareDto } from '@onlyoffice/docspace-api-typescript';
+import { FileShareDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FileShareDto = {
     access,

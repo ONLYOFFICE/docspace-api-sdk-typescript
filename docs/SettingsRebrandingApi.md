@@ -47,7 +47,7 @@ This endpoint does not have any parameters.
 import {
     SettingsRebrandingApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsRebrandingApi(configuration);
@@ -95,7 +95,7 @@ This endpoint does not have any parameters.
 import {
     SettingsRebrandingApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsRebrandingApi(configuration);
@@ -143,7 +143,7 @@ This endpoint does not have any parameters.
 import {
     SettingsRebrandingApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsRebrandingApi(configuration);
@@ -190,7 +190,7 @@ This endpoint does not have any parameters.
 import {
     SettingsRebrandingApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsRebrandingApi(configuration);
@@ -237,7 +237,7 @@ This endpoint does not have any parameters.
 import {
     SettingsRebrandingApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsRebrandingApi(configuration);
@@ -288,7 +288,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsRebrandingApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsRebrandingApi(configuration);
@@ -345,7 +345,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsRebrandingApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsRebrandingApi(configuration);
@@ -398,7 +398,7 @@ This endpoint does not have any parameters.
 import {
     SettingsRebrandingApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsRebrandingApi(configuration);
@@ -449,7 +449,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsRebrandingApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsRebrandingApi(configuration);
@@ -506,7 +506,7 @@ No authorization required
 import {
     SettingsRebrandingApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsRebrandingApi(configuration);
@@ -562,7 +562,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsRebrandingApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsRebrandingApi(configuration);
@@ -620,7 +620,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsRebrandingApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsRebrandingApi(configuration);
@@ -678,7 +678,7 @@ import {
     SettingsRebrandingApi,
     Configuration,
     AdditionalWhiteLabelSettingsWrapper
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsRebrandingApi(configuration);
@@ -735,7 +735,7 @@ import {
     SettingsRebrandingApi,
     Configuration,
     CompanyWhiteLabelSettingsWrapper
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsRebrandingApi(configuration);
@@ -794,7 +794,7 @@ import {
     SettingsRebrandingApi,
     Configuration,
     WhiteLabelRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsRebrandingApi(configuration);
@@ -856,7 +856,7 @@ import {
     SettingsRebrandingApi,
     Configuration,
     WhiteLabelRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsRebrandingApi(configuration);
@@ -916,7 +916,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsRebrandingApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsRebrandingApi(configuration);

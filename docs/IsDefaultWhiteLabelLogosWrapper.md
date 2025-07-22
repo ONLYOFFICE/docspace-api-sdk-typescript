@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { IsDefaultWhiteLabelLogosWrapper } from '@onlyoffice/docspace-api-typescript';
+import { IsDefaultWhiteLabelLogosWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: IsDefaultWhiteLabelLogosWrapper = {
     response,

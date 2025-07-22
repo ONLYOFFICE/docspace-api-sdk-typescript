@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { GobackConfig } from '@onlyoffice/docspace-api-typescript';
+import { GobackConfig } from '@onlyoffice/docspace-api-sdk';
 
 const instance: GobackConfig = {
     url,

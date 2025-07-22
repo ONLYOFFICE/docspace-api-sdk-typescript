@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FillingFormResultIntegerWrapper } from '@onlyoffice/docspace-api-typescript';
+import { FillingFormResultIntegerWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FillingFormResultIntegerWrapper = {
     response,

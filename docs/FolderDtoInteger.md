@@ -58,7 +58,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FolderDtoInteger } from '@onlyoffice/docspace-api-typescript';
+import { FolderDtoInteger } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FolderDtoInteger = {
     title,

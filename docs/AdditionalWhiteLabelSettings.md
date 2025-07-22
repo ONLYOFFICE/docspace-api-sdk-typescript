@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { AdditionalWhiteLabelSettings } from '@onlyoffice/docspace-api-typescript';
+import { AdditionalWhiteLabelSettings } from '@onlyoffice/docspace-api-sdk';
 
 const instance: AdditionalWhiteLabelSettings = {
     startDocsEnabled,

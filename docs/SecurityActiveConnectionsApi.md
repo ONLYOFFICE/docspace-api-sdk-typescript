@@ -35,7 +35,7 @@ This endpoint does not have any parameters.
 import {
     SecurityActiveConnectionsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SecurityActiveConnectionsApi(configuration);
@@ -85,7 +85,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SecurityActiveConnectionsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SecurityActiveConnectionsApi(configuration);
@@ -137,7 +137,7 @@ This endpoint does not have any parameters.
 import {
     SecurityActiveConnectionsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SecurityActiveConnectionsApi(configuration);
@@ -187,7 +187,7 @@ void (empty response body)
 import {
     SecurityActiveConnectionsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SecurityActiveConnectionsApi(configuration);
@@ -239,7 +239,7 @@ This endpoint does not have any parameters.
 import {
     SecurityActiveConnectionsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SecurityActiveConnectionsApi(configuration);

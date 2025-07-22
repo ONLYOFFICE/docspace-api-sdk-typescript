@@ -68,7 +68,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FilesSettingsDto } from '@onlyoffice/docspace-api-typescript';
+import { FilesSettingsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FilesSettingsDto = {
     extsImagePreviewed,

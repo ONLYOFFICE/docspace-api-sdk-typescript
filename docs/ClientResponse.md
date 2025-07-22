@@ -29,7 +29,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ClientResponse } from '@onlyoffice/docspace-api-typescript';
+import { ClientResponse } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ClientResponse = {
     name,

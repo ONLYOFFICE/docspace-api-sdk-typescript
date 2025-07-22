@@ -44,7 +44,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { TenantQuota } from '@onlyoffice/docspace-api-typescript';
+import { TenantQuota } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TenantQuota = {
     tenantId,

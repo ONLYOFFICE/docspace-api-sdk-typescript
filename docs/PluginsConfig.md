@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { PluginsConfig } from '@onlyoffice/docspace-api-typescript';
+import { PluginsConfig } from '@onlyoffice/docspace-api-sdk';
 
 const instance: PluginsConfig = {
     pluginsData,

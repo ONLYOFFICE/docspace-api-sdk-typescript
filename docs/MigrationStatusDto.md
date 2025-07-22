@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { MigrationStatusDto } from '@onlyoffice/docspace-api-typescript';
+import { MigrationStatusDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: MigrationStatusDto = {
     progress,

@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FilesSettingsDtoInternalFormats } from '@onlyoffice/docspace-api-typescript';
+import { FilesSettingsDtoInternalFormats } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FilesSettingsDtoInternalFormats = {
     Unknown,

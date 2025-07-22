@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ReportDto } from '@onlyoffice/docspace-api-typescript';
+import { ReportDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ReportDto = {
     collection,

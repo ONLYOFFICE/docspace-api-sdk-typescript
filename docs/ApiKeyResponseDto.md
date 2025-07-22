@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ApiKeyResponseDto } from '@onlyoffice/docspace-api-typescript';
+import { ApiKeyResponseDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ApiKeyResponseDto = {
     id,

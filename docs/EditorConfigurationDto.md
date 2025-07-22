@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { EditorConfigurationDto } from '@onlyoffice/docspace-api-typescript';
+import { EditorConfigurationDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: EditorConfigurationDto = {
     callbackUrl,

@@ -36,7 +36,7 @@ import {
     SecurityCSPApi,
     Configuration,
     CspRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SecurityCSPApi(configuration);
@@ -88,7 +88,7 @@ No authorization required
 import {
     SecurityCSPApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SecurityCSPApi(configuration);

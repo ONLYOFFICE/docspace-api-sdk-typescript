@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { IpRestrictionBase } from '@onlyoffice/docspace-api-typescript';
+import { IpRestrictionBase } from '@onlyoffice/docspace-api-sdk';
 
 const instance: IpRestrictionBase = {
     ip,

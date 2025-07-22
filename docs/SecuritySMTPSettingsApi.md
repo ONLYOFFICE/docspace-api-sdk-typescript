@@ -35,7 +35,7 @@ This endpoint does not have any parameters.
 import {
     SecuritySMTPSettingsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SecuritySMTPSettingsApi(configuration);
@@ -83,7 +83,7 @@ This endpoint does not have any parameters.
 import {
     SecuritySMTPSettingsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SecuritySMTPSettingsApi(configuration);
@@ -131,7 +131,7 @@ This endpoint does not have any parameters.
 import {
     SecuritySMTPSettingsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SecuritySMTPSettingsApi(configuration);
@@ -183,7 +183,7 @@ import {
     SecuritySMTPSettingsApi,
     Configuration,
     SmtpSettingsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SecuritySMTPSettingsApi(configuration);
@@ -235,7 +235,7 @@ This endpoint does not have any parameters.
 import {
     SecuritySMTPSettingsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SecuritySMTPSettingsApi(configuration);

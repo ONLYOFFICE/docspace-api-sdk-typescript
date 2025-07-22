@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { DocumentBuilderTaskDto } from '@onlyoffice/docspace-api-typescript';
+import { DocumentBuilderTaskDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: DocumentBuilderTaskDto = {
     id,

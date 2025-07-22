@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { OwnerChangeInstructionsWrapper } from '@onlyoffice/docspace-api-typescript';
+import { OwnerChangeInstructionsWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: OwnerChangeInstructionsWrapper = {
     response,

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { PasswordSettingsRequestsDto } from '@onlyoffice/docspace-api-typescript';
+import { PasswordSettingsRequestsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: PasswordSettingsRequestsDto = {
     minLength,

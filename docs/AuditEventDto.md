@@ -28,7 +28,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { AuditEventDto } from '@onlyoffice/docspace-api-typescript';
+import { AuditEventDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: AuditEventDto = {
     id,

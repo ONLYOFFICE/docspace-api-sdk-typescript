@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { TenantAuditSettings } from '@onlyoffice/docspace-api-typescript';
+import { TenantAuditSettings } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TenantAuditSettings = {
     loginHistoryLifeTime,

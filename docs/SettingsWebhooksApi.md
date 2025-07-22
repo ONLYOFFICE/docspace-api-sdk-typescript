@@ -43,7 +43,7 @@ import {
     SettingsWebhooksApi,
     Configuration,
     CreateWebhooksConfigRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsWebhooksApi(configuration);
@@ -98,7 +98,7 @@ import {
     SettingsWebhooksApi,
     Configuration,
     UpdateWebhooksConfigRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsWebhooksApi(configuration);
@@ -149,7 +149,7 @@ This endpoint does not have any parameters.
 import {
     SettingsWebhooksApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsWebhooksApi(configuration);
@@ -196,7 +196,7 @@ This endpoint does not have any parameters.
 import {
     SettingsWebhooksApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsWebhooksApi(configuration);
@@ -256,7 +256,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsWebhooksApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsWebhooksApi(configuration);
@@ -330,7 +330,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsWebhooksApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsWebhooksApi(configuration);
@@ -384,7 +384,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsWebhooksApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsWebhooksApi(configuration);
@@ -441,7 +441,7 @@ import {
     SettingsWebhooksApi,
     Configuration,
     WebhookRetryRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsWebhooksApi(configuration);
@@ -496,7 +496,7 @@ import {
     SettingsWebhooksApi,
     Configuration,
     UpdateWebhooksConfigRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsWebhooksApi(configuration);

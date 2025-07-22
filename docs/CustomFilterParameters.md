@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CustomFilterParameters } from '@onlyoffice/docspace-api-typescript';
+import { CustomFilterParameters } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CustomFilterParameters = {
     enabled,

@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { LogoConfigDto } from '@onlyoffice/docspace-api-typescript';
+import { LogoConfigDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: LogoConfigDto = {
     image,

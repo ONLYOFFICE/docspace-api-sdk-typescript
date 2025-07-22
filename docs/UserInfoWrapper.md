@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { UserInfoWrapper } from '@onlyoffice/docspace-api-typescript';
+import { UserInfoWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: UserInfoWrapper = {
     response,

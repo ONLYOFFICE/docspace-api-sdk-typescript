@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { LockFileParameters } from '@onlyoffice/docspace-api-typescript';
+import { LockFileParameters } from '@onlyoffice/docspace-api-sdk';
 
 const instance: LockFileParameters = {
     lockFile,

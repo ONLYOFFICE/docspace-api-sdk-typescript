@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CustomizationConfigDto } from '@onlyoffice/docspace-api-typescript';
+import { CustomizationConfigDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CustomizationConfigDto = {
     about,

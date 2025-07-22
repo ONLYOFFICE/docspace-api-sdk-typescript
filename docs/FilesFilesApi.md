@@ -79,7 +79,7 @@ import {
     FilesFilesApi,
     Configuration,
     TemplatesRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -135,7 +135,7 @@ import {
     FilesFilesApi,
     Configuration,
     ChangeHistory
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -194,7 +194,7 @@ import {
     FilesFilesApi,
     Configuration,
     CheckFillFormDraft
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -252,7 +252,7 @@ import {
     FilesFilesApi,
     Configuration,
     CopyAsJsonElement
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -312,7 +312,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     FilesFilesApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -371,7 +371,7 @@ import {
     FilesFilesApi,
     Configuration,
     CreateFileJsonElement
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -428,7 +428,7 @@ import {
     FilesFilesApi,
     Configuration,
     CreateFileJsonElement
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -484,7 +484,7 @@ import {
     FilesFilesApi,
     Configuration,
     CreateTextOrHtmlFile
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -542,7 +542,7 @@ import {
     FilesFilesApi,
     Configuration,
     CreateTextOrHtmlFile
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -599,7 +599,7 @@ import {
     FilesFilesApi,
     Configuration,
     FileLinkRequest
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -658,7 +658,7 @@ import {
     FilesFilesApi,
     Configuration,
     CreateTextOrHtmlFile
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -715,7 +715,7 @@ import {
     FilesFilesApi,
     Configuration,
     CreateTextOrHtmlFile
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -770,7 +770,7 @@ import {
     FilesFilesApi,
     Configuration,
     BaseBatchRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -825,7 +825,7 @@ import {
     FilesFilesApi,
     Configuration,
     Delete
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -882,7 +882,7 @@ import {
     FilesFilesApi,
     Configuration,
     BaseBatchRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -936,7 +936,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     FilesFilesApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -990,7 +990,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     FilesFilesApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -1046,7 +1046,7 @@ No authorization required
 import {
     FilesFilesApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -1101,7 +1101,7 @@ No authorization required
 import {
     FilesFilesApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -1160,7 +1160,7 @@ import {
     Configuration,
     ApiDateTime,
     ApiDateTime
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -1225,7 +1225,7 @@ No authorization required
 import {
     FilesFilesApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -1282,7 +1282,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     FilesFilesApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -1342,7 +1342,7 @@ No authorization required
 import {
     FilesFilesApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -1400,7 +1400,7 @@ No authorization required
 import {
     FilesFilesApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -1453,7 +1453,7 @@ No authorization required
 import {
     FilesFilesApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -1506,7 +1506,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     FilesFilesApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -1560,7 +1560,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     FilesFilesApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -1614,7 +1614,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     FilesFilesApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -1669,7 +1669,7 @@ import {
     FilesFilesApi,
     Configuration,
     GetReferenceDataDtoInteger
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -1723,7 +1723,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     FilesFilesApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -1779,7 +1779,7 @@ import {
     FilesFilesApi,
     Configuration,
     LockFileParameters
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -1837,7 +1837,7 @@ import {
     FilesFilesApi,
     Configuration,
     ManageFormFillingDtoInteger
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -1899,7 +1899,7 @@ No authorization required
 import {
     FilesFilesApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -1965,7 +1965,7 @@ No authorization required
 import {
     FilesFilesApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -2028,7 +2028,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     FilesFilesApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -2094,7 +2094,7 @@ import {
     FilesFilesApi,
     Configuration,
     SaveAsPdfInteger
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -2153,7 +2153,7 @@ import {
     FilesFilesApi,
     Configuration,
     SaveFormRoleMappingDtoInteger
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -2212,7 +2212,7 @@ import {
     FilesFilesApi,
     Configuration,
     CustomFilterParameters
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -2270,7 +2270,7 @@ import {
     FilesFilesApi,
     Configuration,
     FileLinkRequest
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -2328,7 +2328,7 @@ import {
     FilesFilesApi,
     Configuration,
     OrderRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -2387,7 +2387,7 @@ import {
     FilesFilesApi,
     Configuration,
     OrdersRequestDtoInteger
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -2443,7 +2443,7 @@ import {
     FilesFilesApi,
     Configuration,
     StartEdit
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -2499,7 +2499,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     FilesFilesApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -2557,7 +2557,7 @@ No authorization required
 import {
     FilesFilesApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
@@ -2619,7 +2619,7 @@ import {
     FilesFilesApi,
     Configuration,
     UpdateFile
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);

@@ -34,7 +34,7 @@ This endpoint does not have any parameters.
 import {
     SettingsLicenseApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsLicenseApi(configuration);
@@ -81,7 +81,7 @@ No authorization required
 import {
     SettingsLicenseApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsLicenseApi(configuration);
@@ -127,7 +127,7 @@ This endpoint does not have any parameters.
 import {
     SettingsLicenseApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsLicenseApi(configuration);
@@ -177,7 +177,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsLicenseApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsLicenseApi(configuration);

@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { GroupDto } from '@onlyoffice/docspace-api-typescript';
+import { GroupDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: GroupDto = {
     name,

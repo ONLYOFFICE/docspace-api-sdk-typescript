@@ -25,7 +25,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FileEntryDto } from '@onlyoffice/docspace-api-typescript';
+import { FileEntryDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FileEntryDto = {
     title,

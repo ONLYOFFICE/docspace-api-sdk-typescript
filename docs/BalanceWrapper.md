@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { BalanceWrapper } from '@onlyoffice/docspace-api-typescript';
+import { BalanceWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: BalanceWrapper = {
     response,

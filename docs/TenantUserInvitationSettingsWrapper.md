@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { TenantUserInvitationSettingsWrapper } from '@onlyoffice/docspace-api-typescript';
+import { TenantUserInvitationSettingsWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TenantUserInvitationSettingsWrapper = {
     response,

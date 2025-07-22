@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { DisplayRequestDto } from '@onlyoffice/docspace-api-typescript';
+import { DisplayRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: DisplayRequestDto = {
     set,

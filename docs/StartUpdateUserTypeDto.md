@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { StartUpdateUserTypeDto } from '@onlyoffice/docspace-api-typescript';
+import { StartUpdateUserTypeDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: StartUpdateUserTypeDto = {
     type,

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { PageableResponseClientInfoResponse } from '@onlyoffice/docspace-api-typescript';
+import { PageableResponseClientInfoResponse } from '@onlyoffice/docspace-api-sdk';
 
 const instance: PageableResponseClientInfoResponse = {
     data,

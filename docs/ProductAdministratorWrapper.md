@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ProductAdministratorWrapper } from '@onlyoffice/docspace-api-typescript';
+import { ProductAdministratorWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ProductAdministratorWrapper = {
     response,

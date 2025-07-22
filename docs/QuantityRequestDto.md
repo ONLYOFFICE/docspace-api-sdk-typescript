@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { QuantityRequestDto } from '@onlyoffice/docspace-api-typescript';
+import { QuantityRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: QuantityRequestDto = {
     quantity,

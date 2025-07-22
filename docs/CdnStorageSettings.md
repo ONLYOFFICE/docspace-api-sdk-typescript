@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CdnStorageSettings } from '@onlyoffice/docspace-api-typescript';
+import { CdnStorageSettings } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CdnStorageSettings = {
     module,

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FileReferenceWrapper } from '@onlyoffice/docspace-api-typescript';
+import { FileReferenceWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FileReferenceWrapper = {
     response,

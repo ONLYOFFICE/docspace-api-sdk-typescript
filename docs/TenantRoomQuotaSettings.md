@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { TenantRoomQuotaSettings } from '@onlyoffice/docspace-api-typescript';
+import { TenantRoomQuotaSettings } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TenantRoomQuotaSettings = {
     enableQuota,

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { SetManagerRequest } from '@onlyoffice/docspace-api-typescript';
+import { SetManagerRequest } from '@onlyoffice/docspace-api-sdk';
 
 const instance: SetManagerRequest = {
     userId,

@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { DocServiceUrlDto } from '@onlyoffice/docspace-api-typescript';
+import { DocServiceUrlDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: DocServiceUrlDto = {
     version,

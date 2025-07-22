@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { RoomLinkRequest } from '@onlyoffice/docspace-api-typescript';
+import { RoomLinkRequest } from '@onlyoffice/docspace-api-sdk';
 
 const instance: RoomLinkRequest = {
     linkId,

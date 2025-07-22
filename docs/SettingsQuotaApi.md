@@ -33,7 +33,7 @@ This endpoint does not have any parameters.
 import {
     SettingsQuotaApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsQuotaApi(configuration);
@@ -84,7 +84,7 @@ import {
     SettingsQuotaApi,
     Configuration,
     QuotaSettingsRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsQuotaApi(configuration);
@@ -140,7 +140,7 @@ import {
     SettingsQuotaApi,
     Configuration,
     TenantQuotaSettingsRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsQuotaApi(configuration);

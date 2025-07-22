@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { SignupAccountRequestDto } from '@onlyoffice/docspace-api-typescript';
+import { SignupAccountRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: SignupAccountRequestDto = {
     employeeType,

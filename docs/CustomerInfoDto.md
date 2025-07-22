@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CustomerInfoDto } from '@onlyoffice/docspace-api-typescript';
+import { CustomerInfoDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CustomerInfoDto = {
     portalId,

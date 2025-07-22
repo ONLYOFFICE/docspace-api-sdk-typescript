@@ -37,7 +37,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     PeopleUserTypeApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PeopleUserTypeApi(configuration);
@@ -92,7 +92,7 @@ import {
     PeopleUserTypeApi,
     Configuration,
     StartUpdateUserTypeDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PeopleUserTypeApi(configuration);
@@ -148,7 +148,7 @@ import {
     PeopleUserTypeApi,
     Configuration,
     TerminateRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PeopleUserTypeApi(configuration);
@@ -204,7 +204,7 @@ import {
     PeopleUserTypeApi,
     Configuration,
     UpdateMembersRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PeopleUserTypeApi(configuration);

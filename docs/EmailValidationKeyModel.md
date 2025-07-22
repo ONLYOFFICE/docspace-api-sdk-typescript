@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { EmailValidationKeyModel } from '@onlyoffice/docspace-api-typescript';
+import { EmailValidationKeyModel } from '@onlyoffice/docspace-api-sdk';
 
 const instance: EmailValidationKeyModel = {
     key,

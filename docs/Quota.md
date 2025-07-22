@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { Quota } from '@onlyoffice/docspace-api-typescript';
+import { Quota } from '@onlyoffice/docspace-api-sdk';
 
 const instance: Quota = {
     id,

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { TenantDevToolsAccessSettingsDto } from '@onlyoffice/docspace-api-typescript';
+import { TenantDevToolsAccessSettingsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TenantDevToolsAccessSettingsDto = {
     limitedAccessForUsers,

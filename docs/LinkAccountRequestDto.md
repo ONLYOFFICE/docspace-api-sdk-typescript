@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { LinkAccountRequestDto } from '@onlyoffice/docspace-api-typescript';
+import { LinkAccountRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: LinkAccountRequestDto = {
     serializedProfile,

@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { SessionRequest } from '@onlyoffice/docspace-api-typescript';
+import { SessionRequest } from '@onlyoffice/docspace-api-sdk';
 
 const instance: SessionRequest = {
     fileName,

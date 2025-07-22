@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { UsageSpaceStatItemDto } from '@onlyoffice/docspace-api-typescript';
+import { UsageSpaceStatItemDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: UsageSpaceStatItemDto = {
     name,

@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { AutoCleanUpData } from '@onlyoffice/docspace-api-typescript';
+import { AutoCleanUpData } from '@onlyoffice/docspace-api-sdk';
 
 const instance: AutoCleanUpData = {
     isAutoCleanUp,

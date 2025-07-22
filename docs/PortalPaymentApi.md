@@ -52,7 +52,7 @@ import {
     PortalPaymentApi,
     Configuration,
     WalletQuantityRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
@@ -108,7 +108,7 @@ import {
     PortalPaymentApi,
     Configuration,
     CustomerOperationsReportRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
@@ -162,7 +162,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     PortalPaymentApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
@@ -217,7 +217,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     PortalPaymentApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
@@ -272,7 +272,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     PortalPaymentApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
@@ -332,7 +332,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     PortalPaymentApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
@@ -397,7 +397,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     PortalPaymentApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
@@ -449,7 +449,7 @@ This endpoint does not have any parameters.
 import {
     PortalPaymentApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
@@ -499,7 +499,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     PortalPaymentApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
@@ -554,7 +554,7 @@ import {
     PortalPaymentApi,
     Configuration,
     PaymentUrlRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
@@ -606,7 +606,7 @@ This endpoint does not have any parameters.
 import {
     PortalPaymentApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
@@ -656,7 +656,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     PortalPaymentApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
@@ -708,7 +708,7 @@ This endpoint does not have any parameters.
 import {
     PortalPaymentApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
@@ -760,7 +760,7 @@ import {
     PortalPaymentApi,
     Configuration,
     SalesRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
@@ -817,7 +817,7 @@ import {
     PortalPaymentApi,
     Configuration,
     TenantWalletSettingsWrapper
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
@@ -873,7 +873,7 @@ import {
     PortalPaymentApi,
     Configuration,
     TopUpDepositRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
@@ -929,7 +929,7 @@ import {
     PortalPaymentApi,
     Configuration,
     QuantityRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
@@ -985,7 +985,7 @@ import {
     PortalPaymentApi,
     Configuration,
     WalletQuantityRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);

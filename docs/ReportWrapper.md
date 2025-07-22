@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ReportWrapper } from '@onlyoffice/docspace-api-typescript';
+import { ReportWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ReportWrapper = {
     response,

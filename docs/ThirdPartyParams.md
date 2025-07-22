@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ThirdPartyParams } from '@onlyoffice/docspace-api-typescript';
+import { ThirdPartyParams } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ThirdPartyParams = {
     auth_data,

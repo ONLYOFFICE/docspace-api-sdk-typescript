@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { SsoSettingsV2 } from '@onlyoffice/docspace-api-typescript';
+import { SsoSettingsV2 } from '@onlyoffice/docspace-api-sdk';
 
 const instance: SsoSettingsV2 = {
     lastModified,

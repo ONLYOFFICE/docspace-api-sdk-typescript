@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ICompressWrapper } from '@onlyoffice/docspace-api-typescript';
+import { ICompressWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ICompressWrapper = {
     response,

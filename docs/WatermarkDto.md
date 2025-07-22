@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { WatermarkDto } from '@onlyoffice/docspace-api-typescript';
+import { WatermarkDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: WatermarkDto = {
     additions,

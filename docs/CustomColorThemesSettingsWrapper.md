@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CustomColorThemesSettingsWrapper } from '@onlyoffice/docspace-api-typescript';
+import { CustomColorThemesSettingsWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CustomColorThemesSettingsWrapper = {
     response,

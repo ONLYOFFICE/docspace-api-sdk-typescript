@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { MigratingApiUser } from '@onlyoffice/docspace-api-typescript';
+import { MigratingApiUser } from '@onlyoffice/docspace-api-sdk';
 
 const instance: MigratingApiUser = {
     shouldImport,

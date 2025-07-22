@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CreateWebhooksConfigRequestsDto } from '@onlyoffice/docspace-api-typescript';
+import { CreateWebhooksConfigRequestsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CreateWebhooksConfigRequestsDto = {
     name,

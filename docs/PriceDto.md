@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { PriceDto } from '@onlyoffice/docspace-api-typescript';
+import { PriceDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: PriceDto = {
     value,

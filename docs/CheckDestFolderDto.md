@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CheckDestFolderDto } from '@onlyoffice/docspace-api-typescript';
+import { CheckDestFolderDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CheckDestFolderDto = {
     result,

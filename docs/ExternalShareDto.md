@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ExternalShareDto } from '@onlyoffice/docspace-api-typescript';
+import { ExternalShareDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ExternalShareDto = {
     status,

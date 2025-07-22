@@ -40,7 +40,7 @@ import {
     FilesSharingApi,
     Configuration,
     ExternalShareRequestParam
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesSharingApi(configuration);
@@ -97,7 +97,7 @@ import {
     FilesSharingApi,
     Configuration,
     ChangeOwnerRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesSharingApi(configuration);
@@ -152,7 +152,7 @@ No authorization required
 import {
     FilesSharingApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesSharingApi(configuration);
@@ -207,7 +207,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     FilesSharingApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesSharingApi(configuration);
@@ -263,7 +263,7 @@ import {
     FilesSharingApi,
     Configuration,
     MentionMessageWrapper
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesSharingApi(configuration);

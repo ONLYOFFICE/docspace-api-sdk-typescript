@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { DeleteVersionBatchRequestDto } from '@onlyoffice/docspace-api-typescript';
+import { DeleteVersionBatchRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: DeleteVersionBatchRequestDto = {
     returnSingleOperation,

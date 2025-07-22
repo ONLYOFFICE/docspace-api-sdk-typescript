@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { BaseBatchRequestDto } from '@onlyoffice/docspace-api-typescript';
+import { BaseBatchRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: BaseBatchRequestDto = {
     returnSingleOperation,

@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CompanyWhiteLabelSettings } from '@onlyoffice/docspace-api-typescript';
+import { CompanyWhiteLabelSettings } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CompanyWhiteLabelSettings = {
     companyName,

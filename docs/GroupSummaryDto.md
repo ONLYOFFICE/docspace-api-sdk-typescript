@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { GroupSummaryDto } from '@onlyoffice/docspace-api-typescript';
+import { GroupSummaryDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: GroupSummaryDto = {
     id,

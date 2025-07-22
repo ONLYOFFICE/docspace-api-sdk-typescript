@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { EditHistoryAuthor } from '@onlyoffice/docspace-api-typescript';
+import { EditHistoryAuthor } from '@onlyoffice/docspace-api-sdk';
 
 const instance: EditHistoryAuthor = {
     id,

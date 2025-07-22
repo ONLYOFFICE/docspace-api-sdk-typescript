@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FeatureUsedDto } from '@onlyoffice/docspace-api-typescript';
+import { FeatureUsedDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FeatureUsedDto = {
     value,

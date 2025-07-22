@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { IPRestrictionsSettings } from '@onlyoffice/docspace-api-typescript';
+import { IPRestrictionsSettings } from '@onlyoffice/docspace-api-sdk';
 
 const instance: IPRestrictionsSettings = {
     enable,

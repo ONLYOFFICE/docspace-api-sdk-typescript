@@ -39,7 +39,7 @@ This endpoint does not have any parameters.
 import {
     SettingsTFASettingsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsTFASettingsApi(configuration);
@@ -87,7 +87,7 @@ This endpoint does not have any parameters.
 import {
     SettingsTFASettingsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsTFASettingsApi(configuration);
@@ -134,7 +134,7 @@ This endpoint does not have any parameters.
 import {
     SettingsTFASettingsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsTFASettingsApi(configuration);
@@ -181,7 +181,7 @@ This endpoint does not have any parameters.
 import {
     SettingsTFASettingsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsTFASettingsApi(configuration);
@@ -233,7 +233,7 @@ import {
     SettingsTFASettingsApi,
     Configuration,
     TfaValidateRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsTFASettingsApi(configuration);
@@ -288,7 +288,7 @@ import {
     SettingsTFASettingsApi,
     Configuration,
     TfaRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsTFASettingsApi(configuration);
@@ -341,7 +341,7 @@ This endpoint does not have any parameters.
 import {
     SettingsTFASettingsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsTFASettingsApi(configuration);
@@ -393,7 +393,7 @@ import {
     SettingsTFASettingsApi,
     Configuration,
     TfaRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsTFASettingsApi(configuration);
@@ -449,7 +449,7 @@ import {
     SettingsTFASettingsApi,
     Configuration,
     TfaRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsTFASettingsApi(configuration);

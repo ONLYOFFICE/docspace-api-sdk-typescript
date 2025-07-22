@@ -34,7 +34,7 @@ This endpoint does not have any parameters.
 import {
     SettingsGreetingSettingsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsGreetingSettingsApi(configuration);
@@ -81,7 +81,7 @@ This endpoint does not have any parameters.
 import {
     SettingsGreetingSettingsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsGreetingSettingsApi(configuration);
@@ -128,7 +128,7 @@ This endpoint does not have any parameters.
 import {
     SettingsGreetingSettingsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsGreetingSettingsApi(configuration);
@@ -179,7 +179,7 @@ import {
     SettingsGreetingSettingsApi,
     Configuration,
     GreetingSettingsRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsGreetingSettingsApi(configuration);

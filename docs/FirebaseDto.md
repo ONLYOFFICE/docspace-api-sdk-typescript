@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FirebaseDto } from '@onlyoffice/docspace-api-typescript';
+import { FirebaseDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FirebaseDto = {
     apiKey,

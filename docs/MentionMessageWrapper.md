@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { MentionMessageWrapper } from '@onlyoffice/docspace-api-typescript';
+import { MentionMessageWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: MentionMessageWrapper = {
     actionLink,

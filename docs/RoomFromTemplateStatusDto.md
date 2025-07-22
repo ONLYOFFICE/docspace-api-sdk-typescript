@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { RoomFromTemplateStatusDto } from '@onlyoffice/docspace-api-typescript';
+import { RoomFromTemplateStatusDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: RoomFromTemplateStatusDto = {
     roomId,

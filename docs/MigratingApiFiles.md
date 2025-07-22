@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { MigratingApiFiles } from '@onlyoffice/docspace-api-typescript';
+import { MigratingApiFiles } from '@onlyoffice/docspace-api-sdk';
 
 const instance: MigratingApiFiles = {
     foldersCount,

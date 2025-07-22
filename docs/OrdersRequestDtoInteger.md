@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { OrdersRequestDtoInteger } from '@onlyoffice/docspace-api-typescript';
+import { OrdersRequestDtoInteger } from '@onlyoffice/docspace-api-sdk';
 
 const instance: OrdersRequestDtoInteger = {
     items,

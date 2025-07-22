@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CreateClientRequest } from '@onlyoffice/docspace-api-typescript';
+import { CreateClientRequest } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CreateClientRequest = {
     name,

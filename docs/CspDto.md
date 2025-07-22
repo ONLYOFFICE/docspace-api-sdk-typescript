@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CspDto } from '@onlyoffice/docspace-api-typescript';
+import { CspDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CspDto = {
     domains,

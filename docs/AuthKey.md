@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { AuthKey } from '@onlyoffice/docspace-api-typescript';
+import { AuthKey } from '@onlyoffice/docspace-api-sdk';
 
 const instance: AuthKey = {
     name,

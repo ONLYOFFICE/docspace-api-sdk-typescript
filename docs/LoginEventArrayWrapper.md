@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { LoginEventArrayWrapper } from '@onlyoffice/docspace-api-typescript';
+import { LoginEventArrayWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: LoginEventArrayWrapper = {
     response,

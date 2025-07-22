@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CheckDocServiceUrlRequestDto } from '@onlyoffice/docspace-api-typescript';
+import { CheckDocServiceUrlRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CheckDocServiceUrlRequestDto = {
     docServiceUrl,

@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { OperationDto } from '@onlyoffice/docspace-api-typescript';
+import { OperationDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: OperationDto = {
     date,

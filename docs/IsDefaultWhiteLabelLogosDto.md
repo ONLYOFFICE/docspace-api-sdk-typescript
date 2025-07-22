@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { IsDefaultWhiteLabelLogosDto } from '@onlyoffice/docspace-api-typescript';
+import { IsDefaultWhiteLabelLogosDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: IsDefaultWhiteLabelLogosDto = {
     name,

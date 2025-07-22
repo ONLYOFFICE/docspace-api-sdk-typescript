@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { Options } from '@onlyoffice/docspace-api-typescript';
+import { Options } from '@onlyoffice/docspace-api-sdk';
 
 const instance: Options = {
     watermark_on_draw,

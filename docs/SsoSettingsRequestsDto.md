@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { SsoSettingsRequestsDto } from '@onlyoffice/docspace-api-typescript';
+import { SsoSettingsRequestsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: SsoSettingsRequestsDto = {
     serializeSettings,

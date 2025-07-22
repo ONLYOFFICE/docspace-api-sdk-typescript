@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { BackupHistoryRecord } from '@onlyoffice/docspace-api-typescript';
+import { BackupHistoryRecord } from '@onlyoffice/docspace-api-sdk';
 
 const instance: BackupHistoryRecord = {
     id,

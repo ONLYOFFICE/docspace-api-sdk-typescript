@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { BatchRequestDtoDestFolderId } from '@onlyoffice/docspace-api-typescript';
+import { BatchRequestDtoDestFolderId } from '@onlyoffice/docspace-api-sdk';
 
 const instance: BatchRequestDtoDestFolderId = {
 };

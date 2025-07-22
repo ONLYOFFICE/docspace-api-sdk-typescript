@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FinishDto } from '@onlyoffice/docspace-api-typescript';
+import { FinishDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FinishDto = {
     isSendWelcomeEmail,

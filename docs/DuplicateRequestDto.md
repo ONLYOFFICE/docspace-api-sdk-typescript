@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { DuplicateRequestDto } from '@onlyoffice/docspace-api-typescript';
+import { DuplicateRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: DuplicateRequestDto = {
     returnSingleOperation,

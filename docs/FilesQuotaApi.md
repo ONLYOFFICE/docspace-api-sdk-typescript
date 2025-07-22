@@ -36,7 +36,7 @@ import {
     FilesQuotaApi,
     Configuration,
     UpdateRoomsRoomIdsRequestDtoInteger
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesQuotaApi(configuration);
@@ -91,7 +91,7 @@ import {
     FilesQuotaApi,
     Configuration,
     UpdateRoomsQuotaRequestDtoInteger
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesQuotaApi(configuration);

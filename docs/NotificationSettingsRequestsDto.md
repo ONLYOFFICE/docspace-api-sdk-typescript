@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { NotificationSettingsRequestsDto } from '@onlyoffice/docspace-api-typescript';
+import { NotificationSettingsRequestsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: NotificationSettingsRequestsDto = {
     type,

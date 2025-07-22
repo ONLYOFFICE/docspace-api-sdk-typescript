@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { AccountInfoDto } from '@onlyoffice/docspace-api-typescript';
+import { AccountInfoDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: AccountInfoDto = {
     provider,

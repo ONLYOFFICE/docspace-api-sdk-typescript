@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { StorageRequestsDto } from '@onlyoffice/docspace-api-typescript';
+import { StorageRequestsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: StorageRequestsDto = {
     module,

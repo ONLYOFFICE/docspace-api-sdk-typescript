@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { MobileRequestsDto } from '@onlyoffice/docspace-api-typescript';
+import { MobileRequestsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: MobileRequestsDto = {
     mobilePhone,

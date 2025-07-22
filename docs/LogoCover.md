@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { LogoCover } from '@onlyoffice/docspace-api-typescript';
+import { LogoCover } from '@onlyoffice/docspace-api-sdk';
 
 const instance: LogoCover = {
     id,

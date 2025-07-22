@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CreateTagRequestDto } from '@onlyoffice/docspace-api-typescript';
+import { CreateTagRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CreateTagRequestDto = {
     name,

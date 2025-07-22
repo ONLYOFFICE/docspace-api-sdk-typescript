@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { TenantUserInvitationSettingsRequestDto } from '@onlyoffice/docspace-api-typescript';
+import { TenantUserInvitationSettingsRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TenantUserInvitationSettingsRequestDto = {
     allowInvitingMembers,

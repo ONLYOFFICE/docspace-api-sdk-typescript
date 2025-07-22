@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { KeyValuePairBooleanString } from '@onlyoffice/docspace-api-typescript';
+import { KeyValuePairBooleanString } from '@onlyoffice/docspace-api-sdk';
 
 const instance: KeyValuePairBooleanString = {
     key,

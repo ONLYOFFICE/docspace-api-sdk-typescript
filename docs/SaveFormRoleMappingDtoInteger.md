@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { SaveFormRoleMappingDtoInteger } from '@onlyoffice/docspace-api-typescript';
+import { SaveFormRoleMappingDtoInteger } from '@onlyoffice/docspace-api-sdk';
 
 const instance: SaveFormRoleMappingDtoInteger = {
     formId,

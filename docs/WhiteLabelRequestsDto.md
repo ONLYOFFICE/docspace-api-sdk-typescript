@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { WhiteLabelRequestsDto } from '@onlyoffice/docspace-api-typescript';
+import { WhiteLabelRequestsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: WhiteLabelRequestsDto = {
     logoText,

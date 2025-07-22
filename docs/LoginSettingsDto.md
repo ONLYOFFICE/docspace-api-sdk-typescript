@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { LoginSettingsDto } from '@onlyoffice/docspace-api-typescript';
+import { LoginSettingsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: LoginSettingsDto = {
     attemptCount,

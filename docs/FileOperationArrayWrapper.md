@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FileOperationArrayWrapper } from '@onlyoffice/docspace-api-typescript';
+import { FileOperationArrayWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FileOperationArrayWrapper = {
     response,

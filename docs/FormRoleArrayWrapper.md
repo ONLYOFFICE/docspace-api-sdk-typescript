@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FormRoleArrayWrapper } from '@onlyoffice/docspace-api-typescript';
+import { FormRoleArrayWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FormRoleArrayWrapper = {
     response,

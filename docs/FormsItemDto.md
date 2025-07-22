@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FormsItemDto } from '@onlyoffice/docspace-api-typescript';
+import { FormsItemDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FormsItemDto = {
     key,

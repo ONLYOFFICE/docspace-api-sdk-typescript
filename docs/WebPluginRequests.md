@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { WebPluginRequests } from '@onlyoffice/docspace-api-typescript';
+import { WebPluginRequests } from '@onlyoffice/docspace-api-sdk';
 
 const instance: WebPluginRequests = {
     enabled,

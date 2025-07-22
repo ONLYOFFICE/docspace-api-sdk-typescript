@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { RoomNewItemsDto } from '@onlyoffice/docspace-api-typescript';
+import { RoomNewItemsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: RoomNewItemsDto = {
     room,

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ChangeClientActivationRequest } from '@onlyoffice/docspace-api-typescript';
+import { ChangeClientActivationRequest } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ChangeClientActivationRequest = {
     status,

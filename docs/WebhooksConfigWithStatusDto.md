@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { WebhooksConfigWithStatusDto } from '@onlyoffice/docspace-api-typescript';
+import { WebhooksConfigWithStatusDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: WebhooksConfigWithStatusDto = {
     configs,

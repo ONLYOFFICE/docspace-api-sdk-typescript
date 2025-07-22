@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { TariffWrapper } from '@onlyoffice/docspace-api-typescript';
+import { TariffWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TariffWrapper = {
     response,

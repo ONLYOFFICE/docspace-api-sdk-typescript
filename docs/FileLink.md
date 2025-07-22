@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FileLink } from '@onlyoffice/docspace-api-typescript';
+import { FileLink } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FileLink = {
     filetype,

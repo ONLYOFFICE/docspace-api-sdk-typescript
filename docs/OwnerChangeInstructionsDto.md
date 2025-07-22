@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { OwnerChangeInstructionsDto } from '@onlyoffice/docspace-api-typescript';
+import { OwnerChangeInstructionsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: OwnerChangeInstructionsDto = {
     status,

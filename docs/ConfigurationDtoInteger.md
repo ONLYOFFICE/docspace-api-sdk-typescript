@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ConfigurationDtoInteger } from '@onlyoffice/docspace-api-typescript';
+import { ConfigurationDtoInteger } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ConfigurationDtoInteger = {
     document,

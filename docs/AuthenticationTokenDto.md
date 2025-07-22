@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { AuthenticationTokenDto } from '@onlyoffice/docspace-api-typescript';
+import { AuthenticationTokenDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: AuthenticationTokenDto = {
     token,

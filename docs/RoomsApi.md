@@ -73,7 +73,7 @@ import {
     RoomsApi,
     Configuration,
     BatchTagsRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -132,7 +132,7 @@ import {
     RoomsApi,
     Configuration,
     ArchiveRoomRequest
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -190,7 +190,7 @@ import {
     RoomsApi,
     Configuration,
     CoverRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -249,7 +249,7 @@ import {
     RoomsApi,
     Configuration,
     CreateRoomRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -304,7 +304,7 @@ import {
     RoomsApi,
     Configuration,
     CreateRoomFromTemplateDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -360,7 +360,7 @@ import {
     RoomsApi,
     Configuration,
     LogoRequest
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -418,7 +418,7 @@ import {
     RoomsApi,
     Configuration,
     CreateTagRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -474,7 +474,7 @@ import {
     RoomsApi,
     Configuration,
     RoomTemplateDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -530,7 +530,7 @@ import {
     RoomsApi,
     Configuration,
     CreateThirdPartyRoom
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -587,7 +587,7 @@ import {
     RoomsApi,
     Configuration,
     BatchTagsRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -644,7 +644,7 @@ import {
     RoomsApi,
     Configuration,
     DeleteRoomRequest
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -700,7 +700,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     RoomsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -756,7 +756,7 @@ import {
     RoomsApi,
     Configuration,
     BatchTagsRequestDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -813,7 +813,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     RoomsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -867,7 +867,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     RoomsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -918,7 +918,7 @@ This endpoint does not have any parameters.
 import {
     RoomsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -965,7 +965,7 @@ This endpoint does not have any parameters.
 import {
     RoomsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -1012,7 +1012,7 @@ This endpoint does not have any parameters.
 import {
     RoomsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -1062,7 +1062,7 @@ No authorization required
 import {
     RoomsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -1116,7 +1116,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     RoomsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -1176,7 +1176,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     RoomsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -1241,7 +1241,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     RoomsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -1298,7 +1298,7 @@ This endpoint does not have any parameters.
 import {
     RoomsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -1363,7 +1363,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     RoomsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -1445,7 +1445,7 @@ This endpoint does not have any parameters.
 import {
     RoomsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -1495,7 +1495,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     RoomsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -1550,7 +1550,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     RoomsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -1604,7 +1604,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     RoomsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -1660,7 +1660,7 @@ import {
     RoomsApi,
     Configuration,
     UserInvitation
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -1717,7 +1717,7 @@ import {
     RoomsApi,
     Configuration,
     SetPublicDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -1773,7 +1773,7 @@ import {
     RoomsApi,
     Configuration,
     RoomLinkRequest
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -1831,7 +1831,7 @@ import {
     RoomsApi,
     Configuration,
     RoomInvitationRequest
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -1887,7 +1887,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     RoomsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -1939,7 +1939,7 @@ void (empty response body)
 import {
     RoomsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -1991,7 +1991,7 @@ import {
     RoomsApi,
     Configuration,
     ArchiveRoomRequest
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -2047,7 +2047,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     RoomsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -2103,7 +2103,7 @@ import {
     RoomsApi,
     Configuration,
     UpdateRoomRequest
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
@@ -2159,7 +2159,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     RoomsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);

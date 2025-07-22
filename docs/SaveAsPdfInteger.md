@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { SaveAsPdfInteger } from '@onlyoffice/docspace-api-typescript';
+import { SaveAsPdfInteger } from '@onlyoffice/docspace-api-sdk';
 
 const instance: SaveAsPdfInteger = {
     folderId,

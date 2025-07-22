@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ProductAdministratorDto } from '@onlyoffice/docspace-api-typescript';
+import { ProductAdministratorDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ProductAdministratorDto = {
     productId,

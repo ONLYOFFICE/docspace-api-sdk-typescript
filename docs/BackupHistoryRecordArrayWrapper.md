@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { BackupHistoryRecordArrayWrapper } from '@onlyoffice/docspace-api-typescript';
+import { BackupHistoryRecordArrayWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: BackupHistoryRecordArrayWrapper = {
     response,

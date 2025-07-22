@@ -35,7 +35,7 @@ This endpoint does not have any parameters.
 import {
     SettingsSSOApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsSSOApi(configuration);
@@ -82,7 +82,7 @@ No authorization required
 import {
     SettingsSSOApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsSSOApi(configuration);
@@ -128,7 +128,7 @@ This endpoint does not have any parameters.
 import {
     SettingsSSOApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsSSOApi(configuration);
@@ -175,7 +175,7 @@ This endpoint does not have any parameters.
 import {
     SettingsSSOApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsSSOApi(configuration);
@@ -226,7 +226,7 @@ import {
     SettingsSSOApi,
     Configuration,
     SsoSettingsRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsSSOApi(configuration);

@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { WalletQuantityRequestDto } from '@onlyoffice/docspace-api-typescript';
+import { WalletQuantityRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: WalletQuantityRequestDto = {
     quantity,

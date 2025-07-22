@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CspRequestsDto } from '@onlyoffice/docspace-api-typescript';
+import { CspRequestsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CspRequestsDto = {
     domains,

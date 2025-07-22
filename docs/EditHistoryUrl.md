@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { EditHistoryUrl } from '@onlyoffice/docspace-api-typescript';
+import { EditHistoryUrl } from '@onlyoffice/docspace-api-sdk';
 
 const instance: EditHistoryUrl = {
     key,

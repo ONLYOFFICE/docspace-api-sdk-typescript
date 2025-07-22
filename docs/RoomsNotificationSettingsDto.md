@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { RoomsNotificationSettingsDto } from '@onlyoffice/docspace-api-typescript';
+import { RoomsNotificationSettingsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: RoomsNotificationSettingsDto = {
     disabledRooms,

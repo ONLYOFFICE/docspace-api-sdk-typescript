@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { TerminateRequestDto } from '@onlyoffice/docspace-api-typescript';
+import { TerminateRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TerminateRequestDto = {
     userId,

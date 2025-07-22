@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { TfaSettingsArrayWrapper } from '@onlyoffice/docspace-api-typescript';
+import { TfaSettingsArrayWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TfaSettingsArrayWrapper = {
     response,

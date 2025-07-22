@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { OwnerIdSettingsRequestDto } from '@onlyoffice/docspace-api-typescript';
+import { OwnerIdSettingsRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: OwnerIdSettingsRequestDto = {
     ownerId,

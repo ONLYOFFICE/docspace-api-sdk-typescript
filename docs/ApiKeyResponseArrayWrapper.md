@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ApiKeyResponseArrayWrapper } from '@onlyoffice/docspace-api-typescript';
+import { ApiKeyResponseArrayWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ApiKeyResponseArrayWrapper = {
     response,

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ObjectArrayWrapper } from '@onlyoffice/docspace-api-typescript';
+import { ObjectArrayWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ObjectArrayWrapper = {
     response,

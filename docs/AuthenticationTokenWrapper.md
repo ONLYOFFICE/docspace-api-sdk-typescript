@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { AuthenticationTokenWrapper } from '@onlyoffice/docspace-api-typescript';
+import { AuthenticationTokenWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: AuthenticationTokenWrapper = {
     response,

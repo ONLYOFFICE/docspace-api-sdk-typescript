@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { Int64Wrapper } from '@onlyoffice/docspace-api-typescript';
+import { Int64Wrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: Int64Wrapper = {
     response,

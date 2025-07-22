@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ChangeOwnerRequestDto } from '@onlyoffice/docspace-api-typescript';
+import { ChangeOwnerRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ChangeOwnerRequestDto = {
     folderIds,

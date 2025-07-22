@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { TaskProgressResponseDto } from '@onlyoffice/docspace-api-typescript';
+import { TaskProgressResponseDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TaskProgressResponseDto = {
     id,

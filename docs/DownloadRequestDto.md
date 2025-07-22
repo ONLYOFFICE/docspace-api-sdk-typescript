@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { DownloadRequestDto } from '@onlyoffice/docspace-api-typescript';
+import { DownloadRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: DownloadRequestDto = {
     returnSingleOperation,

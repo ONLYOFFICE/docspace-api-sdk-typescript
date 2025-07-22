@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { EmbeddedConfig } from '@onlyoffice/docspace-api-typescript';
+import { EmbeddedConfig } from '@onlyoffice/docspace-api-sdk';
 
 const instance: EmbeddedConfig = {
     embedUrl,

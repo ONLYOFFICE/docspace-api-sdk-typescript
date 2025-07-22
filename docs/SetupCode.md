@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { SetupCode } from '@onlyoffice/docspace-api-typescript';
+import { SetupCode } from '@onlyoffice/docspace-api-sdk';
 
 const instance: SetupCode = {
     account,

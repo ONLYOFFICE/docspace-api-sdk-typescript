@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ExchangeToken200Response } from '@onlyoffice/docspace-api-typescript';
+import { ExchangeToken200Response } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ExchangeToken200Response = {
     access_token,

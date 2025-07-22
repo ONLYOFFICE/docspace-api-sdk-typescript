@@ -38,7 +38,7 @@ void (empty response body)
 import {
     MigrationApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new MigrationApi(configuration);
@@ -86,7 +86,7 @@ void (empty response body)
 import {
     MigrationApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new MigrationApi(configuration);
@@ -138,7 +138,7 @@ import {
     MigrationApi,
     Configuration,
     FinishDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new MigrationApi(configuration);
@@ -190,7 +190,7 @@ void (empty response body)
 import {
     MigrationApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new MigrationApi(configuration);
@@ -238,7 +238,7 @@ This endpoint does not have any parameters.
 import {
     MigrationApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new MigrationApi(configuration);
@@ -286,7 +286,7 @@ This endpoint does not have any parameters.
 import {
     MigrationApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new MigrationApi(configuration);
@@ -338,7 +338,7 @@ import {
     MigrationApi,
     Configuration,
     MigrationApiInfo
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new MigrationApi(configuration);
@@ -393,7 +393,7 @@ void (empty response body)
 import {
     MigrationApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new MigrationApi(configuration);

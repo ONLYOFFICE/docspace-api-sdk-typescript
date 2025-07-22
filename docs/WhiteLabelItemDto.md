@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { WhiteLabelItemDto } from '@onlyoffice/docspace-api-typescript';
+import { WhiteLabelItemDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: WhiteLabelItemDto = {
     name,

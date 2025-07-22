@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CdnStorageSettingsWrapper } from '@onlyoffice/docspace-api-typescript';
+import { CdnStorageSettingsWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CdnStorageSettingsWrapper = {
     response,

@@ -39,7 +39,7 @@ void (empty response body)
 import {
     OAuth20AuthorizationApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new OAuth20AuthorizationApi(configuration);
@@ -103,7 +103,7 @@ No authorization required
 import {
     OAuth20AuthorizationApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new OAuth20AuthorizationApi(configuration);
@@ -167,7 +167,7 @@ void (empty response body)
 import {
     OAuth20AuthorizationApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new OAuth20AuthorizationApi(configuration);

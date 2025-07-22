@@ -25,7 +25,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { WebPluginDto } from '@onlyoffice/docspace-api-typescript';
+import { WebPluginDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: WebPluginDto = {
     name,

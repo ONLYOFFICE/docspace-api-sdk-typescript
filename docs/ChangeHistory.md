@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ChangeHistory } from '@onlyoffice/docspace-api-typescript';
+import { ChangeHistory } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ChangeHistory = {
     version,

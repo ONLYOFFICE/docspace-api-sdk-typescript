@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FillingFormResultDtoInteger } from '@onlyoffice/docspace-api-typescript';
+import { FillingFormResultDtoInteger } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FillingFormResultDtoInteger = {
     formNumber,

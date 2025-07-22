@@ -52,7 +52,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { SettingsDto } from '@onlyoffice/docspace-api-typescript';
+import { SettingsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: SettingsDto = {
     timezone,

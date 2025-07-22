@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ThumbnailsDataWrapper } from '@onlyoffice/docspace-api-typescript';
+import { ThumbnailsDataWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ThumbnailsDataWrapper = {
     response,

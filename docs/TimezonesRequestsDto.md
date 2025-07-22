@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { TimezonesRequestsDto } from '@onlyoffice/docspace-api-typescript';
+import { TimezonesRequestsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TimezonesRequestsDto = {
     id,

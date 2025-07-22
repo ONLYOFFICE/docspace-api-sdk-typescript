@@ -48,7 +48,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FileDtoIntegerSecurity } from '@onlyoffice/docspace-api-typescript';
+import { FileDtoIntegerSecurity } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FileDtoIntegerSecurity = {
     Read,

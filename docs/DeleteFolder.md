@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { DeleteFolder } from '@onlyoffice/docspace-api-typescript';
+import { DeleteFolder } from '@onlyoffice/docspace-api-sdk';
 
 const instance: DeleteFolder = {
     deleteAfter,

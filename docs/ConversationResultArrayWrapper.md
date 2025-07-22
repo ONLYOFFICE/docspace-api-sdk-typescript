@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ConversationResultArrayWrapper } from '@onlyoffice/docspace-api-typescript';
+import { ConversationResultArrayWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ConversationResultArrayWrapper = {
     response,

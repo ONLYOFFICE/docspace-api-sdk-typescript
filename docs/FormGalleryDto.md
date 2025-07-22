@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FormGalleryDto } from '@onlyoffice/docspace-api-typescript';
+import { FormGalleryDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FormGalleryDto = {
     path,

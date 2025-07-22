@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { RoomSecurityDto } from '@onlyoffice/docspace-api-typescript';
+import { RoomSecurityDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: RoomSecurityDto = {
     members,

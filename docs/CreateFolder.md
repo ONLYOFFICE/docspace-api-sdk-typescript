@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CreateFolder } from '@onlyoffice/docspace-api-typescript';
+import { CreateFolder } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CreateFolder = {
     title,

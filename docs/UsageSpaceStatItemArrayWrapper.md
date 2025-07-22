@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { UsageSpaceStatItemArrayWrapper } from '@onlyoffice/docspace-api-typescript';
+import { UsageSpaceStatItemArrayWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: UsageSpaceStatItemArrayWrapper = {
     response,

@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { AceShortWrapper } from '@onlyoffice/docspace-api-typescript';
+import { AceShortWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: AceShortWrapper = {
     user,

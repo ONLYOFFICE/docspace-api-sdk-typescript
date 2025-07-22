@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { NewItemsDtoFileEntryDto } from '@onlyoffice/docspace-api-typescript';
+import { NewItemsDtoFileEntryDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: NewItemsDtoFileEntryDto = {
     date,

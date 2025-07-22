@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FeedbackConfig } from '@onlyoffice/docspace-api-typescript';
+import { FeedbackConfig } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FeedbackConfig = {
     url,

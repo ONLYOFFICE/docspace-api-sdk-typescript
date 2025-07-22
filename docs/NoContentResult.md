@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { NoContentResult } from '@onlyoffice/docspace-api-typescript';
+import { NoContentResult } from '@onlyoffice/docspace-api-sdk';
 
 const instance: NoContentResult = {
     statusCode,

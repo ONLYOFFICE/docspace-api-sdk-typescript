@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { GroupRequestDto } from '@onlyoffice/docspace-api-typescript';
+import { GroupRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: GroupRequestDto = {
     members,

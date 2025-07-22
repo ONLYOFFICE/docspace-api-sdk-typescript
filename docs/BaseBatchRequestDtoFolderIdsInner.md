@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { BaseBatchRequestDtoFolderIdsInner } from '@onlyoffice/docspace-api-typescript';
+import { BaseBatchRequestDtoFolderIdsInner } from '@onlyoffice/docspace-api-sdk';
 
 const instance: BaseBatchRequestDtoFolderIdsInner = {
 };

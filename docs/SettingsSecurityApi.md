@@ -40,7 +40,7 @@ This endpoint does not have any parameters.
 import {
     SettingsSecurityApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsSecurityApi(configuration);
@@ -91,7 +91,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsSecurityApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsSecurityApi(configuration);
@@ -144,7 +144,7 @@ This endpoint does not have any parameters.
 import {
     SettingsSecurityApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsSecurityApi(configuration);
@@ -194,7 +194,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsSecurityApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsSecurityApi(configuration);
@@ -248,7 +248,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsSecurityApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsSecurityApi(configuration);
@@ -302,7 +302,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsSecurityApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsSecurityApi(configuration);
@@ -357,7 +357,7 @@ import {
     SettingsSecurityApi,
     Configuration,
     WebItemsSecurityRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsSecurityApi(configuration);
@@ -413,7 +413,7 @@ import {
     SettingsSecurityApi,
     Configuration,
     SecurityRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsSecurityApi(configuration);
@@ -470,7 +470,7 @@ import {
     SettingsSecurityApi,
     Configuration,
     WebItemSecurityRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsSecurityApi(configuration);
@@ -526,7 +526,7 @@ import {
     SettingsSecurityApi,
     Configuration,
     PasswordSettingsRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsSecurityApi(configuration);
