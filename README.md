@@ -107,8 +107,7 @@ Authentication schemes defined for the API:
 Please follow the [building](#building) instruction and execute the following TS code:
 
 ```typescript
-import  from '@onlyoffice/docspace-api-sdk';
-
+import { Configuration, ApiKeysApi } from '@onlyoffice/docspace-api-sdk';
 
 const config = new Configuration ({
     basePath: "YOUR SERVER URL",
