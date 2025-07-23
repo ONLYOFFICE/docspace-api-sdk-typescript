@@ -102,6 +102,44 @@ Authentication schemes defined for the API:
 - **Location**: Cookie
 
 
+## Getting Started
+
+Please follow the [building](#building) instruction and execute the following TS code:
+
+```typescript
+import  from '@onlyoffice/docspace-api-sdk';
+
+
+const config = new Configuration ({
+    basePath: "YOUR SERVER URL",
+    // Configure HTTP basic authorization: Basic
+    username: "YOUR USERNAME",
+    password: "YOUR PASSWORD",
+    // Configure API key authorization: ApiKeyBearer
+    apiKey: "YOUR API KEY"
+    // Configure API key authorization: asc_auth_key
+    apiKey: "YOUR API KEY"
+    // Configure Bearer (JWT) access token for authorization: Bearer
+    accessToken: "YOUR ACCESS TOKEN",
+});
+
+const apiInstance = new ApiKeysApi(config);
+
+const opts: any = {
+  'createApiKeyRequestDto':  // 
+};
+try {
+    const result = await apiInstance.createApiKey(
+      opts
+    );
+    console.log('API called successfully. Returned data: ', result.data);
+  } catch (error) {
+    console.error(error);
+}
+
+
+```
+
 ### Documentation for API Endpoints
 
 All URIs are relative to *http://localhost:8092*
