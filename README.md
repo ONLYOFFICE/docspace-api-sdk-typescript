@@ -145,6 +145,7 @@ try {
 All URIs are relative to *http://localhost:8092*
 
 <details><summary>API Endoints table</summary>
+
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ApiKeysApi* | [**createApiKey**](docs/ApiKeysApi.md#createapikey) | **POST** /api/2.0/keys | Create a user API key
@@ -616,6 +617,7 @@ Class | Method | HTTP request | Description
 ### Documentation For Models
 
 <details><summary>Models list</summary>
+
  - [AccountInfoArrayWrapper](docs/AccountInfoArrayWrapper.md)
  - [AccountInfoDto](docs/AccountInfoDto.md)
  - [AccountLoginType](docs/AccountLoginType.md)
