@@ -37,10 +37,10 @@ import type { StorageRequestsDto } from '../../models';
 // @ts-ignore
 import type { StorageSettingsWrapper } from '../../models';
 /**
- * SettingsStorageApi - axios parameter creator
+ * StorageApi - axios parameter creator
  * @export
  */
-export const SettingsStorageApiAxiosParamCreator = function (configuration?: Configuration) {
+export const StorageApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Returns a list of all the backup storages.
@@ -518,11 +518,11 @@ export const SettingsStorageApiAxiosParamCreator = function (configuration?: Con
 };
 
 /**
- * SettingsStorageApi - functional programming interface
+ * StorageApi - functional programming interface
  * @export
  */
-export const SettingsStorageApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SettingsStorageApiAxiosParamCreator(configuration)
+export const StorageApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = StorageApiAxiosParamCreator(configuration)
     return {
         /**
          * Returns a list of all the backup storages.
@@ -536,7 +536,7 @@ export const SettingsStorageApiFp = function(configuration?: Configuration) {
         async getAllBackupStorages(dump?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StorageArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAllBackupStorages(dump, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsStorageApi.getAllBackupStorages']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['StorageApi.getAllBackupStorages']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -550,7 +550,7 @@ export const SettingsStorageApiFp = function(configuration?: Configuration) {
         async getAllCdnStorages(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StorageArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAllCdnStorages(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsStorageApi.getAllCdnStorages']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['StorageApi.getAllCdnStorages']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -564,7 +564,7 @@ export const SettingsStorageApiFp = function(configuration?: Configuration) {
         async getAllStorages(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StorageArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAllStorages(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsStorageApi.getAllStorages']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['StorageApi.getAllStorages']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -578,7 +578,7 @@ export const SettingsStorageApiFp = function(configuration?: Configuration) {
         async getAmazonS3Regions(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAmazonS3Regions(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsStorageApi.getAmazonS3Regions']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['StorageApi.getAmazonS3Regions']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -592,7 +592,7 @@ export const SettingsStorageApiFp = function(configuration?: Configuration) {
         async getStorageProgress(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DoubleWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getStorageProgress(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsStorageApi.getStorageProgress']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['StorageApi.getStorageProgress']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -606,7 +606,7 @@ export const SettingsStorageApiFp = function(configuration?: Configuration) {
         async resetCdnToDefault(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.resetCdnToDefault(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsStorageApi.resetCdnToDefault']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['StorageApi.resetCdnToDefault']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -620,7 +620,7 @@ export const SettingsStorageApiFp = function(configuration?: Configuration) {
         async resetStorageToDefault(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.resetStorageToDefault(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsStorageApi.resetStorageToDefault']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['StorageApi.resetStorageToDefault']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -635,7 +635,7 @@ export const SettingsStorageApiFp = function(configuration?: Configuration) {
         async updateCdnStorage(storageRequestsDto?: StorageRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CdnStorageSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateCdnStorage(storageRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsStorageApi.updateCdnStorage']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['StorageApi.updateCdnStorage']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -650,18 +650,18 @@ export const SettingsStorageApiFp = function(configuration?: Configuration) {
         async updateStorage(storageRequestsDto?: StorageRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StorageSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateStorage(storageRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsStorageApi.updateStorage']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['StorageApi.updateStorage']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * SettingsStorageApi - factory interface
+ * StorageApi - factory interface
  * @export
  */
-export const SettingsStorageApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SettingsStorageApiFp(configuration)
+export const StorageApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = StorageApiFp(configuration)
     return {
         /**
          * Returns a list of all the backup storages.
@@ -769,22 +769,22 @@ export const SettingsStorageApiFactory = function (configuration?: Configuration
 };
 
 /**
- * SettingsStorageApi - object-oriented interface
+ * StorageApi - object-oriented interface
  * @export
- * @class SettingsStorageApi
+ * @class StorageApi
  * @extends {BaseAPI}
  */
-export class SettingsStorageApi extends BaseAPI {
+export class StorageApi extends BaseAPI {
     /**
      * Returns a list of all the backup storages.
      * @summary Get the backup storages
      * @param {boolean} [dump] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsStorageApi
+     * @memberof StorageApi
      */
     public getAllBackupStorages(dump?: boolean, options?: RawAxiosRequestConfig) {
-        return SettingsStorageApiFp(this.configuration).getAllBackupStorages(dump, options).then((request) => request(this.axios, this.basePath));
+        return StorageApiFp(this.configuration).getAllBackupStorages(dump, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -792,10 +792,10 @@ export class SettingsStorageApi extends BaseAPI {
      * @summary Get the CDN storages
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsStorageApi
+     * @memberof StorageApi
      */
     public getAllCdnStorages(options?: RawAxiosRequestConfig) {
-        return SettingsStorageApiFp(this.configuration).getAllCdnStorages(options).then((request) => request(this.axios, this.basePath));
+        return StorageApiFp(this.configuration).getAllCdnStorages(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -803,10 +803,10 @@ export class SettingsStorageApi extends BaseAPI {
      * @summary Get storages
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsStorageApi
+     * @memberof StorageApi
      */
     public getAllStorages(options?: RawAxiosRequestConfig) {
-        return SettingsStorageApiFp(this.configuration).getAllStorages(options).then((request) => request(this.axios, this.basePath));
+        return StorageApiFp(this.configuration).getAllStorages(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -814,10 +814,10 @@ export class SettingsStorageApi extends BaseAPI {
      * @summary Get Amazon regions
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsStorageApi
+     * @memberof StorageApi
      */
     public getAmazonS3Regions(options?: RawAxiosRequestConfig) {
-        return SettingsStorageApiFp(this.configuration).getAmazonS3Regions(options).then((request) => request(this.axios, this.basePath));
+        return StorageApiFp(this.configuration).getAmazonS3Regions(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -825,10 +825,10 @@ export class SettingsStorageApi extends BaseAPI {
      * @summary Get the storage progress
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsStorageApi
+     * @memberof StorageApi
      */
     public getStorageProgress(options?: RawAxiosRequestConfig) {
-        return SettingsStorageApiFp(this.configuration).getStorageProgress(options).then((request) => request(this.axios, this.basePath));
+        return StorageApiFp(this.configuration).getStorageProgress(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -836,10 +836,10 @@ export class SettingsStorageApi extends BaseAPI {
      * @summary Reset the CDN storage settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsStorageApi
+     * @memberof StorageApi
      */
     public resetCdnToDefault(options?: RawAxiosRequestConfig) {
-        return SettingsStorageApiFp(this.configuration).resetCdnToDefault(options).then((request) => request(this.axios, this.basePath));
+        return StorageApiFp(this.configuration).resetCdnToDefault(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -847,10 +847,10 @@ export class SettingsStorageApi extends BaseAPI {
      * @summary Reset the storage settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsStorageApi
+     * @memberof StorageApi
      */
     public resetStorageToDefault(options?: RawAxiosRequestConfig) {
-        return SettingsStorageApiFp(this.configuration).resetStorageToDefault(options).then((request) => request(this.axios, this.basePath));
+        return StorageApiFp(this.configuration).resetStorageToDefault(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -859,10 +859,10 @@ export class SettingsStorageApi extends BaseAPI {
      * @param {StorageRequestsDto} [storageRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsStorageApi
+     * @memberof StorageApi
      */
     public updateCdnStorage(storageRequestsDto?: StorageRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsStorageApiFp(this.configuration).updateCdnStorage(storageRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return StorageApiFp(this.configuration).updateCdnStorage(storageRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -871,10 +871,10 @@ export class SettingsStorageApi extends BaseAPI {
      * @param {StorageRequestsDto} [storageRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsStorageApi
+     * @memberof StorageApi
      */
     public updateStorage(storageRequestsDto?: StorageRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsStorageApiFp(this.configuration).updateStorage(storageRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return StorageApiFp(this.configuration).updateStorage(storageRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

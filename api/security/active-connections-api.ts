@@ -31,10 +31,10 @@ import type { BooleanWrapper } from '../../models';
 // @ts-ignore
 import type { StringWrapper } from '../../models';
 /**
- * SecurityActiveConnectionsApi - axios parameter creator
+ * ActiveConnectionsApi - axios parameter creator
  * @export
  */
-export const SecurityActiveConnectionsApiAxiosParamCreator = function (configuration?: Configuration) {
+export const ActiveConnectionsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Returns all the active connections to the portal.
@@ -303,11 +303,11 @@ export const SecurityActiveConnectionsApiAxiosParamCreator = function (configura
 };
 
 /**
- * SecurityActiveConnectionsApi - functional programming interface
+ * ActiveConnectionsApi - functional programming interface
  * @export
  */
-export const SecurityActiveConnectionsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SecurityActiveConnectionsApiAxiosParamCreator(configuration)
+export const ActiveConnectionsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ActiveConnectionsApiAxiosParamCreator(configuration)
     return {
         /**
          * Returns all the active connections to the portal.
@@ -320,7 +320,7 @@ export const SecurityActiveConnectionsApiFp = function(configuration?: Configura
         async getAllActiveConnections(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ActiveConnectionsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAllActiveConnections(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SecurityActiveConnectionsApi.getAllActiveConnections']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ActiveConnectionsApi.getAllActiveConnections']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -335,7 +335,7 @@ export const SecurityActiveConnectionsApiFp = function(configuration?: Configura
         async logOutActiveConnection(loginEventId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.logOutActiveConnection(loginEventId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SecurityActiveConnectionsApi.logOutActiveConnection']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ActiveConnectionsApi.logOutActiveConnection']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -349,7 +349,7 @@ export const SecurityActiveConnectionsApiFp = function(configuration?: Configura
         async logOutAllActiveConnectionsChangePassword(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.logOutAllActiveConnectionsChangePassword(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SecurityActiveConnectionsApi.logOutAllActiveConnectionsChangePassword']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ActiveConnectionsApi.logOutAllActiveConnectionsChangePassword']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -364,7 +364,7 @@ export const SecurityActiveConnectionsApiFp = function(configuration?: Configura
         async logOutAllActiveConnectionsForUser(userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.logOutAllActiveConnectionsForUser(userId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SecurityActiveConnectionsApi.logOutAllActiveConnectionsForUser']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ActiveConnectionsApi.logOutAllActiveConnectionsForUser']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -378,18 +378,18 @@ export const SecurityActiveConnectionsApiFp = function(configuration?: Configura
         async logOutAllExceptThisConnection(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.logOutAllExceptThisConnection(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SecurityActiveConnectionsApi.logOutAllExceptThisConnection']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ActiveConnectionsApi.logOutAllExceptThisConnection']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * SecurityActiveConnectionsApi - factory interface
+ * ActiveConnectionsApi - factory interface
  * @export
  */
-export const SecurityActiveConnectionsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SecurityActiveConnectionsApiFp(configuration)
+export const ActiveConnectionsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ActiveConnectionsApiFp(configuration)
     return {
         /**
          * Returns all the active connections to the portal.
@@ -452,21 +452,21 @@ export const SecurityActiveConnectionsApiFactory = function (configuration?: Con
 };
 
 /**
- * SecurityActiveConnectionsApi - object-oriented interface
+ * ActiveConnectionsApi - object-oriented interface
  * @export
- * @class SecurityActiveConnectionsApi
+ * @class ActiveConnectionsApi
  * @extends {BaseAPI}
  */
-export class SecurityActiveConnectionsApi extends BaseAPI {
+export class ActiveConnectionsApi extends BaseAPI {
     /**
      * Returns all the active connections to the portal.
      * @summary Get active connections
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SecurityActiveConnectionsApi
+     * @memberof ActiveConnectionsApi
      */
     public getAllActiveConnections(options?: RawAxiosRequestConfig) {
-        return SecurityActiveConnectionsApiFp(this.configuration).getAllActiveConnections(options).then((request) => request(this.axios, this.basePath));
+        return ActiveConnectionsApiFp(this.configuration).getAllActiveConnections(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -475,10 +475,10 @@ export class SecurityActiveConnectionsApi extends BaseAPI {
      * @param {number} loginEventId The ID of the specific login event.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SecurityActiveConnectionsApi
+     * @memberof ActiveConnectionsApi
      */
     public logOutActiveConnection(loginEventId: number, options?: RawAxiosRequestConfig) {
-        return SecurityActiveConnectionsApiFp(this.configuration).logOutActiveConnection(loginEventId, options).then((request) => request(this.axios, this.basePath));
+        return ActiveConnectionsApiFp(this.configuration).logOutActiveConnection(loginEventId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -486,10 +486,10 @@ export class SecurityActiveConnectionsApi extends BaseAPI {
      * @summary Log out and change password
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SecurityActiveConnectionsApi
+     * @memberof ActiveConnectionsApi
      */
     public logOutAllActiveConnectionsChangePassword(options?: RawAxiosRequestConfig) {
-        return SecurityActiveConnectionsApiFp(this.configuration).logOutAllActiveConnectionsChangePassword(options).then((request) => request(this.axios, this.basePath));
+        return ActiveConnectionsApiFp(this.configuration).logOutAllActiveConnectionsChangePassword(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -498,10 +498,10 @@ export class SecurityActiveConnectionsApi extends BaseAPI {
      * @param {string} userId The user ID extracted from the route parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SecurityActiveConnectionsApi
+     * @memberof ActiveConnectionsApi
      */
     public logOutAllActiveConnectionsForUser(userId: string, options?: RawAxiosRequestConfig) {
-        return SecurityActiveConnectionsApiFp(this.configuration).logOutAllActiveConnectionsForUser(userId, options).then((request) => request(this.axios, this.basePath));
+        return ActiveConnectionsApiFp(this.configuration).logOutAllActiveConnectionsForUser(userId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -509,10 +509,10 @@ export class SecurityActiveConnectionsApi extends BaseAPI {
      * @summary Log out from all connections except the current one
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SecurityActiveConnectionsApi
+     * @memberof ActiveConnectionsApi
      */
     public logOutAllExceptThisConnection(options?: RawAxiosRequestConfig) {
-        return SecurityActiveConnectionsApiFp(this.configuration).logOutAllExceptThisConnection(options).then((request) => request(this.axios, this.basePath));
+        return ActiveConnectionsApiFp(this.configuration).logOutAllExceptThisConnection(options).then((request) => request(this.axios, this.basePath));
     }
 }
 

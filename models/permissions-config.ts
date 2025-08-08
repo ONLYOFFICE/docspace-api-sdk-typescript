@@ -72,12 +72,6 @@ export interface PermissionsConfig {
      */
     'print'?: boolean;
     /**
-     * Specifies whether to display the \"Rename...\" button when using the \"onRequestRename\" event.
-     * @type {boolean}
-     * @memberof PermissionsConfig
-     */
-    'rename'?: boolean;
-    /**
      * Defines if the document can be reviewed or not.
      * @type {boolean}
      * @memberof PermissionsConfig

@@ -29,10 +29,10 @@ import type { DarkThemeSettingsRequestDto } from '../../models';
 // @ts-ignore
 import type { DarkThemeSettingsWrapper } from '../../models';
 /**
- * PeopleThemeApi - axios parameter creator
+ * ThemeApi - axios parameter creator
  * @export
  */
-export const PeopleThemeApiAxiosParamCreator = function (configuration?: Configuration) {
+export const ThemeApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Changes the current portal theme.
@@ -144,11 +144,11 @@ export const PeopleThemeApiAxiosParamCreator = function (configuration?: Configu
 };
 
 /**
- * PeopleThemeApi - functional programming interface
+ * ThemeApi - functional programming interface
  * @export
  */
-export const PeopleThemeApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = PeopleThemeApiAxiosParamCreator(configuration)
+export const ThemeApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ThemeApiAxiosParamCreator(configuration)
     return {
         /**
          * Changes the current portal theme.
@@ -162,7 +162,7 @@ export const PeopleThemeApiFp = function(configuration?: Configuration) {
         async changePortalTheme(darkThemeSettingsRequestDto?: DarkThemeSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DarkThemeSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.changePortalTheme(darkThemeSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleThemeApi.changePortalTheme']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ThemeApi.changePortalTheme']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -176,18 +176,18 @@ export const PeopleThemeApiFp = function(configuration?: Configuration) {
         async getPortalTheme(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DarkThemeSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPortalTheme(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleThemeApi.getPortalTheme']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ThemeApi.getPortalTheme']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * PeopleThemeApi - factory interface
+ * ThemeApi - factory interface
  * @export
  */
-export const PeopleThemeApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = PeopleThemeApiFp(configuration)
+export const ThemeApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ThemeApiFp(configuration)
     return {
         /**
          * Changes the current portal theme.
@@ -216,22 +216,22 @@ export const PeopleThemeApiFactory = function (configuration?: Configuration, ba
 };
 
 /**
- * PeopleThemeApi - object-oriented interface
+ * ThemeApi - object-oriented interface
  * @export
- * @class PeopleThemeApi
+ * @class ThemeApi
  * @extends {BaseAPI}
  */
-export class PeopleThemeApi extends BaseAPI {
+export class ThemeApi extends BaseAPI {
     /**
      * Changes the current portal theme.
      * @summary Change the portal theme
      * @param {DarkThemeSettingsRequestDto} [darkThemeSettingsRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleThemeApi
+     * @memberof ThemeApi
      */
     public changePortalTheme(darkThemeSettingsRequestDto?: DarkThemeSettingsRequestDto, options?: RawAxiosRequestConfig) {
-        return PeopleThemeApiFp(this.configuration).changePortalTheme(darkThemeSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return ThemeApiFp(this.configuration).changePortalTheme(darkThemeSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -239,10 +239,10 @@ export class PeopleThemeApi extends BaseAPI {
      * @summary Get the portal theme
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleThemeApi
+     * @memberof ThemeApi
      */
     public getPortalTheme(options?: RawAxiosRequestConfig) {
-        return PeopleThemeApiFp(this.configuration).getPortalTheme(options).then((request) => request(this.axios, this.basePath));
+        return ThemeApiFp(this.configuration).getPortalTheme(options).then((request) => request(this.axios, this.basePath));
     }
 }
 

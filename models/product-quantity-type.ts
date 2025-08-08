@@ -18,16 +18,28 @@
 
 
 /**
- * The product quantity type.
+ * [0 - Set, 1 - Add, 2 - Sub, 3 - Renew]
  * @export
  * @enum {number}
  */
 
 export const ProductQuantityType = {
-    NUMBER_0: 0,
-    NUMBER_1: 1,
-    NUMBER_2: 2,
-    NUMBER_3: 3
+    /**
+    * Set
+    */
+    Set: 0,
+    /**
+    * Add
+    */
+    Add: 1,
+    /**
+    * Sub
+    */
+    Sub: 2,
+    /**
+    * Renew
+    */
+    Renew: 3
 } as const;
 
 export type ProductQuantityType = typeof ProductQuantityType[keyof typeof ProductQuantityType];

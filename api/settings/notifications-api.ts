@@ -35,10 +35,10 @@ import type { RoomsNotificationSettingsWrapper } from '../../models';
 // @ts-ignore
 import type { RoomsNotificationsSettingsRequestDto } from '../../models';
 /**
- * SettingsNotificationsApi - axios parameter creator
+ * NotificationsApi - axios parameter creator
  * @export
  */
-export const SettingsNotificationsApiAxiosParamCreator = function (configuration?: Configuration) {
+export const NotificationsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Checks if the notification type specified in the request is enabled or not.
@@ -260,11 +260,11 @@ export const SettingsNotificationsApiAxiosParamCreator = function (configuration
 };
 
 /**
- * SettingsNotificationsApi - functional programming interface
+ * NotificationsApi - functional programming interface
  * @export
  */
-export const SettingsNotificationsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SettingsNotificationsApiAxiosParamCreator(configuration)
+export const NotificationsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = NotificationsApiAxiosParamCreator(configuration)
     return {
         /**
          * Checks if the notification type specified in the request is enabled or not.
@@ -278,7 +278,7 @@ export const SettingsNotificationsApiFp = function(configuration?: Configuration
         async getNotificationSettings(type: NotificationType, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NotificationSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getNotificationSettings(type, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsNotificationsApi.getNotificationSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['NotificationsApi.getNotificationSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -292,7 +292,7 @@ export const SettingsNotificationsApiFp = function(configuration?: Configuration
         async getRoomsNotificationSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RoomsNotificationSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomsNotificationSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsNotificationsApi.getRoomsNotificationSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['NotificationsApi.getRoomsNotificationSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -307,7 +307,7 @@ export const SettingsNotificationsApiFp = function(configuration?: Configuration
         async setNotificationSettings(notificationSettingsRequestsDto?: NotificationSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NotificationSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setNotificationSettings(notificationSettingsRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsNotificationsApi.setNotificationSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['NotificationsApi.setNotificationSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -322,18 +322,18 @@ export const SettingsNotificationsApiFp = function(configuration?: Configuration
         async setRoomsNotificationStatus(roomsNotificationsSettingsRequestDto?: RoomsNotificationsSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RoomsNotificationSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setRoomsNotificationStatus(roomsNotificationsSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsNotificationsApi.setRoomsNotificationStatus']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['NotificationsApi.setRoomsNotificationStatus']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * SettingsNotificationsApi - factory interface
+ * NotificationsApi - factory interface
  * @export
  */
-export const SettingsNotificationsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SettingsNotificationsApiFp(configuration)
+export const NotificationsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = NotificationsApiFp(configuration)
     return {
         /**
          * Checks if the notification type specified in the request is enabled or not.
@@ -386,22 +386,22 @@ export const SettingsNotificationsApiFactory = function (configuration?: Configu
 };
 
 /**
- * SettingsNotificationsApi - object-oriented interface
+ * NotificationsApi - object-oriented interface
  * @export
- * @class SettingsNotificationsApi
+ * @class NotificationsApi
  * @extends {BaseAPI}
  */
-export class SettingsNotificationsApi extends BaseAPI {
+export class NotificationsApi extends BaseAPI {
     /**
      * Checks if the notification type specified in the request is enabled or not.
      * @summary Check notification availability
      * @param {NotificationType} type The type of notification to query, specified in the route.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsNotificationsApi
+     * @memberof NotificationsApi
      */
     public getNotificationSettings(type: NotificationType, options?: RawAxiosRequestConfig) {
-        return SettingsNotificationsApiFp(this.configuration).getNotificationSettings(type, options).then((request) => request(this.axios, this.basePath));
+        return NotificationsApiFp(this.configuration).getNotificationSettings(type, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -409,10 +409,10 @@ export class SettingsNotificationsApi extends BaseAPI {
      * @summary Get room notification settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsNotificationsApi
+     * @memberof NotificationsApi
      */
     public getRoomsNotificationSettings(options?: RawAxiosRequestConfig) {
-        return SettingsNotificationsApiFp(this.configuration).getRoomsNotificationSettings(options).then((request) => request(this.axios, this.basePath));
+        return NotificationsApiFp(this.configuration).getRoomsNotificationSettings(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -421,10 +421,10 @@ export class SettingsNotificationsApi extends BaseAPI {
      * @param {NotificationSettingsRequestsDto} [notificationSettingsRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsNotificationsApi
+     * @memberof NotificationsApi
      */
     public setNotificationSettings(notificationSettingsRequestsDto?: NotificationSettingsRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsNotificationsApiFp(this.configuration).setNotificationSettings(notificationSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return NotificationsApiFp(this.configuration).setNotificationSettings(notificationSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -433,10 +433,10 @@ export class SettingsNotificationsApi extends BaseAPI {
      * @param {RoomsNotificationsSettingsRequestDto} [roomsNotificationsSettingsRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsNotificationsApi
+     * @memberof NotificationsApi
      */
     public setRoomsNotificationStatus(roomsNotificationsSettingsRequestDto?: RoomsNotificationsSettingsRequestDto, options?: RawAxiosRequestConfig) {
-        return SettingsNotificationsApiFp(this.configuration).setRoomsNotificationStatus(roomsNotificationsSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return NotificationsApiFp(this.configuration).setRoomsNotificationStatus(roomsNotificationsSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

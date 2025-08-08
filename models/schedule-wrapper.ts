@@ -21,7 +21,7 @@
 import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Schedule } from './schedule';
+import type { ScheduleDto } from './schedule-dto';
 
 /**
  * 
@@ -31,10 +31,10 @@ import type { Schedule } from './schedule';
 export interface ScheduleWrapper {
     /**
      * 
-     * @type {Schedule}
+     * @type {ScheduleDto}
      * @memberof ScheduleWrapper
      */
-    'response'?: Schedule;
+    'response'?: ScheduleDto;
     /**
      * 
      * @type {number}

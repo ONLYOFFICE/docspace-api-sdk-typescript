@@ -18,44 +18,44 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { BaseBatchRequestDtoFolderIdsInner } from './base-batch-request-dto-folder-ids-inner';
+import type { BatchRequestDtoAllOfDestFolderId } from './batch-request-dto-all-of-dest-folder-id';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { BatchRequestDtoDestFolderId } from './batch-request-dto-dest-folder-id';
+import type { BatchRequestDtoAllOfFileIds } from './batch-request-dto-all-of-file-ids';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { BatchRequestDtoAllOfFolderIds } from './batch-request-dto-all-of-folder-ids';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { FileConflictResolveType } from './file-conflict-resolve-type';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { FileOperationRequestBaseDto } from './file-operation-request-base-dto';
 
 /**
+ * @type BatchRequestDto
  * The request parameters for copying/moving files.
  * @export
- * @interface BatchRequestDto
  */
-export interface BatchRequestDto {
-    /**
-     * Specifies whether to return only the current operation
-     * @type {boolean}
-     * @memberof BatchRequestDto
-     */
-    'returnSingleOperation'?: boolean;
+export type BatchRequestDto = FileOperationRequestBaseDto &  {
     /**
      * The list of folder IDs to be copied/moved.
-     * @type {Array<BaseBatchRequestDtoFolderIdsInner>}
+     * @type {Array<BatchRequestDtoAllOfFolderIds>}
      * @memberof BatchRequestDto
      */
-    'folderIds'?: Array<BaseBatchRequestDtoFolderIdsInner> | null;
+    'folderIds'?: Array<BatchRequestDtoAllOfFolderIds> | null;
     /**
      * The list of file IDs to be copied/moved.
-     * @type {Array<BaseBatchRequestDtoFolderIdsInner>}
+     * @type {Array<BatchRequestDtoAllOfFileIds>}
      * @memberof BatchRequestDto
      */
-    'fileIds'?: Array<BaseBatchRequestDtoFolderIdsInner> | null;
+    'fileIds'?: Array<BatchRequestDtoAllOfFileIds> | null;
     /**
      * 
-     * @type {BatchRequestDtoDestFolderId}
+     * @type {BatchRequestDtoAllOfDestFolderId}
      * @memberof BatchRequestDto
      */
-    'destFolderId'?: BatchRequestDtoDestFolderId;
+    'destFolderId'?: BatchRequestDtoAllOfDestFolderId;
     /**
      * 
      * @type {FileConflictResolveType}
@@ -80,7 +80,6 @@ export interface BatchRequestDto {
      * @memberof BatchRequestDto
      */
     'toFillOut'?: boolean;
-}
-
+};
 
 

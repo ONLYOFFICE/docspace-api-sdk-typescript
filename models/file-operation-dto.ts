@@ -18,7 +18,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FileEntryDto } from './file-entry-dto';
+import type { FileEntryBaseDto } from './file-entry-base-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { FileOperationType } from './file-operation-type';
@@ -73,16 +73,16 @@ export interface FileOperationDto {
     'url'?: string | null;
     /**
      * The list of files of the file operation.
-     * @type {Array<FileEntryDto>}
+     * @type {Array<FileEntryBaseDto>}
      * @memberof FileOperationDto
      */
-    'files'?: Array<FileEntryDto> | null;
+    'files'?: Array<FileEntryBaseDto> | null;
     /**
      * The list of folders of the file operation.
-     * @type {Array<FileEntryDto>}
+     * @type {Array<FileEntryBaseDto>}
      * @memberof FileOperationDto
      */
-    'folders'?: Array<FileEntryDto> | null;
+    'folders'?: Array<FileEntryBaseDto> | null;
 }
 
 

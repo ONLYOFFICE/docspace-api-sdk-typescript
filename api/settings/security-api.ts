@@ -45,10 +45,10 @@ import type { WebItemSecurityRequestsDto } from '../../models';
 // @ts-ignore
 import type { WebItemsSecurityRequestsDto } from '../../models';
 /**
- * SettingsSecurityApi - axios parameter creator
+ * SecurityApi - axios parameter creator
  * @export
  */
-export const SettingsSecurityApiAxiosParamCreator = function (configuration?: Configuration) {
+export const SecurityApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Returns a list of all the enabled modules.
@@ -603,11 +603,11 @@ export const SettingsSecurityApiAxiosParamCreator = function (configuration?: Co
 };
 
 /**
- * SettingsSecurityApi - functional programming interface
+ * SecurityApi - functional programming interface
  * @export
  */
-export const SettingsSecurityApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SettingsSecurityApiAxiosParamCreator(configuration)
+export const SecurityApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = SecurityApiAxiosParamCreator(configuration)
     return {
         /**
          * Returns a list of all the enabled modules.
@@ -620,7 +620,7 @@ export const SettingsSecurityApiFp = function(configuration?: Configuration) {
         async getEnabledModules(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getEnabledModules(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsSecurityApi.getEnabledModules']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SecurityApi.getEnabledModules']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -636,7 +636,7 @@ export const SettingsSecurityApiFp = function(configuration?: Configuration) {
         async getIsProductAdministrator(productid?: string, userid?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductAdministratorWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getIsProductAdministrator(productid, userid, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsSecurityApi.getIsProductAdministrator']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SecurityApi.getIsProductAdministrator']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -650,7 +650,7 @@ export const SettingsSecurityApiFp = function(configuration?: Configuration) {
         async getPasswordSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PasswordSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPasswordSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsSecurityApi.getPasswordSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SecurityApi.getPasswordSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -665,7 +665,7 @@ export const SettingsSecurityApiFp = function(configuration?: Configuration) {
         async getProductAdministrators(productid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getProductAdministrators(productid, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsSecurityApi.getProductAdministrators']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SecurityApi.getProductAdministrators']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -680,7 +680,7 @@ export const SettingsSecurityApiFp = function(configuration?: Configuration) {
         async getWebItemSecurityInfo(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getWebItemSecurityInfo(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsSecurityApi.getWebItemSecurityInfo']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SecurityApi.getWebItemSecurityInfo']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -695,7 +695,7 @@ export const SettingsSecurityApiFp = function(configuration?: Configuration) {
         async getWebItemSettingsSecurityInfo(ids?: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SecurityArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getWebItemSettingsSecurityInfo(ids, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsSecurityApi.getWebItemSettingsSecurityInfo']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SecurityApi.getWebItemSettingsSecurityInfo']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -710,7 +710,7 @@ export const SettingsSecurityApiFp = function(configuration?: Configuration) {
         async setAccessToWebItems(webItemsSecurityRequestsDto?: WebItemsSecurityRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SecurityArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setAccessToWebItems(webItemsSecurityRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsSecurityApi.setAccessToWebItems']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SecurityApi.setAccessToWebItems']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -725,7 +725,7 @@ export const SettingsSecurityApiFp = function(configuration?: Configuration) {
         async setProductAdministrator(securityRequestsDto?: SecurityRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductAdministratorWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setProductAdministrator(securityRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsSecurityApi.setProductAdministrator']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SecurityApi.setProductAdministrator']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -740,7 +740,7 @@ export const SettingsSecurityApiFp = function(configuration?: Configuration) {
         async setWebItemSecurity(webItemSecurityRequestsDto?: WebItemSecurityRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SecurityArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setWebItemSecurity(webItemSecurityRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsSecurityApi.setWebItemSecurity']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SecurityApi.setWebItemSecurity']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -755,18 +755,18 @@ export const SettingsSecurityApiFp = function(configuration?: Configuration) {
         async updatePasswordSettings(passwordSettingsRequestsDto?: PasswordSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PasswordSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updatePasswordSettings(passwordSettingsRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsSecurityApi.updatePasswordSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SecurityApi.updatePasswordSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * SettingsSecurityApi - factory interface
+ * SecurityApi - factory interface
  * @export
  */
-export const SettingsSecurityApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SettingsSecurityApiFp(configuration)
+export const SecurityApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = SecurityApiFp(configuration)
     return {
         /**
          * Returns a list of all the enabled modules.
@@ -891,21 +891,21 @@ export const SettingsSecurityApiFactory = function (configuration?: Configuratio
 };
 
 /**
- * SettingsSecurityApi - object-oriented interface
+ * SecurityApi - object-oriented interface
  * @export
- * @class SettingsSecurityApi
+ * @class SecurityApi
  * @extends {BaseAPI}
  */
-export class SettingsSecurityApi extends BaseAPI {
+export class SecurityApi extends BaseAPI {
     /**
      * Returns a list of all the enabled modules.
      * @summary Get the enabled modules
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsSecurityApi
+     * @memberof SecurityApi
      */
     public getEnabledModules(options?: RawAxiosRequestConfig) {
-        return SettingsSecurityApiFp(this.configuration).getEnabledModules(options).then((request) => request(this.axios, this.basePath));
+        return SecurityApiFp(this.configuration).getEnabledModules(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -915,10 +915,10 @@ export class SettingsSecurityApi extends BaseAPI {
      * @param {string} [userid] The user ID extracted from the query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsSecurityApi
+     * @memberof SecurityApi
      */
     public getIsProductAdministrator(productid?: string, userid?: string, options?: RawAxiosRequestConfig) {
-        return SettingsSecurityApiFp(this.configuration).getIsProductAdministrator(productid, userid, options).then((request) => request(this.axios, this.basePath));
+        return SecurityApiFp(this.configuration).getIsProductAdministrator(productid, userid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -926,10 +926,10 @@ export class SettingsSecurityApi extends BaseAPI {
      * @summary Get the password settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsSecurityApi
+     * @memberof SecurityApi
      */
     public getPasswordSettings(options?: RawAxiosRequestConfig) {
-        return SettingsSecurityApiFp(this.configuration).getPasswordSettings(options).then((request) => request(this.axios, this.basePath));
+        return SecurityApiFp(this.configuration).getPasswordSettings(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -938,10 +938,10 @@ export class SettingsSecurityApi extends BaseAPI {
      * @param {string} productid The ID of the product extracted from the route parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsSecurityApi
+     * @memberof SecurityApi
      */
     public getProductAdministrators(productid: string, options?: RawAxiosRequestConfig) {
-        return SettingsSecurityApiFp(this.configuration).getProductAdministrators(productid, options).then((request) => request(this.axios, this.basePath));
+        return SecurityApiFp(this.configuration).getProductAdministrators(productid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -950,10 +950,10 @@ export class SettingsSecurityApi extends BaseAPI {
      * @param {string} id The ID extracted from the route parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsSecurityApi
+     * @memberof SecurityApi
      */
     public getWebItemSecurityInfo(id: string, options?: RawAxiosRequestConfig) {
-        return SettingsSecurityApiFp(this.configuration).getWebItemSecurityInfo(id, options).then((request) => request(this.axios, this.basePath));
+        return SecurityApiFp(this.configuration).getWebItemSecurityInfo(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -962,10 +962,10 @@ export class SettingsSecurityApi extends BaseAPI {
      * @param {Array<string>} [ids] The list of module identifiers for which to retrieve the security settings.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsSecurityApi
+     * @memberof SecurityApi
      */
     public getWebItemSettingsSecurityInfo(ids?: Array<string>, options?: RawAxiosRequestConfig) {
-        return SettingsSecurityApiFp(this.configuration).getWebItemSettingsSecurityInfo(ids, options).then((request) => request(this.axios, this.basePath));
+        return SecurityApiFp(this.configuration).getWebItemSettingsSecurityInfo(ids, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -974,10 +974,10 @@ export class SettingsSecurityApi extends BaseAPI {
      * @param {WebItemsSecurityRequestsDto} [webItemsSecurityRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsSecurityApi
+     * @memberof SecurityApi
      */
     public setAccessToWebItems(webItemsSecurityRequestsDto?: WebItemsSecurityRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsSecurityApiFp(this.configuration).setAccessToWebItems(webItemsSecurityRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return SecurityApiFp(this.configuration).setAccessToWebItems(webItemsSecurityRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -986,10 +986,10 @@ export class SettingsSecurityApi extends BaseAPI {
      * @param {SecurityRequestsDto} [securityRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsSecurityApi
+     * @memberof SecurityApi
      */
     public setProductAdministrator(securityRequestsDto?: SecurityRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsSecurityApiFp(this.configuration).setProductAdministrator(securityRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return SecurityApiFp(this.configuration).setProductAdministrator(securityRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -998,10 +998,10 @@ export class SettingsSecurityApi extends BaseAPI {
      * @param {WebItemSecurityRequestsDto} [webItemSecurityRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsSecurityApi
+     * @memberof SecurityApi
      */
     public setWebItemSecurity(webItemSecurityRequestsDto?: WebItemSecurityRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsSecurityApiFp(this.configuration).setWebItemSecurity(webItemSecurityRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return SecurityApiFp(this.configuration).setWebItemSecurity(webItemSecurityRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1010,10 +1010,10 @@ export class SettingsSecurityApi extends BaseAPI {
      * @param {PasswordSettingsRequestsDto} [passwordSettingsRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsSecurityApi
+     * @memberof SecurityApi
      */
     public updatePasswordSettings(passwordSettingsRequestsDto?: PasswordSettingsRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsSecurityApiFp(this.configuration).updatePasswordSettings(passwordSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return SecurityApiFp(this.configuration).updatePasswordSettings(passwordSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

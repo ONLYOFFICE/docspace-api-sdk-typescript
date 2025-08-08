@@ -16,30 +16,15 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { BaseStorageSettingsCdnStorageSettings } from './base-storage-settings-cdn-storage-settings';
 
 /**
- * 
+ * @type CdnStorageSettings
  * @export
- * @interface CdnStorageSettings
  */
-export interface CdnStorageSettings {
-    /**
-     * 
-     * @type {string}
-     * @memberof CdnStorageSettings
-     */
-    'module'?: string | null;
-    /**
-     * 
-     * @type {{ [key: string]: string | null; }}
-     * @memberof CdnStorageSettings
-     */
-    'props'?: { [key: string]: string | null; } | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CdnStorageSettings
-     */
-    'lastModified'?: string;
-}
+export type CdnStorageSettings = BaseStorageSettingsCdnStorageSettings &  {
+};
+
 

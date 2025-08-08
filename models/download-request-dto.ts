@@ -18,40 +18,41 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { BaseBatchRequestDtoFolderIdsInner } from './base-batch-request-dto-folder-ids-inner';
+import type { DownloadRequestDtoAllOfFileIds } from './download-request-dto-all-of-file-ids';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { DownloadRequestDtoAllOfFolderIds } from './download-request-dto-all-of-folder-ids';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { DownloadRequestItemDto } from './download-request-item-dto';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { FileOperationRequestBaseDto } from './file-operation-request-base-dto';
 
 /**
+ * @type DownloadRequestDto
  * The request parameters for downloading files.
  * @export
- * @interface DownloadRequestDto
  */
-export interface DownloadRequestDto {
-    /**
-     * Specifies whether to return only the current operation
-     * @type {boolean}
-     * @memberof DownloadRequestDto
-     */
-    'returnSingleOperation'?: boolean;
+export type DownloadRequestDto = FileOperationRequestBaseDto &  {
     /**
      * The list of folder IDs to be downloaded.
-     * @type {Array<BaseBatchRequestDtoFolderIdsInner>}
+     * @type {Array<DownloadRequestDtoAllOfFolderIds>}
      * @memberof DownloadRequestDto
      */
-    'folderIds'?: Array<BaseBatchRequestDtoFolderIdsInner> | null;
+    'folderIds'?: Array<DownloadRequestDtoAllOfFolderIds> | null;
     /**
      * The list of file IDs to be downloaded.
-     * @type {Array<BaseBatchRequestDtoFolderIdsInner>}
+     * @type {Array<DownloadRequestDtoAllOfFileIds>}
      * @memberof DownloadRequestDto
      */
-    'fileIds'?: Array<BaseBatchRequestDtoFolderIdsInner> | null;
+    'fileIds'?: Array<DownloadRequestDtoAllOfFileIds> | null;
     /**
      * The list of file IDs which will be converted.
      * @type {Array<DownloadRequestItemDto>}
      * @memberof DownloadRequestDto
      */
     'fileConvertIds'?: Array<DownloadRequestItemDto> | null;
-}
+};
+
 

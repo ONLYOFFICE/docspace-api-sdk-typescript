@@ -27,10 +27,10 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { UsageSpaceStatItemArrayWrapper } from '../../models';
 /**
- * SettingsStatisticsApi - axios parameter creator
+ * StatisticsApi - axios parameter creator
  * @export
  */
-export const SettingsStatisticsApiAxiosParamCreator = function (configuration?: Configuration) {
+export const StatisticsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Returns the space usage statistics for the module with the ID specified in the request.
@@ -91,11 +91,11 @@ export const SettingsStatisticsApiAxiosParamCreator = function (configuration?: 
 };
 
 /**
- * SettingsStatisticsApi - functional programming interface
+ * StatisticsApi - functional programming interface
  * @export
  */
-export const SettingsStatisticsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SettingsStatisticsApiAxiosParamCreator(configuration)
+export const StatisticsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = StatisticsApiAxiosParamCreator(configuration)
     return {
         /**
          * Returns the space usage statistics for the module with the ID specified in the request.
@@ -109,18 +109,18 @@ export const SettingsStatisticsApiFp = function(configuration?: Configuration) {
         async getSpaceUsageStatistics(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UsageSpaceStatItemArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSpaceUsageStatistics(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsStatisticsApi.getSpaceUsageStatistics']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['StatisticsApi.getSpaceUsageStatistics']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * SettingsStatisticsApi - factory interface
+ * StatisticsApi - factory interface
  * @export
  */
-export const SettingsStatisticsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SettingsStatisticsApiFp(configuration)
+export const StatisticsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = StatisticsApiFp(configuration)
     return {
         /**
          * Returns the space usage statistics for the module with the ID specified in the request.
@@ -138,22 +138,22 @@ export const SettingsStatisticsApiFactory = function (configuration?: Configurat
 };
 
 /**
- * SettingsStatisticsApi - object-oriented interface
+ * StatisticsApi - object-oriented interface
  * @export
- * @class SettingsStatisticsApi
+ * @class StatisticsApi
  * @extends {BaseAPI}
  */
-export class SettingsStatisticsApi extends BaseAPI {
+export class StatisticsApi extends BaseAPI {
     /**
      * Returns the space usage statistics for the module with the ID specified in the request.
      * @summary Get the space usage statistics
      * @param {string} id The ID extracted from the route parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsStatisticsApi
+     * @memberof StatisticsApi
      */
     public getSpaceUsageStatistics(id: string, options?: RawAxiosRequestConfig) {
-        return SettingsStatisticsApiFp(this.configuration).getSpaceUsageStatistics(id, options).then((request) => request(this.axios, this.basePath));
+        return StatisticsApiFp(this.configuration).getSpaceUsageStatistics(id, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

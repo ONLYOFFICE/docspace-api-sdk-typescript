@@ -35,8 +35,6 @@ import type { GroupWrapper } from '../../models';
 // @ts-ignore
 import type { MembersRequest } from '../../models';
 // @ts-ignore
-import type { NoContentResultWrapper } from '../../models';
-// @ts-ignore
 import type { SetManagerRequest } from '../../models';
 // @ts-ignore
 import type { SortOrder } from '../../models';
@@ -768,7 +766,7 @@ export const GroupApiFp = function(configuration?: Configuration) {
          * REST API Reference for deleteGroup operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-group/
          */
-        async deleteGroup(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NoContentResultWrapper>> {
+        async deleteGroup(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteGroup(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupApi.deleteGroup']?.[localVarOperationServerIndex]?.url;
@@ -951,7 +949,7 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-group/
          * @throws {RequiredError}
          */
-        deleteGroup(id: string, options?: RawAxiosRequestConfig): AxiosPromise<NoContentResultWrapper> {
+        deleteGroup(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.deleteGroup(id, options).then((request) => request(axios, basePath));
         },
         /**

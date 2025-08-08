@@ -60,7 +60,13 @@ export interface CompanyWhiteLabelSettingsDto {
      */
     'isLicensor'?: boolean;
     /**
-     * Specifies if company white label settings are default or not.
+     * Specifies if the About page is visible or not.
+     * @type {boolean}
+     * @memberof CompanyWhiteLabelSettingsDto
+     */
+    'hideAbout'?: boolean;
+    /**
+     * Specifies if these settings are default or not.
      * @type {boolean}
      * @memberof CompanyWhiteLabelSettingsDto
      */

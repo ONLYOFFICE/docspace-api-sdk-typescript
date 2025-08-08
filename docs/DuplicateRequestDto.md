@@ -7,8 +7,8 @@ The duplicate request parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **returnSingleOperation** | **boolean** | Specifies whether to return only the current operation | [optional] [default to undefined]
-**folderIds** | [**Array&lt;BaseBatchRequestDtoFolderIdsInner&gt;**](BaseBatchRequestDtoFolderIdsInner.md) | The list of folder IDs. | [optional] [default to undefined]
-**fileIds** | [**Array&lt;BaseBatchRequestDtoFolderIdsInner&gt;**](BaseBatchRequestDtoFolderIdsInner.md) | The list of file IDs. | [optional] [default to undefined]
+**folderIds** | [**Array&lt;DuplicateRequestDtoAllOfFolderIds&gt;**](DuplicateRequestDtoAllOfFolderIds.md) | The list of folder IDs. | [optional] [default to undefined]
+**fileIds** | [**Array&lt;DuplicateRequestDtoAllOfFileIds&gt;**](DuplicateRequestDtoAllOfFileIds.md) | The list of file IDs. | [optional] [default to undefined]
 
 ## Example
 

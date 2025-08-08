@@ -31,10 +31,10 @@ import type { TariffWrapper } from '../../models';
 // @ts-ignore
 import type { TenantQuotaWrapper } from '../../models';
 /**
- * PortalQuotaApi - axios parameter creator
+ * QuotaApi - axios parameter creator
  * @export
  */
-export const PortalQuotaApiAxiosParamCreator = function (configuration?: Configuration) {
+export const QuotaApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Returns the current portal quota.
@@ -249,11 +249,11 @@ export const PortalQuotaApiAxiosParamCreator = function (configuration?: Configu
 };
 
 /**
- * PortalQuotaApi - functional programming interface
+ * QuotaApi - functional programming interface
  * @export
  */
-export const PortalQuotaApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = PortalQuotaApiAxiosParamCreator(configuration)
+export const QuotaApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = QuotaApiAxiosParamCreator(configuration)
     return {
         /**
          * Returns the current portal quota.
@@ -266,7 +266,7 @@ export const PortalQuotaApiFp = function(configuration?: Configuration) {
         async getPortalQuota(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantQuotaWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPortalQuota(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalQuotaApi.getPortalQuota']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['QuotaApi.getPortalQuota']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -281,7 +281,7 @@ export const PortalQuotaApiFp = function(configuration?: Configuration) {
         async getPortalTariff(refresh?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TariffWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPortalTariff(refresh, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalQuotaApi.getPortalTariff']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['QuotaApi.getPortalTariff']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -295,7 +295,7 @@ export const PortalQuotaApiFp = function(configuration?: Configuration) {
         async getPortalUsedSpace(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DoubleWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPortalUsedSpace(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalQuotaApi.getPortalUsedSpace']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['QuotaApi.getPortalUsedSpace']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -309,18 +309,18 @@ export const PortalQuotaApiFp = function(configuration?: Configuration) {
         async getRightQuota(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantQuotaWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRightQuota(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalQuotaApi.getRightQuota']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['QuotaApi.getRightQuota']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * PortalQuotaApi - factory interface
+ * QuotaApi - factory interface
  * @export
  */
-export const PortalQuotaApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = PortalQuotaApiFp(configuration)
+export const QuotaApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = QuotaApiFp(configuration)
     return {
         /**
          * Returns the current portal quota.
@@ -371,21 +371,21 @@ export const PortalQuotaApiFactory = function (configuration?: Configuration, ba
 };
 
 /**
- * PortalQuotaApi - object-oriented interface
+ * QuotaApi - object-oriented interface
  * @export
- * @class PortalQuotaApi
+ * @class QuotaApi
  * @extends {BaseAPI}
  */
-export class PortalQuotaApi extends BaseAPI {
+export class QuotaApi extends BaseAPI {
     /**
      * Returns the current portal quota.
      * @summary Get a portal quota
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalQuotaApi
+     * @memberof QuotaApi
      */
     public getPortalQuota(options?: RawAxiosRequestConfig) {
-        return PortalQuotaApiFp(this.configuration).getPortalQuota(options).then((request) => request(this.axios, this.basePath));
+        return QuotaApiFp(this.configuration).getPortalQuota(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -394,10 +394,10 @@ export class PortalQuotaApi extends BaseAPI {
      * @param {boolean} [refresh] The value indicating whether the current portal tariff information should be refreshed.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalQuotaApi
+     * @memberof QuotaApi
      */
     public getPortalTariff(refresh?: boolean, options?: RawAxiosRequestConfig) {
-        return PortalQuotaApiFp(this.configuration).getPortalTariff(refresh, options).then((request) => request(this.axios, this.basePath));
+        return QuotaApiFp(this.configuration).getPortalTariff(refresh, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -405,10 +405,10 @@ export class PortalQuotaApi extends BaseAPI {
      * @summary Get the portal used space
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalQuotaApi
+     * @memberof QuotaApi
      */
     public getPortalUsedSpace(options?: RawAxiosRequestConfig) {
-        return PortalQuotaApiFp(this.configuration).getPortalUsedSpace(options).then((request) => request(this.axios, this.basePath));
+        return QuotaApiFp(this.configuration).getPortalUsedSpace(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -416,10 +416,10 @@ export class PortalQuotaApi extends BaseAPI {
      * @summary Get the recommended quota
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalQuotaApi
+     * @memberof QuotaApi
      */
     public getRightQuota(options?: RawAxiosRequestConfig) {
-        return PortalQuotaApiFp(this.configuration).getRightQuota(options).then((request) => request(this.axios, this.basePath));
+        return QuotaApiFp(this.configuration).getRightQuota(options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -33,10 +33,10 @@ import type { MemberBaseRequestDto } from '../../models';
 // @ts-ignore
 import type { StringWrapper } from '../../models';
 /**
- * PeoplePasswordApi - axios parameter creator
+ * PasswordApi - axios parameter creator
  * @export
  */
-export const PeoplePasswordApiAxiosParamCreator = function (configuration?: Configuration) {
+export const PasswordApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Sets a new password to the user with the ID specified in the request.
@@ -137,11 +137,11 @@ export const PeoplePasswordApiAxiosParamCreator = function (configuration?: Conf
 };
 
 /**
- * PeoplePasswordApi - functional programming interface
+ * PasswordApi - functional programming interface
  * @export
  */
-export const PeoplePasswordApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = PeoplePasswordApiAxiosParamCreator(configuration)
+export const PasswordApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = PasswordApiAxiosParamCreator(configuration)
     return {
         /**
          * Sets a new password to the user with the ID specified in the request.
@@ -156,7 +156,7 @@ export const PeoplePasswordApiFp = function(configuration?: Configuration) {
         async changeUserPassword(userid: string, memberBaseRequestDto?: MemberBaseRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.changeUserPassword(userid, memberBaseRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeoplePasswordApi.changeUserPassword']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PasswordApi.changeUserPassword']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -171,18 +171,18 @@ export const PeoplePasswordApiFp = function(configuration?: Configuration) {
         async sendUserPassword(emailMemberRequestDto?: EmailMemberRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.sendUserPassword(emailMemberRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeoplePasswordApi.sendUserPassword']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PasswordApi.sendUserPassword']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * PeoplePasswordApi - factory interface
+ * PasswordApi - factory interface
  * @export
  */
-export const PeoplePasswordApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = PeoplePasswordApiFp(configuration)
+export const PasswordApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = PasswordApiFp(configuration)
     return {
         /**
          * Sets a new password to the user with the ID specified in the request.
@@ -213,12 +213,12 @@ export const PeoplePasswordApiFactory = function (configuration?: Configuration,
 };
 
 /**
- * PeoplePasswordApi - object-oriented interface
+ * PasswordApi - object-oriented interface
  * @export
- * @class PeoplePasswordApi
+ * @class PasswordApi
  * @extends {BaseAPI}
  */
-export class PeoplePasswordApi extends BaseAPI {
+export class PasswordApi extends BaseAPI {
     /**
      * Sets a new password to the user with the ID specified in the request.
      * @summary Change a user password
@@ -226,10 +226,10 @@ export class PeoplePasswordApi extends BaseAPI {
      * @param {MemberBaseRequestDto} [memberBaseRequestDto] The request parameters for the user generic information.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeoplePasswordApi
+     * @memberof PasswordApi
      */
     public changeUserPassword(userid: string, memberBaseRequestDto?: MemberBaseRequestDto, options?: RawAxiosRequestConfig) {
-        return PeoplePasswordApiFp(this.configuration).changeUserPassword(userid, memberBaseRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return PasswordApiFp(this.configuration).changeUserPassword(userid, memberBaseRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -238,10 +238,10 @@ export class PeoplePasswordApi extends BaseAPI {
      * @param {EmailMemberRequestDto} [emailMemberRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeoplePasswordApi
+     * @memberof PasswordApi
      */
     public sendUserPassword(emailMemberRequestDto?: EmailMemberRequestDto, options?: RawAxiosRequestConfig) {
-        return PeoplePasswordApiFp(this.configuration).sendUserPassword(emailMemberRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return PasswordApiFp(this.configuration).sendUserPassword(emailMemberRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

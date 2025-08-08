@@ -27,10 +27,10 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { GroupArrayWrapper } from '../../models';
 /**
- * GroupRoomsApi - axios parameter creator
+ * RoomsApi - axios parameter creator
  * @export
  */
-export const GroupRoomsApiAxiosParamCreator = function (configuration?: Configuration) {
+export const RoomsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Returns groups with their sharing settings.
@@ -111,11 +111,11 @@ export const GroupRoomsApiAxiosParamCreator = function (configuration?: Configur
 };
 
 /**
- * GroupRoomsApi - functional programming interface
+ * RoomsApi - functional programming interface
  * @export
  */
-export const GroupRoomsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = GroupRoomsApiAxiosParamCreator(configuration)
+export const RoomsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = RoomsApiAxiosParamCreator(configuration)
     return {
         /**
          * Returns groups with their sharing settings.
@@ -133,18 +133,18 @@ export const GroupRoomsApiFp = function(configuration?: Configuration) {
         async getGroupsWithShared(id: number, excludeShared?: boolean, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getGroupsWithShared(id, excludeShared, count, startIndex, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GroupRoomsApi.getGroupsWithShared']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getGroupsWithShared']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * GroupRoomsApi - factory interface
+ * RoomsApi - factory interface
  * @export
  */
-export const GroupRoomsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = GroupRoomsApiFp(configuration)
+export const RoomsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = RoomsApiFp(configuration)
     return {
         /**
          * Returns groups with their sharing settings.
@@ -166,12 +166,12 @@ export const GroupRoomsApiFactory = function (configuration?: Configuration, bas
 };
 
 /**
- * GroupRoomsApi - object-oriented interface
+ * RoomsApi - object-oriented interface
  * @export
- * @class GroupRoomsApi
+ * @class RoomsApi
  * @extends {BaseAPI}
  */
-export class GroupRoomsApi extends BaseAPI {
+export class RoomsApi extends BaseAPI {
     /**
      * Returns groups with their sharing settings.
      * @summary Get groups with sharing settings
@@ -182,10 +182,10 @@ export class GroupRoomsApi extends BaseAPI {
      * @param {string} [filterValue] The text used as a filter for retrieving groups with their sharing settings.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof GroupRoomsApi
+     * @memberof RoomsApi
      */
     public getGroupsWithShared(id: number, excludeShared?: boolean, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig) {
-        return GroupRoomsApiFp(this.configuration).getGroupsWithShared(id, excludeShared, count, startIndex, filterValue, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).getGroupsWithShared(id, excludeShared, count, startIndex, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

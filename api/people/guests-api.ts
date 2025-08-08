@@ -31,10 +31,10 @@ import type { EmployeeFullWrapper } from '../../models';
 // @ts-ignore
 import type { UpdateMembersRequestDto } from '../../models';
 /**
- * PeopleGuestsApi - axios parameter creator
+ * GuestsApi - axios parameter creator
  * @export
  */
-export const PeopleGuestsApiAxiosParamCreator = function (configuration?: Configuration) {
+export const GuestsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Approves a guest sharing link and returns the detailed information about a guest.
@@ -150,11 +150,11 @@ export const PeopleGuestsApiAxiosParamCreator = function (configuration?: Config
 };
 
 /**
- * PeopleGuestsApi - functional programming interface
+ * GuestsApi - functional programming interface
  * @export
  */
-export const PeopleGuestsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = PeopleGuestsApiAxiosParamCreator(configuration)
+export const GuestsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = GuestsApiAxiosParamCreator(configuration)
     return {
         /**
          * Approves a guest sharing link and returns the detailed information about a guest.
@@ -168,7 +168,7 @@ export const PeopleGuestsApiFp = function(configuration?: Configuration) {
         async approveGuestShareLink(emailMemberRequestDto?: EmailMemberRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.approveGuestShareLink(emailMemberRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleGuestsApi.approveGuestShareLink']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['GuestsApi.approveGuestShareLink']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -183,18 +183,18 @@ export const PeopleGuestsApiFp = function(configuration?: Configuration) {
         async deleteGuests(updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteGuests(updateMembersRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleGuestsApi.deleteGuests']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['GuestsApi.deleteGuests']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * PeopleGuestsApi - factory interface
+ * GuestsApi - factory interface
  * @export
  */
-export const PeopleGuestsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = PeopleGuestsApiFp(configuration)
+export const GuestsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = GuestsApiFp(configuration)
     return {
         /**
          * Approves a guest sharing link and returns the detailed information about a guest.
@@ -224,22 +224,22 @@ export const PeopleGuestsApiFactory = function (configuration?: Configuration, b
 };
 
 /**
- * PeopleGuestsApi - object-oriented interface
+ * GuestsApi - object-oriented interface
  * @export
- * @class PeopleGuestsApi
+ * @class GuestsApi
  * @extends {BaseAPI}
  */
-export class PeopleGuestsApi extends BaseAPI {
+export class GuestsApi extends BaseAPI {
     /**
      * Approves a guest sharing link and returns the detailed information about a guest.
      * @summary Approve a guest sharing link
      * @param {EmailMemberRequestDto} [emailMemberRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleGuestsApi
+     * @memberof GuestsApi
      */
     public approveGuestShareLink(emailMemberRequestDto?: EmailMemberRequestDto, options?: RawAxiosRequestConfig) {
-        return PeopleGuestsApiFp(this.configuration).approveGuestShareLink(emailMemberRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return GuestsApiFp(this.configuration).approveGuestShareLink(emailMemberRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -248,10 +248,10 @@ export class PeopleGuestsApi extends BaseAPI {
      * @param {UpdateMembersRequestDto} [updateMembersRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleGuestsApi
+     * @memberof GuestsApi
      */
     public deleteGuests(updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig) {
-        return PeopleGuestsApiFp(this.configuration).deleteGuests(updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return GuestsApiFp(this.configuration).deleteGuests(updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

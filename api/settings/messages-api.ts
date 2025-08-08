@@ -33,10 +33,10 @@ import type { StringWrapper } from '../../models';
 // @ts-ignore
 import type { TurnOnAdminMessageSettingsRequestDto } from '../../models';
 /**
- * SettingsMessagesApi - axios parameter creator
+ * MessagesApi - axios parameter creator
  * @export
  */
-export const SettingsMessagesApiAxiosParamCreator = function (configuration?: Configuration) {
+export const MessagesApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Displays the contact form on the \"Sign In\" page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.
@@ -169,11 +169,11 @@ export const SettingsMessagesApiAxiosParamCreator = function (configuration?: Co
 };
 
 /**
- * SettingsMessagesApi - functional programming interface
+ * MessagesApi - functional programming interface
  * @export
  */
-export const SettingsMessagesApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SettingsMessagesApiAxiosParamCreator(configuration)
+export const MessagesApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = MessagesApiAxiosParamCreator(configuration)
     return {
         /**
          * Displays the contact form on the \"Sign In\" page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.
@@ -187,7 +187,7 @@ export const SettingsMessagesApiFp = function(configuration?: Configuration) {
         async enableAdminMessageSettings(turnOnAdminMessageSettingsRequestDto?: TurnOnAdminMessageSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.enableAdminMessageSettings(turnOnAdminMessageSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsMessagesApi.enableAdminMessageSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['MessagesApi.enableAdminMessageSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -202,7 +202,7 @@ export const SettingsMessagesApiFp = function(configuration?: Configuration) {
         async sendAdminMail(adminMessageSettingsRequestsDto?: AdminMessageSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.sendAdminMail(adminMessageSettingsRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsMessagesApi.sendAdminMail']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['MessagesApi.sendAdminMail']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -217,18 +217,18 @@ export const SettingsMessagesApiFp = function(configuration?: Configuration) {
         async sendJoinInviteMail(adminMessageBaseSettingsRequestsDto?: AdminMessageBaseSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.sendJoinInviteMail(adminMessageBaseSettingsRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsMessagesApi.sendJoinInviteMail']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['MessagesApi.sendJoinInviteMail']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * SettingsMessagesApi - factory interface
+ * MessagesApi - factory interface
  * @export
  */
-export const SettingsMessagesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SettingsMessagesApiFp(configuration)
+export const MessagesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = MessagesApiFp(configuration)
     return {
         /**
          * Displays the contact form on the \"Sign In\" page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.
@@ -270,22 +270,22 @@ export const SettingsMessagesApiFactory = function (configuration?: Configuratio
 };
 
 /**
- * SettingsMessagesApi - object-oriented interface
+ * MessagesApi - object-oriented interface
  * @export
- * @class SettingsMessagesApi
+ * @class MessagesApi
  * @extends {BaseAPI}
  */
-export class SettingsMessagesApi extends BaseAPI {
+export class MessagesApi extends BaseAPI {
     /**
      * Displays the contact form on the \"Sign In\" page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.
      * @summary Enable the administrator message settings
      * @param {TurnOnAdminMessageSettingsRequestDto} [turnOnAdminMessageSettingsRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsMessagesApi
+     * @memberof MessagesApi
      */
     public enableAdminMessageSettings(turnOnAdminMessageSettingsRequestDto?: TurnOnAdminMessageSettingsRequestDto, options?: RawAxiosRequestConfig) {
-        return SettingsMessagesApiFp(this.configuration).enableAdminMessageSettings(turnOnAdminMessageSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return MessagesApiFp(this.configuration).enableAdminMessageSettings(turnOnAdminMessageSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -294,10 +294,10 @@ export class SettingsMessagesApi extends BaseAPI {
      * @param {AdminMessageSettingsRequestsDto} [adminMessageSettingsRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsMessagesApi
+     * @memberof MessagesApi
      */
     public sendAdminMail(adminMessageSettingsRequestsDto?: AdminMessageSettingsRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsMessagesApiFp(this.configuration).sendAdminMail(adminMessageSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return MessagesApiFp(this.configuration).sendAdminMail(adminMessageSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -306,10 +306,10 @@ export class SettingsMessagesApi extends BaseAPI {
      * @param {AdminMessageBaseSettingsRequestsDto} [adminMessageBaseSettingsRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsMessagesApi
+     * @memberof MessagesApi
      */
     public sendJoinInviteMail(adminMessageBaseSettingsRequestsDto?: AdminMessageBaseSettingsRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsMessagesApiFp(this.configuration).sendJoinInviteMail(adminMessageBaseSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return MessagesApiFp(this.configuration).sendJoinInviteMail(adminMessageBaseSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -29,10 +29,10 @@ import type { OwnerChangeInstructionsWrapper } from '../../models';
 // @ts-ignore
 import type { OwnerIdSettingsRequestDto } from '../../models';
 /**
- * SettingsOwnerApi - axios parameter creator
+ * OwnerApi - axios parameter creator
  * @export
  */
-export const SettingsOwnerApiAxiosParamCreator = function (configuration?: Configuration) {
+export const OwnerApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Sends the instructions to change the DocSpace owner.
@@ -148,11 +148,11 @@ export const SettingsOwnerApiAxiosParamCreator = function (configuration?: Confi
 };
 
 /**
- * SettingsOwnerApi - functional programming interface
+ * OwnerApi - functional programming interface
  * @export
  */
-export const SettingsOwnerApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SettingsOwnerApiAxiosParamCreator(configuration)
+export const OwnerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = OwnerApiAxiosParamCreator(configuration)
     return {
         /**
          * Sends the instructions to change the DocSpace owner.
@@ -166,7 +166,7 @@ export const SettingsOwnerApiFp = function(configuration?: Configuration) {
         async sendOwnerChangeInstructions(ownerIdSettingsRequestDto?: OwnerIdSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OwnerChangeInstructionsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.sendOwnerChangeInstructions(ownerIdSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsOwnerApi.sendOwnerChangeInstructions']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['OwnerApi.sendOwnerChangeInstructions']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -181,18 +181,18 @@ export const SettingsOwnerApiFp = function(configuration?: Configuration) {
         async updatePortalOwner(ownerIdSettingsRequestDto?: OwnerIdSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updatePortalOwner(ownerIdSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsOwnerApi.updatePortalOwner']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['OwnerApi.updatePortalOwner']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * SettingsOwnerApi - factory interface
+ * OwnerApi - factory interface
  * @export
  */
-export const SettingsOwnerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SettingsOwnerApiFp(configuration)
+export const OwnerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = OwnerApiFp(configuration)
     return {
         /**
          * Sends the instructions to change the DocSpace owner.
@@ -222,22 +222,22 @@ export const SettingsOwnerApiFactory = function (configuration?: Configuration, 
 };
 
 /**
- * SettingsOwnerApi - object-oriented interface
+ * OwnerApi - object-oriented interface
  * @export
- * @class SettingsOwnerApi
+ * @class OwnerApi
  * @extends {BaseAPI}
  */
-export class SettingsOwnerApi extends BaseAPI {
+export class OwnerApi extends BaseAPI {
     /**
      * Sends the instructions to change the DocSpace owner.
      * @summary Send the owner change instructions
      * @param {OwnerIdSettingsRequestDto} [ownerIdSettingsRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsOwnerApi
+     * @memberof OwnerApi
      */
     public sendOwnerChangeInstructions(ownerIdSettingsRequestDto?: OwnerIdSettingsRequestDto, options?: RawAxiosRequestConfig) {
-        return SettingsOwnerApiFp(this.configuration).sendOwnerChangeInstructions(ownerIdSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return OwnerApiFp(this.configuration).sendOwnerChangeInstructions(ownerIdSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -246,10 +246,10 @@ export class SettingsOwnerApi extends BaseAPI {
      * @param {OwnerIdSettingsRequestDto} [ownerIdSettingsRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsOwnerApi
+     * @memberof OwnerApi
      */
     public updatePortalOwner(ownerIdSettingsRequestDto?: OwnerIdSettingsRequestDto, options?: RawAxiosRequestConfig) {
-        return SettingsOwnerApiFp(this.configuration).updatePortalOwner(ownerIdSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return OwnerApiFp(this.configuration).updatePortalOwner(ownerIdSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

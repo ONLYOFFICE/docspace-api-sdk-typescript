@@ -31,10 +31,10 @@ import type { WebPluginRequests } from '../../models';
 // @ts-ignore
 import type { WebPluginWrapper } from '../../models';
 /**
- * SettingsWebpluginsApi - axios parameter creator
+ * WebpluginsApi - axios parameter creator
  * @export
  */
-export const SettingsWebpluginsApiAxiosParamCreator = function (configuration?: Configuration) {
+export const WebpluginsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Adds a web plugin from a file to the current portal.
@@ -321,11 +321,11 @@ export const SettingsWebpluginsApiAxiosParamCreator = function (configuration?: 
 };
 
 /**
- * SettingsWebpluginsApi - functional programming interface
+ * WebpluginsApi - functional programming interface
  * @export
  */
-export const SettingsWebpluginsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SettingsWebpluginsApiAxiosParamCreator(configuration)
+export const WebpluginsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = WebpluginsApiAxiosParamCreator(configuration)
     return {
         /**
          * Adds a web plugin from a file to the current portal.
@@ -339,7 +339,7 @@ export const SettingsWebpluginsApiFp = function(configuration?: Configuration) {
         async addWebPluginFromFile(system?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebPluginWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.addWebPluginFromFile(system, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsWebpluginsApi.addWebPluginFromFile']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['WebpluginsApi.addWebPluginFromFile']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -354,7 +354,7 @@ export const SettingsWebpluginsApiFp = function(configuration?: Configuration) {
         async deleteWebPlugin(name: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteWebPlugin(name, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsWebpluginsApi.deleteWebPlugin']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['WebpluginsApi.deleteWebPlugin']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -369,7 +369,7 @@ export const SettingsWebpluginsApiFp = function(configuration?: Configuration) {
         async getWebPlugin(name: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebPluginWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getWebPlugin(name, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsWebpluginsApi.getWebPlugin']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['WebpluginsApi.getWebPlugin']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -384,7 +384,7 @@ export const SettingsWebpluginsApiFp = function(configuration?: Configuration) {
         async getWebPlugins(enabled?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebPluginArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getWebPlugins(enabled, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsWebpluginsApi.getWebPlugins']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['WebpluginsApi.getWebPlugins']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -400,18 +400,18 @@ export const SettingsWebpluginsApiFp = function(configuration?: Configuration) {
         async updateWebPlugin(name: string, webPluginRequests?: WebPluginRequests, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateWebPlugin(name, webPluginRequests, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsWebpluginsApi.updateWebPlugin']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['WebpluginsApi.updateWebPlugin']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * SettingsWebpluginsApi - factory interface
+ * WebpluginsApi - factory interface
  * @export
  */
-export const SettingsWebpluginsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SettingsWebpluginsApiFp(configuration)
+export const WebpluginsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = WebpluginsApiFp(configuration)
     return {
         /**
          * Adds a web plugin from a file to the current portal.
@@ -478,22 +478,22 @@ export const SettingsWebpluginsApiFactory = function (configuration?: Configurat
 };
 
 /**
- * SettingsWebpluginsApi - object-oriented interface
+ * WebpluginsApi - object-oriented interface
  * @export
- * @class SettingsWebpluginsApi
+ * @class WebpluginsApi
  * @extends {BaseAPI}
  */
-export class SettingsWebpluginsApi extends BaseAPI {
+export class WebpluginsApi extends BaseAPI {
     /**
      * Adds a web plugin from a file to the current portal.
      * @summary Add a web plugin
      * @param {boolean} [system] Specifies whether to load the system plugins or not.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsWebpluginsApi
+     * @memberof WebpluginsApi
      */
     public addWebPluginFromFile(system?: boolean, options?: RawAxiosRequestConfig) {
-        return SettingsWebpluginsApiFp(this.configuration).addWebPluginFromFile(system, options).then((request) => request(this.axios, this.basePath));
+        return WebpluginsApiFp(this.configuration).addWebPluginFromFile(system, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -502,10 +502,10 @@ export class SettingsWebpluginsApi extends BaseAPI {
      * @param {string} name The web plugin name.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsWebpluginsApi
+     * @memberof WebpluginsApi
      */
     public deleteWebPlugin(name: string, options?: RawAxiosRequestConfig) {
-        return SettingsWebpluginsApiFp(this.configuration).deleteWebPlugin(name, options).then((request) => request(this.axios, this.basePath));
+        return WebpluginsApiFp(this.configuration).deleteWebPlugin(name, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -514,10 +514,10 @@ export class SettingsWebpluginsApi extends BaseAPI {
      * @param {string} name The web plugin name.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsWebpluginsApi
+     * @memberof WebpluginsApi
      */
     public getWebPlugin(name: string, options?: RawAxiosRequestConfig) {
-        return SettingsWebpluginsApiFp(this.configuration).getWebPlugin(name, options).then((request) => request(this.axios, this.basePath));
+        return WebpluginsApiFp(this.configuration).getWebPlugin(name, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -526,10 +526,10 @@ export class SettingsWebpluginsApi extends BaseAPI {
      * @param {boolean} [enabled] The optional filter for the plugin enabled state.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsWebpluginsApi
+     * @memberof WebpluginsApi
      */
     public getWebPlugins(enabled?: boolean, options?: RawAxiosRequestConfig) {
-        return SettingsWebpluginsApiFp(this.configuration).getWebPlugins(enabled, options).then((request) => request(this.axios, this.basePath));
+        return WebpluginsApiFp(this.configuration).getWebPlugins(enabled, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -539,10 +539,10 @@ export class SettingsWebpluginsApi extends BaseAPI {
      * @param {WebPluginRequests} [webPluginRequests] The configuration settings for the web plugin instance.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsWebpluginsApi
+     * @memberof WebpluginsApi
      */
     public updateWebPlugin(name: string, webPluginRequests?: WebPluginRequests, options?: RawAxiosRequestConfig) {
-        return SettingsWebpluginsApiFp(this.configuration).updateWebPlugin(name, webPluginRequests, options).then((request) => request(this.axios, this.basePath));
+        return WebpluginsApiFp(this.configuration).updateWebPlugin(name, webPluginRequests, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

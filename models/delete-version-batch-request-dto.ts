@@ -16,19 +16,16 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { FileOperationRequestBaseDto } from './file-operation-request-base-dto';
 
 /**
+ * @type DeleteVersionBatchRequestDto
  * The request parameters for deleting file versions.
  * @export
- * @interface DeleteVersionBatchRequestDto
  */
-export interface DeleteVersionBatchRequestDto {
-    /**
-     * Specifies whether to return only the current operation
-     * @type {boolean}
-     * @memberof DeleteVersionBatchRequestDto
-     */
-    'returnSingleOperation'?: boolean;
+export type DeleteVersionBatchRequestDto = FileOperationRequestBaseDto &  {
     /**
      * Specifies whether to delete a file after the editing session is finished or not.
      * @type {boolean}
@@ -47,5 +44,6 @@ export interface DeleteVersionBatchRequestDto {
      * @memberof DeleteVersionBatchRequestDto
      */
     'versions': Array<number> | null;
-}
+};
+
 

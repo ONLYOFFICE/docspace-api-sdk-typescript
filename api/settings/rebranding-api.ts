@@ -43,10 +43,10 @@ import type { WhiteLabelItemArrayWrapper } from '../../models';
 // @ts-ignore
 import type { WhiteLabelRequestsDto } from '../../models';
 /**
- * SettingsRebrandingApi - axios parameter creator
+ * RebrandingApi - axios parameter creator
  * @export
  */
-export const SettingsRebrandingApiAxiosParamCreator = function (configuration?: Configuration) {
+export const RebrandingApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Deletes the additional white label settings.
@@ -1006,11 +1006,11 @@ export const SettingsRebrandingApiAxiosParamCreator = function (configuration?: 
 };
 
 /**
- * SettingsRebrandingApi - functional programming interface
+ * RebrandingApi - functional programming interface
  * @export
  */
-export const SettingsRebrandingApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SettingsRebrandingApiAxiosParamCreator(configuration)
+export const RebrandingApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = RebrandingApiAxiosParamCreator(configuration)
     return {
         /**
          * Deletes the additional white label settings.
@@ -1023,7 +1023,7 @@ export const SettingsRebrandingApiFp = function(configuration?: Configuration) {
         async deleteAdditionalWhiteLabelSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AdditionalWhiteLabelSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteAdditionalWhiteLabelSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsRebrandingApi.deleteAdditionalWhiteLabelSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RebrandingApi.deleteAdditionalWhiteLabelSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1037,7 +1037,7 @@ export const SettingsRebrandingApiFp = function(configuration?: Configuration) {
         async deleteCompanyWhiteLabelSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CompanyWhiteLabelSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteCompanyWhiteLabelSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsRebrandingApi.deleteCompanyWhiteLabelSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RebrandingApi.deleteCompanyWhiteLabelSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1051,7 +1051,7 @@ export const SettingsRebrandingApiFp = function(configuration?: Configuration) {
         async getAdditionalWhiteLabelSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AdditionalWhiteLabelSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAdditionalWhiteLabelSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsRebrandingApi.getAdditionalWhiteLabelSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RebrandingApi.getAdditionalWhiteLabelSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1065,7 +1065,7 @@ export const SettingsRebrandingApiFp = function(configuration?: Configuration) {
         async getCompanyWhiteLabelSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CompanyWhiteLabelSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCompanyWhiteLabelSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsRebrandingApi.getCompanyWhiteLabelSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RebrandingApi.getCompanyWhiteLabelSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1079,7 +1079,7 @@ export const SettingsRebrandingApiFp = function(configuration?: Configuration) {
         async getEnableWhitelabel(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getEnableWhitelabel(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsRebrandingApi.getEnableWhitelabel']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RebrandingApi.getEnableWhitelabel']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1095,7 +1095,7 @@ export const SettingsRebrandingApiFp = function(configuration?: Configuration) {
         async getIsDefaultWhiteLabelLogoText(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IsDefaultWhiteLabelLogosWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getIsDefaultWhiteLabelLogoText(isDark, isDefault, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsRebrandingApi.getIsDefaultWhiteLabelLogoText']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RebrandingApi.getIsDefaultWhiteLabelLogoText']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1111,7 +1111,7 @@ export const SettingsRebrandingApiFp = function(configuration?: Configuration) {
         async getIsDefaultWhiteLabelLogos(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IsDefaultWhiteLabelLogosArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getIsDefaultWhiteLabelLogos(isDark, isDefault, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsRebrandingApi.getIsDefaultWhiteLabelLogos']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RebrandingApi.getIsDefaultWhiteLabelLogos']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1125,7 +1125,7 @@ export const SettingsRebrandingApiFp = function(configuration?: Configuration) {
         async getLicensorData(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CompanyWhiteLabelSettingsArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getLicensorData(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsRebrandingApi.getLicensorData']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RebrandingApi.getLicensorData']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1141,7 +1141,7 @@ export const SettingsRebrandingApiFp = function(configuration?: Configuration) {
         async getWhiteLabelLogoText(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getWhiteLabelLogoText(isDark, isDefault, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsRebrandingApi.getWhiteLabelLogoText']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RebrandingApi.getWhiteLabelLogoText']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1157,7 +1157,7 @@ export const SettingsRebrandingApiFp = function(configuration?: Configuration) {
         async getWhiteLabelLogos(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WhiteLabelItemArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getWhiteLabelLogos(isDark, isDefault, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsRebrandingApi.getWhiteLabelLogos']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RebrandingApi.getWhiteLabelLogos']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1173,7 +1173,7 @@ export const SettingsRebrandingApiFp = function(configuration?: Configuration) {
         async restoreWhiteLabelLogoText(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.restoreWhiteLabelLogoText(isDark, isDefault, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsRebrandingApi.restoreWhiteLabelLogoText']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RebrandingApi.restoreWhiteLabelLogoText']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1189,7 +1189,7 @@ export const SettingsRebrandingApiFp = function(configuration?: Configuration) {
         async restoreWhiteLabelLogos(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.restoreWhiteLabelLogos(isDark, isDefault, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsRebrandingApi.restoreWhiteLabelLogos']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RebrandingApi.restoreWhiteLabelLogos']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1204,7 +1204,7 @@ export const SettingsRebrandingApiFp = function(configuration?: Configuration) {
         async saveAdditionalWhiteLabelSettings(additionalWhiteLabelSettingsWrapper?: AdditionalWhiteLabelSettingsWrapper, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.saveAdditionalWhiteLabelSettings(additionalWhiteLabelSettingsWrapper, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsRebrandingApi.saveAdditionalWhiteLabelSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RebrandingApi.saveAdditionalWhiteLabelSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1219,7 +1219,7 @@ export const SettingsRebrandingApiFp = function(configuration?: Configuration) {
         async saveCompanyWhiteLabelSettings(companyWhiteLabelSettingsWrapper?: CompanyWhiteLabelSettingsWrapper, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.saveCompanyWhiteLabelSettings(companyWhiteLabelSettingsWrapper, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsRebrandingApi.saveCompanyWhiteLabelSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RebrandingApi.saveCompanyWhiteLabelSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1236,7 +1236,7 @@ export const SettingsRebrandingApiFp = function(configuration?: Configuration) {
         async saveWhiteLabelLogoText(isDark?: boolean, isDefault?: boolean, whiteLabelRequestsDto?: WhiteLabelRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.saveWhiteLabelLogoText(isDark, isDefault, whiteLabelRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsRebrandingApi.saveWhiteLabelLogoText']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RebrandingApi.saveWhiteLabelLogoText']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1253,7 +1253,7 @@ export const SettingsRebrandingApiFp = function(configuration?: Configuration) {
         async saveWhiteLabelSettings(isDark?: boolean, isDefault?: boolean, whiteLabelRequestsDto?: WhiteLabelRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.saveWhiteLabelSettings(isDark, isDefault, whiteLabelRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsRebrandingApi.saveWhiteLabelSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RebrandingApi.saveWhiteLabelSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1269,18 +1269,18 @@ export const SettingsRebrandingApiFp = function(configuration?: Configuration) {
         async saveWhiteLabelSettingsFromFiles(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.saveWhiteLabelSettingsFromFiles(isDark, isDefault, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsRebrandingApi.saveWhiteLabelSettingsFromFiles']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RebrandingApi.saveWhiteLabelSettingsFromFiles']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * SettingsRebrandingApi - factory interface
+ * RebrandingApi - factory interface
  * @export
  */
-export const SettingsRebrandingApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SettingsRebrandingApiFp(configuration)
+export const RebrandingApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = RebrandingApiFp(configuration)
     return {
         /**
          * Deletes the additional white label settings.
@@ -1495,21 +1495,21 @@ export const SettingsRebrandingApiFactory = function (configuration?: Configurat
 };
 
 /**
- * SettingsRebrandingApi - object-oriented interface
+ * RebrandingApi - object-oriented interface
  * @export
- * @class SettingsRebrandingApi
+ * @class RebrandingApi
  * @extends {BaseAPI}
  */
-export class SettingsRebrandingApi extends BaseAPI {
+export class RebrandingApi extends BaseAPI {
     /**
      * Deletes the additional white label settings.
      * @summary Delete the additional white label settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsRebrandingApi
+     * @memberof RebrandingApi
      */
     public deleteAdditionalWhiteLabelSettings(options?: RawAxiosRequestConfig) {
-        return SettingsRebrandingApiFp(this.configuration).deleteAdditionalWhiteLabelSettings(options).then((request) => request(this.axios, this.basePath));
+        return RebrandingApiFp(this.configuration).deleteAdditionalWhiteLabelSettings(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1517,10 +1517,10 @@ export class SettingsRebrandingApi extends BaseAPI {
      * @summary Delete the company white label settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsRebrandingApi
+     * @memberof RebrandingApi
      */
     public deleteCompanyWhiteLabelSettings(options?: RawAxiosRequestConfig) {
-        return SettingsRebrandingApiFp(this.configuration).deleteCompanyWhiteLabelSettings(options).then((request) => request(this.axios, this.basePath));
+        return RebrandingApiFp(this.configuration).deleteCompanyWhiteLabelSettings(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1528,10 +1528,10 @@ export class SettingsRebrandingApi extends BaseAPI {
      * @summary Get the additional white label settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsRebrandingApi
+     * @memberof RebrandingApi
      */
     public getAdditionalWhiteLabelSettings(options?: RawAxiosRequestConfig) {
-        return SettingsRebrandingApiFp(this.configuration).getAdditionalWhiteLabelSettings(options).then((request) => request(this.axios, this.basePath));
+        return RebrandingApiFp(this.configuration).getAdditionalWhiteLabelSettings(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1539,10 +1539,10 @@ export class SettingsRebrandingApi extends BaseAPI {
      * @summary Get the company white label settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsRebrandingApi
+     * @memberof RebrandingApi
      */
     public getCompanyWhiteLabelSettings(options?: RawAxiosRequestConfig) {
-        return SettingsRebrandingApiFp(this.configuration).getCompanyWhiteLabelSettings(options).then((request) => request(this.axios, this.basePath));
+        return RebrandingApiFp(this.configuration).getCompanyWhiteLabelSettings(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1550,10 +1550,10 @@ export class SettingsRebrandingApi extends BaseAPI {
      * @summary Check the white label availability
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsRebrandingApi
+     * @memberof RebrandingApi
      */
     public getEnableWhitelabel(options?: RawAxiosRequestConfig) {
-        return SettingsRebrandingApiFp(this.configuration).getEnableWhitelabel(options).then((request) => request(this.axios, this.basePath));
+        return RebrandingApiFp(this.configuration).getEnableWhitelabel(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1563,10 +1563,10 @@ export class SettingsRebrandingApi extends BaseAPI {
      * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsRebrandingApi
+     * @memberof RebrandingApi
      */
     public getIsDefaultWhiteLabelLogoText(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig) {
-        return SettingsRebrandingApiFp(this.configuration).getIsDefaultWhiteLabelLogoText(isDark, isDefault, options).then((request) => request(this.axios, this.basePath));
+        return RebrandingApiFp(this.configuration).getIsDefaultWhiteLabelLogoText(isDark, isDefault, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1576,10 +1576,10 @@ export class SettingsRebrandingApi extends BaseAPI {
      * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsRebrandingApi
+     * @memberof RebrandingApi
      */
     public getIsDefaultWhiteLabelLogos(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig) {
-        return SettingsRebrandingApiFp(this.configuration).getIsDefaultWhiteLabelLogos(isDark, isDefault, options).then((request) => request(this.axios, this.basePath));
+        return RebrandingApiFp(this.configuration).getIsDefaultWhiteLabelLogos(isDark, isDefault, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1587,10 +1587,10 @@ export class SettingsRebrandingApi extends BaseAPI {
      * @summary Get the licensor data
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsRebrandingApi
+     * @memberof RebrandingApi
      */
     public getLicensorData(options?: RawAxiosRequestConfig) {
-        return SettingsRebrandingApiFp(this.configuration).getLicensorData(options).then((request) => request(this.axios, this.basePath));
+        return RebrandingApiFp(this.configuration).getLicensorData(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1600,10 +1600,10 @@ export class SettingsRebrandingApi extends BaseAPI {
      * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsRebrandingApi
+     * @memberof RebrandingApi
      */
     public getWhiteLabelLogoText(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig) {
-        return SettingsRebrandingApiFp(this.configuration).getWhiteLabelLogoText(isDark, isDefault, options).then((request) => request(this.axios, this.basePath));
+        return RebrandingApiFp(this.configuration).getWhiteLabelLogoText(isDark, isDefault, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1613,10 +1613,10 @@ export class SettingsRebrandingApi extends BaseAPI {
      * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsRebrandingApi
+     * @memberof RebrandingApi
      */
     public getWhiteLabelLogos(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig) {
-        return SettingsRebrandingApiFp(this.configuration).getWhiteLabelLogos(isDark, isDefault, options).then((request) => request(this.axios, this.basePath));
+        return RebrandingApiFp(this.configuration).getWhiteLabelLogos(isDark, isDefault, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1626,10 +1626,10 @@ export class SettingsRebrandingApi extends BaseAPI {
      * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsRebrandingApi
+     * @memberof RebrandingApi
      */
     public restoreWhiteLabelLogoText(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig) {
-        return SettingsRebrandingApiFp(this.configuration).restoreWhiteLabelLogoText(isDark, isDefault, options).then((request) => request(this.axios, this.basePath));
+        return RebrandingApiFp(this.configuration).restoreWhiteLabelLogoText(isDark, isDefault, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1639,10 +1639,10 @@ export class SettingsRebrandingApi extends BaseAPI {
      * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsRebrandingApi
+     * @memberof RebrandingApi
      */
     public restoreWhiteLabelLogos(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig) {
-        return SettingsRebrandingApiFp(this.configuration).restoreWhiteLabelLogos(isDark, isDefault, options).then((request) => request(this.axios, this.basePath));
+        return RebrandingApiFp(this.configuration).restoreWhiteLabelLogos(isDark, isDefault, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1651,10 +1651,10 @@ export class SettingsRebrandingApi extends BaseAPI {
      * @param {AdditionalWhiteLabelSettingsWrapper} [additionalWhiteLabelSettingsWrapper] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsRebrandingApi
+     * @memberof RebrandingApi
      */
     public saveAdditionalWhiteLabelSettings(additionalWhiteLabelSettingsWrapper?: AdditionalWhiteLabelSettingsWrapper, options?: RawAxiosRequestConfig) {
-        return SettingsRebrandingApiFp(this.configuration).saveAdditionalWhiteLabelSettings(additionalWhiteLabelSettingsWrapper, options).then((request) => request(this.axios, this.basePath));
+        return RebrandingApiFp(this.configuration).saveAdditionalWhiteLabelSettings(additionalWhiteLabelSettingsWrapper, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1663,10 +1663,10 @@ export class SettingsRebrandingApi extends BaseAPI {
      * @param {CompanyWhiteLabelSettingsWrapper} [companyWhiteLabelSettingsWrapper] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsRebrandingApi
+     * @memberof RebrandingApi
      */
     public saveCompanyWhiteLabelSettings(companyWhiteLabelSettingsWrapper?: CompanyWhiteLabelSettingsWrapper, options?: RawAxiosRequestConfig) {
-        return SettingsRebrandingApiFp(this.configuration).saveCompanyWhiteLabelSettings(companyWhiteLabelSettingsWrapper, options).then((request) => request(this.axios, this.basePath));
+        return RebrandingApiFp(this.configuration).saveCompanyWhiteLabelSettings(companyWhiteLabelSettingsWrapper, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1677,10 +1677,10 @@ export class SettingsRebrandingApi extends BaseAPI {
      * @param {WhiteLabelRequestsDto} [whiteLabelRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsRebrandingApi
+     * @memberof RebrandingApi
      */
     public saveWhiteLabelLogoText(isDark?: boolean, isDefault?: boolean, whiteLabelRequestsDto?: WhiteLabelRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsRebrandingApiFp(this.configuration).saveWhiteLabelLogoText(isDark, isDefault, whiteLabelRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return RebrandingApiFp(this.configuration).saveWhiteLabelLogoText(isDark, isDefault, whiteLabelRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1691,10 +1691,10 @@ export class SettingsRebrandingApi extends BaseAPI {
      * @param {WhiteLabelRequestsDto} [whiteLabelRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsRebrandingApi
+     * @memberof RebrandingApi
      */
     public saveWhiteLabelSettings(isDark?: boolean, isDefault?: boolean, whiteLabelRequestsDto?: WhiteLabelRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsRebrandingApiFp(this.configuration).saveWhiteLabelSettings(isDark, isDefault, whiteLabelRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return RebrandingApiFp(this.configuration).saveWhiteLabelSettings(isDark, isDefault, whiteLabelRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1704,10 +1704,10 @@ export class SettingsRebrandingApi extends BaseAPI {
      * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsRebrandingApi
+     * @memberof RebrandingApi
      */
     public saveWhiteLabelSettingsFromFiles(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig) {
-        return SettingsRebrandingApiFp(this.configuration).saveWhiteLabelSettingsFromFiles(isDark, isDefault, options).then((request) => request(this.axios, this.basePath));
+        return RebrandingApiFp(this.configuration).saveWhiteLabelSettingsFromFiles(isDark, isDefault, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

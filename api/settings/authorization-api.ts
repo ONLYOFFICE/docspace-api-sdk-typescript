@@ -31,10 +31,10 @@ import type { AuthServiceRequestsDto } from '../../models';
 // @ts-ignore
 import type { BooleanWrapper } from '../../models';
 /**
- * SettingsAuthorizationApi - axios parameter creator
+ * AuthorizationApi - axios parameter creator
  * @export
  */
-export const SettingsAuthorizationApiAxiosParamCreator = function (configuration?: Configuration) {
+export const AuthorizationApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Returns the authorization services.
@@ -146,11 +146,11 @@ export const SettingsAuthorizationApiAxiosParamCreator = function (configuration
 };
 
 /**
- * SettingsAuthorizationApi - functional programming interface
+ * AuthorizationApi - functional programming interface
  * @export
  */
-export const SettingsAuthorizationApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SettingsAuthorizationApiAxiosParamCreator(configuration)
+export const AuthorizationApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AuthorizationApiAxiosParamCreator(configuration)
     return {
         /**
          * Returns the authorization services.
@@ -163,7 +163,7 @@ export const SettingsAuthorizationApiFp = function(configuration?: Configuration
         async getAuthServices(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthServiceRequestsArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAuthServices(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsAuthorizationApi.getAuthServices']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuthorizationApi.getAuthServices']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -178,18 +178,18 @@ export const SettingsAuthorizationApiFp = function(configuration?: Configuration
         async saveAuthKeys(authServiceRequestsDto?: AuthServiceRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.saveAuthKeys(authServiceRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsAuthorizationApi.saveAuthKeys']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuthorizationApi.saveAuthKeys']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * SettingsAuthorizationApi - factory interface
+ * AuthorizationApi - factory interface
  * @export
  */
-export const SettingsAuthorizationApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SettingsAuthorizationApiFp(configuration)
+export const AuthorizationApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AuthorizationApiFp(configuration)
     return {
         /**
          * Returns the authorization services.
@@ -218,21 +218,21 @@ export const SettingsAuthorizationApiFactory = function (configuration?: Configu
 };
 
 /**
- * SettingsAuthorizationApi - object-oriented interface
+ * AuthorizationApi - object-oriented interface
  * @export
- * @class SettingsAuthorizationApi
+ * @class AuthorizationApi
  * @extends {BaseAPI}
  */
-export class SettingsAuthorizationApi extends BaseAPI {
+export class AuthorizationApi extends BaseAPI {
     /**
      * Returns the authorization services.
      * @summary Get the authorization services
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsAuthorizationApi
+     * @memberof AuthorizationApi
      */
     public getAuthServices(options?: RawAxiosRequestConfig) {
-        return SettingsAuthorizationApiFp(this.configuration).getAuthServices(options).then((request) => request(this.axios, this.basePath));
+        return AuthorizationApiFp(this.configuration).getAuthServices(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -241,10 +241,10 @@ export class SettingsAuthorizationApi extends BaseAPI {
      * @param {AuthServiceRequestsDto} [authServiceRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsAuthorizationApi
+     * @memberof AuthorizationApi
      */
     public saveAuthKeys(authServiceRequestsDto?: AuthServiceRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsAuthorizationApiFp(this.configuration).saveAuthKeys(authServiceRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return AuthorizationApiFp(this.configuration).saveAuthKeys(authServiceRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

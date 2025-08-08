@@ -21,20 +21,16 @@
 import type { EmployeeType } from './employee-type';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { ImportableApiEntity } from './importable-api-entity';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { MigratingApiFiles } from './migrating-api-files';
 
 /**
- * 
+ * @type MigratingApiUser
  * @export
- * @interface MigratingApiUser
  */
-export interface MigratingApiUser {
-    /**
-     * 
-     * @type {boolean}
-     * @memberof MigratingApiUser
-     */
-    'shouldImport'?: boolean;
+export type MigratingApiUser = ImportableApiEntity &  {
     /**
      * 
      * @type {string}
@@ -77,7 +73,6 @@ export interface MigratingApiUser {
      * @memberof MigratingApiUser
      */
     'migratingFiles'?: MigratingApiFiles;
-}
-
+};
 
 

@@ -21,7 +21,7 @@
 import type { CheckDestFolderResult } from './check-dest-folder-result';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FileEntryDto } from './file-entry-dto';
+import type { FileEntryBaseDto } from './file-entry-base-dto';
 
 /**
  * The destination folder checking information.
@@ -37,10 +37,10 @@ export interface CheckDestFolderDto {
     'result'?: CheckDestFolderResult;
     /**
      * The list of files of the destination folder.
-     * @type {Array<FileEntryDto>}
+     * @type {Array<FileEntryBaseDto>}
      * @memberof CheckDestFolderDto
      */
-    'files'?: Array<FileEntryDto> | null;
+    'files'?: Array<FileEntryBaseDto> | null;
 }
 
 

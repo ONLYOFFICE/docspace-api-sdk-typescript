@@ -18,7 +18,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { BaseBatchRequestDtoFolderIdsInner } from './base-batch-request-dto-folder-ids-inner';
+import type { BatchRequestDtoAllOfFileIds } from './batch-request-dto-all-of-file-ids';
 
 /**
  * The request parameters for changing the file owner.
@@ -28,16 +28,16 @@ import type { BaseBatchRequestDtoFolderIdsInner } from './base-batch-request-dto
 export interface ChangeOwnerRequestDto {
     /**
      * The list of folder IDs to change the owner.
-     * @type {Array<BaseBatchRequestDtoFolderIdsInner>}
+     * @type {Array<BatchRequestDtoAllOfFileIds>}
      * @memberof ChangeOwnerRequestDto
      */
-    'folderIds'?: Array<BaseBatchRequestDtoFolderIdsInner> | null;
+    'folderIds'?: Array<BatchRequestDtoAllOfFileIds> | null;
     /**
      * The list of file IDs to change the owner.
-     * @type {Array<BaseBatchRequestDtoFolderIdsInner>}
+     * @type {Array<BatchRequestDtoAllOfFileIds>}
      * @memberof ChangeOwnerRequestDto
      */
-    'fileIds'?: Array<BaseBatchRequestDtoFolderIdsInner> | null;
+    'fileIds'?: Array<BatchRequestDtoAllOfFileIds> | null;
     /**
      * The new file owner ID.
      * @type {string}

@@ -31,10 +31,10 @@ import type { CookieSettingsWrapper } from '../../models';
 // @ts-ignore
 import type { StringWrapper } from '../../models';
 /**
- * SettingsCookiesApi - axios parameter creator
+ * CookiesApi - axios parameter creator
  * @export
  */
-export const SettingsCookiesApiAxiosParamCreator = function (configuration?: Configuration) {
+export const CookiesApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Returns the cookies lifetime value in minutes.
@@ -146,11 +146,11 @@ export const SettingsCookiesApiAxiosParamCreator = function (configuration?: Con
 };
 
 /**
- * SettingsCookiesApi - functional programming interface
+ * CookiesApi - functional programming interface
  * @export
  */
-export const SettingsCookiesApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SettingsCookiesApiAxiosParamCreator(configuration)
+export const CookiesApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = CookiesApiAxiosParamCreator(configuration)
     return {
         /**
          * Returns the cookies lifetime value in minutes.
@@ -163,7 +163,7 @@ export const SettingsCookiesApiFp = function(configuration?: Configuration) {
         async getCookieSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CookieSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCookieSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCookiesApi.getCookieSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CookiesApi.getCookieSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -178,18 +178,18 @@ export const SettingsCookiesApiFp = function(configuration?: Configuration) {
         async updateCookieSettings(cookieSettingsRequestsDto?: CookieSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateCookieSettings(cookieSettingsRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCookiesApi.updateCookieSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CookiesApi.updateCookieSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * SettingsCookiesApi - factory interface
+ * CookiesApi - factory interface
  * @export
  */
-export const SettingsCookiesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SettingsCookiesApiFp(configuration)
+export const CookiesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = CookiesApiFp(configuration)
     return {
         /**
          * Returns the cookies lifetime value in minutes.
@@ -218,21 +218,21 @@ export const SettingsCookiesApiFactory = function (configuration?: Configuration
 };
 
 /**
- * SettingsCookiesApi - object-oriented interface
+ * CookiesApi - object-oriented interface
  * @export
- * @class SettingsCookiesApi
+ * @class CookiesApi
  * @extends {BaseAPI}
  */
-export class SettingsCookiesApi extends BaseAPI {
+export class CookiesApi extends BaseAPI {
     /**
      * Returns the cookies lifetime value in minutes.
      * @summary Get cookies lifetime
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsCookiesApi
+     * @memberof CookiesApi
      */
     public getCookieSettings(options?: RawAxiosRequestConfig) {
-        return SettingsCookiesApiFp(this.configuration).getCookieSettings(options).then((request) => request(this.axios, this.basePath));
+        return CookiesApiFp(this.configuration).getCookieSettings(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -241,10 +241,10 @@ export class SettingsCookiesApi extends BaseAPI {
      * @param {CookieSettingsRequestsDto} [cookieSettingsRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsCookiesApi
+     * @memberof CookiesApi
      */
     public updateCookieSettings(cookieSettingsRequestsDto?: CookieSettingsRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsCookiesApiFp(this.configuration).updateCookieSettings(cookieSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return CookiesApiFp(this.configuration).updateCookieSettings(cookieSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

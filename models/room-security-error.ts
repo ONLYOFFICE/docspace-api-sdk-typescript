@@ -18,14 +18,20 @@
 
 
 /**
- * The error type.
+ * [0 - None, 1 - Form role blocking deletion]
  * @export
  * @enum {number}
  */
 
 export const RoomSecurityError = {
-    NUMBER_0: 0,
-    NUMBER_1: 1
+    /**
+    * None
+    */
+    None: 0,
+    /**
+    * Form role blocking deletion
+    */
+    FormRoleBlockingDeletion: 1
 } as const;
 
 export type RoomSecurityError = typeof RoomSecurityError[keyof typeof RoomSecurityError];

@@ -35,10 +35,10 @@ import type { SortOrder } from '../../models';
 // @ts-ignore
 import type { UpdateMembersRequestDto } from '../../models';
 /**
- * PeopleUserStatusApi - axios parameter creator
+ * UserStatusApi - axios parameter creator
  * @export
  */
-export const PeopleUserStatusApiAxiosParamCreator = function (configuration?: Configuration) {
+export const UserStatusApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Returns a list of profiles filtered by the user status.
@@ -252,11 +252,11 @@ export const PeopleUserStatusApiAxiosParamCreator = function (configuration?: Co
 };
 
 /**
- * PeopleUserStatusApi - functional programming interface
+ * UserStatusApi - functional programming interface
  * @export
  */
-export const PeopleUserStatusApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = PeopleUserStatusApiAxiosParamCreator(configuration)
+export const UserStatusApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = UserStatusApiAxiosParamCreator(configuration)
     return {
         /**
          * Returns a list of profiles filtered by the user status.
@@ -277,7 +277,7 @@ export const PeopleUserStatusApiFp = function(configuration?: Configuration) {
         async getByStatus(status: EmployeeStatus, filterBy?: string, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getByStatus(status, filterBy, count, startIndex, sortBy, sortOrder, filterSeparator, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleUserStatusApi.getByStatus']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['UserStatusApi.getByStatus']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -293,7 +293,7 @@ export const PeopleUserStatusApiFp = function(configuration?: Configuration) {
         async updateUserActivationStatus(activationstatus: EmployeeActivationStatus, updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateUserActivationStatus(activationstatus, updateMembersRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleUserStatusApi.updateUserActivationStatus']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['UserStatusApi.updateUserActivationStatus']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -309,18 +309,18 @@ export const PeopleUserStatusApiFp = function(configuration?: Configuration) {
         async updateUserStatus(status: EmployeeStatus, updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateUserStatus(status, updateMembersRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleUserStatusApi.updateUserStatus']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['UserStatusApi.updateUserStatus']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * PeopleUserStatusApi - factory interface
+ * UserStatusApi - factory interface
  * @export
  */
-export const PeopleUserStatusApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = PeopleUserStatusApiFp(configuration)
+export const UserStatusApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = UserStatusApiFp(configuration)
     return {
         /**
          * Returns a list of profiles filtered by the user status.
@@ -371,12 +371,12 @@ export const PeopleUserStatusApiFactory = function (configuration?: Configuratio
 };
 
 /**
- * PeopleUserStatusApi - object-oriented interface
+ * UserStatusApi - object-oriented interface
  * @export
- * @class PeopleUserStatusApi
+ * @class UserStatusApi
  * @extends {BaseAPI}
  */
-export class PeopleUserStatusApi extends BaseAPI {
+export class UserStatusApi extends BaseAPI {
     /**
      * Returns a list of profiles filtered by the user status.
      * @summary Get profiles by status
@@ -390,10 +390,10 @@ export class PeopleUserStatusApi extends BaseAPI {
      * @param {string} [filterValue] A string value representing additional filter criteria used in query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleUserStatusApi
+     * @memberof UserStatusApi
      */
     public getByStatus(status: EmployeeStatus, filterBy?: string, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig) {
-        return PeopleUserStatusApiFp(this.configuration).getByStatus(status, filterBy, count, startIndex, sortBy, sortOrder, filterSeparator, filterValue, options).then((request) => request(this.axios, this.basePath));
+        return UserStatusApiFp(this.configuration).getByStatus(status, filterBy, count, startIndex, sortBy, sortOrder, filterSeparator, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -403,10 +403,10 @@ export class PeopleUserStatusApi extends BaseAPI {
      * @param {UpdateMembersRequestDto} [updateMembersRequestDto] The request parameters for updating the user information.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleUserStatusApi
+     * @memberof UserStatusApi
      */
     public updateUserActivationStatus(activationstatus: EmployeeActivationStatus, updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig) {
-        return PeopleUserStatusApiFp(this.configuration).updateUserActivationStatus(activationstatus, updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return UserStatusApiFp(this.configuration).updateUserActivationStatus(activationstatus, updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -416,10 +416,10 @@ export class PeopleUserStatusApi extends BaseAPI {
      * @param {UpdateMembersRequestDto} [updateMembersRequestDto] The request parameters for updating the user information.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleUserStatusApi
+     * @memberof UserStatusApi
      */
     public updateUserStatus(status: EmployeeStatus, updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig) {
-        return PeopleUserStatusApiFp(this.configuration).updateUserStatus(status, updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return UserStatusApiFp(this.configuration).updateUserStatus(status, updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

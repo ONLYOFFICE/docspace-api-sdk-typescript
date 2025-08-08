@@ -1,11 +1,11 @@
 # RoomSecurityError
 
-The error type.
+[0 - None, 1 - Form role blocking deletion]
 
 ## Enum
 
-* `NUMBER_0` (value: `0`)
+* `None` (value: `0`)
 
-* `NUMBER_1` (value: `1`)
+* `FormRoleBlockingDeletion` (value: `1`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -16,36 +16,22 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { TenantEntityQuotaSettings } from './tenant-entity-quota-settings';
 
 /**
+ * @type TenantUserQuotaSettings
  * The user quota settings.
  * @export
- * @interface TenantUserQuotaSettings
  */
-export interface TenantUserQuotaSettings {
-    /**
-     * Specifies if the quota is enabled for the tenant entity or not.
-     * @type {boolean}
-     * @memberof TenantUserQuotaSettings
-     */
-    'enableQuota'?: boolean;
-    /**
-     * The default quota of the tenant entity.
-     * @type {number}
-     * @memberof TenantUserQuotaSettings
-     */
-    'defaultQuota'?: number;
-    /**
-     * The date of the last quota recalculation.
-     * @type {string}
-     * @memberof TenantUserQuotaSettings
-     */
-    'lastRecalculateDate'?: string | null;
+export type TenantUserQuotaSettings = TenantEntityQuotaSettings &  {
     /**
      * 
      * @type {string}
      * @memberof TenantUserQuotaSettings
      */
     'lastModified'?: string;
-}
+};
+
 

@@ -18,25 +18,64 @@
 
 
 /**
- * 
+ * [0 - Facebook, 1 - Google, 2 - Dropbox, 3 - Docusign, 4 - Box, 5 - OneDrive, 6 - GosUslugi, 7 - LinkedIn, 8 - MailRu, 9 - VK, 10 - Wordpress, 11 - Yahoo, 12 - Yandex]
  * @export
  * @enum {number}
  */
 
 export const LoginProvider = {
-    NUMBER_0: 0,
-    NUMBER_1: 1,
-    NUMBER_2: 2,
-    NUMBER_3: 3,
-    NUMBER_4: 4,
-    NUMBER_5: 5,
-    NUMBER_6: 6,
-    NUMBER_7: 7,
-    NUMBER_8: 8,
-    NUMBER_9: 9,
-    NUMBER_10: 10,
-    NUMBER_11: 11,
-    NUMBER_12: 12
+    /**
+    * Facebook
+    */
+    Facebook: 0,
+    /**
+    * Google
+    */
+    Google: 1,
+    /**
+    * Dropbox
+    */
+    Dropbox: 2,
+    /**
+    * Docusign
+    */
+    Docusign: 3,
+    /**
+    * Box
+    */
+    Box: 4,
+    /**
+    * OneDrive
+    */
+    OneDrive: 5,
+    /**
+    * GosUslugi
+    */
+    GosUslugi: 6,
+    /**
+    * LinkedIn
+    */
+    LinkedIn: 7,
+    /**
+    * MailRu
+    */
+    MailRu: 8,
+    /**
+    * VK
+    */
+    VK: 9,
+    /**
+    * Wordpress
+    */
+    Wordpress: 10,
+    /**
+    * Yahoo
+    */
+    Yahoo: 11,
+    /**
+    * Yandex
+    */
+    Yandex: 12
 } as const;
 
 export type LoginProvider = typeof LoginProvider[keyof typeof LoginProvider];

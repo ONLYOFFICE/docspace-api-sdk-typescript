@@ -27,10 +27,10 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { StringWrapper } from '../../models';
 /**
- * SecurityOAuth2Api - axios parameter creator
+ * OAuth2Api - axios parameter creator
  * @export
  */
-export const SecurityOAuth2ApiAxiosParamCreator = function (configuration?: Configuration) {
+export const OAuth2ApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Generates a JWT token for communication between login (client) and identity services.
@@ -87,11 +87,11 @@ export const SecurityOAuth2ApiAxiosParamCreator = function (configuration?: Conf
 };
 
 /**
- * SecurityOAuth2Api - functional programming interface
+ * OAuth2Api - functional programming interface
  * @export
  */
-export const SecurityOAuth2ApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SecurityOAuth2ApiAxiosParamCreator(configuration)
+export const OAuth2ApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = OAuth2ApiAxiosParamCreator(configuration)
     return {
         /**
          * Generates a JWT token for communication between login (client) and identity services.
@@ -104,18 +104,18 @@ export const SecurityOAuth2ApiFp = function(configuration?: Configuration) {
         async generateJwtToken(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.generateJwtToken(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SecurityOAuth2Api.generateJwtToken']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['OAuth2Api.generateJwtToken']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * SecurityOAuth2Api - factory interface
+ * OAuth2Api - factory interface
  * @export
  */
-export const SecurityOAuth2ApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SecurityOAuth2ApiFp(configuration)
+export const OAuth2ApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = OAuth2ApiFp(configuration)
     return {
         /**
          * Generates a JWT token for communication between login (client) and identity services.
@@ -132,21 +132,21 @@ export const SecurityOAuth2ApiFactory = function (configuration?: Configuration,
 };
 
 /**
- * SecurityOAuth2Api - object-oriented interface
+ * OAuth2Api - object-oriented interface
  * @export
- * @class SecurityOAuth2Api
+ * @class OAuth2Api
  * @extends {BaseAPI}
  */
-export class SecurityOAuth2Api extends BaseAPI {
+export class OAuth2Api extends BaseAPI {
     /**
      * Generates a JWT token for communication between login (client) and identity services.
      * @summary Generate JWT token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SecurityOAuth2Api
+     * @memberof OAuth2Api
      */
     public generateJwtToken(options?: RawAxiosRequestConfig) {
-        return SecurityOAuth2ApiFp(this.configuration).generateJwtToken(options).then((request) => request(this.axios, this.basePath));
+        return OAuth2ApiFp(this.configuration).generateJwtToken(options).then((request) => request(this.axios, this.basePath));
     }
 }
 

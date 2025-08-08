@@ -27,10 +27,10 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { TenantBannerSettingsWrapper } from '../../models';
 /**
- * SettingsBannersVisibilityApi - axios parameter creator
+ * BannersVisibilityApi - axios parameter creator
  * @export
  */
-export const SettingsBannersVisibilityApiAxiosParamCreator = function (configuration?: Configuration) {
+export const BannersVisibilityApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Returns the promotional banners visibility settings settings for the portal.
@@ -87,11 +87,11 @@ export const SettingsBannersVisibilityApiAxiosParamCreator = function (configura
 };
 
 /**
- * SettingsBannersVisibilityApi - functional programming interface
+ * BannersVisibilityApi - functional programming interface
  * @export
  */
-export const SettingsBannersVisibilityApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SettingsBannersVisibilityApiAxiosParamCreator(configuration)
+export const BannersVisibilityApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = BannersVisibilityApiAxiosParamCreator(configuration)
     return {
         /**
          * Returns the promotional banners visibility settings settings for the portal.
@@ -104,18 +104,18 @@ export const SettingsBannersVisibilityApiFp = function(configuration?: Configura
         async getTenantBannerSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantBannerSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTenantBannerSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsBannersVisibilityApi.getTenantBannerSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['BannersVisibilityApi.getTenantBannerSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * SettingsBannersVisibilityApi - factory interface
+ * BannersVisibilityApi - factory interface
  * @export
  */
-export const SettingsBannersVisibilityApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SettingsBannersVisibilityApiFp(configuration)
+export const BannersVisibilityApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = BannersVisibilityApiFp(configuration)
     return {
         /**
          * Returns the promotional banners visibility settings settings for the portal.
@@ -132,21 +132,21 @@ export const SettingsBannersVisibilityApiFactory = function (configuration?: Con
 };
 
 /**
- * SettingsBannersVisibilityApi - object-oriented interface
+ * BannersVisibilityApi - object-oriented interface
  * @export
- * @class SettingsBannersVisibilityApi
+ * @class BannersVisibilityApi
  * @extends {BaseAPI}
  */
-export class SettingsBannersVisibilityApi extends BaseAPI {
+export class BannersVisibilityApi extends BaseAPI {
     /**
      * Returns the promotional banners visibility settings settings for the portal.
      * @summary Get the promotional banners visibility settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsBannersVisibilityApi
+     * @memberof BannersVisibilityApi
      */
     public getTenantBannerSettings(options?: RawAxiosRequestConfig) {
-        return SettingsBannersVisibilityApiFp(this.configuration).getTenantBannerSettings(options).then((request) => request(this.axios, this.basePath));
+        return BannersVisibilityApiFp(this.configuration).getTenantBannerSettings(options).then((request) => request(this.axios, this.basePath));
     }
 }
 

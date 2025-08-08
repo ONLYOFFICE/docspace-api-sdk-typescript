@@ -45,10 +45,10 @@ import type { StringWrapper } from '../../models';
 // @ts-ignore
 import type { TenantAuditSettingsWrapper } from '../../models';
 /**
- * SecurityAuditTrailDataApi - axios parameter creator
+ * AuditTrailDataApi - axios parameter creator
  * @export
  */
-export const SecurityAuditTrailDataApiAxiosParamCreator = function (configuration?: Configuration) {
+export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Generates the audit trail report.
@@ -451,11 +451,11 @@ export const SecurityAuditTrailDataApiAxiosParamCreator = function (configuratio
 };
 
 /**
- * SecurityAuditTrailDataApi - functional programming interface
+ * AuditTrailDataApi - functional programming interface
  * @export
  */
-export const SecurityAuditTrailDataApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SecurityAuditTrailDataApiAxiosParamCreator(configuration)
+export const AuditTrailDataApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AuditTrailDataApiAxiosParamCreator(configuration)
     return {
         /**
          * Generates the audit trail report.
@@ -468,7 +468,7 @@ export const SecurityAuditTrailDataApiFp = function(configuration?: Configuratio
         async createAuditTrailReport(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createAuditTrailReport(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SecurityAuditTrailDataApi.createAuditTrailReport']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuditTrailDataApi.createAuditTrailReport']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -494,7 +494,7 @@ export const SecurityAuditTrailDataApiFp = function(configuration?: Configuratio
         async getAuditEventsByFilter(userId?: string, productType?: ProductType, moduleType?: ModuleType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, fields?: string | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuditEventArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAuditEventsByFilter(userId, productType, moduleType, actionType, action, entryType, target, from, to, count, startIndex, fields, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SecurityAuditTrailDataApi.getAuditEventsByFilter']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuditTrailDataApi.getAuditEventsByFilter']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -508,7 +508,7 @@ export const SecurityAuditTrailDataApiFp = function(configuration?: Configuratio
         async getAuditSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantAuditSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAuditSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SecurityAuditTrailDataApi.getAuditSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuditTrailDataApi.getAuditSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -524,7 +524,7 @@ export const SecurityAuditTrailDataApiFp = function(configuration?: Configuratio
         async getAuditTrailMappers(productType?: ProductType, moduleType?: ModuleType, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAuditTrailMappers(productType, moduleType, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SecurityAuditTrailDataApi.getAuditTrailMappers']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuditTrailDataApi.getAuditTrailMappers']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -538,7 +538,7 @@ export const SecurityAuditTrailDataApiFp = function(configuration?: Configuratio
         async getAuditTrailTypes(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAuditTrailTypes(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SecurityAuditTrailDataApi.getAuditTrailTypes']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuditTrailDataApi.getAuditTrailTypes']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -552,7 +552,7 @@ export const SecurityAuditTrailDataApiFp = function(configuration?: Configuratio
         async getLastAuditEvents(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuditEventArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getLastAuditEvents(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SecurityAuditTrailDataApi.getLastAuditEvents']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuditTrailDataApi.getLastAuditEvents']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -567,18 +567,18 @@ export const SecurityAuditTrailDataApiFp = function(configuration?: Configuratio
         async setAuditSettings(tenantAuditSettingsWrapper?: TenantAuditSettingsWrapper, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantAuditSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setAuditSettings(tenantAuditSettingsWrapper, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SecurityAuditTrailDataApi.setAuditSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuditTrailDataApi.setAuditSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * SecurityAuditTrailDataApi - factory interface
+ * AuditTrailDataApi - factory interface
  * @export
  */
-export const SecurityAuditTrailDataApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SecurityAuditTrailDataApiFp(configuration)
+export const AuditTrailDataApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AuditTrailDataApiFp(configuration)
     return {
         /**
          * Generates the audit trail report.
@@ -676,21 +676,21 @@ export const SecurityAuditTrailDataApiFactory = function (configuration?: Config
 };
 
 /**
- * SecurityAuditTrailDataApi - object-oriented interface
+ * AuditTrailDataApi - object-oriented interface
  * @export
- * @class SecurityAuditTrailDataApi
+ * @class AuditTrailDataApi
  * @extends {BaseAPI}
  */
-export class SecurityAuditTrailDataApi extends BaseAPI {
+export class AuditTrailDataApi extends BaseAPI {
     /**
      * Generates the audit trail report.
      * @summary Generate the audit trail report
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SecurityAuditTrailDataApi
+     * @memberof AuditTrailDataApi
      */
     public createAuditTrailReport(options?: RawAxiosRequestConfig) {
-        return SecurityAuditTrailDataApiFp(this.configuration).createAuditTrailReport(options).then((request) => request(this.axios, this.basePath));
+        return AuditTrailDataApiFp(this.configuration).createAuditTrailReport(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -710,10 +710,10 @@ export class SecurityAuditTrailDataApi extends BaseAPI {
      * @param {string | null} [fields] Comma-separated list of fields to include in the response
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SecurityAuditTrailDataApi
+     * @memberof AuditTrailDataApi
      */
     public getAuditEventsByFilter(userId?: string, productType?: ProductType, moduleType?: ModuleType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, fields?: string | null, options?: RawAxiosRequestConfig) {
-        return SecurityAuditTrailDataApiFp(this.configuration).getAuditEventsByFilter(userId, productType, moduleType, actionType, action, entryType, target, from, to, count, startIndex, fields, options).then((request) => request(this.axios, this.basePath));
+        return AuditTrailDataApiFp(this.configuration).getAuditEventsByFilter(userId, productType, moduleType, actionType, action, entryType, target, from, to, count, startIndex, fields, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -721,10 +721,10 @@ export class SecurityAuditTrailDataApi extends BaseAPI {
      * @summary Get the audit trail settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SecurityAuditTrailDataApi
+     * @memberof AuditTrailDataApi
      */
     public getAuditSettings(options?: RawAxiosRequestConfig) {
-        return SecurityAuditTrailDataApiFp(this.configuration).getAuditSettings(options).then((request) => request(this.axios, this.basePath));
+        return AuditTrailDataApiFp(this.configuration).getAuditSettings(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -734,10 +734,10 @@ export class SecurityAuditTrailDataApi extends BaseAPI {
      * @param {ModuleType} [moduleType] The module within the product associated with the audit trail.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SecurityAuditTrailDataApi
+     * @memberof AuditTrailDataApi
      */
     public getAuditTrailMappers(productType?: ProductType, moduleType?: ModuleType, options?: RawAxiosRequestConfig) {
-        return SecurityAuditTrailDataApiFp(this.configuration).getAuditTrailMappers(productType, moduleType, options).then((request) => request(this.axios, this.basePath));
+        return AuditTrailDataApiFp(this.configuration).getAuditTrailMappers(productType, moduleType, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -745,10 +745,10 @@ export class SecurityAuditTrailDataApi extends BaseAPI {
      * @summary Get audit trail types
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SecurityAuditTrailDataApi
+     * @memberof AuditTrailDataApi
      */
     public getAuditTrailTypes(options?: RawAxiosRequestConfig) {
-        return SecurityAuditTrailDataApiFp(this.configuration).getAuditTrailTypes(options).then((request) => request(this.axios, this.basePath));
+        return AuditTrailDataApiFp(this.configuration).getAuditTrailTypes(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -756,10 +756,10 @@ export class SecurityAuditTrailDataApi extends BaseAPI {
      * @summary Get audit trail data
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SecurityAuditTrailDataApi
+     * @memberof AuditTrailDataApi
      */
     public getLastAuditEvents(options?: RawAxiosRequestConfig) {
-        return SecurityAuditTrailDataApiFp(this.configuration).getLastAuditEvents(options).then((request) => request(this.axios, this.basePath));
+        return AuditTrailDataApiFp(this.configuration).getLastAuditEvents(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -768,10 +768,10 @@ export class SecurityAuditTrailDataApi extends BaseAPI {
      * @param {TenantAuditSettingsWrapper} [tenantAuditSettingsWrapper] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SecurityAuditTrailDataApi
+     * @memberof AuditTrailDataApi
      */
     public setAuditSettings(tenantAuditSettingsWrapper?: TenantAuditSettingsWrapper, options?: RawAxiosRequestConfig) {
-        return SecurityAuditTrailDataApiFp(this.configuration).setAuditSettings(tenantAuditSettingsWrapper, options).then((request) => request(this.axios, this.basePath));
+        return AuditTrailDataApiFp(this.configuration).setAuditSettings(tenantAuditSettingsWrapper, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -33,10 +33,10 @@ import type { MessageAction } from '../../models';
 // @ts-ignore
 import type { StringWrapper } from '../../models';
 /**
- * SecurityLoginHistoryApi - axios parameter creator
+ * LoginHistoryApi - axios parameter creator
  * @export
  */
-export const SecurityLoginHistoryApiAxiosParamCreator = function (configuration?: Configuration) {
+export const LoginHistoryApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Generates the login history report.
@@ -234,11 +234,11 @@ export const SecurityLoginHistoryApiAxiosParamCreator = function (configuration?
 };
 
 /**
- * SecurityLoginHistoryApi - functional programming interface
+ * LoginHistoryApi - functional programming interface
  * @export
  */
-export const SecurityLoginHistoryApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SecurityLoginHistoryApiAxiosParamCreator(configuration)
+export const LoginHistoryApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = LoginHistoryApiAxiosParamCreator(configuration)
     return {
         /**
          * Generates the login history report.
@@ -251,7 +251,7 @@ export const SecurityLoginHistoryApiFp = function(configuration?: Configuration)
         async createLoginHistoryReport(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createLoginHistoryReport(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SecurityLoginHistoryApi.createLoginHistoryReport']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['LoginHistoryApi.createLoginHistoryReport']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -265,7 +265,7 @@ export const SecurityLoginHistoryApiFp = function(configuration?: Configuration)
         async getLastLoginEvents(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoginEventArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getLastLoginEvents(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SecurityLoginHistoryApi.getLastLoginEvents']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['LoginHistoryApi.getLastLoginEvents']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -286,18 +286,18 @@ export const SecurityLoginHistoryApiFp = function(configuration?: Configuration)
         async getLoginEventsByFilter(userId?: string, action?: MessageAction, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, fields?: string | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoginEventArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getLoginEventsByFilter(userId, action, from, to, count, startIndex, fields, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SecurityLoginHistoryApi.getLoginEventsByFilter']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['LoginHistoryApi.getLoginEventsByFilter']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * SecurityLoginHistoryApi - factory interface
+ * LoginHistoryApi - factory interface
  * @export
  */
-export const SecurityLoginHistoryApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SecurityLoginHistoryApiFp(configuration)
+export const LoginHistoryApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = LoginHistoryApiFp(configuration)
     return {
         /**
          * Generates the login history report.
@@ -343,21 +343,21 @@ export const SecurityLoginHistoryApiFactory = function (configuration?: Configur
 };
 
 /**
- * SecurityLoginHistoryApi - object-oriented interface
+ * LoginHistoryApi - object-oriented interface
  * @export
- * @class SecurityLoginHistoryApi
+ * @class LoginHistoryApi
  * @extends {BaseAPI}
  */
-export class SecurityLoginHistoryApi extends BaseAPI {
+export class LoginHistoryApi extends BaseAPI {
     /**
      * Generates the login history report.
      * @summary Generate the login history report
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SecurityLoginHistoryApi
+     * @memberof LoginHistoryApi
      */
     public createLoginHistoryReport(options?: RawAxiosRequestConfig) {
-        return SecurityLoginHistoryApiFp(this.configuration).createLoginHistoryReport(options).then((request) => request(this.axios, this.basePath));
+        return LoginHistoryApiFp(this.configuration).createLoginHistoryReport(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -365,10 +365,10 @@ export class SecurityLoginHistoryApi extends BaseAPI {
      * @summary Get login history
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SecurityLoginHistoryApi
+     * @memberof LoginHistoryApi
      */
     public getLastLoginEvents(options?: RawAxiosRequestConfig) {
-        return SecurityLoginHistoryApiFp(this.configuration).getLastLoginEvents(options).then((request) => request(this.axios, this.basePath));
+        return LoginHistoryApiFp(this.configuration).getLastLoginEvents(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -383,10 +383,10 @@ export class SecurityLoginHistoryApi extends BaseAPI {
      * @param {string | null} [fields] Comma-separated list of fields to include in the response
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SecurityLoginHistoryApi
+     * @memberof LoginHistoryApi
      */
     public getLoginEventsByFilter(userId?: string, action?: MessageAction, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, fields?: string | null, options?: RawAxiosRequestConfig) {
-        return SecurityLoginHistoryApiFp(this.configuration).getLoginEventsByFilter(userId, action, from, to, count, startIndex, fields, options).then((request) => request(this.axios, this.basePath));
+        return LoginHistoryApiFp(this.configuration).getLoginEventsByFilter(userId, action, from, to, count, startIndex, fields, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -18,31 +18,32 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { BaseBatchRequestDtoFolderIdsInner } from './base-batch-request-dto-folder-ids-inner';
+import type { BaseBatchRequestDtoAllOfFileIds } from './base-batch-request-dto-all-of-file-ids';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { BaseBatchRequestDtoAllOfFolderIds } from './base-batch-request-dto-all-of-folder-ids';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { FileOperationRequestBaseDto } from './file-operation-request-base-dto';
 
 /**
+ * @type BaseBatchRequestDto
  * The base batch request parameters.
  * @export
- * @interface BaseBatchRequestDto
  */
-export interface BaseBatchRequestDto {
-    /**
-     * Specifies whether to return only the current operation
-     * @type {boolean}
-     * @memberof BaseBatchRequestDto
-     */
-    'returnSingleOperation'?: boolean;
+export type BaseBatchRequestDto = FileOperationRequestBaseDto &  {
     /**
      * The list of folder IDs of the base batch request.
-     * @type {Array<BaseBatchRequestDtoFolderIdsInner>}
+     * @type {Array<BaseBatchRequestDtoAllOfFolderIds>}
      * @memberof BaseBatchRequestDto
      */
-    'folderIds'?: Array<BaseBatchRequestDtoFolderIdsInner> | null;
+    'folderIds'?: Array<BaseBatchRequestDtoAllOfFolderIds> | null;
     /**
      * The list of file IDs of the base batch request.
-     * @type {Array<BaseBatchRequestDtoFolderIdsInner>}
+     * @type {Array<BaseBatchRequestDtoAllOfFileIds>}
      * @memberof BaseBatchRequestDto
      */
-    'fileIds'?: Array<BaseBatchRequestDtoFolderIdsInner> | null;
-}
+    'fileIds'?: Array<BaseBatchRequestDtoAllOfFileIds> | null;
+};
+
 

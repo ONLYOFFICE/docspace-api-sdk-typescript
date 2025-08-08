@@ -1,15 +1,15 @@
 # ProductQuantityType
 
-The product quantity type.
+[0 - Set, 1 - Add, 2 - Sub, 3 - Renew]
 
 ## Enum
 
-* `NUMBER_0` (value: `0`)
+* `Set` (value: `0`)
 
-* `NUMBER_1` (value: `1`)
+* `Add` (value: `1`)
 
-* `NUMBER_2` (value: `2`)
+* `Sub` (value: `2`)
 
-* `NUMBER_3` (value: `3`)
+* `Renew` (value: `3`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

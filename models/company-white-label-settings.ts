@@ -60,6 +60,12 @@ export interface CompanyWhiteLabelSettings {
      */
     'IsLicensor'?: boolean;
     /**
+     * Specifies if the About page is visible or not
+     * @type {boolean}
+     * @memberof CompanyWhiteLabelSettings
+     */
+    'hideAbout'?: boolean;
+    /**
      * 
      * @type {string}
      * @memberof CompanyWhiteLabelSettings

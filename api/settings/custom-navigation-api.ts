@@ -31,10 +31,10 @@ import type { CustomNavigationItemArrayWrapper } from '../../models';
 // @ts-ignore
 import type { CustomNavigationItemWrapper } from '../../models';
 /**
- * SettingsCustomNavigationApi - axios parameter creator
+ * CustomNavigationApi - axios parameter creator
  * @export
  */
-export const SettingsCustomNavigationApiAxiosParamCreator = function (configuration?: Configuration) {
+export const CustomNavigationApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Adds a custom navigation item with the parameters specified in the request.
@@ -307,11 +307,11 @@ export const SettingsCustomNavigationApiAxiosParamCreator = function (configurat
 };
 
 /**
- * SettingsCustomNavigationApi - functional programming interface
+ * CustomNavigationApi - functional programming interface
  * @export
  */
-export const SettingsCustomNavigationApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SettingsCustomNavigationApiAxiosParamCreator(configuration)
+export const CustomNavigationApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = CustomNavigationApiAxiosParamCreator(configuration)
     return {
         /**
          * Adds a custom navigation item with the parameters specified in the request.
@@ -325,7 +325,7 @@ export const SettingsCustomNavigationApiFp = function(configuration?: Configurat
         async createCustomNavigationItem(customNavigationItem?: CustomNavigationItem, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomNavigationItemWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createCustomNavigationItem(customNavigationItem, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCustomNavigationApi.createCustomNavigationItem']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CustomNavigationApi.createCustomNavigationItem']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -340,7 +340,7 @@ export const SettingsCustomNavigationApiFp = function(configuration?: Configurat
         async deleteCustomNavigationItem(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteCustomNavigationItem(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCustomNavigationApi.deleteCustomNavigationItem']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CustomNavigationApi.deleteCustomNavigationItem']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -355,7 +355,7 @@ export const SettingsCustomNavigationApiFp = function(configuration?: Configurat
         async getCustomNavigationItem(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomNavigationItemWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCustomNavigationItem(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCustomNavigationApi.getCustomNavigationItem']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CustomNavigationApi.getCustomNavigationItem']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -369,7 +369,7 @@ export const SettingsCustomNavigationApiFp = function(configuration?: Configurat
         async getCustomNavigationItemSample(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomNavigationItemWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCustomNavigationItemSample(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCustomNavigationApi.getCustomNavigationItemSample']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CustomNavigationApi.getCustomNavigationItemSample']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -383,18 +383,18 @@ export const SettingsCustomNavigationApiFp = function(configuration?: Configurat
         async getCustomNavigationItems(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomNavigationItemArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCustomNavigationItems(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCustomNavigationApi.getCustomNavigationItems']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CustomNavigationApi.getCustomNavigationItems']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * SettingsCustomNavigationApi - factory interface
+ * CustomNavigationApi - factory interface
  * @export
  */
-export const SettingsCustomNavigationApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SettingsCustomNavigationApiFp(configuration)
+export const CustomNavigationApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = CustomNavigationApiFp(configuration)
     return {
         /**
          * Adds a custom navigation item with the parameters specified in the request.
@@ -458,22 +458,22 @@ export const SettingsCustomNavigationApiFactory = function (configuration?: Conf
 };
 
 /**
- * SettingsCustomNavigationApi - object-oriented interface
+ * CustomNavigationApi - object-oriented interface
  * @export
- * @class SettingsCustomNavigationApi
+ * @class CustomNavigationApi
  * @extends {BaseAPI}
  */
-export class SettingsCustomNavigationApi extends BaseAPI {
+export class CustomNavigationApi extends BaseAPI {
     /**
      * Adds a custom navigation item with the parameters specified in the request.
      * @summary Add a custom navigation item
      * @param {CustomNavigationItem} [customNavigationItem] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsCustomNavigationApi
+     * @memberof CustomNavigationApi
      */
     public createCustomNavigationItem(customNavigationItem?: CustomNavigationItem, options?: RawAxiosRequestConfig) {
-        return SettingsCustomNavigationApiFp(this.configuration).createCustomNavigationItem(customNavigationItem, options).then((request) => request(this.axios, this.basePath));
+        return CustomNavigationApiFp(this.configuration).createCustomNavigationItem(customNavigationItem, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -482,10 +482,10 @@ export class SettingsCustomNavigationApi extends BaseAPI {
      * @param {string} id The ID extracted from the route parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsCustomNavigationApi
+     * @memberof CustomNavigationApi
      */
     public deleteCustomNavigationItem(id: string, options?: RawAxiosRequestConfig) {
-        return SettingsCustomNavigationApiFp(this.configuration).deleteCustomNavigationItem(id, options).then((request) => request(this.axios, this.basePath));
+        return CustomNavigationApiFp(this.configuration).deleteCustomNavigationItem(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -494,10 +494,10 @@ export class SettingsCustomNavigationApi extends BaseAPI {
      * @param {string} id The ID extracted from the route parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsCustomNavigationApi
+     * @memberof CustomNavigationApi
      */
     public getCustomNavigationItem(id: string, options?: RawAxiosRequestConfig) {
-        return SettingsCustomNavigationApiFp(this.configuration).getCustomNavigationItem(id, options).then((request) => request(this.axios, this.basePath));
+        return CustomNavigationApiFp(this.configuration).getCustomNavigationItem(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -505,10 +505,10 @@ export class SettingsCustomNavigationApi extends BaseAPI {
      * @summary Get a custom navigation item sample
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsCustomNavigationApi
+     * @memberof CustomNavigationApi
      */
     public getCustomNavigationItemSample(options?: RawAxiosRequestConfig) {
-        return SettingsCustomNavigationApiFp(this.configuration).getCustomNavigationItemSample(options).then((request) => request(this.axios, this.basePath));
+        return CustomNavigationApiFp(this.configuration).getCustomNavigationItemSample(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -516,10 +516,10 @@ export class SettingsCustomNavigationApi extends BaseAPI {
      * @summary Get the custom navigation items
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsCustomNavigationApi
+     * @memberof CustomNavigationApi
      */
     public getCustomNavigationItems(options?: RawAxiosRequestConfig) {
-        return SettingsCustomNavigationApiFp(this.configuration).getCustomNavigationItems(options).then((request) => request(this.axios, this.basePath));
+        return CustomNavigationApiFp(this.configuration).getCustomNavigationItems(options).then((request) => request(this.axios, this.basePath));
     }
 }
 

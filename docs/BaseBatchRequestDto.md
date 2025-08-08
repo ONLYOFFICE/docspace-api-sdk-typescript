@@ -7,8 +7,8 @@ The base batch request parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **returnSingleOperation** | **boolean** | Specifies whether to return only the current operation | [optional] [default to undefined]
-**folderIds** | [**Array&lt;BaseBatchRequestDtoFolderIdsInner&gt;**](BaseBatchRequestDtoFolderIdsInner.md) | The list of folder IDs of the base batch request. | [optional] [default to undefined]
-**fileIds** | [**Array&lt;BaseBatchRequestDtoFolderIdsInner&gt;**](BaseBatchRequestDtoFolderIdsInner.md) | The list of file IDs of the base batch request. | [optional] [default to undefined]
+**folderIds** | [**Array&lt;BaseBatchRequestDtoAllOfFolderIds&gt;**](BaseBatchRequestDtoAllOfFolderIds.md) | The list of folder IDs of the base batch request. | [optional] [default to undefined]
+**fileIds** | [**Array&lt;BaseBatchRequestDtoAllOfFileIds&gt;**](BaseBatchRequestDtoAllOfFileIds.md) | The list of file IDs of the base batch request. | [optional] [default to undefined]
 
 ## Example
 

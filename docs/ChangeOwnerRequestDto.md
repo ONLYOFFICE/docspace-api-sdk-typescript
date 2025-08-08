@@ -6,8 +6,8 @@ The request parameters for changing the file owner.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**folderIds** | [**Array&lt;BaseBatchRequestDtoFolderIdsInner&gt;**](BaseBatchRequestDtoFolderIdsInner.md) | The list of folder IDs to change the owner. | [optional] [default to undefined]
-**fileIds** | [**Array&lt;BaseBatchRequestDtoFolderIdsInner&gt;**](BaseBatchRequestDtoFolderIdsInner.md) | The list of file IDs to change the owner. | [optional] [default to undefined]
+**folderIds** | [**Array&lt;BatchRequestDtoAllOfFileIds&gt;**](BatchRequestDtoAllOfFileIds.md) | The list of folder IDs to change the owner. | [optional] [default to undefined]
+**fileIds** | [**Array&lt;BatchRequestDtoAllOfFileIds&gt;**](BatchRequestDtoAllOfFileIds.md) | The list of file IDs to change the owner. | [optional] [default to undefined]
 **userId** | **string** | The new file owner ID. | [default to undefined]
 
 ## Example

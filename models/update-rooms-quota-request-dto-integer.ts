@@ -18,7 +18,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { BaseBatchRequestDtoFolderIdsInner } from './base-batch-request-dto-folder-ids-inner';
+import type { DuplicateRequestDtoAllOfFileIds } from './duplicate-request-dto-all-of-file-ids';
 
 /**
  * The request parameters for updating the room quota.
@@ -28,10 +28,10 @@ import type { BaseBatchRequestDtoFolderIdsInner } from './base-batch-request-dto
 export interface UpdateRoomsQuotaRequestDtoInteger {
     /**
      * The list of room IDs.
-     * @type {Array<BaseBatchRequestDtoFolderIdsInner>}
+     * @type {Array<DuplicateRequestDtoAllOfFileIds>}
      * @memberof UpdateRoomsQuotaRequestDtoInteger
      */
-    'roomIds'?: Array<BaseBatchRequestDtoFolderIdsInner> | null;
+    'roomIds'?: Array<DuplicateRequestDtoAllOfFileIds> | null;
     /**
      * The room quota.
      * @type {number}

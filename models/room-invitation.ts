@@ -18,20 +18,17 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { EmailInvitationDto } from './email-invitation-dto';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { FileShare } from './file-share';
 
 /**
+ * @type RoomInvitation
  * The room invitation parameters.
  * @export
- * @interface RoomInvitation
  */
-export interface RoomInvitation {
-    /**
-     * The email address.
-     * @type {string}
-     * @memberof RoomInvitation
-     */
-    'email'?: string | null;
+export type RoomInvitation = EmailInvitationDto &  {
     /**
      * The ID of the user to share a room with.
      * @type {string}
@@ -44,7 +41,6 @@ export interface RoomInvitation {
      * @memberof RoomInvitation
      */
     'access'?: FileShare;
-}
-
+};
 
 

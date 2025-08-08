@@ -18,14 +18,20 @@
 
 
 /**
- * 
+ * [0 - Ascending, 1 - Descending]
  * @export
  * @enum {number}
  */
 
 export const SortOrder = {
-    NUMBER_0: 0,
-    NUMBER_1: 1
+    /**
+    * Ascending
+    */
+    Ascending: 0,
+    /**
+    * Descending
+    */
+    Descending: 1
 } as const;
 
 export type SortOrder = typeof SortOrder[keyof typeof SortOrder];

@@ -29,10 +29,10 @@ import type { FireBaseUserWrapper } from '../../models';
 // @ts-ignore
 import type { FirebaseRequestsDto } from '../../models';
 /**
- * SecurityFirebaseApi - axios parameter creator
+ * FirebaseApi - axios parameter creator
  * @export
  */
-export const SecurityFirebaseApiAxiosParamCreator = function (configuration?: Configuration) {
+export const FirebaseApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Saves the Firebase device token specified in the request for the Documents application.
@@ -148,11 +148,11 @@ export const SecurityFirebaseApiAxiosParamCreator = function (configuration?: Co
 };
 
 /**
- * SecurityFirebaseApi - functional programming interface
+ * FirebaseApi - functional programming interface
  * @export
  */
-export const SecurityFirebaseApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SecurityFirebaseApiAxiosParamCreator(configuration)
+export const FirebaseApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = FirebaseApiAxiosParamCreator(configuration)
     return {
         /**
          * Saves the Firebase device token specified in the request for the Documents application.
@@ -166,7 +166,7 @@ export const SecurityFirebaseApiFp = function(configuration?: Configuration) {
         async docRegisterPusnNotificationDevice(firebaseRequestsDto?: FirebaseRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FireBaseUserWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.docRegisterPusnNotificationDevice(firebaseRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SecurityFirebaseApi.docRegisterPusnNotificationDevice']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['FirebaseApi.docRegisterPusnNotificationDevice']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -181,18 +181,18 @@ export const SecurityFirebaseApiFp = function(configuration?: Configuration) {
         async subscribeDocumentsPushNotification(firebaseRequestsDto?: FirebaseRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FireBaseUserWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.subscribeDocumentsPushNotification(firebaseRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SecurityFirebaseApi.subscribeDocumentsPushNotification']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['FirebaseApi.subscribeDocumentsPushNotification']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * SecurityFirebaseApi - factory interface
+ * FirebaseApi - factory interface
  * @export
  */
-export const SecurityFirebaseApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SecurityFirebaseApiFp(configuration)
+export const FirebaseApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = FirebaseApiFp(configuration)
     return {
         /**
          * Saves the Firebase device token specified in the request for the Documents application.
@@ -222,22 +222,22 @@ export const SecurityFirebaseApiFactory = function (configuration?: Configuratio
 };
 
 /**
- * SecurityFirebaseApi - object-oriented interface
+ * FirebaseApi - object-oriented interface
  * @export
- * @class SecurityFirebaseApi
+ * @class FirebaseApi
  * @extends {BaseAPI}
  */
-export class SecurityFirebaseApi extends BaseAPI {
+export class FirebaseApi extends BaseAPI {
     /**
      * Saves the Firebase device token specified in the request for the Documents application.
      * @summary Save the Documents Firebase device token
      * @param {FirebaseRequestsDto} [firebaseRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SecurityFirebaseApi
+     * @memberof FirebaseApi
      */
     public docRegisterPusnNotificationDevice(firebaseRequestsDto?: FirebaseRequestsDto, options?: RawAxiosRequestConfig) {
-        return SecurityFirebaseApiFp(this.configuration).docRegisterPusnNotificationDevice(firebaseRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return FirebaseApiFp(this.configuration).docRegisterPusnNotificationDevice(firebaseRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -246,10 +246,10 @@ export class SecurityFirebaseApi extends BaseAPI {
      * @param {FirebaseRequestsDto} [firebaseRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SecurityFirebaseApi
+     * @memberof FirebaseApi
      */
     public subscribeDocumentsPushNotification(firebaseRequestsDto?: FirebaseRequestsDto, options?: RawAxiosRequestConfig) {
-        return SecurityFirebaseApiFp(this.configuration).subscribeDocumentsPushNotification(firebaseRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return FirebaseApiFp(this.configuration).subscribeDocumentsPushNotification(firebaseRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -18,32 +18,32 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { BaseBatchRequestDtoFolderIdsInner } from './base-batch-request-dto-folder-ids-inner';
+import type { DeleteBatchRequestDtoAllOfFileIds } from './delete-batch-request-dto-all-of-file-ids';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { DeleteBatchRequestDtoAllOfFolderIds } from './delete-batch-request-dto-all-of-folder-ids';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { FileOperationRequestBaseDto } from './file-operation-request-base-dto';
 
 /**
+ * @type DeleteBatchRequestDto
  * The request parameters for deleting files.
  * @export
- * @interface DeleteBatchRequestDto
  */
-export interface DeleteBatchRequestDto {
-    /**
-     * Specifies whether to return only the current operation
-     * @type {boolean}
-     * @memberof DeleteBatchRequestDto
-     */
-    'returnSingleOperation'?: boolean;
+export type DeleteBatchRequestDto = FileOperationRequestBaseDto &  {
     /**
      * The list of folder IDs to be deleted.
-     * @type {Array<BaseBatchRequestDtoFolderIdsInner>}
+     * @type {Array<DeleteBatchRequestDtoAllOfFolderIds>}
      * @memberof DeleteBatchRequestDto
      */
-    'folderIds'?: Array<BaseBatchRequestDtoFolderIdsInner> | null;
+    'folderIds'?: Array<DeleteBatchRequestDtoAllOfFolderIds> | null;
     /**
      * The list of file IDs to be deleted.
-     * @type {Array<BaseBatchRequestDtoFolderIdsInner>}
+     * @type {Array<DeleteBatchRequestDtoAllOfFileIds>}
      * @memberof DeleteBatchRequestDto
      */
-    'fileIds'?: Array<BaseBatchRequestDtoFolderIdsInner> | null;
+    'fileIds'?: Array<DeleteBatchRequestDtoAllOfFileIds> | null;
     /**
      * Specifies whether to delete a file after the editing session is finished or not
      * @type {boolean}
@@ -56,5 +56,6 @@ export interface DeleteBatchRequestDto {
      * @memberof DeleteBatchRequestDto
      */
     'immediately'?: boolean;
-}
+};
+
 

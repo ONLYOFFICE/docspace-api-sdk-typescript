@@ -37,10 +37,10 @@ import type { TaskProgressResponseWrapper } from '../../models';
 // @ts-ignore
 import type { TerminateRequestDto } from '../../models';
 /**
- * PeopleUserDataApi - axios parameter creator
+ * UserDataApi - axios parameter creator
  * @export
  */
-export const PeopleUserDataApiAxiosParamCreator = function (configuration?: Configuration) {
+export const UserDataApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Returns the progress of deleting the personal folder.
@@ -590,11 +590,11 @@ export const PeopleUserDataApiAxiosParamCreator = function (configuration?: Conf
 };
 
 /**
- * PeopleUserDataApi - functional programming interface
+ * UserDataApi - functional programming interface
  * @export
  */
-export const PeopleUserDataApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = PeopleUserDataApiAxiosParamCreator(configuration)
+export const UserDataApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = UserDataApiAxiosParamCreator(configuration)
     return {
         /**
          * Returns the progress of deleting the personal folder.
@@ -607,7 +607,7 @@ export const PeopleUserDataApiFp = function(configuration?: Configuration) {
         async getDeletePersonalFolderProgress(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskProgressResponseWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getDeletePersonalFolderProgress(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleUserDataApi.getDeletePersonalFolderProgress']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['UserDataApi.getDeletePersonalFolderProgress']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -622,7 +622,7 @@ export const PeopleUserDataApiFp = function(configuration?: Configuration) {
         async getReassignProgress(userid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskProgressResponseWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getReassignProgress(userid, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleUserDataApi.getReassignProgress']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['UserDataApi.getReassignProgress']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -637,7 +637,7 @@ export const PeopleUserDataApiFp = function(configuration?: Configuration) {
         async getRemoveProgress(userid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskProgressResponseWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRemoveProgress(userid, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleUserDataApi.getRemoveProgress']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['UserDataApi.getRemoveProgress']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -653,7 +653,7 @@ export const PeopleUserDataApiFp = function(configuration?: Configuration) {
         async necessaryReassign(userId?: string, type?: EmployeeType, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.necessaryReassign(userId, type, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleUserDataApi.necessaryReassign']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['UserDataApi.necessaryReassign']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -667,7 +667,7 @@ export const PeopleUserDataApiFp = function(configuration?: Configuration) {
         async sendInstructionsToDelete(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.sendInstructionsToDelete(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleUserDataApi.sendInstructionsToDelete']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['UserDataApi.sendInstructionsToDelete']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -681,7 +681,7 @@ export const PeopleUserDataApiFp = function(configuration?: Configuration) {
         async startDeletePersonalFolder(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskProgressResponseWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.startDeletePersonalFolder(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleUserDataApi.startDeletePersonalFolder']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['UserDataApi.startDeletePersonalFolder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -696,7 +696,7 @@ export const PeopleUserDataApiFp = function(configuration?: Configuration) {
         async startReassign(startReassignRequestDto?: StartReassignRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskProgressResponseWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.startReassign(startReassignRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleUserDataApi.startReassign']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['UserDataApi.startReassign']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -711,7 +711,7 @@ export const PeopleUserDataApiFp = function(configuration?: Configuration) {
         async startRemove(terminateRequestDto?: TerminateRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskProgressResponseWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.startRemove(terminateRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleUserDataApi.startRemove']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['UserDataApi.startRemove']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -726,7 +726,7 @@ export const PeopleUserDataApiFp = function(configuration?: Configuration) {
         async terminateReassign(terminateRequestDto?: TerminateRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskProgressResponseWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.terminateReassign(terminateRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleUserDataApi.terminateReassign']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['UserDataApi.terminateReassign']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -741,18 +741,18 @@ export const PeopleUserDataApiFp = function(configuration?: Configuration) {
         async terminateRemove(terminateRequestDto?: TerminateRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.terminateRemove(terminateRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleUserDataApi.terminateRemove']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['UserDataApi.terminateRemove']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * PeopleUserDataApi - factory interface
+ * UserDataApi - factory interface
  * @export
  */
-export const PeopleUserDataApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = PeopleUserDataApiFp(configuration)
+export const UserDataApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = UserDataApiFp(configuration)
     return {
         /**
          * Returns the progress of deleting the personal folder.
@@ -876,21 +876,21 @@ export const PeopleUserDataApiFactory = function (configuration?: Configuration,
 };
 
 /**
- * PeopleUserDataApi - object-oriented interface
+ * UserDataApi - object-oriented interface
  * @export
- * @class PeopleUserDataApi
+ * @class UserDataApi
  * @extends {BaseAPI}
  */
-export class PeopleUserDataApi extends BaseAPI {
+export class UserDataApi extends BaseAPI {
     /**
      * Returns the progress of deleting the personal folder.
      * @summary Get the progress of deleting the personal folder
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleUserDataApi
+     * @memberof UserDataApi
      */
     public getDeletePersonalFolderProgress(options?: RawAxiosRequestConfig) {
-        return PeopleUserDataApiFp(this.configuration).getDeletePersonalFolderProgress(options).then((request) => request(this.axios, this.basePath));
+        return UserDataApiFp(this.configuration).getDeletePersonalFolderProgress(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -899,10 +899,10 @@ export class PeopleUserDataApi extends BaseAPI {
      * @param {string} userid The user ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleUserDataApi
+     * @memberof UserDataApi
      */
     public getReassignProgress(userid: string, options?: RawAxiosRequestConfig) {
-        return PeopleUserDataApiFp(this.configuration).getReassignProgress(userid, options).then((request) => request(this.axios, this.basePath));
+        return UserDataApiFp(this.configuration).getReassignProgress(userid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -911,10 +911,10 @@ export class PeopleUserDataApi extends BaseAPI {
      * @param {string} userid The user ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleUserDataApi
+     * @memberof UserDataApi
      */
     public getRemoveProgress(userid: string, options?: RawAxiosRequestConfig) {
-        return PeopleUserDataApiFp(this.configuration).getRemoveProgress(userid, options).then((request) => request(this.axios, this.basePath));
+        return UserDataApiFp(this.configuration).getRemoveProgress(userid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -924,10 +924,10 @@ export class PeopleUserDataApi extends BaseAPI {
      * @param {EmployeeType} [type] The expected user type.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleUserDataApi
+     * @memberof UserDataApi
      */
     public necessaryReassign(userId?: string, type?: EmployeeType, options?: RawAxiosRequestConfig) {
-        return PeopleUserDataApiFp(this.configuration).necessaryReassign(userId, type, options).then((request) => request(this.axios, this.basePath));
+        return UserDataApiFp(this.configuration).necessaryReassign(userId, type, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -935,10 +935,10 @@ export class PeopleUserDataApi extends BaseAPI {
      * @summary Send the deletion instructions
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleUserDataApi
+     * @memberof UserDataApi
      */
     public sendInstructionsToDelete(options?: RawAxiosRequestConfig) {
-        return PeopleUserDataApiFp(this.configuration).sendInstructionsToDelete(options).then((request) => request(this.axios, this.basePath));
+        return UserDataApiFp(this.configuration).sendInstructionsToDelete(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -946,10 +946,10 @@ export class PeopleUserDataApi extends BaseAPI {
      * @summary Delete the personal folder
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleUserDataApi
+     * @memberof UserDataApi
      */
     public startDeletePersonalFolder(options?: RawAxiosRequestConfig) {
-        return PeopleUserDataApiFp(this.configuration).startDeletePersonalFolder(options).then((request) => request(this.axios, this.basePath));
+        return UserDataApiFp(this.configuration).startDeletePersonalFolder(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -958,10 +958,10 @@ export class PeopleUserDataApi extends BaseAPI {
      * @param {StartReassignRequestDto} [startReassignRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleUserDataApi
+     * @memberof UserDataApi
      */
     public startReassign(startReassignRequestDto?: StartReassignRequestDto, options?: RawAxiosRequestConfig) {
-        return PeopleUserDataApiFp(this.configuration).startReassign(startReassignRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return UserDataApiFp(this.configuration).startReassign(startReassignRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -970,10 +970,10 @@ export class PeopleUserDataApi extends BaseAPI {
      * @param {TerminateRequestDto} [terminateRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleUserDataApi
+     * @memberof UserDataApi
      */
     public startRemove(terminateRequestDto?: TerminateRequestDto, options?: RawAxiosRequestConfig) {
-        return PeopleUserDataApiFp(this.configuration).startRemove(terminateRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return UserDataApiFp(this.configuration).startRemove(terminateRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -982,10 +982,10 @@ export class PeopleUserDataApi extends BaseAPI {
      * @param {TerminateRequestDto} [terminateRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleUserDataApi
+     * @memberof UserDataApi
      */
     public terminateReassign(terminateRequestDto?: TerminateRequestDto, options?: RawAxiosRequestConfig) {
-        return PeopleUserDataApiFp(this.configuration).terminateReassign(terminateRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return UserDataApiFp(this.configuration).terminateReassign(terminateRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -994,10 +994,10 @@ export class PeopleUserDataApi extends BaseAPI {
      * @param {TerminateRequestDto} [terminateRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleUserDataApi
+     * @memberof UserDataApi
      */
     public terminateRemove(terminateRequestDto?: TerminateRequestDto, options?: RawAxiosRequestConfig) {
-        return PeopleUserDataApiFp(this.configuration).terminateRemove(terminateRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return UserDataApiFp(this.configuration).terminateRemove(terminateRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

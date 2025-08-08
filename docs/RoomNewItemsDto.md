@@ -6,8 +6,8 @@ The room new items information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**room** | [**FileEntryDto**](FileEntryDto.md) |  | [optional] [default to undefined]
-**items** | [**Array&lt;FileEntryDto&gt;**](FileEntryDto.md) | The list of file entry items. | [optional] [default to undefined]
+**room** | [**FileEntryBaseDto**](FileEntryBaseDto.md) |  | [optional] [default to undefined]
+**items** | [**Array&lt;FileEntryBaseDto&gt;**](FileEntryBaseDto.md) | The list of file entry items. | [optional] [default to undefined]
 
 ## Example
 

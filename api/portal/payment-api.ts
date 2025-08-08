@@ -59,10 +59,10 @@ import type { TopUpDepositRequestDto } from '../../models';
 // @ts-ignore
 import type { WalletQuantityRequestDto } from '../../models';
 /**
- * PortalPaymentApi - axios parameter creator
+ * PaymentApi - axios parameter creator
  * @export
  */
-export const PortalPaymentApiAxiosParamCreator = function (configuration?: Configuration) {
+export const PaymentApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Calculate amount of the wallet payment with the parameters specified in the request.
@@ -1082,11 +1082,11 @@ export const PortalPaymentApiAxiosParamCreator = function (configuration?: Confi
 };
 
 /**
- * PortalPaymentApi - functional programming interface
+ * PaymentApi - functional programming interface
  * @export
  */
-export const PortalPaymentApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = PortalPaymentApiAxiosParamCreator(configuration)
+export const PaymentApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = PaymentApiAxiosParamCreator(configuration)
     return {
         /**
          * Calculate amount of the wallet payment with the parameters specified in the request.
@@ -1100,7 +1100,7 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
         async calculateWalletPayment(walletQuantityRequestDto?: WalletQuantityRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentCalculationWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.calculateWalletPayment(walletQuantityRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.calculateWalletPayment']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.calculateWalletPayment']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1115,7 +1115,7 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
         async createCustomerOperationsReport(customerOperationsReportRequestDto?: CustomerOperationsReportRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createCustomerOperationsReport(customerOperationsReportRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.createCustomerOperationsReport']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.createCustomerOperationsReport']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1130,7 +1130,7 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
         async getCheckoutSetupUrl(backUrl?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCheckoutSetupUrl(backUrl, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.getCheckoutSetupUrl']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.getCheckoutSetupUrl']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1145,7 +1145,7 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
         async getCustomerBalance(refresh?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BalanceWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCustomerBalance(refresh, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.getCustomerBalance']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.getCustomerBalance']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1160,7 +1160,7 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
         async getCustomerInfo(refresh?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomerInfoWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCustomerInfo(refresh, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.getCustomerInfo']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.getCustomerInfo']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1180,7 +1180,7 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
         async getCustomerOperations(startDate?: string, endDate?: string, credit?: boolean, withdrawal?: boolean, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ReportWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCustomerOperations(startDate, endDate, credit, withdrawal, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.getCustomerOperations']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.getCustomerOperations']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1195,7 +1195,7 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
         async getPaymentAccount(backUrl?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPaymentAccount(backUrl, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.getPaymentAccount']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.getPaymentAccount']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1209,7 +1209,7 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
         async getPaymentCurrencies(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CurrenciesArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPaymentCurrencies(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.getPaymentCurrencies']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.getPaymentCurrencies']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1224,7 +1224,7 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
         async getPaymentQuotas(wallet?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QuotaArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPaymentQuotas(wallet, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.getPaymentQuotas']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.getPaymentQuotas']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1239,7 +1239,7 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
         async getPaymentUrl(paymentUrlRequestsDto?: PaymentUrlRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPaymentUrl(paymentUrlRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.getPaymentUrl']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.getPaymentUrl']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1253,7 +1253,7 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
         async getPortalPrices(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPortalPrices(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.getPortalPrices']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.getPortalPrices']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1268,7 +1268,7 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
         async getQuotaPaymentInformation(refresh?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QuotaWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getQuotaPaymentInformation(refresh, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.getQuotaPaymentInformation']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.getQuotaPaymentInformation']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1282,7 +1282,7 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
         async getTenantWalletSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantWalletSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTenantWalletSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.getTenantWalletSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.getTenantWalletSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1297,7 +1297,7 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
         async sendPaymentRequest(salesRequestsDto?: SalesRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.sendPaymentRequest(salesRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.sendPaymentRequest']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.sendPaymentRequest']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1312,7 +1312,7 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
         async setTenantWalletSettings(tenantWalletSettingsWrapper?: TenantWalletSettingsWrapper, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantWalletSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setTenantWalletSettings(tenantWalletSettingsWrapper, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.setTenantWalletSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.setTenantWalletSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1327,7 +1327,7 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
         async topUpDeposit(topUpDepositRequestDto?: TopUpDepositRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.topUpDeposit(topUpDepositRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.topUpDeposit']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.topUpDeposit']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1342,7 +1342,7 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
         async updatePayment(quantityRequestDto?: QuantityRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updatePayment(quantityRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.updatePayment']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.updatePayment']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1357,18 +1357,18 @@ export const PortalPaymentApiFp = function(configuration?: Configuration) {
         async updateWalletPayment(walletQuantityRequestDto?: WalletQuantityRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateWalletPayment(walletQuantityRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalPaymentApi.updateWalletPayment']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.updateWalletPayment']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * PortalPaymentApi - factory interface
+ * PaymentApi - factory interface
  * @export
  */
-export const PortalPaymentApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = PortalPaymentApiFp(configuration)
+export const PaymentApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = PaymentApiFp(configuration)
     return {
         /**
          * Calculate amount of the wallet payment with the parameters specified in the request.
@@ -1592,22 +1592,22 @@ export const PortalPaymentApiFactory = function (configuration?: Configuration, 
 };
 
 /**
- * PortalPaymentApi - object-oriented interface
+ * PaymentApi - object-oriented interface
  * @export
- * @class PortalPaymentApi
+ * @class PaymentApi
  * @extends {BaseAPI}
  */
-export class PortalPaymentApi extends BaseAPI {
+export class PaymentApi extends BaseAPI {
     /**
      * Calculate amount of the wallet payment with the parameters specified in the request.
      * @summary Calculate amount of the wallet payment
      * @param {WalletQuantityRequestDto} [walletQuantityRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalPaymentApi
+     * @memberof PaymentApi
      */
     public calculateWalletPayment(walletQuantityRequestDto?: WalletQuantityRequestDto, options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).calculateWalletPayment(walletQuantityRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return PaymentApiFp(this.configuration).calculateWalletPayment(walletQuantityRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1616,10 +1616,10 @@ export class PortalPaymentApi extends BaseAPI {
      * @param {CustomerOperationsReportRequestDto} [customerOperationsReportRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalPaymentApi
+     * @memberof PaymentApi
      */
     public createCustomerOperationsReport(customerOperationsReportRequestDto?: CustomerOperationsReportRequestDto, options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).createCustomerOperationsReport(customerOperationsReportRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return PaymentApiFp(this.configuration).createCustomerOperationsReport(customerOperationsReportRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1628,10 +1628,10 @@ export class PortalPaymentApi extends BaseAPI {
      * @param {string} [backUrl] Back URL
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalPaymentApi
+     * @memberof PaymentApi
      */
     public getCheckoutSetupUrl(backUrl?: string, options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).getCheckoutSetupUrl(backUrl, options).then((request) => request(this.axios, this.basePath));
+        return PaymentApiFp(this.configuration).getCheckoutSetupUrl(backUrl, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1640,10 +1640,10 @@ export class PortalPaymentApi extends BaseAPI {
      * @param {boolean} [refresh] Specifies whether to refresh the payment information cache or not.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalPaymentApi
+     * @memberof PaymentApi
      */
     public getCustomerBalance(refresh?: boolean, options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).getCustomerBalance(refresh, options).then((request) => request(this.axios, this.basePath));
+        return PaymentApiFp(this.configuration).getCustomerBalance(refresh, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1652,10 +1652,10 @@ export class PortalPaymentApi extends BaseAPI {
      * @param {boolean} [refresh] Specifies whether to refresh the payment information cache or not.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalPaymentApi
+     * @memberof PaymentApi
      */
     public getCustomerInfo(refresh?: boolean, options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).getCustomerInfo(refresh, options).then((request) => request(this.axios, this.basePath));
+        return PaymentApiFp(this.configuration).getCustomerInfo(refresh, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1669,10 +1669,10 @@ export class PortalPaymentApi extends BaseAPI {
      * @param {number} [limit] Limit (25 by default)
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalPaymentApi
+     * @memberof PaymentApi
      */
     public getCustomerOperations(startDate?: string, endDate?: string, credit?: boolean, withdrawal?: boolean, offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).getCustomerOperations(startDate, endDate, credit, withdrawal, offset, limit, options).then((request) => request(this.axios, this.basePath));
+        return PaymentApiFp(this.configuration).getCustomerOperations(startDate, endDate, credit, withdrawal, offset, limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1681,10 +1681,10 @@ export class PortalPaymentApi extends BaseAPI {
      * @param {string} [backUrl] The URL where the user will be redirected after payment processing.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalPaymentApi
+     * @memberof PaymentApi
      */
     public getPaymentAccount(backUrl?: string, options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).getPaymentAccount(backUrl, options).then((request) => request(this.axios, this.basePath));
+        return PaymentApiFp(this.configuration).getPaymentAccount(backUrl, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1692,10 +1692,10 @@ export class PortalPaymentApi extends BaseAPI {
      * @summary Get currencies
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalPaymentApi
+     * @memberof PaymentApi
      */
     public getPaymentCurrencies(options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).getPaymentCurrencies(options).then((request) => request(this.axios, this.basePath));
+        return PaymentApiFp(this.configuration).getPaymentCurrencies(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1704,10 +1704,10 @@ export class PortalPaymentApi extends BaseAPI {
      * @param {boolean} [wallet] Get wallet quotas only
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalPaymentApi
+     * @memberof PaymentApi
      */
     public getPaymentQuotas(wallet?: boolean, options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).getPaymentQuotas(wallet, options).then((request) => request(this.axios, this.basePath));
+        return PaymentApiFp(this.configuration).getPaymentQuotas(wallet, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1716,10 +1716,10 @@ export class PortalPaymentApi extends BaseAPI {
      * @param {PaymentUrlRequestsDto} [paymentUrlRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalPaymentApi
+     * @memberof PaymentApi
      */
     public getPaymentUrl(paymentUrlRequestsDto?: PaymentUrlRequestsDto, options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).getPaymentUrl(paymentUrlRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return PaymentApiFp(this.configuration).getPaymentUrl(paymentUrlRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1727,10 +1727,10 @@ export class PortalPaymentApi extends BaseAPI {
      * @summary Get prices
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalPaymentApi
+     * @memberof PaymentApi
      */
     public getPortalPrices(options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).getPortalPrices(options).then((request) => request(this.axios, this.basePath));
+        return PaymentApiFp(this.configuration).getPortalPrices(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1739,10 +1739,10 @@ export class PortalPaymentApi extends BaseAPI {
      * @param {boolean} [refresh] Specifies whether to refresh the payment information cache or not.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalPaymentApi
+     * @memberof PaymentApi
      */
     public getQuotaPaymentInformation(refresh?: boolean, options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).getQuotaPaymentInformation(refresh, options).then((request) => request(this.axios, this.basePath));
+        return PaymentApiFp(this.configuration).getQuotaPaymentInformation(refresh, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1750,10 +1750,10 @@ export class PortalPaymentApi extends BaseAPI {
      * @summary Get wallet auto top up settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalPaymentApi
+     * @memberof PaymentApi
      */
     public getTenantWalletSettings(options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).getTenantWalletSettings(options).then((request) => request(this.axios, this.basePath));
+        return PaymentApiFp(this.configuration).getTenantWalletSettings(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1762,10 +1762,10 @@ export class PortalPaymentApi extends BaseAPI {
      * @param {SalesRequestsDto} [salesRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalPaymentApi
+     * @memberof PaymentApi
      */
     public sendPaymentRequest(salesRequestsDto?: SalesRequestsDto, options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).sendPaymentRequest(salesRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return PaymentApiFp(this.configuration).sendPaymentRequest(salesRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1774,10 +1774,10 @@ export class PortalPaymentApi extends BaseAPI {
      * @param {TenantWalletSettingsWrapper} [tenantWalletSettingsWrapper] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalPaymentApi
+     * @memberof PaymentApi
      */
     public setTenantWalletSettings(tenantWalletSettingsWrapper?: TenantWalletSettingsWrapper, options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).setTenantWalletSettings(tenantWalletSettingsWrapper, options).then((request) => request(this.axios, this.basePath));
+        return PaymentApiFp(this.configuration).setTenantWalletSettings(tenantWalletSettingsWrapper, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1786,10 +1786,10 @@ export class PortalPaymentApi extends BaseAPI {
      * @param {TopUpDepositRequestDto} [topUpDepositRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalPaymentApi
+     * @memberof PaymentApi
      */
     public topUpDeposit(topUpDepositRequestDto?: TopUpDepositRequestDto, options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).topUpDeposit(topUpDepositRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return PaymentApiFp(this.configuration).topUpDeposit(topUpDepositRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1798,10 +1798,10 @@ export class PortalPaymentApi extends BaseAPI {
      * @param {QuantityRequestDto} [quantityRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalPaymentApi
+     * @memberof PaymentApi
      */
     public updatePayment(quantityRequestDto?: QuantityRequestDto, options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).updatePayment(quantityRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return PaymentApiFp(this.configuration).updatePayment(quantityRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1810,10 +1810,10 @@ export class PortalPaymentApi extends BaseAPI {
      * @param {WalletQuantityRequestDto} [walletQuantityRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalPaymentApi
+     * @memberof PaymentApi
      */
     public updateWalletPayment(walletQuantityRequestDto?: WalletQuantityRequestDto, options?: RawAxiosRequestConfig) {
-        return PortalPaymentApiFp(this.configuration).updateWalletPayment(walletQuantityRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return PaymentApiFp(this.configuration).updateWalletPayment(walletQuantityRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

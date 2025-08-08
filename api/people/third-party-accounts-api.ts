@@ -31,10 +31,10 @@ import type { LinkAccountRequestDto } from '../../models';
 // @ts-ignore
 import type { SignupAccountRequestDto } from '../../models';
 /**
- * PeopleThirdPartyAccountsApi - axios parameter creator
+ * ThirdPartyAccountsApi - axios parameter creator
  * @export
  */
-export const PeopleThirdPartyAccountsApiAxiosParamCreator = function (configuration?: Configuration) {
+export const ThirdPartyAccountsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Returns a list of the available third-party accounts.
@@ -239,11 +239,11 @@ export const PeopleThirdPartyAccountsApiAxiosParamCreator = function (configurat
 };
 
 /**
- * PeopleThirdPartyAccountsApi - functional programming interface
+ * ThirdPartyAccountsApi - functional programming interface
  * @export
  */
-export const PeopleThirdPartyAccountsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = PeopleThirdPartyAccountsApiAxiosParamCreator(configuration)
+export const ThirdPartyAccountsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ThirdPartyAccountsApiAxiosParamCreator(configuration)
     return {
         /**
          * Returns a list of the available third-party accounts.
@@ -260,7 +260,7 @@ export const PeopleThirdPartyAccountsApiFp = function(configuration?: Configurat
         async getThirdPartyAuthProviders(inviteView?: boolean, settingsView?: boolean, clientCallback?: string, fromOnly?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountInfoArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getThirdPartyAuthProviders(inviteView, settingsView, clientCallback, fromOnly, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleThirdPartyAccountsApi.getThirdPartyAuthProviders']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ThirdPartyAccountsApi.getThirdPartyAuthProviders']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -275,7 +275,7 @@ export const PeopleThirdPartyAccountsApiFp = function(configuration?: Configurat
         async linkThirdPartyAccount(linkAccountRequestDto?: LinkAccountRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.linkThirdPartyAccount(linkAccountRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleThirdPartyAccountsApi.linkThirdPartyAccount']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ThirdPartyAccountsApi.linkThirdPartyAccount']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -290,7 +290,7 @@ export const PeopleThirdPartyAccountsApiFp = function(configuration?: Configurat
         async signupThirdPartyAccount(signupAccountRequestDto?: SignupAccountRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.signupThirdPartyAccount(signupAccountRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleThirdPartyAccountsApi.signupThirdPartyAccount']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ThirdPartyAccountsApi.signupThirdPartyAccount']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -305,18 +305,18 @@ export const PeopleThirdPartyAccountsApiFp = function(configuration?: Configurat
         async unlinkThirdPartyAccount(provider?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.unlinkThirdPartyAccount(provider, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleThirdPartyAccountsApi.unlinkThirdPartyAccount']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ThirdPartyAccountsApi.unlinkThirdPartyAccount']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * PeopleThirdPartyAccountsApi - factory interface
+ * ThirdPartyAccountsApi - factory interface
  * @export
  */
-export const PeopleThirdPartyAccountsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = PeopleThirdPartyAccountsApiFp(configuration)
+export const ThirdPartyAccountsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ThirdPartyAccountsApiFp(configuration)
     return {
         /**
          * Returns a list of the available third-party accounts.
@@ -373,12 +373,12 @@ export const PeopleThirdPartyAccountsApiFactory = function (configuration?: Conf
 };
 
 /**
- * PeopleThirdPartyAccountsApi - object-oriented interface
+ * ThirdPartyAccountsApi - object-oriented interface
  * @export
- * @class PeopleThirdPartyAccountsApi
+ * @class ThirdPartyAccountsApi
  * @extends {BaseAPI}
  */
-export class PeopleThirdPartyAccountsApi extends BaseAPI {
+export class ThirdPartyAccountsApi extends BaseAPI {
     /**
      * Returns a list of the available third-party accounts.
      * @summary Get third-party accounts
@@ -388,10 +388,10 @@ export class PeopleThirdPartyAccountsApi extends BaseAPI {
      * @param {string} [fromOnly] The provider name if a response is required only from this provider.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleThirdPartyAccountsApi
+     * @memberof ThirdPartyAccountsApi
      */
     public getThirdPartyAuthProviders(inviteView?: boolean, settingsView?: boolean, clientCallback?: string, fromOnly?: string, options?: RawAxiosRequestConfig) {
-        return PeopleThirdPartyAccountsApiFp(this.configuration).getThirdPartyAuthProviders(inviteView, settingsView, clientCallback, fromOnly, options).then((request) => request(this.axios, this.basePath));
+        return ThirdPartyAccountsApiFp(this.configuration).getThirdPartyAuthProviders(inviteView, settingsView, clientCallback, fromOnly, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -400,10 +400,10 @@ export class PeopleThirdPartyAccountsApi extends BaseAPI {
      * @param {LinkAccountRequestDto} [linkAccountRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleThirdPartyAccountsApi
+     * @memberof ThirdPartyAccountsApi
      */
     public linkThirdPartyAccount(linkAccountRequestDto?: LinkAccountRequestDto, options?: RawAxiosRequestConfig) {
-        return PeopleThirdPartyAccountsApiFp(this.configuration).linkThirdPartyAccount(linkAccountRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return ThirdPartyAccountsApiFp(this.configuration).linkThirdPartyAccount(linkAccountRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -412,10 +412,10 @@ export class PeopleThirdPartyAccountsApi extends BaseAPI {
      * @param {SignupAccountRequestDto} [signupAccountRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleThirdPartyAccountsApi
+     * @memberof ThirdPartyAccountsApi
      */
     public signupThirdPartyAccount(signupAccountRequestDto?: SignupAccountRequestDto, options?: RawAxiosRequestConfig) {
-        return PeopleThirdPartyAccountsApiFp(this.configuration).signupThirdPartyAccount(signupAccountRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return ThirdPartyAccountsApiFp(this.configuration).signupThirdPartyAccount(signupAccountRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -424,10 +424,10 @@ export class PeopleThirdPartyAccountsApi extends BaseAPI {
      * @param {string} [provider] The provider name.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleThirdPartyAccountsApi
+     * @memberof ThirdPartyAccountsApi
      */
     public unlinkThirdPartyAccount(provider?: string, options?: RawAxiosRequestConfig) {
-        return PeopleThirdPartyAccountsApiFp(this.configuration).unlinkThirdPartyAccount(provider, options).then((request) => request(this.axios, this.basePath));
+        return ThirdPartyAccountsApiFp(this.configuration).unlinkThirdPartyAccount(provider, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -37,10 +37,10 @@ import type { TerminateRequestDto } from '../../models';
 // @ts-ignore
 import type { UpdateMembersRequestDto } from '../../models';
 /**
- * PeopleUserTypeApi - axios parameter creator
+ * UserTypeApi - axios parameter creator
  * @export
  */
-export const PeopleUserTypeApiAxiosParamCreator = function (configuration?: Configuration) {
+export const UserTypeApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Returns the progress of updating the user type.
@@ -270,11 +270,11 @@ export const PeopleUserTypeApiAxiosParamCreator = function (configuration?: Conf
 };
 
 /**
- * PeopleUserTypeApi - functional programming interface
+ * UserTypeApi - functional programming interface
  * @export
  */
-export const PeopleUserTypeApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = PeopleUserTypeApiAxiosParamCreator(configuration)
+export const UserTypeApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = UserTypeApiAxiosParamCreator(configuration)
     return {
         /**
          * Returns the progress of updating the user type.
@@ -288,7 +288,7 @@ export const PeopleUserTypeApiFp = function(configuration?: Configuration) {
         async getUserTypeUpdateProgress(userid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskProgressResponseWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserTypeUpdateProgress(userid, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleUserTypeApi.getUserTypeUpdateProgress']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['UserTypeApi.getUserTypeUpdateProgress']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -303,7 +303,7 @@ export const PeopleUserTypeApiFp = function(configuration?: Configuration) {
         async starUserTypetUpdate(startUpdateUserTypeDto?: StartUpdateUserTypeDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskProgressResponseWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.starUserTypetUpdate(startUpdateUserTypeDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleUserTypeApi.starUserTypetUpdate']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['UserTypeApi.starUserTypetUpdate']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -318,7 +318,7 @@ export const PeopleUserTypeApiFp = function(configuration?: Configuration) {
         async terminateUserTypeUpdate(terminateRequestDto?: TerminateRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskProgressResponseWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.terminateUserTypeUpdate(terminateRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleUserTypeApi.terminateUserTypeUpdate']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['UserTypeApi.terminateUserTypeUpdate']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -334,18 +334,18 @@ export const PeopleUserTypeApiFp = function(configuration?: Configuration) {
         async updateUserType(type: EmployeeType, updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateUserType(type, updateMembersRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleUserTypeApi.updateUserType']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['UserTypeApi.updateUserType']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * PeopleUserTypeApi - factory interface
+ * UserTypeApi - factory interface
  * @export
  */
-export const PeopleUserTypeApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = PeopleUserTypeApiFp(configuration)
+export const UserTypeApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = UserTypeApiFp(configuration)
     return {
         /**
          * Returns the progress of updating the user type.
@@ -400,22 +400,22 @@ export const PeopleUserTypeApiFactory = function (configuration?: Configuration,
 };
 
 /**
- * PeopleUserTypeApi - object-oriented interface
+ * UserTypeApi - object-oriented interface
  * @export
- * @class PeopleUserTypeApi
+ * @class UserTypeApi
  * @extends {BaseAPI}
  */
-export class PeopleUserTypeApi extends BaseAPI {
+export class UserTypeApi extends BaseAPI {
     /**
      * Returns the progress of updating the user type.
      * @summary Get the progress of updating user type
      * @param {string} userid The user ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleUserTypeApi
+     * @memberof UserTypeApi
      */
     public getUserTypeUpdateProgress(userid: string, options?: RawAxiosRequestConfig) {
-        return PeopleUserTypeApiFp(this.configuration).getUserTypeUpdateProgress(userid, options).then((request) => request(this.axios, this.basePath));
+        return UserTypeApiFp(this.configuration).getUserTypeUpdateProgress(userid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -424,10 +424,10 @@ export class PeopleUserTypeApi extends BaseAPI {
      * @param {StartUpdateUserTypeDto} [startUpdateUserTypeDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleUserTypeApi
+     * @memberof UserTypeApi
      */
     public starUserTypetUpdate(startUpdateUserTypeDto?: StartUpdateUserTypeDto, options?: RawAxiosRequestConfig) {
-        return PeopleUserTypeApiFp(this.configuration).starUserTypetUpdate(startUpdateUserTypeDto, options).then((request) => request(this.axios, this.basePath));
+        return UserTypeApiFp(this.configuration).starUserTypetUpdate(startUpdateUserTypeDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -436,10 +436,10 @@ export class PeopleUserTypeApi extends BaseAPI {
      * @param {TerminateRequestDto} [terminateRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleUserTypeApi
+     * @memberof UserTypeApi
      */
     public terminateUserTypeUpdate(terminateRequestDto?: TerminateRequestDto, options?: RawAxiosRequestConfig) {
-        return PeopleUserTypeApiFp(this.configuration).terminateUserTypeUpdate(terminateRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return UserTypeApiFp(this.configuration).terminateUserTypeUpdate(terminateRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -449,10 +449,10 @@ export class PeopleUserTypeApi extends BaseAPI {
      * @param {UpdateMembersRequestDto} [updateMembersRequestDto] The request parameters for updating the user information.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleUserTypeApi
+     * @memberof UserTypeApi
      */
     public updateUserType(type: EmployeeType, updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig) {
-        return PeopleUserTypeApiFp(this.configuration).updateUserType(type, updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return UserTypeApiFp(this.configuration).updateUserType(type, updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

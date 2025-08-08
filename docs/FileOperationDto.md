@@ -13,8 +13,8 @@ Name | Type | Description | Notes
 **processed** | **string** | The file operation processing status. | [optional] [default to undefined]
 **finished** | **boolean** | Specifies if the file operation is finished or not. | [optional] [default to undefined]
 **url** | **string** | The file operation URL. | [optional] [default to undefined]
-**files** | [**Array&lt;FileEntryDto&gt;**](FileEntryDto.md) | The list of files of the file operation. | [optional] [default to undefined]
-**folders** | [**Array&lt;FileEntryDto&gt;**](FileEntryDto.md) | The list of folders of the file operation. | [optional] [default to undefined]
+**files** | [**Array&lt;FileEntryBaseDto&gt;**](FileEntryBaseDto.md) | The list of files of the file operation. | [optional] [default to undefined]
+**folders** | [**Array&lt;FileEntryBaseDto&gt;**](FileEntryBaseDto.md) | The list of folders of the file operation. | [optional] [default to undefined]
 
 ## Example
 

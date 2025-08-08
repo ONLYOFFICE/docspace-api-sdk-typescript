@@ -18,63 +18,23 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { CreateWebhooksConfigRequestsDto } from './create-webhooks-config-requests-dto';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { WebhookTrigger } from './webhook-trigger';
 
 /**
+ * @type UpdateWebhooksConfigRequestsDto
  * The request parameters for updating the webhook configuration.
  * @export
- * @interface UpdateWebhooksConfigRequestsDto
  */
-export interface UpdateWebhooksConfigRequestsDto {
-    /**
-     * The human-readable name of the webhook configuration.
-     * @type {string}
-     * @memberof UpdateWebhooksConfigRequestsDto
-     */
-    'name': string;
-    /**
-     * The destination URL where the webhook events will be sent.
-     * @type {string}
-     * @memberof UpdateWebhooksConfigRequestsDto
-     */
-    'uri': string;
-    /**
-     * The webhook secret key used to sign the webhook payloads for the security verification.
-     * @type {string}
-     * @memberof UpdateWebhooksConfigRequestsDto
-     */
-    'secretKey'?: string | null;
-    /**
-     * Specifies whether the webhook configuration is active or not.
-     * @type {boolean}
-     * @memberof UpdateWebhooksConfigRequestsDto
-     */
-    'enabled'?: boolean;
-    /**
-     * Specifies whether the SSL certificate verification is required or not.
-     * @type {boolean}
-     * @memberof UpdateWebhooksConfigRequestsDto
-     */
-    'ssl'?: boolean;
-    /**
-     * 
-     * @type {WebhookTrigger}
-     * @memberof UpdateWebhooksConfigRequestsDto
-     */
-    'triggers'?: WebhookTrigger;
-    /**
-     * Target ID
-     * @type {string}
-     * @memberof UpdateWebhooksConfigRequestsDto
-     */
-    'targetId'?: string | null;
+export type UpdateWebhooksConfigRequestsDto = CreateWebhooksConfigRequestsDto &  {
     /**
      * The webhook configuration ID.
      * @type {number}
      * @memberof UpdateWebhooksConfigRequestsDto
      */
     'id'?: number;
-}
-
+};
 
 

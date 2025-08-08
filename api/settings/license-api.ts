@@ -29,10 +29,10 @@ import type { BooleanWrapper } from '../../models';
 // @ts-ignore
 import type { StringWrapper } from '../../models';
 /**
- * SettingsLicenseApi - axios parameter creator
+ * LicenseApi - axios parameter creator
  * @export
  */
-export const SettingsLicenseApiAxiosParamCreator = function (configuration?: Configuration) {
+export const LicenseApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Activates a license for the portal.
@@ -236,11 +236,11 @@ export const SettingsLicenseApiAxiosParamCreator = function (configuration?: Con
 };
 
 /**
- * SettingsLicenseApi - functional programming interface
+ * LicenseApi - functional programming interface
  * @export
  */
-export const SettingsLicenseApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SettingsLicenseApiAxiosParamCreator(configuration)
+export const LicenseApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = LicenseApiAxiosParamCreator(configuration)
     return {
         /**
          * Activates a license for the portal.
@@ -253,7 +253,7 @@ export const SettingsLicenseApiFp = function(configuration?: Configuration) {
         async acceptLicense(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.acceptLicense(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsLicenseApi.acceptLicense']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['LicenseApi.acceptLicense']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -267,7 +267,7 @@ export const SettingsLicenseApiFp = function(configuration?: Configuration) {
         async getIsLicenseRequired(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getIsLicenseRequired(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsLicenseApi.getIsLicenseRequired']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['LicenseApi.getIsLicenseRequired']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -281,7 +281,7 @@ export const SettingsLicenseApiFp = function(configuration?: Configuration) {
         async refreshLicense(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.refreshLicense(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsLicenseApi.refreshLicense']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['LicenseApi.refreshLicense']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -296,18 +296,18 @@ export const SettingsLicenseApiFp = function(configuration?: Configuration) {
         async uploadLicense(files: Array<File>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.uploadLicense(files, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsLicenseApi.uploadLicense']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['LicenseApi.uploadLicense']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * SettingsLicenseApi - factory interface
+ * LicenseApi - factory interface
  * @export
  */
-export const SettingsLicenseApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SettingsLicenseApiFp(configuration)
+export const LicenseApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = LicenseApiFp(configuration)
     return {
         /**
          * Activates a license for the portal.
@@ -358,21 +358,21 @@ export const SettingsLicenseApiFactory = function (configuration?: Configuration
 };
 
 /**
- * SettingsLicenseApi - object-oriented interface
+ * LicenseApi - object-oriented interface
  * @export
- * @class SettingsLicenseApi
+ * @class LicenseApi
  * @extends {BaseAPI}
  */
-export class SettingsLicenseApi extends BaseAPI {
+export class LicenseApi extends BaseAPI {
     /**
      * Activates a license for the portal.
      * @summary Activate a license
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsLicenseApi
+     * @memberof LicenseApi
      */
     public acceptLicense(options?: RawAxiosRequestConfig) {
-        return SettingsLicenseApiFp(this.configuration).acceptLicense(options).then((request) => request(this.axios, this.basePath));
+        return LicenseApiFp(this.configuration).acceptLicense(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -380,10 +380,10 @@ export class SettingsLicenseApi extends BaseAPI {
      * @summary Request a license
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsLicenseApi
+     * @memberof LicenseApi
      */
     public getIsLicenseRequired(options?: RawAxiosRequestConfig) {
-        return SettingsLicenseApiFp(this.configuration).getIsLicenseRequired(options).then((request) => request(this.axios, this.basePath));
+        return LicenseApiFp(this.configuration).getIsLicenseRequired(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -391,10 +391,10 @@ export class SettingsLicenseApi extends BaseAPI {
      * @summary Refresh the license
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsLicenseApi
+     * @memberof LicenseApi
      */
     public refreshLicense(options?: RawAxiosRequestConfig) {
-        return SettingsLicenseApiFp(this.configuration).refreshLicense(options).then((request) => request(this.axios, this.basePath));
+        return LicenseApiFp(this.configuration).refreshLicense(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -403,10 +403,10 @@ export class SettingsLicenseApi extends BaseAPI {
      * @param {Array<File>} files The list of license files to be uploaded.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsLicenseApi
+     * @memberof LicenseApi
      */
     public uploadLicense(files: Array<File>, options?: RawAxiosRequestConfig) {
-        return SettingsLicenseApiFp(this.configuration).uploadLicense(files, options).then((request) => request(this.axios, this.basePath));
+        return LicenseApiFp(this.configuration).uploadLicense(files, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

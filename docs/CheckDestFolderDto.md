@@ -7,7 +7,7 @@ The destination folder checking information.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **result** | [**CheckDestFolderResult**](CheckDestFolderResult.md) |  | [optional] [default to undefined]
-**files** | [**Array&lt;FileEntryDto&gt;**](FileEntryDto.md) | The list of files of the destination folder. | [optional] [default to undefined]
+**files** | [**Array&lt;FileEntryBaseDto&gt;**](FileEntryBaseDto.md) | The list of files of the destination folder. | [optional] [default to undefined]
 
 ## Example
 

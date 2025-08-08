@@ -33,10 +33,10 @@ import type { ObjectWrapper } from '../../models';
 // @ts-ignore
 import type { StringWrapper } from '../../models';
 /**
- * SettingsGreetingSettingsApi - axios parameter creator
+ * GreetingSettingsApi - axios parameter creator
  * @export
  */
-export const SettingsGreetingSettingsApiAxiosParamCreator = function (configuration?: Configuration) {
+export const GreetingSettingsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Returns the greeting settings for the current portal.
@@ -250,11 +250,11 @@ export const SettingsGreetingSettingsApiAxiosParamCreator = function (configurat
 };
 
 /**
- * SettingsGreetingSettingsApi - functional programming interface
+ * GreetingSettingsApi - functional programming interface
  * @export
  */
-export const SettingsGreetingSettingsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SettingsGreetingSettingsApiAxiosParamCreator(configuration)
+export const GreetingSettingsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = GreetingSettingsApiAxiosParamCreator(configuration)
     return {
         /**
          * Returns the greeting settings for the current portal.
@@ -267,7 +267,7 @@ export const SettingsGreetingSettingsApiFp = function(configuration?: Configurat
         async getGreetingSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getGreetingSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsGreetingSettingsApi.getGreetingSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['GreetingSettingsApi.getGreetingSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -281,7 +281,7 @@ export const SettingsGreetingSettingsApiFp = function(configuration?: Configurat
         async getIsDefaultGreetingSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getIsDefaultGreetingSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsGreetingSettingsApi.getIsDefaultGreetingSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['GreetingSettingsApi.getIsDefaultGreetingSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -295,7 +295,7 @@ export const SettingsGreetingSettingsApiFp = function(configuration?: Configurat
         async restoreGreetingSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.restoreGreetingSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsGreetingSettingsApi.restoreGreetingSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['GreetingSettingsApi.restoreGreetingSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -310,18 +310,18 @@ export const SettingsGreetingSettingsApiFp = function(configuration?: Configurat
         async saveGreetingSettings(greetingSettingsRequestsDto?: GreetingSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.saveGreetingSettings(greetingSettingsRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsGreetingSettingsApi.saveGreetingSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['GreetingSettingsApi.saveGreetingSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * SettingsGreetingSettingsApi - factory interface
+ * GreetingSettingsApi - factory interface
  * @export
  */
-export const SettingsGreetingSettingsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SettingsGreetingSettingsApiFp(configuration)
+export const GreetingSettingsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = GreetingSettingsApiFp(configuration)
     return {
         /**
          * Returns the greeting settings for the current portal.
@@ -372,21 +372,21 @@ export const SettingsGreetingSettingsApiFactory = function (configuration?: Conf
 };
 
 /**
- * SettingsGreetingSettingsApi - object-oriented interface
+ * GreetingSettingsApi - object-oriented interface
  * @export
- * @class SettingsGreetingSettingsApi
+ * @class GreetingSettingsApi
  * @extends {BaseAPI}
  */
-export class SettingsGreetingSettingsApi extends BaseAPI {
+export class GreetingSettingsApi extends BaseAPI {
     /**
      * Returns the greeting settings for the current portal.
      * @summary Get greeting settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsGreetingSettingsApi
+     * @memberof GreetingSettingsApi
      */
     public getGreetingSettings(options?: RawAxiosRequestConfig) {
-        return SettingsGreetingSettingsApiFp(this.configuration).getGreetingSettings(options).then((request) => request(this.axios, this.basePath));
+        return GreetingSettingsApiFp(this.configuration).getGreetingSettings(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -394,10 +394,10 @@ export class SettingsGreetingSettingsApi extends BaseAPI {
      * @summary Check the default greeting settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsGreetingSettingsApi
+     * @memberof GreetingSettingsApi
      */
     public getIsDefaultGreetingSettings(options?: RawAxiosRequestConfig) {
-        return SettingsGreetingSettingsApiFp(this.configuration).getIsDefaultGreetingSettings(options).then((request) => request(this.axios, this.basePath));
+        return GreetingSettingsApiFp(this.configuration).getIsDefaultGreetingSettings(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -405,10 +405,10 @@ export class SettingsGreetingSettingsApi extends BaseAPI {
      * @summary Restore the greeting settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsGreetingSettingsApi
+     * @memberof GreetingSettingsApi
      */
     public restoreGreetingSettings(options?: RawAxiosRequestConfig) {
-        return SettingsGreetingSettingsApiFp(this.configuration).restoreGreetingSettings(options).then((request) => request(this.axios, this.basePath));
+        return GreetingSettingsApiFp(this.configuration).restoreGreetingSettings(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -417,10 +417,10 @@ export class SettingsGreetingSettingsApi extends BaseAPI {
      * @param {GreetingSettingsRequestsDto} [greetingSettingsRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsGreetingSettingsApi
+     * @memberof GreetingSettingsApi
      */
     public saveGreetingSettings(greetingSettingsRequestsDto?: GreetingSettingsRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsGreetingSettingsApiFp(this.configuration).saveGreetingSettings(greetingSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return GreetingSettingsApiFp(this.configuration).saveGreetingSettings(greetingSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

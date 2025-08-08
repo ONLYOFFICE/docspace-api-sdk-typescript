@@ -42,77 +42,11 @@ import type { GroupSummaryDto } from './group-summary-dto';
 import type { MobilePhoneActivationStatus } from './mobile-phone-activation-status';
 
 /**
+ * @type EmployeeFullDto
  * The full list of user parameters.
  * @export
- * @interface EmployeeFullDto
  */
-export interface EmployeeFullDto {
-    /**
-     * The user ID.
-     * @type {string}
-     * @memberof EmployeeFullDto
-     */
-    'id'?: string;
-    /**
-     * The user display name.
-     * @type {string}
-     * @memberof EmployeeFullDto
-     */
-    'displayName'?: string | null;
-    /**
-     * The user title.
-     * @type {string}
-     * @memberof EmployeeFullDto
-     */
-    'title'?: string | null;
-    /**
-     * The user avatar.
-     * @type {string}
-     * @memberof EmployeeFullDto
-     */
-    'avatar'?: string | null;
-    /**
-     * The user original size avatar.
-     * @type {string}
-     * @memberof EmployeeFullDto
-     */
-    'avatarOriginal'?: string | null;
-    /**
-     * The user maximum size avatar.
-     * @type {string}
-     * @memberof EmployeeFullDto
-     */
-    'avatarMax'?: string | null;
-    /**
-     * The user medium size avatar.
-     * @type {string}
-     * @memberof EmployeeFullDto
-     */
-    'avatarMedium'?: string | null;
-    /**
-     * The user small size avatar.
-     * @type {string}
-     * @memberof EmployeeFullDto
-     */
-    'avatarSmall'?: string | null;
-    /**
-     * The user profile URL.
-     * @type {string}
-     * @memberof EmployeeFullDto
-     */
-    'profileUrl'?: string | null;
-    /**
-     * Specifies if the user has an avatar or not.
-     * @type {boolean}
-     * @memberof EmployeeFullDto
-     */
-    'hasAvatar'?: boolean;
-    /**
-     * Specifies if the user is anonymous or not.
-     * @type {boolean}
-     * @memberof EmployeeFullDto
-     */
-    'isAnonim'?: boolean;
+export type EmployeeFullDto = EmployeeDto &  {
     /**
      * The user first name.
      * @type {string}
@@ -329,7 +263,6 @@ export interface EmployeeFullDto {
      * @memberof EmployeeFullDto
      */
     'tfaAppEnabled'?: boolean | null;
-}
-
+};
 
 

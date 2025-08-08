@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **providerKey** | **string** | The provider key of the file entry. | [optional] [default to undefined]
 **providerId** | **number** | The provider ID of the file entry. | [optional] [default to undefined]
 **order** | **string** | The order of the file entry. | [optional] [default to undefined]
+**fileEntryType** | [**FileEntryType**](FileEntryType.md) |  | [optional] [default to undefined]
 **id** | **string** | The file entry ID. | [optional] [default to undefined]
 **rootFolderId** | **string** | The root folder ID of the file entry. | [optional] [default to undefined]
 **originId** | **string** | The origin ID of the file entry. | [optional] [default to undefined]
@@ -27,7 +28,7 @@ Name | Type | Description | Notes
 **originTitle** | **string** | The origin title of the file entry. | [optional] [default to undefined]
 **originRoomTitle** | **string** | The origin room title of the file entry. | [optional] [default to undefined]
 **canShare** | **boolean** | Specifies if the file entry can be shared or not. | [optional] [default to undefined]
-**security** | [**FileDtoIntegerSecurity**](FileDtoIntegerSecurity.md) |  | [optional] [default to undefined]
+**security** | [**FileEntryDtoIntegerAllOfSecurity**](FileEntryDtoIntegerAllOfSecurity.md) |  | [optional] [default to undefined]
 **requestToken** | **string** | The request token of the file entry. | [optional] [default to undefined]
 **parentId** | **string** | The parent folder ID of the folder. | [optional] [default to undefined]
 **filesCount** | **number** | The number of files that the folder contains. | [optional] [default to undefined]
@@ -53,7 +54,6 @@ Name | Type | Description | Notes
 **external** | **boolean** | Specifies if the folder can be accessed via an external link or not. | [optional] [default to undefined]
 **passwordProtected** | **boolean** | Specifies if the folder is password protected or not. | [optional] [default to undefined]
 **expired** | **boolean** | Specifies if an external link to the folder is expired or not. | [optional] [default to undefined]
-**fileEntryType** | [**FileEntryType**](FileEntryType.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -75,6 +75,7 @@ const instance: FolderDtoString = {
     providerKey,
     providerId,
     order,
+    fileEntryType,
     id,
     rootFolderId,
     originId,
@@ -108,7 +109,6 @@ const instance: FolderDtoString = {
     external,
     passwordProtected,
     expired,
-    fileEntryType,
 };
 ```
 

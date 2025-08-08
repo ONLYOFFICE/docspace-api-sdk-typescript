@@ -16,25 +16,15 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { IpRestrictionBase } from './ip-restriction-base';
 
 /**
- * 
+ * @type IPRestriction
  * @export
- * @interface IPRestriction
  */
-export interface IPRestriction {
-    /**
-     * 
-     * @type {string}
-     * @memberof IPRestriction
-     */
-    'ip'?: string | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof IPRestriction
-     */
-    'forAdmin'?: boolean;
+export type IPRestriction = IpRestrictionBase &  {
     /**
      * 
      * @type {number}
@@ -47,5 +37,6 @@ export interface IPRestriction {
      * @memberof IPRestriction
      */
     'tenantId'?: number;
-}
+};
+
 

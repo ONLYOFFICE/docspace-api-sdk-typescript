@@ -18,7 +18,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FileEntryDto } from './file-entry-dto';
+import type { FileEntryBaseDto } from './file-entry-base-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { FolderDtoInteger } from './folder-dto-integer';
@@ -31,16 +31,16 @@ import type { FolderDtoInteger } from './folder-dto-integer';
 export interface FolderContentDtoInteger {
     /**
      * The list of files in the folder.
-     * @type {Array<FileEntryDto>}
+     * @type {Array<FileEntryBaseDto>}
      * @memberof FolderContentDtoInteger
      */
-    'files'?: Array<FileEntryDto> | null;
+    'files'?: Array<FileEntryBaseDto> | null;
     /**
      * The list of folders in the folder.
-     * @type {Array<FileEntryDto>}
+     * @type {Array<FileEntryBaseDto>}
      * @memberof FolderContentDtoInteger
      */
-    'folders'?: Array<FileEntryDto> | null;
+    'folders'?: Array<FileEntryBaseDto> | null;
     /**
      * 
      * @type {FolderDtoInteger}

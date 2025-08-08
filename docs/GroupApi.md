@@ -1,6 +1,6 @@
 # GroupApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
@@ -131,7 +131,7 @@ const { status, data } = await apiInstance.addMembersTo(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deleteGroup**
-> NoContentResultWrapper deleteGroup()
+> deleteGroup()
 
 Deletes a group with the ID specified in the request from the list of groups on the portal.
 
@@ -146,7 +146,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-**NoContentResultWrapper**
+void (empty response body)
 
 ### Authorization
 
@@ -173,13 +173,13 @@ const { status, data } = await apiInstance.deleteGroup(
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: Not defined
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | No content |  -  |
+|**204** | No content |  -  |
 |**401** | Unauthorized |  -  |
 |**404** | Group not found |  -  |
 

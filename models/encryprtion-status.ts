@@ -18,16 +18,28 @@
 
 
 /**
- * 
+ * [0 - Decrypted, 1 - Encryption started, 2 - Encrypted, 3 - Decryption started]
  * @export
  * @enum {number}
  */
 
 export const EncryprtionStatus = {
-    NUMBER_0: 0,
-    NUMBER_1: 1,
-    NUMBER_2: 2,
-    NUMBER_3: 3
+    /**
+    * Decrypted
+    */
+    Decrypted: 0,
+    /**
+    * Encryption started
+    */
+    EncryptionStarted: 1,
+    /**
+    * Encrypted
+    */
+    Encrypted: 2,
+    /**
+    * Decryption started
+    */
+    DecryptionStarted: 3
 } as const;
 
 export type EncryprtionStatus = typeof EncryprtionStatus[keyof typeof EncryprtionStatus];

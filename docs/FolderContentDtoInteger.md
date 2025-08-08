@@ -6,8 +6,8 @@ The folder content information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**files** | [**Array&lt;FileEntryDto&gt;**](FileEntryDto.md) | The list of files in the folder. | [optional] [default to undefined]
-**folders** | [**Array&lt;FileEntryDto&gt;**](FileEntryDto.md) | The list of folders in the folder. | [optional] [default to undefined]
+**files** | [**Array&lt;FileEntryBaseDto&gt;**](FileEntryBaseDto.md) | The list of files in the folder. | [optional] [default to undefined]
+**folders** | [**Array&lt;FileEntryBaseDto&gt;**](FileEntryBaseDto.md) | The list of folders in the folder. | [optional] [default to undefined]
 **current** | [**FolderDtoInteger**](FolderDtoInteger.md) |  | [optional] [default to undefined]
 **pathParts** | **any** | The folder path. | [optional] [default to undefined]
 **startIndex** | **number** | The folder start index. | [optional] [default to undefined]

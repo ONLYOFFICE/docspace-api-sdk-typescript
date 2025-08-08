@@ -27,10 +27,13 @@ import type { DraftLocationInteger } from './draft-location-integer';
 import type { EmployeeDto } from './employee-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FileDtoIntegerSecurity } from './file-dto-integer-security';
+import type { FileDtoIntegerAllOfViewAccessibility } from './file-dto-integer-all-of-view-accessibility';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FileDtoIntegerViewAccessibility } from './file-dto-integer-view-accessibility';
+import type { FileEntryDtoInteger } from './file-entry-dto-integer';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { FileEntryDtoIntegerAllOfSecurity } from './file-entry-dto-integer-all-of-security';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { FileEntryType } from './file-entry-type';
@@ -54,149 +57,11 @@ import type { FormFillingStatus } from './form-filling-status';
 import type { Thumbnail } from './thumbnail';
 
 /**
+ * @type FileDtoInteger
  * The file parameters.
  * @export
- * @interface FileDtoInteger
  */
-export interface FileDtoInteger {
-    /**
-     * The file entry title.
-     * @type {string}
-     * @memberof FileDtoInteger
-     */
-    'title'?: string | null;
-    /**
-     * 
-     * @type {FileShare}
-     * @memberof FileDtoInteger
-     */
-    'access'?: FileShare;
-    /**
-     * Specifies if the file entry is shared or not.
-     * @type {boolean}
-     * @memberof FileDtoInteger
-     */
-    'shared'?: boolean;
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof FileDtoInteger
-     */
-    'created'?: ApiDateTime;
-    /**
-     * 
-     * @type {EmployeeDto}
-     * @memberof FileDtoInteger
-     */
-    'createdBy'?: EmployeeDto;
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof FileDtoInteger
-     */
-    'updated'?: ApiDateTime;
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof FileDtoInteger
-     */
-    'autoDelete'?: ApiDateTime;
-    /**
-     * 
-     * @type {FolderType}
-     * @memberof FileDtoInteger
-     */
-    'rootFolderType'?: FolderType;
-    /**
-     * 
-     * @type {FolderType}
-     * @memberof FileDtoInteger
-     */
-    'parentRoomType'?: FolderType;
-    /**
-     * 
-     * @type {EmployeeDto}
-     * @memberof FileDtoInteger
-     */
-    'updatedBy'?: EmployeeDto;
-    /**
-     * Specifies if the file entry provider is specified or not.
-     * @type {boolean}
-     * @memberof FileDtoInteger
-     */
-    'providerItem'?: boolean | null;
-    /**
-     * The provider key of the file entry.
-     * @type {string}
-     * @memberof FileDtoInteger
-     */
-    'providerKey'?: string | null;
-    /**
-     * The provider ID of the file entry.
-     * @type {number}
-     * @memberof FileDtoInteger
-     */
-    'providerId'?: number | null;
-    /**
-     * The order of the file entry.
-     * @type {string}
-     * @memberof FileDtoInteger
-     */
-    'order'?: string | null;
-    /**
-     * The file entry ID.
-     * @type {number}
-     * @memberof FileDtoInteger
-     */
-    'id'?: number;
-    /**
-     * The root folder ID of the file entry.
-     * @type {number}
-     * @memberof FileDtoInteger
-     */
-    'rootFolderId'?: number;
-    /**
-     * The origin ID of the file entry.
-     * @type {number}
-     * @memberof FileDtoInteger
-     */
-    'originId'?: number;
-    /**
-     * The origin room ID of the file entry.
-     * @type {number}
-     * @memberof FileDtoInteger
-     */
-    'originRoomId'?: number;
-    /**
-     * The origin title of the file entry.
-     * @type {string}
-     * @memberof FileDtoInteger
-     */
-    'originTitle'?: string | null;
-    /**
-     * The origin room title of the file entry.
-     * @type {string}
-     * @memberof FileDtoInteger
-     */
-    'originRoomTitle'?: string | null;
-    /**
-     * Specifies if the file entry can be shared or not.
-     * @type {boolean}
-     * @memberof FileDtoInteger
-     */
-    'canShare'?: boolean;
-    /**
-     * 
-     * @type {FileDtoIntegerSecurity}
-     * @memberof FileDtoInteger
-     */
-    'security'?: FileDtoIntegerSecurity | null;
-    /**
-     * The request token of the file entry.
-     * @type {string}
-     * @memberof FileDtoInteger
-     */
-    'requestToken'?: string | null;
+export type FileDtoInteger = FileEntryDtoInteger &  {
     /**
      * The folder ID where the file is located.
      * @type {number}
@@ -361,10 +226,10 @@ export interface FileDtoInteger {
     'draftLocation'?: DraftLocationInteger;
     /**
      * 
-     * @type {FileDtoIntegerViewAccessibility}
+     * @type {FileDtoIntegerAllOfViewAccessibility}
      * @memberof FileDtoInteger
      */
-    'viewAccessibility'?: FileDtoIntegerViewAccessibility | null;
+    'viewAccessibility'?: FileDtoIntegerAllOfViewAccessibility | null;
     /**
      * The available external rights of the file.
      * @type {{ [key: string]: boolean; }}
@@ -383,13 +248,6 @@ export interface FileDtoInteger {
      * @memberof FileDtoInteger
      */
     'expired'?: ApiDateTime;
-    /**
-     * 
-     * @type {FileEntryType}
-     * @memberof FileDtoInteger
-     */
-    'fileEntryType'?: FileEntryType;
-}
-
+};
 
 

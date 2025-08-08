@@ -18,31 +18,32 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { BaseBatchRequestDtoFolderIdsInner } from './base-batch-request-dto-folder-ids-inner';
+import type { DuplicateRequestDtoAllOfFileIds } from './duplicate-request-dto-all-of-file-ids';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { DuplicateRequestDtoAllOfFolderIds } from './duplicate-request-dto-all-of-folder-ids';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { FileOperationRequestBaseDto } from './file-operation-request-base-dto';
 
 /**
+ * @type DuplicateRequestDto
  * The duplicate request parameters.
  * @export
- * @interface DuplicateRequestDto
  */
-export interface DuplicateRequestDto {
-    /**
-     * Specifies whether to return only the current operation
-     * @type {boolean}
-     * @memberof DuplicateRequestDto
-     */
-    'returnSingleOperation'?: boolean;
+export type DuplicateRequestDto = FileOperationRequestBaseDto &  {
     /**
      * The list of folder IDs.
-     * @type {Array<BaseBatchRequestDtoFolderIdsInner>}
+     * @type {Array<DuplicateRequestDtoAllOfFolderIds>}
      * @memberof DuplicateRequestDto
      */
-    'folderIds'?: Array<BaseBatchRequestDtoFolderIdsInner> | null;
+    'folderIds'?: Array<DuplicateRequestDtoAllOfFolderIds> | null;
     /**
      * The list of file IDs.
-     * @type {Array<BaseBatchRequestDtoFolderIdsInner>}
+     * @type {Array<DuplicateRequestDtoAllOfFileIds>}
      * @memberof DuplicateRequestDto
      */
-    'fileIds'?: Array<BaseBatchRequestDtoFolderIdsInner> | null;
-}
+    'fileIds'?: Array<DuplicateRequestDtoAllOfFileIds> | null;
+};
+
 

@@ -7,8 +7,8 @@ The request parameters for downloading files.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **returnSingleOperation** | **boolean** | Specifies whether to return only the current operation | [optional] [default to undefined]
-**folderIds** | [**Array&lt;BaseBatchRequestDtoFolderIdsInner&gt;**](BaseBatchRequestDtoFolderIdsInner.md) | The list of folder IDs to be downloaded. | [optional] [default to undefined]
-**fileIds** | [**Array&lt;BaseBatchRequestDtoFolderIdsInner&gt;**](BaseBatchRequestDtoFolderIdsInner.md) | The list of file IDs to be downloaded. | [optional] [default to undefined]
+**folderIds** | [**Array&lt;DownloadRequestDtoAllOfFolderIds&gt;**](DownloadRequestDtoAllOfFolderIds.md) | The list of folder IDs to be downloaded. | [optional] [default to undefined]
+**fileIds** | [**Array&lt;DownloadRequestDtoAllOfFileIds&gt;**](DownloadRequestDtoAllOfFileIds.md) | The list of file IDs to be downloaded. | [optional] [default to undefined]
 **fileConvertIds** | [**Array&lt;DownloadRequestItemDto&gt;**](DownloadRequestItemDto.md) | The list of file IDs which will be converted. | [optional] [default to undefined]
 
 ## Example

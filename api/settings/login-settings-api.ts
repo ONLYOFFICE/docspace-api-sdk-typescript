@@ -29,10 +29,10 @@ import type { LoginSettingsRequestDto } from '../../models';
 // @ts-ignore
 import type { LoginSettingsWrapper } from '../../models';
 /**
- * SettingsLoginSettingsApi - axios parameter creator
+ * LoginSettingsApi - axios parameter creator
  * @export
  */
-export const SettingsLoginSettingsApiAxiosParamCreator = function (configuration?: Configuration) {
+export const LoginSettingsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Returns the portal login settings.
@@ -195,11 +195,11 @@ export const SettingsLoginSettingsApiAxiosParamCreator = function (configuration
 };
 
 /**
- * SettingsLoginSettingsApi - functional programming interface
+ * LoginSettingsApi - functional programming interface
  * @export
  */
-export const SettingsLoginSettingsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SettingsLoginSettingsApiAxiosParamCreator(configuration)
+export const LoginSettingsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = LoginSettingsApiAxiosParamCreator(configuration)
     return {
         /**
          * Returns the portal login settings.
@@ -212,7 +212,7 @@ export const SettingsLoginSettingsApiFp = function(configuration?: Configuration
         async getLoginSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoginSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getLoginSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsLoginSettingsApi.getLoginSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['LoginSettingsApi.getLoginSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -226,7 +226,7 @@ export const SettingsLoginSettingsApiFp = function(configuration?: Configuration
         async setDefaultLoginSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoginSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setDefaultLoginSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsLoginSettingsApi.setDefaultLoginSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['LoginSettingsApi.setDefaultLoginSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -241,18 +241,18 @@ export const SettingsLoginSettingsApiFp = function(configuration?: Configuration
         async updateLoginSettings(loginSettingsRequestDto?: LoginSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoginSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateLoginSettings(loginSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsLoginSettingsApi.updateLoginSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['LoginSettingsApi.updateLoginSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * SettingsLoginSettingsApi - factory interface
+ * LoginSettingsApi - factory interface
  * @export
  */
-export const SettingsLoginSettingsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SettingsLoginSettingsApiFp(configuration)
+export const LoginSettingsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = LoginSettingsApiFp(configuration)
     return {
         /**
          * Returns the portal login settings.
@@ -292,21 +292,21 @@ export const SettingsLoginSettingsApiFactory = function (configuration?: Configu
 };
 
 /**
- * SettingsLoginSettingsApi - object-oriented interface
+ * LoginSettingsApi - object-oriented interface
  * @export
- * @class SettingsLoginSettingsApi
+ * @class LoginSettingsApi
  * @extends {BaseAPI}
  */
-export class SettingsLoginSettingsApi extends BaseAPI {
+export class LoginSettingsApi extends BaseAPI {
     /**
      * Returns the portal login settings.
      * @summary Get the login settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsLoginSettingsApi
+     * @memberof LoginSettingsApi
      */
     public getLoginSettings(options?: RawAxiosRequestConfig) {
-        return SettingsLoginSettingsApiFp(this.configuration).getLoginSettings(options).then((request) => request(this.axios, this.basePath));
+        return LoginSettingsApiFp(this.configuration).getLoginSettings(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -314,10 +314,10 @@ export class SettingsLoginSettingsApi extends BaseAPI {
      * @summary Reset the login settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsLoginSettingsApi
+     * @memberof LoginSettingsApi
      */
     public setDefaultLoginSettings(options?: RawAxiosRequestConfig) {
-        return SettingsLoginSettingsApiFp(this.configuration).setDefaultLoginSettings(options).then((request) => request(this.axios, this.basePath));
+        return LoginSettingsApiFp(this.configuration).setDefaultLoginSettings(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -326,10 +326,10 @@ export class SettingsLoginSettingsApi extends BaseAPI {
      * @param {LoginSettingsRequestDto} [loginSettingsRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsLoginSettingsApi
+     * @memberof LoginSettingsApi
      */
     public updateLoginSettings(loginSettingsRequestDto?: LoginSettingsRequestDto, options?: RawAxiosRequestConfig) {
-        return SettingsLoginSettingsApiFp(this.configuration).updateLoginSettings(loginSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return LoginSettingsApiFp(this.configuration).updateLoginSettings(loginSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

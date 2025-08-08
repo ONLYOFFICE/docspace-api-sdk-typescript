@@ -24,7 +24,10 @@ import type { ApiDateTime } from './api-date-time';
 import type { EmployeeDto } from './employee-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FileDtoIntegerSecurity } from './file-dto-integer-security';
+import type { FileEntryDtoIntegerAllOfSecurity } from './file-entry-dto-integer-all-of-security';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { FileEntryDtoString } from './file-entry-dto-string';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { FileEntryType } from './file-entry-type';
@@ -48,149 +51,11 @@ import type { RoomType } from './room-type';
 import type { WatermarkDto } from './watermark-dto';
 
 /**
+ * @type FolderDtoString
  * The folder parameters.
  * @export
- * @interface FolderDtoString
  */
-export interface FolderDtoString {
-    /**
-     * The file entry title.
-     * @type {string}
-     * @memberof FolderDtoString
-     */
-    'title'?: string | null;
-    /**
-     * 
-     * @type {FileShare}
-     * @memberof FolderDtoString
-     */
-    'access'?: FileShare;
-    /**
-     * Specifies if the file entry is shared or not.
-     * @type {boolean}
-     * @memberof FolderDtoString
-     */
-    'shared'?: boolean;
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof FolderDtoString
-     */
-    'created'?: ApiDateTime;
-    /**
-     * 
-     * @type {EmployeeDto}
-     * @memberof FolderDtoString
-     */
-    'createdBy'?: EmployeeDto;
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof FolderDtoString
-     */
-    'updated'?: ApiDateTime;
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof FolderDtoString
-     */
-    'autoDelete'?: ApiDateTime;
-    /**
-     * 
-     * @type {FolderType}
-     * @memberof FolderDtoString
-     */
-    'rootFolderType'?: FolderType;
-    /**
-     * 
-     * @type {FolderType}
-     * @memberof FolderDtoString
-     */
-    'parentRoomType'?: FolderType;
-    /**
-     * 
-     * @type {EmployeeDto}
-     * @memberof FolderDtoString
-     */
-    'updatedBy'?: EmployeeDto;
-    /**
-     * Specifies if the file entry provider is specified or not.
-     * @type {boolean}
-     * @memberof FolderDtoString
-     */
-    'providerItem'?: boolean | null;
-    /**
-     * The provider key of the file entry.
-     * @type {string}
-     * @memberof FolderDtoString
-     */
-    'providerKey'?: string | null;
-    /**
-     * The provider ID of the file entry.
-     * @type {number}
-     * @memberof FolderDtoString
-     */
-    'providerId'?: number | null;
-    /**
-     * The order of the file entry.
-     * @type {string}
-     * @memberof FolderDtoString
-     */
-    'order'?: string | null;
-    /**
-     * The file entry ID.
-     * @type {string}
-     * @memberof FolderDtoString
-     */
-    'id'?: string | null;
-    /**
-     * The root folder ID of the file entry.
-     * @type {string}
-     * @memberof FolderDtoString
-     */
-    'rootFolderId'?: string | null;
-    /**
-     * The origin ID of the file entry.
-     * @type {string}
-     * @memberof FolderDtoString
-     */
-    'originId'?: string | null;
-    /**
-     * The origin room ID of the file entry.
-     * @type {string}
-     * @memberof FolderDtoString
-     */
-    'originRoomId'?: string | null;
-    /**
-     * The origin title of the file entry.
-     * @type {string}
-     * @memberof FolderDtoString
-     */
-    'originTitle'?: string | null;
-    /**
-     * The origin room title of the file entry.
-     * @type {string}
-     * @memberof FolderDtoString
-     */
-    'originRoomTitle'?: string | null;
-    /**
-     * Specifies if the file entry can be shared or not.
-     * @type {boolean}
-     * @memberof FolderDtoString
-     */
-    'canShare'?: boolean;
-    /**
-     * 
-     * @type {FileDtoIntegerSecurity}
-     * @memberof FolderDtoString
-     */
-    'security'?: FileDtoIntegerSecurity | null;
-    /**
-     * The request token of the file entry.
-     * @type {string}
-     * @memberof FolderDtoString
-     */
-    'requestToken'?: string | null;
+export type FolderDtoString = FileEntryDtoString &  {
     /**
      * The parent folder ID of the folder.
      * @type {string}
@@ -335,13 +200,6 @@ export interface FolderDtoString {
      * @memberof FolderDtoString
      */
     'expired'?: boolean | null;
-    /**
-     * 
-     * @type {FileEntryType}
-     * @memberof FolderDtoString
-     */
-    'fileEntryType'?: FileEntryType;
-}
-
+};
 
 

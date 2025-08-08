@@ -18,7 +18,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FileEntryDto } from './file-entry-dto';
+import type { FileEntryBaseDto } from './file-entry-base-dto';
 
 /**
  * The room new items information.
@@ -28,15 +28,15 @@ import type { FileEntryDto } from './file-entry-dto';
 export interface RoomNewItemsDto {
     /**
      * 
-     * @type {FileEntryDto}
+     * @type {FileEntryBaseDto}
      * @memberof RoomNewItemsDto
      */
-    'room'?: FileEntryDto;
+    'room'?: FileEntryBaseDto;
     /**
      * The list of file entry items.
-     * @type {Array<FileEntryDto>}
+     * @type {Array<FileEntryBaseDto>}
      * @memberof RoomNewItemsDto
      */
-    'items'?: Array<FileEntryDto> | null;
+    'items'?: Array<FileEntryBaseDto> | null;
 }
 

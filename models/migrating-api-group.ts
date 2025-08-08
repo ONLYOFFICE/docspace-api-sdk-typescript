@@ -16,19 +16,15 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ImportableApiEntity } from './importable-api-entity';
 
 /**
- * 
+ * @type MigratingApiGroup
  * @export
- * @interface MigratingApiGroup
  */
-export interface MigratingApiGroup {
-    /**
-     * 
-     * @type {boolean}
-     * @memberof MigratingApiGroup
-     */
-    'shouldImport'?: boolean;
+export type MigratingApiGroup = ImportableApiEntity &  {
     /**
      * 
      * @type {string}
@@ -47,5 +43,6 @@ export interface MigratingApiGroup {
      * @memberof MigratingApiGroup
      */
     'userUidList'?: Array<string> | null;
-}
+};
+
 

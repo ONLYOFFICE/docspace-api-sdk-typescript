@@ -31,10 +31,10 @@ import type { StringWrapper } from '../../models';
 // @ts-ignore
 import type { TenantWrapper } from '../../models';
 /**
- * PortalSettingsApi - axios parameter creator
+ * SettingsApi - axios parameter creator
  * @export
  */
-export const PortalSettingsApiAxiosParamCreator = function (configuration?: Configuration) {
+export const SettingsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Restores the current portal.
@@ -402,11 +402,11 @@ export const PortalSettingsApiAxiosParamCreator = function (configuration?: Conf
 };
 
 /**
- * PortalSettingsApi - functional programming interface
+ * SettingsApi - functional programming interface
  * @export
  */
-export const PortalSettingsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = PortalSettingsApiAxiosParamCreator(configuration)
+export const SettingsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = SettingsApiAxiosParamCreator(configuration)
     return {
         /**
          * Restores the current portal.
@@ -419,7 +419,7 @@ export const PortalSettingsApiFp = function(configuration?: Configuration) {
         async continuePortal(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.continuePortal(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalSettingsApi.continuePortal']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SettingsApi.continuePortal']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -433,7 +433,7 @@ export const PortalSettingsApiFp = function(configuration?: Configuration) {
         async deletePortal(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deletePortal(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalSettingsApi.deletePortal']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SettingsApi.deletePortal']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -447,7 +447,7 @@ export const PortalSettingsApiFp = function(configuration?: Configuration) {
         async getPortalInformation(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPortalInformation(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalSettingsApi.getPortalInformation']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SettingsApi.getPortalInformation']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -462,7 +462,7 @@ export const PortalSettingsApiFp = function(configuration?: Configuration) {
         async getPortalPath(virtualPath?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPortalPath(virtualPath, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalSettingsApi.getPortalPath']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SettingsApi.getPortalPath']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -476,7 +476,7 @@ export const PortalSettingsApiFp = function(configuration?: Configuration) {
         async sendDeleteInstructions(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.sendDeleteInstructions(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalSettingsApi.sendDeleteInstructions']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SettingsApi.sendDeleteInstructions']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -490,7 +490,7 @@ export const PortalSettingsApiFp = function(configuration?: Configuration) {
         async sendSuspendInstructions(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.sendSuspendInstructions(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalSettingsApi.sendSuspendInstructions']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SettingsApi.sendSuspendInstructions']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -504,18 +504,18 @@ export const PortalSettingsApiFp = function(configuration?: Configuration) {
         async suspendPortal(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.suspendPortal(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalSettingsApi.suspendPortal']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SettingsApi.suspendPortal']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * PortalSettingsApi - factory interface
+ * SettingsApi - factory interface
  * @export
  */
-export const PortalSettingsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = PortalSettingsApiFp(configuration)
+export const SettingsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = SettingsApiFp(configuration)
     return {
         /**
          * Restores the current portal.
@@ -599,21 +599,21 @@ export const PortalSettingsApiFactory = function (configuration?: Configuration,
 };
 
 /**
- * PortalSettingsApi - object-oriented interface
+ * SettingsApi - object-oriented interface
  * @export
- * @class PortalSettingsApi
+ * @class SettingsApi
  * @extends {BaseAPI}
  */
-export class PortalSettingsApi extends BaseAPI {
+export class SettingsApi extends BaseAPI {
     /**
      * Restores the current portal.
      * @summary Restore a portal
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalSettingsApi
+     * @memberof SettingsApi
      */
     public continuePortal(options?: RawAxiosRequestConfig) {
-        return PortalSettingsApiFp(this.configuration).continuePortal(options).then((request) => request(this.axios, this.basePath));
+        return SettingsApiFp(this.configuration).continuePortal(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -621,10 +621,10 @@ export class PortalSettingsApi extends BaseAPI {
      * @summary Delete a portal
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalSettingsApi
+     * @memberof SettingsApi
      */
     public deletePortal(options?: RawAxiosRequestConfig) {
-        return PortalSettingsApiFp(this.configuration).deletePortal(options).then((request) => request(this.axios, this.basePath));
+        return SettingsApiFp(this.configuration).deletePortal(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -632,10 +632,10 @@ export class PortalSettingsApi extends BaseAPI {
      * @summary Get a portal
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalSettingsApi
+     * @memberof SettingsApi
      */
     public getPortalInformation(options?: RawAxiosRequestConfig) {
-        return PortalSettingsApiFp(this.configuration).getPortalInformation(options).then((request) => request(this.axios, this.basePath));
+        return SettingsApiFp(this.configuration).getPortalInformation(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -644,10 +644,10 @@ export class PortalSettingsApi extends BaseAPI {
      * @param {string} [virtualPath] The virtual path for the portal resource access.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalSettingsApi
+     * @memberof SettingsApi
      */
     public getPortalPath(virtualPath?: string, options?: RawAxiosRequestConfig) {
-        return PortalSettingsApiFp(this.configuration).getPortalPath(virtualPath, options).then((request) => request(this.axios, this.basePath));
+        return SettingsApiFp(this.configuration).getPortalPath(virtualPath, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -655,10 +655,10 @@ export class PortalSettingsApi extends BaseAPI {
      * @summary Send removal instructions
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalSettingsApi
+     * @memberof SettingsApi
      */
     public sendDeleteInstructions(options?: RawAxiosRequestConfig) {
-        return PortalSettingsApiFp(this.configuration).sendDeleteInstructions(options).then((request) => request(this.axios, this.basePath));
+        return SettingsApiFp(this.configuration).sendDeleteInstructions(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -666,10 +666,10 @@ export class PortalSettingsApi extends BaseAPI {
      * @summary Send suspension instructions
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalSettingsApi
+     * @memberof SettingsApi
      */
     public sendSuspendInstructions(options?: RawAxiosRequestConfig) {
-        return PortalSettingsApiFp(this.configuration).sendSuspendInstructions(options).then((request) => request(this.axios, this.basePath));
+        return SettingsApiFp(this.configuration).sendSuspendInstructions(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -677,10 +677,10 @@ export class PortalSettingsApi extends BaseAPI {
      * @summary Deactivate a portal
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalSettingsApi
+     * @memberof SettingsApi
      */
     public suspendPortal(options?: RawAxiosRequestConfig) {
-        return PortalSettingsApiFp(this.configuration).suspendPortal(options).then((request) => request(this.axios, this.basePath));
+        return SettingsApiFp(this.configuration).suspendPortal(options).then((request) => request(this.axios, this.basePath));
     }
 }
 

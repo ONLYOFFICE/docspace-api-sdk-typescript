@@ -45,10 +45,10 @@ import type { WebhooksLogArrayWrapper } from '../../models';
 // @ts-ignore
 import type { WebhooksLogWrapper } from '../../models';
 /**
- * SettingsWebhooksApi - axios parameter creator
+ * WebhooksApi - axios parameter creator
  * @export
  */
-export const SettingsWebhooksApiAxiosParamCreator = function (configuration?: Configuration) {
+export const WebhooksApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Creates a new tenant webhook with the parameters specified in the request.
@@ -596,11 +596,11 @@ export const SettingsWebhooksApiAxiosParamCreator = function (configuration?: Co
 };
 
 /**
- * SettingsWebhooksApi - functional programming interface
+ * WebhooksApi - functional programming interface
  * @export
  */
-export const SettingsWebhooksApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SettingsWebhooksApiAxiosParamCreator(configuration)
+export const WebhooksApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = WebhooksApiAxiosParamCreator(configuration)
     return {
         /**
          * Creates a new tenant webhook with the parameters specified in the request.
@@ -614,7 +614,7 @@ export const SettingsWebhooksApiFp = function(configuration?: Configuration) {
         async createWebhook(createWebhooksConfigRequestsDto?: CreateWebhooksConfigRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksConfigWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createWebhook(createWebhooksConfigRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsWebhooksApi.createWebhook']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['WebhooksApi.createWebhook']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -629,7 +629,7 @@ export const SettingsWebhooksApiFp = function(configuration?: Configuration) {
         async enableWebhook(updateWebhooksConfigRequestsDto?: UpdateWebhooksConfigRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksConfigWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.enableWebhook(updateWebhooksConfigRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsWebhooksApi.enableWebhook']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['WebhooksApi.enableWebhook']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -643,7 +643,7 @@ export const SettingsWebhooksApiFp = function(configuration?: Configuration) {
         async getTenantWebhooks(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksConfigWithStatusArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTenantWebhooks(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsWebhooksApi.getTenantWebhooks']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['WebhooksApi.getTenantWebhooks']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -657,7 +657,7 @@ export const SettingsWebhooksApiFp = function(configuration?: Configuration) {
         async getWebhookTriggers(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UnknownWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getWebhookTriggers(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsWebhooksApi.getWebhookTriggers']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['WebhooksApi.getWebhookTriggers']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -682,7 +682,7 @@ export const SettingsWebhooksApiFp = function(configuration?: Configuration) {
         async getWebhooksLogs(deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, count?: number, startIndex?: number, fields?: string | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksLogArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getWebhooksLogs(deliveryFrom, deliveryTo, hookUri, configId, eventId, groupStatus, userId, trigger, count, startIndex, fields, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsWebhooksApi.getWebhooksLogs']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['WebhooksApi.getWebhooksLogs']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -697,7 +697,7 @@ export const SettingsWebhooksApiFp = function(configuration?: Configuration) {
         async removeWebhook(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksConfigWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.removeWebhook(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsWebhooksApi.removeWebhook']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['WebhooksApi.removeWebhook']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -712,7 +712,7 @@ export const SettingsWebhooksApiFp = function(configuration?: Configuration) {
         async retryWebhook(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksLogWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.retryWebhook(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsWebhooksApi.retryWebhook']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['WebhooksApi.retryWebhook']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -727,7 +727,7 @@ export const SettingsWebhooksApiFp = function(configuration?: Configuration) {
         async retryWebhooks(webhookRetryRequestsDto?: WebhookRetryRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksLogArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.retryWebhooks(webhookRetryRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsWebhooksApi.retryWebhooks']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['WebhooksApi.retryWebhooks']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -742,18 +742,18 @@ export const SettingsWebhooksApiFp = function(configuration?: Configuration) {
         async updateWebhook(updateWebhooksConfigRequestsDto?: UpdateWebhooksConfigRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksConfigWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateWebhook(updateWebhooksConfigRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsWebhooksApi.updateWebhook']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['WebhooksApi.updateWebhook']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * SettingsWebhooksApi - factory interface
+ * WebhooksApi - factory interface
  * @export
  */
-export const SettingsWebhooksApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SettingsWebhooksApiFp(configuration)
+export const WebhooksApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = WebhooksApiFp(configuration)
     return {
         /**
          * Creates a new tenant webhook with the parameters specified in the request.
@@ -875,22 +875,22 @@ export const SettingsWebhooksApiFactory = function (configuration?: Configuratio
 };
 
 /**
- * SettingsWebhooksApi - object-oriented interface
+ * WebhooksApi - object-oriented interface
  * @export
- * @class SettingsWebhooksApi
+ * @class WebhooksApi
  * @extends {BaseAPI}
  */
-export class SettingsWebhooksApi extends BaseAPI {
+export class WebhooksApi extends BaseAPI {
     /**
      * Creates a new tenant webhook with the parameters specified in the request.
      * @summary Create a webhook
      * @param {CreateWebhooksConfigRequestsDto} [createWebhooksConfigRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsWebhooksApi
+     * @memberof WebhooksApi
      */
     public createWebhook(createWebhooksConfigRequestsDto?: CreateWebhooksConfigRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsWebhooksApiFp(this.configuration).createWebhook(createWebhooksConfigRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return WebhooksApiFp(this.configuration).createWebhook(createWebhooksConfigRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -899,10 +899,10 @@ export class SettingsWebhooksApi extends BaseAPI {
      * @param {UpdateWebhooksConfigRequestsDto} [updateWebhooksConfigRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsWebhooksApi
+     * @memberof WebhooksApi
      */
     public enableWebhook(updateWebhooksConfigRequestsDto?: UpdateWebhooksConfigRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsWebhooksApiFp(this.configuration).enableWebhook(updateWebhooksConfigRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return WebhooksApiFp(this.configuration).enableWebhook(updateWebhooksConfigRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -910,10 +910,10 @@ export class SettingsWebhooksApi extends BaseAPI {
      * @summary Get webhooks
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsWebhooksApi
+     * @memberof WebhooksApi
      */
     public getTenantWebhooks(options?: RawAxiosRequestConfig) {
-        return SettingsWebhooksApiFp(this.configuration).getTenantWebhooks(options).then((request) => request(this.axios, this.basePath));
+        return WebhooksApiFp(this.configuration).getTenantWebhooks(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -921,10 +921,10 @@ export class SettingsWebhooksApi extends BaseAPI {
      * @summary Get webhook triggers
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsWebhooksApi
+     * @memberof WebhooksApi
      */
     public getWebhookTriggers(options?: RawAxiosRequestConfig) {
-        return SettingsWebhooksApiFp(this.configuration).getWebhookTriggers(options).then((request) => request(this.axios, this.basePath));
+        return WebhooksApiFp(this.configuration).getWebhookTriggers(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -943,10 +943,10 @@ export class SettingsWebhooksApi extends BaseAPI {
      * @param {string | null} [fields] Comma-separated list of fields to include in the response
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsWebhooksApi
+     * @memberof WebhooksApi
      */
     public getWebhooksLogs(deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, count?: number, startIndex?: number, fields?: string | null, options?: RawAxiosRequestConfig) {
-        return SettingsWebhooksApiFp(this.configuration).getWebhooksLogs(deliveryFrom, deliveryTo, hookUri, configId, eventId, groupStatus, userId, trigger, count, startIndex, fields, options).then((request) => request(this.axios, this.basePath));
+        return WebhooksApiFp(this.configuration).getWebhooksLogs(deliveryFrom, deliveryTo, hookUri, configId, eventId, groupStatus, userId, trigger, count, startIndex, fields, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -955,10 +955,10 @@ export class SettingsWebhooksApi extends BaseAPI {
      * @param {number} id The ID extracted from the route parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsWebhooksApi
+     * @memberof WebhooksApi
      */
     public removeWebhook(id: number, options?: RawAxiosRequestConfig) {
-        return SettingsWebhooksApiFp(this.configuration).removeWebhook(id, options).then((request) => request(this.axios, this.basePath));
+        return WebhooksApiFp(this.configuration).removeWebhook(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -967,10 +967,10 @@ export class SettingsWebhooksApi extends BaseAPI {
      * @param {number} id The ID extracted from the route parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsWebhooksApi
+     * @memberof WebhooksApi
      */
     public retryWebhook(id: number, options?: RawAxiosRequestConfig) {
-        return SettingsWebhooksApiFp(this.configuration).retryWebhook(id, options).then((request) => request(this.axios, this.basePath));
+        return WebhooksApiFp(this.configuration).retryWebhook(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -979,10 +979,10 @@ export class SettingsWebhooksApi extends BaseAPI {
      * @param {WebhookRetryRequestsDto} [webhookRetryRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsWebhooksApi
+     * @memberof WebhooksApi
      */
     public retryWebhooks(webhookRetryRequestsDto?: WebhookRetryRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsWebhooksApiFp(this.configuration).retryWebhooks(webhookRetryRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return WebhooksApiFp(this.configuration).retryWebhooks(webhookRetryRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -991,10 +991,10 @@ export class SettingsWebhooksApi extends BaseAPI {
      * @param {UpdateWebhooksConfigRequestsDto} [updateWebhooksConfigRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsWebhooksApi
+     * @memberof WebhooksApi
      */
     public updateWebhook(updateWebhooksConfigRequestsDto?: UpdateWebhooksConfigRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsWebhooksApiFp(this.configuration).updateWebhook(updateWebhooksConfigRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return WebhooksApiFp(this.configuration).updateWebhook(updateWebhooksConfigRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

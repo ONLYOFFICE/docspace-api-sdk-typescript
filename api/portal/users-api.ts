@@ -33,10 +33,10 @@ import type { StringWrapper } from '../../models';
 // @ts-ignore
 import type { UserInfoWrapper } from '../../models';
 /**
- * PortalUsersApi - axios parameter creator
+ * UsersApi - axios parameter creator
  * @export
  */
-export const PortalUsersApiAxiosParamCreator = function (configuration?: Configuration) {
+export const UsersApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Returns an invitation link for joining the portal.
@@ -296,11 +296,11 @@ export const PortalUsersApiAxiosParamCreator = function (configuration?: Configu
 };
 
 /**
- * PortalUsersApi - functional programming interface
+ * UsersApi - functional programming interface
  * @export
  */
-export const PortalUsersApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = PortalUsersApiAxiosParamCreator(configuration)
+export const UsersApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = UsersApiAxiosParamCreator(configuration)
     return {
         /**
          * Returns an invitation link for joining the portal.
@@ -314,7 +314,7 @@ export const PortalUsersApiFp = function(configuration?: Configuration) {
         async getInvitationLink(employeeType: EmployeeType, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getInvitationLink(employeeType, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalUsersApi.getInvitationLink']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['UsersApi.getInvitationLink']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -328,7 +328,7 @@ export const PortalUsersApiFp = function(configuration?: Configuration) {
         async getPortalUsersCount(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Int64Wrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPortalUsersCount(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalUsersApi.getPortalUsersCount']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['UsersApi.getPortalUsersCount']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -343,7 +343,7 @@ export const PortalUsersApiFp = function(configuration?: Configuration) {
         async getUserById(userID: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserInfoWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserById(userID, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalUsersApi.getUserById']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['UsersApi.getUserById']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -357,7 +357,7 @@ export const PortalUsersApiFp = function(configuration?: Configuration) {
         async markGiftMessageAsRead(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.markGiftMessageAsRead(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalUsersApi.markGiftMessageAsRead']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['UsersApi.markGiftMessageAsRead']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -373,18 +373,18 @@ export const PortalUsersApiFp = function(configuration?: Configuration) {
         async sendCongratulations(userid?: string, key?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.sendCongratulations(userid, key, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PortalUsersApi.sendCongratulations']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['UsersApi.sendCongratulations']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * PortalUsersApi - factory interface
+ * UsersApi - factory interface
  * @export
  */
-export const PortalUsersApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = PortalUsersApiFp(configuration)
+export const UsersApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = UsersApiFp(configuration)
     return {
         /**
          * Returns an invitation link for joining the portal.
@@ -449,22 +449,22 @@ export const PortalUsersApiFactory = function (configuration?: Configuration, ba
 };
 
 /**
- * PortalUsersApi - object-oriented interface
+ * UsersApi - object-oriented interface
  * @export
- * @class PortalUsersApi
+ * @class UsersApi
  * @extends {BaseAPI}
  */
-export class PortalUsersApi extends BaseAPI {
+export class UsersApi extends BaseAPI {
     /**
      * Returns an invitation link for joining the portal.
      * @summary Get an invitation link
      * @param {EmployeeType} employeeType The type of employee role for the invitation link (All, RoomAdmin, Guest, DocSpaceAdmin, User).
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalUsersApi
+     * @memberof UsersApi
      */
     public getInvitationLink(employeeType: EmployeeType, options?: RawAxiosRequestConfig) {
-        return PortalUsersApiFp(this.configuration).getInvitationLink(employeeType, options).then((request) => request(this.axios, this.basePath));
+        return UsersApiFp(this.configuration).getInvitationLink(employeeType, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -472,10 +472,10 @@ export class PortalUsersApi extends BaseAPI {
      * @summary Get a number of portal users
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalUsersApi
+     * @memberof UsersApi
      */
     public getPortalUsersCount(options?: RawAxiosRequestConfig) {
-        return PortalUsersApiFp(this.configuration).getPortalUsersCount(options).then((request) => request(this.axios, this.basePath));
+        return UsersApiFp(this.configuration).getPortalUsersCount(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -484,10 +484,10 @@ export class PortalUsersApi extends BaseAPI {
      * @param {string} userID The user ID extracted from the route parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalUsersApi
+     * @memberof UsersApi
      */
     public getUserById(userID: string, options?: RawAxiosRequestConfig) {
-        return PortalUsersApiFp(this.configuration).getUserById(userID, options).then((request) => request(this.axios, this.basePath));
+        return UsersApiFp(this.configuration).getUserById(userID, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -495,10 +495,10 @@ export class PortalUsersApi extends BaseAPI {
      * @summary Mark a gift message as read
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalUsersApi
+     * @memberof UsersApi
      */
     public markGiftMessageAsRead(options?: RawAxiosRequestConfig) {
-        return PortalUsersApiFp(this.configuration).markGiftMessageAsRead(options).then((request) => request(this.axios, this.basePath));
+        return UsersApiFp(this.configuration).markGiftMessageAsRead(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -508,10 +508,10 @@ export class PortalUsersApi extends BaseAPI {
      * @param {string} [key] The template identifier or email configuration key.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PortalUsersApi
+     * @memberof UsersApi
      */
     public sendCongratulations(userid?: string, key?: string, options?: RawAxiosRequestConfig) {
-        return PortalUsersApiFp(this.configuration).sendCongratulations(userid, key, options).then((request) => request(this.axios, this.basePath));
+        return UsersApiFp(this.configuration).sendCongratulations(userid, key, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

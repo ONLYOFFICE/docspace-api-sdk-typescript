@@ -47,10 +47,10 @@ import type { UpdateMemberRequestDto } from '../../models';
 // @ts-ignore
 import type { UpdateMembersRequestDto } from '../../models';
 /**
- * PeopleProfilesApi - axios parameter creator
+ * ProfilesApi - axios parameter creator
  * @export
  */
-export const PeopleProfilesApiAxiosParamCreator = function (configuration?: Configuration) {
+export const ProfilesApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Adds a new portal user with the first name, last name, email address, and several optional parameters specified in the request.
@@ -864,11 +864,11 @@ export const PeopleProfilesApiAxiosParamCreator = function (configuration?: Conf
 };
 
 /**
- * PeopleProfilesApi - functional programming interface
+ * ProfilesApi - functional programming interface
  * @export
  */
-export const PeopleProfilesApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = PeopleProfilesApiAxiosParamCreator(configuration)
+export const ProfilesApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ProfilesApiAxiosParamCreator(configuration)
     return {
         /**
          * Adds a new portal user with the first name, last name, email address, and several optional parameters specified in the request.
@@ -882,7 +882,7 @@ export const PeopleProfilesApiFp = function(configuration?: Configuration) {
         async addMember(memberRequestDto?: MemberRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.addMember(memberRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleProfilesApi.addMember']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ProfilesApi.addMember']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -897,7 +897,7 @@ export const PeopleProfilesApiFp = function(configuration?: Configuration) {
         async deleteMember(userid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteMember(userid, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleProfilesApi.deleteMember']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ProfilesApi.deleteMember']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -911,7 +911,7 @@ export const PeopleProfilesApiFp = function(configuration?: Configuration) {
         async deleteProfile(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteProfile(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleProfilesApi.deleteProfile']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ProfilesApi.deleteProfile']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -933,7 +933,7 @@ export const PeopleProfilesApiFp = function(configuration?: Configuration) {
         async getAllProfiles(count?: number, startIndex?: number, filterBy?: string, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, fields?: string | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAllProfiles(count, startIndex, filterBy, sortBy, sortOrder, filterSeparator, filterValue, fields, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleProfilesApi.getAllProfiles']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ProfilesApi.getAllProfiles']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -947,7 +947,7 @@ export const PeopleProfilesApiFp = function(configuration?: Configuration) {
         async getClaims(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getClaims(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleProfilesApi.getClaims']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ProfilesApi.getClaims']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -963,7 +963,7 @@ export const PeopleProfilesApiFp = function(configuration?: Configuration) {
         async getProfileByEmail(email?: string, culture?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getProfileByEmail(email, culture, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleProfilesApi.getProfileByEmail']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ProfilesApi.getProfileByEmail']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -978,7 +978,7 @@ export const PeopleProfilesApiFp = function(configuration?: Configuration) {
         async getProfileByUserId(userid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getProfileByUserId(userid, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleProfilesApi.getProfileByUserId']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ProfilesApi.getProfileByUserId']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -992,7 +992,7 @@ export const PeopleProfilesApiFp = function(configuration?: Configuration) {
         async getSelfProfile(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSelfProfile(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleProfilesApi.getSelfProfile']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ProfilesApi.getSelfProfile']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1007,7 +1007,7 @@ export const PeopleProfilesApiFp = function(configuration?: Configuration) {
         async inviteUsers(inviteUsersRequestDto?: InviteUsersRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.inviteUsers(inviteUsersRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleProfilesApi.inviteUsers']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ProfilesApi.inviteUsers']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1022,7 +1022,7 @@ export const PeopleProfilesApiFp = function(configuration?: Configuration) {
         async removeUsers(updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.removeUsers(updateMembersRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleProfilesApi.removeUsers']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ProfilesApi.removeUsers']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1037,7 +1037,7 @@ export const PeopleProfilesApiFp = function(configuration?: Configuration) {
         async resendUserInvites(updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.resendUserInvites(updateMembersRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleProfilesApi.resendUserInvites']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ProfilesApi.resendUserInvites']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1052,7 +1052,7 @@ export const PeopleProfilesApiFp = function(configuration?: Configuration) {
         async sendEmailChangeInstructions(updateMemberRequestDto?: UpdateMemberRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.sendEmailChangeInstructions(updateMemberRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleProfilesApi.sendEmailChangeInstructions']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ProfilesApi.sendEmailChangeInstructions']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1068,7 +1068,7 @@ export const PeopleProfilesApiFp = function(configuration?: Configuration) {
         async updateMember(userid: string, updateMemberRequestDto?: UpdateMemberRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateMember(userid, updateMemberRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleProfilesApi.updateMember']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ProfilesApi.updateMember']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1084,18 +1084,18 @@ export const PeopleProfilesApiFp = function(configuration?: Configuration) {
         async updateMemberCulture(userid: string, culture?: Culture, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateMemberCulture(userid, culture, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleProfilesApi.updateMemberCulture']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ProfilesApi.updateMemberCulture']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * PeopleProfilesApi - factory interface
+ * ProfilesApi - factory interface
  * @export
  */
-export const PeopleProfilesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = PeopleProfilesApiFp(configuration)
+export const ProfilesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ProfilesApiFp(configuration)
     return {
         /**
          * Adds a new portal user with the first name, last name, email address, and several optional parameters specified in the request.
@@ -1276,22 +1276,22 @@ export const PeopleProfilesApiFactory = function (configuration?: Configuration,
 };
 
 /**
- * PeopleProfilesApi - object-oriented interface
+ * ProfilesApi - object-oriented interface
  * @export
- * @class PeopleProfilesApi
+ * @class ProfilesApi
  * @extends {BaseAPI}
  */
-export class PeopleProfilesApi extends BaseAPI {
+export class ProfilesApi extends BaseAPI {
     /**
      * Adds a new portal user with the first name, last name, email address, and several optional parameters specified in the request.
      * @summary Add a user
      * @param {MemberRequestDto} [memberRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleProfilesApi
+     * @memberof ProfilesApi
      */
     public addMember(memberRequestDto?: MemberRequestDto, options?: RawAxiosRequestConfig) {
-        return PeopleProfilesApiFp(this.configuration).addMember(memberRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return ProfilesApiFp(this.configuration).addMember(memberRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1300,10 +1300,10 @@ export class PeopleProfilesApi extends BaseAPI {
      * @param {string} userid The user ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleProfilesApi
+     * @memberof ProfilesApi
      */
     public deleteMember(userid: string, options?: RawAxiosRequestConfig) {
-        return PeopleProfilesApiFp(this.configuration).deleteMember(userid, options).then((request) => request(this.axios, this.basePath));
+        return ProfilesApiFp(this.configuration).deleteMember(userid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1311,10 +1311,10 @@ export class PeopleProfilesApi extends BaseAPI {
      * @summary Delete my profile
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleProfilesApi
+     * @memberof ProfilesApi
      */
     public deleteProfile(options?: RawAxiosRequestConfig) {
-        return PeopleProfilesApiFp(this.configuration).deleteProfile(options).then((request) => request(this.axios, this.basePath));
+        return ProfilesApiFp(this.configuration).deleteProfile(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1330,10 +1330,10 @@ export class PeopleProfilesApi extends BaseAPI {
      * @param {string | null} [fields] Comma-separated list of fields to include in the response
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleProfilesApi
+     * @memberof ProfilesApi
      */
     public getAllProfiles(count?: number, startIndex?: number, filterBy?: string, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, fields?: string | null, options?: RawAxiosRequestConfig) {
-        return PeopleProfilesApiFp(this.configuration).getAllProfiles(count, startIndex, filterBy, sortBy, sortOrder, filterSeparator, filterValue, fields, options).then((request) => request(this.axios, this.basePath));
+        return ProfilesApiFp(this.configuration).getAllProfiles(count, startIndex, filterBy, sortBy, sortOrder, filterSeparator, filterValue, fields, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1341,10 +1341,10 @@ export class PeopleProfilesApi extends BaseAPI {
      * @summary Returns the user claims.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleProfilesApi
+     * @memberof ProfilesApi
      */
     public getClaims(options?: RawAxiosRequestConfig) {
-        return PeopleProfilesApiFp(this.configuration).getClaims(options).then((request) => request(this.axios, this.basePath));
+        return ProfilesApiFp(this.configuration).getClaims(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1354,10 +1354,10 @@ export class PeopleProfilesApi extends BaseAPI {
      * @param {string} [culture] Culture
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleProfilesApi
+     * @memberof ProfilesApi
      */
     public getProfileByEmail(email?: string, culture?: string, options?: RawAxiosRequestConfig) {
-        return PeopleProfilesApiFp(this.configuration).getProfileByEmail(email, culture, options).then((request) => request(this.axios, this.basePath));
+        return ProfilesApiFp(this.configuration).getProfileByEmail(email, culture, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1366,10 +1366,10 @@ export class PeopleProfilesApi extends BaseAPI {
      * @param {string} userid The user ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleProfilesApi
+     * @memberof ProfilesApi
      */
     public getProfileByUserId(userid: string, options?: RawAxiosRequestConfig) {
-        return PeopleProfilesApiFp(this.configuration).getProfileByUserId(userid, options).then((request) => request(this.axios, this.basePath));
+        return ProfilesApiFp(this.configuration).getProfileByUserId(userid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1377,10 +1377,10 @@ export class PeopleProfilesApi extends BaseAPI {
      * @summary Get my profile
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleProfilesApi
+     * @memberof ProfilesApi
      */
     public getSelfProfile(options?: RawAxiosRequestConfig) {
-        return PeopleProfilesApiFp(this.configuration).getSelfProfile(options).then((request) => request(this.axios, this.basePath));
+        return ProfilesApiFp(this.configuration).getSelfProfile(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1389,10 +1389,10 @@ export class PeopleProfilesApi extends BaseAPI {
      * @param {InviteUsersRequestDto} [inviteUsersRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleProfilesApi
+     * @memberof ProfilesApi
      */
     public inviteUsers(inviteUsersRequestDto?: InviteUsersRequestDto, options?: RawAxiosRequestConfig) {
-        return PeopleProfilesApiFp(this.configuration).inviteUsers(inviteUsersRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return ProfilesApiFp(this.configuration).inviteUsers(inviteUsersRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1401,10 +1401,10 @@ export class PeopleProfilesApi extends BaseAPI {
      * @param {UpdateMembersRequestDto} [updateMembersRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleProfilesApi
+     * @memberof ProfilesApi
      */
     public removeUsers(updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig) {
-        return PeopleProfilesApiFp(this.configuration).removeUsers(updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return ProfilesApiFp(this.configuration).removeUsers(updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1413,10 +1413,10 @@ export class PeopleProfilesApi extends BaseAPI {
      * @param {UpdateMembersRequestDto} [updateMembersRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleProfilesApi
+     * @memberof ProfilesApi
      */
     public resendUserInvites(updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig) {
-        return PeopleProfilesApiFp(this.configuration).resendUserInvites(updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return ProfilesApiFp(this.configuration).resendUserInvites(updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1425,10 +1425,10 @@ export class PeopleProfilesApi extends BaseAPI {
      * @param {UpdateMemberRequestDto} [updateMemberRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleProfilesApi
+     * @memberof ProfilesApi
      */
     public sendEmailChangeInstructions(updateMemberRequestDto?: UpdateMemberRequestDto, options?: RawAxiosRequestConfig) {
-        return PeopleProfilesApiFp(this.configuration).sendEmailChangeInstructions(updateMemberRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return ProfilesApiFp(this.configuration).sendEmailChangeInstructions(updateMemberRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1438,10 +1438,10 @@ export class PeopleProfilesApi extends BaseAPI {
      * @param {UpdateMemberRequestDto} [updateMemberRequestDto] The request parameters for updating the user information.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleProfilesApi
+     * @memberof ProfilesApi
      */
     public updateMember(userid: string, updateMemberRequestDto?: UpdateMemberRequestDto, options?: RawAxiosRequestConfig) {
-        return PeopleProfilesApiFp(this.configuration).updateMember(userid, updateMemberRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return ProfilesApiFp(this.configuration).updateMember(userid, updateMemberRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1451,10 +1451,10 @@ export class PeopleProfilesApi extends BaseAPI {
      * @param {Culture} [culture] The culture code parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeopleProfilesApi
+     * @memberof ProfilesApi
      */
     public updateMemberCulture(userid: string, culture?: Culture, options?: RawAxiosRequestConfig) {
-        return PeopleProfilesApiFp(this.configuration).updateMemberCulture(userid, culture, options).then((request) => request(this.axios, this.basePath));
+        return ProfilesApiFp(this.configuration).updateMemberCulture(userid, culture, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -14,7 +14,6 @@ Name | Type | Description | Notes
 **modifyFilter** | **boolean** | Defines if the filter can be applied globally (true) affecting all the other users,  or locally (false), i.e. for the current user only. | [optional] [default to undefined]
 **protect** | **boolean** | Defines if the \&quot;Protection\&quot; tab on the toolbar and the \&quot;Protect\&quot; button in the left menu are displayedor hidden. | [optional] [default to undefined]
 **print** | **boolean** | Defines if the document can be printed or not. | [optional] [default to undefined]
-**rename** | **boolean** | Specifies whether to display the \&quot;Rename...\&quot; button when using the \&quot;onRequestRename\&quot; event. | [optional] [default to undefined]
 **review** | **boolean** | Defines if the document can be reviewed or not. | [optional] [default to undefined]
 **copy** | **boolean** | Defines if the content can be copied to the clipboard or not. | [optional] [default to undefined]
 
@@ -32,7 +31,6 @@ const instance: PermissionsConfig = {
     modifyFilter,
     protect,
     print,
-    rename,
     review,
     copy,
 };

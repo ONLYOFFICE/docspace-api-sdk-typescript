@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **address** | **string** | The company address. | [optional] [default to undefined]
 **phone** | **string** | The company phone number. | [optional] [default to undefined]
 **IsLicensor** | **boolean** | Specifies if a company is a licensor or not. | [optional] [default to undefined]
+**hideAbout** | **boolean** | Specifies if the About page is visible or not | [optional] [default to undefined]
 **lastModified** | **string** |  | [optional] [default to undefined]
 
 ## Example
@@ -26,6 +27,7 @@ const instance: CompanyWhiteLabelSettings = {
     address,
     phone,
     IsLicensor,
+    hideAbout,
     lastModified,
 };
 ```

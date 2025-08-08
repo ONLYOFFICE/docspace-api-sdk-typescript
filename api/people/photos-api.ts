@@ -35,10 +35,10 @@ import type { ThumbnailsRequest } from '../../models';
 // @ts-ignore
 import type { UpdatePhotoMemberRequest } from '../../models';
 /**
- * PeoplePhotosApi - axios parameter creator
+ * PhotosApi - axios parameter creator
  * @export
  */
-export const PeoplePhotosApiAxiosParamCreator = function (configuration?: Configuration) {
+export const PhotosApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Creates the user photo thumbnails by coordinates of the original image specified in the request.
@@ -340,11 +340,11 @@ export const PeoplePhotosApiAxiosParamCreator = function (configuration?: Config
 };
 
 /**
- * PeoplePhotosApi - functional programming interface
+ * PhotosApi - functional programming interface
  * @export
  */
-export const PeoplePhotosApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = PeoplePhotosApiAxiosParamCreator(configuration)
+export const PhotosApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = PhotosApiAxiosParamCreator(configuration)
     return {
         /**
          * Creates the user photo thumbnails by coordinates of the original image specified in the request.
@@ -359,7 +359,7 @@ export const PeoplePhotosApiFp = function(configuration?: Configuration) {
         async createMemberPhotoThumbnails(userid: string, thumbnailsRequest?: ThumbnailsRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThumbnailsDataWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createMemberPhotoThumbnails(userid, thumbnailsRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeoplePhotosApi.createMemberPhotoThumbnails']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PhotosApi.createMemberPhotoThumbnails']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -374,7 +374,7 @@ export const PeoplePhotosApiFp = function(configuration?: Configuration) {
         async deleteMemberPhoto(userid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThumbnailsDataWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteMemberPhoto(userid, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeoplePhotosApi.deleteMemberPhoto']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PhotosApi.deleteMemberPhoto']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -389,7 +389,7 @@ export const PeoplePhotosApiFp = function(configuration?: Configuration) {
         async getMemberPhoto(userid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThumbnailsDataWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getMemberPhoto(userid, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeoplePhotosApi.getMemberPhoto']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PhotosApi.getMemberPhoto']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -405,7 +405,7 @@ export const PeoplePhotosApiFp = function(configuration?: Configuration) {
         async updateMemberPhoto(userid: string, updatePhotoMemberRequest?: UpdatePhotoMemberRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThumbnailsDataWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateMemberPhoto(userid, updatePhotoMemberRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeoplePhotosApi.updateMemberPhoto']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PhotosApi.updateMemberPhoto']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -421,18 +421,18 @@ export const PeoplePhotosApiFp = function(configuration?: Configuration) {
         async uploadMemberPhoto(userid: string, formCollection: Array<KeyValuePairStringStringValues>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileUploadResultWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.uploadMemberPhoto(userid, formCollection, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeoplePhotosApi.uploadMemberPhoto']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PhotosApi.uploadMemberPhoto']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * PeoplePhotosApi - factory interface
+ * PhotosApi - factory interface
  * @export
  */
-export const PeoplePhotosApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = PeoplePhotosApiFp(configuration)
+export const PhotosApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = PhotosApiFp(configuration)
     return {
         /**
          * Creates the user photo thumbnails by coordinates of the original image specified in the request.
@@ -501,12 +501,12 @@ export const PeoplePhotosApiFactory = function (configuration?: Configuration, b
 };
 
 /**
- * PeoplePhotosApi - object-oriented interface
+ * PhotosApi - object-oriented interface
  * @export
- * @class PeoplePhotosApi
+ * @class PhotosApi
  * @extends {BaseAPI}
  */
-export class PeoplePhotosApi extends BaseAPI {
+export class PhotosApi extends BaseAPI {
     /**
      * Creates the user photo thumbnails by coordinates of the original image specified in the request.
      * @summary Create photo thumbnails
@@ -514,10 +514,10 @@ export class PeoplePhotosApi extends BaseAPI {
      * @param {ThumbnailsRequest} [thumbnailsRequest] The thumbnail request.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeoplePhotosApi
+     * @memberof PhotosApi
      */
     public createMemberPhotoThumbnails(userid: string, thumbnailsRequest?: ThumbnailsRequest, options?: RawAxiosRequestConfig) {
-        return PeoplePhotosApiFp(this.configuration).createMemberPhotoThumbnails(userid, thumbnailsRequest, options).then((request) => request(this.axios, this.basePath));
+        return PhotosApiFp(this.configuration).createMemberPhotoThumbnails(userid, thumbnailsRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -526,10 +526,10 @@ export class PeoplePhotosApi extends BaseAPI {
      * @param {string} userid The user ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeoplePhotosApi
+     * @memberof PhotosApi
      */
     public deleteMemberPhoto(userid: string, options?: RawAxiosRequestConfig) {
-        return PeoplePhotosApiFp(this.configuration).deleteMemberPhoto(userid, options).then((request) => request(this.axios, this.basePath));
+        return PhotosApiFp(this.configuration).deleteMemberPhoto(userid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -538,10 +538,10 @@ export class PeoplePhotosApi extends BaseAPI {
      * @param {string} userid The user ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeoplePhotosApi
+     * @memberof PhotosApi
      */
     public getMemberPhoto(userid: string, options?: RawAxiosRequestConfig) {
-        return PeoplePhotosApiFp(this.configuration).getMemberPhoto(userid, options).then((request) => request(this.axios, this.basePath));
+        return PhotosApiFp(this.configuration).getMemberPhoto(userid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -551,10 +551,10 @@ export class PeoplePhotosApi extends BaseAPI {
      * @param {UpdatePhotoMemberRequest} [updatePhotoMemberRequest] The request parameters for updating a photo.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeoplePhotosApi
+     * @memberof PhotosApi
      */
     public updateMemberPhoto(userid: string, updatePhotoMemberRequest?: UpdatePhotoMemberRequest, options?: RawAxiosRequestConfig) {
-        return PeoplePhotosApiFp(this.configuration).updateMemberPhoto(userid, updatePhotoMemberRequest, options).then((request) => request(this.axios, this.basePath));
+        return PhotosApiFp(this.configuration).updateMemberPhoto(userid, updatePhotoMemberRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -564,10 +564,10 @@ export class PeoplePhotosApi extends BaseAPI {
      * @param {Array<KeyValuePairStringStringValues>} formCollection The image data.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PeoplePhotosApi
+     * @memberof PhotosApi
      */
     public uploadMemberPhoto(userid: string, formCollection: Array<KeyValuePairStringStringValues>, options?: RawAxiosRequestConfig) {
-        return PeoplePhotosApiFp(this.configuration).uploadMemberPhoto(userid, formCollection, options).then((request) => request(this.axios, this.basePath));
+        return PhotosApiFp(this.configuration).uploadMemberPhoto(userid, formCollection, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

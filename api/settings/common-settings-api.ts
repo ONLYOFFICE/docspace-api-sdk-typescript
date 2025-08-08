@@ -61,10 +61,10 @@ import type { WizardRequestsDto } from '../../models';
 // @ts-ignore
 import type { WizardSettingsWrapper } from '../../models';
 /**
- * SettingsCommonSettingsApi - axios parameter creator
+ * CommonSettingsApi - axios parameter creator
  * @export
  */
-export const SettingsCommonSettingsApiAxiosParamCreator = function (configuration?: Configuration) {
+export const CommonSettingsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Closes the administrator helper notification.
@@ -1001,11 +1001,11 @@ export const SettingsCommonSettingsApiAxiosParamCreator = function (configuratio
 };
 
 /**
- * SettingsCommonSettingsApi - functional programming interface
+ * CommonSettingsApi - functional programming interface
  * @export
  */
-export const SettingsCommonSettingsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SettingsCommonSettingsApiAxiosParamCreator(configuration)
+export const CommonSettingsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = CommonSettingsApiAxiosParamCreator(configuration)
     return {
         /**
          * Closes the administrator helper notification.
@@ -1018,7 +1018,7 @@ export const SettingsCommonSettingsApiFp = function(configuration?: Configuratio
         async closeAdminHelper(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.closeAdminHelper(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.closeAdminHelper']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.closeAdminHelper']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1033,7 +1033,7 @@ export const SettingsCommonSettingsApiFp = function(configuration?: Configuratio
         async completeWizard(wizardRequestsDto?: WizardRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WizardSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.completeWizard(wizardRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.completeWizard']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.completeWizard']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1048,7 +1048,7 @@ export const SettingsCommonSettingsApiFp = function(configuration?: Configuratio
         async configureDeepLink(deepLinkConfigurationRequestsDto?: DeepLinkConfigurationRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantDeepLinkSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.configureDeepLink(deepLinkConfigurationRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.configureDeepLink']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.configureDeepLink']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1063,7 +1063,7 @@ export const SettingsCommonSettingsApiFp = function(configuration?: Configuratio
         async deletePortalColorTheme(id?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomColorThemesSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deletePortalColorTheme(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.deletePortalColorTheme']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.deletePortalColorTheme']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1077,7 +1077,7 @@ export const SettingsCommonSettingsApiFp = function(configuration?: Configuratio
         async getDeepLinkSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantDeepLinkSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getDeepLinkSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.getDeepLinkSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.getDeepLinkSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1091,7 +1091,7 @@ export const SettingsCommonSettingsApiFp = function(configuration?: Configuratio
         async getPaymentSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPaymentSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.getPaymentSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.getPaymentSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1105,7 +1105,7 @@ export const SettingsCommonSettingsApiFp = function(configuration?: Configuratio
         async getPortalColorTheme(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomColorThemesSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPortalColorTheme(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.getPortalColorTheme']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.getPortalColorTheme']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1119,7 +1119,7 @@ export const SettingsCommonSettingsApiFp = function(configuration?: Configuratio
         async getPortalHostname(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPortalHostname(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.getPortalHostname']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.getPortalHostname']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1133,7 +1133,7 @@ export const SettingsCommonSettingsApiFp = function(configuration?: Configuratio
         async getPortalLogo(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPortalLogo(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.getPortalLogo']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.getPortalLogo']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1148,7 +1148,7 @@ export const SettingsCommonSettingsApiFp = function(configuration?: Configuratio
         async getPortalSettings(withpassword?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPortalSettings(withpassword, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.getPortalSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.getPortalSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1162,7 +1162,7 @@ export const SettingsCommonSettingsApiFp = function(configuration?: Configuratio
         async getSocketSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSocketSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.getSocketSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.getSocketSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1176,7 +1176,7 @@ export const SettingsCommonSettingsApiFp = function(configuration?: Configuratio
         async getSupportedCultures(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<STRINGArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSupportedCultures(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.getSupportedCultures']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.getSupportedCultures']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1190,7 +1190,7 @@ export const SettingsCommonSettingsApiFp = function(configuration?: Configuratio
         async getTenantUserInvitationSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantUserInvitationSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTenantUserInvitationSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.getTenantUserInvitationSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.getTenantUserInvitationSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1204,7 +1204,7 @@ export const SettingsCommonSettingsApiFp = function(configuration?: Configuratio
         async getTimeZones(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimezonesRequestsArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTimeZones(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.getTimeZones']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.getTimeZones']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1219,7 +1219,7 @@ export const SettingsCommonSettingsApiFp = function(configuration?: Configuratio
         async saveDnsSettings(dnsSettingsRequestsDto?: DnsSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.saveDnsSettings(dnsSettingsRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.saveDnsSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.saveDnsSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1234,7 +1234,7 @@ export const SettingsCommonSettingsApiFp = function(configuration?: Configuratio
         async saveMailDomainSettings(mailDomainSettingsRequestsDto?: MailDomainSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.saveMailDomainSettings(mailDomainSettingsRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.saveMailDomainSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.saveMailDomainSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1249,7 +1249,7 @@ export const SettingsCommonSettingsApiFp = function(configuration?: Configuratio
         async savePortalColorTheme(customColorThemesSettingsRequestsDto?: CustomColorThemesSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomColorThemesSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.savePortalColorTheme(customColorThemesSettingsRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.savePortalColorTheme']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.savePortalColorTheme']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1264,7 +1264,7 @@ export const SettingsCommonSettingsApiFp = function(configuration?: Configuratio
         async updateEmailActivationSettings(emailActivationSettings?: EmailActivationSettings, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmailActivationSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateEmailActivationSettings(emailActivationSettings, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.updateEmailActivationSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.updateEmailActivationSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1279,18 +1279,18 @@ export const SettingsCommonSettingsApiFp = function(configuration?: Configuratio
         async updateInvitationSettings(tenantUserInvitationSettingsRequestDto?: TenantUserInvitationSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantUserInvitationSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateInvitationSettings(tenantUserInvitationSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsCommonSettingsApi.updateInvitationSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.updateInvitationSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * SettingsCommonSettingsApi - factory interface
+ * CommonSettingsApi - factory interface
  * @export
  */
-export const SettingsCommonSettingsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SettingsCommonSettingsApiFp(configuration)
+export const CommonSettingsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = CommonSettingsApiFp(configuration)
     return {
         /**
          * Closes the administrator helper notification.
@@ -1514,21 +1514,21 @@ export const SettingsCommonSettingsApiFactory = function (configuration?: Config
 };
 
 /**
- * SettingsCommonSettingsApi - object-oriented interface
+ * CommonSettingsApi - object-oriented interface
  * @export
- * @class SettingsCommonSettingsApi
+ * @class CommonSettingsApi
  * @extends {BaseAPI}
  */
-export class SettingsCommonSettingsApi extends BaseAPI {
+export class CommonSettingsApi extends BaseAPI {
     /**
      * Closes the administrator helper notification.
      * @summary Close the admin helper
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsCommonSettingsApi
+     * @memberof CommonSettingsApi
      */
     public closeAdminHelper(options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).closeAdminHelper(options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).closeAdminHelper(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1537,10 +1537,10 @@ export class SettingsCommonSettingsApi extends BaseAPI {
      * @param {WizardRequestsDto} [wizardRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsCommonSettingsApi
+     * @memberof CommonSettingsApi
      */
     public completeWizard(wizardRequestsDto?: WizardRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).completeWizard(wizardRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).completeWizard(wizardRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1549,10 +1549,10 @@ export class SettingsCommonSettingsApi extends BaseAPI {
      * @param {DeepLinkConfigurationRequestsDto} [deepLinkConfigurationRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsCommonSettingsApi
+     * @memberof CommonSettingsApi
      */
     public configureDeepLink(deepLinkConfigurationRequestsDto?: DeepLinkConfigurationRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).configureDeepLink(deepLinkConfigurationRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).configureDeepLink(deepLinkConfigurationRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1561,10 +1561,10 @@ export class SettingsCommonSettingsApi extends BaseAPI {
      * @param {number} [id] The ID of the portal theme to delete.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsCommonSettingsApi
+     * @memberof CommonSettingsApi
      */
     public deletePortalColorTheme(id?: number, options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).deletePortalColorTheme(id, options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).deletePortalColorTheme(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1572,10 +1572,10 @@ export class SettingsCommonSettingsApi extends BaseAPI {
      * @summary Get the deep link settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsCommonSettingsApi
+     * @memberof CommonSettingsApi
      */
     public getDeepLinkSettings(options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).getDeepLinkSettings(options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).getDeepLinkSettings(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1583,10 +1583,10 @@ export class SettingsCommonSettingsApi extends BaseAPI {
      * @summary Get the payment settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsCommonSettingsApi
+     * @memberof CommonSettingsApi
      */
     public getPaymentSettings(options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).getPaymentSettings(options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).getPaymentSettings(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1594,10 +1594,10 @@ export class SettingsCommonSettingsApi extends BaseAPI {
      * @summary Get a color theme
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsCommonSettingsApi
+     * @memberof CommonSettingsApi
      */
     public getPortalColorTheme(options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).getPortalColorTheme(options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).getPortalColorTheme(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1605,10 +1605,10 @@ export class SettingsCommonSettingsApi extends BaseAPI {
      * @summary Get hostname
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsCommonSettingsApi
+     * @memberof CommonSettingsApi
      */
     public getPortalHostname(options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).getPortalHostname(options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).getPortalHostname(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1616,10 +1616,10 @@ export class SettingsCommonSettingsApi extends BaseAPI {
      * @summary Get a portal logo
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsCommonSettingsApi
+     * @memberof CommonSettingsApi
      */
     public getPortalLogo(options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).getPortalLogo(options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).getPortalLogo(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1628,10 +1628,10 @@ export class SettingsCommonSettingsApi extends BaseAPI {
      * @param {boolean} [withpassword] Specifies whether to include the password hashing configuration in the response.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsCommonSettingsApi
+     * @memberof CommonSettingsApi
      */
     public getPortalSettings(withpassword?: boolean, options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).getPortalSettings(withpassword, options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).getPortalSettings(withpassword, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1639,10 +1639,10 @@ export class SettingsCommonSettingsApi extends BaseAPI {
      * @summary Get the socket settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsCommonSettingsApi
+     * @memberof CommonSettingsApi
      */
     public getSocketSettings(options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).getSocketSettings(options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).getSocketSettings(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1650,10 +1650,10 @@ export class SettingsCommonSettingsApi extends BaseAPI {
      * @summary Get supported languages
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsCommonSettingsApi
+     * @memberof CommonSettingsApi
      */
     public getSupportedCultures(options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).getSupportedCultures(options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).getSupportedCultures(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1661,10 +1661,10 @@ export class SettingsCommonSettingsApi extends BaseAPI {
      * @summary Get the user invitation settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsCommonSettingsApi
+     * @memberof CommonSettingsApi
      */
     public getTenantUserInvitationSettings(options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).getTenantUserInvitationSettings(options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).getTenantUserInvitationSettings(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1672,10 +1672,10 @@ export class SettingsCommonSettingsApi extends BaseAPI {
      * @summary Get time zones
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsCommonSettingsApi
+     * @memberof CommonSettingsApi
      */
     public getTimeZones(options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).getTimeZones(options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).getTimeZones(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1684,10 +1684,10 @@ export class SettingsCommonSettingsApi extends BaseAPI {
      * @param {DnsSettingsRequestsDto} [dnsSettingsRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsCommonSettingsApi
+     * @memberof CommonSettingsApi
      */
     public saveDnsSettings(dnsSettingsRequestsDto?: DnsSettingsRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).saveDnsSettings(dnsSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).saveDnsSettings(dnsSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1696,10 +1696,10 @@ export class SettingsCommonSettingsApi extends BaseAPI {
      * @param {MailDomainSettingsRequestsDto} [mailDomainSettingsRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsCommonSettingsApi
+     * @memberof CommonSettingsApi
      */
     public saveMailDomainSettings(mailDomainSettingsRequestsDto?: MailDomainSettingsRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).saveMailDomainSettings(mailDomainSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).saveMailDomainSettings(mailDomainSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1708,10 +1708,10 @@ export class SettingsCommonSettingsApi extends BaseAPI {
      * @param {CustomColorThemesSettingsRequestsDto} [customColorThemesSettingsRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsCommonSettingsApi
+     * @memberof CommonSettingsApi
      */
     public savePortalColorTheme(customColorThemesSettingsRequestsDto?: CustomColorThemesSettingsRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).savePortalColorTheme(customColorThemesSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).savePortalColorTheme(customColorThemesSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1720,10 +1720,10 @@ export class SettingsCommonSettingsApi extends BaseAPI {
      * @param {EmailActivationSettings} [emailActivationSettings] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsCommonSettingsApi
+     * @memberof CommonSettingsApi
      */
     public updateEmailActivationSettings(emailActivationSettings?: EmailActivationSettings, options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).updateEmailActivationSettings(emailActivationSettings, options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).updateEmailActivationSettings(emailActivationSettings, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1732,10 +1732,10 @@ export class SettingsCommonSettingsApi extends BaseAPI {
      * @param {TenantUserInvitationSettingsRequestDto} [tenantUserInvitationSettingsRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsCommonSettingsApi
+     * @memberof CommonSettingsApi
      */
     public updateInvitationSettings(tenantUserInvitationSettingsRequestDto?: TenantUserInvitationSettingsRequestDto, options?: RawAxiosRequestConfig) {
-        return SettingsCommonSettingsApiFp(this.configuration).updateInvitationSettings(tenantUserInvitationSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).updateInvitationSettings(tenantUserInvitationSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -7,9 +7,9 @@ The request parameters for copying/moving files.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **returnSingleOperation** | **boolean** | Specifies whether to return only the current operation | [optional] [default to undefined]
-**folderIds** | [**Array&lt;BaseBatchRequestDtoFolderIdsInner&gt;**](BaseBatchRequestDtoFolderIdsInner.md) | The list of folder IDs to be copied/moved. | [optional] [default to undefined]
-**fileIds** | [**Array&lt;BaseBatchRequestDtoFolderIdsInner&gt;**](BaseBatchRequestDtoFolderIdsInner.md) | The list of file IDs to be copied/moved. | [optional] [default to undefined]
-**destFolderId** | [**BatchRequestDtoDestFolderId**](BatchRequestDtoDestFolderId.md) |  | [optional] [default to undefined]
+**folderIds** | [**Array&lt;BatchRequestDtoAllOfFolderIds&gt;**](BatchRequestDtoAllOfFolderIds.md) | The list of folder IDs to be copied/moved. | [optional] [default to undefined]
+**fileIds** | [**Array&lt;BatchRequestDtoAllOfFileIds&gt;**](BatchRequestDtoAllOfFileIds.md) | The list of file IDs to be copied/moved. | [optional] [default to undefined]
+**destFolderId** | [**BatchRequestDtoAllOfDestFolderId**](BatchRequestDtoAllOfDestFolderId.md) |  | [optional] [default to undefined]
 **conflictResolveType** | [**FileConflictResolveType**](FileConflictResolveType.md) |  | [optional] [default to undefined]
 **deleteAfter** | **boolean** | Specifies whether to delete the source files/folders after they are moved or copied to the destination folder. | [optional] [default to undefined]
 **content** | **boolean** | Specifies whether to copy or move the folder content or not. | [optional] [default to undefined]

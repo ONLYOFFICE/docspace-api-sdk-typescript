@@ -33,10 +33,10 @@ import type { EncryptionSettingsWrapper } from '../../models';
 // @ts-ignore
 import type { StorageEncryptionRequestsDto } from '../../models';
 /**
- * SettingsEncryptionApi - axios parameter creator
+ * EncryptionApi - axios parameter creator
  * @export
  */
-export const SettingsEncryptionApiAxiosParamCreator = function (configuration?: Configuration) {
+export const EncryptionApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Returns the storage encryption progress.
@@ -199,11 +199,11 @@ export const SettingsEncryptionApiAxiosParamCreator = function (configuration?: 
 };
 
 /**
- * SettingsEncryptionApi - functional programming interface
+ * EncryptionApi - functional programming interface
  * @export
  */
-export const SettingsEncryptionApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SettingsEncryptionApiAxiosParamCreator(configuration)
+export const EncryptionApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = EncryptionApiAxiosParamCreator(configuration)
     return {
         /**
          * Returns the storage encryption progress.
@@ -216,7 +216,7 @@ export const SettingsEncryptionApiFp = function(configuration?: Configuration) {
         async getStorageEncryptionProgress(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DoubleWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getStorageEncryptionProgress(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsEncryptionApi.getStorageEncryptionProgress']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['EncryptionApi.getStorageEncryptionProgress']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -230,7 +230,7 @@ export const SettingsEncryptionApiFp = function(configuration?: Configuration) {
         async getStorageEncryptionSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EncryptionSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getStorageEncryptionSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsEncryptionApi.getStorageEncryptionSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['EncryptionApi.getStorageEncryptionSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -245,18 +245,18 @@ export const SettingsEncryptionApiFp = function(configuration?: Configuration) {
         async startStorageEncryption(storageEncryptionRequestsDto?: StorageEncryptionRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.startStorageEncryption(storageEncryptionRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SettingsEncryptionApi.startStorageEncryption']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['EncryptionApi.startStorageEncryption']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * SettingsEncryptionApi - factory interface
+ * EncryptionApi - factory interface
  * @export
  */
-export const SettingsEncryptionApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SettingsEncryptionApiFp(configuration)
+export const EncryptionApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = EncryptionApiFp(configuration)
     return {
         /**
          * Returns the storage encryption progress.
@@ -296,21 +296,21 @@ export const SettingsEncryptionApiFactory = function (configuration?: Configurat
 };
 
 /**
- * SettingsEncryptionApi - object-oriented interface
+ * EncryptionApi - object-oriented interface
  * @export
- * @class SettingsEncryptionApi
+ * @class EncryptionApi
  * @extends {BaseAPI}
  */
-export class SettingsEncryptionApi extends BaseAPI {
+export class EncryptionApi extends BaseAPI {
     /**
      * Returns the storage encryption progress.
      * @summary Get the storage encryption progress
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsEncryptionApi
+     * @memberof EncryptionApi
      */
     public getStorageEncryptionProgress(options?: RawAxiosRequestConfig) {
-        return SettingsEncryptionApiFp(this.configuration).getStorageEncryptionProgress(options).then((request) => request(this.axios, this.basePath));
+        return EncryptionApiFp(this.configuration).getStorageEncryptionProgress(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -318,10 +318,10 @@ export class SettingsEncryptionApi extends BaseAPI {
      * @summary Get the storage encryption settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsEncryptionApi
+     * @memberof EncryptionApi
      */
     public getStorageEncryptionSettings(options?: RawAxiosRequestConfig) {
-        return SettingsEncryptionApiFp(this.configuration).getStorageEncryptionSettings(options).then((request) => request(this.axios, this.basePath));
+        return EncryptionApiFp(this.configuration).getStorageEncryptionSettings(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -330,10 +330,10 @@ export class SettingsEncryptionApi extends BaseAPI {
      * @param {StorageEncryptionRequestsDto} [storageEncryptionRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsEncryptionApi
+     * @memberof EncryptionApi
      */
     public startStorageEncryption(storageEncryptionRequestsDto?: StorageEncryptionRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsEncryptionApiFp(this.configuration).startStorageEncryption(storageEncryptionRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return EncryptionApiFp(this.configuration).startStorageEncryption(storageEncryptionRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

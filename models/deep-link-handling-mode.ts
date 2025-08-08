@@ -18,15 +18,24 @@
 
 
 /**
- * The deep link handling mode.
+ * [0 - Provide choice, 1 - Web, 2 - App]
  * @export
  * @enum {number}
  */
 
 export const DeepLinkHandlingMode = {
-    NUMBER_0: 0,
-    NUMBER_1: 1,
-    NUMBER_2: 2
+    /**
+    * Provide choice
+    */
+    ProvideChoice: 0,
+    /**
+    * Web
+    */
+    Web: 1,
+    /**
+    * App
+    */
+    App: 2
 } as const;
 
 export type DeepLinkHandlingMode = typeof DeepLinkHandlingMode[keyof typeof DeepLinkHandlingMode];

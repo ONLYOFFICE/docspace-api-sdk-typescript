@@ -16,18 +16,15 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { StatusCodeResult } from './status-code-result';
 
 /**
- * 
+ * @type NoContentResult
  * @export
- * @interface NoContentResult
  */
-export interface NoContentResult {
-    /**
-     * 
-     * @type {number}
-     * @memberof NoContentResult
-     */
-    'statusCode'?: number;
-}
+export type NoContentResult = StatusCodeResult &  {
+};
+
 
