@@ -65,7 +65,8 @@ import type { UpdateComment } from '../../models';
 export const OperationsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * 
+         * Starts the download process of files and folders with the IDs specified in the request.
+         * @summary Bulk download
          * @param {DownloadRequestDto} [downloadRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -100,7 +101,8 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * 
+         * Checks the conversion status of a file with the ID specified in the request.
+         * @summary Get conversion status
          * @param {number} fileId The file ID to check conversion status.
          * @param {boolean} [start] Specifies whether a conversion operation is started or not.
          * @param {*} [options] Override http request option.
@@ -124,6 +126,25 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
             if (start !== undefined) {
                 localVarQueryParameter['start'] = start;
             }
@@ -140,7 +161,8 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * 
+         * Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
+         * @summary Check and move or copy to a folder
          * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -160,6 +182,25 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
             if (inDto !== undefined) {
                 for (const [key, value] of Object.entries(inDto)) {
                     localVarQueryParameter[key] = value;
@@ -178,7 +219,8 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * 
+         * Checks if files can be moved or copied to the specified folder.
+         * @summary Check for moving or copying to a folder
          * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -198,6 +240,25 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
             if (inDto !== undefined) {
                 for (const [key, value] of Object.entries(inDto)) {
                     localVarQueryParameter[key] = value;
@@ -216,7 +277,8 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * 
+         * Copies all the selected files and folders to the folder with the ID specified in the request.
+         * @summary Copy to the folder
          * @param {BatchRequestDto} [batchRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -236,6 +298,25 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -251,7 +332,8 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * 
+         * Creates the session to upload large files in multiple chunks to the folder with the ID specified in the request.   **Note**: Each chunk can have different length but the length should be multiple of <b>512</b> and greater or equal to <b>10 mb</b>. Last chunk can have any size.  After the initial response to the request with the <b>200 OK</b> status, you must get the <em>location</em> field value from the response. Send all your chunks to this location.  Each chunk must be sent in the exact order the chunks appear in the file.  After receiving each chunk, the server will respond with the current information about the upload session if no errors occurred.  When the number of bytes uploaded is equal to the number of bytes you sent in the initial request, the server responds with the <b>201 Created</b> status and sends you information about the uploaded file.  Information about created session which includes:  <ul>  <li><b>id:</b> unique ID of this upload session,</li>  <li><b>created:</b> UTC time when the session was created,</li>  <li><b>expired:</b> UTC time when the session will expire if no chunks are sent before that time,</li>  <li><b>location:</b> URL where you should send your next chunk,</li>  <li><b>bytes_uploaded:</b> number of bytes uploaded for the specific upload ID,</li>  <li><b>bytes_total:</b> total number of bytes which will be uploaded.</li>  </ul>
+         * @summary Chunked upload
          * @param {number} folderId The folder ID of the session.
          * @param {SessionRequest} [sessionRequest] The session parameters.
          * @param {*} [options] Override http request option.
@@ -275,6 +357,25 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -290,7 +391,8 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * 
+         * Deletes the files and folders with the IDs specified in the request.
+         * @summary Delete files and folders
          * @param {DeleteBatchRequestDto} [deleteBatchRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -310,6 +412,25 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -325,7 +446,8 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * 
+         * Deletes the file versions with the IDs specified in the request.
+         * @summary Delete file versions
          * @param {DeleteVersionBatchRequestDto} [deleteVersionBatchRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -345,6 +467,25 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -360,7 +501,8 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * 
+         * Duplicates all the selected files and folders.
+         * @summary Duplicate files and folders
          * @param {DuplicateRequestDto} [duplicateRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -380,6 +522,25 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -395,7 +556,8 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * 
+         * Deletes all the files and folders from the \"Trash\" folder.
+         * @summary Empty the \"Trash\" folder
          * @param {boolean} [single] Specifies whether to return only the current operation
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -415,6 +577,25 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
             if (single !== undefined) {
                 localVarQueryParameter['Single'] = single;
             }
@@ -431,7 +612,8 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * 
+         * Returns a list of all the active file operations.
+         * @summary Get active file operations
          * @param {string} [id] The ID of the file operation.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -467,7 +649,8 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * 
+         * Retrieves the statuses of operations filtered by the specified operation type.
+         * @summary Get file operation statuses
          * @param {FileOperationType} operationType Specifies the type of file operation to be retrieved.
          * @param {string} [id] The ID of the file operation.
          * @param {*} [options] Override http request option.
@@ -507,7 +690,8 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * 
+         * Marks the files and folders with the IDs specified in the request as read.
+         * @summary Mark as read
          * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -527,6 +711,25 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -542,7 +745,8 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * 
+         * Moves or copies all the selected files and folders to the folder with the ID specified in the request.
+         * @summary Move or copy to a folder
          * @param {BatchRequestDto} [batchRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -562,6 +766,25 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -577,7 +800,8 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * 
+         * Starts a conversion operation of a file with the ID specified in the request.
+         * @summary Start file conversion
          * @param {number} fileId The file ID to start conversion proccess.
          * @param {CheckConversionRequestDtoInteger} [checkConversionRequestDtoInteger] The parameters for checking file conversion.
          * @param {*} [options] Override http request option.
@@ -601,6 +825,25 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -616,7 +859,8 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * 
+         * Finishes an operation with the ID specified in the request or all the active operations.
+         * @summary Finish active operations
          * @param {string} id The operation ID of the request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -651,7 +895,8 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * 
+         * Updates a comment in a file with the ID specified in the request.
+         * @summary Update a comment
          * @param {number} fileId The file ID where the comment is located.
          * @param {UpdateComment} [updateComment] The parameters for updating a comment.
          * @param {*} [options] Override http request option.
@@ -674,6 +919,25 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
 
 
     
@@ -700,7 +964,8 @@ export const OperationsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = OperationsApiAxiosParamCreator(configuration)
     return {
         /**
-         * 
+         * Starts the download process of files and folders with the IDs specified in the request.
+         * @summary Bulk download
          * @param {DownloadRequestDto} [downloadRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -714,7 +979,8 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Checks the conversion status of a file with the ID specified in the request.
+         * @summary Get conversion status
          * @param {number} fileId The file ID to check conversion status.
          * @param {boolean} [start] Specifies whether a conversion operation is started or not.
          * @param {*} [options] Override http request option.
@@ -729,7 +995,8 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
+         * @summary Check and move or copy to a folder
          * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -743,7 +1010,8 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Checks if files can be moved or copied to the specified folder.
+         * @summary Check for moving or copying to a folder
          * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -757,7 +1025,8 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Copies all the selected files and folders to the folder with the ID specified in the request.
+         * @summary Copy to the folder
          * @param {BatchRequestDto} [batchRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -771,7 +1040,8 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Creates the session to upload large files in multiple chunks to the folder with the ID specified in the request.   **Note**: Each chunk can have different length but the length should be multiple of <b>512</b> and greater or equal to <b>10 mb</b>. Last chunk can have any size.  After the initial response to the request with the <b>200 OK</b> status, you must get the <em>location</em> field value from the response. Send all your chunks to this location.  Each chunk must be sent in the exact order the chunks appear in the file.  After receiving each chunk, the server will respond with the current information about the upload session if no errors occurred.  When the number of bytes uploaded is equal to the number of bytes you sent in the initial request, the server responds with the <b>201 Created</b> status and sends you information about the uploaded file.  Information about created session which includes:  <ul>  <li><b>id:</b> unique ID of this upload session,</li>  <li><b>created:</b> UTC time when the session was created,</li>  <li><b>expired:</b> UTC time when the session will expire if no chunks are sent before that time,</li>  <li><b>location:</b> URL where you should send your next chunk,</li>  <li><b>bytes_uploaded:</b> number of bytes uploaded for the specific upload ID,</li>  <li><b>bytes_total:</b> total number of bytes which will be uploaded.</li>  </ul>
+         * @summary Chunked upload
          * @param {number} folderId The folder ID of the session.
          * @param {SessionRequest} [sessionRequest] The session parameters.
          * @param {*} [options] Override http request option.
@@ -786,7 +1056,8 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Deletes the files and folders with the IDs specified in the request.
+         * @summary Delete files and folders
          * @param {DeleteBatchRequestDto} [deleteBatchRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -800,7 +1071,8 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Deletes the file versions with the IDs specified in the request.
+         * @summary Delete file versions
          * @param {DeleteVersionBatchRequestDto} [deleteVersionBatchRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -814,7 +1086,8 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Duplicates all the selected files and folders.
+         * @summary Duplicate files and folders
          * @param {DuplicateRequestDto} [duplicateRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -828,7 +1101,8 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Deletes all the files and folders from the \"Trash\" folder.
+         * @summary Empty the \"Trash\" folder
          * @param {boolean} [single] Specifies whether to return only the current operation
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -842,7 +1116,8 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Returns a list of all the active file operations.
+         * @summary Get active file operations
          * @param {string} [id] The ID of the file operation.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -856,7 +1131,8 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Retrieves the statuses of operations filtered by the specified operation type.
+         * @summary Get file operation statuses
          * @param {FileOperationType} operationType Specifies the type of file operation to be retrieved.
          * @param {string} [id] The ID of the file operation.
          * @param {*} [options] Override http request option.
@@ -871,7 +1147,8 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Marks the files and folders with the IDs specified in the request as read.
+         * @summary Mark as read
          * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -885,7 +1162,8 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Moves or copies all the selected files and folders to the folder with the ID specified in the request.
+         * @summary Move or copy to a folder
          * @param {BatchRequestDto} [batchRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -899,7 +1177,8 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Starts a conversion operation of a file with the ID specified in the request.
+         * @summary Start file conversion
          * @param {number} fileId The file ID to start conversion proccess.
          * @param {CheckConversionRequestDtoInteger} [checkConversionRequestDtoInteger] The parameters for checking file conversion.
          * @param {*} [options] Override http request option.
@@ -914,7 +1193,8 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Finishes an operation with the ID specified in the request or all the active operations.
+         * @summary Finish active operations
          * @param {string} id The operation ID of the request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -928,7 +1208,8 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Updates a comment in a file with the ID specified in the request.
+         * @summary Update a comment
          * @param {number} fileId The file ID where the comment is located.
          * @param {UpdateComment} [updateComment] The parameters for updating a comment.
          * @param {*} [options] Override http request option.
@@ -953,7 +1234,8 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
     const localVarFp = OperationsApiFp(configuration)
     return {
         /**
-         * 
+         * Starts the download process of files and folders with the IDs specified in the request.
+         * @summary Bulk download
          * @param {DownloadRequestDto} [downloadRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for bulkDownload operation
@@ -964,7 +1246,8 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.bulkDownload(downloadRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Checks the conversion status of a file with the ID specified in the request.
+         * @summary Get conversion status
          * @param {number} fileId The file ID to check conversion status.
          * @param {boolean} [start] Specifies whether a conversion operation is started or not.
          * @param {*} [options] Override http request option.
@@ -976,7 +1259,8 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.checkConversionStatus(fileId, start, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
+         * @summary Check and move or copy to a folder
          * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
          * @param {*} [options] Override http request option.
          * REST API Reference for checkMoveOrCopyBatchItems operation
@@ -987,7 +1271,8 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.checkMoveOrCopyBatchItems(inDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Checks if files can be moved or copied to the specified folder.
+         * @summary Check for moving or copying to a folder
          * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
          * @param {*} [options] Override http request option.
          * REST API Reference for checkMoveOrCopyDestFolder operation
@@ -998,7 +1283,8 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.checkMoveOrCopyDestFolder(inDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Copies all the selected files and folders to the folder with the ID specified in the request.
+         * @summary Copy to the folder
          * @param {BatchRequestDto} [batchRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for copyBatchItems operation
@@ -1009,7 +1295,8 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.copyBatchItems(batchRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Creates the session to upload large files in multiple chunks to the folder with the ID specified in the request.   **Note**: Each chunk can have different length but the length should be multiple of <b>512</b> and greater or equal to <b>10 mb</b>. Last chunk can have any size.  After the initial response to the request with the <b>200 OK</b> status, you must get the <em>location</em> field value from the response. Send all your chunks to this location.  Each chunk must be sent in the exact order the chunks appear in the file.  After receiving each chunk, the server will respond with the current information about the upload session if no errors occurred.  When the number of bytes uploaded is equal to the number of bytes you sent in the initial request, the server responds with the <b>201 Created</b> status and sends you information about the uploaded file.  Information about created session which includes:  <ul>  <li><b>id:</b> unique ID of this upload session,</li>  <li><b>created:</b> UTC time when the session was created,</li>  <li><b>expired:</b> UTC time when the session will expire if no chunks are sent before that time,</li>  <li><b>location:</b> URL where you should send your next chunk,</li>  <li><b>bytes_uploaded:</b> number of bytes uploaded for the specific upload ID,</li>  <li><b>bytes_total:</b> total number of bytes which will be uploaded.</li>  </ul>
+         * @summary Chunked upload
          * @param {number} folderId The folder ID of the session.
          * @param {SessionRequest} [sessionRequest] The session parameters.
          * @param {*} [options] Override http request option.
@@ -1021,7 +1308,8 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.createUploadSession(folderId, sessionRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Deletes the files and folders with the IDs specified in the request.
+         * @summary Delete files and folders
          * @param {DeleteBatchRequestDto} [deleteBatchRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteBatchItems operation
@@ -1032,7 +1320,8 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.deleteBatchItems(deleteBatchRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Deletes the file versions with the IDs specified in the request.
+         * @summary Delete file versions
          * @param {DeleteVersionBatchRequestDto} [deleteVersionBatchRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteFileVersions operation
@@ -1043,7 +1332,8 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.deleteFileVersions(deleteVersionBatchRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Duplicates all the selected files and folders.
+         * @summary Duplicate files and folders
          * @param {DuplicateRequestDto} [duplicateRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for duplicateBatchItems operation
@@ -1054,7 +1344,8 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.duplicateBatchItems(duplicateRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Deletes all the files and folders from the \"Trash\" folder.
+         * @summary Empty the \"Trash\" folder
          * @param {boolean} [single] Specifies whether to return only the current operation
          * @param {*} [options] Override http request option.
          * REST API Reference for emptyTrash operation
@@ -1065,7 +1356,8 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.emptyTrash(single, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Returns a list of all the active file operations.
+         * @summary Get active file operations
          * @param {string} [id] The ID of the file operation.
          * @param {*} [options] Override http request option.
          * REST API Reference for getOperationStatuses operation
@@ -1076,7 +1368,8 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.getOperationStatuses(id, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Retrieves the statuses of operations filtered by the specified operation type.
+         * @summary Get file operation statuses
          * @param {FileOperationType} operationType Specifies the type of file operation to be retrieved.
          * @param {string} [id] The ID of the file operation.
          * @param {*} [options] Override http request option.
@@ -1088,7 +1381,8 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.getOperationStatusesByType(operationType, id, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Marks the files and folders with the IDs specified in the request as read.
+         * @summary Mark as read
          * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for markAsRead operation
@@ -1099,7 +1393,8 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.markAsRead(baseBatchRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Moves or copies all the selected files and folders to the folder with the ID specified in the request.
+         * @summary Move or copy to a folder
          * @param {BatchRequestDto} [batchRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for moveBatchItems operation
@@ -1110,7 +1405,8 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.moveBatchItems(batchRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Starts a conversion operation of a file with the ID specified in the request.
+         * @summary Start file conversion
          * @param {number} fileId The file ID to start conversion proccess.
          * @param {CheckConversionRequestDtoInteger} [checkConversionRequestDtoInteger] The parameters for checking file conversion.
          * @param {*} [options] Override http request option.
@@ -1122,7 +1418,8 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.startFileConversion(fileId, checkConversionRequestDtoInteger, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Finishes an operation with the ID specified in the request or all the active operations.
+         * @summary Finish active operations
          * @param {string} id The operation ID of the request.
          * @param {*} [options] Override http request option.
          * REST API Reference for terminateTasks operation
@@ -1133,7 +1430,8 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.terminateTasks(id, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Updates a comment in a file with the ID specified in the request.
+         * @summary Update a comment
          * @param {number} fileId The file ID where the comment is located.
          * @param {UpdateComment} [updateComment] The parameters for updating a comment.
          * @param {*} [options] Override http request option.
@@ -1155,7 +1453,8 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
  */
 export class OperationsApi extends BaseAPI {
     /**
-     * 
+     * Starts the download process of files and folders with the IDs specified in the request.
+     * @summary Bulk download
      * @param {DownloadRequestDto} [downloadRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1166,7 +1465,8 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Checks the conversion status of a file with the ID specified in the request.
+     * @summary Get conversion status
      * @param {number} fileId The file ID to check conversion status.
      * @param {boolean} [start] Specifies whether a conversion operation is started or not.
      * @param {*} [options] Override http request option.
@@ -1178,7 +1478,8 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
+     * @summary Check and move or copy to a folder
      * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1189,7 +1490,8 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Checks if files can be moved or copied to the specified folder.
+     * @summary Check for moving or copying to a folder
      * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1200,7 +1502,8 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Copies all the selected files and folders to the folder with the ID specified in the request.
+     * @summary Copy to the folder
      * @param {BatchRequestDto} [batchRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1211,7 +1514,8 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Creates the session to upload large files in multiple chunks to the folder with the ID specified in the request.   **Note**: Each chunk can have different length but the length should be multiple of <b>512</b> and greater or equal to <b>10 mb</b>. Last chunk can have any size.  After the initial response to the request with the <b>200 OK</b> status, you must get the <em>location</em> field value from the response. Send all your chunks to this location.  Each chunk must be sent in the exact order the chunks appear in the file.  After receiving each chunk, the server will respond with the current information about the upload session if no errors occurred.  When the number of bytes uploaded is equal to the number of bytes you sent in the initial request, the server responds with the <b>201 Created</b> status and sends you information about the uploaded file.  Information about created session which includes:  <ul>  <li><b>id:</b> unique ID of this upload session,</li>  <li><b>created:</b> UTC time when the session was created,</li>  <li><b>expired:</b> UTC time when the session will expire if no chunks are sent before that time,</li>  <li><b>location:</b> URL where you should send your next chunk,</li>  <li><b>bytes_uploaded:</b> number of bytes uploaded for the specific upload ID,</li>  <li><b>bytes_total:</b> total number of bytes which will be uploaded.</li>  </ul>
+     * @summary Chunked upload
      * @param {number} folderId The folder ID of the session.
      * @param {SessionRequest} [sessionRequest] The session parameters.
      * @param {*} [options] Override http request option.
@@ -1223,7 +1527,8 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Deletes the files and folders with the IDs specified in the request.
+     * @summary Delete files and folders
      * @param {DeleteBatchRequestDto} [deleteBatchRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1234,7 +1539,8 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Deletes the file versions with the IDs specified in the request.
+     * @summary Delete file versions
      * @param {DeleteVersionBatchRequestDto} [deleteVersionBatchRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1245,7 +1551,8 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Duplicates all the selected files and folders.
+     * @summary Duplicate files and folders
      * @param {DuplicateRequestDto} [duplicateRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1256,7 +1563,8 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Deletes all the files and folders from the \"Trash\" folder.
+     * @summary Empty the \"Trash\" folder
      * @param {boolean} [single] Specifies whether to return only the current operation
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1267,7 +1575,8 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Returns a list of all the active file operations.
+     * @summary Get active file operations
      * @param {string} [id] The ID of the file operation.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1278,7 +1587,8 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Retrieves the statuses of operations filtered by the specified operation type.
+     * @summary Get file operation statuses
      * @param {FileOperationType} operationType Specifies the type of file operation to be retrieved.
      * @param {string} [id] The ID of the file operation.
      * @param {*} [options] Override http request option.
@@ -1290,7 +1600,8 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Marks the files and folders with the IDs specified in the request as read.
+     * @summary Mark as read
      * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1301,7 +1612,8 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Moves or copies all the selected files and folders to the folder with the ID specified in the request.
+     * @summary Move or copy to a folder
      * @param {BatchRequestDto} [batchRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1312,7 +1624,8 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Starts a conversion operation of a file with the ID specified in the request.
+     * @summary Start file conversion
      * @param {number} fileId The file ID to start conversion proccess.
      * @param {CheckConversionRequestDtoInteger} [checkConversionRequestDtoInteger] The parameters for checking file conversion.
      * @param {*} [options] Override http request option.
@@ -1324,7 +1637,8 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Finishes an operation with the ID specified in the request or all the active operations.
+     * @summary Finish active operations
      * @param {string} id The operation ID of the request.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1335,7 +1649,8 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Updates a comment in a file with the ID specified in the request.
+     * @summary Update a comment
      * @param {number} fileId The file ID where the comment is located.
      * @param {UpdateComment} [updateComment] The parameters for updating a comment.
      * @param {*} [options] Override http request option.

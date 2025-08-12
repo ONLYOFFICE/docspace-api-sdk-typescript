@@ -45,7 +45,8 @@ import type { MentionWrapperArrayWrapper } from '../../models';
 export const SharingApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * 
+         * Applies a password specified in the request to get the external data.
+         * @summary Apply external data password
          * @param {string} key The unique document identifier.
          * @param {ExternalShareRequestParam} [externalShareRequestParam] The external data share request parameters.
          * @param {*} [options] Override http request option.
@@ -84,7 +85,8 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
+         * Changes the owner of the file with the ID specified in the request.
+         * @summary Change the file owner
          * @param {ChangeOwnerRequestDto} [changeOwnerRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -104,6 +106,25 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -119,7 +140,8 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
+         * Returns the external data by the key specified in the request.
+         * @summary Get the external data
          * @param {string} key The unique key of the external shared data.
          * @param {string} [fileId] The unique document identifier.
          * @param {*} [options] Override http request option.
@@ -159,7 +181,8 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
+         * Returns a list of users with their access rights to the file with the ID specified in the request.
+         * @summary Get user access rights by file ID
          * @param {number} fileId The file ID of the request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -182,6 +205,25 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -194,7 +236,8 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
+         * Sends a message to the users who are mentioned in the file with the ID specified in the request.
+         * @summary Send the mention message
          * @param {number} fileId The file ID of the mention message.
          * @param {MentionMessageWrapper} [mentionMessageWrapper] The mention message.
          * @param {*} [options] Override http request option.
@@ -217,6 +260,25 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
 
 
     
@@ -243,7 +305,8 @@ export const SharingApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = SharingApiAxiosParamCreator(configuration)
     return {
         /**
-         * 
+         * Applies a password specified in the request to get the external data.
+         * @summary Apply external data password
          * @param {string} key The unique document identifier.
          * @param {ExternalShareRequestParam} [externalShareRequestParam] The external data share request parameters.
          * @param {*} [options] Override http request option.
@@ -258,7 +321,8 @@ export const SharingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Changes the owner of the file with the ID specified in the request.
+         * @summary Change the file owner
          * @param {ChangeOwnerRequestDto} [changeOwnerRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -272,7 +336,8 @@ export const SharingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Returns the external data by the key specified in the request.
+         * @summary Get the external data
          * @param {string} key The unique key of the external shared data.
          * @param {string} [fileId] The unique document identifier.
          * @param {*} [options] Override http request option.
@@ -287,7 +352,8 @@ export const SharingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Returns a list of users with their access rights to the file with the ID specified in the request.
+         * @summary Get user access rights by file ID
          * @param {number} fileId The file ID of the request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -301,7 +367,8 @@ export const SharingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Sends a message to the users who are mentioned in the file with the ID specified in the request.
+         * @summary Send the mention message
          * @param {number} fileId The file ID of the mention message.
          * @param {MentionMessageWrapper} [mentionMessageWrapper] The mention message.
          * @param {*} [options] Override http request option.
@@ -326,7 +393,8 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = SharingApiFp(configuration)
     return {
         /**
-         * 
+         * Applies a password specified in the request to get the external data.
+         * @summary Apply external data password
          * @param {string} key The unique document identifier.
          * @param {ExternalShareRequestParam} [externalShareRequestParam] The external data share request parameters.
          * @param {*} [options] Override http request option.
@@ -338,7 +406,8 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.applyExternalSharePassword(key, externalShareRequestParam, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Changes the owner of the file with the ID specified in the request.
+         * @summary Change the file owner
          * @param {ChangeOwnerRequestDto} [changeOwnerRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for changeFileOwner operation
@@ -349,7 +418,8 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.changeFileOwner(changeOwnerRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Returns the external data by the key specified in the request.
+         * @summary Get the external data
          * @param {string} key The unique key of the external shared data.
          * @param {string} [fileId] The unique document identifier.
          * @param {*} [options] Override http request option.
@@ -361,7 +431,8 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getExternalShareData(key, fileId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Returns a list of users with their access rights to the file with the ID specified in the request.
+         * @summary Get user access rights by file ID
          * @param {number} fileId The file ID of the request.
          * @param {*} [options] Override http request option.
          * REST API Reference for getSharedUsers operation
@@ -372,7 +443,8 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getSharedUsers(fileId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Sends a message to the users who are mentioned in the file with the ID specified in the request.
+         * @summary Send the mention message
          * @param {number} fileId The file ID of the mention message.
          * @param {MentionMessageWrapper} [mentionMessageWrapper] The mention message.
          * @param {*} [options] Override http request option.
@@ -394,7 +466,8 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
  */
 export class SharingApi extends BaseAPI {
     /**
-     * 
+     * Applies a password specified in the request to get the external data.
+     * @summary Apply external data password
      * @param {string} key The unique document identifier.
      * @param {ExternalShareRequestParam} [externalShareRequestParam] The external data share request parameters.
      * @param {*} [options] Override http request option.
@@ -406,7 +479,8 @@ export class SharingApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Changes the owner of the file with the ID specified in the request.
+     * @summary Change the file owner
      * @param {ChangeOwnerRequestDto} [changeOwnerRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -417,7 +491,8 @@ export class SharingApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Returns the external data by the key specified in the request.
+     * @summary Get the external data
      * @param {string} key The unique key of the external shared data.
      * @param {string} [fileId] The unique document identifier.
      * @param {*} [options] Override http request option.
@@ -429,7 +504,8 @@ export class SharingApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Returns a list of users with their access rights to the file with the ID specified in the request.
+     * @summary Get user access rights by file ID
      * @param {number} fileId The file ID of the request.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -440,7 +516,8 @@ export class SharingApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Sends a message to the users who are mentioned in the file with the ID specified in the request.
+     * @summary Send the mention message
      * @param {number} fileId The file ID of the mention message.
      * @param {MentionMessageWrapper} [mentionMessageWrapper] The mention message.
      * @param {*} [options] Override http request option.

@@ -4,32 +4,33 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**checkUpload**](#checkupload) | **POST** /api/2.0/files/{folderId}/upload/check | |
-|[**createFolder**](#createfolder) | **POST** /api/2.0/files/folder/{folderId} | |
-|[**deleteFolder**](#deletefolder) | **DELETE** /api/2.0/files/folder/{folderId} | |
-|[**getFilesUsedSpace**](#getfilesusedspace) | **GET** /api/2.0/files/filesusedspace | |
-|[**getFolder**](#getfolder) | **GET** /api/2.0/files/{folderId}/formfilter | |
-|[**getFolderByFolderId**](#getfolderbyfolderid) | **GET** /api/2.0/files/{folderId} | |
-|[**getFolderHistory**](#getfolderhistory) | **GET** /api/2.0/files/folder/{folderId}/log | |
-|[**getFolderInfo**](#getfolderinfo) | **GET** /api/2.0/files/folder/{folderId} | |
-|[**getFolderPath**](#getfolderpath) | **GET** /api/2.0/files/folder/{folderId}/path | |
-|[**getFolderPrimaryExternalLink**](#getfolderprimaryexternallink) | **GET** /api/2.0/files/folder/{id}/link | |
-|[**getFolders**](#getfolders) | **GET** /api/2.0/files/{folderId}/subfolders | |
-|[**getMyFolder**](#getmyfolder) | **GET** /api/2.0/files/@my | |
-|[**getNewFolderItems**](#getnewfolderitems) | **GET** /api/2.0/files/{folderId}/news | |
-|[**getPrivacyFolder**](#getprivacyfolder) | **GET** /api/2.0/files/@privacy | |
-|[**getRootFolders**](#getrootfolders) | **GET** /api/2.0/files/@root | |
-|[**getTrashFolder**](#gettrashfolder) | **GET** /api/2.0/files/@trash | |
-|[**insertFile**](#insertfile) | **POST** /api/2.0/files/{folderId}/insert | |
-|[**insertFileToMyFromBody**](#insertfiletomyfrombody) | **POST** /api/2.0/files/@my/insert | |
-|[**renameFolder**](#renamefolder) | **PUT** /api/2.0/files/folder/{folderId} | |
-|[**setFolderOrder**](#setfolderorder) | **PUT** /api/2.0/files/folder/{folderId}/order | |
-|[**uploadFile**](#uploadfile) | **POST** /api/2.0/files/{folderId}/upload | |
-|[**uploadFileToMy**](#uploadfiletomy) | **POST** /api/2.0/files/@my/upload | |
+|[**checkUpload**](#checkupload) | **POST** /api/2.0/files/{folderId}/upload/check | Check file uploads|
+|[**createFolder**](#createfolder) | **POST** /api/2.0/files/folder/{folderId} | Create a folder|
+|[**deleteFolder**](#deletefolder) | **DELETE** /api/2.0/files/folder/{folderId} | Delete a folder|
+|[**getFilesUsedSpace**](#getfilesusedspace) | **GET** /api/2.0/files/filesusedspace | Get used space of files|
+|[**getFolder**](#getfolder) | **GET** /api/2.0/files/{folderId}/formfilter | Get folder form filter|
+|[**getFolderByFolderId**](#getfolderbyfolderid) | **GET** /api/2.0/files/{folderId} | Get a folder by ID|
+|[**getFolderHistory**](#getfolderhistory) | **GET** /api/2.0/files/folder/{folderId}/log | Get folder history|
+|[**getFolderInfo**](#getfolderinfo) | **GET** /api/2.0/files/folder/{folderId} | Get folder information|
+|[**getFolderPath**](#getfolderpath) | **GET** /api/2.0/files/folder/{folderId}/path | Get the folder path|
+|[**getFolderPrimaryExternalLink**](#getfolderprimaryexternallink) | **GET** /api/2.0/files/folder/{id}/link | Get primary external link|
+|[**getFolders**](#getfolders) | **GET** /api/2.0/files/{folderId}/subfolders | Get subfolders|
+|[**getMyFolder**](#getmyfolder) | **GET** /api/2.0/files/@my | Get the \&quot;My documents\&quot; section|
+|[**getNewFolderItems**](#getnewfolderitems) | **GET** /api/2.0/files/{folderId}/news | Get new folder items|
+|[**getPrivacyFolder**](#getprivacyfolder) | **GET** /api/2.0/files/@privacy | Get the \&quot;Private Room\&quot; section|
+|[**getRootFolders**](#getrootfolders) | **GET** /api/2.0/files/@root | Get filtered sections|
+|[**getTrashFolder**](#gettrashfolder) | **GET** /api/2.0/files/@trash | Get the \&quot;Trash\&quot; section|
+|[**insertFile**](#insertfile) | **POST** /api/2.0/files/{folderId}/insert | Insert a file|
+|[**insertFileToMyFromBody**](#insertfiletomyfrombody) | **POST** /api/2.0/files/@my/insert | Insert a file to the \&quot;My documents\&quot; section|
+|[**renameFolder**](#renamefolder) | **PUT** /api/2.0/files/folder/{folderId} | Rename a folder|
+|[**setFolderOrder**](#setfolderorder) | **PUT** /api/2.0/files/folder/{folderId}/order | Set folder order|
+|[**uploadFile**](#uploadfile) | **POST** /api/2.0/files/{folderId}/upload | Upload a file|
+|[**uploadFileToMy**](#uploadfiletomy) | **POST** /api/2.0/files/@my/upload | Upload a file to the \&quot;My documents\&quot; section|
 
 # **checkUpload**
 > STRINGArrayWrapper checkUpload()
 
+Checks the file uploads to the folder with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/check-upload/).
 
@@ -47,7 +48,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -80,12 +81,14 @@ const { status, data } = await apiInstance.checkUpload(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Inserted file |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **createFolder**
 > FolderIntegerWrapper createFolder()
 
+Creates a new folder with the title specified in the request. The parent folder ID can be also specified.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-folder/).
 
@@ -103,7 +106,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -136,12 +139,14 @@ const { status, data } = await apiInstance.createFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | New folder parameters |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deleteFolder**
 > FileOperationArrayWrapper deleteFolder()
 
+Deletes a folder with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-folder/).
 
@@ -159,7 +164,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -192,12 +197,14 @@ const { status, data } = await apiInstance.deleteFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of file operations |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getFilesUsedSpace**
 > FilesStatisticsResultWrapper getFilesUsedSpace()
 
+Returns the used space of files in the root folders.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-files-used-space/).
 
@@ -211,7 +218,7 @@ This endpoint does not have any parameters.
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -237,12 +244,14 @@ const { status, data } = await apiInstance.getFilesUsedSpace();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Used space of files in the root folders |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getFolder**
 > FormsItemArrayWrapper getFolder()
 
+Returns the form filter of a folder with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder/).
 
@@ -295,6 +304,7 @@ const { status, data } = await apiInstance.getFolder(
 # **getFolderByFolderId**
 > FolderContentIntegerWrapper getFolderByFolderId()
 
+Returns the detailed list of files and folders located in the folder with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-by-folder-id/).
 
@@ -391,6 +401,7 @@ const { status, data } = await apiInstance.getFolderByFolderId(
 # **getFolderHistory**
 > HistoryArrayWrapper getFolderHistory()
 
+Returns the activity history of a folder with a specified identifier.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-history/).
 
@@ -411,7 +422,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -451,6 +462,7 @@ const { status, data } = await apiInstance.getFolderHistory(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of actions in the folder |  -  |
+|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to perform the operation |  -  |
 |**404** | The required folder was not found |  -  |
 
@@ -459,6 +471,7 @@ const { status, data } = await apiInstance.getFolderHistory(
 # **getFolderInfo**
 > FolderIntegerWrapper getFolderInfo()
 
+Returns the detailed information about a folder with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-info/).
 
@@ -511,6 +524,7 @@ const { status, data } = await apiInstance.getFolderInfo(
 # **getFolderPath**
 > FileEntryBaseArrayWrapper getFolderPath()
 
+Returns a path to the folder with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-path/).
 
@@ -527,7 +541,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -557,6 +571,7 @@ const { status, data } = await apiInstance.getFolderPath(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of file entry information |  -  |
+|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to view the folder content |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -564,6 +579,7 @@ const { status, data } = await apiInstance.getFolderPath(
 # **getFolderPrimaryExternalLink**
 > FileShareWrapper getFolderPrimaryExternalLink()
 
+Returns the primary external link by the identifier specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-primary-external-link/).
 
@@ -617,6 +633,7 @@ const { status, data } = await apiInstance.getFolderPrimaryExternalLink(
 # **getFolders**
 > FileEntryBaseArrayWrapper getFolders()
 
+Returns a list of all the subfolders from a folder with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folders/).
 
@@ -633,7 +650,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -663,6 +680,7 @@ const { status, data } = await apiInstance.getFolders(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of file entry information |  -  |
+|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to view the folder content |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -670,6 +688,7 @@ const { status, data } = await apiInstance.getFolders(
 # **getMyFolder**
 > FolderContentIntegerWrapper getMyFolder()
 
+Returns the detailed list of files and folders located in the \"My documents\" section.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-my-folder/).
 
@@ -694,7 +713,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -740,6 +759,7 @@ const { status, data } = await apiInstance.getMyFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The \&quot;My documents\&quot; section contents |  -  |
+|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to view the folder content |  -  |
 |**404** | The required folder was not found |  -  |
 
@@ -748,6 +768,7 @@ const { status, data } = await apiInstance.getMyFolder(
 # **getNewFolderItems**
 > FileEntryBaseArrayWrapper getNewFolderItems()
 
+Returns a list of all the new items from a folder with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-new-folder-items/).
 
@@ -764,7 +785,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -794,6 +815,7 @@ const { status, data } = await apiInstance.getNewFolderItems(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of file entry information |  -  |
+|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to view the folder content |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -801,6 +823,7 @@ const { status, data } = await apiInstance.getNewFolderItems(
 # **getPrivacyFolder**
 > FolderContentIntegerWrapper getPrivacyFolder()
 
+Returns the detailed list of files and folders located in the \"Private Room\" section.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-privacy-folder/).
 
@@ -824,7 +847,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -868,6 +891,7 @@ const { status, data } = await apiInstance.getPrivacyFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The \&quot;Private Room\&quot; section contents |  -  |
+|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to view the folder content |  -  |
 |**404** | The required folder was not found |  -  |
 
@@ -876,6 +900,7 @@ const { status, data } = await apiInstance.getPrivacyFolder(
 # **getRootFolders**
 > FolderContentIntegerArrayWrapper getRootFolders()
 
+Returns all the sections matching the parameters specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-root-folders/).
 
@@ -900,7 +925,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -946,6 +971,7 @@ const { status, data } = await apiInstance.getRootFolders(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of section contents with the following parameters |  -  |
+|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to view the folder content |  -  |
 |**404** | The required folder was not found |  -  |
 
@@ -954,6 +980,7 @@ const { status, data } = await apiInstance.getRootFolders(
 # **getTrashFolder**
 > FolderContentIntegerWrapper getTrashFolder()
 
+Returns the detailed list of files and folders located in the \"Trash\" section.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-trash-folder/).
 
@@ -978,7 +1005,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1024,6 +1051,7 @@ const { status, data } = await apiInstance.getTrashFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The \&quot;Trash\&quot; section contents |  -  |
+|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to view the folder content |  -  |
 |**404** | The required folder was not found |  -  |
 
@@ -1032,6 +1060,7 @@ const { status, data } = await apiInstance.getTrashFolder(
 # **insertFile**
 > FileIntegerWrapper insertFile()
 
+Inserts a file specified in the request to the selected folder by single file uploading.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/insert-file/).
 
@@ -1060,7 +1089,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1114,6 +1143,7 @@ const { status, data } = await apiInstance.insertFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Inserted file |  -  |
+|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to create |  -  |
 |**404** | Folder not found |  -  |
 
@@ -1122,6 +1152,7 @@ const { status, data } = await apiInstance.insertFile(
 # **insertFileToMyFromBody**
 > FileIntegerWrapper insertFileToMyFromBody()
 
+Inserts a file specified in the request to the \"My documents\" section by single file uploading.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/insert-file-to-my-from-body/).
 
@@ -1149,7 +1180,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1201,6 +1232,7 @@ const { status, data } = await apiInstance.insertFileToMyFromBody(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Inserted file |  -  |
+|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to create |  -  |
 |**404** | Folder not found |  -  |
 
@@ -1209,6 +1241,7 @@ const { status, data } = await apiInstance.insertFileToMyFromBody(
 # **renameFolder**
 > FolderIntegerWrapper renameFolder()
 
+Renames the selected folder with a new title specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/rename-folder/).
 
@@ -1226,7 +1259,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1259,6 +1292,7 @@ const { status, data } = await apiInstance.renameFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Folder parameters |  -  |
+|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to rename the folder |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1266,6 +1300,7 @@ const { status, data } = await apiInstance.renameFolder(
 # **setFolderOrder**
 > FolderIntegerWrapper setFolderOrder()
 
+Sets the file order in the folder with ID specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-order/).
 
@@ -1283,7 +1318,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1316,12 +1351,14 @@ const { status, data } = await apiInstance.setFolderOrder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of file operations |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **uploadFile**
 > ObjectWrapper uploadFile()
 
+Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file/).
 
@@ -1339,7 +1376,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1372,6 +1409,7 @@ const { status, data } = await apiInstance.uploadFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Inserted file |  -  |
+|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to create |  -  |
 |**404** | Folder not found |  -  |
 
@@ -1380,6 +1418,7 @@ const { status, data } = await apiInstance.uploadFile(
 # **uploadFileToMy**
 > ObjectWrapper uploadFileToMy()
 
+Uploads a file specified in the request to the \"My documents\" section by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file-to-my/).
 
@@ -1396,7 +1435,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1427,6 +1466,7 @@ const { status, data } = await apiInstance.uploadFileToMy(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Uploaded file(s) |  -  |
+|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to create |  -  |
 |**404** | File not found |  -  |
 
