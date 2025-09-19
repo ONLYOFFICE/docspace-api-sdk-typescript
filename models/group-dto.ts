@@ -57,6 +57,12 @@ export interface GroupDto {
      */
     'isLDAP'?: boolean;
     /**
+     * Indicates whether the group is a system group.
+     * @type {boolean}
+     * @memberof GroupDto
+     */
+    'isSystem'?: boolean | null;
+    /**
      * 
      * @type {EmployeeFullDto}
      * @memberof GroupDto

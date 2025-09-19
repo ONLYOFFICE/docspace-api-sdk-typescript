@@ -21,42 +21,42 @@
 import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FileDtoString } from './file-dto-string';
+import type { TenantWalletServiceSettings } from './tenant-wallet-service-settings';
 
 /**
  * 
  * @export
- * @interface FileStringArrayWrapper
+ * @interface TenantWalletServiceSettingsWrapper
  */
-export interface FileStringArrayWrapper {
+export interface TenantWalletServiceSettingsWrapper {
     /**
      * 
-     * @type {Array<FileDtoString>}
-     * @memberof FileStringArrayWrapper
+     * @type {TenantWalletServiceSettings}
+     * @memberof TenantWalletServiceSettingsWrapper
      */
-    'response'?: Array<FileDtoString>;
+    'response'?: TenantWalletServiceSettings;
     /**
      * 
      * @type {number}
-     * @memberof FileStringArrayWrapper
+     * @memberof TenantWalletServiceSettingsWrapper
      */
     'count'?: number;
     /**
      * 
      * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof FileStringArrayWrapper
+     * @memberof TenantWalletServiceSettingsWrapper
      */
     'links'?: Array<ActiveConnectionsWrapperLinksInner>;
     /**
      * 
      * @type {number}
-     * @memberof FileStringArrayWrapper
+     * @memberof TenantWalletServiceSettingsWrapper
      */
     'status'?: number;
     /**
      * 
      * @type {number}
-     * @memberof FileStringArrayWrapper
+     * @memberof TenantWalletServiceSettingsWrapper
      */
     'statusCode'?: number;
 }

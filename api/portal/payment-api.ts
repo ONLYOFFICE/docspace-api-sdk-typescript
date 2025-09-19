@@ -29,6 +29,8 @@ import type { BalanceWrapper } from '../../models';
 // @ts-ignore
 import type { BooleanWrapper } from '../../models';
 // @ts-ignore
+import type { ChangeWalletServiceStateRequestDto } from '../../models';
+// @ts-ignore
 import type { CurrenciesArrayWrapper } from '../../models';
 // @ts-ignore
 import type { CustomerInfoWrapper } from '../../models';
@@ -52,6 +54,10 @@ import type { ReportWrapper } from '../../models';
 import type { SalesRequestsDto } from '../../models';
 // @ts-ignore
 import type { StringWrapper } from '../../models';
+// @ts-ignore
+import type { TenantWalletService } from '../../models';
+// @ts-ignore
+import type { TenantWalletServiceSettingsWrapper } from '../../models';
 // @ts-ignore
 import type { TenantWalletSettingsWrapper } from '../../models';
 // @ts-ignore
@@ -113,6 +119,61 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(walletQuantityRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Change wallet service state.
+         * @summary Change wallet service state
+         * @param {ChangeWalletServiceStateRequestDto} [changeWalletServiceStateRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for changeTenantWalletServiceState operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-tenant-wallet-service-state/
+         */
+        changeTenantWalletServiceState: async (changeWalletServiceStateRequestDto?: ChangeWalletServiceStateRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/portal/payment/servicestate`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(changeWalletServiceStateRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -753,6 +814,57 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * Get the wallet services settings.
+         * @summary Get wallet services settings
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getTenantWalletServiceSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-wallet-service-settings/
+         */
+        getTenantWalletServiceSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/portal/payment/servicessettings`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns the wallet auto top up settings.
          * @summary Get wallet auto top up settings
          * @param {*} [options] Override http request option.
@@ -762,6 +874,115 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          */
         getTenantWalletSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/portal/payment/topupsettings`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the wallet services.
+         * @summary Get wallet service
+         * @param {TenantWalletService} service Wallet service
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getWalletService operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-wallet-service/
+         */
+        getWalletService: async (service: TenantWalletService, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'service' is not null or undefined
+            assertParamExists('getWalletService', 'service', service)
+            const localVarPath = `/api/2.0/portal/payment/walletservice`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (service !== undefined) {
+                localVarQueryParameter['service'] = service;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the available wallet services.
+         * @summary Get wallet services
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getWalletServices operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-wallet-services/
+         */
+        getWalletServices: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/portal/payment/walletservices`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1104,6 +1325,21 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Change wallet service state.
+         * @summary Change wallet service state
+         * @param {ChangeWalletServiceStateRequestDto} [changeWalletServiceStateRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for changeTenantWalletServiceState operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-tenant-wallet-service-state/
+         */
+        async changeTenantWalletServiceState(changeWalletServiceStateRequestDto?: ChangeWalletServiceStateRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantWalletServiceSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.changeTenantWalletServiceState(changeWalletServiceStateRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.changeTenantWalletServiceState']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Generates the customer operations report as csv file and save in Documents.
          * @summary Generate the customer operations report
          * @param {CustomerOperationsReportRequestDto} [customerOperationsReportRequestDto] 
@@ -1272,6 +1508,20 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Get the wallet services settings.
+         * @summary Get wallet services settings
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getTenantWalletServiceSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-wallet-service-settings/
+         */
+        async getTenantWalletServiceSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantWalletServiceSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getTenantWalletServiceSettings(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.getTenantWalletServiceSettings']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns the wallet auto top up settings.
          * @summary Get wallet auto top up settings
          * @param {*} [options] Override http request option.
@@ -1283,6 +1533,35 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTenantWalletSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaymentApi.getTenantWalletSettings']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the wallet services.
+         * @summary Get wallet service
+         * @param {TenantWalletService} service Wallet service
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getWalletService operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-wallet-service/
+         */
+        async getWalletService(service: TenantWalletService, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QuotaWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getWalletService(service, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.getWalletService']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the available wallet services.
+         * @summary Get wallet services
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getWalletServices operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-wallet-services/
+         */
+        async getWalletServices(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QuotaArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getWalletServices(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.getWalletServices']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1381,6 +1660,18 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          */
         calculateWalletPayment(walletQuantityRequestDto?: WalletQuantityRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<PaymentCalculationWrapper> {
             return localVarFp.calculateWalletPayment(walletQuantityRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Change wallet service state.
+         * @summary Change wallet service state
+         * @param {ChangeWalletServiceStateRequestDto} [changeWalletServiceStateRequestDto] 
+         * @param {*} [options] Override http request option.
+         * REST API Reference for changeTenantWalletServiceState operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-tenant-wallet-service-state/
+         * @throws {RequiredError}
+         */
+        changeTenantWalletServiceState(changeWalletServiceStateRequestDto?: ChangeWalletServiceStateRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<TenantWalletServiceSettingsWrapper> {
+            return localVarFp.changeTenantWalletServiceState(changeWalletServiceStateRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Generates the customer operations report as csv file and save in Documents.
@@ -1518,6 +1809,17 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getQuotaPaymentInformation(refresh, options).then((request) => request(axios, basePath));
         },
         /**
+         * Get the wallet services settings.
+         * @summary Get wallet services settings
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getTenantWalletServiceSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-wallet-service-settings/
+         * @throws {RequiredError}
+         */
+        getTenantWalletServiceSettings(options?: RawAxiosRequestConfig): AxiosPromise<TenantWalletServiceSettingsWrapper> {
+            return localVarFp.getTenantWalletServiceSettings(options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns the wallet auto top up settings.
          * @summary Get wallet auto top up settings
          * @param {*} [options] Override http request option.
@@ -1527,6 +1829,29 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          */
         getTenantWalletSettings(options?: RawAxiosRequestConfig): AxiosPromise<TenantWalletSettingsWrapper> {
             return localVarFp.getTenantWalletSettings(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the wallet services.
+         * @summary Get wallet service
+         * @param {TenantWalletService} service Wallet service
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getWalletService operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-wallet-service/
+         * @throws {RequiredError}
+         */
+        getWalletService(service: TenantWalletService, options?: RawAxiosRequestConfig): AxiosPromise<QuotaWrapper> {
+            return localVarFp.getWalletService(service, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the available wallet services.
+         * @summary Get wallet services
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getWalletServices operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-wallet-services/
+         * @throws {RequiredError}
+         */
+        getWalletServices(options?: RawAxiosRequestConfig): AxiosPromise<QuotaArrayWrapper> {
+            return localVarFp.getWalletServices(options).then((request) => request(axios, basePath));
         },
         /**
          * Sends a request for the portal payment.
@@ -1608,6 +1933,18 @@ export class PaymentApi extends BaseAPI {
      */
     public calculateWalletPayment(walletQuantityRequestDto?: WalletQuantityRequestDto, options?: RawAxiosRequestConfig) {
         return PaymentApiFp(this.configuration).calculateWalletPayment(walletQuantityRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Change wallet service state.
+     * @summary Change wallet service state
+     * @param {ChangeWalletServiceStateRequestDto} [changeWalletServiceStateRequestDto] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentApi
+     */
+    public changeTenantWalletServiceState(changeWalletServiceStateRequestDto?: ChangeWalletServiceStateRequestDto, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).changeTenantWalletServiceState(changeWalletServiceStateRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1746,6 +2083,17 @@ export class PaymentApi extends BaseAPI {
     }
 
     /**
+     * Get the wallet services settings.
+     * @summary Get wallet services settings
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentApi
+     */
+    public getTenantWalletServiceSettings(options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).getTenantWalletServiceSettings(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Returns the wallet auto top up settings.
      * @summary Get wallet auto top up settings
      * @param {*} [options] Override http request option.
@@ -1754,6 +2102,29 @@ export class PaymentApi extends BaseAPI {
      */
     public getTenantWalletSettings(options?: RawAxiosRequestConfig) {
         return PaymentApiFp(this.configuration).getTenantWalletSettings(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the wallet services.
+     * @summary Get wallet service
+     * @param {TenantWalletService} service Wallet service
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentApi
+     */
+    public getWalletService(service: TenantWalletService, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).getWalletService(service, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the available wallet services.
+     * @summary Get wallet services
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentApi
+     */
+    public getWalletServices(options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).getWalletServices(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

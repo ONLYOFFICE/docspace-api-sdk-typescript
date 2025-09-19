@@ -6,24 +6,30 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |------------- | ------------- | -------------|
 |[**checkUpload**](#checkupload) | **POST** /api/2.0/files/{folderId}/upload/check | Check file uploads|
 |[**createFolder**](#createfolder) | **POST** /api/2.0/files/folder/{folderId} | Create a folder|
+|[**createFolderPrimaryExternalLink**](#createfolderprimaryexternallink) | **POST** /api/2.0/files/folder/{id}/link | Create primary external link|
+|[**createReportFolderHistory**](#createreportfolderhistory) | **POST** /api/2.0/files/folder/{folderId}/log/report | Generates folder history|
 |[**deleteFolder**](#deletefolder) | **DELETE** /api/2.0/files/folder/{folderId} | Delete a folder|
 |[**getFilesUsedSpace**](#getfilesusedspace) | **GET** /api/2.0/files/filesusedspace | Get used space of files|
 |[**getFolder**](#getfolder) | **GET** /api/2.0/files/{folderId}/formfilter | Get folder form filter|
 |[**getFolderByFolderId**](#getfolderbyfolderid) | **GET** /api/2.0/files/{folderId} | Get a folder by ID|
 |[**getFolderHistory**](#getfolderhistory) | **GET** /api/2.0/files/folder/{folderId}/log | Get folder history|
 |[**getFolderInfo**](#getfolderinfo) | **GET** /api/2.0/files/folder/{folderId} | Get folder information|
+|[**getFolderLinks**](#getfolderlinks) | **GET** /api/2.0/files/folder/{id}/links | Get the folder links|
 |[**getFolderPath**](#getfolderpath) | **GET** /api/2.0/files/folder/{folderId}/path | Get the folder path|
 |[**getFolderPrimaryExternalLink**](#getfolderprimaryexternallink) | **GET** /api/2.0/files/folder/{id}/link | Get primary external link|
+|[**getFolderSecurityInfo**](#getfoldersecurityinfo) | **GET** /api/2.0/files/folder/{id}/share | Get the folder access rights|
 |[**getFolders**](#getfolders) | **GET** /api/2.0/files/{folderId}/subfolders | Get subfolders|
 |[**getMyFolder**](#getmyfolder) | **GET** /api/2.0/files/@my | Get the \&quot;My documents\&quot; section|
 |[**getNewFolderItems**](#getnewfolderitems) | **GET** /api/2.0/files/{folderId}/news | Get new folder items|
 |[**getPrivacyFolder**](#getprivacyfolder) | **GET** /api/2.0/files/@privacy | Get the \&quot;Private Room\&quot; section|
+|[**getRecentFolder**](#getrecentfolder) | **GET** /api/2.0/files/@recent | Get the \&quot;Recent\&quot; section|
 |[**getRootFolders**](#getrootfolders) | **GET** /api/2.0/files/@root | Get filtered sections|
 |[**getTrashFolder**](#gettrashfolder) | **GET** /api/2.0/files/@trash | Get the \&quot;Trash\&quot; section|
 |[**insertFile**](#insertfile) | **POST** /api/2.0/files/{folderId}/insert | Insert a file|
 |[**insertFileToMyFromBody**](#insertfiletomyfrombody) | **POST** /api/2.0/files/@my/insert | Insert a file to the \&quot;My documents\&quot; section|
 |[**renameFolder**](#renamefolder) | **PUT** /api/2.0/files/folder/{folderId} | Rename a folder|
 |[**setFolderOrder**](#setfolderorder) | **PUT** /api/2.0/files/folder/{folderId}/order | Set folder order|
+|[**setFolderPrimaryExternalLink**](#setfolderprimaryexternallink) | **PUT** /api/2.0/files/folder/{id}/links | Set the folder external link|
 |[**uploadFile**](#uploadfile) | **POST** /api/2.0/files/{folderId}/upload | Upload a file|
 |[**uploadFileToMy**](#uploadfiletomy) | **POST** /api/2.0/files/@my/upload | Upload a file to the \&quot;My documents\&quot; section|
 
@@ -140,6 +146,121 @@ const { status, data } = await apiInstance.createFolder(
 |-------------|-------------|------------------|
 |**200** | New folder parameters |  -  |
 |**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **createFolderPrimaryExternalLink**
+> FileShareWrapper createFolderPrimaryExternalLink()
+
+Creates a primary external link by the identifier specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-folder-primary-external-link/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **folderLinkRequest** | **FolderLinkRequest**| The folder link parameters. | |
+| **id** | [**number**] | The folder ID. | defaults to undefined|
+
+
+### Return type
+
+**FileShareWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    FilesFoldersApi,
+    Configuration,
+    FolderLinkRequest
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new FilesFoldersApi(configuration);
+
+let id: number; //The folder ID. (default to undefined)
+let folderLinkRequest: FolderLinkRequest; //The folder link parameters. (optional)
+
+const { status, data } = await apiInstance.createFolderPrimaryExternalLink(
+    id,
+    folderLinkRequest
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Folders security information |  -  |
+|**401** | Unauthorized |  -  |
+|**404** | Not Found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **createReportFolderHistory**
+> StringWrapper createReportFolderHistory()
+
+Generates the activity history of a folder.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-report-folder-history/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **folderId** | [**number**] |  | defaults to undefined|
+
+
+### Return type
+
+**StringWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    FilesFoldersApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new FilesFoldersApi(configuration);
+
+let folderId: number; // (default to undefined)
+
+const { status, data } = await apiInstance.createReportFolderHistory(
+    folderId
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | URL to the report file |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**404** | The required folder was not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -327,6 +448,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 | **sortBy** | [**string**] | Specifies the property used for sorting the folder request results. | (optional) defaults to undefined|
 | **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
 | **filterValue** | [**string**] | The text value used as a filter parameter for folder content queries. | (optional) defaults to undefined|
+| **location** | **Location** | Represents the location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -363,6 +485,7 @@ let startIndex: number; //The zero-based index of the first item to retrieve in 
 let sortBy: string; //Specifies the property used for sorting the folder request results. (optional) (default to undefined)
 let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
 let filterValue: string; //The text value used as a filter parameter for folder content queries. (optional) (default to undefined)
+let location: Location; //Represents the location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getFolderByFolderId(
     folderId,
@@ -379,7 +502,8 @@ const { status, data } = await apiInstance.getFolderByFolderId(
     startIndex,
     sortBy,
     sortOrder,
-    filterValue
+    filterValue,
+    location
 );
 ```
 
@@ -521,6 +645,60 @@ const { status, data } = await apiInstance.getFolderInfo(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **getFolderLinks**
+> FileShareArrayWrapper getFolderLinks()
+
+Returns the links of the folder with the ID specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-links/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**number**] | The folder ID. | defaults to undefined|
+
+
+### Return type
+
+**FileShareArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    FilesFoldersApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new FilesFoldersApi(configuration);
+
+let id: number; //The folder ID. (default to undefined)
+
+const { status, data } = await apiInstance.getFolderLinks(
+    id
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Folder security information |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **getFolderPath**
 > FileEntryBaseArrayWrapper getFolderPath()
 
@@ -627,6 +805,69 @@ const { status, data } = await apiInstance.getFolderPrimaryExternalLink(
 |-------------|-------------|------------------|
 |**200** | Folder security information |  -  |
 |**404** | Not Found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getFolderSecurityInfo**
+> FileShareArrayWrapper getFolderSecurityInfo()
+
+Returns the access rights of a folder with the ID specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-security-info/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**number**] | The folder ID. | defaults to undefined|
+| **count** | [**number**] | The number of items to be retrieved or processed. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting index of the items to retrieve in a paginated request. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The text filter value used for filtering room security information. | (optional) defaults to undefined|
+
+
+### Return type
+
+**FileShareArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    FilesFoldersApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new FilesFoldersApi(configuration);
+
+let id: number; //The folder ID. (default to undefined)
+let count: number; //The number of items to be retrieved or processed. (optional) (default to undefined)
+let startIndex: number; //The starting index of the items to retrieve in a paginated request. (optional) (default to undefined)
+let filterValue: string; //The text filter value used for filtering room security information. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getFolderSecurityInfo(
+    id,
+    count,
+    startIndex,
+    filterValue
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Security information of folder files |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -891,6 +1132,95 @@ const { status, data } = await apiInstance.getPrivacyFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The \&quot;Private Room\&quot; section contents |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | You don\&#39;t have enough permission to view the folder content |  -  |
+|**404** | The required folder was not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getRecentFolder**
+> FolderContentIntegerWrapper getRecentFolder()
+
+Returns the detailed list of files located in the \"Recent\" section.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-recent-folder/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fields** | **string**| Comma-separated list of fields to include in the response | |
+| **userIdOrGroupId** | [**string**] | The user or group ID. | (optional) defaults to undefined|
+| **filterType** | **FilterType** | The filter type. | (optional) defaults to undefined|
+| **excludeSubject** | [**boolean**] | Specifies whether to exclude search by user or group ID. | (optional) defaults to undefined|
+| **applyFilterOption** | **ApplyFilterOption** | Specifies whether to return only files, only folders or all elements. | (optional) defaults to undefined|
+| **searchArea** | **SearchArea** | The search area. | (optional) defaults to undefined|
+| **extension** | **Array&lt;string&gt;** | Specifies whether to search for a specific file extension in the \&quot;Recent\&quot; folder. | (optional) defaults to undefined|
+| **count** | [**number**] | The maximum number of items to return. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting position of the results to be returned in the query response. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | Specifies the sorting criteria for the folder request. | (optional) defaults to undefined|
+| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The text used for filtering or searching folder contents. | (optional) defaults to undefined|
+
+
+### Return type
+
+**FolderContentIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    FilesFoldersApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new FilesFoldersApi(configuration);
+
+let userIdOrGroupId: string; //The user or group ID. (optional) (default to undefined)
+let filterType: FilterType; //The filter type. (optional) (default to undefined)
+let excludeSubject: boolean; //Specifies whether to exclude search by user or group ID. (optional) (default to undefined)
+let applyFilterOption: ApplyFilterOption; //Specifies whether to return only files, only folders or all elements. (optional) (default to undefined)
+let searchArea: SearchArea; //The search area. (optional) (default to undefined)
+let extension: Array<string>; //Specifies whether to search for a specific file extension in the \"Recent\" folder. (optional) (default to undefined)
+let count: number; //The maximum number of items to return. (optional) (default to undefined)
+let startIndex: number; //The starting position of the results to be returned in the query response. (optional) (default to undefined)
+let sortBy: string; //Specifies the sorting criteria for the folder request. (optional) (default to undefined)
+let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
+let filterValue: string; //The text used for filtering or searching folder contents. (optional) (default to undefined)
+let fields: string; //Comma-separated list of fields to include in the response (optional)
+
+const { status, data } = await apiInstance.getRecentFolder(
+    userIdOrGroupId,
+    filterType,
+    excludeSubject,
+    applyFilterOption,
+    searchArea,
+    extension,
+    count,
+    startIndex,
+    sortBy,
+    sortOrder,
+    filterValue,
+    fields
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The \&quot;Recent\&quot; section contents |  -  |
 |**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to view the folder content |  -  |
 |**404** | The required folder was not found |  -  |
@@ -1351,6 +1681,64 @@ const { status, data } = await apiInstance.setFolderOrder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of file operations |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **setFolderPrimaryExternalLink**
+> FileShareWrapper setFolderPrimaryExternalLink()
+
+Sets the folder external link with the ID specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-primary-external-link/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **folderLinkRequest** | **FolderLinkRequest**| The folder link parameters. | |
+| **id** | [**number**] | The folder ID. | defaults to undefined|
+
+
+### Return type
+
+**FileShareWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    FilesFoldersApi,
+    Configuration,
+    FolderLinkRequest
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new FilesFoldersApi(configuration);
+
+let id: number; //The folder ID. (default to undefined)
+let folderLinkRequest: FolderLinkRequest; //The folder link parameters. (optional)
+
+const { status, data } = await apiInstance.setFolderPrimaryExternalLink(
+    id,
+    folderLinkRequest
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Folder information |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

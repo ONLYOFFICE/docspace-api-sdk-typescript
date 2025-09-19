@@ -4,6 +4,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
+|[**addFileToRecent**](#addfiletorecent) | **POST** /api/2.0/files/file/{fileId}/recent | Add a file to the \&quot;Recent\&quot; section|
 |[**addTemplates**](#addtemplates) | **POST** /api/2.0/files/templates | Add template files|
 |[**changeVersionHistory**](#changeversionhistory) | **PUT** /api/2.0/files/file/{fileId}/history | Change version history|
 |[**checkFillFormDraft**](#checkfillformdraft) | **POST** /api/2.0/files/masterform/{fileId}/checkfillformdraft | Check the form draft filling|
@@ -11,9 +12,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**createEditSession**](#createeditsession) | **POST** /api/2.0/files/file/{fileId}/edit_session | Create the editing session|
 |[**createFile**](#createfile) | **POST** /api/2.0/files/{folderId}/file | Create a file|
 |[**createFileInMyDocuments**](#createfileinmydocuments) | **POST** /api/2.0/files/@my/file | Create a file in the \&quot;My documents\&quot; section|
+|[**createFilePrimaryExternalLink**](#createfileprimaryexternallink) | **POST** /api/2.0/files/file/{id}/link | Create primary external link|
 |[**createHtmlFile**](#createhtmlfile) | **POST** /api/2.0/files/{folderId}/html | Create an HTML file|
 |[**createHtmlFileInMyDocuments**](#createhtmlfileinmydocuments) | **POST** /api/2.0/files/@my/html | Create an HTML file in the \&quot;My documents\&quot; section|
-|[**createPrimaryExternalLink**](#createprimaryexternallink) | **POST** /api/2.0/files/file/{id}/link | Create primary external link|
 |[**createTextFile**](#createtextfile) | **POST** /api/2.0/files/{folderId}/text | Create a text file|
 |[**createTextFileInMyDocuments**](#createtextfileinmydocuments) | **POST** /api/2.0/files/@my/text | Create a text file in the \&quot;My documents\&quot; section|
 |[**createThumbnails**](#createthumbnails) | **POST** /api/2.0/files/thumbnails | Create file thumbnails|
@@ -42,13 +43,67 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**saveFileAsPdf**](#savefileaspdf) | **POST** /api/2.0/files/file/{id}/saveaspdf | Save a file as PDF|
 |[**saveFormRoleMapping**](#saveformrolemapping) | **POST** /api/2.0/files/file/{fileId}/formrolemapping | Save form role mapping|
 |[**setCustomFilterTag**](#setcustomfiltertag) | **PUT** /api/2.0/files/file/{fileId}/customfilter | Set the Custom Filter editing mode|
-|[**setExternalLink**](#setexternallink) | **PUT** /api/2.0/files/file/{id}/links | Set an external link|
+|[**setFileExternalLink**](#setfileexternallink) | **PUT** /api/2.0/files/file/{id}/links | Set an external link|
 |[**setFileOrder**](#setfileorder) | **PUT** /api/2.0/files/{fileId}/order | Set file order|
 |[**setFilesOrder**](#setfilesorder) | **PUT** /api/2.0/files/order | Set order of files|
 |[**startEditFile**](#starteditfile) | **POST** /api/2.0/files/file/{fileId}/startedit | Start file editing|
 |[**startFillingFile**](#startfillingfile) | **PUT** /api/2.0/files/file/{fileId}/startfilling | Start file filling|
 |[**trackEditFile**](#trackeditfile) | **GET** /api/2.0/files/file/{fileId}/trackeditfile | Track file editing|
 |[**updateFile**](#updatefile) | **PUT** /api/2.0/files/file/{fileId} | Update a file|
+
+# **addFileToRecent**
+> FileIntegerWrapper addFileToRecent()
+
+Adds a file with the ID specified in the request to the \"Recent\" section.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/add-file-to-recent/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
+
+
+### Return type
+
+**FileIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    FilesFilesApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new FilesFilesApi(configuration);
+
+let fileId: number; //The file ID of the request. (default to undefined)
+
+const { status, data } = await apiInstance.addFileToRecent(
+    fileId
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | New file information |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **addTemplates**
 > BooleanWrapper addTemplates()
@@ -106,7 +161,7 @@ const { status, data } = await apiInstance.addTemplates(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **changeVersionHistory**
-> FileStringArrayWrapper changeVersionHistory()
+> FileIntegerArrayWrapper changeVersionHistory()
 
 Changes the version history of a file with the ID specified in the request.
 
@@ -122,7 +177,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-**FileStringArrayWrapper**
+**FileIntegerArrayWrapper**
 
 ### Authorization
 
@@ -454,6 +509,65 @@ const { status, data } = await apiInstance.createFileInMyDocuments(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **createFilePrimaryExternalLink**
+> FileShareWrapper createFilePrimaryExternalLink()
+
+Creates a primary external link by the identifier specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file-primary-external-link/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fileLinkRequest** | **FileLinkRequest**| The file external link parameters. | |
+| **id** | [**number**] | The file ID. | defaults to undefined|
+
+
+### Return type
+
+**FileShareWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    FilesFilesApi,
+    Configuration,
+    FileLinkRequest
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new FilesFilesApi(configuration);
+
+let id: number; //The file ID. (default to undefined)
+let fileLinkRequest: FileLinkRequest; //The file external link parameters. (optional)
+
+const { status, data } = await apiInstance.createFilePrimaryExternalLink(
+    id,
+    fileLinkRequest
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | File security information |  -  |
+|**401** | Unauthorized |  -  |
+|**404** | Not Found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **createHtmlFile**
 > FileIntegerWrapper createHtmlFile()
 
@@ -566,65 +680,6 @@ const { status, data } = await apiInstance.createHtmlFileInMyDocuments(
 |**200** | New file information |  -  |
 |**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to create |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **createPrimaryExternalLink**
-> FileShareWrapper createPrimaryExternalLink()
-
-Creates a primary external link by the identifier specified in the request.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-primary-external-link/).
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **fileLinkRequest** | **FileLinkRequest**| The file external link parameters. | |
-| **id** | [**number**] | The file ID. | defaults to undefined|
-
-
-### Return type
-
-**FileShareWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-```typescript
-import {
-    FilesFilesApi,
-    Configuration,
-    FileLinkRequest
-} from '@onlyoffice/docspace-api-sdk';
-
-const configuration = new Configuration();
-const apiInstance = new FilesFilesApi(configuration);
-
-let id: number; //The file ID. (default to undefined)
-let fileLinkRequest: FileLinkRequest; //The file external link parameters. (optional)
-
-const { status, data } = await apiInstance.createPrimaryExternalLink(
-    id,
-    fileLinkRequest
-);
-```
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | File security information |  -  |
-|**401** | Unauthorized |  -  |
-|**404** | Not Found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1373,7 +1428,7 @@ const { status, data } = await apiInstance.getFilePrimaryExternalLink(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getFileVersionInfo**
-> FileStringArrayWrapper getFileVersionInfo()
+> FileIntegerArrayWrapper getFileVersionInfo()
 
 Returns the detailed information about all the available file versions with the ID specified in the request.
 
@@ -1388,7 +1443,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-**FileStringArrayWrapper**
+**FileIntegerArrayWrapper**
 
 ### Authorization
 
@@ -2240,12 +2295,12 @@ const { status, data } = await apiInstance.setCustomFilterTag(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **setExternalLink**
-> FileShareWrapper setExternalLink()
+# **setFileExternalLink**
+> FileShareWrapper setFileExternalLink()
 
 Sets an external link to a file with the ID specified in the request.
 
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-external-link/).
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-external-link/).
 
 ### Parameters
 
@@ -2278,7 +2333,7 @@ const apiInstance = new FilesFilesApi(configuration);
 let id: number; //The file ID. (default to undefined)
 let fileLinkRequest: FileLinkRequest; //The file external link parameters. (optional)
 
-const { status, data } = await apiInstance.setExternalLink(
+const { status, data } = await apiInstance.setFileExternalLink(
     id,
     fileLinkRequest
 );
@@ -2359,7 +2414,7 @@ const { status, data } = await apiInstance.setFileOrder(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **setFilesOrder**
-> FileEntryStringArrayWrapper setFilesOrder()
+> FileEntryIntegerArrayWrapper setFilesOrder()
 
 Sets order of the files.
 
@@ -2374,7 +2429,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-**FileEntryStringArrayWrapper**
+**FileEntryIntegerArrayWrapper**
 
 ### Authorization
 

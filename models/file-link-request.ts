@@ -48,6 +48,12 @@ export interface FileLinkRequest {
      */
     'expirationDate'?: ApiDateTime;
     /**
+     * The link name.
+     * @type {string}
+     * @memberof FileLinkRequest
+     */
+    'title'?: string | null;
+    /**
      * The link scope, whether it is internal or not.
      * @type {boolean}
      * @memberof FileLinkRequest
@@ -59,6 +65,18 @@ export interface FileLinkRequest {
      * @memberof FileLinkRequest
      */
     'primary'?: boolean;
+    /**
+     * Specifies whether to deny downloading the file or not.
+     * @type {boolean}
+     * @memberof FileLinkRequest
+     */
+    'denyDownload'?: boolean;
+    /**
+     * Password for access via link.
+     * @type {string}
+     * @memberof FileLinkRequest
+     */
+    'password'?: string | null;
 }
 
 

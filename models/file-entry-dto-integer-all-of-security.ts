@@ -251,5 +251,17 @@ export interface FileEntryDtoIntegerAllOfSecurity {
      * @memberof FileEntryDtoIntegerAllOfSecurity
      */
     'OpenForm'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FileEntryDtoIntegerAllOfSecurity
+     */
+    'EditInternal'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FileEntryDtoIntegerAllOfSecurity
+     */
+    'EditExpiration'?: boolean;
 }
 

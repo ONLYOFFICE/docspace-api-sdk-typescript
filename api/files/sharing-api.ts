@@ -144,12 +144,13 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
          * @summary Get the external data
          * @param {string} key The unique key of the external shared data.
          * @param {string} [fileId] The unique document identifier.
+         * @param {string} [folderId] The unique folder identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getExternalShareData operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-external-share-data/
          */
-        getExternalShareData: async (key: string, fileId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getExternalShareData: async (key: string, fileId?: string, folderId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'key' is not null or undefined
             assertParamExists('getExternalShareData', 'key', key)
             const localVarPath = `/api/2.0/files/share/{key}`
@@ -167,6 +168,10 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
 
             if (fileId !== undefined) {
                 localVarQueryParameter['fileId'] = fileId;
+            }
+
+            if (folderId !== undefined) {
+                localVarQueryParameter['folderId'] = folderId;
             }
 
 
@@ -340,13 +345,14 @@ export const SharingApiFp = function(configuration?: Configuration) {
          * @summary Get the external data
          * @param {string} key The unique key of the external shared data.
          * @param {string} [fileId] The unique document identifier.
+         * @param {string} [folderId] The unique folder identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getExternalShareData operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-external-share-data/
          */
-        async getExternalShareData(key: string, fileId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ExternalShareWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getExternalShareData(key, fileId, options);
+        async getExternalShareData(key: string, fileId?: string, folderId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ExternalShareWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getExternalShareData(key, fileId, folderId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SharingApi.getExternalShareData']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -422,13 +428,14 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
          * @summary Get the external data
          * @param {string} key The unique key of the external shared data.
          * @param {string} [fileId] The unique document identifier.
+         * @param {string} [folderId] The unique folder identifier.
          * @param {*} [options] Override http request option.
          * REST API Reference for getExternalShareData operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-external-share-data/
          * @throws {RequiredError}
          */
-        getExternalShareData(key: string, fileId?: string, options?: RawAxiosRequestConfig): AxiosPromise<ExternalShareWrapper> {
-            return localVarFp.getExternalShareData(key, fileId, options).then((request) => request(axios, basePath));
+        getExternalShareData(key: string, fileId?: string, folderId?: string, options?: RawAxiosRequestConfig): AxiosPromise<ExternalShareWrapper> {
+            return localVarFp.getExternalShareData(key, fileId, folderId, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of users with their access rights to the file with the ID specified in the request.
@@ -495,12 +502,13 @@ export class SharingApi extends BaseAPI {
      * @summary Get the external data
      * @param {string} key The unique key of the external shared data.
      * @param {string} [fileId] The unique document identifier.
+     * @param {string} [folderId] The unique folder identifier.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SharingApi
      */
-    public getExternalShareData(key: string, fileId?: string, options?: RawAxiosRequestConfig) {
-        return SharingApiFp(this.configuration).getExternalShareData(key, fileId, options).then((request) => request(this.axios, this.basePath));
+    public getExternalShareData(key: string, fileId?: string, folderId?: string, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).getExternalShareData(key, fileId, folderId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

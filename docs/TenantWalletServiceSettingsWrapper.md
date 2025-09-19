@@ -1,11 +1,11 @@
-# FileStringArrayWrapper
+# TenantWalletServiceSettingsWrapper
 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**Array&lt;FileDtoString&gt;**](FileDtoString.md) |  | [optional] [default to undefined]
+**response** | [**TenantWalletServiceSettings**](TenantWalletServiceSettings.md) |  | [optional] [default to undefined]
 **count** | **number** |  | [optional] [default to undefined]
 **links** | [**Array&lt;ActiveConnectionsWrapperLinksInner&gt;**](ActiveConnectionsWrapperLinksInner.md) |  | [optional] [default to undefined]
 **status** | **number** |  | [optional] [default to undefined]
@@ -14,9 +14,9 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FileStringArrayWrapper } from '@onlyoffice/docspace-api-sdk';
+import { TenantWalletServiceSettingsWrapper } from '@onlyoffice/docspace-api-sdk';
 
-const instance: FileStringArrayWrapper = {
+const instance: TenantWalletServiceSettingsWrapper = {
     response,
     count,
     links,

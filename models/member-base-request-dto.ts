@@ -41,5 +41,11 @@ export interface MemberBaseRequestDto {
      * @memberof MemberBaseRequestDto
      */
     'email'?: string | null;
+    /**
+     * The user encrypted email address.
+     * @type {string}
+     * @memberof MemberBaseRequestDto
+     */
+    'encEmail'?: string | null;
 }
 

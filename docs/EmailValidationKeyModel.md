@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **key** | **string** | The email validation key. | [optional] [default to undefined]
 **emplType** | [**EmployeeType**](EmployeeType.md) |  | [optional] [default to undefined]
 **email** | **string** | The email address. | [optional] [default to undefined]
+**encEmail** | **string** | The encrypted email address. | [optional] [default to undefined]
 **uiD** | **string** | The user ID. | [optional] [default to undefined]
 **type** | [**ConfirmType**](ConfirmType.md) |  | [optional] [default to undefined]
 **first** | **string** | Specifies whether it is the first time account access or not. | [optional] [default to undefined]
@@ -23,6 +24,7 @@ const instance: EmailValidationKeyModel = {
     key,
     emplType,
     email,
+    encEmail,
     uiD,
     type,
     first,

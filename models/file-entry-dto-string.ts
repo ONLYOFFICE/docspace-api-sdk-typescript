@@ -30,6 +30,9 @@ import type { FileEntryBaseDto } from './file-entry-base-dto';
 import type { FileEntryDtoIntegerAllOfSecurity } from './file-entry-dto-integer-all-of-security';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { FileEntryDtoIntegerAllOfShareSettings } from './file-entry-dto-integer-all-of-share-settings';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { FileEntryType } from './file-entry-type';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -88,10 +91,22 @@ export type FileEntryDtoString = FileEntryBaseDto &  {
     'canShare'?: boolean;
     /**
      * 
+     * @type {FileEntryDtoIntegerAllOfShareSettings}
+     * @memberof FileEntryDtoString
+     */
+    'shareSettings'?: FileEntryDtoIntegerAllOfShareSettings | null;
+    /**
+     * 
      * @type {FileEntryDtoIntegerAllOfSecurity}
      * @memberof FileEntryDtoString
      */
     'security'?: FileEntryDtoIntegerAllOfSecurity | null;
+    /**
+     * The available external rights of the file entry.
+     * @type {{ [key: string]: boolean; }}
+     * @memberof FileEntryDtoString
+     */
+    'availableExternalRights'?: { [key: string]: boolean; } | null;
     /**
      * The request token of the file entry.
      * @type {string}

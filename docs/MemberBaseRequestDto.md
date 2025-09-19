@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **password** | **string** | The user password. | [optional] [default to undefined]
 **passwordHash** | **string** | The user password hash. | [optional] [default to undefined]
 **email** | **string** | The user email address. | [optional] [default to undefined]
+**encEmail** | **string** | The user encrypted email address. | [optional] [default to undefined]
 
 ## Example
 
@@ -19,6 +20,7 @@ const instance: MemberBaseRequestDto = {
     password,
     passwordHash,
     email,
+    encEmail,
 };
 ```
 

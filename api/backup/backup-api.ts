@@ -35,7 +35,11 @@ import type { BackupRestoreDto } from '../../models';
 // @ts-ignore
 import type { BackupScheduleDto } from '../../models';
 // @ts-ignore
+import type { BackupServiceStateWrapper } from '../../models';
+// @ts-ignore
 import type { BooleanWrapper } from '../../models';
+// @ts-ignore
+import type { Int32Wrapper } from '../../models';
 // @ts-ignore
 import type { ScheduleWrapper } from '../../models';
 /**
@@ -435,6 +439,127 @@ export const BackupApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
+         * Returns the number of backups for a period of time. The default is one month.
+         * @summary Get the number of backups
+         * @param {string} [from] The from date.
+         * @param {string} [to] The to date.
+         * @param {boolean} [paid] Specifies if the backups are paid or not.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getBackupsCount operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backups-count/
+         */
+        getBackupsCount: async (from?: string, to?: string, paid?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/backup/getbackupscount`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (from !== undefined) {
+                localVarQueryParameter['from'] = (from as any instanceof Date) ?
+                    (from as any).toISOString() :
+                    from;
+            }
+
+            if (to !== undefined) {
+                localVarQueryParameter['to'] = (to as any instanceof Date) ?
+                    (to as any).toISOString() :
+                    to;
+            }
+
+            if (paid !== undefined) {
+                localVarQueryParameter['paid'] = paid;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the backup service state.
+         * @summary Get the backup service state
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getBackupsServiceState operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backups-service-state/
+         */
+        getBackupsServiceState: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/backup/getservicestate`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns the progress of the started restoring process.
          * @summary Get the restoring progress
          * @param {boolean} [dump] Specifies if a dump will be created or not.
@@ -697,6 +822,37 @@ export const BackupApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns the number of backups for a period of time. The default is one month.
+         * @summary Get the number of backups
+         * @param {string} [from] The from date.
+         * @param {string} [to] The to date.
+         * @param {boolean} [paid] Specifies if the backups are paid or not.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getBackupsCount operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backups-count/
+         */
+        async getBackupsCount(from?: string, to?: string, paid?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Int32Wrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getBackupsCount(from, to, paid, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BackupApi.getBackupsCount']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the backup service state.
+         * @summary Get the backup service state
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getBackupsServiceState operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backups-service-state/
+         */
+        async getBackupsServiceState(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BackupServiceStateWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getBackupsServiceState(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BackupApi.getBackupsServiceState']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns the progress of the started restoring process.
          * @summary Get the restoring progress
          * @param {boolean} [dump] Specifies if a dump will be created or not.
@@ -836,6 +992,31 @@ export const BackupApiFactory = function (configuration?: Configuration, basePat
             return localVarFp.getBackupSchedule(dump, options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns the number of backups for a period of time. The default is one month.
+         * @summary Get the number of backups
+         * @param {string} [from] The from date.
+         * @param {string} [to] The to date.
+         * @param {boolean} [paid] Specifies if the backups are paid or not.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getBackupsCount operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backups-count/
+         * @throws {RequiredError}
+         */
+        getBackupsCount(from?: string, to?: string, paid?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<Int32Wrapper> {
+            return localVarFp.getBackupsCount(from, to, paid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the backup service state.
+         * @summary Get the backup service state
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getBackupsServiceState operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backups-service-state/
+         * @throws {RequiredError}
+         */
+        getBackupsServiceState(options?: RawAxiosRequestConfig): AxiosPromise<BackupServiceStateWrapper> {
+            return localVarFp.getBackupsServiceState(options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns the progress of the started restoring process.
          * @summary Get the restoring progress
          * @param {boolean} [dump] Specifies if a dump will be created or not.
@@ -963,6 +1144,31 @@ export class BackupApi extends BaseAPI {
      */
     public getBackupSchedule(dump?: boolean, options?: RawAxiosRequestConfig) {
         return BackupApiFp(this.configuration).getBackupSchedule(dump, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the number of backups for a period of time. The default is one month.
+     * @summary Get the number of backups
+     * @param {string} [from] The from date.
+     * @param {string} [to] The to date.
+     * @param {boolean} [paid] Specifies if the backups are paid or not.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BackupApi
+     */
+    public getBackupsCount(from?: string, to?: string, paid?: boolean, options?: RawAxiosRequestConfig) {
+        return BackupApiFp(this.configuration).getBackupsCount(from, to, paid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the backup service state.
+     * @summary Get the backup service state
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BackupApi
+     */
+    public getBackupsServiceState(options?: RawAxiosRequestConfig) {
+        return BackupApiFp(this.configuration).getBackupsServiceState(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

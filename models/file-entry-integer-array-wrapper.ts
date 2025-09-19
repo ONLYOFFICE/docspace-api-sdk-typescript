@@ -21,42 +21,42 @@
 import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FileEntryDtoString } from './file-entry-dto-string';
+import type { FileEntryDtoInteger } from './file-entry-dto-integer';
 
 /**
  * 
  * @export
- * @interface FileEntryStringArrayWrapper
+ * @interface FileEntryIntegerArrayWrapper
  */
-export interface FileEntryStringArrayWrapper {
+export interface FileEntryIntegerArrayWrapper {
     /**
      * 
-     * @type {Array<FileEntryDtoString>}
-     * @memberof FileEntryStringArrayWrapper
+     * @type {Array<FileEntryDtoInteger>}
+     * @memberof FileEntryIntegerArrayWrapper
      */
-    'response'?: Array<FileEntryDtoString>;
+    'response'?: Array<FileEntryDtoInteger>;
     /**
      * 
      * @type {number}
-     * @memberof FileEntryStringArrayWrapper
+     * @memberof FileEntryIntegerArrayWrapper
      */
     'count'?: number;
     /**
      * 
      * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof FileEntryStringArrayWrapper
+     * @memberof FileEntryIntegerArrayWrapper
      */
     'links'?: Array<ActiveConnectionsWrapperLinksInner>;
     /**
      * 
      * @type {number}
-     * @memberof FileEntryStringArrayWrapper
+     * @memberof FileEntryIntegerArrayWrapper
      */
     'status'?: number;
     /**
      * 
      * @type {number}
-     * @memberof FileEntryStringArrayWrapper
+     * @memberof FileEntryIntegerArrayWrapper
      */
     'statusCode'?: number;
 }

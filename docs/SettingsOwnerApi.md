@@ -58,6 +58,7 @@ const { status, data } = await apiInstance.sendOwnerChangeInstructions(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Message about changing the portal owner |  -  |
+|**400** | Owner\&#39;s email is not activated |  -  |
 |**401** | Unauthorized |  -  |
 |**403** | Collaborator can not be an owner |  -  |
 

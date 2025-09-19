@@ -55,7 +55,9 @@ import type { EditorType } from '../../models';
 // @ts-ignore
 import type { FileEntryBaseWrapper } from '../../models';
 // @ts-ignore
-import type { FileEntryStringArrayWrapper } from '../../models';
+import type { FileEntryIntegerArrayWrapper } from '../../models';
+// @ts-ignore
+import type { FileIntegerArrayWrapper } from '../../models';
 // @ts-ignore
 import type { FileIntegerWrapper } from '../../models';
 // @ts-ignore
@@ -70,8 +72,6 @@ import type { FileReferenceWrapper } from '../../models';
 import type { FileShareArrayWrapper } from '../../models';
 // @ts-ignore
 import type { FileShareWrapper } from '../../models';
-// @ts-ignore
-import type { FileStringArrayWrapper } from '../../models';
 // @ts-ignore
 import type { FillingFormResultIntegerWrapper } from '../../models';
 // @ts-ignore
@@ -118,6 +118,61 @@ import type { UpdateFile } from '../../models';
  */
 export const FilesApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * Adds a file with the ID specified in the request to the \"Recent\" section.
+         * @summary Add a file to the \"Recent\" section
+         * @param {number} fileId The file ID of the request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for addFileToRecent operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-file-to-recent/
+         */
+        addFileToRecent: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'fileId' is not null or undefined
+            assertParamExists('addFileToRecent', 'fileId', fileId)
+            const localVarPath = `/api/2.0/files/file/{fileId}/recent`
+                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * Adds files with the IDs specified in the request to the template list.
          * @summary Add template files
@@ -506,6 +561,65 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
+         * Creates a primary external link by the identifier specified in the request.
+         * @summary Create primary external link
+         * @param {number} id The file ID.
+         * @param {FileLinkRequest} [fileLinkRequest] The file external link parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for createFilePrimaryExternalLink operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file-primary-external-link/
+         */
+        createFilePrimaryExternalLink: async (id: number, fileLinkRequest?: FileLinkRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('createFilePrimaryExternalLink', 'id', id)
+            const localVarPath = `/api/2.0/files/file/{id}/link`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(fileLinkRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Creates an HTML (.html) file in the selected folder with the title and contents specified in the request.
          * @summary Create an HTML file
          * @param {number} folderId The folder ID to create the text or HTML file.
@@ -613,65 +727,6 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(createTextOrHtmlFile, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Creates a primary external link by the identifier specified in the request.
-         * @summary Create primary external link
-         * @param {number} id The file ID.
-         * @param {FileLinkRequest} [fileLinkRequest] The file external link parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for createPrimaryExternalLink operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-primary-external-link/
-         */
-        createPrimaryExternalLink: async (id: number, fileLinkRequest?: FileLinkRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('createPrimaryExternalLink', 'id', id)
-            const localVarPath = `/api/2.0/files/file/{id}/link`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(fileLinkRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -2198,12 +2253,12 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * @param {FileLinkRequest} [fileLinkRequest] The file external link parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for setExternalLink operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-external-link/
+         * REST API Reference for setFileExternalLink operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-external-link/
          */
-        setExternalLink: async (id: number, fileLinkRequest?: FileLinkRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setFileExternalLink: async (id: number, fileLinkRequest?: FileLinkRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('setExternalLink', 'id', id)
+            assertParamExists('setFileExternalLink', 'id', id)
             const localVarPath = `/api/2.0/files/file/{id}/links`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2561,6 +2616,21 @@ export const FilesApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = FilesApiAxiosParamCreator(configuration)
     return {
         /**
+         * Adds a file with the ID specified in the request to the \"Recent\" section.
+         * @summary Add a file to the \"Recent\" section
+         * @param {number} fileId The file ID of the request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for addFileToRecent operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-file-to-recent/
+         */
+        async addFileToRecent(fileId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addFileToRecent(fileId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesApi.addFileToRecent']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Adds files with the IDs specified in the request to the template list.
          * @summary Add template files
          * @param {TemplatesRequestDto} [templatesRequestDto] 
@@ -2585,7 +2655,7 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for changeVersionHistory operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-version-history/
          */
-        async changeVersionHistory(fileId: number, changeHistory?: ChangeHistory, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileStringArrayWrapper>> {
+        async changeVersionHistory(fileId: number, changeHistory?: ChangeHistory, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.changeVersionHistory(fileId, changeHistory, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.changeVersionHistory']?.[localVarOperationServerIndex]?.url;
@@ -2671,6 +2741,22 @@ export const FilesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Creates a primary external link by the identifier specified in the request.
+         * @summary Create primary external link
+         * @param {number} id The file ID.
+         * @param {FileLinkRequest} [fileLinkRequest] The file external link parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for createFilePrimaryExternalLink operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file-primary-external-link/
+         */
+        async createFilePrimaryExternalLink(id: number, fileLinkRequest?: FileLinkRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createFilePrimaryExternalLink(id, fileLinkRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesApi.createFilePrimaryExternalLink']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Creates an HTML (.html) file in the selected folder with the title and contents specified in the request.
          * @summary Create an HTML file
          * @param {number} folderId The folder ID to create the text or HTML file.
@@ -2699,22 +2785,6 @@ export const FilesApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createHtmlFileInMyDocuments(createTextOrHtmlFile, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.createHtmlFileInMyDocuments']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Creates a primary external link by the identifier specified in the request.
-         * @summary Create primary external link
-         * @param {number} id The file ID.
-         * @param {FileLinkRequest} [fileLinkRequest] The file external link parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for createPrimaryExternalLink operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-primary-external-link/
-         */
-        async createPrimaryExternalLink(id: number, fileLinkRequest?: FileLinkRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createPrimaryExternalLink(id, fileLinkRequest, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.createPrimaryExternalLink']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2933,7 +3003,7 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for getFileVersionInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-version-info/
          */
-        async getFileVersionInfo(fileId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileStringArrayWrapper>> {
+        async getFileVersionInfo(fileId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getFileVersionInfo(fileId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.getFileVersionInfo']?.[localVarOperationServerIndex]?.url;
@@ -3172,13 +3242,13 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * @param {FileLinkRequest} [fileLinkRequest] The file external link parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for setExternalLink operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-external-link/
+         * REST API Reference for setFileExternalLink operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-external-link/
          */
-        async setExternalLink(id: number, fileLinkRequest?: FileLinkRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setExternalLink(id, fileLinkRequest, options);
+        async setFileExternalLink(id: number, fileLinkRequest?: FileLinkRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setFileExternalLink(id, fileLinkRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.setExternalLink']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['FilesApi.setFileExternalLink']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -3206,7 +3276,7 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for setFilesOrder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-files-order/
          */
-        async setFilesOrder(ordersRequestDtoInteger?: OrdersRequestDtoInteger, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileEntryStringArrayWrapper>> {
+        async setFilesOrder(ordersRequestDtoInteger?: OrdersRequestDtoInteger, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileEntryIntegerArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setFilesOrder(ordersRequestDtoInteger, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.setFilesOrder']?.[localVarOperationServerIndex]?.url;
@@ -3288,6 +3358,18 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
     const localVarFp = FilesApiFp(configuration)
     return {
         /**
+         * Adds a file with the ID specified in the request to the \"Recent\" section.
+         * @summary Add a file to the \"Recent\" section
+         * @param {number} fileId The file ID of the request.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for addFileToRecent operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-file-to-recent/
+         * @throws {RequiredError}
+         */
+        addFileToRecent(fileId: number, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
+            return localVarFp.addFileToRecent(fileId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Adds files with the IDs specified in the request to the template list.
          * @summary Add template files
          * @param {TemplatesRequestDto} [templatesRequestDto] 
@@ -3309,7 +3391,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-version-history/
          * @throws {RequiredError}
          */
-        changeVersionHistory(fileId: number, changeHistory?: ChangeHistory, options?: RawAxiosRequestConfig): AxiosPromise<FileStringArrayWrapper> {
+        changeVersionHistory(fileId: number, changeHistory?: ChangeHistory, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerArrayWrapper> {
             return localVarFp.changeVersionHistory(fileId, changeHistory, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3377,6 +3459,19 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.createFileInMyDocuments(createFileJsonElement, options).then((request) => request(axios, basePath));
         },
         /**
+         * Creates a primary external link by the identifier specified in the request.
+         * @summary Create primary external link
+         * @param {number} id The file ID.
+         * @param {FileLinkRequest} [fileLinkRequest] The file external link parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for createFilePrimaryExternalLink operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file-primary-external-link/
+         * @throws {RequiredError}
+         */
+        createFilePrimaryExternalLink(id: number, fileLinkRequest?: FileLinkRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
+            return localVarFp.createFilePrimaryExternalLink(id, fileLinkRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Creates an HTML (.html) file in the selected folder with the title and contents specified in the request.
          * @summary Create an HTML file
          * @param {number} folderId The folder ID to create the text or HTML file.
@@ -3400,19 +3495,6 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          */
         createHtmlFileInMyDocuments(createTextOrHtmlFile?: CreateTextOrHtmlFile, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
             return localVarFp.createHtmlFileInMyDocuments(createTextOrHtmlFile, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Creates a primary external link by the identifier specified in the request.
-         * @summary Create primary external link
-         * @param {number} id The file ID.
-         * @param {FileLinkRequest} [fileLinkRequest] The file external link parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for createPrimaryExternalLink operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-primary-external-link/
-         * @throws {RequiredError}
-         */
-        createPrimaryExternalLink(id: number, fileLinkRequest?: FileLinkRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
-            return localVarFp.createPrimaryExternalLink(id, fileLinkRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Creates a text (.txt) file in the selected folder with the title and contents specified in the request.
@@ -3591,7 +3673,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-version-info/
          * @throws {RequiredError}
          */
-        getFileVersionInfo(fileId: number, options?: RawAxiosRequestConfig): AxiosPromise<FileStringArrayWrapper> {
+        getFileVersionInfo(fileId: number, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerArrayWrapper> {
             return localVarFp.getFileVersionInfo(fileId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3784,12 +3866,12 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @param {number} id The file ID.
          * @param {FileLinkRequest} [fileLinkRequest] The file external link parameters.
          * @param {*} [options] Override http request option.
-         * REST API Reference for setExternalLink operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-external-link/
+         * REST API Reference for setFileExternalLink operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-external-link/
          * @throws {RequiredError}
          */
-        setExternalLink(id: number, fileLinkRequest?: FileLinkRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
-            return localVarFp.setExternalLink(id, fileLinkRequest, options).then((request) => request(axios, basePath));
+        setFileExternalLink(id: number, fileLinkRequest?: FileLinkRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
+            return localVarFp.setFileExternalLink(id, fileLinkRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Sets order of the file with ID specified in the request.
@@ -3813,7 +3895,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-files-order/
          * @throws {RequiredError}
          */
-        setFilesOrder(ordersRequestDtoInteger?: OrdersRequestDtoInteger, options?: RawAxiosRequestConfig): AxiosPromise<FileEntryStringArrayWrapper> {
+        setFilesOrder(ordersRequestDtoInteger?: OrdersRequestDtoInteger, options?: RawAxiosRequestConfig): AxiosPromise<FileEntryIntegerArrayWrapper> {
             return localVarFp.setFilesOrder(ordersRequestDtoInteger, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3879,6 +3961,18 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
  * @extends {BaseAPI}
  */
 export class FilesApi extends BaseAPI {
+    /**
+     * Adds a file with the ID specified in the request to the \"Recent\" section.
+     * @summary Add a file to the \"Recent\" section
+     * @param {number} fileId The file ID of the request.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesApi
+     */
+    public addFileToRecent(fileId: number, options?: RawAxiosRequestConfig) {
+        return FilesApiFp(this.configuration).addFileToRecent(fileId, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * Adds files with the IDs specified in the request to the template list.
      * @summary Add template files
@@ -3969,6 +4063,19 @@ export class FilesApi extends BaseAPI {
     }
 
     /**
+     * Creates a primary external link by the identifier specified in the request.
+     * @summary Create primary external link
+     * @param {number} id The file ID.
+     * @param {FileLinkRequest} [fileLinkRequest] The file external link parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesApi
+     */
+    public createFilePrimaryExternalLink(id: number, fileLinkRequest?: FileLinkRequest, options?: RawAxiosRequestConfig) {
+        return FilesApiFp(this.configuration).createFilePrimaryExternalLink(id, fileLinkRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Creates an HTML (.html) file in the selected folder with the title and contents specified in the request.
      * @summary Create an HTML file
      * @param {number} folderId The folder ID to create the text or HTML file.
@@ -3991,19 +4098,6 @@ export class FilesApi extends BaseAPI {
      */
     public createHtmlFileInMyDocuments(createTextOrHtmlFile?: CreateTextOrHtmlFile, options?: RawAxiosRequestConfig) {
         return FilesApiFp(this.configuration).createHtmlFileInMyDocuments(createTextOrHtmlFile, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Creates a primary external link by the identifier specified in the request.
-     * @summary Create primary external link
-     * @param {number} id The file ID.
-     * @param {FileLinkRequest} [fileLinkRequest] The file external link parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesApi
-     */
-    public createPrimaryExternalLink(id: number, fileLinkRequest?: FileLinkRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).createPrimaryExternalLink(id, fileLinkRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4379,8 +4473,8 @@ export class FilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public setExternalLink(id: number, fileLinkRequest?: FileLinkRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).setExternalLink(id, fileLinkRequest, options).then((request) => request(this.axios, this.basePath));
+    public setFileExternalLink(id: number, fileLinkRequest?: FileLinkRequest, options?: RawAxiosRequestConfig) {
+        return FilesApiFp(this.configuration).setFileExternalLink(id, fileLinkRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -6,6 +6,7 @@ The white label item parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**type** | [**WhiteLabelLogoType**](WhiteLabelLogoType.md) |  | [optional] [default to undefined]
 **name** | **string** | The white label file name. | [optional] [default to undefined]
 **size** | [**IMagickGeometry**](IMagickGeometry.md) |  | [optional] [default to undefined]
 **path** | [**WhiteLabelItemPathDto**](WhiteLabelItemPathDto.md) |  | [optional] [default to undefined]
@@ -16,6 +17,7 @@ Name | Type | Description | Notes
 import { WhiteLabelItemDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: WhiteLabelItemDto = {
+    type,
     name,
     size,
     path,

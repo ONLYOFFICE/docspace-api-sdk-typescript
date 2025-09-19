@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **title** | **string** | The file entry title. | [optional] [default to undefined]
 **access** | [**FileShare**](FileShare.md) |  | [optional] [default to undefined]
 **shared** | **boolean** | Specifies if the file entry is shared or not. | [optional] [default to undefined]
+**parentShared** | **boolean** | Indicates whether the parent entity is shared. | [optional] [default to undefined]
+**shortWebUrl** | **string** | The short Web URL. | [optional] [default to undefined]
 **created** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
 **createdBy** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] [default to undefined]
 **updated** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
@@ -31,6 +33,8 @@ const instance: FileEntryBaseDto = {
     title,
     access,
     shared,
+    parentShared,
+    shortWebUrl,
     created,
     createdBy,
     updated,

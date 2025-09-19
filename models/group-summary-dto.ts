@@ -41,5 +41,11 @@ export interface GroupSummaryDto {
      * @memberof GroupSummaryDto
      */
     'manager'?: string | null;
+    /**
+     * Indicates whether the group is a system group.
+     * @type {boolean}
+     * @memberof GroupSummaryDto
+     */
+    'isSystem'?: boolean | null;
 }
 

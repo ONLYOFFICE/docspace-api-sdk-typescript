@@ -74,8 +74,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 |------------- | ------------- | ------------- | -------------|
 | **fields** | **string**| Comma-separated list of fields to include in the response | |
 | **userId** | [**string**] | The ID of the user who triggered the audit event. | (optional) defaults to undefined|
-| **productType** | **ProductType** | The type of product related to the audit event. | (optional) defaults to undefined|
-| **moduleType** | **ModuleType** | The module within the product where the audit event occurred. | (optional) defaults to undefined|
+| **moduleType** | **LocationType** | The location where the audit event occurred. | (optional) defaults to undefined|
 | **actionType** | **ActionType** | The type of action performed in the audit event (e.g., Create, Update, Delete). | (optional) defaults to undefined|
 | **action** | **MessageAction** | The specific action that occurred within the audit event. | (optional) defaults to undefined|
 | **entryType** | **EntryType** | The type of audit entry (e.g., Folder, User, File). | (optional) defaults to undefined|
@@ -108,8 +107,7 @@ const configuration = new Configuration();
 const apiInstance = new SecurityAuditTrailDataApi(configuration);
 
 let userId: string; //The ID of the user who triggered the audit event. (optional) (default to undefined)
-let productType: ProductType; //The type of product related to the audit event. (optional) (default to undefined)
-let moduleType: ModuleType; //The module within the product where the audit event occurred. (optional) (default to undefined)
+let moduleType: LocationType; //The location where the audit event occurred. (optional) (default to undefined)
 let actionType: ActionType; //The type of action performed in the audit event (e.g., Create, Update, Delete). (optional) (default to undefined)
 let action: MessageAction; //The specific action that occurred within the audit event. (optional) (default to undefined)
 let entryType: EntryType; //The type of audit entry (e.g., Folder, User, File). (optional) (default to undefined)
@@ -122,7 +120,6 @@ let fields: string; //Comma-separated list of fields to include in the response 
 
 const { status, data } = await apiInstance.getAuditEventsByFilter(
     userId,
-    productType,
     moduleType,
     actionType,
     action,
@@ -211,7 +208,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **productType** | **ProductType** | The type of product related to the audit trail. | (optional) defaults to undefined|
-| **moduleType** | **ModuleType** | The module within the product associated with the audit trail. | (optional) defaults to undefined|
+| **moduleType** | **LocationType** | The location associated with the audit trail. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -234,7 +231,7 @@ const configuration = new Configuration();
 const apiInstance = new SecurityAuditTrailDataApi(configuration);
 
 let productType: ProductType; //The type of product related to the audit trail. (optional) (default to undefined)
-let moduleType: ModuleType; //The module within the product associated with the audit trail. (optional) (default to undefined)
+let moduleType: LocationType; //The location associated with the audit trail. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getAuditTrailMappers(
     productType,

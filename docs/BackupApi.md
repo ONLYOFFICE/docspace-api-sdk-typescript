@@ -11,6 +11,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**getBackupHistory**](#getbackuphistory) | **GET** /api/2.0/backup/getbackuphistory | Get the backup history|
 |[**getBackupProgress**](#getbackupprogress) | **GET** /api/2.0/backup/getbackupprogress | Get the backup progress|
 |[**getBackupSchedule**](#getbackupschedule) | **GET** /api/2.0/backup/getbackupschedule | Get the backup schedule|
+|[**getBackupsCount**](#getbackupscount) | **GET** /api/2.0/backup/getbackupscount | Get the number of backups|
+|[**getBackupsServiceState**](#getbackupsservicestate) | **GET** /api/2.0/backup/getservicestate | Get the backup service state|
 |[**getRestoreProgress**](#getrestoreprogress) | **GET** /api/2.0/backup/getrestoreprogress | Get the restoring progress|
 |[**startBackup**](#startbackup) | **POST** /api/2.0/backup/startbackup | Start the backup|
 |[**startBackupRestore**](#startbackuprestore) | **POST** /api/2.0/backup/startrestore | Start the restoring process|
@@ -401,6 +403,113 @@ const { status, data } = await apiInstance.getBackupSchedule(
 |**200** | Backup schedule |  -  |
 |**401** | Unauthorized |  -  |
 |**402** | Your pricing plan does not support this option |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getBackupsCount**
+> Int32Wrapper getBackupsCount()
+
+Returns the number of backups for a period of time. The default is one month.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backups-count/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **from** | [**string**] | The from date. | (optional) defaults to undefined|
+| **to** | [**string**] | The to date. | (optional) defaults to undefined|
+| **paid** | [**boolean**] | Specifies if the backups are paid or not. | (optional) defaults to undefined|
+
+
+### Return type
+
+**Int32Wrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    BackupApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new BackupApi(configuration);
+
+let from: string; //The from date. (optional) (default to undefined)
+let to: string; //The to date. (optional) (default to undefined)
+let paid: boolean; //Specifies if the backups are paid or not. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getBackupsCount(
+    from,
+    to,
+    paid
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Number of backups |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getBackupsServiceState**
+> BackupServiceStateWrapper getBackupsServiceState()
+
+Returns the backup service state.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backups-service-state/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**BackupServiceStateWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    BackupApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new BackupApi(configuration);
+
+const { status, data } = await apiInstance.getBackupsServiceState();
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Backup service state |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

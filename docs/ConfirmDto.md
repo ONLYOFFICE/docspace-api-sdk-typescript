@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **result** | [**ValidationResult**](ValidationResult.md) |  | [optional] [default to undefined]
 **roomId** | **string** | The confirmation room ID. | [optional] [default to undefined]
 **title** | **string** | The confirmation title. | [optional] [default to undefined]
+**email** | **string** | The confirmation email. | [optional] [default to undefined]
 
 ## Example
 
@@ -19,6 +20,7 @@ const instance: ConfirmDto = {
     result,
     roomId,
     title,
+    email,
 };
 ```
 

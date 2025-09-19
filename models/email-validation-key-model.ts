@@ -48,6 +48,12 @@ export interface EmailValidationKeyModel {
      */
     'email'?: string | null;
     /**
+     * The encrypted email address.
+     * @type {string}
+     * @memberof EmailValidationKeyModel
+     */
+    'encEmail'?: string | null;
+    /**
      * The user ID.
      * @type {string}
      * @memberof EmailValidationKeyModel

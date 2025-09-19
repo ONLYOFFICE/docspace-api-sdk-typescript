@@ -33,9 +33,9 @@ import type { AuditEventArrayWrapper } from '../../models';
 // @ts-ignore
 import type { EntryType } from '../../models';
 // @ts-ignore
-import type { MessageAction } from '../../models';
+import type { LocationType } from '../../models';
 // @ts-ignore
-import type { ModuleType } from '../../models';
+import type { MessageAction } from '../../models';
 // @ts-ignore
 import type { ObjectWrapper } from '../../models';
 // @ts-ignore
@@ -105,8 +105,7 @@ export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Conf
          * Returns a list of the audit events by the parameters specified in the request.
          * @summary Get filtered audit trail data
          * @param {string} [userId] The ID of the user who triggered the audit event.
-         * @param {ProductType} [productType] The type of product related to the audit event.
-         * @param {ModuleType} [moduleType] The module within the product where the audit event occurred.
+         * @param {LocationType} [moduleType] The location where the audit event occurred.
          * @param {ActionType} [actionType] The type of action performed in the audit event (e.g., Create, Update, Delete).
          * @param {MessageAction} [action] The specific action that occurred within the audit event.
          * @param {EntryType} [entryType] The type of audit entry (e.g., Folder, User, File).
@@ -121,7 +120,7 @@ export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Conf
          * REST API Reference for getAuditEventsByFilter operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-events-by-filter/
          */
-        getAuditEventsByFilter: async (userId?: string, productType?: ProductType, moduleType?: ModuleType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, fields?: string | null, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAuditEventsByFilter: async (userId?: string, moduleType?: LocationType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, fields?: string | null, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/security/audit/events/filter`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -155,10 +154,6 @@ export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Conf
 
             if (userId !== undefined) {
                 localVarQueryParameter['userId'] = userId;
-            }
-
-            if (productType !== undefined) {
-                localVarQueryParameter['productType'] = productType;
             }
 
             if (moduleType !== undefined) {
@@ -271,13 +266,13 @@ export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Conf
          * Returns the mappers for the audit trail types.
          * @summary Get audit trail mappers
          * @param {ProductType} [productType] The type of product related to the audit trail.
-         * @param {ModuleType} [moduleType] The module within the product associated with the audit trail.
+         * @param {LocationType} [moduleType] The location associated with the audit trail.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getAuditTrailMappers operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-trail-mappers/
          */
-        getAuditTrailMappers: async (productType?: ProductType, moduleType?: ModuleType, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAuditTrailMappers: async (productType?: ProductType, moduleType?: LocationType, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/security/audit/mappers`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -475,8 +470,7 @@ export const AuditTrailDataApiFp = function(configuration?: Configuration) {
          * Returns a list of the audit events by the parameters specified in the request.
          * @summary Get filtered audit trail data
          * @param {string} [userId] The ID of the user who triggered the audit event.
-         * @param {ProductType} [productType] The type of product related to the audit event.
-         * @param {ModuleType} [moduleType] The module within the product where the audit event occurred.
+         * @param {LocationType} [moduleType] The location where the audit event occurred.
          * @param {ActionType} [actionType] The type of action performed in the audit event (e.g., Create, Update, Delete).
          * @param {MessageAction} [action] The specific action that occurred within the audit event.
          * @param {EntryType} [entryType] The type of audit entry (e.g., Folder, User, File).
@@ -491,8 +485,8 @@ export const AuditTrailDataApiFp = function(configuration?: Configuration) {
          * REST API Reference for getAuditEventsByFilter operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-events-by-filter/
          */
-        async getAuditEventsByFilter(userId?: string, productType?: ProductType, moduleType?: ModuleType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, fields?: string | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuditEventArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAuditEventsByFilter(userId, productType, moduleType, actionType, action, entryType, target, from, to, count, startIndex, fields, options);
+        async getAuditEventsByFilter(userId?: string, moduleType?: LocationType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, fields?: string | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuditEventArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAuditEventsByFilter(userId, moduleType, actionType, action, entryType, target, from, to, count, startIndex, fields, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AuditTrailDataApi.getAuditEventsByFilter']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -515,13 +509,13 @@ export const AuditTrailDataApiFp = function(configuration?: Configuration) {
          * Returns the mappers for the audit trail types.
          * @summary Get audit trail mappers
          * @param {ProductType} [productType] The type of product related to the audit trail.
-         * @param {ModuleType} [moduleType] The module within the product associated with the audit trail.
+         * @param {LocationType} [moduleType] The location associated with the audit trail.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getAuditTrailMappers operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-trail-mappers/
          */
-        async getAuditTrailMappers(productType?: ProductType, moduleType?: ModuleType, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
+        async getAuditTrailMappers(productType?: ProductType, moduleType?: LocationType, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAuditTrailMappers(productType, moduleType, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AuditTrailDataApi.getAuditTrailMappers']?.[localVarOperationServerIndex]?.url;
@@ -595,8 +589,7 @@ export const AuditTrailDataApiFactory = function (configuration?: Configuration,
          * Returns a list of the audit events by the parameters specified in the request.
          * @summary Get filtered audit trail data
          * @param {string} [userId] The ID of the user who triggered the audit event.
-         * @param {ProductType} [productType] The type of product related to the audit event.
-         * @param {ModuleType} [moduleType] The module within the product where the audit event occurred.
+         * @param {LocationType} [moduleType] The location where the audit event occurred.
          * @param {ActionType} [actionType] The type of action performed in the audit event (e.g., Create, Update, Delete).
          * @param {MessageAction} [action] The specific action that occurred within the audit event.
          * @param {EntryType} [entryType] The type of audit entry (e.g., Folder, User, File).
@@ -611,8 +604,8 @@ export const AuditTrailDataApiFactory = function (configuration?: Configuration,
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-events-by-filter/
          * @throws {RequiredError}
          */
-        getAuditEventsByFilter(userId?: string, productType?: ProductType, moduleType?: ModuleType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, fields?: string | null, options?: RawAxiosRequestConfig): AxiosPromise<AuditEventArrayWrapper> {
-            return localVarFp.getAuditEventsByFilter(userId, productType, moduleType, actionType, action, entryType, target, from, to, count, startIndex, fields, options).then((request) => request(axios, basePath));
+        getAuditEventsByFilter(userId?: string, moduleType?: LocationType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, fields?: string | null, options?: RawAxiosRequestConfig): AxiosPromise<AuditEventArrayWrapper> {
+            return localVarFp.getAuditEventsByFilter(userId, moduleType, actionType, action, entryType, target, from, to, count, startIndex, fields, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the audit trail settings.
@@ -629,13 +622,13 @@ export const AuditTrailDataApiFactory = function (configuration?: Configuration,
          * Returns the mappers for the audit trail types.
          * @summary Get audit trail mappers
          * @param {ProductType} [productType] The type of product related to the audit trail.
-         * @param {ModuleType} [moduleType] The module within the product associated with the audit trail.
+         * @param {LocationType} [moduleType] The location associated with the audit trail.
          * @param {*} [options] Override http request option.
          * REST API Reference for getAuditTrailMappers operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-trail-mappers/
          * @throws {RequiredError}
          */
-        getAuditTrailMappers(productType?: ProductType, moduleType?: ModuleType, options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
+        getAuditTrailMappers(productType?: ProductType, moduleType?: LocationType, options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
             return localVarFp.getAuditTrailMappers(productType, moduleType, options).then((request) => request(axios, basePath));
         },
         /**
@@ -697,8 +690,7 @@ export class AuditTrailDataApi extends BaseAPI {
      * Returns a list of the audit events by the parameters specified in the request.
      * @summary Get filtered audit trail data
      * @param {string} [userId] The ID of the user who triggered the audit event.
-     * @param {ProductType} [productType] The type of product related to the audit event.
-     * @param {ModuleType} [moduleType] The module within the product where the audit event occurred.
+     * @param {LocationType} [moduleType] The location where the audit event occurred.
      * @param {ActionType} [actionType] The type of action performed in the audit event (e.g., Create, Update, Delete).
      * @param {MessageAction} [action] The specific action that occurred within the audit event.
      * @param {EntryType} [entryType] The type of audit entry (e.g., Folder, User, File).
@@ -712,8 +704,8 @@ export class AuditTrailDataApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AuditTrailDataApi
      */
-    public getAuditEventsByFilter(userId?: string, productType?: ProductType, moduleType?: ModuleType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, fields?: string | null, options?: RawAxiosRequestConfig) {
-        return AuditTrailDataApiFp(this.configuration).getAuditEventsByFilter(userId, productType, moduleType, actionType, action, entryType, target, from, to, count, startIndex, fields, options).then((request) => request(this.axios, this.basePath));
+    public getAuditEventsByFilter(userId?: string, moduleType?: LocationType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, fields?: string | null, options?: RawAxiosRequestConfig) {
+        return AuditTrailDataApiFp(this.configuration).getAuditEventsByFilter(userId, moduleType, actionType, action, entryType, target, from, to, count, startIndex, fields, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -731,12 +723,12 @@ export class AuditTrailDataApi extends BaseAPI {
      * Returns the mappers for the audit trail types.
      * @summary Get audit trail mappers
      * @param {ProductType} [productType] The type of product related to the audit trail.
-     * @param {ModuleType} [moduleType] The module within the product associated with the audit trail.
+     * @param {LocationType} [moduleType] The location associated with the audit trail.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuditTrailDataApi
      */
-    public getAuditTrailMappers(productType?: ProductType, moduleType?: ModuleType, options?: RawAxiosRequestConfig) {
+    public getAuditTrailMappers(productType?: ProductType, moduleType?: LocationType, options?: RawAxiosRequestConfig) {
         return AuditTrailDataApiFp(this.configuration).getAuditTrailMappers(productType, moduleType, options).then((request) => request(this.axios, this.basePath));
     }
 

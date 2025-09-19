@@ -35,11 +35,13 @@ Name | Type | Description | Notes
 **customization** | **boolean** | Specifies if the customization settings are available or not. | [optional] [default to undefined]
 **lifetime** | **boolean** | Specifies if the license has the lifetime settings or not. | [optional] [default to undefined]
 **custom** | **boolean** | Specifies if the custom domain URL is available or not. | [optional] [default to undefined]
-**autoBackupRestore** | **boolean** | Specifies if the automatic backup option is enabled or not. | [optional] [default to undefined]
+**restore** | **boolean** | Specifies if the restore is enabled or not. | [optional] [default to undefined]
 **oauth** | **boolean** | Specifies if Oauth is available or not. | [optional] [default to undefined]
 **contentSearch** | **boolean** | Specifies if the content search is available or not. | [optional] [default to undefined]
 **thirdParty** | **boolean** | Specifies if the third-party accounts linking is available or not. | [optional] [default to undefined]
 **year** | **boolean** | Specifies if the tenant quota is yearly subscription or not. | [optional] [default to undefined]
+**countFreeBackup** | **number** | The number of free backups within a month. | [optional] [default to undefined]
+**backup** | **boolean** | Specifies if the backup anabled as a wallet service or not. | [optional] [default to undefined]
 
 ## Example
 
@@ -76,11 +78,13 @@ const instance: TenantQuota = {
     customization,
     lifetime,
     custom,
-    autoBackupRestore,
+    restore,
     oauth,
     contentSearch,
     thirdParty,
     year,
+    countFreeBackup,
+    backup,
 };
 ```
 

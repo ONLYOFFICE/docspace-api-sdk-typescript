@@ -93,12 +93,6 @@ export interface FilesSettingsDto {
      */
     'extsWebTemplate'?: Array<string> | null;
     /**
-     * The list of extensions of the co-authoring files.
-     * @type {Array<string>}
-     * @memberof FilesSettingsDto
-     */
-    'extsCoAuthoring'?: Array<string> | null;
-    /**
      * The list of extensions of the files that must be converted.
      * @type {Array<string>}
      * @memberof FilesSettingsDto

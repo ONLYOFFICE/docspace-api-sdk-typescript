@@ -36,6 +36,9 @@ import type { FileEntryDtoInteger } from './file-entry-dto-integer';
 import type { FileEntryDtoIntegerAllOfSecurity } from './file-entry-dto-integer-all-of-security';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { FileEntryDtoIntegerAllOfShareSettings } from './file-entry-dto-integer-all-of-share-settings';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { FileEntryType } from './file-entry-type';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -116,12 +119,6 @@ export type FileDtoInteger = FileEntryDtoInteger &  {
      * @memberof FileDtoInteger
      */
     'webUrl'?: string | null;
-    /**
-     * The short Web URL.
-     * @type {string}
-     * @memberof FileDtoInteger
-     */
-    'shortWebUrl'?: string | null;
     /**
      * 
      * @type {FileType}
@@ -230,12 +227,6 @@ export type FileDtoInteger = FileEntryDtoInteger &  {
      * @memberof FileDtoInteger
      */
     'viewAccessibility'?: FileDtoIntegerAllOfViewAccessibility | null;
-    /**
-     * The available external rights of the file.
-     * @type {{ [key: string]: boolean; }}
-     * @memberof FileDtoInteger
-     */
-    'availableExternalRights'?: { [key: string]: boolean; } | null;
     /**
      * 
      * @type {ApiDateTime}

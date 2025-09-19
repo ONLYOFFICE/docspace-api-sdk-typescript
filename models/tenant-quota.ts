@@ -198,11 +198,11 @@ export interface TenantQuota {
      */
     'custom'?: boolean;
     /**
-     * Specifies if the automatic backup option is enabled or not.
+     * Specifies if the restore is enabled or not.
      * @type {boolean}
      * @memberof TenantQuota
      */
-    'autoBackupRestore'?: boolean;
+    'restore'?: boolean;
     /**
      * Specifies if Oauth is available or not.
      * @type {boolean}
@@ -227,5 +227,17 @@ export interface TenantQuota {
      * @memberof TenantQuota
      */
     'year'?: boolean;
+    /**
+     * The number of free backups within a month.
+     * @type {number}
+     * @memberof TenantQuota
+     */
+    'countFreeBackup'?: number;
+    /**
+     * Specifies if the backup anabled as a wallet service or not.
+     * @type {boolean}
+     * @memberof TenantQuota
+     */
+    'backup'?: boolean;
 }
 

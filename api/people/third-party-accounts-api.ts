@@ -27,6 +27,8 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { AccountInfoArrayWrapper } from '../../models';
 // @ts-ignore
+import type { EmployeeWrapper } from '../../models';
+// @ts-ignore
 import type { LinkAccountRequestDto } from '../../models';
 // @ts-ignore
 import type { SignupAccountRequestDto } from '../../models';
@@ -287,7 +289,7 @@ export const ThirdPartyAccountsApiFp = function(configuration?: Configuration) {
          * REST API Reference for signupThirdPartyAccount operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/signup-third-party-account/
          */
-        async signupThirdPartyAccount(signupAccountRequestDto?: SignupAccountRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async signupThirdPartyAccount(signupAccountRequestDto?: SignupAccountRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.signupThirdPartyAccount(signupAccountRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ThirdPartyAccountsApi.signupThirdPartyAccount']?.[localVarOperationServerIndex]?.url;
@@ -354,7 +356,7 @@ export const ThirdPartyAccountsApiFactory = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/signup-third-party-account/
          * @throws {RequiredError}
          */
-        signupThirdPartyAccount(signupAccountRequestDto?: SignupAccountRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        signupThirdPartyAccount(signupAccountRequestDto?: SignupAccountRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeWrapper> {
             return localVarFp.signupThirdPartyAccount(signupAccountRequestDto, options).then((request) => request(axios, basePath));
         },
         /**

@@ -440,6 +440,61 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
+         * Displays the \"Recent\" folder.
+         * @summary Display the \"Recent\" folder
+         * @param {DisplayRequestDto} [displayRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for displayRecent operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/display-recent/
+         */
+        displayRecent: async (displayRequestDto?: DisplayRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/files/displayrecent`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(displayRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Changes the ability to share a file externally.
          * @summary Change the external sharing ability
          * @param {DisplayRequestDto} [displayRequestDto] 
@@ -1374,6 +1429,21 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Displays the \"Recent\" folder.
+         * @summary Display the \"Recent\" folder
+         * @param {DisplayRequestDto} [displayRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for displayRecent operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/display-recent/
+         */
+        async displayRecent(displayRequestDto?: DisplayRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.displayRecent(displayRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesSettingsApi.displayRecent']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Changes the ability to share a file externally.
          * @summary Change the external sharing ability
          * @param {DisplayRequestDto} [displayRequestDto] 
@@ -1702,6 +1772,18 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.displayFileExtension(settingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
+         * Displays the \"Recent\" folder.
+         * @summary Display the \"Recent\" folder
+         * @param {DisplayRequestDto} [displayRequestDto] 
+         * @param {*} [options] Override http request option.
+         * REST API Reference for displayRecent operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/display-recent/
+         * @throws {RequiredError}
+         */
+        displayRecent(displayRequestDto?: DisplayRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.displayRecent(displayRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Changes the ability to share a file externally.
          * @summary Change the external sharing ability
          * @param {DisplayRequestDto} [displayRequestDto] 
@@ -1979,6 +2061,18 @@ export class FilesSettingsApi extends BaseAPI {
      */
     public displayFileExtension(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig) {
         return FilesSettingsApiFp(this.configuration).displayFileExtension(settingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Displays the \"Recent\" folder.
+     * @summary Display the \"Recent\" folder
+     * @param {DisplayRequestDto} [displayRequestDto] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesSettingsApi
+     */
+    public displayRecent(displayRequestDto?: DisplayRequestDto, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).displayRecent(displayRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

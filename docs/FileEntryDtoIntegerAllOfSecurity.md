@@ -44,6 +44,8 @@ Name | Type | Description | Notes
 **ResetFilling** | **boolean** |  | [optional] [default to undefined]
 **StopFilling** | **boolean** |  | [optional] [default to undefined]
 **OpenForm** | **boolean** |  | [optional] [default to undefined]
+**EditInternal** | **boolean** |  | [optional] [default to undefined]
+**EditExpiration** | **boolean** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -89,6 +91,8 @@ const instance: FileEntryDtoIntegerAllOfSecurity = {
     ResetFilling,
     StopFilling,
     OpenForm,
+    EditInternal,
+    EditExpiration,
 };
 ```
 

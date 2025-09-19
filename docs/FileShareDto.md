@@ -11,6 +11,9 @@ Name | Type | Description | Notes
 **isLocked** | **boolean** | Specifies if the access right is locked or not. | [optional] [default to undefined]
 **isOwner** | **boolean** | Specifies if the user is an owner of the specified file or not. | [optional] [default to undefined]
 **canEditAccess** | **boolean** | Specifies if the user can edit the access to the specified file or not. | [optional] [default to undefined]
+**canEditInternal** | **boolean** | Indicates whether internal editing permissions are granted. | [optional] [default to undefined]
+**canEditDenyDownload** | **boolean** | Determines whether the user has permission to modify the deny download setting for the file share. | [optional] [default to undefined]
+**canEditExpirationDate** | **boolean** | Indicates whether the expiration date of access permissions can be edited. | [optional] [default to undefined]
 **subjectType** | [**SubjectType**](SubjectType.md) |  | [optional] [default to undefined]
 
 ## Example
@@ -24,6 +27,9 @@ const instance: FileShareDto = {
     isLocked,
     isOwner,
     canEditAccess,
+    canEditInternal,
+    canEditDenyDownload,
+    canEditExpirationDate,
     subjectType,
 };
 ```

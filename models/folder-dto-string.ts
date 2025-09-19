@@ -27,6 +27,9 @@ import type { EmployeeDto } from './employee-dto';
 import type { FileEntryDtoIntegerAllOfSecurity } from './file-entry-dto-integer-all-of-security';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { FileEntryDtoIntegerAllOfShareSettings } from './file-entry-dto-integer-all-of-share-settings';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { FileEntryDtoString } from './file-entry-dto-string';
 // May contain unused imports in some cases
 // @ts-ignore

@@ -16,7 +16,6 @@ Name | Type | Description | Notes
 **extsWebRestrictedEditing** | **Array&lt;string&gt;** | The list of extensions of the files that are restricted for editing. | [optional] [default to undefined]
 **extsWebCommented** | **Array&lt;string&gt;** | The list of extensions of the commented files. | [optional] [default to undefined]
 **extsWebTemplate** | **Array&lt;string&gt;** | The list of extensions of the template files. | [optional] [default to undefined]
-**extsCoAuthoring** | **Array&lt;string&gt;** | The list of extensions of the co-authoring files. | [optional] [default to undefined]
 **extsMustConvert** | **Array&lt;string&gt;** | The list of extensions of the files that must be converted. | [optional] [default to undefined]
 **extsConvertible** | **{ [key: string]: Array&lt;string&gt; | null; }** | The list of the convertible extensions. | [optional] [default to undefined]
 **extsUploadable** | **Array&lt;string&gt;** | The list of the uploadable extensions. | [optional] [default to undefined]
@@ -81,7 +80,6 @@ const instance: FilesSettingsDto = {
     extsWebRestrictedEditing,
     extsWebCommented,
     extsWebTemplate,
-    extsCoAuthoring,
     extsMustConvert,
     extsConvertible,
     extsUploadable,

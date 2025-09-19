@@ -60,6 +60,24 @@ export interface FileShareDto {
      */
     'canEditAccess'?: boolean;
     /**
+     * Indicates whether internal editing permissions are granted.
+     * @type {boolean}
+     * @memberof FileShareDto
+     */
+    'canEditInternal'?: boolean;
+    /**
+     * Determines whether the user has permission to modify the deny download setting for the file share.
+     * @type {boolean}
+     * @memberof FileShareDto
+     */
+    'canEditDenyDownload'?: boolean;
+    /**
+     * Indicates whether the expiration date of access permissions can be edited.
+     * @type {boolean}
+     * @memberof FileShareDto
+     */
+    'canEditExpirationDate'?: boolean;
+    /**
      * 
      * @type {SubjectType}
      * @memberof FileShareDto

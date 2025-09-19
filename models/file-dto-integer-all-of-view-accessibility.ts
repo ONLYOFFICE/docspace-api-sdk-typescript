@@ -76,12 +76,6 @@ export interface FileDtoIntegerAllOfViewAccessibility {
      * @type {boolean}
      * @memberof FileDtoIntegerAllOfViewAccessibility
      */
-    'CoAuhtoring'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileDtoIntegerAllOfViewAccessibility
-     */
     'CanConvert'?: boolean;
     /**
      * 

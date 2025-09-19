@@ -128,7 +128,7 @@ const { status, data } = await apiInstance.linkThirdPartyAccount(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **signupThirdPartyAccount**
-> signupThirdPartyAccount()
+> EmployeeWrapper signupThirdPartyAccount()
 
 Creates a third-party account with the parameters specified in the request.
 
@@ -143,7 +143,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-void (empty response body)
+**EmployeeWrapper**
 
 ### Authorization
 
@@ -171,7 +171,7 @@ const { status, data } = await apiInstance.signupThirdPartyAccount(
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details

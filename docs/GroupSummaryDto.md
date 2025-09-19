@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **id** | **string** | The group ID. | [optional] [default to undefined]
 **name** | **string** | The group name. | [optional] [default to undefined]
 **manager** | **string** | The group manager. | [optional] [default to undefined]
+**isSystem** | **boolean** | Indicates whether the group is a system group. | [optional] [default to undefined]
 
 ## Example
 
@@ -19,6 +20,7 @@ const instance: GroupSummaryDto = {
     id,
     name,
     manager,
+    isSystem,
 };
 ```
 

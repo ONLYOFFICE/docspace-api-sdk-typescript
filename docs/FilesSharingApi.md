@@ -136,6 +136,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 |------------- | ------------- | ------------- | -------------|
 | **key** | [**string**] | The unique key of the external shared data. | defaults to undefined|
 | **fileId** | [**string**] | The unique document identifier. | (optional) defaults to undefined|
+| **folderId** | [**string**] | The unique folder identifier. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -159,10 +160,12 @@ const apiInstance = new FilesSharingApi(configuration);
 
 let key: string; //The unique key of the external shared data. (default to undefined)
 let fileId: string; //The unique document identifier. (optional) (default to undefined)
+let folderId: string; //The unique folder identifier. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getExternalShareData(
     key,
-    fileId
+    fileId,
+    folderId
 );
 ```
 

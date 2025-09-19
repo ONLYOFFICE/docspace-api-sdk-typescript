@@ -18,6 +18,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { FileEntryType } from './file-entry-type';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { Status } from './status';
 
 /**
@@ -45,6 +48,12 @@ export interface ExternalShareDto {
      */
     'title'?: string | null;
     /**
+     * 
+     * @type {FileEntryType}
+     * @memberof ExternalShareDto
+     */
+    'type'?: FileEntryType;
+    /**
      * The tenant ID.
      * @type {number}
      * @memberof ExternalShareDto
@@ -57,11 +66,23 @@ export interface ExternalShareDto {
      */
     'entityId'?: string | null;
     /**
-     * The title of the shared entry.
+     * The title of the shared entity.
      * @type {string}
      * @memberof ExternalShareDto
      */
-    'entryTitle'?: string | null;
+    'entityTitle'?: string | null;
+    /**
+     * 
+     * @type {FileEntryType}
+     * @memberof ExternalShareDto
+     */
+    'entityType'?: FileEntryType;
+    /**
+     * Indicates whether the entity represents a room.
+     * @type {boolean}
+     * @memberof ExternalShareDto
+     */
+    'isRoom'?: boolean | null;
     /**
      * Specifies whether to share the external data or not.
      * @type {boolean}
@@ -80,6 +101,12 @@ export interface ExternalShareDto {
      * @memberof ExternalShareDto
      */
     'isAuthenticated'?: boolean;
+    /**
+     * The room ID of the external data.
+     * @type {boolean}
+     * @memberof ExternalShareDto
+     */
+    'isRoomMember'?: boolean;
 }
 
 

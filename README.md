@@ -267,6 +267,16 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get the backup schedule</td>
       </tr>
       <tr>
+        <td><a href="docs/BackupApi.md#getbackupscount"><strong>getBackupsCount</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/backup/getbackupscount</td>
+        <td>Get the number of backups</td>
+      </tr>
+      <tr>
+        <td><a href="docs/BackupApi.md#getbackupsservicestate"><strong>getBackupsServiceState</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/backup/getservicestate</td>
+        <td>Get the backup service state</td>
+      </tr>
+      <tr>
         <td><a href="docs/BackupApi.md#getrestoreprogress"><strong>getRestoreProgress</strong></a></td>
         <td><strong>GET</strong> /api/2.0/backup/getrestoreprogress</td>
         <td>Get the restoring progress</td>
@@ -321,6 +331,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td colspan="3" style="text-align: center;"><strong>FilesApi</strong></td>
       </tr>
       <tr>
+        <td><a href="docs/FilesFilesApi.md#addfiletorecent"><strong>addFileToRecent</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/file/{fileId}/recent</td>
+        <td>Add a file to the \&quot;Recent\&quot; section</td>
+      </tr>
+      <tr>
         <td><a href="docs/FilesFilesApi.md#addtemplates"><strong>addTemplates</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/templates</td>
         <td>Add template files</td>
@@ -356,6 +371,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Create a file in the \&quot;My documents\&quot; section</td>
       </tr>
       <tr>
+        <td><a href="docs/FilesFilesApi.md#createfileprimaryexternallink"><strong>createFilePrimaryExternalLink</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/file/{id}/link</td>
+        <td>Create primary external link</td>
+      </tr>
+      <tr>
         <td><a href="docs/FilesFilesApi.md#createhtmlfile"><strong>createHtmlFile</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/{folderId}/html</td>
         <td>Create an HTML file</td>
@@ -364,11 +384,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td><a href="docs/FilesFilesApi.md#createhtmlfileinmydocuments"><strong>createHtmlFileInMyDocuments</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/@my/html</td>
         <td>Create an HTML file in the \&quot;My documents\&quot; section</td>
-      </tr>
-      <tr>
-        <td><a href="docs/FilesFilesApi.md#createprimaryexternallink"><strong>createPrimaryExternalLink</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/files/file/{id}/link</td>
-        <td>Create primary external link</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFilesApi.md#createtextfile"><strong>createTextFile</strong></a></td>
@@ -511,7 +526,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Set the Custom Filter editing mode</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFilesApi.md#setexternallink"><strong>setExternalLink</strong></a></td>
+        <td><a href="docs/FilesFilesApi.md#setfileexternallink"><strong>setFileExternalLink</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/file/{id}/links</td>
         <td>Set an external link</td>
       </tr>
@@ -559,6 +574,16 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Create a folder</td>
       </tr>
       <tr>
+        <td><a href="docs/FilesFoldersApi.md#createfolderprimaryexternallink"><strong>createFolderPrimaryExternalLink</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/folder/{id}/link</td>
+        <td>Create primary external link</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#createreportfolderhistory"><strong>createReportFolderHistory</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/folder/{folderId}/log/report</td>
+        <td>Generates folder history</td>
+      </tr>
+      <tr>
         <td><a href="docs/FilesFoldersApi.md#deletefolder"><strong>deleteFolder</strong></a></td>
         <td><strong>DELETE</strong> /api/2.0/files/folder/{folderId}</td>
         <td>Delete a folder</td>
@@ -589,6 +614,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get folder information</td>
       </tr>
       <tr>
+        <td><a href="docs/FilesFoldersApi.md#getfolderlinks"><strong>getFolderLinks</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/folder/{id}/links</td>
+        <td>Get the folder links</td>
+      </tr>
+      <tr>
         <td><a href="docs/FilesFoldersApi.md#getfolderpath"><strong>getFolderPath</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/folder/{folderId}/path</td>
         <td>Get the folder path</td>
@@ -597,6 +627,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td><a href="docs/FilesFoldersApi.md#getfolderprimaryexternallink"><strong>getFolderPrimaryExternalLink</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/folder/{id}/link</td>
         <td>Get primary external link</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#getfoldersecurityinfo"><strong>getFolderSecurityInfo</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/folder/{id}/share</td>
+        <td>Get the folder access rights</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersApi.md#getfolders"><strong>getFolders</strong></a></td>
@@ -617,6 +652,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td><a href="docs/FilesFoldersApi.md#getprivacyfolder"><strong>getPrivacyFolder</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/@privacy</td>
         <td>Get the \&quot;Private Room\&quot; section</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#getrecentfolder"><strong>getRecentFolder</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/@recent</td>
+        <td>Get the \&quot;Recent\&quot; section</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersApi.md#getrootfolders"><strong>getRootFolders</strong></a></td>
@@ -647,6 +687,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td><a href="docs/FilesFoldersApi.md#setfolderorder"><strong>setFolderOrder</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/folder/{folderId}/order</td>
         <td>Set folder order</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#setfolderprimaryexternallink"><strong>setFolderPrimaryExternalLink</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/folder/{id}/links</td>
+        <td>Set the folder external link</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersApi.md#uploadfile"><strong>uploadFile</strong></a></td>
@@ -796,6 +841,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td><a href="docs/FilesSettingsApi.md#displayfileextension"><strong>displayFileExtension</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/displayfileextension</td>
         <td>Display a file extension</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#displayrecent"><strong>displayRecent</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/displayrecent</td>
+        <td>Display the \&quot;Recent\&quot; folder</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSettingsApi.md#externalshare"><strong>externalShare</strong></a></td>
@@ -1544,6 +1594,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Calculate amount of the wallet payment</td>
       </tr>
       <tr>
+        <td><a href="docs/PortalPaymentApi.md#changetenantwalletservicestate"><strong>changeTenantWalletServiceState</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/portal/payment/servicestate</td>
+        <td>Change wallet service state</td>
+      </tr>
+      <tr>
         <td><a href="docs/PortalPaymentApi.md#createcustomeroperationsreport"><strong>createCustomerOperationsReport</strong></a></td>
         <td><strong>POST</strong> /api/2.0/portal/payment/customer/operationsreport</td>
         <td>Generate the customer operations report</td>
@@ -1599,9 +1654,24 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get quota payment information</td>
       </tr>
       <tr>
+        <td><a href="docs/PortalPaymentApi.md#gettenantwalletservicesettings"><strong>getTenantWalletServiceSettings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/payment/servicessettings</td>
+        <td>Get wallet services settings</td>
+      </tr>
+      <tr>
         <td><a href="docs/PortalPaymentApi.md#gettenantwalletsettings"><strong>getTenantWalletSettings</strong></a></td>
         <td><strong>GET</strong> /api/2.0/portal/payment/topupsettings</td>
         <td>Get wallet auto top up settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#getwalletservice"><strong>getWalletService</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/payment/walletservice</td>
+        <td>Get wallet service</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#getwalletservices"><strong>getWalletServices</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/payment/walletservices</td>
+        <td>Get wallet services</td>
       </tr>
       <tr>
         <td><a href="docs/PortalPaymentApi.md#sendpaymentrequest"><strong>sendPaymentRequest</strong></a></td>
@@ -2886,6 +2956,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [BackupProgressWrapper](docs/BackupProgressWrapper.md)
  - [BackupRestoreDto](docs/BackupRestoreDto.md)
  - [BackupScheduleDto](docs/BackupScheduleDto.md)
+ - [BackupServiceStateDto](docs/BackupServiceStateDto.md)
+ - [BackupServiceStateWrapper](docs/BackupServiceStateWrapper.md)
  - [BackupStorageType](docs/BackupStorageType.md)
  - [Balance](docs/Balance.md)
  - [BalanceWrapper](docs/BalanceWrapper.md)
@@ -2907,6 +2979,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [ChangeClientActivationRequest](docs/ChangeClientActivationRequest.md)
  - [ChangeHistory](docs/ChangeHistory.md)
  - [ChangeOwnerRequestDto](docs/ChangeOwnerRequestDto.md)
+ - [ChangeWalletServiceStateRequestDto](docs/ChangeWalletServiceStateRequestDto.md)
  - [CheckConversionRequestDtoInteger](docs/CheckConversionRequestDtoInteger.md)
  - [CheckDestFolderDto](docs/CheckDestFolderDto.md)
  - [CheckDestFolderResult](docs/CheckDestFolderResult.md)
@@ -2924,7 +2997,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [CompanyWhiteLabelSettingsDto](docs/CompanyWhiteLabelSettingsDto.md)
  - [CompanyWhiteLabelSettingsWrapper](docs/CompanyWhiteLabelSettingsWrapper.md)
  - [ConfigurationDtoInteger](docs/ConfigurationDtoInteger.md)
- - [ConfigurationDtoString](docs/ConfigurationDtoString.md)
  - [ConfigurationIntegerWrapper](docs/ConfigurationIntegerWrapper.md)
  - [ConfirmData](docs/ConfirmData.md)
  - [ConfirmDto](docs/ConfirmDto.md)
@@ -3011,7 +3083,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DownloadRequestItemDto](docs/DownloadRequestItemDto.md)
  - [DownloadRequestItemDtoKey](docs/DownloadRequestItemDtoKey.md)
  - [DraftLocationInteger](docs/DraftLocationInteger.md)
- - [DraftLocationString](docs/DraftLocationString.md)
  - [DuplicateRequestDto](docs/DuplicateRequestDto.md)
  - [DuplicateRequestDtoAllOfFileIds](docs/DuplicateRequestDtoAllOfFileIds.md)
  - [DuplicateRequestDtoAllOfFolderIds](docs/DuplicateRequestDtoAllOfFolderIds.md)
@@ -3038,6 +3109,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [EmployeeFullWrapper](docs/EmployeeFullWrapper.md)
  - [EmployeeStatus](docs/EmployeeStatus.md)
  - [EmployeeType](docs/EmployeeType.md)
+ - [EmployeeWrapper](docs/EmployeeWrapper.md)
  - [EncryprtionStatus](docs/EncryprtionStatus.md)
  - [EncryptionKeysConfig](docs/EncryptionKeysConfig.md)
  - [EncryptionSettings](docs/EncryptionSettings.md)
@@ -3053,15 +3125,16 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [FileConflictResolveType](docs/FileConflictResolveType.md)
  - [FileDtoInteger](docs/FileDtoInteger.md)
  - [FileDtoIntegerAllOfViewAccessibility](docs/FileDtoIntegerAllOfViewAccessibility.md)
- - [FileDtoString](docs/FileDtoString.md)
  - [FileEntryBaseArrayWrapper](docs/FileEntryBaseArrayWrapper.md)
  - [FileEntryBaseDto](docs/FileEntryBaseDto.md)
  - [FileEntryBaseWrapper](docs/FileEntryBaseWrapper.md)
  - [FileEntryDtoInteger](docs/FileEntryDtoInteger.md)
  - [FileEntryDtoIntegerAllOfSecurity](docs/FileEntryDtoIntegerAllOfSecurity.md)
+ - [FileEntryDtoIntegerAllOfShareSettings](docs/FileEntryDtoIntegerAllOfShareSettings.md)
  - [FileEntryDtoString](docs/FileEntryDtoString.md)
- - [FileEntryStringArrayWrapper](docs/FileEntryStringArrayWrapper.md)
+ - [FileEntryIntegerArrayWrapper](docs/FileEntryIntegerArrayWrapper.md)
  - [FileEntryType](docs/FileEntryType.md)
+ - [FileIntegerArrayWrapper](docs/FileIntegerArrayWrapper.md)
  - [FileIntegerWrapper](docs/FileIntegerWrapper.md)
  - [FileLink](docs/FileLink.md)
  - [FileLinkRequest](docs/FileLinkRequest.md)
@@ -3080,7 +3153,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [FileShareParams](docs/FileShareParams.md)
  - [FileShareWrapper](docs/FileShareWrapper.md)
  - [FileStatus](docs/FileStatus.md)
- - [FileStringArrayWrapper](docs/FileStringArrayWrapper.md)
  - [FileType](docs/FileType.md)
  - [FileUploadResultDto](docs/FileUploadResultDto.md)
  - [FileUploadResultWrapper](docs/FileUploadResultWrapper.md)
@@ -3091,7 +3163,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [FilesStatisticsResultDto](docs/FilesStatisticsResultDto.md)
  - [FilesStatisticsResultWrapper](docs/FilesStatisticsResultWrapper.md)
  - [FillingFormResultDtoInteger](docs/FillingFormResultDtoInteger.md)
- - [FillingFormResultDtoString](docs/FillingFormResultDtoString.md)
  - [FillingFormResultIntegerWrapper](docs/FillingFormResultIntegerWrapper.md)
  - [FilterType](docs/FilterType.md)
  - [FinishDto](docs/FinishDto.md)
@@ -3100,13 +3171,13 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [FirebaseDto](docs/FirebaseDto.md)
  - [FirebaseRequestsDto](docs/FirebaseRequestsDto.md)
  - [FolderContentDtoInteger](docs/FolderContentDtoInteger.md)
- - [FolderContentDtoString](docs/FolderContentDtoString.md)
  - [FolderContentIntegerArrayWrapper](docs/FolderContentIntegerArrayWrapper.md)
  - [FolderContentIntegerWrapper](docs/FolderContentIntegerWrapper.md)
  - [FolderDtoInteger](docs/FolderDtoInteger.md)
  - [FolderDtoString](docs/FolderDtoString.md)
  - [FolderIntegerArrayWrapper](docs/FolderIntegerArrayWrapper.md)
  - [FolderIntegerWrapper](docs/FolderIntegerWrapper.md)
+ - [FolderLinkRequest](docs/FolderLinkRequest.md)
  - [FolderStringArrayWrapper](docs/FolderStringArrayWrapper.md)
  - [FolderStringWrapper](docs/FolderStringWrapper.md)
  - [FolderType](docs/FolderType.md)
@@ -3140,6 +3211,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [IPRestrictionsSettingsWrapper](docs/IPRestrictionsSettingsWrapper.md)
  - [ImportableApiEntity](docs/ImportableApiEntity.md)
  - [InfoConfigDto](docs/InfoConfigDto.md)
+ - [Int32Wrapper](docs/Int32Wrapper.md)
  - [Int64Wrapper](docs/Int64Wrapper.md)
  - [InviteUsersRequestDto](docs/InviteUsersRequestDto.md)
  - [IpRestrictionBase](docs/IpRestrictionBase.md)
@@ -3157,6 +3229,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [KeyValuePairStringStringValues](docs/KeyValuePairStringStringValues.md)
  - [LinkAccountRequestDto](docs/LinkAccountRequestDto.md)
  - [LinkType](docs/LinkType.md)
+ - [Location](docs/Location.md)
+ - [LocationType](docs/LocationType.md)
  - [LockFileParameters](docs/LockFileParameters.md)
  - [LoginEventArrayWrapper](docs/LoginEventArrayWrapper.md)
  - [LoginEventDto](docs/LoginEventDto.md)
@@ -3187,7 +3261,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [MobilePhoneActivationStatus](docs/MobilePhoneActivationStatus.md)
  - [MobileRequestsDto](docs/MobileRequestsDto.md)
  - [Module](docs/Module.md)
- - [ModuleType](docs/ModuleType.md)
  - [ModuleWrapper](docs/ModuleWrapper.md)
  - [NewItemsDtoFileEntryBaseDto](docs/NewItemsDtoFileEntryBaseDto.md)
  - [NewItemsDtoRoomNewItemsDto](docs/NewItemsDtoRoomNewItemsDto.md)
@@ -3361,6 +3434,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [TenantUserInvitationSettingsWrapper](docs/TenantUserInvitationSettingsWrapper.md)
  - [TenantUserQuotaSettings](docs/TenantUserQuotaSettings.md)
  - [TenantUserQuotaSettingsWrapper](docs/TenantUserQuotaSettingsWrapper.md)
+ - [TenantWalletService](docs/TenantWalletService.md)
+ - [TenantWalletServiceSettings](docs/TenantWalletServiceSettings.md)
+ - [TenantWalletServiceSettingsWrapper](docs/TenantWalletServiceSettingsWrapper.md)
  - [TenantWalletSettings](docs/TenantWalletSettings.md)
  - [TenantWalletSettingsWrapper](docs/TenantWalletSettingsWrapper.md)
  - [TenantWrapper](docs/TenantWrapper.md)
@@ -3432,6 +3508,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [WhiteLabelItemArrayWrapper](docs/WhiteLabelItemArrayWrapper.md)
  - [WhiteLabelItemDto](docs/WhiteLabelItemDto.md)
  - [WhiteLabelItemPathDto](docs/WhiteLabelItemPathDto.md)
+ - [WhiteLabelLogoType](docs/WhiteLabelLogoType.md)
  - [WhiteLabelRequestsDto](docs/WhiteLabelRequestsDto.md)
  - [WizardRequestsDto](docs/WizardRequestsDto.md)
  - [WizardSettings](docs/WizardSettings.md)

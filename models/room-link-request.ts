@@ -51,6 +51,12 @@ export interface RoomLinkRequest {
      */
     'expirationDate'?: ApiDateTime;
     /**
+     * The link scope, whether it is internal or not.
+     * @type {boolean}
+     * @memberof RoomLinkRequest
+     */
+    'internal'?: boolean;
+    /**
      * The link name.
      * @type {string}
      * @memberof RoomLinkRequest

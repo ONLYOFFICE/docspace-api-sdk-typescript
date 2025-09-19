@@ -44,6 +44,12 @@ export interface ConfirmDto {
      * @memberof ConfirmDto
      */
     'title'?: string | null;
+    /**
+     * The confirmation email.
+     * @type {string}
+     * @memberof ConfirmDto
+     */
+    'email'?: string | null;
 }
 
 

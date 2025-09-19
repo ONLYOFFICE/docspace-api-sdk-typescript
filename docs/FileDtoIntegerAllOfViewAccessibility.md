@@ -14,7 +14,6 @@ Name | Type | Description | Notes
 **WebCustomFilterEditing** | **boolean** |  | [optional] [default to undefined]
 **WebRestrictedEditing** | **boolean** |  | [optional] [default to undefined]
 **WebComment** | **boolean** |  | [optional] [default to undefined]
-**CoAuhtoring** | **boolean** |  | [optional] [default to undefined]
 **CanConvert** | **boolean** |  | [optional] [default to undefined]
 **MustConvert** | **boolean** |  | [optional] [default to undefined]
 
@@ -32,7 +31,6 @@ const instance: FileDtoIntegerAllOfViewAccessibility = {
     WebCustomFilterEditing,
     WebRestrictedEditing,
     WebComment,
-    CoAuhtoring,
     CanConvert,
     MustConvert,
 };

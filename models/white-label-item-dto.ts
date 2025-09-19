@@ -22,6 +22,9 @@ import type { IMagickGeometry } from './imagick-geometry';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { WhiteLabelItemPathDto } from './white-label-item-path-dto';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { WhiteLabelLogoType } from './white-label-logo-type';
 
 /**
  * The white label item parameters.
@@ -29,6 +32,12 @@ import type { WhiteLabelItemPathDto } from './white-label-item-path-dto';
  * @interface WhiteLabelItemDto
  */
 export interface WhiteLabelItemDto {
+    /**
+     * 
+     * @type {WhiteLabelLogoType}
+     * @memberof WhiteLabelItemDto
+     */
+    'type'?: WhiteLabelLogoType;
     /**
      * The white label file name.
      * @type {string}
@@ -48,4 +57,6 @@ export interface WhiteLabelItemDto {
      */
     'path'?: WhiteLabelItemPathDto;
 }
+
+
 

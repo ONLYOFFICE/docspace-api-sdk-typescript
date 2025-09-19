@@ -57,6 +57,18 @@ export interface FileEntryBaseDto {
      */
     'shared'?: boolean;
     /**
+     * Indicates whether the parent entity is shared.
+     * @type {boolean}
+     * @memberof FileEntryBaseDto
+     */
+    'parentShared'?: boolean;
+    /**
+     * The short Web URL.
+     * @type {string}
+     * @memberof FileEntryBaseDto
+     */
+    'shortWebUrl'?: string | null;
+    /**
      * 
      * @type {ApiDateTime}
      * @memberof FileEntryBaseDto

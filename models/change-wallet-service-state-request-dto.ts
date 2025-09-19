@@ -16,36 +16,29 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { TenantWalletService } from './tenant-wallet-service';
 
 /**
- * The file draft parameters.
+ * Tenant wallet service state request parameters
  * @export
- * @interface DraftLocationString
+ * @interface ChangeWalletServiceStateRequestDto
  */
-export interface DraftLocationString {
+export interface ChangeWalletServiceStateRequestDto {
     /**
-     * The InProcess folder ID of the draft.
-     * @type {string}
-     * @memberof DraftLocationString
+     * 
+     * @type {TenantWalletService}
+     * @memberof ChangeWalletServiceStateRequestDto
      */
-    'folderId'?: string | null;
+    'service'?: TenantWalletService;
     /**
-     * The InProcess folder title of the draft.
-     * @type {string}
-     * @memberof DraftLocationString
+     * Service state
+     * @type {boolean}
+     * @memberof ChangeWalletServiceStateRequestDto
      */
-    'folderTitle'?: string | null;
-    /**
-     * The draft ID.
-     * @type {string}
-     * @memberof DraftLocationString
-     */
-    'fileId'?: string | null;
-    /**
-     * The draft title.
-     * @type {string}
-     * @memberof DraftLocationString
-     */
-    'fileTitle'?: string | null;
+    'enabled'?: boolean;
 }
+
+
 

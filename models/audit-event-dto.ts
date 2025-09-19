@@ -27,10 +27,10 @@ import type { ApiDateTime } from './api-date-time';
 import type { EntryType } from './entry-type';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { MessageAction } from './message-action';
+import type { LocationType } from './location-type';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ModuleType } from './module-type';
+import type { MessageAction } from './message-action';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { ProductType } from './product-type';
@@ -127,10 +127,10 @@ export interface AuditEventDto {
     'product'?: ProductType;
     /**
      * 
-     * @type {ModuleType}
+     * @type {LocationType}
      * @memberof AuditEventDto
      */
-    'module'?: ModuleType;
+    'location'?: LocationType;
     /**
      * The list of target objects affected by the audit event (e.g., document ID, user account).
      * @type {Array<string>}

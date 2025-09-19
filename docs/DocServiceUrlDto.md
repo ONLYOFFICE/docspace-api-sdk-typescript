@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **version** | **string** | The version of the document service. | [default to undefined]
 **docServiceUrlApi** | **string** | The document service URL API. | [default to undefined]
 **docServiceUrl** | **string** | The document service URL. | [default to undefined]
+**docServicePreloadUrl** | **string** | The URL used to preload the document service scripts. | [default to undefined]
 **docServiceUrlInternal** | **string** | The internal document service URL. | [default to undefined]
 **docServicePortalUrl** | **string** | The document service portal URL. | [default to undefined]
 **docServiceSignatureHeader** | **string** | The document service signature header. | [optional] [default to undefined]
@@ -24,6 +25,7 @@ const instance: DocServiceUrlDto = {
     version,
     docServiceUrlApi,
     docServiceUrl,
+    docServicePreloadUrl,
     docServiceUrlInternal,
     docServicePortalUrl,
     docServiceSignatureHeader,

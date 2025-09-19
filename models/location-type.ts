@@ -23,7 +23,7 @@
  * @enum {number}
  */
 
-export const ModuleType = {
+export const LocationType = {
     /**
     * None
     */
@@ -142,7 +142,7 @@ export const ModuleType = {
     OAuth: 28
 } as const;
 
-export type ModuleType = typeof ModuleType[keyof typeof ModuleType];
+export type LocationType = typeof LocationType[keyof typeof LocationType];
 
 
 

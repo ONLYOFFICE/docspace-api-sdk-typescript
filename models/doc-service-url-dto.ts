@@ -42,6 +42,12 @@ export interface DocServiceUrlDto {
      */
     'docServiceUrl': string | null;
     /**
+     * The URL used to preload the document service scripts.
+     * @type {string}
+     * @memberof DocServiceUrlDto
+     */
+    'docServicePreloadUrl': string | null;
+    /**
      * The internal document service URL.
      * @type {string}
      * @memberof DocServiceUrlDto
