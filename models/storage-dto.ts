@@ -31,13 +31,13 @@ export interface StorageDto {
      * @type {string}
      * @memberof StorageDto
      */
-    'id'?: string | null;
+    'id': string | null;
     /**
      * The storage title.
      * @type {string}
      * @memberof StorageDto
      */
-    'title'?: string | null;
+    'title': string | null;
     /**
      * The list of storage authentication keys.
      * @type {Array<AuthKey>}
@@ -49,12 +49,12 @@ export interface StorageDto {
      * @type {boolean}
      * @memberof StorageDto
      */
-    'current'?: boolean;
+    'current': boolean;
     /**
      * Specifies if this storage can be set or not.
      * @type {boolean}
      * @memberof StorageDto
      */
-    'isSet'?: boolean;
+    'isSet': boolean;
 }
 

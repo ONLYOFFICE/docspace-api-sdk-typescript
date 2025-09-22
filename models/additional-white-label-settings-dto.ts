@@ -28,42 +28,42 @@ export interface AdditionalWhiteLabelSettingsDto {
      * @type {boolean}
      * @memberof AdditionalWhiteLabelSettingsDto
      */
-    'startDocsEnabled'?: boolean;
+    'startDocsEnabled': boolean;
     /**
      * Specifies if the Help Center link is available or not.
      * @type {boolean}
      * @memberof AdditionalWhiteLabelSettingsDto
      */
-    'helpCenterEnabled'?: boolean;
+    'helpCenterEnabled': boolean;
     /**
-     * Specifies if the \"Feedback & Support\" link is available or not.
+     * Specifies if the Feedback & Support link is available or not.
      * @type {boolean}
      * @memberof AdditionalWhiteLabelSettingsDto
      */
-    'feedbackAndSupportEnabled'?: boolean;
+    'feedbackAndSupportEnabled': boolean;
     /**
      * Specifies if the user forum is available or not.
      * @type {boolean}
      * @memberof AdditionalWhiteLabelSettingsDto
      */
-    'userForumEnabled'?: boolean;
+    'userForumEnabled': boolean;
     /**
      * Specifies if the Video Guides link is available or not.
      * @type {boolean}
      * @memberof AdditionalWhiteLabelSettingsDto
      */
-    'videoGuidesEnabled'?: boolean;
+    'videoGuidesEnabled': boolean;
     /**
      * Specifies if the License Agreements link is available or not.
      * @type {boolean}
      * @memberof AdditionalWhiteLabelSettingsDto
      */
-    'licenseAgreementsEnabled'?: boolean;
+    'licenseAgreementsEnabled': boolean;
     /**
      * Specifies if the additional white label settings are default or not.
      * @type {boolean}
      * @memberof AdditionalWhiteLabelSettingsDto
      */
-    'isDefault'?: boolean;
+    'isDefault': boolean;
 }
 

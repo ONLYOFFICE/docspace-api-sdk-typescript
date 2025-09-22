@@ -31,12 +31,12 @@ export interface SaveFormRoleMappingDtoInteger {
      * @type {number}
      * @memberof SaveFormRoleMappingDtoInteger
      */
-    'formId'?: number;
+    'formId': number;
     /**
      * The collection of roles.
      * @type {Array<FormRole>}
      * @memberof SaveFormRoleMappingDtoInteger
      */
-    'roles'?: Array<FormRole> | null;
+    'roles': Array<FormRole> | null;
 }
 

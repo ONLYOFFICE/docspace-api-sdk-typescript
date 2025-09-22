@@ -31,7 +31,7 @@ export interface WebhooksLogDto {
      * @type {number}
      * @memberof WebhooksLogDto
      */
-    'id'?: number;
+    'id': number;
     /**
      * The webhook configuration name.
      * @type {string}

@@ -25,6 +25,8 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
+import type { NotificationChannelStatusWrapper } from '../../models';
+// @ts-ignore
 import type { NotificationSettingsRequestsDto } from '../../models';
 // @ts-ignore
 import type { NotificationSettingsWrapper } from '../../models';
@@ -40,6 +42,57 @@ import type { RoomsNotificationsSettingsRequestDto } from '../../models';
  */
 export const NotificationsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * Returns a list of notification channels
+         * @summary Gets notification channel settings
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getNotificationChannels operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-notification-channels/
+         */
+        getNotificationChannels: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/settings/notification/channels`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * Checks if the notification type specified in the request is enabled or not.
          * @summary Check notification availability
@@ -267,6 +320,20 @@ export const NotificationsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = NotificationsApiAxiosParamCreator(configuration)
     return {
         /**
+         * Returns a list of notification channels
+         * @summary Gets notification channel settings
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getNotificationChannels operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-notification-channels/
+         */
+        async getNotificationChannels(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NotificationChannelStatusWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getNotificationChannels(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['NotificationsApi.getNotificationChannels']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Checks if the notification type specified in the request is enabled or not.
          * @summary Check notification availability
          * @param {NotificationType} type The type of notification to query, specified in the route.
@@ -336,6 +403,17 @@ export const NotificationsApiFactory = function (configuration?: Configuration, 
     const localVarFp = NotificationsApiFp(configuration)
     return {
         /**
+         * Returns a list of notification channels
+         * @summary Gets notification channel settings
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getNotificationChannels operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-notification-channels/
+         * @throws {RequiredError}
+         */
+        getNotificationChannels(options?: RawAxiosRequestConfig): AxiosPromise<NotificationChannelStatusWrapper> {
+            return localVarFp.getNotificationChannels(options).then((request) => request(axios, basePath));
+        },
+        /**
          * Checks if the notification type specified in the request is enabled or not.
          * @summary Check notification availability
          * @param {NotificationType} type The type of notification to query, specified in the route.
@@ -392,6 +470,17 @@ export const NotificationsApiFactory = function (configuration?: Configuration, 
  * @extends {BaseAPI}
  */
 export class NotificationsApi extends BaseAPI {
+    /**
+     * Returns a list of notification channels
+     * @summary Gets notification channel settings
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof NotificationsApi
+     */
+    public getNotificationChannels(options?: RawAxiosRequestConfig) {
+        return NotificationsApiFp(this.configuration).getNotificationChannels(options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * Checks if the notification type specified in the request is enabled or not.
      * @summary Check notification availability

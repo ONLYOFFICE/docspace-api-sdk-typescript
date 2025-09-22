@@ -28,12 +28,12 @@ export interface TimezonesRequestsDto {
      * @type {string}
      * @memberof TimezonesRequestsDto
      */
-    'id'?: string | null;
+    'id': string | null;
     /**
      * The user-friendly name for the time zone.
      * @type {string}
      * @memberof TimezonesRequestsDto
      */
-    'displayName'?: string | null;
+    'displayName': string | null;
 }
 

@@ -40,43 +40,43 @@ export interface QuotaDto {
      * @type {number}
      * @memberof QuotaDto
      */
-    'id'?: number;
+    'id': number;
     /**
      * The quota title.
      * @type {string}
      * @memberof QuotaDto
      */
-    'title'?: string | null;
+    'title': string | null;
     /**
      * 
      * @type {PriceDto}
      * @memberof QuotaDto
      */
-    'price'?: PriceDto;
+    'price': PriceDto;
     /**
      * Specifies if the quota is nonprofit or not.
      * @type {boolean}
      * @memberof QuotaDto
      */
-    'nonProfit'?: boolean;
+    'nonProfit': boolean;
     /**
      * Specifies if the quota is free or not.
      * @type {boolean}
      * @memberof QuotaDto
      */
-    'free'?: boolean;
+    'free': boolean;
     /**
      * Specifies if the quota is trial or not.
      * @type {boolean}
      * @memberof QuotaDto
      */
-    'trial'?: boolean;
+    'trial': boolean;
     /**
      * The list of tenant quota features.
      * @type {Array<TenantQuotaFeatureDto>}
      * @memberof QuotaDto
      */
-    'features'?: Array<TenantQuotaFeatureDto> | null;
+    'features': Array<TenantQuotaFeatureDto> | null;
     /**
      * 
      * @type {TenantEntityQuotaSettings}

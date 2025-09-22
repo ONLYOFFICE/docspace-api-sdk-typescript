@@ -6,8 +6,8 @@ The cookie settings.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**lifeTime** | **number** | The cookie lifetime value in minutes. | [optional] [default to undefined]
-**enabled** | **boolean** | Specifies if the cookie settings are enabled or not. | [optional] [default to undefined]
+**lifeTime** | **number** | The cookie lifetime value in minutes. | [default to undefined]
+**enabled** | **boolean** | Specifies if the cookie settings are enabled or not. | [default to undefined]
 
 ## Example
 

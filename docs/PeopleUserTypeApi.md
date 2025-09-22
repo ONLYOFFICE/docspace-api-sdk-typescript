@@ -175,7 +175,7 @@ const { status, data } = await apiInstance.terminateUserTypeUpdate(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **updateUserType**
-> EmployeeFullArrayWrapper updateUserType()
+> EmployeeFullArrayWrapper updateUserType(updateMembersRequestDto)
 
 Changes a type of the users with the IDs specified in the request.
 
@@ -210,7 +210,7 @@ const configuration = new Configuration();
 const apiInstance = new PeopleUserTypeApi(configuration);
 
 let type: EmployeeType; //The new user type. (default to undefined)
-let updateMembersRequestDto: UpdateMembersRequestDto; //The request parameters for updating the user information. (optional)
+let updateMembersRequestDto: UpdateMembersRequestDto; //The request parameters for updating the user information.
 
 const { status, data } = await apiInstance.updateUserType(
     type,

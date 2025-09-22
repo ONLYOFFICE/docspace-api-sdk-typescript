@@ -34,13 +34,13 @@ export interface ExternalShareDto {
      * @type {Status}
      * @memberof ExternalShareDto
      */
-    'status'?: Status;
+    'status': Status;
     /**
      * The external data ID.
      * @type {string}
      * @memberof ExternalShareDto
      */
-    'id'?: string | null;
+    'id': string | null;
     /**
      * The external data title.
      * @type {string}
@@ -58,19 +58,19 @@ export interface ExternalShareDto {
      * @type {number}
      * @memberof ExternalShareDto
      */
-    'tenantId'?: number;
+    'tenantId': number;
     /**
      * The unique identifier of the shared entity.
      * @type {string}
      * @memberof ExternalShareDto
      */
-    'entityId'?: string | null;
+    'entityId': string | null;
     /**
      * The title of the shared entity.
      * @type {string}
      * @memberof ExternalShareDto
      */
-    'entityTitle'?: string | null;
+    'entityTitle': string | null;
     /**
      * 
      * @type {FileEntryType}
@@ -88,13 +88,13 @@ export interface ExternalShareDto {
      * @type {boolean}
      * @memberof ExternalShareDto
      */
-    'shared'?: boolean;
+    'shared': boolean;
     /**
      * The link ID of the external data.
      * @type {string}
      * @memberof ExternalShareDto
      */
-    'linkId'?: string;
+    'linkId': string;
     /**
      * Specifies whether the user is authenticated or not.
      * @type {boolean}

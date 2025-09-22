@@ -28,12 +28,12 @@ export interface CoversResultDto {
      * @type {string}
      * @memberof CoversResultDto
      */
-    'id'?: string | null;
+    'id': string | null;
     /**
      * The cover image data.
      * @type {string}
      * @memberof CoversResultDto
      */
-    'data'?: string | null;
+    'data': string | null;
 }
 

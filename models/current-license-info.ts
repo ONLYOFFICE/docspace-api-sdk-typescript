@@ -28,12 +28,12 @@ export interface CurrentLicenseInfo {
      * @type {boolean}
      * @memberof CurrentLicenseInfo
      */
-    'trial'?: boolean;
+    'trial': boolean;
     /**
      * The date when the license expires.
      * @type {string}
      * @memberof CurrentLicenseInfo
      */
-    'dueDate'?: string;
+    'dueDate': string;
 }
 

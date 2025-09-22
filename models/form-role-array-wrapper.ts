@@ -21,7 +21,7 @@
 import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FormRole } from './form-role';
+import type { FormRoleDto } from './form-role-dto';
 
 /**
  * 
@@ -31,10 +31,10 @@ import type { FormRole } from './form-role';
 export interface FormRoleArrayWrapper {
     /**
      * 
-     * @type {Array<FormRole>}
+     * @type {Array<FormRoleDto>}
      * @memberof FormRoleArrayWrapper
      */
-    'response'?: Array<FormRole>;
+    'response'?: Array<FormRoleDto>;
     /**
      * 
      * @type {number}

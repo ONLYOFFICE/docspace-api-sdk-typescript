@@ -43,31 +43,31 @@ export interface ConfigurationDtoInteger {
      * @type {DocumentConfigDto}
      * @memberof ConfigurationDtoInteger
      */
-    'document'?: DocumentConfigDto;
+    'document': DocumentConfigDto;
     /**
      * The document type.
      * @type {string}
      * @memberof ConfigurationDtoInteger
      */
-    'documentType'?: string | null;
+    'documentType': string | null;
     /**
      * 
      * @type {EditorConfigurationDto}
      * @memberof ConfigurationDtoInteger
      */
-    'editorConfig'?: EditorConfigurationDto;
+    'editorConfig': EditorConfigurationDto;
     /**
      * 
      * @type {EditorType}
      * @memberof ConfigurationDtoInteger
      */
-    'editorType'?: EditorType;
+    'editorType': EditorType;
     /**
      * The editor URL.
      * @type {string}
      * @memberof ConfigurationDtoInteger
      */
-    'editorUrl'?: string | null;
+    'editorUrl': string | null;
     /**
      * The token of the file configuration.
      * @type {string}

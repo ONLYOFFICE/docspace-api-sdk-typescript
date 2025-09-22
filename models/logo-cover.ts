@@ -28,12 +28,12 @@ export interface LogoCover {
      * @type {string}
      * @memberof LogoCover
      */
-    'id'?: string | null;
+    'id': string | null;
     /**
      * The logo cover data.
      * @type {string}
      * @memberof LogoCover
      */
-    'data'?: string | null;
+    'data': string | null;
 }
 

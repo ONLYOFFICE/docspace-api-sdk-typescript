@@ -6,9 +6,9 @@ The account information parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**provider** | **string** | The account provider. | [optional] [default to undefined]
-**url** | **string** | The account URL. | [optional] [default to undefined]
-**linked** | **boolean** | Specifies if an account is linked with other profiles or not. | [optional] [default to undefined]
+**provider** | **string** | The account provider. | [default to undefined]
+**url** | **string** | The account URL. | [default to undefined]
+**linked** | **boolean** | Specifies if an account is linked with other profiles or not. | [default to undefined]
 
 ## Example
 

@@ -135,6 +135,12 @@ export interface FileEntryBaseDto {
      */
     'order'?: string | null;
     /**
+     * Specifies if the file is a favorite or not.
+     * @type {boolean}
+     * @memberof FileEntryBaseDto
+     */
+    'isFavorite'?: boolean | null;
+    /**
      * 
      * @type {FileEntryType}
      * @memberof FileEntryBaseDto

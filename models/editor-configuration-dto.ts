@@ -88,13 +88,13 @@ export interface EditorConfigurationDto {
      * @type {string}
      * @memberof EditorConfigurationDto
      */
-    'lang'?: string | null;
+    'lang': string | null;
     /**
      * The mode of the editor configuration.
      * @type {string}
      * @memberof EditorConfigurationDto
      */
-    'mode'?: string | null;
+    'mode': string | null;
     /**
      * Specifies if the mode is write of the editor configuration.
      * @type {boolean}
@@ -124,6 +124,6 @@ export interface EditorConfigurationDto {
      * @type {UserConfig}
      * @memberof EditorConfigurationDto
      */
-    'user'?: UserConfig;
+    'user': UserConfig;
 }
 

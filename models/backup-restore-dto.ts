@@ -34,7 +34,7 @@ export interface BackupRestoreDto {
      * @type {string}
      * @memberof BackupRestoreDto
      */
-    'backupId'?: string | null;
+    'backupId': string | null;
     /**
      * 
      * @type {BackupStorageType}

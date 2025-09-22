@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **saveUrl** | **string** | The absolute URL that will allow the document to be saved onto the user personal computer. | [optional] [readonly] [default to undefined]
 **shareLinkParam** | **string** | The shared URL parameter. | [optional] [default to undefined]
 **shareUrl** | **string** | The absolute URL that will allow other users to share this document. | [optional] [default to undefined]
-**toolbarDocked** | **string** | The place for the embedded viewer toolbar, can be either \&quot;top\&quot; or \&quot;bottom\&quot;. | [optional] [readonly] [default to undefined]
+**toolbarDocked** | **string** | The place for the embedded viewer toolbar, can be either top or bottom. | [optional] [readonly] [default to undefined]
 
 ## Example
 

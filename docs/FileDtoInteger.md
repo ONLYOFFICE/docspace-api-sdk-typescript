@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **providerKey** | **string** | The provider key of the file entry. | [optional] [default to undefined]
 **providerId** | **number** | The provider ID of the file entry. | [optional] [default to undefined]
 **order** | **string** | The order of the file entry. | [optional] [default to undefined]
+**isFavorite** | **boolean** | Specifies if the file is a favorite or not. | [optional] [default to undefined]
 **fileEntryType** | [**FileEntryType**](FileEntryType.md) |  | [optional] [default to undefined]
 **id** | **number** | The file entry ID. | [optional] [default to undefined]
 **rootFolderId** | **number** | The root folder ID of the file entry. | [optional] [default to undefined]
@@ -86,6 +87,7 @@ const instance: FileDtoInteger = {
     providerKey,
     providerId,
     order,
+    isFavorite,
     fileEntryType,
     id,
     rootFolderId,

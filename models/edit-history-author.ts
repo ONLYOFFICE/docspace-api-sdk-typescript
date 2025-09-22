@@ -28,7 +28,7 @@ export interface EditHistoryAuthor {
      * @type {string}
      * @memberof EditHistoryAuthor
      */
-    'id'?: string | null;
+    'id': string | null;
     /**
      * The author name.
      * @type {string}

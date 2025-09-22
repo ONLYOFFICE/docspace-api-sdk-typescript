@@ -31,7 +31,7 @@ export interface ConfirmDto {
      * @type {ValidationResult}
      * @memberof ConfirmDto
      */
-    'result'?: ValidationResult;
+    'result': ValidationResult;
     /**
      * The confirmation room ID.
      * @type {string}

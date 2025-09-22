@@ -691,7 +691,7 @@ const { status, data } = await apiInstance.sendEmailChangeInstructions(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **updateMember**
-> EmployeeFullWrapper updateMember()
+> EmployeeFullWrapper updateMember(updateMemberRequestDto)
 
 Updates the data for the selected portal user with the first name, last name, email address, and/or optional parameters specified in the request.
 
@@ -726,7 +726,7 @@ const configuration = new Configuration();
 const apiInstance = new PeopleProfilesApi(configuration);
 
 let userid: string; //The user ID. (default to undefined)
-let updateMemberRequestDto: UpdateMemberRequestDto; //The request parameters for updating the user information. (optional)
+let updateMemberRequestDto: UpdateMemberRequestDto; //The request parameters for updating the user information.
 
 const { status, data } = await apiInstance.updateMember(
     userid,

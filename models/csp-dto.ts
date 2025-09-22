@@ -28,12 +28,12 @@ export interface CspDto {
      * @type {Array<string>}
      * @memberof CspDto
      */
-    'domains'?: Array<string> | null;
+    'domains': Array<string> | null;
     /**
      * The CSP header.
      * @type {string}
      * @memberof CspDto
      */
-    'header'?: string | null;
+    'header': string | null;
 }
 

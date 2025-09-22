@@ -8,7 +8,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**sendUserPassword**](#senduserpassword) | **POST** /api/2.0/people/password | Remind a user password|
 
 # **changeUserPassword**
-> EmployeeFullWrapper changeUserPassword()
+> EmployeeFullWrapper changeUserPassword(memberBaseRequestDto)
 
 Sets a new password to the user with the ID specified in the request.
 
@@ -43,7 +43,7 @@ const configuration = new Configuration();
 const apiInstance = new PeoplePasswordApi(configuration);
 
 let userid: string; //The user ID. (default to undefined)
-let memberBaseRequestDto: MemberBaseRequestDto; //The request parameters for the user generic information. (optional)
+let memberBaseRequestDto: MemberBaseRequestDto; //The request parameters for the user generic information.
 
 const { status, data } = await apiInstance.changeUserPassword(
     userid,

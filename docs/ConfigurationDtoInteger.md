@@ -6,11 +6,11 @@ The configuration parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**document** | [**DocumentConfigDto**](DocumentConfigDto.md) |  | [optional] [default to undefined]
-**documentType** | **string** | The document type. | [optional] [default to undefined]
-**editorConfig** | [**EditorConfigurationDto**](EditorConfigurationDto.md) |  | [optional] [default to undefined]
-**editorType** | [**EditorType**](EditorType.md) |  | [optional] [default to undefined]
-**editorUrl** | **string** | The editor URL. | [optional] [default to undefined]
+**document** | [**DocumentConfigDto**](DocumentConfigDto.md) |  | [default to undefined]
+**documentType** | **string** | The document type. | [default to undefined]
+**editorConfig** | [**EditorConfigurationDto**](EditorConfigurationDto.md) |  | [default to undefined]
+**editorType** | [**EditorType**](EditorType.md) |  | [default to undefined]
+**editorUrl** | **string** | The editor URL. | [default to undefined]
 **token** | **string** | The token of the file configuration. | [optional] [default to undefined]
 **type** | **string** | The platform type. | [optional] [default to undefined]
 **file** | [**FileDtoInteger**](FileDtoInteger.md) |  | [optional] [default to undefined]

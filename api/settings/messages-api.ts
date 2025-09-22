@@ -39,7 +39,7 @@ import type { TurnOnAdminMessageSettingsRequestDto } from '../../models';
 export const MessagesApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Displays the contact form on the \"Sign In\" page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.
+         * Displays the contact form on the Sign In page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.
          * @summary Enable the administrator message settings
          * @param {TurnOnAdminMessageSettingsRequestDto} [turnOnAdminMessageSettingsRequestDto] 
          * @param {*} [options] Override http request option.
@@ -176,7 +176,7 @@ export const MessagesApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = MessagesApiAxiosParamCreator(configuration)
     return {
         /**
-         * Displays the contact form on the \"Sign In\" page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.
+         * Displays the contact form on the Sign In page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.
          * @summary Enable the administrator message settings
          * @param {TurnOnAdminMessageSettingsRequestDto} [turnOnAdminMessageSettingsRequestDto] 
          * @param {*} [options] Override http request option.
@@ -231,7 +231,7 @@ export const MessagesApiFactory = function (configuration?: Configuration, baseP
     const localVarFp = MessagesApiFp(configuration)
     return {
         /**
-         * Displays the contact form on the \"Sign In\" page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.
+         * Displays the contact form on the Sign In page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.
          * @summary Enable the administrator message settings
          * @param {TurnOnAdminMessageSettingsRequestDto} [turnOnAdminMessageSettingsRequestDto] 
          * @param {*} [options] Override http request option.
@@ -277,7 +277,7 @@ export const MessagesApiFactory = function (configuration?: Configuration, baseP
  */
 export class MessagesApi extends BaseAPI {
     /**
-     * Displays the contact form on the \"Sign In\" page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.
+     * Displays the contact form on the Sign In page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.
      * @summary Enable the administrator message settings
      * @param {TurnOnAdminMessageSettingsRequestDto} [turnOnAdminMessageSettingsRequestDto] 
      * @param {*} [options] Override http request option.

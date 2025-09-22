@@ -6,7 +6,7 @@ The webhook log parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **number** | The webhook log ID. | [optional] [default to undefined]
+**id** | **number** | The webhook log ID. | [default to undefined]
 **configName** | **string** | The webhook configuration name. | [optional] [default to undefined]
 **trigger** | [**WebhookTrigger**](WebhookTrigger.md) |  | [optional] [default to undefined]
 **creationTime** | **string** | The webhook creation time. | [optional] [default to undefined]

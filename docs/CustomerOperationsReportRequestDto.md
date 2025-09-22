@@ -8,8 +8,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **startDate** | **string** | Start date | [optional] [default to undefined]
 **endDate** | **string** | End date | [optional] [default to undefined]
+**participantName** | **string** | Participant name | [optional] [default to undefined]
 **credit** | **boolean** | Include credit operations | [optional] [default to undefined]
-**withdrawal** | **boolean** | Include withdrawal operations | [optional] [default to undefined]
+**debit** | **boolean** | Include debit operations | [optional] [default to undefined]
 
 ## Example
 
@@ -19,8 +20,9 @@ import { CustomerOperationsReportRequestDto } from '@onlyoffice/docspace-api-sdk
 const instance: CustomerOperationsReportRequestDto = {
     startDate,
     endDate,
+    participantName,
     credit,
-    withdrawal,
+    debit,
 };
 ```
 

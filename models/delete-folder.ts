@@ -30,7 +30,7 @@ export interface DeleteFolder {
      */
     'deleteAfter'?: boolean;
     /**
-     * Specifies whether to move a folder to the \\\"Trash\\\" folder or delete it immediately.
+     * Specifies whether to move a folder to the \\Trash\\ folder or delete it immediately.
      * @type {boolean}
      * @memberof DeleteFolder
      */

@@ -28,7 +28,7 @@ export interface CheckFillFormDraft {
      * @type {number}
      * @memberof CheckFillFormDraft
      */
-    'version'?: number;
+    'version': number;
     /**
      * The action with the form draft.
      * @type {string}

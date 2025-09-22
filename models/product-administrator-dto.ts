@@ -28,18 +28,18 @@ export interface ProductAdministratorDto {
      * @type {string}
      * @memberof ProductAdministratorDto
      */
-    'productId'?: string;
+    'productId': string;
     /**
      * The user unique identifier.
      * @type {string}
      * @memberof ProductAdministratorDto
      */
-    'userId'?: string;
+    'userId': string;
     /**
      * Indicates whether the user has administrator privileges for the product.
      * @type {boolean}
      * @memberof ProductAdministratorDto
      */
-    'administrator'?: boolean;
+    'administrator': boolean;
 }
 

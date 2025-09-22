@@ -76,7 +76,7 @@ export interface SettingsDto {
      * @type {string}
      * @memberof SettingsDto
      */
-    'culture'?: string | null;
+    'culture': string | null;
     /**
      * The UTC offset in the TimeSpan format.
      * @type {string}
@@ -210,7 +210,7 @@ export interface SettingsDto {
      */
     'tenantAlias'?: string | null;
     /**
-     * Specifies whether to display the \"About\" portal section.
+     * Specifies whether to display the About portal section.
      * @type {boolean}
      * @memberof SettingsDto
      */

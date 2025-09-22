@@ -12,13 +12,13 @@ Name | Type | Description | Notes
 **customization** | [**CustomizationConfigDto**](CustomizationConfigDto.md) |  | [optional] [default to undefined]
 **embedded** | [**EmbeddedConfig**](EmbeddedConfig.md) |  | [optional] [default to undefined]
 **encryptionKeys** | [**EncryptionKeysConfig**](EncryptionKeysConfig.md) |  | [optional] [default to undefined]
-**lang** | **string** | The language of the editor configuration. | [optional] [default to undefined]
-**mode** | **string** | The mode of the editor configuration. | [optional] [default to undefined]
+**lang** | **string** | The language of the editor configuration. | [default to undefined]
+**mode** | **string** | The mode of the editor configuration. | [default to undefined]
 **modeWrite** | **boolean** | Specifies if the mode is write of the editor configuration. | [optional] [default to undefined]
 **plugins** | [**PluginsConfig**](PluginsConfig.md) |  | [optional] [default to undefined]
 **recent** | [**Array&lt;RecentConfig&gt;**](RecentConfig.md) | The recent configuration of the editor. | [optional] [default to undefined]
 **templates** | [**Array&lt;TemplatesConfig&gt;**](TemplatesConfig.md) | The templates of the editor configuration. | [optional] [default to undefined]
-**user** | [**UserConfig**](UserConfig.md) |  | [optional] [default to undefined]
+**user** | [**UserConfig**](UserConfig.md) |  | [default to undefined]
 
 ## Example
 

@@ -84,12 +84,6 @@ export type FolderDtoInteger = FileEntryDtoInteger &  {
      */
     'isShareable'?: boolean | null;
     /**
-     * Specifies if the folder is favorite or not.
-     * @type {boolean}
-     * @memberof FolderDtoInteger
-     */
-    'isFavorite'?: boolean | null;
-    /**
      * The new element index in the folder.
      * @type {number}
      * @memberof FolderDtoInteger

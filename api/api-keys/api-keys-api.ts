@@ -309,15 +309,17 @@ export const ApiKeysApiAxiosParamCreator = function (configuration?: Configurati
          * Updates an existing API key changing its name, permissions and status.
          * @summary Update an API key
          * @param {string} keyId The unique identifier of the API key to update.
-         * @param {UpdateApiKeyRequest} [updateApiKeyRequest] The request parameters for updating an existing API key.
+         * @param {UpdateApiKeyRequest} updateApiKeyRequest The request parameters for updating an existing API key.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateApiKey operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-api-key/
          */
-        updateApiKey: async (keyId: string, updateApiKeyRequest?: UpdateApiKeyRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateApiKey: async (keyId: string, updateApiKeyRequest: UpdateApiKeyRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'keyId' is not null or undefined
             assertParamExists('updateApiKey', 'keyId', keyId)
+            // verify required parameter 'updateApiKeyRequest' is not null or undefined
+            assertParamExists('updateApiKey', 'updateApiKeyRequest', updateApiKeyRequest)
             const localVarPath = `/api/2.0/keys/{keyId}`
                 .replace(`{${"keyId"}}`, encodeURIComponent(String(keyId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -450,13 +452,13 @@ export const ApiKeysApiFp = function(configuration?: Configuration) {
          * Updates an existing API key changing its name, permissions and status.
          * @summary Update an API key
          * @param {string} keyId The unique identifier of the API key to update.
-         * @param {UpdateApiKeyRequest} [updateApiKeyRequest] The request parameters for updating an existing API key.
+         * @param {UpdateApiKeyRequest} updateApiKeyRequest The request parameters for updating an existing API key.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateApiKey operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-api-key/
          */
-        async updateApiKey(keyId: string, updateApiKeyRequest?: UpdateApiKeyRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+        async updateApiKey(keyId: string, updateApiKeyRequest: UpdateApiKeyRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateApiKey(keyId, updateApiKeyRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ApiKeysApi.updateApiKey']?.[localVarOperationServerIndex]?.url;
@@ -533,13 +535,13 @@ export const ApiKeysApiFactory = function (configuration?: Configuration, basePa
          * Updates an existing API key changing its name, permissions and status.
          * @summary Update an API key
          * @param {string} keyId The unique identifier of the API key to update.
-         * @param {UpdateApiKeyRequest} [updateApiKeyRequest] The request parameters for updating an existing API key.
+         * @param {UpdateApiKeyRequest} updateApiKeyRequest The request parameters for updating an existing API key.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateApiKey operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-api-key/
          * @throws {RequiredError}
          */
-        updateApiKey(keyId: string, updateApiKeyRequest?: UpdateApiKeyRequest, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+        updateApiKey(keyId: string, updateApiKeyRequest: UpdateApiKeyRequest, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
             return localVarFp.updateApiKey(keyId, updateApiKeyRequest, options).then((request) => request(axios, basePath));
         },
     };
@@ -613,12 +615,12 @@ export class ApiKeysApi extends BaseAPI {
      * Updates an existing API key changing its name, permissions and status.
      * @summary Update an API key
      * @param {string} keyId The unique identifier of the API key to update.
-     * @param {UpdateApiKeyRequest} [updateApiKeyRequest] The request parameters for updating an existing API key.
+     * @param {UpdateApiKeyRequest} updateApiKeyRequest The request parameters for updating an existing API key.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ApiKeysApi
      */
-    public updateApiKey(keyId: string, updateApiKeyRequest?: UpdateApiKeyRequest, options?: RawAxiosRequestConfig) {
+    public updateApiKey(keyId: string, updateApiKeyRequest: UpdateApiKeyRequest, options?: RawAxiosRequestConfig) {
         return ApiKeysApiFp(this.configuration).updateApiKey(keyId, updateApiKeyRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }

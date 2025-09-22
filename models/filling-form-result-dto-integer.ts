@@ -34,7 +34,7 @@ export interface FillingFormResultDtoInteger {
      * @type {number}
      * @memberof FillingFormResultDtoInteger
      */
-    'formNumber'?: number;
+    'formNumber': number;
     /**
      * 
      * @type {FileDtoInteger}
@@ -58,7 +58,7 @@ export interface FillingFormResultDtoInteger {
      * @type {number}
      * @memberof FillingFormResultDtoInteger
      */
-    'roomId'?: number;
+    'roomId': number;
     /**
      * Specifies if the manager who fills the form is a room member or not.
      * @type {boolean}

@@ -72,7 +72,7 @@ const { status, data } = await apiInstance.addGroup(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **addMembersTo**
-> GroupWrapper addMembersTo()
+> GroupWrapper addMembersTo(membersRequest)
 
 Adds new group members to the group with the ID specified in the request.
 
@@ -107,7 +107,7 @@ const configuration = new Configuration();
 const apiInstance = new GroupApi(configuration);
 
 let id: string; //The group ID. (default to undefined)
-let membersRequest: MembersRequest; //The member request. (optional)
+let membersRequest: MembersRequest; //The member request.
 
 const { status, data } = await apiInstance.addMembersTo(
     id,
@@ -431,7 +431,7 @@ const { status, data } = await apiInstance.moveMembersTo(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **removeMembersFrom**
-> GroupWrapper removeMembersFrom()
+> GroupWrapper removeMembersFrom(membersRequest)
 
 Removes the group members specified in the request from the selected group.
 
@@ -466,7 +466,7 @@ const configuration = new Configuration();
 const apiInstance = new GroupApi(configuration);
 
 let id: string; //The group ID. (default to undefined)
-let membersRequest: MembersRequest; //The member request. (optional)
+let membersRequest: MembersRequest; //The member request.
 
 const { status, data } = await apiInstance.removeMembersFrom(
     id,
@@ -490,7 +490,7 @@ const { status, data } = await apiInstance.removeMembersFrom(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **setGroupManager**
-> GroupWrapper setGroupManager()
+> GroupWrapper setGroupManager(setManagerRequest)
 
 Sets a user with the ID specified in the request as a group manager.
 
@@ -525,7 +525,7 @@ const configuration = new Configuration();
 const apiInstance = new GroupApi(configuration);
 
 let id: string; //The group ID. (default to undefined)
-let setManagerRequest: SetManagerRequest; //The request for setting a group manager. (optional)
+let setManagerRequest: SetManagerRequest; //The request for setting a group manager.
 
 const { status, data } = await apiInstance.setGroupManager(
     id,
@@ -549,7 +549,7 @@ const { status, data } = await apiInstance.setGroupManager(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **setMembersTo**
-> GroupWrapper setMembersTo()
+> GroupWrapper setMembersTo(membersRequest)
 
 Replaces the group members with those specified in the request.
 
@@ -584,7 +584,7 @@ const configuration = new Configuration();
 const apiInstance = new GroupApi(configuration);
 
 let id: string; //The group ID. (default to undefined)
-let membersRequest: MembersRequest; //The member request. (optional)
+let membersRequest: MembersRequest; //The member request.
 
 const { status, data } = await apiInstance.setMembersTo(
     id,
@@ -607,7 +607,7 @@ const { status, data } = await apiInstance.setMembersTo(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **updateGroup**
-> GroupWrapper updateGroup()
+> GroupWrapper updateGroup(updateGroupRequest)
 
 Updates the existing group changing the group manager, name, and/or members.
 
@@ -642,7 +642,7 @@ const configuration = new Configuration();
 const apiInstance = new GroupApi(configuration);
 
 let id: string; //The group ID. (default to undefined)
-let updateGroupRequest: UpdateGroupRequest; //The request for updating a group. (optional)
+let updateGroupRequest: UpdateGroupRequest; //The request for updating a group.
 
 const { status, data } = await apiInstance.updateGroup(
     id,

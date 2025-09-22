@@ -211,15 +211,17 @@ export const UserTypeApiAxiosParamCreator = function (configuration?: Configurat
          * Changes a type of the users with the IDs specified in the request.
          * @summary Change a user type
          * @param {EmployeeType} type The new user type.
-         * @param {UpdateMembersRequestDto} [updateMembersRequestDto] The request parameters for updating the user information.
+         * @param {UpdateMembersRequestDto} updateMembersRequestDto The request parameters for updating the user information.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateUserType operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-user-type/
          */
-        updateUserType: async (type: EmployeeType, updateMembersRequestDto?: UpdateMembersRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateUserType: async (type: EmployeeType, updateMembersRequestDto: UpdateMembersRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'type' is not null or undefined
             assertParamExists('updateUserType', 'type', type)
+            // verify required parameter 'updateMembersRequestDto' is not null or undefined
+            assertParamExists('updateUserType', 'updateMembersRequestDto', updateMembersRequestDto)
             const localVarPath = `/api/2.0/people/type/{type}`
                 .replace(`{${"type"}}`, encodeURIComponent(String(type)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -325,13 +327,13 @@ export const UserTypeApiFp = function(configuration?: Configuration) {
          * Changes a type of the users with the IDs specified in the request.
          * @summary Change a user type
          * @param {EmployeeType} type The new user type.
-         * @param {UpdateMembersRequestDto} [updateMembersRequestDto] The request parameters for updating the user information.
+         * @param {UpdateMembersRequestDto} updateMembersRequestDto The request parameters for updating the user information.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateUserType operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-user-type/
          */
-        async updateUserType(type: EmployeeType, updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
+        async updateUserType(type: EmployeeType, updateMembersRequestDto: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateUserType(type, updateMembersRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UserTypeApi.updateUserType']?.[localVarOperationServerIndex]?.url;
@@ -387,13 +389,13 @@ export const UserTypeApiFactory = function (configuration?: Configuration, baseP
          * Changes a type of the users with the IDs specified in the request.
          * @summary Change a user type
          * @param {EmployeeType} type The new user type.
-         * @param {UpdateMembersRequestDto} [updateMembersRequestDto] The request parameters for updating the user information.
+         * @param {UpdateMembersRequestDto} updateMembersRequestDto The request parameters for updating the user information.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateUserType operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-user-type/
          * @throws {RequiredError}
          */
-        updateUserType(type: EmployeeType, updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
+        updateUserType(type: EmployeeType, updateMembersRequestDto: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
             return localVarFp.updateUserType(type, updateMembersRequestDto, options).then((request) => request(axios, basePath));
         },
     };
@@ -446,12 +448,12 @@ export class UserTypeApi extends BaseAPI {
      * Changes a type of the users with the IDs specified in the request.
      * @summary Change a user type
      * @param {EmployeeType} type The new user type.
-     * @param {UpdateMembersRequestDto} [updateMembersRequestDto] The request parameters for updating the user information.
+     * @param {UpdateMembersRequestDto} updateMembersRequestDto The request parameters for updating the user information.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserTypeApi
      */
-    public updateUserType(type: EmployeeType, updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig) {
+    public updateUserType(type: EmployeeType, updateMembersRequestDto: UpdateMembersRequestDto, options?: RawAxiosRequestConfig) {
         return UserTypeApiFp(this.configuration).updateUserType(type, updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }

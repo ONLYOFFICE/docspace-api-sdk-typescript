@@ -46,43 +46,43 @@ export interface FileShareDto {
      * @type {boolean}
      * @memberof FileShareDto
      */
-    'isLocked'?: boolean;
+    'isLocked': boolean;
     /**
      * Specifies if the user is an owner of the specified file or not.
      * @type {boolean}
      * @memberof FileShareDto
      */
-    'isOwner'?: boolean;
+    'isOwner': boolean;
     /**
      * Specifies if the user can edit the access to the specified file or not.
      * @type {boolean}
      * @memberof FileShareDto
      */
-    'canEditAccess'?: boolean;
+    'canEditAccess': boolean;
     /**
      * Indicates whether internal editing permissions are granted.
      * @type {boolean}
      * @memberof FileShareDto
      */
-    'canEditInternal'?: boolean;
+    'canEditInternal': boolean;
     /**
      * Determines whether the user has permission to modify the deny download setting for the file share.
      * @type {boolean}
      * @memberof FileShareDto
      */
-    'canEditDenyDownload'?: boolean;
+    'canEditDenyDownload': boolean;
     /**
      * Indicates whether the expiration date of access permissions can be edited.
      * @type {boolean}
      * @memberof FileShareDto
      */
-    'canEditExpirationDate'?: boolean;
+    'canEditExpirationDate': boolean;
     /**
      * 
      * @type {SubjectType}
      * @memberof FileShareDto
      */
-    'subjectType'?: SubjectType;
+    'subjectType': SubjectType;
 }
 
 

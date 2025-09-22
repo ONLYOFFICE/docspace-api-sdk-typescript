@@ -83,18 +83,19 @@ import type { UploadRequestDto } from '../../models';
 export const FoldersApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Checks the file uploads to the folder with the ID specified in the request.
-         * @summary Check file uploads
+         * 
          * @param {number} folderId The folder ID.
-         * @param {CheckUploadRequest} [checkUploadRequest] The request parameters for checking file uploads.
+         * @param {CheckUploadRequest} checkUploadRequest The request parameters for checking file uploads.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for checkUpload operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-upload/
          */
-        checkUpload: async (folderId: number, checkUploadRequest?: CheckUploadRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        checkUpload: async (folderId: number, checkUploadRequest: CheckUploadRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('checkUpload', 'folderId', folderId)
+            // verify required parameter 'checkUploadRequest' is not null or undefined
+            assertParamExists('checkUpload', 'checkUploadRequest', checkUploadRequest)
             const localVarPath = `/api/2.0/files/{folderId}/upload/check`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -107,25 +108,6 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
 
 
     
@@ -142,18 +124,19 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Creates a new folder with the title specified in the request. The parent folder ID can be also specified.
-         * @summary Create a folder
+         * 
          * @param {number} folderId The folder ID for the folder creation.
-         * @param {CreateFolder} [createFolder] The parameters for creating a folder.
+         * @param {CreateFolder} createFolder The parameters for creating a folder.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-folder/
          */
-        createFolder: async (folderId: number, createFolder?: CreateFolder, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createFolder: async (folderId: number, createFolder: CreateFolder, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('createFolder', 'folderId', folderId)
+            // verify required parameter 'createFolder' is not null or undefined
+            assertParamExists('createFolder', 'createFolder', createFolder)
             const localVarPath = `/api/2.0/files/folder/{folderId}`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -166,25 +149,6 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
 
 
     
@@ -201,18 +165,19 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Creates a primary external link by the identifier specified in the request.
-         * @summary Create primary external link
+         * 
          * @param {number} id The folder ID.
-         * @param {FolderLinkRequest} [folderLinkRequest] The folder link parameters.
+         * @param {FolderLinkRequest} folderLinkRequest The folder link parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createFolderPrimaryExternalLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-folder-primary-external-link/
          */
-        createFolderPrimaryExternalLink: async (id: number, folderLinkRequest?: FolderLinkRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createFolderPrimaryExternalLink: async (id: number, folderLinkRequest: FolderLinkRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('createFolderPrimaryExternalLink', 'id', id)
+            // verify required parameter 'folderLinkRequest' is not null or undefined
+            assertParamExists('createFolderPrimaryExternalLink', 'folderLinkRequest', folderLinkRequest)
             const localVarPath = `/api/2.0/files/folder/{id}/link`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -225,25 +190,6 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
 
 
     
@@ -260,8 +206,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Generates the activity history of a folder.
-         * @summary Generates folder history
+         * 
          * @param {number} folderId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -284,25 +229,6 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -315,18 +241,19 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Deletes a folder with the ID specified in the request.
-         * @summary Delete a folder
+         * 
          * @param {number} folderId The folder ID to delete.
-         * @param {DeleteFolder} [deleteFolder] The parameters for deleting a folder.
+         * @param {DeleteFolder} deleteFolder The parameters for deleting a folder.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deleteFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-folder/
          */
-        deleteFolder: async (folderId: number, deleteFolder?: DeleteFolder, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteFolder: async (folderId: number, deleteFolder: DeleteFolder, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('deleteFolder', 'folderId', folderId)
+            // verify required parameter 'deleteFolder' is not null or undefined
+            assertParamExists('deleteFolder', 'deleteFolder', deleteFolder)
             const localVarPath = `/api/2.0/files/folder/{folderId}`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -339,25 +266,6 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
 
 
     
@@ -374,8 +282,78 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the used space of files in the root folders.
-         * @summary Get used space of files
+         * 
+         * @param {string} [userIdOrGroupId] The user or group ID.
+         * @param {FilterType} [filterType] The filter type.
+         * @param {number} [count] The maximum number of items to retrieve in the request.
+         * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated list.
+         * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterValue] The text used as a filter or search criterion for folder content queries.
+         * @param {string | null} [fields] Comma-separated list of fields to include in the response
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getFavoritesFolder operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-favorites-folder/
+         */
+        getFavoritesFolder: async (userIdOrGroupId?: string, filterType?: FilterType, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, fields?: string | null, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/files/@favorites`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (userIdOrGroupId !== undefined) {
+                localVarQueryParameter['userIdOrGroupId'] = userIdOrGroupId;
+            }
+
+            if (filterType !== undefined) {
+                localVarQueryParameter['filterType'] = filterType;
+            }
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sortBy'] = sortBy;
+            }
+
+            if (sortOrder !== undefined) {
+                localVarQueryParameter['sortOrder'] = sortOrder;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
+            }
+
+            if (fields !== undefined) {
+                localVarQueryParameter['fields'] = fields;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFilesUsedSpace operation
@@ -394,25 +372,6 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -425,8 +384,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the form filter of a folder with the ID specified in the request.
-         * @summary Get folder form filter
+         * 
          * @param {number} folderId The request folder ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -461,8 +419,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the detailed list of files and folders located in the folder with the ID specified in the request.
-         * @summary Get a folder by ID
+         * 
          * @param {number} folderId The folder ID of the request.
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
@@ -572,8 +529,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the activity history of a folder with a specified identifier.
-         * @summary Get folder history
+         * 
          * @param {number} folderId The folder ID of the history request.
          * @param {ApiDateTime} [fromDate] The start date of the history request.
          * @param {ApiDateTime} [toDate] The end date of the history request.
@@ -599,25 +555,6 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
 
             if (fromDate !== undefined) {
                 for (const [key, value] of Object.entries(fromDate)) {
@@ -651,8 +588,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the detailed information about a folder with the ID specified in the request.
-         * @summary Get folder information
+         * 
          * @param {number} folderId The request folder ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -687,8 +623,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the links of the folder with the ID specified in the request.
-         * @summary Get the folder links
+         * 
          * @param {number} id The folder ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -711,25 +646,6 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -742,8 +658,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns a path to the folder with the ID specified in the request.
-         * @summary Get the folder path
+         * 
          * @param {number} folderId The request folder ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -766,25 +681,6 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -797,8 +693,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the primary external link by the identifier specified in the request.
-         * @summary Get primary external link
+         * 
          * @param {number} id The request folder ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -833,8 +728,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the access rights of a folder with the ID specified in the request.
-         * @summary Get the folder access rights
+         * 
          * @param {number} id The folder ID.
          * @param {number} [count] The number of items to be retrieved or processed.
          * @param {number} [startIndex] The starting index of the items to retrieve in a paginated request.
@@ -860,25 +754,6 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
             if (count !== undefined) {
                 localVarQueryParameter['count'] = count;
             }
@@ -903,8 +778,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns a list of all the subfolders from a folder with the ID specified in the request.
-         * @summary Get subfolders
+         * 
          * @param {number} folderId The request folder ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -927,25 +801,6 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -958,8 +813,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the detailed list of files and folders located in the \"My documents\" section.
-         * @summary Get the \"My documents\" section
+         * 
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
          * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
@@ -986,25 +840,6 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
 
             if (userIdOrGroupId !== undefined) {
                 localVarQueryParameter['userIdOrGroupId'] = userIdOrGroupId;
@@ -1054,8 +889,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns a list of all the new items from a folder with the ID specified in the request.
-         * @summary Get new folder items
+         * 
          * @param {number} folderId The request folder ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1078,25 +912,6 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -1109,8 +924,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the detailed list of files and folders located in the \"Private Room\" section.
-         * @summary Get the \"Private Room\" section
+         * 
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
          * @param {number} [count] The maximum number of items to retrieve in the request.
@@ -1136,25 +950,6 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
 
             if (userIdOrGroupId !== undefined) {
                 localVarQueryParameter['userIdOrGroupId'] = userIdOrGroupId;
@@ -1200,14 +995,13 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the detailed list of files located in the \"Recent\" section.
-         * @summary Get the \"Recent\" section
+         * 
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
          * @param {boolean} [excludeSubject] Specifies whether to exclude search by user or group ID.
          * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
          * @param {SearchArea} [searchArea] The search area.
-         * @param {Array<string>} [extension] Specifies whether to search for a specific file extension in the \&quot;Recent\&quot; folder.
+         * @param {Array<string>} [extension] Specifies whether to search for a specific file extension in the Recent folder.
          * @param {number} [count] The maximum number of items to return.
          * @param {number} [startIndex] The starting position of the results to be returned in the query response.
          * @param {string} [sortBy] Specifies the sorting criteria for the folder request.
@@ -1231,25 +1025,6 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
 
             if (userIdOrGroupId !== undefined) {
                 localVarQueryParameter['userIdOrGroupId'] = userIdOrGroupId;
@@ -1311,11 +1086,10 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns all the sections matching the parameters specified in the request.
-         * @summary Get filtered sections
+         * 
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
-         * @param {boolean} [withoutTrash] Specifies whether to return the \&quot;Trash\&quot; section or not.
+         * @param {boolean} [withoutTrash] Specifies whether to return the Trash section or not.
          * @param {number} [count] The maximum number of items to retrieve in the response.
          * @param {number} [startIndex] The starting position of the items to be retrieved.
          * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
@@ -1339,25 +1113,6 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
 
             if (userIdOrGroupId !== undefined) {
                 localVarQueryParameter['userIdOrGroupId'] = userIdOrGroupId;
@@ -1407,8 +1162,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the detailed list of files and folders located in the \"Trash\" section.
-         * @summary Get the \"Trash\" section
+         * 
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
          * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
@@ -1435,25 +1189,6 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
 
             if (userIdOrGroupId !== undefined) {
                 localVarQueryParameter['userIdOrGroupId'] = userIdOrGroupId;
@@ -1503,8 +1238,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Inserts a file specified in the request to the selected folder by single file uploading.
-         * @summary Insert a file
+         * 
          * @param {number} folderId The folder ID for inserting a file.
          * @param {File} [insertFileFile] The file to be inserted.
          * @param {string} [insertFileTitle] The file title to be inserted.
@@ -1539,25 +1273,6 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
             const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
 
 
             if (insertFileFile !== undefined) { 
@@ -1622,8 +1337,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Inserts a file specified in the request to the \"My documents\" section by single file uploading.
-         * @summary Insert a file to the \"My documents\" section
+         * 
          * @param {File} [file] The file to be inserted.
          * @param {string} [title] The file title to be inserted.
          * @param {boolean} [createNewIfExist] Specifies whether to create a new file if it already exists or not.
@@ -1654,25 +1368,6 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
             const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
 
 
             if (file !== undefined) { 
@@ -1737,18 +1432,19 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Renames the selected folder with a new title specified in the request.
-         * @summary Rename a folder
+         * 
          * @param {number} folderId The folder ID for the folder creation.
-         * @param {CreateFolder} [createFolder] The parameters for creating a folder.
+         * @param {CreateFolder} createFolder The parameters for creating a folder.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for renameFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/rename-folder/
          */
-        renameFolder: async (folderId: number, createFolder?: CreateFolder, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        renameFolder: async (folderId: number, createFolder: CreateFolder, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('renameFolder', 'folderId', folderId)
+            // verify required parameter 'createFolder' is not null or undefined
+            assertParamExists('renameFolder', 'createFolder', createFolder)
             const localVarPath = `/api/2.0/files/folder/{folderId}`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1761,25 +1457,6 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
 
 
     
@@ -1796,8 +1473,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Sets the file order in the folder with ID specified in the request.
-         * @summary Set folder order
+         * 
          * @param {number} folderId The folder unique identifier.
          * @param {OrderRequestDto} [orderRequestDto] The folder order information.
          * @param {*} [options] Override http request option.
@@ -1821,25 +1497,6 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -1855,18 +1512,19 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Sets the folder external link with the ID specified in the request.
-         * @summary Set the folder external link
+         * 
          * @param {number} id The folder ID.
-         * @param {FolderLinkRequest} [folderLinkRequest] The folder link parameters.
+         * @param {FolderLinkRequest} folderLinkRequest The folder link parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setFolderPrimaryExternalLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-primary-external-link/
          */
-        setFolderPrimaryExternalLink: async (id: number, folderLinkRequest?: FolderLinkRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setFolderPrimaryExternalLink: async (id: number, folderLinkRequest: FolderLinkRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('setFolderPrimaryExternalLink', 'id', id)
+            // verify required parameter 'folderLinkRequest' is not null or undefined
+            assertParamExists('setFolderPrimaryExternalLink', 'folderLinkRequest', folderLinkRequest)
             const localVarPath = `/api/2.0/files/folder/{id}/links`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1879,25 +1537,6 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
 
 
     
@@ -1914,8 +1553,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
-         * @summary Upload a file
+         * 
          * @param {number} folderId The folder ID to upload a file.
          * @param {UploadRequestDto} [uploadRequestDto] The request parameters for uploading a file.
          * @param {*} [options] Override http request option.
@@ -1939,25 +1577,6 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -1973,8 +1592,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Uploads a file specified in the request to the \"My documents\" section by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
-         * @summary Upload a file to the \"My documents\" section
+         * 
          * @param {UploadRequestDto} [inDto] The request parameters for uploading a file.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1993,25 +1611,6 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
 
             if (inDto !== undefined) {
                 for (const [key, value] of Object.entries(inDto)) {
@@ -2041,56 +1640,52 @@ export const FoldersApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = FoldersApiAxiosParamCreator(configuration)
     return {
         /**
-         * Checks the file uploads to the folder with the ID specified in the request.
-         * @summary Check file uploads
+         * 
          * @param {number} folderId The folder ID.
-         * @param {CheckUploadRequest} [checkUploadRequest] The request parameters for checking file uploads.
+         * @param {CheckUploadRequest} checkUploadRequest The request parameters for checking file uploads.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for checkUpload operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-upload/
          */
-        async checkUpload(folderId: number, checkUploadRequest?: CheckUploadRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<STRINGArrayWrapper>> {
+        async checkUpload(folderId: number, checkUploadRequest: CheckUploadRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<STRINGArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.checkUpload(folderId, checkUploadRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.checkUpload']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Creates a new folder with the title specified in the request. The parent folder ID can be also specified.
-         * @summary Create a folder
+         * 
          * @param {number} folderId The folder ID for the folder creation.
-         * @param {CreateFolder} [createFolder] The parameters for creating a folder.
+         * @param {CreateFolder} createFolder The parameters for creating a folder.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-folder/
          */
-        async createFolder(folderId: number, createFolder?: CreateFolder, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
+        async createFolder(folderId: number, createFolder: CreateFolder, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createFolder(folderId, createFolder, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.createFolder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Creates a primary external link by the identifier specified in the request.
-         * @summary Create primary external link
+         * 
          * @param {number} id The folder ID.
-         * @param {FolderLinkRequest} [folderLinkRequest] The folder link parameters.
+         * @param {FolderLinkRequest} folderLinkRequest The folder link parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createFolderPrimaryExternalLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-folder-primary-external-link/
          */
-        async createFolderPrimaryExternalLink(id: number, folderLinkRequest?: FolderLinkRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
+        async createFolderPrimaryExternalLink(id: number, folderLinkRequest: FolderLinkRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createFolderPrimaryExternalLink(id, folderLinkRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.createFolderPrimaryExternalLink']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Generates the activity history of a folder.
-         * @summary Generates folder history
+         * 
          * @param {number} folderId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2104,24 +1699,43 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Deletes a folder with the ID specified in the request.
-         * @summary Delete a folder
+         * 
          * @param {number} folderId The folder ID to delete.
-         * @param {DeleteFolder} [deleteFolder] The parameters for deleting a folder.
+         * @param {DeleteFolder} deleteFolder The parameters for deleting a folder.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deleteFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-folder/
          */
-        async deleteFolder(folderId: number, deleteFolder?: DeleteFolder, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationArrayWrapper>> {
+        async deleteFolder(folderId: number, deleteFolder: DeleteFolder, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteFolder(folderId, deleteFolder, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.deleteFolder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the used space of files in the root folders.
-         * @summary Get used space of files
+         * 
+         * @param {string} [userIdOrGroupId] The user or group ID.
+         * @param {FilterType} [filterType] The filter type.
+         * @param {number} [count] The maximum number of items to retrieve in the request.
+         * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated list.
+         * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterValue] The text used as a filter or search criterion for folder content queries.
+         * @param {string | null} [fields] Comma-separated list of fields to include in the response
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getFavoritesFolder operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-favorites-folder/
+         */
+        async getFavoritesFolder(userIdOrGroupId?: string, filterType?: FilterType, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, fields?: string | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getFavoritesFolder(userIdOrGroupId, filterType, count, startIndex, sortBy, sortOrder, filterValue, fields, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.getFavoritesFolder']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFilesUsedSpace operation
@@ -2134,8 +1748,7 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the form filter of a folder with the ID specified in the request.
-         * @summary Get folder form filter
+         * 
          * @param {number} folderId The request folder ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2149,8 +1762,7 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the detailed list of files and folders located in the folder with the ID specified in the request.
-         * @summary Get a folder by ID
+         * 
          * @param {number} folderId The folder ID of the request.
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
@@ -2179,8 +1791,7 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the activity history of a folder with a specified identifier.
-         * @summary Get folder history
+         * 
          * @param {number} folderId The folder ID of the history request.
          * @param {ApiDateTime} [fromDate] The start date of the history request.
          * @param {ApiDateTime} [toDate] The end date of the history request.
@@ -2198,8 +1809,7 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the detailed information about a folder with the ID specified in the request.
-         * @summary Get folder information
+         * 
          * @param {number} folderId The request folder ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2213,8 +1823,7 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the links of the folder with the ID specified in the request.
-         * @summary Get the folder links
+         * 
          * @param {number} id The folder ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2228,8 +1837,7 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns a path to the folder with the ID specified in the request.
-         * @summary Get the folder path
+         * 
          * @param {number} folderId The request folder ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2243,8 +1851,7 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the primary external link by the identifier specified in the request.
-         * @summary Get primary external link
+         * 
          * @param {number} id The request folder ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2258,8 +1865,7 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the access rights of a folder with the ID specified in the request.
-         * @summary Get the folder access rights
+         * 
          * @param {number} id The folder ID.
          * @param {number} [count] The number of items to be retrieved or processed.
          * @param {number} [startIndex] The starting index of the items to retrieve in a paginated request.
@@ -2276,8 +1882,7 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns a list of all the subfolders from a folder with the ID specified in the request.
-         * @summary Get subfolders
+         * 
          * @param {number} folderId The request folder ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2291,8 +1896,7 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the detailed list of files and folders located in the \"My documents\" section.
-         * @summary Get the \"My documents\" section
+         * 
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
          * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
@@ -2314,8 +1918,7 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns a list of all the new items from a folder with the ID specified in the request.
-         * @summary Get new folder items
+         * 
          * @param {number} folderId The request folder ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2329,8 +1932,7 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the detailed list of files and folders located in the \"Private Room\" section.
-         * @summary Get the \"Private Room\" section
+         * 
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
          * @param {number} [count] The maximum number of items to retrieve in the request.
@@ -2351,14 +1953,13 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the detailed list of files located in the \"Recent\" section.
-         * @summary Get the \"Recent\" section
+         * 
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
          * @param {boolean} [excludeSubject] Specifies whether to exclude search by user or group ID.
          * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
          * @param {SearchArea} [searchArea] The search area.
-         * @param {Array<string>} [extension] Specifies whether to search for a specific file extension in the \&quot;Recent\&quot; folder.
+         * @param {Array<string>} [extension] Specifies whether to search for a specific file extension in the Recent folder.
          * @param {number} [count] The maximum number of items to return.
          * @param {number} [startIndex] The starting position of the results to be returned in the query response.
          * @param {string} [sortBy] Specifies the sorting criteria for the folder request.
@@ -2377,11 +1978,10 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns all the sections matching the parameters specified in the request.
-         * @summary Get filtered sections
+         * 
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
-         * @param {boolean} [withoutTrash] Specifies whether to return the \&quot;Trash\&quot; section or not.
+         * @param {boolean} [withoutTrash] Specifies whether to return the Trash section or not.
          * @param {number} [count] The maximum number of items to retrieve in the response.
          * @param {number} [startIndex] The starting position of the items to be retrieved.
          * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
@@ -2400,8 +2000,7 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the detailed list of files and folders located in the \"Trash\" section.
-         * @summary Get the \"Trash\" section
+         * 
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
          * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
@@ -2423,8 +2022,7 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Inserts a file specified in the request to the selected folder by single file uploading.
-         * @summary Insert a file
+         * 
          * @param {number} folderId The folder ID for inserting a file.
          * @param {File} [insertFileFile] The file to be inserted.
          * @param {string} [insertFileTitle] The file title to be inserted.
@@ -2450,8 +2048,7 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Inserts a file specified in the request to the \"My documents\" section by single file uploading.
-         * @summary Insert a file to the \"My documents\" section
+         * 
          * @param {File} [file] The file to be inserted.
          * @param {string} [title] The file title to be inserted.
          * @param {boolean} [createNewIfExist] Specifies whether to create a new file if it already exists or not.
@@ -2476,24 +2073,22 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Renames the selected folder with a new title specified in the request.
-         * @summary Rename a folder
+         * 
          * @param {number} folderId The folder ID for the folder creation.
-         * @param {CreateFolder} [createFolder] The parameters for creating a folder.
+         * @param {CreateFolder} createFolder The parameters for creating a folder.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for renameFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/rename-folder/
          */
-        async renameFolder(folderId: number, createFolder?: CreateFolder, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
+        async renameFolder(folderId: number, createFolder: CreateFolder, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.renameFolder(folderId, createFolder, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.renameFolder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Sets the file order in the folder with ID specified in the request.
-         * @summary Set folder order
+         * 
          * @param {number} folderId The folder unique identifier.
          * @param {OrderRequestDto} [orderRequestDto] The folder order information.
          * @param {*} [options] Override http request option.
@@ -2508,24 +2103,22 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Sets the folder external link with the ID specified in the request.
-         * @summary Set the folder external link
+         * 
          * @param {number} id The folder ID.
-         * @param {FolderLinkRequest} [folderLinkRequest] The folder link parameters.
+         * @param {FolderLinkRequest} folderLinkRequest The folder link parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setFolderPrimaryExternalLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-primary-external-link/
          */
-        async setFolderPrimaryExternalLink(id: number, folderLinkRequest?: FolderLinkRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
+        async setFolderPrimaryExternalLink(id: number, folderLinkRequest: FolderLinkRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setFolderPrimaryExternalLink(id, folderLinkRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.setFolderPrimaryExternalLink']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
-         * @summary Upload a file
+         * 
          * @param {number} folderId The folder ID to upload a file.
          * @param {UploadRequestDto} [uploadRequestDto] The request parameters for uploading a file.
          * @param {*} [options] Override http request option.
@@ -2540,8 +2133,7 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Uploads a file specified in the request to the \"My documents\" section by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
-         * @summary Upload a file to the \"My documents\" section
+         * 
          * @param {UploadRequestDto} [inDto] The request parameters for uploading a file.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2565,47 +2157,43 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = FoldersApiFp(configuration)
     return {
         /**
-         * Checks the file uploads to the folder with the ID specified in the request.
-         * @summary Check file uploads
+         * 
          * @param {number} folderId The folder ID.
-         * @param {CheckUploadRequest} [checkUploadRequest] The request parameters for checking file uploads.
+         * @param {CheckUploadRequest} checkUploadRequest The request parameters for checking file uploads.
          * @param {*} [options] Override http request option.
          * REST API Reference for checkUpload operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-upload/
          * @throws {RequiredError}
          */
-        checkUpload(folderId: number, checkUploadRequest?: CheckUploadRequest, options?: RawAxiosRequestConfig): AxiosPromise<STRINGArrayWrapper> {
+        checkUpload(folderId: number, checkUploadRequest: CheckUploadRequest, options?: RawAxiosRequestConfig): AxiosPromise<STRINGArrayWrapper> {
             return localVarFp.checkUpload(folderId, checkUploadRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Creates a new folder with the title specified in the request. The parent folder ID can be also specified.
-         * @summary Create a folder
+         * 
          * @param {number} folderId The folder ID for the folder creation.
-         * @param {CreateFolder} [createFolder] The parameters for creating a folder.
+         * @param {CreateFolder} createFolder The parameters for creating a folder.
          * @param {*} [options] Override http request option.
          * REST API Reference for createFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-folder/
          * @throws {RequiredError}
          */
-        createFolder(folderId: number, createFolder?: CreateFolder, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
+        createFolder(folderId: number, createFolder: CreateFolder, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
             return localVarFp.createFolder(folderId, createFolder, options).then((request) => request(axios, basePath));
         },
         /**
-         * Creates a primary external link by the identifier specified in the request.
-         * @summary Create primary external link
+         * 
          * @param {number} id The folder ID.
-         * @param {FolderLinkRequest} [folderLinkRequest] The folder link parameters.
+         * @param {FolderLinkRequest} folderLinkRequest The folder link parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for createFolderPrimaryExternalLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-folder-primary-external-link/
          * @throws {RequiredError}
          */
-        createFolderPrimaryExternalLink(id: number, folderLinkRequest?: FolderLinkRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
+        createFolderPrimaryExternalLink(id: number, folderLinkRequest: FolderLinkRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
             return localVarFp.createFolderPrimaryExternalLink(id, folderLinkRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Generates the activity history of a folder.
-         * @summary Generates folder history
+         * 
          * @param {number} folderId 
          * @param {*} [options] Override http request option.
          * REST API Reference for createReportFolderHistory operation
@@ -2616,21 +2204,37 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.createReportFolderHistory(folderId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Deletes a folder with the ID specified in the request.
-         * @summary Delete a folder
+         * 
          * @param {number} folderId The folder ID to delete.
-         * @param {DeleteFolder} [deleteFolder] The parameters for deleting a folder.
+         * @param {DeleteFolder} deleteFolder The parameters for deleting a folder.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-folder/
          * @throws {RequiredError}
          */
-        deleteFolder(folderId: number, deleteFolder?: DeleteFolder, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
+        deleteFolder(folderId: number, deleteFolder: DeleteFolder, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
             return localVarFp.deleteFolder(folderId, deleteFolder, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the used space of files in the root folders.
-         * @summary Get used space of files
+         * 
+         * @param {string} [userIdOrGroupId] The user or group ID.
+         * @param {FilterType} [filterType] The filter type.
+         * @param {number} [count] The maximum number of items to retrieve in the request.
+         * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated list.
+         * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterValue] The text used as a filter or search criterion for folder content queries.
+         * @param {string | null} [fields] Comma-separated list of fields to include in the response
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getFavoritesFolder operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-favorites-folder/
+         * @throws {RequiredError}
+         */
+        getFavoritesFolder(userIdOrGroupId?: string, filterType?: FilterType, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, fields?: string | null, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
+            return localVarFp.getFavoritesFolder(userIdOrGroupId, filterType, count, startIndex, sortBy, sortOrder, filterValue, fields, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * REST API Reference for getFilesUsedSpace operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-files-used-space/
@@ -2640,8 +2244,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getFilesUsedSpace(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the form filter of a folder with the ID specified in the request.
-         * @summary Get folder form filter
+         * 
          * @param {number} folderId The request folder ID.
          * @param {*} [options] Override http request option.
          * REST API Reference for getFolder operation
@@ -2652,8 +2255,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getFolder(folderId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the detailed list of files and folders located in the folder with the ID specified in the request.
-         * @summary Get a folder by ID
+         * 
          * @param {number} folderId The folder ID of the request.
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
@@ -2679,8 +2281,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getFolderByFolderId(folderId, userIdOrGroupId, filterType, roomId, excludeSubject, applyFilterOption, extension, searchArea, formsItemKey, formsItemType, count, startIndex, sortBy, sortOrder, filterValue, location, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the activity history of a folder with a specified identifier.
-         * @summary Get folder history
+         * 
          * @param {number} folderId The folder ID of the history request.
          * @param {ApiDateTime} [fromDate] The start date of the history request.
          * @param {ApiDateTime} [toDate] The end date of the history request.
@@ -2695,8 +2296,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getFolderHistory(folderId, fromDate, toDate, count, startIndex, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the detailed information about a folder with the ID specified in the request.
-         * @summary Get folder information
+         * 
          * @param {number} folderId The request folder ID.
          * @param {*} [options] Override http request option.
          * REST API Reference for getFolderInfo operation
@@ -2707,8 +2307,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getFolderInfo(folderId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the links of the folder with the ID specified in the request.
-         * @summary Get the folder links
+         * 
          * @param {number} id The folder ID.
          * @param {*} [options] Override http request option.
          * REST API Reference for getFolderLinks operation
@@ -2719,8 +2318,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getFolderLinks(id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a path to the folder with the ID specified in the request.
-         * @summary Get the folder path
+         * 
          * @param {number} folderId The request folder ID.
          * @param {*} [options] Override http request option.
          * REST API Reference for getFolderPath operation
@@ -2731,8 +2329,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getFolderPath(folderId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the primary external link by the identifier specified in the request.
-         * @summary Get primary external link
+         * 
          * @param {number} id The request folder ID.
          * @param {*} [options] Override http request option.
          * REST API Reference for getFolderPrimaryExternalLink operation
@@ -2743,8 +2340,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getFolderPrimaryExternalLink(id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the access rights of a folder with the ID specified in the request.
-         * @summary Get the folder access rights
+         * 
          * @param {number} id The folder ID.
          * @param {number} [count] The number of items to be retrieved or processed.
          * @param {number} [startIndex] The starting index of the items to retrieve in a paginated request.
@@ -2758,8 +2354,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getFolderSecurityInfo(id, count, startIndex, filterValue, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of all the subfolders from a folder with the ID specified in the request.
-         * @summary Get subfolders
+         * 
          * @param {number} folderId The request folder ID.
          * @param {*} [options] Override http request option.
          * REST API Reference for getFolders operation
@@ -2770,8 +2365,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getFolders(folderId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the detailed list of files and folders located in the \"My documents\" section.
-         * @summary Get the \"My documents\" section
+         * 
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
          * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
@@ -2790,8 +2384,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getMyFolder(userIdOrGroupId, filterType, applyFilterOption, count, startIndex, sortBy, sortOrder, filterValue, fields, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of all the new items from a folder with the ID specified in the request.
-         * @summary Get new folder items
+         * 
          * @param {number} folderId The request folder ID.
          * @param {*} [options] Override http request option.
          * REST API Reference for getNewFolderItems operation
@@ -2802,8 +2395,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getNewFolderItems(folderId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the detailed list of files and folders located in the \"Private Room\" section.
-         * @summary Get the \"Private Room\" section
+         * 
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
          * @param {number} [count] The maximum number of items to retrieve in the request.
@@ -2821,14 +2413,13 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getPrivacyFolder(userIdOrGroupId, filterType, count, startIndex, sortBy, sortOrder, filterValue, fields, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the detailed list of files located in the \"Recent\" section.
-         * @summary Get the \"Recent\" section
+         * 
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
          * @param {boolean} [excludeSubject] Specifies whether to exclude search by user or group ID.
          * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
          * @param {SearchArea} [searchArea] The search area.
-         * @param {Array<string>} [extension] Specifies whether to search for a specific file extension in the \&quot;Recent\&quot; folder.
+         * @param {Array<string>} [extension] Specifies whether to search for a specific file extension in the Recent folder.
          * @param {number} [count] The maximum number of items to return.
          * @param {number} [startIndex] The starting position of the results to be returned in the query response.
          * @param {string} [sortBy] Specifies the sorting criteria for the folder request.
@@ -2844,11 +2435,10 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getRecentFolder(userIdOrGroupId, filterType, excludeSubject, applyFilterOption, searchArea, extension, count, startIndex, sortBy, sortOrder, filterValue, fields, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns all the sections matching the parameters specified in the request.
-         * @summary Get filtered sections
+         * 
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
-         * @param {boolean} [withoutTrash] Specifies whether to return the \&quot;Trash\&quot; section or not.
+         * @param {boolean} [withoutTrash] Specifies whether to return the Trash section or not.
          * @param {number} [count] The maximum number of items to retrieve in the response.
          * @param {number} [startIndex] The starting position of the items to be retrieved.
          * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
@@ -2864,8 +2454,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getRootFolders(userIdOrGroupId, filterType, withoutTrash, count, startIndex, sortBy, sortOrder, filterValue, fields, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the detailed list of files and folders located in the \"Trash\" section.
-         * @summary Get the \"Trash\" section
+         * 
          * @param {string} [userIdOrGroupId] The user or group ID.
          * @param {FilterType} [filterType] The filter type.
          * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
@@ -2884,8 +2473,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getTrashFolder(userIdOrGroupId, filterType, applyFilterOption, count, startIndex, sortBy, sortOrder, filterValue, fields, options).then((request) => request(axios, basePath));
         },
         /**
-         * Inserts a file specified in the request to the selected folder by single file uploading.
-         * @summary Insert a file
+         * 
          * @param {number} folderId The folder ID for inserting a file.
          * @param {File} [insertFileFile] The file to be inserted.
          * @param {string} [insertFileTitle] The file title to be inserted.
@@ -2908,8 +2496,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.insertFile(folderId, insertFileFile, insertFileTitle, insertFileCreateNewIfExist, insertFileKeepConvertStatus, insertFileStreamCanRead, insertFileStreamCanWrite, insertFileStreamCanSeek, insertFileStreamCanTimeout, insertFileStreamLength, insertFileStreamPosition, insertFileStreamReadTimeout, insertFileStreamWriteTimeout, options).then((request) => request(axios, basePath));
         },
         /**
-         * Inserts a file specified in the request to the \"My documents\" section by single file uploading.
-         * @summary Insert a file to the \"My documents\" section
+         * 
          * @param {File} [file] The file to be inserted.
          * @param {string} [title] The file title to be inserted.
          * @param {boolean} [createNewIfExist] Specifies whether to create a new file if it already exists or not.
@@ -2931,21 +2518,19 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.insertFileToMyFromBody(file, title, createNewIfExist, keepConvertStatus, streamCanRead, streamCanWrite, streamCanSeek, streamCanTimeout, streamLength, streamPosition, streamReadTimeout, streamWriteTimeout, options).then((request) => request(axios, basePath));
         },
         /**
-         * Renames the selected folder with a new title specified in the request.
-         * @summary Rename a folder
+         * 
          * @param {number} folderId The folder ID for the folder creation.
-         * @param {CreateFolder} [createFolder] The parameters for creating a folder.
+         * @param {CreateFolder} createFolder The parameters for creating a folder.
          * @param {*} [options] Override http request option.
          * REST API Reference for renameFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/rename-folder/
          * @throws {RequiredError}
          */
-        renameFolder(folderId: number, createFolder?: CreateFolder, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
+        renameFolder(folderId: number, createFolder: CreateFolder, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
             return localVarFp.renameFolder(folderId, createFolder, options).then((request) => request(axios, basePath));
         },
         /**
-         * Sets the file order in the folder with ID specified in the request.
-         * @summary Set folder order
+         * 
          * @param {number} folderId The folder unique identifier.
          * @param {OrderRequestDto} [orderRequestDto] The folder order information.
          * @param {*} [options] Override http request option.
@@ -2957,21 +2542,19 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.setFolderOrder(folderId, orderRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Sets the folder external link with the ID specified in the request.
-         * @summary Set the folder external link
+         * 
          * @param {number} id The folder ID.
-         * @param {FolderLinkRequest} [folderLinkRequest] The folder link parameters.
+         * @param {FolderLinkRequest} folderLinkRequest The folder link parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setFolderPrimaryExternalLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-primary-external-link/
          * @throws {RequiredError}
          */
-        setFolderPrimaryExternalLink(id: number, folderLinkRequest?: FolderLinkRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
+        setFolderPrimaryExternalLink(id: number, folderLinkRequest: FolderLinkRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
             return localVarFp.setFolderPrimaryExternalLink(id, folderLinkRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
-         * @summary Upload a file
+         * 
          * @param {number} folderId The folder ID to upload a file.
          * @param {UploadRequestDto} [uploadRequestDto] The request parameters for uploading a file.
          * @param {*} [options] Override http request option.
@@ -2983,8 +2566,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.uploadFile(folderId, uploadRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Uploads a file specified in the request to the \"My documents\" section by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
-         * @summary Upload a file to the \"My documents\" section
+         * 
          * @param {UploadRequestDto} [inDto] The request parameters for uploading a file.
          * @param {*} [options] Override http request option.
          * REST API Reference for uploadFileToMy operation
@@ -3005,47 +2587,43 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
  */
 export class FoldersApi extends BaseAPI {
     /**
-     * Checks the file uploads to the folder with the ID specified in the request.
-     * @summary Check file uploads
+     * 
      * @param {number} folderId The folder ID.
-     * @param {CheckUploadRequest} [checkUploadRequest] The request parameters for checking file uploads.
+     * @param {CheckUploadRequest} checkUploadRequest The request parameters for checking file uploads.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public checkUpload(folderId: number, checkUploadRequest?: CheckUploadRequest, options?: RawAxiosRequestConfig) {
+    public checkUpload(folderId: number, checkUploadRequest: CheckUploadRequest, options?: RawAxiosRequestConfig) {
         return FoldersApiFp(this.configuration).checkUpload(folderId, checkUploadRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Creates a new folder with the title specified in the request. The parent folder ID can be also specified.
-     * @summary Create a folder
+     * 
      * @param {number} folderId The folder ID for the folder creation.
-     * @param {CreateFolder} [createFolder] The parameters for creating a folder.
+     * @param {CreateFolder} createFolder The parameters for creating a folder.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public createFolder(folderId: number, createFolder?: CreateFolder, options?: RawAxiosRequestConfig) {
+    public createFolder(folderId: number, createFolder: CreateFolder, options?: RawAxiosRequestConfig) {
         return FoldersApiFp(this.configuration).createFolder(folderId, createFolder, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Creates a primary external link by the identifier specified in the request.
-     * @summary Create primary external link
+     * 
      * @param {number} id The folder ID.
-     * @param {FolderLinkRequest} [folderLinkRequest] The folder link parameters.
+     * @param {FolderLinkRequest} folderLinkRequest The folder link parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public createFolderPrimaryExternalLink(id: number, folderLinkRequest?: FolderLinkRequest, options?: RawAxiosRequestConfig) {
+    public createFolderPrimaryExternalLink(id: number, folderLinkRequest: FolderLinkRequest, options?: RawAxiosRequestConfig) {
         return FoldersApiFp(this.configuration).createFolderPrimaryExternalLink(id, folderLinkRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Generates the activity history of a folder.
-     * @summary Generates folder history
+     * 
      * @param {number} folderId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -3056,21 +2634,37 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Deletes a folder with the ID specified in the request.
-     * @summary Delete a folder
+     * 
      * @param {number} folderId The folder ID to delete.
-     * @param {DeleteFolder} [deleteFolder] The parameters for deleting a folder.
+     * @param {DeleteFolder} deleteFolder The parameters for deleting a folder.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public deleteFolder(folderId: number, deleteFolder?: DeleteFolder, options?: RawAxiosRequestConfig) {
+    public deleteFolder(folderId: number, deleteFolder: DeleteFolder, options?: RawAxiosRequestConfig) {
         return FoldersApiFp(this.configuration).deleteFolder(folderId, deleteFolder, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Returns the used space of files in the root folders.
-     * @summary Get used space of files
+     * 
+     * @param {string} [userIdOrGroupId] The user or group ID.
+     * @param {FilterType} [filterType] The filter type.
+     * @param {number} [count] The maximum number of items to retrieve in the request.
+     * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated list.
+     * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
+     * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+     * @param {string} [filterValue] The text used as a filter or search criterion for folder content queries.
+     * @param {string | null} [fields] Comma-separated list of fields to include in the response
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public getFavoritesFolder(userIdOrGroupId?: string, filterType?: FilterType, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, fields?: string | null, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).getFavoritesFolder(userIdOrGroupId, filterType, count, startIndex, sortBy, sortOrder, filterValue, fields, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
@@ -3080,8 +2674,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns the form filter of a folder with the ID specified in the request.
-     * @summary Get folder form filter
+     * 
      * @param {number} folderId The request folder ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -3092,8 +2685,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns the detailed list of files and folders located in the folder with the ID specified in the request.
-     * @summary Get a folder by ID
+     * 
      * @param {number} folderId The folder ID of the request.
      * @param {string} [userIdOrGroupId] The user or group ID.
      * @param {FilterType} [filterType] The filter type.
@@ -3119,8 +2711,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns the activity history of a folder with a specified identifier.
-     * @summary Get folder history
+     * 
      * @param {number} folderId The folder ID of the history request.
      * @param {ApiDateTime} [fromDate] The start date of the history request.
      * @param {ApiDateTime} [toDate] The end date of the history request.
@@ -3135,8 +2726,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns the detailed information about a folder with the ID specified in the request.
-     * @summary Get folder information
+     * 
      * @param {number} folderId The request folder ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -3147,8 +2737,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns the links of the folder with the ID specified in the request.
-     * @summary Get the folder links
+     * 
      * @param {number} id The folder ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -3159,8 +2748,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns a path to the folder with the ID specified in the request.
-     * @summary Get the folder path
+     * 
      * @param {number} folderId The request folder ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -3171,8 +2759,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns the primary external link by the identifier specified in the request.
-     * @summary Get primary external link
+     * 
      * @param {number} id The request folder ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -3183,8 +2770,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns the access rights of a folder with the ID specified in the request.
-     * @summary Get the folder access rights
+     * 
      * @param {number} id The folder ID.
      * @param {number} [count] The number of items to be retrieved or processed.
      * @param {number} [startIndex] The starting index of the items to retrieve in a paginated request.
@@ -3198,8 +2784,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns a list of all the subfolders from a folder with the ID specified in the request.
-     * @summary Get subfolders
+     * 
      * @param {number} folderId The request folder ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -3210,8 +2795,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns the detailed list of files and folders located in the \"My documents\" section.
-     * @summary Get the \"My documents\" section
+     * 
      * @param {string} [userIdOrGroupId] The user or group ID.
      * @param {FilterType} [filterType] The filter type.
      * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
@@ -3230,8 +2814,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns a list of all the new items from a folder with the ID specified in the request.
-     * @summary Get new folder items
+     * 
      * @param {number} folderId The request folder ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -3242,8 +2825,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns the detailed list of files and folders located in the \"Private Room\" section.
-     * @summary Get the \"Private Room\" section
+     * 
      * @param {string} [userIdOrGroupId] The user or group ID.
      * @param {FilterType} [filterType] The filter type.
      * @param {number} [count] The maximum number of items to retrieve in the request.
@@ -3261,14 +2843,13 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns the detailed list of files located in the \"Recent\" section.
-     * @summary Get the \"Recent\" section
+     * 
      * @param {string} [userIdOrGroupId] The user or group ID.
      * @param {FilterType} [filterType] The filter type.
      * @param {boolean} [excludeSubject] Specifies whether to exclude search by user or group ID.
      * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
      * @param {SearchArea} [searchArea] The search area.
-     * @param {Array<string>} [extension] Specifies whether to search for a specific file extension in the \&quot;Recent\&quot; folder.
+     * @param {Array<string>} [extension] Specifies whether to search for a specific file extension in the Recent folder.
      * @param {number} [count] The maximum number of items to return.
      * @param {number} [startIndex] The starting position of the results to be returned in the query response.
      * @param {string} [sortBy] Specifies the sorting criteria for the folder request.
@@ -3284,11 +2865,10 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns all the sections matching the parameters specified in the request.
-     * @summary Get filtered sections
+     * 
      * @param {string} [userIdOrGroupId] The user or group ID.
      * @param {FilterType} [filterType] The filter type.
-     * @param {boolean} [withoutTrash] Specifies whether to return the \&quot;Trash\&quot; section or not.
+     * @param {boolean} [withoutTrash] Specifies whether to return the Trash section or not.
      * @param {number} [count] The maximum number of items to retrieve in the response.
      * @param {number} [startIndex] The starting position of the items to be retrieved.
      * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
@@ -3304,8 +2884,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns the detailed list of files and folders located in the \"Trash\" section.
-     * @summary Get the \"Trash\" section
+     * 
      * @param {string} [userIdOrGroupId] The user or group ID.
      * @param {FilterType} [filterType] The filter type.
      * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
@@ -3324,8 +2903,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Inserts a file specified in the request to the selected folder by single file uploading.
-     * @summary Insert a file
+     * 
      * @param {number} folderId The folder ID for inserting a file.
      * @param {File} [insertFileFile] The file to be inserted.
      * @param {string} [insertFileTitle] The file title to be inserted.
@@ -3348,8 +2926,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Inserts a file specified in the request to the \"My documents\" section by single file uploading.
-     * @summary Insert a file to the \"My documents\" section
+     * 
      * @param {File} [file] The file to be inserted.
      * @param {string} [title] The file title to be inserted.
      * @param {boolean} [createNewIfExist] Specifies whether to create a new file if it already exists or not.
@@ -3371,21 +2948,19 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Renames the selected folder with a new title specified in the request.
-     * @summary Rename a folder
+     * 
      * @param {number} folderId The folder ID for the folder creation.
-     * @param {CreateFolder} [createFolder] The parameters for creating a folder.
+     * @param {CreateFolder} createFolder The parameters for creating a folder.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public renameFolder(folderId: number, createFolder?: CreateFolder, options?: RawAxiosRequestConfig) {
+    public renameFolder(folderId: number, createFolder: CreateFolder, options?: RawAxiosRequestConfig) {
         return FoldersApiFp(this.configuration).renameFolder(folderId, createFolder, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Sets the file order in the folder with ID specified in the request.
-     * @summary Set folder order
+     * 
      * @param {number} folderId The folder unique identifier.
      * @param {OrderRequestDto} [orderRequestDto] The folder order information.
      * @param {*} [options] Override http request option.
@@ -3397,21 +2972,19 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Sets the folder external link with the ID specified in the request.
-     * @summary Set the folder external link
+     * 
      * @param {number} id The folder ID.
-     * @param {FolderLinkRequest} [folderLinkRequest] The folder link parameters.
+     * @param {FolderLinkRequest} folderLinkRequest The folder link parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public setFolderPrimaryExternalLink(id: number, folderLinkRequest?: FolderLinkRequest, options?: RawAxiosRequestConfig) {
+    public setFolderPrimaryExternalLink(id: number, folderLinkRequest: FolderLinkRequest, options?: RawAxiosRequestConfig) {
         return FoldersApiFp(this.configuration).setFolderPrimaryExternalLink(id, folderLinkRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
-     * @summary Upload a file
+     * 
      * @param {number} folderId The folder ID to upload a file.
      * @param {UploadRequestDto} [uploadRequestDto] The request parameters for uploading a file.
      * @param {*} [options] Override http request option.
@@ -3423,8 +2996,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Uploads a file specified in the request to the \"My documents\" section by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
-     * @summary Upload a file to the \"My documents\" section
+     * 
      * @param {UploadRequestDto} [inDto] The request parameters for uploading a file.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

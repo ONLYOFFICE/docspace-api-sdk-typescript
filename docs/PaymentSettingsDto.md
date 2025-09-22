@@ -6,12 +6,12 @@ The payment settings parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**salesEmail** | **string** | The email address for sales inquiries and support. | [optional] [default to undefined]
+**salesEmail** | **string** | The email address for sales inquiries and support. | [default to undefined]
 **feedbackAndSupportUrl** | **string** | The URL for accessing the feedback and support resources. | [optional] [default to undefined]
-**buyUrl** | **string** | The URL for purchasing or upgrading the product. | [optional] [default to undefined]
-**standalone** | **boolean** | Indicates whether the system is running in standalone mode. | [optional] [default to undefined]
-**currentLicense** | [**CurrentLicenseInfo**](CurrentLicenseInfo.md) |  | [optional] [default to undefined]
-**max** | **number** | The maximum quota quantity. | [optional] [default to undefined]
+**buyUrl** | **string** | The URL for purchasing or upgrading the product. | [default to undefined]
+**standalone** | **boolean** | Indicates whether the system is running in standalone mode. | [default to undefined]
+**currentLicense** | [**CurrentLicenseInfo**](CurrentLicenseInfo.md) |  | [default to undefined]
+**max** | **number** | The maximum quota quantity. | [default to undefined]
 
 ## Example
 

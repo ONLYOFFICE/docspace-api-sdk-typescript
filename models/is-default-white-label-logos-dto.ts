@@ -28,12 +28,12 @@ export interface IsDefaultWhiteLabelLogosDto {
      * @type {string}
      * @memberof IsDefaultWhiteLabelLogosDto
      */
-    'name'?: string | null;
+    'name': string | null;
     /**
      * Specifies if the white label logo is default or not.
      * @type {boolean}
      * @memberof IsDefaultWhiteLabelLogosDto
      */
-    'default'?: boolean;
+    'default': boolean;
 }
 

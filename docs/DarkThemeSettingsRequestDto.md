@@ -6,7 +6,7 @@ The theme settings request parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**theme** | [**DarkThemeSettingsType**](DarkThemeSettingsType.md) |  | [optional] [default to undefined]
+**theme** | [**DarkThemeSettingsType**](DarkThemeSettingsType.md) |  | [default to undefined]
 
 ## Example
 

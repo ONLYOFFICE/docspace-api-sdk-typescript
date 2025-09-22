@@ -107,15 +107,17 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
          * Adds new group members to the group with the ID specified in the request.
          * @summary Add group members
          * @param {string} id The group ID.
-         * @param {MembersRequest} [membersRequest] The member request.
+         * @param {MembersRequest} membersRequest The member request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for addMembersTo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-members-to/
          */
-        addMembersTo: async (id: string, membersRequest?: MembersRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        addMembersTo: async (id: string, membersRequest: MembersRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('addMembersTo', 'id', id)
+            // verify required parameter 'membersRequest' is not null or undefined
+            assertParamExists('addMembersTo', 'membersRequest', membersRequest)
             const localVarPath = `/api/2.0/group/{id}/members`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -486,15 +488,17 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
          * Removes the group members specified in the request from the selected group.
          * @summary Remove group members
          * @param {string} id The group ID.
-         * @param {MembersRequest} [membersRequest] The member request.
+         * @param {MembersRequest} membersRequest The member request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for removeMembersFrom operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/remove-members-from/
          */
-        removeMembersFrom: async (id: string, membersRequest?: MembersRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        removeMembersFrom: async (id: string, membersRequest: MembersRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('removeMembersFrom', 'id', id)
+            // verify required parameter 'membersRequest' is not null or undefined
+            assertParamExists('removeMembersFrom', 'membersRequest', membersRequest)
             const localVarPath = `/api/2.0/group/{id}/members`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -545,15 +549,17 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
          * Sets a user with the ID specified in the request as a group manager.
          * @summary Set a group manager
          * @param {string} id The group ID.
-         * @param {SetManagerRequest} [setManagerRequest] The request for setting a group manager.
+         * @param {SetManagerRequest} setManagerRequest The request for setting a group manager.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setGroupManager operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-group-manager/
          */
-        setGroupManager: async (id: string, setManagerRequest?: SetManagerRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setGroupManager: async (id: string, setManagerRequest: SetManagerRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('setGroupManager', 'id', id)
+            // verify required parameter 'setManagerRequest' is not null or undefined
+            assertParamExists('setGroupManager', 'setManagerRequest', setManagerRequest)
             const localVarPath = `/api/2.0/group/{id}/manager`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -604,15 +610,17 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
          * Replaces the group members with those specified in the request.
          * @summary Replace group members
          * @param {string} id The group ID.
-         * @param {MembersRequest} [membersRequest] The member request.
+         * @param {MembersRequest} membersRequest The member request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setMembersTo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-members-to/
          */
-        setMembersTo: async (id: string, membersRequest?: MembersRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setMembersTo: async (id: string, membersRequest: MembersRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('setMembersTo', 'id', id)
+            // verify required parameter 'membersRequest' is not null or undefined
+            assertParamExists('setMembersTo', 'membersRequest', membersRequest)
             const localVarPath = `/api/2.0/group/{id}/members`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -663,15 +671,17 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
          * Updates the existing group changing the group manager, name, and/or members.
          * @summary Update a group
          * @param {string} id The group ID.
-         * @param {UpdateGroupRequest} [updateGroupRequest] The request for updating a group.
+         * @param {UpdateGroupRequest} updateGroupRequest The request for updating a group.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateGroup operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-group/
          */
-        updateGroup: async (id: string, updateGroupRequest?: UpdateGroupRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateGroup: async (id: string, updateGroupRequest: UpdateGroupRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('updateGroup', 'id', id)
+            // verify required parameter 'updateGroupRequest' is not null or undefined
+            assertParamExists('updateGroup', 'updateGroupRequest', updateGroupRequest)
             const localVarPath = `/api/2.0/group/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -747,13 +757,13 @@ export const GroupApiFp = function(configuration?: Configuration) {
          * Adds new group members to the group with the ID specified in the request.
          * @summary Add group members
          * @param {string} id The group ID.
-         * @param {MembersRequest} [membersRequest] The member request.
+         * @param {MembersRequest} membersRequest The member request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for addMembersTo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-members-to/
          */
-        async addMembersTo(id: string, membersRequest?: MembersRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupWrapper>> {
+        async addMembersTo(id: string, membersRequest: MembersRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.addMembersTo(id, membersRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupApi.addMembersTo']?.[localVarOperationServerIndex]?.url;
@@ -847,13 +857,13 @@ export const GroupApiFp = function(configuration?: Configuration) {
          * Removes the group members specified in the request from the selected group.
          * @summary Remove group members
          * @param {string} id The group ID.
-         * @param {MembersRequest} [membersRequest] The member request.
+         * @param {MembersRequest} membersRequest The member request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for removeMembersFrom operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/remove-members-from/
          */
-        async removeMembersFrom(id: string, membersRequest?: MembersRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupWrapper>> {
+        async removeMembersFrom(id: string, membersRequest: MembersRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.removeMembersFrom(id, membersRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupApi.removeMembersFrom']?.[localVarOperationServerIndex]?.url;
@@ -863,13 +873,13 @@ export const GroupApiFp = function(configuration?: Configuration) {
          * Sets a user with the ID specified in the request as a group manager.
          * @summary Set a group manager
          * @param {string} id The group ID.
-         * @param {SetManagerRequest} [setManagerRequest] The request for setting a group manager.
+         * @param {SetManagerRequest} setManagerRequest The request for setting a group manager.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setGroupManager operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-group-manager/
          */
-        async setGroupManager(id: string, setManagerRequest?: SetManagerRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupWrapper>> {
+        async setGroupManager(id: string, setManagerRequest: SetManagerRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setGroupManager(id, setManagerRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupApi.setGroupManager']?.[localVarOperationServerIndex]?.url;
@@ -879,13 +889,13 @@ export const GroupApiFp = function(configuration?: Configuration) {
          * Replaces the group members with those specified in the request.
          * @summary Replace group members
          * @param {string} id The group ID.
-         * @param {MembersRequest} [membersRequest] The member request.
+         * @param {MembersRequest} membersRequest The member request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setMembersTo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-members-to/
          */
-        async setMembersTo(id: string, membersRequest?: MembersRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupWrapper>> {
+        async setMembersTo(id: string, membersRequest: MembersRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setMembersTo(id, membersRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupApi.setMembersTo']?.[localVarOperationServerIndex]?.url;
@@ -895,13 +905,13 @@ export const GroupApiFp = function(configuration?: Configuration) {
          * Updates the existing group changing the group manager, name, and/or members.
          * @summary Update a group
          * @param {string} id The group ID.
-         * @param {UpdateGroupRequest} [updateGroupRequest] The request for updating a group.
+         * @param {UpdateGroupRequest} updateGroupRequest The request for updating a group.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateGroup operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-group/
          */
-        async updateGroup(id: string, updateGroupRequest?: UpdateGroupRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupWrapper>> {
+        async updateGroup(id: string, updateGroupRequest: UpdateGroupRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateGroup(id, updateGroupRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupApi.updateGroup']?.[localVarOperationServerIndex]?.url;
@@ -933,13 +943,13 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
          * Adds new group members to the group with the ID specified in the request.
          * @summary Add group members
          * @param {string} id The group ID.
-         * @param {MembersRequest} [membersRequest] The member request.
+         * @param {MembersRequest} membersRequest The member request.
          * @param {*} [options] Override http request option.
          * REST API Reference for addMembersTo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-members-to/
          * @throws {RequiredError}
          */
-        addMembersTo(id: string, membersRequest?: MembersRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
+        addMembersTo(id: string, membersRequest: MembersRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
             return localVarFp.addMembersTo(id, membersRequest, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1015,52 +1025,52 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
          * Removes the group members specified in the request from the selected group.
          * @summary Remove group members
          * @param {string} id The group ID.
-         * @param {MembersRequest} [membersRequest] The member request.
+         * @param {MembersRequest} membersRequest The member request.
          * @param {*} [options] Override http request option.
          * REST API Reference for removeMembersFrom operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/remove-members-from/
          * @throws {RequiredError}
          */
-        removeMembersFrom(id: string, membersRequest?: MembersRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
+        removeMembersFrom(id: string, membersRequest: MembersRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
             return localVarFp.removeMembersFrom(id, membersRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Sets a user with the ID specified in the request as a group manager.
          * @summary Set a group manager
          * @param {string} id The group ID.
-         * @param {SetManagerRequest} [setManagerRequest] The request for setting a group manager.
+         * @param {SetManagerRequest} setManagerRequest The request for setting a group manager.
          * @param {*} [options] Override http request option.
          * REST API Reference for setGroupManager operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-group-manager/
          * @throws {RequiredError}
          */
-        setGroupManager(id: string, setManagerRequest?: SetManagerRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
+        setGroupManager(id: string, setManagerRequest: SetManagerRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
             return localVarFp.setGroupManager(id, setManagerRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Replaces the group members with those specified in the request.
          * @summary Replace group members
          * @param {string} id The group ID.
-         * @param {MembersRequest} [membersRequest] The member request.
+         * @param {MembersRequest} membersRequest The member request.
          * @param {*} [options] Override http request option.
          * REST API Reference for setMembersTo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-members-to/
          * @throws {RequiredError}
          */
-        setMembersTo(id: string, membersRequest?: MembersRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
+        setMembersTo(id: string, membersRequest: MembersRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
             return localVarFp.setMembersTo(id, membersRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates the existing group changing the group manager, name, and/or members.
          * @summary Update a group
          * @param {string} id The group ID.
-         * @param {UpdateGroupRequest} [updateGroupRequest] The request for updating a group.
+         * @param {UpdateGroupRequest} updateGroupRequest The request for updating a group.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateGroup operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-group/
          * @throws {RequiredError}
          */
-        updateGroup(id: string, updateGroupRequest?: UpdateGroupRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
+        updateGroup(id: string, updateGroupRequest: UpdateGroupRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
             return localVarFp.updateGroup(id, updateGroupRequest, options).then((request) => request(axios, basePath));
         },
     };
@@ -1089,12 +1099,12 @@ export class GroupApi extends BaseAPI {
      * Adds new group members to the group with the ID specified in the request.
      * @summary Add group members
      * @param {string} id The group ID.
-     * @param {MembersRequest} [membersRequest] The member request.
+     * @param {MembersRequest} membersRequest The member request.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupApi
      */
-    public addMembersTo(id: string, membersRequest?: MembersRequest, options?: RawAxiosRequestConfig) {
+    public addMembersTo(id: string, membersRequest: MembersRequest, options?: RawAxiosRequestConfig) {
         return GroupApiFp(this.configuration).addMembersTo(id, membersRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -1171,12 +1181,12 @@ export class GroupApi extends BaseAPI {
      * Removes the group members specified in the request from the selected group.
      * @summary Remove group members
      * @param {string} id The group ID.
-     * @param {MembersRequest} [membersRequest] The member request.
+     * @param {MembersRequest} membersRequest The member request.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupApi
      */
-    public removeMembersFrom(id: string, membersRequest?: MembersRequest, options?: RawAxiosRequestConfig) {
+    public removeMembersFrom(id: string, membersRequest: MembersRequest, options?: RawAxiosRequestConfig) {
         return GroupApiFp(this.configuration).removeMembersFrom(id, membersRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -1184,12 +1194,12 @@ export class GroupApi extends BaseAPI {
      * Sets a user with the ID specified in the request as a group manager.
      * @summary Set a group manager
      * @param {string} id The group ID.
-     * @param {SetManagerRequest} [setManagerRequest] The request for setting a group manager.
+     * @param {SetManagerRequest} setManagerRequest The request for setting a group manager.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupApi
      */
-    public setGroupManager(id: string, setManagerRequest?: SetManagerRequest, options?: RawAxiosRequestConfig) {
+    public setGroupManager(id: string, setManagerRequest: SetManagerRequest, options?: RawAxiosRequestConfig) {
         return GroupApiFp(this.configuration).setGroupManager(id, setManagerRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -1197,12 +1207,12 @@ export class GroupApi extends BaseAPI {
      * Replaces the group members with those specified in the request.
      * @summary Replace group members
      * @param {string} id The group ID.
-     * @param {MembersRequest} [membersRequest] The member request.
+     * @param {MembersRequest} membersRequest The member request.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupApi
      */
-    public setMembersTo(id: string, membersRequest?: MembersRequest, options?: RawAxiosRequestConfig) {
+    public setMembersTo(id: string, membersRequest: MembersRequest, options?: RawAxiosRequestConfig) {
         return GroupApiFp(this.configuration).setMembersTo(id, membersRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -1210,12 +1220,12 @@ export class GroupApi extends BaseAPI {
      * Updates the existing group changing the group manager, name, and/or members.
      * @summary Update a group
      * @param {string} id The group ID.
-     * @param {UpdateGroupRequest} [updateGroupRequest] The request for updating a group.
+     * @param {UpdateGroupRequest} updateGroupRequest The request for updating a group.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupApi
      */
-    public updateGroup(id: string, updateGroupRequest?: UpdateGroupRequest, options?: RawAxiosRequestConfig) {
+    public updateGroup(id: string, updateGroupRequest: UpdateGroupRequest, options?: RawAxiosRequestConfig) {
         return GroupApiFp(this.configuration).updateGroup(id, updateGroupRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }

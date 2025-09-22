@@ -60,7 +60,7 @@ export interface PermissionsConfig {
      */
     'modifyFilter'?: boolean;
     /**
-     * Defines if the \"Protection\" tab on the toolbar and the \"Protect\" button in the left menu are displayedor hidden.
+     * Defines if the Protection tab on the toolbar and the Protect button in the left menu are displayedor hidden.
      * @type {boolean}
      * @memberof PermissionsConfig
      */

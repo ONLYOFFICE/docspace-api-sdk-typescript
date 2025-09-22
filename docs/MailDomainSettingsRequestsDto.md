@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | [**TenantTrustedDomainsType**](TenantTrustedDomainsType.md) |  | [default to undefined]
 **domains** | **Array&lt;string&gt;** | The list of authorized email domains that are considered trusted. | [default to undefined]
-**inviteUsersAsVisitors** | **boolean** | Specifies the default permission level for the invited users (visitors or not). | [optional] [default to undefined]
+**inviteUsersAsVisitors** | **boolean** | Specifies the default permission level for the invited users (visitors or not). | [default to undefined]
 
 ## Example
 

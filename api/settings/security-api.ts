@@ -104,14 +104,18 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * Checks if the selected user is an administrator of a product with the ID specified in the request.
          * @summary Check a product administrator
-         * @param {string} [productid] The ID of the product extracted from the query parameters.
-         * @param {string} [userid] The user ID extracted from the query parameters.
+         * @param {string} productid The ID of the product extracted from the query parameters.
+         * @param {string} userid The user ID extracted from the query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getIsProductAdministrator operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-product-administrator/
          */
-        getIsProductAdministrator: async (productid?: string, userid?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getIsProductAdministrator: async (productid: string, userid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'productid' is not null or undefined
+            assertParamExists('getIsProductAdministrator', 'productid', productid)
+            // verify required parameter 'userid' is not null or undefined
+            assertParamExists('getIsProductAdministrator', 'userid', userid)
             const localVarPath = `/api/2.0/settings/security/administrator`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -626,14 +630,14 @@ export const SecurityApiFp = function(configuration?: Configuration) {
         /**
          * Checks if the selected user is an administrator of a product with the ID specified in the request.
          * @summary Check a product administrator
-         * @param {string} [productid] The ID of the product extracted from the query parameters.
-         * @param {string} [userid] The user ID extracted from the query parameters.
+         * @param {string} productid The ID of the product extracted from the query parameters.
+         * @param {string} userid The user ID extracted from the query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getIsProductAdministrator operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-product-administrator/
          */
-        async getIsProductAdministrator(productid?: string, userid?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductAdministratorWrapper>> {
+        async getIsProductAdministrator(productid: string, userid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductAdministratorWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getIsProductAdministrator(productid, userid, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SecurityApi.getIsProductAdministrator']?.[localVarOperationServerIndex]?.url;
@@ -782,14 +786,14 @@ export const SecurityApiFactory = function (configuration?: Configuration, baseP
         /**
          * Checks if the selected user is an administrator of a product with the ID specified in the request.
          * @summary Check a product administrator
-         * @param {string} [productid] The ID of the product extracted from the query parameters.
-         * @param {string} [userid] The user ID extracted from the query parameters.
+         * @param {string} productid The ID of the product extracted from the query parameters.
+         * @param {string} userid The user ID extracted from the query parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getIsProductAdministrator operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-product-administrator/
          * @throws {RequiredError}
          */
-        getIsProductAdministrator(productid?: string, userid?: string, options?: RawAxiosRequestConfig): AxiosPromise<ProductAdministratorWrapper> {
+        getIsProductAdministrator(productid: string, userid: string, options?: RawAxiosRequestConfig): AxiosPromise<ProductAdministratorWrapper> {
             return localVarFp.getIsProductAdministrator(productid, userid, options).then((request) => request(axios, basePath));
         },
         /**
@@ -911,13 +915,13 @@ export class SecurityApi extends BaseAPI {
     /**
      * Checks if the selected user is an administrator of a product with the ID specified in the request.
      * @summary Check a product administrator
-     * @param {string} [productid] The ID of the product extracted from the query parameters.
-     * @param {string} [userid] The user ID extracted from the query parameters.
+     * @param {string} productid The ID of the product extracted from the query parameters.
+     * @param {string} userid The user ID extracted from the query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SecurityApi
      */
-    public getIsProductAdministrator(productid?: string, userid?: string, options?: RawAxiosRequestConfig) {
+    public getIsProductAdministrator(productid: string, userid: string, options?: RawAxiosRequestConfig) {
         return SecurityApiFp(this.configuration).getIsProductAdministrator(productid, userid, options).then((request) => request(this.axios, this.basePath));
     }
 

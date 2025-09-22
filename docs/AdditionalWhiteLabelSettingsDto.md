@@ -6,13 +6,13 @@ The additional white label settings parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**startDocsEnabled** | **boolean** | Specifies if the sample documents are displayed or hidden. | [optional] [default to undefined]
-**helpCenterEnabled** | **boolean** | Specifies if the Help Center link is available or not. | [optional] [default to undefined]
-**feedbackAndSupportEnabled** | **boolean** | Specifies if the \&quot;Feedback &amp; Support\&quot; link is available or not. | [optional] [default to undefined]
-**userForumEnabled** | **boolean** | Specifies if the user forum is available or not. | [optional] [default to undefined]
-**videoGuidesEnabled** | **boolean** | Specifies if the Video Guides link is available or not. | [optional] [default to undefined]
-**licenseAgreementsEnabled** | **boolean** | Specifies if the License Agreements link is available or not. | [optional] [default to undefined]
-**isDefault** | **boolean** | Specifies if the additional white label settings are default or not. | [optional] [default to undefined]
+**startDocsEnabled** | **boolean** | Specifies if the sample documents are displayed or hidden. | [default to undefined]
+**helpCenterEnabled** | **boolean** | Specifies if the Help Center link is available or not. | [default to undefined]
+**feedbackAndSupportEnabled** | **boolean** | Specifies if the Feedback &amp; Support link is available or not. | [default to undefined]
+**userForumEnabled** | **boolean** | Specifies if the user forum is available or not. | [default to undefined]
+**videoGuidesEnabled** | **boolean** | Specifies if the Video Guides link is available or not. | [default to undefined]
+**licenseAgreementsEnabled** | **boolean** | Specifies if the License Agreements link is available or not. | [default to undefined]
+**isDefault** | **boolean** | Specifies if the additional white label settings are default or not. | [default to undefined]
 
 ## Example
 

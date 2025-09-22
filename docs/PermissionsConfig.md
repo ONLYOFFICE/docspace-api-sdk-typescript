@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **edit** | **boolean** | Defines if the document can be edited or only viewed. | [optional] [default to undefined]
 **fillForms** | **boolean** | Defines if the forms can be filled. | [optional] [default to undefined]
 **modifyFilter** | **boolean** | Defines if the filter can be applied globally (true) affecting all the other users,  or locally (false), i.e. for the current user only. | [optional] [default to undefined]
-**protect** | **boolean** | Defines if the \&quot;Protection\&quot; tab on the toolbar and the \&quot;Protect\&quot; button in the left menu are displayedor hidden. | [optional] [default to undefined]
+**protect** | **boolean** | Defines if the Protection tab on the toolbar and the Protect button in the left menu are displayedor hidden. | [optional] [default to undefined]
 **print** | **boolean** | Defines if the document can be printed or not. | [optional] [default to undefined]
 **review** | **boolean** | Defines if the document can be reviewed or not. | [optional] [default to undefined]
 **copy** | **boolean** | Defines if the content can be copied to the clipboard or not. | [optional] [default to undefined]

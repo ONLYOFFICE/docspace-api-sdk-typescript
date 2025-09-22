@@ -45,6 +45,12 @@ export interface OperationDto {
      */
     'description'?: string | null;
     /**
+     * Brief details of the operation.
+     * @type {string}
+     * @memberof OperationDto
+     */
+    'details'?: string | null;
+    /**
      * Unit of the service.
      * @type {string}
      * @memberof OperationDto
@@ -69,10 +75,22 @@ export interface OperationDto {
      */
     'credit'?: number;
     /**
-     * Withdrawal amount of the operation.
+     * Debit amount of the operation.
      * @type {number}
      * @memberof OperationDto
      */
-    'withdrawal'?: number;
+    'debit'?: number;
+    /**
+     * Original name of the participant.
+     * @type {string}
+     * @memberof OperationDto
+     */
+    'participantName'?: string | null;
+    /**
+     * Display name of the participant.
+     * @type {string}
+     * @memberof OperationDto
+     */
+    'participantDisplayName'?: string | null;
 }
 

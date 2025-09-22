@@ -6,8 +6,8 @@ The parameters representing the Two-Factor Authentication (TFA) configuration se
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | The ID of the TFA configuration. | [optional] [default to undefined]
-**title** | **string** | The display name or description of the TFA configuration. | [optional] [default to undefined]
+**id** | **string** | The ID of the TFA configuration. | [default to undefined]
+**title** | **string** | The display name or description of the TFA configuration. | [default to undefined]
 **enabled** | **boolean** | Indicates whether the TFA configuration is currently active. | [optional] [default to undefined]
 **avaliable** | **boolean** | Indicates whether the TFA configuration can be used. | [optional] [default to undefined]
 **trustedIps** | **Array&lt;string&gt;** | The list of IP addresses that are exempt from TFA requirements. | [optional] [default to undefined]

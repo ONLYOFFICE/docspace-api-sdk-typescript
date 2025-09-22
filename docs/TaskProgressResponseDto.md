@@ -6,11 +6,11 @@ The task progress response parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | The task progress ID. | [optional] [default to undefined]
+**id** | **string** | The task progress ID. | [default to undefined]
 **error** | **string** | The task progress error message. | [optional] [default to undefined]
-**percentage** | **number** | The percentage of the task progress. | [optional] [default to undefined]
-**isCompleted** | **boolean** | Specifies if the task peogress is completed or not. | [optional] [default to undefined]
-**status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) |  | [optional] [default to undefined]
+**percentage** | **number** | The percentage of the task progress. | [default to undefined]
+**isCompleted** | **boolean** | Specifies if the task peogress is completed or not. | [default to undefined]
+**status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) |  | [default to undefined]
 
 ## Example
 

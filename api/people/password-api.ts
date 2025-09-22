@@ -42,15 +42,17 @@ export const PasswordApiAxiosParamCreator = function (configuration?: Configurat
          * Sets a new password to the user with the ID specified in the request.
          * @summary Change a user password
          * @param {string} userid The user ID.
-         * @param {MemberBaseRequestDto} [memberBaseRequestDto] The request parameters for the user generic information.
+         * @param {MemberBaseRequestDto} memberBaseRequestDto The request parameters for the user generic information.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for changeUserPassword operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-user-password/
          */
-        changeUserPassword: async (userid: string, memberBaseRequestDto?: MemberBaseRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        changeUserPassword: async (userid: string, memberBaseRequestDto: MemberBaseRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userid' is not null or undefined
             assertParamExists('changeUserPassword', 'userid', userid)
+            // verify required parameter 'memberBaseRequestDto' is not null or undefined
+            assertParamExists('changeUserPassword', 'memberBaseRequestDto', memberBaseRequestDto)
             const localVarPath = `/api/2.0/people/{userid}/password`
                 .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -147,13 +149,13 @@ export const PasswordApiFp = function(configuration?: Configuration) {
          * Sets a new password to the user with the ID specified in the request.
          * @summary Change a user password
          * @param {string} userid The user ID.
-         * @param {MemberBaseRequestDto} [memberBaseRequestDto] The request parameters for the user generic information.
+         * @param {MemberBaseRequestDto} memberBaseRequestDto The request parameters for the user generic information.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for changeUserPassword operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-user-password/
          */
-        async changeUserPassword(userid: string, memberBaseRequestDto?: MemberBaseRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
+        async changeUserPassword(userid: string, memberBaseRequestDto: MemberBaseRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.changeUserPassword(userid, memberBaseRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PasswordApi.changeUserPassword']?.[localVarOperationServerIndex]?.url;
@@ -188,13 +190,13 @@ export const PasswordApiFactory = function (configuration?: Configuration, baseP
          * Sets a new password to the user with the ID specified in the request.
          * @summary Change a user password
          * @param {string} userid The user ID.
-         * @param {MemberBaseRequestDto} [memberBaseRequestDto] The request parameters for the user generic information.
+         * @param {MemberBaseRequestDto} memberBaseRequestDto The request parameters for the user generic information.
          * @param {*} [options] Override http request option.
          * REST API Reference for changeUserPassword operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-user-password/
          * @throws {RequiredError}
          */
-        changeUserPassword(userid: string, memberBaseRequestDto?: MemberBaseRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
+        changeUserPassword(userid: string, memberBaseRequestDto: MemberBaseRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
             return localVarFp.changeUserPassword(userid, memberBaseRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
@@ -223,12 +225,12 @@ export class PasswordApi extends BaseAPI {
      * Sets a new password to the user with the ID specified in the request.
      * @summary Change a user password
      * @param {string} userid The user ID.
-     * @param {MemberBaseRequestDto} [memberBaseRequestDto] The request parameters for the user generic information.
+     * @param {MemberBaseRequestDto} memberBaseRequestDto The request parameters for the user generic information.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PasswordApi
      */
-    public changeUserPassword(userid: string, memberBaseRequestDto?: MemberBaseRequestDto, options?: RawAxiosRequestConfig) {
+    public changeUserPassword(userid: string, memberBaseRequestDto: MemberBaseRequestDto, options?: RawAxiosRequestConfig) {
         return PasswordApiFp(this.configuration).changeUserPassword(userid, memberBaseRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 

@@ -134,15 +134,17 @@ export const UserStatusApiAxiosParamCreator = function (configuration?: Configur
          * Sets the required activation status to the list of users with the IDs specified in the request.
          * @summary Set an activation status to the users
          * @param {EmployeeActivationStatus} activationstatus The new user activation status.
-         * @param {UpdateMembersRequestDto} [updateMembersRequestDto] The request parameters for updating the user information.
+         * @param {UpdateMembersRequestDto} updateMembersRequestDto The request parameters for updating the user information.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateUserActivationStatus operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-user-activation-status/
          */
-        updateUserActivationStatus: async (activationstatus: EmployeeActivationStatus, updateMembersRequestDto?: UpdateMembersRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateUserActivationStatus: async (activationstatus: EmployeeActivationStatus, updateMembersRequestDto: UpdateMembersRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'activationstatus' is not null or undefined
             assertParamExists('updateUserActivationStatus', 'activationstatus', activationstatus)
+            // verify required parameter 'updateMembersRequestDto' is not null or undefined
+            assertParamExists('updateUserActivationStatus', 'updateMembersRequestDto', updateMembersRequestDto)
             const localVarPath = `/api/2.0/people/activationstatus/{activationstatus}`
                 .replace(`{${"activationstatus"}}`, encodeURIComponent(String(activationstatus)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -193,15 +195,17 @@ export const UserStatusApiAxiosParamCreator = function (configuration?: Configur
          * Changes a status of the users with the IDs specified in the request.
          * @summary Change a user status
          * @param {EmployeeStatus} status The new user status.
-         * @param {UpdateMembersRequestDto} [updateMembersRequestDto] The request parameters for updating the user information.
+         * @param {UpdateMembersRequestDto} updateMembersRequestDto The request parameters for updating the user information.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateUserStatus operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-user-status/
          */
-        updateUserStatus: async (status: EmployeeStatus, updateMembersRequestDto?: UpdateMembersRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateUserStatus: async (status: EmployeeStatus, updateMembersRequestDto: UpdateMembersRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'status' is not null or undefined
             assertParamExists('updateUserStatus', 'status', status)
+            // verify required parameter 'updateMembersRequestDto' is not null or undefined
+            assertParamExists('updateUserStatus', 'updateMembersRequestDto', updateMembersRequestDto)
             const localVarPath = `/api/2.0/people/status/{status}`
                 .replace(`{${"status"}}`, encodeURIComponent(String(status)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -284,13 +288,13 @@ export const UserStatusApiFp = function(configuration?: Configuration) {
          * Sets the required activation status to the list of users with the IDs specified in the request.
          * @summary Set an activation status to the users
          * @param {EmployeeActivationStatus} activationstatus The new user activation status.
-         * @param {UpdateMembersRequestDto} [updateMembersRequestDto] The request parameters for updating the user information.
+         * @param {UpdateMembersRequestDto} updateMembersRequestDto The request parameters for updating the user information.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateUserActivationStatus operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-user-activation-status/
          */
-        async updateUserActivationStatus(activationstatus: EmployeeActivationStatus, updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
+        async updateUserActivationStatus(activationstatus: EmployeeActivationStatus, updateMembersRequestDto: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateUserActivationStatus(activationstatus, updateMembersRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UserStatusApi.updateUserActivationStatus']?.[localVarOperationServerIndex]?.url;
@@ -300,13 +304,13 @@ export const UserStatusApiFp = function(configuration?: Configuration) {
          * Changes a status of the users with the IDs specified in the request.
          * @summary Change a user status
          * @param {EmployeeStatus} status The new user status.
-         * @param {UpdateMembersRequestDto} [updateMembersRequestDto] The request parameters for updating the user information.
+         * @param {UpdateMembersRequestDto} updateMembersRequestDto The request parameters for updating the user information.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateUserStatus operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-user-status/
          */
-        async updateUserStatus(status: EmployeeStatus, updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
+        async updateUserStatus(status: EmployeeStatus, updateMembersRequestDto: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateUserStatus(status, updateMembersRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UserStatusApi.updateUserStatus']?.[localVarOperationServerIndex]?.url;
@@ -345,26 +349,26 @@ export const UserStatusApiFactory = function (configuration?: Configuration, bas
          * Sets the required activation status to the list of users with the IDs specified in the request.
          * @summary Set an activation status to the users
          * @param {EmployeeActivationStatus} activationstatus The new user activation status.
-         * @param {UpdateMembersRequestDto} [updateMembersRequestDto] The request parameters for updating the user information.
+         * @param {UpdateMembersRequestDto} updateMembersRequestDto The request parameters for updating the user information.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateUserActivationStatus operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-user-activation-status/
          * @throws {RequiredError}
          */
-        updateUserActivationStatus(activationstatus: EmployeeActivationStatus, updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
+        updateUserActivationStatus(activationstatus: EmployeeActivationStatus, updateMembersRequestDto: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
             return localVarFp.updateUserActivationStatus(activationstatus, updateMembersRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Changes a status of the users with the IDs specified in the request.
          * @summary Change a user status
          * @param {EmployeeStatus} status The new user status.
-         * @param {UpdateMembersRequestDto} [updateMembersRequestDto] The request parameters for updating the user information.
+         * @param {UpdateMembersRequestDto} updateMembersRequestDto The request parameters for updating the user information.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateUserStatus operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-user-status/
          * @throws {RequiredError}
          */
-        updateUserStatus(status: EmployeeStatus, updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
+        updateUserStatus(status: EmployeeStatus, updateMembersRequestDto: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
             return localVarFp.updateUserStatus(status, updateMembersRequestDto, options).then((request) => request(axios, basePath));
         },
     };
@@ -400,12 +404,12 @@ export class UserStatusApi extends BaseAPI {
      * Sets the required activation status to the list of users with the IDs specified in the request.
      * @summary Set an activation status to the users
      * @param {EmployeeActivationStatus} activationstatus The new user activation status.
-     * @param {UpdateMembersRequestDto} [updateMembersRequestDto] The request parameters for updating the user information.
+     * @param {UpdateMembersRequestDto} updateMembersRequestDto The request parameters for updating the user information.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserStatusApi
      */
-    public updateUserActivationStatus(activationstatus: EmployeeActivationStatus, updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig) {
+    public updateUserActivationStatus(activationstatus: EmployeeActivationStatus, updateMembersRequestDto: UpdateMembersRequestDto, options?: RawAxiosRequestConfig) {
         return UserStatusApiFp(this.configuration).updateUserActivationStatus(activationstatus, updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -413,12 +417,12 @@ export class UserStatusApi extends BaseAPI {
      * Changes a status of the users with the IDs specified in the request.
      * @summary Change a user status
      * @param {EmployeeStatus} status The new user status.
-     * @param {UpdateMembersRequestDto} [updateMembersRequestDto] The request parameters for updating the user information.
+     * @param {UpdateMembersRequestDto} updateMembersRequestDto The request parameters for updating the user information.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserStatusApi
      */
-    public updateUserStatus(status: EmployeeStatus, updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig) {
+    public updateUserStatus(status: EmployeeStatus, updateMembersRequestDto: UpdateMembersRequestDto, options?: RawAxiosRequestConfig) {
         return UserStatusApiFp(this.configuration).updateUserStatus(status, updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }

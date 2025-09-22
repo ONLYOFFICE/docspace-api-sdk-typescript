@@ -34,19 +34,19 @@ export interface FileOperationDto {
      * @type {string}
      * @memberof FileOperationDto
      */
-    'id'?: string | null;
+    'id': string | null;
     /**
      * 
      * @type {FileOperationType}
      * @memberof FileOperationDto
      */
-    'Operation'?: FileOperationType;
+    'Operation': FileOperationType;
     /**
      * The file operation progress in percentage.
      * @type {number}
      * @memberof FileOperationDto
      */
-    'progress'?: number;
+    'progress': number;
     /**
      * The file operation error message.
      * @type {string}

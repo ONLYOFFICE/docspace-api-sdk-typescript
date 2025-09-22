@@ -84,7 +84,7 @@ const { status, data } = await apiInstance.getByStatus(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **updateUserActivationStatus**
-> EmployeeFullArrayWrapper updateUserActivationStatus()
+> EmployeeFullArrayWrapper updateUserActivationStatus(updateMembersRequestDto)
 
 Sets the required activation status to the list of users with the IDs specified in the request.
 
@@ -119,7 +119,7 @@ const configuration = new Configuration();
 const apiInstance = new PeopleUserStatusApi(configuration);
 
 let activationstatus: EmployeeActivationStatus; //The new user activation status. (default to undefined)
-let updateMembersRequestDto: UpdateMembersRequestDto; //The request parameters for updating the user information. (optional)
+let updateMembersRequestDto: UpdateMembersRequestDto; //The request parameters for updating the user information.
 
 const { status, data } = await apiInstance.updateUserActivationStatus(
     activationstatus,
@@ -142,7 +142,7 @@ const { status, data } = await apiInstance.updateUserActivationStatus(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **updateUserStatus**
-> EmployeeFullArrayWrapper updateUserStatus()
+> EmployeeFullArrayWrapper updateUserStatus(updateMembersRequestDto)
 
 Changes a status of the users with the IDs specified in the request.
 
@@ -177,7 +177,7 @@ const configuration = new Configuration();
 const apiInstance = new PeopleUserStatusApi(configuration);
 
 let status: EmployeeStatus; //The new user status. (default to undefined)
-let updateMembersRequestDto: UpdateMembersRequestDto; //The request parameters for updating the user information. (optional)
+let updateMembersRequestDto: UpdateMembersRequestDto; //The request parameters for updating the user information.
 
 const { status, data } = await apiInstance.updateUserStatus(
     status,

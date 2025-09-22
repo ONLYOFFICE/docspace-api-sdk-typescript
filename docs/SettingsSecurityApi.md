@@ -73,8 +73,8 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **productid** | [**string**] | The ID of the product extracted from the query parameters. | (optional) defaults to undefined|
-| **userid** | [**string**] | The user ID extracted from the query parameters. | (optional) defaults to undefined|
+| **productid** | [**string**] | The ID of the product extracted from the query parameters. | defaults to undefined|
+| **userid** | [**string**] | The user ID extracted from the query parameters. | defaults to undefined|
 
 
 ### Return type
@@ -96,8 +96,8 @@ import {
 const configuration = new Configuration();
 const apiInstance = new SettingsSecurityApi(configuration);
 
-let productid: string; //The ID of the product extracted from the query parameters. (optional) (default to undefined)
-let userid: string; //The user ID extracted from the query parameters. (optional) (default to undefined)
+let productid: string; //The ID of the product extracted from the query parameters. (default to undefined)
+let userid: string; //The user ID extracted from the query parameters. (default to undefined)
 
 const { status, data } = await apiInstance.getIsProductAdministrator(
     productid,

@@ -223,8 +223,8 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **userid** | [**string**] | The user ID to receive the congratulatory message. | (optional) defaults to undefined|
-| **key** | [**string**] | The template identifier or email configuration key. | (optional) defaults to undefined|
+| **userid** | [**string**] | The user ID to receive the congratulatory message. | defaults to undefined|
+| **key** | [**string**] | The template identifier or email configuration key. | defaults to undefined|
 
 
 ### Return type
@@ -246,8 +246,8 @@ import {
 const configuration = new Configuration();
 const apiInstance = new PortalUsersApi(configuration);
 
-let userid: string; //The user ID to receive the congratulatory message. (optional) (default to undefined)
-let key: string; //The template identifier or email configuration key. (optional) (default to undefined)
+let userid: string; //The user ID to receive the congratulatory message. (default to undefined)
+let key: string; //The template identifier or email configuration key. (default to undefined)
 
 const { status, data } = await apiInstance.sendCongratulations(
     userid,

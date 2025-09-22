@@ -36,16 +36,22 @@ export interface CustomerOperationsReportRequestDto {
      */
     'endDate'?: string | null;
     /**
+     * Participant name
+     * @type {string}
+     * @memberof CustomerOperationsReportRequestDto
+     */
+    'participantName'?: string | null;
+    /**
      * Include credit operations
      * @type {boolean}
      * @memberof CustomerOperationsReportRequestDto
      */
     'credit'?: boolean | null;
     /**
-     * Include withdrawal operations
+     * Include debit operations
      * @type {boolean}
      * @memberof CustomerOperationsReportRequestDto
      */
-    'withdrawal'?: boolean | null;
+    'debit'?: boolean | null;
 }
 

@@ -84,12 +84,6 @@ export type FolderDtoString = FileEntryDtoString &  {
      */
     'isShareable'?: boolean | null;
     /**
-     * Specifies if the folder is favorite or not.
-     * @type {boolean}
-     * @memberof FolderDtoString
-     */
-    'isFavorite'?: boolean | null;
-    /**
      * The new element index in the folder.
      * @type {number}
      * @memberof FolderDtoString

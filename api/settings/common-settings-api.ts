@@ -230,13 +230,15 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
         /**
          * Deletes the portal color theme with the ID specified in the request.
          * @summary Delete a color theme
-         * @param {number} [id] The ID of the portal theme to delete.
+         * @param {number} id The ID of the portal theme to delete.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deletePortalColorTheme operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-portal-color-theme/
          */
-        deletePortalColorTheme: async (id?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deletePortalColorTheme: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('deletePortalColorTheme', 'id', id)
             const localVarPath = `/api/2.0/settings/colortheme`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -608,7 +610,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Returns a list of all the available portal languages in the format of a two-letter or four-letter language code (e.g. \"de\", \"en-US\", etc.).
+         * Returns a list of all the available portal languages in the format of a two-letter or four-letter language code (e.g. de, en-US, etc.).
          * @summary Get supported languages
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1054,13 +1056,13 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
         /**
          * Deletes the portal color theme with the ID specified in the request.
          * @summary Delete a color theme
-         * @param {number} [id] The ID of the portal theme to delete.
+         * @param {number} id The ID of the portal theme to delete.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deletePortalColorTheme operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-portal-color-theme/
          */
-        async deletePortalColorTheme(id?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomColorThemesSettingsWrapper>> {
+        async deletePortalColorTheme(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomColorThemesSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deletePortalColorTheme(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.deletePortalColorTheme']?.[localVarOperationServerIndex]?.url;
@@ -1166,7 +1168,7 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns a list of all the available portal languages in the format of a two-letter or four-letter language code (e.g. \"de\", \"en-US\", etc.).
+         * Returns a list of all the available portal languages in the format of a two-letter or four-letter language code (e.g. de, en-US, etc.).
          * @summary Get supported languages
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1330,13 +1332,13 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
         /**
          * Deletes the portal color theme with the ID specified in the request.
          * @summary Delete a color theme
-         * @param {number} [id] The ID of the portal theme to delete.
+         * @param {number} id The ID of the portal theme to delete.
          * @param {*} [options] Override http request option.
          * REST API Reference for deletePortalColorTheme operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-portal-color-theme/
          * @throws {RequiredError}
          */
-        deletePortalColorTheme(id?: number, options?: RawAxiosRequestConfig): AxiosPromise<CustomColorThemesSettingsWrapper> {
+        deletePortalColorTheme(id: number, options?: RawAxiosRequestConfig): AxiosPromise<CustomColorThemesSettingsWrapper> {
             return localVarFp.deletePortalColorTheme(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1418,7 +1420,7 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
             return localVarFp.getSocketSettings(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of all the available portal languages in the format of a two-letter or four-letter language code (e.g. \"de\", \"en-US\", etc.).
+         * Returns a list of all the available portal languages in the format of a two-letter or four-letter language code (e.g. de, en-US, etc.).
          * @summary Get supported languages
          * @param {*} [options] Override http request option.
          * REST API Reference for getSupportedCultures operation
@@ -1558,12 +1560,12 @@ export class CommonSettingsApi extends BaseAPI {
     /**
      * Deletes the portal color theme with the ID specified in the request.
      * @summary Delete a color theme
-     * @param {number} [id] The ID of the portal theme to delete.
+     * @param {number} id The ID of the portal theme to delete.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CommonSettingsApi
      */
-    public deletePortalColorTheme(id?: number, options?: RawAxiosRequestConfig) {
+    public deletePortalColorTheme(id: number, options?: RawAxiosRequestConfig) {
         return CommonSettingsApiFp(this.configuration).deletePortalColorTheme(id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -1646,7 +1648,7 @@ export class CommonSettingsApi extends BaseAPI {
     }
 
     /**
-     * Returns a list of all the available portal languages in the format of a two-letter or four-letter language code (e.g. \"de\", \"en-US\", etc.).
+     * Returns a list of all the available portal languages in the format of a two-letter or four-letter language code (e.g. de, en-US, etc.).
      * @summary Get supported languages
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

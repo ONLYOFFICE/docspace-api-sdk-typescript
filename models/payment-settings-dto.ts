@@ -31,7 +31,7 @@ export interface PaymentSettingsDto {
      * @type {string}
      * @memberof PaymentSettingsDto
      */
-    'salesEmail'?: string | null;
+    'salesEmail': string | null;
     /**
      * The URL for accessing the feedback and support resources.
      * @type {string}
@@ -43,24 +43,24 @@ export interface PaymentSettingsDto {
      * @type {string}
      * @memberof PaymentSettingsDto
      */
-    'buyUrl'?: string | null;
+    'buyUrl': string | null;
     /**
      * Indicates whether the system is running in standalone mode.
      * @type {boolean}
      * @memberof PaymentSettingsDto
      */
-    'standalone'?: boolean;
+    'standalone': boolean;
     /**
      * 
      * @type {CurrentLicenseInfo}
      * @memberof PaymentSettingsDto
      */
-    'currentLicense'?: CurrentLicenseInfo;
+    'currentLicense': CurrentLicenseInfo;
     /**
      * The maximum quota quantity.
      * @type {number}
      * @memberof PaymentSettingsDto
      */
-    'max'?: number;
+    'max': number;
 }
 

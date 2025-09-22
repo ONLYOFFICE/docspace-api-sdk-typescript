@@ -28,12 +28,12 @@ export interface CookieSettingsDto {
      * @type {number}
      * @memberof CookieSettingsDto
      */
-    'lifeTime'?: number;
+    'lifeTime': number;
     /**
      * Specifies if the cookie settings are enabled or not.
      * @type {boolean}
      * @memberof CookieSettingsDto
      */
-    'enabled'?: boolean;
+    'enabled': boolean;
 }
 

@@ -36,7 +36,7 @@ export interface AdditionalWhiteLabelSettings {
      */
     'helpCenterEnabled'?: boolean;
     /**
-     * Specifies if the \"Feedback & Support\" link is available or not.
+     * Specifies if the Feedback & Support link is available or not.
      * @type {boolean}
      * @memberof AdditionalWhiteLabelSettings
      */

@@ -6,9 +6,9 @@ The file operation information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | The file operation ID. | [optional] [default to undefined]
-**Operation** | [**FileOperationType**](FileOperationType.md) |  | [optional] [default to undefined]
-**progress** | **number** | The file operation progress in percentage. | [optional] [default to undefined]
+**id** | **string** | The file operation ID. | [default to undefined]
+**Operation** | [**FileOperationType**](FileOperationType.md) |  | [default to undefined]
+**progress** | **number** | The file operation progress in percentage. | [default to undefined]
 **error** | **string** | The file operation error message. | [optional] [default to undefined]
 **processed** | **string** | The file operation processing status. | [optional] [default to undefined]
 **finished** | **boolean** | Specifies if the file operation is finished or not. | [optional] [default to undefined]

@@ -82,6 +82,7 @@ export * from './api/settings/security-api';
 export * from './api/settings/statistics-api';
 export * from './api/settings/storage-api';
 export * from './api/settings/tfasettings-api';
+export * from './api/settings/telegram-api';
 export * from './api/settings/webhooks-api';
 export * from './api/settings/webplugins-api';
 export * from './api/third-party/third-party-api';

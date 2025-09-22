@@ -31,67 +31,73 @@ export interface WebPluginDto {
      * @type {string}
      * @memberof WebPluginDto
      */
-    'name'?: string | null;
+    'name': string | null;
     /**
      * The web plugin version.
      * @type {string}
      * @memberof WebPluginDto
      */
-    'version'?: string | null;
+    'version': string | null;
+    /**
+     * The minimum version of DocSpace with which the plugin is guaranteed to work.
+     * @type {string}
+     * @memberof WebPluginDto
+     */
+    'minDocSpaceVersion'?: string | null;
     /**
      * The web plugin description.
      * @type {string}
      * @memberof WebPluginDto
      */
-    'description'?: string | null;
+    'description': string | null;
     /**
      * The web plugin license.
      * @type {string}
      * @memberof WebPluginDto
      */
-    'license'?: string | null;
+    'license': string | null;
     /**
      * The web plugin author.
      * @type {string}
      * @memberof WebPluginDto
      */
-    'author'?: string | null;
+    'author': string | null;
     /**
      * The web plugin home page URL.
      * @type {string}
      * @memberof WebPluginDto
      */
-    'homePage'?: string | null;
+    'homePage': string | null;
     /**
      * The name by which the web plugin is registered in the window object.
      * @type {string}
      * @memberof WebPluginDto
      */
-    'pluginName'?: string | null;
+    'pluginName': string | null;
     /**
      * The web plugin scopes.
      * @type {string}
      * @memberof WebPluginDto
      */
-    'scopes'?: string | null;
+    'scopes': string | null;
     /**
      * The web plugin image.
      * @type {string}
      * @memberof WebPluginDto
      */
-    'image'?: string | null;
+    'image': string | null;
     /**
      * 
      * @type {EmployeeDto}
      * @memberof WebPluginDto
      */
-    'createBy'?: EmployeeDto;
+    'createBy': EmployeeDto;
     /**
      * The date and time when the web plugin was created.
      * @type {string}
      * @memberof WebPluginDto
      */
-    'createOn'?: string;
+    'createOn': string;
     /**
      * Specifies if the web plugin is enabled or not.
      * @type {boolean}
@@ -103,18 +109,18 @@ export interface WebPluginDto {
      * @type {boolean}
      * @memberof WebPluginDto
      */
-    'system'?: boolean;
+    'system': boolean;
     /**
      * The web plugin URL.
      * @type {string}
      * @memberof WebPluginDto
      */
-    'url'?: string | null;
+    'url': string | null;
     /**
      * The web plugin settings.
      * @type {string}
      * @memberof WebPluginDto
      */
-    'settings'?: string | null;
+    'settings': string | null;
 }
 

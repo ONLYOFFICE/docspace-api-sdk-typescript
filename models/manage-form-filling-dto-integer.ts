@@ -31,7 +31,7 @@ export interface ManageFormFillingDtoInteger {
      * @type {number}
      * @memberof ManageFormFillingDtoInteger
      */
-    'formId'?: number;
+    'formId': number;
     /**
      * 
      * @type {FormFillingManageAction}

@@ -18,19 +18,19 @@
 
 
 /**
- * The settings for the \"Feedback & Support\" menu button.
+ * The settings for the Feedback & Support menu button.
  * @export
  * @interface FeedbackConfig
  */
 export interface FeedbackConfig {
     /**
-     * The absolute URL to the website address which will be opened when clicking the \"Feedback & Support\" menu button.
+     * The absolute URL to the website address which will be opened when clicking the Feedback & Support menu button.
      * @type {string}
      * @memberof FeedbackConfig
      */
     'url'?: string | null;
     /**
-     * Shows or hides the \"Feedback & Support\" menu button.
+     * Shows or hides the Feedback & Support menu button.
      * @type {boolean}
      * @memberof FeedbackConfig
      */

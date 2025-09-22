@@ -28,18 +28,18 @@ export interface AccountInfoDto {
      * @type {string}
      * @memberof AccountInfoDto
      */
-    'provider'?: string | null;
+    'provider': string | null;
     /**
      * The account URL.
      * @type {string}
      * @memberof AccountInfoDto
      */
-    'url'?: string | null;
+    'url': string | null;
     /**
      * Specifies if an account is linked with other profiles or not.
      * @type {boolean}
      * @memberof AccountInfoDto
      */
-    'linked'?: boolean;
+    'linked': boolean;
 }
 

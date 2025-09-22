@@ -34,36 +34,36 @@ export interface FormGalleryDto {
      * @type {string}
      * @memberof FormGalleryDto
      */
-    'domain'?: string | null;
+    'domain': string | null;
     /**
      * The form gallery extension.
      * @type {string}
      * @memberof FormGalleryDto
      */
-    'ext'?: string | null;
+    'ext': string | null;
     /**
      * The form gallery upload path.
      * @type {string}
      * @memberof FormGalleryDto
      */
-    'uploadPath'?: string | null;
+    'uploadPath': string | null;
     /**
      * The form gallery upload domain.
      * @type {string}
      * @memberof FormGalleryDto
      */
-    'uploadDomain'?: string | null;
+    'uploadDomain': string | null;
     /**
      * The form gallery upload extension.
      * @type {string}
      * @memberof FormGalleryDto
      */
-    'uploadExt'?: string | null;
+    'uploadExt': string | null;
     /**
      * The form gallery upload dashboard.
      * @type {string}
      * @memberof FormGalleryDto
      */
-    'uploadDashboard'?: string | null;
+    'uploadDashboard': string | null;
 }
 

@@ -6,8 +6,8 @@ The request parameters for managing the time zone configurations.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | The IANA time zone identifier. | [optional] [default to undefined]
-**displayName** | **string** | The user-friendly name for the time zone. | [optional] [default to undefined]
+**id** | **string** | The IANA time zone identifier. | [default to undefined]
+**displayName** | **string** | The user-friendly name for the time zone. | [default to undefined]
 
 ## Example
 

@@ -232,7 +232,7 @@ const { status, data } = await apiInstance.getWebPlugins(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **updateWebPlugin**
-> updateWebPlugin()
+> updateWebPlugin(webPluginRequests)
 
 Updates a web plugin with the parameters specified in the request.
 
@@ -267,7 +267,7 @@ const configuration = new Configuration();
 const apiInstance = new SettingsWebpluginsApi(configuration);
 
 let name: string; //The web plugin name. (default to undefined)
-let webPluginRequests: WebPluginRequests; //The configuration settings for the web plugin instance. (optional)
+let webPluginRequests: WebPluginRequests; //The configuration settings for the web plugin instance.
 
 const { status, data } = await apiInstance.updateWebPlugin(
     name,

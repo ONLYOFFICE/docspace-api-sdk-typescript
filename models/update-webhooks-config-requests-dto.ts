@@ -34,7 +34,7 @@ export type UpdateWebhooksConfigRequestsDto = CreateWebhooksConfigRequestsDto & 
      * @type {number}
      * @memberof UpdateWebhooksConfigRequestsDto
      */
-    'id'?: number;
+    'id': number;
 };
 
 

@@ -6,8 +6,8 @@ The default white label logos parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **string** | The white label logo name. | [optional] [default to undefined]
-**_default** | **boolean** | Specifies if the white label logo is default or not. | [optional] [default to undefined]
+**name** | **string** | The white label logo name. | [default to undefined]
+**_default** | **boolean** | Specifies if the white label logo is default or not. | [default to undefined]
 
 ## Example
 

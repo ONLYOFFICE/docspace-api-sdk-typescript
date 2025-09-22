@@ -21,42 +21,42 @@
 import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FormRole } from './form-role';
+import type { TelegramStatusDto } from './telegram-status-dto';
 
 /**
  * 
  * @export
- * @interface FormRoleWrapper
+ * @interface TelegramStatusWrapper
  */
-export interface FormRoleWrapper {
+export interface TelegramStatusWrapper {
     /**
      * 
-     * @type {FormRole}
-     * @memberof FormRoleWrapper
+     * @type {TelegramStatusDto}
+     * @memberof TelegramStatusWrapper
      */
-    'response'?: FormRole;
+    'response'?: TelegramStatusDto;
     /**
      * 
      * @type {number}
-     * @memberof FormRoleWrapper
+     * @memberof TelegramStatusWrapper
      */
     'count'?: number;
     /**
      * 
      * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof FormRoleWrapper
+     * @memberof TelegramStatusWrapper
      */
     'links'?: Array<ActiveConnectionsWrapperLinksInner>;
     /**
      * 
      * @type {number}
-     * @memberof FormRoleWrapper
+     * @memberof TelegramStatusWrapper
      */
     'status'?: number;
     /**
      * 
      * @type {number}
-     * @memberof FormRoleWrapper
+     * @memberof TelegramStatusWrapper
      */
     'statusCode'?: number;
 }

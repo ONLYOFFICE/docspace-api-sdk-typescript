@@ -7,12 +7,12 @@ The form gallery parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **path** | **string** | The form gallery path. | [optional] [default to undefined]
-**domain** | **string** | The form gallery domain. | [optional] [default to undefined]
-**ext** | **string** | The form gallery extension. | [optional] [default to undefined]
-**uploadPath** | **string** | The form gallery upload path. | [optional] [default to undefined]
-**uploadDomain** | **string** | The form gallery upload domain. | [optional] [default to undefined]
-**uploadExt** | **string** | The form gallery upload extension. | [optional] [default to undefined]
-**uploadDashboard** | **string** | The form gallery upload dashboard. | [optional] [default to undefined]
+**domain** | **string** | The form gallery domain. | [default to undefined]
+**ext** | **string** | The form gallery extension. | [default to undefined]
+**uploadPath** | **string** | The form gallery upload path. | [default to undefined]
+**uploadDomain** | **string** | The form gallery upload domain. | [default to undefined]
+**uploadExt** | **string** | The form gallery upload extension. | [default to undefined]
+**uploadDashboard** | **string** | The form gallery upload dashboard. | [default to undefined]
 
 ## Example
 

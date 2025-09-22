@@ -52,25 +52,25 @@ export interface FolderContentDtoInteger {
      * @type {any}
      * @memberof FolderContentDtoInteger
      */
-    'pathParts'?: any | null;
+    'pathParts': any | null;
     /**
      * The folder start index.
      * @type {number}
      * @memberof FolderContentDtoInteger
      */
-    'startIndex'?: number;
+    'startIndex': number;
     /**
      * The number of folder elements.
      * @type {number}
      * @memberof FolderContentDtoInteger
      */
-    'count'?: number;
+    'count': number;
     /**
      * The total number of elements in the folder.
      * @type {number}
      * @memberof FolderContentDtoInteger
      */
-    'total'?: number;
+    'total': number;
     /**
      * The new element index in the folder.
      * @type {number}

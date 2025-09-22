@@ -44,15 +44,17 @@ export const PhotosApiAxiosParamCreator = function (configuration?: Configuratio
          * Creates the user photo thumbnails by coordinates of the original image specified in the request.
          * @summary Create photo thumbnails
          * @param {string} userid The user ID.
-         * @param {ThumbnailsRequest} [thumbnailsRequest] The thumbnail request.
+         * @param {ThumbnailsRequest} thumbnailsRequest The thumbnail request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createMemberPhotoThumbnails operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-member-photo-thumbnails/
          */
-        createMemberPhotoThumbnails: async (userid: string, thumbnailsRequest?: ThumbnailsRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createMemberPhotoThumbnails: async (userid: string, thumbnailsRequest: ThumbnailsRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userid' is not null or undefined
             assertParamExists('createMemberPhotoThumbnails', 'userid', userid)
+            // verify required parameter 'thumbnailsRequest' is not null or undefined
+            assertParamExists('createMemberPhotoThumbnails', 'thumbnailsRequest', thumbnailsRequest)
             const localVarPath = `/api/2.0/people/{userid}/photo/thumbnails`
                 .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -213,15 +215,17 @@ export const PhotosApiAxiosParamCreator = function (configuration?: Configuratio
          * Updates a photo of the user with the ID specified in the request.
          * @summary Update a user photo
          * @param {string} userid The user ID.
-         * @param {UpdatePhotoMemberRequest} [updatePhotoMemberRequest] The request parameters for updating a photo.
+         * @param {UpdatePhotoMemberRequest} updatePhotoMemberRequest The request parameters for updating a photo.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateMemberPhoto operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-member-photo/
          */
-        updateMemberPhoto: async (userid: string, updatePhotoMemberRequest?: UpdatePhotoMemberRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateMemberPhoto: async (userid: string, updatePhotoMemberRequest: UpdatePhotoMemberRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userid' is not null or undefined
             assertParamExists('updateMemberPhoto', 'userid', userid)
+            // verify required parameter 'updatePhotoMemberRequest' is not null or undefined
+            assertParamExists('updateMemberPhoto', 'updatePhotoMemberRequest', updatePhotoMemberRequest)
             const localVarPath = `/api/2.0/people/{userid}/photo`
                 .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -350,13 +354,13 @@ export const PhotosApiFp = function(configuration?: Configuration) {
          * Creates the user photo thumbnails by coordinates of the original image specified in the request.
          * @summary Create photo thumbnails
          * @param {string} userid The user ID.
-         * @param {ThumbnailsRequest} [thumbnailsRequest] The thumbnail request.
+         * @param {ThumbnailsRequest} thumbnailsRequest The thumbnail request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createMemberPhotoThumbnails operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-member-photo-thumbnails/
          */
-        async createMemberPhotoThumbnails(userid: string, thumbnailsRequest?: ThumbnailsRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThumbnailsDataWrapper>> {
+        async createMemberPhotoThumbnails(userid: string, thumbnailsRequest: ThumbnailsRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThumbnailsDataWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createMemberPhotoThumbnails(userid, thumbnailsRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PhotosApi.createMemberPhotoThumbnails']?.[localVarOperationServerIndex]?.url;
@@ -396,13 +400,13 @@ export const PhotosApiFp = function(configuration?: Configuration) {
          * Updates a photo of the user with the ID specified in the request.
          * @summary Update a user photo
          * @param {string} userid The user ID.
-         * @param {UpdatePhotoMemberRequest} [updatePhotoMemberRequest] The request parameters for updating a photo.
+         * @param {UpdatePhotoMemberRequest} updatePhotoMemberRequest The request parameters for updating a photo.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateMemberPhoto operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-member-photo/
          */
-        async updateMemberPhoto(userid: string, updatePhotoMemberRequest?: UpdatePhotoMemberRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThumbnailsDataWrapper>> {
+        async updateMemberPhoto(userid: string, updatePhotoMemberRequest: UpdatePhotoMemberRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThumbnailsDataWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateMemberPhoto(userid, updatePhotoMemberRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PhotosApi.updateMemberPhoto']?.[localVarOperationServerIndex]?.url;
@@ -438,13 +442,13 @@ export const PhotosApiFactory = function (configuration?: Configuration, basePat
          * Creates the user photo thumbnails by coordinates of the original image specified in the request.
          * @summary Create photo thumbnails
          * @param {string} userid The user ID.
-         * @param {ThumbnailsRequest} [thumbnailsRequest] The thumbnail request.
+         * @param {ThumbnailsRequest} thumbnailsRequest The thumbnail request.
          * @param {*} [options] Override http request option.
          * REST API Reference for createMemberPhotoThumbnails operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-member-photo-thumbnails/
          * @throws {RequiredError}
          */
-        createMemberPhotoThumbnails(userid: string, thumbnailsRequest?: ThumbnailsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThumbnailsDataWrapper> {
+        createMemberPhotoThumbnails(userid: string, thumbnailsRequest: ThumbnailsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThumbnailsDataWrapper> {
             return localVarFp.createMemberPhotoThumbnails(userid, thumbnailsRequest, options).then((request) => request(axios, basePath));
         },
         /**
@@ -475,13 +479,13 @@ export const PhotosApiFactory = function (configuration?: Configuration, basePat
          * Updates a photo of the user with the ID specified in the request.
          * @summary Update a user photo
          * @param {string} userid The user ID.
-         * @param {UpdatePhotoMemberRequest} [updatePhotoMemberRequest] The request parameters for updating a photo.
+         * @param {UpdatePhotoMemberRequest} updatePhotoMemberRequest The request parameters for updating a photo.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateMemberPhoto operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-member-photo/
          * @throws {RequiredError}
          */
-        updateMemberPhoto(userid: string, updatePhotoMemberRequest?: UpdatePhotoMemberRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThumbnailsDataWrapper> {
+        updateMemberPhoto(userid: string, updatePhotoMemberRequest: UpdatePhotoMemberRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThumbnailsDataWrapper> {
             return localVarFp.updateMemberPhoto(userid, updatePhotoMemberRequest, options).then((request) => request(axios, basePath));
         },
         /**
@@ -511,12 +515,12 @@ export class PhotosApi extends BaseAPI {
      * Creates the user photo thumbnails by coordinates of the original image specified in the request.
      * @summary Create photo thumbnails
      * @param {string} userid The user ID.
-     * @param {ThumbnailsRequest} [thumbnailsRequest] The thumbnail request.
+     * @param {ThumbnailsRequest} thumbnailsRequest The thumbnail request.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PhotosApi
      */
-    public createMemberPhotoThumbnails(userid: string, thumbnailsRequest?: ThumbnailsRequest, options?: RawAxiosRequestConfig) {
+    public createMemberPhotoThumbnails(userid: string, thumbnailsRequest: ThumbnailsRequest, options?: RawAxiosRequestConfig) {
         return PhotosApiFp(this.configuration).createMemberPhotoThumbnails(userid, thumbnailsRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -548,12 +552,12 @@ export class PhotosApi extends BaseAPI {
      * Updates a photo of the user with the ID specified in the request.
      * @summary Update a user photo
      * @param {string} userid The user ID.
-     * @param {UpdatePhotoMemberRequest} [updatePhotoMemberRequest] The request parameters for updating a photo.
+     * @param {UpdatePhotoMemberRequest} updatePhotoMemberRequest The request parameters for updating a photo.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PhotosApi
      */
-    public updateMemberPhoto(userid: string, updatePhotoMemberRequest?: UpdatePhotoMemberRequest, options?: RawAxiosRequestConfig) {
+    public updateMemberPhoto(userid: string, updatePhotoMemberRequest: UpdatePhotoMemberRequest, options?: RawAxiosRequestConfig) {
         return PhotosApiFp(this.configuration).updateMemberPhoto(userid, updatePhotoMemberRequest, options).then((request) => request(this.axios, this.basePath));
     }
 

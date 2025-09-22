@@ -18,7 +18,7 @@
 
 
 /**
- * The presence or absence of the documents in the \"Open Recent...\" menu option.
+ * The presence or absence of the documents in the Open Recent... menu option.
  * @export
  * @interface RecentConfig
  */

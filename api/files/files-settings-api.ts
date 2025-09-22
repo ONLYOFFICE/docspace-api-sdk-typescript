@@ -55,8 +55,7 @@ import type { SettingsRequestDto } from '../../models';
 export const FilesSettingsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Changes the access to the third-party settings.
-         * @summary Change the third-party settings access
+         * 
          * @param {SettingsRequestDto} [settingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -76,25 +75,6 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -110,8 +90,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Updates the trash bin auto-clearing setting.
-         * @summary Update the trash bin auto-clearing setting
+         * 
          * @param {AutoCleanupRequestDto} [autoCleanupRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -131,25 +110,6 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -165,8 +125,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Changes the default access rights in the sharing settings.
-         * @summary Change the default access rights
+         * 
          * @param {Array<number>} [requestBody] Sharing rights (None, ReadWrite, Read, Restrict, Varies, Review, Comment, FillForms, CustomFilter, RoomAdmin, Editing, Collaborator).
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -186,25 +145,6 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -220,8 +160,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Specifies whether to confirm the file deletion or not.
-         * @summary Confirm the file deletion
+         * 
          * @param {SettingsRequestDto} [settingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -241,25 +180,6 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -275,8 +195,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Changes the format of the downloaded archive from .zip to .tar.gz. This method uses the body parameters.
-         * @summary Change the archive format (using body parameters)
+         * 
          * @param {DisplayRequestDto} [displayRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -296,25 +215,6 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -330,8 +230,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Checks the document service location URL.
-         * @summary Check the document service URL
+         * 
          * @param {CheckDocServiceUrlRequestDto} [checkDocServiceUrlRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -351,25 +250,6 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -385,8 +265,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Specifies whether to display a file extension or not.
-         * @summary Display a file extension
+         * 
          * @param {SettingsRequestDto} [settingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -406,25 +285,6 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -440,8 +300,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Displays the \"Recent\" folder.
-         * @summary Display the \"Recent\" folder
+         * 
          * @param {DisplayRequestDto} [displayRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -461,25 +320,6 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -495,8 +335,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Changes the ability to share a file externally.
-         * @summary Change the external sharing ability
+         * 
          * @param {DisplayRequestDto} [displayRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -516,25 +355,6 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -550,8 +370,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Changes the ability to share a file externally on social networks.
-         * @summary Change the external sharing ability on social networks
+         * 
          * @param {DisplayRequestDto} [displayRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -571,25 +390,6 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -605,8 +405,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Specifies if the file forcesaving is enabled or not.
-         * @summary Change the forcesaving ability
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for forcesave operation
@@ -625,25 +424,6 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -656,8 +436,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Returns the trash bin auto-clearing setting.
-         * @summary Get the trash bin auto-clearing setting
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getAutomaticallyCleanUp operation
@@ -676,25 +455,6 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -707,8 +467,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Returns the URL address of the connected editors.
-         * @summary Get the document service URL
+         * 
          * @param {boolean} [version] Specifies whether to return the editor version or not.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -744,8 +503,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Returns the information about the \"Documents\" module.
-         * @summary Get the \"Documents\" information
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFilesModule operation
@@ -764,25 +522,6 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -795,8 +534,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Returns all the file settings.
-         * @summary Get file settings
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFilesSettings operation
@@ -827,8 +565,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Hides the confirmation dialog when canceling operations.
-         * @summary Hide confirmation dialog when canceling operations
+         * 
          * @param {SettingsRequestDto} [settingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -848,25 +585,6 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -882,8 +600,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Hides the confirmation dialog for saving the file copy in the original format when converting a file.
-         * @summary Hide the confirmation dialog when converting
+         * 
          * @param {HideConfirmConvertRequestDto} [hideConfirmConvertRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -903,25 +620,6 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -937,8 +635,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Hides the confirmation dialog when changing the room lifetime settings.
-         * @summary Hide confirmation dialog when changing room lifetime settings
+         * 
          * @param {SettingsRequestDto} [settingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -958,25 +655,6 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -992,8 +670,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Checks if the \"Private Room\" settings are available or not.
-         * @summary Check the \"Private Room\" availability
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for isAvailablePrivacyRoomSettings operation
@@ -1012,25 +689,6 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -1043,8 +701,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Specifies whether to ask a user for a file name on creation or not.
-         * @summary Ask a new file name
+         * 
          * @param {SettingsRequestDto} [settingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1064,25 +721,6 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -1098,8 +736,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Changes the ability to open the document in the same browser tab.
-         * @summary Open document in the same browser tab
+         * 
          * @param {SettingsRequestDto} [settingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1119,25 +756,6 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -1153,8 +771,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Changes the ability to store the forcesaved file versions.
-         * @summary Change the ability to store the forcesaved files
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for storeForcesave operation
@@ -1173,25 +790,6 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -1204,8 +802,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Changes the ability to upload documents in the original formats as well.
-         * @summary Change the ability to upload original formats
+         * 
          * @param {SettingsRequestDto} [settingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1225,25 +822,6 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -1259,8 +837,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Updates a file version if a file with such a name already exists.
-         * @summary Update a file version if it exists
+         * 
          * @param {SettingsRequestDto} [settingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1279,25 +856,6 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
 
 
     
@@ -1324,8 +882,7 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = FilesSettingsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Changes the access to the third-party settings.
-         * @summary Change the third-party settings access
+         * 
          * @param {SettingsRequestDto} [settingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1339,8 +896,7 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Updates the trash bin auto-clearing setting.
-         * @summary Update the trash bin auto-clearing setting
+         * 
          * @param {AutoCleanupRequestDto} [autoCleanupRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1354,8 +910,7 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Changes the default access rights in the sharing settings.
-         * @summary Change the default access rights
+         * 
          * @param {Array<number>} [requestBody] Sharing rights (None, ReadWrite, Read, Restrict, Varies, Review, Comment, FillForms, CustomFilter, RoomAdmin, Editing, Collaborator).
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1369,8 +924,7 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Specifies whether to confirm the file deletion or not.
-         * @summary Confirm the file deletion
+         * 
          * @param {SettingsRequestDto} [settingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1384,8 +938,7 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Changes the format of the downloaded archive from .zip to .tar.gz. This method uses the body parameters.
-         * @summary Change the archive format (using body parameters)
+         * 
          * @param {DisplayRequestDto} [displayRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1399,8 +952,7 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Checks the document service location URL.
-         * @summary Check the document service URL
+         * 
          * @param {CheckDocServiceUrlRequestDto} [checkDocServiceUrlRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1414,8 +966,7 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Specifies whether to display a file extension or not.
-         * @summary Display a file extension
+         * 
          * @param {SettingsRequestDto} [settingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1429,8 +980,7 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Displays the \"Recent\" folder.
-         * @summary Display the \"Recent\" folder
+         * 
          * @param {DisplayRequestDto} [displayRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1444,8 +994,7 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Changes the ability to share a file externally.
-         * @summary Change the external sharing ability
+         * 
          * @param {DisplayRequestDto} [displayRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1459,8 +1008,7 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Changes the ability to share a file externally on social networks.
-         * @summary Change the external sharing ability on social networks
+         * 
          * @param {DisplayRequestDto} [displayRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1474,8 +1022,7 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Specifies if the file forcesaving is enabled or not.
-         * @summary Change the forcesaving ability
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for forcesave operation
@@ -1488,8 +1035,7 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the trash bin auto-clearing setting.
-         * @summary Get the trash bin auto-clearing setting
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getAutomaticallyCleanUp operation
@@ -1502,8 +1048,7 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the URL address of the connected editors.
-         * @summary Get the document service URL
+         * 
          * @param {boolean} [version] Specifies whether to return the editor version or not.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1517,8 +1062,7 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the information about the \"Documents\" module.
-         * @summary Get the \"Documents\" information
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFilesModule operation
@@ -1531,8 +1075,7 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns all the file settings.
-         * @summary Get file settings
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFilesSettings operation
@@ -1545,8 +1088,7 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Hides the confirmation dialog when canceling operations.
-         * @summary Hide confirmation dialog when canceling operations
+         * 
          * @param {SettingsRequestDto} [settingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1560,8 +1102,7 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Hides the confirmation dialog for saving the file copy in the original format when converting a file.
-         * @summary Hide the confirmation dialog when converting
+         * 
          * @param {HideConfirmConvertRequestDto} [hideConfirmConvertRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1575,8 +1116,7 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Hides the confirmation dialog when changing the room lifetime settings.
-         * @summary Hide confirmation dialog when changing room lifetime settings
+         * 
          * @param {SettingsRequestDto} [settingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1590,8 +1130,7 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Checks if the \"Private Room\" settings are available or not.
-         * @summary Check the \"Private Room\" availability
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for isAvailablePrivacyRoomSettings operation
@@ -1604,8 +1143,7 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Specifies whether to ask a user for a file name on creation or not.
-         * @summary Ask a new file name
+         * 
          * @param {SettingsRequestDto} [settingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1619,8 +1157,7 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Changes the ability to open the document in the same browser tab.
-         * @summary Open document in the same browser tab
+         * 
          * @param {SettingsRequestDto} [settingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1634,8 +1171,7 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Changes the ability to store the forcesaved file versions.
-         * @summary Change the ability to store the forcesaved files
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for storeForcesave operation
@@ -1648,8 +1184,7 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Changes the ability to upload documents in the original formats as well.
-         * @summary Change the ability to upload original formats
+         * 
          * @param {SettingsRequestDto} [settingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1663,8 +1198,7 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Updates a file version if a file with such a name already exists.
-         * @summary Update a file version if it exists
+         * 
          * @param {SettingsRequestDto} [settingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1688,8 +1222,7 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
     const localVarFp = FilesSettingsApiFp(configuration)
     return {
         /**
-         * Changes the access to the third-party settings.
-         * @summary Change the third-party settings access
+         * 
          * @param {SettingsRequestDto} [settingsRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for changeAccessToThirdparty operation
@@ -1700,8 +1233,7 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.changeAccessToThirdparty(settingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Updates the trash bin auto-clearing setting.
-         * @summary Update the trash bin auto-clearing setting
+         * 
          * @param {AutoCleanupRequestDto} [autoCleanupRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for changeAutomaticallyCleanUp operation
@@ -1712,8 +1244,7 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.changeAutomaticallyCleanUp(autoCleanupRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Changes the default access rights in the sharing settings.
-         * @summary Change the default access rights
+         * 
          * @param {Array<number>} [requestBody] Sharing rights (None, ReadWrite, Read, Restrict, Varies, Review, Comment, FillForms, CustomFilter, RoomAdmin, Editing, Collaborator).
          * @param {*} [options] Override http request option.
          * REST API Reference for changeDefaultAccessRights operation
@@ -1724,8 +1255,7 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.changeDefaultAccessRights(requestBody, options).then((request) => request(axios, basePath));
         },
         /**
-         * Specifies whether to confirm the file deletion or not.
-         * @summary Confirm the file deletion
+         * 
          * @param {SettingsRequestDto} [settingsRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for changeDeleteConfirm operation
@@ -1736,8 +1266,7 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.changeDeleteConfirm(settingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Changes the format of the downloaded archive from .zip to .tar.gz. This method uses the body parameters.
-         * @summary Change the archive format (using body parameters)
+         * 
          * @param {DisplayRequestDto} [displayRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for changeDownloadZipFromBody operation
@@ -1748,8 +1277,7 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.changeDownloadZipFromBody(displayRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Checks the document service location URL.
-         * @summary Check the document service URL
+         * 
          * @param {CheckDocServiceUrlRequestDto} [checkDocServiceUrlRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for checkDocServiceUrl operation
@@ -1760,8 +1288,7 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.checkDocServiceUrl(checkDocServiceUrlRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Specifies whether to display a file extension or not.
-         * @summary Display a file extension
+         * 
          * @param {SettingsRequestDto} [settingsRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for displayFileExtension operation
@@ -1772,8 +1299,7 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.displayFileExtension(settingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Displays the \"Recent\" folder.
-         * @summary Display the \"Recent\" folder
+         * 
          * @param {DisplayRequestDto} [displayRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for displayRecent operation
@@ -1784,8 +1310,7 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.displayRecent(displayRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Changes the ability to share a file externally.
-         * @summary Change the external sharing ability
+         * 
          * @param {DisplayRequestDto} [displayRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for externalShare operation
@@ -1796,8 +1321,7 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.externalShare(displayRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Changes the ability to share a file externally on social networks.
-         * @summary Change the external sharing ability on social networks
+         * 
          * @param {DisplayRequestDto} [displayRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for externalShareSocialMedia operation
@@ -1808,8 +1332,7 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.externalShareSocialMedia(displayRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Specifies if the file forcesaving is enabled or not.
-         * @summary Change the forcesaving ability
+         * 
          * @param {*} [options] Override http request option.
          * REST API Reference for forcesave operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/forcesave/
@@ -1819,8 +1342,7 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.forcesave(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the trash bin auto-clearing setting.
-         * @summary Get the trash bin auto-clearing setting
+         * 
          * @param {*} [options] Override http request option.
          * REST API Reference for getAutomaticallyCleanUp operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-automatically-clean-up/
@@ -1830,8 +1352,7 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.getAutomaticallyCleanUp(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the URL address of the connected editors.
-         * @summary Get the document service URL
+         * 
          * @param {boolean} [version] Specifies whether to return the editor version or not.
          * @param {*} [options] Override http request option.
          * REST API Reference for getDocServiceUrl operation
@@ -1842,8 +1363,7 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.getDocServiceUrl(version, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the information about the \"Documents\" module.
-         * @summary Get the \"Documents\" information
+         * 
          * @param {*} [options] Override http request option.
          * REST API Reference for getFilesModule operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-files-module/
@@ -1853,8 +1373,7 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.getFilesModule(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns all the file settings.
-         * @summary Get file settings
+         * 
          * @param {*} [options] Override http request option.
          * REST API Reference for getFilesSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-files-settings/
@@ -1864,8 +1383,7 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.getFilesSettings(options).then((request) => request(axios, basePath));
         },
         /**
-         * Hides the confirmation dialog when canceling operations.
-         * @summary Hide confirmation dialog when canceling operations
+         * 
          * @param {SettingsRequestDto} [settingsRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for hideConfirmCancelOperation operation
@@ -1876,8 +1394,7 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.hideConfirmCancelOperation(settingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Hides the confirmation dialog for saving the file copy in the original format when converting a file.
-         * @summary Hide the confirmation dialog when converting
+         * 
          * @param {HideConfirmConvertRequestDto} [hideConfirmConvertRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for hideConfirmConvert operation
@@ -1888,8 +1405,7 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.hideConfirmConvert(hideConfirmConvertRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Hides the confirmation dialog when changing the room lifetime settings.
-         * @summary Hide confirmation dialog when changing room lifetime settings
+         * 
          * @param {SettingsRequestDto} [settingsRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for hideConfirmRoomLifetime operation
@@ -1900,8 +1416,7 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.hideConfirmRoomLifetime(settingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Checks if the \"Private Room\" settings are available or not.
-         * @summary Check the \"Private Room\" availability
+         * 
          * @param {*} [options] Override http request option.
          * REST API Reference for isAvailablePrivacyRoomSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/is-available-privacy-room-settings/
@@ -1911,8 +1426,7 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.isAvailablePrivacyRoomSettings(options).then((request) => request(axios, basePath));
         },
         /**
-         * Specifies whether to ask a user for a file name on creation or not.
-         * @summary Ask a new file name
+         * 
          * @param {SettingsRequestDto} [settingsRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for keepNewFileName operation
@@ -1923,8 +1437,7 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.keepNewFileName(settingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Changes the ability to open the document in the same browser tab.
-         * @summary Open document in the same browser tab
+         * 
          * @param {SettingsRequestDto} [settingsRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for setOpenEditorInSameTab operation
@@ -1935,8 +1448,7 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.setOpenEditorInSameTab(settingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Changes the ability to store the forcesaved file versions.
-         * @summary Change the ability to store the forcesaved files
+         * 
          * @param {*} [options] Override http request option.
          * REST API Reference for storeForcesave operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/store-forcesave/
@@ -1946,8 +1458,7 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.storeForcesave(options).then((request) => request(axios, basePath));
         },
         /**
-         * Changes the ability to upload documents in the original formats as well.
-         * @summary Change the ability to upload original formats
+         * 
          * @param {SettingsRequestDto} [settingsRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for storeOriginal operation
@@ -1958,8 +1469,7 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.storeOriginal(settingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Updates a file version if a file with such a name already exists.
-         * @summary Update a file version if it exists
+         * 
          * @param {SettingsRequestDto} [settingsRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for updateFileIfExist operation
@@ -1980,8 +1490,7 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
  */
 export class FilesSettingsApi extends BaseAPI {
     /**
-     * Changes the access to the third-party settings.
-     * @summary Change the third-party settings access
+     * 
      * @param {SettingsRequestDto} [settingsRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1992,8 +1501,7 @@ export class FilesSettingsApi extends BaseAPI {
     }
 
     /**
-     * Updates the trash bin auto-clearing setting.
-     * @summary Update the trash bin auto-clearing setting
+     * 
      * @param {AutoCleanupRequestDto} [autoCleanupRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2004,8 +1512,7 @@ export class FilesSettingsApi extends BaseAPI {
     }
 
     /**
-     * Changes the default access rights in the sharing settings.
-     * @summary Change the default access rights
+     * 
      * @param {Array<number>} [requestBody] Sharing rights (None, ReadWrite, Read, Restrict, Varies, Review, Comment, FillForms, CustomFilter, RoomAdmin, Editing, Collaborator).
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2016,8 +1523,7 @@ export class FilesSettingsApi extends BaseAPI {
     }
 
     /**
-     * Specifies whether to confirm the file deletion or not.
-     * @summary Confirm the file deletion
+     * 
      * @param {SettingsRequestDto} [settingsRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2028,8 +1534,7 @@ export class FilesSettingsApi extends BaseAPI {
     }
 
     /**
-     * Changes the format of the downloaded archive from .zip to .tar.gz. This method uses the body parameters.
-     * @summary Change the archive format (using body parameters)
+     * 
      * @param {DisplayRequestDto} [displayRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2040,8 +1545,7 @@ export class FilesSettingsApi extends BaseAPI {
     }
 
     /**
-     * Checks the document service location URL.
-     * @summary Check the document service URL
+     * 
      * @param {CheckDocServiceUrlRequestDto} [checkDocServiceUrlRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2052,8 +1556,7 @@ export class FilesSettingsApi extends BaseAPI {
     }
 
     /**
-     * Specifies whether to display a file extension or not.
-     * @summary Display a file extension
+     * 
      * @param {SettingsRequestDto} [settingsRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2064,8 +1567,7 @@ export class FilesSettingsApi extends BaseAPI {
     }
 
     /**
-     * Displays the \"Recent\" folder.
-     * @summary Display the \"Recent\" folder
+     * 
      * @param {DisplayRequestDto} [displayRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2076,8 +1578,7 @@ export class FilesSettingsApi extends BaseAPI {
     }
 
     /**
-     * Changes the ability to share a file externally.
-     * @summary Change the external sharing ability
+     * 
      * @param {DisplayRequestDto} [displayRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2088,8 +1589,7 @@ export class FilesSettingsApi extends BaseAPI {
     }
 
     /**
-     * Changes the ability to share a file externally on social networks.
-     * @summary Change the external sharing ability on social networks
+     * 
      * @param {DisplayRequestDto} [displayRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2100,8 +1600,7 @@ export class FilesSettingsApi extends BaseAPI {
     }
 
     /**
-     * Specifies if the file forcesaving is enabled or not.
-     * @summary Change the forcesaving ability
+     * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesSettingsApi
@@ -2111,8 +1610,7 @@ export class FilesSettingsApi extends BaseAPI {
     }
 
     /**
-     * Returns the trash bin auto-clearing setting.
-     * @summary Get the trash bin auto-clearing setting
+     * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesSettingsApi
@@ -2122,8 +1620,7 @@ export class FilesSettingsApi extends BaseAPI {
     }
 
     /**
-     * Returns the URL address of the connected editors.
-     * @summary Get the document service URL
+     * 
      * @param {boolean} [version] Specifies whether to return the editor version or not.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2134,8 +1631,7 @@ export class FilesSettingsApi extends BaseAPI {
     }
 
     /**
-     * Returns the information about the \"Documents\" module.
-     * @summary Get the \"Documents\" information
+     * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesSettingsApi
@@ -2145,8 +1641,7 @@ export class FilesSettingsApi extends BaseAPI {
     }
 
     /**
-     * Returns all the file settings.
-     * @summary Get file settings
+     * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesSettingsApi
@@ -2156,8 +1651,7 @@ export class FilesSettingsApi extends BaseAPI {
     }
 
     /**
-     * Hides the confirmation dialog when canceling operations.
-     * @summary Hide confirmation dialog when canceling operations
+     * 
      * @param {SettingsRequestDto} [settingsRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2168,8 +1662,7 @@ export class FilesSettingsApi extends BaseAPI {
     }
 
     /**
-     * Hides the confirmation dialog for saving the file copy in the original format when converting a file.
-     * @summary Hide the confirmation dialog when converting
+     * 
      * @param {HideConfirmConvertRequestDto} [hideConfirmConvertRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2180,8 +1673,7 @@ export class FilesSettingsApi extends BaseAPI {
     }
 
     /**
-     * Hides the confirmation dialog when changing the room lifetime settings.
-     * @summary Hide confirmation dialog when changing room lifetime settings
+     * 
      * @param {SettingsRequestDto} [settingsRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2192,8 +1684,7 @@ export class FilesSettingsApi extends BaseAPI {
     }
 
     /**
-     * Checks if the \"Private Room\" settings are available or not.
-     * @summary Check the \"Private Room\" availability
+     * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesSettingsApi
@@ -2203,8 +1694,7 @@ export class FilesSettingsApi extends BaseAPI {
     }
 
     /**
-     * Specifies whether to ask a user for a file name on creation or not.
-     * @summary Ask a new file name
+     * 
      * @param {SettingsRequestDto} [settingsRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2215,8 +1705,7 @@ export class FilesSettingsApi extends BaseAPI {
     }
 
     /**
-     * Changes the ability to open the document in the same browser tab.
-     * @summary Open document in the same browser tab
+     * 
      * @param {SettingsRequestDto} [settingsRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2227,8 +1716,7 @@ export class FilesSettingsApi extends BaseAPI {
     }
 
     /**
-     * Changes the ability to store the forcesaved file versions.
-     * @summary Change the ability to store the forcesaved files
+     * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesSettingsApi
@@ -2238,8 +1726,7 @@ export class FilesSettingsApi extends BaseAPI {
     }
 
     /**
-     * Changes the ability to upload documents in the original formats as well.
-     * @summary Change the ability to upload original formats
+     * 
      * @param {SettingsRequestDto} [settingsRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2250,8 +1737,7 @@ export class FilesSettingsApi extends BaseAPI {
     }
 
     /**
-     * Updates a file version if a file with such a name already exists.
-     * @summary Update a file version if it exists
+     * 
      * @param {SettingsRequestDto} [settingsRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

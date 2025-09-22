@@ -1,11 +1,11 @@
-# FormRoleWrapper
+# TelegramStatusWrapper
 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**FormRole**](FormRole.md) |  | [optional] [default to undefined]
+**response** | [**TelegramStatusDto**](TelegramStatusDto.md) |  | [optional] [default to undefined]
 **count** | **number** |  | [optional] [default to undefined]
 **links** | [**Array&lt;ActiveConnectionsWrapperLinksInner&gt;**](ActiveConnectionsWrapperLinksInner.md) |  | [optional] [default to undefined]
 **status** | **number** |  | [optional] [default to undefined]
@@ -14,9 +14,9 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FormRoleWrapper } from '@onlyoffice/docspace-api-sdk';
+import { TelegramStatusWrapper } from '@onlyoffice/docspace-api-sdk';
 
-const instance: FormRoleWrapper = {
+const instance: TelegramStatusWrapper = {
     response,
     count,
     links,

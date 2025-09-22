@@ -28,7 +28,7 @@ export interface CheckDocServiceUrlRequestDto {
      * @type {string}
      * @memberof CheckDocServiceUrlRequestDto
      */
-    'docServiceUrl'?: string | null;
+    'docServiceUrl': string | null;
     /**
      * The ONLYOFFICE Docs URL address in the local private network.
      * @type {string}

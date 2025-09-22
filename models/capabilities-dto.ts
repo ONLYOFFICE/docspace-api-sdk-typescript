@@ -28,7 +28,7 @@ export interface CapabilitiesDto {
      * @type {boolean}
      * @memberof CapabilitiesDto
      */
-    'ldapEnabled'?: boolean;
+    'ldapEnabled': boolean;
     /**
      * The LDAP domain.
      * @type {string}
@@ -40,30 +40,30 @@ export interface CapabilitiesDto {
      * @type {Array<string>}
      * @memberof CapabilitiesDto
      */
-    'providers'?: Array<string> | null;
+    'providers': Array<string> | null;
     /**
      * The SP login label.
      * @type {string}
      * @memberof CapabilitiesDto
      */
-    'ssoLabel'?: string | null;
+    'ssoLabel': string | null;
     /**
      * Specifies if OAuth is enabled or not.
      * @type {boolean}
      * @memberof CapabilitiesDto
      */
-    'oauthEnabled'?: boolean;
+    'oauthEnabled': boolean;
     /**
      * The SSO URL. If this parameter is empty, then the SSO settings are disabled.
      * @type {string}
      * @memberof CapabilitiesDto
      */
-    'ssoUrl'?: string | null;
+    'ssoUrl': string | null;
     /**
      * Specifies if identity server is enabled or not
      * @type {boolean}
      * @memberof CapabilitiesDto
      */
-    'identityServerEnabled'?: boolean;
+    'identityServerEnabled': boolean;
 }
 

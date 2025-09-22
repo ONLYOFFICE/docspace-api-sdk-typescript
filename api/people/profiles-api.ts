@@ -746,15 +746,17 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
          * Updates the data for the selected portal user with the first name, last name, email address, and/or optional parameters specified in the request.
          * @summary Update a user
          * @param {string} userid The user ID.
-         * @param {UpdateMemberRequestDto} [updateMemberRequestDto] The request parameters for updating the user information.
+         * @param {UpdateMemberRequestDto} updateMemberRequestDto The request parameters for updating the user information.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateMember operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-member/
          */
-        updateMember: async (userid: string, updateMemberRequestDto?: UpdateMemberRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateMember: async (userid: string, updateMemberRequestDto: UpdateMemberRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userid' is not null or undefined
             assertParamExists('updateMember', 'userid', userid)
+            // verify required parameter 'updateMemberRequestDto' is not null or undefined
+            assertParamExists('updateMember', 'updateMemberRequestDto', updateMemberRequestDto)
             const localVarPath = `/api/2.0/people/{userid}`
                 .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1059,13 +1061,13 @@ export const ProfilesApiFp = function(configuration?: Configuration) {
          * Updates the data for the selected portal user with the first name, last name, email address, and/or optional parameters specified in the request.
          * @summary Update a user
          * @param {string} userid The user ID.
-         * @param {UpdateMemberRequestDto} [updateMemberRequestDto] The request parameters for updating the user information.
+         * @param {UpdateMemberRequestDto} updateMemberRequestDto The request parameters for updating the user information.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateMember operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-member/
          */
-        async updateMember(userid: string, updateMemberRequestDto?: UpdateMemberRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
+        async updateMember(userid: string, updateMemberRequestDto: UpdateMemberRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateMember(userid, updateMemberRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ProfilesApi.updateMember']?.[localVarOperationServerIndex]?.url;
@@ -1250,13 +1252,13 @@ export const ProfilesApiFactory = function (configuration?: Configuration, baseP
          * Updates the data for the selected portal user with the first name, last name, email address, and/or optional parameters specified in the request.
          * @summary Update a user
          * @param {string} userid The user ID.
-         * @param {UpdateMemberRequestDto} [updateMemberRequestDto] The request parameters for updating the user information.
+         * @param {UpdateMemberRequestDto} updateMemberRequestDto The request parameters for updating the user information.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateMember operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-member/
          * @throws {RequiredError}
          */
-        updateMember(userid: string, updateMemberRequestDto?: UpdateMemberRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
+        updateMember(userid: string, updateMemberRequestDto: UpdateMemberRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
             return localVarFp.updateMember(userid, updateMemberRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1435,12 +1437,12 @@ export class ProfilesApi extends BaseAPI {
      * Updates the data for the selected portal user with the first name, last name, email address, and/or optional parameters specified in the request.
      * @summary Update a user
      * @param {string} userid The user ID.
-     * @param {UpdateMemberRequestDto} [updateMemberRequestDto] The request parameters for updating the user information.
+     * @param {UpdateMemberRequestDto} updateMemberRequestDto The request parameters for updating the user information.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProfilesApi
      */
-    public updateMember(userid: string, updateMemberRequestDto?: UpdateMemberRequestDto, options?: RawAxiosRequestConfig) {
+    public updateMember(userid: string, updateMemberRequestDto: UpdateMemberRequestDto, options?: RawAxiosRequestConfig) {
         return ProfilesApiFp(this.configuration).updateMember(userid, updateMemberRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 

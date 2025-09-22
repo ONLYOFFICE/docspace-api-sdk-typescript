@@ -28,7 +28,7 @@ export interface PasswordSettingsRequestsDto {
      * @type {number}
      * @memberof PasswordSettingsRequestsDto
      */
-    'minLength'?: number;
+    'minLength': number;
     /**
      * Specifies whether the password should contain the uppercase letters or not.
      * @type {boolean}

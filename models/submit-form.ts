@@ -18,13 +18,13 @@
 
 
 /**
- * The \"Complete & Submit\" button settings.
+ * The Complete & Submit button settings.
  * @export
  * @interface SubmitForm
  */
 export interface SubmitForm {
     /**
-     * Specifies whether the \"Complete  & Submit\" button will be displayed or hidden on the top toolbar.
+     * Specifies whether the Complete  & Submit button will be displayed or hidden on the top toolbar.
      * @type {boolean}
      * @memberof SubmitForm
      */

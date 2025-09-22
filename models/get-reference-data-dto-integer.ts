@@ -34,7 +34,7 @@ export interface GetReferenceDataDtoInteger {
      * @type {string}
      * @memberof GetReferenceDataDtoInteger
      */
-    'instanceId'?: string | null;
+    'instanceId': string | null;
     /**
      * The source file ID.
      * @type {number}

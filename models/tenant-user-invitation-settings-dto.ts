@@ -28,12 +28,12 @@ export interface TenantUserInvitationSettingsDto {
      * @type {boolean}
      * @memberof TenantUserInvitationSettingsDto
      */
-    'allowInvitingMembers'?: boolean;
+    'allowInvitingMembers': boolean;
     /**
      * Allow all DocSpace members to invite external guests to rooms.
      * @type {boolean}
      * @memberof TenantUserInvitationSettingsDto
      */
-    'allowInvitingGuests'?: boolean;
+    'allowInvitingGuests': boolean;
 }
 

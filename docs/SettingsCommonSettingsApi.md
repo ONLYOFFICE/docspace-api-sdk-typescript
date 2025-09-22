@@ -196,7 +196,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] | The ID of the portal theme to delete. | (optional) defaults to undefined|
+| **id** | [**number**] | The ID of the portal theme to delete. | defaults to undefined|
 
 
 ### Return type
@@ -218,7 +218,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
 
-let id: number; //The ID of the portal theme to delete. (optional) (default to undefined)
+let id: number; //The ID of the portal theme to delete. (default to undefined)
 
 const { status, data } = await apiInstance.deletePortalColorTheme(
     id
@@ -576,7 +576,7 @@ const { status, data } = await apiInstance.getSocketSettings();
 # **getSupportedCultures**
 > STRINGArrayWrapper getSupportedCultures()
 
-Returns a list of all the available portal languages in the format of a two-letter or four-letter language code (e.g. \"de\", \"en-US\", etc.).
+Returns a list of all the available portal languages in the format of a two-letter or four-letter language code (e.g. de, en-US, etc.).
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-supported-cultures/).
 

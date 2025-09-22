@@ -6,7 +6,7 @@ The information about the file editing history author.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | The author ID. | [optional] [default to undefined]
+**id** | **string** | The author ID. | [default to undefined]
 **name** | **string** | The author name. | [optional] [default to undefined]
 
 ## Example

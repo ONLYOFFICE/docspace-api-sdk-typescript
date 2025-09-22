@@ -31,7 +31,7 @@ export interface WatermarkDto {
      * @type {WatermarkAdditions}
      * @memberof WatermarkDto
      */
-    'additions'?: WatermarkAdditions;
+    'additions': WatermarkAdditions;
     /**
      * The watermark text.
      * @type {string}

@@ -31,7 +31,7 @@ export interface TaskProgressResponseDto {
      * @type {string}
      * @memberof TaskProgressResponseDto
      */
-    'id'?: string | null;
+    'id': string | null;
     /**
      * The task progress error message.
      * @type {string}
@@ -43,19 +43,19 @@ export interface TaskProgressResponseDto {
      * @type {number}
      * @memberof TaskProgressResponseDto
      */
-    'percentage'?: number;
+    'percentage': number;
     /**
      * Specifies if the task peogress is completed or not.
      * @type {boolean}
      * @memberof TaskProgressResponseDto
      */
-    'isCompleted'?: boolean;
+    'isCompleted': boolean;
     /**
      * 
      * @type {DistributedTaskStatus}
      * @memberof TaskProgressResponseDto
      */
-    'status'?: DistributedTaskStatus;
+    'status': DistributedTaskStatus;
 }
 
 

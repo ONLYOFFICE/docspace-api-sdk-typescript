@@ -28,13 +28,13 @@ export interface RoomTemplateStatusDto {
      * @type {number}
      * @memberof RoomTemplateStatusDto
      */
-    'templateId'?: number;
+    'templateId': number;
     /**
      * The progress of the room template creation process.
      * @type {number}
      * @memberof RoomTemplateStatusDto
      */
-    'progress'?: number;
+    'progress': number;
     /**
      * The error message that is sent when the room template is not created successfully.
      * @type {string}
@@ -46,6 +46,6 @@ export interface RoomTemplateStatusDto {
      * @type {boolean}
      * @memberof RoomTemplateStatusDto
      */
-    'isCompleted'?: boolean;
+    'isCompleted': boolean;
 }
 

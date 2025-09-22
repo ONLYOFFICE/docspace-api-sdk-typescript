@@ -48,7 +48,7 @@ export interface EmbeddedConfig {
      */
     'shareUrl'?: string | null;
     /**
-     * The place for the embedded viewer toolbar, can be either \"top\" or \"bottom\".
+     * The place for the embedded viewer toolbar, can be either top or bottom.
      * @type {string}
      * @memberof EmbeddedConfig
      */

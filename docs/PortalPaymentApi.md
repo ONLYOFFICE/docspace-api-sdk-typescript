@@ -6,11 +6,12 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |------------- | ------------- | -------------|
 |[**calculateWalletPayment**](#calculatewalletpayment) | **PUT** /api/2.0/portal/payment/calculatewallet | Calculate amount of the wallet payment|
 |[**changeTenantWalletServiceState**](#changetenantwalletservicestate) | **POST** /api/2.0/portal/payment/servicestate | Change wallet service state|
-|[**createCustomerOperationsReport**](#createcustomeroperationsreport) | **POST** /api/2.0/portal/payment/customer/operationsreport | Generate the customer operations report|
+|[**createCustomerOperationsReport**](#createcustomeroperationsreport) | **POST** /api/2.0/portal/payment/customer/operationsreport | Start generating the customer operations report|
 |[**getCheckoutSetupUrl**](#getcheckoutsetupurl) | **GET** /api/2.0/portal/payment/chechoutsetupurl | Get the checkout setup page URL|
 |[**getCustomerBalance**](#getcustomerbalance) | **GET** /api/2.0/portal/payment/customer/balance | Get the customer balance|
 |[**getCustomerInfo**](#getcustomerinfo) | **GET** /api/2.0/portal/payment/customerinfo | Get the customer info|
 |[**getCustomerOperations**](#getcustomeroperations) | **GET** /api/2.0/portal/payment/customer/operations | Get the customer operations|
+|[**getCustomerOperationsReport**](#getcustomeroperationsreport) | **GET** /api/2.0/portal/payment/customer/operationsreport | Get the status of generating a customer operations report|
 |[**getPaymentAccount**](#getpaymentaccount) | **GET** /api/2.0/portal/payment/account | Get the payment account|
 |[**getPaymentCurrencies**](#getpaymentcurrencies) | **GET** /api/2.0/portal/payment/currencies | Get currencies|
 |[**getPaymentQuotas**](#getpaymentquotas) | **GET** /api/2.0/portal/payment/quotas | Get quotas|
@@ -23,6 +24,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**getWalletServices**](#getwalletservices) | **GET** /api/2.0/portal/payment/walletservices | Get wallet services|
 |[**sendPaymentRequest**](#sendpaymentrequest) | **POST** /api/2.0/portal/payment/request | Send a payment request|
 |[**setTenantWalletSettings**](#settenantwalletsettings) | **POST** /api/2.0/portal/payment/topupsettings | Set wallet auto top up settings|
+|[**terminateCustomerOperationsReport**](#terminatecustomeroperationsreport) | **DELETE** /api/2.0/portal/payment/customer/operationsreport | Terminate the generating a customer operations report|
 |[**topUpDeposit**](#topupdeposit) | **POST** /api/2.0/portal/payment/deposit | Put money on deposit|
 |[**updatePayment**](#updatepayment) | **PUT** /api/2.0/portal/payment/update | Update the payment quantity|
 |[**updateWalletPayment**](#updatewalletpayment) | **PUT** /api/2.0/portal/payment/updatewallet | Update the wallet payment quantity|
@@ -140,9 +142,9 @@ const { status, data } = await apiInstance.changeTenantWalletServiceState(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **createCustomerOperationsReport**
-> StringWrapper createCustomerOperationsReport()
+> DocumentBuilderTaskWrapper createCustomerOperationsReport()
 
-Generates the customer operations report as csv file and save in Documents.
+Start generating the customer operations report as xlsx file and save in Documents.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-customer-operations-report/).
 
@@ -155,7 +157,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-**StringWrapper**
+**DocumentBuilderTaskWrapper**
 
 ### Authorization
 
@@ -189,7 +191,7 @@ const { status, data } = await apiInstance.createCustomerOperationsReport(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | URL to the csv report file |  -  |
+|**200** | Ok |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -372,8 +374,9 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 |------------- | ------------- | ------------- | -------------|
 | **startDate** | [**string**] | Start date | (optional) defaults to undefined|
 | **endDate** | [**string**] | End date | (optional) defaults to undefined|
+| **participantName** | [**string**] | Participant name | (optional) defaults to undefined|
 | **credit** | [**boolean**] | Include credit operations (true by default) | (optional) defaults to undefined|
-| **withdrawal** | [**boolean**] | Include withdrawal operations (true by default) | (optional) defaults to undefined|
+| **debit** | [**boolean**] | Include debit operations (true by default) | (optional) defaults to undefined|
 | **offset** | [**number**] | Offset (0 by default) | (optional) defaults to undefined|
 | **limit** | [**number**] | Limit (25 by default) | (optional) defaults to undefined|
 
@@ -399,16 +402,18 @@ const apiInstance = new PortalPaymentApi(configuration);
 
 let startDate: string; //Start date (optional) (default to undefined)
 let endDate: string; //End date (optional) (default to undefined)
+let participantName: string; //Participant name (optional) (default to undefined)
 let credit: boolean; //Include credit operations (true by default) (optional) (default to undefined)
-let withdrawal: boolean; //Include withdrawal operations (true by default) (optional) (default to undefined)
+let debit: boolean; //Include debit operations (true by default) (optional) (default to undefined)
 let offset: number; //Offset (0 by default) (optional) (default to undefined)
 let limit: number; //Limit (25 by default) (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getCustomerOperations(
     startDate,
     endDate,
+    participantName,
     credit,
-    withdrawal,
+    debit,
     offset,
     limit
 );
@@ -426,6 +431,53 @@ const { status, data } = await apiInstance.getCustomerOperations(
 |**200** | The customer operations |  -  |
 |**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getCustomerOperationsReport**
+> DocumentBuilderTaskWrapper getCustomerOperationsReport()
+
+Get the status of generating a customer operations report.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-operations-report/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**DocumentBuilderTaskWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+const { status, data } = await apiInstance.getCustomerOperationsReport();
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Ok |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -642,7 +694,7 @@ const { status, data } = await apiInstance.getPaymentUrl(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getPortalPrices**
-> ObjectWrapper getPortalPrices()
+> UnknownWrapper getPortalPrices()
 
 Returns the available portal prices.
 
@@ -654,7 +706,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**ObjectWrapper**
+**UnknownWrapper**
 
 ### Authorization
 
@@ -1050,6 +1102,53 @@ const { status, data } = await apiInstance.setTenantWalletSettings(
 |**200** | The wallet auto top up settings |  -  |
 |**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **terminateCustomerOperationsReport**
+> terminateCustomerOperationsReport()
+
+Terminates the generating a customer operations report.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-customer-operations-report/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+const { status, data } = await apiInstance.terminateCustomerOperationsReport();
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Ok |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -6,8 +6,8 @@ The result of the cover request containing the cover image data.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | The cover unique identifier. | [optional] [default to undefined]
-**data** | **string** | The cover image data. | [optional] [default to undefined]
+**id** | **string** | The cover unique identifier. | [default to undefined]
+**data** | **string** | The cover image data. | [default to undefined]
 
 ## Example
 

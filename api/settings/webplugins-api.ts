@@ -262,15 +262,17 @@ export const WebpluginsApiAxiosParamCreator = function (configuration?: Configur
          * Updates a web plugin with the parameters specified in the request.
          * @summary Update a web plugin
          * @param {string} name The web plugin name.
-         * @param {WebPluginRequests} [webPluginRequests] The configuration settings for the web plugin instance.
+         * @param {WebPluginRequests} webPluginRequests The configuration settings for the web plugin instance.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateWebPlugin operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-web-plugin/
          */
-        updateWebPlugin: async (name: string, webPluginRequests?: WebPluginRequests, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateWebPlugin: async (name: string, webPluginRequests: WebPluginRequests, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'name' is not null or undefined
             assertParamExists('updateWebPlugin', 'name', name)
+            // verify required parameter 'webPluginRequests' is not null or undefined
+            assertParamExists('updateWebPlugin', 'webPluginRequests', webPluginRequests)
             const localVarPath = `/api/2.0/settings/webplugins/{name}`
                 .replace(`{${"name"}}`, encodeURIComponent(String(name)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -391,13 +393,13 @@ export const WebpluginsApiFp = function(configuration?: Configuration) {
          * Updates a web plugin with the parameters specified in the request.
          * @summary Update a web plugin
          * @param {string} name The web plugin name.
-         * @param {WebPluginRequests} [webPluginRequests] The configuration settings for the web plugin instance.
+         * @param {WebPluginRequests} webPluginRequests The configuration settings for the web plugin instance.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateWebPlugin operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-web-plugin/
          */
-        async updateWebPlugin(name: string, webPluginRequests?: WebPluginRequests, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async updateWebPlugin(name: string, webPluginRequests: WebPluginRequests, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateWebPlugin(name, webPluginRequests, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['WebpluginsApi.updateWebPlugin']?.[localVarOperationServerIndex]?.url;
@@ -465,13 +467,13 @@ export const WebpluginsApiFactory = function (configuration?: Configuration, bas
          * Updates a web plugin with the parameters specified in the request.
          * @summary Update a web plugin
          * @param {string} name The web plugin name.
-         * @param {WebPluginRequests} [webPluginRequests] The configuration settings for the web plugin instance.
+         * @param {WebPluginRequests} webPluginRequests The configuration settings for the web plugin instance.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateWebPlugin operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-web-plugin/
          * @throws {RequiredError}
          */
-        updateWebPlugin(name: string, webPluginRequests?: WebPluginRequests, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        updateWebPlugin(name: string, webPluginRequests: WebPluginRequests, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.updateWebPlugin(name, webPluginRequests, options).then((request) => request(axios, basePath));
         },
     };
@@ -536,12 +538,12 @@ export class WebpluginsApi extends BaseAPI {
      * Updates a web plugin with the parameters specified in the request.
      * @summary Update a web plugin
      * @param {string} name The web plugin name.
-     * @param {WebPluginRequests} [webPluginRequests] The configuration settings for the web plugin instance.
+     * @param {WebPluginRequests} webPluginRequests The configuration settings for the web plugin instance.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WebpluginsApi
      */
-    public updateWebPlugin(name: string, webPluginRequests?: WebPluginRequests, options?: RawAxiosRequestConfig) {
+    public updateWebPlugin(name: string, webPluginRequests: WebPluginRequests, options?: RawAxiosRequestConfig) {
         return WebpluginsApiFp(this.configuration).updateWebPlugin(name, webPluginRequests, options).then((request) => request(this.axios, this.basePath));
     }
 }

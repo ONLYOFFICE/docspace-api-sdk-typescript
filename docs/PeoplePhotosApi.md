@@ -11,7 +11,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**uploadMemberPhoto**](#uploadmemberphoto) | **POST** /api/2.0/people/{userid}/photo | Upload a user photo|
 
 # **createMemberPhotoThumbnails**
-> ThumbnailsDataWrapper createMemberPhotoThumbnails()
+> ThumbnailsDataWrapper createMemberPhotoThumbnails(thumbnailsRequest)
 
 Creates the user photo thumbnails by coordinates of the original image specified in the request.
 
@@ -46,7 +46,7 @@ const configuration = new Configuration();
 const apiInstance = new PeoplePhotosApi(configuration);
 
 let userid: string; //The user ID. (default to undefined)
-let thumbnailsRequest: ThumbnailsRequest; //The thumbnail request. (optional)
+let thumbnailsRequest: ThumbnailsRequest; //The thumbnail request.
 
 const { status, data } = await apiInstance.createMemberPhotoThumbnails(
     userid,
@@ -183,7 +183,7 @@ const { status, data } = await apiInstance.getMemberPhoto(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **updateMemberPhoto**
-> ThumbnailsDataWrapper updateMemberPhoto()
+> ThumbnailsDataWrapper updateMemberPhoto(updatePhotoMemberRequest)
 
 Updates a photo of the user with the ID specified in the request.
 
@@ -218,7 +218,7 @@ const configuration = new Configuration();
 const apiInstance = new PeoplePhotosApi(configuration);
 
 let userid: string; //The user ID. (default to undefined)
-let updatePhotoMemberRequest: UpdatePhotoMemberRequest; //The request parameters for updating a photo. (optional)
+let updatePhotoMemberRequest: UpdatePhotoMemberRequest; //The request parameters for updating a photo.
 
 const { status, data } = await apiInstance.updateMemberPhoto(
     userid,

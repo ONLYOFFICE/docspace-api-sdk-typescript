@@ -31,7 +31,7 @@ export interface DocumentBuilderTaskDto {
      * @type {string}
      * @memberof DocumentBuilderTaskDto
      */
-    'id'?: string | null;
+    'id': string | null;
     /**
      * The error message occured while the document building process.
      * @type {string}
@@ -43,19 +43,19 @@ export interface DocumentBuilderTaskDto {
      * @type {number}
      * @memberof DocumentBuilderTaskDto
      */
-    'percentage'?: number;
+    'percentage': number;
     /**
      * Specifies whether the document building process is completed or not.
      * @type {boolean}
      * @memberof DocumentBuilderTaskDto
      */
-    'isCompleted'?: boolean;
+    'isCompleted': boolean;
     /**
      * 
      * @type {DistributedTaskStatus}
      * @memberof DocumentBuilderTaskDto
      */
-    'status'?: DistributedTaskStatus;
+    'status': DistributedTaskStatus;
     /**
      * The result file ID.
      * @type {any}

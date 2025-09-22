@@ -28,13 +28,13 @@ export interface TfaSettingsDto {
      * @type {string}
      * @memberof TfaSettingsDto
      */
-    'id'?: string | null;
+    'id': string | null;
     /**
      * The display name or description of the TFA configuration.
      * @type {string}
      * @memberof TfaSettingsDto
      */
-    'title'?: string | null;
+    'title': string | null;
     /**
      * Indicates whether the TFA configuration is currently active.
      * @type {boolean}

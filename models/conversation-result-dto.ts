@@ -31,19 +31,19 @@ export interface ConversationResultDto {
      * @type {string}
      * @memberof ConversationResultDto
      */
-    'id'?: string | null;
+    'id': string | null;
     /**
      * 
      * @type {FileOperationType}
      * @memberof ConversationResultDto
      */
-    'Operation'?: FileOperationType;
+    'Operation': FileOperationType;
     /**
      * The conversion operation progress.
      * @type {number}
      * @memberof ConversationResultDto
      */
-    'progress'?: number;
+    'progress': number;
     /**
      * The source file for the conversion.
      * @type {string}

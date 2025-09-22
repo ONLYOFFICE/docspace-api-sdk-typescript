@@ -31,7 +31,7 @@ export interface ActiveConnectionsDto {
      * @type {number}
      * @memberof ActiveConnectionsDto
      */
-    'loginEvent'?: number;
+    'loginEvent': number;
     /**
      * The list of active connection items.
      * @type {Array<ActiveConnectionsItemDto>}

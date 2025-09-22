@@ -6,7 +6,7 @@ The webhook configuration parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **number** | The webhook ID. | [optional] [default to undefined]
+**id** | **number** | The webhook ID. | [default to undefined]
 **name** | **string** | The webhook name. | [optional] [default to undefined]
 **uri** | **string** | The webhook URI. | [optional] [default to undefined]
 **enabled** | **boolean** | Specifies if the webhooks are enabled or not. | [optional] [default to undefined]

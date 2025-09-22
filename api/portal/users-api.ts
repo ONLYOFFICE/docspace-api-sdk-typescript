@@ -253,14 +253,18 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * Sends congratulations to the user after registering a portal.
          * @summary Send congratulations
-         * @param {string} [userid] The user ID to receive the congratulatory message.
-         * @param {string} [key] The template identifier or email configuration key.
+         * @param {string} userid The user ID to receive the congratulatory message.
+         * @param {string} key The template identifier or email configuration key.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for sendCongratulations operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-congratulations/
          */
-        sendCongratulations: async (userid?: string, key?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        sendCongratulations: async (userid: string, key: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userid' is not null or undefined
+            assertParamExists('sendCongratulations', 'userid', userid)
+            // verify required parameter 'key' is not null or undefined
+            assertParamExists('sendCongratulations', 'key', key)
             const localVarPath = `/api/2.0/portal/sendcongratulations`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -363,14 +367,14 @@ export const UsersApiFp = function(configuration?: Configuration) {
         /**
          * Sends congratulations to the user after registering a portal.
          * @summary Send congratulations
-         * @param {string} [userid] The user ID to receive the congratulatory message.
-         * @param {string} [key] The template identifier or email configuration key.
+         * @param {string} userid The user ID to receive the congratulatory message.
+         * @param {string} key The template identifier or email configuration key.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for sendCongratulations operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-congratulations/
          */
-        async sendCongratulations(userid?: string, key?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async sendCongratulations(userid: string, key: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.sendCongratulations(userid, key, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UsersApi.sendCongratulations']?.[localVarOperationServerIndex]?.url;
@@ -435,14 +439,14 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
         /**
          * Sends congratulations to the user after registering a portal.
          * @summary Send congratulations
-         * @param {string} [userid] The user ID to receive the congratulatory message.
-         * @param {string} [key] The template identifier or email configuration key.
+         * @param {string} userid The user ID to receive the congratulatory message.
+         * @param {string} key The template identifier or email configuration key.
          * @param {*} [options] Override http request option.
          * REST API Reference for sendCongratulations operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-congratulations/
          * @throws {RequiredError}
          */
-        sendCongratulations(userid?: string, key?: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        sendCongratulations(userid: string, key: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.sendCongratulations(userid, key, options).then((request) => request(axios, basePath));
         },
     };
@@ -504,13 +508,13 @@ export class UsersApi extends BaseAPI {
     /**
      * Sends congratulations to the user after registering a portal.
      * @summary Send congratulations
-     * @param {string} [userid] The user ID to receive the congratulatory message.
-     * @param {string} [key] The template identifier or email configuration key.
+     * @param {string} userid The user ID to receive the congratulatory message.
+     * @param {string} key The template identifier or email configuration key.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    public sendCongratulations(userid?: string, key?: string, options?: RawAxiosRequestConfig) {
+    public sendCongratulations(userid: string, key: string, options?: RawAxiosRequestConfig) {
         return UsersApiFp(this.configuration).sendCongratulations(userid, key, options).then((request) => request(this.axios, this.basePath));
     }
 }

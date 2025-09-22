@@ -31,7 +31,7 @@ export interface DarkThemeSettingsRequestDto {
      * @type {DarkThemeSettingsType}
      * @memberof DarkThemeSettingsRequestDto
      */
-    'theme'?: DarkThemeSettingsType;
+    'theme': DarkThemeSettingsType;
 }
 
 

@@ -6,10 +6,10 @@ The file history information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**action** | [**HistoryAction**](HistoryAction.md) |  | [optional] [default to undefined]
-**initiator** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] [default to undefined]
-**date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
-**data** | [**HistoryData**](HistoryData.md) |  | [optional] [default to undefined]
+**action** | [**HistoryAction**](HistoryAction.md) |  | [default to undefined]
+**initiator** | [**EmployeeDto**](EmployeeDto.md) |  | [default to undefined]
+**date** | [**ApiDateTime**](ApiDateTime.md) |  | [default to undefined]
+**data** | [**HistoryData**](HistoryData.md) |  | [default to undefined]
 **related** | [**Array&lt;HistoryDto&gt;**](HistoryDto.md) | The list of related history. | [optional] [default to undefined]
 
 ## Example

@@ -7,7 +7,7 @@ The parameters for deleting a folder.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **deleteAfter** | **boolean** | Specifies whether to delete a folder after the editing session is finished or not. | [optional] [default to undefined]
-**immediately** | **boolean** | Specifies whether to move a folder to the \\\&quot;Trash\\\&quot; folder or delete it immediately. | [optional] [default to undefined]
+**immediately** | **boolean** | Specifies whether to move a folder to the \\Trash\\ folder or delete it immediately. | [optional] [default to undefined]
 
 ## Example
 

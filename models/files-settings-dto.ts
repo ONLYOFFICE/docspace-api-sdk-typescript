@@ -315,19 +315,19 @@ export interface FilesSettingsDto {
      */
     'storeForcesave'?: boolean;
     /**
-     * Specifies if the \"Recent\" section is displayed or not.
+     * Specifies if the Recent section is displayed or not.
      * @type {boolean}
      * @memberof FilesSettingsDto
      */
     'recentSection'?: boolean;
     /**
-     * Specifies if the \"Favorites\" section is displayed or not.
+     * Specifies if the Favorites section is displayed or not.
      * @type {boolean}
      * @memberof FilesSettingsDto
      */
     'favoritesSection'?: boolean;
     /**
-     * Specifies if the \"Templates\" section is displayed or not.
+     * Specifies if the Templates section is displayed or not.
      * @type {boolean}
      * @memberof FilesSettingsDto
      */

@@ -49,7 +49,7 @@ export interface SignupAccountRequestDto {
      * @type {string}
      * @memberof SignupAccountRequestDto
      */
-    'email'?: string | null;
+    'email': string | null;
     /**
      * The user password hash.
      * @type {string}
@@ -61,7 +61,7 @@ export interface SignupAccountRequestDto {
      * @type {string}
      * @memberof SignupAccountRequestDto
      */
-    'key'?: string | null;
+    'key': string | null;
     /**
      * The user culture code.
      * @type {string}
@@ -73,7 +73,7 @@ export interface SignupAccountRequestDto {
      * @type {string}
      * @memberof SignupAccountRequestDto
      */
-    'serializedProfile'?: string | null;
+    'serializedProfile': string | null;
 }
 
 

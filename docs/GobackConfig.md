@@ -1,12 +1,12 @@
 # GobackConfig
 
-The settings for the \"Open file location\" menu button and upper right corner button.
+The settings for the Open file location menu button and upper right corner button.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**url** | **string** | The absolute URL to the website address which will be opened when clicking the \&quot;Open file location\&quot; menu button. | [optional] [default to undefined]
+**url** | **string** | The absolute URL to the website address which will be opened when clicking the Open file location menu button. | [optional] [default to undefined]
 
 ## Example
 

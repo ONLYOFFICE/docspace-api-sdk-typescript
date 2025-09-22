@@ -18,7 +18,7 @@
 
 
 /**
- * The presence or absence of the templates in the \"Create New...\" menu option.
+ * The presence or absence of the templates in the Create New... menu option.
  * @export
  * @interface TemplatesConfig
  */
@@ -30,7 +30,7 @@ export interface TemplatesConfig {
      */
     'image'?: string | null;
     /**
-     * The template title that will be displayed in the \"Create New...\" menu option.
+     * The template title that will be displayed in the Create New... menu option.
      * @type {string}
      * @memberof TemplatesConfig
      */

@@ -28,12 +28,12 @@ export interface FeatureUsedDto {
      * @type {any}
      * @memberof FeatureUsedDto
      */
-    'value'?: any | null;
+    'value': any | null;
     /**
      * The used space title.
      * @type {string}
      * @memberof FeatureUsedDto
      */
-    'title'?: string | null;
+    'title': string | null;
 }
 

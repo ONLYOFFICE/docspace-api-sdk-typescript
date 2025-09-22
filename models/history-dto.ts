@@ -40,25 +40,25 @@ export interface HistoryDto {
      * @type {HistoryAction}
      * @memberof HistoryDto
      */
-    'action'?: HistoryAction;
+    'action': HistoryAction;
     /**
      * 
      * @type {EmployeeDto}
      * @memberof HistoryDto
      */
-    'initiator'?: EmployeeDto;
+    'initiator': EmployeeDto;
     /**
      * 
      * @type {ApiDateTime}
      * @memberof HistoryDto
      */
-    'date'?: ApiDateTime;
+    'date': ApiDateTime;
     /**
      * 
      * @type {HistoryData}
      * @memberof HistoryDto
      */
-    'data'?: HistoryData;
+    'data': HistoryData;
     /**
      * The list of related history.
      * @type {Array<HistoryDto>}

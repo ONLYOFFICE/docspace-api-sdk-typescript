@@ -6,8 +6,8 @@ The used space parameters of the tenant quota feature.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**value** | **any** | The used space value. | [optional] [default to undefined]
-**title** | **string** | The used space title. | [optional] [default to undefined]
+**value** | **any** | The used space value. | [default to undefined]
+**title** | **string** | The used space title. | [default to undefined]
 
 ## Example
 

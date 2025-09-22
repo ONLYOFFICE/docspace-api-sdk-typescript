@@ -6,7 +6,7 @@ The watermark settings.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**additions** | [**WatermarkAdditions**](WatermarkAdditions.md) |  | [optional] [default to undefined]
+**additions** | [**WatermarkAdditions**](WatermarkAdditions.md) |  | [default to undefined]
 **text** | **string** | The watermark text. | [optional] [default to undefined]
 **rotate** | **number** | The watermark text and image rotate. | [optional] [default to undefined]
 **imageScale** | **number** | The watermark image scale. | [optional] [default to undefined]

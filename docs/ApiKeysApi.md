@@ -262,7 +262,7 @@ const { status, data } = await apiInstance.getApiKeys();
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **updateApiKey**
-> BooleanWrapper updateApiKey()
+> BooleanWrapper updateApiKey(updateApiKeyRequest)
 
 Updates an existing API key changing its name, permissions and status.
 
@@ -297,7 +297,7 @@ const configuration = new Configuration();
 const apiInstance = new ApiKeysApi(configuration);
 
 let keyId: string; //The unique identifier of the API key to update. (default to undefined)
-let updateApiKeyRequest: UpdateApiKeyRequest; //The request parameters for updating an existing API key. (optional)
+let updateApiKeyRequest: UpdateApiKeyRequest; //The request parameters for updating an existing API key.
 
 const { status, data } = await apiInstance.updateApiKey(
     keyId,

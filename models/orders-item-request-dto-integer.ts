@@ -31,19 +31,19 @@ export interface OrdersItemRequestDtoInteger {
      * @type {number}
      * @memberof OrdersItemRequestDtoInteger
      */
-    'entryId'?: number;
+    'entryId': number;
     /**
      * 
      * @type {FileEntryType}
      * @memberof OrdersItemRequestDtoInteger
      */
-    'entryType'?: FileEntryType;
+    'entryType': FileEntryType;
     /**
      * The order value.
      * @type {number}
      * @memberof OrdersItemRequestDtoInteger
      */
-    'order'?: number;
+    'order': number;
 }
 
 

@@ -31,19 +31,19 @@ export interface ActiveConnectionsItemDto {
      * @type {number}
      * @memberof ActiveConnectionsItemDto
      */
-    'id'?: number;
+    'id': number;
     /**
      * The tenant ID.
      * @type {number}
      * @memberof ActiveConnectionsItemDto
      */
-    'tenantId'?: number;
+    'tenantId': number;
     /**
      * The user ID.
      * @type {string}
      * @memberof ActiveConnectionsItemDto
      */
-    'userId'?: string;
+    'userId': string;
     /**
      * Specifies if the active connection has a mobile phone or not.
      * @type {boolean}

@@ -28,48 +28,48 @@ export interface PasswordSettingsDto {
      * @type {number}
      * @memberof PasswordSettingsDto
      */
-    'minLength'?: number;
+    'minLength': number;
     /**
      * Specifies whether the password should contain the uppercase letters or not.
      * @type {boolean}
      * @memberof PasswordSettingsDto
      */
-    'upperCase'?: boolean;
+    'upperCase': boolean;
     /**
      * Specifies whether the password should contain the digits or not.
      * @type {boolean}
      * @memberof PasswordSettingsDto
      */
-    'digits'?: boolean;
+    'digits': boolean;
     /**
      * Specifies whether the password should contain the special symbols or not.
      * @type {boolean}
      * @memberof PasswordSettingsDto
      */
-    'specSymbols'?: boolean;
+    'specSymbols': boolean;
     /**
      * The allowed password characters in the regex string format.
      * @type {string}
      * @memberof PasswordSettingsDto
      */
-    'allowedCharactersRegexStr'?: string | null;
+    'allowedCharactersRegexStr': string | null;
     /**
      * The password digits in the regex string format.
      * @type {string}
      * @memberof PasswordSettingsDto
      */
-    'digitsRegexStr'?: string | null;
+    'digitsRegexStr': string | null;
     /**
      * The password uppercase letters in the regex string format.
      * @type {string}
      * @memberof PasswordSettingsDto
      */
-    'upperCaseRegexStr'?: string | null;
+    'upperCaseRegexStr': string | null;
     /**
      * The passaword special symbols in the regex string format.
      * @type {string}
      * @memberof PasswordSettingsDto
      */
-    'specSymbolsRegexStr'?: string | null;
+    'specSymbolsRegexStr': string | null;
 }
 
