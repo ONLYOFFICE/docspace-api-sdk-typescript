@@ -39,6 +39,7 @@ import type { UpdatePhotoMemberRequest } from '../../models';
  * @export
  */
 export const PhotosApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Creates the user photo thumbnails by coordinates of the original image specified in the request.

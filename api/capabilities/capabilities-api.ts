@@ -31,6 +31,7 @@ import type { CapabilitiesWrapper } from '../../models';
  * @export
  */
 export const CapabilitiesApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Returns the information about portal capabilities.

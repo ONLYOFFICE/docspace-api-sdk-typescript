@@ -45,6 +45,7 @@ import type { ThirdPartyRequestDto } from '../../models';
  * @export
  */
 export const ThirdPartyIntegrationApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * 

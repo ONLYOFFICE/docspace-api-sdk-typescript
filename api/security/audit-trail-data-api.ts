@@ -49,7 +49,11 @@ import type { TenantAuditSettingsWrapper } from '../../models';
  * @export
  */
 export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Configuration) {
+    let fields: string | undefined;
     return {
+        withFields: (f: string) => {
+            fields = f;
+        },
         /**
          * Generates the audit trail report.
          * @summary Generate the audit trail report
@@ -114,13 +118,12 @@ export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Conf
          * @param {ApiDateTime} [to] The ending date and time for filtering audit events.
          * @param {number} [count] The maximum number of audit event records to retrieve.
          * @param {number} [startIndex] The index of the first audit event record to retrieve in a paged query.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getAuditEventsByFilter operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-events-by-filter/
          */
-        getAuditEventsByFilter: async (userId?: string, moduleType?: LocationType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, fields?: string | null, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAuditEventsByFilter: async (userId?: string, moduleType?: LocationType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/security/audit/events/filter`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -196,12 +199,11 @@ export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Conf
                 localVarQueryParameter['startIndex'] = startIndex;
             }
 
-            if (fields !== undefined) {
-                localVarQueryParameter['fields'] = fields;
-            }
-
 
     
+            if(fields !== undefined) {
+                localVarHeaderParameter['fields'] = fields;
+            }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -479,14 +481,13 @@ export const AuditTrailDataApiFp = function(configuration?: Configuration) {
          * @param {ApiDateTime} [to] The ending date and time for filtering audit events.
          * @param {number} [count] The maximum number of audit event records to retrieve.
          * @param {number} [startIndex] The index of the first audit event record to retrieve in a paged query.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getAuditEventsByFilter operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-events-by-filter/
          */
-        async getAuditEventsByFilter(userId?: string, moduleType?: LocationType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, fields?: string | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuditEventArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAuditEventsByFilter(userId, moduleType, actionType, action, entryType, target, from, to, count, startIndex, fields, options);
+        async getAuditEventsByFilter(userId?: string, moduleType?: LocationType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuditEventArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAuditEventsByFilter(userId, moduleType, actionType, action, entryType, target, from, to, count, startIndex, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AuditTrailDataApi.getAuditEventsByFilter']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -598,14 +599,13 @@ export const AuditTrailDataApiFactory = function (configuration?: Configuration,
          * @param {ApiDateTime} [to] The ending date and time for filtering audit events.
          * @param {number} [count] The maximum number of audit event records to retrieve.
          * @param {number} [startIndex] The index of the first audit event record to retrieve in a paged query.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response
          * @param {*} [options] Override http request option.
          * REST API Reference for getAuditEventsByFilter operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-events-by-filter/
          * @throws {RequiredError}
          */
-        getAuditEventsByFilter(userId?: string, moduleType?: LocationType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, fields?: string | null, options?: RawAxiosRequestConfig): AxiosPromise<AuditEventArrayWrapper> {
-            return localVarFp.getAuditEventsByFilter(userId, moduleType, actionType, action, entryType, target, from, to, count, startIndex, fields, options).then((request) => request(axios, basePath));
+        getAuditEventsByFilter(userId?: string, moduleType?: LocationType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): AxiosPromise<AuditEventArrayWrapper> {
+            return localVarFp.getAuditEventsByFilter(userId, moduleType, actionType, action, entryType, target, from, to, count, startIndex, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the audit trail settings.
@@ -699,13 +699,12 @@ export class AuditTrailDataApi extends BaseAPI {
      * @param {ApiDateTime} [to] The ending date and time for filtering audit events.
      * @param {number} [count] The maximum number of audit event records to retrieve.
      * @param {number} [startIndex] The index of the first audit event record to retrieve in a paged query.
-     * @param {string | null} [fields] Comma-separated list of fields to include in the response
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuditTrailDataApi
      */
-    public getAuditEventsByFilter(userId?: string, moduleType?: LocationType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, fields?: string | null, options?: RawAxiosRequestConfig) {
-        return AuditTrailDataApiFp(this.configuration).getAuditEventsByFilter(userId, moduleType, actionType, action, entryType, target, from, to, count, startIndex, fields, options).then((request) => request(this.axios, this.basePath));
+    public getAuditEventsByFilter(userId?: string, moduleType?: LocationType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, options?: RawAxiosRequestConfig) {
+        return AuditTrailDataApiFp(this.configuration).getAuditEventsByFilter(userId, moduleType, actionType, action, entryType, target, from, to, count, startIndex, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

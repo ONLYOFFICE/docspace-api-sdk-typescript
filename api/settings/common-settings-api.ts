@@ -65,6 +65,7 @@ import type { WizardSettingsWrapper } from '../../models';
  * @export
  */
 export const CommonSettingsApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Closes the administrator helper notification.

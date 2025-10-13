@@ -1,23 +1,27 @@
-# SearchApi
+# PeopleSearchApi
 
 All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**getAccountsEntriesWithShared**](#getaccountsentrieswithshared) | **GET** /api/2.0/accounts/room/{id}/search | Get account entries|
+|[**getAccountsEntriesWithFilesShared**](#getaccountsentrieswithfilesshared) | **GET** /api/2.0/accounts/file/{id}/search | Get account entries with file sharing settings|
+|[**getAccountsEntriesWithFoldersShared**](#getaccountsentrieswithfoldersshared) | **GET** /api/2.0/accounts/folder/{id}/search | Get account entries with folder sharing settings|
+|[**getAccountsEntriesWithRoomsShared**](#getaccountsentrieswithroomsshared) | **GET** /api/2.0/accounts/room/{id}/search | Get account entries|
 |[**getSearch**](#getsearch) | **GET** /api/2.0/people/@search/{query} | Search users|
 |[**getSimpleByFilter**](#getsimplebyfilter) | **GET** /api/2.0/people/simple/filter | Search users by extended filter|
+|[**getUsersWithFilesShared**](#getuserswithfilesshared) | **GET** /api/2.0/people/file/{id} | Get users with file sharing settings|
+|[**getUsersWithFoldersShared**](#getuserswithfoldersshared) | **GET** /api/2.0/people/folder/{id} | Get users with folder sharing settings|
 |[**getUsersWithRoomShared**](#getuserswithroomshared) | **GET** /api/2.0/people/room/{id} | Get users with room sharing settings|
 |[**searchUsersByExtendedFilter**](#searchusersbyextendedfilter) | **GET** /api/2.0/people/filter | Search users with detaailed information by extended filter|
 |[**searchUsersByQuery**](#searchusersbyquery) | **GET** /api/2.0/people/search | Search users (using query parameters)|
 |[**searchUsersByStatus**](#searchusersbystatus) | **GET** /api/2.0/people/status/{status}/search | Search users by status filter|
 
-# **getAccountsEntriesWithShared**
-> ObjectArrayWrapper getAccountsEntriesWithShared()
+# **getAccountsEntriesWithFilesShared**
+> ObjectArrayWrapper getAccountsEntriesWithFilesShared()
 
-Returns the account entries with their sharing settings.
+Returns the account entries with their sharing settings for a file with the ID specified in request.
 
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-shared/).
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-files-shared/).
 
 ### Parameters
 
@@ -71,7 +75,189 @@ let startIndex: number; //The starting index for the query results. (optional) (
 let filterSeparator: string; //Specifies the separator used in filter expressions. (optional) (default to undefined)
 let filterValue: string; //The text filter applied to the accounts search query. (optional) (default to undefined)
 
-const { status, data } = await apiInstance.getAccountsEntriesWithShared(
+const { status, data } = await apiInstance.getAccountsEntriesWithFilesShared(
+    id,
+    employeeStatus,
+    activationStatus,
+    excludeShared,
+    includeShared,
+    invitedByMe,
+    inviterId,
+    area,
+    employeeTypes,
+    count,
+    startIndex,
+    filterSeparator,
+    filterValue
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Ok |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getAccountsEntriesWithFoldersShared**
+> ObjectArrayWrapper getAccountsEntriesWithFoldersShared()
+
+Returns the account entries with their sharing settings in a folder with the ID specified in request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-folders-shared/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**number**] | The user ID. | defaults to undefined|
+| **employeeStatus** | **EmployeeStatus** | The user status. | (optional) defaults to undefined|
+| **activationStatus** | **EmployeeActivationStatus** | The user activation status. | (optional) defaults to undefined|
+| **excludeShared** | [**boolean**] | Specifies whether to exclude the account sharing settings from the response. | (optional) defaults to undefined|
+| **includeShared** | [**boolean**] | Specifies whether to include the account sharing settings in the response. | (optional) defaults to undefined|
+| **invitedByMe** | [**boolean**] | Specifies whether the user is invited by the current user or not. | (optional) defaults to undefined|
+| **inviterId** | [**string**] | The inviter ID. | (optional) defaults to undefined|
+| **area** | **Area** | The area of the account entries. | (optional) defaults to undefined|
+| **employeeTypes** | **Array&lt;EmployeeType&gt;** | The list of the user types. | (optional) defaults to undefined|
+| **count** | [**number**] | The number of items to retrieve in a request. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting index for the query results. | (optional) defaults to undefined|
+| **filterSeparator** | [**string**] | Specifies the separator used in filter expressions. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The text filter applied to the accounts search query. | (optional) defaults to undefined|
+
+
+### Return type
+
+**ObjectArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleSearchApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleSearchApi(configuration);
+
+let id: number; //The user ID. (default to undefined)
+let employeeStatus: EmployeeStatus; //The user status. (optional) (default to undefined)
+let activationStatus: EmployeeActivationStatus; //The user activation status. (optional) (default to undefined)
+let excludeShared: boolean; //Specifies whether to exclude the account sharing settings from the response. (optional) (default to undefined)
+let includeShared: boolean; //Specifies whether to include the account sharing settings in the response. (optional) (default to undefined)
+let invitedByMe: boolean; //Specifies whether the user is invited by the current user or not. (optional) (default to undefined)
+let inviterId: string; //The inviter ID. (optional) (default to undefined)
+let area: Area; //The area of the account entries. (optional) (default to undefined)
+let employeeTypes: Array<EmployeeType>; //The list of the user types. (optional) (default to undefined)
+let count: number; //The number of items to retrieve in a request. (optional) (default to undefined)
+let startIndex: number; //The starting index for the query results. (optional) (default to undefined)
+let filterSeparator: string; //Specifies the separator used in filter expressions. (optional) (default to undefined)
+let filterValue: string; //The text filter applied to the accounts search query. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getAccountsEntriesWithFoldersShared(
+    id,
+    employeeStatus,
+    activationStatus,
+    excludeShared,
+    includeShared,
+    invitedByMe,
+    inviterId,
+    area,
+    employeeTypes,
+    count,
+    startIndex,
+    filterSeparator,
+    filterValue
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Ok |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getAccountsEntriesWithRoomsShared**
+> ObjectArrayWrapper getAccountsEntriesWithRoomsShared()
+
+Returns the account entries with their sharing settings in a room with the ID specified in request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-rooms-shared/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**number**] | The user ID. | defaults to undefined|
+| **employeeStatus** | **EmployeeStatus** | The user status. | (optional) defaults to undefined|
+| **activationStatus** | **EmployeeActivationStatus** | The user activation status. | (optional) defaults to undefined|
+| **excludeShared** | [**boolean**] | Specifies whether to exclude the account sharing settings from the response. | (optional) defaults to undefined|
+| **includeShared** | [**boolean**] | Specifies whether to include the account sharing settings in the response. | (optional) defaults to undefined|
+| **invitedByMe** | [**boolean**] | Specifies whether the user is invited by the current user or not. | (optional) defaults to undefined|
+| **inviterId** | [**string**] | The inviter ID. | (optional) defaults to undefined|
+| **area** | **Area** | The area of the account entries. | (optional) defaults to undefined|
+| **employeeTypes** | **Array&lt;EmployeeType&gt;** | The list of the user types. | (optional) defaults to undefined|
+| **count** | [**number**] | The number of items to retrieve in a request. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting index for the query results. | (optional) defaults to undefined|
+| **filterSeparator** | [**string**] | Specifies the separator used in filter expressions. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The text filter applied to the accounts search query. | (optional) defaults to undefined|
+
+
+### Return type
+
+**ObjectArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleSearchApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleSearchApi(configuration);
+
+let id: number; //The user ID. (default to undefined)
+let employeeStatus: EmployeeStatus; //The user status. (optional) (default to undefined)
+let activationStatus: EmployeeActivationStatus; //The user activation status. (optional) (default to undefined)
+let excludeShared: boolean; //Specifies whether to exclude the account sharing settings from the response. (optional) (default to undefined)
+let includeShared: boolean; //Specifies whether to include the account sharing settings in the response. (optional) (default to undefined)
+let invitedByMe: boolean; //Specifies whether the user is invited by the current user or not. (optional) (default to undefined)
+let inviterId: string; //The inviter ID. (optional) (default to undefined)
+let area: Area; //The area of the account entries. (optional) (default to undefined)
+let employeeTypes: Array<EmployeeType>; //The list of the user types. (optional) (default to undefined)
+let count: number; //The number of items to retrieve in a request. (optional) (default to undefined)
+let startIndex: number; //The starting index for the query results. (optional) (default to undefined)
+let filterSeparator: string; //Specifies the separator used in filter expressions. (optional) (default to undefined)
+let filterValue: string; //The text filter applied to the accounts search query. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getAccountsEntriesWithRoomsShared(
     id,
     employeeStatus,
     activationStatus,
@@ -175,7 +361,6 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **fields** | **string**| Comma-separated list of fields to include in the response | |
 | **employeeStatus** | **EmployeeStatus** | The user status. | (optional) defaults to undefined|
 | **groupId** | [**string**] | The group ID. | (optional) defaults to undefined|
 | **activationStatus** | **EmployeeActivationStatus** | The user activation status. | (optional) defaults to undefined|
@@ -237,7 +422,6 @@ let sortBy: string; //Specifies the property or field name by which the results 
 let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
 let filterSeparator: string; //Represents the separator used to split filter criteria in query parameters. (optional) (default to undefined)
 let filterValue: string; //The search text used to filter results based on user input. (optional) (default to undefined)
-let fields: string; //Comma-separated list of fields to include in the response (optional)
 
 const { status, data } = await apiInstance.getSimpleByFilter(
     employeeStatus,
@@ -259,8 +443,7 @@ const { status, data } = await apiInstance.getSimpleByFilter(
     sortBy,
     sortOrder,
     filterSeparator,
-    filterValue,
-    fields
+    filterValue
 );
 ```
 
@@ -274,6 +457,188 @@ const { status, data } = await apiInstance.getSimpleByFilter(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of users |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getUsersWithFilesShared**
+> EmployeeFullArrayWrapper getUsersWithFilesShared()
+
+Returns the users with the sharing settings in a file with the ID specified in request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-users-with-files-shared/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**number**] | The user ID. | defaults to undefined|
+| **employeeStatus** | **EmployeeStatus** | The user status. | (optional) defaults to undefined|
+| **activationStatus** | **EmployeeActivationStatus** | The user activation status. | (optional) defaults to undefined|
+| **excludeShared** | [**boolean**] | Specifies whether to exclude the user sharing settings or not. | (optional) defaults to undefined|
+| **includeShared** | [**boolean**] | Specifies whether to include the user sharing settings or not. | (optional) defaults to undefined|
+| **invitedByMe** | [**boolean**] | Specifies whether the user was invited by the current user or not. | (optional) defaults to undefined|
+| **inviterId** | [**string**] | The inviter ID. | (optional) defaults to undefined|
+| **area** | **Area** | The user area. | (optional) defaults to undefined|
+| **employeeTypes** | **Array&lt;EmployeeType&gt;** | The list of user types. | (optional) defaults to undefined|
+| **count** | [**number**] | The maximum number of users to be retrieved in the request. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The zero-based index of the first record to retrieve in a paged query. | (optional) defaults to undefined|
+| **filterSeparator** | [**string**] | The character or string used to separate multiple filter values in a filtering query. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The filter text value used for searching or filtering user results. | (optional) defaults to undefined|
+
+
+### Return type
+
+**EmployeeFullArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleSearchApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleSearchApi(configuration);
+
+let id: number; //The user ID. (default to undefined)
+let employeeStatus: EmployeeStatus; //The user status. (optional) (default to undefined)
+let activationStatus: EmployeeActivationStatus; //The user activation status. (optional) (default to undefined)
+let excludeShared: boolean; //Specifies whether to exclude the user sharing settings or not. (optional) (default to undefined)
+let includeShared: boolean; //Specifies whether to include the user sharing settings or not. (optional) (default to undefined)
+let invitedByMe: boolean; //Specifies whether the user was invited by the current user or not. (optional) (default to undefined)
+let inviterId: string; //The inviter ID. (optional) (default to undefined)
+let area: Area; //The user area. (optional) (default to undefined)
+let employeeTypes: Array<EmployeeType>; //The list of user types. (optional) (default to undefined)
+let count: number; //The maximum number of users to be retrieved in the request. (optional) (default to undefined)
+let startIndex: number; //The zero-based index of the first record to retrieve in a paged query. (optional) (default to undefined)
+let filterSeparator: string; //The character or string used to separate multiple filter values in a filtering query. (optional) (default to undefined)
+let filterValue: string; //The filter text value used for searching or filtering user results. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getUsersWithFilesShared(
+    id,
+    employeeStatus,
+    activationStatus,
+    excludeShared,
+    includeShared,
+    invitedByMe,
+    inviterId,
+    area,
+    employeeTypes,
+    count,
+    startIndex,
+    filterSeparator,
+    filterValue
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Ok |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getUsersWithFoldersShared**
+> EmployeeFullArrayWrapper getUsersWithFoldersShared()
+
+Returns the users with the sharing settings in a folder with the ID specified in request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-users-with-folders-shared/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**number**] | The user ID. | defaults to undefined|
+| **employeeStatus** | **EmployeeStatus** | The user status. | (optional) defaults to undefined|
+| **activationStatus** | **EmployeeActivationStatus** | The user activation status. | (optional) defaults to undefined|
+| **excludeShared** | [**boolean**] | Specifies whether to exclude the user sharing settings or not. | (optional) defaults to undefined|
+| **includeShared** | [**boolean**] | Specifies whether to include the user sharing settings or not. | (optional) defaults to undefined|
+| **invitedByMe** | [**boolean**] | Specifies whether the user was invited by the current user or not. | (optional) defaults to undefined|
+| **inviterId** | [**string**] | The inviter ID. | (optional) defaults to undefined|
+| **area** | **Area** | The user area. | (optional) defaults to undefined|
+| **employeeTypes** | **Array&lt;EmployeeType&gt;** | The list of user types. | (optional) defaults to undefined|
+| **count** | [**number**] | The maximum number of users to be retrieved in the request. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The zero-based index of the first record to retrieve in a paged query. | (optional) defaults to undefined|
+| **filterSeparator** | [**string**] | The character or string used to separate multiple filter values in a filtering query. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The filter text value used for searching or filtering user results. | (optional) defaults to undefined|
+
+
+### Return type
+
+**EmployeeFullArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleSearchApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleSearchApi(configuration);
+
+let id: number; //The user ID. (default to undefined)
+let employeeStatus: EmployeeStatus; //The user status. (optional) (default to undefined)
+let activationStatus: EmployeeActivationStatus; //The user activation status. (optional) (default to undefined)
+let excludeShared: boolean; //Specifies whether to exclude the user sharing settings or not. (optional) (default to undefined)
+let includeShared: boolean; //Specifies whether to include the user sharing settings or not. (optional) (default to undefined)
+let invitedByMe: boolean; //Specifies whether the user was invited by the current user or not. (optional) (default to undefined)
+let inviterId: string; //The inviter ID. (optional) (default to undefined)
+let area: Area; //The user area. (optional) (default to undefined)
+let employeeTypes: Array<EmployeeType>; //The list of user types. (optional) (default to undefined)
+let count: number; //The maximum number of users to be retrieved in the request. (optional) (default to undefined)
+let startIndex: number; //The zero-based index of the first record to retrieve in a paged query. (optional) (default to undefined)
+let filterSeparator: string; //The character or string used to separate multiple filter values in a filtering query. (optional) (default to undefined)
+let filterValue: string; //The filter text value used for searching or filtering user results. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getUsersWithFoldersShared(
+    id,
+    employeeStatus,
+    activationStatus,
+    excludeShared,
+    includeShared,
+    invitedByMe,
+    inviterId,
+    area,
+    employeeTypes,
+    count,
+    startIndex,
+    filterSeparator,
+    filterValue
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Ok |  -  |
 |**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
 
@@ -381,7 +746,6 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **fields** | **string**| Comma-separated list of fields to include in the response | |
 | **employeeStatus** | **EmployeeStatus** | The user status. | (optional) defaults to undefined|
 | **groupId** | [**string**] | The group ID. | (optional) defaults to undefined|
 | **activationStatus** | **EmployeeActivationStatus** | The user activation status. | (optional) defaults to undefined|
@@ -443,7 +807,6 @@ let sortBy: string; //Specifies the property or field name by which the results 
 let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
 let filterSeparator: string; //Represents the separator used to split filter criteria in query parameters. (optional) (default to undefined)
 let filterValue: string; //The search text used to filter results based on user input. (optional) (default to undefined)
-let fields: string; //Comma-separated list of fields to include in the response (optional)
 
 const { status, data } = await apiInstance.searchUsersByExtendedFilter(
     employeeStatus,
@@ -465,8 +828,7 @@ const { status, data } = await apiInstance.searchUsersByExtendedFilter(
     sortBy,
     sortOrder,
     filterSeparator,
-    filterValue,
-    fields
+    filterValue
 );
 ```
 

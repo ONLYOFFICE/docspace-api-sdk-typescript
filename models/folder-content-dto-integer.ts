@@ -58,13 +58,13 @@ export interface FolderContentDtoInteger {
      * @type {number}
      * @memberof FolderContentDtoInteger
      */
-    'startIndex': number;
+    'startIndex'?: number;
     /**
      * The number of folder elements.
      * @type {number}
      * @memberof FolderContentDtoInteger
      */
-    'count': number;
+    'count'?: number;
     /**
      * The total number of elements in the folder.
      * @type {number}

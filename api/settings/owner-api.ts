@@ -33,6 +33,7 @@ import type { OwnerIdSettingsRequestDto } from '../../models';
  * @export
  */
 export const OwnerApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Sends the instructions to change the DocSpace owner.

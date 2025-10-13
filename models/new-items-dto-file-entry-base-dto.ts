@@ -34,12 +34,12 @@ export interface NewItemsDtoFileEntryBaseDto {
      * @type {ApiDateTime}
      * @memberof NewItemsDtoFileEntryBaseDto
      */
-    'date'?: ApiDateTime;
+    'date': ApiDateTime;
     /**
      * The list of items.
      * @type {Array<FileEntryBaseDto>}
      * @memberof NewItemsDtoFileEntryBaseDto
      */
-    'items'?: Array<FileEntryBaseDto> | null;
+    'items': Array<FileEntryBaseDto> | null;
 }
 

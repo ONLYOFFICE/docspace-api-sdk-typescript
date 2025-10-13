@@ -41,6 +41,7 @@ import type { TerminateRequestDto } from '../../models';
  * @export
  */
 export const UserDataApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Returns the progress of deleting the personal folder.

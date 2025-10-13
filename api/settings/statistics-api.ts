@@ -31,6 +31,7 @@ import type { UsageSpaceStatItemArrayWrapper } from '../../models';
  * @export
  */
 export const StatisticsApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Returns the space usage statistics for the module with the ID specified in the request.

@@ -33,6 +33,7 @@ import type { CspWrapper } from '../../models';
  * @export
  */
 export const CSPApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Configures the CSP (Content Security Policy) settings for the current portal.

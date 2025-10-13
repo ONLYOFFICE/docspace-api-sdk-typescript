@@ -35,6 +35,7 @@ import type { StringWrapper } from '../../models';
  * @export
  */
 export const CookiesApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Returns the cookies lifetime value in minutes.

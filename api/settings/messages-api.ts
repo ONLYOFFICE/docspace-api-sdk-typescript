@@ -37,6 +37,7 @@ import type { TurnOnAdminMessageSettingsRequestDto } from '../../models';
  * @export
  */
 export const MessagesApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Displays the contact form on the Sign In page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.

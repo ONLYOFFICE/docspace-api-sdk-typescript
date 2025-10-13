@@ -37,7 +37,7 @@ export interface DocumentBuilderTaskDto {
      * @type {string}
      * @memberof DocumentBuilderTaskDto
      */
-    'error'?: string | null;
+    'error': string | null;
     /**
      * The percentage of the progress of the document building process.
      * @type {number}
@@ -61,19 +61,19 @@ export interface DocumentBuilderTaskDto {
      * @type {any}
      * @memberof DocumentBuilderTaskDto
      */
-    'resultFileId'?: any | null;
+    'resultFileId': any | null;
     /**
      * The result file name.
      * @type {string}
      * @memberof DocumentBuilderTaskDto
      */
-    'resultFileName'?: string | null;
+    'resultFileName': string | null;
     /**
      * The result file URL.
      * @type {string}
      * @memberof DocumentBuilderTaskDto
      */
-    'resultFileUrl'?: string | null;
+    'resultFileUrl': string | null;
 }
 
 

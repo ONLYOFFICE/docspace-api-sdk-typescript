@@ -18,7 +18,7 @@
 
 
 /**
- * The actions that can be perforrmed with the file entry.
+ * The actions that can be performed with the file entry.
  * @export
  * @interface FileEntryDtoIntegerAllOfSecurity
  */

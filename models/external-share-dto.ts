@@ -46,7 +46,7 @@ export interface ExternalShareDto {
      * @type {string}
      * @memberof ExternalShareDto
      */
-    'title'?: string | null;
+    'title': string | null;
     /**
      * 
      * @type {FileEntryType}
@@ -64,13 +64,13 @@ export interface ExternalShareDto {
      * @type {string}
      * @memberof ExternalShareDto
      */
-    'entityId': string | null;
+    'entityId'?: string | null;
     /**
      * The title of the shared entity.
      * @type {string}
      * @memberof ExternalShareDto
      */
-    'entityTitle': string | null;
+    'entityTitle'?: string | null;
     /**
      * 
      * @type {FileEntryType}
@@ -100,7 +100,7 @@ export interface ExternalShareDto {
      * @type {boolean}
      * @memberof ExternalShareDto
      */
-    'isAuthenticated'?: boolean;
+    'isAuthenticated': boolean;
     /**
      * The room ID of the external data.
      * @type {boolean}

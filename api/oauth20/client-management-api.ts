@@ -41,6 +41,7 @@ import type { UpdateClientRequest } from '../../models';
  * @export
  */
 export const ClientManagementApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Activates or deactivates an OAuth2 client. When deactivated, the client cannot request new access tokens, but existing tokens will remain valid until they expire.

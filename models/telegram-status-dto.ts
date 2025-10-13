@@ -31,7 +31,7 @@ export interface TelegramStatusDto {
      * @type {RegStatus}
      * @memberof TelegramStatusDto
      */
-    'status'?: RegStatus;
+    'status': RegStatus;
     /**
      * 
      * @type {string}

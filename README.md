@@ -639,11 +639,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td></td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFoldersApi.md#getfoldersecurityinfo"><strong>getFolderSecurityInfo</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/files/folder/{id}/share</td>
-        <td></td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFoldersApi.md#getfolders"><strong>getFolders</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/{folderId}/subfolders</td>
         <td></td>
@@ -966,13 +961,58 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td></td>
       </tr>
       <tr>
+        <td><a href="docs/FilesSharingApi.md#getfilesecurityinfo"><strong>getFileSecurityInfo</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/file/{id}/share</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSharingApi.md#getfoldersecurityinfo"><strong>getFolderSecurityInfo</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/folder/{id}/share</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSharingApi.md#getgroupsmemberswithfilesecurity"><strong>getGroupsMembersWithFileSecurity</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/file/{fileId}/group/{groupId}/share</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSharingApi.md#getgroupsmemberswithfoldersecurity"><strong>getGroupsMembersWithFolderSecurity</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/folder/{folderId}/group/{groupId}/share</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSharingApi.md#getsecurityinfo"><strong>getSecurityInfo</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/share</td>
+        <td></td>
+      </tr>
+      <tr>
         <td><a href="docs/FilesSharingApi.md#getsharedusers"><strong>getSharedUsers</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/file/{fileId}/sharedusers</td>
         <td></td>
       </tr>
       <tr>
+        <td><a href="docs/FilesSharingApi.md#removesecurityinfo"><strong>removeSecurityInfo</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/files/share</td>
+        <td></td>
+      </tr>
+      <tr>
         <td><a href="docs/FilesSharingApi.md#sendeditornotify"><strong>sendEditorNotify</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/file/{fileId}/sendeditornotify</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSharingApi.md#setfilesecurityinfo"><strong>setFileSecurityInfo</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/file/{fileId}/share</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSharingApi.md#setfoldersecurityinfo"><strong>setFolderSecurityInfo</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/folder/{folderId}/share</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSharingApi.md#setsecurityinfo"><strong>setSecurityInfo</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/share</td>
         <td></td>
       </tr>
     <tr>
@@ -1091,12 +1131,22 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Update a group</td>
       </tr>
     <tr>
-        <td colspan="3" style="text-align: center;"><strong>RoomsApi</strong></td>
+        <td colspan="3" style="text-align: center;"><strong>SearchApi</strong></td>
       </tr>
       <tr>
-        <td><a href="docs/GroupRoomsApi.md#getgroupswithshared"><strong>getGroupsWithShared</strong></a></td>
+        <td><a href="docs/GroupSearchApi.md#getgroupswithfilesshared"><strong>getGroupsWithFilesShared</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/group/file/{id}</td>
+        <td>Get groups with file sharing settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/GroupSearchApi.md#getgroupswithfoldersshared"><strong>getGroupsWithFoldersShared</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/group/folder/{id}</td>
+        <td>Get groups with folder sharing settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/GroupSearchApi.md#getgroupswithroomsshared"><strong>getGroupsWithRoomsShared</strong></a></td>
         <td><strong>GET</strong> /api/2.0/group/room/{id}</td>
-        <td>Get groups with sharing settings</td>
+        <td>Get groups with room sharing settings</td>
       </tr>
     </tbody>
   </table>
@@ -1416,10 +1466,20 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Change a user quota limit</td>
       </tr>
     <tr>
-        <td colspan="3" style="text-align: center;"><strong>SearchApi</strong></td>
+        <td colspan="3" style="text-align: center;"><strong>PeopleSearchApi</strong></td>
       </tr>
       <tr>
-        <td><a href="docs/PeopleSearchApi.md#getaccountsentrieswithshared"><strong>getAccountsEntriesWithShared</strong></a></td>
+        <td><a href="docs/PeopleSearchApi.md#getaccountsentrieswithfilesshared"><strong>getAccountsEntriesWithFilesShared</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/accounts/file/{id}/search</td>
+        <td>Get account entries with file sharing settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleSearchApi.md#getaccountsentrieswithfoldersshared"><strong>getAccountsEntriesWithFoldersShared</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/accounts/folder/{id}/search</td>
+        <td>Get account entries with folder sharing settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleSearchApi.md#getaccountsentrieswithroomsshared"><strong>getAccountsEntriesWithRoomsShared</strong></a></td>
         <td><strong>GET</strong> /api/2.0/accounts/room/{id}/search</td>
         <td>Get account entries</td>
       </tr>
@@ -1432,6 +1492,16 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td><a href="docs/PeopleSearchApi.md#getsimplebyfilter"><strong>getSimpleByFilter</strong></a></td>
         <td><strong>GET</strong> /api/2.0/people/simple/filter</td>
         <td>Search users by extended filter</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleSearchApi.md#getuserswithfilesshared"><strong>getUsersWithFilesShared</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/people/file/{id}</td>
+        <td>Get users with file sharing settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleSearchApi.md#getuserswithfoldersshared"><strong>getUsersWithFoldersShared</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/people/folder/{id}</td>
+        <td>Get users with folder sharing settings</td>
       </tr>
       <tr>
         <td><a href="docs/PeopleSearchApi.md#getuserswithroomshared"><strong>getUsersWithRoomShared</strong></a></td>
@@ -1832,7 +1902,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <th>Description</th>
       </tr>
       <tr>
-        <td colspan="3" style="text-align: center;"><strong>RoomsRoomsApi</strong></td>
+        <td colspan="3" style="text-align: center;"><strong>RoomsApi</strong></td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#addroomtags"><strong>addRoomTags</strong></a></td>
@@ -2353,34 +2423,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td><a href="docs/SettingsCookiesApi.md#updatecookiesettings"><strong>updateCookieSettings</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/settings/cookiesettings</td>
         <td>Update cookies lifetime</td>
-      </tr>
-    <tr>
-        <td colspan="3" style="text-align: center;"><strong>CustomNavigationApi</strong></td>
-      </tr>
-      <tr>
-        <td><a href="docs/SettingsCustomNavigationApi.md#createcustomnavigationitem"><strong>createCustomNavigationItem</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/settings/customnavigation/create</td>
-        <td>Add a custom navigation item</td>
-      </tr>
-      <tr>
-        <td><a href="docs/SettingsCustomNavigationApi.md#deletecustomnavigationitem"><strong>deleteCustomNavigationItem</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/settings/customnavigation/delete/{id}</td>
-        <td>Delete a custom navigation item</td>
-      </tr>
-      <tr>
-        <td><a href="docs/SettingsCustomNavigationApi.md#getcustomnavigationitem"><strong>getCustomNavigationItem</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/settings/customnavigation/get/{id}</td>
-        <td>Get a custom navigation item by ID</td>
-      </tr>
-      <tr>
-        <td><a href="docs/SettingsCustomNavigationApi.md#getcustomnavigationitemsample"><strong>getCustomNavigationItemSample</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/settings/customnavigation/getsample</td>
-        <td>Get a custom navigation item sample</td>
-      </tr>
-      <tr>
-        <td><a href="docs/SettingsCustomNavigationApi.md#getcustomnavigationitems"><strong>getCustomNavigationItems</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/settings/customnavigation/getall</td>
-        <td>Get the custom navigation items</td>
       </tr>
     <tr>
         <td colspan="3" style="text-align: center;"><strong>EncryptionApi</strong></td>
@@ -3096,9 +3138,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [CustomColorThemesSettingsRequestsDto](docs/CustomColorThemesSettingsRequestsDto.md)
  - [CustomColorThemesSettingsWrapper](docs/CustomColorThemesSettingsWrapper.md)
  - [CustomFilterParameters](docs/CustomFilterParameters.md)
- - [CustomNavigationItem](docs/CustomNavigationItem.md)
- - [CustomNavigationItemArrayWrapper](docs/CustomNavigationItemArrayWrapper.md)
- - [CustomNavigationItemWrapper](docs/CustomNavigationItemWrapper.md)
  - [CustomerConfigDto](docs/CustomerConfigDto.md)
  - [CustomerInfoDto](docs/CustomerInfoDto.md)
  - [CustomerInfoWrapper](docs/CustomerInfoWrapper.md)
@@ -3182,6 +3221,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [FileEntryBaseDto](docs/FileEntryBaseDto.md)
  - [FileEntryBaseWrapper](docs/FileEntryBaseWrapper.md)
  - [FileEntryDtoInteger](docs/FileEntryDtoInteger.md)
+ - [FileEntryDtoIntegerAllOfAvailableShareRights](docs/FileEntryDtoIntegerAllOfAvailableShareRights.md)
  - [FileEntryDtoIntegerAllOfSecurity](docs/FileEntryDtoIntegerAllOfSecurity.md)
  - [FileEntryDtoIntegerAllOfShareSettings](docs/FileEntryDtoIntegerAllOfShareSettings.md)
  - [FileEntryDtoString](docs/FileEntryDtoString.md)
@@ -3203,6 +3243,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [FileShare](docs/FileShare.md)
  - [FileShareArrayWrapper](docs/FileShareArrayWrapper.md)
  - [FileShareDto](docs/FileShareDto.md)
+ - [FileShareLink](docs/FileShareLink.md)
  - [FileShareParams](docs/FileShareParams.md)
  - [FileShareWrapper](docs/FileShareWrapper.md)
  - [FileStatus](docs/FileStatus.md)
@@ -3247,6 +3288,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [GreetingSettingsRequestsDto](docs/GreetingSettingsRequestsDto.md)
  - [GroupArrayWrapper](docs/GroupArrayWrapper.md)
  - [GroupDto](docs/GroupDto.md)
+ - [GroupMemberSecurityRequestArrayWrapper](docs/GroupMemberSecurityRequestArrayWrapper.md)
+ - [GroupMemberSecurityRequestDto](docs/GroupMemberSecurityRequestDto.md)
  - [GroupRequestDto](docs/GroupRequestDto.md)
  - [GroupSummaryArrayWrapper](docs/GroupSummaryArrayWrapper.md)
  - [GroupSummaryDto](docs/GroupSummaryDto.md)
@@ -3410,6 +3453,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [SearchArea](docs/SearchArea.md)
  - [SecurityArrayWrapper](docs/SecurityArrayWrapper.md)
  - [SecurityDto](docs/SecurityDto.md)
+ - [SecurityInfoRequestDto](docs/SecurityInfoRequestDto.md)
+ - [SecurityInfoSimpleRequestDto](docs/SecurityInfoSimpleRequestDto.md)
  - [SecurityRequestsDto](docs/SecurityRequestsDto.md)
  - [SessionRequest](docs/SessionRequest.md)
  - [SetManagerRequest](docs/SetManagerRequest.md)

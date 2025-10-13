@@ -28,7 +28,7 @@ export interface FileLink {
      * @type {string}
      * @memberof FileLink
      */
-    'filetype'?: string | null;
+    'filetype': string | null;
     /**
      * The encrypted signature added to the config in the form of a token.
      * @type {string}
@@ -40,6 +40,6 @@ export interface FileLink {
      * @type {string}
      * @memberof FileLink
      */
-    'url'?: string | null;
+    'url': string | null;
 }
 

@@ -34,19 +34,19 @@ export interface ScheduleDto {
      * @type {BackupStorageType}
      * @memberof ScheduleDto
      */
-    'storageType'?: BackupStorageType;
+    'storageType': BackupStorageType;
     /**
      * 
      * @type {{ [key: string]: string | null; }}
      * @memberof ScheduleDto
      */
-    'storageParams'?: { [key: string]: string | null; } | null;
+    'storageParams': { [key: string]: string | null; } | null;
     /**
      * 
      * @type {CronParams}
      * @memberof ScheduleDto
      */
-    'cronParams'?: CronParams;
+    'cronParams': CronParams;
     /**
      * 
      * @type {number}
@@ -58,13 +58,13 @@ export interface ScheduleDto {
      * @type {string}
      * @memberof ScheduleDto
      */
-    'lastBackupTime'?: string;
+    'lastBackupTime': string;
     /**
      * 
      * @type {boolean}
      * @memberof ScheduleDto
      */
-    'dump'?: boolean;
+    'dump': boolean;
 }
 
 

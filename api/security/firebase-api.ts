@@ -33,6 +33,7 @@ import type { FirebaseRequestsDto } from '../../models';
  * @export
  */
 export const FirebaseApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Saves the Firebase device token specified in the request for the Documents application.

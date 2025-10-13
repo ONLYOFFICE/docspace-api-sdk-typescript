@@ -31,7 +31,7 @@ export interface GroupDto {
      * @type {string}
      * @memberof GroupDto
      */
-    'name'?: string | null;
+    'name': string | null;
     /**
      * The parent group ID.
      * @type {string}
@@ -43,19 +43,19 @@ export interface GroupDto {
      * @type {string}
      * @memberof GroupDto
      */
-    'category'?: string;
+    'category': string;
     /**
      * The group ID.
      * @type {string}
      * @memberof GroupDto
      */
-    'id'?: string;
+    'id': string;
     /**
      * Specifies if the LDAP settings are enabled for the group or not.
      * @type {boolean}
      * @memberof GroupDto
      */
-    'isLDAP'?: boolean;
+    'isLDAP': boolean;
     /**
      * Indicates whether the group is a system group.
      * @type {boolean}

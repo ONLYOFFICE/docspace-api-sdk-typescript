@@ -33,6 +33,7 @@ import type { ObjectWrapper } from '../../models';
  * @export
  */
 export const ThirdPartyApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Returns a request to get the confirmation code from URL.   **Note**: List of providers: Google, Dropbox, Docusign, Box, OneDrive, Wordpress.

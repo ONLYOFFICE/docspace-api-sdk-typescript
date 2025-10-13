@@ -35,6 +35,7 @@ import type { SsoSettingsV2Wrapper } from '../../models';
  * @export
  */
 export const SSOApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Returns the default portal SSO settings.

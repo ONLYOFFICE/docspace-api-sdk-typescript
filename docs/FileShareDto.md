@@ -8,6 +8,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **access** | [**FileShare**](FileShare.md) |  | [optional] [default to undefined]
 **sharedTo** | **any** | The user who has the access to the specified file. | [optional] [default to undefined]
+**sharedToUser** | [**EmployeeFullDto**](EmployeeFullDto.md) |  | [optional] [default to undefined]
+**sharedToGroup** | [**GroupSummaryDto**](GroupSummaryDto.md) |  | [optional] [default to undefined]
+**sharedLink** | [**FileShareLink**](FileShareLink.md) |  | [optional] [default to undefined]
 **isLocked** | **boolean** | Specifies if the access right is locked or not. | [default to undefined]
 **isOwner** | **boolean** | Specifies if the user is an owner of the specified file or not. | [default to undefined]
 **canEditAccess** | **boolean** | Specifies if the user can edit the access to the specified file or not. | [default to undefined]
@@ -24,6 +27,9 @@ import { FileShareDto } from '@onlyoffice/docspace-api-sdk';
 const instance: FileShareDto = {
     access,
     sharedTo,
+    sharedToUser,
+    sharedToGroup,
+    sharedLink,
     isLocked,
     isOwner,
     canEditAccess,

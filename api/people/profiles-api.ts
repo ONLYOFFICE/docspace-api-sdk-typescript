@@ -51,7 +51,11 @@ import type { UpdateMembersRequestDto } from '../../models';
  * @export
  */
 export const ProfilesApiAxiosParamCreator = function (configuration?: Configuration) {
+    let fields: string | undefined;
     return {
+        withFields: (f: string) => {
+            fields = f;
+        },
         /**
          * Adds a new portal user with the first name, last name, email address, and several optional parameters specified in the request.
          * @summary Add a user
@@ -223,13 +227,12 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
          * @param {SortOrder} [sortOrder] The order in which the results are sorted.
          * @param {string} [filterSeparator] The character or string used to separate multiple filter values in a filtering query.
          * @param {string} [filterValue] The text value used as an additional filter criterion for profiles retrieval.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getAllProfiles operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-profiles/
          */
-        getAllProfiles: async (count?: number, startIndex?: number, filterBy?: string, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, fields?: string | null, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAllProfiles: async (count?: number, startIndex?: number, filterBy?: string, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/people`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -289,12 +292,11 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
                 localVarQueryParameter['filterValue'] = filterValue;
             }
 
-            if (fields !== undefined) {
-                localVarQueryParameter['fields'] = fields;
-            }
-
 
     
+            if(fields !== undefined) {
+                localVarHeaderParameter['fields'] = fields;
+            }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -926,14 +928,13 @@ export const ProfilesApiFp = function(configuration?: Configuration) {
          * @param {SortOrder} [sortOrder] The order in which the results are sorted.
          * @param {string} [filterSeparator] The character or string used to separate multiple filter values in a filtering query.
          * @param {string} [filterValue] The text value used as an additional filter criterion for profiles retrieval.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getAllProfiles operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-profiles/
          */
-        async getAllProfiles(count?: number, startIndex?: number, filterBy?: string, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, fields?: string | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllProfiles(count, startIndex, filterBy, sortBy, sortOrder, filterSeparator, filterValue, fields, options);
+        async getAllProfiles(count?: number, startIndex?: number, filterBy?: string, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllProfiles(count, startIndex, filterBy, sortBy, sortOrder, filterSeparator, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ProfilesApi.getAllProfiles']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1144,14 +1145,13 @@ export const ProfilesApiFactory = function (configuration?: Configuration, baseP
          * @param {SortOrder} [sortOrder] The order in which the results are sorted.
          * @param {string} [filterSeparator] The character or string used to separate multiple filter values in a filtering query.
          * @param {string} [filterValue] The text value used as an additional filter criterion for profiles retrieval.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response
          * @param {*} [options] Override http request option.
          * REST API Reference for getAllProfiles operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-profiles/
          * @throws {RequiredError}
          */
-        getAllProfiles(count?: number, startIndex?: number, filterBy?: string, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, fields?: string | null, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
-            return localVarFp.getAllProfiles(count, startIndex, filterBy, sortBy, sortOrder, filterSeparator, filterValue, fields, options).then((request) => request(axios, basePath));
+        getAllProfiles(count?: number, startIndex?: number, filterBy?: string, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
+            return localVarFp.getAllProfiles(count, startIndex, filterBy, sortBy, sortOrder, filterSeparator, filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the user claims.
@@ -1329,13 +1329,12 @@ export class ProfilesApi extends BaseAPI {
      * @param {SortOrder} [sortOrder] The order in which the results are sorted.
      * @param {string} [filterSeparator] The character or string used to separate multiple filter values in a filtering query.
      * @param {string} [filterValue] The text value used as an additional filter criterion for profiles retrieval.
-     * @param {string | null} [fields] Comma-separated list of fields to include in the response
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProfilesApi
      */
-    public getAllProfiles(count?: number, startIndex?: number, filterBy?: string, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, fields?: string | null, options?: RawAxiosRequestConfig) {
-        return ProfilesApiFp(this.configuration).getAllProfiles(count, startIndex, filterBy, sortBy, sortOrder, filterSeparator, filterValue, fields, options).then((request) => request(this.axios, this.basePath));
+    public getAllProfiles(count?: number, startIndex?: number, filterBy?: string, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return ProfilesApiFp(this.configuration).getAllProfiles(count, startIndex, filterBy, sortBy, sortOrder, filterSeparator, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

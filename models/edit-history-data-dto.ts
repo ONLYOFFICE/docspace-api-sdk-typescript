@@ -37,7 +37,7 @@ export interface EditHistoryDataDto {
      * @type {string}
      * @memberof EditHistoryDataDto
      */
-    'key'?: string | null;
+    'key': string | null;
     /**
      * 
      * @type {EditHistoryUrl}
@@ -55,18 +55,18 @@ export interface EditHistoryDataDto {
      * @type {string}
      * @memberof EditHistoryDataDto
      */
-    'url'?: string | null;
+    'url': string | null;
     /**
      * The document version number.
      * @type {number}
      * @memberof EditHistoryDataDto
      */
-    'version'?: number;
+    'version': number;
     /**
      * The document extension.
      * @type {string}
      * @memberof EditHistoryDataDto
      */
-    'fileType'?: string | null;
+    'fileType': string | null;
 }
 

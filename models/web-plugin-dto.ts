@@ -103,7 +103,7 @@ export interface WebPluginDto {
      * @type {boolean}
      * @memberof WebPluginDto
      */
-    'enabled'?: boolean;
+    'enabled': boolean;
     /**
      * Specifies if the web plugin is system or not.
      * @type {boolean}

@@ -6,7 +6,7 @@ The form gallery parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**path** | **string** | The form gallery path. | [optional] [default to undefined]
+**path** | **string** | The form gallery path. | [default to undefined]
 **domain** | **string** | The form gallery domain. | [default to undefined]
 **ext** | **string** | The form gallery extension. | [default to undefined]
 **uploadPath** | **string** | The form gallery upload path. | [default to undefined]

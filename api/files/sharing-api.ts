@@ -27,6 +27,10 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { AceShortWrapperArrayWrapper } from '../../models';
 // @ts-ignore
+import type { BaseBatchRequestDto } from '../../models';
+// @ts-ignore
+import type { BooleanWrapper } from '../../models';
+// @ts-ignore
 import type { ChangeOwnerRequestDto } from '../../models';
 // @ts-ignore
 import type { ExternalShareRequestParam } from '../../models';
@@ -35,14 +39,23 @@ import type { ExternalShareWrapper } from '../../models';
 // @ts-ignore
 import type { FileEntryBaseArrayWrapper } from '../../models';
 // @ts-ignore
+import type { FileShareArrayWrapper } from '../../models';
+// @ts-ignore
+import type { GroupMemberSecurityRequestArrayWrapper } from '../../models';
+// @ts-ignore
 import type { MentionMessageWrapper } from '../../models';
 // @ts-ignore
 import type { MentionWrapperArrayWrapper } from '../../models';
+// @ts-ignore
+import type { SecurityInfoRequestDto } from '../../models';
+// @ts-ignore
+import type { SecurityInfoSimpleRequestDto } from '../../models';
 /**
  * SharingApi - axios parameter creator
  * @export
  */
 export const SharingApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * 
@@ -167,6 +180,239 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @param {number} id The file ID of the request.
+         * @param {number} [count] The number of items to retrieve in the request.
+         * @param {number} [startIndex] The starting index for the query results.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getFileSecurityInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-security-info/
+         */
+        getFileSecurityInfo: async (id: number, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getFileSecurityInfo', 'id', id)
+            const localVarPath = `/api/2.0/files/file/{id}/share`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id The request folder ID.
+         * @param {number} [count] The number of items to retrieve in the request.
+         * @param {number} [startIndex] The starting index for the query results.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getFolderSecurityInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-security-info/
+         */
+        getFolderSecurityInfo: async (id: number, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getFolderSecurityInfo', 'id', id)
+            const localVarPath = `/api/2.0/files/folder/{id}/share`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} fileId The file ID.
+         * @param {string} groupId The group ID.
+         * @param {number} [count] The number of items to be retrieved in the current query.
+         * @param {number} [startIndex] The starting index for the query result set.
+         * @param {string} [filterValue] The filter value used for searching or querying group members based on text input.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getGroupsMembersWithFileSecurity operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-file-security/
+         */
+        getGroupsMembersWithFileSecurity: async (fileId: number, groupId: string, count?: number, startIndex?: number, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'fileId' is not null or undefined
+            assertParamExists('getGroupsMembersWithFileSecurity', 'fileId', fileId)
+            // verify required parameter 'groupId' is not null or undefined
+            assertParamExists('getGroupsMembersWithFileSecurity', 'groupId', groupId)
+            const localVarPath = `/api/2.0/files/file/{fileId}/group/{groupId}/share`
+                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)))
+                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} folderId The folder ID.
+         * @param {string} groupId The group ID.
+         * @param {number} [count] The number of items to be retrieved in the current query.
+         * @param {number} [startIndex] The starting index for the query result set.
+         * @param {string} [filterValue] The filter value used for searching or querying group members based on text input.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getGroupsMembersWithFolderSecurity operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-folder-security/
+         */
+        getGroupsMembersWithFolderSecurity: async (folderId: number, groupId: string, count?: number, startIndex?: number, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'folderId' is not null or undefined
+            assertParamExists('getGroupsMembersWithFolderSecurity', 'folderId', folderId)
+            // verify required parameter 'groupId' is not null or undefined
+            assertParamExists('getGroupsMembersWithFolderSecurity', 'groupId', groupId)
+            const localVarPath = `/api/2.0/files/folder/{folderId}/group/{groupId}/share`
+                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)))
+                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getSecurityInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-security-info/
+         */
+        getSecurityInfo: async (baseBatchRequestDto?: BaseBatchRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/files/share`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(baseBatchRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {number} fileId The file ID of the request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -194,6 +440,41 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for removeSecurityInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/remove-security-info/
+         */
+        removeSecurityInfo: async (baseBatchRequestDto?: BaseBatchRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/files/share`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(baseBatchRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -233,6 +514,123 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(mentionMessageWrapper, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} fileId The file ID.
+         * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The parameters of the security information simple request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setFileSecurityInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-security-info/
+         */
+        setFileSecurityInfo: async (fileId: number, securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'fileId' is not null or undefined
+            assertParamExists('setFileSecurityInfo', 'fileId', fileId)
+            // verify required parameter 'securityInfoSimpleRequestDto' is not null or undefined
+            assertParamExists('setFileSecurityInfo', 'securityInfoSimpleRequestDto', securityInfoSimpleRequestDto)
+            const localVarPath = `/api/2.0/files/file/{fileId}/share`
+                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(securityInfoSimpleRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} folderId The folder ID.
+         * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The parameters of the security information simple request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setFolderSecurityInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-security-info/
+         */
+        setFolderSecurityInfo: async (folderId: number, securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'folderId' is not null or undefined
+            assertParamExists('setFolderSecurityInfo', 'folderId', folderId)
+            // verify required parameter 'securityInfoSimpleRequestDto' is not null or undefined
+            assertParamExists('setFolderSecurityInfo', 'securityInfoSimpleRequestDto', securityInfoSimpleRequestDto)
+            const localVarPath = `/api/2.0/files/folder/{folderId}/share`
+                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(securityInfoSimpleRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {SecurityInfoRequestDto} [securityInfoRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setSecurityInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-security-info/
+         */
+        setSecurityInfo: async (securityInfoRequestDto?: SecurityInfoRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/files/share`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(securityInfoRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -296,6 +694,88 @@ export const SharingApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {number} id The file ID of the request.
+         * @param {number} [count] The number of items to retrieve in the request.
+         * @param {number} [startIndex] The starting index for the query results.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getFileSecurityInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-security-info/
+         */
+        async getFileSecurityInfo(id: number, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getFileSecurityInfo(id, count, startIndex, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SharingApi.getFileSecurityInfo']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} id The request folder ID.
+         * @param {number} [count] The number of items to retrieve in the request.
+         * @param {number} [startIndex] The starting index for the query results.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getFolderSecurityInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-security-info/
+         */
+        async getFolderSecurityInfo(id: number, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getFolderSecurityInfo(id, count, startIndex, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SharingApi.getFolderSecurityInfo']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} fileId The file ID.
+         * @param {string} groupId The group ID.
+         * @param {number} [count] The number of items to be retrieved in the current query.
+         * @param {number} [startIndex] The starting index for the query result set.
+         * @param {string} [filterValue] The filter value used for searching or querying group members based on text input.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getGroupsMembersWithFileSecurity operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-file-security/
+         */
+        async getGroupsMembersWithFileSecurity(fileId: number, groupId: string, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupMemberSecurityRequestArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getGroupsMembersWithFileSecurity(fileId, groupId, count, startIndex, filterValue, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SharingApi.getGroupsMembersWithFileSecurity']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} folderId The folder ID.
+         * @param {string} groupId The group ID.
+         * @param {number} [count] The number of items to be retrieved in the current query.
+         * @param {number} [startIndex] The starting index for the query result set.
+         * @param {string} [filterValue] The filter value used for searching or querying group members based on text input.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getGroupsMembersWithFolderSecurity operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-folder-security/
+         */
+        async getGroupsMembersWithFolderSecurity(folderId: number, groupId: string, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupMemberSecurityRequestArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getGroupsMembersWithFolderSecurity(folderId, groupId, count, startIndex, filterValue, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SharingApi.getGroupsMembersWithFolderSecurity']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getSecurityInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-security-info/
+         */
+        async getSecurityInfo(baseBatchRequestDto?: BaseBatchRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSecurityInfo(baseBatchRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SharingApi.getSecurityInfo']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @param {number} fileId The file ID of the request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -306,6 +786,20 @@ export const SharingApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSharedUsers(fileId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SharingApi.getSharedUsers']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for removeSecurityInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/remove-security-info/
+         */
+        async removeSecurityInfo(baseBatchRequestDto?: BaseBatchRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.removeSecurityInfo(baseBatchRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SharingApi.removeSecurityInfo']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -321,6 +815,50 @@ export const SharingApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.sendEditorNotify(fileId, mentionMessageWrapper, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SharingApi.sendEditorNotify']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} fileId The file ID.
+         * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The parameters of the security information simple request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setFileSecurityInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-security-info/
+         */
+        async setFileSecurityInfo(fileId: number, securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setFileSecurityInfo(fileId, securityInfoSimpleRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SharingApi.setFileSecurityInfo']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} folderId The folder ID.
+         * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The parameters of the security information simple request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setFolderSecurityInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-security-info/
+         */
+        async setFolderSecurityInfo(folderId: number, securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setFolderSecurityInfo(folderId, securityInfoSimpleRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SharingApi.setFolderSecurityInfo']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {SecurityInfoRequestDto} [securityInfoRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setSecurityInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-security-info/
+         */
+        async setSecurityInfo(securityInfoRequestDto?: SecurityInfoRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setSecurityInfo(securityInfoRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SharingApi.setSecurityInfo']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -371,6 +909,73 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @param {number} id The file ID of the request.
+         * @param {number} [count] The number of items to retrieve in the request.
+         * @param {number} [startIndex] The starting index for the query results.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getFileSecurityInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-security-info/
+         * @throws {RequiredError}
+         */
+        getFileSecurityInfo(id: number, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
+            return localVarFp.getFileSecurityInfo(id, count, startIndex, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id The request folder ID.
+         * @param {number} [count] The number of items to retrieve in the request.
+         * @param {number} [startIndex] The starting index for the query results.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getFolderSecurityInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-security-info/
+         * @throws {RequiredError}
+         */
+        getFolderSecurityInfo(id: number, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
+            return localVarFp.getFolderSecurityInfo(id, count, startIndex, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} fileId The file ID.
+         * @param {string} groupId The group ID.
+         * @param {number} [count] The number of items to be retrieved in the current query.
+         * @param {number} [startIndex] The starting index for the query result set.
+         * @param {string} [filterValue] The filter value used for searching or querying group members based on text input.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getGroupsMembersWithFileSecurity operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-file-security/
+         * @throws {RequiredError}
+         */
+        getGroupsMembersWithFileSecurity(fileId: number, groupId: string, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<GroupMemberSecurityRequestArrayWrapper> {
+            return localVarFp.getGroupsMembersWithFileSecurity(fileId, groupId, count, startIndex, filterValue, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} folderId The folder ID.
+         * @param {string} groupId The group ID.
+         * @param {number} [count] The number of items to be retrieved in the current query.
+         * @param {number} [startIndex] The starting index for the query result set.
+         * @param {string} [filterValue] The filter value used for searching or querying group members based on text input.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getGroupsMembersWithFolderSecurity operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-folder-security/
+         * @throws {RequiredError}
+         */
+        getGroupsMembersWithFolderSecurity(folderId: number, groupId: string, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<GroupMemberSecurityRequestArrayWrapper> {
+            return localVarFp.getGroupsMembersWithFolderSecurity(folderId, groupId, count, startIndex, filterValue, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getSecurityInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-security-info/
+         * @throws {RequiredError}
+         */
+        getSecurityInfo(baseBatchRequestDto?: BaseBatchRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
+            return localVarFp.getSecurityInfo(baseBatchRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {number} fileId The file ID of the request.
          * @param {*} [options] Override http request option.
          * REST API Reference for getSharedUsers operation
@@ -379,6 +984,17 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
          */
         getSharedUsers(fileId: number, options?: RawAxiosRequestConfig): AxiosPromise<MentionWrapperArrayWrapper> {
             return localVarFp.getSharedUsers(fileId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
+         * @param {*} [options] Override http request option.
+         * REST API Reference for removeSecurityInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/remove-security-info/
+         * @throws {RequiredError}
+         */
+        removeSecurityInfo(baseBatchRequestDto?: BaseBatchRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.removeSecurityInfo(baseBatchRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -391,6 +1007,41 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
          */
         sendEditorNotify(fileId: number, mentionMessageWrapper?: MentionMessageWrapper, options?: RawAxiosRequestConfig): AxiosPromise<AceShortWrapperArrayWrapper> {
             return localVarFp.sendEditorNotify(fileId, mentionMessageWrapper, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} fileId The file ID.
+         * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The parameters of the security information simple request.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for setFileSecurityInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-security-info/
+         * @throws {RequiredError}
+         */
+        setFileSecurityInfo(fileId: number, securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
+            return localVarFp.setFileSecurityInfo(fileId, securityInfoSimpleRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} folderId The folder ID.
+         * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The parameters of the security information simple request.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for setFolderSecurityInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-security-info/
+         * @throws {RequiredError}
+         */
+        setFolderSecurityInfo(folderId: number, securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
+            return localVarFp.setFolderSecurityInfo(folderId, securityInfoSimpleRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {SecurityInfoRequestDto} [securityInfoRequestDto] 
+         * @param {*} [options] Override http request option.
+         * REST API Reference for setSecurityInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-security-info/
+         * @throws {RequiredError}
+         */
+        setSecurityInfo(securityInfoRequestDto?: SecurityInfoRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
+            return localVarFp.setSecurityInfo(securityInfoRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -440,6 +1091,73 @@ export class SharingApi extends BaseAPI {
 
     /**
      * 
+     * @param {number} id The file ID of the request.
+     * @param {number} [count] The number of items to retrieve in the request.
+     * @param {number} [startIndex] The starting index for the query results.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SharingApi
+     */
+    public getFileSecurityInfo(id: number, count?: number, startIndex?: number, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).getFileSecurityInfo(id, count, startIndex, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id The request folder ID.
+     * @param {number} [count] The number of items to retrieve in the request.
+     * @param {number} [startIndex] The starting index for the query results.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SharingApi
+     */
+    public getFolderSecurityInfo(id: number, count?: number, startIndex?: number, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).getFolderSecurityInfo(id, count, startIndex, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} fileId The file ID.
+     * @param {string} groupId The group ID.
+     * @param {number} [count] The number of items to be retrieved in the current query.
+     * @param {number} [startIndex] The starting index for the query result set.
+     * @param {string} [filterValue] The filter value used for searching or querying group members based on text input.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SharingApi
+     */
+    public getGroupsMembersWithFileSecurity(fileId: number, groupId: string, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).getGroupsMembersWithFileSecurity(fileId, groupId, count, startIndex, filterValue, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} folderId The folder ID.
+     * @param {string} groupId The group ID.
+     * @param {number} [count] The number of items to be retrieved in the current query.
+     * @param {number} [startIndex] The starting index for the query result set.
+     * @param {string} [filterValue] The filter value used for searching or querying group members based on text input.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SharingApi
+     */
+    public getGroupsMembersWithFolderSecurity(folderId: number, groupId: string, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).getGroupsMembersWithFolderSecurity(folderId, groupId, count, startIndex, filterValue, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SharingApi
+     */
+    public getSecurityInfo(baseBatchRequestDto?: BaseBatchRequestDto, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).getSecurityInfo(baseBatchRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @param {number} fileId The file ID of the request.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -447,6 +1165,17 @@ export class SharingApi extends BaseAPI {
      */
     public getSharedUsers(fileId: number, options?: RawAxiosRequestConfig) {
         return SharingApiFp(this.configuration).getSharedUsers(fileId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SharingApi
+     */
+    public removeSecurityInfo(baseBatchRequestDto?: BaseBatchRequestDto, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).removeSecurityInfo(baseBatchRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -459,6 +1188,41 @@ export class SharingApi extends BaseAPI {
      */
     public sendEditorNotify(fileId: number, mentionMessageWrapper?: MentionMessageWrapper, options?: RawAxiosRequestConfig) {
         return SharingApiFp(this.configuration).sendEditorNotify(fileId, mentionMessageWrapper, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} fileId The file ID.
+     * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The parameters of the security information simple request.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SharingApi
+     */
+    public setFileSecurityInfo(fileId: number, securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).setFileSecurityInfo(fileId, securityInfoSimpleRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} folderId The folder ID.
+     * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The parameters of the security information simple request.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SharingApi
+     */
+    public setFolderSecurityInfo(folderId: number, securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).setFolderSecurityInfo(folderId, securityInfoSimpleRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {SecurityInfoRequestDto} [securityInfoRequestDto] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SharingApi
+     */
+    public setSecurityInfo(securityInfoRequestDto?: SecurityInfoRequestDto, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).setSecurityInfo(securityInfoRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

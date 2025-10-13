@@ -40,7 +40,7 @@ export interface RoomFromTemplateStatusDto {
      * @type {string}
      * @memberof RoomFromTemplateStatusDto
      */
-    'error'?: string | null;
+    'error': string | null;
     /**
      * Specifies whether the process of creating a room from the template is completed.
      * @type {boolean}

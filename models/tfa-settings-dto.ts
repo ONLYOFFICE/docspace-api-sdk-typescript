@@ -40,13 +40,13 @@ export interface TfaSettingsDto {
      * @type {boolean}
      * @memberof TfaSettingsDto
      */
-    'enabled'?: boolean;
+    'enabled': boolean;
     /**
      * Indicates whether the TFA configuration can be used.
      * @type {boolean}
      * @memberof TfaSettingsDto
      */
-    'avaliable'?: boolean;
+    'avaliable': boolean;
     /**
      * The list of IP addresses that are exempt from TFA requirements.
      * @type {Array<string>}

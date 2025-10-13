@@ -31,13 +31,13 @@ export interface RoomDataLifetimeDto {
      * @type {boolean}
      * @memberof RoomDataLifetimeDto
      */
-    'deletePermanently'?: boolean;
+    'deletePermanently': boolean;
     /**
      * 
      * @type {RoomDataLifetimePeriod}
      * @memberof RoomDataLifetimeDto
      */
-    'period'?: RoomDataLifetimePeriod;
+    'period': RoomDataLifetimePeriod;
     /**
      * Specifies the time period value of the room data lifetime.
      * @type {number}

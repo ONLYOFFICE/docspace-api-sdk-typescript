@@ -37,6 +37,7 @@ import type { IpRestrictionsWrapper } from '../../models';
  * @export
  */
 export const IPRestrictionsApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Returns the IP portal restrictions.

@@ -51,11 +51,17 @@ export interface FileEntryBaseDto {
      */
     'access'?: FileShare;
     /**
-     * Specifies if the file entry is shared or not.
+     * Specifies if the file entry is shared via link or not.
      * @type {boolean}
      * @memberof FileEntryBaseDto
      */
     'shared'?: boolean;
+    /**
+     * Specifies if the file entry is shared for user or not.
+     * @type {boolean}
+     * @memberof FileEntryBaseDto
+     */
+    'sharedForUser'?: boolean;
     /**
      * Indicates whether the parent entity is shared.
      * @type {boolean}

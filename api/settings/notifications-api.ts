@@ -41,6 +41,7 @@ import type { RoomsNotificationsSettingsRequestDto } from '../../models';
  * @export
  */
 export const NotificationsApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Returns a list of notification channels

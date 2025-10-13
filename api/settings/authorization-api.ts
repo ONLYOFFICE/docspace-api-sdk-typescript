@@ -35,6 +35,7 @@ import type { BooleanWrapper } from '../../models';
  * @export
  */
 export const AuthorizationApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Returns the authorization services.

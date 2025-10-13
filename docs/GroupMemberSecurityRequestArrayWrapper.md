@@ -1,11 +1,11 @@
-# CustomNavigationItemArrayWrapper
+# GroupMemberSecurityRequestArrayWrapper
 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**Array&lt;CustomNavigationItem&gt;**](CustomNavigationItem.md) |  | [optional] [default to undefined]
+**response** | [**Array&lt;GroupMemberSecurityRequestDto&gt;**](GroupMemberSecurityRequestDto.md) |  | [optional] [default to undefined]
 **count** | **number** |  | [optional] [default to undefined]
 **links** | [**Array&lt;ActiveConnectionsWrapperLinksInner&gt;**](ActiveConnectionsWrapperLinksInner.md) |  | [optional] [default to undefined]
 **status** | **number** |  | [optional] [default to undefined]
@@ -14,9 +14,9 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CustomNavigationItemArrayWrapper } from '@onlyoffice/docspace-api-sdk';
+import { GroupMemberSecurityRequestArrayWrapper } from '@onlyoffice/docspace-api-sdk';
 
-const instance: CustomNavigationItemArrayWrapper = {
+const instance: GroupMemberSecurityRequestArrayWrapper = {
     response,
     count,
     links,

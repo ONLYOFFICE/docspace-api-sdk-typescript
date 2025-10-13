@@ -28,18 +28,18 @@ export interface DeepLinkDto {
      * @type {string}
      * @memberof DeepLinkDto
      */
-    'androidPackageName'?: string | null;
+    'androidPackageName': string | null;
     /**
      * The deep link URL.
      * @type {string}
      * @memberof DeepLinkDto
      */
-    'url'?: string | null;
+    'url': string | null;
     /**
      * The deep link IOS package ID.
      * @type {string}
      * @memberof DeepLinkDto
      */
-    'iosPackageId'?: string | null;
+    'iosPackageId': string | null;
 }
 

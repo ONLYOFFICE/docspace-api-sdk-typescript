@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **login** | **string** | The third-party request login. | [optional] [default to undefined]
 **password** | **string** | The third-party request password. | [optional] [default to undefined]
 **token** | **string** | The authentication token. | [optional] [default to undefined]
-**customerTitle** | **string** | The customer title. | [optional] [default to undefined]
-**providerKey** | **string** | The provider key. | [optional] [default to undefined]
+**customerTitle** | **string** | The customer title. | [default to undefined]
+**providerKey** | **string** | The provider key. | [default to undefined]
 **providerId** | **number** | The provider ID. | [optional] [default to undefined]
 
 ## Example

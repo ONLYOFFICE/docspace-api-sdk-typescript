@@ -52,13 +52,13 @@ export interface ThirdPartyRequestDto {
      * @type {string}
      * @memberof ThirdPartyRequestDto
      */
-    'customerTitle'?: string | null;
+    'customerTitle': string | null;
     /**
      * The provider key.
      * @type {string}
      * @memberof ThirdPartyRequestDto
      */
-    'providerKey'?: string | null;
+    'providerKey': string | null;
     /**
      * The provider ID.
      * @type {number}

@@ -4,10 +4,10 @@ The registration Telegram status.
 
 ## Enum
 
-* `Unlinked` (value: `'unlinked'`)
+* `NUMBER_0` (value: `0`)
 
-* `Linked` (value: `'linked'`)
+* `NUMBER_1` (value: `1`)
 
-* `Linking` (value: `'linking'`)
+* `NUMBER_2` (value: `2`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -41,6 +41,7 @@ import type { UpdateApiKeyRequest } from '../../models';
  * @export
  */
 export const ApiKeysApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Creates a user API key with the parameters specified in the request.

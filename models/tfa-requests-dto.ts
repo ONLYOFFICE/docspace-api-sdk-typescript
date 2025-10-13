@@ -31,13 +31,13 @@ export interface TfaRequestsDto {
      * @type {TfaRequestsDtoType}
      * @memberof TfaRequestsDto
      */
-    'type'?: TfaRequestsDtoType;
+    'type': TfaRequestsDtoType;
     /**
      * The ID of the user for whom the TFA settings are being configured.
      * @type {string}
      * @memberof TfaRequestsDto
      */
-    'id'?: string;
+    'id': string;
     /**
      * The list of IP addresses that bypass TFA verification.
      * @type {Array<string>}

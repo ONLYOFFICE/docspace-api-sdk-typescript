@@ -6,9 +6,9 @@ The authentication key parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **string** | The authentication key name. | [optional] [default to undefined]
-**value** | **string** | The authentication key value. | [optional] [default to undefined]
-**title** | **string** | The authentication key title. | [optional] [default to undefined]
+**name** | **string** | The authentication key name. | [default to undefined]
+**value** | **string** | The authentication key value. | [default to undefined]
+**title** | **string** | The authentication key title. | [default to undefined]
 
 ## Example
 

@@ -24,6 +24,9 @@ import type { ApiDateTime } from './api-date-time';
 import type { EmployeeDto } from './employee-dto';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { FileEntryDtoIntegerAllOfAvailableShareRights } from './file-entry-dto-integer-all-of-available-share-rights';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { FileEntryDtoIntegerAllOfSecurity } from './file-entry-dto-integer-all-of-security';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -179,12 +182,6 @@ export type FolderDtoString = FileEntryDtoString &  {
      * @memberof FolderDtoString
      */
     'usedSpace'?: number | null;
-    /**
-     * Specifies if the folder can be accessed via an external link or not.
-     * @type {boolean}
-     * @memberof FolderDtoString
-     */
-    'external'?: boolean | null;
     /**
      * Specifies if the folder is password protected or not.
      * @type {boolean}

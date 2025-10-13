@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | [**RegStatus**](RegStatus.md) |  | [optional] [default to undefined]
+**status** | [**RegStatus**](RegStatus.md) |  | [default to undefined]
 **username** | **string** |  | [optional] [default to undefined]
 
 ## Example

@@ -53,6 +53,7 @@ import type { SettingsRequestDto } from '../../models';
  * @export
  */
 export const FilesSettingsApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * 

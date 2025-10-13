@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **editorUrl** | **string** | The editor URL. | [default to undefined]
 **token** | **string** | The token of the file configuration. | [optional] [default to undefined]
 **type** | **string** | The platform type. | [optional] [default to undefined]
-**file** | [**FileDtoInteger**](FileDtoInteger.md) |  | [optional] [default to undefined]
+**file** | [**FileDtoInteger**](FileDtoInteger.md) |  | [default to undefined]
 **errorMessage** | **string** | The error message. | [optional] [default to undefined]
 **startFilling** | **boolean** | Specifies if the file filling has started or not. | [optional] [default to undefined]
 **fillingStatus** | **boolean** | The file filling status. | [optional] [default to undefined]

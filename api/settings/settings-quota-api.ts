@@ -39,6 +39,7 @@ import type { TenantUserQuotaSettingsWrapper } from '../../models';
  * @export
  */
 export const SettingsQuotaApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Returns the user quota settings.

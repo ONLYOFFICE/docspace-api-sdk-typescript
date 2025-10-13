@@ -43,6 +43,7 @@ import type { StringWrapper } from '../../models';
  * @export
  */
 export const AuthenticationApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Authenticates the current user by SMS, authenticator app, or without two-factor authentication.

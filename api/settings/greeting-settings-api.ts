@@ -37,6 +37,7 @@ import type { StringWrapper } from '../../models';
  * @export
  */
 export const GreetingSettingsApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Returns the greeting settings for the current portal.

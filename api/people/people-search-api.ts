@@ -47,13 +47,247 @@ import type { QuotaFilter } from '../../models';
 // @ts-ignore
 import type { SortOrder } from '../../models';
 /**
- * SearchApi - axios parameter creator
+ * PeopleSearchApi - axios parameter creator
  * @export
  */
-export const SearchApiAxiosParamCreator = function (configuration?: Configuration) {
+export const PeopleSearchApiAxiosParamCreator = function (configuration?: Configuration) {
+    let fields: string | undefined;
     return {
+        withFields: (f: string) => {
+            fields = f;
+        },
         /**
-         * Returns the account entries with their sharing settings.
+         * Returns the account entries with their sharing settings for a file with the ID specified in request.
+         * @summary Get account entries with file sharing settings
+         * @param {number} id The user ID.
+         * @param {EmployeeStatus} [employeeStatus] The user status.
+         * @param {EmployeeActivationStatus} [activationStatus] The user activation status.
+         * @param {boolean} [excludeShared] Specifies whether to exclude the account sharing settings from the response.
+         * @param {boolean} [includeShared] Specifies whether to include the account sharing settings in the response.
+         * @param {boolean} [invitedByMe] Specifies whether the user is invited by the current user or not.
+         * @param {string} [inviterId] The inviter ID.
+         * @param {Area} [area] The area of the account entries.
+         * @param {Array<EmployeeType>} [employeeTypes] The list of the user types.
+         * @param {number} [count] The number of items to retrieve in a request.
+         * @param {number} [startIndex] The starting index for the query results.
+         * @param {string} [filterSeparator] Specifies the separator used in filter expressions.
+         * @param {string} [filterValue] The text filter applied to the accounts search query.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getAccountsEntriesWithFilesShared operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-files-shared/
+         */
+        getAccountsEntriesWithFilesShared: async (id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getAccountsEntriesWithFilesShared', 'id', id)
+            const localVarPath = `/api/2.0/accounts/file/{id}/search`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (employeeStatus !== undefined) {
+                localVarQueryParameter['employeeStatus'] = employeeStatus;
+            }
+
+            if (activationStatus !== undefined) {
+                localVarQueryParameter['activationStatus'] = activationStatus;
+            }
+
+            if (excludeShared !== undefined) {
+                localVarQueryParameter['excludeShared'] = excludeShared;
+            }
+
+            if (includeShared !== undefined) {
+                localVarQueryParameter['includeShared'] = includeShared;
+            }
+
+            if (invitedByMe !== undefined) {
+                localVarQueryParameter['invitedByMe'] = invitedByMe;
+            }
+
+            if (inviterId !== undefined) {
+                localVarQueryParameter['inviterId'] = inviterId;
+            }
+
+            if (area !== undefined) {
+                localVarQueryParameter['area'] = area;
+            }
+
+            if (employeeTypes) {
+                localVarQueryParameter['employeeTypes'] = employeeTypes.join(COLLECTION_FORMATS.csv);
+            }
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (filterSeparator !== undefined) {
+                localVarQueryParameter['filterSeparator'] = filterSeparator;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the account entries with their sharing settings in a folder with the ID specified in request.
+         * @summary Get account entries with folder sharing settings
+         * @param {number} id The user ID.
+         * @param {EmployeeStatus} [employeeStatus] The user status.
+         * @param {EmployeeActivationStatus} [activationStatus] The user activation status.
+         * @param {boolean} [excludeShared] Specifies whether to exclude the account sharing settings from the response.
+         * @param {boolean} [includeShared] Specifies whether to include the account sharing settings in the response.
+         * @param {boolean} [invitedByMe] Specifies whether the user is invited by the current user or not.
+         * @param {string} [inviterId] The inviter ID.
+         * @param {Area} [area] The area of the account entries.
+         * @param {Array<EmployeeType>} [employeeTypes] The list of the user types.
+         * @param {number} [count] The number of items to retrieve in a request.
+         * @param {number} [startIndex] The starting index for the query results.
+         * @param {string} [filterSeparator] Specifies the separator used in filter expressions.
+         * @param {string} [filterValue] The text filter applied to the accounts search query.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getAccountsEntriesWithFoldersShared operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-folders-shared/
+         */
+        getAccountsEntriesWithFoldersShared: async (id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getAccountsEntriesWithFoldersShared', 'id', id)
+            const localVarPath = `/api/2.0/accounts/folder/{id}/search`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (employeeStatus !== undefined) {
+                localVarQueryParameter['employeeStatus'] = employeeStatus;
+            }
+
+            if (activationStatus !== undefined) {
+                localVarQueryParameter['activationStatus'] = activationStatus;
+            }
+
+            if (excludeShared !== undefined) {
+                localVarQueryParameter['excludeShared'] = excludeShared;
+            }
+
+            if (includeShared !== undefined) {
+                localVarQueryParameter['includeShared'] = includeShared;
+            }
+
+            if (invitedByMe !== undefined) {
+                localVarQueryParameter['invitedByMe'] = invitedByMe;
+            }
+
+            if (inviterId !== undefined) {
+                localVarQueryParameter['inviterId'] = inviterId;
+            }
+
+            if (area !== undefined) {
+                localVarQueryParameter['area'] = area;
+            }
+
+            if (employeeTypes) {
+                localVarQueryParameter['employeeTypes'] = employeeTypes.join(COLLECTION_FORMATS.csv);
+            }
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (filterSeparator !== undefined) {
+                localVarQueryParameter['filterSeparator'] = filterSeparator;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the account entries with their sharing settings in a room with the ID specified in request.
          * @summary Get account entries
          * @param {number} id The user ID.
          * @param {EmployeeStatus} [employeeStatus] The user status.
@@ -70,12 +304,12 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {string} [filterValue] The text filter applied to the accounts search query.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for getAccountsEntriesWithShared operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-shared/
+         * REST API Reference for getAccountsEntriesWithRoomsShared operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-rooms-shared/
          */
-        getAccountsEntriesWithShared: async (id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAccountsEntriesWithRoomsShared: async (id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('getAccountsEntriesWithShared', 'id', id)
+            assertParamExists('getAccountsEntriesWithRoomsShared', 'id', id)
             const localVarPath = `/api/2.0/accounts/room/{id}/search`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -255,13 +489,12 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {SortOrder} [sortOrder] The order in which the results are sorted.
          * @param {string} [filterSeparator] Represents the separator used to split filter criteria in query parameters.
          * @param {string} [filterValue] The search text used to filter results based on user input.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getSimpleByFilter operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-simple-by-filter/
          */
-        getSimpleByFilter: async (employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<GetSimpleByFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, fields?: string | null, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getSimpleByFilter: async (employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<GetSimpleByFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/people/simple/filter`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -373,8 +606,237 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
                 localVarQueryParameter['filterValue'] = filterValue;
             }
 
-            if (fields !== undefined) {
-                localVarQueryParameter['fields'] = fields;
+
+    
+            if(fields !== undefined) {
+                localVarHeaderParameter['fields'] = fields;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the users with the sharing settings in a file with the ID specified in request.
+         * @summary Get users with file sharing settings
+         * @param {number} id The user ID.
+         * @param {EmployeeStatus} [employeeStatus] The user status.
+         * @param {EmployeeActivationStatus} [activationStatus] The user activation status.
+         * @param {boolean} [excludeShared] Specifies whether to exclude the user sharing settings or not.
+         * @param {boolean} [includeShared] Specifies whether to include the user sharing settings or not.
+         * @param {boolean} [invitedByMe] Specifies whether the user was invited by the current user or not.
+         * @param {string} [inviterId] The inviter ID.
+         * @param {Area} [area] The user area.
+         * @param {Array<EmployeeType>} [employeeTypes] The list of user types.
+         * @param {number} [count] The maximum number of users to be retrieved in the request.
+         * @param {number} [startIndex] The zero-based index of the first record to retrieve in a paged query.
+         * @param {string} [filterSeparator] The character or string used to separate multiple filter values in a filtering query.
+         * @param {string} [filterValue] The filter text value used for searching or filtering user results.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getUsersWithFilesShared operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-users-with-files-shared/
+         */
+        getUsersWithFilesShared: async (id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getUsersWithFilesShared', 'id', id)
+            const localVarPath = `/api/2.0/people/file/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (employeeStatus !== undefined) {
+                localVarQueryParameter['employeeStatus'] = employeeStatus;
+            }
+
+            if (activationStatus !== undefined) {
+                localVarQueryParameter['activationStatus'] = activationStatus;
+            }
+
+            if (excludeShared !== undefined) {
+                localVarQueryParameter['excludeShared'] = excludeShared;
+            }
+
+            if (includeShared !== undefined) {
+                localVarQueryParameter['includeShared'] = includeShared;
+            }
+
+            if (invitedByMe !== undefined) {
+                localVarQueryParameter['invitedByMe'] = invitedByMe;
+            }
+
+            if (inviterId !== undefined) {
+                localVarQueryParameter['inviterId'] = inviterId;
+            }
+
+            if (area !== undefined) {
+                localVarQueryParameter['area'] = area;
+            }
+
+            if (employeeTypes) {
+                localVarQueryParameter['employeeTypes'] = employeeTypes.join(COLLECTION_FORMATS.csv);
+            }
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (filterSeparator !== undefined) {
+                localVarQueryParameter['filterSeparator'] = filterSeparator;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the users with the sharing settings in a folder with the ID specified in request.
+         * @summary Get users with folder sharing settings
+         * @param {number} id The user ID.
+         * @param {EmployeeStatus} [employeeStatus] The user status.
+         * @param {EmployeeActivationStatus} [activationStatus] The user activation status.
+         * @param {boolean} [excludeShared] Specifies whether to exclude the user sharing settings or not.
+         * @param {boolean} [includeShared] Specifies whether to include the user sharing settings or not.
+         * @param {boolean} [invitedByMe] Specifies whether the user was invited by the current user or not.
+         * @param {string} [inviterId] The inviter ID.
+         * @param {Area} [area] The user area.
+         * @param {Array<EmployeeType>} [employeeTypes] The list of user types.
+         * @param {number} [count] The maximum number of users to be retrieved in the request.
+         * @param {number} [startIndex] The zero-based index of the first record to retrieve in a paged query.
+         * @param {string} [filterSeparator] The character or string used to separate multiple filter values in a filtering query.
+         * @param {string} [filterValue] The filter text value used for searching or filtering user results.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getUsersWithFoldersShared operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-users-with-folders-shared/
+         */
+        getUsersWithFoldersShared: async (id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getUsersWithFoldersShared', 'id', id)
+            const localVarPath = `/api/2.0/people/folder/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (employeeStatus !== undefined) {
+                localVarQueryParameter['employeeStatus'] = employeeStatus;
+            }
+
+            if (activationStatus !== undefined) {
+                localVarQueryParameter['activationStatus'] = activationStatus;
+            }
+
+            if (excludeShared !== undefined) {
+                localVarQueryParameter['excludeShared'] = excludeShared;
+            }
+
+            if (includeShared !== undefined) {
+                localVarQueryParameter['includeShared'] = includeShared;
+            }
+
+            if (invitedByMe !== undefined) {
+                localVarQueryParameter['invitedByMe'] = invitedByMe;
+            }
+
+            if (inviterId !== undefined) {
+                localVarQueryParameter['inviterId'] = inviterId;
+            }
+
+            if (area !== undefined) {
+                localVarQueryParameter['area'] = area;
+            }
+
+            if (employeeTypes) {
+                localVarQueryParameter['employeeTypes'] = employeeTypes.join(COLLECTION_FORMATS.csv);
+            }
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (filterSeparator !== undefined) {
+                localVarQueryParameter['filterSeparator'] = filterSeparator;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
             }
 
 
@@ -526,13 +988,12 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {SortOrder} [sortOrder] The order in which the results are sorted.
          * @param {string} [filterSeparator] Represents the separator used to split filter criteria in query parameters.
          * @param {string} [filterValue] The search text used to filter results based on user input.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for searchUsersByExtendedFilter operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/search-users-by-extended-filter/
          */
-        searchUsersByExtendedFilter: async (employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<SearchUsersByExtendedFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, fields?: string | null, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        searchUsersByExtendedFilter: async (employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<SearchUsersByExtendedFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/people/filter`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -644,12 +1105,11 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
                 localVarQueryParameter['filterValue'] = filterValue;
             }
 
-            if (fields !== undefined) {
-                localVarQueryParameter['fields'] = fields;
-            }
-
 
     
+            if(fields !== undefined) {
+                localVarHeaderParameter['fields'] = fields;
+            }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -789,14 +1249,68 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
 };
 
 /**
- * SearchApi - functional programming interface
+ * PeopleSearchApi - functional programming interface
  * @export
  */
-export const SearchApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SearchApiAxiosParamCreator(configuration)
+export const PeopleSearchApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = PeopleSearchApiAxiosParamCreator(configuration)
     return {
         /**
-         * Returns the account entries with their sharing settings.
+         * Returns the account entries with their sharing settings for a file with the ID specified in request.
+         * @summary Get account entries with file sharing settings
+         * @param {number} id The user ID.
+         * @param {EmployeeStatus} [employeeStatus] The user status.
+         * @param {EmployeeActivationStatus} [activationStatus] The user activation status.
+         * @param {boolean} [excludeShared] Specifies whether to exclude the account sharing settings from the response.
+         * @param {boolean} [includeShared] Specifies whether to include the account sharing settings in the response.
+         * @param {boolean} [invitedByMe] Specifies whether the user is invited by the current user or not.
+         * @param {string} [inviterId] The inviter ID.
+         * @param {Area} [area] The area of the account entries.
+         * @param {Array<EmployeeType>} [employeeTypes] The list of the user types.
+         * @param {number} [count] The number of items to retrieve in a request.
+         * @param {number} [startIndex] The starting index for the query results.
+         * @param {string} [filterSeparator] Specifies the separator used in filter expressions.
+         * @param {string} [filterValue] The text filter applied to the accounts search query.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getAccountsEntriesWithFilesShared operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-files-shared/
+         */
+        async getAccountsEntriesWithFilesShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountsEntriesWithFilesShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getAccountsEntriesWithFilesShared']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the account entries with their sharing settings in a folder with the ID specified in request.
+         * @summary Get account entries with folder sharing settings
+         * @param {number} id The user ID.
+         * @param {EmployeeStatus} [employeeStatus] The user status.
+         * @param {EmployeeActivationStatus} [activationStatus] The user activation status.
+         * @param {boolean} [excludeShared] Specifies whether to exclude the account sharing settings from the response.
+         * @param {boolean} [includeShared] Specifies whether to include the account sharing settings in the response.
+         * @param {boolean} [invitedByMe] Specifies whether the user is invited by the current user or not.
+         * @param {string} [inviterId] The inviter ID.
+         * @param {Area} [area] The area of the account entries.
+         * @param {Array<EmployeeType>} [employeeTypes] The list of the user types.
+         * @param {number} [count] The number of items to retrieve in a request.
+         * @param {number} [startIndex] The starting index for the query results.
+         * @param {string} [filterSeparator] Specifies the separator used in filter expressions.
+         * @param {string} [filterValue] The text filter applied to the accounts search query.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getAccountsEntriesWithFoldersShared operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-folders-shared/
+         */
+        async getAccountsEntriesWithFoldersShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountsEntriesWithFoldersShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getAccountsEntriesWithFoldersShared']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the account entries with their sharing settings in a room with the ID specified in request.
          * @summary Get account entries
          * @param {number} id The user ID.
          * @param {EmployeeStatus} [employeeStatus] The user status.
@@ -813,13 +1327,13 @@ export const SearchApiFp = function(configuration?: Configuration) {
          * @param {string} [filterValue] The text filter applied to the accounts search query.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for getAccountsEntriesWithShared operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-shared/
+         * REST API Reference for getAccountsEntriesWithRoomsShared operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-rooms-shared/
          */
-        async getAccountsEntriesWithShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountsEntriesWithShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options);
+        async getAccountsEntriesWithRoomsShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountsEntriesWithRoomsShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SearchApi.getAccountsEntriesWithShared']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getAccountsEntriesWithRoomsShared']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -836,7 +1350,7 @@ export const SearchApiFp = function(configuration?: Configuration) {
         async getSearch(query: string, filterBy?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSearch(query, filterBy, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SearchApi.getSearch']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getSearch']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -862,16 +1376,69 @@ export const SearchApiFp = function(configuration?: Configuration) {
          * @param {SortOrder} [sortOrder] The order in which the results are sorted.
          * @param {string} [filterSeparator] Represents the separator used to split filter criteria in query parameters.
          * @param {string} [filterValue] The search text used to filter results based on user input.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getSimpleByFilter operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-simple-by-filter/
          */
-        async getSimpleByFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<GetSimpleByFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, fields?: string | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getSimpleByFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, count, startIndex, sortBy, sortOrder, filterSeparator, filterValue, fields, options);
+        async getSimpleByFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<GetSimpleByFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSimpleByFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, count, startIndex, sortBy, sortOrder, filterSeparator, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SearchApi.getSimpleByFilter']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getSimpleByFilter']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the users with the sharing settings in a file with the ID specified in request.
+         * @summary Get users with file sharing settings
+         * @param {number} id The user ID.
+         * @param {EmployeeStatus} [employeeStatus] The user status.
+         * @param {EmployeeActivationStatus} [activationStatus] The user activation status.
+         * @param {boolean} [excludeShared] Specifies whether to exclude the user sharing settings or not.
+         * @param {boolean} [includeShared] Specifies whether to include the user sharing settings or not.
+         * @param {boolean} [invitedByMe] Specifies whether the user was invited by the current user or not.
+         * @param {string} [inviterId] The inviter ID.
+         * @param {Area} [area] The user area.
+         * @param {Array<EmployeeType>} [employeeTypes] The list of user types.
+         * @param {number} [count] The maximum number of users to be retrieved in the request.
+         * @param {number} [startIndex] The zero-based index of the first record to retrieve in a paged query.
+         * @param {string} [filterSeparator] The character or string used to separate multiple filter values in a filtering query.
+         * @param {string} [filterValue] The filter text value used for searching or filtering user results.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getUsersWithFilesShared operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-users-with-files-shared/
+         */
+        async getUsersWithFilesShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUsersWithFilesShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getUsersWithFilesShared']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the users with the sharing settings in a folder with the ID specified in request.
+         * @summary Get users with folder sharing settings
+         * @param {number} id The user ID.
+         * @param {EmployeeStatus} [employeeStatus] The user status.
+         * @param {EmployeeActivationStatus} [activationStatus] The user activation status.
+         * @param {boolean} [excludeShared] Specifies whether to exclude the user sharing settings or not.
+         * @param {boolean} [includeShared] Specifies whether to include the user sharing settings or not.
+         * @param {boolean} [invitedByMe] Specifies whether the user was invited by the current user or not.
+         * @param {string} [inviterId] The inviter ID.
+         * @param {Area} [area] The user area.
+         * @param {Array<EmployeeType>} [employeeTypes] The list of user types.
+         * @param {number} [count] The maximum number of users to be retrieved in the request.
+         * @param {number} [startIndex] The zero-based index of the first record to retrieve in a paged query.
+         * @param {string} [filterSeparator] The character or string used to separate multiple filter values in a filtering query.
+         * @param {string} [filterValue] The filter text value used for searching or filtering user results.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getUsersWithFoldersShared operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-users-with-folders-shared/
+         */
+        async getUsersWithFoldersShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUsersWithFoldersShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getUsersWithFoldersShared']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -898,7 +1465,7 @@ export const SearchApiFp = function(configuration?: Configuration) {
         async getUsersWithRoomShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUsersWithRoomShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SearchApi.getUsersWithRoomShared']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getUsersWithRoomShared']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -924,16 +1491,15 @@ export const SearchApiFp = function(configuration?: Configuration) {
          * @param {SortOrder} [sortOrder] The order in which the results are sorted.
          * @param {string} [filterSeparator] Represents the separator used to split filter criteria in query parameters.
          * @param {string} [filterValue] The search text used to filter results based on user input.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for searchUsersByExtendedFilter operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/search-users-by-extended-filter/
          */
-        async searchUsersByExtendedFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<SearchUsersByExtendedFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, fields?: string | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.searchUsersByExtendedFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, count, startIndex, sortBy, sortOrder, filterSeparator, filterValue, fields, options);
+        async searchUsersByExtendedFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<SearchUsersByExtendedFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.searchUsersByExtendedFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, count, startIndex, sortBy, sortOrder, filterSeparator, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SearchApi.searchUsersByExtendedFilter']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.searchUsersByExtendedFilter']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -948,7 +1514,7 @@ export const SearchApiFp = function(configuration?: Configuration) {
         async searchUsersByQuery(query?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.searchUsersByQuery(query, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SearchApi.searchUsersByQuery']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.searchUsersByQuery']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -966,21 +1532,69 @@ export const SearchApiFp = function(configuration?: Configuration) {
         async searchUsersByStatus(status: EmployeeStatus, query?: string, filterBy?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.searchUsersByStatus(status, query, filterBy, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SearchApi.searchUsersByStatus']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.searchUsersByStatus']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * SearchApi - factory interface
+ * PeopleSearchApi - factory interface
  * @export
  */
-export const SearchApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SearchApiFp(configuration)
+export const PeopleSearchApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = PeopleSearchApiFp(configuration)
     return {
         /**
-         * Returns the account entries with their sharing settings.
+         * Returns the account entries with their sharing settings for a file with the ID specified in request.
+         * @summary Get account entries with file sharing settings
+         * @param {number} id The user ID.
+         * @param {EmployeeStatus} [employeeStatus] The user status.
+         * @param {EmployeeActivationStatus} [activationStatus] The user activation status.
+         * @param {boolean} [excludeShared] Specifies whether to exclude the account sharing settings from the response.
+         * @param {boolean} [includeShared] Specifies whether to include the account sharing settings in the response.
+         * @param {boolean} [invitedByMe] Specifies whether the user is invited by the current user or not.
+         * @param {string} [inviterId] The inviter ID.
+         * @param {Area} [area] The area of the account entries.
+         * @param {Array<EmployeeType>} [employeeTypes] The list of the user types.
+         * @param {number} [count] The number of items to retrieve in a request.
+         * @param {number} [startIndex] The starting index for the query results.
+         * @param {string} [filterSeparator] Specifies the separator used in filter expressions.
+         * @param {string} [filterValue] The text filter applied to the accounts search query.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getAccountsEntriesWithFilesShared operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-files-shared/
+         * @throws {RequiredError}
+         */
+        getAccountsEntriesWithFilesShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<ObjectArrayWrapper> {
+            return localVarFp.getAccountsEntriesWithFilesShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the account entries with their sharing settings in a folder with the ID specified in request.
+         * @summary Get account entries with folder sharing settings
+         * @param {number} id The user ID.
+         * @param {EmployeeStatus} [employeeStatus] The user status.
+         * @param {EmployeeActivationStatus} [activationStatus] The user activation status.
+         * @param {boolean} [excludeShared] Specifies whether to exclude the account sharing settings from the response.
+         * @param {boolean} [includeShared] Specifies whether to include the account sharing settings in the response.
+         * @param {boolean} [invitedByMe] Specifies whether the user is invited by the current user or not.
+         * @param {string} [inviterId] The inviter ID.
+         * @param {Area} [area] The area of the account entries.
+         * @param {Array<EmployeeType>} [employeeTypes] The list of the user types.
+         * @param {number} [count] The number of items to retrieve in a request.
+         * @param {number} [startIndex] The starting index for the query results.
+         * @param {string} [filterSeparator] Specifies the separator used in filter expressions.
+         * @param {string} [filterValue] The text filter applied to the accounts search query.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getAccountsEntriesWithFoldersShared operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-folders-shared/
+         * @throws {RequiredError}
+         */
+        getAccountsEntriesWithFoldersShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<ObjectArrayWrapper> {
+            return localVarFp.getAccountsEntriesWithFoldersShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the account entries with their sharing settings in a room with the ID specified in request.
          * @summary Get account entries
          * @param {number} id The user ID.
          * @param {EmployeeStatus} [employeeStatus] The user status.
@@ -996,12 +1610,12 @@ export const SearchApiFactory = function (configuration?: Configuration, basePat
          * @param {string} [filterSeparator] Specifies the separator used in filter expressions.
          * @param {string} [filterValue] The text filter applied to the accounts search query.
          * @param {*} [options] Override http request option.
-         * REST API Reference for getAccountsEntriesWithShared operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-shared/
+         * REST API Reference for getAccountsEntriesWithRoomsShared operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-rooms-shared/
          * @throws {RequiredError}
          */
-        getAccountsEntriesWithShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<ObjectArrayWrapper> {
-            return localVarFp.getAccountsEntriesWithShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options).then((request) => request(axios, basePath));
+        getAccountsEntriesWithRoomsShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<ObjectArrayWrapper> {
+            return localVarFp.getAccountsEntriesWithRoomsShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of users matching the search query.
@@ -1040,14 +1654,61 @@ export const SearchApiFactory = function (configuration?: Configuration, basePat
          * @param {SortOrder} [sortOrder] The order in which the results are sorted.
          * @param {string} [filterSeparator] Represents the separator used to split filter criteria in query parameters.
          * @param {string} [filterValue] The search text used to filter results based on user input.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response
          * @param {*} [options] Override http request option.
          * REST API Reference for getSimpleByFilter operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-simple-by-filter/
          * @throws {RequiredError}
          */
-        getSimpleByFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<GetSimpleByFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, fields?: string | null, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeArrayWrapper> {
-            return localVarFp.getSimpleByFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, count, startIndex, sortBy, sortOrder, filterSeparator, filterValue, fields, options).then((request) => request(axios, basePath));
+        getSimpleByFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<GetSimpleByFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeArrayWrapper> {
+            return localVarFp.getSimpleByFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, count, startIndex, sortBy, sortOrder, filterSeparator, filterValue, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the users with the sharing settings in a file with the ID specified in request.
+         * @summary Get users with file sharing settings
+         * @param {number} id The user ID.
+         * @param {EmployeeStatus} [employeeStatus] The user status.
+         * @param {EmployeeActivationStatus} [activationStatus] The user activation status.
+         * @param {boolean} [excludeShared] Specifies whether to exclude the user sharing settings or not.
+         * @param {boolean} [includeShared] Specifies whether to include the user sharing settings or not.
+         * @param {boolean} [invitedByMe] Specifies whether the user was invited by the current user or not.
+         * @param {string} [inviterId] The inviter ID.
+         * @param {Area} [area] The user area.
+         * @param {Array<EmployeeType>} [employeeTypes] The list of user types.
+         * @param {number} [count] The maximum number of users to be retrieved in the request.
+         * @param {number} [startIndex] The zero-based index of the first record to retrieve in a paged query.
+         * @param {string} [filterSeparator] The character or string used to separate multiple filter values in a filtering query.
+         * @param {string} [filterValue] The filter text value used for searching or filtering user results.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getUsersWithFilesShared operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-users-with-files-shared/
+         * @throws {RequiredError}
+         */
+        getUsersWithFilesShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
+            return localVarFp.getUsersWithFilesShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the users with the sharing settings in a folder with the ID specified in request.
+         * @summary Get users with folder sharing settings
+         * @param {number} id The user ID.
+         * @param {EmployeeStatus} [employeeStatus] The user status.
+         * @param {EmployeeActivationStatus} [activationStatus] The user activation status.
+         * @param {boolean} [excludeShared] Specifies whether to exclude the user sharing settings or not.
+         * @param {boolean} [includeShared] Specifies whether to include the user sharing settings or not.
+         * @param {boolean} [invitedByMe] Specifies whether the user was invited by the current user or not.
+         * @param {string} [inviterId] The inviter ID.
+         * @param {Area} [area] The user area.
+         * @param {Array<EmployeeType>} [employeeTypes] The list of user types.
+         * @param {number} [count] The maximum number of users to be retrieved in the request.
+         * @param {number} [startIndex] The zero-based index of the first record to retrieve in a paged query.
+         * @param {string} [filterSeparator] The character or string used to separate multiple filter values in a filtering query.
+         * @param {string} [filterValue] The filter text value used for searching or filtering user results.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getUsersWithFoldersShared operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-users-with-folders-shared/
+         * @throws {RequiredError}
+         */
+        getUsersWithFoldersShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
+            return localVarFp.getUsersWithFoldersShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the users with the sharing settings in a room with the ID specified in request.
@@ -1096,14 +1757,13 @@ export const SearchApiFactory = function (configuration?: Configuration, basePat
          * @param {SortOrder} [sortOrder] The order in which the results are sorted.
          * @param {string} [filterSeparator] Represents the separator used to split filter criteria in query parameters.
          * @param {string} [filterValue] The search text used to filter results based on user input.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response
          * @param {*} [options] Override http request option.
          * REST API Reference for searchUsersByExtendedFilter operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/search-users-by-extended-filter/
          * @throws {RequiredError}
          */
-        searchUsersByExtendedFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<SearchUsersByExtendedFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, fields?: string | null, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
-            return localVarFp.searchUsersByExtendedFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, count, startIndex, sortBy, sortOrder, filterSeparator, filterValue, fields, options).then((request) => request(axios, basePath));
+        searchUsersByExtendedFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<SearchUsersByExtendedFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
+            return localVarFp.searchUsersByExtendedFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, count, startIndex, sortBy, sortOrder, filterSeparator, filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of users matching the search query. This method uses the query parameters.
@@ -1136,14 +1796,62 @@ export const SearchApiFactory = function (configuration?: Configuration, basePat
 };
 
 /**
- * SearchApi - object-oriented interface
+ * PeopleSearchApi - object-oriented interface
  * @export
- * @class SearchApi
+ * @class PeopleSearchApi
  * @extends {BaseAPI}
  */
-export class SearchApi extends BaseAPI {
+export class PeopleSearchApi extends BaseAPI {
     /**
-     * Returns the account entries with their sharing settings.
+     * Returns the account entries with their sharing settings for a file with the ID specified in request.
+     * @summary Get account entries with file sharing settings
+     * @param {number} id The user ID.
+     * @param {EmployeeStatus} [employeeStatus] The user status.
+     * @param {EmployeeActivationStatus} [activationStatus] The user activation status.
+     * @param {boolean} [excludeShared] Specifies whether to exclude the account sharing settings from the response.
+     * @param {boolean} [includeShared] Specifies whether to include the account sharing settings in the response.
+     * @param {boolean} [invitedByMe] Specifies whether the user is invited by the current user or not.
+     * @param {string} [inviterId] The inviter ID.
+     * @param {Area} [area] The area of the account entries.
+     * @param {Array<EmployeeType>} [employeeTypes] The list of the user types.
+     * @param {number} [count] The number of items to retrieve in a request.
+     * @param {number} [startIndex] The starting index for the query results.
+     * @param {string} [filterSeparator] Specifies the separator used in filter expressions.
+     * @param {string} [filterValue] The text filter applied to the accounts search query.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PeopleSearchApi
+     */
+    public getAccountsEntriesWithFilesShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return PeopleSearchApiFp(this.configuration).getAccountsEntriesWithFilesShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the account entries with their sharing settings in a folder with the ID specified in request.
+     * @summary Get account entries with folder sharing settings
+     * @param {number} id The user ID.
+     * @param {EmployeeStatus} [employeeStatus] The user status.
+     * @param {EmployeeActivationStatus} [activationStatus] The user activation status.
+     * @param {boolean} [excludeShared] Specifies whether to exclude the account sharing settings from the response.
+     * @param {boolean} [includeShared] Specifies whether to include the account sharing settings in the response.
+     * @param {boolean} [invitedByMe] Specifies whether the user is invited by the current user or not.
+     * @param {string} [inviterId] The inviter ID.
+     * @param {Area} [area] The area of the account entries.
+     * @param {Array<EmployeeType>} [employeeTypes] The list of the user types.
+     * @param {number} [count] The number of items to retrieve in a request.
+     * @param {number} [startIndex] The starting index for the query results.
+     * @param {string} [filterSeparator] Specifies the separator used in filter expressions.
+     * @param {string} [filterValue] The text filter applied to the accounts search query.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PeopleSearchApi
+     */
+    public getAccountsEntriesWithFoldersShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return PeopleSearchApiFp(this.configuration).getAccountsEntriesWithFoldersShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the account entries with their sharing settings in a room with the ID specified in request.
      * @summary Get account entries
      * @param {number} id The user ID.
      * @param {EmployeeStatus} [employeeStatus] The user status.
@@ -1160,10 +1868,10 @@ export class SearchApi extends BaseAPI {
      * @param {string} [filterValue] The text filter applied to the accounts search query.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SearchApi
+     * @memberof PeopleSearchApi
      */
-    public getAccountsEntriesWithShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig) {
-        return SearchApiFp(this.configuration).getAccountsEntriesWithShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options).then((request) => request(this.axios, this.basePath));
+    public getAccountsEntriesWithRoomsShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return PeopleSearchApiFp(this.configuration).getAccountsEntriesWithRoomsShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1174,10 +1882,10 @@ export class SearchApi extends BaseAPI {
      * @param {string} [filterValue] The value used for filtering users, allowing additional constraints for the query.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SearchApi
+     * @memberof PeopleSearchApi
      */
     public getSearch(query: string, filterBy?: string, filterValue?: string, options?: RawAxiosRequestConfig) {
-        return SearchApiFp(this.configuration).getSearch(query, filterBy, filterValue, options).then((request) => request(this.axios, this.basePath));
+        return PeopleSearchApiFp(this.configuration).getSearch(query, filterBy, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1203,13 +1911,60 @@ export class SearchApi extends BaseAPI {
      * @param {SortOrder} [sortOrder] The order in which the results are sorted.
      * @param {string} [filterSeparator] Represents the separator used to split filter criteria in query parameters.
      * @param {string} [filterValue] The search text used to filter results based on user input.
-     * @param {string | null} [fields] Comma-separated list of fields to include in the response
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SearchApi
+     * @memberof PeopleSearchApi
      */
-    public getSimpleByFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<GetSimpleByFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, fields?: string | null, options?: RawAxiosRequestConfig) {
-        return SearchApiFp(this.configuration).getSimpleByFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, count, startIndex, sortBy, sortOrder, filterSeparator, filterValue, fields, options).then((request) => request(this.axios, this.basePath));
+    public getSimpleByFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<GetSimpleByFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return PeopleSearchApiFp(this.configuration).getSimpleByFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, count, startIndex, sortBy, sortOrder, filterSeparator, filterValue, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the users with the sharing settings in a file with the ID specified in request.
+     * @summary Get users with file sharing settings
+     * @param {number} id The user ID.
+     * @param {EmployeeStatus} [employeeStatus] The user status.
+     * @param {EmployeeActivationStatus} [activationStatus] The user activation status.
+     * @param {boolean} [excludeShared] Specifies whether to exclude the user sharing settings or not.
+     * @param {boolean} [includeShared] Specifies whether to include the user sharing settings or not.
+     * @param {boolean} [invitedByMe] Specifies whether the user was invited by the current user or not.
+     * @param {string} [inviterId] The inviter ID.
+     * @param {Area} [area] The user area.
+     * @param {Array<EmployeeType>} [employeeTypes] The list of user types.
+     * @param {number} [count] The maximum number of users to be retrieved in the request.
+     * @param {number} [startIndex] The zero-based index of the first record to retrieve in a paged query.
+     * @param {string} [filterSeparator] The character or string used to separate multiple filter values in a filtering query.
+     * @param {string} [filterValue] The filter text value used for searching or filtering user results.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PeopleSearchApi
+     */
+    public getUsersWithFilesShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return PeopleSearchApiFp(this.configuration).getUsersWithFilesShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the users with the sharing settings in a folder with the ID specified in request.
+     * @summary Get users with folder sharing settings
+     * @param {number} id The user ID.
+     * @param {EmployeeStatus} [employeeStatus] The user status.
+     * @param {EmployeeActivationStatus} [activationStatus] The user activation status.
+     * @param {boolean} [excludeShared] Specifies whether to exclude the user sharing settings or not.
+     * @param {boolean} [includeShared] Specifies whether to include the user sharing settings or not.
+     * @param {boolean} [invitedByMe] Specifies whether the user was invited by the current user or not.
+     * @param {string} [inviterId] The inviter ID.
+     * @param {Area} [area] The user area.
+     * @param {Array<EmployeeType>} [employeeTypes] The list of user types.
+     * @param {number} [count] The maximum number of users to be retrieved in the request.
+     * @param {number} [startIndex] The zero-based index of the first record to retrieve in a paged query.
+     * @param {string} [filterSeparator] The character or string used to separate multiple filter values in a filtering query.
+     * @param {string} [filterValue] The filter text value used for searching or filtering user results.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PeopleSearchApi
+     */
+    public getUsersWithFoldersShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return PeopleSearchApiFp(this.configuration).getUsersWithFoldersShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1230,10 +1985,10 @@ export class SearchApi extends BaseAPI {
      * @param {string} [filterValue] The filter text value used for searching or filtering user results.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SearchApi
+     * @memberof PeopleSearchApi
      */
     public getUsersWithRoomShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig) {
-        return SearchApiFp(this.configuration).getUsersWithRoomShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options).then((request) => request(this.axios, this.basePath));
+        return PeopleSearchApiFp(this.configuration).getUsersWithRoomShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1259,13 +2014,12 @@ export class SearchApi extends BaseAPI {
      * @param {SortOrder} [sortOrder] The order in which the results are sorted.
      * @param {string} [filterSeparator] Represents the separator used to split filter criteria in query parameters.
      * @param {string} [filterValue] The search text used to filter results based on user input.
-     * @param {string | null} [fields] Comma-separated list of fields to include in the response
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SearchApi
+     * @memberof PeopleSearchApi
      */
-    public searchUsersByExtendedFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<SearchUsersByExtendedFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, fields?: string | null, options?: RawAxiosRequestConfig) {
-        return SearchApiFp(this.configuration).searchUsersByExtendedFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, count, startIndex, sortBy, sortOrder, filterSeparator, filterValue, fields, options).then((request) => request(this.axios, this.basePath));
+    public searchUsersByExtendedFilter(employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<SearchUsersByExtendedFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return PeopleSearchApiFp(this.configuration).searchUsersByExtendedFilter(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter, withoutGroup, excludeGroup, invitedByMe, inviterId, area, count, startIndex, sortBy, sortOrder, filterSeparator, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1274,10 +2028,10 @@ export class SearchApi extends BaseAPI {
      * @param {string} [query] The search query.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SearchApi
+     * @memberof PeopleSearchApi
      */
     public searchUsersByQuery(query?: string, options?: RawAxiosRequestConfig) {
-        return SearchApiFp(this.configuration).searchUsersByQuery(query, options).then((request) => request(this.axios, this.basePath));
+        return PeopleSearchApiFp(this.configuration).searchUsersByQuery(query, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1289,10 +2043,10 @@ export class SearchApi extends BaseAPI {
      * @param {string} [filterValue] The value used to filter the search query.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SearchApi
+     * @memberof PeopleSearchApi
      */
     public searchUsersByStatus(status: EmployeeStatus, query?: string, filterBy?: string, filterValue?: string, options?: RawAxiosRequestConfig) {
-        return SearchApiFp(this.configuration).searchUsersByStatus(status, query, filterBy, filterValue, options).then((request) => request(this.axios, this.basePath));
+        return PeopleSearchApiFp(this.configuration).searchUsersByStatus(status, query, filterBy, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

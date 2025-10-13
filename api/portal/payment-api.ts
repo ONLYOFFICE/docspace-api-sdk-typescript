@@ -71,6 +71,7 @@ import type { WalletQuantityRequestDto } from '../../models';
  * @export
  */
 export const PaymentApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Calculate amount of the wallet payment with the parameters specified in the request.

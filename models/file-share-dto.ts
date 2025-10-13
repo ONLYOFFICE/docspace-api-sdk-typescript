@@ -18,7 +18,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { EmployeeFullDto } from './employee-full-dto';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { FileShare } from './file-share';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { FileShareLink } from './file-share-link';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { GroupSummaryDto } from './group-summary-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { SubjectType } from './subject-type';
@@ -39,8 +48,27 @@ export interface FileShareDto {
      * The user who has the access to the specified file.
      * @type {any}
      * @memberof FileShareDto
+     * @deprecated
      */
     'sharedTo'?: any | null;
+    /**
+     * 
+     * @type {EmployeeFullDto}
+     * @memberof FileShareDto
+     */
+    'sharedToUser'?: EmployeeFullDto;
+    /**
+     * 
+     * @type {GroupSummaryDto}
+     * @memberof FileShareDto
+     */
+    'sharedToGroup'?: GroupSummaryDto;
+    /**
+     * 
+     * @type {FileShareLink}
+     * @memberof FileShareDto
+     */
+    'sharedLink'?: FileShareLink;
     /**
      * Specifies if the access right is locked or not.
      * @type {boolean}

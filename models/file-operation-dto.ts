@@ -52,19 +52,19 @@ export interface FileOperationDto {
      * @type {string}
      * @memberof FileOperationDto
      */
-    'error'?: string | null;
+    'error': string | null;
     /**
      * The file operation processing status.
      * @type {string}
      * @memberof FileOperationDto
      */
-    'processed'?: string | null;
+    'processed': string | null;
     /**
      * Specifies if the file operation is finished or not.
      * @type {boolean}
      * @memberof FileOperationDto
      */
-    'finished'?: boolean;
+    'finished': boolean;
     /**
      * The file operation URL.
      * @type {string}

@@ -28,12 +28,12 @@ export interface NotificationChannelDto {
      * @type {string}
      * @memberof NotificationChannelDto
      */
-    'name'?: string | null;
+    'name': string | null;
     /**
      * 
      * @type {boolean}
      * @memberof NotificationChannelDto
      */
-    'isEnabled'?: boolean;
+    'isEnabled': boolean;
 }
 

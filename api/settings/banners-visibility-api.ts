@@ -31,6 +31,7 @@ import type { TenantBannerSettingsWrapper } from '../../models';
  * @export
  */
 export const BannersVisibilityApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Returns the promotional banners visibility settings settings for the portal.

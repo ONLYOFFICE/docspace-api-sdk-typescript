@@ -31,7 +31,7 @@ export interface IpRestrictionsDto {
      * @type {Array<IpRestrictionBase>}
      * @memberof IpRestrictionsDto
      */
-    'ipRestrictions'?: Array<IpRestrictionBase> | null;
+    'ipRestrictions': Array<IpRestrictionBase> | null;
     /**
      * Specifies whether to enable IP restrictions or not.
      * @type {boolean}

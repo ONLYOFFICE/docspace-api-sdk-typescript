@@ -49,6 +49,7 @@ import type { WebItemsSecurityRequestsDto } from '../../models';
  * @export
  */
 export const SecurityApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Returns a list of all the enabled modules.

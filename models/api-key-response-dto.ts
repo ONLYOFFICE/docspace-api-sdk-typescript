@@ -34,19 +34,19 @@ export interface ApiKeyResponseDto {
      * @type {string}
      * @memberof ApiKeyResponseDto
      */
-    'id'?: string;
+    'id': string;
     /**
      * The API key name.
      * @type {string}
      * @memberof ApiKeyResponseDto
      */
-    'name'?: string | null;
+    'name': string | null;
     /**
      * The full API key value (only returned when creating a new key).
      * @type {string}
      * @memberof ApiKeyResponseDto
      */
-    'key'?: string | null;
+    'key': string | null;
     /**
      * The API key postfix (used for identification).
      * @type {string}
@@ -58,7 +58,7 @@ export interface ApiKeyResponseDto {
      * @type {Array<string>}
      * @memberof ApiKeyResponseDto
      */
-    'permissions'?: Array<string> | null;
+    'permissions': Array<string> | null;
     /**
      * 
      * @type {ApiDateTime}
@@ -88,6 +88,6 @@ export interface ApiKeyResponseDto {
      * @type {boolean}
      * @memberof ApiKeyResponseDto
      */
-    'isActive'?: boolean;
+    'isActive': boolean;
 }
 

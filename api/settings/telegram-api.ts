@@ -35,6 +35,7 @@ import type { TelegramStatusWrapper } from '../../models';
  * @export
  */
 export const TelegramApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Checks if the current user is connected to the Telegram Bot or not.

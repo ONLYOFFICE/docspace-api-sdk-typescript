@@ -7,13 +7,13 @@ The document builder task parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** | The document builder ID. | [default to undefined]
-**error** | **string** | The error message occured while the document building process. | [optional] [default to undefined]
+**error** | **string** | The error message occured while the document building process. | [default to undefined]
 **percentage** | **number** | The percentage of the progress of the document building process. | [default to undefined]
 **isCompleted** | **boolean** | Specifies whether the document building process is completed or not. | [default to undefined]
 **status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) |  | [default to undefined]
-**resultFileId** | **any** | The result file ID. | [optional] [default to undefined]
-**resultFileName** | **string** | The result file name. | [optional] [default to undefined]
-**resultFileUrl** | **string** | The result file URL. | [optional] [default to undefined]
+**resultFileId** | **any** | The result file ID. | [default to undefined]
+**resultFileName** | **string** | The result file name. | [default to undefined]
+**resultFileUrl** | **string** | The result file URL. | [default to undefined]
 
 ## Example
 

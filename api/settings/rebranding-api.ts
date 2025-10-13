@@ -47,6 +47,7 @@ import type { WhiteLabelRequestsDto } from '../../models';
  * @export
  */
 export const RebrandingApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Deletes the additional white label settings.

@@ -43,13 +43,13 @@ export interface WatermarkDto {
      * @type {number}
      * @memberof WatermarkDto
      */
-    'rotate'?: number;
+    'rotate': number;
     /**
      * The watermark image scale.
      * @type {number}
      * @memberof WatermarkDto
      */
-    'imageScale'?: number;
+    'imageScale': number;
     /**
      * The watermark image url.
      * @type {string}
@@ -61,13 +61,13 @@ export interface WatermarkDto {
      * @type {number}
      * @memberof WatermarkDto
      */
-    'imageHeight'?: number;
+    'imageHeight': number;
     /**
      * The watermark image width.
      * @type {number}
      * @memberof WatermarkDto
      */
-    'imageWidth'?: number;
+    'imageWidth': number;
 }
 
 

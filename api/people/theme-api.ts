@@ -33,6 +33,7 @@ import type { DarkThemeSettingsWrapper } from '../../models';
  * @export
  */
 export const ThemeApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Changes the current portal theme.

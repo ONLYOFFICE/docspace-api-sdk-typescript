@@ -6,9 +6,9 @@ The file link properties.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**filetype** | **string** | The type of the file for the source viewed or edited document. | [optional] [default to undefined]
+**filetype** | **string** | The type of the file for the source viewed or edited document. | [default to undefined]
 **token** | **string** | The encrypted signature added to the config in the form of a token. | [optional] [default to undefined]
-**url** | **string** | The absolute URL where the source viewed or edited document is stored. | [optional] [default to undefined]
+**url** | **string** | The absolute URL where the source viewed or edited document is stored. | [default to undefined]
 
 ## Example
 

@@ -27,6 +27,9 @@ import type { EmployeeDto } from './employee-dto';
 import type { FileEntryBaseDto } from './file-entry-base-dto';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { FileEntryDtoIntegerAllOfAvailableShareRights } from './file-entry-dto-integer-all-of-available-share-rights';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { FileEntryDtoIntegerAllOfSecurity } from './file-entry-dto-integer-all-of-security';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -102,17 +105,29 @@ export type FileEntryDtoString = FileEntryBaseDto &  {
      */
     'security'?: FileEntryDtoIntegerAllOfSecurity | null;
     /**
-     * The available external rights of the file entry.
-     * @type {{ [key: string]: boolean; }}
+     * 
+     * @type {FileEntryDtoIntegerAllOfAvailableShareRights}
      * @memberof FileEntryDtoString
      */
-    'availableExternalRights'?: { [key: string]: boolean; } | null;
+    'availableShareRights'?: FileEntryDtoIntegerAllOfAvailableShareRights | null;
     /**
      * The request token of the file entry.
      * @type {string}
      * @memberof FileEntryDtoString
      */
     'requestToken'?: string | null;
+    /**
+     * Specifies if the folder can be accessed via an external link or not.
+     * @type {boolean}
+     * @memberof FileEntryDtoString
+     */
+    'external'?: boolean | null;
+    /**
+     * 
+     * @type {ApiDateTime}
+     * @memberof FileEntryDtoString
+     */
+    'expirationDate'?: ApiDateTime;
 };
 
 

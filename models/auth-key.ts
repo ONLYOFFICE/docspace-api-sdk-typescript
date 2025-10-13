@@ -28,18 +28,18 @@ export interface AuthKey {
      * @type {string}
      * @memberof AuthKey
      */
-    'name'?: string | null;
+    'name': string | null;
     /**
      * The authentication key value.
      * @type {string}
      * @memberof AuthKey
      */
-    'value'?: string | null;
+    'value': string | null;
     /**
      * The authentication key title.
      * @type {string}
      * @memberof AuthKey
      */
-    'title'?: string | null;
+    'title': string | null;
 }
 

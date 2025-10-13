@@ -41,6 +41,7 @@ import type { UpdateMembersRequestDto } from '../../models';
  * @export
  */
 export const UserTypeApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Returns the progress of updating the user type.
