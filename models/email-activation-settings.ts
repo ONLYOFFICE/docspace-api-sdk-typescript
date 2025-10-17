@@ -24,7 +24,7 @@
  */
 export interface EmailActivationSettings {
     /**
-     * Specifies whether the email activation settings is shown or hidden.
+     * Specifies whether the email activation settings are shown or hidden.
      * @type {boolean}
      * @memberof EmailActivationSettings
      */

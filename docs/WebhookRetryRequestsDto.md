@@ -1,6 +1,6 @@
 # WebhookRetryRequestsDto
 
-The request parameters for requesting the webhook delivery retries.
+The parameters for requesting the webhook delivery retries.
 
 ## Properties
 

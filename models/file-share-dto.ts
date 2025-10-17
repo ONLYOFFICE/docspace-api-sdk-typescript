@@ -106,6 +106,12 @@ export interface FileShareDto {
      */
     'canEditExpirationDate': boolean;
     /**
+     * Specifies whether the file sharing access can be revoked by the current user.
+     * @type {boolean}
+     * @memberof FileShareDto
+     */
+    'canRevoke': boolean;
+    /**
      * 
      * @type {SubjectType}
      * @memberof FileShareDto

@@ -30,7 +30,7 @@ export interface PaymentUrlRequestsDto {
      */
     'backUrl'?: string | null;
     /**
-     * The quantity of payment
+     * The payment quantity.
      * @type {{ [key: string]: number; }}
      * @memberof PaymentUrlRequestsDto
      */

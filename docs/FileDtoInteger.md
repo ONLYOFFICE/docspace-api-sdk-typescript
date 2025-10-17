@@ -38,6 +38,7 @@ Name | Type | Description | Notes
 **requestToken** | **string** | The request token of the file entry. | [optional] [default to undefined]
 **external** | **boolean** | Specifies if the folder can be accessed via an external link or not. | [optional] [default to undefined]
 **expirationDate** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
+**isLinkExpired** | **boolean** | Indicates whether the shareable link associated with the file or folder has expired. | [optional] [default to undefined]
 **folderId** | **number** | The folder ID where the file is located. | [optional] [default to undefined]
 **version** | **number** | The file version. | [optional] [default to undefined]
 **versionGroup** | **number** | The version group of the file. | [optional] [default to undefined]
@@ -106,6 +107,7 @@ const instance: FileDtoInteger = {
     requestToken,
     external,
     expirationDate,
+    isLinkExpired,
     folderId,
     version,
     versionGroup,

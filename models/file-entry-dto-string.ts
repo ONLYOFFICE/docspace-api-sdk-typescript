@@ -128,6 +128,12 @@ export type FileEntryDtoString = FileEntryBaseDto &  {
      * @memberof FileEntryDtoString
      */
     'expirationDate'?: ApiDateTime;
+    /**
+     * Indicates whether the shareable link associated with the file or folder has expired.
+     * @type {boolean}
+     * @memberof FileEntryDtoString
+     */
+    'isLinkExpired'?: boolean | null;
 };
 
 

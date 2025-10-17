@@ -18,6 +18,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**getFolderLinks**](#getfolderlinks) | **GET** /api/2.0/files/folder/{id}/links | |
 |[**getFolderPath**](#getfolderpath) | **GET** /api/2.0/files/folder/{folderId}/path | |
 |[**getFolderPrimaryExternalLink**](#getfolderprimaryexternallink) | **GET** /api/2.0/files/folder/{id}/link | |
+|[**getFolderRecent**](#getfolderrecent) | **GET** /api/2.0/files/recent | |
 |[**getFolders**](#getfolders) | **GET** /api/2.0/files/{folderId}/subfolders | |
 |[**getMyFolder**](#getmyfolder) | **GET** /api/2.0/files/@my | |
 |[**getNewFolderItems**](#getnewfolderitems) | **GET** /api/2.0/files/{folderId}/news | |
@@ -439,7 +440,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **folderId** | [**number**] | The request folder ID. | defaults to undefined|
+| **folderId** | [**number**] | The folder unique identifier. | defaults to undefined|
 
 
 ### Return type
@@ -461,7 +462,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesFoldersApi(configuration);
 
-let folderId: number; //The request folder ID. (default to undefined)
+let folderId: number; //The folder unique identifier. (default to undefined)
 
 const { status, data } = await apiInstance.getFolder(
     folderId
@@ -491,22 +492,22 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **folderId** | [**number**] | The folder ID of the request. | defaults to undefined|
+| **folderId** | [**number**] | The folder ID. | defaults to undefined|
 | **userIdOrGroupId** | [**string**] | The user or group ID. | (optional) defaults to undefined|
 | **filterType** | **FilterType** | The filter type. | (optional) defaults to undefined|
 | **roomId** | [**number**] | The room ID. | (optional) defaults to undefined|
 | **excludeSubject** | [**boolean**] | Specifies whether to exclude search by user or group ID. | (optional) defaults to undefined|
-| **applyFilterOption** | **ApplyFilterOption** | Specifies whether to return only files, only folders or all elements from the specified folder. | (optional) defaults to undefined|
+| **applyFilterOption** | **ApplyFilterOption** | Specifies whether to return only files, only folders, or all elements from the specified folder. | (optional) defaults to undefined|
 | **extension** | [**string**] | Specifies whether to search for the specific file extension. | (optional) defaults to undefined|
 | **searchArea** | **SearchArea** | The search area. | (optional) defaults to undefined|
 | **formsItemKey** | [**string**] | The forms item key. | (optional) defaults to undefined|
 | **formsItemType** | [**string**] | The forms item type. | (optional) defaults to undefined|
 | **count** | [**number**] | The maximum number of items to retrieve in the request. | (optional) defaults to undefined|
 | **startIndex** | [**number**] | The zero-based index of the first item to retrieve in a paginated request. | (optional) defaults to undefined|
-| **sortBy** | [**string**] | Specifies the property used for sorting the folder request results. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | The property used for sorting the folder request results. | (optional) defaults to undefined|
 | **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
 | **filterValue** | [**string**] | The text value used as a filter parameter for folder content queries. | (optional) defaults to undefined|
-| **location** | **Location** | Represents the location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link. | (optional) defaults to undefined|
+| **location** | **Location** | The location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -528,22 +529,22 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesFoldersApi(configuration);
 
-let folderId: number; //The folder ID of the request. (default to undefined)
+let folderId: number; //The folder ID. (default to undefined)
 let userIdOrGroupId: string; //The user or group ID. (optional) (default to undefined)
 let filterType: FilterType; //The filter type. (optional) (default to undefined)
 let roomId: number; //The room ID. (optional) (default to undefined)
 let excludeSubject: boolean; //Specifies whether to exclude search by user or group ID. (optional) (default to undefined)
-let applyFilterOption: ApplyFilterOption; //Specifies whether to return only files, only folders or all elements from the specified folder. (optional) (default to undefined)
+let applyFilterOption: ApplyFilterOption; //Specifies whether to return only files, only folders, or all elements from the specified folder. (optional) (default to undefined)
 let extension: string; //Specifies whether to search for the specific file extension. (optional) (default to undefined)
 let searchArea: SearchArea; //The search area. (optional) (default to undefined)
 let formsItemKey: string; //The forms item key. (optional) (default to undefined)
 let formsItemType: string; //The forms item type. (optional) (default to undefined)
 let count: number; //The maximum number of items to retrieve in the request. (optional) (default to undefined)
 let startIndex: number; //The zero-based index of the first item to retrieve in a paginated request. (optional) (default to undefined)
-let sortBy: string; //Specifies the property used for sorting the folder request results. (optional) (default to undefined)
+let sortBy: string; //The property used for sorting the folder request results. (optional) (default to undefined)
 let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
 let filterValue: string; //The text value used as a filter parameter for folder content queries. (optional) (default to undefined)
-let location: Location; //Represents the location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link. (optional) (default to undefined)
+let location: Location; //The location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getFolderByFolderId(
     folderId,
@@ -658,7 +659,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **folderId** | [**number**] | The request folder ID. | defaults to undefined|
+| **folderId** | [**number**] | The folder unique identifier. | defaults to undefined|
 
 
 ### Return type
@@ -680,7 +681,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesFoldersApi(configuration);
 
-let folderId: number; //The request folder ID. (default to undefined)
+let folderId: number; //The folder unique identifier. (default to undefined)
 
 const { status, data } = await apiInstance.getFolderInfo(
     folderId
@@ -762,7 +763,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **folderId** | [**number**] | The request folder ID. | defaults to undefined|
+| **folderId** | [**number**] | The folder unique identifier. | defaults to undefined|
 
 
 ### Return type
@@ -784,7 +785,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesFoldersApi(configuration);
 
-let folderId: number; //The request folder ID. (default to undefined)
+let folderId: number; //The folder unique identifier. (default to undefined)
 
 const { status, data } = await apiInstance.getFolderPath(
     folderId
@@ -815,7 +816,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] | The request folder ID. | defaults to undefined|
+| **id** | [**number**] | The folder unique identifier. | defaults to undefined|
 | **count** | [**number**] | The number of items to retrieve in the request. | (optional) defaults to undefined|
 | **startIndex** | [**number**] | The starting index for the query results. | (optional) defaults to undefined|
 
@@ -839,7 +840,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesFoldersApi(configuration);
 
-let id: number; //The request folder ID. (default to undefined)
+let id: number; //The folder unique identifier. (default to undefined)
 let count: number; //The number of items to retrieve in the request. (optional) (default to undefined)
 let startIndex: number; //The starting index for the query results. (optional) (default to undefined)
 
@@ -864,6 +865,90 @@ const { status, data } = await apiInstance.getFolderPrimaryExternalLink(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **getFolderRecent**
+> FolderContentIntegerWrapper getFolderRecent()
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-recent/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **userIdOrGroupId** | [**string**] | The user or group ID. | (optional) defaults to undefined|
+| **filterType** | **FilterType** | The filter type. | (optional) defaults to undefined|
+| **excludeSubject** | [**boolean**] | Specifies whether to exclude search by user or group ID. | (optional) defaults to undefined|
+| **applyFilterOption** | **ApplyFilterOption** | Specifies whether to return only files, only folders or all elements. | (optional) defaults to undefined|
+| **searchArea** | **SearchArea** | The search area. | (optional) defaults to undefined|
+| **extension** | **Array&lt;string&gt;** | Specifies whether to search for a specific file extension in the Recent folder. | (optional) defaults to undefined|
+| **count** | [**number**] | The maximum number of items to return. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting position of the results to be returned in the query response. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | Specifies the sorting criteria for the folder request. | (optional) defaults to undefined|
+| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The text used for filtering or searching folder contents. | (optional) defaults to undefined|
+
+
+### Return type
+
+**FolderContentIntegerWrapper**
+
+### Authorization
+
+No authorization required
+
+### Example
+
+```typescript
+import {
+    FilesFoldersApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new FilesFoldersApi(configuration);
+
+let userIdOrGroupId: string; //The user or group ID. (optional) (default to undefined)
+let filterType: FilterType; //The filter type. (optional) (default to undefined)
+let excludeSubject: boolean; //Specifies whether to exclude search by user or group ID. (optional) (default to undefined)
+let applyFilterOption: ApplyFilterOption; //Specifies whether to return only files, only folders or all elements. (optional) (default to undefined)
+let searchArea: SearchArea; //The search area. (optional) (default to undefined)
+let extension: Array<string>; //Specifies whether to search for a specific file extension in the Recent folder. (optional) (default to undefined)
+let count: number; //The maximum number of items to return. (optional) (default to undefined)
+let startIndex: number; //The starting position of the results to be returned in the query response. (optional) (default to undefined)
+let sortBy: string; //Specifies the sorting criteria for the folder request. (optional) (default to undefined)
+let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
+let filterValue: string; //The text used for filtering or searching folder contents. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getFolderRecent(
+    userIdOrGroupId,
+    filterType,
+    excludeSubject,
+    applyFilterOption,
+    searchArea,
+    extension,
+    count,
+    startIndex,
+    sortBy,
+    sortOrder,
+    filterValue
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The Recent section contents |  -  |
+|**403** | You don\&#39;t have enough permission to view the folder content |  -  |
+|**404** | The required folder was not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **getFolders**
 > FileEntryBaseArrayWrapper getFolders()
 
@@ -874,7 +959,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **folderId** | [**number**] | The request folder ID. | defaults to undefined|
+| **folderId** | [**number**] | The folder unique identifier. | defaults to undefined|
 
 
 ### Return type
@@ -896,7 +981,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesFoldersApi(configuration);
 
-let folderId: number; //The request folder ID. (default to undefined)
+let folderId: number; //The folder unique identifier. (default to undefined)
 
 const { status, data } = await apiInstance.getFolders(
     folderId
@@ -1002,7 +1087,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **folderId** | [**number**] | The request folder ID. | defaults to undefined|
+| **folderId** | [**number**] | The folder unique identifier. | defaults to undefined|
 
 
 ### Return type
@@ -1024,7 +1109,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesFoldersApi(configuration);
 
-let folderId: number; //The request folder ID. (default to undefined)
+let folderId: number; //The folder unique identifier. (default to undefined)
 
 const { status, data } = await apiInstance.getNewFolderItems(
     folderId

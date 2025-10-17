@@ -28,7 +28,7 @@ import type { FileOperationRequestBaseDto } from './file-operation-request-base-
 
 /**
  * @type DuplicateRequestDto
- * The duplicate request parameters.
+ * The request parameters for duplicating files and fodlers.
  * @export
  */
 export type DuplicateRequestDto = FileOperationRequestBaseDto &  {

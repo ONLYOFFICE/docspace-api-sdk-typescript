@@ -6,7 +6,7 @@ The response data for the API key operations.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | The unique identifier of the API key. | [default to undefined]
+**id** | **string** | The API key unique identifier. | [default to undefined]
 **name** | **string** | The API key name. | [default to undefined]
 **key** | **string** | The full API key value (only returned when creating a new key). | [default to undefined]
 **keyPostfix** | **string** | The API key postfix (used for identification). | [optional] [default to undefined]

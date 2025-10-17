@@ -1,5 +1,6 @@
 # Location
 
+The location context of the request.
 
 ## Enum
 

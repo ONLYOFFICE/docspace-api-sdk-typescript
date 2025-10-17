@@ -262,7 +262,7 @@ const { status, data } = await apiInstance.getEnableWhitelabel();
 # **getIsDefaultWhiteLabelLogoText**
 > IsDefaultWhiteLabelLogosWrapper getIsDefaultWhiteLabelLogoText()
 
-Specifies if the white label logo text are default or not.
+Specifies if the white label logo text is default or not.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-default-white-label-logo-text/).
 

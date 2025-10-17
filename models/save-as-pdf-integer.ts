@@ -18,7 +18,7 @@
 
 
 /**
- * The parameters for saving the file as PDF.
+ * The parameters for saving a file as PDF.
  * @export
  * @interface SaveAsPdfInteger
  */

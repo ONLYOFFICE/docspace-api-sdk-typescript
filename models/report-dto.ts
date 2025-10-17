@@ -27,37 +27,37 @@ import type { OperationDto } from './operation-dto';
  */
 export interface ReportDto {
     /**
-     * Collection of operations.
+     * A collection of operations.
      * @type {Array<OperationDto>}
      * @memberof ReportDto
      */
     'collection'?: Array<OperationDto> | null;
     /**
-     * Offset of the report data.
+     * The report data offset.
      * @type {number}
      * @memberof ReportDto
      */
     'offset'?: number;
     /**
-     * Limit of the report data.
+     * The report data limit.
      * @type {number}
      * @memberof ReportDto
      */
     'limit'?: number;
     /**
-     * Total quantity of operations in the report.
+     * The total quantity of operations in the report.
      * @type {number}
      * @memberof ReportDto
      */
     'totalQuantity'?: number;
     /**
-     * Total number of pages in the report.
+     * The total number of pages in the report.
      * @type {number}
      * @memberof ReportDto
      */
     'totalPage'?: number;
     /**
-     * Current page number of the report.
+     * The current page number of the report.
      * @type {number}
      * @memberof ReportDto
      */

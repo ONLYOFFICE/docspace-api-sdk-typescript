@@ -6,7 +6,7 @@ The email activation settings.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**show** | **boolean** | Specifies whether the email activation settings is shown or hidden. | [optional] [default to undefined]
+**show** | **boolean** | Specifies whether the email activation settings are shown or hidden. | [optional] [default to undefined]
 **lastModified** | **string** |  | [optional] [default to undefined]
 
 ## Example

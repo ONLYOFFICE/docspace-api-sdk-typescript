@@ -1,12 +1,13 @@
 # NotificationChannelDto
 
+The notification channel information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **string** |  | [default to undefined]
-**isEnabled** | **boolean** |  | [default to undefined]
+**name** | **string** | The notification channel name. | [default to undefined]
+**isEnabled** | **boolean** | Specifies whether the notification channel is enabled. | [default to undefined]
 
 ## Example
 

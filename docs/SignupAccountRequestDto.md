@@ -9,11 +9,11 @@ Name | Type | Description | Notes
 **employeeType** | [**EmployeeType**](EmployeeType.md) |  | [optional] [default to undefined]
 **firstName** | **string** | The user first name. | [optional] [default to undefined]
 **lastName** | **string** | The user last name. | [optional] [default to undefined]
-**email** | **string** | The user email address. | [default to undefined]
+**email** | **string** | The user email address. | [optional] [default to undefined]
 **passwordHash** | **string** | The user password hash. | [optional] [default to undefined]
 **key** | **string** | The user link key. | [default to undefined]
 **culture** | **string** | The user culture code. | [optional] [default to undefined]
-**serializedProfile** | **string** | Third-party profile in the serialized format | [default to undefined]
+**serializedProfile** | **string** | The third-party profile in the serialized format | [default to undefined]
 
 ## Example
 

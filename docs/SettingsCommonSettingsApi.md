@@ -256,7 +256,7 @@ This endpoint does not have any parameters.
 
 ### Authorization
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+No authorization required
 
 ### Example
 
@@ -282,7 +282,6 @@ const { status, data } = await apiInstance.getDeepLinkSettings();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Ok |  -  |
-|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

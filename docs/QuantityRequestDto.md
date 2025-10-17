@@ -1,12 +1,12 @@
 # QuantityRequestDto
 
-The request parameters for the payment quantity specifications.
+The request parameters for specifying payment quantity.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**quantity** | **{ [key: string]: number; }** | The mapping of item identifiers with their respective quantities in the payment. | [optional] [default to undefined]
+**quantity** | **{ [key: string]: number; }** | The mapping of item identifiers to their respective quantities in the payment. | [optional] [default to undefined]
 
 ## Example
 

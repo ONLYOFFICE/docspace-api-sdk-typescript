@@ -967,7 +967,7 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * Returns a list of users with full information about them matching the parameters specified in the request.
-         * @summary Search users with detaailed information by extended filter
+         * @summary Search users with detailed information by extended filter
          * @param {EmployeeStatus} [employeeStatus] The user status.
          * @param {string} [groupId] The group ID.
          * @param {EmployeeActivationStatus} [activationStatus] The user activation status.
@@ -1470,7 +1470,7 @@ export const PeopleSearchApiFp = function(configuration?: Configuration) {
         },
         /**
          * Returns a list of users with full information about them matching the parameters specified in the request.
-         * @summary Search users with detaailed information by extended filter
+         * @summary Search users with detailed information by extended filter
          * @param {EmployeeStatus} [employeeStatus] The user status.
          * @param {string} [groupId] The group ID.
          * @param {EmployeeActivationStatus} [activationStatus] The user activation status.
@@ -1736,7 +1736,7 @@ export const PeopleSearchApiFactory = function (configuration?: Configuration, b
         },
         /**
          * Returns a list of users with full information about them matching the parameters specified in the request.
-         * @summary Search users with detaailed information by extended filter
+         * @summary Search users with detailed information by extended filter
          * @param {EmployeeStatus} [employeeStatus] The user status.
          * @param {string} [groupId] The group ID.
          * @param {EmployeeActivationStatus} [activationStatus] The user activation status.
@@ -1993,7 +1993,7 @@ export class PeopleSearchApi extends BaseAPI {
 
     /**
      * Returns a list of users with full information about them matching the parameters specified in the request.
-     * @summary Search users with detaailed information by extended filter
+     * @summary Search users with detailed information by extended filter
      * @param {EmployeeStatus} [employeeStatus] The user status.
      * @param {string} [groupId] The group ID.
      * @param {EmployeeActivationStatus} [activationStatus] The user activation status.

@@ -18,7 +18,7 @@
 
 
 /**
- * Represents a sub-account with a specific currency and amount.
+ * Represents a sub-account with a specific currency and balance.
  * @export
  * @interface SubAccount
  */
@@ -30,7 +30,7 @@ export interface SubAccount {
      */
     'currency'?: string | null;
     /**
-     * The amount of the sub-account.
+     * The balance of the sub-account in the specified currency.
      * @type {number}
      * @memberof SubAccount
      */

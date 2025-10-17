@@ -192,6 +192,7 @@ export type FolderDtoInteger = FileEntryDtoInteger &  {
      * Specifies if an external link to the folder is expired or not.
      * @type {boolean}
      * @memberof FolderDtoInteger
+     * @deprecated
      */
     'expired'?: boolean | null;
 };

@@ -1,6 +1,6 @@
 # BatchTagsRequestDto
 
-The parameters for adding tags.
+The parameters for managing room tags.
 
 ## Properties
 

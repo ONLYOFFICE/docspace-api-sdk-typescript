@@ -180,7 +180,7 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @param {number} id The file ID of the request.
+         * @param {number} id The file unique identifier.
          * @param {number} [count] The number of items to retrieve in the request.
          * @param {number} [startIndex] The starting index for the query results.
          * @param {*} [options] Override http request option.
@@ -225,7 +225,7 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @param {number} id The request folder ID.
+         * @param {number} id The folder unique identifier.
          * @param {number} [count] The number of items to retrieve in the request.
          * @param {number} [startIndex] The starting index for the query results.
          * @param {*} [options] Override http request option.
@@ -413,7 +413,7 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @param {number} fileId The file ID of the request.
+         * @param {number} fileId The file unique identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getSharedUsers operation
@@ -483,7 +483,7 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @param {number} fileId The file ID of the mention message.
+         * @param {number} fileId The file ID with the mention message.
          * @param {MentionMessageWrapper} [mentionMessageWrapper] The mention message.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -694,7 +694,7 @@ export const SharingApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} id The file ID of the request.
+         * @param {number} id The file unique identifier.
          * @param {number} [count] The number of items to retrieve in the request.
          * @param {number} [startIndex] The starting index for the query results.
          * @param {*} [options] Override http request option.
@@ -710,7 +710,7 @@ export const SharingApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} id The request folder ID.
+         * @param {number} id The folder unique identifier.
          * @param {number} [count] The number of items to retrieve in the request.
          * @param {number} [startIndex] The starting index for the query results.
          * @param {*} [options] Override http request option.
@@ -776,7 +776,7 @@ export const SharingApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} fileId The file ID of the request.
+         * @param {number} fileId The file unique identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getSharedUsers operation
@@ -804,7 +804,7 @@ export const SharingApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} fileId The file ID of the mention message.
+         * @param {number} fileId The file ID with the mention message.
          * @param {MentionMessageWrapper} [mentionMessageWrapper] The mention message.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -909,7 +909,7 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @param {number} id The file ID of the request.
+         * @param {number} id The file unique identifier.
          * @param {number} [count] The number of items to retrieve in the request.
          * @param {number} [startIndex] The starting index for the query results.
          * @param {*} [options] Override http request option.
@@ -922,7 +922,7 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @param {number} id The request folder ID.
+         * @param {number} id The folder unique identifier.
          * @param {number} [count] The number of items to retrieve in the request.
          * @param {number} [startIndex] The starting index for the query results.
          * @param {*} [options] Override http request option.
@@ -976,7 +976,7 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @param {number} fileId The file ID of the request.
+         * @param {number} fileId The file unique identifier.
          * @param {*} [options] Override http request option.
          * REST API Reference for getSharedUsers operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-shared-users/
@@ -998,7 +998,7 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @param {number} fileId The file ID of the mention message.
+         * @param {number} fileId The file ID with the mention message.
          * @param {MentionMessageWrapper} [mentionMessageWrapper] The mention message.
          * @param {*} [options] Override http request option.
          * REST API Reference for sendEditorNotify operation
@@ -1091,7 +1091,7 @@ export class SharingApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} id The file ID of the request.
+     * @param {number} id The file unique identifier.
      * @param {number} [count] The number of items to retrieve in the request.
      * @param {number} [startIndex] The starting index for the query results.
      * @param {*} [options] Override http request option.
@@ -1104,7 +1104,7 @@ export class SharingApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} id The request folder ID.
+     * @param {number} id The folder unique identifier.
      * @param {number} [count] The number of items to retrieve in the request.
      * @param {number} [startIndex] The starting index for the query results.
      * @param {*} [options] Override http request option.
@@ -1158,7 +1158,7 @@ export class SharingApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} fileId The file ID of the request.
+     * @param {number} fileId The file unique identifier.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SharingApi
@@ -1180,7 +1180,7 @@ export class SharingApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} fileId The file ID of the mention message.
+     * @param {number} fileId The file ID with the mention message.
      * @param {MentionMessageWrapper} [mentionMessageWrapper] The mention message.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

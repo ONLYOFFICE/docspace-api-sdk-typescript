@@ -30,7 +30,7 @@ import type { EmployeeDto } from './employee-dto';
  */
 export interface ApiKeyResponseDto {
     /**
-     * The unique identifier of the API key.
+     * The API key unique identifier.
      * @type {string}
      * @memberof ApiKeyResponseDto
      */

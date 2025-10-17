@@ -4,14 +4,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**calculateWalletPayment**](#calculatewalletpayment) | **PUT** /api/2.0/portal/payment/calculatewallet | Calculate amount of the wallet payment|
+|[**calculateWalletPayment**](#calculatewalletpayment) | **PUT** /api/2.0/portal/payment/calculatewallet | Calculate the wallet payment amount|
 |[**changeTenantWalletServiceState**](#changetenantwalletservicestate) | **POST** /api/2.0/portal/payment/servicestate | Change wallet service state|
-|[**createCustomerOperationsReport**](#createcustomeroperationsreport) | **POST** /api/2.0/portal/payment/customer/operationsreport | Start generating the customer operations report|
+|[**createCustomerOperationsReport**](#createcustomeroperationsreport) | **POST** /api/2.0/portal/payment/customer/operationsreport | Start the customer operations report generation|
 |[**getCheckoutSetupUrl**](#getcheckoutsetupurl) | **GET** /api/2.0/portal/payment/chechoutsetupurl | Get the checkout setup page URL|
 |[**getCustomerBalance**](#getcustomerbalance) | **GET** /api/2.0/portal/payment/customer/balance | Get the customer balance|
-|[**getCustomerInfo**](#getcustomerinfo) | **GET** /api/2.0/portal/payment/customerinfo | Get the customer info|
+|[**getCustomerInfo**](#getcustomerinfo) | **GET** /api/2.0/portal/payment/customerinfo | Get the customer information|
 |[**getCustomerOperations**](#getcustomeroperations) | **GET** /api/2.0/portal/payment/customer/operations | Get the customer operations|
-|[**getCustomerOperationsReport**](#getcustomeroperationsreport) | **GET** /api/2.0/portal/payment/customer/operationsreport | Get the status of generating a customer operations report|
+|[**getCustomerOperationsReport**](#getcustomeroperationsreport) | **GET** /api/2.0/portal/payment/customer/operationsreport | Get the status of the customer operations report generation|
 |[**getPaymentAccount**](#getpaymentaccount) | **GET** /api/2.0/portal/payment/account | Get the payment account|
 |[**getPaymentCurrencies**](#getpaymentcurrencies) | **GET** /api/2.0/portal/payment/currencies | Get currencies|
 |[**getPaymentQuotas**](#getpaymentquotas) | **GET** /api/2.0/portal/payment/quotas | Get quotas|
@@ -19,12 +19,12 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**getPortalPrices**](#getportalprices) | **GET** /api/2.0/portal/payment/prices | Get prices|
 |[**getQuotaPaymentInformation**](#getquotapaymentinformation) | **GET** /api/2.0/portal/payment/quota | Get quota payment information|
 |[**getTenantWalletServiceSettings**](#gettenantwalletservicesettings) | **GET** /api/2.0/portal/payment/servicessettings | Get wallet services settings|
-|[**getTenantWalletSettings**](#gettenantwalletsettings) | **GET** /api/2.0/portal/payment/topupsettings | Get wallet auto top up settings|
+|[**getTenantWalletSettings**](#gettenantwalletsettings) | **GET** /api/2.0/portal/payment/topupsettings | Get wallet auto top-up settings|
 |[**getWalletService**](#getwalletservice) | **GET** /api/2.0/portal/payment/walletservice | Get wallet service|
 |[**getWalletServices**](#getwalletservices) | **GET** /api/2.0/portal/payment/walletservices | Get wallet services|
 |[**sendPaymentRequest**](#sendpaymentrequest) | **POST** /api/2.0/portal/payment/request | Send a payment request|
-|[**setTenantWalletSettings**](#settenantwalletsettings) | **POST** /api/2.0/portal/payment/topupsettings | Set wallet auto top up settings|
-|[**terminateCustomerOperationsReport**](#terminatecustomeroperationsreport) | **DELETE** /api/2.0/portal/payment/customer/operationsreport | Terminate the generating a customer operations report|
+|[**setTenantWalletSettings**](#settenantwalletsettings) | **POST** /api/2.0/portal/payment/topupsettings | Set wallet auto top-up settings|
+|[**terminateCustomerOperationsReport**](#terminatecustomeroperationsreport) | **DELETE** /api/2.0/portal/payment/customer/operationsreport | Terminate the customer operations report generation|
 |[**topUpDeposit**](#topupdeposit) | **POST** /api/2.0/portal/payment/deposit | Put money on deposit|
 |[**updatePayment**](#updatepayment) | **PUT** /api/2.0/portal/payment/update | Update the payment quantity|
 |[**updateWalletPayment**](#updatewalletpayment) | **PUT** /api/2.0/portal/payment/updatewallet | Update the wallet payment quantity|
@@ -32,7 +32,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 # **calculateWalletPayment**
 > PaymentCalculationWrapper calculateWalletPayment()
 
-Calculate amount of the wallet payment with the parameters specified in the request.
+Calculates an amount of the wallet payment with the parameters specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/calculate-wallet-payment/).
 
@@ -88,7 +88,7 @@ const { status, data } = await apiInstance.calculateWalletPayment(
 # **changeTenantWalletServiceState**
 > TenantWalletServiceSettingsWrapper changeTenantWalletServiceState()
 
-Change wallet service state.
+Changes the wallet service state.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-tenant-wallet-service-state/).
 
@@ -144,7 +144,7 @@ const { status, data } = await apiInstance.changeTenantWalletServiceState(
 # **createCustomerOperationsReport**
 > DocumentBuilderTaskWrapper createCustomerOperationsReport()
 
-Start generating the customer operations report as xlsx file and save in Documents.
+Starts generating a customer operations report as an xlsx file and saves it in Documents.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-customer-operations-report/).
 
@@ -207,7 +207,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **backUrl** | [**string**] | Back URL | (optional) defaults to undefined|
+| **backUrl** | [**string**] | The URL where the user will be redirected after completing the setup. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -229,7 +229,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
 
-let backUrl: string; //Back URL (optional) (default to undefined)
+let backUrl: string; //The URL where the user will be redirected after completing the setup. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getCheckoutSetupUrl(
     backUrl
@@ -309,7 +309,7 @@ const { status, data } = await apiInstance.getCustomerBalance(
 # **getCustomerInfo**
 > CustomerInfoWrapper getCustomerInfo()
 
-Returns the customer info.
+Returns the customer information.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-info/).
 
@@ -372,13 +372,13 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **startDate** | [**string**] | Start date | (optional) defaults to undefined|
-| **endDate** | [**string**] | End date | (optional) defaults to undefined|
-| **participantName** | [**string**] | Participant name | (optional) defaults to undefined|
-| **credit** | [**boolean**] | Include credit operations (true by default) | (optional) defaults to undefined|
-| **debit** | [**boolean**] | Include debit operations (true by default) | (optional) defaults to undefined|
-| **offset** | [**number**] | Offset (0 by default) | (optional) defaults to undefined|
-| **limit** | [**number**] | Limit (25 by default) | (optional) defaults to undefined|
+| **startDate** | [**string**] | The report start date. | (optional) defaults to undefined|
+| **endDate** | [**string**] | The report end date. | (optional) defaults to undefined|
+| **participantName** | [**string**] | The participant name. | (optional) defaults to undefined|
+| **credit** | [**boolean**] | Specifies whether to include credit operations in the report. The default value is true. | (optional) defaults to undefined|
+| **debit** | [**boolean**] | Specifies whether to include debit operations in the report. The default value is true. | (optional) defaults to undefined|
+| **offset** | [**number**] | The number of items to skip for pagination. The default value is 0. | (optional) defaults to undefined|
+| **limit** | [**number**] | The maximum number of items to return for pagination. The default value is 25. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -400,13 +400,13 @@ import {
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
 
-let startDate: string; //Start date (optional) (default to undefined)
-let endDate: string; //End date (optional) (default to undefined)
-let participantName: string; //Participant name (optional) (default to undefined)
-let credit: boolean; //Include credit operations (true by default) (optional) (default to undefined)
-let debit: boolean; //Include debit operations (true by default) (optional) (default to undefined)
-let offset: number; //Offset (0 by default) (optional) (default to undefined)
-let limit: number; //Limit (25 by default) (optional) (default to undefined)
+let startDate: string; //The report start date. (optional) (default to undefined)
+let endDate: string; //The report end date. (optional) (default to undefined)
+let participantName: string; //The participant name. (optional) (default to undefined)
+let credit: boolean; //Specifies whether to include credit operations in the report. The default value is true. (optional) (default to undefined)
+let debit: boolean; //Specifies whether to include debit operations in the report. The default value is true. (optional) (default to undefined)
+let offset: number; //The number of items to skip for pagination. The default value is 0. (optional) (default to undefined)
+let limit: number; //The maximum number of items to return for pagination. The default value is 25. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getCustomerOperations(
     startDate,
@@ -437,7 +437,7 @@ const { status, data } = await apiInstance.getCustomerOperations(
 # **getCustomerOperationsReport**
 > DocumentBuilderTaskWrapper getCustomerOperationsReport()
 
-Get the status of generating a customer operations report.
+Returns the status of generating a customer operations report.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-operations-report/).
 
@@ -594,7 +594,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **wallet** | [**boolean**] | Get wallet quotas only | (optional) defaults to undefined|
+| **wallet** | [**boolean**] | Specifies whether to return the wallet quotas only. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -616,7 +616,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
 
-let wallet: boolean; //Get wallet quotas only (optional) (default to undefined)
+let wallet: boolean; //Specifies whether to return the wallet quotas only. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getPaymentQuotas(
     wallet
@@ -798,7 +798,7 @@ const { status, data } = await apiInstance.getQuotaPaymentInformation(
 # **getTenantWalletServiceSettings**
 > TenantWalletServiceSettingsWrapper getTenantWalletServiceSettings()
 
-Get the wallet services settings.
+Returns the wallet services settings.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-wallet-service-settings/).
 
@@ -846,7 +846,7 @@ const { status, data } = await apiInstance.getTenantWalletServiceSettings();
 # **getTenantWalletSettings**
 > TenantWalletSettingsWrapper getTenantWalletSettings()
 
-Returns the wallet auto top up settings.
+Returns the wallet auto top-up settings.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-wallet-settings/).
 
@@ -894,7 +894,7 @@ const { status, data } = await apiInstance.getTenantWalletSettings();
 # **getWalletService**
 > QuotaWrapper getWalletService()
 
-Returns the wallet services.
+Returns the specified wallet service.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-wallet-service/).
 
@@ -902,7 +902,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **service** | **TenantWalletService** | Wallet service | defaults to undefined|
+| **service** | **TenantWalletService** | The wallet service type. | defaults to undefined|
 
 
 ### Return type
@@ -924,7 +924,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
 
-let service: TenantWalletService; //Wallet service (default to undefined)
+let service: TenantWalletService; //The wallet service type. (default to undefined)
 
 const { status, data } = await apiInstance.getWalletService(
     service
@@ -1052,7 +1052,7 @@ const { status, data } = await apiInstance.sendPaymentRequest(
 # **setTenantWalletSettings**
 > TenantWalletSettingsWrapper setTenantWalletSettings()
 
-Set the wallet auto top up settings.
+Sets the wallet auto top-up settings.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-wallet-settings/).
 
@@ -1108,7 +1108,7 @@ const { status, data } = await apiInstance.setTenantWalletSettings(
 # **terminateCustomerOperationsReport**
 > terminateCustomerOperationsReport()
 
-Terminates the generating a customer operations report.
+Terminates generating a customer operations report.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-customer-operations-report/).
 
@@ -1155,7 +1155,7 @@ const { status, data } = await apiInstance.terminateCustomerOperationsReport();
 # **topUpDeposit**
 > BooleanWrapper topUpDeposit()
 
-Returns result of putting money on deposit.
+Returns the result of putting money on deposit.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/top-up-deposit/).
 

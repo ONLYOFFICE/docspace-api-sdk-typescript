@@ -5,8 +5,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**getUserTypeUpdateProgress**](#getusertypeupdateprogress) | **GET** /api/2.0/people/type/progress/{userid} | Get the progress of updating user type|
-|[**starUserTypetUpdate**](#starusertypetupdate) | **POST** /api/2.0/people/type | Update user type|
-|[**terminateUserTypeUpdate**](#terminateusertypeupdate) | **PUT** /api/2.0/people/type/terminate | Terminate update user type|
+|[**starUserTypetUpdate**](#starusertypetupdate) | **POST** /api/2.0/people/type | Start updating user type|
+|[**terminateUserTypeUpdate**](#terminateusertypeupdate) | **PUT** /api/2.0/people/type/terminate | Terminate updating user type|
 |[**updateUserType**](#updateusertype) | **PUT** /api/2.0/people/type/{type} | Change a user type|
 
 # **getUserTypeUpdateProgress**

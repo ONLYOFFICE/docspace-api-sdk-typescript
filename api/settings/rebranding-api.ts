@@ -305,7 +305,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Specifies if the white label logo text are default or not.
+         * Specifies if the white label logo text is default or not.
          * @summary Check the default white label logo text
          * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
          * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
@@ -1084,7 +1084,7 @@ export const RebrandingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Specifies if the white label logo text are default or not.
+         * Specifies if the white label logo text is default or not.
          * @summary Check the default white label logo text
          * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
          * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
@@ -1339,7 +1339,7 @@ export const RebrandingApiFactory = function (configuration?: Configuration, bas
             return localVarFp.getEnableWhitelabel(options).then((request) => request(axios, basePath));
         },
         /**
-         * Specifies if the white label logo text are default or not.
+         * Specifies if the white label logo text is default or not.
          * @summary Check the default white label logo text
          * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
          * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
@@ -1558,7 +1558,7 @@ export class RebrandingApi extends BaseAPI {
     }
 
     /**
-     * Specifies if the white label logo text are default or not.
+     * Specifies if the white label logo text is default or not.
      * @summary Check the default white label logo text
      * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
      * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.

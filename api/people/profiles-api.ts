@@ -308,7 +308,7 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * Returns the user claims.
-         * @summary Returns the user claims.
+         * @summary Get user claims
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getClaims operation
@@ -419,8 +419,8 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Returns the detailed information about a profile of the user with the name specified in the request.
-         * @summary Get a profile by user name
+         * Returns the detailed information about a profile of the user with the ID specified in the request.
+         * @summary Get a profile by user ID
          * @param {string} userid The user ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -941,7 +941,7 @@ export const ProfilesApiFp = function(configuration?: Configuration) {
         },
         /**
          * Returns the user claims.
-         * @summary Returns the user claims.
+         * @summary Get user claims
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getClaims operation
@@ -970,8 +970,8 @@ export const ProfilesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the detailed information about a profile of the user with the name specified in the request.
-         * @summary Get a profile by user name
+         * Returns the detailed information about a profile of the user with the ID specified in the request.
+         * @summary Get a profile by user ID
          * @param {string} userid The user ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1155,7 +1155,7 @@ export const ProfilesApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * Returns the user claims.
-         * @summary Returns the user claims.
+         * @summary Get user claims
          * @param {*} [options] Override http request option.
          * REST API Reference for getClaims operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-claims/
@@ -1178,8 +1178,8 @@ export const ProfilesApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.getProfileByEmail(email, culture, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the detailed information about a profile of the user with the name specified in the request.
-         * @summary Get a profile by user name
+         * Returns the detailed information about a profile of the user with the ID specified in the request.
+         * @summary Get a profile by user ID
          * @param {string} userid The user ID.
          * @param {*} [options] Override http request option.
          * REST API Reference for getProfileByUserId operation
@@ -1339,7 +1339,7 @@ export class ProfilesApi extends BaseAPI {
 
     /**
      * Returns the user claims.
-     * @summary Returns the user claims.
+     * @summary Get user claims
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProfilesApi
@@ -1362,8 +1362,8 @@ export class ProfilesApi extends BaseAPI {
     }
 
     /**
-     * Returns the detailed information about a profile of the user with the name specified in the request.
-     * @summary Get a profile by user name
+     * Returns the detailed information about a profile of the user with the ID specified in the request.
+     * @summary Get a profile by user ID
      * @param {string} userid The user ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

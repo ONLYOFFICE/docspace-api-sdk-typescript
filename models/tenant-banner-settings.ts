@@ -18,7 +18,7 @@
 
 
 /**
- * The promotional banners visibility settings.
+ * The visibility settings of the promotional banners.
  * @export
  * @interface TenantBannerSettings
  */

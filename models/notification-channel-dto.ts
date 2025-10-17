@@ -18,19 +18,19 @@
 
 
 /**
- * 
+ * The notification channel information.
  * @export
  * @interface NotificationChannelDto
  */
 export interface NotificationChannelDto {
     /**
-     * 
+     * The notification channel name.
      * @type {string}
      * @memberof NotificationChannelDto
      */
     'name': string | null;
     /**
-     * 
+     * Specifies whether the notification channel is enabled.
      * @type {boolean}
      * @memberof NotificationChannelDto
      */

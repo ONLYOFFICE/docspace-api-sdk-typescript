@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **portalId** | **string** | The portal ID. | [optional] [readonly] [default to undefined]
 **paymentMethodStatus** | [**PaymentMethodStatus**](PaymentMethodStatus.md) |  | [optional] [default to undefined]
-**email** | **string** | The email address of the customer. | [optional] [readonly] [default to undefined]
+**email** | **string** | The customer email address. | [optional] [readonly] [default to undefined]
 **payer** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] [default to undefined]
 
 ## Example

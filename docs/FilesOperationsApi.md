@@ -360,7 +360,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **sessionRequest** | **SessionRequest**| The session parameters. | |
-| **folderId** | [**number**] | The folder ID of the session. | defaults to undefined|
+| **folderId** | [**number**] | The session folder ID. | defaults to undefined|
 
 
 ### Return type
@@ -383,7 +383,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
 
-let folderId: number; //The folder ID of the session. (default to undefined)
+let folderId: number; //The session folder ID. (default to undefined)
 let sessionRequest: SessionRequest; //The session parameters.
 
 const { status, data } = await apiInstance.createUploadSession(
@@ -952,7 +952,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **id** | [**string**] | The operation ID of the request. | defaults to undefined|
+| **id** | [**string**] | The operation unique identifier. | defaults to undefined|
 
 
 ### Return type
@@ -974,7 +974,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
 
-let id: string; //The operation ID of the request. (default to undefined)
+let id: string; //The operation unique identifier. (default to undefined)
 
 const { status, data } = await apiInstance.terminateTasks(
     id

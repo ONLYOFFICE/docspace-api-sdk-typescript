@@ -16,6 +16,9 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { RecaptchaType } from './recaptcha-type';
 
 /**
  * The request parameters for configuring the administrator message content.
@@ -41,5 +44,19 @@ export interface AdminMessageSettingsRequestsDto {
      * @memberof AdminMessageSettingsRequestsDto
      */
     'culture'?: string | null;
+    /**
+     * 
+     * @type {RecaptchaType}
+     * @memberof AdminMessageSettingsRequestsDto
+     */
+    'recaptchaType'?: RecaptchaType;
+    /**
+     * The user\'s response to the CAPTCHA challenge.
+     * @type {string}
+     * @memberof AdminMessageSettingsRequestsDto
+     */
+    'recaptchaResponse'?: string | null;
 }
+
+
 

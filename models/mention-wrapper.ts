@@ -21,7 +21,7 @@
 import type { UserInfo } from './user-info';
 
 /**
- * The mention message parameters.
+ * The parameters of a user mentioned in a message.
  * @export
  * @interface MentionWrapper
  */
@@ -33,13 +33,13 @@ export interface MentionWrapper {
      */
     'user'?: UserInfo;
     /**
-     * The email address of the user.
+     * The user email address.
      * @type {string}
      * @memberof MentionWrapper
      */
     'email'?: string | null;
     /**
-     * The identification of the user.
+     * The user unique identification.
      * @type {string}
      * @memberof MentionWrapper
      */
@@ -51,13 +51,13 @@ export interface MentionWrapper {
      */
     'image'?: string | null;
     /**
-     * Specifies if the user has the access to the file or not.
+     * Specifies whether the user has the access to the file where they are mentioned.
      * @type {boolean}
      * @memberof MentionWrapper
      */
     'hasAccess'?: boolean;
     /**
-     * The full name of the user.
+     * The user full name.
      * @type {string}
      * @memberof MentionWrapper
      */

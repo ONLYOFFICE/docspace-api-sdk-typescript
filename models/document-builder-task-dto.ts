@@ -21,25 +21,25 @@
 import type { DistributedTaskStatus } from './distributed-task-status';
 
 /**
- * The document builder task parameters.
+ * The Document Builder task parameters.
  * @export
  * @interface DocumentBuilderTaskDto
  */
 export interface DocumentBuilderTaskDto {
     /**
-     * The document builder ID.
+     * The Document Builder task ID.
      * @type {string}
      * @memberof DocumentBuilderTaskDto
      */
     'id': string | null;
     /**
-     * The error message occured while the document building process.
+     * The error message occurred during the document building process.
      * @type {string}
      * @memberof DocumentBuilderTaskDto
      */
     'error': string | null;
     /**
-     * The percentage of the progress of the document building process.
+     * The progress percentage of the document building process.
      * @type {number}
      * @memberof DocumentBuilderTaskDto
      */

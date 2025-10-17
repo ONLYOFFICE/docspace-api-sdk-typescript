@@ -4,12 +4,12 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**setTenantBannerSettings**](#settenantbannersettings) | **POST** /api/2.0/settings/banner | Set the promotional banners visibility settings|
+|[**setTenantBannerSettings**](#settenantbannersettings) | **POST** /api/2.0/settings/banner | Set the banners visibility|
 
 # **setTenantBannerSettings**
 > TenantBannerSettingsWrapper setTenantBannerSettings()
 
-Sets the promotional banners visibility settings settings for the portal.
+Sets the visibility settings of the promotional banners in the portal.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-banner-settings/).
 

@@ -42,7 +42,7 @@ export interface CustomerInfoDto {
      */
     'paymentMethodStatus'?: PaymentMethodStatus;
     /**
-     * The email address of the customer.
+     * The customer email address.
      * @type {string}
      * @memberof CustomerInfoDto
      */

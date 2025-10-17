@@ -6,12 +6,12 @@ Represents a report containing a collection of operations.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**collection** | [**Array&lt;OperationDto&gt;**](OperationDto.md) | Collection of operations. | [optional] [default to undefined]
-**offset** | **number** | Offset of the report data. | [optional] [default to undefined]
-**limit** | **number** | Limit of the report data. | [optional] [default to undefined]
-**totalQuantity** | **number** | Total quantity of operations in the report. | [optional] [default to undefined]
-**totalPage** | **number** | Total number of pages in the report. | [optional] [default to undefined]
-**currentPage** | **number** | Current page number of the report. | [optional] [default to undefined]
+**collection** | [**Array&lt;OperationDto&gt;**](OperationDto.md) | A collection of operations. | [optional] [default to undefined]
+**offset** | **number** | The report data offset. | [optional] [default to undefined]
+**limit** | **number** | The report data limit. | [optional] [default to undefined]
+**totalQuantity** | **number** | The total quantity of operations in the report. | [optional] [default to undefined]
+**totalPage** | **number** | The total number of pages in the report. | [optional] [default to undefined]
+**currentPage** | **number** | The current page number of the report. | [optional] [default to undefined]
 
 ## Example
 

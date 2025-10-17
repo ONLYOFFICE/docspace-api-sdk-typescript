@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **canEditInternal** | **boolean** | Indicates whether internal editing permissions are granted. | [default to undefined]
 **canEditDenyDownload** | **boolean** | Determines whether the user has permission to modify the deny download setting for the file share. | [default to undefined]
 **canEditExpirationDate** | **boolean** | Indicates whether the expiration date of access permissions can be edited. | [default to undefined]
+**canRevoke** | **boolean** | Specifies whether the file sharing access can be revoked by the current user. | [default to undefined]
 **subjectType** | [**SubjectType**](SubjectType.md) |  | [default to undefined]
 
 ## Example
@@ -36,6 +37,7 @@ const instance: FileShareDto = {
     canEditInternal,
     canEditDenyDownload,
     canEditExpirationDate,
+    canRevoke,
     subjectType,
 };
 ```

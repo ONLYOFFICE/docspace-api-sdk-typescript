@@ -121,7 +121,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * 
          * @param {number} id The room Id.
-         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for adding tags.
+         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for managing tags.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for addRoomTags operation
@@ -537,7 +537,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deleteRoomLogo operation
@@ -573,7 +573,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * 
          * @param {number} id The room Id.
-         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for adding tags.
+         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for managing tags.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deleteRoomTags operation
@@ -611,7 +611,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getNewRoomItems operation
@@ -774,7 +774,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getRoomInfo operation
@@ -1124,7 +1124,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getRoomsPrimaryExternalLink operation
@@ -1159,7 +1159,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for pinRoom operation
@@ -1194,7 +1194,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for reorderRoom operation
@@ -1387,7 +1387,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for startRoomIndexExport operation
@@ -1492,7 +1492,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for unpinRoom operation
@@ -1621,7 +1621,7 @@ export const RoomsApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {number} id The room Id.
-         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for adding tags.
+         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for managing tags.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for addRoomTags operation
@@ -1780,7 +1780,7 @@ export const RoomsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deleteRoomLogo operation
@@ -1795,7 +1795,7 @@ export const RoomsApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {number} id The room Id.
-         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for adding tags.
+         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for managing tags.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deleteRoomTags operation
@@ -1809,7 +1809,7 @@ export const RoomsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getNewRoomItems operation
@@ -1876,7 +1876,7 @@ export const RoomsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getRoomInfo operation
@@ -1993,7 +1993,7 @@ export const RoomsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getRoomsPrimaryExternalLink operation
@@ -2007,7 +2007,7 @@ export const RoomsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for pinRoom operation
@@ -2021,7 +2021,7 @@ export const RoomsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for reorderRoom operation
@@ -2094,7 +2094,7 @@ export const RoomsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for startRoomIndexExport operation
@@ -2136,7 +2136,7 @@ export const RoomsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for unpinRoom operation
@@ -2190,7 +2190,7 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
         /**
          * 
          * @param {number} id The room Id.
-         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for adding tags.
+         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for managing tags.
          * @param {*} [options] Override http request option.
          * REST API Reference for addRoomTags operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-room-tags/
@@ -2316,7 +2316,7 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteRoomLogo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-logo/
@@ -2328,7 +2328,7 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
         /**
          * 
          * @param {number} id The room Id.
-         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for adding tags.
+         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for managing tags.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteRoomTags operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-tags/
@@ -2339,7 +2339,7 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * REST API Reference for getNewRoomItems operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-new-room-items/
@@ -2391,7 +2391,7 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * REST API Reference for getRoomInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-info/
@@ -2487,7 +2487,7 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * REST API Reference for getRoomsPrimaryExternalLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-primary-external-link/
@@ -2498,7 +2498,7 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * REST API Reference for pinRoom operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/pin-room/
@@ -2509,7 +2509,7 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * REST API Reference for reorderRoom operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reorder-room/
@@ -2567,7 +2567,7 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * REST API Reference for startRoomIndexExport operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-room-index-export/
@@ -2600,7 +2600,7 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * REST API Reference for unpinRoom operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/unpin-room/
@@ -2645,7 +2645,7 @@ export class RoomsApi extends BaseAPI {
     /**
      * 
      * @param {number} id The room Id.
-     * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for adding tags.
+     * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for managing tags.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RoomsApi
@@ -2771,7 +2771,7 @@ export class RoomsApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} id The room ID of the request.
+     * @param {number} id The room ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RoomsApi
@@ -2783,7 +2783,7 @@ export class RoomsApi extends BaseAPI {
     /**
      * 
      * @param {number} id The room Id.
-     * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for adding tags.
+     * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for managing tags.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RoomsApi
@@ -2794,7 +2794,7 @@ export class RoomsApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} id The room ID of the request.
+     * @param {number} id The room ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RoomsApi
@@ -2846,7 +2846,7 @@ export class RoomsApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} id The room ID of the request.
+     * @param {number} id The room ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RoomsApi
@@ -2942,7 +2942,7 @@ export class RoomsApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} id The room ID of the request.
+     * @param {number} id The room ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RoomsApi
@@ -2953,7 +2953,7 @@ export class RoomsApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} id The room ID of the request.
+     * @param {number} id The room ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RoomsApi
@@ -2964,7 +2964,7 @@ export class RoomsApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} id The room ID of the request.
+     * @param {number} id The room ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RoomsApi
@@ -3022,7 +3022,7 @@ export class RoomsApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} id The room ID of the request.
+     * @param {number} id The room ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RoomsApi
@@ -3055,7 +3055,7 @@ export class RoomsApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} id The room ID of the request.
+     * @param {number} id The room ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RoomsApi

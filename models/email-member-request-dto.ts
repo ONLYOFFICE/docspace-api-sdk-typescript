@@ -16,6 +16,9 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { RecaptchaType } from './recaptcha-type';
 
 /**
  * The request parameters for the user email.
@@ -29,5 +32,19 @@ export interface EmailMemberRequestDto {
      * @memberof EmailMemberRequestDto
      */
     'email': string;
+    /**
+     * 
+     * @type {RecaptchaType}
+     * @memberof EmailMemberRequestDto
+     */
+    'recaptchaType'?: RecaptchaType;
+    /**
+     * The user\'s response to the CAPTCHA challenge.
+     * @type {string}
+     * @memberof EmailMemberRequestDto
+     */
+    'recaptchaResponse'?: string | null;
 }
+
+
 

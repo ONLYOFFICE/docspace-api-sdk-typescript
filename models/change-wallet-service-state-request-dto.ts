@@ -21,7 +21,7 @@
 import type { TenantWalletService } from './tenant-wallet-service';
 
 /**
- * Tenant wallet service state request parameters
+ * The request parameters for changing the tenant wallet service state.
  * @export
  * @interface ChangeWalletServiceStateRequestDto
  */
@@ -33,7 +33,7 @@ export interface ChangeWalletServiceStateRequestDto {
      */
     'service'?: TenantWalletService;
     /**
-     * Service state
+     * Specifies whether the wallet service is enabled.
      * @type {boolean}
      * @memberof ChangeWalletServiceStateRequestDto
      */

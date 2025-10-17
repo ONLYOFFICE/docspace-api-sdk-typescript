@@ -18,13 +18,13 @@
 
 
 /**
- * The request parameters for the payment quantity specifications.
+ * The request parameters for specifying payment quantity.
  * @export
  * @interface QuantityRequestDto
  */
 export interface QuantityRequestDto {
     /**
-     * The mapping of item identifiers with their respective quantities in the payment.
+     * The mapping of item identifiers to their respective quantities in the payment.
      * @type {{ [key: string]: number; }}
      * @memberof QuantityRequestDto
      */

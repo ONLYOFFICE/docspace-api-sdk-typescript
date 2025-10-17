@@ -8,9 +8,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**deleteMember**](#deletemember) | **DELETE** /api/2.0/people/{userid} | Delete a user|
 |[**deleteProfile**](#deleteprofile) | **DELETE** /api/2.0/people/@self | Delete my profile|
 |[**getAllProfiles**](#getallprofiles) | **GET** /api/2.0/people | Get profiles|
-|[**getClaims**](#getclaims) | **GET** /api/2.0/people/tokendiagnostics | Returns the user claims.|
+|[**getClaims**](#getclaims) | **GET** /api/2.0/people/tokendiagnostics | Get user claims|
 |[**getProfileByEmail**](#getprofilebyemail) | **GET** /api/2.0/people/email | Get a profile by user email|
-|[**getProfileByUserId**](#getprofilebyuserid) | **GET** /api/2.0/people/{userid} | Get a profile by user name|
+|[**getProfileByUserId**](#getprofilebyuserid) | **GET** /api/2.0/people/{userid} | Get a profile by user ID|
 |[**getSelfProfile**](#getselfprofile) | **GET** /api/2.0/people/@self | Get my profile|
 |[**inviteUsers**](#inviteusers) | **POST** /api/2.0/people/invite | Invite users|
 |[**removeUsers**](#removeusers) | **PUT** /api/2.0/people/delete | Delete users|
@@ -361,7 +361,7 @@ const { status, data } = await apiInstance.getProfileByEmail(
 # **getProfileByUserId**
 > EmployeeFullWrapper getProfileByUserId()
 
-Returns the detailed information about a profile of the user with the name specified in the request.
+Returns the detailed information about a profile of the user with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-profile-by-user-id/).
 

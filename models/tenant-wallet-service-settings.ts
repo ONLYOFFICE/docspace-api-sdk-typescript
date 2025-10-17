@@ -18,19 +18,19 @@
 
 
 /**
- * 
+ * The wallet services settings.
  * @export
  * @interface TenantWalletServiceSettings
  */
 export interface TenantWalletServiceSettings {
     /**
-     * Enabled services
+     * The list of the enabled wallet services.
      * @type {Array<number>}
      * @memberof TenantWalletServiceSettings
      */
     'enabledServices'?: Array<TenantWalletServiceSettingsEnabledServicesEnum> | null;
     /**
-     * 
+     * The date and time when the wallet services settings were last modified.
      * @type {string}
      * @memberof TenantWalletServiceSettings
      */

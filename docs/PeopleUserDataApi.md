@@ -7,7 +7,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**getDeletePersonalFolderProgress**](#getdeletepersonalfolderprogress) | **GET** /api/2.0/people/delete/personal/progress | Get the progress of deleting the personal folder|
 |[**getReassignProgress**](#getreassignprogress) | **GET** /api/2.0/people/reassign/progress/{userid} | Get the reassignment progress|
 |[**getRemoveProgress**](#getremoveprogress) | **GET** /api/2.0/people/remove/progress/{userid} | Get the deletion progress|
-|[**necessaryReassign**](#necessaryreassign) | **GET** /api/2.0/people/reassign/necessary | Check the data reassignment need|
+|[**necessaryReassign**](#necessaryreassign) | **GET** /api/2.0/people/reassign/necessary | Check data for reassignment need|
 |[**sendInstructionsToDelete**](#sendinstructionstodelete) | **PUT** /api/2.0/people/self/delete | Send the deletion instructions|
 |[**startDeletePersonalFolder**](#startdeletepersonalfolder) | **POST** /api/2.0/people/delete/personal/start | Delete the personal folder|
 |[**startReassign**](#startreassign) | **POST** /api/2.0/people/reassign/start | Start the data reassignment|
@@ -173,7 +173,7 @@ const { status, data } = await apiInstance.getRemoveProgress(
 # **necessaryReassign**
 > BooleanWrapper necessaryReassign()
 
-Checks if the reassignment of rooms and shared files is necessary or not.
+Checks whether the reassignment of rooms and shared files is required.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/necessary-reassign/).
 

@@ -18,37 +18,37 @@
 
 
 /**
- * Parameters of the request for generating the report on client operations
+ * The request parameters for generating a report on client operations.
  * @export
  * @interface CustomerOperationsReportRequestDto
  */
 export interface CustomerOperationsReportRequestDto {
     /**
-     * Start date
+     * The report start date.
      * @type {string}
      * @memberof CustomerOperationsReportRequestDto
      */
     'startDate'?: string | null;
     /**
-     * End date
+     * The report end date.
      * @type {string}
      * @memberof CustomerOperationsReportRequestDto
      */
     'endDate'?: string | null;
     /**
-     * Participant name
+     * The participant name.
      * @type {string}
      * @memberof CustomerOperationsReportRequestDto
      */
     'participantName'?: string | null;
     /**
-     * Include credit operations
+     * Specifies whether to include credit operations in the report.
      * @type {boolean}
      * @memberof CustomerOperationsReportRequestDto
      */
     'credit'?: boolean | null;
     /**
-     * Include debit operations
+     * Specifies whether to include debit operations in the report.
      * @type {boolean}
      * @memberof CustomerOperationsReportRequestDto
      */

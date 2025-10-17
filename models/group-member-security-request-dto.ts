@@ -24,7 +24,7 @@ import type { EmployeeFullDto } from './employee-full-dto';
 import type { FileShare } from './file-share';
 
 /**
- * The security request parameters of the group member.
+ * The group member security information.
  * @export
  * @interface GroupMemberSecurityRequestDto
  */

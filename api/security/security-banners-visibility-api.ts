@@ -36,8 +36,8 @@ export const SecurityBannersVisibilityApiAxiosParamCreator = function (configura
     
     return {
         /**
-         * Sets the promotional banners visibility settings settings for the portal.
-         * @summary Set the promotional banners visibility settings
+         * Sets the visibility settings of the promotional banners in the portal.
+         * @summary Set the banners visibility
          * @param {TenantBannerSettingsDto} [tenantBannerSettingsDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -101,8 +101,8 @@ export const SecurityBannersVisibilityApiFp = function(configuration?: Configura
     const localVarAxiosParamCreator = SecurityBannersVisibilityApiAxiosParamCreator(configuration)
     return {
         /**
-         * Sets the promotional banners visibility settings settings for the portal.
-         * @summary Set the promotional banners visibility settings
+         * Sets the visibility settings of the promotional banners in the portal.
+         * @summary Set the banners visibility
          * @param {TenantBannerSettingsDto} [tenantBannerSettingsDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -126,8 +126,8 @@ export const SecurityBannersVisibilityApiFactory = function (configuration?: Con
     const localVarFp = SecurityBannersVisibilityApiFp(configuration)
     return {
         /**
-         * Sets the promotional banners visibility settings settings for the portal.
-         * @summary Set the promotional banners visibility settings
+         * Sets the visibility settings of the promotional banners in the portal.
+         * @summary Set the banners visibility
          * @param {TenantBannerSettingsDto} [tenantBannerSettingsDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for setTenantBannerSettings operation
@@ -148,8 +148,8 @@ export const SecurityBannersVisibilityApiFactory = function (configuration?: Con
  */
 export class SecurityBannersVisibilityApi extends BaseAPI {
     /**
-     * Sets the promotional banners visibility settings settings for the portal.
-     * @summary Set the promotional banners visibility settings
+     * Sets the visibility settings of the promotional banners in the portal.
+     * @summary Set the banners visibility
      * @param {TenantBannerSettingsDto} [tenantBannerSettingsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

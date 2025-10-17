@@ -1,12 +1,12 @@
 # WalletQuantityRequestDto
 
-The request parameters for the wallet payment quantity specifications.
+The request parameters for specifying wallet payment quantity.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**quantity** | **{ [key: string]: number | null; }** | The mapping of item identifiers with their respective quantities in the payment. | [optional] [default to undefined]
+**quantity** | **{ [key: string]: number | null; }** | The mapping of item identifiers to their respective quantities in the payment. | [optional] [default to undefined]
 **productQuantityType** | [**ProductQuantityType**](ProductQuantityType.md) |  | [optional] [default to undefined]
 
 ## Example

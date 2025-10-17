@@ -99,7 +99,7 @@ export const ApiKeysApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Delete a user API key by its ID.
+         * Deletes a user API key by its ID.
          * @summary Delete a user API key
          * @param {string} keyId The API key ID.
          * @param {*} [options] Override http request option.
@@ -205,8 +205,8 @@ export const ApiKeysApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns current user API key info.
-         * @summary Get user API key info
+         * Returns information about the current user\'s API key.
+         * @summary Get current user\'s API key
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getApiKey operation
@@ -257,7 +257,7 @@ export const ApiKeysApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Returns a list of all API keys for the current user.
-         * @summary Get user API keys
+         * @summary Get current user\'s API keys
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getApiKeys operation
@@ -307,7 +307,7 @@ export const ApiKeysApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Updates an existing API key changing its name, permissions and status.
+         * Updates an existing API key changing its name, permissions, and status.
          * @summary Update an API key
          * @param {string} keyId The unique identifier of the API key to update.
          * @param {UpdateApiKeyRequest} updateApiKeyRequest The request parameters for updating an existing API key.
@@ -393,7 +393,7 @@ export const ApiKeysApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Delete a user API key by its ID.
+         * Deletes a user API key by its ID.
          * @summary Delete a user API key
          * @param {string} keyId The API key ID.
          * @param {*} [options] Override http request option.
@@ -422,8 +422,8 @@ export const ApiKeysApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns current user API key info.
-         * @summary Get user API key info
+         * Returns information about the current user\'s API key.
+         * @summary Get current user\'s API key
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getApiKey operation
@@ -437,7 +437,7 @@ export const ApiKeysApiFp = function(configuration?: Configuration) {
         },
         /**
          * Returns a list of all API keys for the current user.
-         * @summary Get user API keys
+         * @summary Get current user\'s API keys
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getApiKeys operation
@@ -450,7 +450,7 @@ export const ApiKeysApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Updates an existing API key changing its name, permissions and status.
+         * Updates an existing API key changing its name, permissions, and status.
          * @summary Update an API key
          * @param {string} keyId The unique identifier of the API key to update.
          * @param {UpdateApiKeyRequest} updateApiKeyRequest The request parameters for updating an existing API key.
@@ -488,7 +488,7 @@ export const ApiKeysApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.createApiKey(createApiKeyRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Delete a user API key by its ID.
+         * Deletes a user API key by its ID.
          * @summary Delete a user API key
          * @param {string} keyId The API key ID.
          * @param {*} [options] Override http request option.
@@ -511,8 +511,8 @@ export const ApiKeysApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getAllPermissions(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns current user API key info.
-         * @summary Get user API key info
+         * Returns information about the current user\'s API key.
+         * @summary Get current user\'s API key
          * @param {*} [options] Override http request option.
          * REST API Reference for getApiKey operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-api-key/
@@ -523,7 +523,7 @@ export const ApiKeysApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * Returns a list of all API keys for the current user.
-         * @summary Get user API keys
+         * @summary Get current user\'s API keys
          * @param {*} [options] Override http request option.
          * REST API Reference for getApiKeys operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-api-keys/
@@ -533,7 +533,7 @@ export const ApiKeysApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getApiKeys(options).then((request) => request(axios, basePath));
         },
         /**
-         * Updates an existing API key changing its name, permissions and status.
+         * Updates an existing API key changing its name, permissions, and status.
          * @summary Update an API key
          * @param {string} keyId The unique identifier of the API key to update.
          * @param {UpdateApiKeyRequest} updateApiKeyRequest The request parameters for updating an existing API key.
@@ -568,7 +568,7 @@ export class ApiKeysApi extends BaseAPI {
     }
 
     /**
-     * Delete a user API key by its ID.
+     * Deletes a user API key by its ID.
      * @summary Delete a user API key
      * @param {string} keyId The API key ID.
      * @param {*} [options] Override http request option.
@@ -591,8 +591,8 @@ export class ApiKeysApi extends BaseAPI {
     }
 
     /**
-     * Returns current user API key info.
-     * @summary Get user API key info
+     * Returns information about the current user\'s API key.
+     * @summary Get current user\'s API key
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ApiKeysApi
@@ -603,7 +603,7 @@ export class ApiKeysApi extends BaseAPI {
 
     /**
      * Returns a list of all API keys for the current user.
-     * @summary Get user API keys
+     * @summary Get current user\'s API keys
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ApiKeysApi
@@ -613,7 +613,7 @@ export class ApiKeysApi extends BaseAPI {
     }
 
     /**
-     * Updates an existing API key changing its name, permissions and status.
+     * Updates an existing API key changing its name, permissions, and status.
      * @summary Update an API key
      * @param {string} keyId The unique identifier of the API key to update.
      * @param {UpdateApiKeyRequest} updateApiKeyRequest The request parameters for updating an existing API key.

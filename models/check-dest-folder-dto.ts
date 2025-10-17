@@ -24,7 +24,7 @@ import type { CheckDestFolderResult } from './check-dest-folder-result';
 import type { FileEntryBaseDto } from './file-entry-base-dto';
 
 /**
- * The destination folder checking information.
+ * The result of checking whether files can be moved or copied to the specified folder.
  * @export
  * @interface CheckDestFolderDto
  */
@@ -36,7 +36,7 @@ export interface CheckDestFolderDto {
      */
     'result'?: CheckDestFolderResult;
     /**
-     * The list of files of the destination folder.
+     * The list of files in the destination folder.
      * @type {Array<FileEntryBaseDto>}
      * @memberof CheckDestFolderDto
      */

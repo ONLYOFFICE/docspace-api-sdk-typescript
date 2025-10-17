@@ -38,6 +38,7 @@ Name | Type | Description | Notes
 **requestToken** | **string** | The request token of the file entry. | [optional] [default to undefined]
 **external** | **boolean** | Specifies if the folder can be accessed via an external link or not. | [optional] [default to undefined]
 **expirationDate** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
+**isLinkExpired** | **boolean** | Indicates whether the shareable link associated with the file or folder has expired. | [optional] [default to undefined]
 
 ## Example
 
@@ -77,6 +78,7 @@ const instance: FileEntryDtoString = {
     requestToken,
     external,
     expirationDate,
+    isLinkExpired,
 };
 ```
 

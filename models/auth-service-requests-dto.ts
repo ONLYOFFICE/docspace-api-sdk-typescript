@@ -27,37 +27,37 @@ import type { AuthKey } from './auth-key';
  */
 export interface AuthServiceRequestsDto {
     /**
-     * The name of the authentication service.
+     * The name of the authorization service.
      * @type {string}
      * @memberof AuthServiceRequestsDto
      */
     'name'?: string | null;
     /**
-     * The user-friendly display title of the authentication service.
+     * The user-friendly display title of the authorization service.
      * @type {string}
      * @memberof AuthServiceRequestsDto
      */
     'title'?: string | null;
     /**
-     * The brief description of the authentication service.
+     * The brief description of the authorization service.
      * @type {string}
      * @memberof AuthServiceRequestsDto
      */
     'description'?: string | null;
     /**
-     * The detailed instructions for configuring or using the authentication service.
+     * The detailed instructions for configuring or using the authorization service.
      * @type {string}
      * @memberof AuthServiceRequestsDto
      */
     'instruction'?: string | null;
     /**
-     * Specifies whether the authentication service can be configured by the user.
+     * Specifies whether the authorization service can be configured by the user.
      * @type {boolean}
      * @memberof AuthServiceRequestsDto
      */
     'canSet'?: boolean;
     /**
-     * The collection of authorization keys associated with the authentication service.
+     * The collection of authorization keys associated with the authorization service.
      * @type {Array<AuthKey>}
      * @memberof AuthServiceRequestsDto
      */

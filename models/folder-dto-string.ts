@@ -192,6 +192,7 @@ export type FolderDtoString = FileEntryDtoString &  {
      * Specifies if an external link to the folder is expired or not.
      * @type {boolean}
      * @memberof FolderDtoString
+     * @deprecated
      */
     'expired'?: boolean | null;
 };

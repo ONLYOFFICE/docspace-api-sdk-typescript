@@ -197,7 +197,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] | The file ID of the request. | defaults to undefined|
+| **id** | [**number**] | The file unique identifier. | defaults to undefined|
 | **count** | [**number**] | The number of items to retrieve in the request. | (optional) defaults to undefined|
 | **startIndex** | [**number**] | The starting index for the query results. | (optional) defaults to undefined|
 
@@ -221,7 +221,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesSharingApi(configuration);
 
-let id: number; //The file ID of the request. (default to undefined)
+let id: number; //The file unique identifier. (default to undefined)
 let count: number; //The number of items to retrieve in the request. (optional) (default to undefined)
 let startIndex: number; //The starting index for the query results. (optional) (default to undefined)
 
@@ -255,7 +255,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] | The request folder ID. | defaults to undefined|
+| **id** | [**number**] | The folder unique identifier. | defaults to undefined|
 | **count** | [**number**] | The number of items to retrieve in the request. | (optional) defaults to undefined|
 | **startIndex** | [**number**] | The starting index for the query results. | (optional) defaults to undefined|
 
@@ -279,7 +279,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesSharingApi(configuration);
 
-let id: number; //The request folder ID. (default to undefined)
+let id: number; //The folder unique identifier. (default to undefined)
 let count: number; //The number of items to retrieve in the request. (optional) (default to undefined)
 let startIndex: number; //The starting index for the query results. (optional) (default to undefined)
 
@@ -494,7 +494,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
+| **fileId** | [**number**] | The file unique identifier. | defaults to undefined|
 
 
 ### Return type
@@ -516,7 +516,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesSharingApi(configuration);
 
-let fileId: number; //The file ID of the request. (default to undefined)
+let fileId: number; //The file unique identifier. (default to undefined)
 
 const { status, data } = await apiInstance.getSharedUsers(
     fileId
@@ -600,7 +600,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **mentionMessageWrapper** | **MentionMessageWrapper**| The mention message. | |
-| **fileId** | [**number**] | The file ID of the mention message. | defaults to undefined|
+| **fileId** | [**number**] | The file ID with the mention message. | defaults to undefined|
 
 
 ### Return type
@@ -623,7 +623,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesSharingApi(configuration);
 
-let fileId: number; //The file ID of the mention message. (default to undefined)
+let fileId: number; //The file ID with the mention message. (default to undefined)
 let mentionMessageWrapper: MentionMessageWrapper; //The mention message. (optional)
 
 const { status, data } = await apiInstance.sendEditorNotify(

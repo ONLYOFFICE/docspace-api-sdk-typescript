@@ -21,7 +21,7 @@
 import type { DateToAutoCleanUp } from './date-to-auto-clean-up';
 
 /**
- * The auto-clearing request parameters.
+ * The request parameters for updating the trash bin auto-clearing setting.
  * @export
  * @interface AutoCleanupRequestDto
  */
