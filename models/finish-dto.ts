@@ -28,6 +28,6 @@ export interface FinishDto {
      * @type {boolean}
      * @memberof FinishDto
      */
-    'isSendWelcomeEmail'?: boolean;
+    'isSendWelcomeEmail': boolean;
 }
 

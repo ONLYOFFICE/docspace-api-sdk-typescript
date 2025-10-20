@@ -4,12 +4,12 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**getTenantBannerSettings**](#gettenantbannersettings) | **GET** /api/2.0/settings/banner | Get the promotional banners visibility settings|
+|[**getTenantBannerSettings**](#gettenantbannersettings) | **GET** /api/2.0/settings/banner | Get the banners visibility|
 
 # **getTenantBannerSettings**
 > TenantBannerSettingsWrapper getTenantBannerSettings()
 
-Returns the promotional banners visibility settings settings for the portal.
+Returns the visibility settings of the promotional banners in the portal.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-banner-settings/).
 

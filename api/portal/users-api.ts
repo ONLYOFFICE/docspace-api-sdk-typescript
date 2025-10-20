@@ -37,6 +37,7 @@ import type { UserInfoWrapper } from '../../models';
  * @export
  */
 export const UsersApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Returns an invitation link for joining the portal.

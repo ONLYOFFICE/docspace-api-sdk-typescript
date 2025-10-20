@@ -85,7 +85,7 @@ export interface ConfigurationDtoInteger {
      * @type {FileDtoInteger}
      * @memberof ConfigurationDtoInteger
      */
-    'file'?: FileDtoInteger;
+    'file': FileDtoInteger;
     /**
      * The error message.
      * @type {string}

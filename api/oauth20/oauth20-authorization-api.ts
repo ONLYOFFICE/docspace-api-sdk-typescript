@@ -31,6 +31,7 @@ import type { ExchangeToken200Response } from '../../models';
  * @export
  */
 export const OAuth20AuthorizationApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Initiates the OAuth2 authorization flow.

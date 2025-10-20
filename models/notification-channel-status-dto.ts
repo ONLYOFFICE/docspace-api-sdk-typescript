@@ -21,13 +21,13 @@
 import type { NotificationChannelDto } from './notification-channel-dto';
 
 /**
- * 
+ * The notification channel settings.
  * @export
  * @interface NotificationChannelStatusDto
  */
 export interface NotificationChannelStatusDto {
     /**
-     * 
+     * The list of notification channels.
      * @type {Array<NotificationChannelDto>}
      * @memberof NotificationChannelStatusDto
      */

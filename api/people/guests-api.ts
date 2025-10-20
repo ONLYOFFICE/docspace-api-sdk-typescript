@@ -35,6 +35,7 @@ import type { UpdateMembersRequestDto } from '../../models';
  * @export
  */
 export const GuestsApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Approves a guest sharing link and returns the detailed information about a guest.

@@ -46,7 +46,7 @@ export interface Tariff {
      * @type {string}
      * @memberof Tariff
      */
-    'dueDate'?: string;
+    'dueDate': string;
     /**
      * The tariff delay due date.
      * @type {string}
@@ -70,7 +70,7 @@ export interface Tariff {
      * @type {Array<Quota>}
      * @memberof Tariff
      */
-    'quotas'?: Array<Quota> | null;
+    'quotas': Array<Quota> | null;
     /**
      * The list of overdue tariff quotas.
      * @type {Array<Quota>}

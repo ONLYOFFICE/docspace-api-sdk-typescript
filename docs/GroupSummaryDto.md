@@ -6,8 +6,8 @@ The group summary parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | The group ID. | [optional] [default to undefined]
-**name** | **string** | The group name. | [optional] [default to undefined]
+**id** | **string** | The group ID. | [default to undefined]
+**name** | **string** | The group name. | [default to undefined]
 **manager** | **string** | The group manager. | [optional] [default to undefined]
 **isSystem** | **boolean** | Indicates whether the group is a system group. | [optional] [default to undefined]
 

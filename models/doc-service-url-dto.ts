@@ -64,13 +64,13 @@ export interface DocServiceUrlDto {
      * @type {string}
      * @memberof DocServiceUrlDto
      */
-    'docServiceSignatureHeader'?: string | null;
+    'docServiceSignatureHeader': string | null;
     /**
      * Specifies if the document service SSL verification is enabled.
      * @type {boolean}
      * @memberof DocServiceUrlDto
      */
-    'docServiceSslVerification'?: boolean;
+    'docServiceSslVerification': boolean;
     /**
      * Specifies if the document service is default.
      * @type {boolean}

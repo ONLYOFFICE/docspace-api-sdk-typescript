@@ -65,6 +65,7 @@ import type { UpdateComment } from '../../models';
  * @export
  */
 export const OperationsApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * 
@@ -289,7 +290,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * 
-         * @param {number} folderId The folder ID of the session.
+         * @param {number} folderId The session folder ID.
          * @param {SessionRequest} sessionRequest The session parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -691,7 +692,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * 
-         * @param {string} id The operation ID of the request.
+         * @param {string} id The operation unique identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for terminateTasks operation
@@ -862,7 +863,7 @@ export const OperationsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} folderId The folder ID of the session.
+         * @param {number} folderId The session folder ID.
          * @param {SessionRequest} sessionRequest The session parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1019,7 +1020,7 @@ export const OperationsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {string} id The operation ID of the request.
+         * @param {string} id The operation unique identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for terminateTasks operation
@@ -1125,7 +1126,7 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
         },
         /**
          * 
-         * @param {number} folderId The folder ID of the session.
+         * @param {number} folderId The session folder ID.
          * @param {SessionRequest} sessionRequest The session parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for createUploadSession operation
@@ -1249,7 +1250,7 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
         },
         /**
          * 
-         * @param {string} id The operation ID of the request.
+         * @param {string} id The operation unique identifier.
          * @param {*} [options] Override http request option.
          * REST API Reference for terminateTasks operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-tasks/
@@ -1349,7 +1350,7 @@ export class OperationsApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} folderId The folder ID of the session.
+     * @param {number} folderId The session folder ID.
      * @param {SessionRequest} sessionRequest The session parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1473,7 +1474,7 @@ export class OperationsApi extends BaseAPI {
 
     /**
      * 
-     * @param {string} id The operation ID of the request.
+     * @param {string} id The operation unique identifier.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi

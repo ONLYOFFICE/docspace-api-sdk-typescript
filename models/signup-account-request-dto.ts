@@ -49,7 +49,7 @@ export interface SignupAccountRequestDto {
      * @type {string}
      * @memberof SignupAccountRequestDto
      */
-    'email': string | null;
+    'email'?: string | null;
     /**
      * The user password hash.
      * @type {string}
@@ -69,7 +69,7 @@ export interface SignupAccountRequestDto {
      */
     'culture'?: string | null;
     /**
-     * Third-party profile in the serialized format
+     * The third-party profile in the serialized format
      * @type {string}
      * @memberof SignupAccountRequestDto
      */

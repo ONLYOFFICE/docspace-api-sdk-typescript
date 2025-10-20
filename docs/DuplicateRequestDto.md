@@ -1,6 +1,6 @@
 # DuplicateRequestDto
 
-The duplicate request parameters.
+The request parameters for duplicating files and fodlers.
 
 ## Properties
 

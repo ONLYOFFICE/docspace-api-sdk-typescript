@@ -33,6 +33,9 @@ import type { FileDtoIntegerAllOfViewAccessibility } from './file-dto-integer-al
 import type { FileEntryDtoInteger } from './file-entry-dto-integer';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { FileEntryDtoIntegerAllOfAvailableShareRights } from './file-entry-dto-integer-all-of-available-share-rights';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { FileEntryDtoIntegerAllOfSecurity } from './file-entry-dto-integer-all-of-security';
 // May contain unused imports in some cases
 // @ts-ignore

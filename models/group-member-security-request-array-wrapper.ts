@@ -21,42 +21,42 @@
 import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { CustomNavigationItem } from './custom-navigation-item';
+import type { GroupMemberSecurityRequestDto } from './group-member-security-request-dto';
 
 /**
  * 
  * @export
- * @interface CustomNavigationItemWrapper
+ * @interface GroupMemberSecurityRequestArrayWrapper
  */
-export interface CustomNavigationItemWrapper {
+export interface GroupMemberSecurityRequestArrayWrapper {
     /**
      * 
-     * @type {CustomNavigationItem}
-     * @memberof CustomNavigationItemWrapper
+     * @type {Array<GroupMemberSecurityRequestDto>}
+     * @memberof GroupMemberSecurityRequestArrayWrapper
      */
-    'response'?: CustomNavigationItem;
+    'response'?: Array<GroupMemberSecurityRequestDto>;
     /**
      * 
      * @type {number}
-     * @memberof CustomNavigationItemWrapper
+     * @memberof GroupMemberSecurityRequestArrayWrapper
      */
     'count'?: number;
     /**
      * 
      * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof CustomNavigationItemWrapper
+     * @memberof GroupMemberSecurityRequestArrayWrapper
      */
     'links'?: Array<ActiveConnectionsWrapperLinksInner>;
     /**
      * 
      * @type {number}
-     * @memberof CustomNavigationItemWrapper
+     * @memberof GroupMemberSecurityRequestArrayWrapper
      */
     'status'?: number;
     /**
      * 
      * @type {number}
-     * @memberof CustomNavigationItemWrapper
+     * @memberof GroupMemberSecurityRequestArrayWrapper
      */
     'statusCode'?: number;
 }

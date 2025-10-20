@@ -1,13 +1,13 @@
 # SubAccount
 
-Represents a sub-account with a specific currency and amount.
+Represents a sub-account with a specific currency and balance.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **currency** | **string** | The three-character ISO 4217 currency symbol of the sub-account. | [optional] [default to undefined]
-**amount** | **number** | The amount of the sub-account. | [optional] [default to undefined]
+**amount** | **number** | The balance of the sub-account in the specified currency. | [optional] [default to undefined]
 
 ## Example
 

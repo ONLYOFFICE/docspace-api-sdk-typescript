@@ -109,15 +109,19 @@ import type { UploadResultWrapper } from '../../models';
 // @ts-ignore
 import type { UserInvitation } from '../../models';
 /**
- * RoomsRoomsApi - axios parameter creator
+ * RoomsApi - axios parameter creator
  * @export
  */
-export const RoomsRoomsApiAxiosParamCreator = function (configuration?: Configuration) {
+export const RoomsApiAxiosParamCreator = function (configuration?: Configuration) {
+    let fields: string | undefined;
     return {
+        withFields: (f: string) => {
+            fields = f;
+        },
         /**
          * 
          * @param {number} id The room Id.
-         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for adding tags.
+         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for managing tags.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for addRoomTags operation
@@ -533,7 +537,7 @@ export const RoomsRoomsApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deleteRoomLogo operation
@@ -569,7 +573,7 @@ export const RoomsRoomsApiAxiosParamCreator = function (configuration?: Configur
         /**
          * 
          * @param {number} id The room Id.
-         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for adding tags.
+         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for managing tags.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deleteRoomTags operation
@@ -607,7 +611,7 @@ export const RoomsRoomsApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getNewRoomItems operation
@@ -770,7 +774,7 @@ export const RoomsRoomsApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getRoomInfo operation
@@ -903,13 +907,12 @@ export const RoomsRoomsApiAxiosParamCreator = function (configuration?: Configur
          * @param {number} [count] Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.
          * @param {number} [startIndex] Represents the starting index from which the tags\&#39; information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.
          * @param {string} [filterValue] Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getRoomTagsInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-tags-info/
          */
-        getRoomTagsInfo: async (count?: number, startIndex?: number, filterValue?: string, fields?: string | null, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getRoomTagsInfo: async (count?: number, startIndex?: number, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/files/tags`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -934,12 +937,11 @@ export const RoomsRoomsApiAxiosParamCreator = function (configuration?: Configur
                 localVarQueryParameter['filterValue'] = filterValue;
             }
 
-            if (fields !== undefined) {
-                localVarQueryParameter['fields'] = fields;
-            }
-
 
     
+            if(fields !== undefined) {
+                localVarHeaderParameter['fields'] = fields;
+            }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -997,13 +999,12 @@ export const RoomsRoomsApiAxiosParamCreator = function (configuration?: Configur
          * @param {string} [sortBy] Specifies the field by which the room content should be sorted.
          * @param {SortOrder} [sortOrder] The order in which the results are sorted.
          * @param {string} [filterValue] The text filter value used to refine search or query operations.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getRoomsFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-folder/
          */
-        getRoomsFolder: async (type?: Array<RoomType>, subjectId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, fields?: string | null, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getRoomsFolder: async (type?: Array<RoomType>, subjectId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/files/rooms`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1076,12 +1077,11 @@ export const RoomsRoomsApiAxiosParamCreator = function (configuration?: Configur
                 localVarQueryParameter['filterValue'] = filterValue;
             }
 
-            if (fields !== undefined) {
-                localVarQueryParameter['fields'] = fields;
-            }
-
 
     
+            if(fields !== undefined) {
+                localVarHeaderParameter['fields'] = fields;
+            }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -1124,7 +1124,7 @@ export const RoomsRoomsApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getRoomsPrimaryExternalLink operation
@@ -1159,7 +1159,7 @@ export const RoomsRoomsApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for pinRoom operation
@@ -1194,7 +1194,7 @@ export const RoomsRoomsApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for reorderRoom operation
@@ -1387,7 +1387,7 @@ export const RoomsRoomsApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for startRoomIndexExport operation
@@ -1492,7 +1492,7 @@ export const RoomsRoomsApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for unpinRoom operation
@@ -1612,16 +1612,16 @@ export const RoomsRoomsApiAxiosParamCreator = function (configuration?: Configur
 };
 
 /**
- * RoomsRoomsApi - functional programming interface
+ * RoomsApi - functional programming interface
  * @export
  */
-export const RoomsRoomsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = RoomsRoomsApiAxiosParamCreator(configuration)
+export const RoomsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = RoomsApiAxiosParamCreator(configuration)
     return {
         /**
          * 
          * @param {number} id The room Id.
-         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for adding tags.
+         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for managing tags.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for addRoomTags operation
@@ -1630,7 +1630,7 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async addRoomTags(id: number, batchTagsRequestDto?: BatchTagsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.addRoomTags(id, batchTagsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.addRoomTags']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.addRoomTags']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1645,7 +1645,7 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async archiveRoom(id: number, archiveRoomRequest?: ArchiveRoomRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.archiveRoom(id, archiveRoomRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.archiveRoom']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.archiveRoom']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1660,7 +1660,7 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async changeRoomCover(id: number, coverRequestDto: CoverRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.changeRoomCover(id, coverRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.changeRoomCover']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.changeRoomCover']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1674,7 +1674,7 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async createRoom(createRoomRequestDto?: CreateRoomRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createRoom(createRoomRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.createRoom']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.createRoom']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1688,7 +1688,7 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async createRoomFromTemplate(createRoomFromTemplateDto?: CreateRoomFromTemplateDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RoomFromTemplateStatusWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createRoomFromTemplate(createRoomFromTemplateDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.createRoomFromTemplate']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.createRoomFromTemplate']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1703,7 +1703,7 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async createRoomLogo(id: number, logoRequest: LogoRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createRoomLogo(id, logoRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.createRoomLogo']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.createRoomLogo']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1717,7 +1717,7 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async createRoomTag(createTagRequestDto?: CreateTagRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createRoomTag(createTagRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.createRoomTag']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.createRoomTag']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1731,7 +1731,7 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async createRoomTemplate(roomTemplateDto?: RoomTemplateDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RoomTemplateStatusWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createRoomTemplate(roomTemplateDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.createRoomTemplate']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.createRoomTemplate']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1746,7 +1746,7 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async createRoomThirdParty(id: string, createThirdPartyRoom: CreateThirdPartyRoom, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderStringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createRoomThirdParty(id, createThirdPartyRoom, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.createRoomThirdParty']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.createRoomThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1760,7 +1760,7 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async deleteCustomTags(batchTagsRequestDto?: BatchTagsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteCustomTags(batchTagsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.deleteCustomTags']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.deleteCustomTags']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1775,12 +1775,12 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async deleteRoom(id: number, deleteRoomRequest: DeleteRoomRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteRoom(id, deleteRoomRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.deleteRoom']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.deleteRoom']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deleteRoomLogo operation
@@ -1789,13 +1789,13 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async deleteRoomLogo(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteRoomLogo(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.deleteRoomLogo']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.deleteRoomLogo']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
          * @param {number} id The room Id.
-         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for adding tags.
+         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for managing tags.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deleteRoomTags operation
@@ -1804,12 +1804,12 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async deleteRoomTags(id: number, batchTagsRequestDto?: BatchTagsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteRoomTags(id, batchTagsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.deleteRoomTags']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.deleteRoomTags']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getNewRoomItems operation
@@ -1818,7 +1818,7 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async getNewRoomItems(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NewItemsFileEntryBaseArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getNewRoomItems(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.getNewRoomItems']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getNewRoomItems']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1832,7 +1832,7 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async getPublicSettings(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPublicSettings(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.getPublicSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getPublicSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1845,7 +1845,7 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async getRoomCovers(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CoversResultArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomCovers(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.getRoomCovers']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomCovers']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1858,7 +1858,7 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async getRoomCreatingStatus(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RoomFromTemplateStatusWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomCreatingStatus(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.getRoomCreatingStatus']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomCreatingStatus']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1871,12 +1871,12 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async getRoomIndexExport(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentBuilderTaskWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomIndexExport(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.getRoomIndexExport']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomIndexExport']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getRoomInfo operation
@@ -1885,7 +1885,7 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async getRoomInfo(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomInfo(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.getRoomInfo']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomInfo']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1900,7 +1900,7 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async getRoomLinks(id: number, type?: LinkType, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomLinks(id, type, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.getRoomLinks']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomLinks']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1918,7 +1918,7 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async getRoomSecurityInfo(id: number, filterType?: ShareFilterType, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomSecurityInfo(id, filterType, count, startIndex, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.getRoomSecurityInfo']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomSecurityInfo']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1926,16 +1926,15 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
          * @param {number} [count] Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.
          * @param {number} [startIndex] Represents the starting index from which the tags\&#39; information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.
          * @param {string} [filterValue] Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getRoomTagsInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-tags-info/
          */
-        async getRoomTagsInfo(count?: number, startIndex?: number, filterValue?: string, fields?: string | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomTagsInfo(count, startIndex, filterValue, fields, options);
+        async getRoomTagsInfo(count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomTagsInfo(count, startIndex, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.getRoomTagsInfo']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomTagsInfo']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1948,7 +1947,7 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async getRoomTemplateCreatingStatus(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RoomTemplateStatusWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomTemplateCreatingStatus(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.getRoomTemplateCreatingStatus']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomTemplateCreatingStatus']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1968,16 +1967,15 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
          * @param {string} [sortBy] Specifies the field by which the room content should be sorted.
          * @param {SortOrder} [sortOrder] The order in which the results are sorted.
          * @param {string} [filterValue] The text filter value used to refine search or query operations.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getRoomsFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-folder/
          */
-        async getRoomsFolder(type?: Array<RoomType>, subjectId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, fields?: string | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomsFolder(type, subjectId, searchArea, withoutTags, tags, excludeSubject, provider, subjectFilter, quotaFilter, storageFilter, count, startIndex, sortBy, sortOrder, filterValue, fields, options);
+        async getRoomsFolder(type?: Array<RoomType>, subjectId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomsFolder(type, subjectId, searchArea, withoutTags, tags, excludeSubject, provider, subjectFilter, quotaFilter, storageFilter, count, startIndex, sortBy, sortOrder, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.getRoomsFolder']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomsFolder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1990,12 +1988,12 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async getRoomsNewItems(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NewItemsRoomNewItemsArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomsNewItems(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.getRoomsNewItems']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomsNewItems']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getRoomsPrimaryExternalLink operation
@@ -2004,12 +2002,12 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async getRoomsPrimaryExternalLink(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomsPrimaryExternalLink(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.getRoomsPrimaryExternalLink']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomsPrimaryExternalLink']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for pinRoom operation
@@ -2018,12 +2016,12 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async pinRoom(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.pinRoom(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.pinRoom']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.pinRoom']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for reorderRoom operation
@@ -2032,7 +2030,7 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async reorderRoom(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.reorderRoom(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.reorderRoom']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.reorderRoom']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2047,7 +2045,7 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async resendEmailInvitations(id: number, userInvitation: UserInvitation, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.resendEmailInvitations(id, userInvitation, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.resendEmailInvitations']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.resendEmailInvitations']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2061,7 +2059,7 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async setPublicSettings(setPublicDto?: SetPublicDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setPublicSettings(setPublicDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.setPublicSettings']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.setPublicSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2076,7 +2074,7 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async setRoomLink(id: number, roomLinkRequest: RoomLinkRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setRoomLink(id, roomLinkRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.setRoomLink']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.setRoomLink']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2091,12 +2089,12 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async setRoomSecurity(id: number, roomInvitationRequest: RoomInvitationRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RoomSecurityWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setRoomSecurity(id, roomInvitationRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.setRoomSecurity']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.setRoomSecurity']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for startRoomIndexExport operation
@@ -2105,7 +2103,7 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async startRoomIndexExport(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentBuilderTaskWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.startRoomIndexExport(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.startRoomIndexExport']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.startRoomIndexExport']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2118,7 +2116,7 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async terminateRoomIndexExport(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.terminateRoomIndexExport(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.terminateRoomIndexExport']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.terminateRoomIndexExport']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2133,12 +2131,12 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async unarchiveRoom(id: number, archiveRoomRequest?: ArchiveRoomRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.unarchiveRoom(id, archiveRoomRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.unarchiveRoom']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.unarchiveRoom']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for unpinRoom operation
@@ -2147,7 +2145,7 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async unpinRoom(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.unpinRoom(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.unpinRoom']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.unpinRoom']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2162,7 +2160,7 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async updateRoom(id: number, updateRoomRequest: UpdateRoomRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateRoom(id, updateRoomRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.updateRoom']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.updateRoom']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2176,23 +2174,23 @@ export const RoomsRoomsApiFp = function(configuration?: Configuration) {
         async uploadRoomLogo(formCollection?: Array<KeyValuePairStringStringValues>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UploadResultWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.uploadRoomLogo(formCollection, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsRoomsApi.uploadRoomLogo']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.uploadRoomLogo']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * RoomsRoomsApi - factory interface
+ * RoomsApi - factory interface
  * @export
  */
-export const RoomsRoomsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = RoomsRoomsApiFp(configuration)
+export const RoomsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = RoomsApiFp(configuration)
     return {
         /**
          * 
          * @param {number} id The room Id.
-         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for adding tags.
+         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for managing tags.
          * @param {*} [options] Override http request option.
          * REST API Reference for addRoomTags operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-room-tags/
@@ -2318,7 +2316,7 @@ export const RoomsRoomsApiFactory = function (configuration?: Configuration, bas
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteRoomLogo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-logo/
@@ -2330,7 +2328,7 @@ export const RoomsRoomsApiFactory = function (configuration?: Configuration, bas
         /**
          * 
          * @param {number} id The room Id.
-         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for adding tags.
+         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for managing tags.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteRoomTags operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-tags/
@@ -2341,7 +2339,7 @@ export const RoomsRoomsApiFactory = function (configuration?: Configuration, bas
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * REST API Reference for getNewRoomItems operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-new-room-items/
@@ -2393,7 +2391,7 @@ export const RoomsRoomsApiFactory = function (configuration?: Configuration, bas
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * REST API Reference for getRoomInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-info/
@@ -2434,14 +2432,13 @@ export const RoomsRoomsApiFactory = function (configuration?: Configuration, bas
          * @param {number} [count] Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.
          * @param {number} [startIndex] Represents the starting index from which the tags\&#39; information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.
          * @param {string} [filterValue] Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response
          * @param {*} [options] Override http request option.
          * REST API Reference for getRoomTagsInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-tags-info/
          * @throws {RequiredError}
          */
-        getRoomTagsInfo(count?: number, startIndex?: number, filterValue?: string, fields?: string | null, options?: RawAxiosRequestConfig): AxiosPromise<ObjectArrayWrapper> {
-            return localVarFp.getRoomTagsInfo(count, startIndex, filterValue, fields, options).then((request) => request(axios, basePath));
+        getRoomTagsInfo(count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<ObjectArrayWrapper> {
+            return localVarFp.getRoomTagsInfo(count, startIndex, filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2470,14 +2467,13 @@ export const RoomsRoomsApiFactory = function (configuration?: Configuration, bas
          * @param {string} [sortBy] Specifies the field by which the room content should be sorted.
          * @param {SortOrder} [sortOrder] The order in which the results are sorted.
          * @param {string} [filterValue] The text filter value used to refine search or query operations.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response
          * @param {*} [options] Override http request option.
          * REST API Reference for getRoomsFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-folder/
          * @throws {RequiredError}
          */
-        getRoomsFolder(type?: Array<RoomType>, subjectId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, fields?: string | null, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
-            return localVarFp.getRoomsFolder(type, subjectId, searchArea, withoutTags, tags, excludeSubject, provider, subjectFilter, quotaFilter, storageFilter, count, startIndex, sortBy, sortOrder, filterValue, fields, options).then((request) => request(axios, basePath));
+        getRoomsFolder(type?: Array<RoomType>, subjectId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
+            return localVarFp.getRoomsFolder(type, subjectId, searchArea, withoutTags, tags, excludeSubject, provider, subjectFilter, quotaFilter, storageFilter, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2491,7 +2487,7 @@ export const RoomsRoomsApiFactory = function (configuration?: Configuration, bas
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * REST API Reference for getRoomsPrimaryExternalLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-primary-external-link/
@@ -2502,7 +2498,7 @@ export const RoomsRoomsApiFactory = function (configuration?: Configuration, bas
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * REST API Reference for pinRoom operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/pin-room/
@@ -2513,7 +2509,7 @@ export const RoomsRoomsApiFactory = function (configuration?: Configuration, bas
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * REST API Reference for reorderRoom operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reorder-room/
@@ -2571,7 +2567,7 @@ export const RoomsRoomsApiFactory = function (configuration?: Configuration, bas
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * REST API Reference for startRoomIndexExport operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-room-index-export/
@@ -2604,7 +2600,7 @@ export const RoomsRoomsApiFactory = function (configuration?: Configuration, bas
         },
         /**
          * 
-         * @param {number} id The room ID of the request.
+         * @param {number} id The room ID.
          * @param {*} [options] Override http request option.
          * REST API Reference for unpinRoom operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/unpin-room/
@@ -2640,22 +2636,22 @@ export const RoomsRoomsApiFactory = function (configuration?: Configuration, bas
 };
 
 /**
- * RoomsRoomsApi - object-oriented interface
+ * RoomsApi - object-oriented interface
  * @export
- * @class RoomsRoomsApi
+ * @class RoomsApi
  * @extends {BaseAPI}
  */
-export class RoomsRoomsApi extends BaseAPI {
+export class RoomsApi extends BaseAPI {
     /**
      * 
      * @param {number} id The room Id.
-     * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for adding tags.
+     * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for managing tags.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public addRoomTags(id: number, batchTagsRequestDto?: BatchTagsRequestDto, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).addRoomTags(id, batchTagsRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).addRoomTags(id, batchTagsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2664,10 +2660,10 @@ export class RoomsRoomsApi extends BaseAPI {
      * @param {ArchiveRoomRequest} [archiveRoomRequest] The parameters for archiving a room.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public archiveRoom(id: number, archiveRoomRequest?: ArchiveRoomRequest, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).archiveRoom(id, archiveRoomRequest, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).archiveRoom(id, archiveRoomRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2676,10 +2672,10 @@ export class RoomsRoomsApi extends BaseAPI {
      * @param {CoverRequestDto} coverRequestDto The request parameters to change the room cover.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public changeRoomCover(id: number, coverRequestDto: CoverRequestDto, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).changeRoomCover(id, coverRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).changeRoomCover(id, coverRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2687,10 +2683,10 @@ export class RoomsRoomsApi extends BaseAPI {
      * @param {CreateRoomRequestDto} [createRoomRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public createRoom(createRoomRequestDto?: CreateRoomRequestDto, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).createRoom(createRoomRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).createRoom(createRoomRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2698,10 +2694,10 @@ export class RoomsRoomsApi extends BaseAPI {
      * @param {CreateRoomFromTemplateDto} [createRoomFromTemplateDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public createRoomFromTemplate(createRoomFromTemplateDto?: CreateRoomFromTemplateDto, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).createRoomFromTemplate(createRoomFromTemplateDto, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).createRoomFromTemplate(createRoomFromTemplateDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2710,10 +2706,10 @@ export class RoomsRoomsApi extends BaseAPI {
      * @param {LogoRequest} logoRequest The logo request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public createRoomLogo(id: number, logoRequest: LogoRequest, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).createRoomLogo(id, logoRequest, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).createRoomLogo(id, logoRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2721,10 +2717,10 @@ export class RoomsRoomsApi extends BaseAPI {
      * @param {CreateTagRequestDto} [createTagRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public createRoomTag(createTagRequestDto?: CreateTagRequestDto, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).createRoomTag(createTagRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).createRoomTag(createTagRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2732,10 +2728,10 @@ export class RoomsRoomsApi extends BaseAPI {
      * @param {RoomTemplateDto} [roomTemplateDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public createRoomTemplate(roomTemplateDto?: RoomTemplateDto, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).createRoomTemplate(roomTemplateDto, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).createRoomTemplate(roomTemplateDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2744,10 +2740,10 @@ export class RoomsRoomsApi extends BaseAPI {
      * @param {CreateThirdPartyRoom} createThirdPartyRoom The third-party room information.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public createRoomThirdParty(id: string, createThirdPartyRoom: CreateThirdPartyRoom, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).createRoomThirdParty(id, createThirdPartyRoom, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).createRoomThirdParty(id, createThirdPartyRoom, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2755,10 +2751,10 @@ export class RoomsRoomsApi extends BaseAPI {
      * @param {BatchTagsRequestDto} [batchTagsRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public deleteCustomTags(batchTagsRequestDto?: BatchTagsRequestDto, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).deleteCustomTags(batchTagsRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).deleteCustomTags(batchTagsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2767,44 +2763,44 @@ export class RoomsRoomsApi extends BaseAPI {
      * @param {DeleteRoomRequest} deleteRoomRequest The parameters for deleting a room.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public deleteRoom(id: number, deleteRoomRequest: DeleteRoomRequest, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).deleteRoom(id, deleteRoomRequest, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).deleteRoom(id, deleteRoomRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {number} id The room ID of the request.
+     * @param {number} id The room ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public deleteRoomLogo(id: number, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).deleteRoomLogo(id, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).deleteRoomLogo(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {number} id The room Id.
-     * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for adding tags.
+     * @param {BatchTagsRequestDto} [batchTagsRequestDto] The parameters for managing tags.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public deleteRoomTags(id: number, batchTagsRequestDto?: BatchTagsRequestDto, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).deleteRoomTags(id, batchTagsRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).deleteRoomTags(id, batchTagsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {number} id The room ID of the request.
+     * @param {number} id The room ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public getNewRoomItems(id: number, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).getNewRoomItems(id, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).getNewRoomItems(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2812,51 +2808,51 @@ export class RoomsRoomsApi extends BaseAPI {
      * @param {number} id The room template ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public getPublicSettings(id: number, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).getPublicSettings(id, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).getPublicSettings(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public getRoomCovers(options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).getRoomCovers(options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).getRoomCovers(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public getRoomCreatingStatus(options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).getRoomCreatingStatus(options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).getRoomCreatingStatus(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public getRoomIndexExport(options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).getRoomIndexExport(options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).getRoomIndexExport(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {number} id The room ID of the request.
+     * @param {number} id The room ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public getRoomInfo(id: number, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).getRoomInfo(id, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).getRoomInfo(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2865,10 +2861,10 @@ export class RoomsRoomsApi extends BaseAPI {
      * @param {LinkType} [type] The link type.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public getRoomLinks(id: number, type?: LinkType, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).getRoomLinks(id, type, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).getRoomLinks(id, type, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2880,10 +2876,10 @@ export class RoomsRoomsApi extends BaseAPI {
      * @param {string} [filterValue] The text filter value used for filtering room security information.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public getRoomSecurityInfo(id: number, filterType?: ShareFilterType, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).getRoomSecurityInfo(id, filterType, count, startIndex, filterValue, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).getRoomSecurityInfo(id, filterType, count, startIndex, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2891,23 +2887,22 @@ export class RoomsRoomsApi extends BaseAPI {
      * @param {number} [count] Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.
      * @param {number} [startIndex] Represents the starting index from which the tags\&#39; information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.
      * @param {string} [filterValue] Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.
-     * @param {string | null} [fields] Comma-separated list of fields to include in the response
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
-    public getRoomTagsInfo(count?: number, startIndex?: number, filterValue?: string, fields?: string | null, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).getRoomTagsInfo(count, startIndex, filterValue, fields, options).then((request) => request(this.axios, this.basePath));
+    public getRoomTagsInfo(count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).getRoomTagsInfo(count, startIndex, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public getRoomTemplateCreatingStatus(options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).getRoomTemplateCreatingStatus(options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).getRoomTemplateCreatingStatus(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2927,56 +2922,55 @@ export class RoomsRoomsApi extends BaseAPI {
      * @param {string} [sortBy] Specifies the field by which the room content should be sorted.
      * @param {SortOrder} [sortOrder] The order in which the results are sorted.
      * @param {string} [filterValue] The text filter value used to refine search or query operations.
-     * @param {string | null} [fields] Comma-separated list of fields to include in the response
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
-    public getRoomsFolder(type?: Array<RoomType>, subjectId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, fields?: string | null, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).getRoomsFolder(type, subjectId, searchArea, withoutTags, tags, excludeSubject, provider, subjectFilter, quotaFilter, storageFilter, count, startIndex, sortBy, sortOrder, filterValue, fields, options).then((request) => request(this.axios, this.basePath));
+    public getRoomsFolder(type?: Array<RoomType>, subjectId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).getRoomsFolder(type, subjectId, searchArea, withoutTags, tags, excludeSubject, provider, subjectFilter, quotaFilter, storageFilter, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public getRoomsNewItems(options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).getRoomsNewItems(options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).getRoomsNewItems(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {number} id The room ID of the request.
+     * @param {number} id The room ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public getRoomsPrimaryExternalLink(id: number, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).getRoomsPrimaryExternalLink(id, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).getRoomsPrimaryExternalLink(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {number} id The room ID of the request.
+     * @param {number} id The room ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public pinRoom(id: number, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).pinRoom(id, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).pinRoom(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {number} id The room ID of the request.
+     * @param {number} id The room ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public reorderRoom(id: number, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).reorderRoom(id, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).reorderRoom(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2985,10 +2979,10 @@ export class RoomsRoomsApi extends BaseAPI {
      * @param {UserInvitation} userInvitation The user invitation parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public resendEmailInvitations(id: number, userInvitation: UserInvitation, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).resendEmailInvitations(id, userInvitation, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).resendEmailInvitations(id, userInvitation, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2996,10 +2990,10 @@ export class RoomsRoomsApi extends BaseAPI {
      * @param {SetPublicDto} [setPublicDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public setPublicSettings(setPublicDto?: SetPublicDto, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).setPublicSettings(setPublicDto, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).setPublicSettings(setPublicDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3008,10 +3002,10 @@ export class RoomsRoomsApi extends BaseAPI {
      * @param {RoomLinkRequest} roomLinkRequest The room link parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public setRoomLink(id: number, roomLinkRequest: RoomLinkRequest, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).setRoomLink(id, roomLinkRequest, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).setRoomLink(id, roomLinkRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3020,31 +3014,31 @@ export class RoomsRoomsApi extends BaseAPI {
      * @param {RoomInvitationRequest} roomInvitationRequest The room invitation request.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public setRoomSecurity(id: number, roomInvitationRequest: RoomInvitationRequest, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).setRoomSecurity(id, roomInvitationRequest, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).setRoomSecurity(id, roomInvitationRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {number} id The room ID of the request.
+     * @param {number} id The room ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public startRoomIndexExport(id: number, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).startRoomIndexExport(id, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).startRoomIndexExport(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public terminateRoomIndexExport(options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).terminateRoomIndexExport(options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).terminateRoomIndexExport(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3053,21 +3047,21 @@ export class RoomsRoomsApi extends BaseAPI {
      * @param {ArchiveRoomRequest} [archiveRoomRequest] The parameters for archiving a room.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public unarchiveRoom(id: number, archiveRoomRequest?: ArchiveRoomRequest, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).unarchiveRoom(id, archiveRoomRequest, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).unarchiveRoom(id, archiveRoomRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {number} id The room ID of the request.
+     * @param {number} id The room ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public unpinRoom(id: number, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).unpinRoom(id, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).unpinRoom(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3076,10 +3070,10 @@ export class RoomsRoomsApi extends BaseAPI {
      * @param {UpdateRoomRequest} updateRoomRequest The request parameters for updating a room.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public updateRoom(id: number, updateRoomRequest: UpdateRoomRequest, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).updateRoom(id, updateRoomRequest, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).updateRoom(id, updateRoomRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3087,10 +3081,10 @@ export class RoomsRoomsApi extends BaseAPI {
      * @param {Array<KeyValuePairStringStringValues>} [formCollection] The image data.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RoomsRoomsApi
+     * @memberof RoomsApi
      */
     public uploadRoomLogo(formCollection?: Array<KeyValuePairStringStringValues>, options?: RawAxiosRequestConfig) {
-        return RoomsRoomsApiFp(this.configuration).uploadRoomLogo(formCollection, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).uploadRoomLogo(formCollection, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

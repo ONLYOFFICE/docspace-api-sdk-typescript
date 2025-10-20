@@ -31,6 +31,7 @@ import type { StringWrapper } from '../../models';
  * @export
  */
 export const PortalGuestsApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Returns a link to share a guest with another user.

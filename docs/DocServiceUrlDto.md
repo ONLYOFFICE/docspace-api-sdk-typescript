@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 **docServicePreloadUrl** | **string** | The URL used to preload the document service scripts. | [default to undefined]
 **docServiceUrlInternal** | **string** | The internal document service URL. | [default to undefined]
 **docServicePortalUrl** | **string** | The document service portal URL. | [default to undefined]
-**docServiceSignatureHeader** | **string** | The document service signature header. | [optional] [default to undefined]
-**docServiceSslVerification** | **boolean** | Specifies if the document service SSL verification is enabled. | [optional] [default to undefined]
+**docServiceSignatureHeader** | **string** | The document service signature header. | [default to undefined]
+**docServiceSslVerification** | **boolean** | Specifies if the document service SSL verification is enabled. | [default to undefined]
 **isDefault** | **boolean** | Specifies if the document service is default. | [default to undefined]
 
 ## Example

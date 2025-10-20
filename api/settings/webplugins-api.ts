@@ -35,6 +35,7 @@ import type { WebPluginWrapper } from '../../models';
  * @export
  */
 export const WebpluginsApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Adds a web plugin from a file to the current portal.

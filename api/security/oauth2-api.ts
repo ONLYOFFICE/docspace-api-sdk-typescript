@@ -31,6 +31,7 @@ import type { StringWrapper } from '../../models';
  * @export
  */
 export const OAuth2ApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Generates a JWT token for communication between login (client) and identity services.

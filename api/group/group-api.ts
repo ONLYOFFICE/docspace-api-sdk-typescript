@@ -47,7 +47,11 @@ import type { UpdateGroupRequest } from '../../models';
  * @export
  */
 export const GroupApiAxiosParamCreator = function (configuration?: Configuration) {
+    let fields: string | undefined;
     return {
+        withFields: (f: string) => {
+            fields = f;
+        },
         /**
          * Adds a new group with the group manager, name, and members specified in the request.
          * @summary Add a new group
@@ -344,13 +348,12 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} [sortBy] Specifies the property used to sort the query results.
          * @param {SortOrder} [sortOrder] The order in which the results are sorted.
          * @param {string} [filterValue] The text used for filtering or searching group data.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getGroups operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups/
          */
-        getGroups: async (userId?: string, manager?: boolean, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, fields?: string | null, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getGroups: async (userId?: string, manager?: boolean, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/group`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -410,12 +413,11 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
                 localVarQueryParameter['filterValue'] = filterValue;
             }
 
-            if (fields !== undefined) {
-                localVarQueryParameter['fields'] = fields;
-            }
-
 
     
+            if(fields !== undefined) {
+                localVarHeaderParameter['fields'] = fields;
+            }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -825,14 +827,13 @@ export const GroupApiFp = function(configuration?: Configuration) {
          * @param {string} [sortBy] Specifies the property used to sort the query results.
          * @param {SortOrder} [sortOrder] The order in which the results are sorted.
          * @param {string} [filterValue] The text used for filtering or searching group data.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getGroups operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups/
          */
-        async getGroups(userId?: string, manager?: boolean, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, fields?: string | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getGroups(userId, manager, count, startIndex, sortBy, sortOrder, filterValue, fields, options);
+        async getGroups(userId?: string, manager?: boolean, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getGroups(userId, manager, count, startIndex, sortBy, sortOrder, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupApi.getGroups']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -999,14 +1000,13 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
          * @param {string} [sortBy] Specifies the property used to sort the query results.
          * @param {SortOrder} [sortOrder] The order in which the results are sorted.
          * @param {string} [filterValue] The text used for filtering or searching group data.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response
          * @param {*} [options] Override http request option.
          * REST API Reference for getGroups operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups/
          * @throws {RequiredError}
          */
-        getGroups(userId?: string, manager?: boolean, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, fields?: string | null, options?: RawAxiosRequestConfig): AxiosPromise<GroupArrayWrapper> {
-            return localVarFp.getGroups(userId, manager, count, startIndex, sortBy, sortOrder, filterValue, fields, options).then((request) => request(axios, basePath));
+        getGroups(userId?: string, manager?: boolean, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<GroupArrayWrapper> {
+            return localVarFp.getGroups(userId, manager, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Moves all the members from the selected group to another one specified in the request.
@@ -1155,13 +1155,12 @@ export class GroupApi extends BaseAPI {
      * @param {string} [sortBy] Specifies the property used to sort the query results.
      * @param {SortOrder} [sortOrder] The order in which the results are sorted.
      * @param {string} [filterValue] The text used for filtering or searching group data.
-     * @param {string | null} [fields] Comma-separated list of fields to include in the response
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupApi
      */
-    public getGroups(userId?: string, manager?: boolean, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, fields?: string | null, options?: RawAxiosRequestConfig) {
-        return GroupApiFp(this.configuration).getGroups(userId, manager, count, startIndex, sortBy, sortOrder, filterValue, fields, options).then((request) => request(this.axios, this.basePath));
+    public getGroups(userId?: string, manager?: boolean, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig) {
+        return GroupApiFp(this.configuration).getGroups(userId, manager, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

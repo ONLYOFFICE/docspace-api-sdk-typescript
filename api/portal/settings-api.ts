@@ -35,6 +35,7 @@ import type { TenantWrapper } from '../../models';
  * @export
  */
 export const SettingsApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Restores the current portal.

@@ -33,6 +33,7 @@ import type { TenantDevToolsAccessSettingsWrapper } from '../../models';
  * @export
  */
 export const SecurityAccessToDevToolsApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Sets the Developer Tools access settings for the portal.

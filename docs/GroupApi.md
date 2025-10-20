@@ -308,7 +308,6 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **fields** | **string**| Comma-separated list of fields to include in the response | |
 | **userId** | [**string**] | The user ID. | (optional) defaults to undefined|
 | **manager** | [**boolean**] | Specifies if the user is a manager or not. | (optional) defaults to undefined|
 | **count** | [**number**] | The number of records to retrieve. | (optional) defaults to undefined|
@@ -344,7 +343,6 @@ let startIndex: number; //The starting index for paginated results. (optional) (
 let sortBy: string; //Specifies the property used to sort the query results. (optional) (default to undefined)
 let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
 let filterValue: string; //The text used for filtering or searching group data. (optional) (default to undefined)
-let fields: string; //Comma-separated list of fields to include in the response (optional)
 
 const { status, data } = await apiInstance.getGroups(
     userId,
@@ -353,8 +351,7 @@ const { status, data } = await apiInstance.getGroups(
     startIndex,
     sortBy,
     sortOrder,
-    filterValue,
-    fields
+    filterValue
 );
 ```
 

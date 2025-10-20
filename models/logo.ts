@@ -31,25 +31,25 @@ export interface Logo {
      * @type {string}
      * @memberof Logo
      */
-    'original'?: string | null;
+    'original': string | null;
     /**
      * The large logo.
      * @type {string}
      * @memberof Logo
      */
-    'large'?: string | null;
+    'large': string | null;
     /**
      * The medium logo.
      * @type {string}
      * @memberof Logo
      */
-    'medium'?: string | null;
+    'medium': string | null;
     /**
      * The small logo.
      * @type {string}
      * @memberof Logo
      */
-    'small'?: string | null;
+    'small': string | null;
     /**
      * The logo color.
      * @type {string}

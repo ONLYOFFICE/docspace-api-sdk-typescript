@@ -35,6 +35,7 @@ import type { UpdateRoomsRoomIdsRequestDtoInteger } from '../../models';
  * @export
  */
 export const FilesQuotaApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * 

@@ -31,6 +31,6 @@ export interface OrdersRequestDtoInteger {
      * @type {Array<OrdersItemRequestDtoInteger>}
      * @memberof OrdersRequestDtoInteger
      */
-    'items'?: Array<OrdersItemRequestDtoInteger> | null;
+    'items': Array<OrdersItemRequestDtoInteger> | null;
 }
 

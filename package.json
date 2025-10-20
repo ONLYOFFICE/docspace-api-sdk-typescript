@@ -1,6 +1,6 @@
 {
   "name": "@onlyoffice/docspace-api-sdk",
-  "version": "3.5.0-preview.1",
+  "version": "3.5.0",
   "description": "A simple TypeScript SDK for integrating with the ONLYOFFICE DocSpace API",
   "homepage": "https://www.onlyoffice.com",
   "author": "Ascensio System SIA <integration@onlyoffice.com> (https://www.onlyoffice.com)",

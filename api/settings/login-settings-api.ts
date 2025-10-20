@@ -33,6 +33,7 @@ import type { LoginSettingsWrapper } from '../../models';
  * @export
  */
 export const LoginSettingsApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Returns the portal login settings.

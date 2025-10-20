@@ -1,4 +1,4 @@
-# RoomsRoomsApi
+# RoomsApi
 
 All URIs are relative to *https://your-docspace.onlyoffice.com*
 
@@ -53,7 +53,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **batchTagsRequestDto** | **BatchTagsRequestDto**| The parameters for adding tags. | |
+| **batchTagsRequestDto** | **BatchTagsRequestDto**| The parameters for managing tags. | |
 | **id** | [**number**] | The room Id. | defaults to undefined|
 
 
@@ -78,7 +78,7 @@ const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
 
 let id: number; //The room Id. (default to undefined)
-let batchTagsRequestDto: BatchTagsRequestDto; //The parameters for adding tags. (optional)
+let batchTagsRequestDto: BatchTagsRequestDto; //The parameters for managing tags. (optional)
 
 const { status, data } = await apiInstance.addRoomTags(
     id,
@@ -660,7 +660,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] | The room ID of the request. | defaults to undefined|
+| **id** | [**number**] | The room ID. | defaults to undefined|
 
 
 ### Return type
@@ -682,7 +682,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
 
-let id: number; //The room ID of the request. (default to undefined)
+let id: number; //The room ID. (default to undefined)
 
 const { status, data } = await apiInstance.deleteRoomLogo(
     id
@@ -712,7 +712,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **batchTagsRequestDto** | **BatchTagsRequestDto**| The parameters for adding tags. | |
+| **batchTagsRequestDto** | **BatchTagsRequestDto**| The parameters for managing tags. | |
 | **id** | [**number**] | The room Id. | defaults to undefined|
 
 
@@ -737,7 +737,7 @@ const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
 
 let id: number; //The room Id. (default to undefined)
-let batchTagsRequestDto: BatchTagsRequestDto; //The parameters for adding tags. (optional)
+let batchTagsRequestDto: BatchTagsRequestDto; //The parameters for managing tags. (optional)
 
 const { status, data } = await apiInstance.deleteRoomTags(
     id,
@@ -769,7 +769,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] | The room ID of the request. | defaults to undefined|
+| **id** | [**number**] | The room ID. | defaults to undefined|
 
 
 ### Return type
@@ -791,7 +791,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
 
-let id: number; //The room ID of the request. (default to undefined)
+let id: number; //The room ID. (default to undefined)
 
 const { status, data } = await apiInstance.getNewRoomItems(
     id
@@ -1008,7 +1008,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] | The room ID of the request. | defaults to undefined|
+| **id** | [**number**] | The room ID. | defaults to undefined|
 
 
 ### Return type
@@ -1030,7 +1030,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
 
-let id: number; //The room ID of the request. (default to undefined)
+let id: number; //The room ID. (default to undefined)
 
 const { status, data } = await apiInstance.getRoomInfo(
     id
@@ -1179,7 +1179,6 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **fields** | **string**| Comma-separated list of fields to include in the response | |
 | **count** | [**number**] | Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set. | (optional) defaults to undefined|
 | **startIndex** | [**number**] | Represents the starting index from which the tags\&#39; information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins. | (optional) defaults to undefined|
 | **filterValue** | [**string**] | Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information. | (optional) defaults to undefined|
@@ -1207,13 +1206,11 @@ const apiInstance = new RoomsApi(configuration);
 let count: number; //Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set. (optional) (default to undefined)
 let startIndex: number; //Represents the starting index from which the tags\' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins. (optional) (default to undefined)
 let filterValue: string; //Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information. (optional) (default to undefined)
-let fields: string; //Comma-separated list of fields to include in the response (optional)
 
 const { status, data } = await apiInstance.getRoomTagsInfo(
     count,
     startIndex,
-    filterValue,
-    fields
+    filterValue
 );
 ```
 
@@ -1285,7 +1282,6 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **fields** | **string**| Comma-separated list of fields to include in the response | |
 | **type** | **Array&lt;RoomType&gt;** | The filter by room type. | (optional) defaults to undefined|
 | **subjectId** | [**string**] | The filter by user ID. | (optional) defaults to undefined|
 | **searchArea** | **SearchArea** | The room search area (Active, Archive, Any, Recent by links). | (optional) defaults to undefined|
@@ -1337,7 +1333,6 @@ let startIndex: number; //The index from which to start retrieving the room cont
 let sortBy: string; //Specifies the field by which the room content should be sorted. (optional) (default to undefined)
 let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
 let filterValue: string; //The text filter value used to refine search or query operations. (optional) (default to undefined)
-let fields: string; //Comma-separated list of fields to include in the response (optional)
 
 const { status, data } = await apiInstance.getRoomsFolder(
     type,
@@ -1354,8 +1349,7 @@ const { status, data } = await apiInstance.getRoomsFolder(
     startIndex,
     sortBy,
     sortOrder,
-    filterValue,
-    fields
+    filterValue
 );
 ```
 
@@ -1428,7 +1422,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] | The room ID of the request. | defaults to undefined|
+| **id** | [**number**] | The room ID. | defaults to undefined|
 
 
 ### Return type
@@ -1450,7 +1444,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
 
-let id: number; //The room ID of the request. (default to undefined)
+let id: number; //The room ID. (default to undefined)
 
 const { status, data } = await apiInstance.getRoomsPrimaryExternalLink(
     id
@@ -1481,7 +1475,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] | The room ID of the request. | defaults to undefined|
+| **id** | [**number**] | The room ID. | defaults to undefined|
 
 
 ### Return type
@@ -1503,7 +1497,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
 
-let id: number; //The room ID of the request. (default to undefined)
+let id: number; //The room ID. (default to undefined)
 
 const { status, data } = await apiInstance.pinRoom(
     id
@@ -1533,7 +1527,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] | The room ID of the request. | defaults to undefined|
+| **id** | [**number**] | The room ID. | defaults to undefined|
 
 
 ### Return type
@@ -1555,7 +1549,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
 
-let id: number; //The room ID of the request. (default to undefined)
+let id: number; //The room ID. (default to undefined)
 
 const { status, data } = await apiInstance.reorderRoom(
     id
@@ -1806,7 +1800,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] | The room ID of the request. | defaults to undefined|
+| **id** | [**number**] | The room ID. | defaults to undefined|
 
 
 ### Return type
@@ -1828,7 +1822,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
 
-let id: number; //The room ID of the request. (default to undefined)
+let id: number; //The room ID. (default to undefined)
 
 const { status, data } = await apiInstance.startRoomIndexExport(
     id
@@ -1960,7 +1954,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] | The room ID of the request. | defaults to undefined|
+| **id** | [**number**] | The room ID. | defaults to undefined|
 
 
 ### Return type
@@ -1982,7 +1976,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
 
-let id: number; //The room ID of the request. (default to undefined)
+let id: number; //The room ID. (default to undefined)
 
 const { status, data } = await apiInstance.unpinRoom(
     id

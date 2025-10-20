@@ -4,7 +4,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**getNotificationChannels**](#getnotificationchannels) | **GET** /api/2.0/settings/notification/channels | Gets notification channel settings|
+|[**getNotificationChannels**](#getnotificationchannels) | **GET** /api/2.0/settings/notification/channels | Get notification channels|
 |[**getNotificationSettings**](#getnotificationsettings) | **GET** /api/2.0/settings/notification/{type} | Check notification availability|
 |[**getRoomsNotificationSettings**](#getroomsnotificationsettings) | **GET** /api/2.0/settings/notification/rooms | Get room notification settings|
 |[**setNotificationSettings**](#setnotificationsettings) | **POST** /api/2.0/settings/notification | Enable notifications|
@@ -13,7 +13,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 # **getNotificationChannels**
 > NotificationChannelStatusWrapper getNotificationChannels()
 
-Returns a list of notification channels
+Returns a list of notification channels.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-notification-channels/).
 

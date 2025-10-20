@@ -31,31 +31,31 @@ export interface BackupHistoryRecord {
      * @type {string}
      * @memberof BackupHistoryRecord
      */
-    'id'?: string;
+    'id': string;
     /**
      * 
      * @type {string}
      * @memberof BackupHistoryRecord
      */
-    'fileName'?: string | null;
+    'fileName': string | null;
     /**
      * 
      * @type {BackupStorageType}
      * @memberof BackupHistoryRecord
      */
-    'storageType'?: BackupStorageType;
+    'storageType': BackupStorageType;
     /**
      * 
      * @type {string}
      * @memberof BackupHistoryRecord
      */
-    'createdOn'?: string;
+    'createdOn': string;
     /**
      * 
      * @type {string}
      * @memberof BackupHistoryRecord
      */
-    'expiresOn'?: string;
+    'expiresOn': string;
 }
 
 

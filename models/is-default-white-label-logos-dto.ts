@@ -18,7 +18,7 @@
 
 
 /**
- * The default white label logos parameters.
+ * The default white label logo parameters.
  * @export
  * @interface IsDefaultWhiteLabelLogosDto
  */

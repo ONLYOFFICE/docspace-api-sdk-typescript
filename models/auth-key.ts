@@ -18,25 +18,25 @@
 
 
 /**
- * The authentication key parameters.
+ * The authorization key parameters.
  * @export
  * @interface AuthKey
  */
 export interface AuthKey {
     /**
-     * The authentication key name.
+     * The authorization key name.
      * @type {string}
      * @memberof AuthKey
      */
-    'name'?: string | null;
+    'name': string | null;
     /**
-     * The authentication key value.
+     * The authorization key value.
      * @type {string}
      * @memberof AuthKey
      */
-    'value'?: string | null;
+    'value': string | null;
     /**
-     * The authentication key title.
+     * The authorization key title.
      * @type {string}
      * @memberof AuthKey
      */

@@ -28,7 +28,7 @@ export interface FormGalleryDto {
      * @type {string}
      * @memberof FormGalleryDto
      */
-    'path'?: string | null;
+    'path': string | null;
     /**
      * The form gallery domain.
      * @type {string}

@@ -47,6 +47,7 @@ import type { ScheduleWrapper } from '../../models';
  * @export
  */
 export const BackupApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Creates the backup schedule of the current portal with the parameters specified in the request.

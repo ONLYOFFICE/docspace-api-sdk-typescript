@@ -18,7 +18,7 @@
 
 
 /**
- * 
+ * The location context of the request.
  * @export
  * @enum {number}
  */

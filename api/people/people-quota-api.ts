@@ -33,6 +33,7 @@ import type { UpdateMembersQuotaRequestDto } from '../../models';
  * @export
  */
 export const PeopleQuotaApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Resets a quota limit of users with the IDs specified in the request.

@@ -34,6 +34,6 @@ export interface FeatureUsedDto {
      * @type {string}
      * @memberof FeatureUsedDto
      */
-    'title': string | null;
+    'title'?: string | null;
 }
 

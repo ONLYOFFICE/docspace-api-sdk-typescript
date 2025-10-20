@@ -1,13 +1,13 @@
 # TopUpDepositRequestDto
 
-Put money on deposit request parameters
+The request parameters for putting money on deposit.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**amount** | **number** | Amount | [optional] [default to undefined]
-**currency** | **string** | The three-character ISO 4217 currency symbol | [optional] [default to undefined]
+**amount** | **number** | The amount of money for the operation. | [optional] [default to undefined]
+**currency** | **string** | The three-character ISO 4217 currency symbol. | [optional] [default to undefined]
 
 ## Example
 

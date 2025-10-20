@@ -28,7 +28,7 @@ export interface IpRestrictionBase {
      * @type {string}
      * @memberof IpRestrictionBase
      */
-    'ip'?: string | null;
+    'ip': string | null;
     /**
      * 
      * @type {boolean}

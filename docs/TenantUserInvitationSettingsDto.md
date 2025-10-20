@@ -1,13 +1,13 @@
 # TenantUserInvitationSettingsDto
 
-User invitation settings
+The user invitation settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**allowInvitingMembers** | **boolean** | Allow invite new DocSpace members through the Contacts section. | [default to undefined]
-**allowInvitingGuests** | **boolean** | Allow all DocSpace members to invite external guests to rooms. | [default to undefined]
+**allowInvitingMembers** | **boolean** | Specifies whether to allow inviting new DocSpace members through the Contacts section. | [default to undefined]
+**allowInvitingGuests** | **boolean** | Specifies whether to allow all DocSpace members to invite external guests to the rooms. | [default to undefined]
 
 ## Example
 

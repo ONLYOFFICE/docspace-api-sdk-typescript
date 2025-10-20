@@ -33,13 +33,13 @@ export interface MentionMessageWrapper {
      */
     'actionLink'?: ActionLinkConfig;
     /**
-     * A list of emails which will receive the mention message.
+     * A list of emails that will receive the mention message.
      * @type {Array<string>}
      * @memberof MentionMessageWrapper
      */
     'emails'?: Array<string> | null;
     /**
-     * The comment message.
+     * The mention message.
      * @type {string}
      * @memberof MentionMessageWrapper
      */

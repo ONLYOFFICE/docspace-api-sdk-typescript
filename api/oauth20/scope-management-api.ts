@@ -33,6 +33,7 @@ import type { ScopeResponse } from '../../models';
  * @export
  */
 export const ScopeManagementApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the \'openid\' scope always appearing first.

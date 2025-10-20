@@ -37,6 +37,7 @@ import type { StringWrapper } from '../../models';
  * @export
  */
 export const PasswordApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Sets a new password to the user with the ID specified in the request.

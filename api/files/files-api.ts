@@ -115,10 +115,11 @@ import type { UpdateFile } from '../../models';
  * @export
  */
 export const FilesApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * 
-         * @param {number} fileId The file ID of the request.
+         * @param {number} fileId The file unique identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for addFileToRecent operation
@@ -766,7 +767,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @param {number} fileId The file ID of the request.
+         * @param {number} fileId The file unique identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getAllFormRoles operation
@@ -841,7 +842,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @param {number} fileId The file ID of the request.
+         * @param {number} fileId The file unique identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getEditHistory operation
@@ -975,7 +976,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @param {number} id The file ID of the request.
+         * @param {number} id The file unique identifier.
          * @param {number} [count] The number of items to retrieve in the request.
          * @param {number} [startIndex] The starting index for the query results.
          * @param {*} [options] Override http request option.
@@ -1020,7 +1021,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @param {number} id The file ID of the request.
+         * @param {number} id The file unique identifier.
          * @param {number} [count] The number of items to retrieve in the request.
          * @param {number} [startIndex] The starting index for the query results.
          * @param {*} [options] Override http request option.
@@ -1065,7 +1066,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @param {number} fileId The file ID of the request.
+         * @param {number} fileId The file unique identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFileVersionInfo operation
@@ -1136,7 +1137,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @param {number} fileId The file ID of the request.
+         * @param {number} fileId The file unique identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getPresignedFileUri operation
@@ -1171,7 +1172,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @param {number} fileId The file ID of the request.
+         * @param {number} fileId The file unique identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getPresignedUri operation
@@ -1206,7 +1207,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @param {number} fileId The file ID of the request.
+         * @param {number} fileId The file unique identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getProtectedFileUsers operation
@@ -1276,7 +1277,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @param {number} fileId The file ID of the request.
+         * @param {number} fileId The file unique identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for isFormPDF operation
@@ -1556,7 +1557,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * 
          * @param {number} id The file ID to save as PDF.
-         * @param {SaveAsPdfInteger} saveAsPdfInteger The parameters for saving file as PDF.
+         * @param {SaveAsPdfInteger} saveAsPdfInteger The parameters for saving the file as PDF.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveFileAsPdf operation
@@ -2008,7 +2009,7 @@ export const FilesApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {number} fileId The file ID of the request.
+         * @param {number} fileId The file unique identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for addFileToRecent operation
@@ -2255,7 +2256,7 @@ export const FilesApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} fileId The file ID of the request.
+         * @param {number} fileId The file unique identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getAllFormRoles operation
@@ -2284,7 +2285,7 @@ export const FilesApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} fileId The file ID of the request.
+         * @param {number} fileId The file unique identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getEditHistory operation
@@ -2331,7 +2332,7 @@ export const FilesApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} id The file ID of the request.
+         * @param {number} id The file unique identifier.
          * @param {number} [count] The number of items to retrieve in the request.
          * @param {number} [startIndex] The starting index for the query results.
          * @param {*} [options] Override http request option.
@@ -2347,7 +2348,7 @@ export const FilesApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} id The file ID of the request.
+         * @param {number} id The file unique identifier.
          * @param {number} [count] The number of items to retrieve in the request.
          * @param {number} [startIndex] The starting index for the query results.
          * @param {*} [options] Override http request option.
@@ -2363,7 +2364,7 @@ export const FilesApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} fileId The file ID of the request.
+         * @param {number} fileId The file unique identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFileVersionInfo operation
@@ -2391,7 +2392,7 @@ export const FilesApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} fileId The file ID of the request.
+         * @param {number} fileId The file unique identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getPresignedFileUri operation
@@ -2405,7 +2406,7 @@ export const FilesApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} fileId The file ID of the request.
+         * @param {number} fileId The file unique identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getPresignedUri operation
@@ -2419,7 +2420,7 @@ export const FilesApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} fileId The file ID of the request.
+         * @param {number} fileId The file unique identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getProtectedFileUsers operation
@@ -2447,7 +2448,7 @@ export const FilesApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} fileId The file ID of the request.
+         * @param {number} fileId The file unique identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for isFormPDF operation
@@ -2545,7 +2546,7 @@ export const FilesApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {number} id The file ID to save as PDF.
-         * @param {SaveAsPdfInteger} saveAsPdfInteger The parameters for saving file as PDF.
+         * @param {SaveAsPdfInteger} saveAsPdfInteger The parameters for saving the file as PDF.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveFileAsPdf operation
@@ -2719,7 +2720,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
     return {
         /**
          * 
-         * @param {number} fileId The file ID of the request.
+         * @param {number} fileId The file unique identifier.
          * @param {*} [options] Override http request option.
          * REST API Reference for addFileToRecent operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-file-to-recent/
@@ -2915,7 +2916,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @param {number} fileId The file ID of the request.
+         * @param {number} fileId The file unique identifier.
          * @param {*} [options] Override http request option.
          * REST API Reference for getAllFormRoles operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-form-roles/
@@ -2938,7 +2939,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @param {number} fileId The file ID of the request.
+         * @param {number} fileId The file unique identifier.
          * @param {*} [options] Override http request option.
          * REST API Reference for getEditHistory operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-edit-history/
@@ -2976,7 +2977,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @param {number} id The file ID of the request.
+         * @param {number} id The file unique identifier.
          * @param {number} [count] The number of items to retrieve in the request.
          * @param {number} [startIndex] The starting index for the query results.
          * @param {*} [options] Override http request option.
@@ -2989,7 +2990,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @param {number} id The file ID of the request.
+         * @param {number} id The file unique identifier.
          * @param {number} [count] The number of items to retrieve in the request.
          * @param {number} [startIndex] The starting index for the query results.
          * @param {*} [options] Override http request option.
@@ -3002,7 +3003,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @param {number} fileId The file ID of the request.
+         * @param {number} fileId The file unique identifier.
          * @param {*} [options] Override http request option.
          * REST API Reference for getFileVersionInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-version-info/
@@ -3024,7 +3025,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @param {number} fileId The file ID of the request.
+         * @param {number} fileId The file unique identifier.
          * @param {*} [options] Override http request option.
          * REST API Reference for getPresignedFileUri operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-presigned-file-uri/
@@ -3035,7 +3036,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @param {number} fileId The file ID of the request.
+         * @param {number} fileId The file unique identifier.
          * @param {*} [options] Override http request option.
          * REST API Reference for getPresignedUri operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-presigned-uri/
@@ -3046,7 +3047,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @param {number} fileId The file ID of the request.
+         * @param {number} fileId The file unique identifier.
          * @param {*} [options] Override http request option.
          * REST API Reference for getProtectedFileUsers operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-protected-file-users/
@@ -3068,7 +3069,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @param {number} fileId The file ID of the request.
+         * @param {number} fileId The file unique identifier.
          * @param {*} [options] Override http request option.
          * REST API Reference for isFormPDF operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/is-form-pdf/
@@ -3148,7 +3149,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
         /**
          * 
          * @param {number} id The file ID to save as PDF.
-         * @param {SaveAsPdfInteger} saveAsPdfInteger The parameters for saving file as PDF.
+         * @param {SaveAsPdfInteger} saveAsPdfInteger The parameters for saving the file as PDF.
          * @param {*} [options] Override http request option.
          * REST API Reference for saveFileAsPdf operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-file-as-pdf/
@@ -3289,7 +3290,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
 export class FilesApi extends BaseAPI {
     /**
      * 
-     * @param {number} fileId The file ID of the request.
+     * @param {number} fileId The file unique identifier.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesApi
@@ -3485,7 +3486,7 @@ export class FilesApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} fileId The file ID of the request.
+     * @param {number} fileId The file unique identifier.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesApi
@@ -3508,7 +3509,7 @@ export class FilesApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} fileId The file ID of the request.
+     * @param {number} fileId The file unique identifier.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesApi
@@ -3546,7 +3547,7 @@ export class FilesApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} id The file ID of the request.
+     * @param {number} id The file unique identifier.
      * @param {number} [count] The number of items to retrieve in the request.
      * @param {number} [startIndex] The starting index for the query results.
      * @param {*} [options] Override http request option.
@@ -3559,7 +3560,7 @@ export class FilesApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} id The file ID of the request.
+     * @param {number} id The file unique identifier.
      * @param {number} [count] The number of items to retrieve in the request.
      * @param {number} [startIndex] The starting index for the query results.
      * @param {*} [options] Override http request option.
@@ -3572,7 +3573,7 @@ export class FilesApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} fileId The file ID of the request.
+     * @param {number} fileId The file unique identifier.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesApi
@@ -3594,7 +3595,7 @@ export class FilesApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} fileId The file ID of the request.
+     * @param {number} fileId The file unique identifier.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesApi
@@ -3605,7 +3606,7 @@ export class FilesApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} fileId The file ID of the request.
+     * @param {number} fileId The file unique identifier.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesApi
@@ -3616,7 +3617,7 @@ export class FilesApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} fileId The file ID of the request.
+     * @param {number} fileId The file unique identifier.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesApi
@@ -3638,7 +3639,7 @@ export class FilesApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} fileId The file ID of the request.
+     * @param {number} fileId The file unique identifier.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesApi
@@ -3718,7 +3719,7 @@ export class FilesApi extends BaseAPI {
     /**
      * 
      * @param {number} id The file ID to save as PDF.
-     * @param {SaveAsPdfInteger} saveAsPdfInteger The parameters for saving file as PDF.
+     * @param {SaveAsPdfInteger} saveAsPdfInteger The parameters for saving the file as PDF.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesApi

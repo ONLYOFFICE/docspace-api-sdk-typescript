@@ -8,7 +8,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **title** | **string** | The file entry title. | [optional] [default to undefined]
 **access** | [**FileShare**](FileShare.md) |  | [optional] [default to undefined]
-**shared** | **boolean** | Specifies if the file entry is shared or not. | [optional] [default to undefined]
+**shared** | **boolean** | Specifies if the file entry is shared via link or not. | [optional] [default to undefined]
+**sharedForUser** | **boolean** | Specifies if the file entry is shared for user or not. | [optional] [default to undefined]
 **parentShared** | **boolean** | Indicates whether the parent entity is shared. | [optional] [default to undefined]
 **shortWebUrl** | **string** | The short Web URL. | [optional] [default to undefined]
 **created** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
@@ -33,8 +34,11 @@ Name | Type | Description | Notes
 **canShare** | **boolean** | Specifies if the file entry can be shared or not. | [optional] [default to undefined]
 **shareSettings** | [**FileEntryDtoIntegerAllOfShareSettings**](FileEntryDtoIntegerAllOfShareSettings.md) |  | [optional] [default to undefined]
 **security** | [**FileEntryDtoIntegerAllOfSecurity**](FileEntryDtoIntegerAllOfSecurity.md) |  | [optional] [default to undefined]
-**availableExternalRights** | **{ [key: string]: boolean; }** | The available external rights of the file entry. | [optional] [default to undefined]
+**availableShareRights** | [**FileEntryDtoIntegerAllOfAvailableShareRights**](FileEntryDtoIntegerAllOfAvailableShareRights.md) |  | [optional] [default to undefined]
 **requestToken** | **string** | The request token of the file entry. | [optional] [default to undefined]
+**external** | **boolean** | Specifies if the folder can be accessed via an external link or not. | [optional] [default to undefined]
+**expirationDate** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
+**isLinkExpired** | **boolean** | Indicates whether the shareable link associated with the file or folder has expired. | [optional] [default to undefined]
 **parentId** | **number** | The parent folder ID of the folder. | [optional] [default to undefined]
 **filesCount** | **number** | The number of files that the folder contains. | [optional] [default to undefined]
 **foldersCount** | **number** | The number of folders that the folder contains. | [optional] [default to undefined]
@@ -55,7 +59,6 @@ Name | Type | Description | Notes
 **quotaLimit** | **number** | The folder quota limit. | [optional] [default to undefined]
 **isCustomQuota** | **boolean** | Specifies if the folder room has a custom quota or not. | [optional] [default to undefined]
 **usedSpace** | **number** | How much folder space is used (counter). | [optional] [default to undefined]
-**external** | **boolean** | Specifies if the folder can be accessed via an external link or not. | [optional] [default to undefined]
 **passwordProtected** | **boolean** | Specifies if the folder is password protected or not. | [optional] [default to undefined]
 **expired** | **boolean** | Specifies if an external link to the folder is expired or not. | [optional] [default to undefined]
 
@@ -68,6 +71,7 @@ const instance: FolderDtoInteger = {
     title,
     access,
     shared,
+    sharedForUser,
     parentShared,
     shortWebUrl,
     created,
@@ -92,8 +96,11 @@ const instance: FolderDtoInteger = {
     canShare,
     shareSettings,
     security,
-    availableExternalRights,
+    availableShareRights,
     requestToken,
+    external,
+    expirationDate,
+    isLinkExpired,
     parentId,
     filesCount,
     foldersCount,
@@ -114,7 +121,6 @@ const instance: FolderDtoInteger = {
     quotaLimit,
     isCustomQuota,
     usedSpace,
-    external,
     passwordProtected,
     expired,
 };

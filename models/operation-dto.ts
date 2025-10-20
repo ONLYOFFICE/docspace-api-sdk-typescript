@@ -33,31 +33,31 @@ export interface OperationDto {
      */
     'date'?: ApiDateTime;
     /**
-     * Service related to the operation.
+     * The service related to the operation.
      * @type {string}
      * @memberof OperationDto
      */
     'service'?: string | null;
     /**
-     * Brief description of the operation.
+     * The brief operation description.
      * @type {string}
      * @memberof OperationDto
      */
     'description'?: string | null;
     /**
-     * Brief details of the operation.
+     * The detailed information about the operation.
      * @type {string}
      * @memberof OperationDto
      */
     'details'?: string | null;
     /**
-     * Unit of the service.
+     * The service unit.
      * @type {string}
      * @memberof OperationDto
      */
     'serviceUnit'?: string | null;
     /**
-     * Quantity of the service used.
+     * The quantity of the service used.
      * @type {number}
      * @memberof OperationDto
      */
@@ -69,25 +69,25 @@ export interface OperationDto {
      */
     'currency'?: string | null;
     /**
-     * Credit amount of the operation.
+     * The credit amount of the operation.
      * @type {number}
      * @memberof OperationDto
      */
     'credit'?: number;
     /**
-     * Debit amount of the operation.
+     * The debit amount of the operation.
      * @type {number}
      * @memberof OperationDto
      */
     'debit'?: number;
     /**
-     * Original name of the participant.
+     * The participant original name.
      * @type {string}
      * @memberof OperationDto
      */
     'participantName'?: string | null;
     /**
-     * Display name of the participant.
+     * The participant display name.
      * @type {string}
      * @memberof OperationDto
      */

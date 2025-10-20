@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ip** | **string** |  | [optional] [default to undefined]
+**ip** | **string** |  | [default to undefined]
 **forAdmin** | **boolean** |  | [optional] [default to undefined]
 
 ## Example

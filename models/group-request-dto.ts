@@ -30,13 +30,13 @@ export interface GroupRequestDto {
      */
     'members'?: Array<string> | null;
     /**
-     * Group manager ID
+     * The group manager ID.
      * @type {string}
      * @memberof GroupRequestDto
      */
     'groupManager': string;
     /**
-     * Group name
+     * The group name.
      * @type {string}
      * @memberof GroupRequestDto
      */

@@ -35,6 +35,7 @@ import type { TenantQuotaWrapper } from '../../models';
  * @export
  */
 export const QuotaApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Returns the current portal quota.

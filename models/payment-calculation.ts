@@ -18,25 +18,25 @@
 
 
 /**
- * The payment calculation.
+ * The parameters of the calculated payment amount.
  * @export
  * @interface PaymentCalculation
  */
 export interface PaymentCalculation {
     /**
-     * Unique identifier of the operation.
+     * The operation unique identifier.
      * @type {number}
      * @memberof PaymentCalculation
      */
     'operationId'?: number;
     /**
-     * The amount of the payment calculation.
+     * The calculated payment amount.
      * @type {number}
      * @memberof PaymentCalculation
      */
     'amount'?: number;
     /**
-     * The three-character ISO 4217 currency symbol of the payment calculation.
+     * The three-character ISO 4217 currency symbol used for the payment calculation.
      * @type {string}
      * @memberof PaymentCalculation
      */

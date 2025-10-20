@@ -34,6 +34,6 @@ export interface WebPluginRequests {
      * @type {string}
      * @memberof WebPluginRequests
      */
-    'settings'?: string | null;
+    'settings': string | null;
 }
 

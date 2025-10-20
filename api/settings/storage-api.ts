@@ -41,6 +41,7 @@ import type { StorageSettingsWrapper } from '../../models';
  * @export
  */
 export const StorageApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Returns a list of all the backup storages.

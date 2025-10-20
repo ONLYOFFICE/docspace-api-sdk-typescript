@@ -18,19 +18,19 @@
 
 
 /**
- * User invitation settings
+ * The user invitation settings.
  * @export
  * @interface TenantUserInvitationSettingsDto
  */
 export interface TenantUserInvitationSettingsDto {
     /**
-     * Allow invite new DocSpace members through the Contacts section.
+     * Specifies whether to allow inviting new DocSpace members through the Contacts section.
      * @type {boolean}
      * @memberof TenantUserInvitationSettingsDto
      */
     'allowInvitingMembers': boolean;
     /**
-     * Allow all DocSpace members to invite external guests to rooms.
+     * Specifies whether to allow all DocSpace members to invite external guests to the rooms.
      * @type {boolean}
      * @memberof TenantUserInvitationSettingsDto
      */

@@ -229,7 +229,6 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **fields** | **string**| Comma-separated list of fields to include in the response | |
 | **deliveryFrom** | [**string**] | The delivery start time for filtering webhook logs. | (optional) defaults to undefined|
 | **deliveryTo** | [**string**] | The delivery end time for filtering webhook logs. | (optional) defaults to undefined|
 | **hookUri** | [**string**] | The destination URL where webhooks are delivered. | (optional) defaults to undefined|
@@ -271,7 +270,6 @@ let userId: string; //The identifier of the user associated with the webhook eve
 let trigger: WebhookTrigger; //The type of event that triggered the webhook. (optional) (default to undefined)
 let count: number; //The maximum number of webhook log records to return in the query response. (optional) (default to undefined)
 let startIndex: number; //Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries. (optional) (default to undefined)
-let fields: string; //Comma-separated list of fields to include in the response (optional)
 
 const { status, data } = await apiInstance.getWebhooksLogs(
     deliveryFrom,
@@ -283,8 +281,7 @@ const { status, data } = await apiInstance.getWebhooksLogs(
     userId,
     trigger,
     count,
-    startIndex,
-    fields
+    startIndex
 );
 ```
 

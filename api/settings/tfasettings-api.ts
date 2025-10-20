@@ -43,6 +43,7 @@ import type { TfaValidateRequestsDto } from '../../models';
  * @export
  */
 export const TFASettingsApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Returns the two-factor authentication application codes.

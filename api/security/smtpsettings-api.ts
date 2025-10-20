@@ -35,6 +35,7 @@ import type { SmtpSettingsWrapper } from '../../models';
  * @export
  */
 export const SMTPSettingsApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Returns the status of the SMTP testing process.

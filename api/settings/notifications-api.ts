@@ -41,10 +41,11 @@ import type { RoomsNotificationsSettingsRequestDto } from '../../models';
  * @export
  */
 export const NotificationsApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
-         * Returns a list of notification channels
-         * @summary Gets notification channel settings
+         * Returns a list of notification channels.
+         * @summary Get notification channels
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getNotificationChannels operation
@@ -320,8 +321,8 @@ export const NotificationsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = NotificationsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Returns a list of notification channels
-         * @summary Gets notification channel settings
+         * Returns a list of notification channels.
+         * @summary Get notification channels
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getNotificationChannels operation
@@ -403,8 +404,8 @@ export const NotificationsApiFactory = function (configuration?: Configuration, 
     const localVarFp = NotificationsApiFp(configuration)
     return {
         /**
-         * Returns a list of notification channels
-         * @summary Gets notification channel settings
+         * Returns a list of notification channels.
+         * @summary Get notification channels
          * @param {*} [options] Override http request option.
          * REST API Reference for getNotificationChannels operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-notification-channels/
@@ -471,8 +472,8 @@ export const NotificationsApiFactory = function (configuration?: Configuration, 
  */
 export class NotificationsApi extends BaseAPI {
     /**
-     * Returns a list of notification channels
-     * @summary Gets notification channel settings
+     * Returns a list of notification channels.
+     * @summary Get notification channels
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof NotificationsApi

@@ -18,25 +18,25 @@
 
 
 /**
- * 
+ * The tenant wallet settings.
  * @export
  * @interface TenantWalletSettings
  */
 export interface TenantWalletSettings {
     /**
-     * Enabled
+     * Specifies whether automatic top-up for the tenant wallet is enabled.
      * @type {boolean}
      * @memberof TenantWalletSettings
      */
     'enabled'?: boolean;
     /**
-     * Minimun balance
+     * The minimum wallet balance at which automatic top-up will be triggered. Must be between 5 and 1000.
      * @type {number}
      * @memberof TenantWalletSettings
      */
     'minBalance'?: number;
     /**
-     * Up to balance
+     * The maximum wallet balance at which automatic top-up will be triggered. Must be between 6 and 5000.
      * @type {number}
      * @memberof TenantWalletSettings
      */
@@ -48,7 +48,7 @@ export interface TenantWalletSettings {
      */
     'currency'?: string | null;
     /**
-     * 
+     * The date and time when the tenant wallet settings were last modified.
      * @type {string}
      * @memberof TenantWalletSettings
      */

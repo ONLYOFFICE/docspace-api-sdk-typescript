@@ -34,12 +34,12 @@ export interface NewItemsDtoRoomNewItemsDto {
      * @type {ApiDateTime}
      * @memberof NewItemsDtoRoomNewItemsDto
      */
-    'date'?: ApiDateTime;
+    'date': ApiDateTime;
     /**
      * The list of items.
      * @type {Array<RoomNewItemsDto>}
      * @memberof NewItemsDtoRoomNewItemsDto
      */
-    'items'?: Array<RoomNewItemsDto> | null;
+    'items': Array<RoomNewItemsDto> | null;
 }
 

@@ -20,13 +20,13 @@
 /**
  * The registration Telegram status.
  * @export
- * @enum {string}
+ * @enum {number}
  */
 
 export const RegStatus = {
-    Unlinked: 'unlinked',
-    Linked: 'linked',
-    Linking: 'linking'
+    NUMBER_0: 0,
+    NUMBER_1: 1,
+    NUMBER_2: 2
 } as const;
 
 export type RegStatus = typeof RegStatus[keyof typeof RegStatus];

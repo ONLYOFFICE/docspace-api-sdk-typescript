@@ -35,6 +35,7 @@ import type { StringWrapper } from '../../models';
  * @export
  */
 export const ActiveConnectionsApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Returns all the active connections to the portal.

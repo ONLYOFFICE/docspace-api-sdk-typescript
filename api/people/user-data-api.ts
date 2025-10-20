@@ -41,6 +41,7 @@ import type { TerminateRequestDto } from '../../models';
  * @export
  */
 export const UserDataApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Returns the progress of deleting the personal folder.
@@ -204,8 +205,8 @@ export const UserDataApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Checks if the reassignment of rooms and shared files is necessary or not.
-         * @summary Check the data reassignment need
+         * Checks whether the reassignment of rooms and shared files is required.
+         * @summary Check data for reassignment need
          * @param {string} [userId] The user ID.
          * @param {EmployeeType} [type] The expected user type.
          * @param {*} [options] Override http request option.
@@ -641,8 +642,8 @@ export const UserDataApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Checks if the reassignment of rooms and shared files is necessary or not.
-         * @summary Check the data reassignment need
+         * Checks whether the reassignment of rooms and shared files is required.
+         * @summary Check data for reassignment need
          * @param {string} [userId] The user ID.
          * @param {EmployeeType} [type] The expected user type.
          * @param {*} [options] Override http request option.
@@ -790,8 +791,8 @@ export const UserDataApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.getRemoveProgress(userid, options).then((request) => request(axios, basePath));
         },
         /**
-         * Checks if the reassignment of rooms and shared files is necessary or not.
-         * @summary Check the data reassignment need
+         * Checks whether the reassignment of rooms and shared files is required.
+         * @summary Check data for reassignment need
          * @param {string} [userId] The user ID.
          * @param {EmployeeType} [type] The expected user type.
          * @param {*} [options] Override http request option.
@@ -918,8 +919,8 @@ export class UserDataApi extends BaseAPI {
     }
 
     /**
-     * Checks if the reassignment of rooms and shared files is necessary or not.
-     * @summary Check the data reassignment need
+     * Checks whether the reassignment of rooms and shared files is required.
+     * @summary Check data for reassignment need
      * @param {string} [userId] The user ID.
      * @param {EmployeeType} [type] The expected user type.
      * @param {*} [options] Override http request option.

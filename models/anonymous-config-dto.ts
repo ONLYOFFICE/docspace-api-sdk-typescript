@@ -28,6 +28,6 @@ export interface AnonymousConfigDto {
      * @type {boolean}
      * @memberof AnonymousConfigDto
      */
-    'request'?: boolean;
+    'request': boolean;
 }
 

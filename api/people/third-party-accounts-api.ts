@@ -37,6 +37,7 @@ import type { SignupAccountRequestDto } from '../../models';
  * @export
  */
 export const ThirdPartyAccountsApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Returns a list of the available third-party accounts.

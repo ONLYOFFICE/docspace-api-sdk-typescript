@@ -1,12 +1,13 @@
 # TenantWalletServiceSettings
 
+The wallet services settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**enabledServices** | **Array&lt;number&gt;** | Enabled services | [optional] [default to undefined]
-**lastModified** | **string** |  | [optional] [default to undefined]
+**enabledServices** | **Array&lt;number&gt;** | The list of the enabled wallet services. | [optional] [default to undefined]
+**lastModified** | **string** | The date and time when the wallet services settings were last modified. | [optional] [default to undefined]
 
 ## Example
 

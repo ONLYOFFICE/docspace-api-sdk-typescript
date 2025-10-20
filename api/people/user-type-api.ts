@@ -41,6 +41,7 @@ import type { UpdateMembersRequestDto } from '../../models';
  * @export
  */
 export const UserTypeApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Returns the progress of updating the user type.
@@ -99,7 +100,7 @@ export const UserTypeApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * Starts updating the type of the user or guest when reassigning rooms and shared files.
-         * @summary Update user type
+         * @summary Start updating user type
          * @param {StartUpdateUserTypeDto} [startUpdateUserTypeDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -154,7 +155,7 @@ export const UserTypeApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * Terminates the process of updating the type of the user or guest.
-         * @summary Terminate update user type
+         * @summary Terminate updating user type
          * @param {TerminateRequestDto} [terminateRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -295,7 +296,7 @@ export const UserTypeApiFp = function(configuration?: Configuration) {
         },
         /**
          * Starts updating the type of the user or guest when reassigning rooms and shared files.
-         * @summary Update user type
+         * @summary Start updating user type
          * @param {StartUpdateUserTypeDto} [startUpdateUserTypeDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -310,7 +311,7 @@ export const UserTypeApiFp = function(configuration?: Configuration) {
         },
         /**
          * Terminates the process of updating the type of the user or guest.
-         * @summary Terminate update user type
+         * @summary Terminate updating user type
          * @param {TerminateRequestDto} [terminateRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -363,7 +364,7 @@ export const UserTypeApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * Starts updating the type of the user or guest when reassigning rooms and shared files.
-         * @summary Update user type
+         * @summary Start updating user type
          * @param {StartUpdateUserTypeDto} [startUpdateUserTypeDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for starUserTypetUpdate operation
@@ -375,7 +376,7 @@ export const UserTypeApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * Terminates the process of updating the type of the user or guest.
-         * @summary Terminate update user type
+         * @summary Terminate updating user type
          * @param {TerminateRequestDto} [terminateRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for terminateUserTypeUpdate operation
@@ -422,7 +423,7 @@ export class UserTypeApi extends BaseAPI {
 
     /**
      * Starts updating the type of the user or guest when reassigning rooms and shared files.
-     * @summary Update user type
+     * @summary Start updating user type
      * @param {StartUpdateUserTypeDto} [startUpdateUserTypeDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -434,7 +435,7 @@ export class UserTypeApi extends BaseAPI {
 
     /**
      * Terminates the process of updating the type of the user or guest.
-     * @summary Terminate update user type
+     * @summary Terminate updating user type
      * @param {TerminateRequestDto} [terminateRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

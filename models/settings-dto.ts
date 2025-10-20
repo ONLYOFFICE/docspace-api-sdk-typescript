@@ -148,7 +148,7 @@ export interface SettingsDto {
      * @type {string}
      * @memberof SettingsDto
      */
-    'baseDomain'?: string | null;
+    'baseDomain': string | null;
     /**
      * The wizard token.
      * @type {string}
@@ -238,7 +238,7 @@ export interface SettingsDto {
      * @type {boolean}
      * @memberof SettingsDto
      */
-    'cookieSettingsEnabled'?: boolean;
+    'cookieSettingsEnabled': boolean;
     /**
      * Specifies whether the access to the space management is limited or not.
      * @type {boolean}
@@ -280,7 +280,7 @@ export interface SettingsDto {
      * @type {DeepLinkDto}
      * @memberof SettingsDto
      */
-    'deepLink'?: DeepLinkDto;
+    'deepLink': DeepLinkDto;
     /**
      * 
      * @type {FormGalleryDto}

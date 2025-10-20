@@ -7,8 +7,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**createApiKey**](#createapikey) | **POST** /api/2.0/keys | Create a user API key|
 |[**deleteApiKey**](#deleteapikey) | **DELETE** /api/2.0/keys/{keyId} | Delete a user API key|
 |[**getAllPermissions**](#getallpermissions) | **GET** /api/2.0/keys/permissions | Get API key permissions|
-|[**getApiKey**](#getapikey) | **GET** /api/2.0/keys/@self | Get user API key info|
-|[**getApiKeys**](#getapikeys) | **GET** /api/2.0/keys | Get user API keys|
+|[**getApiKey**](#getapikey) | **GET** /api/2.0/keys/@self | Get current user\&#39;s API key|
+|[**getApiKeys**](#getapikeys) | **GET** /api/2.0/keys | Get current user\&#39;s API keys|
 |[**updateApiKey**](#updateapikey) | **PUT** /api/2.0/keys/{keyId} | Update an API key|
 
 # **createApiKey**
@@ -69,7 +69,7 @@ const { status, data } = await apiInstance.createApiKey(
 # **deleteApiKey**
 > BooleanWrapper deleteApiKey()
 
-Delete a user API key by its ID.
+Deletes a user API key by its ID.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-api-key/).
 
@@ -170,7 +170,7 @@ const { status, data } = await apiInstance.getAllPermissions();
 # **getApiKey**
 > ApiKeyResponseWrapper getApiKey()
 
-Returns current user API key info.
+Returns information about the current user\'s API key.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-api-key/).
 
@@ -264,7 +264,7 @@ const { status, data } = await apiInstance.getApiKeys();
 # **updateApiKey**
 > BooleanWrapper updateApiKey(updateApiKeyRequest)
 
-Updates an existing API key changing its name, permissions and status.
+Updates an existing API key changing its name, permissions, and status.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-api-key/).
 

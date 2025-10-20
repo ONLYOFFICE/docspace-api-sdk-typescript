@@ -33,6 +33,7 @@ import type { StringWrapper } from '../../models';
  * @export
  */
 export const LicenseApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Activates a license for the portal.

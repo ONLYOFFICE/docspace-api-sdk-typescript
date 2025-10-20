@@ -72,7 +72,6 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **fields** | **string**| Comma-separated list of fields to include in the response | |
 | **userId** | [**string**] | The ID of the user who triggered the audit event. | (optional) defaults to undefined|
 | **moduleType** | **LocationType** | The location where the audit event occurred. | (optional) defaults to undefined|
 | **actionType** | **ActionType** | The type of action performed in the audit event (e.g., Create, Update, Delete). | (optional) defaults to undefined|
@@ -116,7 +115,6 @@ let from: ApiDateTime; //The starting date and time for filtering audit events. 
 let to: ApiDateTime; //The ending date and time for filtering audit events. (optional) (default to undefined)
 let count: number; //The maximum number of audit event records to retrieve. (optional) (default to undefined)
 let startIndex: number; //The index of the first audit event record to retrieve in a paged query. (optional) (default to undefined)
-let fields: string; //Comma-separated list of fields to include in the response (optional)
 
 const { status, data } = await apiInstance.getAuditEventsByFilter(
     userId,
@@ -128,8 +126,7 @@ const { status, data } = await apiInstance.getAuditEventsByFilter(
     from,
     to,
     count,
-    startIndex,
-    fields
+    startIndex
 );
 ```
 

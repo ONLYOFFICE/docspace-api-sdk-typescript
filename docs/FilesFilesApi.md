@@ -62,7 +62,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
+| **fileId** | [**number**] | The file unique identifier. | defaults to undefined|
 
 
 ### Return type
@@ -84,7 +84,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
-let fileId: number; //The file ID of the request. (default to undefined)
+let fileId: number; //The file unique identifier. (default to undefined)
 
 const { status, data } = await apiInstance.addFileToRecent(
     fileId
@@ -996,7 +996,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
+| **fileId** | [**number**] | The file unique identifier. | defaults to undefined|
 
 
 ### Return type
@@ -1018,7 +1018,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
-let fileId: number; //The file ID of the request. (default to undefined)
+let fileId: number; //The file unique identifier. (default to undefined)
 
 const { status, data } = await apiInstance.getAllFormRoles(
     fileId
@@ -1104,7 +1104,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
+| **fileId** | [**number**] | The file unique identifier. | defaults to undefined|
 
 
 ### Return type
@@ -1126,7 +1126,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
-let fileId: number; //The file ID of the request. (default to undefined)
+let fileId: number; //The file unique identifier. (default to undefined)
 
 const { status, data } = await apiInstance.getEditHistory(
     fileId
@@ -1279,7 +1279,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] | The file ID of the request. | defaults to undefined|
+| **id** | [**number**] | The file unique identifier. | defaults to undefined|
 | **count** | [**number**] | The number of items to retrieve in the request. | (optional) defaults to undefined|
 | **startIndex** | [**number**] | The starting index for the query results. | (optional) defaults to undefined|
 
@@ -1303,7 +1303,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
-let id: number; //The file ID of the request. (default to undefined)
+let id: number; //The file unique identifier. (default to undefined)
 let count: number; //The number of items to retrieve in the request. (optional) (default to undefined)
 let startIndex: number; //The starting index for the query results. (optional) (default to undefined)
 
@@ -1337,7 +1337,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] | The file ID of the request. | defaults to undefined|
+| **id** | [**number**] | The file unique identifier. | defaults to undefined|
 | **count** | [**number**] | The number of items to retrieve in the request. | (optional) defaults to undefined|
 | **startIndex** | [**number**] | The starting index for the query results. | (optional) defaults to undefined|
 
@@ -1361,7 +1361,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
-let id: number; //The file ID of the request. (default to undefined)
+let id: number; //The file unique identifier. (default to undefined)
 let count: number; //The number of items to retrieve in the request. (optional) (default to undefined)
 let startIndex: number; //The starting index for the query results. (optional) (default to undefined)
 
@@ -1396,7 +1396,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
+| **fileId** | [**number**] | The file unique identifier. | defaults to undefined|
 
 
 ### Return type
@@ -1418,7 +1418,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
-let fileId: number; //The file ID of the request. (default to undefined)
+let fileId: number; //The file unique identifier. (default to undefined)
 
 const { status, data } = await apiInstance.getFileVersionInfo(
     fileId
@@ -1500,7 +1500,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
+| **fileId** | [**number**] | The file unique identifier. | defaults to undefined|
 
 
 ### Return type
@@ -1522,7 +1522,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
-let fileId: number; //The file ID of the request. (default to undefined)
+let fileId: number; //The file unique identifier. (default to undefined)
 
 const { status, data } = await apiInstance.getPresignedFileUri(
     fileId
@@ -1552,7 +1552,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
+| **fileId** | [**number**] | The file unique identifier. | defaults to undefined|
 
 
 ### Return type
@@ -1574,7 +1574,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
-let fileId: number; //The file ID of the request. (default to undefined)
+let fileId: number; //The file unique identifier. (default to undefined)
 
 const { status, data } = await apiInstance.getPresignedUri(
     fileId
@@ -1604,7 +1604,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
+| **fileId** | [**number**] | The file unique identifier. | defaults to undefined|
 
 
 ### Return type
@@ -1626,7 +1626,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
-let fileId: number; //The file ID of the request. (default to undefined)
+let fileId: number; //The file unique identifier. (default to undefined)
 
 const { status, data } = await apiInstance.getProtectedFileUsers(
     fileId
@@ -1709,7 +1709,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **fileId** | [**number**] | The file ID of the request. | defaults to undefined|
+| **fileId** | [**number**] | The file unique identifier. | defaults to undefined|
 
 
 ### Return type
@@ -1731,7 +1731,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
-let fileId: number; //The file ID of the request. (default to undefined)
+let fileId: number; //The file unique identifier. (default to undefined)
 
 const { status, data } = await apiInstance.isFormPDF(
     fileId
@@ -2068,7 +2068,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **saveAsPdfInteger** | **SaveAsPdfInteger**| The parameters for saving file as PDF. | |
+| **saveAsPdfInteger** | **SaveAsPdfInteger**| The parameters for saving the file as PDF. | |
 | **id** | [**number**] | The file ID to save as PDF. | defaults to undefined|
 
 
@@ -2093,7 +2093,7 @@ const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
 let id: number; //The file ID to save as PDF. (default to undefined)
-let saveAsPdfInteger: SaveAsPdfInteger; //The parameters for saving file as PDF.
+let saveAsPdfInteger: SaveAsPdfInteger; //The parameters for saving the file as PDF.
 
 const { status, data } = await apiInstance.saveFileAsPdf(
     id,

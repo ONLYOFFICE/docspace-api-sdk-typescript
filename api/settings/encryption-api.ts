@@ -37,6 +37,7 @@ import type { StorageEncryptionRequestsDto } from '../../models';
  * @export
  */
 export const EncryptionApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Returns the storage encryption progress.

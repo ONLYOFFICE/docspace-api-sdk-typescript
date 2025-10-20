@@ -1,11 +1,12 @@
 # NotificationChannelStatusDto
 
+The notification channel settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**channels** | [**Array&lt;NotificationChannelDto&gt;**](NotificationChannelDto.md) |  | [optional] [default to undefined]
+**channels** | [**Array&lt;NotificationChannelDto&gt;**](NotificationChannelDto.md) | The list of notification channels. | [optional] [default to undefined]
 
 ## Example
 

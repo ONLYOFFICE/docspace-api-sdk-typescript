@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **image** | **string** | The web plugin image. | [default to undefined]
 **createBy** | [**EmployeeDto**](EmployeeDto.md) |  | [default to undefined]
 **createOn** | **string** | The date and time when the web plugin was created. | [default to undefined]
-**enabled** | **boolean** | Specifies if the web plugin is enabled or not. | [optional] [default to undefined]
+**enabled** | **boolean** | Specifies if the web plugin is enabled or not. | [default to undefined]
 **system** | **boolean** | Specifies if the web plugin is system or not. | [default to undefined]
 **url** | **string** | The web plugin URL. | [default to undefined]
 **settings** | **string** | The web plugin settings. | [default to undefined]

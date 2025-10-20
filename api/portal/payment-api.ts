@@ -71,10 +71,11 @@ import type { WalletQuantityRequestDto } from '../../models';
  * @export
  */
 export const PaymentApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
-         * Calculate amount of the wallet payment with the parameters specified in the request.
-         * @summary Calculate amount of the wallet payment
+         * Calculates an amount of the wallet payment with the parameters specified in the request.
+         * @summary Calculate the wallet payment amount
          * @param {WalletQuantityRequestDto} [walletQuantityRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -128,7 +129,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Change wallet service state.
+         * Changes the wallet service state.
          * @summary Change wallet service state
          * @param {ChangeWalletServiceStateRequestDto} [changeWalletServiceStateRequestDto] 
          * @param {*} [options] Override http request option.
@@ -183,8 +184,8 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Start generating the customer operations report as xlsx file and save in Documents.
-         * @summary Start generating the customer operations report
+         * Starts generating a customer operations report as an xlsx file and saves it in Documents.
+         * @summary Start the customer operations report generation
          * @param {CustomerOperationsReportRequestDto} [customerOperationsReportRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -240,7 +241,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Returns the URL to the checkout setup page.
          * @summary Get the checkout setup page URL
-         * @param {string} [backUrl] Back URL
+         * @param {string} [backUrl] The URL where the user will be redirected after completing the setup.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getCheckoutSetupUrl operation
@@ -350,8 +351,8 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the customer info.
-         * @summary Get the customer info
+         * Returns the customer information.
+         * @summary Get the customer information
          * @param {boolean} [refresh] Specifies whether to refresh the payment information cache or not.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -408,13 +409,13 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Returns the report of customer operations from the accounting service.
          * @summary Get the customer operations
-         * @param {string} [startDate] Start date
-         * @param {string} [endDate] End date
-         * @param {string} [participantName] Participant name
-         * @param {boolean} [credit] Include credit operations (true by default)
-         * @param {boolean} [debit] Include debit operations (true by default)
-         * @param {number} [offset] Offset (0 by default)
-         * @param {number} [limit] Limit (25 by default)
+         * @param {string} [startDate] The report start date.
+         * @param {string} [endDate] The report end date.
+         * @param {string} [participantName] The participant name.
+         * @param {boolean} [credit] Specifies whether to include credit operations in the report. The default value is true.
+         * @param {boolean} [debit] Specifies whether to include debit operations in the report. The default value is true.
+         * @param {number} [offset] The number of items to skip for pagination. The default value is 0.
+         * @param {number} [limit] The maximum number of items to return for pagination. The default value is 25.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getCustomerOperations operation
@@ -496,8 +497,8 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Get the status of generating a customer operations report.
-         * @summary Get the status of generating a customer operations report
+         * Returns the status of generating a customer operations report.
+         * @summary Get the status of the customer operations report generation
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getCustomerOperationsReport operation
@@ -656,7 +657,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Returns the available portal quotas.
          * @summary Get quotas
-         * @param {boolean} [wallet] Get wallet quotas only
+         * @param {boolean} [wallet] Specifies whether to return the wallet quotas only.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getPaymentQuotas operation
@@ -872,7 +873,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Get the wallet services settings.
+         * Returns the wallet services settings.
          * @summary Get wallet services settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -923,8 +924,8 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the wallet auto top up settings.
-         * @summary Get wallet auto top up settings
+         * Returns the wallet auto top-up settings.
+         * @summary Get wallet auto top-up settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getTenantWalletSettings operation
@@ -974,9 +975,9 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the wallet services.
+         * Returns the specified wallet service.
          * @summary Get wallet service
-         * @param {TenantWalletService} service Wallet service
+         * @param {TenantWalletService} service The wallet service type.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getWalletService operation
@@ -1138,8 +1139,8 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Set the wallet auto top up settings.
-         * @summary Set wallet auto top up settings
+         * Sets the wallet auto top-up settings.
+         * @summary Set wallet auto top-up settings
          * @param {TenantWalletSettingsWrapper} [tenantWalletSettingsWrapper] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1193,8 +1194,8 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Terminates the generating a customer operations report.
-         * @summary Terminate the generating a customer operations report
+         * Terminates generating a customer operations report.
+         * @summary Terminate the customer operations report generation
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for terminateCustomerOperationsReport operation
@@ -1244,7 +1245,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns result of putting money on deposit.
+         * Returns the result of putting money on deposit.
          * @summary Put money on deposit
          * @param {TopUpDepositRequestDto} [topUpDepositRequestDto] 
          * @param {*} [options] Override http request option.
@@ -1419,8 +1420,8 @@ export const PaymentApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = PaymentApiAxiosParamCreator(configuration)
     return {
         /**
-         * Calculate amount of the wallet payment with the parameters specified in the request.
-         * @summary Calculate amount of the wallet payment
+         * Calculates an amount of the wallet payment with the parameters specified in the request.
+         * @summary Calculate the wallet payment amount
          * @param {WalletQuantityRequestDto} [walletQuantityRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1434,7 +1435,7 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Change wallet service state.
+         * Changes the wallet service state.
          * @summary Change wallet service state
          * @param {ChangeWalletServiceStateRequestDto} [changeWalletServiceStateRequestDto] 
          * @param {*} [options] Override http request option.
@@ -1449,8 +1450,8 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Start generating the customer operations report as xlsx file and save in Documents.
-         * @summary Start generating the customer operations report
+         * Starts generating a customer operations report as an xlsx file and saves it in Documents.
+         * @summary Start the customer operations report generation
          * @param {CustomerOperationsReportRequestDto} [customerOperationsReportRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1466,7 +1467,7 @@ export const PaymentApiFp = function(configuration?: Configuration) {
         /**
          * Returns the URL to the checkout setup page.
          * @summary Get the checkout setup page URL
-         * @param {string} [backUrl] Back URL
+         * @param {string} [backUrl] The URL where the user will be redirected after completing the setup.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getCheckoutSetupUrl operation
@@ -1494,8 +1495,8 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the customer info.
-         * @summary Get the customer info
+         * Returns the customer information.
+         * @summary Get the customer information
          * @param {boolean} [refresh] Specifies whether to refresh the payment information cache or not.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1511,13 +1512,13 @@ export const PaymentApiFp = function(configuration?: Configuration) {
         /**
          * Returns the report of customer operations from the accounting service.
          * @summary Get the customer operations
-         * @param {string} [startDate] Start date
-         * @param {string} [endDate] End date
-         * @param {string} [participantName] Participant name
-         * @param {boolean} [credit] Include credit operations (true by default)
-         * @param {boolean} [debit] Include debit operations (true by default)
-         * @param {number} [offset] Offset (0 by default)
-         * @param {number} [limit] Limit (25 by default)
+         * @param {string} [startDate] The report start date.
+         * @param {string} [endDate] The report end date.
+         * @param {string} [participantName] The participant name.
+         * @param {boolean} [credit] Specifies whether to include credit operations in the report. The default value is true.
+         * @param {boolean} [debit] Specifies whether to include debit operations in the report. The default value is true.
+         * @param {number} [offset] The number of items to skip for pagination. The default value is 0.
+         * @param {number} [limit] The maximum number of items to return for pagination. The default value is 25.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getCustomerOperations operation
@@ -1530,8 +1531,8 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Get the status of generating a customer operations report.
-         * @summary Get the status of generating a customer operations report
+         * Returns the status of generating a customer operations report.
+         * @summary Get the status of the customer operations report generation
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getCustomerOperationsReport operation
@@ -1575,7 +1576,7 @@ export const PaymentApiFp = function(configuration?: Configuration) {
         /**
          * Returns the available portal quotas.
          * @summary Get quotas
-         * @param {boolean} [wallet] Get wallet quotas only
+         * @param {boolean} [wallet] Specifies whether to return the wallet quotas only.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getPaymentQuotas operation
@@ -1632,7 +1633,7 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Get the wallet services settings.
+         * Returns the wallet services settings.
          * @summary Get wallet services settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1646,8 +1647,8 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the wallet auto top up settings.
-         * @summary Get wallet auto top up settings
+         * Returns the wallet auto top-up settings.
+         * @summary Get wallet auto top-up settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getTenantWalletSettings operation
@@ -1660,9 +1661,9 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the wallet services.
+         * Returns the specified wallet service.
          * @summary Get wallet service
-         * @param {TenantWalletService} service Wallet service
+         * @param {TenantWalletService} service The wallet service type.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getWalletService operation
@@ -1704,8 +1705,8 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Set the wallet auto top up settings.
-         * @summary Set wallet auto top up settings
+         * Sets the wallet auto top-up settings.
+         * @summary Set wallet auto top-up settings
          * @param {TenantWalletSettingsWrapper} [tenantWalletSettingsWrapper] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1719,8 +1720,8 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Terminates the generating a customer operations report.
-         * @summary Terminate the generating a customer operations report
+         * Terminates generating a customer operations report.
+         * @summary Terminate the customer operations report generation
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for terminateCustomerOperationsReport operation
@@ -1733,7 +1734,7 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns result of putting money on deposit.
+         * Returns the result of putting money on deposit.
          * @summary Put money on deposit
          * @param {TopUpDepositRequestDto} [topUpDepositRequestDto] 
          * @param {*} [options] Override http request option.
@@ -1788,8 +1789,8 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = PaymentApiFp(configuration)
     return {
         /**
-         * Calculate amount of the wallet payment with the parameters specified in the request.
-         * @summary Calculate amount of the wallet payment
+         * Calculates an amount of the wallet payment with the parameters specified in the request.
+         * @summary Calculate the wallet payment amount
          * @param {WalletQuantityRequestDto} [walletQuantityRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for calculateWalletPayment operation
@@ -1800,7 +1801,7 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.calculateWalletPayment(walletQuantityRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Change wallet service state.
+         * Changes the wallet service state.
          * @summary Change wallet service state
          * @param {ChangeWalletServiceStateRequestDto} [changeWalletServiceStateRequestDto] 
          * @param {*} [options] Override http request option.
@@ -1812,8 +1813,8 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.changeTenantWalletServiceState(changeWalletServiceStateRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Start generating the customer operations report as xlsx file and save in Documents.
-         * @summary Start generating the customer operations report
+         * Starts generating a customer operations report as an xlsx file and saves it in Documents.
+         * @summary Start the customer operations report generation
          * @param {CustomerOperationsReportRequestDto} [customerOperationsReportRequestDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for createCustomerOperationsReport operation
@@ -1826,7 +1827,7 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
         /**
          * Returns the URL to the checkout setup page.
          * @summary Get the checkout setup page URL
-         * @param {string} [backUrl] Back URL
+         * @param {string} [backUrl] The URL where the user will be redirected after completing the setup.
          * @param {*} [options] Override http request option.
          * REST API Reference for getCheckoutSetupUrl operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-checkout-setup-url/
@@ -1848,8 +1849,8 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getCustomerBalance(refresh, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the customer info.
-         * @summary Get the customer info
+         * Returns the customer information.
+         * @summary Get the customer information
          * @param {boolean} [refresh] Specifies whether to refresh the payment information cache or not.
          * @param {*} [options] Override http request option.
          * REST API Reference for getCustomerInfo operation
@@ -1862,13 +1863,13 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
         /**
          * Returns the report of customer operations from the accounting service.
          * @summary Get the customer operations
-         * @param {string} [startDate] Start date
-         * @param {string} [endDate] End date
-         * @param {string} [participantName] Participant name
-         * @param {boolean} [credit] Include credit operations (true by default)
-         * @param {boolean} [debit] Include debit operations (true by default)
-         * @param {number} [offset] Offset (0 by default)
-         * @param {number} [limit] Limit (25 by default)
+         * @param {string} [startDate] The report start date.
+         * @param {string} [endDate] The report end date.
+         * @param {string} [participantName] The participant name.
+         * @param {boolean} [credit] Specifies whether to include credit operations in the report. The default value is true.
+         * @param {boolean} [debit] Specifies whether to include debit operations in the report. The default value is true.
+         * @param {number} [offset] The number of items to skip for pagination. The default value is 0.
+         * @param {number} [limit] The maximum number of items to return for pagination. The default value is 25.
          * @param {*} [options] Override http request option.
          * REST API Reference for getCustomerOperations operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-operations/
@@ -1878,8 +1879,8 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getCustomerOperations(startDate, endDate, participantName, credit, debit, offset, limit, options).then((request) => request(axios, basePath));
         },
         /**
-         * Get the status of generating a customer operations report.
-         * @summary Get the status of generating a customer operations report
+         * Returns the status of generating a customer operations report.
+         * @summary Get the status of the customer operations report generation
          * @param {*} [options] Override http request option.
          * REST API Reference for getCustomerOperationsReport operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-operations-report/
@@ -1914,7 +1915,7 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
         /**
          * Returns the available portal quotas.
          * @summary Get quotas
-         * @param {boolean} [wallet] Get wallet quotas only
+         * @param {boolean} [wallet] Specifies whether to return the wallet quotas only.
          * @param {*} [options] Override http request option.
          * REST API Reference for getPaymentQuotas operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-quotas/
@@ -1959,7 +1960,7 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getQuotaPaymentInformation(refresh, options).then((request) => request(axios, basePath));
         },
         /**
-         * Get the wallet services settings.
+         * Returns the wallet services settings.
          * @summary Get wallet services settings
          * @param {*} [options] Override http request option.
          * REST API Reference for getTenantWalletServiceSettings operation
@@ -1970,8 +1971,8 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getTenantWalletServiceSettings(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the wallet auto top up settings.
-         * @summary Get wallet auto top up settings
+         * Returns the wallet auto top-up settings.
+         * @summary Get wallet auto top-up settings
          * @param {*} [options] Override http request option.
          * REST API Reference for getTenantWalletSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-wallet-settings/
@@ -1981,9 +1982,9 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getTenantWalletSettings(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the wallet services.
+         * Returns the specified wallet service.
          * @summary Get wallet service
-         * @param {TenantWalletService} service Wallet service
+         * @param {TenantWalletService} service The wallet service type.
          * @param {*} [options] Override http request option.
          * REST API Reference for getWalletService operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-wallet-service/
@@ -2016,8 +2017,8 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.sendPaymentRequest(salesRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Set the wallet auto top up settings.
-         * @summary Set wallet auto top up settings
+         * Sets the wallet auto top-up settings.
+         * @summary Set wallet auto top-up settings
          * @param {TenantWalletSettingsWrapper} [tenantWalletSettingsWrapper] 
          * @param {*} [options] Override http request option.
          * REST API Reference for setTenantWalletSettings operation
@@ -2028,8 +2029,8 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.setTenantWalletSettings(tenantWalletSettingsWrapper, options).then((request) => request(axios, basePath));
         },
         /**
-         * Terminates the generating a customer operations report.
-         * @summary Terminate the generating a customer operations report
+         * Terminates generating a customer operations report.
+         * @summary Terminate the customer operations report generation
          * @param {*} [options] Override http request option.
          * REST API Reference for terminateCustomerOperationsReport operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-customer-operations-report/
@@ -2039,7 +2040,7 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.terminateCustomerOperationsReport(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns result of putting money on deposit.
+         * Returns the result of putting money on deposit.
          * @summary Put money on deposit
          * @param {TopUpDepositRequestDto} [topUpDepositRequestDto] 
          * @param {*} [options] Override http request option.
@@ -2085,8 +2086,8 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
  */
 export class PaymentApi extends BaseAPI {
     /**
-     * Calculate amount of the wallet payment with the parameters specified in the request.
-     * @summary Calculate amount of the wallet payment
+     * Calculates an amount of the wallet payment with the parameters specified in the request.
+     * @summary Calculate the wallet payment amount
      * @param {WalletQuantityRequestDto} [walletQuantityRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2097,7 +2098,7 @@ export class PaymentApi extends BaseAPI {
     }
 
     /**
-     * Change wallet service state.
+     * Changes the wallet service state.
      * @summary Change wallet service state
      * @param {ChangeWalletServiceStateRequestDto} [changeWalletServiceStateRequestDto] 
      * @param {*} [options] Override http request option.
@@ -2109,8 +2110,8 @@ export class PaymentApi extends BaseAPI {
     }
 
     /**
-     * Start generating the customer operations report as xlsx file and save in Documents.
-     * @summary Start generating the customer operations report
+     * Starts generating a customer operations report as an xlsx file and saves it in Documents.
+     * @summary Start the customer operations report generation
      * @param {CustomerOperationsReportRequestDto} [customerOperationsReportRequestDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2123,7 +2124,7 @@ export class PaymentApi extends BaseAPI {
     /**
      * Returns the URL to the checkout setup page.
      * @summary Get the checkout setup page URL
-     * @param {string} [backUrl] Back URL
+     * @param {string} [backUrl] The URL where the user will be redirected after completing the setup.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
@@ -2145,8 +2146,8 @@ export class PaymentApi extends BaseAPI {
     }
 
     /**
-     * Returns the customer info.
-     * @summary Get the customer info
+     * Returns the customer information.
+     * @summary Get the customer information
      * @param {boolean} [refresh] Specifies whether to refresh the payment information cache or not.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2159,13 +2160,13 @@ export class PaymentApi extends BaseAPI {
     /**
      * Returns the report of customer operations from the accounting service.
      * @summary Get the customer operations
-     * @param {string} [startDate] Start date
-     * @param {string} [endDate] End date
-     * @param {string} [participantName] Participant name
-     * @param {boolean} [credit] Include credit operations (true by default)
-     * @param {boolean} [debit] Include debit operations (true by default)
-     * @param {number} [offset] Offset (0 by default)
-     * @param {number} [limit] Limit (25 by default)
+     * @param {string} [startDate] The report start date.
+     * @param {string} [endDate] The report end date.
+     * @param {string} [participantName] The participant name.
+     * @param {boolean} [credit] Specifies whether to include credit operations in the report. The default value is true.
+     * @param {boolean} [debit] Specifies whether to include debit operations in the report. The default value is true.
+     * @param {number} [offset] The number of items to skip for pagination. The default value is 0.
+     * @param {number} [limit] The maximum number of items to return for pagination. The default value is 25.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
@@ -2175,8 +2176,8 @@ export class PaymentApi extends BaseAPI {
     }
 
     /**
-     * Get the status of generating a customer operations report.
-     * @summary Get the status of generating a customer operations report
+     * Returns the status of generating a customer operations report.
+     * @summary Get the status of the customer operations report generation
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
@@ -2211,7 +2212,7 @@ export class PaymentApi extends BaseAPI {
     /**
      * Returns the available portal quotas.
      * @summary Get quotas
-     * @param {boolean} [wallet] Get wallet quotas only
+     * @param {boolean} [wallet] Specifies whether to return the wallet quotas only.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
@@ -2256,7 +2257,7 @@ export class PaymentApi extends BaseAPI {
     }
 
     /**
-     * Get the wallet services settings.
+     * Returns the wallet services settings.
      * @summary Get wallet services settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2267,8 +2268,8 @@ export class PaymentApi extends BaseAPI {
     }
 
     /**
-     * Returns the wallet auto top up settings.
-     * @summary Get wallet auto top up settings
+     * Returns the wallet auto top-up settings.
+     * @summary Get wallet auto top-up settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
@@ -2278,9 +2279,9 @@ export class PaymentApi extends BaseAPI {
     }
 
     /**
-     * Returns the wallet services.
+     * Returns the specified wallet service.
      * @summary Get wallet service
-     * @param {TenantWalletService} service Wallet service
+     * @param {TenantWalletService} service The wallet service type.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
@@ -2313,8 +2314,8 @@ export class PaymentApi extends BaseAPI {
     }
 
     /**
-     * Set the wallet auto top up settings.
-     * @summary Set wallet auto top up settings
+     * Sets the wallet auto top-up settings.
+     * @summary Set wallet auto top-up settings
      * @param {TenantWalletSettingsWrapper} [tenantWalletSettingsWrapper] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2325,8 +2326,8 @@ export class PaymentApi extends BaseAPI {
     }
 
     /**
-     * Terminates the generating a customer operations report.
-     * @summary Terminate the generating a customer operations report
+     * Terminates generating a customer operations report.
+     * @summary Terminate the customer operations report generation
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
@@ -2336,7 +2337,7 @@ export class PaymentApi extends BaseAPI {
     }
 
     /**
-     * Returns result of putting money on deposit.
+     * Returns the result of putting money on deposit.
      * @summary Put money on deposit
      * @param {TopUpDepositRequestDto} [topUpDepositRequestDto] 
      * @param {*} [options] Override http request option.

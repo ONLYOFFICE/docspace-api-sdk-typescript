@@ -8,16 +8,16 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **status** | [**Status**](Status.md) |  | [default to undefined]
 **id** | **string** | The external data ID. | [default to undefined]
-**title** | **string** | The external data title. | [optional] [default to undefined]
+**title** | **string** | The external data title. | [default to undefined]
 **type** | [**FileEntryType**](FileEntryType.md) |  | [optional] [default to undefined]
 **tenantId** | **number** | The tenant ID. | [default to undefined]
-**entityId** | **string** | The unique identifier of the shared entity. | [default to undefined]
-**entityTitle** | **string** | The title of the shared entity. | [default to undefined]
+**entityId** | **string** | The unique identifier of the shared entity. | [optional] [default to undefined]
+**entityTitle** | **string** | The title of the shared entity. | [optional] [default to undefined]
 **entityType** | [**FileEntryType**](FileEntryType.md) |  | [optional] [default to undefined]
 **isRoom** | **boolean** | Indicates whether the entity represents a room. | [optional] [default to undefined]
 **shared** | **boolean** | Specifies whether to share the external data or not. | [default to undefined]
 **linkId** | **string** | The link ID of the external data. | [default to undefined]
-**isAuthenticated** | **boolean** | Specifies whether the user is authenticated or not. | [optional] [default to undefined]
+**isAuthenticated** | **boolean** | Specifies whether the user is authenticated or not. | [default to undefined]
 **isRoomMember** | **boolean** | The room ID of the external data. | [optional] [default to undefined]
 
 ## Example

@@ -28,13 +28,13 @@ export interface GroupSummaryDto {
      * @type {string}
      * @memberof GroupSummaryDto
      */
-    'id'?: string;
+    'id': string;
     /**
      * The group name.
      * @type {string}
      * @memberof GroupSummaryDto
      */
-    'name'?: string | null;
+    'name': string | null;
     /**
      * The group manager.
      * @type {string}

@@ -31,10 +31,11 @@ import type { TenantBannerSettingsWrapper } from '../../models';
  * @export
  */
 export const BannersVisibilityApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
-         * Returns the promotional banners visibility settings settings for the portal.
-         * @summary Get the promotional banners visibility settings
+         * Returns the visibility settings of the promotional banners in the portal.
+         * @summary Get the banners visibility
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getTenantBannerSettings operation
@@ -94,8 +95,8 @@ export const BannersVisibilityApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = BannersVisibilityApiAxiosParamCreator(configuration)
     return {
         /**
-         * Returns the promotional banners visibility settings settings for the portal.
-         * @summary Get the promotional banners visibility settings
+         * Returns the visibility settings of the promotional banners in the portal.
+         * @summary Get the banners visibility
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getTenantBannerSettings operation
@@ -118,8 +119,8 @@ export const BannersVisibilityApiFactory = function (configuration?: Configurati
     const localVarFp = BannersVisibilityApiFp(configuration)
     return {
         /**
-         * Returns the promotional banners visibility settings settings for the portal.
-         * @summary Get the promotional banners visibility settings
+         * Returns the visibility settings of the promotional banners in the portal.
+         * @summary Get the banners visibility
          * @param {*} [options] Override http request option.
          * REST API Reference for getTenantBannerSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-banner-settings/
@@ -139,8 +140,8 @@ export const BannersVisibilityApiFactory = function (configuration?: Configurati
  */
 export class BannersVisibilityApi extends BaseAPI {
     /**
-     * Returns the promotional banners visibility settings settings for the portal.
-     * @summary Get the promotional banners visibility settings
+     * Returns the visibility settings of the promotional banners in the portal.
+     * @summary Get the banners visibility
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BannersVisibilityApi

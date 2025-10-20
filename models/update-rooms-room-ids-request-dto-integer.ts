@@ -21,7 +21,7 @@
 import type { DuplicateRequestDtoAllOfFileIds } from './duplicate-request-dto-all-of-file-ids';
 
 /**
- * The request parameters for updating the room.
+ * The request parameters for updating the rooms.
  * @export
  * @interface UpdateRoomsRoomIdsRequestDtoInteger
  */

@@ -37,7 +37,11 @@ import type { StringWrapper } from '../../models';
  * @export
  */
 export const LoginHistoryApiAxiosParamCreator = function (configuration?: Configuration) {
+    let fields: string | undefined;
     return {
+        withFields: (f: string) => {
+            fields = f;
+        },
         /**
          * Generates the login history report.
          * @summary Generate the login history report
@@ -149,13 +153,12 @@ export const LoginHistoryApiAxiosParamCreator = function (configuration?: Config
          * @param {ApiDateTime} [to] The ending date and time for filtering login events.
          * @param {number} [count] The number of login events to retrieve in the query.
          * @param {number} [startIndex] The starting index for fetching a subset of login events from the query results.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getLoginEventsByFilter operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-login-events-by-filter/
          */
-        getLoginEventsByFilter: async (userId?: string, action?: MessageAction, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, fields?: string | null, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getLoginEventsByFilter: async (userId?: string, action?: MessageAction, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2.0/security/audit/login/filter`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -215,12 +218,11 @@ export const LoginHistoryApiAxiosParamCreator = function (configuration?: Config
                 localVarQueryParameter['startIndex'] = startIndex;
             }
 
-            if (fields !== undefined) {
-                localVarQueryParameter['fields'] = fields;
-            }
-
 
     
+            if(fields !== undefined) {
+                localVarHeaderParameter['fields'] = fields;
+            }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -277,14 +279,13 @@ export const LoginHistoryApiFp = function(configuration?: Configuration) {
          * @param {ApiDateTime} [to] The ending date and time for filtering login events.
          * @param {number} [count] The number of login events to retrieve in the query.
          * @param {number} [startIndex] The starting index for fetching a subset of login events from the query results.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getLoginEventsByFilter operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-login-events-by-filter/
          */
-        async getLoginEventsByFilter(userId?: string, action?: MessageAction, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, fields?: string | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoginEventArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getLoginEventsByFilter(userId, action, from, to, count, startIndex, fields, options);
+        async getLoginEventsByFilter(userId?: string, action?: MessageAction, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoginEventArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getLoginEventsByFilter(userId, action, from, to, count, startIndex, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['LoginHistoryApi.getLoginEventsByFilter']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -330,14 +331,13 @@ export const LoginHistoryApiFactory = function (configuration?: Configuration, b
          * @param {ApiDateTime} [to] The ending date and time for filtering login events.
          * @param {number} [count] The number of login events to retrieve in the query.
          * @param {number} [startIndex] The starting index for fetching a subset of login events from the query results.
-         * @param {string | null} [fields] Comma-separated list of fields to include in the response
          * @param {*} [options] Override http request option.
          * REST API Reference for getLoginEventsByFilter operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-login-events-by-filter/
          * @throws {RequiredError}
          */
-        getLoginEventsByFilter(userId?: string, action?: MessageAction, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, fields?: string | null, options?: RawAxiosRequestConfig): AxiosPromise<LoginEventArrayWrapper> {
-            return localVarFp.getLoginEventsByFilter(userId, action, from, to, count, startIndex, fields, options).then((request) => request(axios, basePath));
+        getLoginEventsByFilter(userId?: string, action?: MessageAction, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): AxiosPromise<LoginEventArrayWrapper> {
+            return localVarFp.getLoginEventsByFilter(userId, action, from, to, count, startIndex, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -380,13 +380,12 @@ export class LoginHistoryApi extends BaseAPI {
      * @param {ApiDateTime} [to] The ending date and time for filtering login events.
      * @param {number} [count] The number of login events to retrieve in the query.
      * @param {number} [startIndex] The starting index for fetching a subset of login events from the query results.
-     * @param {string | null} [fields] Comma-separated list of fields to include in the response
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof LoginHistoryApi
      */
-    public getLoginEventsByFilter(userId?: string, action?: MessageAction, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, fields?: string | null, options?: RawAxiosRequestConfig) {
-        return LoginHistoryApiFp(this.configuration).getLoginEventsByFilter(userId, action, from, to, count, startIndex, fields, options).then((request) => request(this.axios, this.basePath));
+    public getLoginEventsByFilter(userId?: string, action?: MessageAction, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, options?: RawAxiosRequestConfig) {
+        return LoginHistoryApiFp(this.configuration).getLoginEventsByFilter(userId, action, from, to, count, startIndex, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

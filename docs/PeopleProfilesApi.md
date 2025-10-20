@@ -8,9 +8,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**deleteMember**](#deletemember) | **DELETE** /api/2.0/people/{userid} | Delete a user|
 |[**deleteProfile**](#deleteprofile) | **DELETE** /api/2.0/people/@self | Delete my profile|
 |[**getAllProfiles**](#getallprofiles) | **GET** /api/2.0/people | Get profiles|
-|[**getClaims**](#getclaims) | **GET** /api/2.0/people/tokendiagnostics | Returns the user claims.|
+|[**getClaims**](#getclaims) | **GET** /api/2.0/people/tokendiagnostics | Get user claims|
 |[**getProfileByEmail**](#getprofilebyemail) | **GET** /api/2.0/people/email | Get a profile by user email|
-|[**getProfileByUserId**](#getprofilebyuserid) | **GET** /api/2.0/people/{userid} | Get a profile by user name|
+|[**getProfileByUserId**](#getprofilebyuserid) | **GET** /api/2.0/people/{userid} | Get a profile by user ID|
 |[**getSelfProfile**](#getselfprofile) | **GET** /api/2.0/people/@self | Get my profile|
 |[**inviteUsers**](#inviteusers) | **POST** /api/2.0/people/invite | Invite users|
 |[**removeUsers**](#removeusers) | **PUT** /api/2.0/people/delete | Delete users|
@@ -192,7 +192,6 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **fields** | **string**| Comma-separated list of fields to include in the response | |
 | **count** | [**number**] | The maximum number of items to be retrieved in the response. | (optional) defaults to undefined|
 | **startIndex** | [**number**] | The zero-based index of the first item to be retrieved in a filtered result set. | (optional) defaults to undefined|
 | **filterBy** | [**string**] | Specifies the filter criteria for user-related queries. | (optional) defaults to undefined|
@@ -228,7 +227,6 @@ let sortBy: string; //Specifies the property or field name by which the results 
 let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
 let filterSeparator: string; //The character or string used to separate multiple filter values in a filtering query. (optional) (default to undefined)
 let filterValue: string; //The text value used as an additional filter criterion for profiles retrieval. (optional) (default to undefined)
-let fields: string; //Comma-separated list of fields to include in the response (optional)
 
 const { status, data } = await apiInstance.getAllProfiles(
     count,
@@ -237,8 +235,7 @@ const { status, data } = await apiInstance.getAllProfiles(
     sortBy,
     sortOrder,
     filterSeparator,
-    filterValue,
-    fields
+    filterValue
 );
 ```
 
@@ -364,7 +361,7 @@ const { status, data } = await apiInstance.getProfileByEmail(
 # **getProfileByUserId**
 > EmployeeFullWrapper getProfileByUserId()
 
-Returns the detailed information about a profile of the user with the name specified in the request.
+Returns the detailed information about a profile of the user with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-profile-by-user-id/).
 

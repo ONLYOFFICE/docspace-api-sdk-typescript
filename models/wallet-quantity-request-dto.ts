@@ -21,13 +21,13 @@
 import type { ProductQuantityType } from './product-quantity-type';
 
 /**
- * The request parameters for the wallet payment quantity specifications.
+ * The request parameters for specifying wallet payment quantity.
  * @export
  * @interface WalletQuantityRequestDto
  */
 export interface WalletQuantityRequestDto {
     /**
-     * The mapping of item identifiers with their respective quantities in the payment.
+     * The mapping of item identifiers to their respective quantities in the payment.
      * @type {{ [key: string]: number | null; }}
      * @memberof WalletQuantityRequestDto
      */

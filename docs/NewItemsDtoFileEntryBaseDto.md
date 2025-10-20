@@ -6,8 +6,8 @@ The new item parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
-**items** | [**Array&lt;FileEntryBaseDto&gt;**](FileEntryBaseDto.md) | The list of items. | [optional] [default to undefined]
+**date** | [**ApiDateTime**](ApiDateTime.md) |  | [default to undefined]
+**items** | [**Array&lt;FileEntryBaseDto&gt;**](FileEntryBaseDto.md) | The list of items. | [default to undefined]
 
 ## Example
 

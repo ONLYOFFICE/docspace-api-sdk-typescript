@@ -41,6 +41,7 @@ import type { PageableResponseClientInfoResponse } from '../../models';
  * @export
  */
 export const ClientQueryingApiAxiosParamCreator = function (configuration?: Configuration) {
+    
     return {
         /**
          * Retrieves detailed information about a specific OAuth2 client including its name, description, redirect URIs, and scopes.
