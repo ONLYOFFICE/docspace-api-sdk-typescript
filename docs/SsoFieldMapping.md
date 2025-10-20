@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { SsoFieldMapping } from '@onlyoffice/docspace-api-typescript';
+import { SsoFieldMapping } from '@onlyoffice/docspace-api-sdk';
 
 const instance: SsoFieldMapping = {
     firstName,

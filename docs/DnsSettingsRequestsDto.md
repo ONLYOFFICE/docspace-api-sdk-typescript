@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { DnsSettingsRequestsDto } from '@onlyoffice/docspace-api-typescript';
+import { DnsSettingsRequestsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: DnsSettingsRequestsDto = {
     dnsName,

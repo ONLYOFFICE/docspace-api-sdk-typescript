@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { MigrationStatusWrapper } from '@onlyoffice/docspace-api-typescript';
+import { MigrationStatusWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: MigrationStatusWrapper = {
     response,

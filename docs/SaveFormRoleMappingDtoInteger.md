@@ -6,13 +6,13 @@ The parameters for saving form role mapping.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**formId** | **number** | The form ID. | [optional] [default to undefined]
-**roles** | [**Array&lt;FormRole&gt;**](FormRole.md) | The collection of roles. | [optional] [default to undefined]
+**formId** | **number** | The form ID. | [default to undefined]
+**roles** | [**Array&lt;FormRole&gt;**](FormRole.md) | The collection of roles. | [default to undefined]
 
 ## Example
 
 ```typescript
-import { SaveFormRoleMappingDtoInteger } from '@onlyoffice/docspace-api-typescript';
+import { SaveFormRoleMappingDtoInteger } from '@onlyoffice/docspace-api-sdk';
 
 const instance: SaveFormRoleMappingDtoInteger = {
     formId,

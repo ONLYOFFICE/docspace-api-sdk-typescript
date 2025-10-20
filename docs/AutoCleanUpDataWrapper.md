@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { AutoCleanUpDataWrapper } from '@onlyoffice/docspace-api-typescript';
+import { AutoCleanUpDataWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: AutoCleanUpDataWrapper = {
     response,

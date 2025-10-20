@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { SecurityRequestsDto } from '@onlyoffice/docspace-api-typescript';
+import { SecurityRequestsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: SecurityRequestsDto = {
     productId,

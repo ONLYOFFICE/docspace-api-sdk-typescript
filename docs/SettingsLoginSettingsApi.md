@@ -1,6 +1,6 @@
-# SettingsLoginSettingsApi
+# LoginSettingsApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
@@ -13,19 +13,7 @@ All URIs are relative to *http://localhost:8092*
 
 Returns the portal login settings.
 
-### Example
-
-```typescript
-import {
-    SettingsLoginSettingsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsLoginSettingsApi(configuration);
-
-const { status, data } = await apiInstance.getLoginSettings();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-login-settings/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -38,6 +26,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsLoginSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsLoginSettingsApi(configuration);
+
+const { status, data } = await apiInstance.getLoginSettings();
+```
 
 ### HTTP request headers
 
@@ -58,19 +60,7 @@ This endpoint does not have any parameters.
 
 Resets the portal login settings to default.
 
-### Example
-
-```typescript
-import {
-    SettingsLoginSettingsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsLoginSettingsApi(configuration);
-
-const { status, data } = await apiInstance.setDefaultLoginSettings();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-default-login-settings/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -83,6 +73,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsLoginSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsLoginSettingsApi(configuration);
+
+const { status, data } = await apiInstance.setDefaultLoginSettings();
+```
 
 ### HTTP request headers
 
@@ -103,24 +107,7 @@ This endpoint does not have any parameters.
 
 Updates the login settings with the parameters specified in the request.
 
-### Example
-
-```typescript
-import {
-    SettingsLoginSettingsApi,
-    Configuration,
-    LoginSettingsRequestDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsLoginSettingsApi(configuration);
-
-let loginSettingsRequestDto: LoginSettingsRequestDto; // (optional)
-
-const { status, data } = await apiInstance.updateLoginSettings(
-    loginSettingsRequestDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-login-settings/).
 
 ### Parameters
 
@@ -136,6 +123,25 @@ const { status, data } = await apiInstance.updateLoginSettings(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsLoginSettingsApi,
+    Configuration,
+    LoginSettingsRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsLoginSettingsApi(configuration);
+
+let loginSettingsRequestDto: LoginSettingsRequestDto; // (optional)
+
+const { status, data } = await apiInstance.updateLoginSettings(
+    loginSettingsRequestDto
+);
+```
 
 ### HTTP request headers
 

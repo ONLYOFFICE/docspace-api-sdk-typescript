@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { TenantQuotaFeatureDto } from '@onlyoffice/docspace-api-typescript';
+import { TenantQuotaFeatureDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TenantQuotaFeatureDto = {
     id,

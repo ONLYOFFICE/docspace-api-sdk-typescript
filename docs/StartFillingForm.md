@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { StartFillingForm } from '@onlyoffice/docspace-api-typescript';
+import { StartFillingForm } from '@onlyoffice/docspace-api-sdk';
 
 const instance: StartFillingForm = {
     text,

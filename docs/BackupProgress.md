@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { BackupProgress } from '@onlyoffice/docspace-api-typescript';
+import { BackupProgress } from '@onlyoffice/docspace-api-sdk';
 
 const instance: BackupProgress = {
     isCompleted,

@@ -1,13 +1,13 @@
-# PeopleUserDataApi
+# UserDataApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**getDeletePersonalFolderProgress**](#getdeletepersonalfolderprogress) | **GET** /api/2.0/people/delete/personal/progress | Get the progress of deleting the personal folder|
 |[**getReassignProgress**](#getreassignprogress) | **GET** /api/2.0/people/reassign/progress/{userid} | Get the reassignment progress|
 |[**getRemoveProgress**](#getremoveprogress) | **GET** /api/2.0/people/remove/progress/{userid} | Get the deletion progress|
-|[**necessaryReassign**](#necessaryreassign) | **GET** /api/2.0/people/reassign/necessary | Check the data reassignment need|
+|[**necessaryReassign**](#necessaryreassign) | **GET** /api/2.0/people/reassign/necessary | Check data for reassignment need|
 |[**sendInstructionsToDelete**](#sendinstructionstodelete) | **PUT** /api/2.0/people/self/delete | Send the deletion instructions|
 |[**startDeletePersonalFolder**](#startdeletepersonalfolder) | **POST** /api/2.0/people/delete/personal/start | Delete the personal folder|
 |[**startReassign**](#startreassign) | **POST** /api/2.0/people/reassign/start | Start the data reassignment|
@@ -20,19 +20,7 @@ All URIs are relative to *http://localhost:8092*
 
 Returns the progress of deleting the personal folder.
 
-### Example
-
-```typescript
-import {
-    PeopleUserDataApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleUserDataApi(configuration);
-
-const { status, data } = await apiInstance.getDeletePersonalFolderProgress();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-delete-personal-folder-progress/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -45,6 +33,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleUserDataApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleUserDataApi(configuration);
+
+const { status, data } = await apiInstance.getDeletePersonalFolderProgress();
+```
 
 ### HTTP request headers
 
@@ -65,23 +67,7 @@ This endpoint does not have any parameters.
 
 Returns the progress of the started data reassignment for the user with the ID specified in the request.
 
-### Example
-
-```typescript
-import {
-    PeopleUserDataApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleUserDataApi(configuration);
-
-let userid: string; //The user ID. (default to undefined)
-
-const { status, data } = await apiInstance.getReassignProgress(
-    userid
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-reassign-progress/).
 
 ### Parameters
 
@@ -97,6 +83,24 @@ const { status, data } = await apiInstance.getReassignProgress(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleUserDataApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleUserDataApi(configuration);
+
+let userid: string; //The user ID. (default to undefined)
+
+const { status, data } = await apiInstance.getReassignProgress(
+    userid
+);
+```
 
 ### HTTP request headers
 
@@ -117,23 +121,7 @@ const { status, data } = await apiInstance.getReassignProgress(
 
 Returns the progress of the started data deletion for the user with the ID specified in the request.
 
-### Example
-
-```typescript
-import {
-    PeopleUserDataApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleUserDataApi(configuration);
-
-let userid: string; //The user ID. (default to undefined)
-
-const { status, data } = await apiInstance.getRemoveProgress(
-    userid
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-remove-progress/).
 
 ### Parameters
 
@@ -149,6 +137,24 @@ const { status, data } = await apiInstance.getRemoveProgress(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleUserDataApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleUserDataApi(configuration);
+
+let userid: string; //The user ID. (default to undefined)
+
+const { status, data } = await apiInstance.getRemoveProgress(
+    userid
+);
+```
 
 ### HTTP request headers
 
@@ -167,27 +173,9 @@ const { status, data } = await apiInstance.getRemoveProgress(
 # **necessaryReassign**
 > BooleanWrapper necessaryReassign()
 
-Checks if the reassignment of rooms and shared files is necessary or not.
+Checks whether the reassignment of rooms and shared files is required.
 
-### Example
-
-```typescript
-import {
-    PeopleUserDataApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleUserDataApi(configuration);
-
-let userId: string; //The user ID. (optional) (default to undefined)
-let type: EmployeeType; //The expected user type. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.necessaryReassign(
-    userId,
-    type
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/necessary-reassign/).
 
 ### Parameters
 
@@ -204,6 +192,26 @@ const { status, data } = await apiInstance.necessaryReassign(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleUserDataApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleUserDataApi(configuration);
+
+let userId: string; //The user ID. (optional) (default to undefined)
+let type: EmployeeType; //The expected user type. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.necessaryReassign(
+    userId,
+    type
+);
+```
 
 ### HTTP request headers
 
@@ -224,19 +232,7 @@ const { status, data } = await apiInstance.necessaryReassign(
 
 Sends the instructions for deleting a user profile.
 
-### Example
-
-```typescript
-import {
-    PeopleUserDataApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleUserDataApi(configuration);
-
-const { status, data } = await apiInstance.sendInstructionsToDelete();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-instructions-to-delete/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -249,6 +245,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleUserDataApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleUserDataApi(configuration);
+
+const { status, data } = await apiInstance.sendInstructionsToDelete();
+```
 
 ### HTTP request headers
 
@@ -270,19 +280,7 @@ This endpoint does not have any parameters.
 
 Starts deleting the personal folder.
 
-### Example
-
-```typescript
-import {
-    PeopleUserDataApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleUserDataApi(configuration);
-
-const { status, data } = await apiInstance.startDeletePersonalFolder();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-delete-personal-folder/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -295,6 +293,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleUserDataApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleUserDataApi(configuration);
+
+const { status, data } = await apiInstance.startDeletePersonalFolder();
+```
 
 ### HTTP request headers
 
@@ -316,24 +328,7 @@ This endpoint does not have any parameters.
 
 Starts the data reassignment for the user with the ID specified in the request.
 
-### Example
-
-```typescript
-import {
-    PeopleUserDataApi,
-    Configuration,
-    StartReassignRequestDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleUserDataApi(configuration);
-
-let startReassignRequestDto: StartReassignRequestDto; // (optional)
-
-const { status, data } = await apiInstance.startReassign(
-    startReassignRequestDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-reassign/).
 
 ### Parameters
 
@@ -349,6 +344,25 @@ const { status, data } = await apiInstance.startReassign(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleUserDataApi,
+    Configuration,
+    StartReassignRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleUserDataApi(configuration);
+
+let startReassignRequestDto: StartReassignRequestDto; // (optional)
+
+const { status, data } = await apiInstance.startReassign(
+    startReassignRequestDto
+);
+```
 
 ### HTTP request headers
 
@@ -370,24 +384,7 @@ const { status, data } = await apiInstance.startReassign(
 
 Starts the data deletion for the user with the ID specified in the request.
 
-### Example
-
-```typescript
-import {
-    PeopleUserDataApi,
-    Configuration,
-    TerminateRequestDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleUserDataApi(configuration);
-
-let terminateRequestDto: TerminateRequestDto; // (optional)
-
-const { status, data } = await apiInstance.startRemove(
-    terminateRequestDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-remove/).
 
 ### Parameters
 
@@ -403,6 +400,25 @@ const { status, data } = await apiInstance.startRemove(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleUserDataApi,
+    Configuration,
+    TerminateRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleUserDataApi(configuration);
+
+let terminateRequestDto: TerminateRequestDto; // (optional)
+
+const { status, data } = await apiInstance.startRemove(
+    terminateRequestDto
+);
+```
 
 ### HTTP request headers
 
@@ -426,24 +442,7 @@ const { status, data } = await apiInstance.startRemove(
 
 Terminates the data reassignment for the user with the ID specified in the request.
 
-### Example
-
-```typescript
-import {
-    PeopleUserDataApi,
-    Configuration,
-    TerminateRequestDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleUserDataApi(configuration);
-
-let terminateRequestDto: TerminateRequestDto; // (optional)
-
-const { status, data } = await apiInstance.terminateReassign(
-    terminateRequestDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-reassign/).
 
 ### Parameters
 
@@ -459,6 +458,25 @@ const { status, data } = await apiInstance.terminateReassign(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleUserDataApi,
+    Configuration,
+    TerminateRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleUserDataApi(configuration);
+
+let terminateRequestDto: TerminateRequestDto; // (optional)
+
+const { status, data } = await apiInstance.terminateReassign(
+    terminateRequestDto
+);
+```
 
 ### HTTP request headers
 
@@ -479,24 +497,7 @@ const { status, data } = await apiInstance.terminateReassign(
 
 Terminates the data deletion for the user with the ID specified in the request.
 
-### Example
-
-```typescript
-import {
-    PeopleUserDataApi,
-    Configuration,
-    TerminateRequestDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleUserDataApi(configuration);
-
-let terminateRequestDto: TerminateRequestDto; // (optional)
-
-const { status, data } = await apiInstance.terminateRemove(
-    terminateRequestDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-remove/).
 
 ### Parameters
 
@@ -512,6 +513,25 @@ void (empty response body)
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleUserDataApi,
+    Configuration,
+    TerminateRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleUserDataApi(configuration);
+
+let terminateRequestDto: TerminateRequestDto; // (optional)
+
+const { status, data } = await apiInstance.terminateRemove(
+    terminateRequestDto
+);
+```
 
 ### HTTP request headers
 

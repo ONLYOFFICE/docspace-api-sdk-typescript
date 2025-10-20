@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CompanyWhiteLabelSettingsArrayWrapper } from '@onlyoffice/docspace-api-typescript';
+import { CompanyWhiteLabelSettingsArrayWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CompanyWhiteLabelSettingsArrayWrapper = {
     response,

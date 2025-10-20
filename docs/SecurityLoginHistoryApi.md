@@ -1,6 +1,6 @@
-# SecurityLoginHistoryApi
+# LoginHistoryApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
@@ -13,19 +13,7 @@ All URIs are relative to *http://localhost:8092*
 
 Generates the login history report.
 
-### Example
-
-```typescript
-import {
-    SecurityLoginHistoryApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SecurityLoginHistoryApi(configuration);
-
-const { status, data } = await apiInstance.createLoginHistoryReport();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-login-history-report/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -38,6 +26,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SecurityLoginHistoryApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SecurityLoginHistoryApi(configuration);
+
+const { status, data } = await apiInstance.createLoginHistoryReport();
+```
 
 ### HTTP request headers
 
@@ -59,19 +61,7 @@ This endpoint does not have any parameters.
 
 Returns all the latest user login activity, including successful logins and error logs.
 
-### Example
-
-```typescript
-import {
-    SecurityLoginHistoryApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SecurityLoginHistoryApi(configuration);
-
-const { status, data } = await apiInstance.getLastLoginEvents();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-last-login-events/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -84,6 +74,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SecurityLoginHistoryApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SecurityLoginHistoryApi(configuration);
+
+const { status, data } = await apiInstance.getLastLoginEvents();
+```
 
 ### HTTP request headers
 
@@ -105,31 +109,7 @@ This endpoint does not have any parameters.
 
 Returns a list of the login events by the parameters specified in the request.
 
-### Example
-
-```typescript
-import {
-    SecurityLoginHistoryApi,
-    Configuration,
-    ApiDateTime,
-    ApiDateTime
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SecurityLoginHistoryApi(configuration);
-
-let userId: string; //The ID of the user whose login events are being queried. (optional) (default to undefined)
-let action: MessageAction; //The login-related action to filter events by. (optional) (default to undefined)
-let from: ApiDateTime; //The starting date and time for filtering login events. (optional) (default to undefined)
-let to: ApiDateTime; //The ending date and time for filtering login events. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.getLoginEventsByFilter(
-    userId,
-    action,
-    from,
-    to
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-login-events-by-filter/).
 
 ### Parameters
 
@@ -139,6 +119,8 @@ const { status, data } = await apiInstance.getLoginEventsByFilter(
 | **action** | **MessageAction** | The login-related action to filter events by. | (optional) defaults to undefined|
 | **from** | **ApiDateTime** | The starting date and time for filtering login events. | (optional) defaults to undefined|
 | **to** | **ApiDateTime** | The ending date and time for filtering login events. | (optional) defaults to undefined|
+| **count** | [**number**] | The number of login events to retrieve in the query. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The starting index for fetching a subset of login events from the query results. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -148,6 +130,36 @@ const { status, data } = await apiInstance.getLoginEventsByFilter(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SecurityLoginHistoryApi,
+    Configuration,
+    ApiDateTime,
+    ApiDateTime
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SecurityLoginHistoryApi(configuration);
+
+let userId: string; //The ID of the user whose login events are being queried. (optional) (default to undefined)
+let action: MessageAction; //The login-related action to filter events by. (optional) (default to undefined)
+let from: ApiDateTime; //The starting date and time for filtering login events. (optional) (default to undefined)
+let to: ApiDateTime; //The ending date and time for filtering login events. (optional) (default to undefined)
+let count: number; //The number of login events to retrieve in the query. (optional) (default to undefined)
+let startIndex: number; //The starting index for fetching a subset of login events from the query results. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getLoginEventsByFilter(
+    userId,
+    action,
+    from,
+    to,
+    count,
+    startIndex
+);
+```
 
 ### HTTP request headers
 

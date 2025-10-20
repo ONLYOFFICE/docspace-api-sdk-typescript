@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { RoomSecurityWrapper } from '@onlyoffice/docspace-api-typescript';
+import { RoomSecurityWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: RoomSecurityWrapper = {
     response,

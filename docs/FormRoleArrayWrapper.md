@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**Array&lt;FormRole&gt;**](FormRole.md) |  | [optional] [default to undefined]
+**response** | [**Array&lt;FormRoleDto&gt;**](FormRoleDto.md) |  | [optional] [default to undefined]
 **count** | **number** |  | [optional] [default to undefined]
 **links** | [**Array&lt;ActiveConnectionsWrapperLinksInner&gt;**](ActiveConnectionsWrapperLinksInner.md) |  | [optional] [default to undefined]
 **status** | **number** |  | [optional] [default to undefined]
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FormRoleArrayWrapper } from '@onlyoffice/docspace-api-typescript';
+import { FormRoleArrayWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FormRoleArrayWrapper = {
     response,

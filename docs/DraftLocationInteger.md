@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { DraftLocationInteger } from '@onlyoffice/docspace-api-typescript';
+import { DraftLocationInteger } from '@onlyoffice/docspace-api-sdk';
 
 const instance: DraftLocationInteger = {
     folderId,

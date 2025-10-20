@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { UserConfig } from '@onlyoffice/docspace-api-typescript';
+import { UserConfig } from '@onlyoffice/docspace-api-sdk';
 
 const instance: UserConfig = {
     id,

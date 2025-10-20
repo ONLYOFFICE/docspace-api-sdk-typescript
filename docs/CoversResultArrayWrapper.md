@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CoversResultArrayWrapper } from '@onlyoffice/docspace-api-typescript';
+import { CoversResultArrayWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CoversResultArrayWrapper = {
     response,

@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { IMagickGeometry } from '@onlyoffice/docspace-api-typescript';
+import { IMagickGeometry } from '@onlyoffice/docspace-api-sdk';
 
 const instance: IMagickGeometry = {
     aspectRatio,

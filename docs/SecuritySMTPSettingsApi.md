@@ -1,6 +1,6 @@
-# SecuritySMTPSettingsApi
+# SMTPSettingsApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
@@ -15,19 +15,7 @@ All URIs are relative to *http://localhost:8092*
 
 Returns the status of the SMTP testing process.
 
-### Example
-
-```typescript
-import {
-    SecuritySMTPSettingsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SecuritySMTPSettingsApi(configuration);
-
-const { status, data } = await apiInstance.getSmtpOperationStatus();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-smtp-operation-status/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -40,6 +28,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SecuritySMTPSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SecuritySMTPSettingsApi(configuration);
+
+const { status, data } = await apiInstance.getSmtpOperationStatus();
+```
 
 ### HTTP request headers
 
@@ -61,19 +63,7 @@ This endpoint does not have any parameters.
 
 Returns the current portal SMTP settings.
 
-### Example
-
-```typescript
-import {
-    SecuritySMTPSettingsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SecuritySMTPSettingsApi(configuration);
-
-const { status, data } = await apiInstance.getSmtpSettings();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-smtp-settings/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -86,6 +76,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SecuritySMTPSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SecuritySMTPSettingsApi(configuration);
+
+const { status, data } = await apiInstance.getSmtpSettings();
+```
 
 ### HTTP request headers
 
@@ -107,19 +111,7 @@ This endpoint does not have any parameters.
 
 Resets the SMTP settings of the current portal.
 
-### Example
-
-```typescript
-import {
-    SecuritySMTPSettingsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SecuritySMTPSettingsApi(configuration);
-
-const { status, data } = await apiInstance.resetSmtpSettings();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-smtp-settings/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -132,6 +124,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SecuritySMTPSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SecuritySMTPSettingsApi(configuration);
+
+const { status, data } = await apiInstance.resetSmtpSettings();
+```
 
 ### HTTP request headers
 
@@ -153,24 +159,7 @@ This endpoint does not have any parameters.
 
 Saves the SMTP settings for the current portal.
 
-### Example
-
-```typescript
-import {
-    SecuritySMTPSettingsApi,
-    Configuration,
-    SmtpSettingsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SecuritySMTPSettingsApi(configuration);
-
-let smtpSettingsDto: SmtpSettingsDto; // (optional)
-
-const { status, data } = await apiInstance.saveSmtpSettings(
-    smtpSettingsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-smtp-settings/).
 
 ### Parameters
 
@@ -186,6 +175,25 @@ const { status, data } = await apiInstance.saveSmtpSettings(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SecuritySMTPSettingsApi,
+    Configuration,
+    SmtpSettingsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SecuritySMTPSettingsApi(configuration);
+
+let smtpSettingsDto: SmtpSettingsDto; // (optional)
+
+const { status, data } = await apiInstance.saveSmtpSettings(
+    smtpSettingsDto
+);
+```
 
 ### HTTP request headers
 
@@ -207,19 +215,7 @@ const { status, data } = await apiInstance.saveSmtpSettings(
 
 Tests the SMTP settings for the current portal (sends test message to the user email).
 
-### Example
-
-```typescript
-import {
-    SecuritySMTPSettingsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SecuritySMTPSettingsApi(configuration);
-
-const { status, data } = await apiInstance.testSmtpSettings();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/test-smtp-settings/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -232,6 +228,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SecuritySMTPSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SecuritySMTPSettingsApi(configuration);
+
+const { status, data } = await apiInstance.testSmtpSettings();
+```
 
 ### HTTP request headers
 

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { IPRestrictionArrayWrapper } from '@onlyoffice/docspace-api-typescript';
+import { IPRestrictionArrayWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: IPRestrictionArrayWrapper = {
     response,

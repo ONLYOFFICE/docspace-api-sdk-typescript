@@ -1,6 +1,6 @@
 # AutoCleanupRequestDto
 
-The auto-clearing request parameters.
+The request parameters for updating the trash bin auto-clearing setting.
 
 ## Properties
 
@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { AutoCleanupRequestDto } from '@onlyoffice/docspace-api-typescript';
+import { AutoCleanupRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: AutoCleanupRequestDto = {
     set,

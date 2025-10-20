@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { StartEdit } from '@onlyoffice/docspace-api-typescript';
+import { StartEdit } from '@onlyoffice/docspace-api-sdk';
 
 const instance: StartEdit = {
     editingAlone,

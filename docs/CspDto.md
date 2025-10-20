@@ -6,13 +6,13 @@ The CSP (Content Security Policy) parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**domains** | **Array&lt;string&gt;** | The list of CSP domains. | [optional] [default to undefined]
-**header** | **string** | The CSP header. | [optional] [default to undefined]
+**domains** | **Array&lt;string&gt;** | The list of CSP domains. | [default to undefined]
+**header** | **string** | The CSP header. | [default to undefined]
 
 ## Example
 
 ```typescript
-import { CspDto } from '@onlyoffice/docspace-api-typescript';
+import { CspDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CspDto = {
     domains,

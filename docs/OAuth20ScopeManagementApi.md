@@ -1,6 +1,6 @@
-# OAuth20ScopeManagementApi
+# ScopeManagementApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
@@ -11,19 +11,7 @@ All URIs are relative to *http://localhost:8092*
 
 Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the \'openid\' scope always appearing first.
 
-### Example
-
-```typescript
-import {
-    OAuth20ScopeManagementApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new OAuth20ScopeManagementApi(configuration);
-
-const { status, data } = await apiInstance.getScopes();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-scopes/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -35,7 +23,21 @@ This endpoint does not have any parameters.
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
+
+### Example
+
+```typescript
+import {
+    OAuth20ScopeManagementApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new OAuth20ScopeManagementApi(configuration);
+
+const { status, data } = await apiInstance.getScopes();
+```
 
 ### HTTP request headers
 

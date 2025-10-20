@@ -1,6 +1,6 @@
-# PeopleProfilesApi
+# ProfilesApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
@@ -8,13 +8,13 @@ All URIs are relative to *http://localhost:8092*
 |[**deleteMember**](#deletemember) | **DELETE** /api/2.0/people/{userid} | Delete a user|
 |[**deleteProfile**](#deleteprofile) | **DELETE** /api/2.0/people/@self | Delete my profile|
 |[**getAllProfiles**](#getallprofiles) | **GET** /api/2.0/people | Get profiles|
-|[**getByEmail**](#getbyemail) | **GET** /api/2.0/people/email | Get a profile by user email|
-|[**getById**](#getbyid) | **GET** /api/2.0/people/{userid} | Get a profile by user name|
-|[**getClaims**](#getclaims) | **GET** /api/2.0/people/tokendiagnostics | Returns the user claims.|
+|[**getClaims**](#getclaims) | **GET** /api/2.0/people/tokendiagnostics | Get user claims|
+|[**getProfileByEmail**](#getprofilebyemail) | **GET** /api/2.0/people/email | Get a profile by user email|
+|[**getProfileByUserId**](#getprofilebyuserid) | **GET** /api/2.0/people/{userid} | Get a profile by user ID|
+|[**getSelfProfile**](#getselfprofile) | **GET** /api/2.0/people/@self | Get my profile|
 |[**inviteUsers**](#inviteusers) | **POST** /api/2.0/people/invite | Invite users|
 |[**removeUsers**](#removeusers) | **PUT** /api/2.0/people/delete | Delete users|
 |[**resendUserInvites**](#resenduserinvites) | **PUT** /api/2.0/people/invite | Resend activation emails|
-|[**self**](#self) | **GET** /api/2.0/people/@self | Get my profile|
 |[**sendEmailChangeInstructions**](#sendemailchangeinstructions) | **POST** /api/2.0/people/email | Send instructions to change email|
 |[**updateMember**](#updatemember) | **PUT** /api/2.0/people/{userid} | Update a user|
 |[**updateMemberCulture**](#updatememberculture) | **PUT** /api/2.0/people/{userid}/culture | Update a user culture code|
@@ -24,24 +24,7 @@ All URIs are relative to *http://localhost:8092*
 
 Adds a new portal user with the first name, last name, email address, and several optional parameters specified in the request.
 
-### Example
-
-```typescript
-import {
-    PeopleProfilesApi,
-    Configuration,
-    MemberRequestDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleProfilesApi(configuration);
-
-let memberRequestDto: MemberRequestDto; // (optional)
-
-const { status, data } = await apiInstance.addMember(
-    memberRequestDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/add-member/).
 
 ### Parameters
 
@@ -57,6 +40,25 @@ const { status, data } = await apiInstance.addMember(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleProfilesApi,
+    Configuration,
+    MemberRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleProfilesApi(configuration);
+
+let memberRequestDto: MemberRequestDto; // (optional)
+
+const { status, data } = await apiInstance.addMember(
+    memberRequestDto
+);
+```
 
 ### HTTP request headers
 
@@ -78,23 +80,7 @@ const { status, data } = await apiInstance.addMember(
 
 Deletes a user with the ID specified in the request from the portal.
 
-### Example
-
-```typescript
-import {
-    PeopleProfilesApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleProfilesApi(configuration);
-
-let userid: string; //The user ID. (default to undefined)
-
-const { status, data } = await apiInstance.deleteMember(
-    userid
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-member/).
 
 ### Parameters
 
@@ -110,6 +96,24 @@ const { status, data } = await apiInstance.deleteMember(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleProfilesApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleProfilesApi(configuration);
+
+let userid: string; //The user ID. (default to undefined)
+
+const { status, data } = await apiInstance.deleteMember(
+    userid
+);
+```
 
 ### HTTP request headers
 
@@ -133,19 +137,7 @@ const { status, data } = await apiInstance.deleteMember(
 
 Deletes the current user profile.
 
-### Example
-
-```typescript
-import {
-    PeopleProfilesApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleProfilesApi(configuration);
-
-const { status, data } = await apiInstance.deleteProfile();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-profile/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -158,6 +150,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleProfilesApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleProfilesApi(configuration);
+
+const { status, data } = await apiInstance.deleteProfile();
+```
 
 ### HTTP request headers
 
@@ -180,22 +186,19 @@ This endpoint does not have any parameters.
 
 Returns a list of profiles for all the portal users.
 
-### Example
-
-```typescript
-import {
-    PeopleProfilesApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleProfilesApi(configuration);
-
-const { status, data } = await apiInstance.getAllProfiles();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-profiles/).
 
 ### Parameters
-This endpoint does not have any parameters.
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **count** | [**number**] | The maximum number of items to be retrieved in the response. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The zero-based index of the first item to be retrieved in a filtered result set. | (optional) defaults to undefined|
+| **filterBy** | [**string**] | Specifies the filter criteria for user-related queries. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | Specifies the property or field name by which the results should be sorted. | (optional) defaults to undefined|
+| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
+| **filterSeparator** | [**string**] | The character or string used to separate multiple filter values in a filtering query. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The text value used as an additional filter criterion for profiles retrieval. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -205,6 +208,36 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleProfilesApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleProfilesApi(configuration);
+
+let count: number; //The maximum number of items to be retrieved in the response. (optional) (default to undefined)
+let startIndex: number; //The zero-based index of the first item to be retrieved in a filtered result set. (optional) (default to undefined)
+let filterBy: string; //Specifies the filter criteria for user-related queries. (optional) (default to undefined)
+let sortBy: string; //Specifies the property or field name by which the results should be sorted. (optional) (default to undefined)
+let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
+let filterSeparator: string; //The character or string used to separate multiple filter values in a filtering query. (optional) (default to undefined)
+let filterValue: string; //The text value used as an additional filter criterion for profiles retrieval. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getAllProfiles(
+    count,
+    startIndex,
+    filterBy,
+    sortBy,
+    sortOrder,
+    filterSeparator,
+    filterValue
+);
+```
 
 ### HTTP request headers
 
@@ -220,10 +253,24 @@ This endpoint does not have any parameters.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getByEmail**
-> EmployeeFullWrapper getByEmail()
+# **getClaims**
+> ObjectWrapper getClaims()
 
-Returns the detailed information about a profile of the user with the email specified in the request.
+Returns the user claims.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-claims/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**ObjectWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -231,23 +278,41 @@ Returns the detailed information about a profile of the user with the email spec
 import {
     PeopleProfilesApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PeopleProfilesApi(configuration);
 
-let email: string; //The user email address. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.getByEmail(
-    email
-);
+const { status, data } = await apiInstance.getClaims();
 ```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Claims |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getProfileByEmail**
+> EmployeeFullWrapper getProfileByEmail()
+
+Returns the detailed information about a profile of the user with the email specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-profile-by-email/).
 
 ### Parameters
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **email** | [**string**] | The user email address. | (optional) defaults to undefined|
+| **culture** | [**string**] | Culture | (optional) defaults to undefined|
 
 
 ### Return type
@@ -257,6 +322,26 @@ const { status, data } = await apiInstance.getByEmail(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleProfilesApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleProfilesApi(configuration);
+
+let email: string; //The user email address. (optional) (default to undefined)
+let culture: string; //Culture (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getProfileByEmail(
+    email,
+    culture
+);
+```
 
 ### HTTP request headers
 
@@ -273,28 +358,12 @@ const { status, data } = await apiInstance.getByEmail(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getById**
-> EmployeeFullWrapper getById()
+# **getProfileByUserId**
+> EmployeeFullWrapper getProfileByUserId()
 
-Returns the detailed information about a profile of the user with the name specified in the request.
+Returns the detailed information about a profile of the user with the ID specified in the request.
 
-### Example
-
-```typescript
-import {
-    PeopleProfilesApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleProfilesApi(configuration);
-
-let userid: string; //The user ID. (default to undefined)
-
-const { status, data } = await apiInstance.getById(
-    userid
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-profile-by-user-id/).
 
 ### Parameters
 
@@ -310,6 +379,24 @@ const { status, data } = await apiInstance.getById(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleProfilesApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleProfilesApi(configuration);
+
+let userid: string; //The user ID. (default to undefined)
+
+const { status, data } = await apiInstance.getProfileByUserId(
+    userid
+);
+```
 
 ### HTTP request headers
 
@@ -327,24 +414,12 @@ const { status, data } = await apiInstance.getById(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getClaims**
-> ObjectWrapper getClaims()
+# **getSelfProfile**
+> EmployeeFullWrapper getSelfProfile()
 
-Returns the user claims.
+Returns the detailed information about the current user profile.
 
-### Example
-
-```typescript
-import {
-    PeopleProfilesApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleProfilesApi(configuration);
-
-const { status, data } = await apiInstance.getClaims();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-self-profile/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -352,11 +427,25 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**ObjectWrapper**
+**EmployeeFullWrapper**
 
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleProfilesApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleProfilesApi(configuration);
+
+const { status, data } = await apiInstance.getSelfProfile();
+```
 
 ### HTTP request headers
 
@@ -367,7 +456,7 @@ This endpoint does not have any parameters.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Claims |  -  |
+|**200** | Detailed information about my profile |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -377,24 +466,7 @@ This endpoint does not have any parameters.
 
 Invites users specified in the request to the current portal.
 
-### Example
-
-```typescript
-import {
-    PeopleProfilesApi,
-    Configuration,
-    InviteUsersRequestDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleProfilesApi(configuration);
-
-let inviteUsersRequestDto: InviteUsersRequestDto; // (optional)
-
-const { status, data } = await apiInstance.inviteUsers(
-    inviteUsersRequestDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/invite-users/).
 
 ### Parameters
 
@@ -410,6 +482,25 @@ const { status, data } = await apiInstance.inviteUsers(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleProfilesApi,
+    Configuration,
+    InviteUsersRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleProfilesApi(configuration);
+
+let inviteUsersRequestDto: InviteUsersRequestDto; // (optional)
+
+const { status, data } = await apiInstance.inviteUsers(
+    inviteUsersRequestDto
+);
+```
 
 ### HTTP request headers
 
@@ -431,24 +522,7 @@ const { status, data } = await apiInstance.inviteUsers(
 
 Deletes a list of the users with the IDs specified in the request.
 
-### Example
-
-```typescript
-import {
-    PeopleProfilesApi,
-    Configuration,
-    UpdateMembersRequestDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleProfilesApi(configuration);
-
-let updateMembersRequestDto: UpdateMembersRequestDto; // (optional)
-
-const { status, data } = await apiInstance.removeUsers(
-    updateMembersRequestDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/remove-users/).
 
 ### Parameters
 
@@ -464,6 +538,25 @@ const { status, data } = await apiInstance.removeUsers(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleProfilesApi,
+    Configuration,
+    UpdateMembersRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleProfilesApi(configuration);
+
+let updateMembersRequestDto: UpdateMembersRequestDto; // (optional)
+
+const { status, data } = await apiInstance.removeUsers(
+    updateMembersRequestDto
+);
+```
 
 ### HTTP request headers
 
@@ -485,24 +578,7 @@ const { status, data } = await apiInstance.removeUsers(
 
 Resends emails to the users who have not activated their emails.
 
-### Example
-
-```typescript
-import {
-    PeopleProfilesApi,
-    Configuration,
-    UpdateMembersRequestDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleProfilesApi(configuration);
-
-let updateMembersRequestDto: UpdateMembersRequestDto; // (optional)
-
-const { status, data } = await apiInstance.resendUserInvites(
-    updateMembersRequestDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/resend-user-invites/).
 
 ### Parameters
 
@@ -519,6 +595,25 @@ const { status, data } = await apiInstance.resendUserInvites(
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+```typescript
+import {
+    PeopleProfilesApi,
+    Configuration,
+    UpdateMembersRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleProfilesApi(configuration);
+
+let updateMembersRequestDto: UpdateMembersRequestDto; // (optional)
+
+const { status, data } = await apiInstance.resendUserInvites(
+    updateMembersRequestDto
+);
+```
+
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -534,74 +629,12 @@ const { status, data } = await apiInstance.resendUserInvites(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **self**
-> EmployeeFullWrapper self()
-
-Returns the detailed information about the current user profile.
-
-### Example
-
-```typescript
-import {
-    PeopleProfilesApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleProfilesApi(configuration);
-
-const { status, data } = await apiInstance.self();
-```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**EmployeeFullWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Detailed information about my profile |  -  |
-|**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **sendEmailChangeInstructions**
 > StringWrapper sendEmailChangeInstructions()
 
 Sends a message to the user email with the instructions to change the email address connected to the portal.
 
-### Example
-
-```typescript
-import {
-    PeopleProfilesApi,
-    Configuration,
-    UpdateMemberRequestDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleProfilesApi(configuration);
-
-let updateMemberRequestDto: UpdateMemberRequestDto; // (optional)
-
-const { status, data } = await apiInstance.sendEmailChangeInstructions(
-    updateMemberRequestDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-email-change-instructions/).
 
 ### Parameters
 
@@ -617,6 +650,25 @@ const { status, data } = await apiInstance.sendEmailChangeInstructions(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleProfilesApi,
+    Configuration,
+    UpdateMemberRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleProfilesApi(configuration);
+
+let updateMemberRequestDto: UpdateMemberRequestDto; // (optional)
+
+const { status, data } = await apiInstance.sendEmailChangeInstructions(
+    updateMemberRequestDto
+);
+```
 
 ### HTTP request headers
 
@@ -636,30 +688,11 @@ const { status, data } = await apiInstance.sendEmailChangeInstructions(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **updateMember**
-> EmployeeFullWrapper updateMember()
+> EmployeeFullWrapper updateMember(updateMemberRequestDto)
 
 Updates the data for the selected portal user with the first name, last name, email address, and/or optional parameters specified in the request.
 
-### Example
-
-```typescript
-import {
-    PeopleProfilesApi,
-    Configuration,
-    UpdateMemberRequestDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleProfilesApi(configuration);
-
-let userid: string; //The user ID. (default to undefined)
-let updateMemberRequestDto: UpdateMemberRequestDto; //The request parameters for updating the user information. (optional)
-
-const { status, data } = await apiInstance.updateMember(
-    userid,
-    updateMemberRequestDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-member/).
 
 ### Parameters
 
@@ -676,6 +709,27 @@ const { status, data } = await apiInstance.updateMember(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleProfilesApi,
+    Configuration,
+    UpdateMemberRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleProfilesApi(configuration);
+
+let userid: string; //The user ID. (default to undefined)
+let updateMemberRequestDto: UpdateMemberRequestDto; //The request parameters for updating the user information.
+
+const { status, data } = await apiInstance.updateMember(
+    userid,
+    updateMemberRequestDto
+);
+```
 
 ### HTTP request headers
 
@@ -699,26 +753,7 @@ const { status, data } = await apiInstance.updateMember(
 
 Updates the user culture code with the parameters specified in the request.
 
-### Example
-
-```typescript
-import {
-    PeopleProfilesApi,
-    Configuration,
-    Culture
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleProfilesApi(configuration);
-
-let userid: string; //The user ID. (default to undefined)
-let culture: Culture; //The culture code parameters. (optional)
-
-const { status, data } = await apiInstance.updateMemberCulture(
-    userid,
-    culture
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-member-culture/).
 
 ### Parameters
 
@@ -735,6 +770,27 @@ const { status, data } = await apiInstance.updateMemberCulture(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleProfilesApi,
+    Configuration,
+    Culture
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleProfilesApi(configuration);
+
+let userid: string; //The user ID. (default to undefined)
+let culture: Culture; //The culture code parameters. (optional)
+
+const { status, data } = await apiInstance.updateMemberCulture(
+    userid,
+    culture
+);
+```
 
 ### HTTP request headers
 

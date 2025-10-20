@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { DocumentConfigDto } from '@onlyoffice/docspace-api-typescript';
+import { DocumentConfigDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: DocumentConfigDto = {
     fileType,

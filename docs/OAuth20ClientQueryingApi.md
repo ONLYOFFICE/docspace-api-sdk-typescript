@@ -1,6 +1,6 @@
-# OAuth20ClientQueryingApi
+# ClientQueryingApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
@@ -16,23 +16,7 @@ All URIs are relative to *http://localhost:8092*
 
 Retrieves detailed information about a specific OAuth2 client including its name, description, redirect URIs, and scopes.
 
-### Example
-
-```typescript
-import {
-    OAuth20ClientQueryingApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new OAuth20ClientQueryingApi(configuration);
-
-let clientId: string; //The client identifier. (default to undefined)
-
-const { status, data } = await apiInstance.getClient(
-    clientId
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-client/).
 
 ### Parameters
 
@@ -47,7 +31,25 @@ const { status, data } = await apiInstance.getClient(
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
+
+### Example
+
+```typescript
+import {
+    OAuth20ClientQueryingApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new OAuth20ClientQueryingApi(configuration);
+
+let clientId: string; //The client identifier. (default to undefined)
+
+const { status, data } = await apiInstance.getClient(
+    clientId
+);
+```
 
 ### HTTP request headers
 
@@ -72,23 +74,7 @@ const { status, data } = await apiInstance.getClient(
 
 Retrieves the detailed information for a client with the ID specified in the request.
 
-### Example
-
-```typescript
-import {
-    OAuth20ClientQueryingApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new OAuth20ClientQueryingApi(configuration);
-
-let clientId: string; //The client identifier. (default to undefined)
-
-const { status, data } = await apiInstance.getClientInfo(
-    clientId
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-client-info/).
 
 ### Parameters
 
@@ -103,7 +89,25 @@ const { status, data } = await apiInstance.getClientInfo(
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
+
+### Example
+
+```typescript
+import {
+    OAuth20ClientQueryingApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new OAuth20ClientQueryingApi(configuration);
+
+let clientId: string; //The client identifier. (default to undefined)
+
+const { status, data } = await apiInstance.getClientInfo(
+    clientId
+);
+```
 
 ### HTTP request headers
 
@@ -126,27 +130,7 @@ const { status, data } = await apiInstance.getClientInfo(
 
 Retrieves a paginated list of OAuth2 clients. The results can be paginated using the \'limit\' parameter and the last seen client ID or creation date.
 
-### Example
-
-```typescript
-import {
-    OAuth20ClientQueryingApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new OAuth20ClientQueryingApi(configuration);
-
-let limit: number; //The maximum number of results returned per page. (default to undefined)
-let lastClientId: string; //The ID of the last retrieved client. (optional) (default to undefined)
-let lastCreatedOn: string; //The creation date of the last retrieved client. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.getClients(
-    limit,
-    lastClientId,
-    lastCreatedOn
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-clients/).
 
 ### Parameters
 
@@ -163,7 +147,29 @@ const { status, data } = await apiInstance.getClients(
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
+
+### Example
+
+```typescript
+import {
+    OAuth20ClientQueryingApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new OAuth20ClientQueryingApi(configuration);
+
+let limit: number; //The maximum number of results returned per page. (default to undefined)
+let lastClientId: string; //The ID of the last retrieved client. (optional) (default to undefined)
+let lastCreatedOn: string; //The creation date of the last retrieved client. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getClients(
+    limit,
+    lastClientId,
+    lastCreatedOn
+);
+```
 
 ### HTTP request headers
 
@@ -187,27 +193,7 @@ const { status, data } = await apiInstance.getClients(
 
 Retrieves a paginated list of information for all clients.
 
-### Example
-
-```typescript
-import {
-    OAuth20ClientQueryingApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new OAuth20ClientQueryingApi(configuration);
-
-let limit: number; //The maximum number of results returned per page. (default to undefined)
-let lastClientId: string; //The identifier of the last retrieved client. (optional) (default to undefined)
-let lastCreatedOn: string; //The creation date of the last retrieved client. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.getClientsInfo(
-    limit,
-    lastClientId,
-    lastCreatedOn
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-clients-info/).
 
 ### Parameters
 
@@ -224,7 +210,29 @@ const { status, data } = await apiInstance.getClientsInfo(
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
+
+### Example
+
+```typescript
+import {
+    OAuth20ClientQueryingApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new OAuth20ClientQueryingApi(configuration);
+
+let limit: number; //The maximum number of results returned per page. (default to undefined)
+let lastClientId: string; //The identifier of the last retrieved client. (optional) (default to undefined)
+let lastCreatedOn: string; //The creation date of the last retrieved client. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getClientsInfo(
+    limit,
+    lastClientId,
+    lastCreatedOn
+);
+```
 
 ### HTTP request headers
 
@@ -247,25 +255,7 @@ const { status, data } = await apiInstance.getClientsInfo(
 
 Retrieves a paginated list of user consents.
 
-### Example
-
-```typescript
-import {
-    OAuth20ClientQueryingApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new OAuth20ClientQueryingApi(configuration);
-
-let limit: number; //The maximum number of results returned per page. (default to undefined)
-let lastModifiedOn: string; //The date when the user consent was last modified. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.getConsents(
-    limit,
-    lastModifiedOn
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-consents/).
 
 ### Parameters
 
@@ -281,7 +271,27 @@ const { status, data } = await apiInstance.getConsents(
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
+
+### Example
+
+```typescript
+import {
+    OAuth20ClientQueryingApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new OAuth20ClientQueryingApi(configuration);
+
+let limit: number; //The maximum number of results returned per page. (default to undefined)
+let lastModifiedOn: string; //The date when the user consent was last modified. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getConsents(
+    limit,
+    lastModifiedOn
+);
+```
 
 ### HTTP request headers
 
@@ -301,23 +311,7 @@ const { status, data } = await apiInstance.getConsents(
 
 Returns the public information for a client with the ID secified din the request.
 
-### Example
-
-```typescript
-import {
-    OAuth20ClientQueryingApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new OAuth20ClientQueryingApi(configuration);
-
-let clientId: string; //The client identifier. (default to undefined)
-
-const { status, data } = await apiInstance.getPublicClientInfo(
-    clientId
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-public-client-info/).
 
 ### Parameters
 
@@ -333,6 +327,24 @@ const { status, data } = await apiInstance.getPublicClientInfo(
 ### Authorization
 
 No authorization required
+
+### Example
+
+```typescript
+import {
+    OAuth20ClientQueryingApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new OAuth20ClientQueryingApi(configuration);
+
+let clientId: string; //The client identifier. (default to undefined)
+
+const { status, data } = await apiInstance.getPublicClientInfo(
+    clientId
+);
+```
 
 ### HTTP request headers
 

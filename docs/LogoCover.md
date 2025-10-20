@@ -6,13 +6,13 @@ The logo cover information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | The logo cover ID. | [optional] [default to undefined]
-**data** | **string** | The logo cover data. | [optional] [default to undefined]
+**id** | **string** | The logo cover ID. | [default to undefined]
+**data** | **string** | The logo cover data. | [default to undefined]
 
 ## Example
 
 ```typescript
-import { LogoCover } from '@onlyoffice/docspace-api-typescript';
+import { LogoCover } from '@onlyoffice/docspace-api-sdk';
 
 const instance: LogoCover = {
     id,

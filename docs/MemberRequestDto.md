@@ -31,7 +31,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { MemberRequestDto } from '@onlyoffice/docspace-api-typescript';
+import { MemberRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: MemberRequestDto = {
     password,

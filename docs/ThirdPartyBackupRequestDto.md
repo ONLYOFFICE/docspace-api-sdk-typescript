@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ThirdPartyBackupRequestDto } from '@onlyoffice/docspace-api-typescript';
+import { ThirdPartyBackupRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ThirdPartyBackupRequestDto = {
     url,

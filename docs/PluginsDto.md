@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { PluginsDto } from '@onlyoffice/docspace-api-typescript';
+import { PluginsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: PluginsDto = {
     enabled,

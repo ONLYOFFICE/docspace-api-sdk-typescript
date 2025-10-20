@@ -1,6 +1,6 @@
-# SecurityOAuth2Api
+# OAuth2Api
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
@@ -11,19 +11,7 @@ All URIs are relative to *http://localhost:8092*
 
 Generates a JWT token for communication between login (client) and identity services.
 
-### Example
-
-```typescript
-import {
-    SecurityOAuth2Api,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SecurityOAuth2Api(configuration);
-
-const { status, data } = await apiInstance.generateJwtToken();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/generate-jwt-token/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -36,6 +24,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SecurityOAuth2Api,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SecurityOAuth2Api(configuration);
+
+const { status, data } = await apiInstance.generateJwtToken();
+```
 
 ### HTTP request headers
 

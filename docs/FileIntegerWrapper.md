@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FileIntegerWrapper } from '@onlyoffice/docspace-api-typescript';
+import { FileIntegerWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FileIntegerWrapper = {
     response,

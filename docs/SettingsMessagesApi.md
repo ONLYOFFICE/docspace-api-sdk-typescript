@@ -1,36 +1,19 @@
-# SettingsMessagesApi
+# MessagesApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**enableAdminMessageSettings**](#enableadminmessagesettings) | **POST** /api/2.0/settings/messagesettings | Enable the administrator message settings|
-|[**sendAdmMail**](#sendadmmail) | **POST** /api/2.0/settings/sendadmmail | Send a message to the administrator|
+|[**sendAdminMail**](#sendadminmail) | **POST** /api/2.0/settings/sendadmmail | Send a message to the administrator|
 |[**sendJoinInviteMail**](#sendjoininvitemail) | **POST** /api/2.0/settings/sendjoininvite | Sends an invitation email|
 
 # **enableAdminMessageSettings**
 > StringWrapper enableAdminMessageSettings()
 
-Displays the contact form on the \"Sign In\" page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.
+Displays the contact form on the Sign In page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.
 
-### Example
-
-```typescript
-import {
-    SettingsMessagesApi,
-    Configuration,
-    TurnOnAdminMessageSettingsRequestDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsMessagesApi(configuration);
-
-let turnOnAdminMessageSettingsRequestDto: TurnOnAdminMessageSettingsRequestDto; // (optional)
-
-const { status, data } = await apiInstance.enableAdminMessageSettings(
-    turnOnAdminMessageSettingsRequestDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/enable-admin-message-settings/).
 
 ### Parameters
 
@@ -47,6 +30,25 @@ const { status, data } = await apiInstance.enableAdminMessageSettings(
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+```typescript
+import {
+    SettingsMessagesApi,
+    Configuration,
+    TurnOnAdminMessageSettingsRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsMessagesApi(configuration);
+
+let turnOnAdminMessageSettingsRequestDto: TurnOnAdminMessageSettingsRequestDto; // (optional)
+
+const { status, data } = await apiInstance.enableAdminMessageSettings(
+    turnOnAdminMessageSettingsRequestDto
+);
+```
+
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -61,29 +63,12 @@ const { status, data } = await apiInstance.enableAdminMessageSettings(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **sendAdmMail**
-> StringWrapper sendAdmMail()
+# **sendAdminMail**
+> StringWrapper sendAdminMail()
 
 Sends a message to the administrator email when unauthorized users encounter issues accessing DocSpace.
 
-### Example
-
-```typescript
-import {
-    SettingsMessagesApi,
-    Configuration,
-    AdminMessageSettingsRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsMessagesApi(configuration);
-
-let adminMessageSettingsRequestsDto: AdminMessageSettingsRequestsDto; // (optional)
-
-const { status, data } = await apiInstance.sendAdmMail(
-    adminMessageSettingsRequestsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-admin-mail/).
 
 ### Parameters
 
@@ -99,6 +84,25 @@ const { status, data } = await apiInstance.sendAdmMail(
 ### Authorization
 
 No authorization required
+
+### Example
+
+```typescript
+import {
+    SettingsMessagesApi,
+    Configuration,
+    AdminMessageSettingsRequestsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsMessagesApi(configuration);
+
+let adminMessageSettingsRequestsDto: AdminMessageSettingsRequestsDto; // (optional)
+
+const { status, data } = await apiInstance.sendAdminMail(
+    adminMessageSettingsRequestsDto
+);
+```
 
 ### HTTP request headers
 
@@ -120,24 +124,7 @@ No authorization required
 
 Sends an invitation email with a link to the DocSpace.
 
-### Example
-
-```typescript
-import {
-    SettingsMessagesApi,
-    Configuration,
-    AdminMessageBaseSettingsRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsMessagesApi(configuration);
-
-let adminMessageBaseSettingsRequestsDto: AdminMessageBaseSettingsRequestsDto; // (optional)
-
-const { status, data } = await apiInstance.sendJoinInviteMail(
-    adminMessageBaseSettingsRequestsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-join-invite-mail/).
 
 ### Parameters
 
@@ -153,6 +140,25 @@ const { status, data } = await apiInstance.sendJoinInviteMail(
 ### Authorization
 
 No authorization required
+
+### Example
+
+```typescript
+import {
+    SettingsMessagesApi,
+    Configuration,
+    AdminMessageBaseSettingsRequestsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsMessagesApi(configuration);
+
+let adminMessageBaseSettingsRequestsDto: AdminMessageBaseSettingsRequestsDto; // (optional)
+
+const { status, data } = await apiInstance.sendJoinInviteMail(
+    adminMessageBaseSettingsRequestsDto
+);
+```
 
 ### HTTP request headers
 

@@ -1,6 +1,6 @@
-# SettingsWebpluginsApi
+# WebpluginsApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
@@ -15,23 +15,7 @@ All URIs are relative to *http://localhost:8092*
 
 Adds a web plugin from a file to the current portal.
 
-### Example
-
-```typescript
-import {
-    SettingsWebpluginsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsWebpluginsApi(configuration);
-
-let system: boolean; //Specifies whether to load the system plugins or not. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.addWebPluginFromFile(
-    system
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/add-web-plugin-from-file/).
 
 ### Parameters
 
@@ -47,6 +31,24 @@ const { status, data } = await apiInstance.addWebPluginFromFile(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsWebpluginsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsWebpluginsApi(configuration);
+
+let system: boolean; //Specifies whether to load the system plugins or not. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.addWebPluginFromFile(
+    system
+);
+```
 
 ### HTTP request headers
 
@@ -69,23 +71,7 @@ const { status, data } = await apiInstance.addWebPluginFromFile(
 
 Deletes a web plugin by the name specified in the request.
 
-### Example
-
-```typescript
-import {
-    SettingsWebpluginsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsWebpluginsApi(configuration);
-
-let name: string; //The web plugin name. (default to undefined)
-
-const { status, data } = await apiInstance.deleteWebPlugin(
-    name
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-web-plugin/).
 
 ### Parameters
 
@@ -101,6 +87,24 @@ void (empty response body)
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsWebpluginsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsWebpluginsApi(configuration);
+
+let name: string; //The web plugin name. (default to undefined)
+
+const { status, data } = await apiInstance.deleteWebPlugin(
+    name
+);
+```
 
 ### HTTP request headers
 
@@ -122,23 +126,7 @@ void (empty response body)
 
 Returns a web plugin by the name specified in the request.
 
-### Example
-
-```typescript
-import {
-    SettingsWebpluginsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsWebpluginsApi(configuration);
-
-let name: string; //The web plugin name. (default to undefined)
-
-const { status, data } = await apiInstance.getWebPlugin(
-    name
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-web-plugin/).
 
 ### Parameters
 
@@ -154,6 +142,24 @@ const { status, data } = await apiInstance.getWebPlugin(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsWebpluginsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsWebpluginsApi(configuration);
+
+let name: string; //The web plugin name. (default to undefined)
+
+const { status, data } = await apiInstance.getWebPlugin(
+    name
+);
+```
 
 ### HTTP request headers
 
@@ -175,23 +181,7 @@ const { status, data } = await apiInstance.getWebPlugin(
 
 Returns the portal web plugins.
 
-### Example
-
-```typescript
-import {
-    SettingsWebpluginsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsWebpluginsApi(configuration);
-
-let enabled: boolean; //The optional filter for the plugin enabled state. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.getWebPlugins(
-    enabled
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-web-plugins/).
 
 ### Parameters
 
@@ -207,6 +197,24 @@ const { status, data } = await apiInstance.getWebPlugins(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsWebpluginsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsWebpluginsApi(configuration);
+
+let enabled: boolean; //The optional filter for the plugin enabled state. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getWebPlugins(
+    enabled
+);
+```
 
 ### HTTP request headers
 
@@ -224,30 +232,11 @@ const { status, data } = await apiInstance.getWebPlugins(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **updateWebPlugin**
-> updateWebPlugin()
+> updateWebPlugin(webPluginRequests)
 
 Updates a web plugin with the parameters specified in the request.
 
-### Example
-
-```typescript
-import {
-    SettingsWebpluginsApi,
-    Configuration,
-    WebPluginRequests
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsWebpluginsApi(configuration);
-
-let name: string; //The web plugin name. (default to undefined)
-let webPluginRequests: WebPluginRequests; //The configuration settings for the web plugin instance. (optional)
-
-const { status, data } = await apiInstance.updateWebPlugin(
-    name,
-    webPluginRequests
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-web-plugin/).
 
 ### Parameters
 
@@ -264,6 +253,27 @@ void (empty response body)
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsWebpluginsApi,
+    Configuration,
+    WebPluginRequests
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsWebpluginsApi(configuration);
+
+let name: string; //The web plugin name. (default to undefined)
+let webPluginRequests: WebPluginRequests; //The configuration settings for the web plugin instance.
+
+const { status, data } = await apiInstance.updateWebPlugin(
+    name,
+    webPluginRequests
+);
+```
 
 ### HTTP request headers
 

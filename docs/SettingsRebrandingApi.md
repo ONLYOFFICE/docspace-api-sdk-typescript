@@ -1,6 +1,6 @@
-# SettingsRebrandingApi
+# RebrandingApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
@@ -27,19 +27,7 @@ All URIs are relative to *http://localhost:8092*
 
 Deletes the additional white label settings.
 
-### Example
-
-```typescript
-import {
-    SettingsRebrandingApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsRebrandingApi(configuration);
-
-const { status, data } = await apiInstance.deleteAdditionalWhiteLabelSettings();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-additional-white-label-settings/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -52,6 +40,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsRebrandingApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsRebrandingApi(configuration);
+
+const { status, data } = await apiInstance.deleteAdditionalWhiteLabelSettings();
+```
 
 ### HTTP request headers
 
@@ -73,19 +75,7 @@ This endpoint does not have any parameters.
 
 Deletes the company white label settings.
 
-### Example
-
-```typescript
-import {
-    SettingsRebrandingApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsRebrandingApi(configuration);
-
-const { status, data } = await apiInstance.deleteCompanyWhiteLabelSettings();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-company-white-label-settings/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -98,6 +88,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsRebrandingApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsRebrandingApi(configuration);
+
+const { status, data } = await apiInstance.deleteCompanyWhiteLabelSettings();
+```
 
 ### HTTP request headers
 
@@ -119,19 +123,7 @@ This endpoint does not have any parameters.
 
 Returns the additional white label settings.
 
-### Example
-
-```typescript
-import {
-    SettingsRebrandingApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsRebrandingApi(configuration);
-
-const { status, data } = await apiInstance.getAdditionalWhiteLabelSettings();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-additional-white-label-settings/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -144,6 +136,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsRebrandingApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsRebrandingApi(configuration);
+
+const { status, data } = await apiInstance.getAdditionalWhiteLabelSettings();
+```
 
 ### HTTP request headers
 
@@ -164,19 +170,7 @@ This endpoint does not have any parameters.
 
 Returns the company white label settings.
 
-### Example
-
-```typescript
-import {
-    SettingsRebrandingApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsRebrandingApi(configuration);
-
-const { status, data } = await apiInstance.getCompanyWhiteLabelSettings();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-company-white-label-settings/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -189,6 +183,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsRebrandingApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsRebrandingApi(configuration);
+
+const { status, data } = await apiInstance.getCompanyWhiteLabelSettings();
+```
 
 ### HTTP request headers
 
@@ -209,19 +217,7 @@ This endpoint does not have any parameters.
 
 Checks if the white label is enabled or not.
 
-### Example
-
-```typescript
-import {
-    SettingsRebrandingApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsRebrandingApi(configuration);
-
-const { status, data } = await apiInstance.getEnableWhitelabel();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-enable-whitelabel/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -234,6 +230,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsRebrandingApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsRebrandingApi(configuration);
+
+const { status, data } = await apiInstance.getEnableWhitelabel();
+```
 
 ### HTTP request headers
 
@@ -252,27 +262,9 @@ This endpoint does not have any parameters.
 # **getIsDefaultWhiteLabelLogoText**
 > IsDefaultWhiteLabelLogosWrapper getIsDefaultWhiteLabelLogoText()
 
-Specifies if the white label logo text are default or not.
+Specifies if the white label logo text is default or not.
 
-### Example
-
-```typescript
-import {
-    SettingsRebrandingApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsRebrandingApi(configuration);
-
-let isDark: boolean; //Specifies if the white label logo is for the dark theme or not. (optional) (default to undefined)
-let isDefault: boolean; //Specifies if the logo is for a default tenant or not. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.getIsDefaultWhiteLabelLogoText(
-    isDark,
-    isDefault
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-default-white-label-logo-text/).
 
 ### Parameters
 
@@ -289,6 +281,26 @@ const { status, data } = await apiInstance.getIsDefaultWhiteLabelLogoText(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsRebrandingApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsRebrandingApi(configuration);
+
+let isDark: boolean; //Specifies if the white label logo is for the dark theme or not. (optional) (default to undefined)
+let isDefault: boolean; //Specifies if the logo is for a default tenant or not. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getIsDefaultWhiteLabelLogoText(
+    isDark,
+    isDefault
+);
+```
 
 ### HTTP request headers
 
@@ -309,25 +321,7 @@ const { status, data } = await apiInstance.getIsDefaultWhiteLabelLogoText(
 
 Specifies if the white label logos are default or not.
 
-### Example
-
-```typescript
-import {
-    SettingsRebrandingApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsRebrandingApi(configuration);
-
-let isDark: boolean; //Specifies if the white label logo is for the dark theme or not. (optional) (default to undefined)
-let isDefault: boolean; //Specifies if the logo is for a default tenant or not. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.getIsDefaultWhiteLabelLogos(
-    isDark,
-    isDefault
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-default-white-label-logos/).
 
 ### Parameters
 
@@ -344,6 +338,26 @@ const { status, data } = await apiInstance.getIsDefaultWhiteLabelLogos(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsRebrandingApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsRebrandingApi(configuration);
+
+let isDark: boolean; //Specifies if the white label logo is for the dark theme or not. (optional) (default to undefined)
+let isDefault: boolean; //Specifies if the logo is for a default tenant or not. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getIsDefaultWhiteLabelLogos(
+    isDark,
+    isDefault
+);
+```
 
 ### HTTP request headers
 
@@ -364,19 +378,7 @@ const { status, data } = await apiInstance.getIsDefaultWhiteLabelLogos(
 
 Returns the licensor data.
 
-### Example
-
-```typescript
-import {
-    SettingsRebrandingApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsRebrandingApi(configuration);
-
-const { status, data } = await apiInstance.getLicensorData();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-licensor-data/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -389,6 +391,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsRebrandingApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsRebrandingApi(configuration);
+
+const { status, data } = await apiInstance.getLicensorData();
+```
 
 ### HTTP request headers
 
@@ -409,25 +425,7 @@ This endpoint does not have any parameters.
 
 Returns the white label logo text.
 
-### Example
-
-```typescript
-import {
-    SettingsRebrandingApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsRebrandingApi(configuration);
-
-let isDark: boolean; //Specifies if the white label logo is for the dark theme or not. (optional) (default to undefined)
-let isDefault: boolean; //Specifies if the logo is for a default tenant or not. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.getWhiteLabelLogoText(
-    isDark,
-    isDefault
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-white-label-logo-text/).
 
 ### Parameters
 
@@ -444,6 +442,26 @@ const { status, data } = await apiInstance.getWhiteLabelLogoText(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsRebrandingApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsRebrandingApi(configuration);
+
+let isDark: boolean; //Specifies if the white label logo is for the dark theme or not. (optional) (default to undefined)
+let isDefault: boolean; //Specifies if the logo is for a default tenant or not. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getWhiteLabelLogoText(
+    isDark,
+    isDefault
+);
+```
 
 ### HTTP request headers
 
@@ -464,25 +482,7 @@ const { status, data } = await apiInstance.getWhiteLabelLogoText(
 
 Returns the white label logos.
 
-### Example
-
-```typescript
-import {
-    SettingsRebrandingApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsRebrandingApi(configuration);
-
-let isDark: boolean; //Specifies if the white label logo is for the dark theme or not. (optional) (default to undefined)
-let isDefault: boolean; //Specifies if the logo is for a default tenant or not. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.getWhiteLabelLogos(
-    isDark,
-    isDefault
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-white-label-logos/).
 
 ### Parameters
 
@@ -499,6 +499,26 @@ const { status, data } = await apiInstance.getWhiteLabelLogos(
 ### Authorization
 
 No authorization required
+
+### Example
+
+```typescript
+import {
+    SettingsRebrandingApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsRebrandingApi(configuration);
+
+let isDark: boolean; //Specifies if the white label logo is for the dark theme or not. (optional) (default to undefined)
+let isDefault: boolean; //Specifies if the logo is for a default tenant or not. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getWhiteLabelLogos(
+    isDark,
+    isDefault
+);
+```
 
 ### HTTP request headers
 
@@ -518,25 +538,7 @@ No authorization required
 
 Restores the white label logo text.
 
-### Example
-
-```typescript
-import {
-    SettingsRebrandingApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsRebrandingApi(configuration);
-
-let isDark: boolean; //Specifies if the white label logo is for the dark theme or not. (optional) (default to undefined)
-let isDefault: boolean; //Specifies if the logo is for a default tenant or not. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.restoreWhiteLabelLogoText(
-    isDark,
-    isDefault
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/restore-white-label-logo-text/).
 
 ### Parameters
 
@@ -553,6 +555,26 @@ const { status, data } = await apiInstance.restoreWhiteLabelLogoText(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsRebrandingApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsRebrandingApi(configuration);
+
+let isDark: boolean; //Specifies if the white label logo is for the dark theme or not. (optional) (default to undefined)
+let isDefault: boolean; //Specifies if the logo is for a default tenant or not. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.restoreWhiteLabelLogoText(
+    isDark,
+    isDefault
+);
+```
 
 ### HTTP request headers
 
@@ -574,25 +596,7 @@ const { status, data } = await apiInstance.restoreWhiteLabelLogoText(
 
 Restores the white label logos.
 
-### Example
-
-```typescript
-import {
-    SettingsRebrandingApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsRebrandingApi(configuration);
-
-let isDark: boolean; //Specifies if the white label logo is for the dark theme or not. (optional) (default to undefined)
-let isDefault: boolean; //Specifies if the logo is for a default tenant or not. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.restoreWhiteLabelLogos(
-    isDark,
-    isDefault
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/restore-white-label-logos/).
 
 ### Parameters
 
@@ -609,6 +613,26 @@ const { status, data } = await apiInstance.restoreWhiteLabelLogos(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsRebrandingApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsRebrandingApi(configuration);
+
+let isDark: boolean; //Specifies if the white label logo is for the dark theme or not. (optional) (default to undefined)
+let isDefault: boolean; //Specifies if the logo is for a default tenant or not. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.restoreWhiteLabelLogos(
+    isDark,
+    isDefault
+);
+```
 
 ### HTTP request headers
 
@@ -630,24 +654,7 @@ const { status, data } = await apiInstance.restoreWhiteLabelLogos(
 
 Saves the additional white label settings specified in the request.
 
-### Example
-
-```typescript
-import {
-    SettingsRebrandingApi,
-    Configuration,
-    AdditionalWhiteLabelSettingsWrapper
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsRebrandingApi(configuration);
-
-let additionalWhiteLabelSettingsWrapper: AdditionalWhiteLabelSettingsWrapper; // (optional)
-
-const { status, data } = await apiInstance.saveAdditionalWhiteLabelSettings(
-    additionalWhiteLabelSettingsWrapper
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-additional-white-label-settings/).
 
 ### Parameters
 
@@ -663,6 +670,25 @@ const { status, data } = await apiInstance.saveAdditionalWhiteLabelSettings(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsRebrandingApi,
+    Configuration,
+    AdditionalWhiteLabelSettingsWrapper
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsRebrandingApi(configuration);
+
+let additionalWhiteLabelSettingsWrapper: AdditionalWhiteLabelSettingsWrapper; // (optional)
+
+const { status, data } = await apiInstance.saveAdditionalWhiteLabelSettings(
+    additionalWhiteLabelSettingsWrapper
+);
+```
 
 ### HTTP request headers
 
@@ -685,24 +711,7 @@ const { status, data } = await apiInstance.saveAdditionalWhiteLabelSettings(
 
 Saves the company white label settings specified in the request.
 
-### Example
-
-```typescript
-import {
-    SettingsRebrandingApi,
-    Configuration,
-    CompanyWhiteLabelSettingsWrapper
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsRebrandingApi(configuration);
-
-let companyWhiteLabelSettingsWrapper: CompanyWhiteLabelSettingsWrapper; // (optional)
-
-const { status, data } = await apiInstance.saveCompanyWhiteLabelSettings(
-    companyWhiteLabelSettingsWrapper
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-company-white-label-settings/).
 
 ### Parameters
 
@@ -718,6 +727,25 @@ const { status, data } = await apiInstance.saveCompanyWhiteLabelSettings(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsRebrandingApi,
+    Configuration,
+    CompanyWhiteLabelSettingsWrapper
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsRebrandingApi(configuration);
+
+let companyWhiteLabelSettingsWrapper: CompanyWhiteLabelSettingsWrapper; // (optional)
+
+const { status, data } = await apiInstance.saveCompanyWhiteLabelSettings(
+    companyWhiteLabelSettingsWrapper
+);
+```
 
 ### HTTP request headers
 
@@ -740,28 +768,7 @@ const { status, data } = await apiInstance.saveCompanyWhiteLabelSettings(
 
 Saves the white label logo text specified in the request.
 
-### Example
-
-```typescript
-import {
-    SettingsRebrandingApi,
-    Configuration,
-    WhiteLabelRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsRebrandingApi(configuration);
-
-let isDark: boolean; //Specifies if the white label logo is for the dark theme or not. (optional) (default to undefined)
-let isDefault: boolean; //Specifies if the logo is for a default tenant or not. (optional) (default to undefined)
-let whiteLabelRequestsDto: WhiteLabelRequestsDto; // (optional)
-
-const { status, data } = await apiInstance.saveWhiteLabelLogoText(
-    isDark,
-    isDefault,
-    whiteLabelRequestsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-white-label-logo-text/).
 
 ### Parameters
 
@@ -779,6 +786,29 @@ const { status, data } = await apiInstance.saveWhiteLabelLogoText(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsRebrandingApi,
+    Configuration,
+    WhiteLabelRequestsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsRebrandingApi(configuration);
+
+let isDark: boolean; //Specifies if the white label logo is for the dark theme or not. (optional) (default to undefined)
+let isDefault: boolean; //Specifies if the logo is for a default tenant or not. (optional) (default to undefined)
+let whiteLabelRequestsDto: WhiteLabelRequestsDto; // (optional)
+
+const { status, data } = await apiInstance.saveWhiteLabelLogoText(
+    isDark,
+    isDefault,
+    whiteLabelRequestsDto
+);
+```
 
 ### HTTP request headers
 
@@ -800,28 +830,7 @@ const { status, data } = await apiInstance.saveWhiteLabelLogoText(
 
 Saves the white label logos specified in the request.
 
-### Example
-
-```typescript
-import {
-    SettingsRebrandingApi,
-    Configuration,
-    WhiteLabelRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsRebrandingApi(configuration);
-
-let isDark: boolean; //Specifies if the white label logo is for the dark theme or not. (optional) (default to undefined)
-let isDefault: boolean; //Specifies if the logo is for a default tenant or not. (optional) (default to undefined)
-let whiteLabelRequestsDto: WhiteLabelRequestsDto; // (optional)
-
-const { status, data } = await apiInstance.saveWhiteLabelSettings(
-    isDark,
-    isDefault,
-    whiteLabelRequestsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-white-label-settings/).
 
 ### Parameters
 
@@ -839,6 +848,29 @@ const { status, data } = await apiInstance.saveWhiteLabelSettings(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsRebrandingApi,
+    Configuration,
+    WhiteLabelRequestsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsRebrandingApi(configuration);
+
+let isDark: boolean; //Specifies if the white label logo is for the dark theme or not. (optional) (default to undefined)
+let isDefault: boolean; //Specifies if the logo is for a default tenant or not. (optional) (default to undefined)
+let whiteLabelRequestsDto: WhiteLabelRequestsDto; // (optional)
+
+const { status, data } = await apiInstance.saveWhiteLabelSettings(
+    isDark,
+    isDefault,
+    whiteLabelRequestsDto
+);
+```
 
 ### HTTP request headers
 
@@ -860,25 +892,7 @@ const { status, data } = await apiInstance.saveWhiteLabelSettings(
 
 Saves the white label logos from files.
 
-### Example
-
-```typescript
-import {
-    SettingsRebrandingApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsRebrandingApi(configuration);
-
-let isDark: boolean; //Specifies if the white label logo is for the dark theme or not. (optional) (default to undefined)
-let isDefault: boolean; //Specifies if the logo is for a default tenant or not. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.saveWhiteLabelSettingsFromFiles(
-    isDark,
-    isDefault
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-white-label-settings-from-files/).
 
 ### Parameters
 
@@ -895,6 +909,26 @@ const { status, data } = await apiInstance.saveWhiteLabelSettingsFromFiles(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsRebrandingApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsRebrandingApi(configuration);
+
+let isDark: boolean; //Specifies if the white label logo is for the dark theme or not. (optional) (default to undefined)
+let isDefault: boolean; //Specifies if the logo is for a default tenant or not. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.saveWhiteLabelSettingsFromFiles(
+    isDark,
+    isDefault
+);
+```
 
 ### HTTP request headers
 

@@ -1,6 +1,6 @@
 # RecentConfig
 
-The presence or absence of the documents in the \"Open Recent...\" menu option.
+The presence or absence of the documents in the Open Recent... menu option.
 
 ## Properties
 
@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { RecentConfig } from '@onlyoffice/docspace-api-typescript';
+import { RecentConfig } from '@onlyoffice/docspace-api-sdk';
 
 const instance: RecentConfig = {
     folder,

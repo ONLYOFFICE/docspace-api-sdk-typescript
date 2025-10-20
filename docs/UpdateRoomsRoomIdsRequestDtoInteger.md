@@ -1,17 +1,17 @@
 # UpdateRoomsRoomIdsRequestDtoInteger
 
-The request parameters for updating the room.
+The request parameters for updating the rooms.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**roomIds** | [**Array&lt;BaseBatchRequestDtoFolderIdsInner&gt;**](BaseBatchRequestDtoFolderIdsInner.md) | The list of room IDs. | [optional] [default to undefined]
+**roomIds** | [**Array&lt;DuplicateRequestDtoAllOfFileIds&gt;**](DuplicateRequestDtoAllOfFileIds.md) | The list of room IDs. | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { UpdateRoomsRoomIdsRequestDtoInteger } from '@onlyoffice/docspace-api-typescript';
+import { UpdateRoomsRoomIdsRequestDtoInteger } from '@onlyoffice/docspace-api-sdk';
 
 const instance: UpdateRoomsRoomIdsRequestDtoInteger = {
     roomIds,

@@ -1,6 +1,6 @@
 # WebhookRetryRequestsDto
 
-The request parameters for requesting the webhook delivery retries.
+The parameters for requesting the webhook delivery retries.
 
 ## Properties
 
@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { WebhookRetryRequestsDto } from '@onlyoffice/docspace-api-typescript';
+import { WebhookRetryRequestsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: WebhookRetryRequestsDto = {
     ids,

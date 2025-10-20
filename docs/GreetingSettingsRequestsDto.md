@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { GreetingSettingsRequestsDto } from '@onlyoffice/docspace-api-typescript';
+import { GreetingSettingsRequestsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: GreetingSettingsRequestsDto = {
     title,

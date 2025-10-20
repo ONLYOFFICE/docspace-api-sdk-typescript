@@ -8,7 +8,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **title** | **string** | The file entry title. | [optional] [default to undefined]
 **access** | [**FileShare**](FileShare.md) |  | [optional] [default to undefined]
-**shared** | **boolean** | Specifies if the file entry is shared or not. | [optional] [default to undefined]
+**shared** | **boolean** | Specifies if the file entry is shared via link or not. | [optional] [default to undefined]
+**sharedForUser** | **boolean** | Specifies if the file entry is shared for user or not. | [optional] [default to undefined]
+**parentShared** | **boolean** | Indicates whether the parent entity is shared. | [optional] [default to undefined]
+**shortWebUrl** | **string** | The short Web URL. | [optional] [default to undefined]
 **created** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
 **createdBy** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] [default to undefined]
 **updated** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
@@ -20,6 +23,8 @@ Name | Type | Description | Notes
 **providerKey** | **string** | The provider key of the file entry. | [optional] [default to undefined]
 **providerId** | **number** | The provider ID of the file entry. | [optional] [default to undefined]
 **order** | **string** | The order of the file entry. | [optional] [default to undefined]
+**isFavorite** | **boolean** | Specifies if the file is a favorite or not. | [optional] [default to undefined]
+**fileEntryType** | [**FileEntryType**](FileEntryType.md) |  | [optional] [default to undefined]
 **id** | **number** | The file entry ID. | [optional] [default to undefined]
 **rootFolderId** | **number** | The root folder ID of the file entry. | [optional] [default to undefined]
 **originId** | **number** | The origin ID of the file entry. | [optional] [default to undefined]
@@ -27,8 +32,13 @@ Name | Type | Description | Notes
 **originTitle** | **string** | The origin title of the file entry. | [optional] [default to undefined]
 **originRoomTitle** | **string** | The origin room title of the file entry. | [optional] [default to undefined]
 **canShare** | **boolean** | Specifies if the file entry can be shared or not. | [optional] [default to undefined]
-**security** | [**FileDtoIntegerSecurity**](FileDtoIntegerSecurity.md) |  | [optional] [default to undefined]
+**shareSettings** | [**FileEntryDtoIntegerAllOfShareSettings**](FileEntryDtoIntegerAllOfShareSettings.md) |  | [optional] [default to undefined]
+**security** | [**FileEntryDtoIntegerAllOfSecurity**](FileEntryDtoIntegerAllOfSecurity.md) |  | [optional] [default to undefined]
+**availableShareRights** | [**FileEntryDtoIntegerAllOfAvailableShareRights**](FileEntryDtoIntegerAllOfAvailableShareRights.md) |  | [optional] [default to undefined]
 **requestToken** | **string** | The request token of the file entry. | [optional] [default to undefined]
+**external** | **boolean** | Specifies if the folder can be accessed via an external link or not. | [optional] [default to undefined]
+**expirationDate** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
+**isLinkExpired** | **boolean** | Indicates whether the shareable link associated with the file or folder has expired. | [optional] [default to undefined]
 **folderId** | **number** | The folder ID where the file is located. | [optional] [default to undefined]
 **version** | **number** | The file version. | [optional] [default to undefined]
 **versionGroup** | **number** | The version group of the file. | [optional] [default to undefined]
@@ -38,7 +48,6 @@ Name | Type | Description | Notes
 **mute** | **boolean** | Specifies if the file is muted or not. | [optional] [default to undefined]
 **viewUrl** | **string** | The URL link to view the file. | [optional] [default to undefined]
 **webUrl** | **string** | The Web URL link to the file. | [optional] [default to undefined]
-**shortWebUrl** | **string** | The short Web URL. | [optional] [default to undefined]
 **fileType** | [**FileType**](FileType.md) |  | [optional] [default to undefined]
 **fileExst** | **string** | The file extension. | [optional] [default to undefined]
 **comment** | **string** | The comment to the file. | [optional] [default to undefined]
@@ -56,21 +65,22 @@ Name | Type | Description | Notes
 **inProcessFolderId** | **number** | The InProcess folder ID of the file. | [optional] [default to undefined]
 **inProcessFolderTitle** | **string** | The InProcess folder title of the file. | [optional] [default to undefined]
 **draftLocation** | [**DraftLocationInteger**](DraftLocationInteger.md) |  | [optional] [default to undefined]
-**viewAccessibility** | [**FileDtoIntegerViewAccessibility**](FileDtoIntegerViewAccessibility.md) |  | [optional] [default to undefined]
-**availableExternalRights** | **{ [key: string]: boolean; }** | The available external rights of the file. | [optional] [default to undefined]
+**viewAccessibility** | [**FileDtoIntegerAllOfViewAccessibility**](FileDtoIntegerAllOfViewAccessibility.md) |  | [optional] [default to undefined]
 **lastOpened** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
 **expired** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
-**fileEntryType** | [**FileEntryType**](FileEntryType.md) |  | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { FileDtoInteger } from '@onlyoffice/docspace-api-typescript';
+import { FileDtoInteger } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FileDtoInteger = {
     title,
     access,
     shared,
+    sharedForUser,
+    parentShared,
+    shortWebUrl,
     created,
     createdBy,
     updated,
@@ -82,6 +92,8 @@ const instance: FileDtoInteger = {
     providerKey,
     providerId,
     order,
+    isFavorite,
+    fileEntryType,
     id,
     rootFolderId,
     originId,
@@ -89,8 +101,13 @@ const instance: FileDtoInteger = {
     originTitle,
     originRoomTitle,
     canShare,
+    shareSettings,
     security,
+    availableShareRights,
     requestToken,
+    external,
+    expirationDate,
+    isLinkExpired,
     folderId,
     version,
     versionGroup,
@@ -100,7 +117,6 @@ const instance: FileDtoInteger = {
     mute,
     viewUrl,
     webUrl,
-    shortWebUrl,
     fileType,
     fileExst,
     comment,
@@ -119,10 +135,8 @@ const instance: FileDtoInteger = {
     inProcessFolderTitle,
     draftLocation,
     viewAccessibility,
-    availableExternalRights,
     lastOpened,
     expired,
-    fileEntryType,
 };
 ```
 

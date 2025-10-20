@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { DownloadRequestItemDtoKey } from '@onlyoffice/docspace-api-typescript';
+import { DownloadRequestItemDtoKey } from '@onlyoffice/docspace-api-sdk';
 
 const instance: DownloadRequestItemDtoKey = {
 };

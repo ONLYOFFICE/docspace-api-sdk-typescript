@@ -12,16 +12,16 @@ Name | Type | Description | Notes
 **feedback** | [**FeedbackConfig**](FeedbackConfig.md) |  | [optional] [default to undefined]
 **forcesave** | **boolean** | Specifies if the customization should be force saved. | [optional] [default to undefined]
 **goback** | [**GobackConfig**](GobackConfig.md) |  | [optional] [default to undefined]
+**review** | [**ReviewConfig**](ReviewConfig.md) |  | [optional] [default to undefined]
 **logo** | [**LogoConfigDto**](LogoConfigDto.md) |  | [optional] [default to undefined]
 **mentionShare** | **boolean** | Specifies if the share should be mentioned. | [optional] [default to undefined]
-**reviewDisplay** | **string** | The review display of the customization. | [optional] [default to undefined]
 **submitForm** | [**SubmitForm**](SubmitForm.md) |  | [optional] [default to undefined]
 **startFillingForm** | [**StartFillingForm**](StartFillingForm.md) |  | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { CustomizationConfigDto } from '@onlyoffice/docspace-api-typescript';
+import { CustomizationConfigDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CustomizationConfigDto = {
     about,
@@ -30,9 +30,9 @@ const instance: CustomizationConfigDto = {
     feedback,
     forcesave,
     goback,
+    review,
     logo,
     mentionShare,
-    reviewDisplay,
     submitForm,
     startFillingForm,
 };

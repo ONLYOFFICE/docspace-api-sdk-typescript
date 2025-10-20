@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { EncryptionSettings } from '@onlyoffice/docspace-api-typescript';
+import { EncryptionSettings } from '@onlyoffice/docspace-api-sdk';
 
 const instance: EncryptionSettings = {
     password,

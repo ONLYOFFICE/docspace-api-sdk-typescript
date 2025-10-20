@@ -1,6 +1,6 @@
 # SettingsQuotaApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
@@ -13,19 +13,7 @@ All URIs are relative to *http://localhost:8092*
 
 Returns the user quota settings.
 
-### Example
-
-```typescript
-import {
-    SettingsQuotaApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsQuotaApi(configuration);
-
-const { status, data } = await apiInstance.getUserQuotaSettings();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-quota-settings/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -38,6 +26,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsQuotaApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsQuotaApi(configuration);
+
+const { status, data } = await apiInstance.getUserQuotaSettings();
+```
 
 ### HTTP request headers
 
@@ -58,24 +60,7 @@ This endpoint does not have any parameters.
 
 Saves the room quota settings specified in the request to the current portal.
 
-### Example
-
-```typescript
-import {
-    SettingsQuotaApi,
-    Configuration,
-    QuotaSettingsRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsQuotaApi(configuration);
-
-let quotaSettingsRequestsDto: QuotaSettingsRequestsDto; // (optional)
-
-const { status, data } = await apiInstance.saveRoomQuotaSettings(
-    quotaSettingsRequestsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-room-quota-settings/).
 
 ### Parameters
 
@@ -91,6 +76,25 @@ const { status, data } = await apiInstance.saveRoomQuotaSettings(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsQuotaApi,
+    Configuration,
+    QuotaSettingsRequestsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsQuotaApi(configuration);
+
+let quotaSettingsRequestsDto: QuotaSettingsRequestsDto; // (optional)
+
+const { status, data } = await apiInstance.saveRoomQuotaSettings(
+    quotaSettingsRequestsDto
+);
+```
 
 ### HTTP request headers
 
@@ -112,24 +116,7 @@ const { status, data } = await apiInstance.saveRoomQuotaSettings(
 
 Saves the tenant quota settings specified in the request to the current portal.
 
-### Example
-
-```typescript
-import {
-    SettingsQuotaApi,
-    Configuration,
-    TenantQuotaSettingsRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsQuotaApi(configuration);
-
-let tenantQuotaSettingsRequestsDto: TenantQuotaSettingsRequestsDto; // (optional)
-
-const { status, data } = await apiInstance.setTenantQuotaSettings(
-    tenantQuotaSettingsRequestsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-quota-settings/).
 
 ### Parameters
 
@@ -145,6 +132,25 @@ const { status, data } = await apiInstance.setTenantQuotaSettings(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsQuotaApi,
+    Configuration,
+    TenantQuotaSettingsRequestsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsQuotaApi(configuration);
+
+let tenantQuotaSettingsRequestsDto: TenantQuotaSettingsRequestsDto; // (optional)
+
+const { status, data } = await apiInstance.setTenantQuotaSettings(
+    tenantQuotaSettingsRequestsDto
+);
+```
 
 ### HTTP request headers
 

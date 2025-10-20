@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { EmailActivationSettingsWrapper } from '@onlyoffice/docspace-api-typescript';
+import { EmailActivationSettingsWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: EmailActivationSettingsWrapper = {
     response,

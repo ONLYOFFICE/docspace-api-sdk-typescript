@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { LogoRequestsDto } from '@onlyoffice/docspace-api-typescript';
+import { LogoRequestsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: LogoRequestsDto = {
     light,

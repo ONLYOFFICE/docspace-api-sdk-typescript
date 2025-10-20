@@ -1,6 +1,6 @@
-# OAuth20ClientManagementApi
+# ClientManagementApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
@@ -16,26 +16,7 @@ All URIs are relative to *http://localhost:8092*
 
 Activates or deactivates an OAuth2 client. When deactivated, the client cannot request new access tokens, but existing tokens will remain valid until they expire.
 
-### Example
-
-```typescript
-import {
-    OAuth20ClientManagementApi,
-    Configuration,
-    ChangeClientActivationRequest
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new OAuth20ClientManagementApi(configuration);
-
-let clientId: string; //The client identifier. (default to undefined)
-let changeClientActivationRequest: ChangeClientActivationRequest; //
-
-const { status, data } = await apiInstance.changeActivation(
-    clientId,
-    changeClientActivationRequest
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-activation/).
 
 ### Parameters
 
@@ -51,7 +32,28 @@ const { status, data } = await apiInstance.changeActivation(
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
+
+### Example
+
+```typescript
+import {
+    OAuth20ClientManagementApi,
+    Configuration,
+    ChangeClientActivationRequest
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new OAuth20ClientManagementApi(configuration);
+
+let clientId: string; //The client identifier. (default to undefined)
+let changeClientActivationRequest: ChangeClientActivationRequest; //
+
+const { status, data } = await apiInstance.changeActivation(
+    clientId,
+    changeClientActivationRequest
+);
+```
 
 ### HTTP request headers
 
@@ -76,24 +78,7 @@ const { status, data } = await apiInstance.changeActivation(
 
 Creates a new OAuth2 client with the specified configuration. The client will be created with the provided scopes, redirect URIs, and other settings. Returns the created client details including the generated client ID.
 
-### Example
-
-```typescript
-import {
-    OAuth20ClientManagementApi,
-    Configuration,
-    CreateClientRequest
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new OAuth20ClientManagementApi(configuration);
-
-let createClientRequest: CreateClientRequest; //
-
-const { status, data } = await apiInstance.createClient(
-    createClientRequest
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-client/).
 
 ### Parameters
 
@@ -108,7 +93,26 @@ const { status, data } = await apiInstance.createClient(
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
+
+### Example
+
+```typescript
+import {
+    OAuth20ClientManagementApi,
+    Configuration,
+    CreateClientRequest
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new OAuth20ClientManagementApi(configuration);
+
+let createClientRequest: CreateClientRequest; //
+
+const { status, data } = await apiInstance.createClient(
+    createClientRequest
+);
+```
 
 ### HTTP request headers
 
@@ -132,23 +136,7 @@ const { status, data } = await apiInstance.createClient(
 
 Permanently deletes an OAuth2 client and all associated data. All access and refresh tokens issued to this client will be invalidated. This operation cannot be undone.
 
-### Example
-
-```typescript
-import {
-    OAuth20ClientManagementApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new OAuth20ClientManagementApi(configuration);
-
-let clientId: string; //The client identifier. (default to undefined)
-
-const { status, data } = await apiInstance.deleteClient(
-    clientId
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-client/).
 
 ### Parameters
 
@@ -163,7 +151,25 @@ const { status, data } = await apiInstance.deleteClient(
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
+
+### Example
+
+```typescript
+import {
+    OAuth20ClientManagementApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new OAuth20ClientManagementApi(configuration);
+
+let clientId: string; //The client identifier. (default to undefined)
+
+const { status, data } = await apiInstance.deleteClient(
+    clientId
+);
+```
 
 ### HTTP request headers
 
@@ -188,23 +194,7 @@ const { status, data } = await apiInstance.deleteClient(
 
 Generates a new client secret for the specified OAuth2 client. The old secret will be immediately invalidated. This operation should be used with caution as it requires updating the secret in all client applications.
 
-### Example
-
-```typescript
-import {
-    OAuth20ClientManagementApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new OAuth20ClientManagementApi(configuration);
-
-let clientId: string; //The client identifier. (default to undefined)
-
-const { status, data } = await apiInstance.regenerateSecret(
-    clientId
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/regenerate-secret/).
 
 ### Parameters
 
@@ -219,7 +209,25 @@ const { status, data } = await apiInstance.regenerateSecret(
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
+
+### Example
+
+```typescript
+import {
+    OAuth20ClientManagementApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new OAuth20ClientManagementApi(configuration);
+
+let clientId: string; //The client identifier. (default to undefined)
+
+const { status, data } = await apiInstance.regenerateSecret(
+    clientId
+);
+```
 
 ### HTTP request headers
 
@@ -244,23 +252,7 @@ const { status, data } = await apiInstance.regenerateSecret(
 
 Revokes all user consents for the specified OAuth2 client. This will invalidate all access tokens and refresh tokens issued to this client for the current user. The user will need to re-authorize the client to access their resources.
 
-### Example
-
-```typescript
-import {
-    OAuth20ClientManagementApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new OAuth20ClientManagementApi(configuration);
-
-let clientId: string; //The client identifier. (default to undefined)
-
-const { status, data } = await apiInstance.revokeUserClient(
-    clientId
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/revoke-user-client/).
 
 ### Parameters
 
@@ -275,7 +267,25 @@ const { status, data } = await apiInstance.revokeUserClient(
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
+
+### Example
+
+```typescript
+import {
+    OAuth20ClientManagementApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new OAuth20ClientManagementApi(configuration);
+
+let clientId: string; //The client identifier. (default to undefined)
+
+const { status, data } = await apiInstance.revokeUserClient(
+    clientId
+);
+```
 
 ### HTTP request headers
 
@@ -301,26 +311,7 @@ const { status, data } = await apiInstance.revokeUserClient(
 
 Updates the configuration of an existing OAuth2 client, allowing modifications to the client name, description, redirect URIs, and other settings. The client ID cannot be modified.
 
-### Example
-
-```typescript
-import {
-    OAuth20ClientManagementApi,
-    Configuration,
-    UpdateClientRequest
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new OAuth20ClientManagementApi(configuration);
-
-let clientId: string; //The client identifier. (default to undefined)
-let updateClientRequest: UpdateClientRequest; //
-
-const { status, data } = await apiInstance.updateClient(
-    clientId,
-    updateClientRequest
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-client/).
 
 ### Parameters
 
@@ -336,7 +327,28 @@ const { status, data } = await apiInstance.updateClient(
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
+
+### Example
+
+```typescript
+import {
+    OAuth20ClientManagementApi,
+    Configuration,
+    UpdateClientRequest
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new OAuth20ClientManagementApi(configuration);
+
+let clientId: string; //The client identifier. (default to undefined)
+let updateClientRequest: UpdateClientRequest; //
+
+const { status, data } = await apiInstance.updateClient(
+    clientId,
+    updateClientRequest
+);
+```
 
 ### HTTP request headers
 

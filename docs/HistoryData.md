@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { HistoryData } from '@onlyoffice/docspace-api-typescript';
+import { HistoryData } from '@onlyoffice/docspace-api-sdk';
 
 const instance: HistoryData = {
     initiatorName,

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ClientSecretResponse } from '@onlyoffice/docspace-api-typescript';
+import { ClientSecretResponse } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ClientSecretResponse = {
     client_secret,

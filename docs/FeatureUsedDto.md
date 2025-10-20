@@ -6,13 +6,13 @@ The used space parameters of the tenant quota feature.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**value** | **any** | The used space value. | [optional] [default to undefined]
+**value** | **any** | The used space value. | [default to undefined]
 **title** | **string** | The used space title. | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { FeatureUsedDto } from '@onlyoffice/docspace-api-typescript';
+import { FeatureUsedDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FeatureUsedDto = {
     value,

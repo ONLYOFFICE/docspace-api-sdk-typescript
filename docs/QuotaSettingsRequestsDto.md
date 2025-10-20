@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { QuotaSettingsRequestsDto } from '@onlyoffice/docspace-api-typescript';
+import { QuotaSettingsRequestsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: QuotaSettingsRequestsDto = {
     enableQuota,

@@ -6,16 +6,16 @@ The configuration parameters for the embedded document type.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**embedUrl** | **string** | The absolute URL to the document serving as a source file for the document embedded into the web page. | [optional] [readonly] [default to undefined]
+**embedUrl** | **string** | The absolute URL to the document serving as a source file for the document embedded into the web page. | [optional] [default to undefined]
 **saveUrl** | **string** | The absolute URL that will allow the document to be saved onto the user personal computer. | [optional] [readonly] [default to undefined]
 **shareLinkParam** | **string** | The shared URL parameter. | [optional] [default to undefined]
-**shareUrl** | **string** | The absolute URL that will allow other users to share this document. | [optional] [readonly] [default to undefined]
-**toolbarDocked** | **string** | The place for the embedded viewer toolbar, can be either \&quot;top\&quot; or \&quot;bottom\&quot;. | [optional] [readonly] [default to undefined]
+**shareUrl** | **string** | The absolute URL that will allow other users to share this document. | [optional] [default to undefined]
+**toolbarDocked** | **string** | The place for the embedded viewer toolbar, can be either top or bottom. | [optional] [readonly] [default to undefined]
 
 ## Example
 
 ```typescript
-import { EmbeddedConfig } from '@onlyoffice/docspace-api-typescript';
+import { EmbeddedConfig } from '@onlyoffice/docspace-api-sdk';
 
 const instance: EmbeddedConfig = {
     embedUrl,

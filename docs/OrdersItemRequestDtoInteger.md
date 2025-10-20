@@ -6,14 +6,14 @@ An item in the ordering request with its entry type and ID.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entryId** | **number** | The entry unique identifier (file or folder). | [optional] [default to undefined]
-**entryType** | [**FileEntryType**](FileEntryType.md) |  | [optional] [default to undefined]
-**order** | **number** | The order value. | [optional] [default to undefined]
+**entryId** | **number** | The entry unique identifier (file or folder). | [default to undefined]
+**entryType** | [**FileEntryType**](FileEntryType.md) |  | [default to undefined]
+**order** | **number** | The order value. | [default to undefined]
 
 ## Example
 
 ```typescript
-import { OrdersItemRequestDtoInteger } from '@onlyoffice/docspace-api-typescript';
+import { OrdersItemRequestDtoInteger } from '@onlyoffice/docspace-api-sdk';
 
 const instance: OrdersItemRequestDtoInteger = {
     entryId,

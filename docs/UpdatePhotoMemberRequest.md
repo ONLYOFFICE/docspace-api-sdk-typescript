@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { UpdatePhotoMemberRequest } from '@onlyoffice/docspace-api-typescript';
+import { UpdatePhotoMemberRequest } from '@onlyoffice/docspace-api-sdk';
 
 const instance: UpdatePhotoMemberRequest = {
     files,

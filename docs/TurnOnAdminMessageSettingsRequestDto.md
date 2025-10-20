@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { TurnOnAdminMessageSettingsRequestDto } from '@onlyoffice/docspace-api-typescript';
+import { TurnOnAdminMessageSettingsRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TurnOnAdminMessageSettingsRequestDto = {
     turnOn,

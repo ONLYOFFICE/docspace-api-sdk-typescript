@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CronParams } from '@onlyoffice/docspace-api-typescript';
+import { CronParams } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CronParams = {
     period,

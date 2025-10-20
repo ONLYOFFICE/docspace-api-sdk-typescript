@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { EmployeeFullArrayWrapper } from '@onlyoffice/docspace-api-typescript';
+import { EmployeeFullArrayWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: EmployeeFullArrayWrapper = {
     response,

@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **page** | **string** | The audit event page. | [optional] [default to undefined]
 **actionType** | [**ActionType**](ActionType.md) |  | [optional] [default to undefined]
 **product** | [**ProductType**](ProductType.md) |  | [optional] [default to undefined]
-**module** | [**ModuleType**](ModuleType.md) |  | [optional] [default to undefined]
+**location** | [**LocationType**](LocationType.md) |  | [optional] [default to undefined]
 **target** | **Array&lt;string&gt;** | The list of target objects affected by the audit event (e.g., document ID, user account). | [optional] [default to undefined]
 **entries** | [**Array&lt;EntryType&gt;**](EntryType.md) | The list of audit entry types (e.g., Folder, User, File). | [optional] [default to undefined]
 **context** | **string** | The audit event context. | [optional] [default to undefined]
@@ -28,7 +28,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { AuditEventDto } from '@onlyoffice/docspace-api-typescript';
+import { AuditEventDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: AuditEventDto = {
     id,
@@ -45,7 +45,7 @@ const instance: AuditEventDto = {
     page,
     actionType,
     product,
-    module,
+    location,
     target,
     entries,
     context,

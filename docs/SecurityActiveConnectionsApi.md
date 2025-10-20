@@ -1,6 +1,6 @@
-# SecurityActiveConnectionsApi
+# ActiveConnectionsApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
@@ -15,19 +15,7 @@ All URIs are relative to *http://localhost:8092*
 
 Returns all the active connections to the portal.
 
-### Example
-
-```typescript
-import {
-    SecurityActiveConnectionsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SecurityActiveConnectionsApi(configuration);
-
-const { status, data } = await apiInstance.getAllActiveConnections();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-active-connections/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -40,6 +28,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SecurityActiveConnectionsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SecurityActiveConnectionsApi(configuration);
+
+const { status, data } = await apiInstance.getAllActiveConnections();
+```
 
 ### HTTP request headers
 
@@ -60,23 +62,7 @@ This endpoint does not have any parameters.
 
 Logs out from the connection with the ID specified in the request.
 
-### Example
-
-```typescript
-import {
-    SecurityActiveConnectionsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SecurityActiveConnectionsApi(configuration);
-
-let loginEventId: number; //The ID of the specific login event. (default to undefined)
-
-const { status, data } = await apiInstance.logOutActiveConnection(
-    loginEventId
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/log-out-active-connection/).
 
 ### Parameters
 
@@ -92,6 +78,24 @@ const { status, data } = await apiInstance.logOutActiveConnection(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SecurityActiveConnectionsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SecurityActiveConnectionsApi(configuration);
+
+let loginEventId: number; //The ID of the specific login event. (default to undefined)
+
+const { status, data } = await apiInstance.logOutActiveConnection(
+    loginEventId
+);
+```
 
 ### HTTP request headers
 
@@ -113,19 +117,7 @@ const { status, data } = await apiInstance.logOutActiveConnection(
 
 Logs out from all the active connections for the current user and changes their password.
 
-### Example
-
-```typescript
-import {
-    SecurityActiveConnectionsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SecurityActiveConnectionsApi(configuration);
-
-const { status, data } = await apiInstance.logOutAllActiveConnectionsChangePassword();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/log-out-all-active-connections-change-password/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -138,6 +130,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SecurityActiveConnectionsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SecurityActiveConnectionsApi(configuration);
+
+const { status, data } = await apiInstance.logOutAllActiveConnectionsChangePassword();
+```
 
 ### HTTP request headers
 
@@ -158,23 +164,7 @@ This endpoint does not have any parameters.
 
 Logs out from all the active connections for the user with the ID specified in the request.
 
-### Example
-
-```typescript
-import {
-    SecurityActiveConnectionsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SecurityActiveConnectionsApi(configuration);
-
-let userId: string; //The user ID extracted from the route parameters. (default to undefined)
-
-const { status, data } = await apiInstance.logOutAllActiveConnectionsForUser(
-    userId
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/log-out-all-active-connections-for-user/).
 
 ### Parameters
 
@@ -190,6 +180,24 @@ void (empty response body)
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SecurityActiveConnectionsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SecurityActiveConnectionsApi(configuration);
+
+let userId: string; //The user ID extracted from the route parameters. (default to undefined)
+
+const { status, data } = await apiInstance.logOutAllActiveConnectionsForUser(
+    userId
+);
+```
 
 ### HTTP request headers
 
@@ -211,19 +219,7 @@ void (empty response body)
 
 Logs out from all the active connections except the current connection.
 
-### Example
-
-```typescript
-import {
-    SecurityActiveConnectionsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SecurityActiveConnectionsApi(configuration);
-
-const { status, data } = await apiInstance.logOutAllExceptThisConnection();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/log-out-all-except-this-connection/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -236,6 +232,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SecurityActiveConnectionsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SecurityActiveConnectionsApi(configuration);
+
+const { status, data } = await apiInstance.logOutAllExceptThisConnection();
+```
 
 ### HTTP request headers
 

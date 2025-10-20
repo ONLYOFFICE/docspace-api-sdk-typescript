@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { NotificationSettingsWrapper } from '@onlyoffice/docspace-api-typescript';
+import { NotificationSettingsWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: NotificationSettingsWrapper = {
     response,

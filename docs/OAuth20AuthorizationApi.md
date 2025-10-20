@@ -1,41 +1,19 @@
 # OAuth20AuthorizationApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**oauth2AuthorizeGet**](#oauth2authorizeget) | **GET** /oauth2/authorize | OAuth2 authorization endpoint|
-|[**oauth2AuthorizePost**](#oauth2authorizepost) | **POST** /oauth2/authorize | OAuth2 consent endpoint|
-|[**oauth2TokenPost**](#oauth2tokenpost) | **POST** /oauth2/token | OAuth2 token endpoint|
+|[**authorizeOAuth**](#authorizeoauth) | **GET** /oauth2/authorize | OAuth2 authorization endpoint|
+|[**exchangeToken**](#exchangetoken) | **POST** /oauth2/token | OAuth2 token endpoint|
+|[**submitConsent**](#submitconsent) | **POST** /oauth2/authorize | OAuth2 consent endpoint|
 
-# **oauth2AuthorizeGet**
-> oauth2AuthorizeGet()
+# **authorizeOAuth**
+> authorizeOAuth()
 
 Initiates the OAuth2 authorization flow.
 
-### Example
-
-```typescript
-import {
-    OAuth20AuthorizationApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new OAuth20AuthorizationApi(configuration);
-
-let responseType: string; //The OAuth 2.0 response type, must be \'code\' for authorization code flow. (default to undefined)
-let clientId: string; //The client identifier issued to the client during registration. (default to undefined)
-let redirectUri: string; //The URL to redirect to after authorization is complete. (default to undefined)
-let scope: string; //The space-separated list of requested scope permissions. (default to undefined)
-
-const { status, data } = await apiInstance.oauth2AuthorizeGet(
-    responseType,
-    clientId,
-    redirectUri,
-    scope
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/authorize-oauth/).
 
 ### Parameters
 
@@ -53,7 +31,31 @@ void (empty response body)
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
+
+### Example
+
+```typescript
+import {
+    OAuth20AuthorizationApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new OAuth20AuthorizationApi(configuration);
+
+let responseType: string; //The OAuth 2.0 response type, must be \'code\' for authorization code flow. (default to undefined)
+let clientId: string; //The client identifier issued to the client during registration. (default to undefined)
+let redirectUri: string; //The URL to redirect to after authorization is complete. (default to undefined)
+let scope: string; //The space-separated list of requested scope permissions. (default to undefined)
+
+const { status, data } = await apiInstance.authorizeOAuth(
+    responseType,
+    clientId,
+    redirectUri,
+    scope
+);
+```
 
 ### HTTP request headers
 
@@ -69,10 +71,31 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **oauth2AuthorizePost**
-> oauth2AuthorizePost()
+# **exchangeToken**
+> ExchangeToken200Response exchangeToken()
 
-Sends a consent request with the specified parameters.
+Exchanges an authorization code specified in the request for the access token.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/exchange-token/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **grantType** | [**string**] | The OAuth2 grant type, must be \\\&#39;authorization_code\\\&#39; for the authorization code flow. | (optional) defaults to undefined|
+| **code** | [**string**] | A temporary authorization code that is sent to the client to be exchanged for a token. | (optional) defaults to undefined|
+| **redirectUri** | [**string**] | The URL where the user will be redirected after successful or unsuccessful authentication. | (optional) defaults to undefined|
+| **clientId** | [**string**] | The client identifier issued to the client during registration. | (optional) defaults to undefined|
+| **clientSecret** | [**string**] | The client secret issued to the client during registration. | (optional) defaults to undefined|
+
+
+### Return type
+
+**ExchangeToken200Response**
+
+### Authorization
+
+No authorization required
 
 ### Example
 
@@ -80,21 +103,46 @@ Sends a consent request with the specified parameters.
 import {
     OAuth20AuthorizationApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new OAuth20AuthorizationApi(configuration);
 
+let grantType: string; //The OAuth2 grant type, must be \\\'authorization_code\\\' for the authorization code flow. (optional) (default to undefined)
+let code: string; //A temporary authorization code that is sent to the client to be exchanged for a token. (optional) (default to undefined)
+let redirectUri: string; //The URL where the user will be redirected after successful or unsuccessful authentication. (optional) (default to undefined)
 let clientId: string; //The client identifier issued to the client during registration. (optional) (default to undefined)
-let state: string; //The random string used to solve the CSRF vulnerability problem. (optional) (default to undefined)
-let scope: string; //The space-separated list of requested scope permissions. (optional) (default to undefined)
+let clientSecret: string; //The client secret issued to the client during registration. (optional) (default to undefined)
 
-const { status, data } = await apiInstance.oauth2AuthorizePost(
+const { status, data } = await apiInstance.exchangeToken(
+    grantType,
+    code,
+    redirectUri,
     clientId,
-    state,
-    scope
+    clientSecret
 );
 ```
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The authorization code was successfully exchanged for the access token |  -  |
+|**400** | Invalid request parameters |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **submitConsent**
+> submitConsent()
+
+Sends a consent request with the specified parameters.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/submit-consent/).
 
 ### Parameters
 
@@ -111,7 +159,29 @@ void (empty response body)
 
 ### Authorization
 
-[x-signature](../README.md#x-signature)
+[asc_auth_key](../README.md#asc_auth_key)
+
+### Example
+
+```typescript
+import {
+    OAuth20AuthorizationApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new OAuth20AuthorizationApi(configuration);
+
+let clientId: string; //The client identifier issued to the client during registration. (optional) (default to undefined)
+let state: string; //The random string used to solve the CSRF vulnerability problem. (optional) (default to undefined)
+let scope: string; //The space-separated list of requested scope permissions. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.submitConsent(
+    clientId,
+    state,
+    scope
+);
+```
 
 ### HTTP request headers
 
@@ -123,70 +193,6 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**302** | Redirect to the client\&#39;s redirect URI with authorization code |  -  |
-|**400** | Invalid request parameters |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **oauth2TokenPost**
-> Oauth2TokenPost200Response oauth2TokenPost()
-
-Exchanges an authorization code specified in the request for the access token.
-
-### Example
-
-```typescript
-import {
-    OAuth20AuthorizationApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new OAuth20AuthorizationApi(configuration);
-
-let grantType: string; //The OAuth2 grant type, must be \\\'authorization_code\\\' for the authorization code flow. (optional) (default to undefined)
-let code: string; //A temporary authorization code that is sent to the client to be exchanged for a token. (optional) (default to undefined)
-let redirectUri: string; //The URL where the user will be redirected after successful or unsuccessful authentication. (optional) (default to undefined)
-let clientId: string; //The client identifier issued to the client during registration. (optional) (default to undefined)
-let clientSecret: string; //The client secret issued to the client during registration. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.oauth2TokenPost(
-    grantType,
-    code,
-    redirectUri,
-    clientId,
-    clientSecret
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **grantType** | [**string**] | The OAuth2 grant type, must be \\\&#39;authorization_code\\\&#39; for the authorization code flow. | (optional) defaults to undefined|
-| **code** | [**string**] | A temporary authorization code that is sent to the client to be exchanged for a token. | (optional) defaults to undefined|
-| **redirectUri** | [**string**] | The URL where the user will be redirected after successful or unsuccessful authentication. | (optional) defaults to undefined|
-| **clientId** | [**string**] | The client identifier issued to the client during registration. | (optional) defaults to undefined|
-| **clientSecret** | [**string**] | The client secret issued to the client during registration. | (optional) defaults to undefined|
-
-
-### Return type
-
-**Oauth2TokenPost200Response**
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/x-www-form-urlencoded
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | The authorization code was successfully exchanged for the access token |  -  |
 |**400** | Invalid request parameters |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

@@ -1,15 +1,15 @@
-# SettingsSecurityApi
+# SecurityApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**getEnabledModules**](#getenabledmodules) | **GET** /api/2.0/settings/security/modules | Get the enabled modules|
+|[**getIsProductAdministrator**](#getisproductadministrator) | **GET** /api/2.0/settings/security/administrator | Check a product administrator|
 |[**getPasswordSettings**](#getpasswordsettings) | **GET** /api/2.0/settings/security/password | Get the password settings|
 |[**getProductAdministrators**](#getproductadministrators) | **GET** /api/2.0/settings/security/administrator/{productid} | Get the product administrators|
 |[**getWebItemSecurityInfo**](#getwebitemsecurityinfo) | **GET** /api/2.0/settings/security/{id} | Get the module availability|
 |[**getWebItemSettingsSecurityInfo**](#getwebitemsettingssecurityinfo) | **GET** /api/2.0/settings/security | Get the security settings|
-|[**isProductAdministrator**](#isproductadministrator) | **GET** /api/2.0/settings/security/administrator | Check a product administrator|
 |[**setAccessToWebItems**](#setaccesstowebitems) | **PUT** /api/2.0/settings/security/access | Set the security settings to modules|
 |[**setProductAdministrator**](#setproductadministrator) | **PUT** /api/2.0/settings/security/administrator | Set a product administrator|
 |[**setWebItemSecurity**](#setwebitemsecurity) | **PUT** /api/2.0/settings/security | Set the module security settings|
@@ -20,19 +20,7 @@ All URIs are relative to *http://localhost:8092*
 
 Returns a list of all the enabled modules.
 
-### Example
-
-```typescript
-import {
-    SettingsSecurityApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsSecurityApi(configuration);
-
-const { status, data } = await apiInstance.getEnabledModules();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-enabled-modules/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -45,6 +33,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsSecurityApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsSecurityApi(configuration);
+
+const { status, data } = await apiInstance.getEnabledModules();
+```
 
 ### HTTP request headers
 
@@ -60,10 +62,28 @@ This endpoint does not have any parameters.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getPasswordSettings**
-> PasswordSettingsWrapper getPasswordSettings()
+# **getIsProductAdministrator**
+> ProductAdministratorWrapper getIsProductAdministrator()
 
-Returns the portal password settings.
+Checks if the selected user is an administrator of a product with the ID specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-product-administrator/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **productid** | [**string**] | The ID of the product extracted from the query parameters. | defaults to undefined|
+| **userid** | [**string**] | The user ID extracted from the query parameters. | defaults to undefined|
+
+
+### Return type
+
+**ProductAdministratorWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -71,13 +91,40 @@ Returns the portal password settings.
 import {
     SettingsSecurityApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsSecurityApi(configuration);
 
-const { status, data } = await apiInstance.getPasswordSettings();
+let productid: string; //The ID of the product extracted from the query parameters. (default to undefined)
+let userid: string; //The user ID extracted from the query parameters. (default to undefined)
+
+const { status, data } = await apiInstance.getIsProductAdministrator(
+    productid,
+    userid
+);
 ```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Object with the user security information: product ID, user ID, administrator or not |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getPasswordSettings**
+> PasswordSettingsWrapper getPasswordSettings()
+
+Returns the portal password settings.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-password-settings/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -90,6 +137,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsSecurityApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsSecurityApi(configuration);
+
+const { status, data } = await apiInstance.getPasswordSettings();
+```
 
 ### HTTP request headers
 
@@ -110,23 +171,7 @@ This endpoint does not have any parameters.
 
 Returns a list of all the administrators of a product with the ID specified in the request.
 
-### Example
-
-```typescript
-import {
-    SettingsSecurityApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsSecurityApi(configuration);
-
-let productid: string; //The ID of the product extracted from the route parameters. (default to undefined)
-
-const { status, data } = await apiInstance.getProductAdministrators(
-    productid
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-product-administrators/).
 
 ### Parameters
 
@@ -142,6 +187,24 @@ const { status, data } = await apiInstance.getProductAdministrators(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsSecurityApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsSecurityApi(configuration);
+
+let productid: string; //The ID of the product extracted from the route parameters. (default to undefined)
+
+const { status, data } = await apiInstance.getProductAdministrators(
+    productid
+);
+```
 
 ### HTTP request headers
 
@@ -162,23 +225,7 @@ const { status, data } = await apiInstance.getProductAdministrators(
 
 Returns the availability of the module with the ID specified in the request.
 
-### Example
-
-```typescript
-import {
-    SettingsSecurityApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsSecurityApi(configuration);
-
-let id: string; //The ID extracted from the route parameters. (default to undefined)
-
-const { status, data } = await apiInstance.getWebItemSecurityInfo(
-    id
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-web-item-security-info/).
 
 ### Parameters
 
@@ -194,6 +241,24 @@ const { status, data } = await apiInstance.getWebItemSecurityInfo(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsSecurityApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsSecurityApi(configuration);
+
+let id: string; //The ID extracted from the route parameters. (default to undefined)
+
+const { status, data } = await apiInstance.getWebItemSecurityInfo(
+    id
+);
+```
 
 ### HTTP request headers
 
@@ -214,23 +279,7 @@ const { status, data } = await apiInstance.getWebItemSecurityInfo(
 
 Returns the security settings for the modules specified in the request.
 
-### Example
-
-```typescript
-import {
-    SettingsSecurityApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsSecurityApi(configuration);
-
-let ids: Array<string>; //The list of module identifiers for which to retrieve the security settings. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.getWebItemSettingsSecurityInfo(
-    ids
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-web-item-settings-security-info/).
 
 ### Parameters
 
@@ -247,6 +296,24 @@ const { status, data } = await apiInstance.getWebItemSettingsSecurityInfo(
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+```typescript
+import {
+    SettingsSecurityApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsSecurityApi(configuration);
+
+let ids: Array<string>; //The list of module identifiers for which to retrieve the security settings. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getWebItemSettingsSecurityInfo(
+    ids
+);
+```
+
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -261,84 +328,12 @@ const { status, data } = await apiInstance.getWebItemSettingsSecurityInfo(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **isProductAdministrator**
-> ProductAdministratorWrapper isProductAdministrator()
-
-Checks if the selected user is an administrator of a product with the ID specified in the request.
-
-### Example
-
-```typescript
-import {
-    SettingsSecurityApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsSecurityApi(configuration);
-
-let productid: string; //The ID of the product extracted from the query parameters. (optional) (default to undefined)
-let userid: string; //The user ID extracted from the query parameters. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.isProductAdministrator(
-    productid,
-    userid
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **productid** | [**string**] | The ID of the product extracted from the query parameters. | (optional) defaults to undefined|
-| **userid** | [**string**] | The user ID extracted from the query parameters. | (optional) defaults to undefined|
-
-
-### Return type
-
-**ProductAdministratorWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Object with the user security information: product ID, user ID, administrator or not |  -  |
-|**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **setAccessToWebItems**
 > SecurityArrayWrapper setAccessToWebItems()
 
 Sets the security settings to the modules with the IDs specified in the request.
 
-### Example
-
-```typescript
-import {
-    SettingsSecurityApi,
-    Configuration,
-    WebItemsSecurityRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsSecurityApi(configuration);
-
-let webItemsSecurityRequestsDto: WebItemsSecurityRequestsDto; // (optional)
-
-const { status, data } = await apiInstance.setAccessToWebItems(
-    webItemsSecurityRequestsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-access-to-web-items/).
 
 ### Parameters
 
@@ -354,6 +349,25 @@ const { status, data } = await apiInstance.setAccessToWebItems(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsSecurityApi,
+    Configuration,
+    WebItemsSecurityRequestsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsSecurityApi(configuration);
+
+let webItemsSecurityRequestsDto: WebItemsSecurityRequestsDto; // (optional)
+
+const { status, data } = await apiInstance.setAccessToWebItems(
+    webItemsSecurityRequestsDto
+);
+```
 
 ### HTTP request headers
 
@@ -375,24 +389,7 @@ const { status, data } = await apiInstance.setAccessToWebItems(
 
 Sets the selected user as an administrator of a product with the ID specified in the request.
 
-### Example
-
-```typescript
-import {
-    SettingsSecurityApi,
-    Configuration,
-    SecurityRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsSecurityApi(configuration);
-
-let securityRequestsDto: SecurityRequestsDto; // (optional)
-
-const { status, data } = await apiInstance.setProductAdministrator(
-    securityRequestsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-product-administrator/).
 
 ### Parameters
 
@@ -409,6 +406,25 @@ const { status, data } = await apiInstance.setProductAdministrator(
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+```typescript
+import {
+    SettingsSecurityApi,
+    Configuration,
+    SecurityRequestsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsSecurityApi(configuration);
+
+let securityRequestsDto: SecurityRequestsDto; // (optional)
+
+const { status, data } = await apiInstance.setProductAdministrator(
+    securityRequestsDto
+);
+```
+
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -421,6 +437,7 @@ const { status, data } = await apiInstance.setProductAdministrator(
 |**200** | Object with the user security information: product ID, user ID, administrator or not |  -  |
 |**401** | Unauthorized |  -  |
 |**402** | Your pricing plan does not support this option |  -  |
+|**403** | Only portal owner can set user as administrator |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -429,24 +446,7 @@ const { status, data } = await apiInstance.setProductAdministrator(
 
 Sets the security settings to the module with the ID specified in the request.
 
-### Example
-
-```typescript
-import {
-    SettingsSecurityApi,
-    Configuration,
-    WebItemSecurityRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsSecurityApi(configuration);
-
-let webItemSecurityRequestsDto: WebItemSecurityRequestsDto; // (optional)
-
-const { status, data } = await apiInstance.setWebItemSecurity(
-    webItemSecurityRequestsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-web-item-security/).
 
 ### Parameters
 
@@ -462,6 +462,25 @@ const { status, data } = await apiInstance.setWebItemSecurity(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsSecurityApi,
+    Configuration,
+    WebItemSecurityRequestsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsSecurityApi(configuration);
+
+let webItemSecurityRequestsDto: WebItemSecurityRequestsDto; // (optional)
+
+const { status, data } = await apiInstance.setWebItemSecurity(
+    webItemSecurityRequestsDto
+);
+```
 
 ### HTTP request headers
 
@@ -483,24 +502,7 @@ const { status, data } = await apiInstance.setWebItemSecurity(
 
 Sets the portal password settings.
 
-### Example
-
-```typescript
-import {
-    SettingsSecurityApi,
-    Configuration,
-    PasswordSettingsRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsSecurityApi(configuration);
-
-let passwordSettingsRequestsDto: PasswordSettingsRequestsDto; // (optional)
-
-const { status, data } = await apiInstance.updatePasswordSettings(
-    passwordSettingsRequestsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-password-settings/).
 
 ### Parameters
 
@@ -516,6 +518,25 @@ const { status, data } = await apiInstance.updatePasswordSettings(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsSecurityApi,
+    Configuration,
+    PasswordSettingsRequestsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsSecurityApi(configuration);
+
+let passwordSettingsRequestsDto: PasswordSettingsRequestsDto; // (optional)
+
+const { status, data } = await apiInstance.updatePasswordSettings(
+    passwordSettingsRequestsDto
+);
+```
 
 ### HTTP request headers
 

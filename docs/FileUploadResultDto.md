@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FileUploadResultDto } from '@onlyoffice/docspace-api-typescript';
+import { FileUploadResultDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FileUploadResultDto = {
     success,

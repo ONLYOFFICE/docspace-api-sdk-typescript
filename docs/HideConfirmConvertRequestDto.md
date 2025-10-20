@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { HideConfirmConvertRequestDto } from '@onlyoffice/docspace-api-typescript';
+import { HideConfirmConvertRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: HideConfirmConvertRequestDto = {
     save,

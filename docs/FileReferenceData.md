@@ -9,16 +9,18 @@ Name | Type | Description | Notes
 **fileKey** | **string** | The unique document identifier used by the service to get a link to the file. | [optional] [default to undefined]
 **instanceId** | **string** | The unique system identifier. | [optional] [default to undefined]
 **roomId** | **string** | Room ID | [optional] [default to undefined]
+**canEditRoom** | **boolean** | Specifies if the room can be edited out or not. | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { FileReferenceData } from '@onlyoffice/docspace-api-typescript';
+import { FileReferenceData } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FileReferenceData = {
     fileKey,
     instanceId,
     roomId,
+    canEditRoom,
 };
 ```
 

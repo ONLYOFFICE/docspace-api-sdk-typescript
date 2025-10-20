@@ -1,6 +1,6 @@
-# SettingsIPRestrictionsApi
+# IPRestrictionsApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
@@ -14,19 +14,7 @@ All URIs are relative to *http://localhost:8092*
 
 Returns the IP portal restrictions.
 
-### Example
-
-```typescript
-import {
-    SettingsIPRestrictionsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsIPRestrictionsApi(configuration);
-
-const { status, data } = await apiInstance.getIpRestrictions();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-ip-restrictions/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -39,6 +27,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsIPRestrictionsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsIPRestrictionsApi(configuration);
+
+const { status, data } = await apiInstance.getIpRestrictions();
+```
 
 ### HTTP request headers
 
@@ -59,19 +61,7 @@ This endpoint does not have any parameters.
 
 Returns the IP restriction settings.
 
-### Example
-
-```typescript
-import {
-    SettingsIPRestrictionsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsIPRestrictionsApi(configuration);
-
-const { status, data } = await apiInstance.readIpRestrictionsSettings();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/read-ip-restrictions-settings/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -84,6 +74,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsIPRestrictionsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsIPRestrictionsApi(configuration);
+
+const { status, data } = await apiInstance.readIpRestrictionsSettings();
+```
 
 ### HTTP request headers
 
@@ -104,24 +108,7 @@ This endpoint does not have any parameters.
 
 Updates the IP restrictions with the parameters specified in the request.
 
-### Example
-
-```typescript
-import {
-    SettingsIPRestrictionsApi,
-    Configuration,
-    IpRestrictionsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsIPRestrictionsApi(configuration);
-
-let ipRestrictionsDto: IpRestrictionsDto; // (optional)
-
-const { status, data } = await apiInstance.saveIpRestrictions(
-    ipRestrictionsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-ip-restrictions/).
 
 ### Parameters
 
@@ -137,6 +124,25 @@ const { status, data } = await apiInstance.saveIpRestrictions(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsIPRestrictionsApi,
+    Configuration,
+    IpRestrictionsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsIPRestrictionsApi(configuration);
+
+let ipRestrictionsDto: IpRestrictionsDto; // (optional)
+
+const { status, data } = await apiInstance.saveIpRestrictions(
+    ipRestrictionsDto
+);
+```
 
 ### HTTP request headers
 
@@ -157,24 +163,7 @@ const { status, data } = await apiInstance.saveIpRestrictions(
 
 Updates the IP restriction settings with the parameters specified in the request.
 
-### Example
-
-```typescript
-import {
-    SettingsIPRestrictionsApi,
-    Configuration,
-    IpRestrictionsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsIPRestrictionsApi(configuration);
-
-let ipRestrictionsDto: IpRestrictionsDto; // (optional)
-
-const { status, data } = await apiInstance.updateIpRestrictionsSettings(
-    ipRestrictionsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-ip-restrictions-settings/).
 
 ### Parameters
 
@@ -190,6 +179,25 @@ const { status, data } = await apiInstance.updateIpRestrictionsSettings(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsIPRestrictionsApi,
+    Configuration,
+    IpRestrictionsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsIPRestrictionsApi(configuration);
+
+let ipRestrictionsDto: IpRestrictionsDto; // (optional)
+
+const { status, data } = await apiInstance.updateIpRestrictionsSettings(
+    ipRestrictionsDto
+);
+```
 
 ### HTTP request headers
 

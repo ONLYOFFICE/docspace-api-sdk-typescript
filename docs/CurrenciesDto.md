@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CurrenciesDto } from '@onlyoffice/docspace-api-typescript';
+import { CurrenciesDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CurrenciesDto = {
     isoCountryCode,

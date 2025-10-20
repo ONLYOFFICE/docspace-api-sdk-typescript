@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { AdminMessageBaseSettingsRequestsDto } from '@onlyoffice/docspace-api-typescript';
+import { AdminMessageBaseSettingsRequestsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: AdminMessageBaseSettingsRequestsDto = {
     email,

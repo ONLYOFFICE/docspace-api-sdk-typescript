@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ItemKeyValuePairStringLogoRequestsDto } from '@onlyoffice/docspace-api-typescript';
+import { ItemKeyValuePairStringLogoRequestsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ItemKeyValuePairStringLogoRequestsDto = {
     key,

@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { EditHistoryDto } from '@onlyoffice/docspace-api-typescript';
+import { EditHistoryDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: EditHistoryDto = {
     id,

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { SmtpOperationStatusRequestsWrapper } from '@onlyoffice/docspace-api-typescript';
+import { SmtpOperationStatusRequestsWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: SmtpOperationStatusRequestsWrapper = {
     response,

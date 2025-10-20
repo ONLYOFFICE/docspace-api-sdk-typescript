@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { InfoConfigDto } from '@onlyoffice/docspace-api-typescript';
+import { InfoConfigDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: InfoConfigDto = {
     favorite,

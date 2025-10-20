@@ -1,18 +1,18 @@
 # FeedbackConfig
 
-The settings for the \"Feedback & Support\" menu button.
+The settings for the Feedback & Support menu button.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**url** | **string** | The absolute URL to the website address which will be opened when clicking the \&quot;Feedback &amp; Support\&quot; menu button. | [optional] [default to undefined]
-**visible** | **boolean** | Shows or hides the \&quot;Feedback &amp; Support\&quot; menu button. | [optional] [readonly] [default to undefined]
+**url** | **string** | The absolute URL to the website address which will be opened when clicking the Feedback &amp; Support menu button. | [optional] [default to undefined]
+**visible** | **boolean** | Shows or hides the Feedback &amp; Support menu button. | [optional] [readonly] [default to undefined]
 
 ## Example
 
 ```typescript
-import { FeedbackConfig } from '@onlyoffice/docspace-api-typescript';
+import { FeedbackConfig } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FeedbackConfig = {
     url,

@@ -6,7 +6,7 @@ The backup restoring parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**backupId** | **string** | The backup ID. | [optional] [default to undefined]
+**backupId** | **string** | The backup ID. | [default to undefined]
 **storageType** | [**BackupStorageType**](BackupStorageType.md) |  | [optional] [default to undefined]
 **storageParams** | [**Array&lt;ItemKeyValuePairObjectObject&gt;**](ItemKeyValuePairObjectObject.md) | The backup storage parameters. | [optional] [default to undefined]
 **notify** | **boolean** | Notifies users about the portal restoring process or not. | [optional] [default to undefined]
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { BackupRestoreDto } from '@onlyoffice/docspace-api-typescript';
+import { BackupRestoreDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: BackupRestoreDto = {
     backupId,

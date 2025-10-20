@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CoverRequestDto } from '@onlyoffice/docspace-api-typescript';
+import { CoverRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CoverRequestDto = {
     color,

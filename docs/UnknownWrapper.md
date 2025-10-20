@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { UnknownWrapper } from '@onlyoffice/docspace-api-typescript';
+import { UnknownWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: UnknownWrapper = {
     response,

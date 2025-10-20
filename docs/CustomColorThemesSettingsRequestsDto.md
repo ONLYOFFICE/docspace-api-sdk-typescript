@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CustomColorThemesSettingsRequestsDto } from '@onlyoffice/docspace-api-typescript';
+import { CustomColorThemesSettingsRequestsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CustomColorThemesSettingsRequestsDto = {
     theme,

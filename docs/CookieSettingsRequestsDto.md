@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CookieSettingsRequestsDto } from '@onlyoffice/docspace-api-typescript';
+import { CookieSettingsRequestsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CookieSettingsRequestsDto = {
     lifeTime,

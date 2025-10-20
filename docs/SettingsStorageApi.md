@@ -1,6 +1,6 @@
-# SettingsStorageApi
+# StorageApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
@@ -11,7 +11,7 @@ All URIs are relative to *http://localhost:8092*
 |[**getStorageProgress**](#getstorageprogress) | **GET** /api/2.0/settings/storage/progress | Get the storage progress|
 |[**resetCdnToDefault**](#resetcdntodefault) | **DELETE** /api/2.0/settings/storage/cdn | Reset the CDN storage settings|
 |[**resetStorageToDefault**](#resetstoragetodefault) | **DELETE** /api/2.0/settings/storage | Reset the storage settings|
-|[**updateCdn**](#updatecdn) | **PUT** /api/2.0/settings/storage/cdn | Update the CDN storage|
+|[**updateCdnStorage**](#updatecdnstorage) | **PUT** /api/2.0/settings/storage/cdn | Update the CDN storage|
 |[**updateStorage**](#updatestorage) | **PUT** /api/2.0/settings/storage | Update a storage|
 
 # **getAllBackupStorages**
@@ -19,23 +19,7 @@ All URIs are relative to *http://localhost:8092*
 
 Returns a list of all the backup storages.
 
-### Example
-
-```typescript
-import {
-    SettingsStorageApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsStorageApi(configuration);
-
-let dump: boolean; // (optional) (default to undefined)
-
-const { status, data } = await apiInstance.getAllBackupStorages(
-    dump
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-backup-storages/).
 
 ### Parameters
 
@@ -51,6 +35,24 @@ const { status, data } = await apiInstance.getAllBackupStorages(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsStorageApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsStorageApi(configuration);
+
+let dump: boolean; // (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getAllBackupStorages(
+    dump
+);
+```
 
 ### HTTP request headers
 
@@ -72,19 +74,7 @@ const { status, data } = await apiInstance.getAllBackupStorages(
 
 Returns a list of all the CDN storages.
 
-### Example
-
-```typescript
-import {
-    SettingsStorageApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsStorageApi(configuration);
-
-const { status, data } = await apiInstance.getAllCdnStorages();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-cdn-storages/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -97,6 +87,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsStorageApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsStorageApi(configuration);
+
+const { status, data } = await apiInstance.getAllCdnStorages();
+```
 
 ### HTTP request headers
 
@@ -118,19 +122,7 @@ This endpoint does not have any parameters.
 
 Returns a list of all the portal storages.
 
-### Example
-
-```typescript
-import {
-    SettingsStorageApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsStorageApi(configuration);
-
-const { status, data } = await apiInstance.getAllStorages();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-storages/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -143,6 +135,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsStorageApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsStorageApi(configuration);
+
+const { status, data } = await apiInstance.getAllStorages();
+```
 
 ### HTTP request headers
 
@@ -164,19 +170,7 @@ This endpoint does not have any parameters.
 
 Returns a list of all Amazon regions.
 
-### Example
-
-```typescript
-import {
-    SettingsStorageApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsStorageApi(configuration);
-
-const { status, data } = await apiInstance.getAmazonS3Regions();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-amazon-s3-regions/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -189,6 +183,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsStorageApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsStorageApi(configuration);
+
+const { status, data } = await apiInstance.getAmazonS3Regions();
+```
 
 ### HTTP request headers
 
@@ -209,19 +217,7 @@ This endpoint does not have any parameters.
 
 Returns the storage progress.
 
-### Example
-
-```typescript
-import {
-    SettingsStorageApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsStorageApi(configuration);
-
-const { status, data } = await apiInstance.getStorageProgress();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-storage-progress/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -234,6 +230,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsStorageApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsStorageApi(configuration);
+
+const { status, data } = await apiInstance.getStorageProgress();
+```
 
 ### HTTP request headers
 
@@ -254,19 +264,7 @@ This endpoint does not have any parameters.
 
 Resets the CDN storage settings to the default parameters.
 
-### Example
-
-```typescript
-import {
-    SettingsStorageApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsStorageApi(configuration);
-
-const { status, data } = await apiInstance.resetCdnToDefault();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-cdn-to-default/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -279,6 +277,20 @@ void (empty response body)
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsStorageApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsStorageApi(configuration);
+
+const { status, data } = await apiInstance.resetCdnToDefault();
+```
 
 ### HTTP request headers
 
@@ -300,19 +312,7 @@ void (empty response body)
 
 Resets the storage settings to the default parameters.
 
-### Example
-
-```typescript
-import {
-    SettingsStorageApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsStorageApi(configuration);
-
-const { status, data } = await apiInstance.resetStorageToDefault();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-storage-to-default/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -325,6 +325,20 @@ void (empty response body)
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsStorageApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsStorageApi(configuration);
+
+const { status, data } = await apiInstance.resetStorageToDefault();
+```
 
 ### HTTP request headers
 
@@ -341,29 +355,12 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **updateCdn**
-> CdnStorageSettingsWrapper updateCdn()
+# **updateCdnStorage**
+> CdnStorageSettingsWrapper updateCdnStorage()
 
 Updates the CDN storage with the parameters specified in the request.
 
-### Example
-
-```typescript
-import {
-    SettingsStorageApi,
-    Configuration,
-    StorageRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsStorageApi(configuration);
-
-let storageRequestsDto: StorageRequestsDto; // (optional)
-
-const { status, data } = await apiInstance.updateCdn(
-    storageRequestsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-cdn-storage/).
 
 ### Parameters
 
@@ -379,6 +376,25 @@ const { status, data } = await apiInstance.updateCdn(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsStorageApi,
+    Configuration,
+    StorageRequestsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsStorageApi(configuration);
+
+let storageRequestsDto: StorageRequestsDto; // (optional)
+
+const { status, data } = await apiInstance.updateCdnStorage(
+    storageRequestsDto
+);
+```
 
 ### HTTP request headers
 
@@ -401,24 +417,7 @@ const { status, data } = await apiInstance.updateCdn(
 
 Updates a storage with the parameters specified in the request.
 
-### Example
-
-```typescript
-import {
-    SettingsStorageApi,
-    Configuration,
-    StorageRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsStorageApi(configuration);
-
-let storageRequestsDto: StorageRequestsDto; // (optional)
-
-const { status, data } = await apiInstance.updateStorage(
-    storageRequestsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-storage/).
 
 ### Parameters
 
@@ -434,6 +433,25 @@ const { status, data } = await apiInstance.updateStorage(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsStorageApi,
+    Configuration,
+    StorageRequestsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsStorageApi(configuration);
+
+let storageRequestsDto: StorageRequestsDto; // (optional)
+
+const { status, data } = await apiInstance.updateStorage(
+    storageRequestsDto
+);
+```
 
 ### HTTP request headers
 

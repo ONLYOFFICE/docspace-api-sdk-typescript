@@ -6,12 +6,12 @@ The parameters for terminating a process or operation.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**isSendWelcomeEmail** | **boolean** | Specifies whether to send a welcome email or not. | [optional] [default to undefined]
+**isSendWelcomeEmail** | **boolean** | Specifies whether to send a welcome email or not. | [default to undefined]
 
 ## Example
 
 ```typescript
-import { FinishDto } from '@onlyoffice/docspace-api-typescript';
+import { FinishDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FinishDto = {
     isSendWelcomeEmail,

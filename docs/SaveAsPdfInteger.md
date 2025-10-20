@@ -1,6 +1,6 @@
 # SaveAsPdfInteger
 
-The parameters for saving the file as PDF.
+The parameters for saving a file as PDF.
 
 ## Properties
 
@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { SaveAsPdfInteger } from '@onlyoffice/docspace-api-typescript';
+import { SaveAsPdfInteger } from '@onlyoffice/docspace-api-sdk';
 
 const instance: SaveAsPdfInteger = {
     folderId,

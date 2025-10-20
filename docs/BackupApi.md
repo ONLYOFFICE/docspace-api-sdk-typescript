@@ -1,6 +1,6 @@
 # BackupApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
@@ -11,6 +11,8 @@ All URIs are relative to *http://localhost:8092*
 |[**getBackupHistory**](#getbackuphistory) | **GET** /api/2.0/backup/getbackuphistory | Get the backup history|
 |[**getBackupProgress**](#getbackupprogress) | **GET** /api/2.0/backup/getbackupprogress | Get the backup progress|
 |[**getBackupSchedule**](#getbackupschedule) | **GET** /api/2.0/backup/getbackupschedule | Get the backup schedule|
+|[**getBackupsCount**](#getbackupscount) | **GET** /api/2.0/backup/getbackupscount | Get the number of backups|
+|[**getBackupsServiceState**](#getbackupsservicestate) | **GET** /api/2.0/backup/getservicestate | Get the backup service state|
 |[**getRestoreProgress**](#getrestoreprogress) | **GET** /api/2.0/backup/getrestoreprogress | Get the restoring progress|
 |[**startBackup**](#startbackup) | **POST** /api/2.0/backup/startbackup | Start the backup|
 |[**startBackupRestore**](#startbackuprestore) | **POST** /api/2.0/backup/startrestore | Start the restoring process|
@@ -20,24 +22,7 @@ All URIs are relative to *http://localhost:8092*
 
 Creates the backup schedule of the current portal with the parameters specified in the request.
 
-### Example
-
-```typescript
-import {
-    BackupApi,
-    Configuration,
-    BackupScheduleDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new BackupApi(configuration);
-
-let backupScheduleDto: BackupScheduleDto; // (optional)
-
-const { status, data } = await apiInstance.createBackupSchedule(
-    backupScheduleDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-backup-schedule/).
 
 ### Parameters
 
@@ -53,6 +38,25 @@ const { status, data } = await apiInstance.createBackupSchedule(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    BackupApi,
+    Configuration,
+    BackupScheduleDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new BackupApi(configuration);
+
+let backupScheduleDto: BackupScheduleDto; // (optional)
+
+const { status, data } = await apiInstance.createBackupSchedule(
+    backupScheduleDto
+);
+```
 
 ### HTTP request headers
 
@@ -77,23 +81,7 @@ const { status, data } = await apiInstance.createBackupSchedule(
 
 Deletes the backup with the ID specified in the request.
 
-### Example
-
-```typescript
-import {
-    BackupApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new BackupApi(configuration);
-
-let id: string; //The backup ID. (default to undefined)
-
-const { status, data } = await apiInstance.deleteBackup(
-    id
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-backup/).
 
 ### Parameters
 
@@ -109,6 +97,24 @@ const { status, data } = await apiInstance.deleteBackup(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    BackupApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new BackupApi(configuration);
+
+let id: string; //The backup ID. (default to undefined)
+
+const { status, data } = await apiInstance.deleteBackup(
+    id
+);
+```
 
 ### HTTP request headers
 
@@ -130,23 +136,7 @@ const { status, data } = await apiInstance.deleteBackup(
 
 Deletes the backup history from the current portal.
 
-### Example
-
-```typescript
-import {
-    BackupApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new BackupApi(configuration);
-
-let dump: boolean; //Specifies if a dump will be created or not. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.deleteBackupHistory(
-    dump
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-backup-history/).
 
 ### Parameters
 
@@ -162,6 +152,24 @@ const { status, data } = await apiInstance.deleteBackupHistory(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    BackupApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new BackupApi(configuration);
+
+let dump: boolean; //Specifies if a dump will be created or not. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.deleteBackupHistory(
+    dump
+);
+```
 
 ### HTTP request headers
 
@@ -183,23 +191,7 @@ const { status, data } = await apiInstance.deleteBackupHistory(
 
 Deletes the backup schedule of the current portal.
 
-### Example
-
-```typescript
-import {
-    BackupApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new BackupApi(configuration);
-
-let dump: boolean; //Specifies if a dump will be created or not. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.deleteBackupSchedule(
-    dump
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-backup-schedule/).
 
 ### Parameters
 
@@ -215,6 +207,24 @@ const { status, data } = await apiInstance.deleteBackupSchedule(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    BackupApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new BackupApi(configuration);
+
+let dump: boolean; //Specifies if a dump will be created or not. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.deleteBackupSchedule(
+    dump
+);
+```
 
 ### HTTP request headers
 
@@ -236,23 +246,7 @@ const { status, data } = await apiInstance.deleteBackupSchedule(
 
 Returns the history of the started backup.
 
-### Example
-
-```typescript
-import {
-    BackupApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new BackupApi(configuration);
-
-let dump: boolean; //Specifies if a dump will be created or not. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.getBackupHistory(
-    dump
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backup-history/).
 
 ### Parameters
 
@@ -268,6 +262,24 @@ const { status, data } = await apiInstance.getBackupHistory(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    BackupApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new BackupApi(configuration);
+
+let dump: boolean; //Specifies if a dump will be created or not. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getBackupHistory(
+    dump
+);
+```
 
 ### HTTP request headers
 
@@ -289,23 +301,7 @@ const { status, data } = await apiInstance.getBackupHistory(
 
 Returns the progress of the started backup.
 
-### Example
-
-```typescript
-import {
-    BackupApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new BackupApi(configuration);
-
-let dump: boolean; //Specifies if a dump will be created or not. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.getBackupProgress(
-    dump
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backup-progress/).
 
 ### Parameters
 
@@ -321,6 +317,24 @@ const { status, data } = await apiInstance.getBackupProgress(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    BackupApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new BackupApi(configuration);
+
+let dump: boolean; //Specifies if a dump will be created or not. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getBackupProgress(
+    dump
+);
+```
 
 ### HTTP request headers
 
@@ -342,23 +356,7 @@ const { status, data } = await apiInstance.getBackupProgress(
 
 Returns the backup schedule of the current portal.
 
-### Example
-
-```typescript
-import {
-    BackupApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new BackupApi(configuration);
-
-let dump: boolean; //Specifies if a dump will be created or not. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.getBackupSchedule(
-    dump
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backup-schedule/).
 
 ### Parameters
 
@@ -375,6 +373,24 @@ const { status, data } = await apiInstance.getBackupSchedule(
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+```typescript
+import {
+    BackupApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new BackupApi(configuration);
+
+let dump: boolean; //Specifies if a dump will be created or not. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getBackupSchedule(
+    dump
+);
+```
+
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -390,10 +406,29 @@ const { status, data } = await apiInstance.getBackupSchedule(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getRestoreProgress**
-> BackupProgressWrapper getRestoreProgress()
+# **getBackupsCount**
+> Int32Wrapper getBackupsCount()
 
-Returns the progress of the started restoring process.
+Returns the number of backups for a period of time. The default is one month.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backups-count/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **from** | [**string**] | The from date. | (optional) defaults to undefined|
+| **to** | [**string**] | The to date. | (optional) defaults to undefined|
+| **paid** | [**boolean**] | Specifies if the backups are paid or not. | (optional) defaults to undefined|
+
+
+### Return type
+
+**Int32Wrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -401,17 +436,89 @@ Returns the progress of the started restoring process.
 import {
     BackupApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new BackupApi(configuration);
 
-let dump: boolean; //Specifies if a dump will be created or not. (optional) (default to undefined)
+let from: string; //The from date. (optional) (default to undefined)
+let to: string; //The to date. (optional) (default to undefined)
+let paid: boolean; //Specifies if the backups are paid or not. (optional) (default to undefined)
 
-const { status, data } = await apiInstance.getRestoreProgress(
-    dump
+const { status, data } = await apiInstance.getBackupsCount(
+    from,
+    to,
+    paid
 );
 ```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Number of backups |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getBackupsServiceState**
+> BackupServiceStateWrapper getBackupsServiceState()
+
+Returns the backup service state.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backups-service-state/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**BackupServiceStateWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    BackupApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new BackupApi(configuration);
+
+const { status, data } = await apiInstance.getBackupsServiceState();
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Backup service state |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getRestoreProgress**
+> BackupProgressWrapper getRestoreProgress()
+
+Returns the progress of the started restoring process.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-restore-progress/).
 
 ### Parameters
 
@@ -427,6 +534,24 @@ const { status, data } = await apiInstance.getRestoreProgress(
 ### Authorization
 
 No authorization required
+
+### Example
+
+```typescript
+import {
+    BackupApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new BackupApi(configuration);
+
+let dump: boolean; //Specifies if a dump will be created or not. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getRestoreProgress(
+    dump
+);
+```
 
 ### HTTP request headers
 
@@ -446,24 +571,7 @@ No authorization required
 
 Starts the backup of the current portal with the parameters specified in the request.
 
-### Example
-
-```typescript
-import {
-    BackupApi,
-    Configuration,
-    BackupDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new BackupApi(configuration);
-
-let backupDto: BackupDto; // (optional)
-
-const { status, data } = await apiInstance.startBackup(
-    backupDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-backup/).
 
 ### Parameters
 
@@ -479,6 +587,25 @@ const { status, data } = await apiInstance.startBackup(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    BackupApi,
+    Configuration,
+    BackupDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new BackupApi(configuration);
+
+let backupDto: BackupDto; // (optional)
+
+const { status, data } = await apiInstance.startBackup(
+    backupDto
+);
+```
 
 ### HTTP request headers
 
@@ -503,24 +630,7 @@ const { status, data } = await apiInstance.startBackup(
 
 Starts the data restoring process of the current portal with the parameters specified in the request.
 
-### Example
-
-```typescript
-import {
-    BackupApi,
-    Configuration,
-    BackupRestoreDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new BackupApi(configuration);
-
-let backupRestoreDto: BackupRestoreDto; // (optional)
-
-const { status, data } = await apiInstance.startBackupRestore(
-    backupRestoreDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-backup-restore/).
 
 ### Parameters
 
@@ -536,6 +646,25 @@ const { status, data } = await apiInstance.startBackupRestore(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    BackupApi,
+    Configuration,
+    BackupRestoreDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new BackupApi(configuration);
+
+let backupRestoreDto: BackupRestoreDto; // (optional)
+
+const { status, data } = await apiInstance.startBackupRestore(
+    backupRestoreDto
+);
+```
 
 ### HTTP request headers
 

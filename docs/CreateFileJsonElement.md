@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CreateFileJsonElement } from '@onlyoffice/docspace-api-typescript';
+import { CreateFileJsonElement } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CreateFileJsonElement = {
     title,

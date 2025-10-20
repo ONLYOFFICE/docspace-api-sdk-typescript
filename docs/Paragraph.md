@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { Paragraph } from '@onlyoffice/docspace-api-typescript';
+import { Paragraph } from '@onlyoffice/docspace-api-sdk';
 
 const instance: Paragraph = {
     align,

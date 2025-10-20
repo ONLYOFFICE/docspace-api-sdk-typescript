@@ -31,7 +31,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { DbTenant } from '@onlyoffice/docspace-api-typescript';
+import { DbTenant } from '@onlyoffice/docspace-api-sdk';
 
 const instance: DbTenant = {
     id,

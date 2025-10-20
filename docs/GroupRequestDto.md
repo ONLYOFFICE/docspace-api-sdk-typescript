@@ -7,13 +7,13 @@ The group request parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **members** | **Array&lt;string&gt;** | The list of group member IDs. | [optional] [default to undefined]
-**groupManager** | **string** | Group manager ID | [default to undefined]
-**groupName** | **string** | Group name | [optional] [default to undefined]
+**groupManager** | **string** | The group manager ID. | [default to undefined]
+**groupName** | **string** | The group name. | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { GroupRequestDto } from '@onlyoffice/docspace-api-typescript';
+import { GroupRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: GroupRequestDto = {
     members,

@@ -6,12 +6,12 @@ The theme settings request parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**theme** | [**DarkThemeSettingsType**](DarkThemeSettingsType.md) |  | [optional] [default to undefined]
+**theme** | [**DarkThemeSettingsType**](DarkThemeSettingsType.md) |  | [default to undefined]
 
 ## Example
 
 ```typescript
-import { DarkThemeSettingsRequestDto } from '@onlyoffice/docspace-api-typescript';
+import { DarkThemeSettingsRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: DarkThemeSettingsRequestDto = {
     theme,

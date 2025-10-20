@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { SsoCertificate } from '@onlyoffice/docspace-api-typescript';
+import { SsoCertificate } from '@onlyoffice/docspace-api-sdk';
 
 const instance: SsoCertificate = {
     selfSigned,

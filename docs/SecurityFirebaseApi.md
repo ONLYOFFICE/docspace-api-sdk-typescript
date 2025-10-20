@@ -1,6 +1,6 @@
-# SecurityFirebaseApi
+# FirebaseApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
@@ -12,24 +12,7 @@ All URIs are relative to *http://localhost:8092*
 
 Saves the Firebase device token specified in the request for the Documents application.
 
-### Example
-
-```typescript
-import {
-    SecurityFirebaseApi,
-    Configuration,
-    FirebaseRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SecurityFirebaseApi(configuration);
-
-let firebaseRequestsDto: FirebaseRequestsDto; // (optional)
-
-const { status, data } = await apiInstance.docRegisterPusnNotificationDevice(
-    firebaseRequestsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/doc-register-pusn-notification-device/).
 
 ### Parameters
 
@@ -45,6 +28,25 @@ const { status, data } = await apiInstance.docRegisterPusnNotificationDevice(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SecurityFirebaseApi,
+    Configuration,
+    FirebaseRequestsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SecurityFirebaseApi(configuration);
+
+let firebaseRequestsDto: FirebaseRequestsDto; // (optional)
+
+const { status, data } = await apiInstance.docRegisterPusnNotificationDevice(
+    firebaseRequestsDto
+);
+```
 
 ### HTTP request headers
 
@@ -65,24 +67,7 @@ const { status, data } = await apiInstance.docRegisterPusnNotificationDevice(
 
 Subscribes to the Documents push notification.
 
-### Example
-
-```typescript
-import {
-    SecurityFirebaseApi,
-    Configuration,
-    FirebaseRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SecurityFirebaseApi(configuration);
-
-let firebaseRequestsDto: FirebaseRequestsDto; // (optional)
-
-const { status, data } = await apiInstance.subscribeDocumentsPushNotification(
-    firebaseRequestsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/subscribe-documents-push-notification/).
 
 ### Parameters
 
@@ -98,6 +83,25 @@ const { status, data } = await apiInstance.subscribeDocumentsPushNotification(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SecurityFirebaseApi,
+    Configuration,
+    FirebaseRequestsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SecurityFirebaseApi(configuration);
+
+let firebaseRequestsDto: FirebaseRequestsDto; // (optional)
+
+const { status, data } = await apiInstance.subscribeDocumentsPushNotification(
+    firebaseRequestsDto
+);
+```
 
 ### HTTP request headers
 

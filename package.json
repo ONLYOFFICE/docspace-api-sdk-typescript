@@ -1,19 +1,31 @@
 {
-  "name": "@onlyoffice/docspace-api-typescript",
-  "version": "3.1.0",
-  "description": "OpenAPI client for @onlyoffice/docspace-api-typescript",
+  "name": "@onlyoffice/docspace-api-sdk",
+  "version": "3.5.0",
+  "description": "A simple TypeScript SDK for integrating with the ONLYOFFICE DocSpace API",
   "homepage": "https://www.onlyoffice.com",
   "author": "Ascensio System SIA <integration@onlyoffice.com> (https://www.onlyoffice.com)",
+  "maintainers": [
+    "Ascensio System SIA <integration@onlyoffice.com> (https://www.onlyoffice.com)"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ONLYOFFICE/docspace-api-sdk-typescript.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ONLYOFFICE/docspace-api-sdk-typescript/issues",
+    "email": "support@onlyoffice.com"
+  },
   "keywords": [
-    "axios",
-    "typescript",
-    "openapi-client",
-    "openapi-generator",
-    "@onlyoffice/docspace-api-typescript"
+    "onlyoffice",
+    "docspace",
+    "sdk"
   ],
   "license": "Apache-2.0",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build"

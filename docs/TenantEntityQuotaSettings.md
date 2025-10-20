@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { TenantEntityQuotaSettings } from '@onlyoffice/docspace-api-typescript';
+import { TenantEntityQuotaSettings } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TenantEntityQuotaSettings = {
     enableQuota,

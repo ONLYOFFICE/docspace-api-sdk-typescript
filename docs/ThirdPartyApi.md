@@ -1,33 +1,17 @@
 # ThirdPartyApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**getCodeRequest**](#getcoderequest) | **GET** /api/2.0/thirdparty/{provider} | Get the code request|
+|[**getThirdPartyCode**](#getthirdpartycode) | **GET** /api/2.0/thirdparty/{provider} | Get the code request|
 
-# **getCodeRequest**
-> ObjectWrapper getCodeRequest()
+# **getThirdPartyCode**
+> ObjectWrapper getThirdPartyCode()
 
 Returns a request to get the confirmation code from URL.   **Note**: List of providers: Google, Dropbox, Docusign, Box, OneDrive, Wordpress.
 
-### Example
-
-```typescript
-import {
-    ThirdPartyApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new ThirdPartyApi(configuration);
-
-let provider: LoginProvider; //The identity provider used for authentication. (default to undefined)
-
-const { status, data } = await apiInstance.getCodeRequest(
-    provider
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-third-party-code/).
 
 ### Parameters
 
@@ -43,6 +27,24 @@ const { status, data } = await apiInstance.getCodeRequest(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    ThirdPartyApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new ThirdPartyApi(configuration);
+
+let provider: LoginProvider; //The identity provider used for authentication. (default to undefined)
+
+const { status, data } = await apiInstance.getThirdPartyCode(
+    provider
+);
+```
 
 ### HTTP request headers
 

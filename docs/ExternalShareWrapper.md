@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ExternalShareWrapper } from '@onlyoffice/docspace-api-typescript';
+import { ExternalShareWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ExternalShareWrapper = {
     response,

@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FormRole } from '@onlyoffice/docspace-api-typescript';
+import { FormRole } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FormRole = {
     roomId,

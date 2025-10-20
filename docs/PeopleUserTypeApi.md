@@ -1,36 +1,20 @@
-# PeopleUserTypeApi
+# UserTypeApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**getChangeTypeProgress**](#getchangetypeprogress) | **GET** /api/2.0/people/type/progress/{userid} | Get the progress of updating user type|
-|[**startUpdateUserType**](#startupdateusertype) | **POST** /api/2.0/people/type | Update user type|
-|[**terminateChangeType**](#terminatechangetype) | **PUT** /api/2.0/people/type/terminate | Terminate update user type|
+|[**getUserTypeUpdateProgress**](#getusertypeupdateprogress) | **GET** /api/2.0/people/type/progress/{userid} | Get the progress of updating user type|
+|[**starUserTypetUpdate**](#starusertypetupdate) | **POST** /api/2.0/people/type | Start updating user type|
+|[**terminateUserTypeUpdate**](#terminateusertypeupdate) | **PUT** /api/2.0/people/type/terminate | Terminate updating user type|
 |[**updateUserType**](#updateusertype) | **PUT** /api/2.0/people/type/{type} | Change a user type|
 
-# **getChangeTypeProgress**
-> TaskProgressResponseWrapper getChangeTypeProgress()
+# **getUserTypeUpdateProgress**
+> TaskProgressResponseWrapper getUserTypeUpdateProgress()
 
 Returns the progress of updating the user type.
 
-### Example
-
-```typescript
-import {
-    PeopleUserTypeApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleUserTypeApi(configuration);
-
-let userid: string; //The user ID. (default to undefined)
-
-const { status, data } = await apiInstance.getChangeTypeProgress(
-    userid
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-type-update-progress/).
 
 ### Parameters
 
@@ -47,6 +31,24 @@ const { status, data } = await apiInstance.getChangeTypeProgress(
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+```typescript
+import {
+    PeopleUserTypeApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleUserTypeApi(configuration);
+
+let userid: string; //The user ID. (default to undefined)
+
+const { status, data } = await apiInstance.getUserTypeUpdateProgress(
+    userid
+);
+```
+
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -61,29 +63,12 @@ const { status, data } = await apiInstance.getChangeTypeProgress(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **startUpdateUserType**
-> TaskProgressResponseWrapper startUpdateUserType()
+# **starUserTypetUpdate**
+> TaskProgressResponseWrapper starUserTypetUpdate()
 
 Starts updating the type of the user or guest when reassigning rooms and shared files.
 
-### Example
-
-```typescript
-import {
-    PeopleUserTypeApi,
-    Configuration,
-    StartUpdateUserTypeDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleUserTypeApi(configuration);
-
-let startUpdateUserTypeDto: StartUpdateUserTypeDto; // (optional)
-
-const { status, data } = await apiInstance.startUpdateUserType(
-    startUpdateUserTypeDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/star-user-typet-update/).
 
 ### Parameters
 
@@ -100,6 +85,25 @@ const { status, data } = await apiInstance.startUpdateUserType(
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+```typescript
+import {
+    PeopleUserTypeApi,
+    Configuration,
+    StartUpdateUserTypeDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleUserTypeApi(configuration);
+
+let startUpdateUserTypeDto: StartUpdateUserTypeDto; // (optional)
+
+const { status, data } = await apiInstance.starUserTypetUpdate(
+    startUpdateUserTypeDto
+);
+```
+
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -115,29 +119,12 @@ const { status, data } = await apiInstance.startUpdateUserType(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **terminateChangeType**
-> TaskProgressResponseWrapper terminateChangeType()
+# **terminateUserTypeUpdate**
+> TaskProgressResponseWrapper terminateUserTypeUpdate()
 
 Terminates the process of updating the type of the user or guest.
 
-### Example
-
-```typescript
-import {
-    PeopleUserTypeApi,
-    Configuration,
-    TerminateRequestDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleUserTypeApi(configuration);
-
-let terminateRequestDto: TerminateRequestDto; // (optional)
-
-const { status, data } = await apiInstance.terminateChangeType(
-    terminateRequestDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-user-type-update/).
 
 ### Parameters
 
@@ -154,6 +141,25 @@ const { status, data } = await apiInstance.terminateChangeType(
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+```typescript
+import {
+    PeopleUserTypeApi,
+    Configuration,
+    TerminateRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleUserTypeApi(configuration);
+
+let terminateRequestDto: TerminateRequestDto; // (optional)
+
+const { status, data } = await apiInstance.terminateUserTypeUpdate(
+    terminateRequestDto
+);
+```
+
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -169,30 +175,11 @@ const { status, data } = await apiInstance.terminateChangeType(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **updateUserType**
-> EmployeeFullArrayWrapper updateUserType()
+> EmployeeFullArrayWrapper updateUserType(updateMembersRequestDto)
 
 Changes a type of the users with the IDs specified in the request.
 
-### Example
-
-```typescript
-import {
-    PeopleUserTypeApi,
-    Configuration,
-    UpdateMembersRequestDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleUserTypeApi(configuration);
-
-let type: EmployeeType; //The new user type. (default to undefined)
-let updateMembersRequestDto: UpdateMembersRequestDto; //The request parameters for updating the user information. (optional)
-
-const { status, data } = await apiInstance.updateUserType(
-    type,
-    updateMembersRequestDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-user-type/).
 
 ### Parameters
 
@@ -209,6 +196,27 @@ const { status, data } = await apiInstance.updateUserType(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleUserTypeApi,
+    Configuration,
+    UpdateMembersRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleUserTypeApi(configuration);
+
+let type: EmployeeType; //The new user type. (default to undefined)
+let updateMembersRequestDto: UpdateMembersRequestDto; //The request parameters for updating the user information.
+
+const { status, data } = await apiInstance.updateUserType(
+    type,
+    updateMembersRequestDto
+);
+```
 
 ### HTTP request headers
 

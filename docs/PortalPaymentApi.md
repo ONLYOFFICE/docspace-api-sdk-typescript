@@ -1,22 +1,222 @@
-# PortalPaymentApi
+# PaymentApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**getCurrencies**](#getcurrencies) | **GET** /api/2.0/portal/payment/currencies | Get currencies|
+|[**calculateWalletPayment**](#calculatewalletpayment) | **PUT** /api/2.0/portal/payment/calculatewallet | Calculate the wallet payment amount|
+|[**changeTenantWalletServiceState**](#changetenantwalletservicestate) | **POST** /api/2.0/portal/payment/servicestate | Change wallet service state|
+|[**createCustomerOperationsReport**](#createcustomeroperationsreport) | **POST** /api/2.0/portal/payment/customer/operationsreport | Start the customer operations report generation|
+|[**getCheckoutSetupUrl**](#getcheckoutsetupurl) | **GET** /api/2.0/portal/payment/chechoutsetupurl | Get the checkout setup page URL|
+|[**getCustomerBalance**](#getcustomerbalance) | **GET** /api/2.0/portal/payment/customer/balance | Get the customer balance|
+|[**getCustomerInfo**](#getcustomerinfo) | **GET** /api/2.0/portal/payment/customerinfo | Get the customer information|
+|[**getCustomerOperations**](#getcustomeroperations) | **GET** /api/2.0/portal/payment/customer/operations | Get the customer operations|
+|[**getCustomerOperationsReport**](#getcustomeroperationsreport) | **GET** /api/2.0/portal/payment/customer/operationsreport | Get the status of the customer operations report generation|
 |[**getPaymentAccount**](#getpaymentaccount) | **GET** /api/2.0/portal/payment/account | Get the payment account|
+|[**getPaymentCurrencies**](#getpaymentcurrencies) | **GET** /api/2.0/portal/payment/currencies | Get currencies|
+|[**getPaymentQuotas**](#getpaymentquotas) | **GET** /api/2.0/portal/payment/quotas | Get quotas|
 |[**getPaymentUrl**](#getpaymenturl) | **PUT** /api/2.0/portal/payment/url | Get the payment page URL|
-|[**getPrices**](#getprices) | **GET** /api/2.0/portal/payment/prices | Get prices|
-|[**getQuota**](#getquota) | **GET** /api/2.0/portal/payment/quota | Get quota payment information|
-|[**getQuotas**](#getquotas) | **GET** /api/2.0/portal/payment/quotas | Get quotas|
-|[**paymentUpdate**](#paymentupdate) | **PUT** /api/2.0/portal/payment/update | Update the payment quantity|
-|[**sendSalesRequest**](#sendsalesrequest) | **POST** /api/2.0/portal/payment/request | Send a payment request|
+|[**getPortalPrices**](#getportalprices) | **GET** /api/2.0/portal/payment/prices | Get prices|
+|[**getQuotaPaymentInformation**](#getquotapaymentinformation) | **GET** /api/2.0/portal/payment/quota | Get quota payment information|
+|[**getTenantWalletServiceSettings**](#gettenantwalletservicesettings) | **GET** /api/2.0/portal/payment/servicessettings | Get wallet services settings|
+|[**getTenantWalletSettings**](#gettenantwalletsettings) | **GET** /api/2.0/portal/payment/topupsettings | Get wallet auto top-up settings|
+|[**getWalletService**](#getwalletservice) | **GET** /api/2.0/portal/payment/walletservice | Get wallet service|
+|[**getWalletServices**](#getwalletservices) | **GET** /api/2.0/portal/payment/walletservices | Get wallet services|
+|[**sendPaymentRequest**](#sendpaymentrequest) | **POST** /api/2.0/portal/payment/request | Send a payment request|
+|[**setTenantWalletSettings**](#settenantwalletsettings) | **POST** /api/2.0/portal/payment/topupsettings | Set wallet auto top-up settings|
+|[**terminateCustomerOperationsReport**](#terminatecustomeroperationsreport) | **DELETE** /api/2.0/portal/payment/customer/operationsreport | Terminate the customer operations report generation|
+|[**topUpDeposit**](#topupdeposit) | **POST** /api/2.0/portal/payment/deposit | Put money on deposit|
+|[**updatePayment**](#updatepayment) | **PUT** /api/2.0/portal/payment/update | Update the payment quantity|
+|[**updateWalletPayment**](#updatewalletpayment) | **PUT** /api/2.0/portal/payment/updatewallet | Update the wallet payment quantity|
 
-# **getCurrencies**
-> CurrenciesArrayWrapper getCurrencies()
+# **calculateWalletPayment**
+> PaymentCalculationWrapper calculateWalletPayment()
 
-Returns the available portal currencies.
+Calculates an amount of the wallet payment with the parameters specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/calculate-wallet-payment/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **walletQuantityRequestDto** | **WalletQuantityRequestDto**|  | |
+
+
+### Return type
+
+**PaymentCalculationWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration,
+    WalletQuantityRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+let walletQuantityRequestDto: WalletQuantityRequestDto; // (optional)
+
+const { status, data } = await apiInstance.calculateWalletPayment(
+    walletQuantityRequestDto
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Payment calculation |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **changeTenantWalletServiceState**
+> TenantWalletServiceSettingsWrapper changeTenantWalletServiceState()
+
+Changes the wallet service state.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-tenant-wallet-service-state/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **changeWalletServiceStateRequestDto** | **ChangeWalletServiceStateRequestDto**|  | |
+
+
+### Return type
+
+**TenantWalletServiceSettingsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration,
+    ChangeWalletServiceStateRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+let changeWalletServiceStateRequestDto: ChangeWalletServiceStateRequestDto; // (optional)
+
+const { status, data } = await apiInstance.changeTenantWalletServiceState(
+    changeWalletServiceStateRequestDto
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The wallet service settings |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **createCustomerOperationsReport**
+> DocumentBuilderTaskWrapper createCustomerOperationsReport()
+
+Starts generating a customer operations report as an xlsx file and saves it in Documents.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-customer-operations-report/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **customerOperationsReportRequestDto** | **CustomerOperationsReportRequestDto**|  | |
+
+
+### Return type
+
+**DocumentBuilderTaskWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration,
+    CustomerOperationsReportRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+let customerOperationsReportRequestDto: CustomerOperationsReportRequestDto; // (optional)
+
+const { status, data } = await apiInstance.createCustomerOperationsReport(
+    customerOperationsReportRequestDto
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Ok |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getCheckoutSetupUrl**
+> StringWrapper getCheckoutSetupUrl()
+
+Returns the URL to the checkout setup page.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-checkout-setup-url/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **backUrl** | [**string**] | The URL where the user will be redirected after completing the setup. | (optional) defaults to undefined|
+
+
+### Return type
+
+**StringWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -24,25 +224,17 @@ Returns the available portal currencies.
 import {
     PortalPaymentApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
 
-const { status, data } = await apiInstance.getCurrencies();
+let backUrl: string; //The URL where the user will be redirected after completing the setup. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getCheckoutSetupUrl(
+    backUrl
+);
 ```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**CurrenciesArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -53,7 +245,238 @@ This endpoint does not have any parameters.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | List of available portal currencies |  -  |
+|**200** | The URL to the checkout setup page |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getCustomerBalance**
+> BalanceWrapper getCustomerBalance()
+
+Returns the customer balance from the accounting service.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-balance/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **refresh** | [**boolean**] | Specifies whether to refresh the payment information cache or not. | (optional) defaults to undefined|
+
+
+### Return type
+
+**BalanceWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+let refresh: boolean; //Specifies whether to refresh the payment information cache or not. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getCustomerBalance(
+    refresh
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The customer balance |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getCustomerInfo**
+> CustomerInfoWrapper getCustomerInfo()
+
+Returns the customer information.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-info/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **refresh** | [**boolean**] | Specifies whether to refresh the payment information cache or not. | (optional) defaults to undefined|
+
+
+### Return type
+
+**CustomerInfoWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+let refresh: boolean; //Specifies whether to refresh the payment information cache or not. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getCustomerInfo(
+    refresh
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The customer info |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getCustomerOperations**
+> ReportWrapper getCustomerOperations()
+
+Returns the report of customer operations from the accounting service.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-operations/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **startDate** | [**string**] | The report start date. | (optional) defaults to undefined|
+| **endDate** | [**string**] | The report end date. | (optional) defaults to undefined|
+| **participantName** | [**string**] | The participant name. | (optional) defaults to undefined|
+| **credit** | [**boolean**] | Specifies whether to include credit operations in the report. The default value is true. | (optional) defaults to undefined|
+| **debit** | [**boolean**] | Specifies whether to include debit operations in the report. The default value is true. | (optional) defaults to undefined|
+| **offset** | [**number**] | The number of items to skip for pagination. The default value is 0. | (optional) defaults to undefined|
+| **limit** | [**number**] | The maximum number of items to return for pagination. The default value is 25. | (optional) defaults to undefined|
+
+
+### Return type
+
+**ReportWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+let startDate: string; //The report start date. (optional) (default to undefined)
+let endDate: string; //The report end date. (optional) (default to undefined)
+let participantName: string; //The participant name. (optional) (default to undefined)
+let credit: boolean; //Specifies whether to include credit operations in the report. The default value is true. (optional) (default to undefined)
+let debit: boolean; //Specifies whether to include debit operations in the report. The default value is true. (optional) (default to undefined)
+let offset: number; //The number of items to skip for pagination. The default value is 0. (optional) (default to undefined)
+let limit: number; //The maximum number of items to return for pagination. The default value is 25. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getCustomerOperations(
+    startDate,
+    endDate,
+    participantName,
+    credit,
+    debit,
+    offset,
+    limit
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The customer operations |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getCustomerOperationsReport**
+> DocumentBuilderTaskWrapper getCustomerOperationsReport()
+
+Returns the status of generating a customer operations report.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-operations-report/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**DocumentBuilderTaskWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+const { status, data } = await apiInstance.getCustomerOperationsReport();
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Ok |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -63,23 +486,7 @@ This endpoint does not have any parameters.
 
 Returns the URL to the payment account.
 
-### Example
-
-```typescript
-import {
-    PortalPaymentApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PortalPaymentApi(configuration);
-
-let backUrl: string; //The URL where the user will be redirected after payment processing. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.getPaymentAccount(
-    backUrl
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-account/).
 
 ### Parameters
 
@@ -96,6 +503,24 @@ const { status, data } = await apiInstance.getPaymentAccount(
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+let backUrl: string; //The URL where the user will be redirected after payment processing. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getPaymentAccount(
+    backUrl
+);
+```
+
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -107,6 +532,108 @@ const { status, data } = await apiInstance.getPaymentAccount(
 |-------------|-------------|------------------|
 |**200** | The URL to the payment account |  -  |
 |**401** | Unauthorized |  -  |
+|**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getPaymentCurrencies**
+> CurrenciesArrayWrapper getPaymentCurrencies()
+
+Returns the available portal currencies.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-currencies/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**CurrenciesArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+const { status, data } = await apiInstance.getPaymentCurrencies();
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | List of available portal currencies |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getPaymentQuotas**
+> QuotaArrayWrapper getPaymentQuotas()
+
+Returns the available portal quotas.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-quotas/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **wallet** | [**boolean**] | Specifies whether to return the wallet quotas only. | (optional) defaults to undefined|
+
+
+### Return type
+
+**QuotaArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+let wallet: boolean; //Specifies whether to return the wallet quotas only. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getPaymentQuotas(
+    wallet
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | List of available portal quotas |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -115,24 +642,7 @@ const { status, data } = await apiInstance.getPaymentAccount(
 
 Returns the URL to the payment page.
 
-### Example
-
-```typescript
-import {
-    PortalPaymentApi,
-    Configuration,
-    PaymentUrlRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PortalPaymentApi(configuration);
-
-let paymentUrlRequestsDto: PaymentUrlRequestsDto; // (optional)
-
-const { status, data } = await apiInstance.getPaymentUrl(
-    paymentUrlRequestsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-url/).
 
 ### Parameters
 
@@ -149,6 +659,25 @@ const { status, data } = await apiInstance.getPaymentUrl(
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration,
+    PaymentUrlRequestsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+let paymentUrlRequestsDto: PaymentUrlRequestsDto; // (optional)
+
+const { status, data } = await apiInstance.getPaymentUrl(
+    paymentUrlRequestsDto
+);
+```
+
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -160,27 +689,16 @@ const { status, data } = await apiInstance.getPaymentUrl(
 |-------------|-------------|------------------|
 |**200** | The URL to the payment page |  -  |
 |**401** | Unauthorized |  -  |
+|**403** | No permissions to perform this action |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getPrices**
-> ObjectWrapper getPrices()
+# **getPortalPrices**
+> UnknownWrapper getPortalPrices()
 
 Returns the available portal prices.
 
-### Example
-
-```typescript
-import {
-    PortalPaymentApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PortalPaymentApi(configuration);
-
-const { status, data } = await apiInstance.getPrices();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-prices/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -188,11 +706,25 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**ObjectWrapper**
+**UnknownWrapper**
 
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+const { status, data } = await apiInstance.getPortalPrices();
+```
 
 ### HTTP request headers
 
@@ -208,28 +740,12 @@ This endpoint does not have any parameters.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getQuota**
-> QuotaWrapper getQuota()
+# **getQuotaPaymentInformation**
+> QuotaWrapper getQuotaPaymentInformation()
 
 Returns the payment information about the current portal quota.
 
-### Example
-
-```typescript
-import {
-    PortalPaymentApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PortalPaymentApi(configuration);
-
-let refresh: boolean; //Specifies whether to refresh the payment information cache or not. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.getQuota(
-    refresh
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-quota-payment-information/).
 
 ### Parameters
 
@@ -246,6 +762,24 @@ const { status, data } = await apiInstance.getQuota(
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+let refresh: boolean; //Specifies whether to refresh the payment information cache or not. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getQuotaPaymentInformation(
+    refresh
+);
+```
+
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -261,10 +795,24 @@ const { status, data } = await apiInstance.getQuota(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getQuotas**
-> QuotaArrayWrapper getQuotas()
+# **getTenantWalletServiceSettings**
+> TenantWalletServiceSettingsWrapper getTenantWalletServiceSettings()
 
-Returns the available portal quotas.
+Returns the wallet services settings.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-wallet-service-settings/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**TenantWalletServiceSettingsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -272,13 +820,137 @@ Returns the available portal quotas.
 import {
     PortalPaymentApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
 
-const { status, data } = await apiInstance.getQuotas();
+const { status, data } = await apiInstance.getTenantWalletServiceSettings();
 ```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The wallet services settings |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getTenantWalletSettings**
+> TenantWalletSettingsWrapper getTenantWalletSettings()
+
+Returns the wallet auto top-up settings.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-wallet-settings/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**TenantWalletSettingsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+const { status, data } = await apiInstance.getTenantWalletSettings();
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The wallet auto top up settings |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getWalletService**
+> QuotaWrapper getWalletService()
+
+Returns the specified wallet service.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-wallet-service/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **service** | **TenantWalletService** | The wallet service type. | defaults to undefined|
+
+
+### Return type
+
+**QuotaWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+let service: TenantWalletService; //The wallet service type. (default to undefined)
+
+const { status, data } = await apiInstance.getWalletService(
+    service
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Wallet service |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getWalletServices**
+> QuotaArrayWrapper getWalletServices()
+
+Returns the available wallet services.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-wallet-services/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -292,6 +964,20 @@ This endpoint does not have any parameters.
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+const { status, data } = await apiInstance.getWalletServices();
+```
+
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -301,87 +987,17 @@ This endpoint does not have any parameters.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | List of available portal quotas |  -  |
+|**200** | List of available wallet services |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **paymentUpdate**
-> BooleanWrapper paymentUpdate()
-
-Updates the payment quantity with the parameters specified in the request.
-
-### Example
-
-```typescript
-import {
-    PortalPaymentApi,
-    Configuration,
-    QuantityRequestDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PortalPaymentApi(configuration);
-
-let quantityRequestDto: QuantityRequestDto; // (optional)
-
-const { status, data } = await apiInstance.paymentUpdate(
-    quantityRequestDto
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **quantityRequestDto** | **QuantityRequestDto**|  | |
-
-
-### Return type
-
-**BooleanWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Boolean value: true if the operation is successful |  -  |
-|**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **sendSalesRequest**
-> sendSalesRequest()
+# **sendPaymentRequest**
+> sendPaymentRequest()
 
 Sends a request for the portal payment.
 
-### Example
-
-```typescript
-import {
-    PortalPaymentApi,
-    Configuration,
-    SalesRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PortalPaymentApi(configuration);
-
-let salesRequestsDto: SalesRequestsDto; // (optional)
-
-const { status, data } = await apiInstance.sendSalesRequest(
-    salesRequestsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-payment-request/).
 
 ### Parameters
 
@@ -398,6 +1014,25 @@ void (empty response body)
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration,
+    SalesRequestsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+let salesRequestsDto: SalesRequestsDto; // (optional)
+
+const { status, data } = await apiInstance.sendPaymentRequest(
+    salesRequestsDto
+);
+```
+
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -411,6 +1046,277 @@ void (empty response body)
 |**400** | Incorrect email or message text is empty |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Request limit is exceeded |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **setTenantWalletSettings**
+> TenantWalletSettingsWrapper setTenantWalletSettings()
+
+Sets the wallet auto top-up settings.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-wallet-settings/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **tenantWalletSettingsWrapper** | **TenantWalletSettingsWrapper**|  | |
+
+
+### Return type
+
+**TenantWalletSettingsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration,
+    TenantWalletSettingsWrapper
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+let tenantWalletSettingsWrapper: TenantWalletSettingsWrapper; // (optional)
+
+const { status, data } = await apiInstance.setTenantWalletSettings(
+    tenantWalletSettingsWrapper
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The wallet auto top up settings |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **terminateCustomerOperationsReport**
+> terminateCustomerOperationsReport()
+
+Terminates generating a customer operations report.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-customer-operations-report/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+const { status, data } = await apiInstance.terminateCustomerOperationsReport();
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Ok |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **topUpDeposit**
+> BooleanWrapper topUpDeposit()
+
+Returns the result of putting money on deposit.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/top-up-deposit/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **topUpDepositRequestDto** | **TopUpDepositRequestDto**|  | |
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration,
+    TopUpDepositRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+let topUpDepositRequestDto: TopUpDepositRequestDto; // (optional)
+
+const { status, data } = await apiInstance.topUpDeposit(
+    topUpDepositRequestDto
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Boolean value: true if the operation is successful |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **updatePayment**
+> BooleanWrapper updatePayment()
+
+Updates the payment quantity with the parameters specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-payment/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **quantityRequestDto** | **QuantityRequestDto**|  | |
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration,
+    QuantityRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+let quantityRequestDto: QuantityRequestDto; // (optional)
+
+const { status, data } = await apiInstance.updatePayment(
+    quantityRequestDto
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Boolean value: true if the operation is successful |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | No permissions to perform this action |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **updateWalletPayment**
+> BooleanWrapper updateWalletPayment()
+
+Updates the wallet payment quantity with the parameters specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-wallet-payment/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **walletQuantityRequestDto** | **WalletQuantityRequestDto**|  | |
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration,
+    WalletQuantityRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+let walletQuantityRequestDto: WalletQuantityRequestDto; // (optional)
+
+const { status, data } = await apiInstance.updateWalletPayment(
+    walletQuantityRequestDto
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Boolean value: true if the operation is successful |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | No permissions to perform this action |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { WebItemSecurityRequestsDto } from '@onlyoffice/docspace-api-typescript';
+import { WebItemSecurityRequestsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: WebItemSecurityRequestsDto = {
     id,

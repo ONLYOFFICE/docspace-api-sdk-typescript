@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { AccountInfoArrayWrapper } from '@onlyoffice/docspace-api-typescript';
+import { AccountInfoArrayWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: AccountInfoArrayWrapper = {
     response,

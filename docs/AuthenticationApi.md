@@ -1,6 +1,6 @@
 # AuthenticationApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
@@ -17,24 +17,7 @@ All URIs are relative to *http://localhost:8092*
 
 Authenticates the current user by SMS, authenticator app, or without two-factor authentication.
 
-### Example
-
-```typescript
-import {
-    AuthenticationApi,
-    Configuration,
-    AuthRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new AuthenticationApi(configuration);
-
-let authRequestsDto: AuthRequestsDto; // (optional)
-
-const { status, data } = await apiInstance.authenticateMe(
-    authRequestsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/authenticate-me/).
 
 ### Parameters
 
@@ -50,6 +33,25 @@ const { status, data } = await apiInstance.authenticateMe(
 ### Authorization
 
 No authorization required
+
+### Example
+
+```typescript
+import {
+    AuthenticationApi,
+    Configuration,
+    AuthRequestsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new AuthenticationApi(configuration);
+
+let authRequestsDto: AuthRequestsDto; // (optional)
+
+const { status, data } = await apiInstance.authenticateMe(
+    authRequestsDto
+);
+```
 
 ### HTTP request headers
 
@@ -73,26 +75,7 @@ No authorization required
 
 Authenticates the current user by SMS or two-factor authentication code.
 
-### Example
-
-```typescript
-import {
-    AuthenticationApi,
-    Configuration,
-    AuthRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new AuthenticationApi(configuration);
-
-let code: string; // (default to undefined)
-let authRequestsDto: AuthRequestsDto; // (optional)
-
-const { status, data } = await apiInstance.authenticateMeFromBodyWithCode(
-    code,
-    authRequestsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/authenticate-me-from-body-with-code/).
 
 ### Parameters
 
@@ -109,6 +92,27 @@ const { status, data } = await apiInstance.authenticateMeFromBodyWithCode(
 ### Authorization
 
 No authorization required
+
+### Example
+
+```typescript
+import {
+    AuthenticationApi,
+    Configuration,
+    AuthRequestsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new AuthenticationApi(configuration);
+
+let code: string; // (default to undefined)
+let authRequestsDto: AuthRequestsDto; // (optional)
+
+const { status, data } = await apiInstance.authenticateMeFromBodyWithCode(
+    code,
+    authRequestsDto
+);
+```
 
 ### HTTP request headers
 
@@ -132,24 +136,7 @@ No authorization required
 
 Opens a confirmation email URL to validate a certain action (employee invitation, portal removal, phone activation, etc.).
 
-### Example
-
-```typescript
-import {
-    AuthenticationApi,
-    Configuration,
-    EmailValidationKeyModel
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new AuthenticationApi(configuration);
-
-let emailValidationKeyModel: EmailValidationKeyModel; // (optional)
-
-const { status, data } = await apiInstance.checkConfirm(
-    emailValidationKeyModel
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/check-confirm/).
 
 ### Parameters
 
@@ -165,6 +152,25 @@ const { status, data } = await apiInstance.checkConfirm(
 ### Authorization
 
 No authorization required
+
+### Example
+
+```typescript
+import {
+    AuthenticationApi,
+    Configuration,
+    EmailValidationKeyModel
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new AuthenticationApi(configuration);
+
+let emailValidationKeyModel: EmailValidationKeyModel; // (optional)
+
+const { status, data } = await apiInstance.checkConfirm(
+    emailValidationKeyModel
+);
+```
 
 ### HTTP request headers
 
@@ -184,19 +190,7 @@ No authorization required
 
 Checks if the current user is authenticated or not.
 
-### Example
-
-```typescript
-import {
-    AuthenticationApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new AuthenticationApi(configuration);
-
-const { status, data } = await apiInstance.getIsAuthentificated();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-authentificated/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -209,6 +203,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 No authorization required
+
+### Example
+
+```typescript
+import {
+    AuthenticationApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new AuthenticationApi(configuration);
+
+const { status, data } = await apiInstance.getIsAuthentificated();
+```
 
 ### HTTP request headers
 
@@ -228,19 +236,7 @@ No authorization required
 
 Logs out of the current user account.
 
-### Example
-
-```typescript
-import {
-    AuthenticationApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new AuthenticationApi(configuration);
-
-const { status, data } = await apiInstance.logout();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/logout/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -253,6 +249,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 No authorization required
+
+### Example
+
+```typescript
+import {
+    AuthenticationApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new AuthenticationApi(configuration);
+
+const { status, data } = await apiInstance.logout();
+```
 
 ### HTTP request headers
 
@@ -272,24 +282,7 @@ No authorization required
 
 Sets a mobile phone for the current user.
 
-### Example
-
-```typescript
-import {
-    AuthenticationApi,
-    Configuration,
-    MobileRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new AuthenticationApi(configuration);
-
-let mobileRequestsDto: MobileRequestsDto; // (optional)
-
-const { status, data } = await apiInstance.saveMobilePhone(
-    mobileRequestsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-mobile-phone/).
 
 ### Parameters
 
@@ -305,6 +298,25 @@ const { status, data } = await apiInstance.saveMobilePhone(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    AuthenticationApi,
+    Configuration,
+    MobileRequestsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new AuthenticationApi(configuration);
+
+let mobileRequestsDto: MobileRequestsDto; // (optional)
+
+const { status, data } = await apiInstance.saveMobilePhone(
+    mobileRequestsDto
+);
+```
 
 ### HTTP request headers
 
@@ -325,24 +337,7 @@ const { status, data } = await apiInstance.saveMobilePhone(
 
 Sends SMS with an authentication code.
 
-### Example
-
-```typescript
-import {
-    AuthenticationApi,
-    Configuration,
-    AuthRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new AuthenticationApi(configuration);
-
-let authRequestsDto: AuthRequestsDto; // (optional)
-
-const { status, data } = await apiInstance.sendSmsCode(
-    authRequestsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-sms-code/).
 
 ### Parameters
 
@@ -358,6 +353,25 @@ const { status, data } = await apiInstance.sendSmsCode(
 ### Authorization
 
 No authorization required
+
+### Example
+
+```typescript
+import {
+    AuthenticationApi,
+    Configuration,
+    AuthRequestsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new AuthenticationApi(configuration);
+
+let authRequestsDto: AuthRequestsDto; // (optional)
+
+const { status, data } = await apiInstance.sendSmsCode(
+    authRequestsDto
+);
+```
 
 ### HTTP request headers
 

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { RoomFromTemplateStatusWrapper } from '@onlyoffice/docspace-api-typescript';
+import { RoomFromTemplateStatusWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: RoomFromTemplateStatusWrapper = {
     response,

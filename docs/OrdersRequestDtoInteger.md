@@ -6,12 +6,12 @@ The collection of items to be ordered.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**items** | [**Array&lt;OrdersItemRequestDtoInteger&gt;**](OrdersItemRequestDtoInteger.md) | The list of items with their ordering information. | [optional] [default to undefined]
+**items** | [**Array&lt;OrdersItemRequestDtoInteger&gt;**](OrdersItemRequestDtoInteger.md) | The list of items with their ordering information. | [default to undefined]
 
 ## Example
 
 ```typescript
-import { OrdersRequestDtoInteger } from '@onlyoffice/docspace-api-typescript';
+import { OrdersRequestDtoInteger } from '@onlyoffice/docspace-api-sdk';
 
 const instance: OrdersRequestDtoInteger = {
     items,

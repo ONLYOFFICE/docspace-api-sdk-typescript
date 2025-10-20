@@ -9,16 +9,20 @@ Name | Type | Description | Notes
 **message** | **string** | The content of the administrator message to be sent. | [default to undefined]
 **email** | **string** | Email | [default to undefined]
 **culture** | **string** | Culture | [optional] [default to undefined]
+**recaptchaType** | [**RecaptchaType**](RecaptchaType.md) |  | [optional] [default to undefined]
+**recaptchaResponse** | **string** | The user\&#39;s response to the CAPTCHA challenge. | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { AdminMessageSettingsRequestsDto } from '@onlyoffice/docspace-api-typescript';
+import { AdminMessageSettingsRequestsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: AdminMessageSettingsRequestsDto = {
     message,
     email,
     culture,
+    recaptchaType,
+    recaptchaResponse,
 };
 ```
 

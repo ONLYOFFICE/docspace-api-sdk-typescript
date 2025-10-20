@@ -8,15 +8,17 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **value** | **number** | The price value. | [optional] [default to undefined]
 **currencySymbol** | **string** | The currency symbol. | [optional] [default to undefined]
+**isoCurrencySymbol** | **string** | The three-character ISO 4217 currency symbol. | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { PriceDto } from '@onlyoffice/docspace-api-typescript';
+import { PriceDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: PriceDto = {
     value,
     currencySymbol,
+    isoCurrencySymbol,
 };
 ```
 

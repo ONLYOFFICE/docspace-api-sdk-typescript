@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { TenantQuotaSettingsWrapper } from '@onlyoffice/docspace-api-typescript';
+import { TenantQuotaSettingsWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TenantQuotaSettingsWrapper = {
     response,

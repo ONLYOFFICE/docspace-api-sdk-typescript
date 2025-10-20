@@ -1,33 +1,17 @@
 # PortalGuestsApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**getGuestShareLink**](#getguestsharelink) | **GET** /api/2.0/people/guests/{userid}/share | Get a guest sharing link|
+|[**getGuestSharingLink**](#getguestsharinglink) | **GET** /api/2.0/people/guests/{userid}/share | Get a guest sharing link|
 
-# **getGuestShareLink**
-> StringWrapper getGuestShareLink()
+# **getGuestSharingLink**
+> StringWrapper getGuestSharingLink()
 
 Returns a link to share a guest with another user.
 
-### Example
-
-```typescript
-import {
-    PortalGuestsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PortalGuestsApi(configuration);
-
-let userid: string; //The user ID. (default to undefined)
-
-const { status, data } = await apiInstance.getGuestShareLink(
-    userid
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-guest-sharing-link/).
 
 ### Parameters
 
@@ -43,6 +27,24 @@ const { status, data } = await apiInstance.getGuestShareLink(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalGuestsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalGuestsApi(configuration);
+
+let userid: string; //The user ID. (default to undefined)
+
+const { status, data } = await apiInstance.getGuestSharingLink(
+    userid
+);
+```
 
 ### HTTP request headers
 

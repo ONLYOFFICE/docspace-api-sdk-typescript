@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ClientInfoResponse } from '@onlyoffice/docspace-api-typescript';
+import { ClientInfoResponse } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ClientInfoResponse = {
     name,

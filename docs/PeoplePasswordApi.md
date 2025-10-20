@@ -1,6 +1,6 @@
-# PeoplePasswordApi
+# PasswordApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
@@ -8,30 +8,11 @@ All URIs are relative to *http://localhost:8092*
 |[**sendUserPassword**](#senduserpassword) | **POST** /api/2.0/people/password | Remind a user password|
 
 # **changeUserPassword**
-> EmployeeFullWrapper changeUserPassword()
+> EmployeeFullWrapper changeUserPassword(memberBaseRequestDto)
 
 Sets a new password to the user with the ID specified in the request.
 
-### Example
-
-```typescript
-import {
-    PeoplePasswordApi,
-    Configuration,
-    MemberBaseRequestDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeoplePasswordApi(configuration);
-
-let userid: string; //The user ID. (default to undefined)
-let memberBaseRequestDto: MemberBaseRequestDto; //The request parameters for the user generic information. (optional)
-
-const { status, data } = await apiInstance.changeUserPassword(
-    userid,
-    memberBaseRequestDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-user-password/).
 
 ### Parameters
 
@@ -48,6 +29,27 @@ const { status, data } = await apiInstance.changeUserPassword(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeoplePasswordApi,
+    Configuration,
+    MemberBaseRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeoplePasswordApi(configuration);
+
+let userid: string; //The user ID. (default to undefined)
+let memberBaseRequestDto: MemberBaseRequestDto; //The request parameters for the user generic information.
+
+const { status, data } = await apiInstance.changeUserPassword(
+    userid,
+    memberBaseRequestDto
+);
+```
 
 ### HTTP request headers
 
@@ -71,24 +73,7 @@ const { status, data } = await apiInstance.changeUserPassword(
 
 Reminds a password to the user using the email address specified in the request.
 
-### Example
-
-```typescript
-import {
-    PeoplePasswordApi,
-    Configuration,
-    EmailMemberRequestDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeoplePasswordApi(configuration);
-
-let emailMemberRequestDto: EmailMemberRequestDto; // (optional)
-
-const { status, data } = await apiInstance.sendUserPassword(
-    emailMemberRequestDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-user-password/).
 
 ### Parameters
 
@@ -104,6 +89,25 @@ const { status, data } = await apiInstance.sendUserPassword(
 ### Authorization
 
 No authorization required
+
+### Example
+
+```typescript
+import {
+    PeoplePasswordApi,
+    Configuration,
+    EmailMemberRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeoplePasswordApi(configuration);
+
+let emailMemberRequestDto: EmailMemberRequestDto; // (optional)
+
+const { status, data } = await apiInstance.sendUserPassword(
+    emailMemberRequestDto
+);
+```
 
 ### HTTP request headers
 

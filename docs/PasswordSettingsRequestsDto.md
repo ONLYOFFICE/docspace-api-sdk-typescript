@@ -6,7 +6,7 @@ The request parameters for configuring the password complexity requirements.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**minLength** | **number** | The minimum number of characters required for valid passwords. | [optional] [default to undefined]
+**minLength** | **number** | The minimum number of characters required for valid passwords. | [default to undefined]
 **upperCase** | **boolean** | Specifies whether the password should contain the uppercase letters or not. | [optional] [default to undefined]
 **digits** | **boolean** | Specifies whether the password should contain the digits or not. | [optional] [default to undefined]
 **specSymbols** | **boolean** | Specifies whether the password should contain the special symbols or not. | [optional] [default to undefined]
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { PasswordSettingsRequestsDto } from '@onlyoffice/docspace-api-typescript';
+import { PasswordSettingsRequestsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: PasswordSettingsRequestsDto = {
     minLength,

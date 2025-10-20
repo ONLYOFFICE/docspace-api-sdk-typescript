@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FolderStringWrapper } from '@onlyoffice/docspace-api-typescript';
+import { FolderStringWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FolderStringWrapper = {
     response,

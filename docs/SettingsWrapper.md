@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { SettingsWrapper } from '@onlyoffice/docspace-api-typescript';
+import { SettingsWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: SettingsWrapper = {
     response,

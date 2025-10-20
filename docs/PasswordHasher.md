@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { PasswordHasher } from '@onlyoffice/docspace-api-typescript';
+import { PasswordHasher } from '@onlyoffice/docspace-api-sdk';
 
 const instance: PasswordHasher = {
     size,

@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { TenantDeepLinkSettings } from '@onlyoffice/docspace-api-typescript';
+import { TenantDeepLinkSettings } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TenantDeepLinkSettings = {
     handlingMode,

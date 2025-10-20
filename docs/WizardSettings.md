@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { WizardSettings } from '@onlyoffice/docspace-api-typescript';
+import { WizardSettings } from '@onlyoffice/docspace-api-sdk';
 
 const instance: WizardSettings = {
     completed,

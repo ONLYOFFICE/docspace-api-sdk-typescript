@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { Run } from '@onlyoffice/docspace-api-typescript';
+import { Run } from '@onlyoffice/docspace-api-sdk';
 
 const instance: Run = {
     fill,

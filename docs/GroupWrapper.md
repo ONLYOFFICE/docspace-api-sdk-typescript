@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { GroupWrapper } from '@onlyoffice/docspace-api-typescript';
+import { GroupWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: GroupWrapper = {
     response,

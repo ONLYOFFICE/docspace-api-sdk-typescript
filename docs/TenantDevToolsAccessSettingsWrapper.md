@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { TenantDevToolsAccessSettingsWrapper } from '@onlyoffice/docspace-api-typescript';
+import { TenantDevToolsAccessSettingsWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TenantDevToolsAccessSettingsWrapper = {
     response,

@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ScopeResponse } from '@onlyoffice/docspace-api-typescript';
+import { ScopeResponse } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ScopeResponse = {
     name,

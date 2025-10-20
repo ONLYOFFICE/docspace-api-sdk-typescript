@@ -6,12 +6,12 @@ The anonymous config parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**request** | **boolean** | Specifies if the anonymous is a request. | [optional] [default to undefined]
+**request** | **boolean** | Specifies if the anonymous is a request. | [default to undefined]
 
 ## Example
 
 ```typescript
-import { AnonymousConfigDto } from '@onlyoffice/docspace-api-typescript';
+import { AnonymousConfigDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: AnonymousConfigDto = {
     request,

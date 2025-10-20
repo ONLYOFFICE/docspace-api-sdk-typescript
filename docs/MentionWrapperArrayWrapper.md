@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { MentionWrapperArrayWrapper } from '@onlyoffice/docspace-api-typescript';
+import { MentionWrapperArrayWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: MentionWrapperArrayWrapper = {
     response,

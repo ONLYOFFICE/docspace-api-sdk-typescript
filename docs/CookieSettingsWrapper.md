@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CookieSettingsWrapper } from '@onlyoffice/docspace-api-typescript';
+import { CookieSettingsWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CookieSettingsWrapper = {
     response,

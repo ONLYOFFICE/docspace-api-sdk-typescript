@@ -10,8 +10,11 @@ Name | Type | Description | Notes
 **name** | **string** | The tenant name. | [optional] [default to undefined]
 **price** | **number** | The tenant price. | [optional] [default to undefined]
 **priceCurrencySymbol** | **string** | The tenant price currency symbol. | [optional] [default to undefined]
+**priceISOCurrencySymbol** | **string** | The tenant price three-character ISO 4217 currency symbol. | [optional] [default to undefined]
 **productId** | **string** | The tenant product ID. | [optional] [default to undefined]
 **visible** | **boolean** | Specifies if the tenant quota is visible or not. | [optional] [default to undefined]
+**wallet** | **boolean** | Specifies if the tenant quota applies to the wallet or not | [optional] [default to undefined]
+**dueDate** | **string** | The quota due date. | [optional] [default to undefined]
 **features** | **string** | The tenant quota features. | [optional] [default to undefined]
 **maxFileSize** | **number** | The tenant maximum file size. | [optional] [default to undefined]
 **maxTotalSize** | **number** | The tenant maximum total size. | [optional] [default to undefined]
@@ -32,24 +35,29 @@ Name | Type | Description | Notes
 **customization** | **boolean** | Specifies if the customization settings are available or not. | [optional] [default to undefined]
 **lifetime** | **boolean** | Specifies if the license has the lifetime settings or not. | [optional] [default to undefined]
 **custom** | **boolean** | Specifies if the custom domain URL is available or not. | [optional] [default to undefined]
-**autoBackupRestore** | **boolean** | Specifies if the automatic backup option is enabled or not. | [optional] [default to undefined]
+**restore** | **boolean** | Specifies if the restore is enabled or not. | [optional] [default to undefined]
 **oauth** | **boolean** | Specifies if Oauth is available or not. | [optional] [default to undefined]
 **contentSearch** | **boolean** | Specifies if the content search is available or not. | [optional] [default to undefined]
 **thirdParty** | **boolean** | Specifies if the third-party accounts linking is available or not. | [optional] [default to undefined]
 **year** | **boolean** | Specifies if the tenant quota is yearly subscription or not. | [optional] [default to undefined]
+**countFreeBackup** | **number** | The number of free backups within a month. | [optional] [default to undefined]
+**backup** | **boolean** | Specifies if the backup anabled as a wallet service or not. | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { TenantQuota } from '@onlyoffice/docspace-api-typescript';
+import { TenantQuota } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TenantQuota = {
     tenantId,
     name,
     price,
     priceCurrencySymbol,
+    priceISOCurrencySymbol,
     productId,
     visible,
+    wallet,
+    dueDate,
     features,
     maxFileSize,
     maxTotalSize,
@@ -70,11 +78,13 @@ const instance: TenantQuota = {
     customization,
     lifetime,
     custom,
-    autoBackupRestore,
+    restore,
     oauth,
     contentSearch,
     thirdParty,
     year,
+    countFreeBackup,
+    backup,
 };
 ```
 

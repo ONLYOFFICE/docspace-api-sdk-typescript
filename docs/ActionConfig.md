@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ActionConfig } from '@onlyoffice/docspace-api-typescript';
+import { ActionConfig } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ActionConfig = {
     data,

@@ -1,13 +1,13 @@
-# PortalSettingsApi
+# SettingsApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**continuePortal**](#continueportal) | **PUT** /api/2.0/portal/continue | Restore a portal|
 |[**deletePortal**](#deleteportal) | **DELETE** /api/2.0/portal/delete | Delete a portal|
-|[**get**](#get) | **GET** /api/2.0/portal | Get a portal|
-|[**getFullAbsolutePath**](#getfullabsolutepath) | **GET** /api/2.0/portal/path | Get a path to the portal|
+|[**getPortalInformation**](#getportalinformation) | **GET** /api/2.0/portal | Get a portal|
+|[**getPortalPath**](#getportalpath) | **GET** /api/2.0/portal/path | Get a path to the portal|
 |[**sendDeleteInstructions**](#senddeleteinstructions) | **POST** /api/2.0/portal/delete | Send removal instructions|
 |[**sendSuspendInstructions**](#sendsuspendinstructions) | **POST** /api/2.0/portal/suspend | Send suspension instructions|
 |[**suspendPortal**](#suspendportal) | **PUT** /api/2.0/portal/suspend | Deactivate a portal|
@@ -17,19 +17,7 @@ All URIs are relative to *http://localhost:8092*
 
 Restores the current portal.
 
-### Example
-
-```typescript
-import {
-    PortalSettingsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PortalSettingsApi(configuration);
-
-const { status, data } = await apiInstance.continuePortal();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/continue-portal/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -42,6 +30,20 @@ void (empty response body)
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalSettingsApi(configuration);
+
+const { status, data } = await apiInstance.continuePortal();
+```
 
 ### HTTP request headers
 
@@ -62,19 +64,7 @@ void (empty response body)
 
 Deletes the current portal.
 
-### Example
-
-```typescript
-import {
-    PortalSettingsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PortalSettingsApi(configuration);
-
-const { status, data } = await apiInstance.deletePortal();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-portal/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -87,6 +77,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalSettingsApi(configuration);
+
+const { status, data } = await apiInstance.deletePortal();
+```
 
 ### HTTP request headers
 
@@ -102,24 +106,12 @@ This endpoint does not have any parameters.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get**
-> TenantWrapper get()
+# **getPortalInformation**
+> TenantWrapper getPortalInformation()
 
 Returns the current portal information.
 
-### Example
-
-```typescript
-import {
-    PortalSettingsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PortalSettingsApi(configuration);
-
-const { status, data } = await apiInstance.get();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-information/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -132,6 +124,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalSettingsApi(configuration);
+
+const { status, data } = await apiInstance.getPortalInformation();
+```
 
 ### HTTP request headers
 
@@ -147,28 +153,12 @@ This endpoint does not have any parameters.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getFullAbsolutePath**
-> ObjectWrapper getFullAbsolutePath()
+# **getPortalPath**
+> ObjectWrapper getPortalPath()
 
 Returns the full absolute path to the current portal.
 
-### Example
-
-```typescript
-import {
-    PortalSettingsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PortalSettingsApi(configuration);
-
-let virtualPath: string; //The virtual path for the portal resource access. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.getFullAbsolutePath(
-    virtualPath
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-path/).
 
 ### Parameters
 
@@ -184,6 +174,24 @@ const { status, data } = await apiInstance.getFullAbsolutePath(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalSettingsApi(configuration);
+
+let virtualPath: string; //The virtual path for the portal resource access. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getPortalPath(
+    virtualPath
+);
+```
 
 ### HTTP request headers
 
@@ -204,19 +212,7 @@ const { status, data } = await apiInstance.getFullAbsolutePath(
 
 Sends the instructions to remove the current portal.
 
-### Example
-
-```typescript
-import {
-    PortalSettingsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PortalSettingsApi(configuration);
-
-const { status, data } = await apiInstance.sendDeleteInstructions();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-delete-instructions/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -229,6 +225,20 @@ void (empty response body)
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalSettingsApi(configuration);
+
+const { status, data } = await apiInstance.sendDeleteInstructions();
+```
 
 ### HTTP request headers
 
@@ -249,19 +259,7 @@ void (empty response body)
 
 Sends the instructions to suspend the current portal.
 
-### Example
-
-```typescript
-import {
-    PortalSettingsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PortalSettingsApi(configuration);
-
-const { status, data } = await apiInstance.sendSuspendInstructions();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-suspend-instructions/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -274,6 +272,20 @@ void (empty response body)
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalSettingsApi(configuration);
+
+const { status, data } = await apiInstance.sendSuspendInstructions();
+```
 
 ### HTTP request headers
 
@@ -294,19 +306,7 @@ void (empty response body)
 
 Deactivates the current portal.
 
-### Example
-
-```typescript
-import {
-    PortalSettingsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PortalSettingsApi(configuration);
-
-const { status, data } = await apiInstance.suspendPortal();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/suspend-portal/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -319,6 +319,20 @@ void (empty response body)
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalSettingsApi(configuration);
+
+const { status, data } = await apiInstance.suspendPortal();
+```
 
 ### HTTP request headers
 

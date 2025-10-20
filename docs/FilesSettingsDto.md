@@ -16,7 +16,6 @@ Name | Type | Description | Notes
 **extsWebRestrictedEditing** | **Array&lt;string&gt;** | The list of extensions of the files that are restricted for editing. | [optional] [default to undefined]
 **extsWebCommented** | **Array&lt;string&gt;** | The list of extensions of the commented files. | [optional] [default to undefined]
 **extsWebTemplate** | **Array&lt;string&gt;** | The list of extensions of the template files. | [optional] [default to undefined]
-**extsCoAuthoring** | **Array&lt;string&gt;** | The list of extensions of the co-authoring files. | [optional] [default to undefined]
 **extsMustConvert** | **Array&lt;string&gt;** | The list of extensions of the files that must be converted. | [optional] [default to undefined]
 **extsConvertible** | **{ [key: string]: Array&lt;string&gt; | null; }** | The list of the convertible extensions. | [optional] [default to undefined]
 **extsUploadable** | **Array&lt;string&gt;** | The list of the uploadable extensions. | [optional] [default to undefined]
@@ -27,6 +26,7 @@ Name | Type | Description | Notes
 **extsSpreadsheet** | **Array&lt;string&gt;** | The list of the spreadsheet extensions. | [optional] [default to undefined]
 **extsPresentation** | **Array&lt;string&gt;** | The list of the presentation extensions. | [optional] [default to undefined]
 **extsDocument** | **Array&lt;string&gt;** | The list of the text document extensions. | [optional] [default to undefined]
+**extsDiagram** | **Array&lt;string&gt;** | The list of the diagram extensions. | [optional] [default to undefined]
 **internalFormats** | [**FilesSettingsDtoInternalFormats**](FilesSettingsDtoInternalFormats.md) |  | [optional] [default to undefined]
 **masterFormExtension** | **string** | The master form extension. | [optional] [default to undefined]
 **paramVersion** | **string** | The URL parameter which specifies the file version. | [optional] [default to undefined]
@@ -53,9 +53,9 @@ Name | Type | Description | Notes
 **defaultOrder** | [**OrderBy**](OrderBy.md) |  | [optional] [default to undefined]
 **forcesave** | **boolean** | Specifies whether to forcesave the files or not. | [optional] [default to undefined]
 **storeForcesave** | **boolean** | Specifies whether to store the forcesaved file versions or not. | [optional] [default to undefined]
-**recentSection** | **boolean** | Specifies if the \&quot;Recent\&quot; section is displayed or not. | [optional] [default to undefined]
-**favoritesSection** | **boolean** | Specifies if the \&quot;Favorites\&quot; section is displayed or not. | [optional] [default to undefined]
-**templatesSection** | **boolean** | Specifies if the \&quot;Templates\&quot; section is displayed or not. | [optional] [default to undefined]
+**recentSection** | **boolean** | Specifies if the Recent section is displayed or not. | [optional] [default to undefined]
+**favoritesSection** | **boolean** | Specifies if the Favorites section is displayed or not. | [optional] [default to undefined]
+**templatesSection** | **boolean** | Specifies if the Templates section is displayed or not. | [optional] [default to undefined]
 **downloadTarGz** | **boolean** | Specifies whether to download the .tar.gz files or not. | [optional] [default to undefined]
 **automaticallyCleanUp** | [**AutoCleanUpData**](AutoCleanUpData.md) |  | [optional] [default to undefined]
 **canSearchByContent** | **boolean** | Specifies whether the file can be searched by its content or not. | [optional] [default to undefined]
@@ -67,7 +67,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FilesSettingsDto } from '@onlyoffice/docspace-api-typescript';
+import { FilesSettingsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FilesSettingsDto = {
     extsImagePreviewed,
@@ -80,7 +80,6 @@ const instance: FilesSettingsDto = {
     extsWebRestrictedEditing,
     extsWebCommented,
     extsWebTemplate,
-    extsCoAuthoring,
     extsMustConvert,
     extsConvertible,
     extsUploadable,
@@ -91,6 +90,7 @@ const instance: FilesSettingsDto = {
     extsSpreadsheet,
     extsPresentation,
     extsDocument,
+    extsDiagram,
     internalFormats,
     masterFormExtension,
     paramVersion,

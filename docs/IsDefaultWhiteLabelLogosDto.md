@@ -1,18 +1,18 @@
 # IsDefaultWhiteLabelLogosDto
 
-The default white label logos parameters.
+The default white label logo parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **string** | The white label logo name. | [optional] [default to undefined]
-**_default** | **boolean** | Specifies if the white label logo is default or not. | [optional] [default to undefined]
+**name** | **string** | The white label logo name. | [default to undefined]
+**_default** | **boolean** | Specifies if the white label logo is default or not. | [default to undefined]
 
 ## Example
 
 ```typescript
-import { IsDefaultWhiteLabelLogosDto } from '@onlyoffice/docspace-api-typescript';
+import { IsDefaultWhiteLabelLogosDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: IsDefaultWhiteLabelLogosDto = {
     name,

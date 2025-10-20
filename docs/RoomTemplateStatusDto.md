@@ -6,15 +6,15 @@ The room template status.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**templateId** | **number** | The room template ID. | [optional] [default to undefined]
-**progress** | **number** | The progress of the room template creation process. | [optional] [default to undefined]
+**templateId** | **number** | The room template ID. | [default to undefined]
+**progress** | **number** | The progress of the room template creation process. | [default to undefined]
 **error** | **string** | The error message that is sent when the room template is not created successfully. | [optional] [default to undefined]
-**isCompleted** | **boolean** | Specifies whether the process of creating the room template is completed. | [optional] [default to undefined]
+**isCompleted** | **boolean** | Specifies whether the process of creating the room template is completed. | [default to undefined]
 
 ## Example
 
 ```typescript
-import { RoomTemplateStatusDto } from '@onlyoffice/docspace-api-typescript';
+import { RoomTemplateStatusDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: RoomTemplateStatusDto = {
     templateId,

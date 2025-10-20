@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { SecurityDto } from '@onlyoffice/docspace-api-typescript';
+import { SecurityDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: SecurityDto = {
     webItemId,

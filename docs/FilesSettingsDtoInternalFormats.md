@@ -15,11 +15,12 @@ Name | Type | Description | Notes
 **Presentation** | **string** |  | [optional] [default to undefined]
 **Document** | **string** |  | [optional] [default to undefined]
 **Pdf** | **string** |  | [optional] [default to undefined]
+**Diagram** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { FilesSettingsDtoInternalFormats } from '@onlyoffice/docspace-api-typescript';
+import { FilesSettingsDtoInternalFormats } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FilesSettingsDtoInternalFormats = {
     Unknown,
@@ -31,6 +32,7 @@ const instance: FilesSettingsDtoInternalFormats = {
     Presentation,
     Document,
     Pdf,
+    Diagram,
 };
 ```
 

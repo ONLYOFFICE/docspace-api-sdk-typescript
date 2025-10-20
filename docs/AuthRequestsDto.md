@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { AuthRequestsDto } from '@onlyoffice/docspace-api-typescript';
+import { AuthRequestsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: AuthRequestsDto = {
     userName,

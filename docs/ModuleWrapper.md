@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ModuleWrapper } from '@onlyoffice/docspace-api-typescript';
+import { ModuleWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ModuleWrapper = {
     response,

@@ -8,16 +8,17 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **number** | The tariff ID. | [optional] [default to undefined]
 **state** | [**TariffState**](TariffState.md) |  | [optional] [default to undefined]
-**dueDate** | **string** | The tariff due date. | [optional] [default to undefined]
+**dueDate** | **string** | The tariff due date. | [default to undefined]
 **delayDueDate** | **string** | The tariff delay due date. | [optional] [default to undefined]
 **licenseDate** | **string** | The tariff license date. | [optional] [default to undefined]
 **customerId** | **string** | The tariff customer ID. | [optional] [default to undefined]
-**quotas** | [**Array&lt;Quota&gt;**](Quota.md) | The list of tariff quotas. | [optional] [default to undefined]
+**quotas** | [**Array&lt;Quota&gt;**](Quota.md) | The list of tariff quotas. | [default to undefined]
+**overdueQuotas** | [**Array&lt;Quota&gt;**](Quota.md) | The list of overdue tariff quotas. | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { Tariff } from '@onlyoffice/docspace-api-typescript';
+import { Tariff } from '@onlyoffice/docspace-api-sdk';
 
 const instance: Tariff = {
     id,
@@ -27,6 +28,7 @@ const instance: Tariff = {
     licenseDate,
     customerId,
     quotas,
+    overdueQuotas,
 };
 ```
 

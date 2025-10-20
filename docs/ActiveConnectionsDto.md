@@ -6,13 +6,13 @@ The active connections parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**loginEvent** | **number** | The login event. | [optional] [default to undefined]
+**loginEvent** | **number** | The login event. | [default to undefined]
 **items** | [**Array&lt;ActiveConnectionsItemDto&gt;**](ActiveConnectionsItemDto.md) | The list of active connection items. | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { ActiveConnectionsDto } from '@onlyoffice/docspace-api-typescript';
+import { ActiveConnectionsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ActiveConnectionsDto = {
     loginEvent,

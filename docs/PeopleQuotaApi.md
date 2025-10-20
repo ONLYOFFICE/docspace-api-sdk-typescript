@@ -1,6 +1,6 @@
 # PeopleQuotaApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
@@ -12,24 +12,7 @@ All URIs are relative to *http://localhost:8092*
 
 Resets a quota limit of users with the IDs specified in the request.
 
-### Example
-
-```typescript
-import {
-    PeopleQuotaApi,
-    Configuration,
-    UpdateMembersQuotaRequestDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleQuotaApi(configuration);
-
-let updateMembersQuotaRequestDto: UpdateMembersQuotaRequestDto; // (optional)
-
-const { status, data } = await apiInstance.resetUsersQuota(
-    updateMembersQuotaRequestDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-users-quota/).
 
 ### Parameters
 
@@ -45,6 +28,25 @@ const { status, data } = await apiInstance.resetUsersQuota(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleQuotaApi,
+    Configuration,
+    UpdateMembersQuotaRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleQuotaApi(configuration);
+
+let updateMembersQuotaRequestDto: UpdateMembersQuotaRequestDto; // (optional)
+
+const { status, data } = await apiInstance.resetUsersQuota(
+    updateMembersQuotaRequestDto
+);
+```
 
 ### HTTP request headers
 
@@ -68,24 +70,7 @@ const { status, data } = await apiInstance.resetUsersQuota(
 
 Changes a quota limit for the users with the IDs specified in the request.
 
-### Example
-
-```typescript
-import {
-    PeopleQuotaApi,
-    Configuration,
-    UpdateMembersQuotaRequestDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleQuotaApi(configuration);
-
-let updateMembersQuotaRequestDto: UpdateMembersQuotaRequestDto; // (optional)
-
-const { status, data } = await apiInstance.updateUserQuota(
-    updateMembersQuotaRequestDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-user-quota/).
 
 ### Parameters
 
@@ -101,6 +86,25 @@ const { status, data } = await apiInstance.updateUserQuota(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleQuotaApi,
+    Configuration,
+    UpdateMembersQuotaRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleQuotaApi(configuration);
+
+let updateMembersQuotaRequestDto: UpdateMembersQuotaRequestDto; // (optional)
+
+const { status, data } = await apiInstance.updateUserQuota(
+    updateMembersQuotaRequestDto
+);
+```
 
 ### HTTP request headers
 

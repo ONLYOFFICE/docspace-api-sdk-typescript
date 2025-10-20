@@ -11,14 +11,14 @@ Name | Type | Description | Notes
 **lastName** | **string** | The user last name. | [optional] [default to undefined]
 **email** | **string** | The user email address. | [optional] [default to undefined]
 **passwordHash** | **string** | The user password hash. | [optional] [default to undefined]
-**key** | **string** | The user link key. | [optional] [default to undefined]
+**key** | **string** | The user link key. | [default to undefined]
 **culture** | **string** | The user culture code. | [optional] [default to undefined]
-**serializedProfile** | **string** | Third-party profile in the serialized format | [optional] [default to undefined]
+**serializedProfile** | **string** | The third-party profile in the serialized format | [default to undefined]
 
 ## Example
 
 ```typescript
-import { SignupAccountRequestDto } from '@onlyoffice/docspace-api-typescript';
+import { SignupAccountRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: SignupAccountRequestDto = {
     employeeType,

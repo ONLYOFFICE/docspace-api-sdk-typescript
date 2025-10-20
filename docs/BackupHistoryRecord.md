@@ -5,16 +5,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** |  | [optional] [default to undefined]
-**fileName** | **string** |  | [optional] [default to undefined]
-**storageType** | [**BackupStorageType**](BackupStorageType.md) |  | [optional] [default to undefined]
-**createdOn** | **string** |  | [optional] [default to undefined]
-**expiresOn** | **string** |  | [optional] [default to undefined]
+**id** | **string** |  | [default to undefined]
+**fileName** | **string** |  | [default to undefined]
+**storageType** | [**BackupStorageType**](BackupStorageType.md) |  | [default to undefined]
+**createdOn** | **string** |  | [default to undefined]
+**expiresOn** | **string** |  | [default to undefined]
 
 ## Example
 
 ```typescript
-import { BackupHistoryRecord } from '@onlyoffice/docspace-api-typescript';
+import { BackupHistoryRecord } from '@onlyoffice/docspace-api-sdk';
 
 const instance: BackupHistoryRecord = {
     id,

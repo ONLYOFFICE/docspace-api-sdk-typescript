@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { WebhooksLogArrayWrapper } from '@onlyoffice/docspace-api-typescript';
+import { WebhooksLogArrayWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: WebhooksLogArrayWrapper = {
     response,

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { EditHistoryDataWrapper } from '@onlyoffice/docspace-api-typescript';
+import { EditHistoryDataWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: EditHistoryDataWrapper = {
     response,

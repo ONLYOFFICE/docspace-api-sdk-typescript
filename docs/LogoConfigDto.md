@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **image** | **string** | The image of the logo. | [optional] [default to undefined]
 **imageDark** | **string** | The dark image of the logo. | [optional] [default to undefined]
+**imageLight** | **string** | The light image of the logo. | [optional] [default to undefined]
 **imageEmbedded** | **string** | The embedded image of the logo. | [optional] [default to undefined]
 **url** | **string** | The url link of the logo. | [optional] [default to undefined]
 **visible** | **boolean** | Specifies if the logo is visible. | [optional] [default to undefined]
@@ -15,11 +16,12 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { LogoConfigDto } from '@onlyoffice/docspace-api-typescript';
+import { LogoConfigDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: LogoConfigDto = {
     image,
     imageDark,
+    imageLight,
     imageEmbedded,
     url,
     visible,

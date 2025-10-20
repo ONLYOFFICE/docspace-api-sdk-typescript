@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { UpdateFile } from '@onlyoffice/docspace-api-typescript';
+import { UpdateFile } from '@onlyoffice/docspace-api-sdk';
 
 const instance: UpdateFile = {
     title,

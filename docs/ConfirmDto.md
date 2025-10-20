@@ -6,19 +6,21 @@ The confirmation parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**result** | [**ValidationResult**](ValidationResult.md) |  | [optional] [default to undefined]
+**result** | [**ValidationResult**](ValidationResult.md) |  | [default to undefined]
 **roomId** | **string** | The confirmation room ID. | [optional] [default to undefined]
 **title** | **string** | The confirmation title. | [optional] [default to undefined]
+**email** | **string** | The confirmation email. | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { ConfirmDto } from '@onlyoffice/docspace-api-typescript';
+import { ConfirmDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ConfirmDto = {
     result,
     roomId,
     title,
+    email,
 };
 ```
 

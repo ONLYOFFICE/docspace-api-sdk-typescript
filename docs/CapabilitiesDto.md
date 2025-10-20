@@ -6,18 +6,18 @@ The capabilities parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ldapEnabled** | **boolean** | Specifies if the LDAP settings are enabled or not. | [optional] [default to undefined]
+**ldapEnabled** | **boolean** | Specifies if the LDAP settings are enabled or not. | [default to undefined]
 **ldapDomain** | **string** | The LDAP domain. | [optional] [default to undefined]
-**providers** | **Array&lt;string&gt;** | The list of providers. | [optional] [default to undefined]
-**ssoLabel** | **string** | The SP login label. | [optional] [default to undefined]
-**oauthEnabled** | **boolean** | Specifies if OAuth is enabled or not. | [optional] [default to undefined]
-**ssoUrl** | **string** | The SSO URL. If this parameter is empty, then the SSO settings are disabled. | [optional] [default to undefined]
-**identityServerEnabled** | **boolean** | Specifies if identity server is enabled or not | [optional] [default to undefined]
+**providers** | **Array&lt;string&gt;** | The list of providers. | [default to undefined]
+**ssoLabel** | **string** | The SP login label. | [default to undefined]
+**oauthEnabled** | **boolean** | Specifies if OAuth is enabled or not. | [default to undefined]
+**ssoUrl** | **string** | The SSO URL. If this parameter is empty, then the SSO settings are disabled. | [default to undefined]
+**identityServerEnabled** | **boolean** | Specifies if identity server is enabled or not | [default to undefined]
 
 ## Example
 
 ```typescript
-import { CapabilitiesDto } from '@onlyoffice/docspace-api-typescript';
+import { CapabilitiesDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CapabilitiesDto = {
     ldapEnabled,

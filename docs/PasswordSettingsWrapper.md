@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { PasswordSettingsWrapper } from '@onlyoffice/docspace-api-typescript';
+import { PasswordSettingsWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: PasswordSettingsWrapper = {
     response,

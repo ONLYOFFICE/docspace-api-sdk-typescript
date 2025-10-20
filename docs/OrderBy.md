@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { OrderBy } from '@onlyoffice/docspace-api-typescript';
+import { OrderBy } from '@onlyoffice/docspace-api-sdk';
 
 const instance: OrderBy = {
     is_asc,

@@ -1,6 +1,6 @@
-# PeopleGuestsApi
+# GuestsApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
@@ -12,24 +12,7 @@ All URIs are relative to *http://localhost:8092*
 
 Approves a guest sharing link and returns the detailed information about a guest.
 
-### Example
-
-```typescript
-import {
-    PeopleGuestsApi,
-    Configuration,
-    EmailMemberRequestDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleGuestsApi(configuration);
-
-let emailMemberRequestDto: EmailMemberRequestDto; // (optional)
-
-const { status, data } = await apiInstance.approveGuestShareLink(
-    emailMemberRequestDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/approve-guest-share-link/).
 
 ### Parameters
 
@@ -45,6 +28,25 @@ const { status, data } = await apiInstance.approveGuestShareLink(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleGuestsApi,
+    Configuration,
+    EmailMemberRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleGuestsApi(configuration);
+
+let emailMemberRequestDto: EmailMemberRequestDto; // (optional)
+
+const { status, data } = await apiInstance.approveGuestShareLink(
+    emailMemberRequestDto
+);
+```
 
 ### HTTP request headers
 
@@ -67,24 +69,7 @@ const { status, data } = await apiInstance.approveGuestShareLink(
 
 Deletes guests from the list and excludes them from rooms to which they were invited.
 
-### Example
-
-```typescript
-import {
-    PeopleGuestsApi,
-    Configuration,
-    UpdateMembersRequestDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleGuestsApi(configuration);
-
-let updateMembersRequestDto: UpdateMembersRequestDto; // (optional)
-
-const { status, data } = await apiInstance.deleteGuests(
-    updateMembersRequestDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-guests/).
 
 ### Parameters
 
@@ -100,6 +85,25 @@ void (empty response body)
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleGuestsApi,
+    Configuration,
+    UpdateMembersRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleGuestsApi(configuration);
+
+let updateMembersRequestDto: UpdateMembersRequestDto; // (optional)
+
+const { status, data } = await apiInstance.deleteGuests(
+    updateMembersRequestDto
+);
+```
 
 ### HTTP request headers
 

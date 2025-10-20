@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { WizardRequestsDto } from '@onlyoffice/docspace-api-typescript';
+import { WizardRequestsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: WizardRequestsDto = {
     email,

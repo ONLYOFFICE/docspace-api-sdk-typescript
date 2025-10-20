@@ -1,6 +1,6 @@
 # CapabilitiesApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
@@ -11,19 +11,7 @@ All URIs are relative to *http://localhost:8092*
 
 Returns the information about portal capabilities.
 
-### Example
-
-```typescript
-import {
-    CapabilitiesApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new CapabilitiesApi(configuration);
-
-const { status, data } = await apiInstance.getPortalCapabilities();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-capabilities/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -36,6 +24,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 No authorization required
+
+### Example
+
+```typescript
+import {
+    CapabilitiesApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new CapabilitiesApi(configuration);
+
+const { status, data } = await apiInstance.getPortalCapabilities();
+```
 
 ### HTTP request headers
 

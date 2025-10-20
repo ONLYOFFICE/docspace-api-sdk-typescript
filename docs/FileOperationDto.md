@@ -6,20 +6,20 @@ The file operation information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | The file operation ID. | [optional] [default to undefined]
-**Operation** | [**FileOperationType**](FileOperationType.md) |  | [optional] [default to undefined]
-**progress** | **number** | The file operation progress in percentage. | [optional] [default to undefined]
-**error** | **string** | The file operation error message. | [optional] [default to undefined]
-**processed** | **string** | The file operation processing status. | [optional] [default to undefined]
-**finished** | **boolean** | Specifies if the file operation is finished or not. | [optional] [default to undefined]
+**id** | **string** | The file operation ID. | [default to undefined]
+**Operation** | [**FileOperationType**](FileOperationType.md) |  | [default to undefined]
+**progress** | **number** | The file operation progress in percentage. | [default to undefined]
+**error** | **string** | The file operation error message. | [default to undefined]
+**processed** | **string** | The file operation processing status. | [default to undefined]
+**finished** | **boolean** | Specifies if the file operation is finished or not. | [default to undefined]
 **url** | **string** | The file operation URL. | [optional] [default to undefined]
-**files** | [**Array&lt;FileEntryDto&gt;**](FileEntryDto.md) | The list of files of the file operation. | [optional] [default to undefined]
-**folders** | [**Array&lt;FileEntryDto&gt;**](FileEntryDto.md) | The list of folders of the file operation. | [optional] [default to undefined]
+**files** | [**Array&lt;FileEntryBaseDto&gt;**](FileEntryBaseDto.md) | The list of files of the file operation. | [optional] [default to undefined]
+**folders** | [**Array&lt;FileEntryBaseDto&gt;**](FileEntryBaseDto.md) | The list of folders of the file operation. | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { FileOperationDto } from '@onlyoffice/docspace-api-typescript';
+import { FileOperationDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FileOperationDto = {
     id,

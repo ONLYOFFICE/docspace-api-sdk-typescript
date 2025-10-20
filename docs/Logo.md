@@ -6,17 +6,17 @@ The room logo information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**original** | **string** | The original logo. | [optional] [default to undefined]
-**large** | **string** | The large logo. | [optional] [default to undefined]
-**medium** | **string** | The medium logo. | [optional] [default to undefined]
-**small** | **string** | The small logo. | [optional] [default to undefined]
+**original** | **string** | The original logo. | [default to undefined]
+**large** | **string** | The large logo. | [default to undefined]
+**medium** | **string** | The medium logo. | [default to undefined]
+**small** | **string** | The small logo. | [default to undefined]
 **color** | **string** | The logo color. | [optional] [default to undefined]
 **cover** | [**LogoCover**](LogoCover.md) |  | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { Logo } from '@onlyoffice/docspace-api-typescript';
+import { Logo } from '@onlyoffice/docspace-api-sdk';
 
 const instance: Logo = {
     original,

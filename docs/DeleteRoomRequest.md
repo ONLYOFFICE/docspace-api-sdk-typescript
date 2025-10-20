@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { DeleteRoomRequest } from '@onlyoffice/docspace-api-typescript';
+import { DeleteRoomRequest } from '@onlyoffice/docspace-api-sdk';
 
 const instance: DeleteRoomRequest = {
     deleteAfter,

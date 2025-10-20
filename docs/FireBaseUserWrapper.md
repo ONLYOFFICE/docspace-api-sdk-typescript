@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { FireBaseUserWrapper } from '@onlyoffice/docspace-api-typescript';
+import { FireBaseUserWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FireBaseUserWrapper = {
     response,

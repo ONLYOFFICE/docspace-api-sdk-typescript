@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ApiDateTime } from '@onlyoffice/docspace-api-typescript';
+import { ApiDateTime } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ApiDateTime = {
     utcTime,

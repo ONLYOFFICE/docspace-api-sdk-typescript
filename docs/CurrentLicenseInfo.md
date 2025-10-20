@@ -6,13 +6,13 @@ The current license information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**trial** | **boolean** | Specifies whether the license is trial or not. | [optional] [default to undefined]
-**dueDate** | **string** | The date when the license expires. | [optional] [default to undefined]
+**trial** | **boolean** | Specifies whether the license is trial or not. | [default to undefined]
+**dueDate** | **string** | The date when the license expires. | [default to undefined]
 
 ## Example
 
 ```typescript
-import { CurrentLicenseInfo } from '@onlyoffice/docspace-api-typescript';
+import { CurrentLicenseInfo } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CurrentLicenseInfo = {
     trial,

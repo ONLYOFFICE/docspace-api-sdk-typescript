@@ -6,10 +6,10 @@ The parameters representing the Two-Factor Authentication (TFA) configuration se
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | The ID of the TFA configuration. | [optional] [default to undefined]
-**title** | **string** | The display name or description of the TFA configuration. | [optional] [default to undefined]
-**enabled** | **boolean** | Indicates whether the TFA configuration is currently active. | [optional] [default to undefined]
-**avaliable** | **boolean** | Indicates whether the TFA configuration can be used. | [optional] [default to undefined]
+**id** | **string** | The ID of the TFA configuration. | [default to undefined]
+**title** | **string** | The display name or description of the TFA configuration. | [default to undefined]
+**enabled** | **boolean** | Indicates whether the TFA configuration is currently active. | [default to undefined]
+**avaliable** | **boolean** | Indicates whether the TFA configuration can be used. | [default to undefined]
 **trustedIps** | **Array&lt;string&gt;** | The list of IP addresses that are exempt from TFA requirements. | [optional] [default to undefined]
 **mandatoryUsers** | **Array&lt;string&gt;** | The list of user IDs that are required to use TFA. | [optional] [default to undefined]
 **mandatoryGroups** | **Array&lt;string&gt;** | The list of group IDs whose members are required to use TFA. | [optional] [default to undefined]
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { TfaSettingsDto } from '@onlyoffice/docspace-api-typescript';
+import { TfaSettingsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TfaSettingsDto = {
     id,

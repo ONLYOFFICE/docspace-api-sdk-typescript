@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**Schedule**](Schedule.md) |  | [optional] [default to undefined]
+**response** | [**ScheduleDto**](ScheduleDto.md) |  | [optional] [default to undefined]
 **count** | **number** |  | [optional] [default to undefined]
 **links** | [**Array&lt;ActiveConnectionsWrapperLinksInner&gt;**](ActiveConnectionsWrapperLinksInner.md) |  | [optional] [default to undefined]
 **status** | **number** |  | [optional] [default to undefined]
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ScheduleWrapper } from '@onlyoffice/docspace-api-typescript';
+import { ScheduleWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ScheduleWrapper = {
     response,

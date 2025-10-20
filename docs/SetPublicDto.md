@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { SetPublicDto } from '@onlyoffice/docspace-api-typescript';
+import { SetPublicDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: SetPublicDto = {
     id,

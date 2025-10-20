@@ -6,17 +6,17 @@ The parameters of the form filling result.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**formNumber** | **number** | The filling form number. | [optional] [default to undefined]
+**formNumber** | **number** | The filling form number. | [default to undefined]
 **completedForm** | [**FileDtoInteger**](FileDtoInteger.md) |  | [optional] [default to undefined]
 **originalForm** | [**FileDtoInteger**](FileDtoInteger.md) |  | [optional] [default to undefined]
 **manager** | [**EmployeeFullDto**](EmployeeFullDto.md) |  | [optional] [default to undefined]
-**roomId** | **number** | The room ID where filling the form. | [optional] [default to undefined]
+**roomId** | **number** | The room ID where filling the form. | [default to undefined]
 **isRoomMember** | **boolean** | Specifies if the manager who fills the form is a room member or not. | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { FillingFormResultDtoInteger } from '@onlyoffice/docspace-api-typescript';
+import { FillingFormResultDtoInteger } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FillingFormResultDtoInteger = {
     formNumber,

@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { MigratingApiGroup } from '@onlyoffice/docspace-api-typescript';
+import { MigratingApiGroup } from '@onlyoffice/docspace-api-sdk';
 
 const instance: MigratingApiGroup = {
     shouldImport,

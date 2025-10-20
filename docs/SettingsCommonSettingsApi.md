@@ -1,45 +1,35 @@
-# SettingsCommonSettingsApi
+# CommonSettingsApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**closeAdminHelper**](#closeadminhelper) | **PUT** /api/2.0/settings/closeadminhelper | Close the admin helper|
 |[**completeWizard**](#completewizard) | **PUT** /api/2.0/settings/wizard/complete | Complete the Wizard settings|
-|[**deleteColorTheme**](#deletecolortheme) | **DELETE** /api/2.0/settings/colortheme | Delete a color theme|
-|[**getColorTheme**](#getcolortheme) | **GET** /api/2.0/settings/colortheme | Get a color theme|
-|[**getLogo**](#getlogo) | **GET** /api/2.0/settings/logo | Get a portal logo|
-|[**getMachineName**](#getmachinename) | **GET** /api/2.0/settings/machine | Get hostname|
-|[**getSettings**](#getsettings) | **GET** /api/2.0/settings | Get the portal settings|
+|[**configureDeepLink**](#configuredeeplink) | **POST** /api/2.0/settings/deeplink | Configure the deep link settings|
+|[**deletePortalColorTheme**](#deleteportalcolortheme) | **DELETE** /api/2.0/settings/colortheme | Delete a color theme|
+|[**getDeepLinkSettings**](#getdeeplinksettings) | **GET** /api/2.0/settings/deeplink | Get the deep link settings|
+|[**getPaymentSettings**](#getpaymentsettings) | **GET** /api/2.0/settings/payment | Get the payment settings|
+|[**getPortalColorTheme**](#getportalcolortheme) | **GET** /api/2.0/settings/colortheme | Get a color theme|
+|[**getPortalHostname**](#getportalhostname) | **GET** /api/2.0/settings/machine | Get hostname|
+|[**getPortalLogo**](#getportallogo) | **GET** /api/2.0/settings/logo | Get a portal logo|
+|[**getPortalSettings**](#getportalsettings) | **GET** /api/2.0/settings | Get the portal settings|
 |[**getSocketSettings**](#getsocketsettings) | **GET** /api/2.0/settings/socket | Get the socket settings|
 |[**getSupportedCultures**](#getsupportedcultures) | **GET** /api/2.0/settings/cultures | Get supported languages|
-|[**getTimeZonesAsync**](#gettimezonesasync) | **GET** /api/2.0/settings/timezones | Get time zones|
-|[**gettDeepLinkSettings**](#gettdeeplinksettings) | **GET** /api/2.0/settings/deeplink | Get the deep link settings|
-|[**paymentSettings**](#paymentsettings) | **GET** /api/2.0/settings/payment | Get the payment settings|
-|[**saveColorTheme**](#savecolortheme) | **PUT** /api/2.0/settings/colortheme | Save a color theme|
-|[**saveConfigureDeepLink**](#saveconfiguredeeplink) | **POST** /api/2.0/settings/deeplink | Configure the deep link settings|
+|[**getTenantUserInvitationSettings**](#gettenantuserinvitationsettings) | **GET** /api/2.0/settings/invitationsettings | Get the user invitation settings|
+|[**getTimeZones**](#gettimezones) | **GET** /api/2.0/settings/timezones | Get time zones|
 |[**saveDnsSettings**](#savednssettings) | **PUT** /api/2.0/settings/dns | Save the DNS settings|
 |[**saveMailDomainSettings**](#savemaildomainsettings) | **POST** /api/2.0/settings/maildomainsettings | Save the mail domain settings|
+|[**savePortalColorTheme**](#saveportalcolortheme) | **PUT** /api/2.0/settings/colortheme | Save a color theme|
 |[**updateEmailActivationSettings**](#updateemailactivationsettings) | **PUT** /api/2.0/settings/emailactivation | Update the email activation settings|
+|[**updateInvitationSettings**](#updateinvitationsettings) | **PUT** /api/2.0/settings/invitationsettings | Update user invitation settings|
 
 # **closeAdminHelper**
 > closeAdminHelper()
 
 Closes the administrator helper notification.
 
-### Example
-
-```typescript
-import {
-    SettingsCommonSettingsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsCommonSettingsApi(configuration);
-
-const { status, data } = await apiInstance.closeAdminHelper();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/close-admin-helper/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -52,6 +42,20 @@ void (empty response body)
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsCommonSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsCommonSettingsApi(configuration);
+
+const { status, data } = await apiInstance.closeAdminHelper();
+```
 
 ### HTTP request headers
 
@@ -73,24 +77,7 @@ void (empty response body)
 
 Completes the Wizard settings.
 
-### Example
-
-```typescript
-import {
-    SettingsCommonSettingsApi,
-    Configuration,
-    WizardRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsCommonSettingsApi(configuration);
-
-let wizardRequestsDto: WizardRequestsDto; // (optional)
-
-const { status, data } = await apiInstance.completeWizard(
-    wizardRequestsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/complete-wizard/).
 
 ### Parameters
 
@@ -106,6 +93,25 @@ const { status, data } = await apiInstance.completeWizard(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsCommonSettingsApi,
+    Configuration,
+    WizardRequestsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsCommonSettingsApi(configuration);
+
+let wizardRequestsDto: WizardRequestsDto; // (optional)
+
+const { status, data } = await apiInstance.completeWizard(
+    wizardRequestsDto
+);
+```
 
 ### HTTP request headers
 
@@ -123,34 +129,74 @@ const { status, data } = await apiInstance.completeWizard(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **deleteColorTheme**
-> CustomColorThemesSettingsWrapper deleteColorTheme()
+# **configureDeepLink**
+> TenantDeepLinkSettingsWrapper configureDeepLink()
 
-Deletes the portal color theme with the ID specified in the request.
+Saves the deep link configuration settings for the portal.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/configure-deep-link/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **deepLinkConfigurationRequestsDto** | **DeepLinkConfigurationRequestsDto**|  | |
+
+
+### Return type
+
+**TenantDeepLinkSettingsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
 ```typescript
 import {
     SettingsCommonSettingsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
+    Configuration,
+    DeepLinkConfigurationRequestsDto
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
 
-let id: number; //The ID of the portal theme to delete. (optional) (default to undefined)
+let deepLinkConfigurationRequestsDto: DeepLinkConfigurationRequestsDto; // (optional)
 
-const { status, data } = await apiInstance.deleteColorTheme(
-    id
+const { status, data } = await apiInstance.configureDeepLink(
+    deepLinkConfigurationRequestsDto
 );
 ```
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Deep link configuration updated |  -  |
+|**400** | Invalid deep link configuration |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **deletePortalColorTheme**
+> CustomColorThemesSettingsWrapper deletePortalColorTheme()
+
+Deletes the portal color theme with the ID specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-portal-color-theme/).
 
 ### Parameters
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] | The ID of the portal theme to delete. | (optional) defaults to undefined|
+| **id** | [**number**] | The ID of the portal theme to delete. | defaults to undefined|
 
 
 ### Return type
@@ -160,6 +206,24 @@ const { status, data } = await apiInstance.deleteColorTheme(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsCommonSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsCommonSettingsApi(configuration);
+
+let id: number; //The ID of the portal theme to delete. (default to undefined)
+
+const { status, data } = await apiInstance.deletePortalColorTheme(
+    id
+);
+```
 
 ### HTTP request headers
 
@@ -175,10 +239,24 @@ const { status, data } = await apiInstance.deleteColorTheme(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getColorTheme**
-> CustomColorThemesSettingsWrapper getColorTheme()
+# **getDeepLinkSettings**
+> TenantDeepLinkSettingsWrapper getDeepLinkSettings()
 
-Returns the portal color theme.
+Returns the deep link settings.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-deep-link-settings/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**TenantDeepLinkSettingsWrapper**
+
+### Authorization
+
+No authorization required
 
 ### Example
 
@@ -186,13 +264,80 @@ Returns the portal color theme.
 import {
     SettingsCommonSettingsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
 
-const { status, data } = await apiInstance.getColorTheme();
+const { status, data } = await apiInstance.getDeepLinkSettings();
 ```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Ok |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getPaymentSettings**
+> PaymentSettingsWrapper getPaymentSettings()
+
+Returns the portal payment settings.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-settings/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**PaymentSettingsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsCommonSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsCommonSettingsApi(configuration);
+
+const { status, data } = await apiInstance.getPaymentSettings();
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Payment settings: sales email, feedback and support URL, link to pay for a portal, Standalone or not, current license, maximum quota quantity |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getPortalColorTheme**
+> CustomColorThemesSettingsWrapper getPortalColorTheme()
+
+Returns the portal color theme.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-color-theme/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -205,6 +350,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 No authorization required
+
+### Example
+
+```typescript
+import {
+    SettingsCommonSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsCommonSettingsApi(configuration);
+
+const { status, data } = await apiInstance.getPortalColorTheme();
+```
 
 ### HTTP request headers
 
@@ -219,69 +378,12 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getLogo**
-> StringWrapper getLogo()
-
-Returns the portal logo image URL.
-
-### Example
-
-```typescript
-import {
-    SettingsCommonSettingsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsCommonSettingsApi(configuration);
-
-const { status, data } = await apiInstance.getLogo();
-```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**StringWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Portal logo image URL |  -  |
-|**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **getMachineName**
-> ObjectWrapper getMachineName()
+# **getPortalHostname**
+> ObjectWrapper getPortalHostname()
 
 Returns the portal hostname.
 
-### Example
-
-```typescript
-import {
-    SettingsCommonSettingsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsCommonSettingsApi(configuration);
-
-const { status, data } = await apiInstance.getMachineName();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-hostname/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -294,6 +396,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsCommonSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsCommonSettingsApi(configuration);
+
+const { status, data } = await apiInstance.getPortalHostname();
+```
 
 ### HTTP request headers
 
@@ -309,10 +425,24 @@ This endpoint does not have any parameters.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getSettings**
-> SettingsWrapper getSettings()
+# **getPortalLogo**
+> StringWrapper getPortalLogo()
 
-Returns a list of all the available portal settings with the current values for each parameter.
+Returns the portal logo image URL.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-logo/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**StringWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -320,17 +450,34 @@ Returns a list of all the available portal settings with the current values for 
 import {
     SettingsCommonSettingsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
 
-let withpassword: boolean; //Specifies whether to include the password hashing configuration in the response. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.getSettings(
-    withpassword
-);
+const { status, data } = await apiInstance.getPortalLogo();
 ```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Portal logo image URL |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getPortalSettings**
+> SettingsWrapper getPortalSettings()
+
+Returns a list of all the available portal settings with the current values for each parameter.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-settings/).
 
 ### Parameters
 
@@ -346,6 +493,24 @@ const { status, data } = await apiInstance.getSettings(
 ### Authorization
 
 No authorization required
+
+### Example
+
+```typescript
+import {
+    SettingsCommonSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsCommonSettingsApi(configuration);
+
+let withpassword: boolean; //Specifies whether to include the password hashing configuration in the response. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getPortalSettings(
+    withpassword
+);
+```
 
 ### HTTP request headers
 
@@ -365,19 +530,7 @@ No authorization required
 
 Returns the socket settings.
 
-### Example
-
-```typescript
-import {
-    SettingsCommonSettingsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsCommonSettingsApi(configuration);
-
-const { status, data } = await apiInstance.getSocketSettings();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-socket-settings/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -390,6 +543,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsCommonSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsCommonSettingsApi(configuration);
+
+const { status, data } = await apiInstance.getSocketSettings();
+```
 
 ### HTTP request headers
 
@@ -408,21 +575,9 @@ This endpoint does not have any parameters.
 # **getSupportedCultures**
 > STRINGArrayWrapper getSupportedCultures()
 
-Returns a list of all the available portal languages in the format of a two-letter or four-letter language code (e.g. \"de\", \"en-US\", etc.).
+Returns a list of all the available portal languages in the format of a two-letter or four-letter language code (e.g. de, en-US, etc.).
 
-### Example
-
-```typescript
-import {
-    SettingsCommonSettingsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsCommonSettingsApi(configuration);
-
-const { status, data } = await apiInstance.getSupportedCultures();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-supported-cultures/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -435,6 +590,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 No authorization required
+
+### Example
+
+```typescript
+import {
+    SettingsCommonSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsCommonSettingsApi(configuration);
+
+const { status, data } = await apiInstance.getSupportedCultures();
+```
 
 ### HTTP request headers
 
@@ -449,10 +618,24 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getTimeZonesAsync**
-> TimezonesRequestsArrayWrapper getTimeZonesAsync()
+# **getTenantUserInvitationSettings**
+> TenantUserInvitationSettingsWrapper getTenantUserInvitationSettings()
 
-Returns a list of all the available portal time zones.
+Returns the portal user invitation settings.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-user-invitation-settings/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**TenantUserInvitationSettingsWrapper**
+
+### Authorization
+
+No authorization required
 
 ### Example
 
@@ -460,13 +643,33 @@ Returns a list of all the available portal time zones.
 import {
     SettingsCommonSettingsApi,
     Configuration
-} from '@onlyoffice/docspace-api-typescript';
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
 
-const { status, data } = await apiInstance.getTimeZonesAsync();
+const { status, data } = await apiInstance.getTenantUserInvitationSettings();
 ```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | portal user invitation settings |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getTimeZones**
+> TimezonesRequestsArrayWrapper getTimeZones()
+
+Returns a list of all the available portal time zones.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-time-zones/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -479,6 +682,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsCommonSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsCommonSettingsApi(configuration);
+
+const { status, data } = await apiInstance.getTimeZones();
+```
 
 ### HTTP request headers
 
@@ -494,226 +711,12 @@ This endpoint does not have any parameters.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **gettDeepLinkSettings**
-> TenantDeepLinkSettingsWrapper gettDeepLinkSettings()
-
-Returns the deep link settings.
-
-### Example
-
-```typescript
-import {
-    SettingsCommonSettingsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsCommonSettingsApi(configuration);
-
-const { status, data } = await apiInstance.gettDeepLinkSettings();
-```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**TenantDeepLinkSettingsWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Ok |  -  |
-|**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **paymentSettings**
-> PaymentSettingsWrapper paymentSettings()
-
-Returns the portal payment settings.
-
-### Example
-
-```typescript
-import {
-    SettingsCommonSettingsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsCommonSettingsApi(configuration);
-
-const { status, data } = await apiInstance.paymentSettings();
-```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**PaymentSettingsWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Payment settings: sales email, feedback and support URL, link to pay for a portal, Standalone or not, current license, maximum quota quantity |  -  |
-|**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **saveColorTheme**
-> CustomColorThemesSettingsWrapper saveColorTheme()
-
-Saves the portal color theme specified in the request.
-
-### Example
-
-```typescript
-import {
-    SettingsCommonSettingsApi,
-    Configuration,
-    CustomColorThemesSettingsRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsCommonSettingsApi(configuration);
-
-let customColorThemesSettingsRequestsDto: CustomColorThemesSettingsRequestsDto; // (optional)
-
-const { status, data } = await apiInstance.saveColorTheme(
-    customColorThemesSettingsRequestsDto
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **customColorThemesSettingsRequestsDto** | **CustomColorThemesSettingsRequestsDto**|  | |
-
-
-### Return type
-
-**CustomColorThemesSettingsWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Portal theme settings |  -  |
-|**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **saveConfigureDeepLink**
-> TenantDeepLinkSettingsWrapper saveConfigureDeepLink()
-
-Saves the deep link configuration settings for the portal.
-
-### Example
-
-```typescript
-import {
-    SettingsCommonSettingsApi,
-    Configuration,
-    DeepLinkConfigurationRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsCommonSettingsApi(configuration);
-
-let deepLinkConfigurationRequestsDto: DeepLinkConfigurationRequestsDto; // (optional)
-
-const { status, data } = await apiInstance.saveConfigureDeepLink(
-    deepLinkConfigurationRequestsDto
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **deepLinkConfigurationRequestsDto** | **DeepLinkConfigurationRequestsDto**|  | |
-
-
-### Return type
-
-**TenantDeepLinkSettingsWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Deep link configuration updated |  -  |
-|**400** | Invalid deep link configuration |  -  |
-|**401** | Unauthorized |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **saveDnsSettings**
 > StringWrapper saveDnsSettings()
 
 Saves the DNS settings specified in the request to the current portal.
 
-### Example
-
-```typescript
-import {
-    SettingsCommonSettingsApi,
-    Configuration,
-    DnsSettingsRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsCommonSettingsApi(configuration);
-
-let dnsSettingsRequestsDto: DnsSettingsRequestsDto; // (optional)
-
-const { status, data } = await apiInstance.saveDnsSettings(
-    dnsSettingsRequestsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-dns-settings/).
 
 ### Parameters
 
@@ -729,6 +732,25 @@ const { status, data } = await apiInstance.saveDnsSettings(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsCommonSettingsApi,
+    Configuration,
+    DnsSettingsRequestsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsCommonSettingsApi(configuration);
+
+let dnsSettingsRequestsDto: DnsSettingsRequestsDto; // (optional)
+
+const { status, data } = await apiInstance.saveDnsSettings(
+    dnsSettingsRequestsDto
+);
+```
 
 ### HTTP request headers
 
@@ -752,24 +774,7 @@ const { status, data } = await apiInstance.saveDnsSettings(
 
 Saves the mail domain settings specified in the request to the portal.
 
-### Example
-
-```typescript
-import {
-    SettingsCommonSettingsApi,
-    Configuration,
-    MailDomainSettingsRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsCommonSettingsApi(configuration);
-
-let mailDomainSettingsRequestsDto: MailDomainSettingsRequestsDto; // (optional)
-
-const { status, data } = await apiInstance.saveMailDomainSettings(
-    mailDomainSettingsRequestsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-mail-domain-settings/).
 
 ### Parameters
 
@@ -786,6 +791,25 @@ const { status, data } = await apiInstance.saveMailDomainSettings(
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+```typescript
+import {
+    SettingsCommonSettingsApi,
+    Configuration,
+    MailDomainSettingsRequestsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsCommonSettingsApi(configuration);
+
+let mailDomainSettingsRequestsDto: MailDomainSettingsRequestsDto; // (optional)
+
+const { status, data } = await apiInstance.saveMailDomainSettings(
+    mailDomainSettingsRequestsDto
+);
+```
+
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -800,10 +824,27 @@ const { status, data } = await apiInstance.saveMailDomainSettings(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **updateEmailActivationSettings**
-> EmailActivationSettingsWrapper updateEmailActivationSettings()
+# **savePortalColorTheme**
+> CustomColorThemesSettingsWrapper savePortalColorTheme()
 
-Updates the email activation settings.
+Saves the portal color theme specified in the request.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-portal-color-theme/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **customColorThemesSettingsRequestsDto** | **CustomColorThemesSettingsRequestsDto**|  | |
+
+
+### Return type
+
+**CustomColorThemesSettingsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -811,18 +852,39 @@ Updates the email activation settings.
 import {
     SettingsCommonSettingsApi,
     Configuration,
-    EmailActivationSettings
-} from '@onlyoffice/docspace-api-typescript';
+    CustomColorThemesSettingsRequestsDto
+} from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
 
-let emailActivationSettings: EmailActivationSettings; // (optional)
+let customColorThemesSettingsRequestsDto: CustomColorThemesSettingsRequestsDto; // (optional)
 
-const { status, data } = await apiInstance.updateEmailActivationSettings(
-    emailActivationSettings
+const { status, data } = await apiInstance.savePortalColorTheme(
+    customColorThemesSettingsRequestsDto
 );
 ```
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Portal theme settings |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **updateEmailActivationSettings**
+> EmailActivationSettingsWrapper updateEmailActivationSettings()
+
+Updates the email activation settings.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-email-activation-settings/).
 
 ### Parameters
 
@@ -839,6 +901,25 @@ const { status, data } = await apiInstance.updateEmailActivationSettings(
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+```typescript
+import {
+    SettingsCommonSettingsApi,
+    Configuration,
+    EmailActivationSettings
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsCommonSettingsApi(configuration);
+
+let emailActivationSettings: EmailActivationSettings; // (optional)
+
+const { status, data } = await apiInstance.updateEmailActivationSettings(
+    emailActivationSettings
+);
+```
+
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -849,6 +930,61 @@ const { status, data } = await apiInstance.updateEmailActivationSettings(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Updated email activation settings |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **updateInvitationSettings**
+> TenantUserInvitationSettingsWrapper updateInvitationSettings()
+
+Updates the portal user invitation settings.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-invitation-settings/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **tenantUserInvitationSettingsRequestDto** | **TenantUserInvitationSettingsRequestDto**|  | |
+
+
+### Return type
+
+**TenantUserInvitationSettingsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsCommonSettingsApi,
+    Configuration,
+    TenantUserInvitationSettingsRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsCommonSettingsApi(configuration);
+
+let tenantUserInvitationSettingsRequestDto: TenantUserInvitationSettingsRequestDto; // (optional)
+
+const { status, data } = await apiInstance.updateInvitationSettings(
+    tenantUserInvitationSettingsRequestDto
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Updated user invitation settings |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

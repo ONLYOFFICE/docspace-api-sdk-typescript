@@ -6,11 +6,12 @@ The group parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **string** | The group name. | [optional] [default to undefined]
+**name** | **string** | The group name. | [default to undefined]
 **parent** | **string** | The parent group ID. | [optional] [default to undefined]
-**category** | **string** | The group category ID. | [optional] [default to undefined]
-**id** | **string** | The group ID. | [optional] [default to undefined]
-**isLDAP** | **boolean** | Specifies if the LDAP settings are enabled for the group or not. | [optional] [default to undefined]
+**category** | **string** | The group category ID. | [default to undefined]
+**id** | **string** | The group ID. | [default to undefined]
+**isLDAP** | **boolean** | Specifies if the LDAP settings are enabled for the group or not. | [default to undefined]
+**isSystem** | **boolean** | Indicates whether the group is a system group. | [optional] [default to undefined]
 **manager** | [**EmployeeFullDto**](EmployeeFullDto.md) |  | [optional] [default to undefined]
 **members** | [**Array&lt;EmployeeFullDto&gt;**](EmployeeFullDto.md) | The list of group members. | [optional] [default to undefined]
 **shared** | **boolean** | Specifies whether the group can be shared or not. | [optional] [default to undefined]
@@ -19,7 +20,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { GroupDto } from '@onlyoffice/docspace-api-typescript';
+import { GroupDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: GroupDto = {
     name,
@@ -27,6 +28,7 @@ const instance: GroupDto = {
     category,
     id,
     isLDAP,
+    isSystem,
     manager,
     members,
     shared,

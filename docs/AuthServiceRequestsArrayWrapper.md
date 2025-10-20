@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { AuthServiceRequestsArrayWrapper } from '@onlyoffice/docspace-api-typescript';
+import { AuthServiceRequestsArrayWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: AuthServiceRequestsArrayWrapper = {
     response,

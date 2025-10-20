@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { WebPluginWrapper } from '@onlyoffice/docspace-api-typescript';
+import { WebPluginWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: WebPluginWrapper = {
     response,

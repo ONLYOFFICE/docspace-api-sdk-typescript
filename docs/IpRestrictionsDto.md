@@ -6,13 +6,13 @@ The parameters for configuring new IP restriction settings.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ipRestrictions** | [**Array&lt;IpRestrictionBase&gt;**](IpRestrictionBase.md) | The list of IP restriction addresses. | [optional] [default to undefined]
+**ipRestrictions** | [**Array&lt;IpRestrictionBase&gt;**](IpRestrictionBase.md) | The list of IP restriction addresses. | [default to undefined]
 **enable** | **boolean** | Specifies whether to enable IP restrictions or not. | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { IpRestrictionsDto } from '@onlyoffice/docspace-api-typescript';
+import { IpRestrictionsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: IpRestrictionsDto = {
     ipRestrictions,

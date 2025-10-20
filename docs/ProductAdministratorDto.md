@@ -6,14 +6,14 @@ The product administrator parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**productId** | **string** | The product ID. | [optional] [default to undefined]
-**userId** | **string** | The user unique identifier. | [optional] [default to undefined]
-**administrator** | **boolean** | Indicates whether the user has administrator privileges for the product. | [optional] [default to undefined]
+**productId** | **string** | The product ID. | [default to undefined]
+**userId** | **string** | The user unique identifier. | [default to undefined]
+**administrator** | **boolean** | Indicates whether the user has administrator privileges for the product. | [default to undefined]
 
 ## Example
 
 ```typescript
-import { ProductAdministratorDto } from '@onlyoffice/docspace-api-typescript';
+import { ProductAdministratorDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ProductAdministratorDto = {
     productId,

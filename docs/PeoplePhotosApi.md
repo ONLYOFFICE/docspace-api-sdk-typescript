@@ -1,6 +1,6 @@
-# PeoplePhotosApi
+# PhotosApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
@@ -11,30 +11,11 @@ All URIs are relative to *http://localhost:8092*
 |[**uploadMemberPhoto**](#uploadmemberphoto) | **POST** /api/2.0/people/{userid}/photo | Upload a user photo|
 
 # **createMemberPhotoThumbnails**
-> ThumbnailsDataWrapper createMemberPhotoThumbnails()
+> ThumbnailsDataWrapper createMemberPhotoThumbnails(thumbnailsRequest)
 
 Creates the user photo thumbnails by coordinates of the original image specified in the request.
 
-### Example
-
-```typescript
-import {
-    PeoplePhotosApi,
-    Configuration,
-    ThumbnailsRequest
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeoplePhotosApi(configuration);
-
-let userid: string; //The user ID. (default to undefined)
-let thumbnailsRequest: ThumbnailsRequest; //The thumbnail request. (optional)
-
-const { status, data } = await apiInstance.createMemberPhotoThumbnails(
-    userid,
-    thumbnailsRequest
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-member-photo-thumbnails/).
 
 ### Parameters
 
@@ -51,6 +32,27 @@ const { status, data } = await apiInstance.createMemberPhotoThumbnails(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeoplePhotosApi,
+    Configuration,
+    ThumbnailsRequest
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeoplePhotosApi(configuration);
+
+let userid: string; //The user ID. (default to undefined)
+let thumbnailsRequest: ThumbnailsRequest; //The thumbnail request.
+
+const { status, data } = await apiInstance.createMemberPhotoThumbnails(
+    userid,
+    thumbnailsRequest
+);
+```
 
 ### HTTP request headers
 
@@ -73,23 +75,7 @@ const { status, data } = await apiInstance.createMemberPhotoThumbnails(
 
 Deletes a photo of the user with the ID specified in the request.
 
-### Example
-
-```typescript
-import {
-    PeoplePhotosApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeoplePhotosApi(configuration);
-
-let userid: string; //The user ID. (default to undefined)
-
-const { status, data } = await apiInstance.deleteMemberPhoto(
-    userid
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-member-photo/).
 
 ### Parameters
 
@@ -105,6 +91,24 @@ const { status, data } = await apiInstance.deleteMemberPhoto(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeoplePhotosApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeoplePhotosApi(configuration);
+
+let userid: string; //The user ID. (default to undefined)
+
+const { status, data } = await apiInstance.deleteMemberPhoto(
+    userid
+);
+```
 
 ### HTTP request headers
 
@@ -127,23 +131,7 @@ const { status, data } = await apiInstance.deleteMemberPhoto(
 
 Returns a photo of the user with the ID specified in the request.
 
-### Example
-
-```typescript
-import {
-    PeoplePhotosApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeoplePhotosApi(configuration);
-
-let userid: string; //The user ID. (default to undefined)
-
-const { status, data } = await apiInstance.getMemberPhoto(
-    userid
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-member-photo/).
 
 ### Parameters
 
@@ -159,6 +147,24 @@ const { status, data } = await apiInstance.getMemberPhoto(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeoplePhotosApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeoplePhotosApi(configuration);
+
+let userid: string; //The user ID. (default to undefined)
+
+const { status, data } = await apiInstance.getMemberPhoto(
+    userid
+);
+```
 
 ### HTTP request headers
 
@@ -177,30 +183,11 @@ const { status, data } = await apiInstance.getMemberPhoto(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **updateMemberPhoto**
-> ThumbnailsDataWrapper updateMemberPhoto()
+> ThumbnailsDataWrapper updateMemberPhoto(updatePhotoMemberRequest)
 
 Updates a photo of the user with the ID specified in the request.
 
-### Example
-
-```typescript
-import {
-    PeoplePhotosApi,
-    Configuration,
-    UpdatePhotoMemberRequest
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeoplePhotosApi(configuration);
-
-let userid: string; //The user ID. (default to undefined)
-let updatePhotoMemberRequest: UpdatePhotoMemberRequest; //The request parameters for updating a photo. (optional)
-
-const { status, data } = await apiInstance.updateMemberPhoto(
-    userid,
-    updatePhotoMemberRequest
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-member-photo/).
 
 ### Parameters
 
@@ -217,6 +204,27 @@ const { status, data } = await apiInstance.updateMemberPhoto(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeoplePhotosApi,
+    Configuration,
+    UpdatePhotoMemberRequest
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeoplePhotosApi(configuration);
+
+let userid: string; //The user ID. (default to undefined)
+let updatePhotoMemberRequest: UpdatePhotoMemberRequest; //The request parameters for updating a photo.
+
+const { status, data } = await apiInstance.updateMemberPhoto(
+    userid,
+    updatePhotoMemberRequest
+);
+```
 
 ### HTTP request headers
 
@@ -239,25 +247,7 @@ const { status, data } = await apiInstance.updateMemberPhoto(
 
 Uploads a photo of the user with the ID specified in the request.
 
-### Example
-
-```typescript
-import {
-    PeoplePhotosApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new PeoplePhotosApi(configuration);
-
-let userid: string; //The user ID. (default to undefined)
-let formCollection: Array<KeyValuePairStringStringValues>; //The image data. (default to undefined)
-
-const { status, data } = await apiInstance.uploadMemberPhoto(
-    userid,
-    formCollection
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-member-photo/).
 
 ### Parameters
 
@@ -274,6 +264,26 @@ const { status, data } = await apiInstance.uploadMemberPhoto(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeoplePhotosApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeoplePhotosApi(configuration);
+
+let userid: string; //The user ID. (default to undefined)
+let formCollection: Array<KeyValuePairStringStringValues>; //The image data. (default to undefined)
+
+const { status, data } = await apiInstance.uploadMemberPhoto(
+    userid,
+    formCollection
+);
+```
 
 ### HTTP request headers
 

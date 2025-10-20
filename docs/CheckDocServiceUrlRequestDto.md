@@ -6,7 +6,7 @@ The request parameters for checking the document service location.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**docServiceUrl** | **string** | The ONLYOFFICE Docs URL address. | [optional] [default to undefined]
+**docServiceUrl** | **string** | The ONLYOFFICE Docs URL address. | [default to undefined]
 **docServiceUrlInternal** | **string** | The ONLYOFFICE Docs URL address in the local private network. | [optional] [default to undefined]
 **docServiceUrlPortal** | **string** | The ONLYOFFICE Docs URL address. | [optional] [default to undefined]
 **docServiceSignatureSecret** | **string** | The signature secret of the ONLYOFFICE Docs. | [optional] [default to undefined]
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { CheckDocServiceUrlRequestDto } from '@onlyoffice/docspace-api-typescript';
+import { CheckDocServiceUrlRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CheckDocServiceUrlRequestDto = {
     docServiceUrl,

@@ -1,6 +1,6 @@
 # SecurityAccessToDevToolsApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
@@ -11,24 +11,7 @@ All URIs are relative to *http://localhost:8092*
 
 Sets the Developer Tools access settings for the portal.
 
-### Example
-
-```typescript
-import {
-    SecurityAccessToDevToolsApi,
-    Configuration,
-    TenantDevToolsAccessSettingsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SecurityAccessToDevToolsApi(configuration);
-
-let tenantDevToolsAccessSettingsDto: TenantDevToolsAccessSettingsDto; // (optional)
-
-const { status, data } = await apiInstance.setTenantDevToolsAccessSettings(
-    tenantDevToolsAccessSettingsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-dev-tools-access-settings/).
 
 ### Parameters
 
@@ -44,6 +27,25 @@ const { status, data } = await apiInstance.setTenantDevToolsAccessSettings(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SecurityAccessToDevToolsApi,
+    Configuration,
+    TenantDevToolsAccessSettingsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SecurityAccessToDevToolsApi(configuration);
+
+let tenantDevToolsAccessSettingsDto: TenantDevToolsAccessSettingsDto; // (optional)
+
+const { status, data } = await apiInstance.setTenantDevToolsAccessSettings(
+    tenantDevToolsAccessSettingsDto
+);
+```
 
 ### HTTP request headers
 

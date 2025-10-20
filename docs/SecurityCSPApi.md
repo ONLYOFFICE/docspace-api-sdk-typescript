@@ -1,35 +1,18 @@
-# SecurityCSPApi
+# CSPApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**csp**](#csp) | **POST** /api/2.0/security/csp | Configure CSP settings|
-|[**getCsp**](#getcsp) | **GET** /api/2.0/security/csp | Get CSP settings|
+|[**configureCsp**](#configurecsp) | **POST** /api/2.0/security/csp | Configure CSP settings|
+|[**getCspSettings**](#getcspsettings) | **GET** /api/2.0/security/csp | Get CSP settings|
 
-# **csp**
-> CspWrapper csp()
+# **configureCsp**
+> CspWrapper configureCsp()
 
 Configures the CSP (Content Security Policy) settings for the current portal.
 
-### Example
-
-```typescript
-import {
-    SecurityCSPApi,
-    Configuration,
-    CspRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SecurityCSPApi(configuration);
-
-let cspRequestsDto: CspRequestsDto; // (optional)
-
-const { status, data } = await apiInstance.csp(
-    cspRequestsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/configure-csp/).
 
 ### Parameters
 
@@ -46,6 +29,25 @@ const { status, data } = await apiInstance.csp(
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
+### Example
+
+```typescript
+import {
+    SecurityCSPApi,
+    Configuration,
+    CspRequestsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SecurityCSPApi(configuration);
+
+let cspRequestsDto: CspRequestsDto; // (optional)
+
+const { status, data } = await apiInstance.configureCsp(
+    cspRequestsDto
+);
+```
+
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -61,24 +63,12 @@ const { status, data } = await apiInstance.csp(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getCsp**
-> CspWrapper getCsp()
+# **getCspSettings**
+> CspWrapper getCspSettings()
 
 Returns the CSP (Content Security Policy) settings for the current portal.
 
-### Example
-
-```typescript
-import {
-    SecurityCSPApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SecurityCSPApi(configuration);
-
-const { status, data } = await apiInstance.getCsp();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-csp-settings/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -91,6 +81,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 No authorization required
+
+### Example
+
+```typescript
+import {
+    SecurityCSPApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SecurityCSPApi(configuration);
+
+const { status, data } = await apiInstance.getCspSettings();
+```
 
 ### HTTP request headers
 

@@ -1,11 +1,11 @@
-# SettingsGreetingSettingsApi
+# GreetingSettingsApi
 
-All URIs are relative to *http://localhost:8092*
+All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**getGreetingSettings**](#getgreetingsettings) | **GET** /api/2.0/settings/greetingsettings | Get greeting settings|
-|[**isDefault**](#isdefault) | **GET** /api/2.0/settings/greetingsettings/isdefault | Check the default greeting settings|
+|[**getIsDefaultGreetingSettings**](#getisdefaultgreetingsettings) | **GET** /api/2.0/settings/greetingsettings/isdefault | Check the default greeting settings|
 |[**restoreGreetingSettings**](#restoregreetingsettings) | **POST** /api/2.0/settings/greetingsettings/restore | Restore the greeting settings|
 |[**saveGreetingSettings**](#savegreetingsettings) | **POST** /api/2.0/settings/greetingsettings | Save the greeting settings|
 
@@ -14,19 +14,7 @@ All URIs are relative to *http://localhost:8092*
 
 Returns the greeting settings for the current portal.
 
-### Example
-
-```typescript
-import {
-    SettingsGreetingSettingsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsGreetingSettingsApi(configuration);
-
-const { status, data } = await apiInstance.getGreetingSettings();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-greeting-settings/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -39,6 +27,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsGreetingSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsGreetingSettingsApi(configuration);
+
+const { status, data } = await apiInstance.getGreetingSettings();
+```
 
 ### HTTP request headers
 
@@ -54,24 +56,12 @@ This endpoint does not have any parameters.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **isDefault**
-> BooleanWrapper isDefault()
+# **getIsDefaultGreetingSettings**
+> BooleanWrapper getIsDefaultGreetingSettings()
 
 Checks if the greeting settings of the current portal are set to default or not.
 
-### Example
-
-```typescript
-import {
-    SettingsGreetingSettingsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsGreetingSettingsApi(configuration);
-
-const { status, data } = await apiInstance.isDefault();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-default-greeting-settings/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -84,6 +74,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsGreetingSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsGreetingSettingsApi(configuration);
+
+const { status, data } = await apiInstance.getIsDefaultGreetingSettings();
+```
 
 ### HTTP request headers
 
@@ -104,19 +108,7 @@ This endpoint does not have any parameters.
 
 Restores the current portal greeting settings.
 
-### Example
-
-```typescript
-import {
-    SettingsGreetingSettingsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsGreetingSettingsApi(configuration);
-
-const { status, data } = await apiInstance.restoreGreetingSettings();
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/restore-greeting-settings/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -129,6 +121,20 @@ This endpoint does not have any parameters.
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsGreetingSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsGreetingSettingsApi(configuration);
+
+const { status, data } = await apiInstance.restoreGreetingSettings();
+```
 
 ### HTTP request headers
 
@@ -149,24 +155,7 @@ This endpoint does not have any parameters.
 
 Saves the greeting settings specified in the request to the current portal.
 
-### Example
-
-```typescript
-import {
-    SettingsGreetingSettingsApi,
-    Configuration,
-    GreetingSettingsRequestsDto
-} from '@onlyoffice/docspace-api-typescript';
-
-const configuration = new Configuration();
-const apiInstance = new SettingsGreetingSettingsApi(configuration);
-
-let greetingSettingsRequestsDto: GreetingSettingsRequestsDto; // (optional)
-
-const { status, data } = await apiInstance.saveGreetingSettings(
-    greetingSettingsRequestsDto
-);
-```
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-greeting-settings/).
 
 ### Parameters
 
@@ -182,6 +171,25 @@ const { status, data } = await apiInstance.saveGreetingSettings(
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsGreetingSettingsApi,
+    Configuration,
+    GreetingSettingsRequestsDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsGreetingSettingsApi(configuration);
+
+let greetingSettingsRequestsDto: GreetingSettingsRequestsDto; // (optional)
+
+const { status, data } = await apiInstance.saveGreetingSettings(
+    greetingSettingsRequestsDto
+);
+```
 
 ### HTTP request headers
 

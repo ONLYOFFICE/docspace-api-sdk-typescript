@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { Culture } from '@onlyoffice/docspace-api-typescript';
+import { Culture } from '@onlyoffice/docspace-api-sdk';
 
 const instance: Culture = {
     cultureName,

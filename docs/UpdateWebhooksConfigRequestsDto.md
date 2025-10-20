@@ -13,12 +13,12 @@ Name | Type | Description | Notes
 **ssl** | **boolean** | Specifies whether the SSL certificate verification is required or not. | [optional] [default to undefined]
 **triggers** | [**WebhookTrigger**](WebhookTrigger.md) |  | [optional] [default to undefined]
 **targetId** | **string** | Target ID | [optional] [default to undefined]
-**id** | **number** | The webhook configuration ID. | [optional] [default to undefined]
+**id** | **number** | The webhook configuration ID. | [default to undefined]
 
 ## Example
 
 ```typescript
-import { UpdateWebhooksConfigRequestsDto } from '@onlyoffice/docspace-api-typescript';
+import { UpdateWebhooksConfigRequestsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: UpdateWebhooksConfigRequestsDto = {
     name,

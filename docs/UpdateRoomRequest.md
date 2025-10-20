@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { UpdateRoomRequest } from '@onlyoffice/docspace-api-typescript';
+import { UpdateRoomRequest } from '@onlyoffice/docspace-api-sdk';
 
 const instance: UpdateRoomRequest = {
     title,

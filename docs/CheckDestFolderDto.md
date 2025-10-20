@@ -1,18 +1,18 @@
 # CheckDestFolderDto
 
-The destination folder checking information.
+The result of checking whether files can be moved or copied to the specified folder.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **result** | [**CheckDestFolderResult**](CheckDestFolderResult.md) |  | [optional] [default to undefined]
-**files** | [**Array&lt;FileEntryDto&gt;**](FileEntryDto.md) | The list of files of the destination folder. | [optional] [default to undefined]
+**files** | [**Array&lt;FileEntryBaseDto&gt;**](FileEntryBaseDto.md) | The list of files in the destination folder. | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { CheckDestFolderDto } from '@onlyoffice/docspace-api-typescript';
+import { CheckDestFolderDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CheckDestFolderDto = {
     result,

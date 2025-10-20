@@ -1,22 +1,22 @@
 # MentionWrapper
 
-The mention message parameters.
+The parameters of a user mentioned in a message.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **user** | [**UserInfo**](UserInfo.md) |  | [optional] [default to undefined]
-**email** | **string** | The email address of the user. | [optional] [readonly] [default to undefined]
-**id** | **string** | The identification of the user. | [optional] [readonly] [default to undefined]
+**email** | **string** | The user email address. | [optional] [readonly] [default to undefined]
+**id** | **string** | The user unique identification. | [optional] [readonly] [default to undefined]
 **image** | **string** | The path to the user\&#39;s avatar. | [optional] [readonly] [default to undefined]
-**hasAccess** | **boolean** | Specifies if the user has the access to the file or not. | [optional] [readonly] [default to undefined]
-**name** | **string** | The full name of the user. | [optional] [readonly] [default to undefined]
+**hasAccess** | **boolean** | Specifies whether the user has the access to the file where they are mentioned. | [optional] [readonly] [default to undefined]
+**name** | **string** | The user full name. | [optional] [readonly] [default to undefined]
 
 ## Example
 
 ```typescript
-import { MentionWrapper } from '@onlyoffice/docspace-api-typescript';
+import { MentionWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: MentionWrapper = {
     user,

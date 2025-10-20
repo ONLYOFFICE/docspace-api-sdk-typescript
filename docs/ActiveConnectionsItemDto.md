@@ -6,9 +6,9 @@ The active connection item parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **number** | The active connection ID. | [optional] [default to undefined]
-**tenantId** | **number** | The tenant ID. | [optional] [default to undefined]
-**userId** | **string** | The user ID. | [optional] [default to undefined]
+**id** | **number** | The active connection ID. | [default to undefined]
+**tenantId** | **number** | The tenant ID. | [default to undefined]
+**userId** | **string** | The user ID. | [default to undefined]
 **mobile** | **boolean** | Specifies if the active connection has a mobile phone or not. | [optional] [default to undefined]
 **ip** | **string** | The IP address of the active connection. | [optional] [default to undefined]
 **country** | **string** | The active connection country. | [optional] [default to undefined]
@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ActiveConnectionsItemDto } from '@onlyoffice/docspace-api-typescript';
+import { ActiveConnectionsItemDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ActiveConnectionsItemDto = {
     id,
