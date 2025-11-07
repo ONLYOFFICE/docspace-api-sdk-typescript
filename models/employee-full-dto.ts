@@ -240,6 +240,12 @@ export type EmployeeFullDto = EmployeeDto &  {
      */
     'loginEventId'?: number | null;
     /**
+     * The auth cookie lifetime in seconds.
+     * @type {number}
+     * @memberof EmployeeFullDto
+     */
+    'authCookieLifetime'?: number | null;
+    /**
      * 
      * @type {EmployeeDto}
      * @memberof EmployeeFullDto

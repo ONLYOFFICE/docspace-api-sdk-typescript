@@ -59,7 +59,6 @@ try {
 
 ```
 
-<a id="documentation-for-authorization"></a>
 ## Documentation For Authorization
 
 
@@ -2602,6 +2601,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get the user quota settings</td>
       </tr>
       <tr>
+        <td><a href="docs/SettingsQuotaApi.md#saveaiagentquotasettings"><strong>saveAiAgentQuotaSettings</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/aiagentquotasettings</td>
+        <td>Save the AI Agent quota settings</td>
+      </tr>
+      <tr>
         <td><a href="docs/SettingsQuotaApi.md#saveroomquotasettings"><strong>saveRoomQuotaSettings</strong></a></td>
         <td><strong>POST</strong> /api/2.0/settings/roomquotasettings</td>
         <td>Save the room quota settings</td>
@@ -3080,6 +3084,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [ChangeHistory](docs/ChangeHistory.md)
  - [ChangeOwnerRequestDto](docs/ChangeOwnerRequestDto.md)
  - [ChangeWalletServiceStateRequestDto](docs/ChangeWalletServiceStateRequestDto.md)
+ - [ChatSettings](docs/ChatSettings.md)
  - [CheckConversionRequestDtoInteger](docs/CheckConversionRequestDtoInteger.md)
  - [CheckDestFolderDto](docs/CheckDestFolderDto.md)
  - [CheckDestFolderResult](docs/CheckDestFolderResult.md)
@@ -3472,6 +3477,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [SexEnum](docs/SexEnum.md)
  - [ShareFilterType](docs/ShareFilterType.md)
  - [SignupAccountRequestDto](docs/SignupAccountRequestDto.md)
+ - [Size](docs/Size.md)
  - [SmtpOperationStatusRequestsDto](docs/SmtpOperationStatusRequestsDto.md)
  - [SmtpOperationStatusRequestsWrapper](docs/SmtpOperationStatusRequestsWrapper.md)
  - [SmtpSettingsDto](docs/SmtpSettingsDto.md)
@@ -3514,6 +3520,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [TelegramStatusWrapper](docs/TelegramStatusWrapper.md)
  - [TemplatesConfig](docs/TemplatesConfig.md)
  - [TemplatesRequestDto](docs/TemplatesRequestDto.md)
+ - [TenantAiAgentQuotaSettings](docs/TenantAiAgentQuotaSettings.md)
+ - [TenantAiAgentQuotaSettingsWrapper](docs/TenantAiAgentQuotaSettingsWrapper.md)
  - [TenantAuditSettings](docs/TenantAuditSettings.md)
  - [TenantAuditSettingsWrapper](docs/TenantAuditSettingsWrapper.md)
  - [TenantBannerSettings](docs/TenantBannerSettings.md)
@@ -3593,6 +3601,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [UserInvitation](docs/UserInvitation.md)
  - [UserInvitationRequestDto](docs/UserInvitationRequestDto.md)
  - [ValidationResult](docs/ValidationResult.md)
+ - [VectorizationStatus](docs/VectorizationStatus.md)
  - [WalletQuantityRequestDto](docs/WalletQuantityRequestDto.md)
  - [WatermarkAdditions](docs/WatermarkAdditions.md)
  - [WatermarkDto](docs/WatermarkDto.md)

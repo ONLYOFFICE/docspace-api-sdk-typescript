@@ -60,6 +60,12 @@ export interface TenantQuota {
      */
     'productId'?: string | null;
     /**
+     * The service name.
+     * @type {string}
+     * @memberof TenantQuota
+     */
+    'serviceName'?: string | null;
+    /**
      * Specifies if the tenant quota is visible or not.
      * @type {boolean}
      * @memberof TenantQuota

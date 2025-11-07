@@ -263,5 +263,23 @@ export interface FileEntryDtoIntegerAllOfSecurity {
      * @memberof FileEntryDtoIntegerAllOfSecurity
      */
     'EditExpiration'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FileEntryDtoIntegerAllOfSecurity
+     */
+    'Vectorization'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FileEntryDtoIntegerAllOfSecurity
+     */
+    'AscAi'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FileEntryDtoIntegerAllOfSecurity
+     */
+    'UseChat'?: boolean;
 }
 

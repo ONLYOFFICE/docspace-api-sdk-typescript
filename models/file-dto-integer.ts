@@ -60,7 +60,13 @@ import type { FolderType } from './folder-type';
 import type { FormFillingStatus } from './form-filling-status';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { Size } from './size';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { Thumbnail } from './thumbnail';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { VectorizationStatus } from './vectorization-status';
 
 /**
  * @type FileDtoInteger
@@ -242,6 +248,18 @@ export type FileDtoInteger = FileEntryDtoInteger &  {
      * @memberof FileDtoInteger
      */
     'expired'?: ApiDateTime;
+    /**
+     * 
+     * @type {VectorizationStatus}
+     * @memberof FileDtoInteger
+     */
+    'vectorizationStatus'?: VectorizationStatus;
+    /**
+     * 
+     * @type {Size}
+     * @memberof FileDtoInteger
+     */
+    'dimensions'?: Size;
 };
 
 

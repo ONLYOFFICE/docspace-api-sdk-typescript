@@ -18,31 +18,28 @@
 
 
 /**
- * [-14 - WebSearch, -13 - AITools, -12 - Backup, -11 - Storage]
+ * 
  * @export
- * @enum {number}
+ * @interface ChatSettings
  */
-
-export const TenantWalletService = {
+export interface ChatSettings {
     /**
-    * WebSearch
-    */
-    WebSearch: -14,
+     * 
+     * @type {number}
+     * @memberof ChatSettings
+     */
+    'providerId'?: number;
     /**
-    * AITools
-    */
-    AITools: -13,
+     * 
+     * @type {string}
+     * @memberof ChatSettings
+     */
+    'modelId'?: string | null;
     /**
-    * Backup
-    */
-    Backup: -12,
-    /**
-    * Storage
-    */
-    Storage: -11
-} as const;
-
-export type TenantWalletService = typeof TenantWalletService[keyof typeof TenantWalletService];
-
-
+     * 
+     * @type {string}
+     * @memberof ChatSettings
+     */
+    'prompt'?: string | null;
+}
 

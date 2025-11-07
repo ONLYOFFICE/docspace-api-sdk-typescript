@@ -18,31 +18,22 @@
 
 
 /**
- * [-14 - WebSearch, -13 - AITools, -12 - Backup, -11 - Storage]
+ * 
  * @export
- * @enum {number}
+ * @interface Size
  */
-
-export const TenantWalletService = {
+export interface Size {
     /**
-    * WebSearch
-    */
-    WebSearch: -14,
+     * 
+     * @type {number}
+     * @memberof Size
+     */
+    'height'?: number;
     /**
-    * AITools
-    */
-    AITools: -13,
-    /**
-    * Backup
-    */
-    Backup: -12,
-    /**
-    * Storage
-    */
-    Storage: -11
-} as const;
-
-export type TenantWalletService = typeof TenantWalletService[keyof typeof TenantWalletService];
-
-
+     * 
+     * @type {number}
+     * @memberof Size
+     */
+    'width'?: number;
+}
 

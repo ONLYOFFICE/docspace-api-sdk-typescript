@@ -1,15 +1,12 @@
-# ProductType
+# VectorizationStatus
 
-[2 - Documents, 3 - Login, 7 - Settings, 8 - Contacts]
 
 ## Enum
 
-* `Documents` (value: `2`)
+* `NUMBER_0` (value: `0`)
 
-* `Login` (value: `3`)
+* `NUMBER_1` (value: `1`)
 
-* `Settings` (value: `7`)
-
-* `Contacts` (value: `8`)
+* `NUMBER_2` (value: `2`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

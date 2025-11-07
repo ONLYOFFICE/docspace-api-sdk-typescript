@@ -61,6 +61,8 @@ Name | Type | Description | Notes
 **usedSpace** | **number** | How much folder space is used (counter). | [optional] [default to undefined]
 **passwordProtected** | **boolean** | Specifies if the folder is password protected or not. | [optional] [default to undefined]
 **expired** | **boolean** | Specifies if an external link to the folder is expired or not. | [optional] [default to undefined]
+**chatSettings** | [**ChatSettings**](ChatSettings.md) |  | [optional] [default to undefined]
+**rootRoomType** | [**RoomType**](RoomType.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -123,6 +125,8 @@ const instance: FolderDtoString = {
     usedSpace,
     passwordProtected,
     expired,
+    chatSettings,
+    rootRoomType,
 };
 ```
 

@@ -46,6 +46,9 @@ Name | Type | Description | Notes
 **OpenForm** | **boolean** |  | [optional] [default to undefined]
 **EditInternal** | **boolean** |  | [optional] [default to undefined]
 **EditExpiration** | **boolean** |  | [optional] [default to undefined]
+**Vectorization** | **boolean** |  | [optional] [default to undefined]
+**AscAi** | **boolean** |  | [optional] [default to undefined]
+**UseChat** | **boolean** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -93,6 +96,9 @@ const instance: FileEntryDtoIntegerAllOfSecurity = {
     OpenForm,
     EditInternal,
     EditExpiration,
+    Vectorization,
+    AscAi,
+    UseChat,
 };
 ```
 

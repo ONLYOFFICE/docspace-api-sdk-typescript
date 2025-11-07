@@ -18,7 +18,7 @@
 
 
 /**
- * [0 - Facebook, 1 - Google, 2 - Dropbox, 3 - Docusign, 4 - Box, 5 - OneDrive, 6 - GosUslugi, 7 - LinkedIn, 8 - MailRu, 9 - VK, 10 - Wordpress, 11 - Yahoo, 12 - Yandex]
+ * [0 - Facebook, 1 - Google, 2 - Dropbox, 3 - Docusign, 4 - Box, 5 - OneDrive, 6 - GosUslugi, 7 - LinkedIn, 8 - MailRu, 9 - VK, 10 - Wordpress, 11 - Yahoo, 12 - Yandex, 13 - Github]
  * @export
  * @enum {number}
  */
@@ -75,7 +75,11 @@ export const LoginProvider = {
     /**
     * Yandex
     */
-    Yandex: 12
+    Yandex: 12,
+    /**
+    * Github
+    */
+    Github: 13
 } as const;
 
 export type LoginProvider = typeof LoginProvider[keyof typeof LoginProvider];

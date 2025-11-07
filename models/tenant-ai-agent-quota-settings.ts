@@ -16,33 +16,22 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { TenantEntityQuotaSettings } from './tenant-entity-quota-settings';
 
 /**
- * [-14 - WebSearch, -13 - AITools, -12 - Backup, -11 - Storage]
+ * @type TenantAiAgentQuotaSettings
+ * The ai agent quota settings.
  * @export
- * @enum {number}
  */
-
-export const TenantWalletService = {
+export type TenantAiAgentQuotaSettings = TenantEntityQuotaSettings &  {
     /**
-    * WebSearch
-    */
-    WebSearch: -14,
-    /**
-    * AITools
-    */
-    AITools: -13,
-    /**
-    * Backup
-    */
-    Backup: -12,
-    /**
-    * Storage
-    */
-    Storage: -11
-} as const;
-
-export type TenantWalletService = typeof TenantWalletService[keyof typeof TenantWalletService];
-
+     * 
+     * @type {string}
+     * @memberof TenantAiAgentQuotaSettings
+     */
+    'lastModified'?: string;
+};
 
 

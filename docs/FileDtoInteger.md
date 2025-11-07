@@ -68,6 +68,8 @@ Name | Type | Description | Notes
 **viewAccessibility** | [**FileDtoIntegerAllOfViewAccessibility**](FileDtoIntegerAllOfViewAccessibility.md) |  | [optional] [default to undefined]
 **lastOpened** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
 **expired** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
+**vectorizationStatus** | [**VectorizationStatus**](VectorizationStatus.md) |  | [optional] [default to undefined]
+**dimensions** | [**Size**](Size.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -137,6 +139,8 @@ const instance: FileDtoInteger = {
     viewAccessibility,
     lastOpened,
     expired,
+    vectorizationStatus,
+    dimensions,
 };
 ```
 

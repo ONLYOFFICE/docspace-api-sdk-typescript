@@ -18,31 +18,18 @@
 
 
 /**
- * [-14 - WebSearch, -13 - AITools, -12 - Backup, -11 - Storage]
+ * 
  * @export
  * @enum {number}
  */
 
-export const TenantWalletService = {
-    /**
-    * WebSearch
-    */
-    WebSearch: -14,
-    /**
-    * AITools
-    */
-    AITools: -13,
-    /**
-    * Backup
-    */
-    Backup: -12,
-    /**
-    * Storage
-    */
-    Storage: -11
+export const VectorizationStatus = {
+    NUMBER_0: 0,
+    NUMBER_1: 1,
+    NUMBER_2: 2
 } as const;
 
-export type TenantWalletService = typeof TenantWalletService[keyof typeof TenantWalletService];
+export type VectorizationStatus = typeof VectorizationStatus[keyof typeof VectorizationStatus];
 
 
 

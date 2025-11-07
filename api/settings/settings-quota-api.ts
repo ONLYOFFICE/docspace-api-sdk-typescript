@@ -27,6 +27,8 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { QuotaSettingsRequestsDto } from '../../models';
 // @ts-ignore
+import type { TenantAiAgentQuotaSettingsWrapper } from '../../models';
+// @ts-ignore
 import type { TenantQuotaSettingsRequestsDto } from '../../models';
 // @ts-ignore
 import type { TenantQuotaSettingsWrapper } from '../../models';
@@ -86,6 +88,61 @@ export const SettingsQuotaApiAxiosParamCreator = function (configuration?: Confi
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Saves the AI Agent quota settings specified in the request to the current portal.
+         * @summary Save the AI Agent quota settings
+         * @param {QuotaSettingsRequestsDto} [quotaSettingsRequestsDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for saveAiAgentQuotaSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-ai-agent-quota-settings/
+         */
+        saveAiAgentQuotaSettings: async (quotaSettingsRequestsDto?: QuotaSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2.0/settings/aiagentquotasettings`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(quotaSettingsRequestsDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -227,6 +284,21 @@ export const SettingsQuotaApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Saves the AI Agent quota settings specified in the request to the current portal.
+         * @summary Save the AI Agent quota settings
+         * @param {QuotaSettingsRequestsDto} [quotaSettingsRequestsDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for saveAiAgentQuotaSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-ai-agent-quota-settings/
+         */
+        async saveAiAgentQuotaSettings(quotaSettingsRequestsDto?: QuotaSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantAiAgentQuotaSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.saveAiAgentQuotaSettings(quotaSettingsRequestsDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SettingsQuotaApi.saveAiAgentQuotaSettings']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Saves the room quota settings specified in the request to the current portal.
          * @summary Save the room quota settings
          * @param {QuotaSettingsRequestsDto} [quotaSettingsRequestsDto] 
@@ -278,6 +350,18 @@ export const SettingsQuotaApiFactory = function (configuration?: Configuration, 
             return localVarFp.getUserQuotaSettings(options).then((request) => request(axios, basePath));
         },
         /**
+         * Saves the AI Agent quota settings specified in the request to the current portal.
+         * @summary Save the AI Agent quota settings
+         * @param {QuotaSettingsRequestsDto} [quotaSettingsRequestsDto] 
+         * @param {*} [options] Override http request option.
+         * REST API Reference for saveAiAgentQuotaSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-ai-agent-quota-settings/
+         * @throws {RequiredError}
+         */
+        saveAiAgentQuotaSettings(quotaSettingsRequestsDto?: QuotaSettingsRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<TenantAiAgentQuotaSettingsWrapper> {
+            return localVarFp.saveAiAgentQuotaSettings(quotaSettingsRequestsDto, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Saves the room quota settings specified in the request to the current portal.
          * @summary Save the room quota settings
          * @param {QuotaSettingsRequestsDto} [quotaSettingsRequestsDto] 
@@ -320,6 +404,18 @@ export class SettingsQuotaApi extends BaseAPI {
      */
     public getUserQuotaSettings(options?: RawAxiosRequestConfig) {
         return SettingsQuotaApiFp(this.configuration).getUserQuotaSettings(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Saves the AI Agent quota settings specified in the request to the current portal.
+     * @summary Save the AI Agent quota settings
+     * @param {QuotaSettingsRequestsDto} [quotaSettingsRequestsDto] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SettingsQuotaApi
+     */
+    public saveAiAgentQuotaSettings(quotaSettingsRequestsDto?: QuotaSettingsRequestsDto, options?: RawAxiosRequestConfig) {
+        return SettingsQuotaApiFp(this.configuration).saveAiAgentQuotaSettings(quotaSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

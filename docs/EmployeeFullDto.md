@@ -49,6 +49,7 @@ Name | Type | Description | Notes
 **shared** | **boolean** | Specifies if the user has access rights. | [optional] [default to undefined]
 **isCustomQuota** | **boolean** | Specifies if the user has a custom quota or not. | [optional] [default to undefined]
 **loginEventId** | **number** | The current login event ID. | [optional] [default to undefined]
+**authCookieLifetime** | **number** | The auth cookie lifetime in seconds. | [optional] [default to undefined]
 **createdBy** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] [default to undefined]
 **registrationDate** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
 **hasPersonalFolder** | **boolean** | Specifies if the user has a personal folder or not. | [optional] [default to undefined]
@@ -103,6 +104,7 @@ const instance: EmployeeFullDto = {
     shared,
     isCustomQuota,
     loginEventId,
+    authCookieLifetime,
     createdBy,
     registrationDate,
     hasPersonalFolder,

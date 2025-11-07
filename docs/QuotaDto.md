@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **features** | [**Array&lt;TenantQuotaFeatureDto&gt;**](TenantQuotaFeatureDto.md) | The list of tenant quota features. | [default to undefined]
 **usersQuota** | [**TenantEntityQuotaSettings**](TenantEntityQuotaSettings.md) |  | [optional] [default to undefined]
 **roomsQuota** | [**TenantEntityQuotaSettings**](TenantEntityQuotaSettings.md) |  | [optional] [default to undefined]
+**aiAgentsQuota** | [**TenantEntityQuotaSettings**](TenantEntityQuotaSettings.md) |  | [optional] [default to undefined]
 **tenantCustomQuota** | [**TenantQuotaSettings**](TenantQuotaSettings.md) |  | [optional] [default to undefined]
 **dueDate** | **string** | The due date. | [optional] [default to undefined]
 
@@ -33,6 +34,7 @@ const instance: QuotaDto = {
     features,
     usersQuota,
     roomsQuota,
+    aiAgentsQuota,
     tenantCustomQuota,
     dueDate,
 };
