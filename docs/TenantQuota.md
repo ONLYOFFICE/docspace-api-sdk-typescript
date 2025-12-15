@@ -43,6 +43,7 @@ Name | Type | Description | Notes
 **year** | **boolean** | Specifies if the tenant quota is yearly subscription or not. | [optional] [default to undefined]
 **countFreeBackup** | **number** | The number of free backups within a month. | [optional] [default to undefined]
 **backup** | **boolean** | Specifies if the backup anabled as a wallet service or not. | [optional] [default to undefined]
+**countAIAgent** | **number** | The number of AI agents. | [optional] [default to undefined]
 
 ## Example
 
@@ -87,6 +88,7 @@ const instance: TenantQuota = {
     year,
     countFreeBackup,
     backup,
+    countAIAgent,
 };
 ```
 

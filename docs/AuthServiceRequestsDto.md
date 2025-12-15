@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **description** | **string** | The brief description of the authorization service. | [optional] [default to undefined]
 **instruction** | **string** | The detailed instructions for configuring or using the authorization service. | [optional] [default to undefined]
 **canSet** | **boolean** | Specifies whether the authorization service can be configured by the user. | [optional] [default to undefined]
+**paid** | **boolean** | Specifies whether the authorization service is paid or not. | [optional] [default to undefined]
 **props** | [**Array&lt;AuthKey&gt;**](AuthKey.md) | The collection of authorization keys associated with the authorization service. | [optional] [default to undefined]
 
 ## Example
@@ -24,6 +25,7 @@ const instance: AuthServiceRequestsDto = {
     description,
     instruction,
     canSet,
+    paid,
     props,
 };
 ```

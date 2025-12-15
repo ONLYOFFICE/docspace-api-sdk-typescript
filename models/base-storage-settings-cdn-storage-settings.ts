@@ -40,12 +40,6 @@ export interface BaseStorageSettingsCdnStorageSettings {
      * @type {string}
      * @memberof BaseStorageSettingsCdnStorageSettings
      */
-    'id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BaseStorageSettingsCdnStorageSettings
-     */
     'lastModified'?: string;
 }
 

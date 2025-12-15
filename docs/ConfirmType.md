@@ -1,45 +1,45 @@
 # ConfirmType
 
-[0 - Emp invite, 1 - Link invite, 2 - Portal suspend, 3 - Portal continue, 4 - Portal remove, 5 - Dns change, 6 - Portal owner change, 7 - Activation, 8 - Email change, 9 - Email activation, 10 - Password change, 11 - Profile remove, 12 - Phone activation, 13 - Phone auth, 14 - Auth, 15 - Tfa activation, 16 - Tfa auth, 17 - Wizard, 18 - Guest share link]
+[EmpInvite - Emp invite, LinkInvite - Link invite, PortalSuspend - Portal suspend, PortalContinue - Portal continue, PortalRemove - Portal remove, DnsChange - Dns change, PortalOwnerChange - Portal owner change, Activation - Activation, EmailChange - Email change, EmailActivation - Email activation, PasswordChange - Password change, ProfileRemove - Profile remove, PhoneActivation - Phone activation, PhoneAuth - Phone auth, Auth - Auth, TfaActivation - Tfa activation, TfaAuth - Tfa auth, Wizard - Wizard, GuestShareLink - Guest share link]
 
 ## Enum
 
-* `EmpInvite` (value: `0`)
+* `EmpInvite` (value: `'EmpInvite'`)
 
-* `LinkInvite` (value: `1`)
+* `LinkInvite` (value: `'LinkInvite'`)
 
-* `PortalSuspend` (value: `2`)
+* `PortalSuspend` (value: `'PortalSuspend'`)
 
-* `PortalContinue` (value: `3`)
+* `PortalContinue` (value: `'PortalContinue'`)
 
-* `PortalRemove` (value: `4`)
+* `PortalRemove` (value: `'PortalRemove'`)
 
-* `DnsChange` (value: `5`)
+* `DnsChange` (value: `'DnsChange'`)
 
-* `PortalOwnerChange` (value: `6`)
+* `PortalOwnerChange` (value: `'PortalOwnerChange'`)
 
-* `Activation` (value: `7`)
+* `Activation` (value: `'Activation'`)
 
-* `EmailChange` (value: `8`)
+* `EmailChange` (value: `'EmailChange'`)
 
-* `EmailActivation` (value: `9`)
+* `EmailActivation` (value: `'EmailActivation'`)
 
-* `PasswordChange` (value: `10`)
+* `PasswordChange` (value: `'PasswordChange'`)
 
-* `ProfileRemove` (value: `11`)
+* `ProfileRemove` (value: `'ProfileRemove'`)
 
-* `PhoneActivation` (value: `12`)
+* `PhoneActivation` (value: `'PhoneActivation'`)
 
-* `PhoneAuth` (value: `13`)
+* `PhoneAuth` (value: `'PhoneAuth'`)
 
-* `Auth` (value: `14`)
+* `Auth` (value: `'Auth'`)
 
-* `TfaActivation` (value: `15`)
+* `TfaActivation` (value: `'TfaActivation'`)
 
-* `TfaAuth` (value: `16`)
+* `TfaAuth` (value: `'TfaAuth'`)
 
-* `Wizard` (value: `17`)
+* `Wizard` (value: `'Wizard'`)
 
-* `GuestShareLink` (value: `18`)
+* `GuestShareLink` (value: `'GuestShareLink'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

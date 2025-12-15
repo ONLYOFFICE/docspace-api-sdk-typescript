@@ -18,6 +18,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { DistributedTaskStatus } from './distributed-task-status';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { FileEntryBaseDto } from './file-entry-base-dto';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -83,6 +86,12 @@ export interface FileOperationDto {
      * @memberof FileOperationDto
      */
     'folders'?: Array<FileEntryBaseDto> | null;
+    /**
+     * 
+     * @type {DistributedTaskStatus}
+     * @memberof FileOperationDto
+     */
+    'status'?: DistributedTaskStatus;
 }
 
 

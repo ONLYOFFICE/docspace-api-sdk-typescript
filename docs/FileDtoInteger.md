@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **title** | **string** | The file entry title. | [optional] [default to undefined]
 **access** | [**FileShare**](FileShare.md) |  | [optional] [default to undefined]
+**sharedBy** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] [default to undefined]
+**ownedBy** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] [default to undefined]
 **shared** | **boolean** | Specifies if the file entry is shared via link or not. | [optional] [default to undefined]
 **sharedForUser** | **boolean** | Specifies if the file entry is shared for user or not. | [optional] [default to undefined]
 **parentShared** | **boolean** | Indicates whether the parent entity is shared. | [optional] [default to undefined]
@@ -79,6 +81,8 @@ import { FileDtoInteger } from '@onlyoffice/docspace-api-sdk';
 const instance: FileDtoInteger = {
     title,
     access,
+    sharedBy,
+    ownedBy,
     shared,
     sharedForUser,
     parentShared,

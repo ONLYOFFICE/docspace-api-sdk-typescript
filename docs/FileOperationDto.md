@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **url** | **string** | The file operation URL. | [optional] [default to undefined]
 **files** | [**Array&lt;FileEntryBaseDto&gt;**](FileEntryBaseDto.md) | The list of files of the file operation. | [optional] [default to undefined]
 **folders** | [**Array&lt;FileEntryBaseDto&gt;**](FileEntryBaseDto.md) | The list of folders of the file operation. | [optional] [default to undefined]
+**status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -31,6 +32,7 @@ const instance: FileOperationDto = {
     url,
     files,
     folders,
+    status,
 };
 ```
 

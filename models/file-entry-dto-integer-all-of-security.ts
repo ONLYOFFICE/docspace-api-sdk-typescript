@@ -274,7 +274,7 @@ export interface FileEntryDtoIntegerAllOfSecurity {
      * @type {boolean}
      * @memberof FileEntryDtoIntegerAllOfSecurity
      */
-    'AscAi'?: boolean;
+    'AskAi'?: boolean;
     /**
      * 
      * @type {boolean}

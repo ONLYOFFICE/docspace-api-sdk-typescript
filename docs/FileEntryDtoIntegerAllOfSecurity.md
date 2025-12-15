@@ -47,7 +47,7 @@ Name | Type | Description | Notes
 **EditInternal** | **boolean** |  | [optional] [default to undefined]
 **EditExpiration** | **boolean** |  | [optional] [default to undefined]
 **Vectorization** | **boolean** |  | [optional] [default to undefined]
-**AscAi** | **boolean** |  | [optional] [default to undefined]
+**AskAi** | **boolean** |  | [optional] [default to undefined]
 **UseChat** | **boolean** |  | [optional] [default to undefined]
 
 ## Example
@@ -97,7 +97,7 @@ const instance: FileEntryDtoIntegerAllOfSecurity = {
     EditInternal,
     EditExpiration,
     Vectorization,
-    AscAi,
+    AskAi,
     UseChat,
 };
 ```

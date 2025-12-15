@@ -245,5 +245,11 @@ export interface TenantQuota {
      * @memberof TenantQuota
      */
     'backup'?: boolean;
+    /**
+     * The number of AI agents.
+     * @type {number}
+     * @memberof TenantQuota
+     */
+    'countAIAgent'?: number;
 }
 

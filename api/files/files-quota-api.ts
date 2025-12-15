@@ -38,7 +38,8 @@ export const FilesQuotaApiAxiosParamCreator = function (configuration?: Configur
     
     return {
         /**
-         * 
+         * Resets the quota limit for the rooms with the IDs specified in the request.
+         * @summary Reset the room quota limit
          * @param {UpdateRoomsRoomIdsRequestDtoInteger} [updateRoomsRoomIdsRequestDtoInteger] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -58,6 +59,25 @@ export const FilesQuotaApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -73,7 +93,8 @@ export const FilesQuotaApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * 
+         * Changes the quota limit for the rooms with the IDs specified in the request.
+         * @summary Change the room quota limit
          * @param {UpdateRoomsQuotaRequestDtoInteger} [updateRoomsQuotaRequestDtoInteger] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -92,6 +113,25 @@ export const FilesQuotaApiAxiosParamCreator = function (configuration?: Configur
             const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
 
 
     
@@ -118,7 +158,8 @@ export const FilesQuotaApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = FilesQuotaApiAxiosParamCreator(configuration)
     return {
         /**
-         * 
+         * Resets the quota limit for the rooms with the IDs specified in the request.
+         * @summary Reset the room quota limit
          * @param {UpdateRoomsRoomIdsRequestDtoInteger} [updateRoomsRoomIdsRequestDtoInteger] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -132,7 +173,8 @@ export const FilesQuotaApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Changes the quota limit for the rooms with the IDs specified in the request.
+         * @summary Change the room quota limit
          * @param {UpdateRoomsQuotaRequestDtoInteger} [updateRoomsQuotaRequestDtoInteger] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -156,7 +198,8 @@ export const FilesQuotaApiFactory = function (configuration?: Configuration, bas
     const localVarFp = FilesQuotaApiFp(configuration)
     return {
         /**
-         * 
+         * Resets the quota limit for the rooms with the IDs specified in the request.
+         * @summary Reset the room quota limit
          * @param {UpdateRoomsRoomIdsRequestDtoInteger} [updateRoomsRoomIdsRequestDtoInteger] 
          * @param {*} [options] Override http request option.
          * REST API Reference for resetRoomQuota operation
@@ -167,7 +210,8 @@ export const FilesQuotaApiFactory = function (configuration?: Configuration, bas
             return localVarFp.resetRoomQuota(updateRoomsRoomIdsRequestDtoInteger, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Changes the quota limit for the rooms with the IDs specified in the request.
+         * @summary Change the room quota limit
          * @param {UpdateRoomsQuotaRequestDtoInteger} [updateRoomsQuotaRequestDtoInteger] 
          * @param {*} [options] Override http request option.
          * REST API Reference for updateRoomsQuota operation
@@ -188,7 +232,8 @@ export const FilesQuotaApiFactory = function (configuration?: Configuration, bas
  */
 export class FilesQuotaApi extends BaseAPI {
     /**
-     * 
+     * Resets the quota limit for the rooms with the IDs specified in the request.
+     * @summary Reset the room quota limit
      * @param {UpdateRoomsRoomIdsRequestDtoInteger} [updateRoomsRoomIdsRequestDtoInteger] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -199,7 +244,8 @@ export class FilesQuotaApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Changes the quota limit for the rooms with the IDs specified in the request.
+     * @summary Change the room quota limit
      * @param {UpdateRoomsQuotaRequestDtoInteger} [updateRoomsQuotaRequestDtoInteger] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

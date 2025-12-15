@@ -4,57 +4,58 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**addFileToRecent**](#addfiletorecent) | **POST** /api/2.0/files/file/{fileId}/recent | |
-|[**addTemplates**](#addtemplates) | **POST** /api/2.0/files/templates | |
-|[**changeVersionHistory**](#changeversionhistory) | **PUT** /api/2.0/files/file/{fileId}/history | |
-|[**checkFillFormDraft**](#checkfillformdraft) | **POST** /api/2.0/files/masterform/{fileId}/checkfillformdraft | |
-|[**copyFileAs**](#copyfileas) | **POST** /api/2.0/files/file/{fileId}/copyas | |
-|[**createEditSession**](#createeditsession) | **POST** /api/2.0/files/file/{fileId}/edit_session | |
-|[**createFile**](#createfile) | **POST** /api/2.0/files/{folderId}/file | |
-|[**createFileInMyDocuments**](#createfileinmydocuments) | **POST** /api/2.0/files/@my/file | |
-|[**createFilePrimaryExternalLink**](#createfileprimaryexternallink) | **POST** /api/2.0/files/file/{id}/link | |
-|[**createHtmlFile**](#createhtmlfile) | **POST** /api/2.0/files/{folderId}/html | |
-|[**createHtmlFileInMyDocuments**](#createhtmlfileinmydocuments) | **POST** /api/2.0/files/@my/html | |
-|[**createTextFile**](#createtextfile) | **POST** /api/2.0/files/{folderId}/text | |
-|[**createTextFileInMyDocuments**](#createtextfileinmydocuments) | **POST** /api/2.0/files/@my/text | |
-|[**createThumbnails**](#createthumbnails) | **POST** /api/2.0/files/thumbnails | |
-|[**deleteFile**](#deletefile) | **DELETE** /api/2.0/files/file/{fileId} | |
-|[**deleteRecent**](#deleterecent) | **DELETE** /api/2.0/files/recent | |
-|[**deleteTemplates**](#deletetemplates) | **DELETE** /api/2.0/files/templates | |
-|[**getAllFormRoles**](#getallformroles) | **GET** /api/2.0/files/file/{fileId}/formroles | |
-|[**getEditDiffUrl**](#geteditdiffurl) | **GET** /api/2.0/files/file/{fileId}/edit/diff | |
-|[**getEditHistory**](#getedithistory) | **GET** /api/2.0/files/file/{fileId}/edit/history | |
-|[**getFileHistory**](#getfilehistory) | **GET** /api/2.0/files/file/{fileId}/log | |
-|[**getFileInfo**](#getfileinfo) | **GET** /api/2.0/files/file/{fileId} | |
-|[**getFileLinks**](#getfilelinks) | **GET** /api/2.0/files/file/{id}/links | |
-|[**getFilePrimaryExternalLink**](#getfileprimaryexternallink) | **GET** /api/2.0/files/file/{id}/link | |
-|[**getFileVersionInfo**](#getfileversioninfo) | **GET** /api/2.0/files/file/{fileId}/history | |
-|[**getFillResult**](#getfillresult) | **GET** /api/2.0/files/file/fillresult | |
-|[**getPresignedFileUri**](#getpresignedfileuri) | **GET** /api/2.0/files/file/{fileId}/presigned | |
-|[**getPresignedUri**](#getpresigneduri) | **GET** /api/2.0/files/file/{fileId}/presigneduri | |
-|[**getProtectedFileUsers**](#getprotectedfileusers) | **GET** /api/2.0/files/file/{fileId}/protectusers | |
-|[**getReferenceData**](#getreferencedata) | **POST** /api/2.0/files/file/referencedata | |
-|[**isFormPDF**](#isformpdf) | **GET** /api/2.0/files/file/{fileId}/isformpdf | |
-|[**lockFile**](#lockfile) | **PUT** /api/2.0/files/file/{fileId}/lock | |
-|[**manageFormFilling**](#manageformfilling) | **PUT** /api/2.0/files/file/{fileId}/manageformfilling | |
-|[**openEditFile**](#openeditfile) | **GET** /api/2.0/files/file/{fileId}/openedit | |
-|[**restoreFileVersion**](#restorefileversion) | **GET** /api/2.0/files/file/{fileId}/restoreversion | |
-|[**saveEditingFileFromForm**](#saveeditingfilefromform) | **PUT** /api/2.0/files/file/{fileId}/saveediting | |
-|[**saveFileAsPdf**](#savefileaspdf) | **POST** /api/2.0/files/file/{id}/saveaspdf | |
-|[**saveFormRoleMapping**](#saveformrolemapping) | **POST** /api/2.0/files/file/{fileId}/formrolemapping | |
-|[**setCustomFilterTag**](#setcustomfiltertag) | **PUT** /api/2.0/files/file/{fileId}/customfilter | |
-|[**setFileExternalLink**](#setfileexternallink) | **PUT** /api/2.0/files/file/{id}/links | |
-|[**setFileOrder**](#setfileorder) | **PUT** /api/2.0/files/{fileId}/order | |
-|[**setFilesOrder**](#setfilesorder) | **PUT** /api/2.0/files/order | |
-|[**startEditFile**](#starteditfile) | **POST** /api/2.0/files/file/{fileId}/startedit | |
-|[**startFillingFile**](#startfillingfile) | **PUT** /api/2.0/files/file/{fileId}/startfilling | |
-|[**toggleFileFavorite**](#togglefilefavorite) | **GET** /api/2.0/files/favorites/{fileId} | |
-|[**trackEditFile**](#trackeditfile) | **GET** /api/2.0/files/file/{fileId}/trackeditfile | |
-|[**updateFile**](#updatefile) | **PUT** /api/2.0/files/file/{fileId} | |
+|[**addFileToRecent**](#addfiletorecent) | **POST** /api/2.0/files/file/{fileId}/recent | Add a file to the Recent section|
+|[**addTemplates**](#addtemplates) | **POST** /api/2.0/files/templates | Add template files|
+|[**changeVersionHistory**](#changeversionhistory) | **PUT** /api/2.0/files/file/{fileId}/history | Change version history|
+|[**checkFillFormDraft**](#checkfillformdraft) | **POST** /api/2.0/files/masterform/{fileId}/checkfillformdraft | Check the form draft filling|
+|[**copyFileAs**](#copyfileas) | **POST** /api/2.0/files/file/{fileId}/copyas | Copy a file|
+|[**createEditSession**](#createeditsession) | **POST** /api/2.0/files/file/{fileId}/edit_session | Create the editing session|
+|[**createFile**](#createfile) | **POST** /api/2.0/files/{folderId}/file | Create a file|
+|[**createFileInMyDocuments**](#createfileinmydocuments) | **POST** /api/2.0/files/@my/file | Create a file in the My documents section|
+|[**createFilePrimaryExternalLink**](#createfileprimaryexternallink) | **POST** /api/2.0/files/file/{id}/link | Create primary external link|
+|[**createHtmlFile**](#createhtmlfile) | **POST** /api/2.0/files/{folderId}/html | Create an HTML file|
+|[**createHtmlFileInMyDocuments**](#createhtmlfileinmydocuments) | **POST** /api/2.0/files/@my/html | Create an HTML file in the My documents section|
+|[**createTextFile**](#createtextfile) | **POST** /api/2.0/files/{folderId}/text | Create a text file|
+|[**createTextFileInMyDocuments**](#createtextfileinmydocuments) | **POST** /api/2.0/files/@my/text | Create a text file in the My documents section|
+|[**createThumbnails**](#createthumbnails) | **POST** /api/2.0/files/thumbnails | Create file thumbnails|
+|[**deleteFile**](#deletefile) | **DELETE** /api/2.0/files/file/{fileId} | Delete a file|
+|[**deleteRecent**](#deleterecent) | **DELETE** /api/2.0/files/recent | Delete recent files|
+|[**deleteTemplates**](#deletetemplates) | **DELETE** /api/2.0/files/templates | Delete template files|
+|[**getAllFormRoles**](#getallformroles) | **GET** /api/2.0/files/file/{fileId}/formroles | Get form roles|
+|[**getEditDiffUrl**](#geteditdiffurl) | **GET** /api/2.0/files/file/{fileId}/edit/diff | Get changes URL|
+|[**getEditHistory**](#getedithistory) | **GET** /api/2.0/files/file/{fileId}/edit/history | Get version history|
+|[**getFileHistory**](#getfilehistory) | **GET** /api/2.0/files/file/{fileId}/log | Get file history|
+|[**getFileInfo**](#getfileinfo) | **GET** /api/2.0/files/file/{fileId} | Get file information|
+|[**getFileLinks**](#getfilelinks) | **GET** /api/2.0/files/file/{id}/links | Get file external links|
+|[**getFilePrimaryExternalLink**](#getfileprimaryexternallink) | **GET** /api/2.0/files/file/{id}/link | Get primary external link|
+|[**getFileVersionInfo**](#getfileversioninfo) | **GET** /api/2.0/files/file/{fileId}/history | Get file versions|
+|[**getFillResult**](#getfillresult) | **GET** /api/2.0/files/file/fillresult | Get form-filling result|
+|[**getPresignedFileUri**](#getpresignedfileuri) | **GET** /api/2.0/files/file/{fileId}/presigned | Get file download link asynchronously|
+|[**getPresignedUri**](#getpresigneduri) | **GET** /api/2.0/files/file/{fileId}/presigneduri | Get file download link|
+|[**getProtectedFileUsers**](#getprotectedfileusers) | **GET** /api/2.0/files/file/{fileId}/protectusers | Get users access rights to the protected file|
+|[**getReferenceData**](#getreferencedata) | **POST** /api/2.0/files/file/referencedata | Get reference data|
+|[**isFormPDF**](#isformpdf) | **GET** /api/2.0/files/file/{fileId}/isformpdf | Check the PDF file|
+|[**lockFile**](#lockfile) | **PUT** /api/2.0/files/file/{fileId}/lock | Lock a file|
+|[**manageFormFilling**](#manageformfilling) | **PUT** /api/2.0/files/file/{fileId}/manageformfilling | Perform form filling action|
+|[**openEditFile**](#openeditfile) | **GET** /api/2.0/files/file/{fileId}/openedit | Open a file configuration|
+|[**restoreFileVersion**](#restorefileversion) | **POST** /api/2.0/files/file/{fileId}/restoreversion | Restore a file version|
+|[**saveEditingFileFromForm**](#saveeditingfilefromform) | **PUT** /api/2.0/files/file/{fileId}/saveediting | Save file edits|
+|[**saveFileAsPdf**](#savefileaspdf) | **POST** /api/2.0/files/file/{id}/saveaspdf | Save a file as PDF|
+|[**saveFormRoleMapping**](#saveformrolemapping) | **POST** /api/2.0/files/file/{fileId}/formrolemapping | Save form role mapping|
+|[**setCustomFilterTag**](#setcustomfiltertag) | **PUT** /api/2.0/files/file/{fileId}/customfilter | Set the Custom Filter editing mode|
+|[**setFileExternalLink**](#setfileexternallink) | **PUT** /api/2.0/files/file/{id}/links | Set an external link|
+|[**setFileOrder**](#setfileorder) | **PUT** /api/2.0/files/{fileId}/order | Set file order|
+|[**setFilesOrder**](#setfilesorder) | **PUT** /api/2.0/files/order | Set order of files|
+|[**startEditFile**](#starteditfile) | **POST** /api/2.0/files/file/{fileId}/startedit | Start file editing|
+|[**startFillingFile**](#startfillingfile) | **PUT** /api/2.0/files/file/{fileId}/startfilling | Start file filling|
+|[**toggleFileFavorite**](#togglefilefavorite) | **GET** /api/2.0/files/favorites/{fileId} | Change the file favorite status|
+|[**trackEditFile**](#trackeditfile) | **GET** /api/2.0/files/file/{fileId}/trackeditfile | Track file editing|
+|[**updateFile**](#updatefile) | **PUT** /api/2.0/files/file/{fileId} | Update a file|
 
 # **addFileToRecent**
 > FileIntegerWrapper addFileToRecent()
 
+Adds a file with the ID specified in the request to the Recent section.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/add-file-to-recent/).
 
@@ -71,7 +72,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -101,12 +102,14 @@ const { status, data } = await apiInstance.addFileToRecent(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | New file information |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **addTemplates**
 > BooleanWrapper addTemplates()
 
+Adds files with the IDs specified in the request to the template list.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/add-templates/).
 
@@ -123,7 +126,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -154,12 +157,14 @@ const { status, data } = await apiInstance.addTemplates(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Boolean value: true if the operation is successful |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **changeVersionHistory**
 > FileIntegerArrayWrapper changeVersionHistory(changeHistory)
 
+Changes the version history of a file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-version-history/).
 
@@ -177,7 +182,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -210,6 +215,7 @@ const { status, data } = await apiInstance.changeVersionHistory(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Updated information about file versions |  -  |
+|**401** | Unauthorized |  -  |
 |**403** | You do not have enough permissions to edit the file |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -217,6 +223,7 @@ const { status, data } = await apiInstance.changeVersionHistory(
 # **checkFillFormDraft**
 > StringWrapper checkFillFormDraft(checkFillFormDraft)
 
+Checks if the current file is a form draft which can be filled out.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/check-fill-form-draft/).
 
@@ -274,6 +281,7 @@ const { status, data } = await apiInstance.checkFillFormDraft(
 # **copyFileAs**
 > FileEntryBaseWrapper copyFileAs(copyAsJsonElement)
 
+Copies (and converts if possible) an existing file to the specified folder.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/copy-file-as/).
 
@@ -291,7 +299,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -325,6 +333,7 @@ const { status, data } = await apiInstance.copyFileAs(
 |-------------|-------------|------------------|
 |**200** | Copied file entry information |  -  |
 |**400** | No file id or folder id toFolderId determine provider |  -  |
+|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to create |  -  |
 |**404** | File not found |  -  |
 
@@ -333,6 +342,7 @@ const { status, data } = await apiInstance.copyFileAs(
 # **createEditSession**
 > ObjectWrapper createEditSession()
 
+Creates a session to edit the existing file with multiple chunks (needed for WebDAV).   **Note**: Information about created session which includes:  <ul>  <li><b>id:</b> unique ID of this upload session,</li>  <li><b>created:</b> UTC time when the session was created,</li>  <li><b>expired:</b> UTC time when the session will expire if no chunks are sent before that time,</li>  <li><b>location:</b> URL where you should send your next chunk,</li>  <li><b>bytes_uploaded:</b> number of bytes uploaded for the specific upload ID,</li>  <li><b>bytes_total:</b> total number of bytes which will be uploaded.</li>  </ul>
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-edit-session/).
 
@@ -350,7 +360,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -382,6 +392,7 @@ const { status, data } = await apiInstance.createEditSession(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Information about created session |  -  |
+|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to edit the file |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -389,6 +400,7 @@ const { status, data } = await apiInstance.createEditSession(
 # **createFile**
 > FileIntegerWrapper createFile(createFileJsonElement)
 
+Creates a new file in the specified folder with the title specified in the request.   **Note**: If a file extension is different from DOCX/XLSX/PPTX and refers to one of the known text, spreadsheet, or presentation formats, it will be changed to DOCX/XLSX/PPTX accordingly. If the file extension is not specified or is unknown, the DOCX extension will be added to the file title.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file/).
 
@@ -406,7 +418,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -439,12 +451,14 @@ const { status, data } = await apiInstance.createFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | New file information |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **createFileInMyDocuments**
 > FileIntegerWrapper createFileInMyDocuments()
 
+Creates a new file in the My documents section with the title specified in the request.   **Note**: If a file extension is different from DOCX/XLSX/PPTX and refers to one of the known text, spreadsheet, or presentation formats, it will be changed to DOCX/XLSX/PPTX accordingly. If the file extension is not specified or is unknown, the DOCX extension will be added to the file title.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file-in-my-documents/).
 
@@ -461,7 +475,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -492,12 +506,14 @@ const { status, data } = await apiInstance.createFileInMyDocuments(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | New file information |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **createFilePrimaryExternalLink**
 > FileShareWrapper createFilePrimaryExternalLink(fileLinkRequest)
 
+Creates a primary external link by the identifier specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file-primary-external-link/).
 
@@ -515,7 +531,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -548,6 +564,7 @@ const { status, data } = await apiInstance.createFilePrimaryExternalLink(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | File security information |  -  |
+|**401** | Unauthorized |  -  |
 |**404** | Not Found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -555,6 +572,7 @@ const { status, data } = await apiInstance.createFilePrimaryExternalLink(
 # **createHtmlFile**
 > FileIntegerWrapper createHtmlFile(createTextOrHtmlFile)
 
+Creates an HTML (.html) file in the selected folder with the title and contents specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-html-file/).
 
@@ -572,7 +590,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -605,6 +623,7 @@ const { status, data } = await apiInstance.createHtmlFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | New file information |  -  |
+|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to create |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -612,6 +631,7 @@ const { status, data } = await apiInstance.createHtmlFile(
 # **createHtmlFileInMyDocuments**
 > FileIntegerWrapper createHtmlFileInMyDocuments()
 
+Creates an HTML (.html) file in the My documents section with the title and contents specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-html-file-in-my-documents/).
 
@@ -628,7 +648,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -659,6 +679,7 @@ const { status, data } = await apiInstance.createHtmlFileInMyDocuments(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | New file information |  -  |
+|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to create |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -666,6 +687,7 @@ const { status, data } = await apiInstance.createHtmlFileInMyDocuments(
 # **createTextFile**
 > FileIntegerWrapper createTextFile(createTextOrHtmlFile)
 
+Creates a text (.txt) file in the selected folder with the title and contents specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-text-file/).
 
@@ -683,7 +705,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -716,12 +738,14 @@ const { status, data } = await apiInstance.createTextFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | New file information |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **createTextFileInMyDocuments**
 > FileIntegerWrapper createTextFileInMyDocuments()
 
+Creates a text (.txt) file in the My documents section with the title and contents specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-text-file-in-my-documents/).
 
@@ -738,7 +762,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -769,12 +793,14 @@ const { status, data } = await apiInstance.createTextFileInMyDocuments(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | New file information |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **createThumbnails**
 > ObjectArrayWrapper createThumbnails()
 
+Creates thumbnails for the files with the IDs specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-thumbnails/).
 
@@ -828,6 +854,7 @@ const { status, data } = await apiInstance.createThumbnails(
 # **deleteFile**
 > FileOperationArrayWrapper deleteFile(_delete)
 
+Deletes a file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-file/).
 
@@ -845,7 +872,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -878,12 +905,14 @@ const { status, data } = await apiInstance.deleteFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of file operations |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deleteRecent**
 > NoContentResultWrapper deleteRecent()
 
+Removes files with the IDs specified in the request from the Recent section.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-recent/).
 
@@ -900,7 +929,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -931,12 +960,14 @@ const { status, data } = await apiInstance.deleteRecent(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | No content |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deleteTemplates**
 > BooleanWrapper deleteTemplates()
 
+Removes files with the IDs specified in the request from the template list.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-templates/).
 
@@ -953,7 +984,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -983,12 +1014,14 @@ const { status, data } = await apiInstance.deleteTemplates(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Boolean value: true if the operation is successful |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getAllFormRoles**
 > FormRoleArrayWrapper getAllFormRoles()
 
+Returns all roles for the specified form.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-form-roles/).
 
@@ -1005,7 +1038,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1035,6 +1068,7 @@ const { status, data } = await apiInstance.getAllFormRoles(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Successfully retrieved all roles for the form |  -  |
+|**401** | Unauthorized |  -  |
 |**403** | You do not have enough permissions to view the form roles |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1042,6 +1076,7 @@ const { status, data } = await apiInstance.getAllFormRoles(
 # **getEditDiffUrl**
 > EditHistoryDataWrapper getEditDiffUrl()
 
+Returns a URL to the changes of a file version specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-edit-diff-url/).
 
@@ -1097,6 +1132,7 @@ const { status, data } = await apiInstance.getEditDiffUrl(
 # **getEditHistory**
 > EditHistoryArrayWrapper getEditHistory()
 
+Returns the version history of a file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-edit-history/).
 
@@ -1149,6 +1185,7 @@ const { status, data } = await apiInstance.getEditHistory(
 # **getFileHistory**
 > HistoryArrayWrapper getFileHistory()
 
+Returns the list of actions performed on the file with the specified identifier.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-history/).
 
@@ -1169,7 +1206,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1209,6 +1246,7 @@ const { status, data } = await apiInstance.getFileHistory(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of actions performed on the file |  -  |
+|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to perform the operation |  -  |
 |**404** | The required file was not found |  -  |
 
@@ -1217,6 +1255,7 @@ const { status, data } = await apiInstance.getFileHistory(
 # **getFileInfo**
 > FileIntegerWrapper getFileInfo()
 
+Returns the detailed information about a file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-info/).
 
@@ -1272,6 +1311,7 @@ const { status, data } = await apiInstance.getFileInfo(
 # **getFileLinks**
 > FileShareArrayWrapper getFileLinks()
 
+Returns the external links of a file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-links/).
 
@@ -1290,7 +1330,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1324,12 +1364,14 @@ const { status, data } = await apiInstance.getFileLinks(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | File security information |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getFilePrimaryExternalLink**
 > FileShareWrapper getFilePrimaryExternalLink()
 
+Returns the primary external link by the identifier specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-primary-external-link/).
 
@@ -1389,6 +1431,7 @@ const { status, data } = await apiInstance.getFilePrimaryExternalLink(
 # **getFileVersionInfo**
 > FileIntegerArrayWrapper getFileVersionInfo()
 
+Returns the detailed information about all the available file versions with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-version-info/).
 
@@ -1441,6 +1484,7 @@ const { status, data } = await apiInstance.getFileVersionInfo(
 # **getFillResult**
 > FillingFormResultIntegerWrapper getFillResult()
 
+Retrieves the result of a form-filling session.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-fill-result/).
 
@@ -1493,6 +1537,7 @@ const { status, data } = await apiInstance.getFillResult(
 # **getPresignedFileUri**
 > FileLinkWrapper getPresignedFileUri()
 
+Returns a link to download a file with the ID specified in the request asynchronously.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-presigned-file-uri/).
 
@@ -1509,7 +1554,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1539,12 +1584,14 @@ const { status, data } = await apiInstance.getPresignedFileUri(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | File download link |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getPresignedUri**
 > StringWrapper getPresignedUri()
 
+Returns a pre-signed URL to download a file with the specified ID.  This temporary link provides secure access to the file.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-presigned-uri/).
 
@@ -1561,7 +1608,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1591,12 +1638,14 @@ const { status, data } = await apiInstance.getPresignedUri(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | File download link |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getProtectedFileUsers**
 > MentionWrapperArrayWrapper getProtectedFileUsers()
 
+Returns a list of users with their access rights to the protected file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-protected-file-users/).
 
@@ -1613,7 +1662,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1643,12 +1692,14 @@ const { status, data } = await apiInstance.getProtectedFileUsers(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of users with their access rights to the protected file |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getReferenceData**
 > FileReferenceWrapper getReferenceData()
 
+Returns the reference data to uniquely identify a file in its system and check the availability of insering data into the destination spreadsheet by the external link.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-reference-data/).
 
@@ -1665,7 +1716,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1696,12 +1747,14 @@ const { status, data } = await apiInstance.getReferenceData(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | File reference data |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **isFormPDF**
 > BooleanWrapper isFormPDF()
 
+Checks if the PDF file is a form or not.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/is-form-pdf/).
 
@@ -1718,7 +1771,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1748,12 +1801,14 @@ const { status, data } = await apiInstance.isFormPDF(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Boolean value: true - the PDF file is form, false - the PDF file is not a form |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **lockFile**
 > FileIntegerWrapper lockFile(lockFileParameters)
 
+Locks a file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/lock-file/).
 
@@ -1771,7 +1826,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1804,12 +1859,14 @@ const { status, data } = await apiInstance.lockFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Locked file information |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **manageFormFilling**
 > manageFormFilling()
 
+Performs the specified form filling action.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/manage-form-filling/).
 
@@ -1827,7 +1884,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -1860,6 +1917,7 @@ const { status, data } = await apiInstance.manageFormFilling(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Successfully processed the form filling action |  -  |
+|**401** | Unauthorized |  -  |
 |**403** | You do not have enough permissions to perform this action |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1867,6 +1925,7 @@ const { status, data } = await apiInstance.manageFormFilling(
 # **openEditFile**
 > ConfigurationIntegerWrapper openEditFile()
 
+Returns the initialization configuration of a file to open it in the editor.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/open-edit-file/).
 
@@ -1935,6 +1994,7 @@ const { status, data } = await apiInstance.openEditFile(
 # **restoreFileVersion**
 > EditHistoryArrayWrapper restoreFileVersion()
 
+Restores a file version specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/restore-file-version/).
 
@@ -1995,6 +2055,7 @@ const { status, data } = await apiInstance.restoreFileVersion(
 # **saveEditingFileFromForm**
 > FileIntegerWrapper saveEditingFileFromForm()
 
+Saves edits to a file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-editing-file-from-form/).
 
@@ -2015,7 +2076,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2054,6 +2115,7 @@ const { status, data } = await apiInstance.saveEditingFileFromForm(
 |-------------|-------------|------------------|
 |**200** | Saved file parameters |  -  |
 |**400** | No file id or folder id toFolderId determine provider |  -  |
+|**401** | Unauthorized |  -  |
 |**403** | You do not have enough permissions to edit the file |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2061,6 +2123,7 @@ const { status, data } = await apiInstance.saveEditingFileFromForm(
 # **saveFileAsPdf**
 > FileIntegerWrapper saveFileAsPdf(saveAsPdfInteger)
 
+Saves a file with the identifier specified in the request as a PDF document.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-file-as-pdf/).
 
@@ -2078,7 +2141,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2111,6 +2174,7 @@ const { status, data } = await apiInstance.saveFileAsPdf(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | New file information |  -  |
+|**401** | Unauthorized |  -  |
 |**404** | File not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2118,6 +2182,7 @@ const { status, data } = await apiInstance.saveFileAsPdf(
 # **saveFormRoleMapping**
 > saveFormRoleMapping()
 
+Saves the form role mapping.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-form-role-mapping/).
 
@@ -2135,7 +2200,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2168,6 +2233,7 @@ const { status, data } = await apiInstance.saveFormRoleMapping(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Updated information about form role mappings |  -  |
+|**401** | Unauthorized |  -  |
 |**403** | You do not have enough permissions to edit the file |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2175,6 +2241,7 @@ const { status, data } = await apiInstance.saveFormRoleMapping(
 # **setCustomFilterTag**
 > FileIntegerWrapper setCustomFilterTag(customFilterParameters)
 
+Sets the Custom Filter editing mode to a file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-custom-filter-tag/).
 
@@ -2192,7 +2259,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2225,12 +2292,14 @@ const { status, data } = await apiInstance.setCustomFilterTag(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | File information |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **setFileExternalLink**
 > FileShareWrapper setFileExternalLink(fileLinkRequest)
 
+Sets an external link to a file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-external-link/).
 
@@ -2248,7 +2317,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2281,12 +2350,14 @@ const { status, data } = await apiInstance.setFileExternalLink(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | File security information |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **setFileOrder**
 > FileIntegerWrapper setFileOrder()
 
+Sets the order of the file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-order/).
 
@@ -2304,7 +2375,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2337,6 +2408,7 @@ const { status, data } = await apiInstance.setFileOrder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Updated file information |  -  |
+|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to perform the operation |  -  |
 |**404** | Not Found |  -  |
 
@@ -2345,6 +2417,7 @@ const { status, data } = await apiInstance.setFileOrder(
 # **setFilesOrder**
 > FileEntryIntegerArrayWrapper setFilesOrder()
 
+Sets the order of the files specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-files-order/).
 
@@ -2361,7 +2434,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2392,12 +2465,14 @@ const { status, data } = await apiInstance.setFilesOrder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Updated file entries information |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **startEditFile**
 > StringWrapper startEditFile(startEdit)
 
+Informs about opening a file with the ID specified in the request for editing, locking it from being deleted or moved (this method is called by the mobile editors).
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-edit-file/).
 
@@ -2455,6 +2530,7 @@ const { status, data } = await apiInstance.startEditFile(
 # **startFillingFile**
 > FileIntegerWrapper startFillingFile()
 
+Starts filling a file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-filling-file/).
 
@@ -2471,7 +2547,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2501,6 +2577,7 @@ const { status, data } = await apiInstance.startFillingFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | File information |  -  |
+|**401** | Unauthorized |  -  |
 |**403** | You do not have enough permissions to edit the file |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2508,6 +2585,7 @@ const { status, data } = await apiInstance.startFillingFile(
 # **toggleFileFavorite**
 > BooleanWrapper toggleFileFavorite()
 
+Changes the favorite status of the file with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/toggle-file-favorite/).
 
@@ -2525,7 +2603,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### Example
 
@@ -2557,6 +2635,7 @@ const { status, data } = await apiInstance.toggleFileFavorite(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Boolean value: true - the file is favorite, false - the file is not favorite |  -  |
+|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to perform the operation |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2564,6 +2643,7 @@ const { status, data } = await apiInstance.toggleFileFavorite(
 # **trackEditFile**
 > KeyValuePairBooleanStringWrapper trackEditFile()
 
+Tracks file changes when editing.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/track-edit-file/).
 
@@ -2626,6 +2706,7 @@ const { status, data } = await apiInstance.trackEditFile(
 # **updateFile**
 > FileIntegerWrapper updateFile(updateFile)
 
+Updates the information of the selected file with the parameters specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file/).
 

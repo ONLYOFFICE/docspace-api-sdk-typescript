@@ -6,6 +6,7 @@ The file history information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **number** | The unique identifier for the file history entry. | [default to undefined]
 **action** | [**HistoryAction**](HistoryAction.md) |  | [default to undefined]
 **initiator** | [**EmployeeDto**](EmployeeDto.md) |  | [default to undefined]
 **date** | [**ApiDateTime**](ApiDateTime.md) |  | [default to undefined]
@@ -18,6 +19,7 @@ Name | Type | Description | Notes
 import { HistoryDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: HistoryDto = {
+    id,
     action,
     initiator,
     date,
