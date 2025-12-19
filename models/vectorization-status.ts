@@ -18,15 +18,24 @@
 
 
 /**
- * 
+ * [0 - In Progress, 1 - Completed, 2 - Failed]
  * @export
  * @enum {number}
  */
 
 export const VectorizationStatus = {
-    NUMBER_0: 0,
-    NUMBER_1: 1,
-    NUMBER_2: 2
+    /**
+    * In Progress
+    */
+    InProgress: 0,
+    /**
+    * Completed
+    */
+    Completed: 1,
+    /**
+    * Failed
+    */
+    Failed: 2
 } as const;
 
 export type VectorizationStatus = typeof VectorizationStatus[keyof typeof VectorizationStatus];

@@ -638,11 +638,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get primary external link</td>
       </tr>
       <tr>
-        <td><a href="docs/FilesFoldersApi.md#getfolderrecent"><strong>getFolderRecent</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/files/recent</td>
-        <td>Get the Recent section</td>
-      </tr>
-      <tr>
         <td><a href="docs/FilesFoldersApi.md#getfolders"><strong>getFolders</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/{folderId}/subfolders</td>
         <td>Get subfolders</td>
@@ -664,7 +659,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersApi.md#getrecentfolder"><strong>getRecentFolder</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/files/@recent</td>
+        <td><strong>GET</strong> /api/2.0/files/recent</td>
         <td>Get the Recent section</td>
       </tr>
       <tr>
@@ -977,12 +972,12 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       <tr>
         <td><a href="docs/FilesSharingApi.md#getgroupsmemberswithfilesecurity"><strong>getGroupsMembersWithFileSecurity</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/file/{fileId}/group/{groupId}/share</td>
-        <td>Get group members with security information</td>
+        <td>Get file group members with security information</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSharingApi.md#getgroupsmemberswithfoldersecurity"><strong>getGroupsMembersWithFolderSecurity</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/folder/{folderId}/group/{groupId}/share</td>
-        <td>Get group members with security information</td>
+        <td>Get folder group members with security information</td>
       </tr>
       <tr>
         <td><a href="docs/FilesSharingApi.md#getsecurityinfo"><strong>getSecurityInfo</strong></a></td>

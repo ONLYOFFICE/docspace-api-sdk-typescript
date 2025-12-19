@@ -949,115 +949,6 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the detailed list of files located in the Recent section.
-         * @summary Get the Recent section
-         * @param {string} [userIdOrGroupId] The user or group ID.
-         * @param {FilterType} [filterType] The filter type.
-         * @param {boolean} [excludeSubject] Specifies whether to exclude search by user or group ID.
-         * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
-         * @param {SearchArea} [searchArea] The search area.
-         * @param {Array<string>} [extension] Specifies whether to search for a specific file extension in the Recent folder.
-         * @param {number} [count] The maximum number of items to return.
-         * @param {number} [startIndex] The starting position of the results to be returned in the query response.
-         * @param {string} [sortBy] Specifies the sorting criteria for the folder request.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text used for filtering or searching folder contents.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getFolderRecent operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-recent/
-         */
-        getFolderRecent: async (userIdOrGroupId?: string, filterType?: FilterType, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, searchArea?: SearchArea, extension?: Array<string>, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/files/recent`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-            if (userIdOrGroupId !== undefined) {
-                localVarQueryParameter['userIdOrGroupId'] = userIdOrGroupId;
-            }
-
-            if (filterType !== undefined) {
-                localVarQueryParameter['filterType'] = filterType;
-            }
-
-            if (excludeSubject !== undefined) {
-                localVarQueryParameter['excludeSubject'] = excludeSubject;
-            }
-
-            if (applyFilterOption !== undefined) {
-                localVarQueryParameter['applyFilterOption'] = applyFilterOption;
-            }
-
-            if (searchArea !== undefined) {
-                localVarQueryParameter['searchArea'] = searchArea;
-            }
-
-            if (extension) {
-                localVarQueryParameter['extension'] = extension.join(COLLECTION_FORMATS.csv);
-            }
-
-            if (count !== undefined) {
-                localVarQueryParameter['count'] = count;
-            }
-
-            if (startIndex !== undefined) {
-                localVarQueryParameter['startIndex'] = startIndex;
-            }
-
-            if (sortBy !== undefined) {
-                localVarQueryParameter['sortBy'] = sortBy;
-            }
-
-            if (sortOrder !== undefined) {
-                localVarQueryParameter['sortOrder'] = sortOrder;
-            }
-
-            if (filterValue !== undefined) {
-                localVarQueryParameter['filterValue'] = filterValue;
-            }
-
-
-    
-            if(fields !== undefined) {
-                localVarHeaderParameter['fields'] = fields;
-            }
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Returns a list of all the subfolders from a folder with the ID specified in the request.
          * @summary Get subfolders
          * @param {number} folderId The folder unique identifier.
@@ -1370,7 +1261,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-recent-folder/
          */
         getRecentFolder: async (userIdOrGroupId?: string, filterType?: FilterType, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, searchArea?: SearchArea, extension?: Array<string>, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/files/@recent`;
+            const localVarPath = `/api/2.0/files/recent`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -2431,31 +2322,6 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the detailed list of files located in the Recent section.
-         * @summary Get the Recent section
-         * @param {string} [userIdOrGroupId] The user or group ID.
-         * @param {FilterType} [filterType] The filter type.
-         * @param {boolean} [excludeSubject] Specifies whether to exclude search by user or group ID.
-         * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
-         * @param {SearchArea} [searchArea] The search area.
-         * @param {Array<string>} [extension] Specifies whether to search for a specific file extension in the Recent folder.
-         * @param {number} [count] The maximum number of items to return.
-         * @param {number} [startIndex] The starting position of the results to be returned in the query response.
-         * @param {string} [sortBy] Specifies the sorting criteria for the folder request.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text used for filtering or searching folder contents.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getFolderRecent operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-recent/
-         */
-        async getFolderRecent(userIdOrGroupId?: string, filterType?: FilterType, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, searchArea?: SearchArea, extension?: Array<string>, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getFolderRecent(userIdOrGroupId, filterType, excludeSubject, applyFilterOption, searchArea, extension, count, startIndex, sortBy, sortOrder, filterValue, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FoldersApi.getFolderRecent']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
          * Returns a list of all the subfolders from a folder with the ID specified in the request.
          * @summary Get subfolders
          * @param {number} folderId The folder unique identifier.
@@ -2939,28 +2805,6 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getFolderPrimaryExternalLink(id, count, startIndex, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the detailed list of files located in the Recent section.
-         * @summary Get the Recent section
-         * @param {string} [userIdOrGroupId] The user or group ID.
-         * @param {FilterType} [filterType] The filter type.
-         * @param {boolean} [excludeSubject] Specifies whether to exclude search by user or group ID.
-         * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
-         * @param {SearchArea} [searchArea] The search area.
-         * @param {Array<string>} [extension] Specifies whether to search for a specific file extension in the Recent folder.
-         * @param {number} [count] The maximum number of items to return.
-         * @param {number} [startIndex] The starting position of the results to be returned in the query response.
-         * @param {string} [sortBy] Specifies the sorting criteria for the folder request.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text used for filtering or searching folder contents.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for getFolderRecent operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-recent/
-         * @throws {RequiredError}
-         */
-        getFolderRecent(userIdOrGroupId?: string, filterType?: FilterType, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, searchArea?: SearchArea, extension?: Array<string>, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
-            return localVarFp.getFolderRecent(userIdOrGroupId, filterType, excludeSubject, applyFilterOption, searchArea, extension, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Returns a list of all the subfolders from a folder with the ID specified in the request.
          * @summary Get subfolders
          * @param {number} folderId The folder unique identifier.
@@ -3399,28 +3243,6 @@ export class FoldersApi extends BaseAPI {
      */
     public getFolderPrimaryExternalLink(id: number, count?: number, startIndex?: number, options?: RawAxiosRequestConfig) {
         return FoldersApiFp(this.configuration).getFolderPrimaryExternalLink(id, count, startIndex, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns the detailed list of files located in the Recent section.
-     * @summary Get the Recent section
-     * @param {string} [userIdOrGroupId] The user or group ID.
-     * @param {FilterType} [filterType] The filter type.
-     * @param {boolean} [excludeSubject] Specifies whether to exclude search by user or group ID.
-     * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
-     * @param {SearchArea} [searchArea] The search area.
-     * @param {Array<string>} [extension] Specifies whether to search for a specific file extension in the Recent folder.
-     * @param {number} [count] The maximum number of items to return.
-     * @param {number} [startIndex] The starting position of the results to be returned in the query response.
-     * @param {string} [sortBy] Specifies the sorting criteria for the folder request.
-     * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-     * @param {string} [filterValue] The text used for filtering or searching folder contents.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FoldersApi
-     */
-    public getFolderRecent(userIdOrGroupId?: string, filterType?: FilterType, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, searchArea?: SearchArea, extension?: Array<string>, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).getFolderRecent(userIdOrGroupId, filterType, excludeSubject, applyFilterOption, searchArea, extension, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

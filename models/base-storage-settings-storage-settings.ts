@@ -40,6 +40,12 @@ export interface BaseStorageSettingsStorageSettings {
      * @type {string}
      * @memberof BaseStorageSettingsStorageSettings
      */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BaseStorageSettingsStorageSettings
+     */
     'lastModified'?: string;
 }
 

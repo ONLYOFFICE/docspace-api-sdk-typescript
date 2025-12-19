@@ -332,7 +332,7 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Returns the group members with their file security information.
-         * @summary Get group members with security information
+         * @summary Get file group members with security information
          * @param {number} fileId The file ID.
          * @param {string} groupId The group ID.
          * @param {number} [count] The number of items to be retrieved in the current query.
@@ -406,7 +406,7 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Returns the group members with their folder security information.
-         * @summary Get group members with security information
+         * @summary Get folder group members with security information
          * @param {number} folderId The folder ID.
          * @param {string} groupId The group ID.
          * @param {number} [count] The number of items to be retrieved in the current query.
@@ -973,7 +973,7 @@ export const SharingApiFp = function(configuration?: Configuration) {
         },
         /**
          * Returns the group members with their file security information.
-         * @summary Get group members with security information
+         * @summary Get file group members with security information
          * @param {number} fileId The file ID.
          * @param {string} groupId The group ID.
          * @param {number} [count] The number of items to be retrieved in the current query.
@@ -992,7 +992,7 @@ export const SharingApiFp = function(configuration?: Configuration) {
         },
         /**
          * Returns the group members with their folder security information.
-         * @summary Get group members with security information
+         * @summary Get folder group members with security information
          * @param {number} folderId The folder ID.
          * @param {string} groupId The group ID.
          * @param {number} [count] The number of items to be retrieved in the current query.
@@ -1196,7 +1196,7 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * Returns the group members with their file security information.
-         * @summary Get group members with security information
+         * @summary Get file group members with security information
          * @param {number} fileId The file ID.
          * @param {string} groupId The group ID.
          * @param {number} [count] The number of items to be retrieved in the current query.
@@ -1212,7 +1212,7 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * Returns the group members with their folder security information.
-         * @summary Get group members with security information
+         * @summary Get folder group members with security information
          * @param {number} folderId The folder ID.
          * @param {string} groupId The group ID.
          * @param {number} [count] The number of items to be retrieved in the current query.
@@ -1392,7 +1392,7 @@ export class SharingApi extends BaseAPI {
 
     /**
      * Returns the group members with their file security information.
-     * @summary Get group members with security information
+     * @summary Get file group members with security information
      * @param {number} fileId The file ID.
      * @param {string} groupId The group ID.
      * @param {number} [count] The number of items to be retrieved in the current query.
@@ -1408,7 +1408,7 @@ export class SharingApi extends BaseAPI {
 
     /**
      * Returns the group members with their folder security information.
-     * @summary Get group members with security information
+     * @summary Get folder group members with security information
      * @param {number} folderId The folder ID.
      * @param {string} groupId The group ID.
      * @param {number} [count] The number of items to be retrieved in the current query.

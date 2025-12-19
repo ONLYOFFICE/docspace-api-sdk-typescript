@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **module** | **string** |  | [optional] [default to undefined]
 **props** | **{ [key: string]: string | null; }** |  | [optional] [default to undefined]
+**id** | **string** |  | [optional] [readonly] [default to undefined]
 **lastModified** | **string** |  | [optional] [default to undefined]
 
 ## Example
@@ -17,6 +18,7 @@ import { StorageSettings } from '@onlyoffice/docspace-api-sdk';
 const instance: StorageSettings = {
     module,
     props,
+    id,
     lastModified,
 };
 ```
