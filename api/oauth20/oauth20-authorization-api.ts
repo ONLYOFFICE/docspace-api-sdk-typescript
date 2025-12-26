@@ -32,6 +32,7 @@ import type { ExchangeToken200Response } from '../../models';
  */
 export const OAuth20AuthorizationApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Initiates the OAuth2 authorization flow.
@@ -54,6 +55,7 @@ export const OAuth20AuthorizationApiAxiosParamCreator = function (configuration?
             assertParamExists('authorizeOAuth', 'redirectUri', redirectUri)
             // verify required parameter 'scope' is not null or undefined
             assertParamExists('authorizeOAuth', 'scope', scope)
+
             const localVarPath = `/oauth2/authorize`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -109,6 +111,7 @@ export const OAuth20AuthorizationApiAxiosParamCreator = function (configuration?
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/exchange-token/
          */
         exchangeToken: async (grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/oauth2/token`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -168,6 +171,7 @@ export const OAuth20AuthorizationApiAxiosParamCreator = function (configuration?
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/submit-consent/
          */
         submitConsent: async (clientId?: string, state?: string, scope?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/oauth2/authorize`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

@@ -32,6 +32,7 @@ import type { StringWrapper } from '../../models';
  */
 export const OAuth2ApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Generates a JWT token for communication between login (client) and identity services.
@@ -42,6 +43,7 @@ export const OAuth2ApiAxiosParamCreator = function (configuration?: Configuratio
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/generate-jwt-token/
          */
         generateJwtToken: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/security/oauth2/token`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

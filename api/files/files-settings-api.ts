@@ -54,6 +54,7 @@ import type { SettingsRequestDto } from '../../models';
  */
 export const FilesSettingsApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Changes the access to the third-party settings.
@@ -65,6 +66,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-access-to-thirdparty/
          */
         changeAccessToThirdparty: async (settingsRequestDto?: SettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/thirdparty`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -120,6 +122,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-automatically-clean-up/
          */
         changeAutomaticallyCleanUp: async (autoCleanupRequestDto?: AutoCleanupRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/settings/autocleanup`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -175,6 +178,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-default-access-rights/
          */
         changeDefaultAccessRights: async (requestBody?: Array<number>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/settings/dafaultaccessrights`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -230,6 +234,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-delete-confirm/
          */
         changeDeleteConfirm: async (settingsRequestDto?: SettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/changedeleteconfrim`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -285,6 +290,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-download-zip-from-body/
          */
         changeDownloadZipFromBody: async (displayRequestDto?: DisplayRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/settings/downloadtargz`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -340,6 +346,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-doc-service-url/
          */
         checkDocServiceUrl: async (checkDocServiceUrlRequestDto?: CheckDocServiceUrlRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/docservice`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -395,6 +402,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/display-file-extension/
          */
         displayFileExtension: async (settingsRequestDto?: SettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/displayfileextension`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -450,6 +458,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/display-recent/
          */
         displayRecent: async (displayRequestDto?: DisplayRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/displayrecent`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -505,6 +514,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/external-share/
          */
         externalShare: async (displayRequestDto?: DisplayRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/settings/external`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -560,6 +570,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/external-share-social-media/
          */
         externalShareSocialMedia: async (displayRequestDto?: DisplayRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/settings/externalsocialmedia`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -614,6 +625,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/forcesave/
          */
         forcesave: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/forcesave`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -665,6 +677,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-automatically-clean-up/
          */
         getAutomaticallyCleanUp: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/settings/autocleanup`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -717,6 +730,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-doc-service-url/
          */
         getDocServiceUrl: async (version?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/docservice`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -753,6 +767,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-files-module/
          */
         getFilesModule: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/info`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -804,6 +819,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-files-settings/
          */
         getFilesSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/settings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -837,6 +853,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/hide-confirm-cancel-operation/
          */
         hideConfirmCancelOperation: async (settingsRequestDto?: SettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/hideconfirmcanceloperation`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -892,6 +909,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/hide-confirm-convert/
          */
         hideConfirmConvert: async (hideConfirmConvertRequestDto?: HideConfirmConvertRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/hideconfirmconvert`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -947,6 +965,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/hide-confirm-room-lifetime/
          */
         hideConfirmRoomLifetime: async (settingsRequestDto?: SettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/hideconfirmroomlifetime`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1001,6 +1020,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/is-available-privacy-room-settings/
          */
         isAvailablePrivacyRoomSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/@privacy/available`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1053,6 +1073,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/keep-new-file-name/
          */
         keepNewFileName: async (settingsRequestDto?: SettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/keepnewfilename`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1108,6 +1129,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-open-editor-in-same-tab/
          */
         setOpenEditorInSameTab: async (settingsRequestDto?: SettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/settings/openeditorinsametab`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1162,6 +1184,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/store-forcesave/
          */
         storeForcesave: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/storeforcesave`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1214,6 +1237,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/store-original/
          */
         storeOriginal: async (settingsRequestDto?: SettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/storeoriginal`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1269,6 +1293,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file-if-exist/
          */
         updateFileIfExist: async (settingsRequestDto?: SettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/updateifexist`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

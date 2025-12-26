@@ -82,9 +82,13 @@ import type { UploadRequestDto } from '../../models';
  */
 export const FoldersApiAxiosParamCreator = function (configuration?: Configuration) {
     let fields: string | undefined;
+    let useAtRecent = false;
     return {
         withFields: (f: string) => {
             fields = f;
+        },
+        withAtRecent: () => {
+            useAtRecent = true;
         },
         /**
          * Checks the file uploads to the folder with the ID specified in the request.
@@ -101,6 +105,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             assertParamExists('checkUpload', 'folderId', folderId)
             // verify required parameter 'checkUploadRequest' is not null or undefined
             assertParamExists('checkUpload', 'checkUploadRequest', checkUploadRequest)
+
             const localVarPath = `/api/2.0/files/{folderId}/upload/check`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -162,6 +167,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             assertParamExists('createFolder', 'folderId', folderId)
             // verify required parameter 'createFolder' is not null or undefined
             assertParamExists('createFolder', 'createFolder', createFolder)
+
             const localVarPath = `/api/2.0/files/folder/{folderId}`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -223,6 +229,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             assertParamExists('createFolderPrimaryExternalLink', 'id', id)
             // verify required parameter 'folderLinkRequest' is not null or undefined
             assertParamExists('createFolderPrimaryExternalLink', 'folderLinkRequest', folderLinkRequest)
+
             const localVarPath = `/api/2.0/files/folder/{id}/link`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -281,6 +288,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
         createReportFolderHistory: async (folderId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('createReportFolderHistory', 'folderId', folderId)
+
             const localVarPath = `/api/2.0/files/folder/{folderId}/log/report`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -339,6 +347,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             assertParamExists('deleteFolder', 'folderId', folderId)
             // verify required parameter 'deleteFolder' is not null or undefined
             assertParamExists('deleteFolder', 'deleteFolder', deleteFolder)
+
             const localVarPath = `/api/2.0/files/folder/{folderId}`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -401,6 +410,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-favorites-folder/
          */
         getFavoritesFolder: async (userIdOrGroupId?: string, filterType?: FilterType, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/@favorites`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -483,6 +493,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-files-used-space/
          */
         getFilesUsedSpace: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/filesusedspace`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -537,6 +548,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
         getFolder: async (folderId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('getFolder', 'folderId', folderId)
+
             const localVarPath = `/api/2.0/files/{folderId}/formfilter`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -589,6 +601,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
         getFolderByFolderId: async (folderId: number, userIdOrGroupId?: string, sharedBy?: string, filterType?: FilterType, roomId?: number, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, extension?: string, searchArea?: SearchArea, formsItemKey?: string, formsItemType?: string, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, location?: Location, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('getFolderByFolderId', 'folderId', folderId)
+
             const localVarPath = `/api/2.0/files/{folderId}`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -693,6 +706,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
         getFolderHistory: async (folderId: number, fromDate?: ApiDateTime, toDate?: ApiDateTime, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('getFolderHistory', 'folderId', folderId)
+
             const localVarPath = `/api/2.0/files/folder/{folderId}/log`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -768,6 +782,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
         getFolderInfo: async (folderId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('getFolderInfo', 'folderId', folderId)
+
             const localVarPath = `/api/2.0/files/folder/{folderId}`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -804,6 +819,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
         getFolderLinks: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getFolderLinks', 'id', id)
+
             const localVarPath = `/api/2.0/files/folder/{id}/links`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -859,6 +875,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
         getFolderPath: async (folderId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('getFolderPath', 'folderId', folderId)
+
             const localVarPath = `/api/2.0/files/folder/{folderId}/path`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -916,6 +933,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
         getFolderPrimaryExternalLink: async (id: number, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getFolderPrimaryExternalLink', 'id', id)
+
             const localVarPath = `/api/2.0/files/folder/{id}/link`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -960,6 +978,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
         getFolders: async (folderId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('getFolders', 'folderId', folderId)
+
             const localVarPath = `/api/2.0/files/{folderId}/subfolders`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1020,6 +1039,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-my-folder/
          */
         getMyFolder: async (userIdOrGroupId?: string, filterType?: FilterType, applyFilterOption?: ApplyFilterOption, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/@my`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1109,6 +1129,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
         getNewFolderItems: async (folderId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('getNewFolderItems', 'folderId', folderId)
+
             const localVarPath = `/api/2.0/files/{folderId}/news`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1168,6 +1189,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-privacy-folder/
          */
         getPrivacyFolder: async (userIdOrGroupId?: string, filterType?: FilterType, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/@privacy`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1261,7 +1283,9 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-recent-folder/
          */
         getRecentFolder: async (userIdOrGroupId?: string, filterType?: FilterType, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, searchArea?: SearchArea, extension?: Array<string>, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/2.0/files/recent`;
+            const localVarPath = (useAtRecent ? '/api/2.0/files/@recent' : '/api/2.0/files/recent');
+            useAtRecent = false;
+
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1367,6 +1391,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-root-folders/
          */
         getRootFolders: async (userIdOrGroupId?: string, filterType?: FilterType, withoutTrash?: boolean, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/@root`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1461,6 +1486,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-trash-folder/
          */
         getTrashFolder: async (userIdOrGroupId?: string, filterType?: FilterType, applyFilterOption?: ApplyFilterOption, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/@trash`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1562,6 +1588,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
         insertFile: async (folderId: number, insertFileFile?: File, insertFileTitle?: string, insertFileCreateNewIfExist?: boolean, insertFileKeepConvertStatus?: boolean, insertFileStreamCanRead?: boolean, insertFileStreamCanWrite?: boolean, insertFileStreamCanSeek?: boolean, insertFileStreamCanTimeout?: boolean, insertFileStreamLength?: number, insertFileStreamPosition?: number, insertFileStreamReadTimeout?: number, insertFileStreamWriteTimeout?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('insertFile', 'folderId', folderId)
+
             const localVarPath = `/api/2.0/files/{folderId}/insert`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1678,6 +1705,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/insert-file-to-my-from-body/
          */
         insertFileToMyFromBody: async (file?: File, title?: string, createNewIfExist?: boolean, keepConvertStatus?: boolean, streamCanRead?: boolean, streamCanWrite?: boolean, streamCanSeek?: boolean, streamCanTimeout?: boolean, streamLength?: number, streamPosition?: number, streamReadTimeout?: number, streamWriteTimeout?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/@my/insert`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1787,6 +1815,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             assertParamExists('renameFolder', 'folderId', folderId)
             // verify required parameter 'createFolder' is not null or undefined
             assertParamExists('renameFolder', 'createFolder', createFolder)
+
             const localVarPath = `/api/2.0/files/folder/{folderId}`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1846,6 +1875,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
         setFolderOrder: async (folderId: number, orderRequestDto?: OrderRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('setFolderOrder', 'folderId', folderId)
+
             const localVarPath = `/api/2.0/files/folder/{folderId}/order`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1907,6 +1937,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             assertParamExists('setFolderPrimaryExternalLink', 'id', id)
             // verify required parameter 'folderLinkRequest' is not null or undefined
             assertParamExists('setFolderPrimaryExternalLink', 'folderLinkRequest', folderLinkRequest)
+
             const localVarPath = `/api/2.0/files/folder/{id}/links`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1966,6 +1997,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
         uploadFile: async (folderId: number, uploadRequestDto?: UploadRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('uploadFile', 'folderId', folderId)
+
             const localVarPath = `/api/2.0/files/{folderId}/upload`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2022,6 +2054,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file-to-my/
          */
         uploadFileToMy: async (inDto?: UploadRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/@my/upload`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

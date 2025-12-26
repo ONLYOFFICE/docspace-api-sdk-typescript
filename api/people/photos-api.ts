@@ -40,6 +40,7 @@ import type { UpdatePhotoMemberRequest } from '../../models';
  */
 export const PhotosApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Creates the user photo thumbnails by coordinates of the original image specified in the request.
@@ -56,6 +57,7 @@ export const PhotosApiAxiosParamCreator = function (configuration?: Configuratio
             assertParamExists('createMemberPhotoThumbnails', 'userid', userid)
             // verify required parameter 'thumbnailsRequest' is not null or undefined
             assertParamExists('createMemberPhotoThumbnails', 'thumbnailsRequest', thumbnailsRequest)
+
             const localVarPath = `/api/2.0/people/{userid}/photo/thumbnails`
                 .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -114,6 +116,7 @@ export const PhotosApiAxiosParamCreator = function (configuration?: Configuratio
         deleteMemberPhoto: async (userid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userid' is not null or undefined
             assertParamExists('deleteMemberPhoto', 'userid', userid)
+
             const localVarPath = `/api/2.0/people/{userid}/photo`
                 .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -169,6 +172,7 @@ export const PhotosApiAxiosParamCreator = function (configuration?: Configuratio
         getMemberPhoto: async (userid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userid' is not null or undefined
             assertParamExists('getMemberPhoto', 'userid', userid)
+
             const localVarPath = `/api/2.0/people/{userid}/photo`
                 .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -227,6 +231,7 @@ export const PhotosApiAxiosParamCreator = function (configuration?: Configuratio
             assertParamExists('updateMemberPhoto', 'userid', userid)
             // verify required parameter 'updatePhotoMemberRequest' is not null or undefined
             assertParamExists('updateMemberPhoto', 'updatePhotoMemberRequest', updatePhotoMemberRequest)
+
             const localVarPath = `/api/2.0/people/{userid}/photo`
                 .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -288,6 +293,7 @@ export const PhotosApiAxiosParamCreator = function (configuration?: Configuratio
             assertParamExists('uploadMemberPhoto', 'userid', userid)
             // verify required parameter 'formCollection' is not null or undefined
             assertParamExists('uploadMemberPhoto', 'formCollection', formCollection)
+
             const localVarPath = `/api/2.0/people/{userid}/photo`
                 .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.

@@ -42,6 +42,7 @@ import type { TenantUserQuotaSettingsWrapper } from '../../models';
  */
 export const SettingsQuotaApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Returns the user quota settings.
@@ -52,6 +53,7 @@ export const SettingsQuotaApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-quota-settings/
          */
         getUserQuotaSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/userquotasettings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -104,6 +106,7 @@ export const SettingsQuotaApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-ai-agent-quota-settings/
          */
         saveAiAgentQuotaSettings: async (quotaSettingsRequestsDto?: QuotaSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/aiagentquotasettings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -159,6 +162,7 @@ export const SettingsQuotaApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-room-quota-settings/
          */
         saveRoomQuotaSettings: async (quotaSettingsRequestsDto?: QuotaSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/roomquotasettings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -214,6 +218,7 @@ export const SettingsQuotaApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-quota-settings/
          */
         setTenantQuotaSettings: async (tenantQuotaSettingsRequestsDto?: TenantQuotaSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/tenantquotasettings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

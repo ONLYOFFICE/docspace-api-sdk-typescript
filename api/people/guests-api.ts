@@ -36,6 +36,7 @@ import type { UpdateMembersRequestDto } from '../../models';
  */
 export const GuestsApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Approves a guest sharing link and returns the detailed information about a guest.
@@ -47,6 +48,7 @@ export const GuestsApiAxiosParamCreator = function (configuration?: Configuratio
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/approve-guest-share-link/
          */
         approveGuestShareLink: async (emailMemberRequestDto?: EmailMemberRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/guests/share/approve`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -102,6 +104,7 @@ export const GuestsApiAxiosParamCreator = function (configuration?: Configuratio
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-guests/
          */
         deleteGuests: async (updateMembersRequestDto?: UpdateMembersRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/guests`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

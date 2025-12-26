@@ -34,6 +34,7 @@ import type { ObjectWrapper } from '../../models';
  */
 export const ThirdPartyApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Returns a request to get the confirmation code from URL.   **Note**: List of providers: Google, Dropbox, Docusign, Box, OneDrive, Wordpress.
@@ -47,6 +48,7 @@ export const ThirdPartyApiAxiosParamCreator = function (configuration?: Configur
         getThirdPartyCode: async (provider: LoginProvider, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'provider' is not null or undefined
             assertParamExists('getThirdPartyCode', 'provider', provider)
+
             const localVarPath = `/api/2.0/thirdparty/{provider}`
                 .replace(`{${"provider"}}`, encodeURIComponent(String(provider)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.

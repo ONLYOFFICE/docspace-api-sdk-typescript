@@ -38,6 +38,7 @@ import type { STRINGArrayWrapper } from '../../models';
  */
 export const MigrationApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Cancels the migration.
@@ -48,6 +49,7 @@ export const MigrationApiAxiosParamCreator = function (configuration?: Configura
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/cancel-migration/
          */
         cancelMigration: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/migration/cancel`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -99,6 +101,7 @@ export const MigrationApiAxiosParamCreator = function (configuration?: Configura
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/clear-migration/
          */
         clearMigration: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/migration/clear`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -151,6 +154,7 @@ export const MigrationApiAxiosParamCreator = function (configuration?: Configura
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/finish-migration/
          */
         finishMigration: async (finishDto?: FinishDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/migration/finish`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -205,6 +209,7 @@ export const MigrationApiAxiosParamCreator = function (configuration?: Configura
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-migration-logs/
          */
         getMigrationLogs: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/migration/logs`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -256,6 +261,7 @@ export const MigrationApiAxiosParamCreator = function (configuration?: Configura
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-migration-status/
          */
         getMigrationStatus: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/migration/status`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -307,6 +313,7 @@ export const MigrationApiAxiosParamCreator = function (configuration?: Configura
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/list-migrations/
          */
         listMigrations: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/migration/list`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -359,6 +366,7 @@ export const MigrationApiAxiosParamCreator = function (configuration?: Configura
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-migration/
          */
         startMigration: async (migrationApiInfo?: MigrationApiInfo, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/migration/migrate`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -416,6 +424,7 @@ export const MigrationApiAxiosParamCreator = function (configuration?: Configura
         uploadAndInitializeMigration: async (migratorName: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'migratorName' is not null or undefined
             assertParamExists('uploadAndInitializeMigration', 'migratorName', migratorName)
+
             const localVarPath = `/api/2.0/migration/init/{migratorName}`
                 .replace(`{${"migratorName"}}`, encodeURIComponent(String(migratorName)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.

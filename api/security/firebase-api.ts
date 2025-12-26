@@ -34,6 +34,7 @@ import type { FirebaseRequestsDto } from '../../models';
  */
 export const FirebaseApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Saves the Firebase device token specified in the request for the Documents application.
@@ -45,6 +46,7 @@ export const FirebaseApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/doc-register-pusn-notification-device/
          */
         docRegisterPusnNotificationDevice: async (firebaseRequestsDto?: FirebaseRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/push/docregisterdevice`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -100,6 +102,7 @@ export const FirebaseApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/subscribe-documents-push-notification/
          */
         subscribeDocumentsPushNotification: async (firebaseRequestsDto?: FirebaseRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/push/docsubscribe`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

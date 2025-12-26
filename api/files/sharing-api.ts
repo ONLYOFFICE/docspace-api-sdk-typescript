@@ -56,6 +56,7 @@ import type { SecurityInfoSimpleRequestDto } from '../../models';
  */
 export const SharingApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Applies a password specified in the request to get the external data.
@@ -72,6 +73,7 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             assertParamExists('applyExternalSharePassword', 'key', key)
             // verify required parameter 'externalShareRequestParam' is not null or undefined
             assertParamExists('applyExternalSharePassword', 'externalShareRequestParam', externalShareRequestParam)
+
             const localVarPath = `/api/2.0/files/share/{key}/password`
                 .replace(`{${"key"}}`, encodeURIComponent(String(key)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -109,6 +111,7 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-file-owner/
          */
         changeFileOwner: async (changeOwnerRequestDto?: ChangeOwnerRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/owner`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -168,6 +171,7 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
         getExternalShareData: async (key: string, fileId?: string, folderId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'key' is not null or undefined
             assertParamExists('getExternalShareData', 'key', key)
+
             const localVarPath = `/api/2.0/files/share/{key}`
                 .replace(`{${"key"}}`, encodeURIComponent(String(key)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -214,6 +218,7 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
         getFileSecurityInfo: async (id: number, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getFileSecurityInfo', 'id', id)
+
             const localVarPath = `/api/2.0/files/file/{id}/share`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -279,6 +284,7 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
         getFolderSecurityInfo: async (id: number, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getFolderSecurityInfo', 'id', id)
+
             const localVarPath = `/api/2.0/files/folder/{id}/share`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -348,6 +354,7 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             assertParamExists('getGroupsMembersWithFileSecurity', 'fileId', fileId)
             // verify required parameter 'groupId' is not null or undefined
             assertParamExists('getGroupsMembersWithFileSecurity', 'groupId', groupId)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/group/{groupId}/share`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)))
                 .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
@@ -422,6 +429,7 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             assertParamExists('getGroupsMembersWithFolderSecurity', 'folderId', folderId)
             // verify required parameter 'groupId' is not null or undefined
             assertParamExists('getGroupsMembersWithFolderSecurity', 'groupId', groupId)
+
             const localVarPath = `/api/2.0/files/folder/{folderId}/group/{groupId}/share`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)))
                 .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
@@ -488,6 +496,7 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-security-info/
          */
         getSecurityInfo: async (baseBatchRequestDto?: BaseBatchRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/share`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -545,6 +554,7 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
         getSharedUsers: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('getSharedUsers', 'fileId', fileId)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/sharedusers`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -598,6 +608,7 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/remove-security-info/
          */
         removeSecurityInfo: async (baseBatchRequestDto?: BaseBatchRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/share`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -656,6 +667,7 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
         sendEditorNotify: async (fileId: number, mentionMessageWrapper?: MentionMessageWrapper, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('sendEditorNotify', 'fileId', fileId)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/sendeditornotify`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -717,6 +729,7 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             assertParamExists('setFileSecurityInfo', 'fileId', fileId)
             // verify required parameter 'securityInfoSimpleRequestDto' is not null or undefined
             assertParamExists('setFileSecurityInfo', 'securityInfoSimpleRequestDto', securityInfoSimpleRequestDto)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/share`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -778,6 +791,7 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             assertParamExists('setFolderSecurityInfo', 'folderId', folderId)
             // verify required parameter 'securityInfoSimpleRequestDto' is not null or undefined
             assertParamExists('setFolderSecurityInfo', 'securityInfoSimpleRequestDto', securityInfoSimpleRequestDto)
+
             const localVarPath = `/api/2.0/files/folder/{folderId}/share`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -834,6 +848,7 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-security-info/
          */
         setSecurityInfo: async (securityInfoRequestDto?: SecurityInfoRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/share`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

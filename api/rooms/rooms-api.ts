@@ -114,6 +114,7 @@ import type { UserInvitation } from '../../models';
  */
 export const RoomsApiAxiosParamCreator = function (configuration?: Configuration) {
     let fields: string | undefined;
+    
     return {
         withFields: (f: string) => {
             fields = f;
@@ -131,6 +132,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         addRoomTags: async (id: number, batchTagsRequestDto?: BatchTagsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('addRoomTags', 'id', id)
+
             const localVarPath = `/api/2.0/files/rooms/{id}/tags`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -190,6 +192,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         archiveRoom: async (id: number, archiveRoomRequest?: ArchiveRoomRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('archiveRoom', 'id', id)
+
             const localVarPath = `/api/2.0/files/rooms/{id}/archive`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -251,6 +254,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('changeRoomCover', 'id', id)
             // verify required parameter 'coverRequestDto' is not null or undefined
             assertParamExists('changeRoomCover', 'coverRequestDto', coverRequestDto)
+
             const localVarPath = `/api/2.0/files/rooms/{id}/cover`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -307,6 +311,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room/
          */
         createRoom: async (createRoomRequestDto?: CreateRoomRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/rooms`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -362,6 +367,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room-from-template/
          */
         createRoomFromTemplate: async (createRoomFromTemplateDto?: CreateRoomFromTemplateDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/rooms/fromtemplate`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -422,6 +428,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('createRoomLogo', 'id', id)
             // verify required parameter 'logoRequest' is not null or undefined
             assertParamExists('createRoomLogo', 'logoRequest', logoRequest)
+
             const localVarPath = `/api/2.0/files/rooms/{id}/logo`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -478,6 +485,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room-tag/
          */
         createRoomTag: async (createTagRequestDto?: CreateTagRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/tags`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -533,6 +541,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room-template/
          */
         createRoomTemplate: async (roomTemplateDto?: RoomTemplateDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/roomtemplate`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -593,6 +602,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('createRoomThirdParty', 'id', id)
             // verify required parameter 'createThirdPartyRoom' is not null or undefined
             assertParamExists('createRoomThirdParty', 'createThirdPartyRoom', createThirdPartyRoom)
+
             const localVarPath = `/api/2.0/files/rooms/thirdparty/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -649,6 +659,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-custom-tags/
          */
         deleteCustomTags: async (batchTagsRequestDto?: BatchTagsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/tags`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -709,6 +720,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('deleteRoom', 'id', id)
             // verify required parameter 'deleteRoomRequest' is not null or undefined
             assertParamExists('deleteRoom', 'deleteRoomRequest', deleteRoomRequest)
+
             const localVarPath = `/api/2.0/files/rooms/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -767,6 +779,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         deleteRoomLogo: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('deleteRoomLogo', 'id', id)
+
             const localVarPath = `/api/2.0/files/rooms/{id}/logo`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -823,6 +836,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         deleteRoomTags: async (id: number, batchTagsRequestDto?: BatchTagsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('deleteRoomTags', 'id', id)
+
             const localVarPath = `/api/2.0/files/rooms/{id}/tags`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -881,6 +895,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         getNewRoomItems: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getNewRoomItems', 'id', id)
+
             const localVarPath = `/api/2.0/files/rooms/{id}/news`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -936,6 +951,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         getPublicSettings: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getPublicSettings', 'id', id)
+
             const localVarPath = `/api/2.0/files/roomtemplate/{id}/public`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -988,6 +1004,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-covers/
          */
         getRoomCovers: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/rooms/covers`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1039,6 +1056,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-creating-status/
          */
         getRoomCreatingStatus: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/rooms/fromtemplate/status`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1090,6 +1108,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-index-export/
          */
         getRoomIndexExport: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/rooms/indexexport`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1144,6 +1163,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         getRoomInfo: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getRoomInfo', 'id', id)
+
             const localVarPath = `/api/2.0/files/rooms/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1181,6 +1201,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         getRoomLinks: async (id: number, type?: LinkType, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getRoomLinks', 'id', id)
+
             const localVarPath = `/api/2.0/files/rooms/{id}/links`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1244,6 +1265,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         getRoomSecurityInfo: async (id: number, filterType?: ShareFilterType, count?: number, startIndex?: number, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getRoomSecurityInfo', 'id', id)
+
             const localVarPath = `/api/2.0/files/rooms/{id}/share`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1315,6 +1337,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-tags-info/
          */
         getRoomTagsInfo: async (count?: number, startIndex?: number, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/tags`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1381,6 +1404,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-template-creating-status/
          */
         getRoomTemplateCreatingStatus: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/roomtemplate/status`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1447,6 +1471,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-folder/
          */
         getRoomsFolder: async (type?: Array<RoomType>, subjectId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/rooms`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1561,6 +1586,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-new-items/
          */
         getRoomsNewItems: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/rooms/news`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1615,6 +1641,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         getRoomsPrimaryExternalLink: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getRoomsPrimaryExternalLink', 'id', id)
+
             const localVarPath = `/api/2.0/files/rooms/{id}/link`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1670,6 +1697,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         pinRoom: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('pinRoom', 'id', id)
+
             const localVarPath = `/api/2.0/files/rooms/{id}/pin`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1725,6 +1753,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         reorderRoom: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('reorderRoom', 'id', id)
+
             const localVarPath = `/api/2.0/files/rooms/{id}/reorder`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1783,6 +1812,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('resendEmailInvitations', 'id', id)
             // verify required parameter 'userInvitation' is not null or undefined
             assertParamExists('resendEmailInvitations', 'userInvitation', userInvitation)
+
             const localVarPath = `/api/2.0/files/rooms/{id}/resend`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1839,6 +1869,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-public-settings/
          */
         setPublicSettings: async (setPublicDto?: SetPublicDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/roomtemplate/public`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1899,6 +1930,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('setRoomLink', 'id', id)
             // verify required parameter 'roomLinkRequest' is not null or undefined
             assertParamExists('setRoomLink', 'roomLinkRequest', roomLinkRequest)
+
             const localVarPath = `/api/2.0/files/rooms/{id}/links`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1960,6 +1992,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('setRoomSecurity', 'id', id)
             // verify required parameter 'roomInvitationRequest' is not null or undefined
             assertParamExists('setRoomSecurity', 'roomInvitationRequest', roomInvitationRequest)
+
             const localVarPath = `/api/2.0/files/rooms/{id}/share`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2018,6 +2051,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         startRoomIndexExport: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('startRoomIndexExport', 'id', id)
+
             const localVarPath = `/api/2.0/files/rooms/{id}/indexexport`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2070,6 +2104,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-room-index-export/
          */
         terminateRoomIndexExport: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/rooms/indexexport`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -2125,6 +2160,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         unarchiveRoom: async (id: number, archiveRoomRequest?: ArchiveRoomRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('unarchiveRoom', 'id', id)
+
             const localVarPath = `/api/2.0/files/rooms/{id}/unarchive`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2183,6 +2219,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         unpinRoom: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('unpinRoom', 'id', id)
+
             const localVarPath = `/api/2.0/files/rooms/{id}/unpin`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2241,6 +2278,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('updateRoom', 'id', id)
             // verify required parameter 'updateRoomRequest' is not null or undefined
             assertParamExists('updateRoom', 'updateRoomRequest', updateRoomRequest)
+
             const localVarPath = `/api/2.0/files/rooms/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2297,6 +2335,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-room-logo/
          */
         uploadRoomLogo: async (formCollection?: Array<KeyValuePairStringStringValues>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/logos`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

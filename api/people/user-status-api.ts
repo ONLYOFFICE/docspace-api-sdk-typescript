@@ -40,6 +40,7 @@ import type { UpdateMembersRequestDto } from '../../models';
  */
 export const UserStatusApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Returns a list of profiles filtered by the user status.
@@ -60,6 +61,7 @@ export const UserStatusApiAxiosParamCreator = function (configuration?: Configur
         getByStatus: async (status: EmployeeStatus, filterBy?: string, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'status' is not null or undefined
             assertParamExists('getByStatus', 'status', status)
+
             const localVarPath = `/api/2.0/people/status/{status}`
                 .replace(`{${"status"}}`, encodeURIComponent(String(status)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -146,6 +148,7 @@ export const UserStatusApiAxiosParamCreator = function (configuration?: Configur
             assertParamExists('updateUserActivationStatus', 'activationstatus', activationstatus)
             // verify required parameter 'updateMembersRequestDto' is not null or undefined
             assertParamExists('updateUserActivationStatus', 'updateMembersRequestDto', updateMembersRequestDto)
+
             const localVarPath = `/api/2.0/people/activationstatus/{activationstatus}`
                 .replace(`{${"activationstatus"}}`, encodeURIComponent(String(activationstatus)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -207,6 +210,7 @@ export const UserStatusApiAxiosParamCreator = function (configuration?: Configur
             assertParamExists('updateUserStatus', 'status', status)
             // verify required parameter 'updateMembersRequestDto' is not null or undefined
             assertParamExists('updateUserStatus', 'updateMembersRequestDto', updateMembersRequestDto)
+
             const localVarPath = `/api/2.0/people/status/{status}`
                 .replace(`{${"status"}}`, encodeURIComponent(String(status)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.

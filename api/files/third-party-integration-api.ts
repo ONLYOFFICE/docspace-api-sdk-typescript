@@ -46,6 +46,7 @@ import type { ThirdPartyRequestDto } from '../../models';
  */
 export const ThirdPartyIntegrationApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Removes the third-party storage service account with the ID specified in the request.
@@ -59,6 +60,7 @@ export const ThirdPartyIntegrationApiAxiosParamCreator = function (configuration
         deleteThirdParty: async (providerId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'providerId' is not null or undefined
             assertParamExists('deleteThirdParty', 'providerId', providerId)
+
             const localVarPath = `/api/2.0/files/thirdparty/{providerId}`
                 .replace(`{${"providerId"}}`, encodeURIComponent(String(providerId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -112,6 +114,7 @@ export const ThirdPartyIntegrationApiAxiosParamCreator = function (configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-providers/
          */
         getAllProviders: async (excludewebdav?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/thirdparty/providers`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -167,6 +170,7 @@ export const ThirdPartyIntegrationApiAxiosParamCreator = function (configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backup-third-party-account/
          */
         getBackupThirdPartyAccount: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/thirdparty/backup`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -218,6 +222,7 @@ export const ThirdPartyIntegrationApiAxiosParamCreator = function (configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-capabilities/
          */
         getCapabilities: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/thirdparty/capabilities`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -269,6 +274,7 @@ export const ThirdPartyIntegrationApiAxiosParamCreator = function (configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-common-third-party-folders/
          */
         getCommonThirdPartyFolders: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/thirdparty/common`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -320,6 +326,7 @@ export const ThirdPartyIntegrationApiAxiosParamCreator = function (configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-third-party-accounts/
          */
         getThirdPartyAccounts: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/thirdparty`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -372,6 +379,7 @@ export const ThirdPartyIntegrationApiAxiosParamCreator = function (configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-third-party/
          */
         saveThirdParty: async (thirdPartyRequestDto?: ThirdPartyRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/thirdparty`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -427,6 +435,7 @@ export const ThirdPartyIntegrationApiAxiosParamCreator = function (configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-third-party-backup/
          */
         saveThirdPartyBackup: async (thirdPartyBackupRequestDto?: ThirdPartyBackupRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/thirdparty/backup`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

@@ -44,6 +44,7 @@ import type { TfaValidateRequestsDto } from '../../models';
  */
 export const TFASettingsApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Returns the two-factor authentication application codes.
@@ -54,6 +55,7 @@ export const TFASettingsApiAxiosParamCreator = function (configuration?: Configu
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tfa-app-codes/
          */
         getTfaAppCodes: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/tfaappcodes`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -105,6 +107,7 @@ export const TFASettingsApiAxiosParamCreator = function (configuration?: Configu
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tfa-confirm-url/
          */
         getTfaConfirmUrl: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/tfaapp/confirm`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -156,6 +159,7 @@ export const TFASettingsApiAxiosParamCreator = function (configuration?: Configu
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tfa-settings/
          */
         getTfaSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/tfaapp`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -207,6 +211,7 @@ export const TFASettingsApiAxiosParamCreator = function (configuration?: Configu
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/tfa-app-generate-setup-code/
          */
         tfaAppGenerateSetupCode: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/tfaapp/setup`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -259,6 +264,7 @@ export const TFASettingsApiAxiosParamCreator = function (configuration?: Configu
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/tfa-validate-auth-code/
          */
         tfaValidateAuthCode: async (tfaValidateRequestsDto?: TfaValidateRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/tfaapp/validate`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -314,6 +320,7 @@ export const TFASettingsApiAxiosParamCreator = function (configuration?: Configu
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/unlink-tfa-app/
          */
         unlinkTfaApp: async (tfaRequestsDto?: TfaRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/tfaappnewapp`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -368,6 +375,7 @@ export const TFASettingsApiAxiosParamCreator = function (configuration?: Configu
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-tfa-app-codes/
          */
         updateTfaAppCodes: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/tfaappnewcodes`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -420,6 +428,7 @@ export const TFASettingsApiAxiosParamCreator = function (configuration?: Configu
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-tfa-settings/
          */
         updateTfaSettings: async (tfaRequestsDto?: TfaRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/tfaapp`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -475,6 +484,7 @@ export const TFASettingsApiAxiosParamCreator = function (configuration?: Configu
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-tfa-settings-link/
          */
         updateTfaSettingsLink: async (tfaRequestsDto?: TfaRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/tfaappwithlink`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

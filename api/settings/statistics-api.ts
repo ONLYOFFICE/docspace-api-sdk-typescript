@@ -32,6 +32,7 @@ import type { UsageSpaceStatItemArrayWrapper } from '../../models';
  */
 export const StatisticsApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Returns the space usage statistics for the module with the ID specified in the request.
@@ -45,6 +46,7 @@ export const StatisticsApiAxiosParamCreator = function (configuration?: Configur
         getSpaceUsageStatistics: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getSpaceUsageStatistics', 'id', id)
+
             const localVarPath = `/api/2.0/settings/statistics/spaceusage/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.

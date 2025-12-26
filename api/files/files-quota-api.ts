@@ -36,6 +36,7 @@ import type { UpdateRoomsRoomIdsRequestDtoInteger } from '../../models';
  */
 export const FilesQuotaApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Resets the quota limit for the rooms with the IDs specified in the request.
@@ -47,6 +48,7 @@ export const FilesQuotaApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-room-quota/
          */
         resetRoomQuota: async (updateRoomsRoomIdsRequestDtoInteger?: UpdateRoomsRoomIdsRequestDtoInteger, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/rooms/resetquota`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -102,6 +104,7 @@ export const FilesQuotaApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-rooms-quota/
          */
         updateRoomsQuota: async (updateRoomsQuotaRequestDtoInteger?: UpdateRoomsQuotaRequestDtoInteger, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/rooms/roomquota`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

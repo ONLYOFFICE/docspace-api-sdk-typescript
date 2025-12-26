@@ -50,6 +50,7 @@ import type { WebItemsSecurityRequestsDto } from '../../models';
  */
 export const SecurityApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Returns a list of all the enabled modules.
@@ -60,6 +61,7 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-enabled-modules/
          */
         getEnabledModules: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/security/modules`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -117,6 +119,7 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
             assertParamExists('getIsProductAdministrator', 'productid', productid)
             // verify required parameter 'userid' is not null or undefined
             assertParamExists('getIsProductAdministrator', 'userid', userid)
+
             const localVarPath = `/api/2.0/settings/security/administrator`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -176,6 +179,7 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-password-settings/
          */
         getPasswordSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/security/password`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -230,6 +234,7 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
         getProductAdministrators: async (productid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'productid' is not null or undefined
             assertParamExists('getProductAdministrators', 'productid', productid)
+
             const localVarPath = `/api/2.0/settings/security/administrator/{productid}`
                 .replace(`{${"productid"}}`, encodeURIComponent(String(productid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -285,6 +290,7 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
         getWebItemSecurityInfo: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getWebItemSecurityInfo', 'id', id)
+
             const localVarPath = `/api/2.0/settings/security/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -338,6 +344,7 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-web-item-settings-security-info/
          */
         getWebItemSettingsSecurityInfo: async (ids?: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/security`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -394,6 +401,7 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-access-to-web-items/
          */
         setAccessToWebItems: async (webItemsSecurityRequestsDto?: WebItemsSecurityRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/security/access`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -449,6 +457,7 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-product-administrator/
          */
         setProductAdministrator: async (securityRequestsDto?: SecurityRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/security/administrator`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -504,6 +513,7 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-web-item-security/
          */
         setWebItemSecurity: async (webItemSecurityRequestsDto?: WebItemSecurityRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/security`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -559,6 +569,7 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-password-settings/
          */
         updatePasswordSettings: async (passwordSettingsRequestsDto?: PasswordSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/security/password`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

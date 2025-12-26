@@ -38,6 +38,7 @@ import type { IpRestrictionsWrapper } from '../../models';
  */
 export const IPRestrictionsApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Returns the IP portal restrictions.
@@ -48,6 +49,7 @@ export const IPRestrictionsApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-ip-restrictions/
          */
         getIpRestrictions: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/iprestrictions`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -99,6 +101,7 @@ export const IPRestrictionsApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/read-ip-restrictions-settings/
          */
         readIpRestrictionsSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/iprestrictions/settings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -151,6 +154,7 @@ export const IPRestrictionsApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-ip-restrictions/
          */
         saveIpRestrictions: async (ipRestrictionsDto?: IpRestrictionsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/iprestrictions`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -206,6 +210,7 @@ export const IPRestrictionsApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-ip-restrictions-settings/
          */
         updateIpRestrictionsSettings: async (ipRestrictionsDto?: IpRestrictionsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/iprestrictions/settings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

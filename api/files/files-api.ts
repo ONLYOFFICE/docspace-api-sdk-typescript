@@ -116,6 +116,7 @@ import type { UpdateFile } from '../../models';
  */
 export const FilesApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Adds a file with the ID specified in the request to the Recent section.
@@ -129,6 +130,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         addFileToRecent: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('addFileToRecent', 'fileId', fileId)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/recent`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -182,6 +184,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-templates/
          */
         addTemplates: async (templatesRequestDto?: TemplatesRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/templates`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -242,6 +245,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('changeVersionHistory', 'fileId', fileId)
             // verify required parameter 'changeHistory' is not null or undefined
             assertParamExists('changeVersionHistory', 'changeHistory', changeHistory)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/history`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -303,6 +307,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('checkFillFormDraft', 'fileId', fileId)
             // verify required parameter 'checkFillFormDraft' is not null or undefined
             assertParamExists('checkFillFormDraft', 'checkFillFormDraft', checkFillFormDraft)
+
             const localVarPath = `/api/2.0/files/masterform/{fileId}/checkfillformdraft`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -345,6 +350,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('copyFileAs', 'fileId', fileId)
             // verify required parameter 'copyAsJsonElement' is not null or undefined
             assertParamExists('copyFileAs', 'copyAsJsonElement', copyAsJsonElement)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/copyas`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -404,6 +410,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         createEditSession: async (fileId: number, fileSize?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('createEditSession', 'fileId', fileId)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/edit_session`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -466,6 +473,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('createFile', 'folderId', folderId)
             // verify required parameter 'createFileJsonElement' is not null or undefined
             assertParamExists('createFile', 'createFileJsonElement', createFileJsonElement)
+
             const localVarPath = `/api/2.0/files/{folderId}/file`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -522,6 +530,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file-in-my-documents/
          */
         createFileInMyDocuments: async (createFileJsonElement?: CreateFileJsonElement, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/@my/file`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -582,6 +591,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('createFilePrimaryExternalLink', 'id', id)
             // verify required parameter 'fileLinkRequest' is not null or undefined
             assertParamExists('createFilePrimaryExternalLink', 'fileLinkRequest', fileLinkRequest)
+
             const localVarPath = `/api/2.0/files/file/{id}/link`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -643,6 +653,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('createHtmlFile', 'folderId', folderId)
             // verify required parameter 'createTextOrHtmlFile' is not null or undefined
             assertParamExists('createHtmlFile', 'createTextOrHtmlFile', createTextOrHtmlFile)
+
             const localVarPath = `/api/2.0/files/{folderId}/html`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -699,6 +710,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-html-file-in-my-documents/
          */
         createHtmlFileInMyDocuments: async (createTextOrHtmlFile?: CreateTextOrHtmlFile, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/@my/html`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -759,6 +771,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('createTextFile', 'folderId', folderId)
             // verify required parameter 'createTextOrHtmlFile' is not null or undefined
             assertParamExists('createTextFile', 'createTextOrHtmlFile', createTextOrHtmlFile)
+
             const localVarPath = `/api/2.0/files/{folderId}/text`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -815,6 +828,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-text-file-in-my-documents/
          */
         createTextFileInMyDocuments: async (createTextOrHtmlFile?: CreateTextOrHtmlFile, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/@my/text`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -870,6 +884,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-thumbnails/
          */
         createThumbnails: async (baseBatchRequestDto?: BaseBatchRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/thumbnails`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -911,6 +926,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('deleteFile', 'fileId', fileId)
             // verify required parameter '_delete' is not null or undefined
             assertParamExists('deleteFile', '_delete', _delete)
+
             const localVarPath = `/api/2.0/files/file/{fileId}`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -967,6 +983,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-recent/
          */
         deleteRecent: async (baseBatchRequestDto?: BaseBatchRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/recent`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1022,6 +1039,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-templates/
          */
         deleteTemplates: async (requestBody?: Array<number>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/templates`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1079,6 +1097,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         getAllFormRoles: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('getAllFormRoles', 'fileId', fileId)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/formroles`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1135,6 +1154,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         getEditDiffUrl: async (fileId: number, version?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('getEditDiffUrl', 'fileId', fileId)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/edit/diff`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1175,6 +1195,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         getEditHistory: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('getEditHistory', 'fileId', fileId)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/edit/history`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1215,6 +1236,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         getFileHistory: async (fileId: number, fromDate?: ApiDateTime, toDate?: ApiDateTime, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('getFileHistory', 'fileId', fileId)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/log`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1291,6 +1313,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         getFileInfo: async (fileId: number, version?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('getFileInfo', 'fileId', fileId)
+
             const localVarPath = `/api/2.0/files/file/{fileId}`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1333,6 +1356,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         getFileLinks: async (id: number, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getFileLinks', 'id', id)
+
             const localVarPath = `/api/2.0/files/file/{id}/links`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1398,6 +1422,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         getFilePrimaryExternalLink: async (id: number, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getFilePrimaryExternalLink', 'id', id)
+
             const localVarPath = `/api/2.0/files/file/{id}/link`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1442,6 +1467,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         getFileVersionInfo: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('getFileVersionInfo', 'fileId', fileId)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/history`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1476,6 +1502,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-fill-result/
          */
         getFillResult: async (fillingSessionId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/file/fillresult`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1515,6 +1542,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         getPresignedFileUri: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('getPresignedFileUri', 'fileId', fileId)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/presigned`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1570,6 +1598,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         getPresignedUri: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('getPresignedUri', 'fileId', fileId)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/presigneduri`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1625,6 +1654,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         getProtectedFileUsers: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('getProtectedFileUsers', 'fileId', fileId)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/protectusers`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1678,6 +1708,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-reference-data/
          */
         getReferenceData: async (getReferenceDataDtoInteger?: GetReferenceDataDtoInteger, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/file/referencedata`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1735,6 +1766,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         isFormPDF: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('isFormPDF', 'fileId', fileId)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/isformpdf`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1793,6 +1825,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('lockFile', 'fileId', fileId)
             // verify required parameter 'lockFileParameters' is not null or undefined
             assertParamExists('lockFile', 'lockFileParameters', lockFileParameters)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/lock`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1852,6 +1885,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         manageFormFilling: async (fileId: string, manageFormFillingDtoInteger?: ManageFormFillingDtoInteger, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('manageFormFilling', 'fileId', fileId)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/manageformfilling`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1915,6 +1949,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         openEditFile: async (fileId: number, version?: number, view?: boolean, editorType?: EditorType, edit?: boolean, fill?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('openEditFile', 'fileId', fileId)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/openedit`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1973,6 +2008,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         restoreFileVersion: async (fileId: number, version?: number, url?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('restoreFileVersion', 'fileId', fileId)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/restoreversion`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2021,6 +2057,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         saveEditingFileFromForm: async (fileId: number, fileExtension?: string, downloadUri?: string, file?: File, forcesave?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('saveEditingFileFromForm', 'fileId', fileId)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/saveediting`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2099,6 +2136,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('saveFileAsPdf', 'id', id)
             // verify required parameter 'saveAsPdfInteger' is not null or undefined
             assertParamExists('saveFileAsPdf', 'saveAsPdfInteger', saveAsPdfInteger)
+
             const localVarPath = `/api/2.0/files/file/{id}/saveaspdf`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2158,6 +2196,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         saveFormRoleMapping: async (fileId: string, saveFormRoleMappingDtoInteger?: SaveFormRoleMappingDtoInteger, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('saveFormRoleMapping', 'fileId', fileId)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/formrolemapping`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2219,6 +2258,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('setCustomFilterTag', 'fileId', fileId)
             // verify required parameter 'customFilterParameters' is not null or undefined
             assertParamExists('setCustomFilterTag', 'customFilterParameters', customFilterParameters)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/customfilter`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2280,6 +2320,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('setFileExternalLink', 'id', id)
             // verify required parameter 'fileLinkRequest' is not null or undefined
             assertParamExists('setFileExternalLink', 'fileLinkRequest', fileLinkRequest)
+
             const localVarPath = `/api/2.0/files/file/{id}/links`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2339,6 +2380,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         setFileOrder: async (fileId: number, orderRequestDto?: OrderRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('setFileOrder', 'fileId', fileId)
+
             const localVarPath = `/api/2.0/files/{fileId}/order`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2395,6 +2437,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-files-order/
          */
         setFilesOrder: async (ordersRequestDtoInteger?: OrdersRequestDtoInteger, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/order`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -2455,6 +2498,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('startEditFile', 'fileId', fileId)
             // verify required parameter 'startEdit' is not null or undefined
             assertParamExists('startEditFile', 'startEdit', startEdit)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/startedit`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2494,6 +2538,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         startFillingFile: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('startFillingFile', 'fileId', fileId)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/startfilling`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2550,6 +2595,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         toggleFileFavorite: async (fileId: number, favorite?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('toggleFileFavorite', 'fileId', fileId)
+
             const localVarPath = `/api/2.0/files/favorites/{fileId}`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2612,6 +2658,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         trackEditFile: async (fileId: number, tabId?: string, docKeyForTrack?: string, isFinish?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('trackEditFile', 'fileId', fileId)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/trackeditfile`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2663,6 +2710,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('updateFile', 'fileId', fileId)
             // verify required parameter 'updateFile' is not null or undefined
             assertParamExists('updateFile', 'updateFile', updateFile)
+
             const localVarPath = `/api/2.0/files/file/{fileId}`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.

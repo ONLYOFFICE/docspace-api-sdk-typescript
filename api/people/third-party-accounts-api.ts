@@ -38,6 +38,7 @@ import type { SignupAccountRequestDto } from '../../models';
  */
 export const ThirdPartyAccountsApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Returns a list of the available third-party accounts.
@@ -52,6 +53,7 @@ export const ThirdPartyAccountsApiAxiosParamCreator = function (configuration?: 
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-third-party-auth-providers/
          */
         getThirdPartyAuthProviders: async (inviteView?: boolean, settingsView?: boolean, clientCallback?: string, fromOnly?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/thirdparty/providers`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -101,6 +103,7 @@ export const ThirdPartyAccountsApiAxiosParamCreator = function (configuration?: 
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/link-third-party-account/
          */
         linkThirdPartyAccount: async (linkAccountRequestDto?: LinkAccountRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/thirdparty/linkaccount`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -156,6 +159,7 @@ export const ThirdPartyAccountsApiAxiosParamCreator = function (configuration?: 
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/signup-third-party-account/
          */
         signupThirdPartyAccount: async (signupAccountRequestDto?: SignupAccountRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/thirdparty/signup`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -192,6 +196,7 @@ export const ThirdPartyAccountsApiAxiosParamCreator = function (configuration?: 
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/unlink-third-party-account/
          */
         unlinkThirdPartyAccount: async (provider?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/thirdparty/unlinkaccount`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

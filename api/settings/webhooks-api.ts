@@ -50,6 +50,7 @@ import type { WebhooksLogWrapper } from '../../models';
  */
 export const WebhooksApiAxiosParamCreator = function (configuration?: Configuration) {
     let fields: string | undefined;
+    
     return {
         withFields: (f: string) => {
             fields = f;
@@ -64,6 +65,7 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-webhook/
          */
         createWebhook: async (createWebhooksConfigRequestsDto?: CreateWebhooksConfigRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/webhook`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -119,6 +121,7 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/enable-webhook/
          */
         enableWebhook: async (updateWebhooksConfigRequestsDto?: UpdateWebhooksConfigRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/webhook/enable`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -173,6 +176,7 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-webhooks/
          */
         getTenantWebhooks: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/webhook`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -224,6 +228,7 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-webhook-triggers/
          */
         getWebhookTriggers: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/webhook/triggers`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -285,6 +290,7 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-webhooks-logs/
          */
         getWebhooksLogs: async (deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/webhooks/log`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -386,6 +392,7 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
         removeWebhook: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('removeWebhook', 'id', id)
+
             const localVarPath = `/api/2.0/settings/webhook/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -441,6 +448,7 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
         retryWebhook: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('retryWebhook', 'id', id)
+
             const localVarPath = `/api/2.0/settings/webhook/{id}/retry`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -494,6 +502,7 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/retry-webhooks/
          */
         retryWebhooks: async (webhookRetryRequestsDto?: WebhookRetryRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/webhook/retry`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -549,6 +558,7 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-webhook/
          */
         updateWebhook: async (updateWebhooksConfigRequestsDto?: UpdateWebhooksConfigRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/webhook`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

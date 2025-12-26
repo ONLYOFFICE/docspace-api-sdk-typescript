@@ -66,6 +66,7 @@ import type { UpdateComment } from '../../models';
  */
 export const OperationsApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Adds files and folders with the IDs specified in the request to the favorite list.
@@ -77,6 +78,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-favorites/
          */
         addFavorites: async (baseBatchRequestDto?: BaseBatchRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/favorites`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -132,6 +134,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/bulk-download/
          */
         bulkDownload: async (downloadRequestDto?: DownloadRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/fileops/bulkdownload`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -171,6 +174,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
         checkConversionStatus: async (fileId: number, start?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('checkConversionStatus', 'fileId', fileId)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/checkconversion`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -228,6 +232,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-move-or-copy-batch-items/
          */
         checkMoveOrCopyBatchItems: async (inDto?: BatchRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/fileops/move`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -286,6 +291,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-move-or-copy-dest-folder/
          */
         checkMoveOrCopyDestFolder: async (inDto?: BatchRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/fileops/checkdestfolder`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -344,6 +350,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/copy-batch-items/
          */
         copyBatchItems: async (batchRequestDto?: BatchRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/fileops/copy`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -404,6 +411,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             assertParamExists('createUploadSession', 'folderId', folderId)
             // verify required parameter 'sessionRequest' is not null or undefined
             assertParamExists('createUploadSession', 'sessionRequest', sessionRequest)
+
             const localVarPath = `/api/2.0/files/{folderId}/upload/create_session`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -460,6 +468,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-batch-items/
          */
         deleteBatchItems: async (deleteBatchRequestDto?: DeleteBatchRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/fileops/delete`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -515,6 +524,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-favorites-from-body/
          */
         deleteFavoritesFromBody: async (baseBatchRequestDto?: BaseBatchRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/favorites`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -570,6 +580,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-file-versions/
          */
         deleteFileVersions: async (deleteVersionBatchRequestDto?: DeleteVersionBatchRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/fileops/deleteversion`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -625,6 +636,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/duplicate-batch-items/
          */
         duplicateBatchItems: async (duplicateRequestDto?: DuplicateRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/fileops/duplicate`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -680,6 +692,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/empty-trash/
          */
         emptyTrash: async (single?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/fileops/emptytrash`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -736,6 +749,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-operation-statuses/
          */
         getOperationStatuses: async (id?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/fileops`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -776,6 +790,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
         getOperationStatusesByType: async (operationType: FileOperationType, id?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'operationType' is not null or undefined
             assertParamExists('getOperationStatusesByType', 'operationType', operationType)
+
             const localVarPath = `/api/2.0/files/fileops/{operationType}`
                 .replace(`{${"operationType"}}`, encodeURIComponent(String(operationType)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -814,6 +829,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/mark-as-read/
          */
         markAsRead: async (baseBatchRequestDto?: BaseBatchRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/fileops/markasread`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -869,6 +885,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/move-batch-items/
          */
         moveBatchItems: async (batchRequestDto?: BatchRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/files/fileops/move`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -927,6 +944,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
         startFileConversion: async (fileId: number, checkConversionRequestDtoInteger?: CheckConversionRequestDtoInteger, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('startFileConversion', 'fileId', fileId)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/checkconversion`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -985,6 +1003,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
         terminateTasks: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('terminateTasks', 'id', id)
+
             const localVarPath = `/api/2.0/files/fileops/terminate/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1024,6 +1043,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             assertParamExists('updateFileComment', 'fileId', fileId)
             // verify required parameter 'updateComment' is not null or undefined
             assertParamExists('updateFileComment', 'updateComment', updateComment)
+
             const localVarPath = `/api/2.0/files/file/{fileId}/comment`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
