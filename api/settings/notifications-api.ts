@@ -42,6 +42,7 @@ import type { RoomsNotificationsSettingsRequestDto } from '../../models';
  */
 export const NotificationsApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Returns a list of notification channels.
@@ -52,6 +53,7 @@ export const NotificationsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-notification-channels/
          */
         getNotificationChannels: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/notification/channels`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -106,6 +108,7 @@ export const NotificationsApiAxiosParamCreator = function (configuration?: Confi
         getNotificationSettings: async (type: NotificationType, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'type' is not null or undefined
             assertParamExists('getNotificationSettings', 'type', type)
+
             const localVarPath = `/api/2.0/settings/notification/{type}`
                 .replace(`{${"type"}}`, encodeURIComponent(String(type)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -158,6 +161,7 @@ export const NotificationsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-notification-settings/
          */
         getRoomsNotificationSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/notification/rooms`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -210,6 +214,7 @@ export const NotificationsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-notification-settings/
          */
         setNotificationSettings: async (notificationSettingsRequestsDto?: NotificationSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/notification`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -265,6 +270,7 @@ export const NotificationsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-rooms-notification-status/
          */
         setRoomsNotificationStatus: async (roomsNotificationsSettingsRequestDto?: RoomsNotificationsSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/notification/rooms`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

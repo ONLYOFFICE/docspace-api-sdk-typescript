@@ -38,6 +38,7 @@ import type { TurnOnAdminMessageSettingsRequestDto } from '../../models';
  */
 export const MessagesApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Displays the contact form on the Sign In page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.
@@ -49,6 +50,7 @@ export const MessagesApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/enable-admin-message-settings/
          */
         enableAdminMessageSettings: async (turnOnAdminMessageSettingsRequestDto?: TurnOnAdminMessageSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/messagesettings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -104,6 +106,7 @@ export const MessagesApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-admin-mail/
          */
         sendAdminMail: async (adminMessageSettingsRequestsDto?: AdminMessageSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/sendadmmail`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -140,6 +143,7 @@ export const MessagesApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-join-invite-mail/
          */
         sendJoinInviteMail: async (adminMessageBaseSettingsRequestsDto?: AdminMessageBaseSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/sendjoininvite`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

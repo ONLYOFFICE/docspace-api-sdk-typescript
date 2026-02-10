@@ -34,6 +34,7 @@ import type { UpdateMembersQuotaRequestDto } from '../../models';
  */
 export const PeopleQuotaApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Resets a quota limit of users with the IDs specified in the request.
@@ -45,6 +46,7 @@ export const PeopleQuotaApiAxiosParamCreator = function (configuration?: Configu
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-users-quota/
          */
         resetUsersQuota: async (updateMembersQuotaRequestDto?: UpdateMembersQuotaRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/resetquota`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -100,6 +102,7 @@ export const PeopleQuotaApiAxiosParamCreator = function (configuration?: Configu
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-user-quota/
          */
         updateUserQuota: async (updateMembersQuotaRequestDto?: UpdateMembersQuotaRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/userquota`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

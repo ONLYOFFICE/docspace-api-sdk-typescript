@@ -36,6 +36,7 @@ import type { SsoSettingsV2Wrapper } from '../../models';
  */
 export const SSOApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Returns the default portal SSO settings.
@@ -46,6 +47,7 @@ export const SSOApiAxiosParamCreator = function (configuration?: Configuration) 
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-default-sso-settings-v2/
          */
         getDefaultSsoSettingsV2: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/ssov2/default`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -97,6 +99,7 @@ export const SSOApiAxiosParamCreator = function (configuration?: Configuration) 
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-sso-settings-v2/
          */
         getSsoSettingsV2: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/ssov2`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -129,6 +132,7 @@ export const SSOApiAxiosParamCreator = function (configuration?: Configuration) 
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-sso-settings-v2-constants/
          */
         getSsoSettingsV2Constants: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/ssov2/constants`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -180,6 +184,7 @@ export const SSOApiAxiosParamCreator = function (configuration?: Configuration) 
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-sso-settings-v2/
          */
         resetSsoSettingsV2: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/ssov2`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -232,6 +237,7 @@ export const SSOApiAxiosParamCreator = function (configuration?: Configuration) 
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-sso-settings-v2/
          */
         saveSsoSettingsV2: async (ssoSettingsRequestsDto?: SsoSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/ssov2`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

@@ -21,6 +21,9 @@
 import type { ApiDateTime } from './api-date-time';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { ChatSettings } from './chat-settings';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { EmployeeDto } from './employee-dto';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -195,6 +198,18 @@ export type FolderDtoInteger = FileEntryDtoInteger &  {
      * @deprecated
      */
     'expired'?: boolean | null;
+    /**
+     * 
+     * @type {ChatSettings}
+     * @memberof FolderDtoInteger
+     */
+    'chatSettings'?: ChatSettings;
+    /**
+     * 
+     * @type {RoomType}
+     * @memberof FolderDtoInteger
+     */
+    'rootRoomType'?: RoomType;
 };
 
 

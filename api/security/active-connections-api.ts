@@ -36,6 +36,7 @@ import type { StringWrapper } from '../../models';
  */
 export const ActiveConnectionsApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Returns all the active connections to the portal.
@@ -46,6 +47,7 @@ export const ActiveConnectionsApiAxiosParamCreator = function (configuration?: C
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-active-connections/
          */
         getAllActiveConnections: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/security/activeconnections`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -100,6 +102,7 @@ export const ActiveConnectionsApiAxiosParamCreator = function (configuration?: C
         logOutActiveConnection: async (loginEventId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'loginEventId' is not null or undefined
             assertParamExists('logOutActiveConnection', 'loginEventId', loginEventId)
+
             const localVarPath = `/api/2.0/security/activeconnections/logout/{loginEventId}`
                 .replace(`{${"loginEventId"}}`, encodeURIComponent(String(loginEventId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -152,6 +155,7 @@ export const ActiveConnectionsApiAxiosParamCreator = function (configuration?: C
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/log-out-all-active-connections-change-password/
          */
         logOutAllActiveConnectionsChangePassword: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/security/activeconnections/logoutallchangepassword`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -206,6 +210,7 @@ export const ActiveConnectionsApiAxiosParamCreator = function (configuration?: C
         logOutAllActiveConnectionsForUser: async (userId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('logOutAllActiveConnectionsForUser', 'userId', userId)
+
             const localVarPath = `/api/2.0/security/activeconnections/logoutall/{userId}`
                 .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -258,6 +263,7 @@ export const ActiveConnectionsApiAxiosParamCreator = function (configuration?: C
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/log-out-all-except-this-connection/
          */
         logOutAllExceptThisConnection: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/security/activeconnections/logoutallexceptthis`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

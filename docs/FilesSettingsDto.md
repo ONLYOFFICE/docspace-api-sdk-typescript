@@ -63,6 +63,8 @@ Name | Type | Description | Notes
 **maxUploadThreadCount** | **number** | The maximum number of upload threads. | [optional] [default to undefined]
 **chunkUploadSize** | **number** | The size of a large file that is uploaded in chunks. | [optional] [default to undefined]
 **openEditorInSameTab** | **boolean** | Specifies whether to open the editor in the same tab or not. | [optional] [default to undefined]
+**extsFilesVectorized** | **Array&lt;string&gt;** | List of extensions available for vectorization | [optional] [default to undefined]
+**maxVectorizationFileSize** | **number** | The maximum file size for vectorization | [optional] [default to undefined]
 
 ## Example
 
@@ -127,6 +129,8 @@ const instance: FilesSettingsDto = {
     maxUploadThreadCount,
     chunkUploadSize,
     openEditorInSameTab,
+    extsFilesVectorized,
+    maxVectorizationFileSize,
 };
 ```
 

@@ -32,6 +32,7 @@ import type { GroupArrayWrapper } from '../../models';
  */
 export const SearchApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Returns groups with their sharing settings for a file with the ID specified in request.
@@ -49,6 +50,7 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
         getGroupsWithFilesShared: async (id: number, excludeShared?: boolean, count?: number, startIndex?: number, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getGroupsWithFilesShared', 'id', id)
+
             const localVarPath = `/api/2.0/group/file/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -124,6 +126,7 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
         getGroupsWithFoldersShared: async (id: number, excludeShared?: boolean, count?: number, startIndex?: number, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getGroupsWithFoldersShared', 'id', id)
+
             const localVarPath = `/api/2.0/group/folder/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -199,6 +202,7 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
         getGroupsWithRoomsShared: async (id: number, excludeShared?: boolean, count?: number, startIndex?: number, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getGroupsWithRoomsShared', 'id', id)
+
             const localVarPath = `/api/2.0/group/room/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.

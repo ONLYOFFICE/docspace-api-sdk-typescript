@@ -32,6 +32,7 @@ import type { StringWrapper } from '../../models';
  */
 export const PortalGuestsApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Returns a link to share a guest with another user.
@@ -45,6 +46,7 @@ export const PortalGuestsApiAxiosParamCreator = function (configuration?: Config
         getGuestSharingLink: async (userid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userid' is not null or undefined
             assertParamExists('getGuestSharingLink', 'userid', userid)
+
             const localVarPath = `/api/2.0/people/guests/{userid}/share`
                 .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.

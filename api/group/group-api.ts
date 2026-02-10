@@ -48,6 +48,7 @@ import type { UpdateGroupRequest } from '../../models';
  */
 export const GroupApiAxiosParamCreator = function (configuration?: Configuration) {
     let fields: string | undefined;
+    
     return {
         withFields: (f: string) => {
             fields = f;
@@ -62,6 +63,7 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-group/
          */
         addGroup: async (groupRequestDto?: GroupRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/group`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -122,6 +124,7 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('addMembersTo', 'id', id)
             // verify required parameter 'membersRequest' is not null or undefined
             assertParamExists('addMembersTo', 'membersRequest', membersRequest)
+
             const localVarPath = `/api/2.0/group/{id}/members`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -180,6 +183,7 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
         deleteGroup: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('deleteGroup', 'id', id)
+
             const localVarPath = `/api/2.0/group/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -236,6 +240,7 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
         getGroup: async (id: string, includeMembers?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getGroup', 'id', id)
+
             const localVarPath = `/api/2.0/group/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -295,6 +300,7 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
         getGroupByUserId: async (userid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userid' is not null or undefined
             assertParamExists('getGroupByUserId', 'userid', userid)
+
             const localVarPath = `/api/2.0/group/user/{userid}`
                 .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -354,6 +360,7 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups/
          */
         getGroups: async (userId?: string, manager?: boolean, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/group`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -442,6 +449,7 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('moveMembersTo', 'fromId', fromId)
             // verify required parameter 'toId' is not null or undefined
             assertParamExists('moveMembersTo', 'toId', toId)
+
             const localVarPath = `/api/2.0/group/{fromId}/members/{toId}`
                 .replace(`{${"fromId"}}`, encodeURIComponent(String(fromId)))
                 .replace(`{${"toId"}}`, encodeURIComponent(String(toId)));
@@ -501,6 +509,7 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('removeMembersFrom', 'id', id)
             // verify required parameter 'membersRequest' is not null or undefined
             assertParamExists('removeMembersFrom', 'membersRequest', membersRequest)
+
             const localVarPath = `/api/2.0/group/{id}/members`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -562,6 +571,7 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('setGroupManager', 'id', id)
             // verify required parameter 'setManagerRequest' is not null or undefined
             assertParamExists('setGroupManager', 'setManagerRequest', setManagerRequest)
+
             const localVarPath = `/api/2.0/group/{id}/manager`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -623,6 +633,7 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('setMembersTo', 'id', id)
             // verify required parameter 'membersRequest' is not null or undefined
             assertParamExists('setMembersTo', 'membersRequest', membersRequest)
+
             const localVarPath = `/api/2.0/group/{id}/members`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -684,6 +695,7 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('updateGroup', 'id', id)
             // verify required parameter 'updateGroupRequest' is not null or undefined
             assertParamExists('updateGroup', 'updateGroupRequest', updateGroupRequest)
+
             const localVarPath = `/api/2.0/group/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.

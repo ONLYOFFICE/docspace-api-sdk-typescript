@@ -42,6 +42,7 @@ import type { UpdateMembersRequestDto } from '../../models';
  */
 export const UserTypeApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Returns the progress of updating the user type.
@@ -55,6 +56,7 @@ export const UserTypeApiAxiosParamCreator = function (configuration?: Configurat
         getUserTypeUpdateProgress: async (userid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userid' is not null or undefined
             assertParamExists('getUserTypeUpdateProgress', 'userid', userid)
+
             const localVarPath = `/api/2.0/people/type/progress/{userid}`
                 .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -108,6 +110,7 @@ export const UserTypeApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/star-user-typet-update/
          */
         starUserTypetUpdate: async (startUpdateUserTypeDto?: StartUpdateUserTypeDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/type`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -163,6 +166,7 @@ export const UserTypeApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-user-type-update/
          */
         terminateUserTypeUpdate: async (terminateRequestDto?: TerminateRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/type/terminate`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -223,6 +227,7 @@ export const UserTypeApiAxiosParamCreator = function (configuration?: Configurat
             assertParamExists('updateUserType', 'type', type)
             // verify required parameter 'updateMembersRequestDto' is not null or undefined
             assertParamExists('updateUserType', 'updateMembersRequestDto', updateMembersRequestDto)
+
             const localVarPath = `/api/2.0/people/type/{type}`
                 .replace(`{${"type"}}`, encodeURIComponent(String(type)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.

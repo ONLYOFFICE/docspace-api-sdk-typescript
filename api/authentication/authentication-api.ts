@@ -44,6 +44,7 @@ import type { StringWrapper } from '../../models';
  */
 export const AuthenticationApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Authenticates the current user by SMS, authenticator app, or without two-factor authentication.
@@ -55,6 +56,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/authenticate-me/
          */
         authenticateMe: async (authRequestsDto?: AuthRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/authentication`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -94,6 +96,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
         authenticateMeFromBodyWithCode: async (code: string, authRequestsDto?: AuthRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'code' is not null or undefined
             assertParamExists('authenticateMeFromBodyWithCode', 'code', code)
+
             const localVarPath = `/api/2.0/authentication/{code}`
                 .replace(`{${"code"}}`, encodeURIComponent(String(code)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -131,6 +134,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-confirm/
          */
         checkConfirm: async (emailValidationKeyModel?: EmailValidationKeyModel, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/authentication/confirm`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -166,6 +170,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-authentificated/
          */
         getIsAuthentificated: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/authentication`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -198,6 +203,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/logout/
          */
         logout: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/authentication/logout`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -231,6 +237,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-mobile-phone/
          */
         saveMobilePhone: async (mobileRequestsDto?: MobileRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/authentication/setphone`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -286,6 +293,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-sms-code/
          */
         sendSmsCode: async (authRequestsDto?: AuthRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/authentication/sendsms`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

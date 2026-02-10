@@ -66,6 +66,7 @@ import type { WizardSettingsWrapper } from '../../models';
  */
 export const CommonSettingsApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Closes the administrator helper notification.
@@ -76,6 +77,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/close-admin-helper/
          */
         closeAdminHelper: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/closeadminhelper`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -128,6 +130,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/complete-wizard/
          */
         completeWizard: async (wizardRequestsDto?: WizardRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/wizard/complete`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -183,6 +186,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/configure-deep-link/
          */
         configureDeepLink: async (deepLinkConfigurationRequestsDto?: DeepLinkConfigurationRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/deeplink`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -240,6 +244,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
         deletePortalColorTheme: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('deletePortalColorTheme', 'id', id)
+
             const localVarPath = `/api/2.0/settings/colortheme`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -295,6 +300,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-deep-link-settings/
          */
         getDeepLinkSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/deeplink`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -327,6 +333,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-settings/
          */
         getPaymentSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/payment`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -378,6 +385,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-color-theme/
          */
         getPortalColorTheme: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/colortheme`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -410,6 +418,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-hostname/
          */
         getPortalHostname: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/machine`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -461,6 +470,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-logo/
          */
         getPortalLogo: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/logo`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -513,6 +523,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-settings/
          */
         getPortalSettings: async (withpassword?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -549,6 +560,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-socket-settings/
          */
         getSocketSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/socket`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -600,6 +612,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-supported-cultures/
          */
         getSupportedCultures: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/cultures`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -632,6 +645,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-user-invitation-settings/
          */
         getTenantUserInvitationSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/invitationsettings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -664,6 +678,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-time-zones/
          */
         getTimeZones: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/timezones`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -716,6 +731,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-dns-settings/
          */
         saveDnsSettings: async (dnsSettingsRequestsDto?: DnsSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/dns`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -771,6 +787,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-mail-domain-settings/
          */
         saveMailDomainSettings: async (mailDomainSettingsRequestsDto?: MailDomainSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/maildomainsettings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -826,6 +843,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-portal-color-theme/
          */
         savePortalColorTheme: async (customColorThemesSettingsRequestsDto?: CustomColorThemesSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/colortheme`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -881,6 +899,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-email-activation-settings/
          */
         updateEmailActivationSettings: async (emailActivationSettings?: EmailActivationSettings, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/emailactivation`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -936,6 +955,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-invitation-settings/
          */
         updateInvitationSettings: async (tenantUserInvitationSettingsRequestDto?: TenantUserInvitationSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/invitationsettings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

@@ -50,6 +50,7 @@ import type { TenantAuditSettingsWrapper } from '../../models';
  */
 export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Configuration) {
     let fields: string | undefined;
+    
     return {
         withFields: (f: string) => {
             fields = f;
@@ -63,6 +64,7 @@ export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-audit-trail-report/
          */
         createAuditTrailReport: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/security/audit/events/report`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -124,6 +126,7 @@ export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-events-by-filter/
          */
         getAuditEventsByFilter: async (userId?: string, moduleType?: LocationType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/security/audit/events/filter`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -222,6 +225,7 @@ export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-settings/
          */
         getAuditSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/security/audit/settings/lifetime`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -275,6 +279,7 @@ export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-trail-mappers/
          */
         getAuditTrailMappers: async (productType?: ProductType, moduleType?: LocationType, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/security/audit/mappers`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -315,6 +320,7 @@ export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-trail-types/
          */
         getAuditTrailTypes: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/security/audit/types`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -347,6 +353,7 @@ export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-last-audit-events/
          */
         getLastAuditEvents: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/security/audit/events/last`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -399,6 +406,7 @@ export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Conf
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-audit-settings/
          */
         setAuditSettings: async (tenantAuditSettingsWrapper?: TenantAuditSettingsWrapper, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/security/audit/settings/lifetime`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

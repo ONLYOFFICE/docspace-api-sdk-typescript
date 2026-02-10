@@ -18,6 +18,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { ChatSettings } from './chat-settings';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { FileShareParams } from './file-share-params';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -116,6 +119,12 @@ export interface CreateRoomRequestDto {
      * @memberof CreateRoomRequestDto
      */
     'share'?: Array<FileShareParams> | null;
+    /**
+     * 
+     * @type {ChatSettings}
+     * @memberof CreateRoomRequestDto
+     */
+    'chatSettings'?: ChatSettings;
 }
 
 

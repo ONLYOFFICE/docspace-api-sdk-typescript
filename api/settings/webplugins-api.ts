@@ -36,6 +36,7 @@ import type { WebPluginWrapper } from '../../models';
  */
 export const WebpluginsApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Adds a web plugin from a file to the current portal.
@@ -47,6 +48,7 @@ export const WebpluginsApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-web-plugin-from-file/
          */
         addWebPluginFromFile: async (system?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/webplugins`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -105,6 +107,7 @@ export const WebpluginsApiAxiosParamCreator = function (configuration?: Configur
         deleteWebPlugin: async (name: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'name' is not null or undefined
             assertParamExists('deleteWebPlugin', 'name', name)
+
             const localVarPath = `/api/2.0/settings/webplugins/{name}`
                 .replace(`{${"name"}}`, encodeURIComponent(String(name)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -160,6 +163,7 @@ export const WebpluginsApiAxiosParamCreator = function (configuration?: Configur
         getWebPlugin: async (name: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'name' is not null or undefined
             assertParamExists('getWebPlugin', 'name', name)
+
             const localVarPath = `/api/2.0/settings/webplugins/{name}`
                 .replace(`{${"name"}}`, encodeURIComponent(String(name)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -213,6 +217,7 @@ export const WebpluginsApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-web-plugins/
          */
         getWebPlugins: async (enabled?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/webplugins`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -274,6 +279,7 @@ export const WebpluginsApiAxiosParamCreator = function (configuration?: Configur
             assertParamExists('updateWebPlugin', 'name', name)
             // verify required parameter 'webPluginRequests' is not null or undefined
             assertParamExists('updateWebPlugin', 'webPluginRequests', webPluginRequests)
+
             const localVarPath = `/api/2.0/settings/webplugins/{name}`
                 .replace(`{${"name"}}`, encodeURIComponent(String(name)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.

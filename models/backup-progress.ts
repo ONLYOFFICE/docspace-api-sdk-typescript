@@ -49,6 +49,12 @@ export interface BackupProgress {
      * @type {string}
      * @memberof BackupProgress
      */
+    'warning'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BackupProgress
+     */
     'link'?: string | null;
     /**
      * 

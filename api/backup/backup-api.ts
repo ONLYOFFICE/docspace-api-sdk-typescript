@@ -48,6 +48,7 @@ import type { ScheduleWrapper } from '../../models';
  */
 export const BackupApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Creates the backup schedule of the current portal with the parameters specified in the request.
@@ -59,6 +60,7 @@ export const BackupApiAxiosParamCreator = function (configuration?: Configuratio
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-backup-schedule/
          */
         createBackupSchedule: async (backupScheduleDto?: BackupScheduleDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/backup/createbackupschedule`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -116,6 +118,7 @@ export const BackupApiAxiosParamCreator = function (configuration?: Configuratio
         deleteBackup: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('deleteBackup', 'id', id)
+
             const localVarPath = `/api/2.0/backup/deletebackup/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -169,6 +172,7 @@ export const BackupApiAxiosParamCreator = function (configuration?: Configuratio
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-backup-history/
          */
         deleteBackupHistory: async (dump?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/backup/deletebackuphistory`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -225,6 +229,7 @@ export const BackupApiAxiosParamCreator = function (configuration?: Configuratio
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-backup-schedule/
          */
         deleteBackupSchedule: async (dump?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/backup/deletebackupschedule`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -281,6 +286,7 @@ export const BackupApiAxiosParamCreator = function (configuration?: Configuratio
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backup-history/
          */
         getBackupHistory: async (dump?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/backup/getbackuphistory`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -337,6 +343,7 @@ export const BackupApiAxiosParamCreator = function (configuration?: Configuratio
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backup-progress/
          */
         getBackupProgress: async (dump?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/backup/getbackupprogress`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -393,6 +400,7 @@ export const BackupApiAxiosParamCreator = function (configuration?: Configuratio
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backup-schedule/
          */
         getBackupSchedule: async (dump?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/backup/getbackupschedule`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -451,6 +459,7 @@ export const BackupApiAxiosParamCreator = function (configuration?: Configuratio
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backups-count/
          */
         getBackupsCount: async (from?: string, to?: string, paid?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/backup/getbackupscount`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -518,6 +527,7 @@ export const BackupApiAxiosParamCreator = function (configuration?: Configuratio
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backups-service-state/
          */
         getBackupsServiceState: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/backup/getservicestate`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -570,6 +580,7 @@ export const BackupApiAxiosParamCreator = function (configuration?: Configuratio
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-restore-progress/
          */
         getRestoreProgress: async (dump?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/backup/getrestoreprogress`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -607,6 +618,7 @@ export const BackupApiAxiosParamCreator = function (configuration?: Configuratio
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-backup/
          */
         startBackup: async (backupDto?: BackupDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/backup/startbackup`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -662,6 +674,7 @@ export const BackupApiAxiosParamCreator = function (configuration?: Configuratio
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-backup-restore/
          */
         startBackupRestore: async (backupRestoreDto?: BackupRestoreDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/backup/startrestore`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

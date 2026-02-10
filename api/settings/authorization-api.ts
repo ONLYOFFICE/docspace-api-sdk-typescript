@@ -36,6 +36,7 @@ import type { BooleanWrapper } from '../../models';
  */
 export const AuthorizationApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Returns the authorization services.
@@ -46,6 +47,7 @@ export const AuthorizationApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-auth-services/
          */
         getAuthServices: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/authservice`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -98,6 +100,7 @@ export const AuthorizationApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-auth-keys/
          */
         saveAuthKeys: async (authServiceRequestsDto?: AuthServiceRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/authservice`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

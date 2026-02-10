@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **priceCurrencySymbol** | **string** | The tenant price currency symbol. | [optional] [default to undefined]
 **priceISOCurrencySymbol** | **string** | The tenant price three-character ISO 4217 currency symbol. | [optional] [default to undefined]
 **productId** | **string** | The tenant product ID. | [optional] [default to undefined]
+**serviceName** | **string** | The service name. | [optional] [default to undefined]
 **visible** | **boolean** | Specifies if the tenant quota is visible or not. | [optional] [default to undefined]
 **wallet** | **boolean** | Specifies if the tenant quota applies to the wallet or not | [optional] [default to undefined]
 **dueDate** | **string** | The quota due date. | [optional] [default to undefined]
@@ -42,6 +43,7 @@ Name | Type | Description | Notes
 **year** | **boolean** | Specifies if the tenant quota is yearly subscription or not. | [optional] [default to undefined]
 **countFreeBackup** | **number** | The number of free backups within a month. | [optional] [default to undefined]
 **backup** | **boolean** | Specifies if the backup anabled as a wallet service or not. | [optional] [default to undefined]
+**countAIAgent** | **number** | The number of AI agents. | [optional] [default to undefined]
 
 ## Example
 
@@ -55,6 +57,7 @@ const instance: TenantQuota = {
     priceCurrencySymbol,
     priceISOCurrencySymbol,
     productId,
+    serviceName,
     visible,
     wallet,
     dueDate,
@@ -85,6 +88,7 @@ const instance: TenantQuota = {
     year,
     countFreeBackup,
     backup,
+    countAIAgent,
 };
 ```
 

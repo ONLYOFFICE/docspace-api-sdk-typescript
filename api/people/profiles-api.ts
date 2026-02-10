@@ -52,6 +52,7 @@ import type { UpdateMembersRequestDto } from '../../models';
  */
 export const ProfilesApiAxiosParamCreator = function (configuration?: Configuration) {
     let fields: string | undefined;
+    
     return {
         withFields: (f: string) => {
             fields = f;
@@ -66,6 +67,7 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-member/
          */
         addMember: async (memberRequestDto?: MemberRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -123,6 +125,7 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
         deleteMember: async (userid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userid' is not null or undefined
             assertParamExists('deleteMember', 'userid', userid)
+
             const localVarPath = `/api/2.0/people/{userid}`
                 .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -175,6 +178,7 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-profile/
          */
         deleteProfile: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/@self`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -233,6 +237,7 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-profiles/
          */
         getAllProfiles: async (count?: number, startIndex?: number, filterBy?: string, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -315,6 +320,7 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-claims/
          */
         getClaims: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/tokendiagnostics`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -361,13 +367,15 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
          * Returns the detailed information about a profile of the user with the email specified in the request.
          * @summary Get a profile by user email
          * @param {string} [email] The user email address.
+         * @param {string} [encemail] The user encrypted email address.
          * @param {string} [culture] Culture
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getProfileByEmail operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-profile-by-email/
          */
-        getProfileByEmail: async (email?: string, culture?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getProfileByEmail: async (email?: string, encemail?: string, culture?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/email`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -403,6 +411,10 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
                 localVarQueryParameter['email'] = email;
             }
 
+            if (encemail !== undefined) {
+                localVarQueryParameter['encemail'] = encemail;
+            }
+
             if (culture !== undefined) {
                 localVarQueryParameter['culture'] = culture;
             }
@@ -430,6 +442,7 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
         getProfileByUserId: async (userid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userid' is not null or undefined
             assertParamExists('getProfileByUserId', 'userid', userid)
+
             const localVarPath = `/api/2.0/people/{userid}`
                 .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -482,6 +495,7 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-self-profile/
          */
         getSelfProfile: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/@self`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -534,6 +548,7 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/invite-users/
          */
         inviteUsers: async (inviteUsersRequestDto?: InviteUsersRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/invite`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -589,6 +604,7 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/remove-users/
          */
         removeUsers: async (updateMembersRequestDto?: UpdateMembersRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/delete`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -644,6 +660,7 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/resend-user-invites/
          */
         resendUserInvites: async (updateMembersRequestDto?: UpdateMembersRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/invite`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -699,6 +716,7 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-email-change-instructions/
          */
         sendEmailChangeInstructions: async (updateMemberRequestDto?: UpdateMemberRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/email`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -759,6 +777,7 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             assertParamExists('updateMember', 'userid', userid)
             // verify required parameter 'updateMemberRequestDto' is not null or undefined
             assertParamExists('updateMember', 'updateMemberRequestDto', updateMemberRequestDto)
+
             const localVarPath = `/api/2.0/people/{userid}`
                 .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -818,6 +837,7 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
         updateMemberCulture: async (userid: string, culture?: Culture, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userid' is not null or undefined
             assertParamExists('updateMemberCulture', 'userid', userid)
+
             const localVarPath = `/api/2.0/people/{userid}/culture`
                 .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -957,14 +977,15 @@ export const ProfilesApiFp = function(configuration?: Configuration) {
          * Returns the detailed information about a profile of the user with the email specified in the request.
          * @summary Get a profile by user email
          * @param {string} [email] The user email address.
+         * @param {string} [encemail] The user encrypted email address.
          * @param {string} [culture] Culture
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getProfileByEmail operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-profile-by-email/
          */
-        async getProfileByEmail(email?: string, culture?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getProfileByEmail(email, culture, options);
+        async getProfileByEmail(email?: string, encemail?: string, culture?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getProfileByEmail(email, encemail, culture, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ProfilesApi.getProfileByEmail']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1168,14 +1189,15 @@ export const ProfilesApiFactory = function (configuration?: Configuration, baseP
          * Returns the detailed information about a profile of the user with the email specified in the request.
          * @summary Get a profile by user email
          * @param {string} [email] The user email address.
+         * @param {string} [encemail] The user encrypted email address.
          * @param {string} [culture] Culture
          * @param {*} [options] Override http request option.
          * REST API Reference for getProfileByEmail operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-profile-by-email/
          * @throws {RequiredError}
          */
-        getProfileByEmail(email?: string, culture?: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
-            return localVarFp.getProfileByEmail(email, culture, options).then((request) => request(axios, basePath));
+        getProfileByEmail(email?: string, encemail?: string, culture?: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
+            return localVarFp.getProfileByEmail(email, encemail, culture, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the detailed information about a profile of the user with the ID specified in the request.
@@ -1352,13 +1374,14 @@ export class ProfilesApi extends BaseAPI {
      * Returns the detailed information about a profile of the user with the email specified in the request.
      * @summary Get a profile by user email
      * @param {string} [email] The user email address.
+     * @param {string} [encemail] The user encrypted email address.
      * @param {string} [culture] Culture
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProfilesApi
      */
-    public getProfileByEmail(email?: string, culture?: string, options?: RawAxiosRequestConfig) {
-        return ProfilesApiFp(this.configuration).getProfileByEmail(email, culture, options).then((request) => request(this.axios, this.basePath));
+    public getProfileByEmail(email?: string, encemail?: string, culture?: string, options?: RawAxiosRequestConfig) {
+        return ProfilesApiFp(this.configuration).getProfileByEmail(email, encemail, culture, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

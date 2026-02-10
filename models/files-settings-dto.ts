@@ -374,6 +374,18 @@ export interface FilesSettingsDto {
      * @memberof FilesSettingsDto
      */
     'openEditorInSameTab'?: boolean;
+    /**
+     * List of extensions available for vectorization
+     * @type {Array<string>}
+     * @memberof FilesSettingsDto
+     */
+    'extsFilesVectorized'?: Array<string> | null;
+    /**
+     * The maximum file size for vectorization
+     * @type {number}
+     * @memberof FilesSettingsDto
+     */
+    'maxVectorizationFileSize'?: number;
 }
 
 export const FilesSettingsDtoDefaultSharingAccessRightsEnum = {

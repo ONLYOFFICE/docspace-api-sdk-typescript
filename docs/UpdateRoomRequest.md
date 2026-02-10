@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **tags** | **Array&lt;string&gt;** | The list of tags. | [optional] [default to undefined]
 **color** | **string** | The room color. | [optional] [default to undefined]
 **cover** | **string** | The room cover. | [optional] [default to undefined]
+**chatSettings** | [**ChatSettings**](ChatSettings.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -33,6 +34,7 @@ const instance: UpdateRoomRequest = {
     tags,
     color,
     cover,
+    chatSettings,
 };
 ```
 

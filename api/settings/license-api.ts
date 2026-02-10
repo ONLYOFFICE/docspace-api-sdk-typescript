@@ -34,6 +34,7 @@ import type { StringWrapper } from '../../models';
  */
 export const LicenseApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Activates a license for the portal.
@@ -44,6 +45,7 @@ export const LicenseApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/accept-license/
          */
         acceptLicense: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/license/accept`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -95,6 +97,7 @@ export const LicenseApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-license-required/
          */
         getIsLicenseRequired: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/license/required`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -127,6 +130,7 @@ export const LicenseApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/refresh-license/
          */
         refreshLicense: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/license/refresh`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -181,6 +185,7 @@ export const LicenseApiAxiosParamCreator = function (configuration?: Configurati
         uploadLicense: async (files: Array<File>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'files' is not null or undefined
             assertParamExists('uploadLicense', 'files', files)
+
             const localVarPath = `/api/2.0/settings/license`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
