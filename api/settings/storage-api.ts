@@ -42,6 +42,7 @@ import type { StorageSettingsWrapper } from '../../models';
  */
 export const StorageApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Returns a list of all the backup storages.
@@ -53,6 +54,7 @@ export const StorageApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-backup-storages/
          */
         getAllBackupStorages: async (dump?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/storage/backup`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -108,6 +110,7 @@ export const StorageApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-cdn-storages/
          */
         getAllCdnStorages: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/storage/cdn`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -159,6 +162,7 @@ export const StorageApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-storages/
          */
         getAllStorages: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/storage`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -210,6 +214,7 @@ export const StorageApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-amazon-s3-regions/
          */
         getAmazonS3Regions: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/storage/s3/regions`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -261,6 +266,7 @@ export const StorageApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-storage-progress/
          */
         getStorageProgress: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/storage/progress`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -312,6 +318,7 @@ export const StorageApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-cdn-to-default/
          */
         resetCdnToDefault: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/storage/cdn`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -363,6 +370,7 @@ export const StorageApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-storage-to-default/
          */
         resetStorageToDefault: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/storage`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -415,6 +423,7 @@ export const StorageApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-cdn-storage/
          */
         updateCdnStorage: async (storageRequestsDto?: StorageRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/storage/cdn`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -470,6 +479,7 @@ export const StorageApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-storage/
          */
         updateStorage: async (storageRequestsDto?: StorageRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/storage`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

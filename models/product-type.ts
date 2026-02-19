@@ -18,16 +18,12 @@
 
 
 /**
- * [0 - None, 2 - Documents, 3 - Login, 4 - Others, 5 - People, 7 - Settings]
+ * [2 - Documents, 3 - Login, 7 - Settings, 8 - Contacts]
  * @export
  * @enum {number}
  */
 
 export const ProductType = {
-    /**
-    * None
-    */
-    None: 0,
     /**
     * Documents
     */
@@ -37,17 +33,13 @@ export const ProductType = {
     */
     Login: 3,
     /**
-    * Others
-    */
-    Others: 4,
-    /**
-    * People
-    */
-    People: 5,
-    /**
     * Settings
     */
-    Settings: 7
+    Settings: 7,
+    /**
+    * Contacts
+    */
+    Contacts: 8
 } as const;
 
 export type ProductType = typeof ProductType[keyof typeof ProductType];

@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **title** | **string** | The file entry title. | [optional] [default to undefined]
 **access** | [**FileShare**](FileShare.md) |  | [optional] [default to undefined]
+**sharedBy** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] [default to undefined]
+**ownedBy** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] [default to undefined]
 **shared** | **boolean** | Specifies if the file entry is shared via link or not. | [optional] [default to undefined]
 **sharedForUser** | **boolean** | Specifies if the file entry is shared for user or not. | [optional] [default to undefined]
 **parentShared** | **boolean** | Indicates whether the parent entity is shared. | [optional] [default to undefined]
@@ -61,6 +63,8 @@ Name | Type | Description | Notes
 **usedSpace** | **number** | How much folder space is used (counter). | [optional] [default to undefined]
 **passwordProtected** | **boolean** | Specifies if the folder is password protected or not. | [optional] [default to undefined]
 **expired** | **boolean** | Specifies if an external link to the folder is expired or not. | [optional] [default to undefined]
+**chatSettings** | [**ChatSettings**](ChatSettings.md) |  | [optional] [default to undefined]
+**rootRoomType** | [**RoomType**](RoomType.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -70,6 +74,8 @@ import { FolderDtoString } from '@onlyoffice/docspace-api-sdk';
 const instance: FolderDtoString = {
     title,
     access,
+    sharedBy,
+    ownedBy,
     shared,
     sharedForUser,
     parentShared,
@@ -123,6 +129,8 @@ const instance: FolderDtoString = {
     usedSpace,
     passwordProtected,
     expired,
+    chatSettings,
+    rootRoomType,
 };
 ```
 

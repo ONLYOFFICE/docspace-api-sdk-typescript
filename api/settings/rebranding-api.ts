@@ -48,6 +48,7 @@ import type { WhiteLabelRequestsDto } from '../../models';
  */
 export const RebrandingApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Deletes the additional white label settings.
@@ -58,6 +59,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-additional-white-label-settings/
          */
         deleteAdditionalWhiteLabelSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/rebranding/additional`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -109,6 +111,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-company-white-label-settings/
          */
         deleteCompanyWhiteLabelSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/rebranding/company`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -160,6 +163,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-additional-white-label-settings/
          */
         getAdditionalWhiteLabelSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/rebranding/additional`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -211,6 +215,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-company-white-label-settings/
          */
         getCompanyWhiteLabelSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/rebranding/company`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -262,6 +267,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-enable-whitelabel/
          */
         getEnableWhitelabel: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/enablewhitelabel`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -315,6 +321,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-default-white-label-logo-text/
          */
         getIsDefaultWhiteLabelLogoText: async (isDark?: boolean, isDefault?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/whitelabel/logotext/isdefault`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -376,6 +383,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-default-white-label-logos/
          */
         getIsDefaultWhiteLabelLogos: async (isDark?: boolean, isDefault?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/whitelabel/logos/isdefault`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -435,6 +443,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-licensor-data/
          */
         getLicensorData: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/companywhitelabel`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -488,6 +497,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-white-label-logo-text/
          */
         getWhiteLabelLogoText: async (isDark?: boolean, isDefault?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/whitelabel/logotext`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -549,6 +559,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-white-label-logos/
          */
         getWhiteLabelLogos: async (isDark?: boolean, isDefault?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/whitelabel/logos`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -591,6 +602,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/restore-white-label-logo-text/
          */
         restoreWhiteLabelLogoText: async (isDark?: boolean, isDefault?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/whitelabel/logotext/restore`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -652,6 +664,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/restore-white-label-logos/
          */
         restoreWhiteLabelLogos: async (isDark?: boolean, isDefault?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/whitelabel/logos/restore`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -712,6 +725,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-additional-white-label-settings/
          */
         saveAdditionalWhiteLabelSettings: async (additionalWhiteLabelSettingsWrapper?: AdditionalWhiteLabelSettingsWrapper, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/rebranding/additional`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -767,6 +781,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-company-white-label-settings/
          */
         saveCompanyWhiteLabelSettings: async (companyWhiteLabelSettingsWrapper?: CompanyWhiteLabelSettingsWrapper, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/rebranding/company`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -824,6 +839,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-white-label-logo-text/
          */
         saveWhiteLabelLogoText: async (isDark?: boolean, isDefault?: boolean, whiteLabelRequestsDto?: WhiteLabelRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/whitelabel/logotext/save`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -889,6 +905,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-white-label-settings/
          */
         saveWhiteLabelSettings: async (isDark?: boolean, isDefault?: boolean, whiteLabelRequestsDto?: WhiteLabelRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/whitelabel/logos/save`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -953,6 +970,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-white-label-settings-from-files/
          */
         saveWhiteLabelSettingsFromFiles: async (isDark?: boolean, isDefault?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/whitelabel/logos/savefromfiles`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

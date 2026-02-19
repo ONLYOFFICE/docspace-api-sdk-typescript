@@ -32,6 +32,7 @@ import type { CapabilitiesWrapper } from '../../models';
  */
 export const CapabilitiesApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Returns the information about portal capabilities.
@@ -42,6 +43,7 @@ export const CapabilitiesApiAxiosParamCreator = function (configuration?: Config
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-capabilities/
          */
         getPortalCapabilities: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/capabilities`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

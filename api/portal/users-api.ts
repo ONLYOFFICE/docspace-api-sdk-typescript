@@ -38,6 +38,7 @@ import type { UserInfoWrapper } from '../../models';
  */
 export const UsersApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Returns an invitation link for joining the portal.
@@ -51,6 +52,7 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
         getInvitationLink: async (employeeType: EmployeeType, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'employeeType' is not null or undefined
             assertParamExists('getInvitationLink', 'employeeType', employeeType)
+
             const localVarPath = `/api/2.0/portal/users/invite/{employeeType}`
                 .replace(`{${"employeeType"}}`, encodeURIComponent(String(employeeType)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -103,6 +105,7 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-users-count/
          */
         getPortalUsersCount: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/portal/userscount`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -157,6 +160,7 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
         getUserById: async (userID: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userID' is not null or undefined
             assertParamExists('getUserById', 'userID', userID)
+
             const localVarPath = `/api/2.0/portal/users/{userID}`
                 .replace(`{${"userID"}}`, encodeURIComponent(String(userID)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -209,6 +213,7 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/mark-gift-message-as-read/
          */
         markGiftMessageAsRead: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/portal/present/mark`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -266,6 +271,7 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('sendCongratulations', 'userid', userid)
             // verify required parameter 'key' is not null or undefined
             assertParamExists('sendCongratulations', 'key', key)
+
             const localVarPath = `/api/2.0/portal/sendcongratulations`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

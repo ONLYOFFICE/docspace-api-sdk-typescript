@@ -18,6 +18,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { ChatSettings } from './chat-settings';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { LogoRequest } from './logo-request';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -92,5 +95,11 @@ export interface UpdateRoomRequest {
      * @memberof UpdateRoomRequest
      */
     'cover'?: string | null;
+    /**
+     * 
+     * @type {ChatSettings}
+     * @memberof UpdateRoomRequest
+     */
+    'chatSettings'?: ChatSettings;
 }
 

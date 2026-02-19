@@ -34,6 +34,7 @@ import type { TenantBannerSettingsWrapper } from '../../models';
  */
 export const SecurityBannersVisibilityApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Sets the visibility settings of the promotional banners in the portal.
@@ -45,6 +46,7 @@ export const SecurityBannersVisibilityApiAxiosParamCreator = function (configura
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-banner-settings/
          */
         setTenantBannerSettings: async (tenantBannerSettingsDto?: TenantBannerSettingsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/banner`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

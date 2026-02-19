@@ -38,6 +38,7 @@ import type { StringWrapper } from '../../models';
  */
 export const GreetingSettingsApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Returns the greeting settings for the current portal.
@@ -48,6 +49,7 @@ export const GreetingSettingsApiAxiosParamCreator = function (configuration?: Co
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-greeting-settings/
          */
         getGreetingSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/greetingsettings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -99,6 +101,7 @@ export const GreetingSettingsApiAxiosParamCreator = function (configuration?: Co
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-default-greeting-settings/
          */
         getIsDefaultGreetingSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/greetingsettings/isdefault`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -150,6 +153,7 @@ export const GreetingSettingsApiAxiosParamCreator = function (configuration?: Co
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/restore-greeting-settings/
          */
         restoreGreetingSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/greetingsettings/restore`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -202,6 +206,7 @@ export const GreetingSettingsApiAxiosParamCreator = function (configuration?: Co
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-greeting-settings/
          */
         saveGreetingSettings: async (greetingSettingsRequestsDto?: GreetingSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/greetingsettings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

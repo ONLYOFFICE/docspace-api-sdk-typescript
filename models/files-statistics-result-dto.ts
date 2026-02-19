@@ -50,5 +50,11 @@ export interface FilesStatisticsResultDto {
      * @memberof FilesStatisticsResultDto
      */
     'roomsUsedSpace'?: FilesStatisticsFolder;
+    /**
+     * 
+     * @type {FilesStatisticsFolder}
+     * @memberof FilesStatisticsResultDto
+     */
+    'aiAgentsUsedSpace'?: FilesStatisticsFolder;
 }
 

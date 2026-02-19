@@ -72,6 +72,7 @@ import type { WalletQuantityRequestDto } from '../../models';
  */
 export const PaymentApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Calculates an amount of the wallet payment with the parameters specified in the request.
@@ -83,6 +84,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/calculate-wallet-payment/
          */
         calculateWalletPayment: async (walletQuantityRequestDto?: WalletQuantityRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/portal/payment/calculatewallet`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -138,6 +140,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-tenant-wallet-service-state/
          */
         changeTenantWalletServiceState: async (changeWalletServiceStateRequestDto?: ChangeWalletServiceStateRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/portal/payment/servicestate`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -193,6 +196,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-customer-operations-report/
          */
         createCustomerOperationsReport: async (customerOperationsReportRequestDto?: CustomerOperationsReportRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/portal/payment/customer/operationsreport`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -248,6 +252,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-checkout-setup-url/
          */
         getCheckoutSetupUrl: async (backUrl?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/portal/payment/chechoutsetupurl`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -304,6 +309,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-balance/
          */
         getCustomerBalance: async (refresh?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/portal/payment/customer/balance`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -360,6 +366,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-info/
          */
         getCustomerInfo: async (refresh?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/portal/payment/customerinfo`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -422,6 +429,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-operations/
          */
         getCustomerOperations: async (startDate?: string, endDate?: string, participantName?: string, credit?: boolean, debit?: boolean, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/portal/payment/customer/operations`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -505,6 +513,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-operations-report/
          */
         getCustomerOperationsReport: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/portal/payment/customer/operationsreport`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -557,6 +566,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-account/
          */
         getPaymentAccount: async (backUrl?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/portal/payment/account`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -612,6 +622,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-currencies/
          */
         getPaymentCurrencies: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/portal/payment/currencies`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -664,6 +675,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-quotas/
          */
         getPaymentQuotas: async (wallet?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/portal/payment/quotas`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -720,6 +732,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-url/
          */
         getPaymentUrl: async (paymentUrlRequestsDto?: PaymentUrlRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/portal/payment/url`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -774,6 +787,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-prices/
          */
         getPortalPrices: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/portal/payment/prices`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -826,6 +840,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-quota-payment-information/
          */
         getQuotaPaymentInformation: async (refresh?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/portal/payment/quota`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -881,6 +896,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-wallet-service-settings/
          */
         getTenantWalletServiceSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/portal/payment/servicessettings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -932,6 +948,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-wallet-settings/
          */
         getTenantWalletSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/portal/payment/topupsettings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -986,6 +1003,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
         getWalletService: async (service: TenantWalletService, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'service' is not null or undefined
             assertParamExists('getWalletService', 'service', service)
+
             const localVarPath = `/api/2.0/portal/payment/walletservice`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1041,6 +1059,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-wallet-services/
          */
         getWalletServices: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/portal/payment/walletservices`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1093,6 +1112,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-payment-request/
          */
         sendPaymentRequest: async (salesRequestsDto?: SalesRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/portal/payment/request`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1148,6 +1168,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-wallet-settings/
          */
         setTenantWalletSettings: async (tenantWalletSettingsWrapper?: TenantWalletSettingsWrapper, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/portal/payment/topupsettings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1202,6 +1223,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-customer-operations-report/
          */
         terminateCustomerOperationsReport: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/portal/payment/customer/operationsreport`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1254,6 +1276,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/top-up-deposit/
          */
         topUpDeposit: async (topUpDepositRequestDto?: TopUpDepositRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/portal/payment/deposit`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1309,6 +1332,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-payment/
          */
         updatePayment: async (quantityRequestDto?: QuantityRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/portal/payment/update`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1364,6 +1388,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-wallet-payment/
          */
         updateWalletPayment: async (walletQuantityRequestDto?: WalletQuantityRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/portal/payment/updatewallet`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

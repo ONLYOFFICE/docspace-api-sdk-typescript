@@ -18,12 +18,20 @@
 
 
 /**
- * [-12 - Backup, -11 - Storage]
+ * [-14 - WebSearch, -13 - AITools, -12 - Backup, -11 - Storage]
  * @export
  * @enum {number}
  */
 
 export const TenantWalletService = {
+    /**
+    * WebSearch
+    */
+    WebSearch: -14,
+    /**
+    * AITools
+    */
+    AITools: -13,
     /**
     * Backup
     */

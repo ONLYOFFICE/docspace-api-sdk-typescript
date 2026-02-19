@@ -42,6 +42,7 @@ import type { UpdateClientRequest } from '../../models';
  */
 export const ClientManagementApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Activates or deactivates an OAuth2 client. When deactivated, the client cannot request new access tokens, but existing tokens will remain valid until they expire.
@@ -58,6 +59,7 @@ export const ClientManagementApiAxiosParamCreator = function (configuration?: Co
             assertParamExists('changeActivation', 'clientId', clientId)
             // verify required parameter 'changeClientActivationRequest' is not null or undefined
             assertParamExists('changeActivation', 'changeClientActivationRequest', changeClientActivationRequest)
+
             const localVarPath = `/api/2.0/clients/{clientId}/activation`
                 .replace(`{${"clientId"}}`, encodeURIComponent(String(clientId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -99,6 +101,7 @@ export const ClientManagementApiAxiosParamCreator = function (configuration?: Co
         createClient: async (createClientRequest: CreateClientRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'createClientRequest' is not null or undefined
             assertParamExists('createClient', 'createClientRequest', createClientRequest)
+
             const localVarPath = `/api/2.0/clients`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -139,6 +142,7 @@ export const ClientManagementApiAxiosParamCreator = function (configuration?: Co
         deleteClient: async (clientId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'clientId' is not null or undefined
             assertParamExists('deleteClient', 'clientId', clientId)
+
             const localVarPath = `/api/2.0/clients/{clientId}`
                 .replace(`{${"clientId"}}`, encodeURIComponent(String(clientId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -177,6 +181,7 @@ export const ClientManagementApiAxiosParamCreator = function (configuration?: Co
         regenerateSecret: async (clientId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'clientId' is not null or undefined
             assertParamExists('regenerateSecret', 'clientId', clientId)
+
             const localVarPath = `/api/2.0/clients/{clientId}/regenerate`
                 .replace(`{${"clientId"}}`, encodeURIComponent(String(clientId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -215,6 +220,7 @@ export const ClientManagementApiAxiosParamCreator = function (configuration?: Co
         revokeUserClient: async (clientId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'clientId' is not null or undefined
             assertParamExists('revokeUserClient', 'clientId', clientId)
+
             const localVarPath = `/api/2.0/clients/{clientId}/revoke`
                 .replace(`{${"clientId"}}`, encodeURIComponent(String(clientId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -256,6 +262,7 @@ export const ClientManagementApiAxiosParamCreator = function (configuration?: Co
             assertParamExists('updateClient', 'clientId', clientId)
             // verify required parameter 'updateClientRequest' is not null or undefined
             assertParamExists('updateClient', 'updateClientRequest', updateClientRequest)
+
             const localVarPath = `/api/2.0/clients/{clientId}`
                 .replace(`{${"clientId"}}`, encodeURIComponent(String(clientId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.

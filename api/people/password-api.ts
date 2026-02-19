@@ -38,6 +38,7 @@ import type { StringWrapper } from '../../models';
  */
 export const PasswordApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Sets a new password to the user with the ID specified in the request.
@@ -54,6 +55,7 @@ export const PasswordApiAxiosParamCreator = function (configuration?: Configurat
             assertParamExists('changeUserPassword', 'userid', userid)
             // verify required parameter 'memberBaseRequestDto' is not null or undefined
             assertParamExists('changeUserPassword', 'memberBaseRequestDto', memberBaseRequestDto)
+
             const localVarPath = `/api/2.0/people/{userid}/password`
                 .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -110,6 +112,7 @@ export const PasswordApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-user-password/
          */
         sendUserPassword: async (emailMemberRequestDto?: EmailMemberRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/password`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

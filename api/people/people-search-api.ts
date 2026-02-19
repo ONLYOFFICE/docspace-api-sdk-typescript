@@ -52,6 +52,7 @@ import type { SortOrder } from '../../models';
  */
 export const PeopleSearchApiAxiosParamCreator = function (configuration?: Configuration) {
     let fields: string | undefined;
+    
     return {
         withFields: (f: string) => {
             fields = f;
@@ -80,6 +81,7 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
         getAccountsEntriesWithFilesShared: async (id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getAccountsEntriesWithFilesShared', 'id', id)
+
             const localVarPath = `/api/2.0/accounts/file/{id}/search`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -195,6 +197,7 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
         getAccountsEntriesWithFoldersShared: async (id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getAccountsEntriesWithFoldersShared', 'id', id)
+
             const localVarPath = `/api/2.0/accounts/folder/{id}/search`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -310,6 +313,7 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
         getAccountsEntriesWithRoomsShared: async (id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getAccountsEntriesWithRoomsShared', 'id', id)
+
             const localVarPath = `/api/2.0/accounts/room/{id}/search`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -415,6 +419,7 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
         getSearch: async (query: string, filterBy?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'query' is not null or undefined
             assertParamExists('getSearch', 'query', query)
+
             const localVarPath = `/api/2.0/people/@search/{query}`
                 .replace(`{${"query"}}`, encodeURIComponent(String(query)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -495,6 +500,7 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-simple-by-filter/
          */
         getSimpleByFilter: async (employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<GetSimpleByFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/simple/filter`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -644,6 +650,7 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
         getUsersWithFilesShared: async (id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getUsersWithFilesShared', 'id', id)
+
             const localVarPath = `/api/2.0/people/file/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -759,6 +766,7 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
         getUsersWithFoldersShared: async (id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getUsersWithFoldersShared', 'id', id)
+
             const localVarPath = `/api/2.0/people/folder/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -874,6 +882,7 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
         getUsersWithRoomShared: async (id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getUsersWithRoomShared', 'id', id)
+
             const localVarPath = `/api/2.0/people/room/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -994,6 +1003,7 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/search-users-by-extended-filter/
          */
         searchUsersByExtendedFilter: async (employeeStatus?: EmployeeStatus, groupId?: string, activationStatus?: EmployeeActivationStatus, employeeType?: EmployeeType, employeeTypes?: Array<SearchUsersByExtendedFilterEmployeeTypesEnum>, isAdministrator?: boolean, payments?: Payments, accountLoginType?: AccountLoginType, quotaFilter?: QuotaFilter, withoutGroup?: boolean, excludeGroup?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/filter`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1129,6 +1139,7 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/search-users-by-query/
          */
         searchUsersByQuery: async (query?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/search`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1190,6 +1201,7 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
         searchUsersByStatus: async (status: EmployeeStatus, query?: string, filterBy?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'status' is not null or undefined
             assertParamExists('searchUsersByStatus', 'status', status)
+
             const localVarPath = `/api/2.0/people/status/{status}/search`
                 .replace(`{${"status"}}`, encodeURIComponent(String(status)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.

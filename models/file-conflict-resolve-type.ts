@@ -18,24 +18,15 @@
 
 
 /**
- * [0 - Skip, 1 - Overwrite, 2 - Duplicate]
+ * [Skip - Skip, Overwrite - Overwrite, Duplicate - Duplicate]
  * @export
- * @enum {number}
+ * @enum {string}
  */
 
 export const FileConflictResolveType = {
-    /**
-    * Skip
-    */
-    Skip: 0,
-    /**
-    * Overwrite
-    */
-    Overwrite: 1,
-    /**
-    * Duplicate
-    */
-    Duplicate: 2
+    Skip: 'Skip',
+    Overwrite: 'Overwrite',
+    Duplicate: 'Duplicate'
 } as const;
 
 export type FileConflictResolveType = typeof FileConflictResolveType[keyof typeof FileConflictResolveType];

@@ -34,6 +34,7 @@ import type { CspWrapper } from '../../models';
  */
 export const CSPApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Configures the CSP (Content Security Policy) settings for the current portal.
@@ -45,6 +46,7 @@ export const CSPApiAxiosParamCreator = function (configuration?: Configuration) 
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/configure-csp/
          */
         configureCsp: async (cspRequestsDto?: CspRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/security/csp`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -99,6 +101,7 @@ export const CSPApiAxiosParamCreator = function (configuration?: Configuration) 
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-csp-settings/
          */
         getCspSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/security/csp`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

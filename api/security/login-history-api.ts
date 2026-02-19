@@ -38,6 +38,7 @@ import type { StringWrapper } from '../../models';
  */
 export const LoginHistoryApiAxiosParamCreator = function (configuration?: Configuration) {
     let fields: string | undefined;
+    
     return {
         withFields: (f: string) => {
             fields = f;
@@ -51,6 +52,7 @@ export const LoginHistoryApiAxiosParamCreator = function (configuration?: Config
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-login-history-report/
          */
         createLoginHistoryReport: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/security/audit/login/report`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -102,6 +104,7 @@ export const LoginHistoryApiAxiosParamCreator = function (configuration?: Config
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-last-login-events/
          */
         getLastLoginEvents: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/security/audit/login/last`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -159,6 +162,7 @@ export const LoginHistoryApiAxiosParamCreator = function (configuration?: Config
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-login-events-by-filter/
          */
         getLoginEventsByFilter: async (userId?: string, action?: MessageAction, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/security/audit/login/filter`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

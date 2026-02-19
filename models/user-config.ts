@@ -47,5 +47,11 @@ export interface UserConfig {
      * @memberof UserConfig
      */
     'roles'?: Array<string> | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserConfig
+     */
+    'customerId'?: string | null;
 }
 

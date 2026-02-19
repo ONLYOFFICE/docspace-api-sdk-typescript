@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **roomType** | [**RoomType**](RoomType.md) |  | [default to undefined]
 **_private** | **boolean** | Specifies whether the room to be created is private or not. | [optional] [default to undefined]
 **share** | [**Array&lt;FileShareParams&gt;**](FileShareParams.md) | The collection of sharing parameters. | [optional] [default to undefined]
+**chatSettings** | [**ChatSettings**](ChatSettings.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -39,6 +40,7 @@ const instance: CreateRoomRequestDto = {
     roomType,
     _private,
     share,
+    chatSettings,
 };
 ```
 

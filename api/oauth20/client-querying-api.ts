@@ -42,6 +42,7 @@ import type { PageableResponseClientInfoResponse } from '../../models';
  */
 export const ClientQueryingApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Retrieves detailed information about a specific OAuth2 client including its name, description, redirect URIs, and scopes.
@@ -55,6 +56,7 @@ export const ClientQueryingApiAxiosParamCreator = function (configuration?: Conf
         getClient: async (clientId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'clientId' is not null or undefined
             assertParamExists('getClient', 'clientId', clientId)
+
             const localVarPath = `/api/2.0/clients/{clientId}`
                 .replace(`{${"clientId"}}`, encodeURIComponent(String(clientId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -93,6 +95,7 @@ export const ClientQueryingApiAxiosParamCreator = function (configuration?: Conf
         getClientInfo: async (clientId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'clientId' is not null or undefined
             assertParamExists('getClientInfo', 'clientId', clientId)
+
             const localVarPath = `/api/2.0/clients/{clientId}/info`
                 .replace(`{${"clientId"}}`, encodeURIComponent(String(clientId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -133,6 +136,7 @@ export const ClientQueryingApiAxiosParamCreator = function (configuration?: Conf
         getClients: async (limit: number, lastClientId?: string, lastCreatedOn?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'limit' is not null or undefined
             assertParamExists('getClients', 'limit', limit)
+
             const localVarPath = `/api/2.0/clients`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -186,6 +190,7 @@ export const ClientQueryingApiAxiosParamCreator = function (configuration?: Conf
         getClientsInfo: async (limit: number, lastClientId?: string, lastCreatedOn?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'limit' is not null or undefined
             assertParamExists('getClientsInfo', 'limit', limit)
+
             const localVarPath = `/api/2.0/clients/info`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -238,6 +243,7 @@ export const ClientQueryingApiAxiosParamCreator = function (configuration?: Conf
         getConsents: async (limit: number, lastModifiedOn?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'limit' is not null or undefined
             assertParamExists('getConsents', 'limit', limit)
+
             const localVarPath = `/api/2.0/clients/consents`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -285,6 +291,7 @@ export const ClientQueryingApiAxiosParamCreator = function (configuration?: Conf
         getPublicClientInfo: async (clientId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'clientId' is not null or undefined
             assertParamExists('getPublicClientInfo', 'clientId', clientId)
+
             const localVarPath = `/api/2.0/clients/{clientId}/public/info`
                 .replace(`{${"clientId"}}`, encodeURIComponent(String(clientId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.

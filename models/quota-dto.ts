@@ -91,6 +91,12 @@ export interface QuotaDto {
     'roomsQuota'?: TenantEntityQuotaSettings;
     /**
      * 
+     * @type {TenantEntityQuotaSettings}
+     * @memberof QuotaDto
+     */
+    'aiAgentsQuota'?: TenantEntityQuotaSettings;
+    /**
+     * 
      * @type {TenantQuotaSettings}
      * @memberof QuotaDto
      */

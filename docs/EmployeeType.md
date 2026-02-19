@@ -1,17 +1,17 @@
 # EmployeeType
 
-[0 - All, 1 - Room admin, 2 - Guest, 3 - DocSpace admin, 4 - User]
+[All - All, RoomAdmin - Room admin, Guest - Guest, DocSpaceAdmin - DocSpace admin, User - User]
 
 ## Enum
 
-* `All` (value: `0`)
+* `All` (value: `'All'`)
 
-* `RoomAdmin` (value: `1`)
+* `RoomAdmin` (value: `'RoomAdmin'`)
 
-* `Guest` (value: `2`)
+* `Guest` (value: `'Guest'`)
 
-* `DocSpaceAdmin` (value: `3`)
+* `DocSpaceAdmin` (value: `'DocSpaceAdmin'`)
 
-* `User` (value: `4`)
+* `User` (value: `'User'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

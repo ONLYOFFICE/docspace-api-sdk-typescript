@@ -34,6 +34,7 @@ import type { LoginSettingsWrapper } from '../../models';
  */
 export const LoginSettingsApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Returns the portal login settings.
@@ -44,6 +45,7 @@ export const LoginSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-login-settings/
          */
         getLoginSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/security/loginsettings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -95,6 +97,7 @@ export const LoginSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-default-login-settings/
          */
         setDefaultLoginSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/security/loginsettings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -147,6 +150,7 @@ export const LoginSettingsApiAxiosParamCreator = function (configuration?: Confi
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-login-settings/
          */
         updateLoginSettings: async (loginSettingsRequestDto?: LoginSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/security/loginsettings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

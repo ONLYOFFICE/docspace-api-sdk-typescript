@@ -312,6 +312,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **email** | [**string**] | The user email address. | (optional) defaults to undefined|
+| **encemail** | [**string**] | The user encrypted email address. | (optional) defaults to undefined|
 | **culture** | [**string**] | Culture | (optional) defaults to undefined|
 
 
@@ -335,10 +336,12 @@ const configuration = new Configuration();
 const apiInstance = new PeopleProfilesApi(configuration);
 
 let email: string; //The user email address. (optional) (default to undefined)
+let encemail: string; //The user encrypted email address. (optional) (default to undefined)
 let culture: string; //Culture (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getProfileByEmail(
     email,
+    encemail,
     culture
 );
 ```

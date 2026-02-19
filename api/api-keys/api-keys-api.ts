@@ -42,6 +42,7 @@ import type { UpdateApiKeyRequest } from '../../models';
  */
 export const ApiKeysApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Creates a user API key with the parameters specified in the request.
@@ -53,6 +54,7 @@ export const ApiKeysApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-api-key/
          */
         createApiKey: async (createApiKeyRequestDto?: CreateApiKeyRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/keys`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -110,6 +112,7 @@ export const ApiKeysApiAxiosParamCreator = function (configuration?: Configurati
         deleteApiKey: async (keyId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'keyId' is not null or undefined
             assertParamExists('deleteApiKey', 'keyId', keyId)
+
             const localVarPath = `/api/2.0/keys/{keyId}`
                 .replace(`{${"keyId"}}`, encodeURIComponent(String(keyId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -162,6 +165,7 @@ export const ApiKeysApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-permissions/
          */
         getAllPermissions: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/keys/permissions`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -213,6 +217,7 @@ export const ApiKeysApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-api-key/
          */
         getApiKey: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/keys/@self`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -264,6 +269,7 @@ export const ApiKeysApiAxiosParamCreator = function (configuration?: Configurati
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-api-keys/
          */
         getApiKeys: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/keys`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -321,6 +327,7 @@ export const ApiKeysApiAxiosParamCreator = function (configuration?: Configurati
             assertParamExists('updateApiKey', 'keyId', keyId)
             // verify required parameter 'updateApiKeyRequest' is not null or undefined
             assertParamExists('updateApiKey', 'updateApiKeyRequest', updateApiKeyRequest)
+
             const localVarPath = `/api/2.0/keys/{keyId}`
                 .replace(`{${"keyId"}}`, encodeURIComponent(String(keyId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.

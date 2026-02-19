@@ -36,6 +36,7 @@ import type { SmtpSettingsWrapper } from '../../models';
  */
 export const SMTPSettingsApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Returns the status of the SMTP testing process.
@@ -46,6 +47,7 @@ export const SMTPSettingsApiAxiosParamCreator = function (configuration?: Config
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-smtp-operation-status/
          */
         getSmtpOperationStatus: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/smtpsettings/smtp/test/status`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -97,6 +99,7 @@ export const SMTPSettingsApiAxiosParamCreator = function (configuration?: Config
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-smtp-settings/
          */
         getSmtpSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/smtpsettings/smtp`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -148,6 +151,7 @@ export const SMTPSettingsApiAxiosParamCreator = function (configuration?: Config
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-smtp-settings/
          */
         resetSmtpSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/smtpsettings/smtp`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -200,6 +204,7 @@ export const SMTPSettingsApiAxiosParamCreator = function (configuration?: Config
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-smtp-settings/
          */
         saveSmtpSettings: async (smtpSettingsDto?: SmtpSettingsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/smtpsettings/smtp`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -254,6 +259,7 @@ export const SMTPSettingsApiAxiosParamCreator = function (configuration?: Config
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/test-smtp-settings/
          */
         testSmtpSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/smtpsettings/smtp/test`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

@@ -51,6 +51,18 @@ export interface FileEntryBaseDto {
      */
     'access'?: FileShare;
     /**
+     * 
+     * @type {EmployeeDto}
+     * @memberof FileEntryBaseDto
+     */
+    'sharedBy'?: EmployeeDto;
+    /**
+     * 
+     * @type {EmployeeDto}
+     * @memberof FileEntryBaseDto
+     */
+    'ownedBy'?: EmployeeDto;
+    /**
      * Specifies if the file entry is shared via link or not.
      * @type {boolean}
      * @memberof FileEntryBaseDto

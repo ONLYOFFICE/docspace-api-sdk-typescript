@@ -18,32 +18,17 @@
 
 
 /**
- * [0 - All, 1 - Room admin, 2 - Guest, 3 - DocSpace admin, 4 - User]
+ * [All - All, RoomAdmin - Room admin, Guest - Guest, DocSpaceAdmin - DocSpace admin, User - User]
  * @export
- * @enum {number}
+ * @enum {string}
  */
 
 export const EmployeeType = {
-    /**
-    * All
-    */
-    All: 0,
-    /**
-    * Room admin
-    */
-    RoomAdmin: 1,
-    /**
-    * Guest
-    */
-    Guest: 2,
-    /**
-    * DocSpace admin
-    */
-    DocSpaceAdmin: 3,
-    /**
-    * User
-    */
-    User: 4
+    All: 'All',
+    RoomAdmin: 'RoomAdmin',
+    Guest: 'Guest',
+    DocSpaceAdmin: 'DocSpaceAdmin',
+    User: 'User'
 } as const;
 
 export type EmployeeType = typeof EmployeeType[keyof typeof EmployeeType];

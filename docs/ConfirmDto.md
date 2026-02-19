@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **roomId** | **string** | The confirmation room ID. | [optional] [default to undefined]
 **title** | **string** | The confirmation title. | [optional] [default to undefined]
 **email** | **string** | The confirmation email. | [optional] [default to undefined]
+**isAgent** | **boolean** | The confirmation is agent. | [optional] [default to undefined]
 
 ## Example
 
@@ -21,6 +22,7 @@ const instance: ConfirmDto = {
     roomId,
     title,
     email,
+    isAgent,
 };
 ```
 

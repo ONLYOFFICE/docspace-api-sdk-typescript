@@ -34,6 +34,7 @@ import type { OwnerIdSettingsRequestDto } from '../../models';
  */
 export const OwnerApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Sends the instructions to change the DocSpace owner.
@@ -45,6 +46,7 @@ export const OwnerApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-owner-change-instructions/
          */
         sendOwnerChangeInstructions: async (ownerIdSettingsRequestDto?: OwnerIdSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/owner`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -100,6 +102,7 @@ export const OwnerApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-portal-owner/
          */
         updatePortalOwner: async (ownerIdSettingsRequestDto?: OwnerIdSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/owner`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

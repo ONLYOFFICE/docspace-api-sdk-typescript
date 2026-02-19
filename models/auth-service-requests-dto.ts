@@ -57,6 +57,12 @@ export interface AuthServiceRequestsDto {
      */
     'canSet'?: boolean;
     /**
+     * Specifies whether the authorization service is paid or not.
+     * @type {boolean}
+     * @memberof AuthServiceRequestsDto
+     */
+    'paid'?: boolean;
+    /**
      * The collection of authorization keys associated with the authorization service.
      * @type {Array<AuthKey>}
      * @memberof AuthServiceRequestsDto

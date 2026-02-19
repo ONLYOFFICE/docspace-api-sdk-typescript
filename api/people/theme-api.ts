@@ -34,6 +34,7 @@ import type { DarkThemeSettingsWrapper } from '../../models';
  */
 export const ThemeApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Changes the current portal theme.
@@ -45,6 +46,7 @@ export const ThemeApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-portal-theme/
          */
         changePortalTheme: async (darkThemeSettingsRequestDto?: DarkThemeSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/theme`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -99,6 +101,7 @@ export const ThemeApiAxiosParamCreator = function (configuration?: Configuration
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-theme/
          */
         getPortalTheme: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/theme`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

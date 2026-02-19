@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **isCompleted** | **boolean** |  | [optional] [default to undefined]
 **progress** | **number** |  | [optional] [default to undefined]
 **error** | **string** |  | [optional] [default to undefined]
+**warning** | **string** |  | [optional] [default to undefined]
 **link** | **string** |  | [optional] [default to undefined]
 **tenantId** | **number** |  | [optional] [default to undefined]
 **backupProgressEnum** | [**BackupProgressEnum**](BackupProgressEnum.md) |  | [optional] [default to undefined]
@@ -22,6 +23,7 @@ const instance: BackupProgress = {
     isCompleted,
     progress,
     error,
+    warning,
     link,
     tenantId,
     backupProgressEnum,

@@ -18,24 +18,15 @@
 
 
 /**
- * [0 - Base, 1 - Dark, 2 - System]
+ * [Base - Base, Dark - Dark, System - System]
  * @export
- * @enum {number}
+ * @enum {string}
  */
 
 export const DarkThemeSettingsType = {
-    /**
-    * Base
-    */
-    Base: 0,
-    /**
-    * Dark
-    */
-    Dark: 1,
-    /**
-    * System
-    */
-    System: 2
+    Base: 'Base',
+    Dark: 'Dark',
+    System: 'System'
 } as const;
 
 export type DarkThemeSettingsType = typeof DarkThemeSettingsType[keyof typeof DarkThemeSettingsType];

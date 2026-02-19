@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **trashUsedSpace** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) |  | [optional] [default to undefined]
 **archiveUsedSpace** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) |  | [optional] [default to undefined]
 **roomsUsedSpace** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) |  | [optional] [default to undefined]
+**aiAgentsUsedSpace** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -21,6 +22,7 @@ const instance: FilesStatisticsResultDto = {
     trashUsedSpace,
     archiveUsedSpace,
     roomsUsedSpace,
+    aiAgentsUsedSpace,
 };
 ```
 

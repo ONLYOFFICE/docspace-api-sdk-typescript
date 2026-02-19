@@ -32,6 +32,7 @@ import type { TenantDevToolsAccessSettingsWrapper } from '../../models';
  */
 export const AccessToDevToolsApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Returns the Developer Tools access settings for the portal.
@@ -42,6 +43,7 @@ export const AccessToDevToolsApiAxiosParamCreator = function (configuration?: Co
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-access-dev-tools-settings/
          */
         getTenantAccessDevToolsSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/devtoolsaccess`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

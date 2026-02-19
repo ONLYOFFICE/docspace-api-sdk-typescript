@@ -36,6 +36,12 @@ import type { HistoryData } from './history-data';
  */
 export interface HistoryDto {
     /**
+     * The unique identifier for the file history entry.
+     * @type {number}
+     * @memberof HistoryDto
+     */
+    'id': number;
+    /**
      * 
      * @type {HistoryAction}
      * @memberof HistoryDto

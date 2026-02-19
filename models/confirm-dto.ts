@@ -50,6 +50,12 @@ export interface ConfirmDto {
      * @memberof ConfirmDto
      */
     'email'?: string | null;
+    /**
+     * The confirmation is agent.
+     * @type {boolean}
+     * @memberof ConfirmDto
+     */
+    'isAgent'?: boolean;
 }
 
 

@@ -42,6 +42,7 @@ import type { TerminateRequestDto } from '../../models';
  */
 export const UserDataApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Returns the progress of deleting the personal folder.
@@ -52,6 +53,7 @@ export const UserDataApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-delete-personal-folder-progress/
          */
         getDeletePersonalFolderProgress: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/delete/personal/progress`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -106,6 +108,7 @@ export const UserDataApiAxiosParamCreator = function (configuration?: Configurat
         getReassignProgress: async (userid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userid' is not null or undefined
             assertParamExists('getReassignProgress', 'userid', userid)
+
             const localVarPath = `/api/2.0/people/reassign/progress/{userid}`
                 .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -161,6 +164,7 @@ export const UserDataApiAxiosParamCreator = function (configuration?: Configurat
         getRemoveProgress: async (userid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userid' is not null or undefined
             assertParamExists('getRemoveProgress', 'userid', userid)
+
             const localVarPath = `/api/2.0/people/remove/progress/{userid}`
                 .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -215,6 +219,7 @@ export const UserDataApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/necessary-reassign/
          */
         necessaryReassign: async (userId?: string, type?: EmployeeType, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/reassign/necessary`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -274,6 +279,7 @@ export const UserDataApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-instructions-to-delete/
          */
         sendInstructionsToDelete: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/self/delete`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -325,6 +331,7 @@ export const UserDataApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-delete-personal-folder/
          */
         startDeletePersonalFolder: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/delete/personal/start`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -377,6 +384,7 @@ export const UserDataApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-reassign/
          */
         startReassign: async (startReassignRequestDto?: StartReassignRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/reassign/start`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -432,6 +440,7 @@ export const UserDataApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-remove/
          */
         startRemove: async (terminateRequestDto?: TerminateRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/remove/start`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -487,6 +496,7 @@ export const UserDataApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-reassign/
          */
         terminateReassign: async (terminateRequestDto?: TerminateRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/reassign/terminate`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -542,6 +552,7 @@ export const UserDataApiAxiosParamCreator = function (configuration?: Configurat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-remove/
          */
         terminateRemove: async (terminateRequestDto?: TerminateRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/people/remove/terminate`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

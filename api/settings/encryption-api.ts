@@ -38,6 +38,7 @@ import type { StorageEncryptionRequestsDto } from '../../models';
  */
 export const EncryptionApiAxiosParamCreator = function (configuration?: Configuration) {
     
+    
     return {
         /**
          * Returns the storage encryption progress.
@@ -48,6 +49,7 @@ export const EncryptionApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-storage-encryption-progress/
          */
         getStorageEncryptionProgress: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/encryption/progress`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -99,6 +101,7 @@ export const EncryptionApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-storage-encryption-settings/
          */
         getStorageEncryptionSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/encryption/settings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -151,6 +154,7 @@ export const EncryptionApiAxiosParamCreator = function (configuration?: Configur
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-storage-encryption/
          */
         startStorageEncryption: async (storageEncryptionRequestsDto?: StorageEncryptionRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
             const localVarPath = `/api/2.0/settings/encryption/start`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

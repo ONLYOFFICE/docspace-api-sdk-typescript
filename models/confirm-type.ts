@@ -18,88 +18,31 @@
 
 
 /**
- * [0 - Emp invite, 1 - Link invite, 2 - Portal suspend, 3 - Portal continue, 4 - Portal remove, 5 - Dns change, 6 - Portal owner change, 7 - Activation, 8 - Email change, 9 - Email activation, 10 - Password change, 11 - Profile remove, 12 - Phone activation, 13 - Phone auth, 14 - Auth, 15 - Tfa activation, 16 - Tfa auth, 17 - Wizard, 18 - Guest share link]
+ * [EmpInvite - Emp invite, LinkInvite - Link invite, PortalSuspend - Portal suspend, PortalContinue - Portal continue, PortalRemove - Portal remove, DnsChange - Dns change, PortalOwnerChange - Portal owner change, Activation - Activation, EmailChange - Email change, EmailActivation - Email activation, PasswordChange - Password change, ProfileRemove - Profile remove, PhoneActivation - Phone activation, PhoneAuth - Phone auth, Auth - Auth, TfaActivation - Tfa activation, TfaAuth - Tfa auth, Wizard - Wizard, GuestShareLink - Guest share link]
  * @export
- * @enum {number}
+ * @enum {string}
  */
 
 export const ConfirmType = {
-    /**
-    * Emp invite
-    */
-    EmpInvite: 0,
-    /**
-    * Link invite
-    */
-    LinkInvite: 1,
-    /**
-    * Portal suspend
-    */
-    PortalSuspend: 2,
-    /**
-    * Portal continue
-    */
-    PortalContinue: 3,
-    /**
-    * Portal remove
-    */
-    PortalRemove: 4,
-    /**
-    * Dns change
-    */
-    DnsChange: 5,
-    /**
-    * Portal owner change
-    */
-    PortalOwnerChange: 6,
-    /**
-    * Activation
-    */
-    Activation: 7,
-    /**
-    * Email change
-    */
-    EmailChange: 8,
-    /**
-    * Email activation
-    */
-    EmailActivation: 9,
-    /**
-    * Password change
-    */
-    PasswordChange: 10,
-    /**
-    * Profile remove
-    */
-    ProfileRemove: 11,
-    /**
-    * Phone activation
-    */
-    PhoneActivation: 12,
-    /**
-    * Phone auth
-    */
-    PhoneAuth: 13,
-    /**
-    * Auth
-    */
-    Auth: 14,
-    /**
-    * Tfa activation
-    */
-    TfaActivation: 15,
-    /**
-    * Tfa auth
-    */
-    TfaAuth: 16,
-    /**
-    * Wizard
-    */
-    Wizard: 17,
-    /**
-    * Guest share link
-    */
-    GuestShareLink: 18
+    EmpInvite: 'EmpInvite',
+    LinkInvite: 'LinkInvite',
+    PortalSuspend: 'PortalSuspend',
+    PortalContinue: 'PortalContinue',
+    PortalRemove: 'PortalRemove',
+    DnsChange: 'DnsChange',
+    PortalOwnerChange: 'PortalOwnerChange',
+    Activation: 'Activation',
+    EmailChange: 'EmailChange',
+    EmailActivation: 'EmailActivation',
+    PasswordChange: 'PasswordChange',
+    ProfileRemove: 'ProfileRemove',
+    PhoneActivation: 'PhoneActivation',
+    PhoneAuth: 'PhoneAuth',
+    Auth: 'Auth',
+    TfaActivation: 'TfaActivation',
+    TfaAuth: 'TfaAuth',
+    Wizard: 'Wizard',
+    GuestShareLink: 'GuestShareLink'
 } as const;
 
 export type ConfirmType = typeof ConfirmType[keyof typeof ConfirmType];
