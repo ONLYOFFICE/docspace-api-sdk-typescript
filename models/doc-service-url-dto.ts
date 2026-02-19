@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,62 +21,42 @@
 
 /**
  * The document service URL parameters.
- * @export
- * @interface DocServiceUrlDto
  */
 export interface DocServiceUrlDto {
     /**
      * The version of the document service.
-     * @type {string}
-     * @memberof DocServiceUrlDto
      */
-    'version': string | null;
+    'version': string;
     /**
      * The document service URL API.
-     * @type {string}
-     * @memberof DocServiceUrlDto
      */
-    'docServiceUrlApi': string | null;
+    'docServiceUrlApi': string;
     /**
      * The document service URL.
-     * @type {string}
-     * @memberof DocServiceUrlDto
      */
-    'docServiceUrl': string | null;
+    'docServiceUrl': string;
     /**
      * The URL used to preload the document service scripts.
-     * @type {string}
-     * @memberof DocServiceUrlDto
      */
-    'docServicePreloadUrl': string | null;
+    'docServicePreloadUrl': string;
     /**
      * The internal document service URL.
-     * @type {string}
-     * @memberof DocServiceUrlDto
      */
-    'docServiceUrlInternal': string | null;
+    'docServiceUrlInternal': string;
     /**
      * The document service portal URL.
-     * @type {string}
-     * @memberof DocServiceUrlDto
      */
-    'docServicePortalUrl': string | null;
+    'docServicePortalUrl': string;
     /**
      * The document service signature header.
-     * @type {string}
-     * @memberof DocServiceUrlDto
      */
-    'docServiceSignatureHeader': string | null;
+    'docServiceSignatureHeader': string;
     /**
      * Specifies if the document service SSL verification is enabled.
-     * @type {boolean}
-     * @memberof DocServiceUrlDto
      */
     'docServiceSslVerification': boolean;
     /**
      * Specifies if the document service is default.
-     * @type {boolean}
-     * @memberof DocServiceUrlDto
      */
     'isDefault': boolean;
 }

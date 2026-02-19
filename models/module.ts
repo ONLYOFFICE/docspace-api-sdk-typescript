@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,62 +21,42 @@
 
 /**
  * The module information.
- * @export
- * @interface Module
  */
 export interface Module {
     /**
      * The module ID.
-     * @type {string}
-     * @memberof Module
      */
     'id'?: string;
     /**
      * The module product class name.
-     * @type {string}
-     * @memberof Module
      */
-    'appName'?: string | null;
+    'appName'?: string;
     /**
      * The module product class name.
-     * @type {string}
-     * @memberof Module
      */
-    'title'?: string | null;
+    'title'?: string;
     /**
      * The URL to the module start page.
-     * @type {string}
-     * @memberof Module
      */
-    'link'?: string | null;
+    'link'?: string;
     /**
      * The module icon URL.
-     * @type {string}
-     * @memberof Module
      */
-    'iconUrl'?: string | null;
+    'iconUrl'?: string;
     /**
      * The module large image URL.
-     * @type {string}
-     * @memberof Module
      */
-    'imageUrl'?: string | null;
+    'imageUrl'?: string;
     /**
      * The module help URL.
-     * @type {string}
-     * @memberof Module
      */
-    'helpUrl'?: string | null;
+    'helpUrl'?: string;
     /**
      * The module description.
-     * @type {string}
-     * @memberof Module
      */
-    'description'?: string | null;
+    'description'?: string;
     /**
      * Specifies if the module is primary or not.
-     * @type {boolean}
-     * @memberof Module
      */
     'isPrimary'?: boolean;
 }

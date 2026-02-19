@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,21 +21,15 @@
 
 /**
  * The information about the action in the document that will be scrolled to.
- * @export
- * @interface ActionConfig
  */
 export interface ActionConfig {
     /**
      * The action data that will be scrolled to.
-     * @type {string}
-     * @memberof ActionConfig
      */
-    'data'?: string | null;
+    'data'?: string;
     /**
      * The action type.
-     * @type {string}
-     * @memberof ActionConfig
      */
-    'type'?: string | null;
+    'type'?: string;
 }
 

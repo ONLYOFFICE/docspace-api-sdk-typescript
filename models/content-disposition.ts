@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -17,59 +19,14 @@
  */
 
 
-/**
- * 
- * @export
- * @interface ContentDisposition
- */
 export interface ContentDisposition {
-    /**
-     * 
-     * @type {string}
-     * @memberof ContentDisposition
-     */
-    'dispositionType'?: string | null;
-    /**
-     * 
-     * @type {Array<any>}
-     * @memberof ContentDisposition
-     */
-    'parameters'?: Array<any> | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ContentDisposition
-     */
-    'fileName'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ContentDisposition
-     */
+    'dispositionType'?: string;
+    'parameters'?: Array<any>;
+    'fileName'?: string;
     'creationDate'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ContentDisposition
-     */
     'modificationDate'?: string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ContentDisposition
-     */
     'inline'?: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof ContentDisposition
-     */
     'readDate'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof ContentDisposition
-     */
     'size'?: number;
 }
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,26 +21,18 @@
 
 /**
  * The request parameters for starting the reassignment process.
- * @export
- * @interface StartReassignRequestDto
  */
 export interface StartReassignRequestDto {
     /**
      * The user ID whose data will be reassigned to another user.
-     * @type {string}
-     * @memberof StartReassignRequestDto
      */
     'fromUserId': string;
     /**
      * The user ID to whom all the data will be reassigned.
-     * @type {string}
-     * @memberof StartReassignRequestDto
      */
     'toUserId': string;
     /**
      * Specifies whether to delete a profile when the data reassignment will be finished or not.
-     * @type {boolean}
-     * @memberof StartReassignRequestDto
      */
     'deleteProfile'?: boolean;
 }

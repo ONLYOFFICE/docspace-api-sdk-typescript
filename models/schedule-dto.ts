@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -23,47 +25,12 @@ import type { BackupStorageType } from './backup-storage-type';
 // @ts-ignore
 import type { CronParams } from './cron-params';
 
-/**
- * 
- * @export
- * @interface ScheduleDto
- */
 export interface ScheduleDto {
-    /**
-     * 
-     * @type {BackupStorageType}
-     * @memberof ScheduleDto
-     */
     'storageType': BackupStorageType;
-    /**
-     * 
-     * @type {{ [key: string]: string | null; }}
-     * @memberof ScheduleDto
-     */
-    'storageParams': { [key: string]: string | null; } | null;
-    /**
-     * 
-     * @type {CronParams}
-     * @memberof ScheduleDto
-     */
+    'storageParams': { [key: string]: string; };
     'cronParams': CronParams;
-    /**
-     * 
-     * @type {number}
-     * @memberof ScheduleDto
-     */
-    'backupsStored'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ScheduleDto
-     */
+    'backupsStored'?: number;
     'lastBackupTime': string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ScheduleDto
-     */
     'dump': boolean;
 }
 

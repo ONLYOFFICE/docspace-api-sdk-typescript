@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,21 +21,15 @@
 
 /**
  * The information about the file editing history author.
- * @export
- * @interface EditHistoryAuthor
  */
 export interface EditHistoryAuthor {
     /**
      * The author ID.
-     * @type {string}
-     * @memberof EditHistoryAuthor
      */
-    'id': string | null;
+    'id': string;
     /**
      * The author name.
-     * @type {string}
-     * @memberof EditHistoryAuthor
      */
-    'name'?: string | null;
+    'name'?: string;
 }
 

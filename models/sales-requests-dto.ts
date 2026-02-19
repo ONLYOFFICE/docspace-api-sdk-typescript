@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,27 +21,19 @@
 
 /**
  * The request parameters for handling sales and payment inquiries in the portal.
- * @export
- * @interface SalesRequestsDto
  */
 export interface SalesRequestsDto {
     /**
      * The name of the user submitting the sales request.
-     * @type {string}
-     * @memberof SalesRequestsDto
      */
-    'userName'?: string | null;
+    'userName'?: string;
     /**
      * The contact email address for the sales inquiry.
-     * @type {string}
-     * @memberof SalesRequestsDto
      */
-    'email': string | null;
+    'email': string;
     /**
      * The details of the sales inquiry or payment request.
-     * @type {string}
-     * @memberof SalesRequestsDto
      */
-    'message': string | null;
+    'message': string;
 }
 

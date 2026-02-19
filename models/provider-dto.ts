@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,51 +21,35 @@
 
 /**
  * The provider information.
- * @export
- * @interface ProviderDto
  */
 export interface ProviderDto {
     /**
      * The provider name.
-     * @type {string}
-     * @memberof ProviderDto
      */
-    'name'?: string | null;
+    'name'?: string;
     /**
      * The provider key.
-     * @type {string}
-     * @memberof ProviderDto
      */
-    'key'?: string | null;
+    'key'?: string;
     /**
      * Specifies whether the provider is connected.
-     * @type {boolean}
-     * @memberof ProviderDto
      */
     'connected'?: boolean;
     /**
      * Specifies if the provider is OAuth.
-     * @type {boolean}
-     * @memberof ProviderDto
      */
     'oauth'?: boolean;
     /**
      * The provider redirect URL.
-     * @type {string}
-     * @memberof ProviderDto
      */
-    'redirectUrl'?: string | null;
+    'redirectUrl'?: string;
     /**
      * The required connection URL flag.
-     * @type {boolean}
-     * @memberof ProviderDto
      */
     'requiredConnectionUrl'?: boolean;
     /**
      * The provider OAuth client ID.
-     * @type {string}
-     * @memberof ProviderDto
      */
-    'clientId'?: string | null;
+    'clientId'?: string;
 }
 

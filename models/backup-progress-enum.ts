@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,22 +21,11 @@
 
 /**
  * [0 - Backup, 1 - Restore, 2 - Transfer]
- * @export
- * @enum {number}
  */
 
 export const BackupProgressEnum = {
-    /**
-    * Backup
-    */
     Backup: 0,
-    /**
-    * Restore
-    */
     Restore: 1,
-    /**
-    * Transfer
-    */
     Transfer: 2
 } as const;
 

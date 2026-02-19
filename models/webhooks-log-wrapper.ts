@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -18,46 +20,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { WebhooksLogDto } from './webhooks-log-dto';
 
-/**
- * 
- * @export
- * @interface WebhooksLogWrapper
- */
 export interface WebhooksLogWrapper {
-    /**
-     * 
-     * @type {WebhooksLogDto}
-     * @memberof WebhooksLogWrapper
-     */
     'response'?: WebhooksLogDto;
-    /**
-     * 
-     * @type {number}
-     * @memberof WebhooksLogWrapper
-     */
     'count'?: number;
-    /**
-     * 
-     * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof WebhooksLogWrapper
-     */
-    'links'?: Array<ActiveConnectionsWrapperLinksInner>;
-    /**
-     * 
-     * @type {number}
-     * @memberof WebhooksLogWrapper
-     */
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
     'status'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof WebhooksLogWrapper
-     */
     'statusCode'?: number;
 }
 

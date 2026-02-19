@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,30 +21,13 @@
 
 /**
  * [0 - User, 1 - External link, 2 - Group, 3 - Invitation link, 4 - Primary external link]
- * @export
- * @enum {number}
  */
 
 export const SubjectType = {
-    /**
-    * User
-    */
     User: 0,
-    /**
-    * External link
-    */
     ExternalLink: 1,
-    /**
-    * Group
-    */
     Group: 2,
-    /**
-    * Invitation link
-    */
     InvitationLink: 3,
-    /**
-    * Primary external link
-    */
     PrimaryExternalLink: 4
 } as const;
 

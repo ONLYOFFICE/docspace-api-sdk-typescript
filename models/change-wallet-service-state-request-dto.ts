@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,20 +24,11 @@ import type { TenantWalletService } from './tenant-wallet-service';
 
 /**
  * The request parameters for changing the tenant wallet service state.
- * @export
- * @interface ChangeWalletServiceStateRequestDto
  */
 export interface ChangeWalletServiceStateRequestDto {
-    /**
-     * 
-     * @type {TenantWalletService}
-     * @memberof ChangeWalletServiceStateRequestDto
-     */
     'service'?: TenantWalletService;
     /**
      * Specifies whether the wallet service is enabled.
-     * @type {boolean}
-     * @memberof ChangeWalletServiceStateRequestDto
      */
     'enabled'?: boolean;
 }

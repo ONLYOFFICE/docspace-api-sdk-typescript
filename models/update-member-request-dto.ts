@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -28,106 +30,63 @@ import type { SexEnum } from './sex-enum';
 
 /**
  * The request parameters for updating the user information.
- * @export
- * @interface UpdateMemberRequestDto
  */
 export interface UpdateMemberRequestDto {
     /**
      * The user ID.
-     * @type {string}
-     * @memberof UpdateMemberRequestDto
      */
-    'userId'?: string | null;
+    'userId'?: string;
     /**
      * Specifies whether to disable a user or not.
-     * @type {boolean}
-     * @memberof UpdateMemberRequestDto
      */
-    'disable'?: boolean | null;
+    'disable'?: boolean;
     /**
      * The user email address.
-     * @type {string}
-     * @memberof UpdateMemberRequestDto
      */
-    'email'?: string | null;
+    'email'?: string;
     /**
      * Specifies if this is a guest or a user.
-     * @type {boolean}
-     * @memberof UpdateMemberRequestDto
      */
-    'isUser'?: boolean | null;
+    'isUser'?: boolean;
     /**
      * The user first name.
-     * @type {string}
-     * @memberof UpdateMemberRequestDto
      */
-    'firstName'?: string | null;
+    'firstName'?: string;
     /**
      * The user last name.
-     * @type {string}
-     * @memberof UpdateMemberRequestDto
      */
-    'lastName'?: string | null;
+    'lastName'?: string;
     /**
      * The list of the user departments.
-     * @type {Array<string>}
-     * @memberof UpdateMemberRequestDto
      */
-    'department'?: Array<string> | null;
+    'department'?: Array<string>;
     /**
      * The user title.
-     * @type {string}
-     * @memberof UpdateMemberRequestDto
      */
-    'title'?: string | null;
+    'title'?: string;
     /**
      * The user location.
-     * @type {string}
-     * @memberof UpdateMemberRequestDto
      */
-    'location'?: string | null;
-    /**
-     * 
-     * @type {SexEnum}
-     * @memberof UpdateMemberRequestDto
-     */
+    'location'?: string;
     'sex'?: SexEnum;
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof UpdateMemberRequestDto
-     */
     'birthday'?: ApiDateTime;
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof UpdateMemberRequestDto
-     */
     'worksfrom'?: ApiDateTime;
     /**
      * The user comment.
-     * @type {string}
-     * @memberof UpdateMemberRequestDto
      */
-    'comment'?: string | null;
+    'comment'?: string;
     /**
      * The list of the user contacts.
-     * @type {Array<Contact>}
-     * @memberof UpdateMemberRequestDto
      */
-    'contacts'?: Array<Contact> | null;
+    'contacts'?: Array<Contact>;
     /**
      * The user avatar photo URL.
-     * @type {string}
-     * @memberof UpdateMemberRequestDto
      */
-    'files'?: string | null;
+    'files'?: string;
     /**
      * Specifies if tips, updates and offers are allowed to be sent to the user or not.
-     * @type {boolean}
-     * @memberof UpdateMemberRequestDto
      */
-    'spam'?: boolean | null;
+    'spam'?: boolean;
 }
 
 

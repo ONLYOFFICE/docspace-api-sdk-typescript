@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,22 +21,11 @@
 
 /**
  * [0 - None, 1 - Custom, 2 - All]
- * @export
- * @enum {number}
  */
 
 export const TenantTrustedDomainsType = {
-    /**
-    * None
-    */
     None: 0,
-    /**
-    * Custom
-    */
     Custom: 1,
-    /**
-    * All
-    */
     All: 2
 } as const;
 

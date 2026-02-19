@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **charSet** | **string** |  | [optional] [default to undefined]
 **mediaType** | **string** |  | [optional] [default to undefined]
 **name** | **string** |  | [optional] [default to undefined]
-**parameters** | **Array&lt;any&gt;** |  | [optional] [readonly] [default to undefined]
+**parameters** | **Array&lt;any&gt;** |  | [optional] [default to undefined]
 
 ## Example
 

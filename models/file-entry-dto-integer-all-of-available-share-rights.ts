@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,39 +21,12 @@
 
 /**
  * The available external rights of the file entry.
- * @export
- * @interface FileEntryDtoIntegerAllOfAvailableShareRights
  */
 export interface FileEntryDtoIntegerAllOfAvailableShareRights {
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof FileEntryDtoIntegerAllOfAvailableShareRights
-     */
     'User'?: Array<string>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof FileEntryDtoIntegerAllOfAvailableShareRights
-     */
     'ExternalLink'?: Array<string>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof FileEntryDtoIntegerAllOfAvailableShareRights
-     */
     'Group'?: Array<string>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof FileEntryDtoIntegerAllOfAvailableShareRights
-     */
     'InvitationLink'?: Array<string>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof FileEntryDtoIntegerAllOfAvailableShareRights
-     */
     'PrimaryExternalLink'?: Array<string>;
 }
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -34,80 +36,39 @@ import type { SsoSpCertificateAdvanced } from './sso-sp-certificate-advanced';
 
 /**
  * The SSO portal settings.
- * @export
- * @interface SsoSettingsV2
  */
 export interface SsoSettingsV2 {
-    /**
-     * 
-     * @type {string}
-     * @memberof SsoSettingsV2
-     */
     'lastModified'?: string;
     /**
      * Specifies if the SSO settings are enabled or not.
-     * @type {boolean}
-     * @memberof SsoSettingsV2
      */
-    'enableSso'?: boolean | null;
-    /**
-     * 
-     * @type {SsoIdpSettings}
-     * @memberof SsoSettingsV2
-     */
+    'enableSso'?: boolean;
     'idpSettings'?: SsoIdpSettings;
     /**
      * The list of the IdP certificates.
-     * @type {Array<SsoCertificate>}
-     * @memberof SsoSettingsV2
      */
-    'idpCertificates'?: Array<SsoCertificate> | null;
-    /**
-     * 
-     * @type {SsoIdpCertificateAdvanced}
-     * @memberof SsoSettingsV2
-     */
+    'idpCertificates'?: Array<SsoCertificate>;
     'idpCertificateAdvanced'?: SsoIdpCertificateAdvanced;
     /**
      * The SP login label.
-     * @type {string}
-     * @memberof SsoSettingsV2
      */
-    'spLoginLabel'?: string | null;
+    'spLoginLabel'?: string;
     /**
      * The list of the SP certificates.
-     * @type {Array<SsoCertificate>}
-     * @memberof SsoSettingsV2
      */
-    'spCertificates'?: Array<SsoCertificate> | null;
-    /**
-     * 
-     * @type {SsoSpCertificateAdvanced}
-     * @memberof SsoSettingsV2
-     */
+    'spCertificates'?: Array<SsoCertificate>;
     'spCertificateAdvanced'?: SsoSpCertificateAdvanced;
-    /**
-     * 
-     * @type {SsoFieldMapping}
-     * @memberof SsoSettingsV2
-     */
     'fieldMapping'?: SsoFieldMapping;
     /**
      * Specifies if the authentication page will be hidden or not.
-     * @type {boolean}
-     * @memberof SsoSettingsV2
      */
     'hideAuthPage'?: boolean;
     /**
      * The user type.
-     * @type {number}
-     * @memberof SsoSettingsV2
      */
     'usersType'?: number;
     /**
      * Specifies if the email verification is disabled or not.
-     * @type {boolean}
-     * @memberof SsoSettingsV2
      */
     'disableEmailVerification'?: boolean;
 }

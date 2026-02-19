@@ -1,4 +1,4 @@
-# FilesApi
+# FilesFilesApi
 
 All URIs are relative to *https://your-docspace.onlyoffice.com*
 
@@ -30,6 +30,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**getFilePrimaryExternalLink**](#getfileprimaryexternallink) | **GET** /api/2.0/files/file/{id}/link | Get primary external link|
 |[**getFileVersionInfo**](#getfileversioninfo) | **GET** /api/2.0/files/file/{fileId}/history | Get file versions|
 |[**getFillResult**](#getfillresult) | **GET** /api/2.0/files/file/fillresult | Get form-filling result|
+|[**getFormSubmissions**](#getformsubmissions) | **GET** /api/2.0/files/file/{fileId}/submissions | Get form submission results|
 |[**getPresignedFileUri**](#getpresignedfileuri) | **GET** /api/2.0/files/file/{fileId}/presigned | Get file download link asynchronously|
 |[**getPresignedUri**](#getpresigneduri) | **GET** /api/2.0/files/file/{fileId}/presigneduri | Get file download link|
 |[**getProtectedFileUsers**](#getprotectedfileusers) | **GET** /api/2.0/files/file/{fileId}/protectusers | Get users access rights to the protected file|
@@ -215,8 +216,8 @@ const { status, data } = await apiInstance.changeVersionHistory(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Updated information about file versions |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You do not have enough permissions to edit the file |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -333,16 +334,16 @@ const { status, data } = await apiInstance.copyFileAs(
 |-------------|-------------|------------------|
 |**200** | Copied file entry information |  -  |
 |**400** | No file id or folder id toFolderId determine provider |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to create |  -  |
 |**404** | File not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **createEditSession**
-> ObjectWrapper createEditSession()
+> ChunkedUploadSessionResponseWrapperIntegerWrapper createEditSession()
 
-Creates a session to edit the existing file with multiple chunks (needed for WebDAV).   **Note**: Information about created session which includes:  <ul>  <li><b>id:</b> unique ID of this upload session,</li>  <li><b>created:</b> UTC time when the session was created,</li>  <li><b>expired:</b> UTC time when the session will expire if no chunks are sent before that time,</li>  <li><b>location:</b> URL where you should send your next chunk,</li>  <li><b>bytes_uploaded:</b> number of bytes uploaded for the specific upload ID,</li>  <li><b>bytes_total:</b> total number of bytes which will be uploaded.</li>  </ul>
+Creates a session to edit the existing file with multiple chunks (needed for WebDAV).
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-edit-session/).
 
@@ -356,7 +357,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-**ObjectWrapper**
+**ChunkedUploadSessionResponseWrapperIntegerWrapper**
 
 ### Authorization
 
@@ -392,15 +393,15 @@ const { status, data } = await apiInstance.createEditSession(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Information about created session |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to edit the file |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **createFile**
 > FileIntegerWrapper createFile(createFileJsonElement)
 
-Creates a new file in the specified folder with the title specified in the request.   **Note**: If a file extension is different from DOCX/XLSX/PPTX and refers to one of the known text, spreadsheet, or presentation formats, it will be changed to DOCX/XLSX/PPTX accordingly. If the file extension is not specified or is unknown, the DOCX extension will be added to the file title.
+Creates a new file in the specified folder with the title specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file/).
 
@@ -458,7 +459,7 @@ const { status, data } = await apiInstance.createFile(
 # **createFileInMyDocuments**
 > FileIntegerWrapper createFileInMyDocuments()
 
-Creates a new file in the My documents section with the title specified in the request.   **Note**: If a file extension is different from DOCX/XLSX/PPTX and refers to one of the known text, spreadsheet, or presentation formats, it will be changed to DOCX/XLSX/PPTX accordingly. If the file extension is not specified or is unknown, the DOCX extension will be added to the file title.
+Creates a new file in the My documents section with the title specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file-in-my-documents/).
 
@@ -564,8 +565,8 @@ const { status, data } = await apiInstance.createFilePrimaryExternalLink(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | File security information |  -  |
-|**401** | Unauthorized |  -  |
 |**404** | Not Found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -623,8 +624,8 @@ const { status, data } = await apiInstance.createHtmlFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | New file information |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to create |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -679,8 +680,8 @@ const { status, data } = await apiInstance.createHtmlFileInMyDocuments(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | New file information |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to create |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1068,8 +1069,8 @@ const { status, data } = await apiInstance.getAllFormRoles(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Successfully retrieved all roles for the form |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You do not have enough permissions to view the form roles |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1246,9 +1247,9 @@ const { status, data } = await apiInstance.getFileHistory(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of actions performed on the file |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to perform the operation |  -  |
 |**404** | The required file was not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1531,6 +1532,61 @@ const { status, data } = await apiInstance.getFillResult(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Ok |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getFormSubmissions**
+> FormResultsArrayWrapper getFormSubmissions()
+
+Returns the results of form submissions.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-form-submissions/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fileId** | [**number**] | The file unique identifier. | defaults to undefined|
+
+
+### Return type
+
+**FormResultsArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    FilesFilesApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new FilesFilesApi(configuration);
+
+let fileId: number; //The file unique identifier. (default to undefined)
+
+const { status, data } = await apiInstance.getFormSubmissions(
+    fileId
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Form submission results were successfully retrieved |  -  |
+|**403** | You do not have enough permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1917,8 +1973,8 @@ const { status, data } = await apiInstance.manageFormFilling(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Successfully processed the form filling action |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You do not have enough permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2115,8 +2171,8 @@ const { status, data } = await apiInstance.saveEditingFileFromForm(
 |-------------|-------------|------------------|
 |**200** | Saved file parameters |  -  |
 |**400** | No file id or folder id toFolderId determine provider |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You do not have enough permissions to edit the file |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2174,8 +2230,8 @@ const { status, data } = await apiInstance.saveFileAsPdf(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | New file information |  -  |
-|**401** | Unauthorized |  -  |
 |**404** | File not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2233,8 +2289,8 @@ const { status, data } = await apiInstance.saveFormRoleMapping(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Updated information about form role mappings |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You do not have enough permissions to edit the file |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2408,9 +2464,9 @@ const { status, data } = await apiInstance.setFileOrder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Updated file information |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to perform the operation |  -  |
 |**404** | Not Found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2577,8 +2633,8 @@ const { status, data } = await apiInstance.startFillingFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | File information |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You do not have enough permissions to edit the file |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2635,8 +2691,8 @@ const { status, data } = await apiInstance.toggleFileFavorite(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Boolean value: true - the file is favorite, false - the file is not favorite |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,15 +24,11 @@ import type { OrdersItemRequestDtoInteger } from './orders-item-request-dto-inte
 
 /**
  * The collection of items to be ordered.
- * @export
- * @interface OrdersRequestDtoInteger
  */
 export interface OrdersRequestDtoInteger {
     /**
      * The list of items with their ordering information.
-     * @type {Array<OrdersItemRequestDtoInteger>}
-     * @memberof OrdersRequestDtoInteger
      */
-    'items': Array<OrdersItemRequestDtoInteger> | null;
+    'items': Array<OrdersItemRequestDtoInteger>;
 }
 

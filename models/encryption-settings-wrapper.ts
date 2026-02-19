@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -18,46 +20,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
+import type { EncryptionSettings } from './encryption-settings';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { EncryptionSettings } from './encryption-settings';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
-/**
- * 
- * @export
- * @interface EncryptionSettingsWrapper
- */
 export interface EncryptionSettingsWrapper {
-    /**
-     * 
-     * @type {EncryptionSettings}
-     * @memberof EncryptionSettingsWrapper
-     */
     'response'?: EncryptionSettings;
-    /**
-     * 
-     * @type {number}
-     * @memberof EncryptionSettingsWrapper
-     */
     'count'?: number;
-    /**
-     * 
-     * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof EncryptionSettingsWrapper
-     */
-    'links'?: Array<ActiveConnectionsWrapperLinksInner>;
-    /**
-     * 
-     * @type {number}
-     * @memberof EncryptionSettingsWrapper
-     */
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
     'status'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof EncryptionSettingsWrapper
-     */
     'statusCode'?: number;
 }
 

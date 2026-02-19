@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,51 +21,35 @@
 
 /**
  * The third-party request parameters.
- * @export
- * @interface ThirdPartyRequestDto
  */
 export interface ThirdPartyRequestDto {
     /**
      * The connection URL for the sharepoint.
-     * @type {string}
-     * @memberof ThirdPartyRequestDto
      */
-    'url'?: string | null;
+    'url'?: string;
     /**
      * The third-party request login.
-     * @type {string}
-     * @memberof ThirdPartyRequestDto
      */
-    'login'?: string | null;
+    'login'?: string;
     /**
      * The third-party request password.
-     * @type {string}
-     * @memberof ThirdPartyRequestDto
      */
-    'password'?: string | null;
+    'password'?: string;
     /**
      * The authentication token.
-     * @type {string}
-     * @memberof ThirdPartyRequestDto
      */
-    'token'?: string | null;
+    'token'?: string;
     /**
      * The customer title.
-     * @type {string}
-     * @memberof ThirdPartyRequestDto
      */
-    'customerTitle': string | null;
+    'customerTitle': string;
     /**
      * The provider key.
-     * @type {string}
-     * @memberof ThirdPartyRequestDto
      */
-    'providerKey': string | null;
+    'providerKey': string;
     /**
      * The provider ID.
-     * @type {number}
-     * @memberof ThirdPartyRequestDto
      */
-    'providerId'?: number | null;
+    'providerId'?: number;
 }
 

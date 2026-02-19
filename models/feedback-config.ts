@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,20 +21,14 @@
 
 /**
  * The settings for the Feedback & Support menu button.
- * @export
- * @interface FeedbackConfig
  */
 export interface FeedbackConfig {
     /**
      * The absolute URL to the website address which will be opened when clicking the Feedback & Support menu button.
-     * @type {string}
-     * @memberof FeedbackConfig
      */
-    'url'?: string | null;
+    'url'?: string;
     /**
      * Shows or hides the Feedback & Support menu button.
-     * @type {boolean}
-     * @memberof FeedbackConfig
      */
     'visible'?: boolean;
 }

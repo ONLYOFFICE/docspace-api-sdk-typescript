@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,20 +21,14 @@
 
 /**
  * The user invitation parameters.
- * @export
- * @interface UserInvitation
  */
 export interface UserInvitation {
     /**
      * The list of user IDs.
-     * @type {Array<string>}
-     * @memberof UserInvitation
      */
-    'usersIds'?: Array<string> | null;
+    'usersIds'?: Array<string>;
     /**
      * Specifies whether to resend all user invitations or not.
-     * @type {boolean}
-     * @memberof UserInvitation
      */
     'resendAll'?: boolean;
 }

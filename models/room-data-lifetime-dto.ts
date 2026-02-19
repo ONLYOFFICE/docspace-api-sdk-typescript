@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,34 +24,21 @@ import type { RoomDataLifetimePeriod } from './room-data-lifetime-period';
 
 /**
  * The room data lifetime information.
- * @export
- * @interface RoomDataLifetimeDto
  */
 export interface RoomDataLifetimeDto {
     /**
      * Specifies whether to permanently delete the room data or not.
-     * @type {boolean}
-     * @memberof RoomDataLifetimeDto
      */
     'deletePermanently'?: boolean;
-    /**
-     * 
-     * @type {RoomDataLifetimePeriod}
-     * @memberof RoomDataLifetimeDto
-     */
     'period'?: RoomDataLifetimePeriod;
     /**
      * Specifies the time period value of the room data lifetime.
-     * @type {number}
-     * @memberof RoomDataLifetimeDto
      */
-    'value'?: number | null;
+    'value'?: number;
     /**
      * Specifies whether the room data lifetime setting is enabled or not.
-     * @type {boolean}
-     * @memberof RoomDataLifetimeDto
      */
-    'enabled'?: boolean | null;
+    'enabled'?: boolean;
 }
 
 

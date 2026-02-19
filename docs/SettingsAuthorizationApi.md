@@ -1,4 +1,4 @@
-# AuthorizationApi
+# SettingsAuthorizationApi
 
 All URIs are relative to *https://your-docspace.onlyoffice.com*
 
@@ -106,8 +106,8 @@ const { status, data } = await apiInstance.saveAuthKeys(
 |-------------|-------------|------------------|
 |**200** | Boolean value: true if the authorization keys are changed |  -  |
 |**400** | Bad keys |  -  |
-|**401** | Unauthorized |  -  |
 |**402** | Your pricing plan does not support this option |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -55,37 +57,37 @@ export type FileEntryDtoString = FileEntryBaseDto &  {
      * @type {string}
      * @memberof FileEntryDtoString
      */
-    'id'?: string | null;
+    'id'?: string;
     /**
      * The root folder ID of the file entry.
      * @type {string}
      * @memberof FileEntryDtoString
      */
-    'rootFolderId'?: string | null;
+    'rootFolderId'?: string;
     /**
      * The origin ID of the file entry.
      * @type {string}
      * @memberof FileEntryDtoString
      */
-    'originId'?: string | null;
+    'originId'?: string;
     /**
      * The origin room ID of the file entry.
      * @type {string}
      * @memberof FileEntryDtoString
      */
-    'originRoomId'?: string | null;
+    'originRoomId'?: string;
     /**
      * The origin title of the file entry.
      * @type {string}
      * @memberof FileEntryDtoString
      */
-    'originTitle'?: string | null;
+    'originTitle'?: string;
     /**
      * The origin room title of the file entry.
      * @type {string}
      * @memberof FileEntryDtoString
      */
-    'originRoomTitle'?: string | null;
+    'originRoomTitle'?: string;
     /**
      * Specifies if the file entry can be shared or not.
      * @type {boolean}
@@ -97,31 +99,31 @@ export type FileEntryDtoString = FileEntryBaseDto &  {
      * @type {FileEntryDtoIntegerAllOfShareSettings}
      * @memberof FileEntryDtoString
      */
-    'shareSettings'?: FileEntryDtoIntegerAllOfShareSettings | null;
+    'shareSettings'?: FileEntryDtoIntegerAllOfShareSettings;
     /**
      * 
      * @type {FileEntryDtoIntegerAllOfSecurity}
      * @memberof FileEntryDtoString
      */
-    'security'?: FileEntryDtoIntegerAllOfSecurity | null;
+    'security'?: FileEntryDtoIntegerAllOfSecurity;
     /**
      * 
      * @type {FileEntryDtoIntegerAllOfAvailableShareRights}
      * @memberof FileEntryDtoString
      */
-    'availableShareRights'?: FileEntryDtoIntegerAllOfAvailableShareRights | null;
+    'availableShareRights'?: FileEntryDtoIntegerAllOfAvailableShareRights;
     /**
      * The request token of the file entry.
      * @type {string}
      * @memberof FileEntryDtoString
      */
-    'requestToken'?: string | null;
+    'requestToken'?: string;
     /**
      * Specifies if the folder can be accessed via an external link or not.
      * @type {boolean}
      * @memberof FileEntryDtoString
      */
-    'external'?: boolean | null;
+    'external'?: boolean;
     /**
      * 
      * @type {ApiDateTime}
@@ -133,7 +135,7 @@ export type FileEntryDtoString = FileEntryBaseDto &  {
      * @type {boolean}
      * @memberof FileEntryDtoString
      */
-    'isLinkExpired'?: boolean | null;
+    'isLinkExpired'?: boolean;
 };
 
 

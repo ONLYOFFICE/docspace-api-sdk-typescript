@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,21 +21,15 @@
 
 /**
  * The request parameters for putting money on deposit.
- * @export
- * @interface TopUpDepositRequestDto
  */
 export interface TopUpDepositRequestDto {
     /**
      * The amount of money for the operation.
-     * @type {number}
-     * @memberof TopUpDepositRequestDto
      */
     'amount'?: number;
     /**
      * The three-character ISO 4217 currency symbol.
-     * @type {string}
-     * @memberof TopUpDepositRequestDto
      */
-    'currency'?: string | null;
+    'currency'?: string;
 }
 

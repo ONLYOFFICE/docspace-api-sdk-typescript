@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,21 +21,15 @@
 
 /**
  * The request parameters for the payment URL configuration with quantity information.
- * @export
- * @interface PaymentUrlRequestsDto
  */
 export interface PaymentUrlRequestsDto {
     /**
      * The URL where the user will be redirected after payment processing.
-     * @type {string}
-     * @memberof PaymentUrlRequestsDto
      */
-    'backUrl'?: string | null;
+    'backUrl'?: string;
     /**
      * The payment quantity.
-     * @type {{ [key: string]: number; }}
-     * @memberof PaymentUrlRequestsDto
      */
-    'quantity'?: { [key: string]: number; } | null;
+    'quantity'?: { [key: string]: number; };
 }
 

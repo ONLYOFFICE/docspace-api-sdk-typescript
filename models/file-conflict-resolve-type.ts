@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,8 +21,6 @@
 
 /**
  * [Skip - Skip, Overwrite - Overwrite, Duplicate - Duplicate]
- * @export
- * @enum {string}
  */
 
 export const FileConflictResolveType = {

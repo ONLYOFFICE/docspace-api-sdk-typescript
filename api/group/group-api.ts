@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -228,7 +227,7 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Returns the detailed information about the selected group.   **Note**: This method returns full group information.
+         * Returns the detailed information about the selected group.
          * @summary Get a group
          * @param {string} id The group ID.
          * @param {boolean} [includeMembers] Specifies whether to include the group members or not.
@@ -345,7 +344,7 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Returns the general information about all the groups, such as group ID and group manager.   **Note**: This method returns partial group information.
+         * Returns the general information about all the groups, such as group ID and group manager.
          * @summary Get groups
          * @param {string} [userId] The user ID.
          * @param {boolean} [manager] Specifies if the user is a manager or not.
@@ -799,7 +798,7 @@ export const GroupApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the detailed information about the selected group.   **Note**: This method returns full group information.
+         * Returns the detailed information about the selected group.
          * @summary Get a group
          * @param {string} id The group ID.
          * @param {boolean} [includeMembers] Specifies whether to include the group members or not.
@@ -830,7 +829,7 @@ export const GroupApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the general information about all the groups, such as group ID and group manager.   **Note**: This method returns partial group information.
+         * Returns the general information about all the groups, such as group ID and group manager.
          * @summary Get groups
          * @param {string} [userId] The user ID.
          * @param {boolean} [manager] Specifies if the user is a manager or not.
@@ -978,7 +977,7 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.deleteGroup(id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the detailed information about the selected group.   **Note**: This method returns full group information.
+         * Returns the detailed information about the selected group.
          * @summary Get a group
          * @param {string} id The group ID.
          * @param {boolean} [includeMembers] Specifies whether to include the group members or not.
@@ -1003,7 +1002,7 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.getGroupByUserId(userid, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the general information about all the groups, such as group ID and group manager.   **Note**: This method returns partial group information.
+         * Returns the general information about all the groups, such as group ID and group manager.
          * @summary Get groups
          * @param {string} [userId] The user ID.
          * @param {boolean} [manager] Specifies if the user is a manager or not.
@@ -1133,7 +1132,7 @@ export class GroupApi extends BaseAPI {
     }
 
     /**
-     * Returns the detailed information about the selected group.   **Note**: This method returns full group information.
+     * Returns the detailed information about the selected group.
      * @summary Get a group
      * @param {string} id The group ID.
      * @param {boolean} [includeMembers] Specifies whether to include the group members or not.
@@ -1158,7 +1157,7 @@ export class GroupApi extends BaseAPI {
     }
 
     /**
-     * Returns the general information about all the groups, such as group ID and group manager.   **Note**: This method returns partial group information.
+     * Returns the general information about all the groups, such as group ID and group manager.
      * @summary Get groups
      * @param {string} [userId] The user ID.
      * @param {boolean} [manager] Specifies if the user is a manager or not.

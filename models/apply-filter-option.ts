@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,22 +21,11 @@
 
 /**
  * [0 - All, 1 - Files, 2 - Folders]
- * @export
- * @enum {number}
  */
 
 export const ApplyFilterOption = {
-    /**
-    * All
-    */
     All: 0,
-    /**
-    * Files
-    */
     Files: 1,
-    /**
-    * Folders
-    */
     Folders: 2
 } as const;
 

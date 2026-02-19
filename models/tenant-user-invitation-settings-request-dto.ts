@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,20 +21,14 @@
 
 /**
  * The request parameters for updating the user invitation settings.
- * @export
- * @interface TenantUserInvitationSettingsRequestDto
  */
 export interface TenantUserInvitationSettingsRequestDto {
     /**
      * Specifies whether to allow inviting new DocSpace members through the Contacts section.
-     * @type {boolean}
-     * @memberof TenantUserInvitationSettingsRequestDto
      */
     'allowInvitingMembers'?: boolean;
     /**
      * Specifies whether to allow all DocSpace members to invite external guests to the rooms.
-     * @type {boolean}
-     * @memberof TenantUserInvitationSettingsRequestDto
      */
     'allowInvitingGuests'?: boolean;
 }

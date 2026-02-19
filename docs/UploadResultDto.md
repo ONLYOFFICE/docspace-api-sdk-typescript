@@ -7,7 +7,7 @@ The upload result parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **success** | **boolean** | Specifies if the upload operation is successful or not. | [optional] [default to undefined]
-**data** | **any** | The uploaded data. | [optional] [default to undefined]
+**data** | **any** |  | [optional] [default to undefined]
 **message** | **string** | The message sent after the successful upload operation. | [optional] [default to undefined]
 
 ## Example

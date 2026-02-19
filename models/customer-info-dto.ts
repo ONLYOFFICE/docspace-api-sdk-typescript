@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -25,33 +27,17 @@ import type { PaymentMethodStatus } from './payment-method-status';
 
 /**
  * The customer information.
- * @export
- * @interface CustomerInfoDto
  */
 export interface CustomerInfoDto {
     /**
      * The portal ID.
-     * @type {string}
-     * @memberof CustomerInfoDto
      */
-    'portalId'?: string | null;
-    /**
-     * 
-     * @type {PaymentMethodStatus}
-     * @memberof CustomerInfoDto
-     */
+    'portalId'?: string;
     'paymentMethodStatus'?: PaymentMethodStatus;
     /**
      * The customer email address.
-     * @type {string}
-     * @memberof CustomerInfoDto
      */
-    'email'?: string | null;
-    /**
-     * 
-     * @type {EmployeeDto}
-     * @memberof CustomerInfoDto
-     */
+    'email'?: string;
     'payer'?: EmployeeDto;
 }
 

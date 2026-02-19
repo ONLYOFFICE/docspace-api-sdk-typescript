@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -18,46 +20,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { LoginSettingsDto } from './login-settings-dto';
 
-/**
- * 
- * @export
- * @interface LoginSettingsWrapper
- */
 export interface LoginSettingsWrapper {
-    /**
-     * 
-     * @type {LoginSettingsDto}
-     * @memberof LoginSettingsWrapper
-     */
     'response'?: LoginSettingsDto;
-    /**
-     * 
-     * @type {number}
-     * @memberof LoginSettingsWrapper
-     */
     'count'?: number;
-    /**
-     * 
-     * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof LoginSettingsWrapper
-     */
-    'links'?: Array<ActiveConnectionsWrapperLinksInner>;
-    /**
-     * 
-     * @type {number}
-     * @memberof LoginSettingsWrapper
-     */
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
     'status'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof LoginSettingsWrapper
-     */
     'statusCode'?: number;
 }
 

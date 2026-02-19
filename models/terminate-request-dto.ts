@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,14 +21,10 @@
 
 /**
  * The request parameters for terminating the reassignment/deletion process.
- * @export
- * @interface TerminateRequestDto
  */
 export interface TerminateRequestDto {
     /**
      * The user ID whose data is reassigned/removed.
-     * @type {string}
-     * @memberof TerminateRequestDto
      */
     'userId': string;
 }

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,68 +24,43 @@ import type { EmployeeFullDto } from './employee-full-dto';
 
 /**
  * The group parameters.
- * @export
- * @interface GroupDto
  */
 export interface GroupDto {
     /**
      * The group name.
-     * @type {string}
-     * @memberof GroupDto
      */
-    'name': string | null;
+    'name': string;
     /**
      * The parent group ID.
-     * @type {string}
-     * @memberof GroupDto
      */
-    'parent'?: string | null;
+    'parent'?: string;
     /**
      * The group category ID.
-     * @type {string}
-     * @memberof GroupDto
      */
     'category': string;
     /**
      * The group ID.
-     * @type {string}
-     * @memberof GroupDto
      */
     'id': string;
     /**
      * Specifies if the LDAP settings are enabled for the group or not.
-     * @type {boolean}
-     * @memberof GroupDto
      */
     'isLDAP': boolean;
     /**
      * Indicates whether the group is a system group.
-     * @type {boolean}
-     * @memberof GroupDto
      */
-    'isSystem'?: boolean | null;
-    /**
-     * 
-     * @type {EmployeeFullDto}
-     * @memberof GroupDto
-     */
+    'isSystem'?: boolean;
     'manager'?: EmployeeFullDto;
     /**
      * The list of group members.
-     * @type {Array<EmployeeFullDto>}
-     * @memberof GroupDto
      */
-    'members'?: Array<EmployeeFullDto> | null;
+    'members'?: Array<EmployeeFullDto>;
     /**
      * Specifies whether the group can be shared or not.
-     * @type {boolean}
-     * @memberof GroupDto
      */
-    'shared'?: boolean | null;
+    'shared'?: boolean;
     /**
      * The number of group members.
-     * @type {number}
-     * @memberof GroupDto
      */
     'membersCount'?: number;
 }

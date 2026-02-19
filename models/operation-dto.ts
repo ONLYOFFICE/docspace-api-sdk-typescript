@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,75 +24,48 @@ import type { ApiDateTime } from './api-date-time';
 
 /**
  * Represents an operation.
- * @export
- * @interface OperationDto
  */
 export interface OperationDto {
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof OperationDto
-     */
     'date'?: ApiDateTime;
     /**
      * The service related to the operation.
-     * @type {string}
-     * @memberof OperationDto
      */
-    'service'?: string | null;
+    'service'?: string;
     /**
      * The brief operation description.
-     * @type {string}
-     * @memberof OperationDto
      */
-    'description'?: string | null;
+    'description'?: string;
     /**
      * The detailed information about the operation.
-     * @type {string}
-     * @memberof OperationDto
      */
-    'details'?: string | null;
+    'details'?: string;
     /**
      * The service unit.
-     * @type {string}
-     * @memberof OperationDto
      */
-    'serviceUnit'?: string | null;
+    'serviceUnit'?: string;
     /**
      * The quantity of the service used.
-     * @type {number}
-     * @memberof OperationDto
      */
     'quantity'?: number;
     /**
      * The three-character ISO 4217 currency symbol of the operation.
-     * @type {string}
-     * @memberof OperationDto
      */
-    'currency'?: string | null;
+    'currency'?: string;
     /**
      * The credit amount of the operation.
-     * @type {number}
-     * @memberof OperationDto
      */
     'credit'?: number;
     /**
      * The debit amount of the operation.
-     * @type {number}
-     * @memberof OperationDto
      */
     'debit'?: number;
     /**
      * The participant original name.
-     * @type {string}
-     * @memberof OperationDto
      */
-    'participantName'?: string | null;
+    'participantName'?: string;
     /**
      * The participant display name.
-     * @type {string}
-     * @memberof OperationDto
      */
-    'participantDisplayName'?: string | null;
+    'participantDisplayName'?: string;
 }
 

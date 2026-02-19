@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,14 +21,10 @@
 
 /**
  * The request for setting a group manager.
- * @export
- * @interface SetManagerRequest
  */
 export interface SetManagerRequest {
     /**
      * The user ID.
-     * @type {string}
-     * @memberof SetManagerRequest
      */
     'userId': string;
 }

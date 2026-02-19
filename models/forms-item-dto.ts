@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,21 +21,9 @@
 
 /**
  * The forms item information.
- * @export
- * @interface FormsItemDto
  */
 export interface FormsItemDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof FormsItemDto
-     */
-    'key'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof FormsItemDto
-     */
-    'type'?: string | null;
+    'key'?: string;
+    'type'?: string;
 }
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,14 +21,10 @@
 
 /**
  * The response containing the regenerated client secret.
- * @export
- * @interface ClientSecretResponse
  */
 export interface ClientSecretResponse {
     /**
      * The newly generated client secret.
-     * @type {string}
-     * @memberof ClientSecretResponse
      */
     'client_secret'?: string;
 }

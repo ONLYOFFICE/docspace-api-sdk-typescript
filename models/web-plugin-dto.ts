@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,105 +24,80 @@ import type { EmployeeDto } from './employee-dto';
 
 /**
  * The web plugin information.
- * @export
- * @interface WebPluginDto
  */
 export interface WebPluginDto {
     /**
      * The web plugin name.
-     * @type {string}
-     * @memberof WebPluginDto
      */
-    'name': string | null;
+    'name': string;
     /**
      * The web plugin version.
-     * @type {string}
-     * @memberof WebPluginDto
      */
-    'version': string | null;
+    'version': string;
     /**
      * The minimum version of DocSpace with which the plugin is guaranteed to work.
-     * @type {string}
-     * @memberof WebPluginDto
      */
-    'minDocSpaceVersion'?: string | null;
+    'minDocSpaceVersion'?: string;
     /**
      * The web plugin description.
-     * @type {string}
-     * @memberof WebPluginDto
      */
-    'description': string | null;
+    'description': string;
     /**
      * The web plugin license.
-     * @type {string}
-     * @memberof WebPluginDto
      */
-    'license': string | null;
+    'license': string;
     /**
      * The web plugin author.
-     * @type {string}
-     * @memberof WebPluginDto
      */
-    'author': string | null;
+    'author': string;
     /**
      * The web plugin home page URL.
-     * @type {string}
-     * @memberof WebPluginDto
      */
-    'homePage': string | null;
+    'homePage': string;
     /**
      * The name by which the web plugin is registered in the window object.
-     * @type {string}
-     * @memberof WebPluginDto
      */
-    'pluginName': string | null;
+    'pluginName': string;
     /**
      * The web plugin scopes.
-     * @type {string}
-     * @memberof WebPluginDto
      */
-    'scopes': string | null;
+    'scopes': string;
     /**
      * The web plugin image.
-     * @type {string}
-     * @memberof WebPluginDto
      */
-    'image': string | null;
-    /**
-     * 
-     * @type {EmployeeDto}
-     * @memberof WebPluginDto
-     */
+    'image': string;
     'createBy': EmployeeDto;
     /**
      * The date and time when the web plugin was created.
-     * @type {string}
-     * @memberof WebPluginDto
      */
     'createOn': string;
     /**
      * Specifies if the web plugin is enabled or not.
-     * @type {boolean}
-     * @memberof WebPluginDto
      */
     'enabled': boolean;
     /**
      * Specifies if the web plugin is system or not.
-     * @type {boolean}
-     * @memberof WebPluginDto
      */
     'system': boolean;
     /**
      * The web plugin URL.
-     * @type {string}
-     * @memberof WebPluginDto
      */
-    'url': string | null;
+    'url': string;
+    /**
+     * The web plugin css URL.
+     */
+    'cssUrl': string;
     /**
      * The web plugin settings.
-     * @type {string}
-     * @memberof WebPluginDto
      */
-    'settings': string | null;
+    'settings': string;
+    /**
+     * The web plugin localized name.
+     */
+    'nameLocale'?: { [key: string]: string; };
+    /**
+     * The web plugin localized description.
+     */
+    'descriptionLocale'?: { [key: string]: string; };
 }
 

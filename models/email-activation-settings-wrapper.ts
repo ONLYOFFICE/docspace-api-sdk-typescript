@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -18,46 +20,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
+import type { EmailActivationSettings } from './email-activation-settings';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { EmailActivationSettings } from './email-activation-settings';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
-/**
- * 
- * @export
- * @interface EmailActivationSettingsWrapper
- */
 export interface EmailActivationSettingsWrapper {
-    /**
-     * 
-     * @type {EmailActivationSettings}
-     * @memberof EmailActivationSettingsWrapper
-     */
     'response'?: EmailActivationSettings;
-    /**
-     * 
-     * @type {number}
-     * @memberof EmailActivationSettingsWrapper
-     */
     'count'?: number;
-    /**
-     * 
-     * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof EmailActivationSettingsWrapper
-     */
-    'links'?: Array<ActiveConnectionsWrapperLinksInner>;
-    /**
-     * 
-     * @type {number}
-     * @memberof EmailActivationSettingsWrapper
-     */
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
     'status'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof EmailActivationSettingsWrapper
-     */
     'statusCode'?: number;
 }
 

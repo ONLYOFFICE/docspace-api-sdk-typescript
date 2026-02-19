@@ -102,8 +102,8 @@ const { status, data } = await apiInstance.getAccountsEntriesWithFilesShared(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Ok |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -193,8 +193,8 @@ const { status, data } = await apiInstance.getAccountsEntriesWithFoldersShared(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Ok |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -284,8 +284,8 @@ const { status, data } = await apiInstance.getAccountsEntriesWithRoomsShared(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Ok |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -345,8 +345,8 @@ const { status, data } = await apiInstance.getSearch(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of users with the detailed information |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -457,8 +457,8 @@ const { status, data } = await apiInstance.getSimpleByFilter(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of users |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -548,8 +548,8 @@ const { status, data } = await apiInstance.getUsersWithFilesShared(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Ok |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -639,8 +639,8 @@ const { status, data } = await apiInstance.getUsersWithFoldersShared(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Ok |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -730,8 +730,8 @@ const { status, data } = await apiInstance.getUsersWithRoomShared(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Ok |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -842,8 +842,8 @@ const { status, data } = await apiInstance.searchUsersByExtendedFilter(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of users with the detailed information |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -960,8 +960,8 @@ const { status, data } = await apiInstance.searchUsersByStatus(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of users with the detailed information |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,15 +21,11 @@
 
 /**
  * The parameters of the button that starts filling out the form.
- * @export
- * @interface StartFillingForm
  */
 export interface StartFillingForm {
     /**
      * The caption of the button that starts filling out the form.
-     * @type {string}
-     * @memberof StartFillingForm
      */
-    'text'?: string | null;
+    'text'?: string;
 }
 

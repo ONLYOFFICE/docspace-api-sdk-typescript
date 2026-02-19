@@ -16,6 +16,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**externalShareSocialMedia**](#externalsharesocialmedia) | **PUT** /api/2.0/files/settings/externalsocialmedia | Change the external sharing ability on social networks|
 |[**forcesave**](#forcesave) | **PUT** /api/2.0/files/forcesave | Change the forcesaving ability|
 |[**getAutomaticallyCleanUp**](#getautomaticallycleanup) | **GET** /api/2.0/files/settings/autocleanup | Get the trash bin auto-clearing setting|
+|[**getDefaultTemplates**](#getdefaulttemplates) | **GET** /api/2.0/files/settings/defaulttemplate | Get the default template setting|
 |[**getDocServiceUrl**](#getdocserviceurl) | **GET** /api/2.0/files/docservice | Get the document service URL|
 |[**getFilesModule**](#getfilesmodule) | **GET** /api/2.0/files/info | Get the Documents information|
 |[**getFilesSettings**](#getfilessettings) | **GET** /api/2.0/files/settings | Get file settings|
@@ -24,10 +25,13 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**hideConfirmRoomLifetime**](#hideconfirmroomlifetime) | **PUT** /api/2.0/files/hideconfirmroomlifetime | Hide confirmation dialog when changing room lifetime settings|
 |[**isAvailablePrivacyRoomSettings**](#isavailableprivacyroomsettings) | **GET** /api/2.0/files/@privacy/available | Check the Private Room availability|
 |[**keepNewFileName**](#keepnewfilename) | **PUT** /api/2.0/files/keepnewfilename | Ask a new file name|
+|[**setDefaultTemplate**](#setdefaulttemplate) | **PUT** /api/2.0/files/settings/defaulttemplate | Change the default template setting|
 |[**setOpenEditorInSameTab**](#setopeneditorinsametab) | **PUT** /api/2.0/files/settings/openeditorinsametab | Open document in the same browser tab|
+|[**setOrganizeRoomsGrouping**](#setorganizeroomsgrouping) | **PUT** /api/2.0/files/settings/organizegrouping | Organize rooms grouping|
 |[**storeForcesave**](#storeforcesave) | **PUT** /api/2.0/files/storeforcesave | Change the ability to store the forcesaved files|
 |[**storeOriginal**](#storeoriginal) | **PUT** /api/2.0/files/storeoriginal | Change the ability to upload original formats|
 |[**updateFileIfExist**](#updatefileifexist) | **PUT** /api/2.0/files/updateifexist | Update a file version if it exists|
+|[**uploadDefaultTemplate**](#uploaddefaulttemplate) | **POST** /api/2.0/files/settings/defaulttemplate | Upload a file as the default template setting|
 
 # **changeAccessToThirdparty**
 > BooleanWrapper changeAccessToThirdparty()
@@ -465,8 +469,8 @@ const { status, data } = await apiInstance.displayRecent(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Boolean value: true if the parameter is enabled |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -670,6 +674,54 @@ const { status, data } = await apiInstance.getAutomaticallyCleanUp();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The auto-clearing setting properties: auto-clearing or not, a time interval when the auto-clearing will be performed |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getDefaultTemplates**
+> DefaultTemplateSettingsWrapper getDefaultTemplates()
+
+Returns the default template setting.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-default-templates/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**DefaultTemplateSettingsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    FilesSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new FilesSettingsApi(configuration);
+
+const { status, data } = await apiInstance.getDefaultTemplates();
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Default template settings |  -  |
+|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1087,6 +1139,62 @@ const { status, data } = await apiInstance.keepNewFileName(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **setDefaultTemplate**
+> DefaultTemplateSettingsWrapper setDefaultTemplate()
+
+Changes the default template setting.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-default-template/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **defaultTemplateSettingsRequestDto** | **DefaultTemplateSettingsRequestDto**|  | |
+
+
+### Return type
+
+**DefaultTemplateSettingsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    FilesSettingsApi,
+    Configuration,
+    DefaultTemplateSettingsRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new FilesSettingsApi(configuration);
+
+let defaultTemplateSettingsRequestDto: DefaultTemplateSettingsRequestDto; // (optional)
+
+const { status, data } = await apiInstance.setDefaultTemplate(
+    defaultTemplateSettingsRequestDto
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | New default template settings |  -  |
+|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **setOpenEditorInSameTab**
 > BooleanWrapper setOpenEditorInSameTab()
 
@@ -1124,6 +1232,61 @@ const apiInstance = new FilesSettingsApi(configuration);
 let settingsRequestDto: SettingsRequestDto; // (optional)
 
 const { status, data } = await apiInstance.setOpenEditorInSameTab(
+    settingsRequestDto
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Boolean value: true if the parameter is enabled |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **setOrganizeRoomsGrouping**
+> BooleanWrapper setOrganizeRoomsGrouping()
+
+Changes the setting that allows the user to organize the grouping of rooms.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-organize-rooms-grouping/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **settingsRequestDto** | **SettingsRequestDto**|  | |
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    FilesSettingsApi,
+    Configuration,
+    SettingsRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new FilesSettingsApi(configuration);
+
+let settingsRequestDto: SettingsRequestDto; // (optional)
+
+const { status, data } = await apiInstance.setOrganizeRoomsGrouping(
     settingsRequestDto
 );
 ```
@@ -1295,6 +1458,64 @@ const { status, data } = await apiInstance.updateFileIfExist(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Boolean value: true if the operation is successful |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **uploadDefaultTemplate**
+> DefaultTemplateSettingsWrapper uploadDefaultTemplate()
+
+Uploads a file to use as the default template setting.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-default-template/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fileExtension** | [**string**] | File extension of a template to replace | defaults to undefined|
+| **file** | [**File**] | File to replace template with | defaults to undefined|
+
+
+### Return type
+
+**DefaultTemplateSettingsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    FilesSettingsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new FilesSettingsApi(configuration);
+
+let fileExtension: string; //File extension of a template to replace (default to undefined)
+let file: File; //File to replace template with (default to undefined)
+
+const { status, data } = await apiInstance.uploadDefaultTemplate(
+    fileExtension,
+    file
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | New default template settings |  -  |
+|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,45 +21,31 @@
 
 /**
  * The SSO IdP settings.
- * @export
- * @interface SsoIdpSettings
  */
 export interface SsoIdpSettings {
     /**
      * The entity ID.
-     * @type {string}
-     * @memberof SsoIdpSettings
      */
-    'entityId'?: string | null;
+    'entityId'?: string;
     /**
      * The SSO URL.
-     * @type {string}
-     * @memberof SsoIdpSettings
      */
-    'ssoUrl'?: string | null;
+    'ssoUrl'?: string;
     /**
      * The SSO binding.
-     * @type {string}
-     * @memberof SsoIdpSettings
      */
-    'ssoBinding'?: string | null;
+    'ssoBinding'?: string;
     /**
      * The SLO URL.
-     * @type {string}
-     * @memberof SsoIdpSettings
      */
-    'sloUrl'?: string | null;
+    'sloUrl'?: string;
     /**
      * The SLO binding.
-     * @type {string}
-     * @memberof SsoIdpSettings
      */
-    'sloBinding'?: string | null;
+    'sloBinding'?: string;
     /**
      * The name ID format.
-     * @type {string}
-     * @memberof SsoIdpSettings
      */
-    'nameIdFormat'?: string | null;
+    'nameIdFormat'?: string;
 }
 

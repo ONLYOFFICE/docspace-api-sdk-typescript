@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -18,46 +20,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
+import type { FolderContentDtoInteger } from './folder-content-dto-integer';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FolderContentDtoInteger } from './folder-content-dto-integer';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
-/**
- * 
- * @export
- * @interface FolderContentIntegerArrayWrapper
- */
 export interface FolderContentIntegerArrayWrapper {
-    /**
-     * 
-     * @type {Array<FolderContentDtoInteger>}
-     * @memberof FolderContentIntegerArrayWrapper
-     */
     'response'?: Array<FolderContentDtoInteger>;
-    /**
-     * 
-     * @type {number}
-     * @memberof FolderContentIntegerArrayWrapper
-     */
     'count'?: number;
-    /**
-     * 
-     * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof FolderContentIntegerArrayWrapper
-     */
-    'links'?: Array<ActiveConnectionsWrapperLinksInner>;
-    /**
-     * 
-     * @type {number}
-     * @memberof FolderContentIntegerArrayWrapper
-     */
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
     'status'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof FolderContentIntegerArrayWrapper
-     */
     'statusCode'?: number;
 }
 

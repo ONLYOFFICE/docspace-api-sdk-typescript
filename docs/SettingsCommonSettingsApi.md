@@ -18,6 +18,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**getSupportedCultures**](#getsupportedcultures) | **GET** /api/2.0/settings/cultures | Get supported languages|
 |[**getTenantUserInvitationSettings**](#gettenantuserinvitationsettings) | **GET** /api/2.0/settings/invitationsettings | Get the user invitation settings|
 |[**getTimeZones**](#gettimezones) | **GET** /api/2.0/settings/timezones | Get time zones|
+|[**saveDefaultFolder**](#savedefaultfolder) | **PUT** /api/2.0/settings/defaultfolder | Set the default folder|
 |[**saveDnsSettings**](#savednssettings) | **PUT** /api/2.0/settings/dns | Save the DNS settings|
 |[**saveMailDomainSettings**](#savemaildomainsettings) | **POST** /api/2.0/settings/maildomainsettings | Save the mail domain settings|
 |[**savePortalColorTheme**](#saveportalcolortheme) | **PUT** /api/2.0/settings/colortheme | Save a color theme|
@@ -67,8 +68,8 @@ const { status, data } = await apiInstance.closeAdminHelper();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Ok |  -  |
-|**401** | Unauthorized |  -  |
 |**405** | Not available |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -124,8 +125,8 @@ const { status, data } = await apiInstance.completeWizard(
 |-------------|-------------|------------------|
 |**200** | Wizard settings |  -  |
 |**400** | Incorrect email address/The password is empty |  -  |
-|**401** | Unauthorized |  -  |
 |**402** | You must enter a license key or license key is not correct or license expired or user quota does not match the license |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -711,6 +712,61 @@ const { status, data } = await apiInstance.getTimeZones();
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **saveDefaultFolder**
+> StudioDefaultPageSettingsWrapper saveDefaultFolder()
+
+Sets the default folder.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-default-folder/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **defaultProductRequestDto** | **DefaultProductRequestDto**|  | |
+
+
+### Return type
+
+**StudioDefaultPageSettingsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsCommonSettingsApi,
+    Configuration,
+    DefaultProductRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsCommonSettingsApi(configuration);
+
+let defaultProductRequestDto: DefaultProductRequestDto; // (optional)
+
+const { status, data } = await apiInstance.saveDefaultFolder(
+    defaultProductRequestDto
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Message about saving settings successfully |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **saveDnsSettings**
 > StringWrapper saveDnsSettings()
 
@@ -763,9 +819,9 @@ const { status, data } = await apiInstance.saveDnsSettings(
 |-------------|-------------|------------------|
 |**200** | Message about changing DNS |  -  |
 |**400** | Invalid domain name/incorrect length of doman name |  -  |
-|**401** | Unauthorized |  -  |
 |**402** | Your pricing plan does not support this option |  -  |
 |**405** | Method not allowed |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

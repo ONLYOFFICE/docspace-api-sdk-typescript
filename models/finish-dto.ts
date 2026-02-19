@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,14 +21,10 @@
 
 /**
  * The parameters for terminating a process or operation.
- * @export
- * @interface FinishDto
  */
 export interface FinishDto {
     /**
      * Specifies whether to send a welcome email or not.
-     * @type {boolean}
-     * @memberof FinishDto
      */
     'isSendWelcomeEmail': boolean;
 }

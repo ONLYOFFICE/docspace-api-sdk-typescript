@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **dispositionType** | **string** |  | [optional] [default to undefined]
-**parameters** | **Array&lt;any&gt;** |  | [optional] [readonly] [default to undefined]
+**parameters** | **Array&lt;any&gt;** |  | [optional] [default to undefined]
 **fileName** | **string** |  | [optional] [default to undefined]
 **creationDate** | **string** |  | [optional] [default to undefined]
 **modificationDate** | **string** |  | [optional] [default to undefined]

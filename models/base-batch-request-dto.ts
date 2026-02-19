@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -37,13 +39,13 @@ export type BaseBatchRequestDto = FileOperationRequestBaseDto &  {
      * @type {Array<BaseBatchRequestDtoAllOfFolderIds>}
      * @memberof BaseBatchRequestDto
      */
-    'folderIds'?: Array<BaseBatchRequestDtoAllOfFolderIds> | null;
+    'folderIds'?: Array<BaseBatchRequestDtoAllOfFolderIds>;
     /**
      * The list of file IDs of the base batch request.
      * @type {Array<BaseBatchRequestDtoAllOfFileIds>}
      * @memberof BaseBatchRequestDto
      */
-    'fileIds'?: Array<BaseBatchRequestDtoAllOfFileIds> | null;
+    'fileIds'?: Array<BaseBatchRequestDtoAllOfFileIds>;
 };
 
 

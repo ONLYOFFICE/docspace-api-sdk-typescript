@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -20,29 +22,9 @@
 // @ts-ignore
 import type { BackupPeriod } from './backup-period';
 
-/**
- * 
- * @export
- * @interface CronParams
- */
 export interface CronParams {
-    /**
-     * 
-     * @type {BackupPeriod}
-     * @memberof CronParams
-     */
     'period'?: BackupPeriod;
-    /**
-     * 
-     * @type {number}
-     * @memberof CronParams
-     */
     'hour'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof CronParams
-     */
     'day'?: number;
 }
 

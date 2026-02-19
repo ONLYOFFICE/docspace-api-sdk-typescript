@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,57 +21,39 @@
 
 /**
  * The password settings parameters.
- * @export
- * @interface PasswordSettingsDto
  */
 export interface PasswordSettingsDto {
     /**
      * The minimum number of characters required for valid passwords.
-     * @type {number}
-     * @memberof PasswordSettingsDto
      */
     'minLength': number;
     /**
      * Specifies whether the password should contain the uppercase letters or not.
-     * @type {boolean}
-     * @memberof PasswordSettingsDto
      */
     'upperCase': boolean;
     /**
      * Specifies whether the password should contain the digits or not.
-     * @type {boolean}
-     * @memberof PasswordSettingsDto
      */
     'digits': boolean;
     /**
      * Specifies whether the password should contain the special symbols or not.
-     * @type {boolean}
-     * @memberof PasswordSettingsDto
      */
     'specSymbols': boolean;
     /**
      * The allowed password characters in the regex string format.
-     * @type {string}
-     * @memberof PasswordSettingsDto
      */
-    'allowedCharactersRegexStr': string | null;
+    'allowedCharactersRegexStr': string;
     /**
      * The password digits in the regex string format.
-     * @type {string}
-     * @memberof PasswordSettingsDto
      */
-    'digitsRegexStr': string | null;
+    'digitsRegexStr': string;
     /**
      * The password uppercase letters in the regex string format.
-     * @type {string}
-     * @memberof PasswordSettingsDto
      */
-    'upperCaseRegexStr': string | null;
+    'upperCaseRegexStr': string;
     /**
      * The passaword special symbols in the regex string format.
-     * @type {string}
-     * @memberof PasswordSettingsDto
      */
-    'specSymbolsRegexStr': string | null;
+    'specSymbolsRegexStr': string;
 }
 

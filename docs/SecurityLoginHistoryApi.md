@@ -51,8 +51,8 @@ const { status, data } = await apiInstance.createLoginHistoryReport();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | URL to the xlsx report file |  -  |
-|**401** | Unauthorized |  -  |
 |**402** | Your pricing plan does not support this option |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -99,8 +99,8 @@ const { status, data } = await apiInstance.getLastLoginEvents();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of login events |  -  |
-|**401** | Unauthorized |  -  |
 |**402** | Your pricing plan does not support this option |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -171,8 +171,8 @@ const { status, data } = await apiInstance.getLoginEventsByFilter(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of filtered login events |  -  |
-|**401** | Unauthorized |  -  |
 |**402** | Your pricing plan does not support this option |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

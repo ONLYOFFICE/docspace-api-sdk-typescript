@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,15 +21,11 @@
 
 /**
  * The request parameters for linking accounts.
- * @export
- * @interface LinkAccountRequestDto
  */
 export interface LinkAccountRequestDto {
     /**
      * The third-party profile in the serialized format.
-     * @type {string}
-     * @memberof LinkAccountRequestDto
      */
-    'serializedProfile'?: string | null;
+    'serializedProfile'?: string;
 }
 

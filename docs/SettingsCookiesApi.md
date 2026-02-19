@@ -105,8 +105,8 @@ const { status, data } = await apiInstance.updateCookieSettings(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Message about the result of saving new settings |  -  |
-|**401** | Unauthorized |  -  |
 |**402** | Your pricing plan does not support this option |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

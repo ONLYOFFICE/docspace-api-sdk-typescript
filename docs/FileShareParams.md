@@ -6,8 +6,8 @@ The collection of file sharing parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**email** | **string** | The email address. | [optional] [default to undefined]
 **shareTo** | **string** | The ID of the user to whom the file will be shared. | [optional] [default to undefined]
-**email** | **string** | The user email address. | [optional] [default to undefined]
 **access** | [**FileShare**](FileShare.md) |  | [optional] [default to undefined]
 
 ## Example
@@ -16,8 +16,8 @@ Name | Type | Description | Notes
 import { FileShareParams } from '@onlyoffice/docspace-api-sdk';
 
 const instance: FileShareParams = {
-    shareTo,
     email,
+    shareTo,
     access,
 };
 ```

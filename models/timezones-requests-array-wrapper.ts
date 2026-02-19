@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -18,46 +20,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { TimezonesRequestsDto } from './timezones-requests-dto';
 
-/**
- * 
- * @export
- * @interface TimezonesRequestsArrayWrapper
- */
 export interface TimezonesRequestsArrayWrapper {
-    /**
-     * 
-     * @type {Array<TimezonesRequestsDto>}
-     * @memberof TimezonesRequestsArrayWrapper
-     */
     'response'?: Array<TimezonesRequestsDto>;
-    /**
-     * 
-     * @type {number}
-     * @memberof TimezonesRequestsArrayWrapper
-     */
     'count'?: number;
-    /**
-     * 
-     * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof TimezonesRequestsArrayWrapper
-     */
-    'links'?: Array<ActiveConnectionsWrapperLinksInner>;
-    /**
-     * 
-     * @type {number}
-     * @memberof TimezonesRequestsArrayWrapper
-     */
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
     'status'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof TimezonesRequestsArrayWrapper
-     */
     'statusCode'?: number;
 }
 

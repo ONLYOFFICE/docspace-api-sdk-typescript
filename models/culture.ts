@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -18,16 +20,12 @@
 
 
 /**
- * The culture code parameters.
- * @export
- * @interface Culture
+ * The culture name parameters.
  */
 export interface Culture {
     /**
-     * The user language.
-     * @type {string}
-     * @memberof Culture
+     * The user culture name (en-US, de, fr, es, ...).
      */
-    'cultureName'?: string | null;
+    'cultureName': string;
 }
 

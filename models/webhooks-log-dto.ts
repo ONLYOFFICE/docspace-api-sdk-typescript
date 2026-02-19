@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,82 +24,53 @@ import type { WebhookTrigger } from './webhook-trigger';
 
 /**
  * The webhook log parameters.
- * @export
- * @interface WebhooksLogDto
  */
 export interface WebhooksLogDto {
     /**
      * The webhook log ID.
-     * @type {number}
-     * @memberof WebhooksLogDto
      */
     'id': number;
     /**
      * The webhook configuration name.
-     * @type {string}
-     * @memberof WebhooksLogDto
      */
-    'configName'?: string | null;
-    /**
-     * 
-     * @type {WebhookTrigger}
-     * @memberof WebhooksLogDto
-     */
+    'configName'?: string;
     'trigger'?: WebhookTrigger;
     /**
      * The webhook creation time.
-     * @type {string}
-     * @memberof WebhooksLogDto
      */
     'creationTime'?: string;
     /**
      * The webhook method.
-     * @type {string}
-     * @memberof WebhooksLogDto
      */
-    'method'?: string | null;
+    'method'?: string;
     /**
      * The webhook route.
-     * @type {string}
-     * @memberof WebhooksLogDto
      */
-    'route'?: string | null;
+    'route'?: string;
     /**
      * The webhook request headers.
-     * @type {string}
-     * @memberof WebhooksLogDto
      */
-    'requestHeaders'?: string | null;
+    'requestHeaders'?: string;
     /**
      * The webhook request payload.
-     * @type {string}
-     * @memberof WebhooksLogDto
      */
-    'requestPayload'?: string | null;
+    'requestPayload'?: string;
     /**
      * The webhook response headers.
-     * @type {string}
-     * @memberof WebhooksLogDto
      */
-    'responseHeaders'?: string | null;
+    'responseHeaders'?: string;
     /**
      * The webhook response payload.
-     * @type {string}
-     * @memberof WebhooksLogDto
      */
-    'responsePayload'?: string | null;
+    'responsePayload'?: string;
     /**
      * The webhook status.
-     * @type {number}
-     * @memberof WebhooksLogDto
      */
     'status'?: number;
     /**
      * The webhook delivery time.
-     * @type {string}
-     * @memberof WebhooksLogDto
      */
-    'delivery'?: string | null;
+    'delivery'?: string;
 }
 
 

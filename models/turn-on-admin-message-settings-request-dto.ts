@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,14 +21,10 @@
 
 /**
  * The request parameters for enabling or disabling administrator messaging system.
- * @export
- * @interface TurnOnAdminMessageSettingsRequestDto
  */
 export interface TurnOnAdminMessageSettingsRequestDto {
     /**
      * The global switch for the administrator messaging functionality.
-     * @type {boolean}
-     * @memberof TurnOnAdminMessageSettingsRequestDto
      */
     'turnOn'?: boolean;
 }

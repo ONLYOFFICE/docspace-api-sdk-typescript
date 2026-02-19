@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,51 +24,35 @@ import type { AuthKey } from './auth-key';
 
 /**
  * The request parameters for handling the authorization service.
- * @export
- * @interface AuthServiceRequestsDto
  */
 export interface AuthServiceRequestsDto {
     /**
      * The name of the authorization service.
-     * @type {string}
-     * @memberof AuthServiceRequestsDto
      */
-    'name'?: string | null;
+    'name'?: string;
     /**
      * The user-friendly display title of the authorization service.
-     * @type {string}
-     * @memberof AuthServiceRequestsDto
      */
-    'title'?: string | null;
+    'title'?: string;
     /**
      * The brief description of the authorization service.
-     * @type {string}
-     * @memberof AuthServiceRequestsDto
      */
-    'description'?: string | null;
+    'description'?: string;
     /**
      * The detailed instructions for configuring or using the authorization service.
-     * @type {string}
-     * @memberof AuthServiceRequestsDto
      */
-    'instruction'?: string | null;
+    'instruction'?: string;
     /**
      * Specifies whether the authorization service can be configured by the user.
-     * @type {boolean}
-     * @memberof AuthServiceRequestsDto
      */
     'canSet'?: boolean;
     /**
      * Specifies whether the authorization service is paid or not.
-     * @type {boolean}
-     * @memberof AuthServiceRequestsDto
      */
     'paid'?: boolean;
     /**
      * The collection of authorization keys associated with the authorization service.
-     * @type {Array<AuthKey>}
-     * @memberof AuthServiceRequestsDto
      */
-    'props'?: Array<AuthKey> | null;
+    'props'?: Array<AuthKey>;
 }
 

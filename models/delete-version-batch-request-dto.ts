@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -43,7 +45,7 @@ export type DeleteVersionBatchRequestDto = FileOperationRequestBaseDto &  {
      * @type {Array<number>}
      * @memberof DeleteVersionBatchRequestDto
      */
-    'versions': Array<number> | null;
+    'versions': Array<number>;
 };
 
 

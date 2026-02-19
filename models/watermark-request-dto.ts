@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,56 +24,35 @@ import type { WatermarkAdditions } from './watermark-additions';
 
 /**
  * The request parameters for adding watermarks.
- * @export
- * @interface WatermarkRequestDto
  */
 export interface WatermarkRequestDto {
     /**
      * Specifies whether watermarks are on or off.
-     * @type {boolean}
-     * @memberof WatermarkRequestDto
      */
-    'enabled'?: boolean | null;
-    /**
-     * 
-     * @type {WatermarkAdditions}
-     * @memberof WatermarkRequestDto
-     */
+    'enabled'?: boolean;
     'additions'?: WatermarkAdditions;
     /**
      * The watermark text.
-     * @type {string}
-     * @memberof WatermarkRequestDto
      */
-    'text'?: string | null;
+    'text'?: string;
     /**
      * The watermark text and image rotate angle.
-     * @type {number}
-     * @memberof WatermarkRequestDto
      */
     'rotate'?: number;
     /**
      * The watermark image scale.
-     * @type {number}
-     * @memberof WatermarkRequestDto
      */
     'imageScale'?: number;
     /**
      * The path to the temporary image file.
-     * @type {string}
-     * @memberof WatermarkRequestDto
      */
-    'imageUrl'?: string | null;
+    'imageUrl'?: string;
     /**
      * The watermark image height.
-     * @type {number}
-     * @memberof WatermarkRequestDto
      */
     'imageHeight'?: number;
     /**
      * The watermark image width.
-     * @type {number}
-     * @memberof WatermarkRequestDto
      */
     'imageWidth'?: number;
 }

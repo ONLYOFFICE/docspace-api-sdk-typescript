@@ -1,38 +1,39 @@
 # WhiteLabelLogoType
 
+[1 - Light small, 2 - Login page, 3 - Favicon, 4 - Docs editor, 5 - Docs editor embed, 6 - Left menu, 7 - About page, 8 - Notification, 9 - Spreadsheet editor, 10 - Spreadsheet editor embed, 11 - Presentation editor, 12 - Presentation editor embed, 13 - Pdf editor, 14 - Pdf editor embed, 15 - Diagram editor, 16 - Diagram editor embed]
 
 ## Enum
 
-* `NUMBER_1` (value: `1`)
+* `LightSmall` (value: `1`)
 
-* `NUMBER_2` (value: `2`)
+* `LoginPage` (value: `2`)
 
-* `NUMBER_3` (value: `3`)
+* `Favicon` (value: `3`)
 
-* `NUMBER_4` (value: `4`)
+* `DocsEditor` (value: `4`)
 
-* `NUMBER_5` (value: `5`)
+* `DocsEditorEmbed` (value: `5`)
 
-* `NUMBER_6` (value: `6`)
+* `LeftMenu` (value: `6`)
 
-* `NUMBER_7` (value: `7`)
+* `AboutPage` (value: `7`)
 
-* `NUMBER_8` (value: `8`)
+* `Notification` (value: `8`)
 
-* `NUMBER_9` (value: `9`)
+* `SpreadsheetEditor` (value: `9`)
 
-* `NUMBER_10` (value: `10`)
+* `SpreadsheetEditorEmbed` (value: `10`)
 
-* `NUMBER_11` (value: `11`)
+* `PresentationEditor` (value: `11`)
 
-* `NUMBER_12` (value: `12`)
+* `PresentationEditorEmbed` (value: `12`)
 
-* `NUMBER_13` (value: `13`)
+* `PdfEditor` (value: `13`)
 
-* `NUMBER_14` (value: `14`)
+* `PdfEditorEmbed` (value: `14`)
 
-* `NUMBER_15` (value: `15`)
+* `DiagramEditor` (value: `15`)
 
-* `NUMBER_16` (value: `16`)
+* `DiagramEditorEmbed` (value: `16`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

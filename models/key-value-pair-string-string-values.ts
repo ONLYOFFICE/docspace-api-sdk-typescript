@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -17,23 +19,8 @@
  */
 
 
-/**
- * 
- * @export
- * @interface KeyValuePairStringStringValues
- */
 export interface KeyValuePairStringStringValues {
-    /**
-     * 
-     * @type {string}
-     * @memberof KeyValuePairStringStringValues
-     */
-    'key'?: string | null;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof KeyValuePairStringStringValues
-     */
+    'key'?: string;
     'value'?: Array<string>;
 }
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,14 +21,10 @@
 
 /**
  * The settings request parameters.
- * @export
- * @interface SettingsRequestDto
  */
 export interface SettingsRequestDto {
     /**
      * Specifies whether to set the specified settings or not.
-     * @type {boolean}
-     * @memberof SettingsRequestDto
      */
     'set'?: boolean;
 }

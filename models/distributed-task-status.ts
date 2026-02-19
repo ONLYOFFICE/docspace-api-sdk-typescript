@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,30 +21,13 @@
 
 /**
  * [0 - Created, 1 - Running, 2 - Completed, 3 - Canceled, 4 - Failted]
- * @export
- * @enum {number}
  */
 
 export const DistributedTaskStatus = {
-    /**
-    * Created
-    */
     Created: 0,
-    /**
-    * Running
-    */
     Running: 1,
-    /**
-    * Completed
-    */
     Completed: 2,
-    /**
-    * Canceled
-    */
     Canceled: 3,
-    /**
-    * Failted
-    */
     Failted: 4
 } as const;
 

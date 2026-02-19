@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -27,7 +26,7 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { CreateWebhooksConfigRequestsDto } from '../../models';
 // @ts-ignore
-import type { UnknownWrapper } from '../../models';
+import type { GetWebhookTriggers200Response } from '../../models';
 // @ts-ignore
 import type { UpdateWebhooksConfigRequestsDto } from '../../models';
 // @ts-ignore
@@ -666,7 +665,7 @@ export const WebhooksApiFp = function(configuration?: Configuration) {
          * REST API Reference for getWebhookTriggers operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-webhook-triggers/
          */
-        async getWebhookTriggers(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UnknownWrapper>> {
+        async getWebhookTriggers(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetWebhookTriggers200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getWebhookTriggers(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['WebhooksApi.getWebhookTriggers']?.[localVarOperationServerIndex]?.url;
@@ -809,7 +808,7 @@ export const WebhooksApiFactory = function (configuration?: Configuration, baseP
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-webhook-triggers/
          * @throws {RequiredError}
          */
-        getWebhookTriggers(options?: RawAxiosRequestConfig): AxiosPromise<UnknownWrapper> {
+        getWebhookTriggers(options?: RawAxiosRequestConfig): AxiosPromise<GetWebhookTriggers200Response> {
             return localVarFp.getWebhookTriggers(options).then((request) => request(axios, basePath));
         },
         /**

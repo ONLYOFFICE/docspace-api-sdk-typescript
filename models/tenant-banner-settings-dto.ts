@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,14 +21,10 @@
 
 /**
  * The request parameters for managing the visibility settings of the promotional banners for the current tenant.
- * @export
- * @interface TenantBannerSettingsDto
  */
 export interface TenantBannerSettingsDto {
     /**
      * The banners visibility flag.
-     * @type {boolean}
-     * @memberof TenantBannerSettingsDto
      */
     'hidden'?: boolean;
 }

@@ -65,8 +65,8 @@ const { status, data } = await apiInstance.deleteAdditionalWhiteLabelSettings();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Default additional white label settings |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -113,8 +113,8 @@ const { status, data } = await apiInstance.deleteCompanyWhiteLabelSettings();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Default company white label settings |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -586,8 +586,8 @@ const { status, data } = await apiInstance.restoreWhiteLabelLogoText(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Boolean value: true if the operation is successful |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -644,8 +644,8 @@ const { status, data } = await apiInstance.restoreWhiteLabelLogos(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Boolean value: true if the operation is successful |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -701,8 +701,8 @@ const { status, data } = await apiInstance.saveAdditionalWhiteLabelSettings(
 |-------------|-------------|------------------|
 |**200** | Boolean value: true if the operation is successful |  -  |
 |**400** | Settings is empty |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -758,8 +758,8 @@ const { status, data } = await apiInstance.saveCompanyWhiteLabelSettings(
 |-------------|-------------|------------------|
 |**200** | Boolean value: true if the operation is successful |  -  |
 |**400** | Argument is empty or invalid |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -820,8 +820,8 @@ const { status, data } = await apiInstance.saveWhiteLabelLogoText(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Boolean value: true if the operation is sucessful |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -882,8 +882,8 @@ const { status, data } = await apiInstance.saveWhiteLabelSettings(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Boolean value: true if the operation is sucessful |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -940,9 +940,9 @@ const { status, data } = await apiInstance.saveWhiteLabelSettingsFromFiles(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Boolean value: true if the operation is sucessful |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
 |**409** | No input files |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

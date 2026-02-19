@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,27 +21,19 @@
 
 /**
  * The file link properties.
- * @export
- * @interface FileLink
  */
 export interface FileLink {
     /**
      * The type of the file for the source viewed or edited document.
-     * @type {string}
-     * @memberof FileLink
      */
-    'filetype': string | null;
+    'filetype': string;
     /**
      * The encrypted signature added to the config in the form of a token.
-     * @type {string}
-     * @memberof FileLink
      */
-    'token'?: string | null;
+    'token'?: string;
     /**
      * The absolute URL where the source viewed or edited document is stored.
-     * @type {string}
-     * @memberof FileLink
      */
-    'url': string | null;
+    'url': string;
 }
 

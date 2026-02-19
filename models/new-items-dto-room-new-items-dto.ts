@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -25,21 +27,12 @@ import type { RoomNewItemsDto } from './room-new-items-dto';
 
 /**
  * The new item parameters.
- * @export
- * @interface NewItemsDtoRoomNewItemsDto
  */
 export interface NewItemsDtoRoomNewItemsDto {
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof NewItemsDtoRoomNewItemsDto
-     */
     'date': ApiDateTime;
     /**
      * The list of items.
-     * @type {Array<RoomNewItemsDto>}
-     * @memberof NewItemsDtoRoomNewItemsDto
      */
-    'items': Array<RoomNewItemsDto> | null;
+    'items': Array<RoomNewItemsDto>;
 }
 

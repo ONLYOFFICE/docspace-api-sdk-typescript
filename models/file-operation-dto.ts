@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -18,6 +20,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { DistributedTaskStatus } from './distributed-task-status';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { FileEntryBaseDto } from './file-entry-base-dto';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -25,64 +30,42 @@ import type { FileOperationType } from './file-operation-type';
 
 /**
  * The file operation information.
- * @export
- * @interface FileOperationDto
  */
 export interface FileOperationDto {
     /**
      * The file operation ID.
-     * @type {string}
-     * @memberof FileOperationDto
      */
-    'id': string | null;
-    /**
-     * 
-     * @type {FileOperationType}
-     * @memberof FileOperationDto
-     */
+    'id': string;
     'Operation': FileOperationType;
     /**
      * The file operation progress in percentage.
-     * @type {number}
-     * @memberof FileOperationDto
      */
     'progress': number;
     /**
      * The file operation error message.
-     * @type {string}
-     * @memberof FileOperationDto
      */
-    'error': string | null;
+    'error': string;
     /**
      * The file operation processing status.
-     * @type {string}
-     * @memberof FileOperationDto
      */
-    'processed': string | null;
+    'processed': string;
     /**
      * Specifies if the file operation is finished or not.
-     * @type {boolean}
-     * @memberof FileOperationDto
      */
     'finished': boolean;
     /**
      * The file operation URL.
-     * @type {string}
-     * @memberof FileOperationDto
      */
-    'url'?: string | null;
+    'url'?: string;
     /**
      * The list of files of the file operation.
-     * @type {Array<FileEntryBaseDto>}
-     * @memberof FileOperationDto
      */
-    'files'?: Array<FileEntryBaseDto> | null;
+    'files'?: Array<FileEntryBaseDto>;
     /**
      * The list of folders of the file operation.
-     * @type {Array<FileEntryBaseDto>}
-     * @memberof FileOperationDto
      */
-    'folders'?: Array<FileEntryBaseDto> | null;
+    'folders'?: Array<FileEntryBaseDto>;
+    'status'?: DistributedTaskStatus;
 }
 
 

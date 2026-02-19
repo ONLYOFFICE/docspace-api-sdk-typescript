@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -28,33 +30,14 @@ import type { WhiteLabelLogoType } from './white-label-logo-type';
 
 /**
  * The white label item parameters.
- * @export
- * @interface WhiteLabelItemDto
  */
 export interface WhiteLabelItemDto {
-    /**
-     * 
-     * @type {WhiteLabelLogoType}
-     * @memberof WhiteLabelItemDto
-     */
     'type'?: WhiteLabelLogoType;
     /**
      * The white label file name.
-     * @type {string}
-     * @memberof WhiteLabelItemDto
      */
-    'name'?: string | null;
-    /**
-     * 
-     * @type {IMagickGeometry}
-     * @memberof WhiteLabelItemDto
-     */
+    'name'?: string;
     'size'?: IMagickGeometry;
-    /**
-     * 
-     * @type {WhiteLabelItemPathDto}
-     * @memberof WhiteLabelItemDto
-     */
     'path'?: WhiteLabelItemPathDto;
 }
 

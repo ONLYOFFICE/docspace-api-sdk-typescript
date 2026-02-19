@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -20,7 +22,6 @@
 /**
  * @type DownloadRequestItemDtoKey
  * The unique identifier or reference key for the file to be downloaded.
- * @export
  */
 export type DownloadRequestItemDtoKey = number | string;
 

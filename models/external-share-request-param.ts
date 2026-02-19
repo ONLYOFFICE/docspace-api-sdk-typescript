@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,15 +21,11 @@
 
 /**
  * The external data parameters.
- * @export
- * @interface ExternalShareRequestParam
  */
 export interface ExternalShareRequestParam {
     /**
      * The password to share external data.
-     * @type {string}
-     * @memberof ExternalShareRequestParam
      */
-    'password'?: string | null;
+    'password'?: string;
 }
 

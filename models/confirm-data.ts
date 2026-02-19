@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,27 +21,19 @@
 
 /**
  * The additional confirmation data required for authentication.
- * @export
- * @interface ConfirmData
  */
 export interface ConfirmData {
     /**
      * The email address to confirm the user\'s identity.
-     * @type {string}
-     * @memberof ConfirmData
      */
-    'email'?: string | null;
+    'email'?: string;
     /**
      * Specifies whether this is the first access to the user\'s account.
-     * @type {boolean}
-     * @memberof ConfirmData
      */
-    'first'?: boolean | null;
+    'first'?: boolean;
     /**
      * The unique confirmation key for validating user identity.
-     * @type {string}
-     * @memberof ConfirmData
      */
-    'key'?: string | null;
+    'key'?: string;
 }
 

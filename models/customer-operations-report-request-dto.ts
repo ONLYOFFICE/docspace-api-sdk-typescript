@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,39 +21,27 @@
 
 /**
  * The request parameters for generating a report on client operations.
- * @export
- * @interface CustomerOperationsReportRequestDto
  */
 export interface CustomerOperationsReportRequestDto {
     /**
      * The report start date.
-     * @type {string}
-     * @memberof CustomerOperationsReportRequestDto
      */
-    'startDate'?: string | null;
+    'startDate'?: string;
     /**
      * The report end date.
-     * @type {string}
-     * @memberof CustomerOperationsReportRequestDto
      */
-    'endDate'?: string | null;
+    'endDate'?: string;
     /**
      * The participant name.
-     * @type {string}
-     * @memberof CustomerOperationsReportRequestDto
      */
-    'participantName'?: string | null;
+    'participantName'?: string;
     /**
      * Specifies whether to include credit operations in the report.
-     * @type {boolean}
-     * @memberof CustomerOperationsReportRequestDto
      */
-    'credit'?: boolean | null;
+    'credit'?: boolean;
     /**
      * Specifies whether to include debit operations in the report.
-     * @type {boolean}
-     * @memberof CustomerOperationsReportRequestDto
      */
-    'debit'?: boolean | null;
+    'debit'?: boolean;
 }
 

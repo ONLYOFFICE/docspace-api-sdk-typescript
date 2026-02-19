@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -38,6 +37,8 @@ import type { CustomerInfoWrapper } from '../../models';
 import type { CustomerOperationsReportRequestDto } from '../../models';
 // @ts-ignore
 import type { DocumentBuilderTaskWrapper } from '../../models';
+// @ts-ignore
+import type { GetPortalPrices200Response } from '../../models';
 // @ts-ignore
 import type { PaymentCalculationWrapper } from '../../models';
 // @ts-ignore
@@ -63,9 +64,9 @@ import type { TenantWalletSettingsWrapper } from '../../models';
 // @ts-ignore
 import type { TopUpDepositRequestDto } from '../../models';
 // @ts-ignore
-import type { UnknownWrapper } from '../../models';
-// @ts-ignore
 import type { WalletQuantityRequestDto } from '../../models';
+// @ts-ignore
+import type { WalletServiceArrayWrapper } from '../../models';
 /**
  * PaymentApi - axios parameter creator
  * @export
@@ -253,7 +254,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          */
         getCheckoutSetupUrl: async (backUrl?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
-            const localVarPath = `/api/2.0/portal/payment/chechoutsetupurl`;
+            const localVarPath = `/api/2.0/portal/payment/checkoutsetupurl`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1636,7 +1637,7 @@ export const PaymentApiFp = function(configuration?: Configuration) {
          * REST API Reference for getPortalPrices operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-prices/
          */
-        async getPortalPrices(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UnknownWrapper>> {
+        async getPortalPrices(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetPortalPrices200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPortalPrices(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaymentApi.getPortalPrices']?.[localVarOperationServerIndex]?.url;
@@ -1708,7 +1709,7 @@ export const PaymentApiFp = function(configuration?: Configuration) {
          * REST API Reference for getWalletServices operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-wallet-services/
          */
-        async getWalletServices(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QuotaArrayWrapper>> {
+        async getWalletServices(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WalletServiceArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getWalletServices(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaymentApi.getWalletServices']?.[localVarOperationServerIndex]?.url;
@@ -1969,7 +1970,7 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-prices/
          * @throws {RequiredError}
          */
-        getPortalPrices(options?: RawAxiosRequestConfig): AxiosPromise<UnknownWrapper> {
+        getPortalPrices(options?: RawAxiosRequestConfig): AxiosPromise<GetPortalPrices200Response> {
             return localVarFp.getPortalPrices(options).then((request) => request(axios, basePath));
         },
         /**
@@ -2026,7 +2027,7 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-wallet-services/
          * @throws {RequiredError}
          */
-        getWalletServices(options?: RawAxiosRequestConfig): AxiosPromise<QuotaArrayWrapper> {
+        getWalletServices(options?: RawAxiosRequestConfig): AxiosPromise<WalletServiceArrayWrapper> {
             return localVarFp.getWalletServices(options).then((request) => request(axios, basePath));
         },
         /**

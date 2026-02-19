@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -43,13 +45,13 @@ export type BatchRequestDto = FileOperationRequestBaseDto &  {
      * @type {Array<BatchRequestDtoAllOfFolderIds>}
      * @memberof BatchRequestDto
      */
-    'folderIds'?: Array<BatchRequestDtoAllOfFolderIds> | null;
+    'folderIds'?: Array<BatchRequestDtoAllOfFolderIds>;
     /**
      * The list of file IDs to be copied/moved.
      * @type {Array<BatchRequestDtoAllOfFileIds>}
      * @memberof BatchRequestDto
      */
-    'fileIds'?: Array<BatchRequestDtoAllOfFileIds> | null;
+    'fileIds'?: Array<BatchRequestDtoAllOfFileIds>;
     /**
      * 
      * @type {BatchRequestDtoAllOfDestFolderId}

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,69 +21,17 @@
 
 /**
  * The file accessibility.
- * @export
- * @interface FileDtoIntegerAllOfViewAccessibility
  */
 export interface FileDtoIntegerAllOfViewAccessibility {
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileDtoIntegerAllOfViewAccessibility
-     */
     'ImageView'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileDtoIntegerAllOfViewAccessibility
-     */
     'MediaView'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileDtoIntegerAllOfViewAccessibility
-     */
     'WebView'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileDtoIntegerAllOfViewAccessibility
-     */
     'WebEdit'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileDtoIntegerAllOfViewAccessibility
-     */
     'WebReview'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileDtoIntegerAllOfViewAccessibility
-     */
     'WebCustomFilterEditing'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileDtoIntegerAllOfViewAccessibility
-     */
     'WebRestrictedEditing'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileDtoIntegerAllOfViewAccessibility
-     */
     'WebComment'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileDtoIntegerAllOfViewAccessibility
-     */
     'CanConvert'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileDtoIntegerAllOfViewAccessibility
-     */
     'MustConvert'?: boolean;
 }
 

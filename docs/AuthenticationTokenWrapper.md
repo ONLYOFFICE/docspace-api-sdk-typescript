@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **response** | [**AuthenticationTokenDto**](AuthenticationTokenDto.md) |  | [optional] [default to undefined]
 **count** | **number** |  | [optional] [default to undefined]
-**links** | [**Array&lt;ActiveConnectionsWrapperLinksInner&gt;**](ActiveConnectionsWrapperLinksInner.md) |  | [optional] [default to undefined]
+**links** | [**Array&lt;GetPortalPrices200ResponseLinksInner&gt;**](GetPortalPrices200ResponseLinksInner.md) |  | [optional] [default to undefined]
 **status** | **number** |  | [optional] [default to undefined]
 **statusCode** | **number** |  | [optional] [default to undefined]
 

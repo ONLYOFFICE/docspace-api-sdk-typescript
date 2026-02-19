@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,45 +24,28 @@ import type { OAuth20Token } from './oauth20-token';
 
 /**
  * The authentication data.
- * @export
- * @interface AuthData
  */
 export interface AuthData {
     /**
      * The authentication login.
-     * @type {string}
-     * @memberof AuthData
      */
-    'login'?: string | null;
+    'login'?: string;
     /**
      * The authentication password.
-     * @type {string}
-     * @memberof AuthData
      */
-    'password'?: string | null;
+    'password'?: string;
     /**
      * The authentication raw token.
-     * @type {string}
-     * @memberof AuthData
      */
-    'rawToken'?: string | null;
+    'rawToken'?: string;
     /**
      * The authentication URL.
-     * @type {string}
-     * @memberof AuthData
      */
-    'url'?: string | null;
+    'url'?: string;
     /**
      * The authentication provider.
-     * @type {string}
-     * @memberof AuthData
      */
-    'provider'?: string | null;
-    /**
-     * 
-     * @type {OAuth20Token}
-     * @memberof AuthData
-     */
+    'provider'?: string;
     'token'?: OAuth20Token;
 }
 

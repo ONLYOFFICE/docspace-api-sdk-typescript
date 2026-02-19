@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,18 +21,10 @@
 
 /**
  * [0 - Fast, 1 - Strict]
- * @export
- * @enum {number}
  */
 
 export const CoEditingConfigMode = {
-    /**
-    * Fast
-    */
     Fast: 0,
-    /**
-    * Strict
-    */
     Strict: 1
 } as const;
 

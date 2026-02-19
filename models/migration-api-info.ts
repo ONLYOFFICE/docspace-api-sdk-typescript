@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -23,113 +25,23 @@ import type { MigratingApiGroup } from './migrating-api-group';
 // @ts-ignore
 import type { MigratingApiUser } from './migrating-api-user';
 
-/**
- * 
- * @export
- * @interface MigrationApiInfo
- */
 export interface MigrationApiInfo {
-    /**
-     * 
-     * @type {string}
-     * @memberof MigrationApiInfo
-     */
-    'migratorName'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MigrationApiInfo
-     */
-    'operation'?: string | null;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof MigrationApiInfo
-     */
-    'failedArchives'?: Array<string> | null;
-    /**
-     * 
-     * @type {Array<MigratingApiUser>}
-     * @memberof MigrationApiInfo
-     */
-    'users'?: Array<MigratingApiUser> | null;
-    /**
-     * 
-     * @type {Array<MigratingApiUser>}
-     * @memberof MigrationApiInfo
-     */
-    'withoutEmailUsers'?: Array<MigratingApiUser> | null;
-    /**
-     * 
-     * @type {Array<MigratingApiUser>}
-     * @memberof MigrationApiInfo
-     */
-    'existUsers'?: Array<MigratingApiUser> | null;
-    /**
-     * 
-     * @type {Array<MigratingApiGroup>}
-     * @memberof MigrationApiInfo
-     */
-    'groups'?: Array<MigratingApiGroup> | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof MigrationApiInfo
-     */
+    'migratorName'?: string;
+    'operation'?: string;
+    'failedArchives'?: Array<string>;
+    'users'?: Array<MigratingApiUser>;
+    'withoutEmailUsers'?: Array<MigratingApiUser>;
+    'existUsers'?: Array<MigratingApiUser>;
+    'groups'?: Array<MigratingApiGroup>;
     'importPersonalFiles'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof MigrationApiInfo
-     */
     'importSharedFiles'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof MigrationApiInfo
-     */
     'importSharedFolders'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof MigrationApiInfo
-     */
     'importCommonFiles'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof MigrationApiInfo
-     */
     'importProjectFiles'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof MigrationApiInfo
-     */
     'importGroups'?: boolean;
-    /**
-     * 
-     * @type {number}
-     * @memberof MigrationApiInfo
-     */
     'successedUsers'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof MigrationApiInfo
-     */
     'failedUsers'?: number;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof MigrationApiInfo
-     */
-    'files'?: Array<string> | null;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof MigrationApiInfo
-     */
-    'errors'?: Array<string> | null;
+    'files'?: Array<string>;
+    'errors'?: Array<string>;
 }
 

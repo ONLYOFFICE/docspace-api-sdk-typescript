@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,14 +21,10 @@
 
 /**
  * The base operation request parameters.
- * @export
- * @interface FileOperationRequestBaseDto
  */
 export interface FileOperationRequestBaseDto {
     /**
      * Specifies whether to return only the current operation
-     * @type {boolean}
-     * @memberof FileOperationRequestBaseDto
      */
     'returnSingleOperation'?: boolean;
 }

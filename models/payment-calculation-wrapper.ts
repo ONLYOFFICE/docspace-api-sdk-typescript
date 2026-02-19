@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -18,46 +20,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { PaymentCalculation } from './payment-calculation';
 
-/**
- * 
- * @export
- * @interface PaymentCalculationWrapper
- */
 export interface PaymentCalculationWrapper {
-    /**
-     * 
-     * @type {PaymentCalculation}
-     * @memberof PaymentCalculationWrapper
-     */
     'response'?: PaymentCalculation;
-    /**
-     * 
-     * @type {number}
-     * @memberof PaymentCalculationWrapper
-     */
     'count'?: number;
-    /**
-     * 
-     * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof PaymentCalculationWrapper
-     */
-    'links'?: Array<ActiveConnectionsWrapperLinksInner>;
-    /**
-     * 
-     * @type {number}
-     * @memberof PaymentCalculationWrapper
-     */
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
     'status'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PaymentCalculationWrapper
-     */
     'statusCode'?: number;
 }
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,26 +24,15 @@ import type { TenantTrustedDomainsType } from './tenant-trusted-domains-type';
 
 /**
  * The request parameters for configuring trusted mail domains and visitor invitation settings.
- * @export
- * @interface MailDomainSettingsRequestsDto
  */
 export interface MailDomainSettingsRequestsDto {
-    /**
-     * 
-     * @type {TenantTrustedDomainsType}
-     * @memberof MailDomainSettingsRequestsDto
-     */
     'type': TenantTrustedDomainsType;
     /**
      * The list of authorized email domains that are considered trusted.
-     * @type {Array<string>}
-     * @memberof MailDomainSettingsRequestsDto
      */
-    'domains': Array<string> | null;
+    'domains': Array<string>;
     /**
      * Specifies the default permission level for the invited users (visitors or not).
-     * @type {boolean}
-     * @memberof MailDomainSettingsRequestsDto
      */
     'inviteUsersAsVisitors': boolean;
 }

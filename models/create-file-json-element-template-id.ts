@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -20,7 +22,6 @@
 /**
  * @type CreateFileJsonElementTemplateId
  * The template file ID for creation.
- * @export
  */
 export type CreateFileJsonElementTemplateId = number | string;
 

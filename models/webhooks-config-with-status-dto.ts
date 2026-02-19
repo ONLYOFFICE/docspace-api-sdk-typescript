@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,20 +24,11 @@ import type { WebhooksConfigDto } from './webhooks-config-dto';
 
 /**
  * The webhook configuration with its status.
- * @export
- * @interface WebhooksConfigWithStatusDto
  */
 export interface WebhooksConfigWithStatusDto {
-    /**
-     * 
-     * @type {WebhooksConfigDto}
-     * @memberof WebhooksConfigWithStatusDto
-     */
     'configs'?: WebhooksConfigDto;
     /**
      * The webhook status.
-     * @type {number}
-     * @memberof WebhooksConfigWithStatusDto
      */
     'status'?: number;
 }

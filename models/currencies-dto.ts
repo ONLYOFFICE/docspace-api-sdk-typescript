@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,27 +21,19 @@
 
 /**
  * The currencies parameters.
- * @export
- * @interface CurrenciesDto
  */
 export interface CurrenciesDto {
     /**
      * The ISO country code.
-     * @type {string}
-     * @memberof CurrenciesDto
      */
-    'isoCountryCode'?: string | null;
+    'isoCountryCode'?: string;
     /**
      * The ISO currency symbol.
-     * @type {string}
-     * @memberof CurrenciesDto
      */
-    'isoCurrencySymbol'?: string | null;
+    'isoCurrencySymbol'?: string;
     /**
      * The currency native name.
-     * @type {string}
-     * @memberof CurrenciesDto
      */
-    'currencyNativeName'?: string | null;
+    'currencyNativeName'?: string;
 }
 

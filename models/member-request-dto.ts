@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -31,136 +33,80 @@ import type { SexEnum } from './sex-enum';
 
 /**
  * The user request parameters.
- * @export
- * @interface MemberRequestDto
  */
 export interface MemberRequestDto {
     /**
      * The user password.
-     * @type {string}
-     * @memberof MemberRequestDto
      */
-    'password'?: string | null;
+    'password'?: string;
     /**
      * The user password hash.
-     * @type {string}
-     * @memberof MemberRequestDto
      */
-    'passwordHash'?: string | null;
+    'passwordHash'?: string;
     /**
      * The user email address.
-     * @type {string}
-     * @memberof MemberRequestDto
      */
-    'email'?: string | null;
-    /**
-     * 
-     * @type {EmployeeType}
-     * @memberof MemberRequestDto
-     */
+    'email'?: string;
     'type'?: EmployeeType;
     /**
      * Specifies if this is a guest or a user.
-     * @type {boolean}
-     * @memberof MemberRequestDto
      */
-    'isUser'?: boolean | null;
+    'isUser'?: boolean;
     /**
      * The user first name.
-     * @type {string}
-     * @memberof MemberRequestDto
      */
-    'firstName'?: string | null;
+    'firstName'?: string;
     /**
      * The user last name.
-     * @type {string}
-     * @memberof MemberRequestDto
      */
-    'lastName'?: string | null;
+    'lastName'?: string;
     /**
      * The list of the user departments IDs.
-     * @type {Array<string>}
-     * @memberof MemberRequestDto
      */
-    'department'?: Array<string> | null;
+    'department'?: Array<string>;
     /**
      * The user title.
-     * @type {string}
-     * @memberof MemberRequestDto
      */
-    'title'?: string | null;
+    'title'?: string;
     /**
      * The user location.
-     * @type {string}
-     * @memberof MemberRequestDto
      */
-    'location'?: string | null;
-    /**
-     * 
-     * @type {SexEnum}
-     * @memberof MemberRequestDto
-     */
+    'location'?: string;
     'sex'?: SexEnum;
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof MemberRequestDto
-     */
     'birthday'?: ApiDateTime;
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof MemberRequestDto
-     */
     'worksfrom'?: ApiDateTime;
     /**
      * The user comment.
-     * @type {string}
-     * @memberof MemberRequestDto
      */
-    'comment'?: string | null;
+    'comment'?: string;
     /**
      * The list of the user contacts.
-     * @type {Array<Contact>}
-     * @memberof MemberRequestDto
      */
-    'contacts'?: Array<Contact> | null;
+    'contacts'?: Array<Contact>;
     /**
      * The avatar photo URL.
-     * @type {string}
-     * @memberof MemberRequestDto
      */
-    'files'?: string | null;
+    'files'?: string;
     /**
      * Specifies if the user is added via the invitation link or not.
-     * @type {boolean}
-     * @memberof MemberRequestDto
      */
     'fromInviteLink'?: boolean;
     /**
      * The user key.
-     * @type {string}
-     * @memberof MemberRequestDto
      */
-    'key'?: string | null;
+    'key'?: string;
     /**
      * The user culture code.
-     * @type {string}
-     * @memberof MemberRequestDto
      */
-    'cultureName'?: string | null;
+    'cultureName'?: string;
     /**
      * The user target ID.
-     * @type {string}
-     * @memberof MemberRequestDto
      */
     'target'?: string;
     /**
      * Specifies if tips, updates and offers are allowed to be sent to the user or not.
-     * @type {boolean}
-     * @memberof MemberRequestDto
      */
-    'spam'?: boolean | null;
+    'spam'?: boolean;
 }
 
 

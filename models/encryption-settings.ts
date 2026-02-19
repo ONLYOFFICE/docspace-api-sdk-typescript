@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,26 +24,15 @@ import type { EncryprtionStatus } from './encryprtion-status';
 
 /**
  * The encryption settings.
- * @export
- * @interface EncryptionSettings
  */
 export interface EncryptionSettings {
     /**
      * The encryption password.
-     * @type {string}
-     * @memberof EncryptionSettings
      */
-    'password'?: string | null;
-    /**
-     * 
-     * @type {EncryprtionStatus}
-     * @memberof EncryptionSettings
-     */
+    'password'?: string;
     'status'?: EncryprtionStatus;
     /**
      * Specifies if the users will be notified about the encryption operation or not.
-     * @type {boolean}
-     * @memberof EncryptionSettings
      */
     'notifyUsers'?: boolean;
 }

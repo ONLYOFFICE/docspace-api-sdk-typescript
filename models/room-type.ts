@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,34 +21,14 @@
 
 /**
  * [1 - Form filling room, 2 - Collaboration room, 5 - Custom room, 6 - Public room, 8 - Virtual data room, 9 - AI Room]
- * @export
- * @enum {number}
  */
 
 export const RoomType = {
-    /**
-    * Form filling room
-    */
     FillingFormsRoom: 1,
-    /**
-    * Collaboration room
-    */
     EditingRoom: 2,
-    /**
-    * Custom room
-    */
     CustomRoom: 5,
-    /**
-    * Public room
-    */
     PublicRoom: 6,
-    /**
-    * Virtual data room
-    */
     VirtualDataRoom: 8,
-    /**
-    * AI Room
-    */
     AiRoom: 9
 } as const;
 

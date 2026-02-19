@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,26 +21,18 @@
 
 /**
  * The plugins parameters.
- * @export
- * @interface PluginsDto
  */
 export interface PluginsDto {
     /**
      * Specifies if the plugins are enabled or not.
-     * @type {boolean}
-     * @memberof PluginsDto
      */
     'enabled'?: boolean;
     /**
      * Specifies if the plugins can be uploaded or not.
-     * @type {boolean}
-     * @memberof PluginsDto
      */
     'upload'?: boolean;
     /**
      * Specifies if the plugins can be deleted or not.
-     * @type {boolean}
-     * @memberof PluginsDto
      */
     'delete'?: boolean;
 }

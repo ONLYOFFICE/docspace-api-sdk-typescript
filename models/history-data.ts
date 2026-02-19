@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,15 +21,11 @@
 
 /**
  * The history data.
- * @export
- * @interface HistoryData
  */
 export interface HistoryData {
     /**
      * The name of the action initiator.
-     * @type {string}
-     * @memberof HistoryData
      */
-    'initiatorName'?: string | null;
+    'initiatorName'?: string;
 }
 

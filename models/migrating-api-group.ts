@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -30,19 +32,19 @@ export type MigratingApiGroup = ImportableApiEntity &  {
      * @type {string}
      * @memberof MigratingApiGroup
      */
-    'groupName'?: string | null;
+    'groupName'?: string;
     /**
      * 
      * @type {string}
      * @memberof MigratingApiGroup
      */
-    'moduleName'?: string | null;
+    'moduleName'?: string;
     /**
      * 
      * @type {Array<string>}
      * @memberof MigratingApiGroup
      */
-    'userUidList'?: Array<string> | null;
+    'userUidList'?: Array<string>;
 };
 
 

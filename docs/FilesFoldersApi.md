@@ -203,8 +203,8 @@ const { status, data } = await apiInstance.createFolderPrimaryExternalLink(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Folders security information |  -  |
-|**401** | Unauthorized |  -  |
 |**404** | Not Found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -258,9 +258,9 @@ const { status, data } = await apiInstance.createReportFolderHistory(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | URL to the report file |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to perform the operation |  -  |
 |**404** | The required folder was not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -390,9 +390,9 @@ const { status, data } = await apiInstance.getFavoritesFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The Favorites section contents |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to view the folder content |  -  |
 |**404** | The required folder was not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -663,9 +663,9 @@ const { status, data } = await apiInstance.getFolderHistory(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of actions in the folder |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to perform the operation |  -  |
 |**404** | The required folder was not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -826,8 +826,8 @@ const { status, data } = await apiInstance.getFolderPath(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of file entry information |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to view the folder content |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -941,8 +941,8 @@ const { status, data } = await apiInstance.getFolders(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of file entry information |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to view the folder content |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1017,9 +1017,9 @@ const { status, data } = await apiInstance.getMyFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The My documents section contents |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to view the folder content |  -  |
 |**404** | The required folder was not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1073,8 +1073,8 @@ const { status, data } = await apiInstance.getNewFolderItems(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of file entry information |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to view the folder content |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1146,9 +1146,9 @@ const { status, data } = await apiInstance.getPrivacyFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The Private Room section contents |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to view the folder content |  -  |
 |**404** | The required folder was not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1232,9 +1232,9 @@ const { status, data } = await apiInstance.getRecentFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The Recent section contents |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to view the folder content |  -  |
 |**404** | The required folder was not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1309,9 +1309,9 @@ const { status, data } = await apiInstance.getRootFolders(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of section contents with the following parameters |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to view the folder content |  -  |
 |**404** | The required folder was not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1386,9 +1386,9 @@ const { status, data } = await apiInstance.getTrashFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The Trash section contents |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to view the folder content |  -  |
 |**404** | The required folder was not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1478,9 +1478,9 @@ const { status, data } = await apiInstance.insertFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Inserted file |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to create |  -  |
 |**404** | Folder not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1567,9 +1567,9 @@ const { status, data } = await apiInstance.insertFileToMyFromBody(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Inserted file |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to create |  -  |
 |**404** | Folder not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1627,8 +1627,8 @@ const { status, data } = await apiInstance.renameFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Folder parameters |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to rename the folder |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1751,7 +1751,7 @@ const { status, data } = await apiInstance.setFolderPrimaryExternalLink(
 # **uploadFile**
 > ObjectWrapper uploadFile()
 
-Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
+Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file/).
 
@@ -1802,16 +1802,16 @@ const { status, data } = await apiInstance.uploadFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Inserted file |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to create |  -  |
 |**404** | Folder not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **uploadFileToMy**
 > ObjectWrapper uploadFileToMy()
 
-Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
+Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file-to-my/).
 
@@ -1859,9 +1859,9 @@ const { status, data } = await apiInstance.uploadFileToMy(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Uploaded file(s) |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to create |  -  |
 |**404** | File not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,18 +21,10 @@
 
 /**
  * [0 - None, 1 - Form role blocking deletion]
- * @export
- * @enum {number}
  */
 
 export const RoomSecurityError = {
-    /**
-    * None
-    */
     None: 0,
-    /**
-    * Form role blocking deletion
-    */
     FormRoleBlockingDeletion: 1
 } as const;
 

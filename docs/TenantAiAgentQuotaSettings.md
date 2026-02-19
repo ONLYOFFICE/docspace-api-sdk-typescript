@@ -1,6 +1,6 @@
 # TenantAiAgentQuotaSettings
 
-The ai agent quota settings.
+The AI agent quota settings.
 
 ## Properties
 

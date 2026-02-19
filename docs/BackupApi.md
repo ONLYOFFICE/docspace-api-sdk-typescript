@@ -4,6 +4,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
+|[**cancelBackup**](#cancelbackup) | **POST** /api/2.0/backup/cancelbackup | Cancel current backup|
 |[**createBackupSchedule**](#createbackupschedule) | **POST** /api/2.0/backup/createbackupschedule | Create the backup schedule|
 |[**deleteBackup**](#deletebackup) | **DELETE** /api/2.0/backup/deletebackup/{id} | Delete the backup|
 |[**deleteBackupHistory**](#deletebackuphistory) | **DELETE** /api/2.0/backup/deletebackuphistory | Delete the backup history|
@@ -16,6 +17,53 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**getRestoreProgress**](#getrestoreprogress) | **GET** /api/2.0/backup/getrestoreprogress | Get the restoring progress|
 |[**startBackup**](#startbackup) | **POST** /api/2.0/backup/startbackup | Start the backup|
 |[**startBackupRestore**](#startbackuprestore) | **POST** /api/2.0/backup/startrestore | Start the restoring process|
+
+# **cancelBackup**
+> BooleanWrapper cancelBackup()
+
+Cancel current backup.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/cancel-backup/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    BackupApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new BackupApi(configuration);
+
+const { status, data } = await apiInstance.cancelBackup();
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Boolean value: true if the operation is successful |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **createBackupSchedule**
 > BooleanWrapper createBackupSchedule()
@@ -69,10 +117,10 @@ const { status, data } = await apiInstance.createBackupSchedule(
 |-------------|-------------|------------------|
 |**200** | Boolean value: true if the operation is successful |  -  |
 |**400** | BackupStored must be 1 - 30 or backup can not start as dump |  -  |
-|**401** | Unauthorized |  -  |
 |**402** | Your pricing plan does not support this option |  -  |
-|**403** | You don\&#39;t have enough permission to create |  -  |
+|**403** | Access denied |  -  |
 |**404** | The required folder was not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -126,8 +174,8 @@ const { status, data } = await apiInstance.deleteBackup(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Boolean value: true if the operation is successful |  -  |
+|**403** | Access denied |  -  |
 |**401** | Unauthorized |  -  |
-|**402** | Your pricing plan does not support this option |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -181,8 +229,8 @@ const { status, data } = await apiInstance.deleteBackupHistory(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Boolean value: true if the operation is successful |  -  |
+|**403** | Access denied |  -  |
 |**401** | Unauthorized |  -  |
-|**402** | Your pricing plan does not support this option |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -236,8 +284,8 @@ const { status, data } = await apiInstance.deleteBackupSchedule(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Boolean value: true if the operation is successful |  -  |
+|**403** | Access denied |  -  |
 |**401** | Unauthorized |  -  |
-|**402** | Your pricing plan does not support this option |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -291,8 +339,8 @@ const { status, data } = await apiInstance.getBackupHistory(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of backup history records |  -  |
+|**403** | Access denied |  -  |
 |**401** | Unauthorized |  -  |
-|**402** | Your pricing plan does not support this option |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -346,8 +394,8 @@ const { status, data } = await apiInstance.getBackupProgress(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Backup progress: completed or not, progress percentage, error, tenant ID, backup progress item (Backup, Restore, Transfer), link |  -  |
+|**403** | Access denied |  -  |
 |**401** | Unauthorized |  -  |
-|**402** | Your pricing plan does not support this option |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -401,8 +449,8 @@ const { status, data } = await apiInstance.getBackupSchedule(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Backup schedule |  -  |
+|**403** | Access denied |  -  |
 |**401** | Unauthorized |  -  |
-|**402** | Your pricing plan does not support this option |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -462,6 +510,8 @@ const { status, data } = await apiInstance.getBackupsCount(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Number of backups |  -  |
+|**400** | From date must be less than to date |  -  |
+|**403** | Access denied |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -618,10 +668,10 @@ const { status, data } = await apiInstance.startBackup(
 |-------------|-------------|------------------|
 |**200** | Backup progress: completed or not, progress percentage, error, tenant ID, backup progress item (Backup, Restore, Transfer), link |  -  |
 |**400** | Wrong folder type or backup can&#x60;t start as dump |  -  |
-|**401** | Unauthorized |  -  |
 |**402** | Your pricing plan does not support this option |  -  |
-|**403** | You don\&#39;t have enough permission to create |  -  |
+|**403** | Access denied |  -  |
 |**404** | The required folder was not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -677,10 +727,10 @@ const { status, data } = await apiInstance.startBackupRestore(
 |-------------|-------------|------------------|
 |**200** | Backup progress: completed or not, progress percentage, error, tenant ID, backup progress item (Backup, Restore, Transfer), link |  -  |
 |**400** | Backup can not start as dump |  -  |
-|**401** | Unauthorized |  -  |
 |**402** | Your pricing plan does not support this option |  -  |
-|**403** | You don\&#39;t have enough permission to create |  -  |
+|**403** | Access denied |  -  |
 |**404** | The required file or folder was not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

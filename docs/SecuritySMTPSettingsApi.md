@@ -53,8 +53,8 @@ const { status, data } = await apiInstance.getSmtpOperationStatus();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | SMTP operation status |  -  |
-|**401** | Unauthorized |  -  |
 |**402** | Your pricing plan does not support this option |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -101,8 +101,8 @@ const { status, data } = await apiInstance.getSmtpSettings();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | SMTP settings |  -  |
-|**401** | Unauthorized |  -  |
 |**402** | Your pricing plan does not support this option |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -149,8 +149,8 @@ const { status, data } = await apiInstance.resetSmtpSettings();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Default SMTP settings |  -  |
-|**401** | Unauthorized |  -  |
 |**402** | Your pricing plan does not support this option |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -205,8 +205,8 @@ const { status, data } = await apiInstance.saveSmtpSettings(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | SMTP settings |  -  |
-|**401** | Unauthorized |  -  |
 |**402** | Your pricing plan does not support this option |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -253,8 +253,8 @@ const { status, data } = await apiInstance.testSmtpSettings();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | SMTP operation status |  -  |
-|**401** | Unauthorized |  -  |
 |**402** | Your pricing plan does not support this option |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

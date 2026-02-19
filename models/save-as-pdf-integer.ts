@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,21 +21,15 @@
 
 /**
  * The parameters for saving a file as PDF.
- * @export
- * @interface SaveAsPdfInteger
  */
 export interface SaveAsPdfInteger {
     /**
      * The folder ID to save the file as PDF.
-     * @type {number}
-     * @memberof SaveAsPdfInteger
      */
     'folderId': number;
     /**
      * The file title to save as PDF.
-     * @type {string}
-     * @memberof SaveAsPdfInteger
      */
-    'title': string | null;
+    'title': string;
 }
 

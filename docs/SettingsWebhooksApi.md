@@ -172,7 +172,7 @@ const { status, data } = await apiInstance.getTenantWebhooks();
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getWebhookTriggers**
-> UnknownWrapper getWebhookTriggers()
+> GetWebhookTriggers200Response getWebhookTriggers()
 
 Returns a list of triggers for a webhook.
 
@@ -184,7 +184,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**UnknownWrapper**
+**GetWebhookTriggers200Response**
 
 ### Authorization
 
@@ -404,8 +404,8 @@ const { status, data } = await apiInstance.retryWebhook(
 |-------------|-------------|------------------|
 |**200** | Logs of the webhook activities |  -  |
 |**400** | Id incorrect |  -  |
-|**401** | Unauthorized |  -  |
 |**404** | Item not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

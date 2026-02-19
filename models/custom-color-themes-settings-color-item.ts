@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,21 +21,15 @@
 
 /**
  * The custom color theme color parameters.
- * @export
- * @interface CustomColorThemesSettingsColorItem
  */
 export interface CustomColorThemesSettingsColorItem {
     /**
      * The accent color.
-     * @type {string}
-     * @memberof CustomColorThemesSettingsColorItem
      */
-    'accent'?: string | null;
+    'accent'?: string;
     /**
      * The button color.
-     * @type {string}
-     * @memberof CustomColorThemesSettingsColorItem
      */
-    'buttons'?: string | null;
+    'buttons'?: string;
 }
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -17,23 +19,8 @@
  */
 
 
-/**
- * 
- * @export
- * @interface IpRestrictionBase
- */
 export interface IpRestrictionBase {
-    /**
-     * 
-     * @type {string}
-     * @memberof IpRestrictionBase
-     */
-    'ip': string | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof IpRestrictionBase
-     */
+    'ip': string;
     'forAdmin'?: boolean;
 }
 

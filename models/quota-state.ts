@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,18 +21,10 @@
 
 /**
  * [0 - Active, 1 - Overdue]
- * @export
- * @enum {number}
  */
 
 export const QuotaState = {
-    /**
-    * Active
-    */
     Active: 0,
-    /**
-    * Overdue
-    */
     Overdue: 1
 } as const;
 

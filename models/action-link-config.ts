@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,15 +24,8 @@ import type { ActionConfig } from './action-config';
 
 /**
  * The config parameter which contains the information about the action in the document that will be scrolled to.
- * @export
- * @interface ActionLinkConfig
  */
 export interface ActionLinkConfig {
-    /**
-     * 
-     * @type {ActionConfig}
-     * @memberof ActionLinkConfig
-     */
     'action'?: ActionConfig;
 }
 

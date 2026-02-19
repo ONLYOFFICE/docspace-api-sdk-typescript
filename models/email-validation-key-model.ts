@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -25,58 +27,34 @@ import type { EmployeeType } from './employee-type';
 
 /**
  * The confirmation email parameters.
- * @export
- * @interface EmailValidationKeyModel
  */
 export interface EmailValidationKeyModel {
     /**
      * The email validation key.
-     * @type {string}
-     * @memberof EmailValidationKeyModel
      */
-    'key'?: string | null;
-    /**
-     * 
-     * @type {EmployeeType}
-     * @memberof EmailValidationKeyModel
-     */
+    'key'?: string;
     'emplType'?: EmployeeType;
     /**
      * The email address.
-     * @type {string}
-     * @memberof EmailValidationKeyModel
      */
-    'email'?: string | null;
+    'email'?: string;
     /**
      * The encrypted email address.
-     * @type {string}
-     * @memberof EmailValidationKeyModel
      */
-    'encEmail'?: string | null;
+    'encEmail'?: string;
     /**
      * The user ID.
-     * @type {string}
-     * @memberof EmailValidationKeyModel
      */
-    'uiD'?: string | null;
-    /**
-     * 
-     * @type {ConfirmType}
-     * @memberof EmailValidationKeyModel
-     */
+    'uiD'?: string;
     'type'?: ConfirmType;
     /**
      * Specifies whether it is the first time account access or not.
-     * @type {string}
-     * @memberof EmailValidationKeyModel
      */
-    'first'?: string | null;
+    'first'?: string;
     /**
      * The room ID.
-     * @type {string}
-     * @memberof EmailValidationKeyModel
      */
-    'roomId'?: string | null;
+    'roomId'?: string;
 }
 
 

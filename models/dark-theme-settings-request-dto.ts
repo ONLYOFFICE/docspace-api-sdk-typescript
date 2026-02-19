@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,15 +24,8 @@ import type { DarkThemeSettingsType } from './dark-theme-settings-type';
 
 /**
  * The theme settings request parameters.
- * @export
- * @interface DarkThemeSettingsRequestDto
  */
 export interface DarkThemeSettingsRequestDto {
-    /**
-     * 
-     * @type {DarkThemeSettingsType}
-     * @memberof DarkThemeSettingsRequestDto
-     */
     'theme': DarkThemeSettingsType;
 }
 

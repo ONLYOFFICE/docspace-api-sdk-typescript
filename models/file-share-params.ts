@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -18,14 +20,17 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { EmailInvitationDto } from './email-invitation-dto';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { FileShare } from './file-share';
 
 /**
+ * @type FileShareParams
  * The collection of file sharing parameters.
  * @export
- * @interface FileShareParams
  */
-export interface FileShareParams {
+export type FileShareParams = EmailInvitationDto &  {
     /**
      * The ID of the user to whom the file will be shared.
      * @type {string}
@@ -33,18 +38,11 @@ export interface FileShareParams {
      */
     'shareTo'?: string;
     /**
-     * The user email address.
-     * @type {string}
-     * @memberof FileShareParams
-     */
-    'email'?: string | null;
-    /**
      * 
      * @type {FileShare}
      * @memberof FileShareParams
      */
     'access'?: FileShare;
-}
-
+};
 
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,44 +21,30 @@
 
 /**
  * The IdP advanced certificate parameters.
- * @export
- * @interface SsoIdpCertificateAdvanced
  */
 export interface SsoIdpCertificateAdvanced {
     /**
      * The certificate verification algorithm.
-     * @type {string}
-     * @memberof SsoIdpCertificateAdvanced
      */
-    'verifyAlgorithm'?: string | null;
+    'verifyAlgorithm'?: string;
     /**
      * Specifies if the signatures of the SAML authentication responses sent to SP will be verified or not.
-     * @type {boolean}
-     * @memberof SsoIdpCertificateAdvanced
      */
     'verifyAuthResponsesSign'?: boolean;
     /**
      * Specifies if the signatures of the SAML logout requests sent to SP will be verified or not.
-     * @type {boolean}
-     * @memberof SsoIdpCertificateAdvanced
      */
     'verifyLogoutRequestsSign'?: boolean;
     /**
      * Specifies if the signatures of the SAML logout responses sent to SP will be verified or not.
-     * @type {boolean}
-     * @memberof SsoIdpCertificateAdvanced
      */
     'verifyLogoutResponsesSign'?: boolean;
     /**
      * The certificate decryption algorithm.
-     * @type {string}
-     * @memberof SsoIdpCertificateAdvanced
      */
-    'decryptAlgorithm'?: string | null;
+    'decryptAlgorithm'?: string;
     /**
      * Specifies if the assertions will be decrypted or not.
-     * @type {boolean}
-     * @memberof SsoIdpCertificateAdvanced
      */
     'decryptAssertions'?: boolean;
 }

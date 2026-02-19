@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,42 +21,16 @@
 
 /**
  * [0 - Active, 1 - Archive, 2 - Any, 3 - Recent by links, 4 - Template, 5 - Knowledge, 6 - Result storage, 7 - AiAgents]
- * @export
- * @enum {number}
  */
 
 export const SearchArea = {
-    /**
-    * Active
-    */
     Active: 0,
-    /**
-    * Archive
-    */
     Archive: 1,
-    /**
-    * Any
-    */
     Any: 2,
-    /**
-    * Recent by links
-    */
     RecentByLinks: 3,
-    /**
-    * Template
-    */
     Templates: 4,
-    /**
-    * Knowledge
-    */
     Knowledge: 5,
-    /**
-    * Result storage
-    */
     ResultStorage: 6,
-    /**
-    * AiAgents
-    */
     AiAgents: 7
 } as const;
 

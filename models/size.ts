@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -17,23 +19,8 @@
  */
 
 
-/**
- * 
- * @export
- * @interface Size
- */
 export interface Size {
-    /**
-     * 
-     * @type {number}
-     * @memberof Size
-     */
     'height'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof Size
-     */
     'width'?: number;
 }
 

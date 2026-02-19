@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,21 +21,15 @@
 
 /**
  * The parameters for updating a comment.
- * @export
- * @interface UpdateComment
  */
 export interface UpdateComment {
     /**
      * The comment version.
-     * @type {number}
-     * @memberof UpdateComment
      */
     'version': number;
     /**
      * The comment text.
-     * @type {string}
-     * @memberof UpdateComment
      */
-    'comment'?: string | null;
+    'comment'?: string;
 }
 

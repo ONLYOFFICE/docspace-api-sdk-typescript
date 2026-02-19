@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,28 +24,17 @@ import type { EmployeeType } from './employee-type';
 
 /**
  * The parameters for updating the type of the user or guest when reassigning rooms and shared files.
- * @export
- * @interface StartUpdateUserTypeDto
  */
 export interface StartUpdateUserTypeDto {
-    /**
-     * 
-     * @type {EmployeeType}
-     * @memberof StartUpdateUserTypeDto
-     */
     'type'?: EmployeeType;
     /**
      * The user ID.
-     * @type {string}
-     * @memberof StartUpdateUserTypeDto
      */
     'userId'?: string;
     /**
      * The user ID to reassign.
-     * @type {string}
-     * @memberof StartUpdateUserTypeDto
      */
-    'reassignUserId'?: string | null;
+    'reassignUserId'?: string;
 }
 
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,33 +21,23 @@
 
 /**
  * The group summary parameters.
- * @export
- * @interface GroupSummaryDto
  */
 export interface GroupSummaryDto {
     /**
      * The group ID.
-     * @type {string}
-     * @memberof GroupSummaryDto
      */
     'id': string;
     /**
      * The group name.
-     * @type {string}
-     * @memberof GroupSummaryDto
      */
-    'name': string | null;
+    'name': string;
     /**
      * The group manager.
-     * @type {string}
-     * @memberof GroupSummaryDto
      */
-    'manager'?: string | null;
+    'manager'?: string;
     /**
      * Indicates whether the group is a system group.
-     * @type {boolean}
-     * @memberof GroupSummaryDto
      */
-    'isSystem'?: boolean | null;
+    'isSystem'?: boolean;
 }
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,39 +21,27 @@
 
 /**
  * The parameters of the usage space statistics item.
- * @export
- * @interface UsageSpaceStatItemDto
  */
 export interface UsageSpaceStatItemDto {
     /**
      * The item name.
-     * @type {string}
-     * @memberof UsageSpaceStatItemDto
      */
-    'name'?: string | null;
+    'name'?: string;
     /**
      * The item icon path.
-     * @type {string}
-     * @memberof UsageSpaceStatItemDto
      */
-    'icon'?: string | null;
+    'icon'?: string;
     /**
      * Specifies if the item is disabled or not.
-     * @type {boolean}
-     * @memberof UsageSpaceStatItemDto
      */
     'disabled'?: boolean;
     /**
      * The item used space.
-     * @type {string}
-     * @memberof UsageSpaceStatItemDto
      */
-    'size'?: string | null;
+    'size'?: string;
     /**
      * The item URL.
-     * @type {string}
-     * @memberof UsageSpaceStatItemDto
      */
-    'url'?: string | null;
+    'url'?: string;
 }
 

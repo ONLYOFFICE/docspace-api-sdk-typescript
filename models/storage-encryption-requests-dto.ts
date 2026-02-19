@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,14 +21,10 @@
 
 /**
  * The request parameters for managing storage encryption operations and notifications.
- * @export
- * @interface StorageEncryptionRequestsDto
  */
 export interface StorageEncryptionRequestsDto {
     /**
      * Specifies whether the users receive notifications about the storage encryption operations.
-     * @type {boolean}
-     * @memberof StorageEncryptionRequestsDto
      */
     'notifyUsers'?: boolean;
 }

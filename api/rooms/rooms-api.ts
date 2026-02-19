@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -71,8 +70,6 @@ import type { NewItemsRoomNewItemsArrayWrapper } from '../../models';
 // @ts-ignore
 import type { ObjectArrayWrapper } from '../../models';
 // @ts-ignore
-import type { ObjectWrapper } from '../../models';
-// @ts-ignore
 import type { ProviderFilter } from '../../models';
 // @ts-ignore
 import type { QuotaFilter } from '../../models';
@@ -101,9 +98,13 @@ import type { SortOrder } from '../../models';
 // @ts-ignore
 import type { StorageFilter } from '../../models';
 // @ts-ignore
+import type { StringWrapper } from '../../models';
+// @ts-ignore
 import type { SubjectFilter } from '../../models';
 // @ts-ignore
 import type { UpdateRoomRequest } from '../../models';
+// @ts-ignore
+import type { UpdateTagRequestDto } from '../../models';
 // @ts-ignore
 import type { UploadResultWrapper } from '../../models';
 // @ts-ignore
@@ -650,7 +651,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Deletes a bunch of custom room tags specified in the request.
+         * Deletes a bunch of custom tags specified in the request.
          * @summary Delete the custom room tags
          * @param {BatchTagsRequestDto} [batchTagsRequestDto] 
          * @param {*} [options] Override http request option.
@@ -1326,7 +1327,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Returns a list of custom room tags.
+         * Returns a list of custom tags.
          * @summary Get the room tags
          * @param {number} [count] Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.
          * @param {number} [startIndex] Represents the starting index from which the tags\&#39; information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.
@@ -1465,12 +1466,13 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} [sortBy] Specifies the field by which the room content should be sorted.
          * @param {SortOrder} [sortOrder] The order in which the results are sorted.
          * @param {string} [filterValue] The text filter value used to refine search or query operations.
+         * @param {number} [groupId] The group ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getRoomsFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-folder/
          */
-        getRoomsFolder: async (type?: Array<RoomType>, subjectId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getRoomsFolder: async (type?: Array<RoomType>, subjectId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, groupId?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/files/rooms`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1563,6 +1565,10 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
                 localVarQueryParameter['filterValue'] = filterValue;
             }
 
+            if (groupId !== undefined) {
+                localVarQueryParameter['groupId'] = groupId;
+            }
+
 
     
             if(fields !== undefined) {
@@ -1644,6 +1650,62 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
 
             const localVarPath = `/api/2.0/files/rooms/{id}/link`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Checks if a specific custom tag has linked items.
+         * @summary Has tag links
+         * @param {string} tagName 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for hasTagLinks operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/has-tag-links/
+         */
+        hasTagLinks: async (tagName: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tagName' is not null or undefined
+            assertParamExists('hasTagLinks', 'tagName', tagName)
+
+            const localVarPath = `/api/2.0/files/tags/{tagName}/haslinks`
+                .replace(`{${"tagName"}}`, encodeURIComponent(String(tagName)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -2326,6 +2388,62 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
+         * Updates the name of a custom tag.
+         * @summary Update tag
+         * @param {UpdateTagRequestDto} [updateTagRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for updateRoomTag operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-room-tag/
+         */
+        updateRoomTag: async (updateTagRequestDto?: UpdateTagRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/files/tags`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateTagRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Uploads a temporary image to create a room logo.
          * @summary Upload a room logo image
          * @param {Array<KeyValuePairStringStringValues>} [formCollection] The image data.
@@ -2501,7 +2619,7 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * REST API Reference for createRoomTag operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room-tag/
          */
-        async createRoomTag(createTagRequestDto?: CreateTagRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
+        async createRoomTag(createTagRequestDto?: CreateTagRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createRoomTag(createTagRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.createRoomTag']?.[localVarOperationServerIndex]?.url;
@@ -2539,7 +2657,7 @@ export const RoomsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Deletes a bunch of custom room tags specified in the request.
+         * Deletes a bunch of custom tags specified in the request.
          * @summary Delete the custom room tags
          * @param {BatchTagsRequestDto} [batchTagsRequestDto] 
          * @param {*} [options] Override http request option.
@@ -2723,7 +2841,7 @@ export const RoomsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns a list of custom room tags.
+         * Returns a list of custom tags.
          * @summary Get the room tags
          * @param {number} [count] Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.
          * @param {number} [startIndex] Represents the starting index from which the tags\&#39; information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.
@@ -2771,13 +2889,14 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * @param {string} [sortBy] Specifies the field by which the room content should be sorted.
          * @param {SortOrder} [sortOrder] The order in which the results are sorted.
          * @param {string} [filterValue] The text filter value used to refine search or query operations.
+         * @param {number} [groupId] The group ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getRoomsFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-folder/
          */
-        async getRoomsFolder(type?: Array<RoomType>, subjectId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomsFolder(type, subjectId, searchArea, withoutTags, tags, excludeSubject, provider, subjectFilter, quotaFilter, storageFilter, count, startIndex, sortBy, sortOrder, filterValue, options);
+        async getRoomsFolder(type?: Array<RoomType>, subjectId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, groupId?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomsFolder(type, subjectId, searchArea, withoutTags, tags, excludeSubject, provider, subjectFilter, quotaFilter, storageFilter, count, startIndex, sortBy, sortOrder, filterValue, groupId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomsFolder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -2809,6 +2928,21 @@ export const RoomsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomsPrimaryExternalLink(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomsPrimaryExternalLink']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Checks if a specific custom tag has linked items.
+         * @summary Has tag links
+         * @param {string} tagName 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for hasTagLinks operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/has-tag-links/
+         */
+        async hasTagLinks(tagName: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.hasTagLinks(tagName, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.hasTagLinks']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2981,6 +3115,21 @@ export const RoomsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Updates the name of a custom tag.
+         * @summary Update tag
+         * @param {UpdateTagRequestDto} [updateTagRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for updateRoomTag operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-room-tag/
+         */
+        async updateRoomTag(updateTagRequestDto?: UpdateTagRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateRoomTag(updateTagRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.updateRoomTag']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Uploads a temporary image to create a room logo.
          * @summary Upload a room logo image
          * @param {Array<KeyValuePairStringStringValues>} [formCollection] The image data.
@@ -3090,7 +3239,7 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room-tag/
          * @throws {RequiredError}
          */
-        createRoomTag(createTagRequestDto?: CreateTagRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
+        createRoomTag(createTagRequestDto?: CreateTagRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
             return localVarFp.createRoomTag(createTagRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3119,7 +3268,7 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.createRoomThirdParty(id, createThirdPartyRoom, options).then((request) => request(axios, basePath));
         },
         /**
-         * Deletes a bunch of custom room tags specified in the request.
+         * Deletes a bunch of custom tags specified in the request.
          * @summary Delete the custom room tags
          * @param {BatchTagsRequestDto} [batchTagsRequestDto] 
          * @param {*} [options] Override http request option.
@@ -3267,7 +3416,7 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.getRoomSecurityInfo(id, filterType, count, startIndex, filterValue, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of custom room tags.
+         * Returns a list of custom tags.
          * @summary Get the room tags
          * @param {number} [count] Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.
          * @param {number} [startIndex] Represents the starting index from which the tags\&#39; information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.
@@ -3309,13 +3458,14 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          * @param {string} [sortBy] Specifies the field by which the room content should be sorted.
          * @param {SortOrder} [sortOrder] The order in which the results are sorted.
          * @param {string} [filterValue] The text filter value used to refine search or query operations.
+         * @param {number} [groupId] The group ID
          * @param {*} [options] Override http request option.
          * REST API Reference for getRoomsFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-folder/
          * @throws {RequiredError}
          */
-        getRoomsFolder(type?: Array<RoomType>, subjectId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
-            return localVarFp.getRoomsFolder(type, subjectId, searchArea, withoutTags, tags, excludeSubject, provider, subjectFilter, quotaFilter, storageFilter, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(axios, basePath));
+        getRoomsFolder(type?: Array<RoomType>, subjectId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, groupId?: number, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
+            return localVarFp.getRoomsFolder(type, subjectId, searchArea, withoutTags, tags, excludeSubject, provider, subjectFilter, quotaFilter, storageFilter, count, startIndex, sortBy, sortOrder, filterValue, groupId, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the room new items.
@@ -3339,6 +3489,18 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          */
         getRoomsPrimaryExternalLink(id: number, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
             return localVarFp.getRoomsPrimaryExternalLink(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Checks if a specific custom tag has linked items.
+         * @summary Has tag links
+         * @param {string} tagName 
+         * @param {*} [options] Override http request option.
+         * REST API Reference for hasTagLinks operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/has-tag-links/
+         * @throws {RequiredError}
+         */
+        hasTagLinks(tagName: string, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.hasTagLinks(tagName, options).then((request) => request(axios, basePath));
         },
         /**
          * Pins a room with the ID specified in the request to the top of the list.
@@ -3477,6 +3639,18 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.updateRoom(id, updateRoomRequest, options).then((request) => request(axios, basePath));
         },
         /**
+         * Updates the name of a custom tag.
+         * @summary Update tag
+         * @param {UpdateTagRequestDto} [updateTagRequestDto] 
+         * @param {*} [options] Override http request option.
+         * REST API Reference for updateRoomTag operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-room-tag/
+         * @throws {RequiredError}
+         */
+        updateRoomTag(updateTagRequestDto?: UpdateTagRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.updateRoomTag(updateTagRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Uploads a temporary image to create a room logo.
          * @summary Upload a room logo image
          * @param {Array<KeyValuePairStringStringValues>} [formCollection] The image data.
@@ -3612,7 +3786,7 @@ export class RoomsApi extends BaseAPI {
     }
 
     /**
-     * Deletes a bunch of custom room tags specified in the request.
+     * Deletes a bunch of custom tags specified in the request.
      * @summary Delete the custom room tags
      * @param {BatchTagsRequestDto} [batchTagsRequestDto] 
      * @param {*} [options] Override http request option.
@@ -3760,7 +3934,7 @@ export class RoomsApi extends BaseAPI {
     }
 
     /**
-     * Returns a list of custom room tags.
+     * Returns a list of custom tags.
      * @summary Get the room tags
      * @param {number} [count] Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.
      * @param {number} [startIndex] Represents the starting index from which the tags\&#39; information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.
@@ -3802,12 +3976,13 @@ export class RoomsApi extends BaseAPI {
      * @param {string} [sortBy] Specifies the field by which the room content should be sorted.
      * @param {SortOrder} [sortOrder] The order in which the results are sorted.
      * @param {string} [filterValue] The text filter value used to refine search or query operations.
+     * @param {number} [groupId] The group ID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public getRoomsFolder(type?: Array<RoomType>, subjectId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).getRoomsFolder(type, subjectId, searchArea, withoutTags, tags, excludeSubject, provider, subjectFilter, quotaFilter, storageFilter, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(this.axios, this.basePath));
+    public getRoomsFolder(type?: Array<RoomType>, subjectId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, groupId?: number, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).getRoomsFolder(type, subjectId, searchArea, withoutTags, tags, excludeSubject, provider, subjectFilter, quotaFilter, storageFilter, count, startIndex, sortBy, sortOrder, filterValue, groupId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3831,6 +4006,18 @@ export class RoomsApi extends BaseAPI {
      */
     public getRoomsPrimaryExternalLink(id: number, options?: RawAxiosRequestConfig) {
         return RoomsApiFp(this.configuration).getRoomsPrimaryExternalLink(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Checks if a specific custom tag has linked items.
+     * @summary Has tag links
+     * @param {string} tagName 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RoomsApi
+     */
+    public hasTagLinks(tagName: string, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).hasTagLinks(tagName, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3967,6 +4154,18 @@ export class RoomsApi extends BaseAPI {
      */
     public updateRoom(id: number, updateRoomRequest: UpdateRoomRequest, options?: RawAxiosRequestConfig) {
         return RoomsApiFp(this.configuration).updateRoom(id, updateRoomRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Updates the name of a custom tag.
+     * @summary Update tag
+     * @param {UpdateTagRequestDto} [updateTagRequestDto] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RoomsApi
+     */
+    public updateRoomTag(updateTagRequestDto?: UpdateTagRequestDto, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).updateRoomTag(updateTagRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

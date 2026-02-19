@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,22 +21,11 @@
 
 /**
  * [0 - Provide choice, 1 - Web, 2 - App]
- * @export
- * @enum {number}
  */
 
 export const DeepLinkHandlingMode = {
-    /**
-    * Provide choice
-    */
     ProvideChoice: 0,
-    /**
-    * Web
-    */
     Web: 1,
-    /**
-    * App
-    */
     App: 2
 } as const;
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -17,29 +19,9 @@
  */
 
 
-/**
- * 
- * @export
- * @interface MigratingApiFiles
- */
 export interface MigratingApiFiles {
-    /**
-     * 
-     * @type {number}
-     * @memberof MigratingApiFiles
-     */
     'foldersCount'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof MigratingApiFiles
-     */
     'filesCount'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof MigratingApiFiles
-     */
     'bytesTotal'?: number;
 }
 

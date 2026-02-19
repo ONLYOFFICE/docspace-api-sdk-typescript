@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,14 +21,10 @@
 
 /**
  * The parameters for locking a file.
- * @export
- * @interface LockFileParameters
  */
 export interface LockFileParameters {
     /**
      * Specifies whether to lock a file or not.
-     * @type {boolean}
-     * @memberof LockFileParameters
      */
     'lockFile'?: boolean;
 }

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,21 +21,15 @@
 
 /**
  * The CSP (Content Security Policy) parameters.
- * @export
- * @interface CspDto
  */
 export interface CspDto {
     /**
      * The list of CSP domains.
-     * @type {Array<string>}
-     * @memberof CspDto
      */
-    'domains': Array<string> | null;
+    'domains': Array<string>;
     /**
      * The CSP header.
-     * @type {string}
-     * @memberof CspDto
      */
-    'header': string | null;
+    'header': string;
 }
 

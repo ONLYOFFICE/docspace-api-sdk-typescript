@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,27 +21,19 @@
 
 /**
  * The authorization key parameters.
- * @export
- * @interface AuthKey
  */
 export interface AuthKey {
     /**
      * The authorization key name.
-     * @type {string}
-     * @memberof AuthKey
      */
-    'name': string | null;
+    'name': string;
     /**
      * The authorization key value.
-     * @type {string}
-     * @memberof AuthKey
      */
-    'value': string | null;
+    'value': string;
     /**
      * The authorization key title.
-     * @type {string}
-     * @memberof AuthKey
      */
-    'title'?: string | null;
+    'title'?: string;
 }
 

@@ -107,8 +107,8 @@ const { status, data } = await apiInstance.saveAiAgentQuotaSettings(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Tenant AI Agent quota settings |  -  |
-|**401** | Unauthorized |  -  |
 |**402** | Your pricing plan does not support this option |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -163,8 +163,8 @@ const { status, data } = await apiInstance.saveRoomQuotaSettings(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Tenant room quota settings |  -  |
-|**401** | Unauthorized |  -  |
 |**402** | Your pricing plan does not support this option |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -219,9 +219,9 @@ const { status, data } = await apiInstance.setTenantQuotaSettings(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Tenant quota settings |  -  |
-|**401** | Unauthorized |  -  |
 |**402** | Your pricing plan does not support this option |  -  |
 |**405** | Not available |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

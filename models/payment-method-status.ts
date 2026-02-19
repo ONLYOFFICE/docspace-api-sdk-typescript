@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,22 +21,11 @@
 
 /**
  * [0 - None, 1 - Set, 2 - Expired]
- * @export
- * @enum {number}
  */
 
 export const PaymentMethodStatus = {
-    /**
-    * None
-    */
     None: 0,
-    /**
-    * Set
-    */
     Set: 1,
-    /**
-    * Expired
-    */
     Expired: 2
 } as const;
 

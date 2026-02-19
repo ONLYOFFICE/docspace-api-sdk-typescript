@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,45 +24,28 @@ import type { LogoCover } from './logo-cover';
 
 /**
  * The room logo information.
- * @export
- * @interface Logo
  */
 export interface Logo {
     /**
      * The original logo.
-     * @type {string}
-     * @memberof Logo
      */
-    'original': string | null;
+    'original': string;
     /**
      * The large logo.
-     * @type {string}
-     * @memberof Logo
      */
-    'large': string | null;
+    'large': string;
     /**
      * The medium logo.
-     * @type {string}
-     * @memberof Logo
      */
-    'medium': string | null;
+    'medium': string;
     /**
      * The small logo.
-     * @type {string}
-     * @memberof Logo
      */
-    'small': string | null;
+    'small': string;
     /**
      * The logo color.
-     * @type {string}
-     * @memberof Logo
      */
-    'color'?: string | null;
-    /**
-     * 
-     * @type {LogoCover}
-     * @memberof Logo
-     */
+    'color'?: string;
     'cover'?: LogoCover;
 }
 

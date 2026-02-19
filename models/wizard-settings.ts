@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,21 +21,12 @@
 
 /**
  * The Wizard settings.
- * @export
- * @interface WizardSettings
  */
 export interface WizardSettings {
     /**
      * Specifies if the Wizard settings are completed or not
-     * @type {boolean}
-     * @memberof WizardSettings
      */
     'completed'?: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof WizardSettings
-     */
     'lastModified'?: string;
 }
 

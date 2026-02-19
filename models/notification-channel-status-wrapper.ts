@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -18,46 +20,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { NotificationChannelStatusDto } from './notification-channel-status-dto';
 
-/**
- * 
- * @export
- * @interface NotificationChannelStatusWrapper
- */
 export interface NotificationChannelStatusWrapper {
-    /**
-     * 
-     * @type {NotificationChannelStatusDto}
-     * @memberof NotificationChannelStatusWrapper
-     */
     'response'?: NotificationChannelStatusDto;
-    /**
-     * 
-     * @type {number}
-     * @memberof NotificationChannelStatusWrapper
-     */
     'count'?: number;
-    /**
-     * 
-     * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof NotificationChannelStatusWrapper
-     */
-    'links'?: Array<ActiveConnectionsWrapperLinksInner>;
-    /**
-     * 
-     * @type {number}
-     * @memberof NotificationChannelStatusWrapper
-     */
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
     'status'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof NotificationChannelStatusWrapper
-     */
     'statusCode'?: number;
 }
 

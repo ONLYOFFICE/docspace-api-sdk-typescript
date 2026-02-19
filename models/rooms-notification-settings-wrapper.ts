@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -18,46 +20,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { RoomsNotificationSettingsDto } from './rooms-notification-settings-dto';
 
-/**
- * 
- * @export
- * @interface RoomsNotificationSettingsWrapper
- */
 export interface RoomsNotificationSettingsWrapper {
-    /**
-     * 
-     * @type {RoomsNotificationSettingsDto}
-     * @memberof RoomsNotificationSettingsWrapper
-     */
     'response'?: RoomsNotificationSettingsDto;
-    /**
-     * 
-     * @type {number}
-     * @memberof RoomsNotificationSettingsWrapper
-     */
     'count'?: number;
-    /**
-     * 
-     * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof RoomsNotificationSettingsWrapper
-     */
-    'links'?: Array<ActiveConnectionsWrapperLinksInner>;
-    /**
-     * 
-     * @type {number}
-     * @memberof RoomsNotificationSettingsWrapper
-     */
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
     'status'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof RoomsNotificationSettingsWrapper
-     */
     'statusCode'?: number;
 }
 

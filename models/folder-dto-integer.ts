@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -88,7 +90,7 @@ export type FolderDtoInteger = FileEntryDtoInteger &  {
      * @type {boolean}
      * @memberof FolderDtoInteger
      */
-    'isShareable'?: boolean | null;
+    'isShareable'?: boolean;
     /**
      * The new element index in the folder.
      * @type {number}
@@ -106,7 +108,7 @@ export type FolderDtoInteger = FileEntryDtoInteger &  {
      * @type {Array<string>}
      * @memberof FolderDtoInteger
      */
-    'tags'?: Array<string> | null;
+    'tags'?: Array<string>;
     /**
      * 
      * @type {Logo}
@@ -166,38 +168,38 @@ export type FolderDtoInteger = FileEntryDtoInteger &  {
      * @type {boolean}
      * @memberof FolderDtoInteger
      */
-    'inRoom'?: boolean | null;
+    'inRoom'?: boolean;
     /**
      * The folder quota limit.
      * @type {number}
      * @memberof FolderDtoInteger
      */
-    'quotaLimit'?: number | null;
+    'quotaLimit'?: number;
     /**
      * Specifies if the folder room has a custom quota or not.
      * @type {boolean}
      * @memberof FolderDtoInteger
      */
-    'isCustomQuota'?: boolean | null;
+    'isCustomQuota'?: boolean;
     /**
      * How much folder space is used (counter).
      * @type {number}
      * @memberof FolderDtoInteger
      */
-    'usedSpace'?: number | null;
+    'usedSpace'?: number;
     /**
      * Specifies if the folder is password protected or not.
      * @type {boolean}
      * @memberof FolderDtoInteger
      */
-    'passwordProtected'?: boolean | null;
+    'passwordProtected'?: boolean;
     /**
      * Specifies if an external link to the folder is expired or not.
      * @type {boolean}
      * @memberof FolderDtoInteger
      * @deprecated
      */
-    'expired'?: boolean | null;
+    'expired'?: boolean;
     /**
      * 
      * @type {ChatSettings}

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,39 +21,12 @@
 
 /**
  * A dictionary representing the sharing settings for the file entry.
- * @export
- * @interface FileEntryDtoIntegerAllOfShareSettings
  */
 export interface FileEntryDtoIntegerAllOfShareSettings {
-    /**
-     * 
-     * @type {number}
-     * @memberof FileEntryDtoIntegerAllOfShareSettings
-     */
     'User'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof FileEntryDtoIntegerAllOfShareSettings
-     */
     'ExternalLink'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof FileEntryDtoIntegerAllOfShareSettings
-     */
     'Group'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof FileEntryDtoIntegerAllOfShareSettings
-     */
     'InvitationLink'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof FileEntryDtoIntegerAllOfShareSettings
-     */
     'PrimaryExternalLink'?: number;
 }
 

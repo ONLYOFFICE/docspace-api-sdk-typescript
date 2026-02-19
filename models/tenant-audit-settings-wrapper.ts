@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,15 +24,8 @@ import type { TenantAuditSettings } from './tenant-audit-settings';
 
 /**
  * The tenant audit settings wrapper.
- * @export
- * @interface TenantAuditSettingsWrapper
  */
 export interface TenantAuditSettingsWrapper {
-    /**
-     * 
-     * @type {TenantAuditSettings}
-     * @memberof TenantAuditSettingsWrapper
-     */
     'settings'?: TenantAuditSettings;
 }
 

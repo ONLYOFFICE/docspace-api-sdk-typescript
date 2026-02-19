@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -20,41 +22,11 @@
 // @ts-ignore
 import type { BackupStorageType } from './backup-storage-type';
 
-/**
- * 
- * @export
- * @interface BackupHistoryRecord
- */
 export interface BackupHistoryRecord {
-    /**
-     * 
-     * @type {string}
-     * @memberof BackupHistoryRecord
-     */
     'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BackupHistoryRecord
-     */
-    'fileName': string | null;
-    /**
-     * 
-     * @type {BackupStorageType}
-     * @memberof BackupHistoryRecord
-     */
+    'fileName': string;
     'storageType': BackupStorageType;
-    /**
-     * 
-     * @type {string}
-     * @memberof BackupHistoryRecord
-     */
     'createdOn': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BackupHistoryRecord
-     */
     'expiresOn': string;
 }
 

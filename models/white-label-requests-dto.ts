@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,21 +24,15 @@ import type { ItemKeyValuePairStringLogoRequestsDto } from './item-key-value-pai
 
 /**
  * The request parameters for configuring the white label branding settings.
- * @export
- * @interface WhiteLabelRequestsDto
  */
 export interface WhiteLabelRequestsDto {
     /**
      * The text to display alongside or in place of the logo.
-     * @type {string}
-     * @memberof WhiteLabelRequestsDto
      */
-    'logoText'?: string | null;
+    'logoText'?: string;
     /**
      * The white label tenant IDs with their logos (light or dark).
-     * @type {Array<ItemKeyValuePairStringLogoRequestsDto>}
-     * @memberof WhiteLabelRequestsDto
      */
-    'logo'?: Array<ItemKeyValuePairStringLogoRequestsDto> | null;
+    'logo'?: Array<ItemKeyValuePairStringLogoRequestsDto>;
 }
 

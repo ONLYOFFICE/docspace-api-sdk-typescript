@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -18,46 +20,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { IsDefaultWhiteLabelLogosDto } from './is-default-white-label-logos-dto';
 
-/**
- * 
- * @export
- * @interface IsDefaultWhiteLabelLogosArrayWrapper
- */
 export interface IsDefaultWhiteLabelLogosArrayWrapper {
-    /**
-     * 
-     * @type {Array<IsDefaultWhiteLabelLogosDto>}
-     * @memberof IsDefaultWhiteLabelLogosArrayWrapper
-     */
     'response'?: Array<IsDefaultWhiteLabelLogosDto>;
-    /**
-     * 
-     * @type {number}
-     * @memberof IsDefaultWhiteLabelLogosArrayWrapper
-     */
     'count'?: number;
-    /**
-     * 
-     * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof IsDefaultWhiteLabelLogosArrayWrapper
-     */
-    'links'?: Array<ActiveConnectionsWrapperLinksInner>;
-    /**
-     * 
-     * @type {number}
-     * @memberof IsDefaultWhiteLabelLogosArrayWrapper
-     */
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
     'status'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof IsDefaultWhiteLabelLogosArrayWrapper
-     */
     'statusCode'?: number;
 }
 

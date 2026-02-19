@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -17,35 +19,9 @@
  */
 
 
-/**
- * 
- * @export
- * @interface BaseStorageSettingsCdnStorageSettings
- */
 export interface BaseStorageSettingsCdnStorageSettings {
-    /**
-     * 
-     * @type {string}
-     * @memberof BaseStorageSettingsCdnStorageSettings
-     */
-    'module'?: string | null;
-    /**
-     * 
-     * @type {{ [key: string]: string | null; }}
-     * @memberof BaseStorageSettingsCdnStorageSettings
-     */
-    'props'?: { [key: string]: string | null; } | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof BaseStorageSettingsCdnStorageSettings
-     */
-    'id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BaseStorageSettingsCdnStorageSettings
-     */
+    'module'?: string;
+    'props'?: { [key: string]: string; };
     'lastModified'?: string;
 }
 

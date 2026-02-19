@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,38 +24,23 @@ import type { CopyAsJsonElementDestFolderId } from './copy-as-json-element-dest-
 
 /**
  * The parameters for copying a file.
- * @export
- * @interface CopyAsJsonElement
  */
 export interface CopyAsJsonElement {
     /**
      * The copied file name.
-     * @type {string}
-     * @memberof CopyAsJsonElement
      */
-    'destTitle': string | null;
-    /**
-     * 
-     * @type {CopyAsJsonElementDestFolderId}
-     * @memberof CopyAsJsonElement
-     */
+    'destTitle': string;
     'destFolderId': CopyAsJsonElementDestFolderId;
     /**
      * Specifies whether to allow creating the copied file of an external extension or not.
-     * @type {boolean}
-     * @memberof CopyAsJsonElement
      */
     'enableExternalExt'?: boolean;
     /**
      * The copied file password.
-     * @type {string}
-     * @memberof CopyAsJsonElement
      */
-    'password'?: string | null;
+    'password'?: string;
     /**
      * Specifies whether to convert the file to form or not.
-     * @type {boolean}
-     * @memberof CopyAsJsonElement
      */
     'toForm'?: boolean;
 }

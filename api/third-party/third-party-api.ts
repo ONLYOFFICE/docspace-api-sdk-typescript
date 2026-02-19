@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -37,7 +36,7 @@ export const ThirdPartyApiAxiosParamCreator = function (configuration?: Configur
     
     return {
         /**
-         * Returns a request to get the confirmation code from URL.   **Note**: List of providers: Google, Dropbox, Docusign, Box, OneDrive, Wordpress.
+         * Returns a request to get the confirmation code from URL.
          * @summary Get the code request
          * @param {LoginProvider} provider The identity provider used for authentication.
          * @param {*} [options] Override http request option.
@@ -103,7 +102,7 @@ export const ThirdPartyApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ThirdPartyApiAxiosParamCreator(configuration)
     return {
         /**
-         * Returns a request to get the confirmation code from URL.   **Note**: List of providers: Google, Dropbox, Docusign, Box, OneDrive, Wordpress.
+         * Returns a request to get the confirmation code from URL.
          * @summary Get the code request
          * @param {LoginProvider} provider The identity provider used for authentication.
          * @param {*} [options] Override http request option.
@@ -128,7 +127,7 @@ export const ThirdPartyApiFactory = function (configuration?: Configuration, bas
     const localVarFp = ThirdPartyApiFp(configuration)
     return {
         /**
-         * Returns a request to get the confirmation code from URL.   **Note**: List of providers: Google, Dropbox, Docusign, Box, OneDrive, Wordpress.
+         * Returns a request to get the confirmation code from URL.
          * @summary Get the code request
          * @param {LoginProvider} provider The identity provider used for authentication.
          * @param {*} [options] Override http request option.
@@ -150,7 +149,7 @@ export const ThirdPartyApiFactory = function (configuration?: Configuration, bas
  */
 export class ThirdPartyApi extends BaseAPI {
     /**
-     * Returns a request to get the confirmation code from URL.   **Note**: List of providers: Google, Dropbox, Docusign, Box, OneDrive, Wordpress.
+     * Returns a request to get the confirmation code from URL.
      * @summary Get the code request
      * @param {LoginProvider} provider The identity provider used for authentication.
      * @param {*} [options] Override http request option.

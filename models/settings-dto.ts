@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -27,6 +29,9 @@ import type { DeepLinkDto } from './deep-link-dto';
 import type { FirebaseDto } from './firebase-dto';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { FolderType } from './folder-type';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { FormGalleryDto } from './form-gallery-dto';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -49,262 +54,147 @@ import type { TenantTrustedDomainsType } from './tenant-trusted-domains-type';
 
 /**
  * The settings information.
- * @export
- * @interface SettingsDto
  */
 export interface SettingsDto {
     /**
      * The time zone.
-     * @type {string}
-     * @memberof SettingsDto
      */
-    'timezone'?: string | null;
+    'timezone'?: string;
     /**
      * The list of the trusted domains.
-     * @type {Array<string>}
-     * @memberof SettingsDto
      */
-    'trustedDomains'?: Array<string> | null;
-    /**
-     * 
-     * @type {TenantTrustedDomainsType}
-     * @memberof SettingsDto
-     */
+    'trustedDomains'?: Array<string>;
     'trustedDomainsType'?: TenantTrustedDomainsType;
     /**
      * The language.
-     * @type {string}
-     * @memberof SettingsDto
      */
-    'culture': string | null;
+    'culture': string;
     /**
      * The UTC offset in the TimeSpan format.
-     * @type {string}
-     * @memberof SettingsDto
      */
     'utcOffset'?: string;
     /**
      * The UTC offset in hours.
-     * @type {number}
-     * @memberof SettingsDto
      */
     'utcHoursOffset'?: number;
     /**
      * The greeting settings.
-     * @type {string}
-     * @memberof SettingsDto
      */
-    'greetingSettings'?: string | null;
+    'greetingSettings'?: string;
     /**
      * The owner ID.
-     * @type {string}
-     * @memberof SettingsDto
      */
     'ownerId'?: string;
     /**
      * The team template ID.
-     * @type {string}
-     * @memberof SettingsDto
      */
-    'nameSchemaId'?: string | null;
+    'nameSchemaId'?: string;
     /**
      * Specifies if a user can join the portal or not.
-     * @type {boolean}
-     * @memberof SettingsDto
      */
-    'enabledJoin'?: boolean | null;
+    'enabledJoin'?: boolean;
     /**
      * Specifies if a user can send a message to the administrator when accessing the DocSpace portal or not.
-     * @type {boolean}
-     * @memberof SettingsDto
      */
-    'enableAdmMess'?: boolean | null;
+    'enableAdmMess'?: boolean;
     /**
      * Specifies if a user can connect third-party providers to the portal or not.
-     * @type {boolean}
-     * @memberof SettingsDto
      */
-    'thirdpartyEnable'?: boolean | null;
+    'thirdpartyEnable'?: boolean;
     /**
      * Specifies if this portal is a DocSpace portal or not.
-     * @type {boolean}
-     * @memberof SettingsDto
      */
     'docSpace'?: boolean;
     /**
      * Indicates whether the system is running in standalone mode.
-     * @type {boolean}
-     * @memberof SettingsDto
      */
     'standalone'?: boolean;
     /**
      * Specifies if this portal is the AMI instance or not.
-     * @type {boolean}
-     * @memberof SettingsDto
      */
     'isAmi'?: boolean;
     /**
      * The base domain.
-     * @type {string}
-     * @memberof SettingsDto
      */
-    'baseDomain': string | null;
+    'baseDomain': string;
     /**
      * The wizard token.
-     * @type {string}
-     * @memberof SettingsDto
      */
-    'wizardToken'?: string | null;
-    /**
-     * 
-     * @type {PasswordHasher}
-     * @memberof SettingsDto
-     */
+    'wizardToken'?: string;
     'passwordHash'?: PasswordHasher;
-    /**
-     * 
-     * @type {FirebaseDto}
-     * @memberof SettingsDto
-     */
     'firebase'?: FirebaseDto;
     /**
      * The portal version.
-     * @type {string}
-     * @memberof SettingsDto
      */
-    'version'?: string | null;
-    /**
-     * 
-     * @type {RecaptchaType}
-     * @memberof SettingsDto
-     */
+    'version'?: string;
     'recaptchaType'?: RecaptchaType;
     /**
      * The ReCAPTCHA public key.
-     * @type {string}
-     * @memberof SettingsDto
      */
-    'recaptchaPublicKey'?: string | null;
+    'recaptchaPublicKey'?: string;
     /**
      * Specifies if the debug information will be sent or not.
-     * @type {boolean}
-     * @memberof SettingsDto
      */
     'debugInfo'?: boolean;
     /**
      * The socket URL.
-     * @type {string}
-     * @memberof SettingsDto
      */
-    'socketUrl'?: string | null;
-    /**
-     * 
-     * @type {TenantStatus}
-     * @memberof SettingsDto
-     */
+    'socketUrl'?: string;
     'tenantStatus'?: TenantStatus;
     /**
      * The tenant alias.
-     * @type {string}
-     * @memberof SettingsDto
      */
-    'tenantAlias'?: string | null;
+    'tenantAlias'?: string;
     /**
      * Specifies whether to display the About portal section.
-     * @type {boolean}
-     * @memberof SettingsDto
      */
     'displayAbout'?: boolean;
-    /**
-     * 
-     * @type {TenantDomainValidator}
-     * @memberof SettingsDto
-     */
     'domainValidator'?: TenantDomainValidator;
     /**
      * The Zendesk key.
-     * @type {string}
-     * @memberof SettingsDto
      */
-    'zendeskKey'?: string | null;
+    'zendeskKey'?: string;
     /**
      * The tag manager ID.
-     * @type {string}
-     * @memberof SettingsDto
      */
-    'tagManagerId'?: string | null;
+    'tagManagerId'?: string;
     /**
      * Specifies whether the cookie settings are enabled.
-     * @type {boolean}
-     * @memberof SettingsDto
      */
     'cookieSettingsEnabled': boolean;
     /**
      * Specifies whether the access to the space management is limited or not.
-     * @type {boolean}
-     * @memberof SettingsDto
      */
     'limitedAccessSpace'?: boolean;
     /**
      * Specifies whether the access to the Developer Tools is limited for users or not.
-     * @type {boolean}
-     * @memberof SettingsDto
      */
     'limitedAccessDevToolsForUsers'?: boolean;
     /**
      * Specifies whether to display the promotional banners.
-     * @type {boolean}
-     * @memberof SettingsDto
      */
     'displayBanners'?: boolean;
     /**
      * The user name validation regex.
-     * @type {string}
-     * @memberof SettingsDto
      */
-    'userNameRegex'?: string | null;
+    'userNameRegex'?: string;
     /**
      * The maximum number of invitations to the portal.
-     * @type {number}
-     * @memberof SettingsDto
      */
-    'invitationLimit'?: number | null;
-    /**
-     * 
-     * @type {PluginsDto}
-     * @memberof SettingsDto
-     */
+    'invitationLimit'?: number;
     'plugins'?: PluginsDto;
-    /**
-     * 
-     * @type {DeepLinkDto}
-     * @memberof SettingsDto
-     */
     'deepLink': DeepLinkDto;
-    /**
-     * 
-     * @type {FormGalleryDto}
-     * @memberof SettingsDto
-     */
     'formGallery'?: FormGalleryDto;
     /**
      * The maximum image upload size.
-     * @type {number}
-     * @memberof SettingsDto
      */
     'maxImageUploadSize'?: number;
     /**
      * The white label logo text.
-     * @type {string}
-     * @memberof SettingsDto
      */
-    'logoText'?: string | null;
-    /**
-     * 
-     * @type {CultureSpecificExternalResources}
-     * @memberof SettingsDto
-     */
+    'logoText'?: string;
     'externalResources'?: CultureSpecificExternalResources;
+    'defaultFolderType'?: FolderType;
 }
 
 

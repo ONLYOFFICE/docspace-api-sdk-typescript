@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,15 +21,11 @@
 
 /**
  * The request parameters for checking file uploads.
- * @export
- * @interface CheckUploadRequest
  */
 export interface CheckUploadRequest {
     /**
      * The list of file titles.
-     * @type {Array<string>}
-     * @memberof CheckUploadRequest
      */
-    'filesTitle'?: Array<string> | null;
+    'filesTitle'?: Array<string>;
 }
 

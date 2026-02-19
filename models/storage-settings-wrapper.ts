@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -18,46 +20,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { StorageSettings } from './storage-settings';
 
-/**
- * 
- * @export
- * @interface StorageSettingsWrapper
- */
 export interface StorageSettingsWrapper {
-    /**
-     * 
-     * @type {StorageSettings}
-     * @memberof StorageSettingsWrapper
-     */
     'response'?: StorageSettings;
-    /**
-     * 
-     * @type {number}
-     * @memberof StorageSettingsWrapper
-     */
     'count'?: number;
-    /**
-     * 
-     * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof StorageSettingsWrapper
-     */
-    'links'?: Array<ActiveConnectionsWrapperLinksInner>;
-    /**
-     * 
-     * @type {number}
-     * @memberof StorageSettingsWrapper
-     */
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
     'status'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof StorageSettingsWrapper
-     */
     'statusCode'?: number;
 }
 

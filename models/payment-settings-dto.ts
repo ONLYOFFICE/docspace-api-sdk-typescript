@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,44 +24,27 @@ import type { CurrentLicenseInfo } from './current-license-info';
 
 /**
  * The payment settings parameters.
- * @export
- * @interface PaymentSettingsDto
  */
 export interface PaymentSettingsDto {
     /**
      * The email address for sales inquiries and support.
-     * @type {string}
-     * @memberof PaymentSettingsDto
      */
-    'salesEmail': string | null;
+    'salesEmail': string;
     /**
      * The URL for accessing the feedback and support resources.
-     * @type {string}
-     * @memberof PaymentSettingsDto
      */
-    'feedbackAndSupportUrl'?: string | null;
+    'feedbackAndSupportUrl'?: string;
     /**
      * The URL for purchasing or upgrading the product.
-     * @type {string}
-     * @memberof PaymentSettingsDto
      */
-    'buyUrl': string | null;
+    'buyUrl': string;
     /**
      * Indicates whether the system is running in standalone mode.
-     * @type {boolean}
-     * @memberof PaymentSettingsDto
      */
     'standalone': boolean;
-    /**
-     * 
-     * @type {CurrentLicenseInfo}
-     * @memberof PaymentSettingsDto
-     */
     'currentLicense': CurrentLicenseInfo;
     /**
      * The maximum quota quantity.
-     * @type {number}
-     * @memberof PaymentSettingsDto
      */
     'max': number;
 }

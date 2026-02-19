@@ -9,7 +9,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**startStorageEncryption**](#startstorageencryption) | **POST** /api/2.0/settings/encryption/start | Start the storage encryption process|
 
 # **getStorageEncryptionProgress**
-> DoubleWrapper getStorageEncryptionProgress()
+> DoubleNullableWrapper getStorageEncryptionProgress()
 
 Returns the storage encryption progress.
 
@@ -21,7 +21,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**DoubleWrapper**
+**DoubleNullableWrapper**
 
 ### Authorization
 
@@ -51,8 +51,8 @@ const { status, data } = await apiInstance.getStorageEncryptionProgress();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Storage encryption progress |  -  |
-|**401** | Unauthorized |  -  |
 |**405** | Method not allowed |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -99,9 +99,9 @@ const { status, data } = await apiInstance.getStorageEncryptionSettings();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Storage encryption settings |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
 |**405** | Method not allowed |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -156,10 +156,10 @@ const { status, data } = await apiInstance.startStorageEncryption(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Boolean value: true if the operation is successful |  -  |
-|**401** | Unauthorized |  -  |
 |**402** | Your pricing plan does not support this option |  -  |
 |**403** | No permissions to perform this action |  -  |
 |**405** | Method not allowed |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

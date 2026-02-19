@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,50 +21,34 @@
 
 /**
  * The SSO certificate parameters.
- * @export
- * @interface SsoCertificate
  */
 export interface SsoCertificate {
     /**
      * Specifies if a certificate is self-signed or not.
-     * @type {boolean}
-     * @memberof SsoCertificate
      */
     'selfSigned'?: boolean;
     /**
      * The CRT certificate file.
-     * @type {string}
-     * @memberof SsoCertificate
      */
-    'crt'?: string | null;
+    'crt'?: string;
     /**
      * The certificate key.
-     * @type {string}
-     * @memberof SsoCertificate
      */
-    'key'?: string | null;
+    'key'?: string;
     /**
      * The certificate action.
-     * @type {string}
-     * @memberof SsoCertificate
      */
-    'action'?: string | null;
+    'action'?: string;
     /**
      * The certificate domain name.
-     * @type {string}
-     * @memberof SsoCertificate
      */
-    'domainName'?: string | null;
+    'domainName'?: string;
     /**
      * The certificate start date.
-     * @type {string}
-     * @memberof SsoCertificate
      */
     'startDate'?: string;
     /**
      * The certificate expiration date.
-     * @type {string}
-     * @memberof SsoCertificate
      */
     'expiredDate'?: string;
 }

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,39 +21,27 @@
 
 /**
  * The configuration parameters for the embedded document type.
- * @export
- * @interface EmbeddedConfig
  */
 export interface EmbeddedConfig {
     /**
      * The absolute URL to the document serving as a source file for the document embedded into the web page.
-     * @type {string}
-     * @memberof EmbeddedConfig
      */
-    'embedUrl'?: string | null;
+    'embedUrl'?: string;
     /**
      * The absolute URL that will allow the document to be saved onto the user personal computer.
-     * @type {string}
-     * @memberof EmbeddedConfig
      */
-    'saveUrl'?: string | null;
+    'saveUrl'?: string;
     /**
      * The shared URL parameter.
-     * @type {string}
-     * @memberof EmbeddedConfig
      */
-    'shareLinkParam'?: string | null;
+    'shareLinkParam'?: string;
     /**
      * The absolute URL that will allow other users to share this document.
-     * @type {string}
-     * @memberof EmbeddedConfig
      */
-    'shareUrl'?: string | null;
+    'shareUrl'?: string;
     /**
      * The place for the embedded viewer toolbar, can be either top or bottom.
-     * @type {string}
-     * @memberof EmbeddedConfig
      */
-    'toolbarDocked'?: string | null;
+    'toolbarDocked'?: string;
 }
 

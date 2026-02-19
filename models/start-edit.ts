@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,14 +21,10 @@
 
 /**
  * The parameters for starting file editing.
- * @export
- * @interface StartEdit
  */
 export interface StartEdit {
     /**
      * Specifies whether to share the file with other users for editing or not.
-     * @type {boolean}
-     * @memberof StartEdit
      */
     'editingAlone'?: boolean;
 }

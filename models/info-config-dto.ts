@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -25,46 +27,29 @@ import type { EditorType } from './editor-type';
 
 /**
  * The information config parameters.
- * @export
- * @interface InfoConfigDto
  */
 export interface InfoConfigDto {
     /**
      * Specifies if the file is favorite or not.
-     * @type {boolean}
-     * @memberof InfoConfigDto
      */
-    'favorite'?: boolean | null;
+    'favorite'?: boolean;
     /**
      * The folder of the file.
-     * @type {string}
-     * @memberof InfoConfigDto
      */
-    'folder'?: string | null;
+    'folder'?: string;
     /**
      * The file owner.
-     * @type {string}
-     * @memberof InfoConfigDto
      */
-    'owner'?: string | null;
+    'owner'?: string;
     /**
      * The sharing settings of the file.
-     * @type {Array<AceShortWrapper>}
-     * @memberof InfoConfigDto
      */
-    'sharingSettings'?: Array<AceShortWrapper> | null;
-    /**
-     * 
-     * @type {EditorType}
-     * @memberof InfoConfigDto
-     */
+    'sharingSettings'?: Array<AceShortWrapper>;
     'type'?: EditorType;
     /**
      * The uploaded file.
-     * @type {string}
-     * @memberof InfoConfigDto
      */
-    'uploaded'?: string | null;
+    'uploaded'?: string;
 }
 
 

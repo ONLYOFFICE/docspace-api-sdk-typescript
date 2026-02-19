@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,15 +24,11 @@ import type { ItemKeyValuePairStringBoolean } from './item-key-value-pair-string
 
 /**
  * The request parameters for configuring security settings across multiple web modules.
- * @export
- * @interface WebItemsSecurityRequestsDto
  */
 export interface WebItemsSecurityRequestsDto {
     /**
      * The list of module security configurations.
-     * @type {Array<ItemKeyValuePairStringBoolean>}
-     * @memberof WebItemsSecurityRequestsDto
      */
-    'items'?: Array<ItemKeyValuePairStringBoolean> | null;
+    'items'?: Array<ItemKeyValuePairStringBoolean>;
 }
 

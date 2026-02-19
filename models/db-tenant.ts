@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -31,135 +33,79 @@ import type { TenantTrustedDomainsType } from './tenant-trusted-domains-type';
 
 /**
  * The database tenant parameters.
- * @export
- * @interface DbTenant
  */
 export interface DbTenant {
     /**
      * The tenant ID.
-     * @type {number}
-     * @memberof DbTenant
      */
     'id'?: number;
     /**
      * The tenant name.
-     * @type {string}
-     * @memberof DbTenant
      */
-    'name'?: string | null;
+    'name'?: string;
     /**
      * The tenant alias.
-     * @type {string}
-     * @memberof DbTenant
      */
-    'alias'?: string | null;
+    'alias'?: string;
     /**
      * Mapped domain
-     * @type {string}
-     * @memberof DbTenant
      */
-    'mappedDomain'?: string | null;
+    'mappedDomain'?: string;
     /**
      * The tenant version.
-     * @type {number}
-     * @memberof DbTenant
      */
     'version'?: number;
     /**
      * The Version_changed field.
-     * @type {string}
-     * @memberof DbTenant
      */
-    'version_Changed'?: string | null;
+    'version_Changed'?: string;
     /**
      * The date and time when the version was changed.
-     * @type {string}
-     * @memberof DbTenant
      */
     'versionChanged'?: string;
     /**
      * The tenant language.
-     * @type {string}
-     * @memberof DbTenant
      */
-    'language'?: string | null;
+    'language'?: string;
     /**
      * The tenant time zone.
-     * @type {string}
-     * @memberof DbTenant
      */
-    'timeZone'?: string | null;
+    'timeZone'?: string;
     /**
      * The tenant trusted domains raw.
-     * @type {string}
-     * @memberof DbTenant
      */
-    'trustedDomainsRaw'?: string | null;
-    /**
-     * 
-     * @type {TenantTrustedDomainsType}
-     * @memberof DbTenant
-     */
+    'trustedDomainsRaw'?: string;
     'trustedDomainsEnabled'?: TenantTrustedDomainsType;
-    /**
-     * 
-     * @type {TenantStatus}
-     * @memberof DbTenant
-     */
     'status'?: TenantStatus;
     /**
      * The date and time when the tenant status was changed.
-     * @type {string}
-     * @memberof DbTenant
      */
-    'statusChanged'?: string | null;
+    'statusChanged'?: string;
     /**
      * The hacked date and time when the tenant status was changed.
-     * @type {string}
-     * @memberof DbTenant
      */
     'statusChangedHack'?: string;
     /**
      * The tenant creation date.
-     * @type {string}
-     * @memberof DbTenant
      */
     'creationDateTime'?: string;
     /**
      * The tenant owner ID.
-     * @type {string}
-     * @memberof DbTenant
      */
-    'ownerId'?: string | null;
+    'ownerId'?: string;
     /**
      * The tenant payment ID.
-     * @type {string}
-     * @memberof DbTenant
      */
-    'paymentId'?: string | null;
-    /**
-     * 
-     * @type {TenantIndustry}
-     * @memberof DbTenant
-     */
+    'paymentId'?: string;
     'industry'?: TenantIndustry;
     /**
      * The date and time when the tenant was last modified.
-     * @type {string}
-     * @memberof DbTenant
      */
     'lastModified'?: string;
     /**
      * Specifies if the calls are available for the current tenant or not.
-     * @type {boolean}
-     * @memberof DbTenant
      */
     'calls'?: boolean;
-    /**
-     * 
-     * @type {DbTenantPartner}
-     * @memberof DbTenant
-     */
     'partner'?: DbTenantPartner;
 }
 

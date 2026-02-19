@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,21 +24,12 @@ import type { CustomColorThemesSettingsItem } from './custom-color-themes-settin
 
 /**
  * The request parameters for managing the portal theme settings.
- * @export
- * @interface CustomColorThemesSettingsRequestsDto
  */
 export interface CustomColorThemesSettingsRequestsDto {
-    /**
-     * 
-     * @type {CustomColorThemesSettingsItem}
-     * @memberof CustomColorThemesSettingsRequestsDto
-     */
     'theme'?: CustomColorThemesSettingsItem;
     /**
      * Specifies the optional value indicating the selected custom color theme.
-     * @type {number}
-     * @memberof CustomColorThemesSettingsRequestsDto
      */
-    'selected'?: number | null;
+    'selected'?: number;
 }
 

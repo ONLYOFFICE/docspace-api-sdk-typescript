@@ -30,6 +30,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**getRoomsFolder**](#getroomsfolder) | **GET** /api/2.0/files/rooms | Get rooms|
 |[**getRoomsNewItems**](#getroomsnewitems) | **GET** /api/2.0/files/rooms/news | Get the room new items|
 |[**getRoomsPrimaryExternalLink**](#getroomsprimaryexternallink) | **GET** /api/2.0/files/rooms/{id}/link | Get the room primary external link|
+|[**hasTagLinks**](#hastaglinks) | **GET** /api/2.0/files/tags/{tagName}/haslinks | Has tag links|
 |[**pinRoom**](#pinroom) | **PUT** /api/2.0/files/rooms/{id}/pin | Pin a room|
 |[**reorderRoom**](#reorderroom) | **PUT** /api/2.0/files/rooms/{id}/reorder | Reorder the room|
 |[**resendEmailInvitations**](#resendemailinvitations) | **POST** /api/2.0/files/rooms/{id}/resend | Resend the room invitations|
@@ -41,6 +42,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**unarchiveRoom**](#unarchiveroom) | **PUT** /api/2.0/files/rooms/{id}/unarchive | Unarchive a room|
 |[**unpinRoom**](#unpinroom) | **PUT** /api/2.0/files/rooms/{id}/unpin | Unpin a room|
 |[**updateRoom**](#updateroom) | **PUT** /api/2.0/files/rooms/{id} | Update a room|
+|[**updateRoomTag**](#updateroomtag) | **PUT** /api/2.0/files/tags | Update tag|
 |[**uploadRoomLogo**](#uploadroomlogo) | **POST** /api/2.0/files/logos | Upload a room logo image|
 
 # **addRoomTags**
@@ -97,8 +99,8 @@ const { status, data } = await apiInstance.addRoomTags(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Room information |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have permission to edit the room |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -214,9 +216,9 @@ const { status, data } = await apiInstance.changeRoomCover(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Room cover |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have permission to change cover |  -  |
 |**404** | The required room was not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -384,13 +386,13 @@ const { status, data } = await apiInstance.createRoomLogo(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Room information |  -  |
-|**401** | Unauthorized |  -  |
 |**404** | The required room was not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **createRoomTag**
-> ObjectWrapper createRoomTag()
+> StringWrapper createRoomTag()
 
 Creates a custom room tag with the parameters specified in the request.
 
@@ -405,7 +407,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-**ObjectWrapper**
+**StringWrapper**
 
 ### Authorization
 
@@ -440,8 +442,8 @@ const { status, data } = await apiInstance.createRoomTag(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | New tag name |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -561,7 +563,7 @@ const { status, data } = await apiInstance.createRoomThirdParty(
 # **deleteCustomTags**
 > deleteCustomTags()
 
-Deletes a bunch of custom room tags specified in the request.
+Deletes a bunch of custom tags specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-custom-tags/).
 
@@ -609,8 +611,8 @@ const { status, data } = await apiInstance.deleteCustomTags(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Ok |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -780,8 +782,8 @@ const { status, data } = await apiInstance.deleteRoomTags(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Room information |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have permission to edit the room |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1213,7 +1215,7 @@ const { status, data } = await apiInstance.getRoomSecurityInfo(
 # **getRoomTagsInfo**
 > ObjectArrayWrapper getRoomTagsInfo()
 
-Returns a list of custom room tags.
+Returns a list of custom tags.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-tags-info/).
 
@@ -1343,6 +1345,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 | **sortBy** | [**string**] | Specifies the field by which the room content should be sorted. | (optional) defaults to undefined|
 | **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
 | **filterValue** | [**string**] | The text filter value used to refine search or query operations. | (optional) defaults to undefined|
+| **groupId** | [**number**] | The group ID | (optional) defaults to undefined|
 
 
 ### Return type
@@ -1379,6 +1382,7 @@ let startIndex: number; //The index from which to start retrieving the room cont
 let sortBy: string; //Specifies the field by which the room content should be sorted. (optional) (default to undefined)
 let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
 let filterValue: string; //The text filter value used to refine search or query operations. (optional) (default to undefined)
+let groupId: number; //The group ID (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getRoomsFolder(
     type,
@@ -1395,7 +1399,8 @@ const { status, data } = await apiInstance.getRoomsFolder(
     startIndex,
     sortBy,
     sortOrder,
-    filterValue
+    filterValue,
+    groupId
 );
 ```
 
@@ -1409,8 +1414,8 @@ const { status, data } = await apiInstance.getRoomsFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Returns the contents of the Rooms section |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to view the room content |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1511,8 +1516,63 @@ const { status, data } = await apiInstance.getRoomsPrimaryExternalLink(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Room security information |  -  |
-|**401** | Unauthorized |  -  |
 |**404** | Not Found |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **hasTagLinks**
+> BooleanWrapper hasTagLinks()
+
+Checks if a specific custom tag has linked items.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/has-tag-links/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **tagName** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    RoomsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new RoomsApi(configuration);
+
+let tagName: string; // (default to undefined)
+
+const { status, data } = await apiInstance.hasTagLinks(
+    tagName
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | True if tag has links, false otherwise |  -  |
+|**404** | Tag not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1903,8 +1963,8 @@ const { status, data } = await apiInstance.startRoomIndexExport(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Ok |  -  |
-|**401** | Unauthorized |  -  |
 |**501** | Folder indexing is turned off |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2125,6 +2185,62 @@ const { status, data } = await apiInstance.updateRoom(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **updateRoomTag**
+> StringWrapper updateRoomTag()
+
+Updates the name of a custom tag.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-room-tag/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **updateTagRequestDto** | **UpdateTagRequestDto**|  | |
+
+
+### Return type
+
+**StringWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    RoomsApi,
+    Configuration,
+    UpdateTagRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new RoomsApi(configuration);
+
+let updateTagRequestDto: UpdateTagRequestDto; // (optional)
+
+const { status, data } = await apiInstance.updateRoomTag(
+    updateTagRequestDto
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Updated tag name |  -  |
+|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **uploadRoomLogo**
 > UploadResultWrapper uploadRoomLogo()
 
@@ -2175,8 +2291,8 @@ const { status, data } = await apiInstance.uploadRoomLogo(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Upload result |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

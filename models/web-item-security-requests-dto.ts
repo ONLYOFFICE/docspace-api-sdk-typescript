@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,27 +21,19 @@
 
 /**
  * The request parameters for configuring security settings of a single web module.
- * @export
- * @interface WebItemSecurityRequestsDto
  */
 export interface WebItemSecurityRequestsDto {
     /**
      * The module ID.
-     * @type {string}
-     * @memberof WebItemSecurityRequestsDto
      */
-    'id': string | null;
+    'id': string;
     /**
      * Controls whether the security restrictions are enforced for this module.
-     * @type {boolean}
-     * @memberof WebItemSecurityRequestsDto
      */
     'enabled'?: boolean;
     /**
      * The collection of user and group identifiers granted access to the module.
-     * @type {Array<string>}
-     * @memberof WebItemSecurityRequestsDto
      */
-    'subjects'?: Array<string> | null;
+    'subjects'?: Array<string>;
 }
 

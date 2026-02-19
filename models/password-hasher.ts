@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -17,29 +19,9 @@
  */
 
 
-/**
- * 
- * @export
- * @interface PasswordHasher
- */
 export interface PasswordHasher {
-    /**
-     * 
-     * @type {number}
-     * @memberof PasswordHasher
-     */
     'size'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PasswordHasher
-     */
     'iterations'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof PasswordHasher
-     */
-    'salt'?: string | null;
+    'salt'?: string;
 }
 

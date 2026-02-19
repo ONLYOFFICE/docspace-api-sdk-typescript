@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,14 +21,10 @@
 
 /**
  * The parameters for archiving a room.
- * @export
- * @interface ArchiveRoomRequest
  */
 export interface ArchiveRoomRequest {
     /**
      * Specifies whether to archive a room after the editing session is finished or not.
-     * @type {boolean}
-     * @memberof ArchiveRoomRequest
      */
     'deleteAfter'?: boolean;
 }

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,18 +21,10 @@
 
 /**
  * [0 - Invitation, 1 - External]
- * @export
- * @enum {number}
  */
 
 export const LinkType = {
-    /**
-    * Invitation
-    */
     Invitation: 0,
-    /**
-    * External
-    */
     External: 1
 } as const;
 

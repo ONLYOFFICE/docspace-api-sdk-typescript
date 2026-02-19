@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -25,86 +27,49 @@ import type { Status } from './status';
 
 /**
  * The external sharing information and validation data.
- * @export
- * @interface ExternalShareDto
  */
 export interface ExternalShareDto {
-    /**
-     * 
-     * @type {Status}
-     * @memberof ExternalShareDto
-     */
     'status': Status;
     /**
      * The external data ID.
-     * @type {string}
-     * @memberof ExternalShareDto
      */
-    'id': string | null;
+    'id': string;
     /**
      * The external data title.
-     * @type {string}
-     * @memberof ExternalShareDto
      */
-    'title': string | null;
-    /**
-     * 
-     * @type {FileEntryType}
-     * @memberof ExternalShareDto
-     */
+    'title': string;
     'type'?: FileEntryType;
     /**
      * The tenant ID.
-     * @type {number}
-     * @memberof ExternalShareDto
      */
     'tenantId': number;
     /**
      * The unique identifier of the shared entity.
-     * @type {string}
-     * @memberof ExternalShareDto
      */
-    'entityId'?: string | null;
+    'entityId'?: string;
     /**
      * The title of the shared entity.
-     * @type {string}
-     * @memberof ExternalShareDto
      */
-    'entityTitle'?: string | null;
-    /**
-     * 
-     * @type {FileEntryType}
-     * @memberof ExternalShareDto
-     */
+    'entityTitle'?: string;
     'entityType'?: FileEntryType;
     /**
      * Indicates whether the entity represents a room.
-     * @type {boolean}
-     * @memberof ExternalShareDto
      */
-    'isRoom'?: boolean | null;
+    'isRoom'?: boolean;
     /**
      * Specifies whether to share the external data or not.
-     * @type {boolean}
-     * @memberof ExternalShareDto
      */
     'shared': boolean;
     /**
      * The link ID of the external data.
-     * @type {string}
-     * @memberof ExternalShareDto
      */
     'linkId': string;
     /**
      * Specifies whether the user is authenticated or not.
-     * @type {boolean}
-     * @memberof ExternalShareDto
      */
     'isAuthenticated': boolean;
     /**
      * The room ID of the external data.
-     * @type {boolean}
-     * @memberof ExternalShareDto
      */
     'isRoomMember'?: boolean;
 }

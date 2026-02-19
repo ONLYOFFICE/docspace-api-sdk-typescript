@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -37,13 +39,13 @@ export type DeleteBatchRequestDto = FileOperationRequestBaseDto &  {
      * @type {Array<DeleteBatchRequestDtoAllOfFolderIds>}
      * @memberof DeleteBatchRequestDto
      */
-    'folderIds'?: Array<DeleteBatchRequestDtoAllOfFolderIds> | null;
+    'folderIds'?: Array<DeleteBatchRequestDtoAllOfFolderIds>;
     /**
      * The list of file IDs to be deleted.
      * @type {Array<DeleteBatchRequestDtoAllOfFileIds>}
      * @memberof DeleteBatchRequestDto
      */
-    'fileIds'?: Array<DeleteBatchRequestDtoAllOfFileIds> | null;
+    'fileIds'?: Array<DeleteBatchRequestDtoAllOfFileIds>;
     /**
      * Specifies whether to delete a file after the editing session is finished or not
      * @type {boolean}

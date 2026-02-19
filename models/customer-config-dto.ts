@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,45 +21,31 @@
 
 /**
  * The customer config parameters.
- * @export
- * @interface CustomerConfigDto
  */
 export interface CustomerConfigDto {
     /**
      * The address of the customer configuration.
-     * @type {string}
-     * @memberof CustomerConfigDto
      */
-    'address'?: string | null;
+    'address'?: string;
     /**
      * The logo of the customer configuration.
-     * @type {string}
-     * @memberof CustomerConfigDto
      */
-    'logo'?: string | null;
+    'logo'?: string;
     /**
      * The dark logo of the customer configuration.
-     * @type {string}
-     * @memberof CustomerConfigDto
      */
-    'logoDark'?: string | null;
+    'logoDark'?: string;
     /**
      * The mail address of the customer configuration.
-     * @type {string}
-     * @memberof CustomerConfigDto
      */
-    'mail'?: string | null;
+    'mail'?: string;
     /**
      * The name of the customer configuration.
-     * @type {string}
-     * @memberof CustomerConfigDto
      */
-    'name'?: string | null;
+    'name'?: string;
     /**
      * The site web address of the customer configuration.
-     * @type {string}
-     * @memberof CustomerConfigDto
      */
-    'www'?: string | null;
+    'www'?: string;
 }
 

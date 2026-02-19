@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,26 +21,12 @@
 
 /**
  * [2 - Documents, 3 - Login, 7 - Settings, 8 - Contacts]
- * @export
- * @enum {number}
  */
 
 export const ProductType = {
-    /**
-    * Documents
-    */
     Documents: 2,
-    /**
-    * Login
-    */
     Login: 3,
-    /**
-    * Settings
-    */
     Settings: 7,
-    /**
-    * Contacts
-    */
     Contacts: 8
 } as const;
 

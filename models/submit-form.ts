@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,21 +21,15 @@
 
 /**
  * The Complete & Submit button settings.
- * @export
- * @interface SubmitForm
  */
 export interface SubmitForm {
     /**
      * Specifies whether the Complete  & Submit button will be displayed or hidden on the top toolbar.
-     * @type {boolean}
-     * @memberof SubmitForm
      */
     'visible'?: boolean;
     /**
      * A message displayed after forms are submitted.
-     * @type {string}
-     * @memberof SubmitForm
      */
-    'resultMessage'?: string | null;
+    'resultMessage'?: string;
 }
 

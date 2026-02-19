@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,27 +21,19 @@
 
 /**
  * The tenant entity quota settings.
- * @export
- * @interface TenantEntityQuotaSettings
  */
 export interface TenantEntityQuotaSettings {
     /**
      * Specifies if the quota is enabled for the tenant entity or not.
-     * @type {boolean}
-     * @memberof TenantEntityQuotaSettings
      */
     'enableQuota'?: boolean;
     /**
      * The default quota of the tenant entity.
-     * @type {number}
-     * @memberof TenantEntityQuotaSettings
      */
     'defaultQuota'?: number;
     /**
      * The date of the last quota recalculation.
-     * @type {string}
-     * @memberof TenantEntityQuotaSettings
      */
-    'lastRecalculateDate'?: string | null;
+    'lastRecalculateDate'?: string;
 }
 

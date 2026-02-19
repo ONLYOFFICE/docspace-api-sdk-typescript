@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,15 +21,11 @@
 
 /**
  * The request parameters for the Single Sign-On (SSO) configuration settings.
- * @export
- * @interface SsoSettingsRequestsDto
  */
 export interface SsoSettingsRequestsDto {
     /**
      * The JSON-serialized SSO configuration settings.
-     * @type {string}
-     * @memberof SsoSettingsRequestsDto
      */
-    'serializeSettings': string | null;
+    'serializeSettings': string;
 }
 

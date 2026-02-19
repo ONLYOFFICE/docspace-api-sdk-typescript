@@ -125,8 +125,8 @@ const { status, data } = await apiInstance.addMembersTo(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Group with the detailed information |  -  |
-|**401** | Unauthorized |  -  |
 |**404** | Group not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -180,15 +180,15 @@ const { status, data } = await apiInstance.deleteGroup(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | No content |  -  |
-|**401** | Unauthorized |  -  |
 |**404** | Group not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getGroup**
 > GroupWrapper getGroup()
 
-Returns the detailed information about the selected group.   **Note**: This method returns full group information.
+Returns the detailed information about the selected group.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-group/).
 
@@ -238,8 +238,8 @@ const { status, data } = await apiInstance.getGroup(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Group with the detailed information |  -  |
-|**401** | Unauthorized |  -  |
 |**404** | Group not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -300,7 +300,7 @@ const { status, data } = await apiInstance.getGroupByUserId(
 # **getGroups**
 > GroupArrayWrapper getGroups()
 
-Returns the general information about all the groups, such as group ID and group manager.   **Note**: This method returns partial group information.
+Returns the general information about all the groups, such as group ID and group manager.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups/).
 
@@ -422,8 +422,8 @@ const { status, data } = await apiInstance.moveMembersTo(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Group with the detailed information |  -  |
-|**401** | Unauthorized |  -  |
 |**404** | Group not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -481,8 +481,8 @@ const { status, data } = await apiInstance.removeMembersFrom(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Group with the detailed information |  -  |
-|**401** | Unauthorized |  -  |
 |**404** | Group not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -540,8 +540,8 @@ const { status, data } = await apiInstance.setGroupManager(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Group with the detailed information |  -  |
-|**401** | Unauthorized |  -  |
 |**404** | User not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -657,8 +657,8 @@ const { status, data } = await apiInstance.updateGroup(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Updated group with the detailed information |  -  |
-|**401** | Unauthorized |  -  |
 |**404** | Group not found |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

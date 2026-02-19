@@ -7,7 +7,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**calculateWalletPayment**](#calculatewalletpayment) | **PUT** /api/2.0/portal/payment/calculatewallet | Calculate the wallet payment amount|
 |[**changeTenantWalletServiceState**](#changetenantwalletservicestate) | **POST** /api/2.0/portal/payment/servicestate | Change wallet service state|
 |[**createCustomerOperationsReport**](#createcustomeroperationsreport) | **POST** /api/2.0/portal/payment/customer/operationsreport | Start the customer operations report generation|
-|[**getCheckoutSetupUrl**](#getcheckoutsetupurl) | **GET** /api/2.0/portal/payment/chechoutsetupurl | Get the checkout setup page URL|
+|[**getCheckoutSetupUrl**](#getcheckoutsetupurl) | **GET** /api/2.0/portal/payment/checkoutsetupurl | Get the checkout setup page URL|
 |[**getCustomerBalance**](#getcustomerbalance) | **GET** /api/2.0/portal/payment/customer/balance | Get the customer balance|
 |[**getCustomerInfo**](#getcustomerinfo) | **GET** /api/2.0/portal/payment/customerinfo | Get the customer information|
 |[**getCustomerOperations**](#getcustomeroperations) | **GET** /api/2.0/portal/payment/customer/operations | Get the customer operations|
@@ -80,8 +80,8 @@ const { status, data } = await apiInstance.calculateWalletPayment(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Payment calculation |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -136,8 +136,8 @@ const { status, data } = await apiInstance.changeTenantWalletServiceState(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The wallet service settings |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -246,8 +246,8 @@ const { status, data } = await apiInstance.getCheckoutSetupUrl(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The URL to the checkout setup page |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -301,8 +301,8 @@ const { status, data } = await apiInstance.getCustomerBalance(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The customer balance |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -356,8 +356,8 @@ const { status, data } = await apiInstance.getCustomerInfo(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The customer info |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -429,8 +429,8 @@ const { status, data } = await apiInstance.getCustomerOperations(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The customer operations |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -531,8 +531,8 @@ const { status, data } = await apiInstance.getPaymentAccount(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The URL to the payment account |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -688,13 +688,13 @@ const { status, data } = await apiInstance.getPaymentUrl(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The URL to the payment page |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getPortalPrices**
-> UnknownWrapper getPortalPrices()
+> GetPortalPrices200Response getPortalPrices()
 
 Returns the available portal prices.
 
@@ -706,7 +706,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**UnknownWrapper**
+**GetPortalPrices200Response**
 
 ### Authorization
 
@@ -790,8 +790,8 @@ const { status, data } = await apiInstance.getQuotaPaymentInformation(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Payment information about the current portal quota |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -838,8 +838,8 @@ const { status, data } = await apiInstance.getTenantWalletServiceSettings();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The wallet services settings |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -886,8 +886,8 @@ const { status, data } = await apiInstance.getTenantWalletSettings();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The wallet auto top up settings |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -946,7 +946,7 @@ const { status, data } = await apiInstance.getWalletService(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getWalletServices**
-> QuotaArrayWrapper getWalletServices()
+> WalletServiceArrayWrapper getWalletServices()
 
 Returns the available wallet services.
 
@@ -958,7 +958,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**QuotaArrayWrapper**
+**WalletServiceArrayWrapper**
 
 ### Authorization
 
@@ -1044,8 +1044,8 @@ const { status, data } = await apiInstance.sendPaymentRequest(
 |-------------|-------------|------------------|
 |**200** | Ok |  -  |
 |**400** | Incorrect email or message text is empty |  -  |
-|**401** | Unauthorized |  -  |
 |**429** | Request limit is exceeded |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1100,8 +1100,8 @@ const { status, data } = await apiInstance.setTenantWalletSettings(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The wallet auto top up settings |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1203,8 +1203,8 @@ const { status, data } = await apiInstance.topUpDeposit(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Boolean value: true if the operation is successful |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1259,8 +1259,8 @@ const { status, data } = await apiInstance.updatePayment(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Boolean value: true if the operation is successful |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1315,8 +1315,8 @@ const { status, data } = await apiInstance.updateWalletPayment(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Boolean value: true if the operation is successful |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

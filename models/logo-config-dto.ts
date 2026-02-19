@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,44 +21,30 @@
 
 /**
  * The logo config parameters.
- * @export
- * @interface LogoConfigDto
  */
 export interface LogoConfigDto {
     /**
      * The image of the logo.
-     * @type {string}
-     * @memberof LogoConfigDto
      */
-    'image'?: string | null;
+    'image'?: string;
     /**
      * The dark image of the logo.
-     * @type {string}
-     * @memberof LogoConfigDto
      */
-    'imageDark'?: string | null;
+    'imageDark'?: string;
     /**
      * The light image of the logo.
-     * @type {string}
-     * @memberof LogoConfigDto
      */
-    'imageLight'?: string | null;
+    'imageLight'?: string;
     /**
      * The embedded image of the logo.
-     * @type {string}
-     * @memberof LogoConfigDto
      */
-    'imageEmbedded'?: string | null;
+    'imageEmbedded'?: string;
     /**
      * The url link of the logo.
-     * @type {string}
-     * @memberof LogoConfigDto
      */
-    'url'?: string | null;
+    'url'?: string;
     /**
      * Specifies if the logo is visible.
-     * @type {boolean}
-     * @memberof LogoConfigDto
      */
     'visible'?: boolean;
 }

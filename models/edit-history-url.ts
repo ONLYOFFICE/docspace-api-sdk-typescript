@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,27 +21,19 @@
 
 /**
  * The file editing history URL parameters.
- * @export
- * @interface EditHistoryUrl
  */
 export interface EditHistoryUrl {
     /**
      * The document identifier of the previous version of the document.
-     * @type {string}
-     * @memberof EditHistoryUrl
      */
-    'key'?: string | null;
+    'key'?: string;
     /**
      * The url address of the previous version of the document.
-     * @type {string}
-     * @memberof EditHistoryUrl
      */
-    'url'?: string | null;
+    'url'?: string;
     /**
      * The document extension.
-     * @type {string}
-     * @memberof EditHistoryUrl
      */
-    'fileType'?: string | null;
+    'fileType'?: string;
 }
 

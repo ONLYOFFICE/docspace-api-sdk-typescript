@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,21 +24,15 @@ import type { SubAccount } from './sub-account';
 
 /**
  * Represents a balance with an account number and a list of sub-accounts.
- * @export
- * @interface Balance
  */
 export interface Balance {
     /**
      * The account number.
-     * @type {number}
-     * @memberof Balance
      */
     'accountNumber'?: number;
     /**
      * A list of sub-accounts.
-     * @type {Array<SubAccount>}
-     * @memberof Balance
      */
-    'subAccounts'?: Array<SubAccount> | null;
+    'subAccounts'?: Array<SubAccount>;
 }
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -18,46 +20,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { TenantAiAgentQuotaSettings } from './tenant-ai-agent-quota-settings';
 
-/**
- * 
- * @export
- * @interface TenantAiAgentQuotaSettingsWrapper
- */
 export interface TenantAiAgentQuotaSettingsWrapper {
-    /**
-     * 
-     * @type {TenantAiAgentQuotaSettings}
-     * @memberof TenantAiAgentQuotaSettingsWrapper
-     */
     'response'?: TenantAiAgentQuotaSettings;
-    /**
-     * 
-     * @type {number}
-     * @memberof TenantAiAgentQuotaSettingsWrapper
-     */
     'count'?: number;
-    /**
-     * 
-     * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof TenantAiAgentQuotaSettingsWrapper
-     */
-    'links'?: Array<ActiveConnectionsWrapperLinksInner>;
-    /**
-     * 
-     * @type {number}
-     * @memberof TenantAiAgentQuotaSettingsWrapper
-     */
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
     'status'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof TenantAiAgentQuotaSettingsWrapper
-     */
     'statusCode'?: number;
 }
 

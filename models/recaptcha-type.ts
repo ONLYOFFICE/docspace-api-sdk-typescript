@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,26 +21,12 @@
 
 /**
  * [0 - Default, 1 - AndroidV2, 2 - iOSV2, 3 - hCaptcha]
- * @export
- * @enum {number}
  */
 
 export const RecaptchaType = {
-    /**
-    * Default
-    */
     Default: 0,
-    /**
-    * AndroidV2
-    */
     AndroidV2: 1,
-    /**
-    * iOSV2
-    */
     iOSV2: 2,
-    /**
-    * hCaptcha
-    */
     hCaptcha: 3
 } as const;
 

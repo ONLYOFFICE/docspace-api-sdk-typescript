@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,18 +21,10 @@
 
 /**
  * [0 - Ascending, 1 - Descending]
- * @export
- * @enum {number}
  */
 
 export const SortOrder = {
-    /**
-    * Ascending
-    */
     Ascending: 0,
-    /**
-    * Descending
-    */
     Descending: 1
 } as const;
 

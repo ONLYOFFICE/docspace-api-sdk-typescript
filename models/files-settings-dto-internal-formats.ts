@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,69 +21,17 @@
 
 /**
  * The internal file formats.
- * @export
- * @interface FilesSettingsDtoInternalFormats
  */
 export interface FilesSettingsDtoInternalFormats {
-    /**
-     * 
-     * @type {string}
-     * @memberof FilesSettingsDtoInternalFormats
-     */
     'Unknown'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FilesSettingsDtoInternalFormats
-     */
     'Archive'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FilesSettingsDtoInternalFormats
-     */
     'Video'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FilesSettingsDtoInternalFormats
-     */
     'Audio'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FilesSettingsDtoInternalFormats
-     */
     'Image'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FilesSettingsDtoInternalFormats
-     */
     'Spreadsheet'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FilesSettingsDtoInternalFormats
-     */
     'Presentation'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FilesSettingsDtoInternalFormats
-     */
     'Document'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FilesSettingsDtoInternalFormats
-     */
     'Pdf'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FilesSettingsDtoInternalFormats
-     */
     'Diagram'?: string;
 }
 

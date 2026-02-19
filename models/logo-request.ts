@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,38 +21,26 @@
 
 /**
  * The logo request parameters.
- * @export
- * @interface LogoRequest
  */
 export interface LogoRequest {
     /**
      * The path to the temporary image file.
-     * @type {string}
-     * @memberof LogoRequest
      */
-    'tmpFile'?: string | null;
+    'tmpFile'?: string;
     /**
      * The X coordinate of the rectangle starting point.
-     * @type {number}
-     * @memberof LogoRequest
      */
     'x'?: number;
     /**
      * The Y coordinate of the rectangle starting point.
-     * @type {number}
-     * @memberof LogoRequest
      */
     'y'?: number;
     /**
      * The rectangle width.
-     * @type {number}
-     * @memberof LogoRequest
      */
     'width'?: number;
     /**
      * The rectangle height.
-     * @type {number}
-     * @memberof LogoRequest
      */
     'height'?: number;
 }

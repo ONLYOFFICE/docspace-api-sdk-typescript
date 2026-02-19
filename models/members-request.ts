@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,15 +21,11 @@
 
 /**
  * The member request.
- * @export
- * @interface MembersRequest
  */
 export interface MembersRequest {
     /**
      * The list of group member IDs.
-     * @type {Array<string>}
-     * @memberof MembersRequest
      */
-    'members'?: Array<string> | null;
+    'members'?: Array<string>;
 }
 

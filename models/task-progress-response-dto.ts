@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,39 +24,24 @@ import type { DistributedTaskStatus } from './distributed-task-status';
 
 /**
  * The task progress response parameters.
- * @export
- * @interface TaskProgressResponseDto
  */
 export interface TaskProgressResponseDto {
     /**
      * The task progress ID.
-     * @type {string}
-     * @memberof TaskProgressResponseDto
      */
-    'id': string | null;
+    'id': string;
     /**
      * The task progress error message.
-     * @type {string}
-     * @memberof TaskProgressResponseDto
      */
-    'error'?: string | null;
+    'error'?: string;
     /**
      * The percentage of the task progress.
-     * @type {number}
-     * @memberof TaskProgressResponseDto
      */
     'percentage': number;
     /**
      * Specifies if the task peogress is completed or not.
-     * @type {boolean}
-     * @memberof TaskProgressResponseDto
      */
     'isCompleted': boolean;
-    /**
-     * 
-     * @type {DistributedTaskStatus}
-     * @memberof TaskProgressResponseDto
-     */
     'status': DistributedTaskStatus;
 }
 

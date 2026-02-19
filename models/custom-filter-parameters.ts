@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,14 +21,10 @@
 
 /**
  * The parameters for setting the Custom Filter editing mode.
- * @export
- * @interface CustomFilterParameters
  */
 export interface CustomFilterParameters {
     /**
      * Specifies whether the Custom Filter editing mode is enabled or not.
-     * @type {boolean}
-     * @memberof CustomFilterParameters
      */
     'enabled'?: boolean;
 }

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,14 +21,10 @@
 
 /**
  * The request parameters for managing the owner-specific settings.
- * @export
- * @interface OwnerIdSettingsRequestDto
  */
 export interface OwnerIdSettingsRequestDto {
     /**
      * The ID of the owner whose settings are being managed.
-     * @type {string}
-     * @memberof OwnerIdSettingsRequestDto
      */
     'ownerId': string;
 }

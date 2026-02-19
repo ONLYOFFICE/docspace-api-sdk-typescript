@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,58 +24,37 @@ import type { EmployeeType } from './employee-type';
 
 /**
  * The request parameters for creating a third-party account.
- * @export
- * @interface SignupAccountRequestDto
  */
 export interface SignupAccountRequestDto {
-    /**
-     * 
-     * @type {EmployeeType}
-     * @memberof SignupAccountRequestDto
-     */
     'employeeType'?: EmployeeType;
     /**
      * The user first name.
-     * @type {string}
-     * @memberof SignupAccountRequestDto
      */
-    'firstName'?: string | null;
+    'firstName'?: string;
     /**
      * The user last name.
-     * @type {string}
-     * @memberof SignupAccountRequestDto
      */
-    'lastName'?: string | null;
+    'lastName'?: string;
     /**
      * The user email address.
-     * @type {string}
-     * @memberof SignupAccountRequestDto
      */
-    'email'?: string | null;
+    'email'?: string;
     /**
      * The user password hash.
-     * @type {string}
-     * @memberof SignupAccountRequestDto
      */
-    'passwordHash'?: string | null;
+    'passwordHash'?: string;
     /**
      * The user link key.
-     * @type {string}
-     * @memberof SignupAccountRequestDto
      */
-    'key': string | null;
+    'key': string;
     /**
      * The user culture code.
-     * @type {string}
-     * @memberof SignupAccountRequestDto
      */
-    'culture'?: string | null;
+    'culture'?: string;
     /**
      * The third-party profile in the serialized format
-     * @type {string}
-     * @memberof SignupAccountRequestDto
      */
-    'serializedProfile': string | null;
+    'serializedProfile': string;
 }
 
 

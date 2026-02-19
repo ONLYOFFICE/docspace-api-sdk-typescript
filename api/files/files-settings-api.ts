@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -32,6 +31,10 @@ import type { AutoCleanupRequestDto } from '../../models';
 import type { BooleanWrapper } from '../../models';
 // @ts-ignore
 import type { CheckDocServiceUrlRequestDto } from '../../models';
+// @ts-ignore
+import type { DefaultTemplateSettingsRequestDto } from '../../models';
+// @ts-ignore
+import type { DefaultTemplateSettingsWrapper } from '../../models';
 // @ts-ignore
 import type { DisplayRequestDto } from '../../models';
 // @ts-ignore
@@ -721,6 +724,58 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
+         * Returns the default template setting.
+         * @summary Get the default template setting
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getDefaultTemplates operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-default-templates/
+         */
+        getDefaultTemplates: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/files/settings/defaulttemplate`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns the URL address of the connected editors.
          * @summary Get the document service URL
          * @param {boolean} [version] Specifies whether to return the editor version or not.
@@ -1120,6 +1175,62 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
+         * Changes the default template setting.
+         * @summary Change the default template setting
+         * @param {DefaultTemplateSettingsRequestDto} [defaultTemplateSettingsRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setDefaultTemplate operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-default-template/
+         */
+        setDefaultTemplate: async (defaultTemplateSettingsRequestDto?: DefaultTemplateSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/files/settings/defaulttemplate`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(defaultTemplateSettingsRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Changes the ability to open the document in the same browser tab.
          * @summary Open document in the same browser tab
          * @param {SettingsRequestDto} [settingsRequestDto] 
@@ -1131,6 +1242,62 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
         setOpenEditorInSameTab: async (settingsRequestDto?: SettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/files/settings/openeditorinsametab`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(settingsRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Changes the setting that allows the user to organize the grouping of rooms.
+         * @summary Organize rooms grouping
+         * @param {SettingsRequestDto} [settingsRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setOrganizeRoomsGrouping operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-organize-rooms-grouping/
+         */
+        setOrganizeRoomsGrouping: async (settingsRequestDto?: SettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/files/settings/organizegrouping`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1339,6 +1506,76 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Uploads a file to use as the default template setting.
+         * @summary Upload a file as the default template setting
+         * @param {string} fileExtension File extension of a template to replace
+         * @param {File} file File to replace template with
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for uploadDefaultTemplate operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-default-template/
+         */
+        uploadDefaultTemplate: async (fileExtension: string, file: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'fileExtension' is not null or undefined
+            assertParamExists('uploadDefaultTemplate', 'fileExtension', fileExtension)
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('uploadDefaultTemplate', 'file', file)
+
+            const localVarPath = `/api/2.0/files/settings/defaulttemplate`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (fileExtension !== undefined) {
+                localVarQueryParameter['FileExtension'] = fileExtension;
+            }
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('File', file as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -1528,6 +1765,20 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns the default template setting.
+         * @summary Get the default template setting
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getDefaultTemplates operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-default-templates/
+         */
+        async getDefaultTemplates(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DefaultTemplateSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getDefaultTemplates(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesSettingsApi.getDefaultTemplates']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns the URL address of the connected editors.
          * @summary Get the document service URL
          * @param {boolean} [version] Specifies whether to return the editor version or not.
@@ -1645,6 +1896,21 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Changes the default template setting.
+         * @summary Change the default template setting
+         * @param {DefaultTemplateSettingsRequestDto} [defaultTemplateSettingsRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setDefaultTemplate operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-default-template/
+         */
+        async setDefaultTemplate(defaultTemplateSettingsRequestDto?: DefaultTemplateSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DefaultTemplateSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setDefaultTemplate(defaultTemplateSettingsRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesSettingsApi.setDefaultTemplate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Changes the ability to open the document in the same browser tab.
          * @summary Open document in the same browser tab
          * @param {SettingsRequestDto} [settingsRequestDto] 
@@ -1657,6 +1923,21 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setOpenEditorInSameTab(settingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesSettingsApi.setOpenEditorInSameTab']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Changes the setting that allows the user to organize the grouping of rooms.
+         * @summary Organize rooms grouping
+         * @param {SettingsRequestDto} [settingsRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setOrganizeRoomsGrouping operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-organize-rooms-grouping/
+         */
+        async setOrganizeRoomsGrouping(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setOrganizeRoomsGrouping(settingsRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesSettingsApi.setOrganizeRoomsGrouping']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1701,6 +1982,22 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateFileIfExist(settingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesSettingsApi.updateFileIfExist']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Uploads a file to use as the default template setting.
+         * @summary Upload a file as the default template setting
+         * @param {string} fileExtension File extension of a template to replace
+         * @param {File} file File to replace template with
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for uploadDefaultTemplate operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-default-template/
+         */
+        async uploadDefaultTemplate(fileExtension: string, file: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DefaultTemplateSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadDefaultTemplate(fileExtension, file, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesSettingsApi.uploadDefaultTemplate']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -1856,6 +2153,17 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.getAutomaticallyCleanUp(options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns the default template setting.
+         * @summary Get the default template setting
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getDefaultTemplates operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-default-templates/
+         * @throws {RequiredError}
+         */
+        getDefaultTemplates(options?: RawAxiosRequestConfig): AxiosPromise<DefaultTemplateSettingsWrapper> {
+            return localVarFp.getDefaultTemplates(options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns the URL address of the connected editors.
          * @summary Get the document service URL
          * @param {boolean} [version] Specifies whether to return the editor version or not.
@@ -1949,6 +2257,18 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.keepNewFileName(settingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
+         * Changes the default template setting.
+         * @summary Change the default template setting
+         * @param {DefaultTemplateSettingsRequestDto} [defaultTemplateSettingsRequestDto] 
+         * @param {*} [options] Override http request option.
+         * REST API Reference for setDefaultTemplate operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-default-template/
+         * @throws {RequiredError}
+         */
+        setDefaultTemplate(defaultTemplateSettingsRequestDto?: DefaultTemplateSettingsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<DefaultTemplateSettingsWrapper> {
+            return localVarFp.setDefaultTemplate(defaultTemplateSettingsRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Changes the ability to open the document in the same browser tab.
          * @summary Open document in the same browser tab
          * @param {SettingsRequestDto} [settingsRequestDto] 
@@ -1959,6 +2279,18 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
          */
         setOpenEditorInSameTab(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
             return localVarFp.setOpenEditorInSameTab(settingsRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Changes the setting that allows the user to organize the grouping of rooms.
+         * @summary Organize rooms grouping
+         * @param {SettingsRequestDto} [settingsRequestDto] 
+         * @param {*} [options] Override http request option.
+         * REST API Reference for setOrganizeRoomsGrouping operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-organize-rooms-grouping/
+         * @throws {RequiredError}
+         */
+        setOrganizeRoomsGrouping(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.setOrganizeRoomsGrouping(settingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Changes the ability to store the forcesaved file versions.
@@ -1994,6 +2326,19 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
          */
         updateFileIfExist(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
             return localVarFp.updateFileIfExist(settingsRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Uploads a file to use as the default template setting.
+         * @summary Upload a file as the default template setting
+         * @param {string} fileExtension File extension of a template to replace
+         * @param {File} file File to replace template with
+         * @param {*} [options] Override http request option.
+         * REST API Reference for uploadDefaultTemplate operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-default-template/
+         * @throws {RequiredError}
+         */
+        uploadDefaultTemplate(fileExtension: string, file: File, options?: RawAxiosRequestConfig): AxiosPromise<DefaultTemplateSettingsWrapper> {
+            return localVarFp.uploadDefaultTemplate(fileExtension, file, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -2148,6 +2493,17 @@ export class FilesSettingsApi extends BaseAPI {
     }
 
     /**
+     * Returns the default template setting.
+     * @summary Get the default template setting
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesSettingsApi
+     */
+    public getDefaultTemplates(options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).getDefaultTemplates(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Returns the URL address of the connected editors.
      * @summary Get the document service URL
      * @param {boolean} [version] Specifies whether to return the editor version or not.
@@ -2241,6 +2597,18 @@ export class FilesSettingsApi extends BaseAPI {
     }
 
     /**
+     * Changes the default template setting.
+     * @summary Change the default template setting
+     * @param {DefaultTemplateSettingsRequestDto} [defaultTemplateSettingsRequestDto] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesSettingsApi
+     */
+    public setDefaultTemplate(defaultTemplateSettingsRequestDto?: DefaultTemplateSettingsRequestDto, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).setDefaultTemplate(defaultTemplateSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Changes the ability to open the document in the same browser tab.
      * @summary Open document in the same browser tab
      * @param {SettingsRequestDto} [settingsRequestDto] 
@@ -2250,6 +2618,18 @@ export class FilesSettingsApi extends BaseAPI {
      */
     public setOpenEditorInSameTab(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig) {
         return FilesSettingsApiFp(this.configuration).setOpenEditorInSameTab(settingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Changes the setting that allows the user to organize the grouping of rooms.
+     * @summary Organize rooms grouping
+     * @param {SettingsRequestDto} [settingsRequestDto] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesSettingsApi
+     */
+    public setOrganizeRoomsGrouping(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).setOrganizeRoomsGrouping(settingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2285,6 +2665,19 @@ export class FilesSettingsApi extends BaseAPI {
      */
     public updateFileIfExist(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig) {
         return FilesSettingsApiFp(this.configuration).updateFileIfExist(settingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Uploads a file to use as the default template setting.
+     * @summary Upload a file as the default template setting
+     * @param {string} fileExtension File extension of a template to replace
+     * @param {File} file File to replace template with
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesSettingsApi
+     */
+    public uploadDefaultTemplate(fileExtension: string, file: File, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).uploadDefaultTemplate(fileExtension, file, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -1985,7 +1984,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
+         * Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
          * @summary Upload a file
          * @param {number} folderId The folder ID to upload a file.
          * @param {UploadRequestDto} [uploadRequestDto] The request parameters for uploading a file.
@@ -2045,7 +2044,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
+         * Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
          * @summary Upload a file to the My documents section
          * @param {UploadRequestDto} [inDto] The request parameters for uploading a file.
          * @param {*} [options] Override http request option.
@@ -2598,7 +2597,7 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
+         * Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
          * @summary Upload a file
          * @param {number} folderId The folder ID to upload a file.
          * @param {UploadRequestDto} [uploadRequestDto] The request parameters for uploading a file.
@@ -2614,7 +2613,7 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
+         * Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
          * @summary Upload a file to the My documents section
          * @param {UploadRequestDto} [inDto] The request parameters for uploading a file.
          * @param {*} [options] Override http request option.
@@ -3045,7 +3044,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.setFolderPrimaryExternalLink(id, folderLinkRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
+         * Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
          * @summary Upload a file
          * @param {number} folderId The folder ID to upload a file.
          * @param {UploadRequestDto} [uploadRequestDto] The request parameters for uploading a file.
@@ -3058,7 +3057,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.uploadFile(folderId, uploadRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
+         * Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
          * @summary Upload a file to the My documents section
          * @param {UploadRequestDto} [inDto] The request parameters for uploading a file.
          * @param {*} [options] Override http request option.
@@ -3486,7 +3485,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
+     * Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
      * @summary Upload a file
      * @param {number} folderId The folder ID to upload a file.
      * @param {UploadRequestDto} [uploadRequestDto] The request parameters for uploading a file.
@@ -3499,7 +3498,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.   **Note**:  You can upload files in two different ways:   <ol>  <li>Using single file upload. You should set the Content-Type and Content-Disposition headers to specify a file name and content type, and send the file to the request body.</li>  <li>Using standart multipart/form-data method.</li>  </ol>
+     * Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
      * @summary Upload a file to the My documents section
      * @param {UploadRequestDto} [inDto] The request parameters for uploading a file.
      * @param {*} [options] Override http request option.

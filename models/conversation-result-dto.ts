@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,52 +24,30 @@ import type { FileOperationType } from './file-operation-type';
 
 /**
  * The result of file convertion operation.
- * @export
- * @interface ConversationResultDto
  */
 export interface ConversationResultDto {
     /**
      * The conversion operation ID.
-     * @type {string}
-     * @memberof ConversationResultDto
      */
-    'id': string | null;
-    /**
-     * 
-     * @type {FileOperationType}
-     * @memberof ConversationResultDto
-     */
+    'id': string;
     'Operation': FileOperationType;
     /**
      * The conversion operation progress.
-     * @type {number}
-     * @memberof ConversationResultDto
      */
     'progress': number;
     /**
      * The source file for the conversion.
-     * @type {string}
-     * @memberof ConversationResultDto
      */
-    'source'?: string | null;
-    /**
-     * The resulting file after the conversion.
-     * @type {any}
-     * @memberof ConversationResultDto
-     */
-    'result'?: any | null;
+    'source'?: string;
+    'result'?: any;
     /**
      * The conversion operation error message.
-     * @type {string}
-     * @memberof ConversationResultDto
      */
-    'error'?: string | null;
+    'error'?: string;
     /**
      * Specifies if the conversion operation is processed or not.
-     * @type {string}
-     * @memberof ConversationResultDto
      */
-    'processed'?: string | null;
+    'processed'?: string;
 }
 
 

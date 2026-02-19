@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,66 +21,22 @@
 
 /**
  * [0 - Facebook, 1 - Google, 2 - Dropbox, 3 - Docusign, 4 - Box, 5 - OneDrive, 6 - GosUslugi, 7 - LinkedIn, 8 - MailRu, 9 - VK, 10 - Wordpress, 11 - Yahoo, 12 - Yandex, 13 - Github]
- * @export
- * @enum {number}
  */
 
 export const LoginProvider = {
-    /**
-    * Facebook
-    */
     Facebook: 0,
-    /**
-    * Google
-    */
     Google: 1,
-    /**
-    * Dropbox
-    */
     Dropbox: 2,
-    /**
-    * Docusign
-    */
     Docusign: 3,
-    /**
-    * Box
-    */
     Box: 4,
-    /**
-    * OneDrive
-    */
     OneDrive: 5,
-    /**
-    * GosUslugi
-    */
     GosUslugi: 6,
-    /**
-    * LinkedIn
-    */
     LinkedIn: 7,
-    /**
-    * MailRu
-    */
     MailRu: 8,
-    /**
-    * VK
-    */
     VK: 9,
-    /**
-    * Wordpress
-    */
     Wordpress: 10,
-    /**
-    * Yahoo
-    */
     Yahoo: 11,
-    /**
-    * Yandex
-    */
     Yandex: 12,
-    /**
-    * Github
-    */
     Github: 13
 } as const;
 

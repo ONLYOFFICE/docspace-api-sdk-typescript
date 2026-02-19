@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,21 +24,12 @@ import type { FileEntryBaseDto } from './file-entry-base-dto';
 
 /**
  * The room new items information.
- * @export
- * @interface RoomNewItemsDto
  */
 export interface RoomNewItemsDto {
-    /**
-     * 
-     * @type {FileEntryBaseDto}
-     * @memberof RoomNewItemsDto
-     */
     'room'?: FileEntryBaseDto;
     /**
      * The list of file entry items.
-     * @type {Array<FileEntryBaseDto>}
-     * @memberof RoomNewItemsDto
      */
-    'items'?: Array<FileEntryBaseDto> | null;
+    'items'?: Array<FileEntryBaseDto>;
 }
 

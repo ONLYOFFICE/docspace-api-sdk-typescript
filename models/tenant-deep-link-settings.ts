@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,21 +24,9 @@ import type { DeepLinkHandlingMode } from './deep-link-handling-mode';
 
 /**
  * The deep link settings.
- * @export
- * @interface TenantDeepLinkSettings
  */
 export interface TenantDeepLinkSettings {
-    /**
-     * 
-     * @type {DeepLinkHandlingMode}
-     * @memberof TenantDeepLinkSettings
-     */
     'handlingMode'?: DeepLinkHandlingMode;
-    /**
-     * 
-     * @type {string}
-     * @memberof TenantDeepLinkSettings
-     */
     'lastModified'?: string;
 }
 

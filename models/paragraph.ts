@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,21 +24,15 @@ import type { Run } from './run';
 
 /**
  * The paragraph parameters.
- * @export
- * @interface Paragraph
  */
 export interface Paragraph {
     /**
      * The paragraph align.
-     * @type {number}
-     * @memberof Paragraph
      */
     'align'?: number;
     /**
      * The list of text runs from the paragraph.
-     * @type {Array<Run>}
-     * @memberof Paragraph
      */
-    'runs'?: Array<Run> | null;
+    'runs'?: Array<Run>;
 }
 

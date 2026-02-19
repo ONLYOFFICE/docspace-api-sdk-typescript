@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,75 +24,48 @@ import type { LogoRequest } from './logo-request';
 
 /**
  * The room template parameters.
- * @export
- * @interface RoomTemplateDto
  */
 export interface RoomTemplateDto {
     /**
      * The room template ID.
-     * @type {number}
-     * @memberof RoomTemplateDto
      */
     'roomId': number;
     /**
      * The room template title.
-     * @type {string}
-     * @memberof RoomTemplateDto
      */
-    'title'?: string | null;
-    /**
-     * 
-     * @type {LogoRequest}
-     * @memberof RoomTemplateDto
-     */
+    'title'?: string;
     'logo'?: LogoRequest;
     /**
      * Specifies whether to copy room logo or not.
-     * @type {boolean}
-     * @memberof RoomTemplateDto
      */
     'copyLogo'?: boolean;
     /**
      * The collection of email addresses of users with whom to share a room.
-     * @type {Array<string>}
-     * @memberof RoomTemplateDto
      */
-    'share'?: Array<string> | null;
+    'share'?: Array<string>;
     /**
      * The collection of groups with whom to share a room.
-     * @type {Array<string>}
-     * @memberof RoomTemplateDto
      */
-    'groups'?: Array<string> | null;
+    'groups'?: Array<string>;
     /**
      * Specifies whether the room template is public or not.
-     * @type {boolean}
-     * @memberof RoomTemplateDto
      */
     'public'?: boolean;
     /**
      * The collection of tags.
-     * @type {Array<string>}
-     * @memberof RoomTemplateDto
      */
-    'tags'?: Array<string> | null;
+    'tags'?: Array<string>;
     /**
      * The color of the room template.
-     * @type {string}
-     * @memberof RoomTemplateDto
      */
-    'color'?: string | null;
+    'color'?: string;
     /**
      * The cover of the room template.
-     * @type {string}
-     * @memberof RoomTemplateDto
      */
-    'cover'?: string | null;
+    'cover'?: string;
     /**
      * Room quota
-     * @type {number}
-     * @memberof RoomTemplateDto
      */
-    'quota'?: number | null;
+    'quota'?: number;
 }
 

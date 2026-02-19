@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,21 +24,15 @@ import type { FormRole } from './form-role';
 
 /**
  * The parameters for saving form role mapping.
- * @export
- * @interface SaveFormRoleMappingDtoInteger
  */
 export interface SaveFormRoleMappingDtoInteger {
     /**
      * The form ID.
-     * @type {number}
-     * @memberof SaveFormRoleMappingDtoInteger
      */
     'formId': number;
     /**
      * The collection of roles.
-     * @type {Array<FormRole>}
-     * @memberof SaveFormRoleMappingDtoInteger
      */
-    'roles': Array<FormRole> | null;
+    'roles': Array<FormRole>;
 }
 

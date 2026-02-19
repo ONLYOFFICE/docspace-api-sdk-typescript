@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,27 +21,19 @@
 
 /**
  * The text run parameters.
- * @export
- * @interface Run
  */
 export interface Run {
     /**
      * The fill color of the text run in RGB format.
-     * @type {Array<number>}
-     * @memberof Run
      */
-    'fill'?: Array<number> | null;
+    'fill'?: Array<number>;
     /**
      * The run text.
-     * @type {string}
-     * @memberof Run
      */
-    'text'?: string | null;
+    'text'?: string;
     /**
      * The font size of the text run in points.
-     * @type {string}
-     * @memberof Run
      */
-    'font-size'?: string | null;
+    'font-size'?: string;
 }
 

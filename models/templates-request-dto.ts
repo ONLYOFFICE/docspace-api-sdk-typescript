@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,15 +21,11 @@
 
 /**
  * The request parameters for adding files to the template list.
- * @export
- * @interface TemplatesRequestDto
  */
 export interface TemplatesRequestDto {
     /**
      * The list of file IDs.
-     * @type {Array<number>}
-     * @memberof TemplatesRequestDto
      */
-    'fileIds'?: Array<number> | null;
+    'fileIds'?: Array<number>;
 }
 

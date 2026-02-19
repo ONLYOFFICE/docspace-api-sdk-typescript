@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -43,75 +45,27 @@ import type { SubmitForm } from './submit-form';
 
 /**
  * The customization config parameters.
- * @export
- * @interface CustomizationConfigDto
  */
 export interface CustomizationConfigDto {
     /**
      * Specifies if the customization is about.
-     * @type {boolean}
-     * @memberof CustomizationConfigDto
      */
     'about'?: boolean;
-    /**
-     * 
-     * @type {CustomerConfigDto}
-     * @memberof CustomizationConfigDto
-     */
     'customer'?: CustomerConfigDto;
-    /**
-     * 
-     * @type {AnonymousConfigDto}
-     * @memberof CustomizationConfigDto
-     */
     'anonymous'?: AnonymousConfigDto;
-    /**
-     * 
-     * @type {FeedbackConfig}
-     * @memberof CustomizationConfigDto
-     */
     'feedback'?: FeedbackConfig;
     /**
      * Specifies if the customization should be force saved.
-     * @type {boolean}
-     * @memberof CustomizationConfigDto
      */
-    'forcesave'?: boolean | null;
-    /**
-     * 
-     * @type {GobackConfig}
-     * @memberof CustomizationConfigDto
-     */
+    'forcesave'?: boolean;
     'goback'?: GobackConfig;
-    /**
-     * 
-     * @type {ReviewConfig}
-     * @memberof CustomizationConfigDto
-     */
     'review'?: ReviewConfig;
-    /**
-     * 
-     * @type {LogoConfigDto}
-     * @memberof CustomizationConfigDto
-     */
     'logo'?: LogoConfigDto;
     /**
      * Specifies if the share should be mentioned.
-     * @type {boolean}
-     * @memberof CustomizationConfigDto
      */
     'mentionShare'?: boolean;
-    /**
-     * 
-     * @type {SubmitForm}
-     * @memberof CustomizationConfigDto
-     */
     'submitForm'?: SubmitForm;
-    /**
-     * 
-     * @type {StartFillingForm}
-     * @memberof CustomizationConfigDto
-     */
     'startFillingForm'?: StartFillingForm;
 }
 

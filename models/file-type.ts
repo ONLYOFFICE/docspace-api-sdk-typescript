@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,50 +21,18 @@
 
 /**
  * [0 - Unknown, 1 - Archive, 2 - Video, 3 - Audio, 4 - Image, 5 - Spreadsheet, 6 - Presentation, 7 - Document, 10 - Pdf, 11 - Diagram]
- * @export
- * @enum {number}
  */
 
 export const FileType = {
-    /**
-    * Unknown
-    */
     Unknown: 0,
-    /**
-    * Archive
-    */
     Archive: 1,
-    /**
-    * Video
-    */
     Video: 2,
-    /**
-    * Audio
-    */
     Audio: 3,
-    /**
-    * Image
-    */
     Image: 4,
-    /**
-    * Spreadsheet
-    */
     Spreadsheet: 5,
-    /**
-    * Presentation
-    */
     Presentation: 6,
-    /**
-    * Document
-    */
     Document: 7,
-    /**
-    * Pdf
-    */
     Pdf: 10,
-    /**
-    * Diagram
-    */
     Diagram: 11
 } as const;
 

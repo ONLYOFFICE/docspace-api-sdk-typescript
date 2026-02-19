@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,18 +21,10 @@
 
 /**
  * [0 - Paid, 1 - Free]
- * @export
- * @enum {number}
  */
 
 export const Payments = {
-    /**
-    * Paid
-    */
     Paid: 0,
-    /**
-    * Free
-    */
     Free: 1
 } as const;
 

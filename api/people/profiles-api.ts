@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -40,8 +39,6 @@ import type { MemberRequestDto } from '../../models';
 import type { ObjectWrapper } from '../../models';
 // @ts-ignore
 import type { SortOrder } from '../../models';
-// @ts-ignore
-import type { StringWrapper } from '../../models';
 // @ts-ignore
 import type { UpdateMemberRequestDto } from '../../models';
 // @ts-ignore
@@ -707,62 +704,6 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Sends a message to the user email with the instructions to change the email address connected to the portal.
-         * @summary Send instructions to change email
-         * @param {UpdateMemberRequestDto} [updateMemberRequestDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for sendEmailChangeInstructions operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-email-change-instructions/
-         */
-        sendEmailChangeInstructions: async (updateMemberRequestDto?: UpdateMemberRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-
-            const localVarPath = `/api/2.0/people/email`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateMemberRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Updates the data for the selected portal user with the first name, last name, email address, and/or optional parameters specified in the request.
          * @summary Update a user
          * @param {string} userid The user ID.
@@ -825,10 +766,10 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Updates the user culture code with the parameters specified in the request.
-         * @summary Update a user culture code
+         * Updates the user culture with the parameters specified in the request.
+         * @summary Update a user culture
          * @param {string} userid The user ID.
-         * @param {Culture} [culture] The culture code parameters.
+         * @param {Culture} [culture] The culture name parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateMemberCulture operation
@@ -1065,21 +1006,6 @@ export const ProfilesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Sends a message to the user email with the instructions to change the email address connected to the portal.
-         * @summary Send instructions to change email
-         * @param {UpdateMemberRequestDto} [updateMemberRequestDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for sendEmailChangeInstructions operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-email-change-instructions/
-         */
-        async sendEmailChangeInstructions(updateMemberRequestDto?: UpdateMemberRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.sendEmailChangeInstructions(updateMemberRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ProfilesApi.sendEmailChangeInstructions']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
          * Updates the data for the selected portal user with the first name, last name, email address, and/or optional parameters specified in the request.
          * @summary Update a user
          * @param {string} userid The user ID.
@@ -1096,10 +1022,10 @@ export const ProfilesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Updates the user culture code with the parameters specified in the request.
-         * @summary Update a user culture code
+         * Updates the user culture with the parameters specified in the request.
+         * @summary Update a user culture
          * @param {string} userid The user ID.
-         * @param {Culture} [culture] The culture code parameters.
+         * @param {Culture} [culture] The culture name parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateMemberCulture operation
@@ -1259,18 +1185,6 @@ export const ProfilesApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.resendUserInvites(updateMembersRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Sends a message to the user email with the instructions to change the email address connected to the portal.
-         * @summary Send instructions to change email
-         * @param {UpdateMemberRequestDto} [updateMemberRequestDto] 
-         * @param {*} [options] Override http request option.
-         * REST API Reference for sendEmailChangeInstructions operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-email-change-instructions/
-         * @throws {RequiredError}
-         */
-        sendEmailChangeInstructions(updateMemberRequestDto?: UpdateMemberRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.sendEmailChangeInstructions(updateMemberRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Updates the data for the selected portal user with the first name, last name, email address, and/or optional parameters specified in the request.
          * @summary Update a user
          * @param {string} userid The user ID.
@@ -1284,10 +1198,10 @@ export const ProfilesApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.updateMember(userid, updateMemberRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Updates the user culture code with the parameters specified in the request.
-         * @summary Update a user culture code
+         * Updates the user culture with the parameters specified in the request.
+         * @summary Update a user culture
          * @param {string} userid The user ID.
-         * @param {Culture} [culture] The culture code parameters.
+         * @param {Culture} [culture] The culture name parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateMemberCulture operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-member-culture/
@@ -1444,18 +1358,6 @@ export class ProfilesApi extends BaseAPI {
     }
 
     /**
-     * Sends a message to the user email with the instructions to change the email address connected to the portal.
-     * @summary Send instructions to change email
-     * @param {UpdateMemberRequestDto} [updateMemberRequestDto] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProfilesApi
-     */
-    public sendEmailChangeInstructions(updateMemberRequestDto?: UpdateMemberRequestDto, options?: RawAxiosRequestConfig) {
-        return ProfilesApiFp(this.configuration).sendEmailChangeInstructions(updateMemberRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Updates the data for the selected portal user with the first name, last name, email address, and/or optional parameters specified in the request.
      * @summary Update a user
      * @param {string} userid The user ID.
@@ -1469,10 +1371,10 @@ export class ProfilesApi extends BaseAPI {
     }
 
     /**
-     * Updates the user culture code with the parameters specified in the request.
-     * @summary Update a user culture code
+     * Updates the user culture with the parameters specified in the request.
+     * @summary Update a user culture
      * @param {string} userid The user ID.
-     * @param {Culture} [culture] The culture code parameters.
+     * @param {Culture} [culture] The culture name parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProfilesApi

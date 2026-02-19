@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,32 +24,19 @@ import type { MigrationApiInfo } from './migration-api-info';
 
 /**
  * The migration status parameters.
- * @export
- * @interface MigrationStatusDto
  */
 export interface MigrationStatusDto {
     /**
      * The migration progress.
-     * @type {number}
-     * @memberof MigrationStatusDto
      */
     'progress'?: number;
     /**
      * The migration error.
-     * @type {string}
-     * @memberof MigrationStatusDto
      */
-    'error'?: string | null;
-    /**
-     * 
-     * @type {MigrationApiInfo}
-     * @memberof MigrationStatusDto
-     */
+    'error'?: string;
     'parseResult'?: MigrationApiInfo;
     /**
      * Specifies whether the migration is completed or not.
-     * @type {boolean}
-     * @memberof MigrationStatusDto
      */
     'isCompleted'?: boolean;
 }

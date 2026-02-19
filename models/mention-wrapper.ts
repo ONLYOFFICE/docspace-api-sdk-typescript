@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,45 +24,28 @@ import type { UserInfo } from './user-info';
 
 /**
  * The parameters of a user mentioned in a message.
- * @export
- * @interface MentionWrapper
  */
 export interface MentionWrapper {
-    /**
-     * 
-     * @type {UserInfo}
-     * @memberof MentionWrapper
-     */
     'user'?: UserInfo;
     /**
      * The user email address.
-     * @type {string}
-     * @memberof MentionWrapper
      */
-    'email'?: string | null;
+    'email'?: string;
     /**
      * The user unique identification.
-     * @type {string}
-     * @memberof MentionWrapper
      */
-    'id'?: string | null;
+    'id'?: string;
     /**
      * The path to the user\'s avatar.
-     * @type {string}
-     * @memberof MentionWrapper
      */
-    'image'?: string | null;
+    'image'?: string;
     /**
      * Specifies whether the user has the access to the file where they are mentioned.
-     * @type {boolean}
-     * @memberof MentionWrapper
      */
     'hasAccess'?: boolean;
     /**
      * The user full name.
-     * @type {string}
-     * @memberof MentionWrapper
      */
-    'name'?: string | null;
+    'name'?: string;
 }
 

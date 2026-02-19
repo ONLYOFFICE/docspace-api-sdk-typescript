@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -17,41 +19,11 @@
  */
 
 
-/**
- * 
- * @export
- * @interface ContentType
- */
 export interface ContentType {
-    /**
-     * 
-     * @type {string}
-     * @memberof ContentType
-     */
-    'boundary'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ContentType
-     */
-    'charSet'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ContentType
-     */
-    'mediaType'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ContentType
-     */
-    'name'?: string | null;
-    /**
-     * 
-     * @type {Array<any>}
-     * @memberof ContentType
-     */
-    'parameters'?: Array<any> | null;
+    'boundary'?: string;
+    'charSet'?: string;
+    'mediaType'?: string;
+    'name'?: string;
+    'parameters'?: Array<any>;
 }
 

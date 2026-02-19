@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,22 +21,11 @@
 
 /**
  * [0 - None, 1 - Internal, 2 - ThirdParty]
- * @export
- * @enum {number}
  */
 
 export const StorageFilter = {
-    /**
-    * None
-    */
     None: 0,
-    /**
-    * Internal
-    */
     Internal: 1,
-    /**
-    * ThirdParty
-    */
     ThirdParty: 2
 } as const;
 

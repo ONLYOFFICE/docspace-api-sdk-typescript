@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,26 +21,12 @@
 
 /**
  * [0 - Decrypted, 1 - Encryption started, 2 - Encrypted, 3 - Decryption started]
- * @export
- * @enum {number}
  */
 
 export const EncryprtionStatus = {
-    /**
-    * Decrypted
-    */
     Decrypted: 0,
-    /**
-    * Encryption started
-    */
     EncryptionStarted: 1,
-    /**
-    * Encrypted
-    */
     Encrypted: 2,
-    /**
-    * Decryption started
-    */
     DecryptionStarted: 3
 } as const;
 

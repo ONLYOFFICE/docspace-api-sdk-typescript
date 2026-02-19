@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,57 +24,36 @@ import type { FileReferenceData } from './file-reference-data';
 
 /**
  * The file reference parameters.
- * @export
- * @interface FileReference
  */
 export interface FileReference {
-    /**
-     * 
-     * @type {FileReferenceData}
-     * @memberof FileReference
-     */
     'referenceData'?: FileReferenceData;
     /**
      * The error message text.
-     * @type {string}
-     * @memberof FileReference
      */
-    'error'?: string | null;
+    'error'?: string;
     /**
      * The file name or relative path for the formula editor.
-     * @type {string}
-     * @memberof FileReference
      */
-    'path'?: string | null;
+    'path'?: string;
     /**
      * The URL address to download the current file.
-     * @type {string}
-     * @memberof FileReference
      */
-    'url'?: string | null;
+    'url'?: string;
     /**
      * An extension of the document specified with the url parameter.
-     * @type {string}
-     * @memberof FileReference
      */
-    'fileType'?: string | null;
+    'fileType'?: string;
     /**
      * The unique document identifier used by the service to take the data from the co-editing session.
-     * @type {string}
-     * @memberof FileReference
      */
-    'key'?: string | null;
+    'key'?: string;
     /**
      * The file URL.
-     * @type {string}
-     * @memberof FileReference
      */
-    'link'?: string | null;
+    'link'?: string;
     /**
      * The encrypted signature added to the parameter in the form of a token.
-     * @type {string}
-     * @memberof FileReference
      */
-    'token'?: string | null;
+    'token'?: string;
 }
 

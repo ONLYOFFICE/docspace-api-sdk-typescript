@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,44 +24,27 @@ import type { ApiDateTime } from './api-date-time';
 
 /**
  * The session request parameters.
- * @export
- * @interface SessionRequest
  */
 export interface SessionRequest {
     /**
      * The file name.
-     * @type {string}
-     * @memberof SessionRequest
      */
-    'fileName': string | null;
+    'fileName': string;
     /**
      * The file size.
-     * @type {number}
-     * @memberof SessionRequest
      */
     'fileSize'?: number;
     /**
      * The relative path to the file.
-     * @type {string}
-     * @memberof SessionRequest
      */
-    'relativePath'?: string | null;
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof SessionRequest
-     */
+    'relativePath'?: string;
     'createOn'?: ApiDateTime;
     /**
      * Specifies whether the file is encrypted or not.
-     * @type {boolean}
-     * @memberof SessionRequest
      */
     'encrypted'?: boolean;
     /**
      * Specifies whether to create a new file if it already exists.
-     * @type {boolean}
-     * @memberof SessionRequest
      */
     'createNewIfExist'?: boolean;
 }

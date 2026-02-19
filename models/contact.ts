@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,21 +21,15 @@
 
 /**
  * The contact information.
- * @export
- * @interface Contact
  */
 export interface Contact {
     /**
      * The contact type.
-     * @type {string}
-     * @memberof Contact
      */
-    'type'?: string | null;
+    'type'?: string;
     /**
      * The contact value.
-     * @type {string}
-     * @memberof Contact
      */
-    'value'?: string | null;
+    'value'?: string;
 }
 

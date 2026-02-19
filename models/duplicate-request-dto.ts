@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -37,13 +39,13 @@ export type DuplicateRequestDto = FileOperationRequestBaseDto &  {
      * @type {Array<DuplicateRequestDtoAllOfFolderIds>}
      * @memberof DuplicateRequestDto
      */
-    'folderIds'?: Array<DuplicateRequestDtoAllOfFolderIds> | null;
+    'folderIds'?: Array<DuplicateRequestDtoAllOfFolderIds>;
     /**
      * The list of file IDs.
      * @type {Array<DuplicateRequestDtoAllOfFileIds>}
      * @memberof DuplicateRequestDto
      */
-    'fileIds'?: Array<DuplicateRequestDtoAllOfFileIds> | null;
+    'fileIds'?: Array<DuplicateRequestDtoAllOfFileIds>;
 };
 
 

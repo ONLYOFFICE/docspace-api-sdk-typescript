@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -18,46 +20,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
+import type { FireBaseUser } from './fire-base-user';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FireBaseUser } from './fire-base-user';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
-/**
- * 
- * @export
- * @interface FireBaseUserWrapper
- */
 export interface FireBaseUserWrapper {
-    /**
-     * 
-     * @type {FireBaseUser}
-     * @memberof FireBaseUserWrapper
-     */
     'response'?: FireBaseUser;
-    /**
-     * 
-     * @type {number}
-     * @memberof FireBaseUserWrapper
-     */
     'count'?: number;
-    /**
-     * 
-     * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof FireBaseUserWrapper
-     */
-    'links'?: Array<ActiveConnectionsWrapperLinksInner>;
-    /**
-     * 
-     * @type {number}
-     * @memberof FireBaseUserWrapper
-     */
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
     'status'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof FireBaseUserWrapper
-     */
     'statusCode'?: number;
 }
 

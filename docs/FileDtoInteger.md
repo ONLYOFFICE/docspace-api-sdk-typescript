@@ -47,6 +47,7 @@ Name | Type | Description | Notes
 **contentLength** | **string** | The content length of the file. | [optional] [default to undefined]
 **pureContentLength** | **number** | The pure content length of the file. | [optional] [default to undefined]
 **fileStatus** | [**FileStatus**](FileStatus.md) |  | [optional] [default to undefined]
+**editingBy** | **{ [key: string]: string; }** | The list of users editing the file. | [optional] [default to undefined]
 **mute** | **boolean** | Specifies if the file is muted or not. | [optional] [default to undefined]
 **viewUrl** | **string** | The URL link to view the file. | [optional] [default to undefined]
 **webUrl** | **string** | The Web URL link to the file. | [optional] [default to undefined]
@@ -120,6 +121,7 @@ const instance: FileDtoInteger = {
     contentLength,
     pureContentLength,
     fileStatus,
+    editingBy,
     mute,
     viewUrl,
     webUrl,

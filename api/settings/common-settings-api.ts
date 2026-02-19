@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -30,6 +29,8 @@ import type { CustomColorThemesSettingsRequestsDto } from '../../models';
 import type { CustomColorThemesSettingsWrapper } from '../../models';
 // @ts-ignore
 import type { DeepLinkConfigurationRequestsDto } from '../../models';
+// @ts-ignore
+import type { DefaultProductRequestDto } from '../../models';
 // @ts-ignore
 import type { DnsSettingsRequestsDto } from '../../models';
 // @ts-ignore
@@ -48,6 +49,8 @@ import type { STRINGArrayWrapper } from '../../models';
 import type { SettingsWrapper } from '../../models';
 // @ts-ignore
 import type { StringWrapper } from '../../models';
+// @ts-ignore
+import type { StudioDefaultPageSettingsWrapper } from '../../models';
 // @ts-ignore
 import type { TenantDeepLinkSettingsWrapper } from '../../models';
 // @ts-ignore
@@ -722,6 +725,62 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
+         * Sets the default folder.
+         * @summary Set the default folder
+         * @param {DefaultProductRequestDto} [defaultProductRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for saveDefaultFolder operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-default-folder/
+         */
+        saveDefaultFolder: async (defaultProductRequestDto?: DefaultProductRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/settings/defaultfolder`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(defaultProductRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Saves the DNS settings specified in the request to the current portal.
          * @summary Save the DNS settings
          * @param {DnsSettingsRequestsDto} [dnsSettingsRequestsDto] 
@@ -1212,6 +1271,21 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Sets the default folder.
+         * @summary Set the default folder
+         * @param {DefaultProductRequestDto} [defaultProductRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for saveDefaultFolder operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-default-folder/
+         */
+        async saveDefaultFolder(defaultProductRequestDto?: DefaultProductRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudioDefaultPageSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.saveDefaultFolder(defaultProductRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.saveDefaultFolder']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Saves the DNS settings specified in the request to the current portal.
          * @summary Save the DNS settings
          * @param {DnsSettingsRequestsDto} [dnsSettingsRequestsDto] 
@@ -1455,6 +1529,18 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
             return localVarFp.getTimeZones(options).then((request) => request(axios, basePath));
         },
         /**
+         * Sets the default folder.
+         * @summary Set the default folder
+         * @param {DefaultProductRequestDto} [defaultProductRequestDto] 
+         * @param {*} [options] Override http request option.
+         * REST API Reference for saveDefaultFolder operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-default-folder/
+         * @throws {RequiredError}
+         */
+        saveDefaultFolder(defaultProductRequestDto?: DefaultProductRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<StudioDefaultPageSettingsWrapper> {
+            return localVarFp.saveDefaultFolder(defaultProductRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Saves the DNS settings specified in the request to the current portal.
          * @summary Save the DNS settings
          * @param {DnsSettingsRequestsDto} [dnsSettingsRequestsDto] 
@@ -1680,6 +1766,18 @@ export class CommonSettingsApi extends BaseAPI {
      */
     public getTimeZones(options?: RawAxiosRequestConfig) {
         return CommonSettingsApiFp(this.configuration).getTimeZones(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Sets the default folder.
+     * @summary Set the default folder
+     * @param {DefaultProductRequestDto} [defaultProductRequestDto] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CommonSettingsApi
+     */
+    public saveDefaultFolder(defaultProductRequestDto?: DefaultProductRequestDto, options?: RawAxiosRequestConfig) {
+        return CommonSettingsApiFp(this.configuration).saveDefaultFolder(defaultProductRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

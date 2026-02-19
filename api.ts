@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -17,24 +19,33 @@
  */
 
 
+export * from './api/ai/agents-api';
+export * from './api/ai/chat-api';
+export * from './api/ai/mcpapi';
+export * from './api/ai/messages-api';
+export * from './api/ai/providers-api';
+export * from './api/ai/settings-api';
+export * from './api/ai/vectorization-api';
 export * from './api/api-keys/api-keys-api';
 export * from './api/authentication/authentication-api';
 export * from './api/backup/backup-api';
 export * from './api/capabilities/capabilities-api';
 export * from './api/files/files-api';
+export * from './api/files/files-files-api';
 export * from './api/files/folders-api';
 export * from './api/files/operations-api';
-export * from './api/files/files-quota-api';
+export * from './api/files/quota-api';
 export * from './api/files/files-settings-api';
 export * from './api/files/sharing-api';
 export * from './api/files/third-party-integration-api';
 export * from './api/group/group-api';
 export * from './api/group/search-api';
 export * from './api/migration/migration-api';
-export * from './api/oauth20/oauth20-authorization-api';
+export * from './api/oauth20/authorization-api';
 export * from './api/oauth20/client-management-api';
 export * from './api/oauth20/client-querying-api';
 export * from './api/oauth20/scope-management-api';
+export * from './api/people/email-api';
 export * from './api/people/guests-api';
 export * from './api/people/password-api';
 export * from './api/people/photos-api';
@@ -48,8 +59,8 @@ export * from './api/people/user-status-api';
 export * from './api/people/user-type-api';
 export * from './api/portal/portal-guests-api';
 export * from './api/portal/payment-api';
-export * from './api/portal/quota-api';
-export * from './api/portal/settings-api';
+export * from './api/portal/portal-quota-api';
+export * from './api/portal/portal-settings-api';
 export * from './api/portal/users-api';
 export * from './api/rooms/rooms-api';
 export * from './api/security/security-access-to-dev-tools-api';
@@ -62,7 +73,7 @@ export * from './api/security/login-history-api';
 export * from './api/security/oauth2-api';
 export * from './api/security/smtpsettings-api';
 export * from './api/settings/access-to-dev-tools-api';
-export * from './api/settings/authorization-api';
+export * from './api/settings/settings-authorization-api';
 export * from './api/settings/banners-visibility-api';
 export * from './api/settings/common-settings-api';
 export * from './api/settings/cookies-api';
@@ -71,7 +82,7 @@ export * from './api/settings/greeting-settings-api';
 export * from './api/settings/iprestrictions-api';
 export * from './api/settings/license-api';
 export * from './api/settings/login-settings-api';
-export * from './api/settings/messages-api';
+export * from './api/settings/settings-messages-api';
 export * from './api/settings/notifications-api';
 export * from './api/settings/owner-api';
 export * from './api/settings/settings-quota-api';

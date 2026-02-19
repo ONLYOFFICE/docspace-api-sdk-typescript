@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -37,93 +39,48 @@ import type { WatermarkRequestDto } from './watermark-request-dto';
 
 /**
  * The request parameters for creating a room.
- * @export
- * @interface CreateRoomRequestDto
  */
 export interface CreateRoomRequestDto {
     /**
      * The room name.
-     * @type {string}
-     * @memberof CreateRoomRequestDto
      */
-    'title': string | null;
+    'title': string;
     /**
      * The room quota.
-     * @type {number}
-     * @memberof CreateRoomRequestDto
      */
-    'quota'?: number | null;
+    'quota'?: number;
     /**
      * Specifies whether to create a room with indexing.
-     * @type {boolean}
-     * @memberof CreateRoomRequestDto
      */
-    'indexing'?: boolean | null;
+    'indexing'?: boolean;
     /**
      * Specifies whether to deny downloads from the room.
-     * @type {boolean}
-     * @memberof CreateRoomRequestDto
      */
-    'denyDownload'?: boolean | null;
-    /**
-     * 
-     * @type {RoomDataLifetimeDto}
-     * @memberof CreateRoomRequestDto
-     */
+    'denyDownload'?: boolean;
     'lifetime'?: RoomDataLifetimeDto;
-    /**
-     * 
-     * @type {WatermarkRequestDto}
-     * @memberof CreateRoomRequestDto
-     */
     'watermark'?: WatermarkRequestDto;
-    /**
-     * 
-     * @type {LogoRequest}
-     * @memberof CreateRoomRequestDto
-     */
     'logo'?: LogoRequest;
     /**
      * The list of tags.
-     * @type {Array<string>}
-     * @memberof CreateRoomRequestDto
      */
-    'tags'?: Array<string> | null;
+    'tags'?: Array<string>;
     /**
      * The room color.
-     * @type {string}
-     * @memberof CreateRoomRequestDto
      */
-    'color'?: string | null;
+    'color'?: string;
     /**
      * The room cover.
-     * @type {string}
-     * @memberof CreateRoomRequestDto
      */
-    'cover'?: string | null;
-    /**
-     * 
-     * @type {RoomType}
-     * @memberof CreateRoomRequestDto
-     */
+    'cover'?: string;
     'roomType': RoomType;
     /**
      * Specifies whether the room to be created is private or not.
-     * @type {boolean}
-     * @memberof CreateRoomRequestDto
      */
     'private'?: boolean;
     /**
      * The collection of sharing parameters.
-     * @type {Array<FileShareParams>}
-     * @memberof CreateRoomRequestDto
      */
-    'share'?: Array<FileShareParams> | null;
-    /**
-     * 
-     * @type {ChatSettings}
-     * @memberof CreateRoomRequestDto
-     */
+    'share'?: Array<FileShareParams>;
     'chatSettings'?: ChatSettings;
 }
 

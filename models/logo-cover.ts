@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,21 +21,15 @@
 
 /**
  * The logo cover information.
- * @export
- * @interface LogoCover
  */
 export interface LogoCover {
     /**
      * The logo cover ID.
-     * @type {string}
-     * @memberof LogoCover
      */
-    'id': string | null;
+    'id': string;
     /**
      * The logo cover data.
-     * @type {string}
-     * @memberof LogoCover
      */
-    'data': string | null;
+    'data': string;
 }
 

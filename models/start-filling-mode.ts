@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,22 +21,11 @@
 
 /**
  * [0 - None, 1 - Share to fill out, 2 - Start filling]
- * @export
- * @enum {number}
  */
 
 export const StartFillingMode = {
-    /**
-    * None
-    */
     None: 0,
-    /**
-    * Share to fill out
-    */
     ShareToFillOut: 1,
-    /**
-    * Start filling
-    */
     StartFilling: 2
 } as const;
 

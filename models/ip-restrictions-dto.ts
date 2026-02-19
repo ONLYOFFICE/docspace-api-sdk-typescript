@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,21 +24,15 @@ import type { IpRestrictionBase } from './ip-restriction-base';
 
 /**
  * The parameters for configuring new IP restriction settings.
- * @export
- * @interface IpRestrictionsDto
  */
 export interface IpRestrictionsDto {
     /**
      * The list of IP restriction addresses.
-     * @type {Array<IpRestrictionBase>}
-     * @memberof IpRestrictionsDto
      */
-    'ipRestrictions': Array<IpRestrictionBase> | null;
+    'ipRestrictions': Array<IpRestrictionBase>;
     /**
      * Specifies whether to enable IP restrictions or not.
-     * @type {boolean}
-     * @memberof IpRestrictionsDto
      */
-    'enable'?: boolean | null;
+    'enable'?: boolean;
 }
 

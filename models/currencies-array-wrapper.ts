@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -18,46 +20,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
+import type { CurrenciesDto } from './currencies-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { CurrenciesDto } from './currencies-dto';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
-/**
- * 
- * @export
- * @interface CurrenciesArrayWrapper
- */
 export interface CurrenciesArrayWrapper {
-    /**
-     * 
-     * @type {Array<CurrenciesDto>}
-     * @memberof CurrenciesArrayWrapper
-     */
     'response'?: Array<CurrenciesDto>;
-    /**
-     * 
-     * @type {number}
-     * @memberof CurrenciesArrayWrapper
-     */
     'count'?: number;
-    /**
-     * 
-     * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof CurrenciesArrayWrapper
-     */
-    'links'?: Array<ActiveConnectionsWrapperLinksInner>;
-    /**
-     * 
-     * @type {number}
-     * @memberof CurrenciesArrayWrapper
-     */
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
     'status'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof CurrenciesArrayWrapper
-     */
     'statusCode'?: number;
 }
 

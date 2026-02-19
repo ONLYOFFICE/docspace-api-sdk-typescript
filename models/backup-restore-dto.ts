@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -25,38 +27,23 @@ import type { ItemKeyValuePairObjectObject } from './item-key-value-pair-object-
 
 /**
  * The backup restoring parameters.
- * @export
- * @interface BackupRestoreDto
  */
 export interface BackupRestoreDto {
     /**
      * The backup ID.
-     * @type {string}
-     * @memberof BackupRestoreDto
      */
-    'backupId': string | null;
-    /**
-     * 
-     * @type {BackupStorageType}
-     * @memberof BackupRestoreDto
-     */
+    'backupId': string;
     'storageType'?: BackupStorageType;
     /**
      * The backup storage parameters.
-     * @type {Array<ItemKeyValuePairObjectObject>}
-     * @memberof BackupRestoreDto
      */
-    'storageParams'?: Array<ItemKeyValuePairObjectObject> | null;
+    'storageParams'?: Array<ItemKeyValuePairObjectObject>;
     /**
      * Notifies users about the portal restoring process or not.
-     * @type {boolean}
-     * @memberof BackupRestoreDto
      */
     'notify'?: boolean;
     /**
      * Specifies if a dump will be created or not.
-     * @type {boolean}
-     * @memberof BackupRestoreDto
      */
     'dump'?: boolean;
 }

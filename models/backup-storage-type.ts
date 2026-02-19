@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,34 +21,14 @@
 
 /**
  * [0 - Documents, 1 - Thridparty documents, 2 - Custom cloud, 3 - Local, 4 - Data store, 5 - Thirdparty consumer]
- * @export
- * @enum {number}
  */
 
 export const BackupStorageType = {
-    /**
-    * Documents
-    */
     Documents: 0,
-    /**
-    * Thridparty documents
-    */
     ThridpartyDocuments: 1,
-    /**
-    * Custom cloud
-    */
     CustomCloud: 2,
-    /**
-    * Local
-    */
     Local: 3,
-    /**
-    * Data store
-    */
     DataStore: 4,
-    /**
-    * Thirdparty consumer
-    */
     ThirdPartyConsumer: 5
 } as const;
 

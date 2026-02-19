@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -25,22 +27,13 @@ import type { FileEntryBaseDto } from './file-entry-base-dto';
 
 /**
  * The result of checking whether files can be moved or copied to the specified folder.
- * @export
- * @interface CheckDestFolderDto
  */
 export interface CheckDestFolderDto {
-    /**
-     * 
-     * @type {CheckDestFolderResult}
-     * @memberof CheckDestFolderDto
-     */
     'result'?: CheckDestFolderResult;
     /**
      * The list of files in the destination folder.
-     * @type {Array<FileEntryBaseDto>}
-     * @memberof CheckDestFolderDto
      */
-    'files'?: Array<FileEntryBaseDto> | null;
+    'files'?: Array<FileEntryBaseDto>;
 }
 
 

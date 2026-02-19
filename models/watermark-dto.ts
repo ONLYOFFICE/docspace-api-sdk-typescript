@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,50 +24,31 @@ import type { WatermarkAdditions } from './watermark-additions';
 
 /**
  * The watermark settings.
- * @export
- * @interface WatermarkDto
  */
 export interface WatermarkDto {
-    /**
-     * 
-     * @type {WatermarkAdditions}
-     * @memberof WatermarkDto
-     */
     'additions': WatermarkAdditions;
     /**
      * The watermark text.
-     * @type {string}
-     * @memberof WatermarkDto
      */
-    'text'?: string | null;
+    'text'?: string;
     /**
      * The watermark text and image rotate.
-     * @type {number}
-     * @memberof WatermarkDto
      */
     'rotate': number;
     /**
      * The watermark image scale.
-     * @type {number}
-     * @memberof WatermarkDto
      */
     'imageScale': number;
     /**
      * The watermark image url.
-     * @type {string}
-     * @memberof WatermarkDto
      */
-    'imageUrl'?: string | null;
+    'imageUrl'?: string;
     /**
      * The watermark image height.
-     * @type {number}
-     * @memberof WatermarkDto
      */
     'imageHeight': number;
     /**
      * The watermark image width.
-     * @type {number}
-     * @memberof WatermarkDto
      */
     'imageWidth': number;
 }

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,8 +21,6 @@
 
 /**
  * The registration Telegram status.
- * @export
- * @enum {number}
  */
 
 export const RegStatus = {

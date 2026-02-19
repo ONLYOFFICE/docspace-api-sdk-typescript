@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,34 +21,14 @@
 
 /**
  * [1 - One week, 2 - Two weeks, 3 - One month, 4 - Thirty days, 5 - Two months, 6 - Three months]
- * @export
- * @enum {number}
  */
 
 export const DateToAutoCleanUp = {
-    /**
-    * One week
-    */
     OneWeek: 1,
-    /**
-    * Two weeks
-    */
     TwoWeeks: 2,
-    /**
-    * One month
-    */
     OneMonth: 3,
-    /**
-    * Thirty days
-    */
     ThirtyDays: 4,
-    /**
-    * Two months
-    */
     TwoMonths: 5,
-    /**
-    * Three months
-    */
     ThreeMonths: 6
 } as const;
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,18 +21,10 @@
 
 /**
  * [0 - Not activated, 1 - Activated]
- * @export
- * @enum {number}
  */
 
 export const MobilePhoneActivationStatus = {
-    /**
-    * Not activated
-    */
     NotActivated: 0,
-    /**
-    * Activated
-    */
     Activated: 1
 } as const;
 

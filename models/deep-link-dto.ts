@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,27 +21,19 @@
 
 /**
  * The deep link parameters.
- * @export
- * @interface DeepLinkDto
  */
 export interface DeepLinkDto {
     /**
      * The Android package name.
-     * @type {string}
-     * @memberof DeepLinkDto
      */
-    'androidPackageName': string | null;
+    'androidPackageName': string;
     /**
      * The deep link URL.
-     * @type {string}
-     * @memberof DeepLinkDto
      */
-    'url': string | null;
+    'url': string;
     /**
      * The deep link IOS package ID.
-     * @type {string}
-     * @memberof DeepLinkDto
      */
-    'iosPackageId': string | null;
+    'iosPackageId': string;
 }
 

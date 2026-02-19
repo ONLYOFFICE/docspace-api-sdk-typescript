@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -47,7 +46,7 @@ export const StorageApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Returns a list of all the backup storages.
          * @summary Get the backup storages
-         * @param {boolean} [dump] 
+         * @param {boolean} [dump] Indicates whether the operation should perform a dump of backup storage data.  This property is used as a parameter in backup-related API requests to specify  if additional details or data dumping is required during the process.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getAllBackupStorages operation
@@ -538,7 +537,7 @@ export const StorageApiFp = function(configuration?: Configuration) {
         /**
          * Returns a list of all the backup storages.
          * @summary Get the backup storages
-         * @param {boolean} [dump] 
+         * @param {boolean} [dump] Indicates whether the operation should perform a dump of backup storage data.  This property is used as a parameter in backup-related API requests to specify  if additional details or data dumping is required during the process.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getAllBackupStorages operation
@@ -677,7 +676,7 @@ export const StorageApiFactory = function (configuration?: Configuration, basePa
         /**
          * Returns a list of all the backup storages.
          * @summary Get the backup storages
-         * @param {boolean} [dump] 
+         * @param {boolean} [dump] Indicates whether the operation should perform a dump of backup storage data.  This property is used as a parameter in backup-related API requests to specify  if additional details or data dumping is required during the process.
          * @param {*} [options] Override http request option.
          * REST API Reference for getAllBackupStorages operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-backup-storages/
@@ -789,7 +788,7 @@ export class StorageApi extends BaseAPI {
     /**
      * Returns a list of all the backup storages.
      * @summary Get the backup storages
-     * @param {boolean} [dump] 
+     * @param {boolean} [dump] Indicates whether the operation should perform a dump of backup storage data.  This property is used as a parameter in backup-related API requests to specify  if additional details or data dumping is required during the process.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof StorageApi

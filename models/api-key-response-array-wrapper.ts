@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -18,46 +20,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
+import type { ApiKeyResponseDto } from './api-key-response-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ApiKeyResponseDto } from './api-key-response-dto';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
-/**
- * 
- * @export
- * @interface ApiKeyResponseArrayWrapper
- */
 export interface ApiKeyResponseArrayWrapper {
-    /**
-     * 
-     * @type {Array<ApiKeyResponseDto>}
-     * @memberof ApiKeyResponseArrayWrapper
-     */
     'response'?: Array<ApiKeyResponseDto>;
-    /**
-     * 
-     * @type {number}
-     * @memberof ApiKeyResponseArrayWrapper
-     */
     'count'?: number;
-    /**
-     * 
-     * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof ApiKeyResponseArrayWrapper
-     */
-    'links'?: Array<ActiveConnectionsWrapperLinksInner>;
-    /**
-     * 
-     * @type {number}
-     * @memberof ApiKeyResponseArrayWrapper
-     */
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
     'status'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ApiKeyResponseArrayWrapper
-     */
     'statusCode'?: number;
 }
 

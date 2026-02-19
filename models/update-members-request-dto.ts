@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,20 +21,14 @@
 
 /**
  * The request parameters for updating the user information.
- * @export
- * @interface UpdateMembersRequestDto
  */
 export interface UpdateMembersRequestDto {
     /**
      * The list of user IDs.
-     * @type {Array<string>}
-     * @memberof UpdateMembersRequestDto
      */
-    'userIds'?: Array<string> | null;
+    'userIds'?: Array<string>;
     /**
      * Specifies whether to resend invitation letters to all the users or not.
-     * @type {boolean}
-     * @memberof UpdateMembersRequestDto
      */
     'resendAll'?: boolean;
 }

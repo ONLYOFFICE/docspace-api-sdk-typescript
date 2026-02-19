@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -17,59 +19,14 @@
  */
 
 
-/**
- * 
- * @export
- * @interface OAuth20Token
- */
 export interface OAuth20Token {
-    /**
-     * 
-     * @type {string}
-     * @memberof OAuth20Token
-     */
-    'access_token'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof OAuth20Token
-     */
-    'refresh_token'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof OAuth20Token
-     */
+    'access_token'?: string;
+    'refresh_token'?: string;
     'expires_in'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof OAuth20Token
-     */
-    'client_id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof OAuth20Token
-     */
-    'client_secret'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof OAuth20Token
-     */
-    'redirect_uri'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof OAuth20Token
-     */
+    'client_id'?: string;
+    'client_secret'?: string;
+    'redirect_uri'?: string;
     'timestamp'?: string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof OAuth20Token
-     */
     'isExpired'?: boolean;
 }
 

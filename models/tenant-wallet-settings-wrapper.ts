@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,15 +24,8 @@ import type { TenantWalletSettings } from './tenant-wallet-settings';
 
 /**
  * The wrapper for the tenant wallet settings.
- * @export
- * @interface TenantWalletSettingsWrapper
  */
 export interface TenantWalletSettingsWrapper {
-    /**
-     * 
-     * @type {TenantWalletSettings}
-     * @memberof TenantWalletSettingsWrapper
-     */
     'settings'?: TenantWalletSettings;
 }
 

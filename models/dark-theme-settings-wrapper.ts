@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -18,46 +20,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
+import type { DarkThemeSettings } from './dark-theme-settings';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { DarkThemeSettings } from './dark-theme-settings';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
-/**
- * 
- * @export
- * @interface DarkThemeSettingsWrapper
- */
 export interface DarkThemeSettingsWrapper {
-    /**
-     * 
-     * @type {DarkThemeSettings}
-     * @memberof DarkThemeSettingsWrapper
-     */
     'response'?: DarkThemeSettings;
-    /**
-     * 
-     * @type {number}
-     * @memberof DarkThemeSettingsWrapper
-     */
     'count'?: number;
-    /**
-     * 
-     * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof DarkThemeSettingsWrapper
-     */
-    'links'?: Array<ActiveConnectionsWrapperLinksInner>;
-    /**
-     * 
-     * @type {number}
-     * @memberof DarkThemeSettingsWrapper
-     */
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
     'status'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof DarkThemeSettingsWrapper
-     */
     'statusCode'?: number;
 }
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -36,31 +38,31 @@ export type MigratingApiUser = ImportableApiEntity &  {
      * @type {string}
      * @memberof MigratingApiUser
      */
-    'key'?: string | null;
+    'key'?: string;
     /**
      * 
      * @type {string}
      * @memberof MigratingApiUser
      */
-    'email'?: string | null;
+    'email'?: string;
     /**
      * 
      * @type {string}
      * @memberof MigratingApiUser
      */
-    'displayName'?: string | null;
+    'displayName'?: string;
     /**
      * 
      * @type {string}
      * @memberof MigratingApiUser
      */
-    'firstName'?: string | null;
+    'firstName'?: string;
     /**
      * 
      * @type {string}
      * @memberof MigratingApiUser
      */
-    'lastName'?: string | null;
+    'lastName'?: string;
     /**
      * 
      * @type {EmployeeType}

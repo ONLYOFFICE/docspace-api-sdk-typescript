@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -25,44 +27,21 @@ import type { FileDtoInteger } from './file-dto-integer';
 
 /**
  * The parameters of the form filling result.
- * @export
- * @interface FillingFormResultDtoInteger
  */
 export interface FillingFormResultDtoInteger {
     /**
      * The filling form number.
-     * @type {number}
-     * @memberof FillingFormResultDtoInteger
      */
     'formNumber': number;
-    /**
-     * 
-     * @type {FileDtoInteger}
-     * @memberof FillingFormResultDtoInteger
-     */
     'completedForm'?: FileDtoInteger;
-    /**
-     * 
-     * @type {FileDtoInteger}
-     * @memberof FillingFormResultDtoInteger
-     */
     'originalForm'?: FileDtoInteger;
-    /**
-     * 
-     * @type {EmployeeFullDto}
-     * @memberof FillingFormResultDtoInteger
-     */
     'manager'?: EmployeeFullDto;
     /**
      * The room ID where filling the form.
-     * @type {number}
-     * @memberof FillingFormResultDtoInteger
      */
     'roomId': number;
     /**
      * Specifies if the manager who fills the form is a room member or not.
-     * @type {boolean}
-     * @memberof FillingFormResultDtoInteger
      */
     'isRoomMember'?: boolean;
 }

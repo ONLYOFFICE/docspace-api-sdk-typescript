@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,21 +21,15 @@
 
 /**
  * The request parameters for the administrator message configuration.
- * @export
- * @interface AdminMessageBaseSettingsRequestsDto
  */
 export interface AdminMessageBaseSettingsRequestsDto {
     /**
      * The email address used for sending administrator messages.
-     * @type {string}
-     * @memberof AdminMessageBaseSettingsRequestsDto
      */
-    'email': string | null;
+    'email': string;
     /**
      * The locale identifier for message localization.
-     * @type {string}
-     * @memberof AdminMessageBaseSettingsRequestsDto
      */
-    'culture'?: string | null;
+    'culture'?: string;
 }
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,20 +21,14 @@
 
 /**
  * The parameters for changing version history.
- * @export
- * @interface ChangeHistory
  */
 export interface ChangeHistory {
     /**
      * The file version of the change history.
-     * @type {number}
-     * @memberof ChangeHistory
      */
     'version': number;
     /**
      * Specifies whether to start a new version or continue revision of the change history.
-     * @type {boolean}
-     * @memberof ChangeHistory
      */
     'continueVersion'?: boolean;
 }

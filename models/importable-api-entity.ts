@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -17,17 +19,7 @@
  */
 
 
-/**
- * 
- * @export
- * @interface ImportableApiEntity
- */
 export interface ImportableApiEntity {
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ImportableApiEntity
-     */
     'shouldImport'?: boolean;
 }
 

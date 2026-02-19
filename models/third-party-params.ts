@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,45 +24,28 @@ import type { AuthData } from './auth-data';
 
 /**
  * The third-party account parameters.
- * @export
- * @interface ThirdPartyParams
  */
 export interface ThirdPartyParams {
-    /**
-     * 
-     * @type {AuthData}
-     * @memberof ThirdPartyParams
-     */
     'auth_data'?: AuthData;
     /**
      * Specifies if this is a corporate account or not.
-     * @type {boolean}
-     * @memberof ThirdPartyParams
      */
     'corporate'?: boolean;
     /**
      * Specifies if this is a room storage or not.
-     * @type {boolean}
-     * @memberof ThirdPartyParams
      */
     'roomsStorage'?: boolean;
     /**
      * The customer title.
-     * @type {string}
-     * @memberof ThirdPartyParams
      */
-    'customer_title'?: string | null;
+    'customer_title'?: string;
     /**
      * The provider ID.
-     * @type {number}
-     * @memberof ThirdPartyParams
      */
-    'provider_id'?: number | null;
+    'provider_id'?: number;
     /**
      * The provider key.
-     * @type {string}
-     * @memberof ThirdPartyParams
      */
-    'provider_key'?: string | null;
+    'provider_key'?: string;
 }
 

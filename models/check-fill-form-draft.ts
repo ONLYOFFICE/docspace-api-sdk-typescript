@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,32 +21,22 @@
 
 /**
  * The parameters for checking the form draft filling.
- * @export
- * @interface CheckFillFormDraft
  */
 export interface CheckFillFormDraft {
     /**
      * The file version of the form draft.
-     * @type {number}
-     * @memberof CheckFillFormDraft
      */
     'version': number;
     /**
      * The action with the form draft.
-     * @type {string}
-     * @memberof CheckFillFormDraft
      */
-    'action'?: string | null;
+    'action'?: string;
     /**
      * Specifies whether to request the form for viewing or not.
-     * @type {boolean}
-     * @memberof CheckFillFormDraft
      */
     'requestView'?: boolean;
     /**
      * Specifies whether to request an embedded form or not.
-     * @type {boolean}
-     * @memberof CheckFillFormDraft
      */
     'requestEmbedded'?: boolean;
 }

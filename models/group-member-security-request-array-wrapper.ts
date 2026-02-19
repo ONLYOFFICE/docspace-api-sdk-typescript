@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -18,46 +20,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { GroupMemberSecurityRequestDto } from './group-member-security-request-dto';
 
-/**
- * 
- * @export
- * @interface GroupMemberSecurityRequestArrayWrapper
- */
 export interface GroupMemberSecurityRequestArrayWrapper {
-    /**
-     * 
-     * @type {Array<GroupMemberSecurityRequestDto>}
-     * @memberof GroupMemberSecurityRequestArrayWrapper
-     */
     'response'?: Array<GroupMemberSecurityRequestDto>;
-    /**
-     * 
-     * @type {number}
-     * @memberof GroupMemberSecurityRequestArrayWrapper
-     */
     'count'?: number;
-    /**
-     * 
-     * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof GroupMemberSecurityRequestArrayWrapper
-     */
-    'links'?: Array<ActiveConnectionsWrapperLinksInner>;
-    /**
-     * 
-     * @type {number}
-     * @memberof GroupMemberSecurityRequestArrayWrapper
-     */
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
     'status'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof GroupMemberSecurityRequestArrayWrapper
-     */
     'statusCode'?: number;
 }
 

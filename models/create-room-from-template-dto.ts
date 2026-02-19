@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -28,87 +30,50 @@ import type { WatermarkRequestDto } from './watermark-request-dto';
 
 /**
  * The parameters for creating a room from a template.
- * @export
- * @interface CreateRoomFromTemplateDto
  */
 export interface CreateRoomFromTemplateDto {
     /**
      * The template ID from which the room to be created.
-     * @type {number}
-     * @memberof CreateRoomFromTemplateDto
      */
     'templateId': number;
     /**
      * The room title.
-     * @type {string}
-     * @memberof CreateRoomFromTemplateDto
      */
-    'title': string | null;
-    /**
-     * 
-     * @type {LogoRequest}
-     * @memberof CreateRoomFromTemplateDto
-     */
+    'title': string;
     'logo'?: LogoRequest;
     /**
      * Specifies whether to copy a logo or not.
-     * @type {boolean}
-     * @memberof CreateRoomFromTemplateDto
      */
     'copyLogo'?: boolean;
     /**
      * The collection of tags.
-     * @type {Array<string>}
-     * @memberof CreateRoomFromTemplateDto
      */
-    'tags'?: Array<string> | null;
+    'tags'?: Array<string>;
     /**
      * The color of the room to be created.
-     * @type {string}
-     * @memberof CreateRoomFromTemplateDto
      */
-    'color'?: string | null;
+    'color'?: string;
     /**
      * The cover of the room to be created.
-     * @type {string}
-     * @memberof CreateRoomFromTemplateDto
      */
-    'cover'?: string | null;
+    'cover'?: string;
     /**
      * The room quota.
-     * @type {number}
-     * @memberof CreateRoomFromTemplateDto
      */
-    'quota'?: number | null;
+    'quota'?: number;
     /**
      * Specifies whether to create a room with indexing.
-     * @type {boolean}
-     * @memberof CreateRoomFromTemplateDto
      */
-    'indexing'?: boolean | null;
+    'indexing'?: boolean;
     /**
      * Specifies whether to deny downloads from the room.
-     * @type {boolean}
-     * @memberof CreateRoomFromTemplateDto
      */
-    'denyDownload'?: boolean | null;
-    /**
-     * 
-     * @type {RoomDataLifetimeDto}
-     * @memberof CreateRoomFromTemplateDto
-     */
+    'denyDownload'?: boolean;
     'lifetime'?: RoomDataLifetimeDto;
-    /**
-     * 
-     * @type {WatermarkRequestDto}
-     * @memberof CreateRoomFromTemplateDto
-     */
     'watermark'?: WatermarkRequestDto;
     /**
      * Specifies whether the room to be created is private or not.
-     * @type {boolean}
-     * @memberof CreateRoomFromTemplateDto
      */
-    'private'?: boolean | null;
+    'private'?: boolean;
 }
 

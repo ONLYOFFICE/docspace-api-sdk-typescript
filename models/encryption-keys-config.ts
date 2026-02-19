@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,27 +21,19 @@
 
 /**
  * The encryption keys of the editor configuration.
- * @export
- * @interface EncryptionKeysConfig
  */
 export interface EncryptionKeysConfig {
     /**
      * The crypto engine ID of the encryption key.
-     * @type {string}
-     * @memberof EncryptionKeysConfig
      */
-    'cryptoEngineId'?: string | null;
+    'cryptoEngineId'?: string;
     /**
      * The private key.
-     * @type {string}
-     * @memberof EncryptionKeysConfig
      */
-    'privateKeyEnc'?: string | null;
+    'privateKeyEnc'?: string;
     /**
      * The public key.
-     * @type {string}
-     * @memberof EncryptionKeysConfig
      */
-    'publicKey'?: string | null;
+    'publicKey'?: string;
 }
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -21,43 +23,13 @@
 import type { ActiveConnectionsDto } from './active-connections-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
-/**
- * 
- * @export
- * @interface ActiveConnectionsWrapper
- */
 export interface ActiveConnectionsWrapper {
-    /**
-     * 
-     * @type {ActiveConnectionsDto}
-     * @memberof ActiveConnectionsWrapper
-     */
     'response'?: ActiveConnectionsDto;
-    /**
-     * 
-     * @type {number}
-     * @memberof ActiveConnectionsWrapper
-     */
     'count'?: number;
-    /**
-     * 
-     * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof ActiveConnectionsWrapper
-     */
-    'links'?: Array<ActiveConnectionsWrapperLinksInner>;
-    /**
-     * 
-     * @type {number}
-     * @memberof ActiveConnectionsWrapper
-     */
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
     'status'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ActiveConnectionsWrapper
-     */
     'statusCode'?: number;
 }
 

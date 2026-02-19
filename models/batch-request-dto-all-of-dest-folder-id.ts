@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -20,7 +22,6 @@
 /**
  * @type BatchRequestDtoAllOfDestFolderId
  * The destination folder ID.
- * @export
  */
 export type BatchRequestDtoAllOfDestFolderId = number | string;
 

@@ -7,7 +7,7 @@ The file upload result.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **success** | **boolean** | Specifies if the upload operation is successful or not. | [optional] [default to undefined]
-**data** | **any** | The file upload result data. | [optional] [default to undefined]
+**data** | **any** |  | [optional] [default to undefined]
 **message** | **string** | The file upload result message. | [optional] [default to undefined]
 
 ## Example

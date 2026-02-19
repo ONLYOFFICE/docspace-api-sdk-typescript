@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,18 +21,10 @@
 
 /**
  * [0 - Owner, 1 - Member]
- * @export
- * @enum {number}
  */
 
 export const SubjectFilter = {
-    /**
-    * Owner
-    */
     Owner: 0,
-    /**
-    * Member
-    */
     Member: 1
 } as const;
 

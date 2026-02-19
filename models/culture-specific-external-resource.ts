@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,21 +21,15 @@
 
 /**
  * The external resource parameters.
- * @export
- * @interface CultureSpecificExternalResource
  */
 export interface CultureSpecificExternalResource {
     /**
      * The external resource domain.
-     * @type {string}
-     * @memberof CultureSpecificExternalResource
      */
-    'domain'?: string | null;
+    'domain'?: string;
     /**
      * The external resource entries.
-     * @type {{ [key: string]: string | null; }}
-     * @memberof CultureSpecificExternalResource
      */
-    'entries'?: { [key: string]: string | null; } | null;
+    'entries'?: { [key: string]: string; };
 }
 

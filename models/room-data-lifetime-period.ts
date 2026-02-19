@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,22 +21,11 @@
 
 /**
  * [0 - Day, 1 - Month, 2 - Year]
- * @export
- * @enum {number}
  */
 
 export const RoomDataLifetimePeriod = {
-    /**
-    * Day
-    */
     Day: 0,
-    /**
-    * Month
-    */
     Month: 1,
-    /**
-    * Year
-    */
     Year: 2
 } as const;
 

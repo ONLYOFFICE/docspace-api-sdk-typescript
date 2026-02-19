@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,14 +21,10 @@
 
 /**
  * The error response containing the human-readable error explanation.
- * @export
- * @interface ErrorResponse
  */
 export interface ErrorResponse {
     /**
      * The human-readable error explanation.
-     * @type {string}
-     * @memberof ErrorResponse
      */
     'reason'?: string;
 }

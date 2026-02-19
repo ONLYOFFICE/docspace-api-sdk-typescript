@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,26 +21,12 @@
 
 /**
  * [-14 - WebSearch, -13 - AITools, -12 - Backup, -11 - Storage]
- * @export
- * @enum {number}
  */
 
 export const TenantWalletService = {
-    /**
-    * WebSearch
-    */
     WebSearch: -14,
-    /**
-    * AITools
-    */
     AITools: -13,
-    /**
-    * Backup
-    */
     Backup: -12,
-    /**
-    * Storage
-    */
     Storage: -11
 } as const;
 

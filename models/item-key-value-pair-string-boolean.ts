@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -17,23 +19,8 @@
  */
 
 
-/**
- * 
- * @export
- * @interface ItemKeyValuePairStringBoolean
- */
 export interface ItemKeyValuePairStringBoolean {
-    /**
-     * 
-     * @type {string}
-     * @memberof ItemKeyValuePairStringBoolean
-     */
-    'key'?: string | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ItemKeyValuePairStringBoolean
-     */
+    'key'?: string;
     'value'?: boolean;
 }
 

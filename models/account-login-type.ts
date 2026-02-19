@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,22 +21,11 @@
 
 /**
  * [0 - SSO, 1 - LDAP, 2 - Standart]
- * @export
- * @enum {number}
  */
 
 export const AccountLoginType = {
-    /**
-    * SSO
-    */
     SSO: 0,
-    /**
-    * LDAP
-    */
     LDAP: 1,
-    /**
-    * Standart
-    */
     Standart: 2
 } as const;
 

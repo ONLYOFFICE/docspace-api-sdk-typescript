@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,14 +21,10 @@
 
 /**
  * The request parameters for hiding the confirmation dialog when converting.
- * @export
- * @interface HideConfirmConvertRequestDto
  */
 export interface HideConfirmConvertRequestDto {
     /**
      * Specifies whether to set the specified settings or not.
-     * @type {boolean}
-     * @memberof HideConfirmConvertRequestDto
      */
     'save'?: boolean;
 }

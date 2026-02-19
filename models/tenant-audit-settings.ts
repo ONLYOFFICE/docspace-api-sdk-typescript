@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,27 +21,16 @@
 
 /**
  * The tenant audit settings parameters.
- * @export
- * @interface TenantAuditSettings
  */
 export interface TenantAuditSettings {
     /**
      * The login history lifetime.
-     * @type {number}
-     * @memberof TenantAuditSettings
      */
     'loginHistoryLifeTime'?: number;
     /**
      * The audit trail lifetime.
-     * @type {number}
-     * @memberof TenantAuditSettings
      */
     'auditTrailLifeTime'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof TenantAuditSettings
-     */
     'lastModified'?: string;
 }
 

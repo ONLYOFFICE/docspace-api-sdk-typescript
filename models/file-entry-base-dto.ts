@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -34,135 +36,58 @@ import type { FolderType } from './folder-type';
 
 /**
  * The file entry information.
- * @export
- * @interface FileEntryBaseDto
  */
 export interface FileEntryBaseDto {
     /**
      * The file entry title.
-     * @type {string}
-     * @memberof FileEntryBaseDto
      */
-    'title'?: string | null;
-    /**
-     * 
-     * @type {FileShare}
-     * @memberof FileEntryBaseDto
-     */
+    'title'?: string;
     'access'?: FileShare;
-    /**
-     * 
-     * @type {EmployeeDto}
-     * @memberof FileEntryBaseDto
-     */
     'sharedBy'?: EmployeeDto;
-    /**
-     * 
-     * @type {EmployeeDto}
-     * @memberof FileEntryBaseDto
-     */
     'ownedBy'?: EmployeeDto;
     /**
      * Specifies if the file entry is shared via link or not.
-     * @type {boolean}
-     * @memberof FileEntryBaseDto
      */
     'shared'?: boolean;
     /**
      * Specifies if the file entry is shared for user or not.
-     * @type {boolean}
-     * @memberof FileEntryBaseDto
      */
     'sharedForUser'?: boolean;
     /**
      * Indicates whether the parent entity is shared.
-     * @type {boolean}
-     * @memberof FileEntryBaseDto
      */
     'parentShared'?: boolean;
     /**
      * The short Web URL.
-     * @type {string}
-     * @memberof FileEntryBaseDto
      */
-    'shortWebUrl'?: string | null;
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof FileEntryBaseDto
-     */
+    'shortWebUrl'?: string;
     'created'?: ApiDateTime;
-    /**
-     * 
-     * @type {EmployeeDto}
-     * @memberof FileEntryBaseDto
-     */
     'createdBy'?: EmployeeDto;
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof FileEntryBaseDto
-     */
     'updated'?: ApiDateTime;
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof FileEntryBaseDto
-     */
     'autoDelete'?: ApiDateTime;
-    /**
-     * 
-     * @type {FolderType}
-     * @memberof FileEntryBaseDto
-     */
     'rootFolderType'?: FolderType;
-    /**
-     * 
-     * @type {FolderType}
-     * @memberof FileEntryBaseDto
-     */
     'parentRoomType'?: FolderType;
-    /**
-     * 
-     * @type {EmployeeDto}
-     * @memberof FileEntryBaseDto
-     */
     'updatedBy'?: EmployeeDto;
     /**
      * Specifies if the file entry provider is specified or not.
-     * @type {boolean}
-     * @memberof FileEntryBaseDto
      */
-    'providerItem'?: boolean | null;
+    'providerItem'?: boolean;
     /**
      * The provider key of the file entry.
-     * @type {string}
-     * @memberof FileEntryBaseDto
      */
-    'providerKey'?: string | null;
+    'providerKey'?: string;
     /**
      * The provider ID of the file entry.
-     * @type {number}
-     * @memberof FileEntryBaseDto
      */
-    'providerId'?: number | null;
+    'providerId'?: number;
     /**
      * The order of the file entry.
-     * @type {string}
-     * @memberof FileEntryBaseDto
      */
-    'order'?: string | null;
+    'order'?: string;
     /**
      * Specifies if the file is a favorite or not.
-     * @type {boolean}
-     * @memberof FileEntryBaseDto
      */
-    'isFavorite'?: boolean | null;
-    /**
-     * 
-     * @type {FileEntryType}
-     * @memberof FileEntryBaseDto
-     */
+    'isFavorite'?: boolean;
     'fileEntryType'?: FileEntryType;
 }
 

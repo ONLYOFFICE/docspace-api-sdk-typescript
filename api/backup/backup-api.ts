@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -50,6 +49,58 @@ export const BackupApiAxiosParamCreator = function (configuration?: Configuratio
     
     
     return {
+        /**
+         * Cancel current backup.
+         * @summary Cancel current backup
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for cancelBackup operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/cancel-backup/
+         */
+        cancelBackup: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/backup/cancelbackup`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * Creates the backup schedule of the current portal with the parameters specified in the request.
          * @summary Create the backup schedule
@@ -731,6 +782,20 @@ export const BackupApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = BackupApiAxiosParamCreator(configuration)
     return {
         /**
+         * Cancel current backup.
+         * @summary Cancel current backup
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for cancelBackup operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/cancel-backup/
+         */
+        async cancelBackup(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.cancelBackup(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BackupApi.cancelBackup']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Creates the backup schedule of the current portal with the parameters specified in the request.
          * @summary Create the backup schedule
          * @param {BackupScheduleDto} [backupScheduleDto] 
@@ -922,6 +987,17 @@ export const BackupApiFactory = function (configuration?: Configuration, basePat
     const localVarFp = BackupApiFp(configuration)
     return {
         /**
+         * Cancel current backup.
+         * @summary Cancel current backup
+         * @param {*} [options] Override http request option.
+         * REST API Reference for cancelBackup operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/cancel-backup/
+         * @throws {RequiredError}
+         */
+        cancelBackup(options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.cancelBackup(options).then((request) => request(axios, basePath));
+        },
+        /**
          * Creates the backup schedule of the current portal with the parameters specified in the request.
          * @summary Create the backup schedule
          * @param {BackupScheduleDto} [backupScheduleDto] 
@@ -1076,6 +1152,17 @@ export const BackupApiFactory = function (configuration?: Configuration, basePat
  * @extends {BaseAPI}
  */
 export class BackupApi extends BaseAPI {
+    /**
+     * Cancel current backup.
+     * @summary Cancel current backup
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BackupApi
+     */
+    public cancelBackup(options?: RawAxiosRequestConfig) {
+        return BackupApiFp(this.configuration).cancelBackup(options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * Creates the backup schedule of the current portal with the parameters specified in the request.
      * @summary Create the backup schedule

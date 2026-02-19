@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,21 +24,15 @@ import type { ActiveConnectionsItemDto } from './active-connections-item-dto';
 
 /**
  * The active connections parameters.
- * @export
- * @interface ActiveConnectionsDto
  */
 export interface ActiveConnectionsDto {
     /**
      * The login event.
-     * @type {number}
-     * @memberof ActiveConnectionsDto
      */
     'loginEvent': number;
     /**
      * The list of active connection items.
-     * @type {Array<ActiveConnectionsItemDto>}
-     * @memberof ActiveConnectionsDto
      */
-    'items'?: Array<ActiveConnectionsItemDto> | null;
+    'items'?: Array<ActiveConnectionsItemDto>;
 }
 

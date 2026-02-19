@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,15 +24,8 @@ import type { WatermarkOnDraw } from './watermark-on-draw';
 
 /**
  * The document options.
- * @export
- * @interface Options
  */
 export interface Options {
-    /**
-     * 
-     * @type {WatermarkOnDraw}
-     * @memberof Options
-     */
     'watermark_on_draw'?: WatermarkOnDraw;
 }
 

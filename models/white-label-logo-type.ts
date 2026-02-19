@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -18,28 +20,26 @@
 
 
 /**
- * 
- * @export
- * @enum {number}
+ * [1 - Light small, 2 - Login page, 3 - Favicon, 4 - Docs editor, 5 - Docs editor embed, 6 - Left menu, 7 - About page, 8 - Notification, 9 - Spreadsheet editor, 10 - Spreadsheet editor embed, 11 - Presentation editor, 12 - Presentation editor embed, 13 - Pdf editor, 14 - Pdf editor embed, 15 - Diagram editor, 16 - Diagram editor embed]
  */
 
 export const WhiteLabelLogoType = {
-    NUMBER_1: 1,
-    NUMBER_2: 2,
-    NUMBER_3: 3,
-    NUMBER_4: 4,
-    NUMBER_5: 5,
-    NUMBER_6: 6,
-    NUMBER_7: 7,
-    NUMBER_8: 8,
-    NUMBER_9: 9,
-    NUMBER_10: 10,
-    NUMBER_11: 11,
-    NUMBER_12: 12,
-    NUMBER_13: 13,
-    NUMBER_14: 14,
-    NUMBER_15: 15,
-    NUMBER_16: 16
+    LightSmall: 1,
+    LoginPage: 2,
+    Favicon: 3,
+    DocsEditor: 4,
+    DocsEditorEmbed: 5,
+    LeftMenu: 6,
+    AboutPage: 7,
+    Notification: 8,
+    SpreadsheetEditor: 9,
+    SpreadsheetEditorEmbed: 10,
+    PresentationEditor: 11,
+    PresentationEditorEmbed: 12,
+    PdfEditor: 13,
+    PdfEditorEmbed: 14,
+    DiagramEditor: 15,
+    DiagramEditorEmbed: 16
 } as const;
 
 export type WhiteLabelLogoType = typeof WhiteLabelLogoType[keyof typeof WhiteLabelLogoType];

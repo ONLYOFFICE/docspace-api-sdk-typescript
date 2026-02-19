@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,26 +21,18 @@
 
 /**
  * The account information parameters.
- * @export
- * @interface AccountInfoDto
  */
 export interface AccountInfoDto {
     /**
      * The account provider.
-     * @type {string}
-     * @memberof AccountInfoDto
      */
-    'provider': string | null;
+    'provider': string;
     /**
      * The account URL.
-     * @type {string}
-     * @memberof AccountInfoDto
      */
-    'url': string | null;
+    'url': string;
     /**
      * Specifies if an account is linked with other profiles or not.
-     * @type {boolean}
-     * @memberof AccountInfoDto
      */
     'linked': boolean;
 }

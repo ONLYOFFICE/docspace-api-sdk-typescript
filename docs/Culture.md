@@ -1,12 +1,12 @@
 # Culture
 
-The culture code parameters.
+The culture name parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cultureName** | **string** | The user language. | [optional] [default to undefined]
+**cultureName** | **string** | The user culture name (en-US, de, fr, es, ...). | [default to undefined]
 
 ## Example
 

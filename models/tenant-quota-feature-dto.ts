@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,51 +24,29 @@ import type { FeatureUsedDto } from './feature-used-dto';
 
 /**
  * The tenant quota feature parameters.
- * @export
- * @interface TenantQuotaFeatureDto
  */
 export interface TenantQuotaFeatureDto {
     /**
      * The ID of the tenant quota feature.
-     * @type {string}
-     * @memberof TenantQuotaFeatureDto
      */
-    'id'?: string | null;
+    'id'?: string;
     /**
      * The title of the tenant quota feature.
-     * @type {string}
-     * @memberof TenantQuotaFeatureDto
      */
-    'title'?: string | null;
+    'title'?: string;
     /**
      * The image URL of the tenant quota feature.
-     * @type {string}
-     * @memberof TenantQuotaFeatureDto
      */
-    'image'?: string | null;
-    /**
-     * The value of the tenant quota feature.
-     * @type {any}
-     * @memberof TenantQuotaFeatureDto
-     */
-    'value'?: any | null;
+    'image'?: string;
+    'value'?: any;
     /**
      * The type of the tenant quota feature.
-     * @type {string}
-     * @memberof TenantQuotaFeatureDto
      */
-    'type'?: string | null;
-    /**
-     * 
-     * @type {FeatureUsedDto}
-     * @memberof TenantQuotaFeatureDto
-     */
+    'type'?: string;
     'used'?: FeatureUsedDto;
     /**
      * The price title of the tenant quota feature.
-     * @type {string}
-     * @memberof TenantQuotaFeatureDto
      */
-    'priceTitle'?: string | null;
+    'priceTitle'?: string;
 }
 

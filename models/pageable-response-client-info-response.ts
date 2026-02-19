@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,32 +21,22 @@
 
 /**
  * The response containing paginated client information.
- * @export
- * @interface PageableResponseClientInfoResponse
  */
 export interface PageableResponseClientInfoResponse {
     /**
      * The paginated client data.
-     * @type {object}
-     * @memberof PageableResponseClientInfoResponse
      */
     'data'?: object;
     /**
      * The maximum number of results returned per page.
-     * @type {number}
-     * @memberof PageableResponseClientInfoResponse
      */
     'limit'?: number;
     /**
      * The identifier of the last retrieved client.
-     * @type {string}
-     * @memberof PageableResponseClientInfoResponse
      */
     'last_client_id'?: string;
     /**
      * The creation date of the last retrieved client.
-     * @type {string}
-     * @memberof PageableResponseClientInfoResponse
      */
     'last_created_on'?: string;
 }

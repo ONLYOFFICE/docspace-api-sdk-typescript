@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,20 +21,14 @@
 
 /**
  * The parameters for deleting a file.
- * @export
- * @interface Delete
  */
 export interface Delete {
     /**
      * Specifies whether to delete a file after the editing session is finished or not.
-     * @type {boolean}
-     * @memberof Delete
      */
     'deleteAfter'?: boolean;
     /**
      * Specifies whether to move a file to the \\Trash\\ folder or delete it immediately.
-     * @type {boolean}
-     * @memberof Delete
      */
     'immediately'?: boolean;
 }

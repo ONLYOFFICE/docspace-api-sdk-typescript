@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **extsWebCommented** | **Array&lt;string&gt;** | The list of extensions of the commented files. | [optional] [default to undefined]
 **extsWebTemplate** | **Array&lt;string&gt;** | The list of extensions of the template files. | [optional] [default to undefined]
 **extsMustConvert** | **Array&lt;string&gt;** | The list of extensions of the files that must be converted. | [optional] [default to undefined]
-**extsConvertible** | **{ [key: string]: Array&lt;string&gt; | null; }** | The list of the convertible extensions. | [optional] [default to undefined]
+**extsConvertible** | **{ [key: string]: Array&lt;string&gt;; }** | The list of the convertible extensions. | [optional] [default to undefined]
 **extsUploadable** | **Array&lt;string&gt;** | The list of the uploadable extensions. | [optional] [default to undefined]
 **extsArchive** | **Array&lt;string&gt;** | The list of extensions of the archive files. | [optional] [default to undefined]
 **extsVideo** | **Array&lt;string&gt;** | The list of the video extensions. | [optional] [default to undefined]
@@ -63,6 +63,7 @@ Name | Type | Description | Notes
 **maxUploadThreadCount** | **number** | The maximum number of upload threads. | [optional] [default to undefined]
 **chunkUploadSize** | **number** | The size of a large file that is uploaded in chunks. | [optional] [default to undefined]
 **openEditorInSameTab** | **boolean** | Specifies whether to open the editor in the same tab or not. | [optional] [default to undefined]
+**organizeRoomsGrouping** | **boolean** | Specifies whether the grouping of rooms is enabled or not. | [optional] [default to undefined]
 **extsFilesVectorized** | **Array&lt;string&gt;** | List of extensions available for vectorization | [optional] [default to undefined]
 **maxVectorizationFileSize** | **number** | The maximum file size for vectorization | [optional] [default to undefined]
 
@@ -129,6 +130,7 @@ const instance: FilesSettingsDto = {
     maxUploadThreadCount,
     chunkUploadSize,
     openEditorInSameTab,
+    organizeRoomsGrouping,
     extsFilesVectorized,
     maxVectorizationFileSize,
 };

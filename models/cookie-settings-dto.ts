@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,20 +21,14 @@
 
 /**
  * The cookie settings.
- * @export
- * @interface CookieSettingsDto
  */
 export interface CookieSettingsDto {
     /**
      * The cookie lifetime value in minutes.
-     * @type {number}
-     * @memberof CookieSettingsDto
      */
     'lifeTime': number;
     /**
      * Specifies if the cookie settings are enabled or not.
-     * @type {boolean}
-     * @memberof CookieSettingsDto
      */
     'enabled': boolean;
 }

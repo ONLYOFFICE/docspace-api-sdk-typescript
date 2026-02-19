@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,22 +21,11 @@
 
 /**
  * [0 - None, 1 - Sms, 2 - App]
- * @export
- * @enum {number}
  */
 
 export const TfaRequestsDtoType = {
-    /**
-    * None
-    */
     None: 0,
-    /**
-    * Sms
-    */
     Sms: 1,
-    /**
-    * App
-    */
     App: 2
 } as const;
 

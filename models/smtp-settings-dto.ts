@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,68 +21,46 @@
 
 /**
  * The SMTP settings parameters.
- * @export
- * @interface SmtpSettingsDto
  */
 export interface SmtpSettingsDto {
     /**
      * The SMTP host.
-     * @type {string}
-     * @memberof SmtpSettingsDto
      */
-    'host'?: string | null;
+    'host'?: string;
     /**
      * The SMTP port.
-     * @type {number}
-     * @memberof SmtpSettingsDto
      */
-    'port'?: number | null;
+    'port'?: number;
     /**
      * The sender address.
-     * @type {string}
-     * @memberof SmtpSettingsDto
      */
-    'senderAddress'?: string | null;
+    'senderAddress'?: string;
     /**
      * The sender display name.
-     * @type {string}
-     * @memberof SmtpSettingsDto
      */
-    'senderDisplayName'?: string | null;
+    'senderDisplayName'?: string;
     /**
      * The credentials username.
-     * @type {string}
-     * @memberof SmtpSettingsDto
      */
-    'credentialsUserName'?: string | null;
+    'credentialsUserName'?: string;
     /**
      * The credentials user password.
-     * @type {string}
-     * @memberof SmtpSettingsDto
      */
-    'credentialsUserPassword'?: string | null;
+    'credentialsUserPassword'?: string;
     /**
      * Specifies whether the SSL is enabled or not.
-     * @type {boolean}
-     * @memberof SmtpSettingsDto
      */
     'enableSSL'?: boolean;
     /**
      * Specifies whether the authentication is enabled or not.
-     * @type {boolean}
-     * @memberof SmtpSettingsDto
      */
     'enableAuth'?: boolean;
     /**
      * Specifies whether to use NTLM or not.
-     * @type {boolean}
-     * @memberof SmtpSettingsDto
      */
     'useNtlm'?: boolean;
     /**
      * Specifies if the current settings are default or not.
-     * @type {boolean}
-     * @memberof SmtpSettingsDto
      */
     'isDefaultSettings'?: boolean;
 }

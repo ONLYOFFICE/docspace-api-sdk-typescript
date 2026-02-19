@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -18,46 +20,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
+import type { EmployeeFullDto } from './employee-full-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { EmployeeFullDto } from './employee-full-dto';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
-/**
- * 
- * @export
- * @interface EmployeeFullArrayWrapper
- */
 export interface EmployeeFullArrayWrapper {
-    /**
-     * 
-     * @type {Array<EmployeeFullDto>}
-     * @memberof EmployeeFullArrayWrapper
-     */
     'response'?: Array<EmployeeFullDto>;
-    /**
-     * 
-     * @type {number}
-     * @memberof EmployeeFullArrayWrapper
-     */
     'count'?: number;
-    /**
-     * 
-     * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof EmployeeFullArrayWrapper
-     */
-    'links'?: Array<ActiveConnectionsWrapperLinksInner>;
-    /**
-     * 
-     * @type {number}
-     * @memberof EmployeeFullArrayWrapper
-     */
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
     'status'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof EmployeeFullArrayWrapper
-     */
     'statusCode'?: number;
 }
 

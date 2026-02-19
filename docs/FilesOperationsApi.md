@@ -4,6 +4,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
+|[**abortUploadSession**](#abortuploadsession) | **DELETE** /api/2.0/files/{folderId}/session/{sessionId} | Aborts an in-progress file upload session.|
 |[**addFavorites**](#addfavorites) | **POST** /api/2.0/files/favorites | Add favorite files and folders|
 |[**bulkDownload**](#bulkdownload) | **PUT** /api/2.0/files/fileops/bulkdownload | Bulk download|
 |[**checkConversionStatus**](#checkconversionstatus) | **GET** /api/2.0/files/file/{fileId}/checkconversion | Get conversion status|
@@ -11,11 +12,13 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**checkMoveOrCopyDestFolder**](#checkmoveorcopydestfolder) | **GET** /api/2.0/files/fileops/checkdestfolder | Check for moving or copying files to a folder|
 |[**copyBatchItems**](#copybatchitems) | **PUT** /api/2.0/files/fileops/copy | Copy to the folder|
 |[**createUploadSession**](#createuploadsession) | **POST** /api/2.0/files/{folderId}/upload/create_session | Chunked upload|
+|[**createUploadSessionInFolder**](#createuploadsessioninfolder) | **POST** /api/2.0/files/{folderId}/session | Creates a session for uploading a file to a specific folder in chunks.|
 |[**deleteBatchItems**](#deletebatchitems) | **PUT** /api/2.0/files/fileops/delete | Delete files and folders|
 |[**deleteFavoritesFromBody**](#deletefavoritesfrombody) | **DELETE** /api/2.0/files/favorites | Delete favorite files and folders (using body parameters)|
 |[**deleteFileVersions**](#deletefileversions) | **PUT** /api/2.0/files/fileops/deleteversion | Delete file versions|
 |[**duplicateBatchItems**](#duplicatebatchitems) | **PUT** /api/2.0/files/fileops/duplicate | Duplicate files and folders|
 |[**emptyTrash**](#emptytrash) | **PUT** /api/2.0/files/fileops/emptytrash | Empty the Trash folder|
+|[**finalizeSession**](#finalizesession) | **PUT** /api/2.0/files/{folderId}/session/{sessionId}/finalize | Finalize an upload session|
 |[**getOperationStatuses**](#getoperationstatuses) | **GET** /api/2.0/files/fileops | Get active file operations|
 |[**getOperationStatusesByType**](#getoperationstatusesbytype) | **GET** /api/2.0/files/fileops/{operationType} | Get file operation statuses|
 |[**markAsRead**](#markasread) | **PUT** /api/2.0/files/fileops/markasread | Mark as read|
@@ -23,6 +26,65 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**startFileConversion**](#startfileconversion) | **PUT** /api/2.0/files/file/{fileId}/checkconversion | Start file conversion|
 |[**terminateTasks**](#terminatetasks) | **PUT** /api/2.0/files/fileops/terminate/{id} | Finish active operations|
 |[**updateFileComment**](#updatefilecomment) | **PUT** /api/2.0/files/file/{fileId}/comment | Update a comment|
+|[**uploadAsyncSession**](#uploadasyncsession) | **POST** /api/2.0/files/{folderId}/session/{sessionId}/upload | Handles the upload of a chunk for an existing upload session.|
+|[**uploadSession**](#uploadsession) | **POST** /api/2.0/files/{folderId}/session/{sessionId} | Resumes an ongoing file upload session for uploading additional chunks of data.|
+
+# **abortUploadSession**
+> abortUploadSession()
+
+This method allows users to cancel an ongoing upload session identified by the session ID.  Once the session is aborted, the associated resources will be cleaned up, and the session will no longer accept further uploads.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/abort-upload-session/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **sessionId** | [**string**] |  | defaults to undefined|
+| **folderId** | [**number**] |  | defaults to undefined|
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    FilesOperationsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new FilesOperationsApi(configuration);
+
+let sessionId: string; // (default to undefined)
+let folderId: number; // (default to undefined)
+
+const { status, data } = await apiInstance.abortUploadSession(
+    sessionId,
+    folderId
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | OK |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **addFavorites**
 > BooleanWrapper addFavorites()
@@ -75,8 +137,8 @@ const { status, data } = await apiInstance.addFavorites(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Boolean value: true if the operation is successful |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -243,8 +305,8 @@ const { status, data } = await apiInstance.checkMoveOrCopyBatchItems(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of file entry information |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to create |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -299,8 +361,8 @@ const { status, data } = await apiInstance.checkMoveOrCopyDestFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Result |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to create |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -355,15 +417,15 @@ const { status, data } = await apiInstance.copyBatchItems(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of file operations |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to copy |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **createUploadSession**
-> ObjectWrapper createUploadSession(sessionRequest)
+> ChunkedUploadSessionResponseWrapperIntegerWrapper createUploadSession(sessionRequest)
 
-Creates the session to upload large files in multiple chunks to the folder with the ID specified in the request.   **Note**: Each chunk can have different length but the length should be multiple of <b>512</b> and greater or equal to <b>10 mb</b>. Last chunk can have any size.  After the initial response to the request with the <b>200 OK</b> status, you must get the <em>location</em> field value from the response. Send all your chunks to this location.  Each chunk must be sent in the exact order the chunks appear in the file.  After receiving each chunk, the server will respond with the current information about the upload session if no errors occurred.  When the number of bytes uploaded is equal to the number of bytes you sent in the initial request, the server responds with the <b>201 Created</b> status and sends you information about the uploaded file.  Information about created session which includes:  <ul>  <li><b>id:</b> unique ID of this upload session,</li>  <li><b>created:</b> UTC time when the session was created,</li>  <li><b>expired:</b> UTC time when the session will expire if no chunks are sent before that time,</li>  <li><b>location:</b> URL where you should send your next chunk,</li>  <li><b>bytes_uploaded:</b> number of bytes uploaded for the specific upload ID,</li>  <li><b>bytes_total:</b> total number of bytes which will be uploaded.</li>  </ul>
+Creates the session to upload large files in multiple chunks to the folder with the ID specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session/).
 
@@ -377,7 +439,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-**ObjectWrapper**
+**ChunkedUploadSessionResponseWrapperIntegerWrapper**
 
 ### Authorization
 
@@ -414,8 +476,66 @@ const { status, data } = await apiInstance.createUploadSession(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Information about created session |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to create |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **createUploadSessionInFolder**
+> ChunkedUploadSessionResponseIntegerWrapper createUploadSessionInFolder(sessionRequest)
+
+The session allows the user to upload a file in smaller chunks to the folder identified by its ID.  The file information, such as name, size, and additional metadata, must be provided in the request.  This method facilitates large file upload scenarios by enabling chunked file uploads.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session-in-folder/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **sessionRequest** | **SessionRequest**| The session parameters. | |
+| **folderId** | [**number**] | The session folder ID. | defaults to undefined|
+
+
+### Return type
+
+**ChunkedUploadSessionResponseIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    FilesOperationsApi,
+    Configuration,
+    SessionRequest
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new FilesOperationsApi(configuration);
+
+let folderId: number; //The session folder ID. (default to undefined)
+let sessionRequest: SessionRequest; //The session parameters.
+
+const { status, data } = await apiInstance.createUploadSessionInFolder(
+    folderId,
+    sessionRequest
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | OK |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -470,8 +590,8 @@ const { status, data } = await apiInstance.deleteBatchItems(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of file operations |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to delete |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -636,8 +756,8 @@ const { status, data } = await apiInstance.duplicateBatchItems(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of file operations |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to duplicate |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -691,6 +811,63 @@ const { status, data } = await apiInstance.emptyTrash(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of file operations |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **finalizeSession**
+> UploadSessionResponseIntegerWrapper finalizeSession()
+
+Finalizes the upload session by processing the uploaded file chunks and marking the upload as complete.  This method consolidates chunked uploads into a complete file if required, sends notifications about the upload event,  and performs any additional cleanup or related actions, such as socket updates and webhook publishing.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/finalize-session/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **folderId** | [**number**] |  | defaults to undefined|
+| **sessionId** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**UploadSessionResponseIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    FilesOperationsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new FilesOperationsApi(configuration);
+
+let folderId: number; // (default to undefined)
+let sessionId: string; // (default to undefined)
+
+const { status, data } = await apiInstance.finalizeSession(
+    folderId,
+    sessionId
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | OK |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -910,8 +1087,8 @@ const { status, data } = await apiInstance.moveBatchItems(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of file operations |  -  |
-|**401** | Unauthorized |  -  |
 |**403** | You don\&#39;t have enough permission to move |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1080,6 +1257,129 @@ const { status, data } = await apiInstance.updateFileComment(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Updated comment |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **uploadAsyncSession**
+> ChunkedUploadSessionResponseIntegerWrapper uploadAsyncSession()
+
+This method allows the caller to upload a specific chunk of a file to an ongoing upload session.  The session is identified by the session ID provided in the request. The chunk can be of any size  within the limits allowed during the session initialization. Each chunk must be uploaded in the  correct order for the server to process it appropriately.  The server updates the upload session status and stores the progress information after processing  each chunk. The updated session details are returned in the response.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-async-session/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **folderId** | [**number**] |  | defaults to undefined|
+| **sessionId** | [**string**] |  | defaults to undefined|
+| **chunkNumber** | [**number**] |  | (optional) defaults to undefined|
+| **file** | [**File**] |  | (optional) defaults to undefined|
+
+
+### Return type
+
+**ChunkedUploadSessionResponseIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    FilesOperationsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new FilesOperationsApi(configuration);
+
+let folderId: number; // (default to undefined)
+let sessionId: string; // (default to undefined)
+let chunkNumber: number; // (optional) (default to undefined)
+let file: File; // (optional) (default to undefined)
+
+const { status, data } = await apiInstance.uploadAsyncSession(
+    folderId,
+    sessionId,
+    chunkNumber,
+    file
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | OK |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **uploadSession**
+> UploadSessionResponseIntegerWrapper uploadSession()
+
+This method allows continuing an interrupted or partially completed file upload session by uploading subsequent data chunks.  The server will validate each uploaded chunk, update the session state, and respond with the status of the current upload. Once  the total bytes uploaded match the total file size, the file upload process is finalized and related events are triggered.  If the file is newly uploaded, the server responds with a 201 Created status upon completion. If it overwrites an existing file,  versioning information is updated accordingly. The method also triggers associated webhooks and socket notifications to reflect  the updated file state.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-session/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **folderId** | [**number**] |  | defaults to undefined|
+| **sessionId** | [**string**] |  | defaults to undefined|
+| **file** | [**File**] |  | (optional) defaults to undefined|
+
+
+### Return type
+
+**UploadSessionResponseIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    FilesOperationsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new FilesOperationsApi(configuration);
+
+let folderId: number; // (default to undefined)
+let sessionId: string; // (default to undefined)
+let file: File; // (optional) (default to undefined)
+
+const { status, data } = await apiInstance.uploadSession(
+    folderId,
+    sessionId,
+    file
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | OK |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

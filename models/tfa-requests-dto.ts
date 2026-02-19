@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,40 +24,25 @@ import type { TfaRequestsDtoType } from './tfa-requests-dto-type';
 
 /**
  * The request parameters for configuring the Two-Factor Authentication (TFA) settings.
- * @export
- * @interface TfaRequestsDto
  */
 export interface TfaRequestsDto {
-    /**
-     * 
-     * @type {TfaRequestsDtoType}
-     * @memberof TfaRequestsDto
-     */
     'type'?: TfaRequestsDtoType;
     /**
      * The ID of the user for whom the TFA settings are being configured.
-     * @type {string}
-     * @memberof TfaRequestsDto
      */
     'id'?: string;
     /**
      * The list of IP addresses that bypass TFA verification.
-     * @type {Array<string>}
-     * @memberof TfaRequestsDto
      */
-    'trustedIps'?: Array<string> | null;
+    'trustedIps'?: Array<string>;
     /**
      * The list of user IDs for whom TFA is mandatory.
-     * @type {Array<string>}
-     * @memberof TfaRequestsDto
      */
-    'mandatoryUsers'?: Array<string> | null;
+    'mandatoryUsers'?: Array<string>;
     /**
      * The list group IDs whose members must use TFA.
-     * @type {Array<string>}
-     * @memberof TfaRequestsDto
      */
-    'mandatoryGroups'?: Array<string> | null;
+    'mandatoryGroups'?: Array<string>;
 }
 
 

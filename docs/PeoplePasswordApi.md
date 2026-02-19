@@ -8,7 +8,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**sendUserPassword**](#senduserpassword) | **POST** /api/2.0/people/password | Remind a user password|
 
 # **changeUserPassword**
-> EmployeeFullWrapper changeUserPassword(memberBaseRequestDto)
+> EmployeeFullWrapper changeUserPassword(changePasswordRequest)
 
 Sets a new password to the user with the ID specified in the request.
 
@@ -18,7 +18,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **memberBaseRequestDto** | **MemberBaseRequestDto**| The request parameters for the user generic information. | |
+| **changePasswordRequest** | **ChangePasswordRequest**| The request parameters for updating a user password. | |
 | **userid** | [**string**] | The user ID. | defaults to undefined|
 
 
@@ -36,18 +36,18 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     PeoplePasswordApi,
     Configuration,
-    MemberBaseRequestDto
+    ChangePasswordRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PeoplePasswordApi(configuration);
 
 let userid: string; //The user ID. (default to undefined)
-let memberBaseRequestDto: MemberBaseRequestDto; //The request parameters for the user generic information.
+let changePasswordRequest: ChangePasswordRequest; //The request parameters for updating a user password.
 
 const { status, data } = await apiInstance.changeUserPassword(
     userid,
-    memberBaseRequestDto
+    changePasswordRequest
 );
 ```
 
@@ -61,10 +61,10 @@ const { status, data } = await apiInstance.changeUserPassword(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Detailed user information |  -  |
-|**400** | Incorrect email |  -  |
+|**400** | Incorrect userId or password |  -  |
+|**403** | The link is invalid or no permissions to perform this action |  -  |
+|**404** | The user could not be found |  -  |
 |**401** | Unauthorized |  -  |
-|**403** | The invitation link is invalid or its validity has expired |  -  |
-|**404** | User not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

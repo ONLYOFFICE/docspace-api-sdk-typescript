@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,20 +21,14 @@
 
 /**
  * The public settings of the room template to set.
- * @export
- * @interface SetPublicDto
  */
 export interface SetPublicDto {
     /**
      * The room template ID.
-     * @type {number}
-     * @memberof SetPublicDto
      */
     'id': number;
     /**
      * Specifies whether the room template is public or not.
-     * @type {boolean}
-     * @memberof SetPublicDto
      */
     'public'?: boolean;
 }

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,15 +24,8 @@ import type { AdditionalWhiteLabelSettings } from './additional-white-label-sett
 
 /**
  * The additional white label settings wrapper.
- * @export
- * @interface AdditionalWhiteLabelSettingsWrapper
  */
 export interface AdditionalWhiteLabelSettingsWrapper {
-    /**
-     * 
-     * @type {AdditionalWhiteLabelSettings}
-     * @memberof AdditionalWhiteLabelSettingsWrapper
-     */
     'settings'?: AdditionalWhiteLabelSettings;
 }
 

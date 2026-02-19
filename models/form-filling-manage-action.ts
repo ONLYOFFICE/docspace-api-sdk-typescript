@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,18 +21,10 @@
 
 /**
  * [0 - Stop, 1 - Resume]
- * @export
- * @enum {number}
  */
 
 export const FormFillingManageAction = {
-    /**
-    * Stop
-    */
     Stop: 0,
-    /**
-    * Resume
-    */
     Resume: 1
 } as const;
 

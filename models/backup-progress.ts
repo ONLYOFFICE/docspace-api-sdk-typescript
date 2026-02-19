@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,61 +21,20 @@
 // May contain unused imports in some cases
 // @ts-ignore
 import type { BackupProgressEnum } from './backup-progress-enum';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { DistributedTaskStatus } from './distributed-task-status';
 
-/**
- * 
- * @export
- * @interface BackupProgress
- */
 export interface BackupProgress {
-    /**
-     * 
-     * @type {boolean}
-     * @memberof BackupProgress
-     */
     'isCompleted'?: boolean;
-    /**
-     * 
-     * @type {number}
-     * @memberof BackupProgress
-     */
     'progress'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof BackupProgress
-     */
-    'error'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof BackupProgress
-     */
-    'warning'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof BackupProgress
-     */
-    'link'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof BackupProgress
-     */
+    'error'?: string;
+    'warning'?: string;
+    'link'?: string;
     'tenantId'?: number;
-    /**
-     * 
-     * @type {BackupProgressEnum}
-     * @memberof BackupProgress
-     */
     'backupProgressEnum'?: BackupProgressEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof BackupProgress
-     */
-    'taskId'?: string | null;
+    'status'?: DistributedTaskStatus;
+    'taskId'?: string;
 }
 
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,20 +21,14 @@
 
 /**
  * The request parameters for managing the DNS (Domain Name System) settings.
- * @export
- * @interface DnsSettingsRequestsDto
  */
 export interface DnsSettingsRequestsDto {
     /**
      * The DNS (Domain Name System) configuration name.
-     * @type {string}
-     * @memberof DnsSettingsRequestsDto
      */
-    'dnsName'?: string | null;
+    'dnsName'?: string;
     /**
      * Specifies whether the DNS settings are enabled.
-     * @type {boolean}
-     * @memberof DnsSettingsRequestsDto
      */
     'enable'?: boolean;
 }

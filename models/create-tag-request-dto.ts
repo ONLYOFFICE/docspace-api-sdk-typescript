@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,15 +21,11 @@
 
 /**
  * The request parameters for creating a tag.
- * @export
- * @interface CreateTagRequestDto
  */
 export interface CreateTagRequestDto {
     /**
      * The tag name.
-     * @type {string}
-     * @memberof CreateTagRequestDto
      */
-    'name': string | null;
+    'name': string;
 }
 

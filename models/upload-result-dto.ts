@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,27 +21,16 @@
 
 /**
  * The upload result parameters.
- * @export
- * @interface UploadResultDto
  */
 export interface UploadResultDto {
     /**
      * Specifies if the upload operation is successful or not.
-     * @type {boolean}
-     * @memberof UploadResultDto
      */
     'success'?: boolean;
-    /**
-     * The uploaded data.
-     * @type {any}
-     * @memberof UploadResultDto
-     */
-    'data'?: any | null;
+    'data'?: any;
     /**
      * The message sent after the successful upload operation.
-     * @type {string}
-     * @memberof UploadResultDto
      */
-    'message'?: string | null;
+    'message'?: string;
 }
 

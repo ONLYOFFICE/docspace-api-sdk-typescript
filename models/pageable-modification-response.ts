@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,26 +21,18 @@
 
 /**
  * The response containing paginated modification information.
- * @export
- * @interface PageableModificationResponse
  */
 export interface PageableModificationResponse {
     /**
      * The paginated modification data.
-     * @type {object}
-     * @memberof PageableModificationResponse
      */
     'data'?: object;
     /**
      * The maximum number of results returned per page.
-     * @type {number}
-     * @memberof PageableModificationResponse
      */
     'limit'?: number;
     /**
      * The date when the user consent was last modified.
-     * @type {string}
-     * @memberof PageableModificationResponse
      */
     'last_modified_on'?: string;
 }

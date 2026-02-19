@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -17,34 +19,21 @@
  */
 
 
-/**
- * 
- * @export
- * @interface ExchangeToken200Response
- */
 export interface ExchangeToken200Response {
     /**
      * The access token issued by the authorization server.
-     * @type {string}
-     * @memberof ExchangeToken200Response
      */
     'access_token'?: string;
     /**
      * The type of token issued, typically \'Bearer\'.
-     * @type {string}
-     * @memberof ExchangeToken200Response
      */
     'token_type'?: string;
     /**
      * The number of seconds until the access token expires.
-     * @type {number}
-     * @memberof ExchangeToken200Response
      */
     'expires_in'?: number;
     /**
      * The token used to obtain a new access token when the current one expires.
-     * @type {string}
-     * @memberof ExchangeToken200Response
      */
     'refresh_token'?: string;
 }

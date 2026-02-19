@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,20 +21,14 @@
 
 /**
  * The API date and time parameters.
- * @export
- * @interface ApiDateTime
  */
 export interface ApiDateTime {
     /**
      * The time in UTC format.
-     * @type {string}
-     * @memberof ApiDateTime
      */
     'utcTime'?: string;
     /**
      * The time zone offset.
-     * @type {string}
-     * @memberof ApiDateTime
      */
     'timeZoneOffset'?: string;
 }

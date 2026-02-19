@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -31,75 +33,39 @@ import type { WatermarkRequestDto } from './watermark-request-dto';
 
 /**
  * The request parameters for updating a room.
- * @export
- * @interface UpdateRoomRequest
  */
 export interface UpdateRoomRequest {
     /**
      * The room title.
-     * @type {string}
-     * @memberof UpdateRoomRequest
      */
-    'title'?: string | null;
+    'title'?: string;
     /**
      * The room quota.
-     * @type {number}
-     * @memberof UpdateRoomRequest
      */
-    'quota'?: number | null;
+    'quota'?: number;
     /**
      * Specifies whether to create a third-party room with indexing.
-     * @type {boolean}
-     * @memberof UpdateRoomRequest
      */
-    'indexing'?: boolean | null;
+    'indexing'?: boolean;
     /**
      * Specifies whether to deny downloads from the third-party room.
-     * @type {boolean}
-     * @memberof UpdateRoomRequest
      */
-    'denyDownload'?: boolean | null;
-    /**
-     * 
-     * @type {RoomDataLifetimeDto}
-     * @memberof UpdateRoomRequest
-     */
+    'denyDownload'?: boolean;
     'lifetime'?: RoomDataLifetimeDto;
-    /**
-     * 
-     * @type {WatermarkRequestDto}
-     * @memberof UpdateRoomRequest
-     */
     'watermark'?: WatermarkRequestDto;
-    /**
-     * 
-     * @type {LogoRequest}
-     * @memberof UpdateRoomRequest
-     */
     'logo'?: LogoRequest;
     /**
      * The list of tags.
-     * @type {Array<string>}
-     * @memberof UpdateRoomRequest
      */
-    'tags'?: Array<string> | null;
+    'tags'?: Array<string>;
     /**
      * The room color.
-     * @type {string}
-     * @memberof UpdateRoomRequest
      */
-    'color'?: string | null;
+    'color'?: string;
     /**
      * The room cover.
-     * @type {string}
-     * @memberof UpdateRoomRequest
      */
-    'cover'?: string | null;
-    /**
-     * 
-     * @type {ChatSettings}
-     * @memberof UpdateRoomRequest
-     */
+    'cover'?: string;
     'chatSettings'?: ChatSettings;
 }
 

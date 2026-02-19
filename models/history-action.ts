@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,22 +24,10 @@ import type { MessageAction } from './message-action';
 
 /**
  * The action performed on the file.
- * @export
- * @interface HistoryAction
  */
 export interface HistoryAction {
-    /**
-     * 
-     * @type {MessageAction}
-     * @memberof HistoryAction
-     */
     'id'?: MessageAction;
-    /**
-     * 
-     * @type {string}
-     * @memberof HistoryAction
-     */
-    'key'?: string | null;
+    'key'?: string;
 }
 
 

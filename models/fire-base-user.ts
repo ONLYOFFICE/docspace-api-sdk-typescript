@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,51 +24,32 @@ import type { DbTenant } from './db-tenant';
 
 /**
  * The Firebase user parameters.
- * @export
- * @interface FireBaseUser
  */
 export interface FireBaseUser {
     /**
      * The Firebase user ID.
-     * @type {number}
-     * @memberof FireBaseUser
      */
     'id'?: number;
     /**
      * The user ID.
-     * @type {string}
-     * @memberof FireBaseUser
      */
     'userId'?: string;
     /**
      * The tenant ID.
-     * @type {number}
-     * @memberof FireBaseUser
      */
     'tenantId'?: number;
     /**
      * The Firebase device token.
-     * @type {string}
-     * @memberof FireBaseUser
      */
-    'firebaseDeviceToken'?: string | null;
+    'firebaseDeviceToken'?: string;
     /**
      * The Firebase application.
-     * @type {string}
-     * @memberof FireBaseUser
      */
-    'application'?: string | null;
+    'application'?: string;
     /**
      * Specifies if the user is subscribed to the push notifications or not.
-     * @type {boolean}
-     * @memberof FireBaseUser
      */
-    'isSubscribed'?: boolean | null;
-    /**
-     * 
-     * @type {DbTenant}
-     * @memberof FireBaseUser
-     */
+    'isSubscribed'?: boolean;
     'tenant'?: DbTenant;
 }
 

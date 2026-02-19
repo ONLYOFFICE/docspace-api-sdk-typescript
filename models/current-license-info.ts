@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,20 +21,14 @@
 
 /**
  * The current license information.
- * @export
- * @interface CurrentLicenseInfo
  */
 export interface CurrentLicenseInfo {
     /**
      * Specifies whether the license is trial or not.
-     * @type {boolean}
-     * @memberof CurrentLicenseInfo
      */
     'trial': boolean;
     /**
      * The date when the license expires.
-     * @type {string}
-     * @memberof CurrentLicenseInfo
      */
     'dueDate': string;
 }

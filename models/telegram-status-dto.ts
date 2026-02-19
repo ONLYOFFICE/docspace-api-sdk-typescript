@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -20,24 +22,9 @@
 // @ts-ignore
 import type { RegStatus } from './reg-status';
 
-/**
- * 
- * @export
- * @interface TelegramStatusDto
- */
 export interface TelegramStatusDto {
-    /**
-     * 
-     * @type {RegStatus}
-     * @memberof TelegramStatusDto
-     */
     'status': RegStatus;
-    /**
-     * 
-     * @type {string}
-     * @memberof TelegramStatusDto
-     */
-    'username'?: string | null;
+    'username'?: string;
 }
 
 

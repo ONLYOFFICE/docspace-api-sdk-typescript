@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,21 +24,15 @@ import type { UserInvitationRequestDto } from './user-invitation-request-dto';
 
 /**
  * The request parameters for inviting users.
- * @export
- * @interface InviteUsersRequestDto
  */
 export interface InviteUsersRequestDto {
     /**
      * The list of user invitations.
-     * @type {Array<UserInvitationRequestDto>}
-     * @memberof InviteUsersRequestDto
      */
     'invitations': Array<UserInvitationRequestDto>;
     /**
      * The culture code of invitations.
-     * @type {string}
-     * @memberof InviteUsersRequestDto
      */
-    'culture'?: string | null;
+    'culture'?: string;
 }
 

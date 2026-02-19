@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -25,27 +27,16 @@ import type { RoomSecurityError } from './room-security-error';
 
 /**
  * The room security parameters.
- * @export
- * @interface RoomSecurityDto
  */
 export interface RoomSecurityDto {
     /**
      * The list of room members.
-     * @type {Array<FileShareDto>}
-     * @memberof RoomSecurityDto
      */
-    'members'?: Array<FileShareDto> | null;
+    'members'?: Array<FileShareDto>;
     /**
      * The warning message.
-     * @type {string}
-     * @memberof RoomSecurityDto
      */
-    'warning'?: string | null;
-    /**
-     * 
-     * @type {RoomSecurityError}
-     * @memberof RoomSecurityDto
-     */
+    'warning'?: string;
     'error'?: RoomSecurityError;
 }
 

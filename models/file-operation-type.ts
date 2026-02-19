@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,42 +21,16 @@
 
 /**
  * [0 - Move, 1 - Copy, 2 - Delete, 3 - Download, 4 - MarkAsRead, 5 - Import, 6 - Convert, 7 - Duplicate]
- * @export
- * @enum {number}
  */
 
 export const FileOperationType = {
-    /**
-    * Move
-    */
     Move: 0,
-    /**
-    * Copy
-    */
     Copy: 1,
-    /**
-    * Delete
-    */
     Delete: 2,
-    /**
-    * Download
-    */
     Download: 3,
-    /**
-    * MarkAsRead
-    */
     MarkAsRead: 4,
-    /**
-    * Import
-    */
     Import: 5,
-    /**
-    * Convert
-    */
     Convert: 6,
-    /**
-    * Duplicate
-    */
     Duplicate: 7
 } as const;
 

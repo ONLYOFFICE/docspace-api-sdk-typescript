@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -17,29 +19,9 @@
  */
 
 
-/**
- * 
- * @export
- * @interface SetupCode
- */
 export interface SetupCode {
-    /**
-     * 
-     * @type {string}
-     * @memberof SetupCode
-     */
-    'account'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SetupCode
-     */
-    'manualEntryKey'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SetupCode
-     */
-    'qrCodeSetupImageUrl'?: string | null;
+    'account'?: string;
+    'manualEntryKey'?: string;
+    'qrCodeSetupImageUrl'?: string;
 }
 

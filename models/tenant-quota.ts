@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,237 +21,239 @@
 
 /**
  * The current tenant quota.
- * @export
- * @interface TenantQuota
  */
 export interface TenantQuota {
     /**
      * The tenant ID.
-     * @type {number}
-     * @memberof TenantQuota
      */
     'tenantId'?: number;
     /**
      * The tenant name.
-     * @type {string}
-     * @memberof TenantQuota
      */
-    'name'?: string | null;
+    'name'?: string;
     /**
      * The tenant price.
-     * @type {number}
-     * @memberof TenantQuota
      */
     'price'?: number;
     /**
      * The tenant price currency symbol.
-     * @type {string}
-     * @memberof TenantQuota
      */
-    'priceCurrencySymbol'?: string | null;
+    'priceCurrencySymbol'?: string;
     /**
      * The tenant price three-character ISO 4217 currency symbol.
-     * @type {string}
-     * @memberof TenantQuota
      */
-    'priceISOCurrencySymbol'?: string | null;
+    'priceISOCurrencySymbol'?: string;
     /**
      * The tenant product ID.
-     * @type {string}
-     * @memberof TenantQuota
      */
-    'productId'?: string | null;
+    'productId'?: string;
     /**
      * The service name.
-     * @type {string}
-     * @memberof TenantQuota
      */
-    'serviceName'?: string | null;
+    'serviceName'?: string;
+    /**
+     * The service group.
+     */
+    'serviceGroup'?: string;
     /**
      * Specifies if the tenant quota is visible or not.
-     * @type {boolean}
-     * @memberof TenantQuota
      */
     'visible'?: boolean;
     /**
      * Specifies if the tenant quota applies to the wallet or not
-     * @type {boolean}
-     * @memberof TenantQuota
      */
     'wallet'?: boolean;
     /**
      * The quota due date.
-     * @type {string}
-     * @memberof TenantQuota
      */
-    'dueDate'?: string | null;
+    'dueDate'?: string;
     /**
      * The tenant quota features.
-     * @type {string}
-     * @memberof TenantQuota
      */
-    'features'?: string | null;
+    'features'?: string;
     /**
      * The tenant maximum file size.
-     * @type {number}
-     * @memberof TenantQuota
      */
     'maxFileSize'?: number;
     /**
      * The tenant maximum total size.
-     * @type {number}
-     * @memberof TenantQuota
      */
     'maxTotalSize'?: number;
     /**
      * The number of portal users.
-     * @type {number}
-     * @memberof TenantQuota
      */
     'countUser'?: number;
     /**
      * The number of portal room administrators.
-     * @type {number}
-     * @memberof TenantQuota
      */
     'countRoomAdmin'?: number;
     /**
      * The number of room users.
-     * @type {number}
-     * @memberof TenantQuota
      */
     'usersInRoom'?: number;
     /**
      * The number of rooms.
-     * @type {number}
-     * @memberof TenantQuota
      */
     'countRoom'?: number;
     /**
      * Specifies if the tenant quota is nonprofit or not.
-     * @type {boolean}
-     * @memberof TenantQuota
      */
     'nonProfit'?: boolean;
     /**
      * Specifies if the tenant quota is trial or not.
-     * @type {boolean}
-     * @memberof TenantQuota
      */
     'trial'?: boolean;
     /**
      * Specifies if the tenant quota is free or not.
-     * @type {boolean}
-     * @memberof TenantQuota
      */
     'free'?: boolean;
     /**
      * Specifies if the tenant quota is updated or not.
-     * @type {boolean}
-     * @memberof TenantQuota
      */
     'update'?: boolean;
     /**
      * Specifies if the audit trail is available or not.
-     * @type {boolean}
-     * @memberof TenantQuota
      */
     'audit'?: boolean;
     /**
      * Specifies if ONLYOFFICE Docs is included in the tenant quota or not.
-     * @type {boolean}
-     * @memberof TenantQuota
      */
     'docsEdition'?: boolean;
     /**
      * Specifies if the LDAP settings are available or not.
-     * @type {boolean}
-     * @memberof TenantQuota
      */
     'ldap'?: boolean;
     /**
      * Specifies if the SSO settings are available or not.
-     * @type {boolean}
-     * @memberof TenantQuota
      */
     'sso'?: boolean;
     /**
      * Specifies if the statistics settings are available or not.
-     * @type {boolean}
-     * @memberof TenantQuota
      */
     'statistic'?: boolean;
     /**
      * Specifies if the branding settings are available or not.
-     * @type {boolean}
-     * @memberof TenantQuota
      */
     'branding'?: boolean;
     /**
      * Specifies if the customization settings are available or not.
-     * @type {boolean}
-     * @memberof TenantQuota
      */
     'customization'?: boolean;
     /**
      * Specifies if the license has the lifetime settings or not.
-     * @type {boolean}
-     * @memberof TenantQuota
      */
     'lifetime'?: boolean;
     /**
+     * Specifies if the Automation API is available or not.
+     */
+    'automationApi'?: boolean;
+    /**
      * Specifies if the custom domain URL is available or not.
-     * @type {boolean}
-     * @memberof TenantQuota
      */
     'custom'?: boolean;
     /**
      * Specifies if the restore is enabled or not.
-     * @type {boolean}
-     * @memberof TenantQuota
      */
     'restore'?: boolean;
     /**
      * Specifies if Oauth is available or not.
-     * @type {boolean}
-     * @memberof TenantQuota
      */
     'oauth'?: boolean;
     /**
      * Specifies if the content search is available or not.
-     * @type {boolean}
-     * @memberof TenantQuota
      */
     'contentSearch'?: boolean;
     /**
      * Specifies if the third-party accounts linking is available or not.
-     * @type {boolean}
-     * @memberof TenantQuota
      */
     'thirdParty'?: boolean;
     /**
      * Specifies if the tenant quota is yearly subscription or not.
-     * @type {boolean}
-     * @memberof TenantQuota
      */
     'year'?: boolean;
     /**
      * The number of free backups within a month.
-     * @type {number}
-     * @memberof TenantQuota
      */
     'countFreeBackup'?: number;
     /**
      * Specifies if the backup anabled as a wallet service or not.
-     * @type {boolean}
-     * @memberof TenantQuota
      */
     'backup'?: boolean;
     /**
      * The number of AI agents.
-     * @type {number}
-     * @memberof TenantQuota
      */
     'countAIAgent'?: number;
+    /**
+     * Specifies if the AI tools anabled as a wallet service or not.
+     */
+    'aiTools'?: boolean;
+    /**
+     * Specifies whether the web search is enabled as a subservice of AI tools.
+     */
+    'aiToolsWebSearch'?: boolean;
+    /**
+     * Specifies whether the web fetch is enabled as a subservice of AI tools
+     */
+    'aiToolsWebFetch'?: boolean;
+    /**
+     * Specifies whether the embedding is enabled as a subservice of AI tools
+     */
+    'aiToolsEmbedding'?: boolean;
+    /**
+     * Specifies whether the Deepseek 3.1 input tokens is enabled as a subservice of AI tools
+     */
+    'aiToolsDeepseek31Input'?: boolean;
+    /**
+     * Specifies whether the Deepseek 3.1 output tokens is enabled as a subservice of AI tools
+     */
+    'aiToolsDeepseek31Output'?: boolean;
+    /**
+     * Specifies whether the Claude 4.5 input tokens is enabled as a subservice of AI tools
+     */
+    'aiToolsClaude45Input'?: boolean;
+    /**
+     * Specifies whether the Claude 4.5 output tokens is enabled as a subservice of AI tools
+     */
+    'aiToolsClaude45Output'?: boolean;
+    /**
+     * Specifies whether the GPT 5 input tokens is enabled as a subservice of AI tools
+     */
+    'aiToolsGPT5Input'?: boolean;
+    /**
+     * Specifies whether the GPT 5 output tokens is enabled as a subservice of AI tools
+     */
+    'aiToolsGPT5Output'?: boolean;
+    /**
+     * Specifies whether the Deepseek 3.2 input tokens is enabled as a subservice of AI tools
+     */
+    'aiToolsDeepseek32Input'?: boolean;
+    /**
+     * Specifies whether the Deepseek 3.2 output tokens is enabled as a subservice of AI tools
+     */
+    'aiToolsDeepseek32Output'?: boolean;
+    /**
+     * Specifies whether the GPT 5.2 input tokens is enabled as a subservice of AI tools
+     */
+    'aiToolsGPT52Input'?: boolean;
+    /**
+     * Specifies whether the GPT 5.2 output tokens is enabled as a subservice of AI tools
+     */
+    'aiToolsGPT52Output'?: boolean;
+    /**
+     * Specifies whether the Gemini 3 Pro input tokens is enabled as a subservice of AI tools
+     */
+    'aiToolsGemini3ProInput'?: boolean;
+    /**
+     * Specifies whether the Gemini 3 Pro output tokens is enabled as a subservice of AI tools
+     */
+    'aiToolsGemini3ProOutput'?: boolean;
+    /**
+     * Specifies whether the Gemini 3 Flash input tokens is enabled as a subservice of AI tools
+     */
+    'aiToolsGemini3FlashInput'?: boolean;
+    /**
+     * Specifies whether the Gemini 3 Flash output tokens is enabled as a subservice of AI tools
+     */
+    'aiToolsGemini3FlashOutput'?: boolean;
 }
 

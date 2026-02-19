@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -25,57 +27,33 @@ import type { ContentType } from './content-type';
 
 /**
  * The request parameters for uploading a file.
- * @export
- * @interface UploadRequestDto
  */
 export interface UploadRequestDto {
     /**
      * The file to be uploaded.
-     * @type {File}
-     * @memberof UploadRequestDto
      */
-    'file'?: File | null;
-    /**
-     * 
-     * @type {ContentType}
-     * @memberof UploadRequestDto
-     */
+    'file'?: File;
     'contentType'?: ContentType;
-    /**
-     * 
-     * @type {ContentDisposition}
-     * @memberof UploadRequestDto
-     */
     'contentDisposition'?: ContentDisposition;
     /**
      * The list of files when specified as multipart/form-data.
-     * @type {Array<File>}
-     * @memberof UploadRequestDto
      */
-    'files'?: Array<File> | null;
+    'files'?: Array<File>;
     /**
      * Specifies whether to create the new file if it already exists or not.
-     * @type {boolean}
-     * @memberof UploadRequestDto
      */
     'createNewIfExist'?: boolean;
     /**
      * Specifies whether to upload documents in the original formats as well or not.
-     * @type {boolean}
-     * @memberof UploadRequestDto
      */
-    'storeOriginalFileFlag'?: boolean | null;
+    'storeOriginalFileFlag'?: boolean;
     /**
      * Specifies whether to keep the file converting status or not.
-     * @type {boolean}
-     * @memberof UploadRequestDto
      */
     'keepConvertStatus'?: boolean;
     /**
      * The request input stream.
-     * @type {File}
-     * @memberof UploadRequestDto
      */
-    'stream'?: File | null;
+    'stream'?: File;
 }
 

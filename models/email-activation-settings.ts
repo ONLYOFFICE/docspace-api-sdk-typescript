@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,21 +21,12 @@
 
 /**
  * The email activation settings.
- * @export
- * @interface EmailActivationSettings
  */
 export interface EmailActivationSettings {
     /**
      * Specifies whether the email activation settings are shown or hidden.
-     * @type {boolean}
-     * @memberof EmailActivationSettings
      */
     'show'?: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof EmailActivationSettings
-     */
     'lastModified'?: string;
 }
 

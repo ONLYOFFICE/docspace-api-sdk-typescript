@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,33 +24,17 @@ import type { CustomColorThemesSettingsColorItem } from './custom-color-themes-s
 
 /**
  * The custom color theme settings.
- * @export
- * @interface CustomColorThemesSettingsItem
  */
 export interface CustomColorThemesSettingsItem {
     /**
      * The custom color theme ID.
-     * @type {number}
-     * @memberof CustomColorThemesSettingsItem
      */
     'id'?: number;
     /**
      * The custom color theme name.
-     * @type {string}
-     * @memberof CustomColorThemesSettingsItem
      */
-    'name'?: string | null;
-    /**
-     * 
-     * @type {CustomColorThemesSettingsColorItem}
-     * @memberof CustomColorThemesSettingsItem
-     */
+    'name'?: string;
     'main'?: CustomColorThemesSettingsColorItem;
-    /**
-     * 
-     * @type {CustomColorThemesSettingsColorItem}
-     * @memberof CustomColorThemesSettingsItem
-     */
     'text'?: CustomColorThemesSettingsColorItem;
 }
 

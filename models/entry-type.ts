@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,42 +21,16 @@
 
 /**
  * [0 - None, 1 - File, 2 - Folder, 23 - User, 24 - Group, 25 - Room, 26 - Tag, 27 - Agent]
- * @export
- * @enum {number}
  */
 
 export const EntryType = {
-    /**
-    * None
-    */
     None: 0,
-    /**
-    * File
-    */
     File: 1,
-    /**
-    * Folder
-    */
     Folder: 2,
-    /**
-    * User
-    */
     User: 23,
-    /**
-    * Group
-    */
     Group: 24,
-    /**
-    * Room
-    */
     Room: 25,
-    /**
-    * Tag
-    */
     Tag: 26,
-    /**
-    * Agent
-    */
     Agent: 27
 } as const;
 

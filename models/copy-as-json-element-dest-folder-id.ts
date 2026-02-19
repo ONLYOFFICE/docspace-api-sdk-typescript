@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -20,7 +22,6 @@
 /**
  * @type CopyAsJsonElementDestFolderId
  * The destination folder ID of the copied file.
- * @export
  */
 export type CopyAsJsonElementDestFolderId = number | string;
 

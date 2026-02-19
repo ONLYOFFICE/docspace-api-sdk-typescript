@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,7 +24,7 @@ import type { TenantEntityQuotaSettings } from './tenant-entity-quota-settings';
 
 /**
  * @type TenantAiAgentQuotaSettings
- * The ai agent quota settings.
+ * The AI agent quota settings.
  * @export
  */
 export type TenantAiAgentQuotaSettings = TenantEntityQuotaSettings &  {

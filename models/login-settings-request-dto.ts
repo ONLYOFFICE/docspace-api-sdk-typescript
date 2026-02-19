@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,26 +21,18 @@
 
 /**
  * The request parameters for configuring login security and performance settings.
- * @export
- * @interface LoginSettingsRequestDto
  */
 export interface LoginSettingsRequestDto {
     /**
      * The maximum number of consecutive failed login attempts allowed before triggering account suspension.
-     * @type {number}
-     * @memberof LoginSettingsRequestDto
      */
     'attemptCount'?: number;
     /**
      * The duration (in minutes) for which an account remains suspended after exceeding maximum login attempts.
-     * @type {number}
-     * @memberof LoginSettingsRequestDto
      */
     'blockTime'?: number;
     /**
      * The maximum time (in seconds) allowed for server to process and respond to login requests.
-     * @type {number}
-     * @memberof LoginSettingsRequestDto
      */
     'checkPeriod'?: number;
 }

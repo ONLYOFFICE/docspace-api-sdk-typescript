@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,27 +21,16 @@
 
 /**
  * The file upload result.
- * @export
- * @interface FileUploadResultDto
  */
 export interface FileUploadResultDto {
     /**
      * Specifies if the upload operation is successful or not.
-     * @type {boolean}
-     * @memberof FileUploadResultDto
      */
     'success'?: boolean;
-    /**
-     * The file upload result data.
-     * @type {any}
-     * @memberof FileUploadResultDto
-     */
-    'data'?: any | null;
+    'data'?: any;
     /**
      * The file upload result message.
-     * @type {string}
-     * @memberof FileUploadResultDto
      */
-    'message'?: string | null;
+    'message'?: string;
 }
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,50 +21,34 @@
 
 /**
  * The additional white label settings parameters.
- * @export
- * @interface AdditionalWhiteLabelSettingsDto
  */
 export interface AdditionalWhiteLabelSettingsDto {
     /**
      * Specifies if the sample documents are displayed or hidden.
-     * @type {boolean}
-     * @memberof AdditionalWhiteLabelSettingsDto
      */
     'startDocsEnabled': boolean;
     /**
      * Specifies if the Help Center link is available or not.
-     * @type {boolean}
-     * @memberof AdditionalWhiteLabelSettingsDto
      */
     'helpCenterEnabled': boolean;
     /**
      * Specifies if the Feedback & Support link is available or not.
-     * @type {boolean}
-     * @memberof AdditionalWhiteLabelSettingsDto
      */
     'feedbackAndSupportEnabled': boolean;
     /**
      * Specifies if the user forum is available or not.
-     * @type {boolean}
-     * @memberof AdditionalWhiteLabelSettingsDto
      */
     'userForumEnabled': boolean;
     /**
      * Specifies if the Video Guides link is available or not.
-     * @type {boolean}
-     * @memberof AdditionalWhiteLabelSettingsDto
      */
     'videoGuidesEnabled': boolean;
     /**
      * Specifies if the License Agreements link is available or not.
-     * @type {boolean}
-     * @memberof AdditionalWhiteLabelSettingsDto
      */
     'licenseAgreementsEnabled': boolean;
     /**
      * Specifies if the additional white label settings are default or not.
-     * @type {boolean}
-     * @memberof AdditionalWhiteLabelSettingsDto
      */
     'isDefault': boolean;
 }

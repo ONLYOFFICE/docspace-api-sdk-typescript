@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -18,46 +20,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
+import type { FormRoleDto } from './form-role-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FormRoleDto } from './form-role-dto';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
-/**
- * 
- * @export
- * @interface FormRoleArrayWrapper
- */
 export interface FormRoleArrayWrapper {
-    /**
-     * 
-     * @type {Array<FormRoleDto>}
-     * @memberof FormRoleArrayWrapper
-     */
     'response'?: Array<FormRoleDto>;
-    /**
-     * 
-     * @type {number}
-     * @memberof FormRoleArrayWrapper
-     */
     'count'?: number;
-    /**
-     * 
-     * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof FormRoleArrayWrapper
-     */
-    'links'?: Array<ActiveConnectionsWrapperLinksInner>;
-    /**
-     * 
-     * @type {number}
-     * @memberof FormRoleArrayWrapper
-     */
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
     'status'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof FormRoleArrayWrapper
-     */
     'statusCode'?: number;
 }
 

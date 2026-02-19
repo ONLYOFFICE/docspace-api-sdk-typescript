@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,20 +21,11 @@
 
 /**
  * The request parameters for configuring notification settings for the chat or collaboration rooms.
- * @export
- * @interface RoomsNotificationsSettingsRequestDto
  */
 export interface RoomsNotificationsSettingsRequestDto {
-    /**
-     * The target room identifier.
-     * @type {any}
-     * @memberof RoomsNotificationsSettingsRequestDto
-     */
-    'roomsId'?: any | null;
+    'roomsId'?: any;
     /**
      * Specifies whether the notifications will be delivered to the specified room or not.
-     * @type {boolean}
-     * @memberof RoomsNotificationsSettingsRequestDto
      */
     'mute'?: boolean;
 }

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,40 +21,22 @@
 
 /**
  * The wallet services settings.
- * @export
- * @interface TenantWalletServiceSettings
  */
 export interface TenantWalletServiceSettings {
     /**
      * The list of the enabled wallet services.
-     * @type {Array<number>}
-     * @memberof TenantWalletServiceSettings
      */
-    'enabledServices'?: Array<TenantWalletServiceSettingsEnabledServicesEnum> | null;
+    'enabledServices'?: Array<TenantWalletServiceSettingsEnabledServicesEnum>;
     /**
      * The date and time when the wallet services settings were last modified.
-     * @type {string}
-     * @memberof TenantWalletServiceSettings
      */
     'lastModified'?: string;
 }
 
 export const TenantWalletServiceSettingsEnabledServicesEnum = {
-    /**
-    * WebSearch
-    */
     WebSearch: -14,
-    /**
-    * AITools
-    */
     AITools: -13,
-    /**
-    * Backup
-    */
     Backup: -12,
-    /**
-    * Storage
-    */
     Storage: -11
 } as const;
 

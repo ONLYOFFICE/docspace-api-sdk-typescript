@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,15 +21,11 @@
 
 /**
  * The email invitation parameters.
- * @export
- * @interface EmailInvitationDto
  */
 export interface EmailInvitationDto {
     /**
      * The email address.
-     * @type {string}
-     * @memberof EmailInvitationDto
      */
-    'email'?: string | null;
+    'email'?: string;
 }
 

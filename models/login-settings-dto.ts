@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,32 +21,22 @@
 
 /**
  * The login settings parameters.
- * @export
- * @interface LoginSettingsDto
  */
 export interface LoginSettingsDto {
     /**
      * The maximum number of consecutive failed login attempts allowed before triggering account suspension.
-     * @type {number}
-     * @memberof LoginSettingsDto
      */
     'attemptCount': number;
     /**
      * The duration (in minutes) for which an account remains suspended after exceeding maximum login attempts.
-     * @type {number}
-     * @memberof LoginSettingsDto
      */
     'blockTime': number;
     /**
      * The maximum time (in seconds) allowed for server to process and respond to login requests.
-     * @type {number}
-     * @memberof LoginSettingsDto
      */
     'checkPeriod': number;
     /**
      * Specifies if these settings are default or not
-     * @type {boolean}
-     * @memberof LoginSettingsDto
      */
     'isDefault': boolean;
 }

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,21 +21,15 @@
 
 /**
  * The result of the cover request containing the cover image data.
- * @export
- * @interface CoversResultDto
  */
 export interface CoversResultDto {
     /**
      * The cover unique identifier.
-     * @type {string}
-     * @memberof CoversResultDto
      */
-    'id': string | null;
+    'id': string;
     /**
      * The cover image data.
-     * @type {string}
-     * @memberof CoversResultDto
      */
-    'data': string | null;
+    'data': string;
 }
 

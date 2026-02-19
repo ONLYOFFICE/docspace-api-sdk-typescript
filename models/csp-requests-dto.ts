@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,15 +21,11 @@
 
 /**
  * The request parameters for configuring the Content Security Policy (CSP) settings.
- * @export
- * @interface CspRequestsDto
  */
 export interface CspRequestsDto {
     /**
      * The collection of allowed domains in the Content Security Policy (CSP).
-     * @type {Array<string>}
-     * @memberof CspRequestsDto
      */
-    'domains'?: Array<string> | null;
+    'domains'?: Array<string>;
 }
 

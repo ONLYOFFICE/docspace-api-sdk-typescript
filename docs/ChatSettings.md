@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **providerId** | **number** |  | [optional] [default to undefined]
 **modelId** | **string** |  | [optional] [default to undefined]
 **prompt** | **string** |  | [optional] [default to undefined]
+**internal** | **boolean** |  | [optional] [readonly] [default to undefined]
 
 ## Example
 
@@ -18,6 +19,7 @@ const instance: ChatSettings = {
     providerId,
     modelId,
     prompt,
+    internal,
 };
 ```
 

@@ -56,9 +56,9 @@ const { status, data } = await apiInstance.getGuestSharingLink(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | User share link |  -  |
-|**401** | Unauthorized |  -  |
-|**403** | No permissions to perform this action |  -  |
 |**404** | User not found |  -  |
+|**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

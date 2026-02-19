@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,22 +21,11 @@
 
 /**
  * [0 - All, 1 - People, 2 - Guests]
- * @export
- * @enum {number}
  */
 
 export const Area = {
-    /**
-    * All
-    */
     All: 0,
-    /**
-    * People
-    */
     People: 1,
-    /**
-    * Guests
-    */
     Guests: 2
 } as const;
 

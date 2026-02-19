@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,14 +21,10 @@
 
 /**
  * Backup service state.
- * @export
- * @interface BackupServiceStateDto
  */
 export interface BackupServiceStateDto {
     /**
      * Specifies if the backup service is enabled or not.
-     * @type {boolean}
-     * @memberof BackupServiceStateDto
      */
     'enabled'?: boolean;
 }

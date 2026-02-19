@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,22 +21,11 @@
 
 /**
  * [0 - Every day, 1 - Every week, 2 - Every month]
- * @export
- * @enum {number}
  */
 
 export const BackupPeriod = {
-    /**
-    * Every day
-    */
     EveryDay: 0,
-    /**
-    * Every week
-    */
     EveryWeek: 1,
-    /**
-    * Every month
-    */
     EveryMonth: 2
 } as const;
 

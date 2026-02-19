@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -28,195 +30,119 @@ import type { MobilePhoneActivationStatus } from './mobile-phone-activation-stat
 
 /**
  * The user information.
- * @export
- * @interface UserInfo
  */
 export interface UserInfo {
     /**
      * The user ID.
-     * @type {string}
-     * @memberof UserInfo
      */
     'id'?: string;
     /**
      * The user first name.
-     * @type {string}
-     * @memberof UserInfo
      */
-    'firstName'?: string | null;
+    'firstName'?: string;
     /**
      * The user last name.
-     * @type {string}
-     * @memberof UserInfo
      */
-    'lastName'?: string | null;
+    'lastName'?: string;
     /**
      * The user username.
-     * @type {string}
-     * @memberof UserInfo
      */
-    'userName'?: string | null;
+    'userName'?: string;
     /**
      * The user birthday.
-     * @type {string}
-     * @memberof UserInfo
      */
-    'birthDate'?: string | null;
+    'birthDate'?: string;
     /**
      * The user sex (male or female).
-     * @type {boolean}
-     * @memberof UserInfo
      */
-    'sex'?: boolean | null;
-    /**
-     * 
-     * @type {EmployeeStatus}
-     * @memberof UserInfo
-     */
+    'sex'?: boolean;
     'status'?: EmployeeStatus;
-    /**
-     * 
-     * @type {EmployeeActivationStatus}
-     * @memberof UserInfo
-     */
     'activationStatus'?: EmployeeActivationStatus;
     /**
      * The date and time when the user account was terminated.
-     * @type {string}
-     * @memberof UserInfo
      */
-    'terminatedDate'?: string | null;
+    'terminatedDate'?: string;
     /**
      * The user title.
-     * @type {string}
-     * @memberof UserInfo
      */
-    'title'?: string | null;
+    'title'?: string;
     /**
      * The user registration date.
-     * @type {string}
-     * @memberof UserInfo
      */
-    'workFromDate'?: string | null;
+    'workFromDate'?: string;
     /**
      * The user email address.
-     * @type {string}
-     * @memberof UserInfo
      */
-    'email'?: string | null;
+    'email'?: string;
     /**
      * The list of user contacts in the string format.
-     * @type {string}
-     * @memberof UserInfo
      */
-    'contacts'?: string | null;
+    'contacts'?: string;
     /**
      * The list of user contacts.
-     * @type {Array<string>}
-     * @memberof UserInfo
      */
-    'contactsList'?: Array<string> | null;
+    'contactsList'?: Array<string>;
     /**
      * The user location.
-     * @type {string}
-     * @memberof UserInfo
      */
-    'location'?: string | null;
+    'location'?: string;
     /**
      * The user notes.
-     * @type {string}
-     * @memberof UserInfo
      */
-    'notes'?: string | null;
+    'notes'?: string;
     /**
      * Specifies if the user account was removed or not.
-     * @type {boolean}
-     * @memberof UserInfo
      */
     'removed'?: boolean;
     /**
      * The date and time when the user account was last modified.
-     * @type {string}
-     * @memberof UserInfo
      */
     'lastModified'?: string;
     /**
      * The tenant ID.
-     * @type {number}
-     * @memberof UserInfo
      */
     'tenantId'?: number;
     /**
      * Specifies if the user is active or not.
-     * @type {boolean}
-     * @memberof UserInfo
      */
     'isActive'?: boolean;
     /**
      * The user culture code.
-     * @type {string}
-     * @memberof UserInfo
      */
-    'cultureName'?: string | null;
+    'cultureName'?: string;
     /**
      * The user mobile phone.
-     * @type {string}
-     * @memberof UserInfo
      */
-    'mobilePhone'?: string | null;
-    /**
-     * 
-     * @type {MobilePhoneActivationStatus}
-     * @memberof UserInfo
-     */
+    'mobilePhone'?: string;
     'mobilePhoneActivationStatus'?: MobilePhoneActivationStatus;
     /**
      * The LDAP user identificator.
-     * @type {string}
-     * @memberof UserInfo
      */
-    'sid'?: string | null;
+    'sid'?: string;
     /**
      * The LDAP user quota attribute.
-     * @type {number}
-     * @memberof UserInfo
      */
     'ldapQouta'?: number;
     /**
      * The SSO SAML user identificator.
-     * @type {string}
-     * @memberof UserInfo
      */
-    'ssoNameId'?: string | null;
+    'ssoNameId'?: string;
     /**
      * The SSO SAML user session identificator.
-     * @type {string}
-     * @memberof UserInfo
      */
-    'ssoSessionId'?: string | null;
+    'ssoSessionId'?: string;
     /**
      * The date and time when the user account was created.
-     * @type {string}
-     * @memberof UserInfo
      */
     'createDate'?: string;
     /**
      * The ID of the user who created the current user account.
-     * @type {string}
-     * @memberof UserInfo
      */
-    'createdBy'?: string | null;
+    'createdBy'?: string;
     /**
      * Specifies if tips, updates and offers are allowed to be sent to the user or not.
-     * @type {boolean}
-     * @memberof UserInfo
      */
-    'spam'?: boolean | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof UserInfo
-     */
+    'spam'?: boolean;
     'checkActivation'?: boolean;
 }
 

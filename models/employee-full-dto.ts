@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -52,31 +54,31 @@ export type EmployeeFullDto = EmployeeDto &  {
      * @type {string}
      * @memberof EmployeeFullDto
      */
-    'firstName'?: string | null;
+    'firstName'?: string;
     /**
      * The user last name.
      * @type {string}
      * @memberof EmployeeFullDto
      */
-    'lastName'?: string | null;
+    'lastName'?: string;
     /**
      * The user username.
      * @type {string}
      * @memberof EmployeeFullDto
      */
-    'userName'?: string | null;
+    'userName'?: string;
     /**
      * The user email.
      * @type {string}
      * @memberof EmployeeFullDto
      */
-    'email'?: string | null;
+    'email'?: string;
     /**
      * The list of user contacts.
      * @type {Array<Contact>}
      * @memberof EmployeeFullDto
      */
-    'contacts'?: Array<Contact> | null;
+    'contacts'?: Array<Contact>;
     /**
      * 
      * @type {ApiDateTime}
@@ -88,7 +90,7 @@ export type EmployeeFullDto = EmployeeDto &  {
      * @type {string}
      * @memberof EmployeeFullDto
      */
-    'sex'?: string | null;
+    'sex'?: string;
     /**
      * 
      * @type {EmployeeStatus}
@@ -112,7 +114,7 @@ export type EmployeeFullDto = EmployeeDto &  {
      * @type {string}
      * @memberof EmployeeFullDto
      */
-    'department'?: string | null;
+    'department'?: string;
     /**
      * 
      * @type {ApiDateTime}
@@ -124,19 +126,19 @@ export type EmployeeFullDto = EmployeeDto &  {
      * @type {Array<GroupSummaryDto>}
      * @memberof EmployeeFullDto
      */
-    'groups'?: Array<GroupSummaryDto> | null;
+    'groups'?: Array<GroupSummaryDto>;
     /**
      * The user location.
      * @type {string}
      * @memberof EmployeeFullDto
      */
-    'location'?: string | null;
+    'location'?: string;
     /**
      * The user notes.
      * @type {string}
      * @memberof EmployeeFullDto
      */
-    'notes'?: string | null;
+    'notes'?: string;
     /**
      * Specifies if the user is an administrator or not.
      * @type {boolean}
@@ -160,7 +162,7 @@ export type EmployeeFullDto = EmployeeDto &  {
      * @type {Array<string>}
      * @memberof EmployeeFullDto
      */
-    'listAdminModules'?: Array<string> | null;
+    'listAdminModules'?: Array<string>;
     /**
      * Specifies if the user is a portal owner or not.
      * @type {boolean}
@@ -184,13 +186,13 @@ export type EmployeeFullDto = EmployeeDto &  {
      * @type {string}
      * @memberof EmployeeFullDto
      */
-    'cultureName'?: string | null;
+    'cultureName'?: string;
     /**
      * The user mobile phone number.
      * @type {string}
      * @memberof EmployeeFullDto
      */
-    'mobilePhone'?: string | null;
+    'mobilePhone'?: string;
     /**
      * 
      * @type {MobilePhoneActivationStatus}
@@ -214,37 +216,37 @@ export type EmployeeFullDto = EmployeeDto &  {
      * @type {number}
      * @memberof EmployeeFullDto
      */
-    'quotaLimit'?: number | null;
+    'quotaLimit'?: number;
     /**
      * The portal used space of the user.
      * @type {number}
      * @memberof EmployeeFullDto
      */
-    'usedSpace'?: number | null;
+    'usedSpace'?: number;
     /**
      * Specifies if the user has access rights.
      * @type {boolean}
      * @memberof EmployeeFullDto
      */
-    'shared'?: boolean | null;
+    'shared'?: boolean;
     /**
      * Specifies if the user has a custom quota or not.
      * @type {boolean}
      * @memberof EmployeeFullDto
      */
-    'isCustomQuota'?: boolean | null;
+    'isCustomQuota'?: boolean;
     /**
      * The current login event ID.
      * @type {number}
      * @memberof EmployeeFullDto
      */
-    'loginEventId'?: number | null;
+    'loginEventId'?: number;
     /**
      * The auth cookie lifetime in seconds.
      * @type {number}
      * @memberof EmployeeFullDto
      */
-    'authCookieLifetime'?: number | null;
+    'authCookieLifetime'?: number;
     /**
      * 
      * @type {EmployeeDto}
@@ -268,7 +270,7 @@ export type EmployeeFullDto = EmployeeDto &  {
      * @type {boolean}
      * @memberof EmployeeFullDto
      */
-    'tfaAppEnabled'?: boolean | null;
+    'tfaAppEnabled'?: boolean;
 };
 
 

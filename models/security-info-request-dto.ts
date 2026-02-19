@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -25,39 +27,27 @@ import type { FileShareParams } from './file-share-params';
 
 /**
  * The security information request parameters.
- * @export
- * @interface SecurityInfoRequestDto
  */
 export interface SecurityInfoRequestDto {
     /**
      * The list of the shared folder IDs.
-     * @type {Array<DuplicateRequestDtoAllOfFileIds>}
-     * @memberof SecurityInfoRequestDto
      */
-    'folderIds'?: Array<DuplicateRequestDtoAllOfFileIds> | null;
+    'folderIds'?: Array<DuplicateRequestDtoAllOfFileIds>;
     /**
      * The list of the shared file IDs.
-     * @type {Array<DuplicateRequestDtoAllOfFileIds>}
-     * @memberof SecurityInfoRequestDto
      */
-    'fileIds'?: Array<DuplicateRequestDtoAllOfFileIds> | null;
+    'fileIds'?: Array<DuplicateRequestDtoAllOfFileIds>;
     /**
      * The collection of sharing parameters.
-     * @type {Array<FileShareParams>}
-     * @memberof SecurityInfoRequestDto
      */
-    'share'?: Array<FileShareParams> | null;
+    'share'?: Array<FileShareParams>;
     /**
      * Specifies whether to notify users about the shared file or not.
-     * @type {boolean}
-     * @memberof SecurityInfoRequestDto
      */
     'notify'?: boolean;
     /**
      * The message to send when notifying about the shared file.
-     * @type {string}
-     * @memberof SecurityInfoRequestDto
      */
-    'sharingMessage'?: string | null;
+    'sharingMessage'?: string;
 }
 

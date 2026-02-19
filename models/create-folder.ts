@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,15 +21,11 @@
 
 /**
  * The parameters for creating a folder.
- * @export
- * @interface CreateFolder
  */
 export interface CreateFolder {
     /**
      * The folder title to create.
-     * @type {string}
-     * @memberof CreateFolder
      */
-    'title': string | null;
+    'title': string;
 }
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -20,7 +22,6 @@
 /**
  * @type QuotaSettingsRequestsDtoDefaultQuota
  * The default storage quota value applied to new users.
- * @export
  */
 export type QuotaSettingsRequestsDtoDefaultQuota = number | string;
 

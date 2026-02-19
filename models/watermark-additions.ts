@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,30 +21,13 @@
 
 /**
  * [1 - User name, 2 - User email, 4 - User ip adress, 8 - Current date, 16 - Room name]
- * @export
- * @enum {number}
  */
 
 export const WatermarkAdditions = {
-    /**
-    * User name
-    */
     UserName: 1,
-    /**
-    * User email
-    */
     UserEmail: 2,
-    /**
-    * User ip adress
-    */
     UserIpAdress: 4,
-    /**
-    * Current date
-    */
     CurrentDate: 8,
-    /**
-    * Room name
-    */
     RoomName: 16
 } as const;
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,21 +21,15 @@
 
 /**
  * The white label item path parameters.
- * @export
- * @interface WhiteLabelItemPathDto
  */
 export interface WhiteLabelItemPathDto {
     /**
      * The path to the light theme logo.
-     * @type {string}
-     * @memberof WhiteLabelItemPathDto
      */
-    'light'?: string | null;
+    'light'?: string;
     /**
      * The path to the dark theme logo.
-     * @type {string}
-     * @memberof WhiteLabelItemPathDto
      */
-    'dark'?: string | null;
+    'dark'?: string;
 }
 

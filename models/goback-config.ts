@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,15 +21,11 @@
 
 /**
  * The settings for the Open file location menu button and upper right corner button.
- * @export
- * @interface GobackConfig
  */
 export interface GobackConfig {
     /**
      * The absolute URL to the website address which will be opened when clicking the Open file location menu button.
-     * @type {string}
-     * @memberof GobackConfig
      */
-    'url'?: string | null;
+    'url'?: string;
 }
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -18,46 +20,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { TelegramStatusDto } from './telegram-status-dto';
 
-/**
- * 
- * @export
- * @interface TelegramStatusWrapper
- */
 export interface TelegramStatusWrapper {
-    /**
-     * 
-     * @type {TelegramStatusDto}
-     * @memberof TelegramStatusWrapper
-     */
     'response'?: TelegramStatusDto;
-    /**
-     * 
-     * @type {number}
-     * @memberof TelegramStatusWrapper
-     */
     'count'?: number;
-    /**
-     * 
-     * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof TelegramStatusWrapper
-     */
-    'links'?: Array<ActiveConnectionsWrapperLinksInner>;
-    /**
-     * 
-     * @type {number}
-     * @memberof TelegramStatusWrapper
-     */
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
     'status'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof TelegramStatusWrapper
-     */
     'statusCode'?: number;
 }
 

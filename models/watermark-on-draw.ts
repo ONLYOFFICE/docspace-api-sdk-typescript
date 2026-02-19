@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,51 +24,35 @@ import type { Paragraph } from './paragraph';
 
 /**
  * The document watermark parameters.
- * @export
- * @interface WatermarkOnDraw
  */
 export interface WatermarkOnDraw {
     /**
      * Defines the watermark width measured in millimeters.
-     * @type {number}
-     * @memberof WatermarkOnDraw
      */
     'width'?: number;
     /**
      * Defines the watermark height measured in millimeters.
-     * @type {number}
-     * @memberof WatermarkOnDraw
      */
     'height'?: number;
     /**
      * Defines the watermark margins measured in millimeters.
-     * @type {Array<number>}
-     * @memberof WatermarkOnDraw
      */
-    'margins'?: Array<number> | null;
+    'margins'?: Array<number>;
     /**
      * Defines the watermark fill color.
-     * @type {string}
-     * @memberof WatermarkOnDraw
      */
-    'fill'?: string | null;
+    'fill'?: string;
     /**
      * Defines the watermark rotation angle.
-     * @type {number}
-     * @memberof WatermarkOnDraw
      */
     'rotate'?: number;
     /**
      * Defines the watermark transparency percentage.
-     * @type {number}
-     * @memberof WatermarkOnDraw
      */
     'transparent'?: number;
     /**
      * The list of paragraphs of the watermark.
-     * @type {Array<Paragraph>}
-     * @memberof WatermarkOnDraw
      */
-    'paragraphs'?: Array<Paragraph> | null;
+    'paragraphs'?: Array<Paragraph>;
 }
 

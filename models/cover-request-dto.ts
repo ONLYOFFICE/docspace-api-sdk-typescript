@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,21 +21,15 @@
 
 /**
  * The request parameters to change the room cover.
- * @export
- * @interface CoverRequestDto
  */
 export interface CoverRequestDto {
     /**
      * The cover color.
-     * @type {string}
-     * @memberof CoverRequestDto
      */
-    'color'?: string | null;
+    'color'?: string;
     /**
      * The cover name.
-     * @type {string}
-     * @memberof CoverRequestDto
      */
-    'cover'?: string | null;
+    'cover'?: string;
 }
 

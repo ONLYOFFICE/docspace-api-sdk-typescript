@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,18 +21,10 @@
 
 /**
  * [0 - Female, 1 - Male]
- * @export
- * @enum {number}
  */
 
 export const SexEnum = {
-    /**
-    * Female
-    */
     Female: 0,
-    /**
-    * Male
-    */
     Male: 1
 } as const;
 

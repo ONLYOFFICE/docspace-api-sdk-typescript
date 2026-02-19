@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,26 +21,12 @@
 
 /**
  * [0 - Trial, 1 - Paid, 2 - Delay, 3 - Not paid]
- * @export
- * @enum {number}
  */
 
 export const TariffState = {
-    /**
-    * Trial
-    */
     Trial: 0,
-    /**
-    * Paid
-    */
     Paid: 1,
-    /**
-    * Delay
-    */
     Delay: 2,
-    /**
-    * Not paid
-    */
     NotPaid: 3
 } as const;
 

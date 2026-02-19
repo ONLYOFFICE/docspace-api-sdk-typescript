@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -25,21 +27,12 @@ import type { FileEntryBaseDto } from './file-entry-base-dto';
 
 /**
  * The new item parameters.
- * @export
- * @interface NewItemsDtoFileEntryBaseDto
  */
 export interface NewItemsDtoFileEntryBaseDto {
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof NewItemsDtoFileEntryBaseDto
-     */
     'date': ApiDateTime;
     /**
      * The list of items.
-     * @type {Array<FileEntryBaseDto>}
-     * @memberof NewItemsDtoFileEntryBaseDto
      */
-    'items': Array<FileEntryBaseDto> | null;
+    'items': Array<FileEntryBaseDto>;
 }
 

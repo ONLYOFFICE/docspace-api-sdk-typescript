@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -28,63 +30,37 @@ import type { EditHistoryChangesWrapper } from './edit-history-changes-wrapper';
 
 /**
  * The file editing history parameters.
- * @export
- * @interface EditHistoryDto
  */
 export interface EditHistoryDto {
     /**
      * The document ID.
-     * @type {number}
-     * @memberof EditHistoryDto
      */
     'id'?: number;
     /**
      * The document identifier used to unambiguously identify the document file.
-     * @type {string}
-     * @memberof EditHistoryDto
      */
-    'key'?: string | null;
+    'key'?: string;
     /**
      * The document version number.
-     * @type {number}
-     * @memberof EditHistoryDto
      */
     'version'?: number;
     /**
      * The document version group.
-     * @type {number}
-     * @memberof EditHistoryDto
      */
     'versionGroup'?: number;
-    /**
-     * 
-     * @type {EditHistoryAuthor}
-     * @memberof EditHistoryDto
-     */
     'user'?: EditHistoryAuthor;
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof EditHistoryDto
-     */
     'created'?: ApiDateTime;
     /**
      * The file history changes in the string format.
-     * @type {string}
-     * @memberof EditHistoryDto
      */
-    'changesHistory'?: string | null;
+    'changesHistory'?: string;
     /**
      * The list of file history changes.
-     * @type {Array<EditHistoryChangesWrapper>}
-     * @memberof EditHistoryDto
      */
-    'changes'?: Array<EditHistoryChangesWrapper> | null;
+    'changes'?: Array<EditHistoryChangesWrapper>;
     /**
      * The current server version number.
-     * @type {string}
-     * @memberof EditHistoryDto
      */
-    'serverVersion'?: string | null;
+    'serverVersion'?: string;
 }
 

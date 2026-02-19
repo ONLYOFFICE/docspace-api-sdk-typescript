@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,15 +21,11 @@
 
 /**
  * The request parameters for validating the two-factor authentication codes.
- * @export
- * @interface TfaValidateRequestsDto
  */
 export interface TfaValidateRequestsDto {
     /**
      * The verification code provided by the user.
-     * @type {string}
-     * @memberof TfaValidateRequestsDto
      */
-    'code': string | null;
+    'code': string;
 }
 

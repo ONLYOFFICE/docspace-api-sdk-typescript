@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -79,13 +81,13 @@ export type FileEntryDtoInteger = FileEntryBaseDto &  {
      * @type {string}
      * @memberof FileEntryDtoInteger
      */
-    'originTitle'?: string | null;
+    'originTitle'?: string;
     /**
      * The origin room title of the file entry.
      * @type {string}
      * @memberof FileEntryDtoInteger
      */
-    'originRoomTitle'?: string | null;
+    'originRoomTitle'?: string;
     /**
      * Specifies if the file entry can be shared or not.
      * @type {boolean}
@@ -97,31 +99,31 @@ export type FileEntryDtoInteger = FileEntryBaseDto &  {
      * @type {FileEntryDtoIntegerAllOfShareSettings}
      * @memberof FileEntryDtoInteger
      */
-    'shareSettings'?: FileEntryDtoIntegerAllOfShareSettings | null;
+    'shareSettings'?: FileEntryDtoIntegerAllOfShareSettings;
     /**
      * 
      * @type {FileEntryDtoIntegerAllOfSecurity}
      * @memberof FileEntryDtoInteger
      */
-    'security'?: FileEntryDtoIntegerAllOfSecurity | null;
+    'security'?: FileEntryDtoIntegerAllOfSecurity;
     /**
      * 
      * @type {FileEntryDtoIntegerAllOfAvailableShareRights}
      * @memberof FileEntryDtoInteger
      */
-    'availableShareRights'?: FileEntryDtoIntegerAllOfAvailableShareRights | null;
+    'availableShareRights'?: FileEntryDtoIntegerAllOfAvailableShareRights;
     /**
      * The request token of the file entry.
      * @type {string}
      * @memberof FileEntryDtoInteger
      */
-    'requestToken'?: string | null;
+    'requestToken'?: string;
     /**
      * Specifies if the folder can be accessed via an external link or not.
      * @type {boolean}
      * @memberof FileEntryDtoInteger
      */
-    'external'?: boolean | null;
+    'external'?: boolean;
     /**
      * 
      * @type {ApiDateTime}
@@ -133,7 +135,7 @@ export type FileEntryDtoInteger = FileEntryBaseDto &  {
      * @type {boolean}
      * @memberof FileEntryDtoInteger
      */
-    'isLinkExpired'?: boolean | null;
+    'isLinkExpired'?: boolean;
 };
 
 

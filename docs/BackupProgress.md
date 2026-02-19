@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **link** | **string** |  | [optional] [default to undefined]
 **tenantId** | **number** |  | [optional] [default to undefined]
 **backupProgressEnum** | [**BackupProgressEnum**](BackupProgressEnum.md) |  | [optional] [default to undefined]
+**status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) |  | [optional] [default to undefined]
 **taskId** | **string** |  | [optional] [default to undefined]
 
 ## Example
@@ -27,6 +28,7 @@ const instance: BackupProgress = {
     link,
     tenantId,
     backupProgressEnum,
+    status,
     taskId,
 };
 ```

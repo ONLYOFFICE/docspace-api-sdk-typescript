@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,21 +21,15 @@
 
 /**
  * The request parameters for managing the time zone configurations.
- * @export
- * @interface TimezonesRequestsDto
  */
 export interface TimezonesRequestsDto {
     /**
      * The IANA time zone identifier.
-     * @type {string}
-     * @memberof TimezonesRequestsDto
      */
-    'id': string | null;
+    'id': string;
     /**
      * The user-friendly name for the time zone.
-     * @type {string}
-     * @memberof TimezonesRequestsDto
      */
-    'displayName': string | null;
+    'displayName': string;
 }
 

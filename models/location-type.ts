@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,42 +21,16 @@
 
 /**
  * [0 - None, 1 - Files, 2 - Folders, 3 - Documents settings, 27 - Rooms, 29 - Settings, 30 - Contacts, 31 - Agents]
- * @export
- * @enum {number}
  */
 
 export const LocationType = {
-    /**
-    * None
-    */
     None: 0,
-    /**
-    * Files
-    */
     Files: 1,
-    /**
-    * Folders
-    */
     Folders: 2,
-    /**
-    * Documents settings
-    */
     DocumentsSettings: 3,
-    /**
-    * Rooms
-    */
     Rooms: 27,
-    /**
-    * Settings
-    */
     Settings: 29,
-    /**
-    * Contacts
-    */
     Contacts: 30,
-    /**
-    * Agents
-    */
     Agents: 31
 } as const;
 

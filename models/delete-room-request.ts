@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,14 +21,10 @@
 
 /**
  * The parameters for deleting a room.
- * @export
- * @interface DeleteRoomRequest
  */
 export interface DeleteRoomRequest {
     /**
      * Specifies whether to delete a room after the editing session is finished or not.
-     * @type {boolean}
-     * @memberof DeleteRoomRequest
      */
     'deleteAfter'?: boolean;
 }

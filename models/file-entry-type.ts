@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,18 +21,10 @@
 
 /**
  * [1 - Folder, 2 - File]
- * @export
- * @enum {number}
  */
 
 export const FileEntryType = {
-    /**
-    * Folder
-    */
     Folder: 1,
-    /**
-    * File
-    */
     File: 2
 } as const;
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -25,26 +27,15 @@ import type { ItemKeyValuePairObjectObject } from './item-key-value-pair-object-
 
 /**
  * The backup parameters.
- * @export
- * @interface BackupDto
  */
 export interface BackupDto {
-    /**
-     * 
-     * @type {BackupStorageType}
-     * @memberof BackupDto
-     */
     'storageType'?: BackupStorageType;
     /**
      * The backup storage parameters.
-     * @type {Array<ItemKeyValuePairObjectObject>}
-     * @memberof BackupDto
      */
-    'storageParams'?: Array<ItemKeyValuePairObjectObject> | null;
+    'storageParams'?: Array<ItemKeyValuePairObjectObject>;
     /**
      * Specifies if a dump will be created or not.
-     * @type {boolean}
-     * @memberof BackupDto
      */
     'dump'?: boolean;
 }

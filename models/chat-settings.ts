@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -17,29 +19,10 @@
  */
 
 
-/**
- * 
- * @export
- * @interface ChatSettings
- */
 export interface ChatSettings {
-    /**
-     * 
-     * @type {number}
-     * @memberof ChatSettings
-     */
     'providerId'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ChatSettings
-     */
-    'modelId'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ChatSettings
-     */
-    'prompt'?: string | null;
+    'modelId'?: string;
+    'prompt'?: string;
+    'internal'?: boolean;
 }
 

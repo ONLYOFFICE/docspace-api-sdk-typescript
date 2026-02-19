@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,74 +21,50 @@
 
 /**
  * The user parameters.
- * @export
- * @interface EmployeeDto
  */
 export interface EmployeeDto {
     /**
      * The user ID.
-     * @type {string}
-     * @memberof EmployeeDto
      */
     'id'?: string;
     /**
-     * The user display name.
-     * @type {string}
-     * @memberof EmployeeDto
+     * The HTML-encoded user\'s display name formatted according to the default format for the current culture.
      */
-    'displayName'?: string | null;
+    'displayName'?: string;
     /**
      * The user title.
-     * @type {string}
-     * @memberof EmployeeDto
      */
-    'title'?: string | null;
+    'title'?: string;
     /**
      * The user avatar.
-     * @type {string}
-     * @memberof EmployeeDto
      */
-    'avatar'?: string | null;
+    'avatar'?: string;
     /**
      * The user original size avatar.
-     * @type {string}
-     * @memberof EmployeeDto
      */
-    'avatarOriginal'?: string | null;
+    'avatarOriginal'?: string;
     /**
      * The user maximum size avatar.
-     * @type {string}
-     * @memberof EmployeeDto
      */
-    'avatarMax'?: string | null;
+    'avatarMax'?: string;
     /**
      * The user medium size avatar.
-     * @type {string}
-     * @memberof EmployeeDto
      */
-    'avatarMedium'?: string | null;
+    'avatarMedium'?: string;
     /**
      * The user small size avatar.
-     * @type {string}
-     * @memberof EmployeeDto
      */
-    'avatarSmall'?: string | null;
+    'avatarSmall'?: string;
     /**
      * The user profile URL.
-     * @type {string}
-     * @memberof EmployeeDto
      */
-    'profileUrl'?: string | null;
+    'profileUrl'?: string;
     /**
      * Specifies if the user has an avatar or not.
-     * @type {boolean}
-     * @memberof EmployeeDto
      */
     'hasAvatar'?: boolean;
     /**
      * Specifies if the user is anonymous or not.
-     * @type {boolean}
-     * @memberof EmployeeDto
      */
     'isAnonim'?: boolean;
 }

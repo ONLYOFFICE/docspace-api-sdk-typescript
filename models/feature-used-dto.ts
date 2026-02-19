@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,21 +21,12 @@
 
 /**
  * The used space parameters of the tenant quota feature.
- * @export
- * @interface FeatureUsedDto
  */
 export interface FeatureUsedDto {
-    /**
-     * The used space value.
-     * @type {any}
-     * @memberof FeatureUsedDto
-     */
-    'value': any | null;
+    'value': any;
     /**
      * The used space title.
-     * @type {string}
-     * @memberof FeatureUsedDto
      */
-    'title'?: string | null;
+    'title'?: string;
 }
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,14 +21,10 @@
 
 /**
  * The request parameters for managing the Developer Tools access settings for the current tenant.
- * @export
- * @interface TenantDevToolsAccessSettingsDto
  */
 export interface TenantDevToolsAccessSettingsDto {
     /**
      * Determines if users have restricted access to the Developer Tools.
-     * @type {boolean}
-     * @memberof TenantDevToolsAccessSettingsDto
      */
     'limitedAccessForUsers'?: boolean;
 }

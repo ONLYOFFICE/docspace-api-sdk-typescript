@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,27 +21,19 @@
 
 /**
  * The presence or absence of the documents in the Open Recent... menu option.
- * @export
- * @interface RecentConfig
  */
 export interface RecentConfig {
     /**
      * The folder where the document is stored.
-     * @type {string}
-     * @memberof RecentConfig
      */
-    'folder'?: string | null;
+    'folder'?: string;
     /**
      * The document title that will be displayed in the Open Recent... menu option.
-     * @type {string}
-     * @memberof RecentConfig
      */
-    'title'?: string | null;
+    'title'?: string;
     /**
      * The absolute URL to the document where it is stored.
-     * @type {string}
-     * @memberof RecentConfig
      */
-    'url'?: string | null;
+    'url'?: string;
 }
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,22 +21,11 @@
 
 /**
  * [0 - Desktop, 1 - Mobile, 2 - Embedded]
- * @export
- * @enum {number}
  */
 
 export const EditorType = {
-    /**
-    * Desktop
-    */
     Desktop: 0,
-    /**
-    * Mobile
-    */
     Mobile: 1,
-    /**
-    * Embedded
-    */
     Embedded: 2
 } as const;
 

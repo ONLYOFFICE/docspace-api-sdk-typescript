@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -28,414 +30,253 @@ import type { OrderBy } from './order-by';
 
 /**
  * The file settings parameters.
- * @export
- * @interface FilesSettingsDto
  */
 export interface FilesSettingsDto {
     /**
      * The list of extensions of the viewed images.
-     * @type {Array<string>}
-     * @memberof FilesSettingsDto
      */
-    'extsImagePreviewed'?: Array<string> | null;
+    'extsImagePreviewed'?: Array<string>;
     /**
      * The list of extensions of the viewed media files.
-     * @type {Array<string>}
-     * @memberof FilesSettingsDto
      */
-    'extsMediaPreviewed'?: Array<string> | null;
+    'extsMediaPreviewed'?: Array<string>;
     /**
      * The list of extensions of the viewed files.
-     * @type {Array<string>}
-     * @memberof FilesSettingsDto
      */
-    'extsWebPreviewed'?: Array<string> | null;
+    'extsWebPreviewed'?: Array<string>;
     /**
      * The list of extensions of the edited files.
-     * @type {Array<string>}
-     * @memberof FilesSettingsDto
      */
-    'extsWebEdited'?: Array<string> | null;
+    'extsWebEdited'?: Array<string>;
     /**
      * The list of extensions of the encrypted files.
-     * @type {Array<string>}
-     * @memberof FilesSettingsDto
      */
-    'extsWebEncrypt'?: Array<string> | null;
+    'extsWebEncrypt'?: Array<string>;
     /**
      * The list of extensions of the reviewed files.
-     * @type {Array<string>}
-     * @memberof FilesSettingsDto
      */
-    'extsWebReviewed'?: Array<string> | null;
+    'extsWebReviewed'?: Array<string>;
     /**
      * The list of extensions of the custom filter files.
-     * @type {Array<string>}
-     * @memberof FilesSettingsDto
      */
-    'extsWebCustomFilterEditing'?: Array<string> | null;
+    'extsWebCustomFilterEditing'?: Array<string>;
     /**
      * The list of extensions of the files that are restricted for editing.
-     * @type {Array<string>}
-     * @memberof FilesSettingsDto
      */
-    'extsWebRestrictedEditing'?: Array<string> | null;
+    'extsWebRestrictedEditing'?: Array<string>;
     /**
      * The list of extensions of the commented files.
-     * @type {Array<string>}
-     * @memberof FilesSettingsDto
      */
-    'extsWebCommented'?: Array<string> | null;
+    'extsWebCommented'?: Array<string>;
     /**
      * The list of extensions of the template files.
-     * @type {Array<string>}
-     * @memberof FilesSettingsDto
      */
-    'extsWebTemplate'?: Array<string> | null;
+    'extsWebTemplate'?: Array<string>;
     /**
      * The list of extensions of the files that must be converted.
-     * @type {Array<string>}
-     * @memberof FilesSettingsDto
      */
-    'extsMustConvert'?: Array<string> | null;
+    'extsMustConvert'?: Array<string>;
     /**
      * The list of the convertible extensions.
-     * @type {{ [key: string]: Array<string> | null; }}
-     * @memberof FilesSettingsDto
      */
-    'extsConvertible'?: { [key: string]: Array<string> | null; } | null;
+    'extsConvertible'?: { [key: string]: Array<string>; };
     /**
      * The list of the uploadable extensions.
-     * @type {Array<string>}
-     * @memberof FilesSettingsDto
      */
-    'extsUploadable'?: Array<string> | null;
+    'extsUploadable'?: Array<string>;
     /**
      * The list of extensions of the archive files.
-     * @type {Array<string>}
-     * @memberof FilesSettingsDto
      */
-    'extsArchive'?: Array<string> | null;
+    'extsArchive'?: Array<string>;
     /**
      * The list of the video extensions.
-     * @type {Array<string>}
-     * @memberof FilesSettingsDto
      */
-    'extsVideo'?: Array<string> | null;
+    'extsVideo'?: Array<string>;
     /**
      * The list of the audio extensions.
-     * @type {Array<string>}
-     * @memberof FilesSettingsDto
      */
-    'extsAudio'?: Array<string> | null;
+    'extsAudio'?: Array<string>;
     /**
      * The list of the image extensions.
-     * @type {Array<string>}
-     * @memberof FilesSettingsDto
      */
-    'extsImage'?: Array<string> | null;
+    'extsImage'?: Array<string>;
     /**
      * The list of the spreadsheet extensions.
-     * @type {Array<string>}
-     * @memberof FilesSettingsDto
      */
-    'extsSpreadsheet'?: Array<string> | null;
+    'extsSpreadsheet'?: Array<string>;
     /**
      * The list of the presentation extensions.
-     * @type {Array<string>}
-     * @memberof FilesSettingsDto
      */
-    'extsPresentation'?: Array<string> | null;
+    'extsPresentation'?: Array<string>;
     /**
      * The list of the text document extensions.
-     * @type {Array<string>}
-     * @memberof FilesSettingsDto
      */
-    'extsDocument'?: Array<string> | null;
+    'extsDocument'?: Array<string>;
     /**
      * The list of the diagram extensions.
-     * @type {Array<string>}
-     * @memberof FilesSettingsDto
      */
-    'extsDiagram'?: Array<string> | null;
-    /**
-     * 
-     * @type {FilesSettingsDtoInternalFormats}
-     * @memberof FilesSettingsDto
-     */
-    'internalFormats'?: FilesSettingsDtoInternalFormats | null;
+    'extsDiagram'?: Array<string>;
+    'internalFormats'?: FilesSettingsDtoInternalFormats;
     /**
      * The master form extension.
-     * @type {string}
-     * @memberof FilesSettingsDto
      */
-    'masterFormExtension'?: string | null;
+    'masterFormExtension'?: string;
     /**
      * The URL parameter which specifies the file version.
-     * @type {string}
-     * @memberof FilesSettingsDto
      */
-    'paramVersion'?: string | null;
+    'paramVersion'?: string;
     /**
      * The URL parameter which specifies the output type of the converted file.
-     * @type {string}
-     * @memberof FilesSettingsDto
      */
-    'paramOutType'?: string | null;
+    'paramOutType'?: string;
     /**
      * The URL to download a file.
-     * @type {string}
-     * @memberof FilesSettingsDto
      */
-    'fileDownloadUrlString'?: string | null;
+    'fileDownloadUrlString'?: string;
     /**
      * The URL to the file web viewer.
-     * @type {string}
-     * @memberof FilesSettingsDto
      */
-    'fileWebViewerUrlString'?: string | null;
+    'fileWebViewerUrlString'?: string;
     /**
      * The external URL to the file web viewer.
-     * @type {string}
-     * @memberof FilesSettingsDto
      */
-    'fileWebViewerExternalUrlString'?: string | null;
+    'fileWebViewerExternalUrlString'?: string;
     /**
      * The URL to the file web editor.
-     * @type {string}
-     * @memberof FilesSettingsDto
      */
-    'fileWebEditorUrlString'?: string | null;
+    'fileWebEditorUrlString'?: string;
     /**
      * The external URL to the file web editor.
-     * @type {string}
-     * @memberof FilesSettingsDto
      */
-    'fileWebEditorExternalUrlString'?: string | null;
+    'fileWebEditorExternalUrlString'?: string;
     /**
      * The redirect URL to the file viewer.
-     * @type {string}
-     * @memberof FilesSettingsDto
      */
-    'fileRedirectPreviewUrlString'?: string | null;
+    'fileRedirectPreviewUrlString'?: string;
     /**
      * The URL to the file thumbnail.
-     * @type {string}
-     * @memberof FilesSettingsDto
      */
-    'fileThumbnailUrlString'?: string | null;
+    'fileThumbnailUrlString'?: string;
     /**
      * Specifies whether to confirm the file deletion or not.
-     * @type {boolean}
-     * @memberof FilesSettingsDto
      */
     'confirmDelete'?: boolean;
     /**
      * Specifies whether to allow users to connect the third-party storages.
-     * @type {boolean}
-     * @memberof FilesSettingsDto
      */
     'enableThirdParty'?: boolean;
     /**
      * Specifies whether to enable sharing external links to the files.
-     * @type {boolean}
-     * @memberof FilesSettingsDto
      */
     'externalShare'?: boolean;
     /**
      * Specifies whether to enable sharing files on social media.
-     * @type {boolean}
-     * @memberof FilesSettingsDto
      */
     'externalShareSocialMedia'?: boolean;
     /**
      * Specifies whether to enable storing original files.
-     * @type {boolean}
-     * @memberof FilesSettingsDto
      */
     'storeOriginalFiles'?: boolean;
     /**
      * Specifies whether to keep the new file name.
-     * @type {boolean}
-     * @memberof FilesSettingsDto
      */
     'keepNewFileName'?: boolean;
     /**
      * Specifies whether to display the file extension.
-     * @type {boolean}
-     * @memberof FilesSettingsDto
      */
     'displayFileExtension'?: boolean;
     /**
      * Specifies whether to display the conversion notification.
-     * @type {boolean}
-     * @memberof FilesSettingsDto
      */
     'convertNotify'?: boolean;
     /**
      * Specifies whether to hide the confirmation dialog for the cancel operation.
-     * @type {boolean}
-     * @memberof FilesSettingsDto
      */
     'hideConfirmCancelOperation'?: boolean;
     /**
      * Specifies whether to hide the confirmation dialog  for saving the file copy in the original format when converting a file.
-     * @type {boolean}
-     * @memberof FilesSettingsDto
      */
     'hideConfirmConvertSave'?: boolean;
     /**
      * Specifies whether to hide the confirmation dialog  for opening the conversion result.
-     * @type {boolean}
-     * @memberof FilesSettingsDto
      */
     'hideConfirmConvertOpen'?: boolean;
     /**
      * Specifies whether to hide the confirmation dialog about the file lifetime in the room.
-     * @type {boolean}
-     * @memberof FilesSettingsDto
      */
     'hideConfirmRoomLifetime'?: boolean;
-    /**
-     * 
-     * @type {OrderBy}
-     * @memberof FilesSettingsDto
-     */
     'defaultOrder'?: OrderBy;
     /**
      * Specifies whether to forcesave the files or not.
-     * @type {boolean}
-     * @memberof FilesSettingsDto
      */
     'forcesave'?: boolean;
     /**
      * Specifies whether to store the forcesaved file versions or not.
-     * @type {boolean}
-     * @memberof FilesSettingsDto
      */
     'storeForcesave'?: boolean;
     /**
      * Specifies if the Recent section is displayed or not.
-     * @type {boolean}
-     * @memberof FilesSettingsDto
      */
     'recentSection'?: boolean;
     /**
      * Specifies if the Favorites section is displayed or not.
-     * @type {boolean}
-     * @memberof FilesSettingsDto
      */
     'favoritesSection'?: boolean;
     /**
      * Specifies if the Templates section is displayed or not.
-     * @type {boolean}
-     * @memberof FilesSettingsDto
      */
     'templatesSection'?: boolean;
     /**
      * Specifies whether to download the .tar.gz files or not.
-     * @type {boolean}
-     * @memberof FilesSettingsDto
      */
     'downloadTarGz'?: boolean;
-    /**
-     * 
-     * @type {AutoCleanUpData}
-     * @memberof FilesSettingsDto
-     */
     'automaticallyCleanUp'?: AutoCleanUpData;
     /**
      * Specifies whether the file can be searched by its content or not.
-     * @type {boolean}
-     * @memberof FilesSettingsDto
      */
     'canSearchByContent'?: boolean;
     /**
      * The default access rights in sharing settings.
-     * @type {Array<number>}
-     * @memberof FilesSettingsDto
      */
-    'defaultSharingAccessRights'?: Array<FilesSettingsDtoDefaultSharingAccessRightsEnum> | null;
+    'defaultSharingAccessRights'?: Array<FilesSettingsDtoDefaultSharingAccessRightsEnum>;
     /**
      * The maximum number of upload threads.
-     * @type {number}
-     * @memberof FilesSettingsDto
      */
     'maxUploadThreadCount'?: number;
     /**
      * The size of a large file that is uploaded in chunks.
-     * @type {number}
-     * @memberof FilesSettingsDto
      */
     'chunkUploadSize'?: number;
     /**
      * Specifies whether to open the editor in the same tab or not.
-     * @type {boolean}
-     * @memberof FilesSettingsDto
      */
     'openEditorInSameTab'?: boolean;
     /**
-     * List of extensions available for vectorization
-     * @type {Array<string>}
-     * @memberof FilesSettingsDto
+     * Specifies whether the grouping of rooms is enabled or not.
      */
-    'extsFilesVectorized'?: Array<string> | null;
+    'organizeRoomsGrouping'?: boolean;
+    /**
+     * List of extensions available for vectorization
+     */
+    'extsFilesVectorized'?: Array<string>;
     /**
      * The maximum file size for vectorization
-     * @type {number}
-     * @memberof FilesSettingsDto
      */
     'maxVectorizationFileSize'?: number;
 }
 
 export const FilesSettingsDtoDefaultSharingAccessRightsEnum = {
-    /**
-    * None
-    */
     None: 0,
-    /**
-    * Read and write
-    */
     ReadWrite: 1,
-    /**
-    * Read
-    */
     Read: 2,
-    /**
-    * Restrict
-    */
     Restrict: 3,
-    /**
-    * Varies
-    */
     Varies: 4,
-    /**
-    * Review
-    */
     Review: 5,
-    /**
-    * Comment
-    */
     Comment: 6,
-    /**
-    * Fill forms
-    */
     FillForms: 7,
-    /**
-    * Custom filter
-    */
     CustomFilter: 8,
-    /**
-    * Room manager
-    */
     RoomManager: 9,
-    /**
-    * Editing
-    */
     Editing: 10,
-    /**
-    * Content creator
-    */
     ContentCreator: 11
 } as const;
 

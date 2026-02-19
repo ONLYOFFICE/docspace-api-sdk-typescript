@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -18,19 +20,15 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { DuplicateRequestDtoAllOfFileIds } from './duplicate-request-dto-all-of-file-ids';
+import type { ContinueChatBodyFilesInner } from './continue-chat-body-files-inner';
 
 /**
  * The request parameters for updating the rooms.
- * @export
- * @interface UpdateRoomsRoomIdsRequestDtoInteger
  */
 export interface UpdateRoomsRoomIdsRequestDtoInteger {
     /**
      * The list of room IDs.
-     * @type {Array<DuplicateRequestDtoAllOfFileIds>}
-     * @memberof UpdateRoomsRoomIdsRequestDtoInteger
      */
-    'roomIds'?: Array<DuplicateRequestDtoAllOfFileIds> | null;
+    'roomIds'?: Array<ContinueChatBodyFilesInner>;
 }
 

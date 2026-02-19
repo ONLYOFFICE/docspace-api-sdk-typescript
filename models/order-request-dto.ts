@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,14 +21,10 @@
 
 /**
  * The parameters for ordering requests.
- * @export
- * @interface OrderRequestDto
  */
 export interface OrderRequestDto {
     /**
      * The order value.
-     * @type {number}
-     * @memberof OrderRequestDto
      */
     'order'?: number;
 }

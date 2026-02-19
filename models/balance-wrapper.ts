@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -18,46 +20,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
+import type { Balance } from './balance';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Balance } from './balance';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
-/**
- * 
- * @export
- * @interface BalanceWrapper
- */
 export interface BalanceWrapper {
-    /**
-     * 
-     * @type {Balance}
-     * @memberof BalanceWrapper
-     */
     'response'?: Balance;
-    /**
-     * 
-     * @type {number}
-     * @memberof BalanceWrapper
-     */
     'count'?: number;
-    /**
-     * 
-     * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof BalanceWrapper
-     */
-    'links'?: Array<ActiveConnectionsWrapperLinksInner>;
-    /**
-     * 
-     * @type {number}
-     * @memberof BalanceWrapper
-     */
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
     'status'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof BalanceWrapper
-     */
     'statusCode'?: number;
 }
 

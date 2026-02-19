@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,51 +24,32 @@ import type { EditHistoryUrl } from './edit-history-url';
 
 /**
  * The file editing history data.
- * @export
- * @interface EditHistoryDataDto
  */
 export interface EditHistoryDataDto {
     /**
      * The URL address of the file with the document changes data.
-     * @type {string}
-     * @memberof EditHistoryDataDto
      */
-    'changesUrl'?: string | null;
+    'changesUrl'?: string;
     /**
      * The document identifier used to unambiguously identify the document file.
-     * @type {string}
-     * @memberof EditHistoryDataDto
      */
-    'key': string | null;
-    /**
-     * 
-     * @type {EditHistoryUrl}
-     * @memberof EditHistoryDataDto
-     */
+    'key': string;
     'previous'?: EditHistoryUrl;
     /**
      * The encrypted signature added to the parameter in the form of a token.
-     * @type {string}
-     * @memberof EditHistoryDataDto
      */
-    'token'?: string | null;
+    'token'?: string;
     /**
      * The URL address of the current document version.
-     * @type {string}
-     * @memberof EditHistoryDataDto
      */
-    'url': string | null;
+    'url': string;
     /**
      * The document version number.
-     * @type {number}
-     * @memberof EditHistoryDataDto
      */
     'version': number;
     /**
      * The document extension.
-     * @type {string}
-     * @memberof EditHistoryDataDto
      */
-    'fileType': string | null;
+    'fileType': string;
 }
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,15 +24,8 @@ import type { TenantDeepLinkSettings } from './tenant-deep-link-settings';
 
 /**
  * The request parameters for managing the deep link configuration.
- * @export
- * @interface DeepLinkConfigurationRequestsDto
  */
 export interface DeepLinkConfigurationRequestsDto {
-    /**
-     * 
-     * @type {TenantDeepLinkSettings}
-     * @memberof DeepLinkConfigurationRequestsDto
-     */
     'deepLinkSettings'?: TenantDeepLinkSettings;
 }
 

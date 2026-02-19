@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,15 +21,11 @@
 
 /**
  * The rooms notification settings.
- * @export
- * @interface RoomsNotificationSettingsDto
  */
 export interface RoomsNotificationSettingsDto {
     /**
      * The list of rooms with the disabled notifications.
-     * @type {Array<object>}
-     * @memberof RoomsNotificationSettingsDto
      */
-    'disabledRooms'?: Array<object> | null;
+    'disabledRooms'?: Array<object>;
 }
 

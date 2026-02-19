@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,56 +21,38 @@
 
 /**
  * The form role.
- * @export
- * @interface FormRole
  */
 export interface FormRole {
     /**
      * The room ID.
-     * @type {number}
-     * @memberof FormRole
      */
     'roomId'?: number;
     /**
      * The role name.
-     * @type {string}
-     * @memberof FormRole
      */
-    'roleName'?: string | null;
+    'roleName'?: string;
     /**
      * The role color.
-     * @type {string}
-     * @memberof FormRole
      */
-    'roleColor'?: string | null;
+    'roleColor'?: string;
     /**
      * The user ID.
-     * @type {string}
-     * @memberof FormRole
      */
     'userId'?: string;
     /**
      * The role sequence.
-     * @type {number}
-     * @memberof FormRole
      */
     'sequence'?: number;
     /**
      * Specifies if the role was submitted or not.
-     * @type {boolean}
-     * @memberof FormRole
      */
     'submitted'?: boolean;
     /**
      * The date and time when the role was opened.
-     * @type {string}
-     * @memberof FormRole
      */
     'openedAt'?: string;
     /**
      * The date and time when the role was submitted.
-     * @type {string}
-     * @memberof FormRole
      */
     'submissionDate'?: string;
 }

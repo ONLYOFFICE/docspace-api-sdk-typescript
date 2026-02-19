@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,15 +21,11 @@
 
 /**
  * The request parameters for specifying payment quantity.
- * @export
- * @interface QuantityRequestDto
  */
 export interface QuantityRequestDto {
     /**
      * The mapping of item identifiers to their respective quantities in the payment.
-     * @type {{ [key: string]: number; }}
-     * @memberof QuantityRequestDto
      */
-    'quantity'?: { [key: string]: number; } | null;
+    'quantity'?: { [key: string]: number; };
 }
 

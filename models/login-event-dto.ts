@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -25,88 +27,54 @@ import type { MessageAction } from './message-action';
 
 /**
  * The login event parameters.
- * @export
- * @interface LoginEventDto
  */
 export interface LoginEventDto {
     /**
      * The login event ID.
-     * @type {number}
-     * @memberof LoginEventDto
      */
     'id'?: number;
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof LoginEventDto
-     */
     'date'?: ApiDateTime;
     /**
      * The user name of the login event.
-     * @type {string}
-     * @memberof LoginEventDto
      */
-    'user'?: string | null;
+    'user'?: string;
     /**
      * The user ID of the login event.
-     * @type {string}
-     * @memberof LoginEventDto
      */
     'userId'?: string;
     /**
      * The user login of the login event.
-     * @type {string}
-     * @memberof LoginEventDto
      */
-    'login'?: string | null;
+    'login'?: string;
     /**
      * The login event action.
-     * @type {string}
-     * @memberof LoginEventDto
      */
-    'action'?: string | null;
-    /**
-     * 
-     * @type {MessageAction}
-     * @memberof LoginEventDto
-     */
+    'action'?: string;
     'actionId'?: MessageAction;
     /**
      * The login event IP.
-     * @type {string}
-     * @memberof LoginEventDto
      */
-    'ip'?: string | null;
+    'ip'?: string;
     /**
      * The login event country.
-     * @type {string}
-     * @memberof LoginEventDto
      */
-    'country'?: string | null;
+    'country'?: string;
     /**
      * The login event city.
-     * @type {string}
-     * @memberof LoginEventDto
      */
-    'city'?: string | null;
+    'city'?: string;
     /**
      * The login event browser.
-     * @type {string}
-     * @memberof LoginEventDto
      */
-    'browser'?: string | null;
+    'browser'?: string;
     /**
      * The login event platform.
-     * @type {string}
-     * @memberof LoginEventDto
      */
-    'platform'?: string | null;
+    'platform'?: string;
     /**
      * The login event page.
-     * @type {string}
-     * @memberof LoginEventDto
      */
-    'page'?: string | null;
+    'page'?: string;
 }
 
 

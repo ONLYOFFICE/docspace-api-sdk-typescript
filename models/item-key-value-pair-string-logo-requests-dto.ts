@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -20,23 +22,8 @@
 // @ts-ignore
 import type { LogoRequestsDto } from './logo-requests-dto';
 
-/**
- * 
- * @export
- * @interface ItemKeyValuePairStringLogoRequestsDto
- */
 export interface ItemKeyValuePairStringLogoRequestsDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof ItemKeyValuePairStringLogoRequestsDto
-     */
-    'key'?: string | null;
-    /**
-     * 
-     * @type {LogoRequestsDto}
-     * @memberof ItemKeyValuePairStringLogoRequestsDto
-     */
+    'key'?: string;
     'value'?: LogoRequestsDto;
 }
 

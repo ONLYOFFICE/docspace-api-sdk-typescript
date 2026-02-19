@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,50 +21,18 @@
 
 /**
  * [0 - None, 1 - Box, 2 - DropBox, 3 - GoogleDrive, 4 - kDrive, 5 - OneDrive, 6 - SharePoint, 7 - WebDav, 8 - Yandex, 9 - Storage]
- * @export
- * @enum {number}
  */
 
 export const ProviderFilter = {
-    /**
-    * None
-    */
     None: 0,
-    /**
-    * Box
-    */
     Box: 1,
-    /**
-    * DropBox
-    */
     DropBox: 2,
-    /**
-    * GoogleDrive
-    */
     GoogleDrive: 3,
-    /**
-    * kDrive
-    */
     kDrive: 4,
-    /**
-    * OneDrive
-    */
     OneDrive: 5,
-    /**
-    * SharePoint
-    */
     SharePoint: 6,
-    /**
-    * WebDav
-    */
     WebDav: 7,
-    /**
-    * Yandex
-    */
     Yandex: 8,
-    /**
-    * Storage
-    */
     Storage: 9
 } as const;
 

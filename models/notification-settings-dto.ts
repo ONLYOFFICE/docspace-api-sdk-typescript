@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,20 +24,11 @@ import type { NotificationType } from './notification-type';
 
 /**
  * The notification settings parameters.
- * @export
- * @interface NotificationSettingsDto
  */
 export interface NotificationSettingsDto {
-    /**
-     * 
-     * @type {NotificationType}
-     * @memberof NotificationSettingsDto
-     */
     'type'?: NotificationType;
     /**
      * Specifies if the notification type is enabled or not.
-     * @type {boolean}
-     * @memberof NotificationSettingsDto
      */
     'isEnabled'?: boolean;
 }

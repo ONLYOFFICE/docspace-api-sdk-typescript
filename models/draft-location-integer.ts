@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,33 +21,23 @@
 
 /**
  * The file draft parameters.
- * @export
- * @interface DraftLocationInteger
  */
 export interface DraftLocationInteger {
     /**
      * The InProcess folder ID of the draft.
-     * @type {number}
-     * @memberof DraftLocationInteger
      */
     'folderId'?: number;
     /**
      * The InProcess folder title of the draft.
-     * @type {string}
-     * @memberof DraftLocationInteger
      */
-    'folderTitle'?: string | null;
+    'folderTitle'?: string;
     /**
      * The draft ID.
-     * @type {number}
-     * @memberof DraftLocationInteger
      */
     'fileId'?: number;
     /**
      * The draft title.
-     * @type {string}
-     * @memberof DraftLocationInteger
      */
-    'fileTitle'?: string | null;
+    'fileTitle'?: string;
 }
 

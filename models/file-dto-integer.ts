@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -97,19 +99,25 @@ export type FileDtoInteger = FileEntryDtoInteger &  {
      * @type {string}
      * @memberof FileDtoInteger
      */
-    'contentLength'?: string | null;
+    'contentLength'?: string;
     /**
      * The pure content length of the file.
      * @type {number}
      * @memberof FileDtoInteger
      */
-    'pureContentLength'?: number | null;
+    'pureContentLength'?: number;
     /**
      * 
      * @type {FileStatus}
      * @memberof FileDtoInteger
      */
     'fileStatus'?: FileStatus;
+    /**
+     * The list of users editing the file.
+     * @type {{ [key: string]: string; }}
+     * @memberof FileDtoInteger
+     */
+    'editingBy'?: { [key: string]: string; };
     /**
      * Specifies if the file is muted or not.
      * @type {boolean}
@@ -121,13 +129,13 @@ export type FileDtoInteger = FileEntryDtoInteger &  {
      * @type {string}
      * @memberof FileDtoInteger
      */
-    'viewUrl'?: string | null;
+    'viewUrl'?: string;
     /**
      * The Web URL link to the file.
      * @type {string}
      * @memberof FileDtoInteger
      */
-    'webUrl'?: string | null;
+    'webUrl'?: string;
     /**
      * 
      * @type {FileType}
@@ -139,25 +147,25 @@ export type FileDtoInteger = FileEntryDtoInteger &  {
      * @type {string}
      * @memberof FileDtoInteger
      */
-    'fileExst'?: string | null;
+    'fileExst'?: string;
     /**
      * The comment to the file.
      * @type {string}
      * @memberof FileDtoInteger
      */
-    'comment'?: string | null;
+    'comment'?: string;
     /**
      * Specifies if the file is encrypted or not.
      * @type {boolean}
      * @memberof FileDtoInteger
      */
-    'encrypted'?: boolean | null;
+    'encrypted'?: boolean;
     /**
      * The thumbnail URL of the file.
      * @type {string}
      * @memberof FileDtoInteger
      */
-    'thumbnailUrl'?: string | null;
+    'thumbnailUrl'?: string;
     /**
      * 
      * @type {Thumbnail}
@@ -169,19 +177,19 @@ export type FileDtoInteger = FileEntryDtoInteger &  {
      * @type {boolean}
      * @memberof FileDtoInteger
      */
-    'locked'?: boolean | null;
+    'locked'?: boolean;
     /**
      * The user ID of the person who locked the file.
      * @type {string}
      * @memberof FileDtoInteger
      */
-    'lockedBy'?: string | null;
+    'lockedBy'?: string;
     /**
      * Specifies if the file has a draft or not.
      * @type {boolean}
      * @memberof FileDtoInteger
      */
-    'hasDraft'?: boolean | null;
+    'hasDraft'?: boolean;
     /**
      * 
      * @type {FormFillingStatus}
@@ -193,37 +201,37 @@ export type FileDtoInteger = FileEntryDtoInteger &  {
      * @type {boolean}
      * @memberof FileDtoInteger
      */
-    'isForm'?: boolean | null;
+    'isForm'?: boolean;
     /**
      * Specifies if the Custom Filter editing mode is enabled for a file or not.
      * @type {boolean}
      * @memberof FileDtoInteger
      */
-    'customFilterEnabled'?: boolean | null;
+    'customFilterEnabled'?: boolean;
     /**
      * The name of the user who enabled a Custom Filter editing mode for a file.
      * @type {string}
      * @memberof FileDtoInteger
      */
-    'customFilterEnabledBy'?: string | null;
+    'customFilterEnabledBy'?: string;
     /**
      * Specifies if the filling has started or not.
      * @type {boolean}
      * @memberof FileDtoInteger
      */
-    'startFilling'?: boolean | null;
+    'startFilling'?: boolean;
     /**
      * The InProcess folder ID of the file.
      * @type {number}
      * @memberof FileDtoInteger
      */
-    'inProcessFolderId'?: number | null;
+    'inProcessFolderId'?: number;
     /**
      * The InProcess folder title of the file.
      * @type {string}
      * @memberof FileDtoInteger
      */
-    'inProcessFolderTitle'?: string | null;
+    'inProcessFolderTitle'?: string;
     /**
      * 
      * @type {DraftLocationInteger}
@@ -235,7 +243,7 @@ export type FileDtoInteger = FileEntryDtoInteger &  {
      * @type {FileDtoIntegerAllOfViewAccessibility}
      * @memberof FileDtoInteger
      */
-    'viewAccessibility'?: FileDtoIntegerAllOfViewAccessibility | null;
+    'viewAccessibility'?: FileDtoIntegerAllOfViewAccessibility;
     /**
      * 
      * @type {ApiDateTime}

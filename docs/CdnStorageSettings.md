@@ -6,8 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **module** | **string** |  | [optional] [default to undefined]
-**props** | **{ [key: string]: string | null; }** |  | [optional] [default to undefined]
-**id** | **string** |  | [optional] [readonly] [default to undefined]
+**props** | **{ [key: string]: string; }** |  | [optional] [default to undefined]
 **lastModified** | **string** |  | [optional] [default to undefined]
 
 ## Example
@@ -18,7 +17,6 @@ import { CdnStorageSettings } from '@onlyoffice/docspace-api-sdk';
 const instance: CdnStorageSettings = {
     module,
     props,
-    id,
     lastModified,
 };
 ```

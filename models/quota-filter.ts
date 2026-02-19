@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,22 +21,11 @@
 
 /**
  * [0 - All, 1 - Default, 2 - Custom]
- * @export
- * @enum {number}
  */
 
 export const QuotaFilter = {
-    /**
-    * All
-    */
     All: 0,
-    /**
-    * Default
-    */
     Default: 1,
-    /**
-    * Custom
-    */
     Custom: 2
 } as const;
 

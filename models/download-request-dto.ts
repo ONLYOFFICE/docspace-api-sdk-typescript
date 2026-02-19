@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -40,19 +42,19 @@ export type DownloadRequestDto = FileOperationRequestBaseDto &  {
      * @type {Array<DownloadRequestDtoAllOfFolderIds>}
      * @memberof DownloadRequestDto
      */
-    'folderIds'?: Array<DownloadRequestDtoAllOfFolderIds> | null;
+    'folderIds'?: Array<DownloadRequestDtoAllOfFolderIds>;
     /**
      * The list of file IDs to be downloaded.
      * @type {Array<DownloadRequestDtoAllOfFileIds>}
      * @memberof DownloadRequestDto
      */
-    'fileIds'?: Array<DownloadRequestDtoAllOfFileIds> | null;
+    'fileIds'?: Array<DownloadRequestDtoAllOfFileIds>;
     /**
      * The list of file IDs which will be converted.
      * @type {Array<DownloadRequestItemDto>}
      * @memberof DownloadRequestDto
      */
-    'fileConvertIds'?: Array<DownloadRequestItemDto> | null;
+    'fileConvertIds'?: Array<DownloadRequestItemDto>;
 };
 
 

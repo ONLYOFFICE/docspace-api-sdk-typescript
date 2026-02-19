@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,27 +21,19 @@
 
 /**
  * The request parameters for updating an existing API key.
- * @export
- * @interface UpdateApiKeyRequest
  */
 export interface UpdateApiKeyRequest {
     /**
      * The new name for the API key.
-     * @type {string}
-     * @memberof UpdateApiKeyRequest
      */
-    'name'?: string | null;
+    'name'?: string;
     /**
      * The new list of permissions for the API key.
-     * @type {Array<string>}
-     * @memberof UpdateApiKeyRequest
      */
-    'permissions'?: Array<string> | null;
+    'permissions'?: Array<string>;
     /**
      * Indicates whether the API key should be active or not.
-     * @type {boolean}
-     * @memberof UpdateApiKeyRequest
      */
-    'isActive'?: boolean | null;
+    'isActive'?: boolean;
 }
 

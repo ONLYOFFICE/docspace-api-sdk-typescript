@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,21 +21,15 @@
 
 /**
  * The configuration settings for the web plugin instance.
- * @export
- * @interface WebPluginRequests
  */
 export interface WebPluginRequests {
     /**
      * Controls whether the web plugin is active and operational.
-     * @type {boolean}
-     * @memberof WebPluginRequests
      */
     'enabled'?: boolean;
     /**
      * The JSON-formatted configuration settings for the web plugin.
-     * @type {string}
-     * @memberof WebPluginRequests
      */
-    'settings': string | null;
+    'settings': string;
 }
 

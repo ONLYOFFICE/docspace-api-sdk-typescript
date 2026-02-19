@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,22 +21,11 @@
 
 /**
  * [0 - In Progress, 1 - Completed, 2 - Failed]
- * @export
- * @enum {number}
  */
 
 export const VectorizationStatus = {
-    /**
-    * In Progress
-    */
     InProgress: 0,
-    /**
-    * Completed
-    */
     Completed: 1,
-    /**
-    * Failed
-    */
     Failed: 2
 } as const;
 

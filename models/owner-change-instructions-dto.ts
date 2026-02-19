@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,21 +21,15 @@
 
 /**
  * The owner change instructions parameters.
- * @export
- * @interface OwnerChangeInstructionsDto
  */
 export interface OwnerChangeInstructionsDto {
     /**
      * The owner change instructions status.
-     * @type {number}
-     * @memberof OwnerChangeInstructionsDto
      */
     'status'?: number;
     /**
      * The owner change instructions message.
-     * @type {string}
-     * @memberof OwnerChangeInstructionsDto
      */
-    'message'?: string | null;
+    'message'?: string;
 }
 

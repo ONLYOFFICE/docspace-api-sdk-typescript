@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,8 +21,6 @@
 
 /**
  * [Base - Base, Dark - Dark, System - System]
- * @export
- * @enum {string}
  */
 
 export const DarkThemeSettingsType = {

@@ -228,6 +228,7 @@ const { status, data } = await apiInstance.updateUserType(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of users with the detailed information |  -  |
+|**403** | No permissions to perform this action |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

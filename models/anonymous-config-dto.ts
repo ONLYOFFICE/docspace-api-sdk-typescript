@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,14 +21,10 @@
 
 /**
  * The anonymous config parameters.
- * @export
- * @interface AnonymousConfigDto
  */
 export interface AnonymousConfigDto {
     /**
      * Specifies if the anonymous is a request.
-     * @type {boolean}
-     * @memberof AnonymousConfigDto
      */
     'request': boolean;
 }

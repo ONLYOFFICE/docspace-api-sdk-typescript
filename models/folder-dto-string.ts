@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -70,7 +72,7 @@ export type FolderDtoString = FileEntryDtoString &  {
      * @type {string}
      * @memberof FolderDtoString
      */
-    'parentId'?: string | null;
+    'parentId'?: string;
     /**
      * The number of files that the folder contains.
      * @type {number}
@@ -88,7 +90,7 @@ export type FolderDtoString = FileEntryDtoString &  {
      * @type {boolean}
      * @memberof FolderDtoString
      */
-    'isShareable'?: boolean | null;
+    'isShareable'?: boolean;
     /**
      * The new element index in the folder.
      * @type {number}
@@ -106,7 +108,7 @@ export type FolderDtoString = FileEntryDtoString &  {
      * @type {Array<string>}
      * @memberof FolderDtoString
      */
-    'tags'?: Array<string> | null;
+    'tags'?: Array<string>;
     /**
      * 
      * @type {Logo}
@@ -166,38 +168,38 @@ export type FolderDtoString = FileEntryDtoString &  {
      * @type {boolean}
      * @memberof FolderDtoString
      */
-    'inRoom'?: boolean | null;
+    'inRoom'?: boolean;
     /**
      * The folder quota limit.
      * @type {number}
      * @memberof FolderDtoString
      */
-    'quotaLimit'?: number | null;
+    'quotaLimit'?: number;
     /**
      * Specifies if the folder room has a custom quota or not.
      * @type {boolean}
      * @memberof FolderDtoString
      */
-    'isCustomQuota'?: boolean | null;
+    'isCustomQuota'?: boolean;
     /**
      * How much folder space is used (counter).
      * @type {number}
      * @memberof FolderDtoString
      */
-    'usedSpace'?: number | null;
+    'usedSpace'?: number;
     /**
      * Specifies if the folder is password protected or not.
      * @type {boolean}
      * @memberof FolderDtoString
      */
-    'passwordProtected'?: boolean | null;
+    'passwordProtected'?: boolean;
     /**
      * Specifies if an external link to the folder is expired or not.
      * @type {boolean}
      * @memberof FolderDtoString
      * @deprecated
      */
-    'expired'?: boolean | null;
+    'expired'?: boolean;
     /**
      * 
      * @type {ChatSettings}

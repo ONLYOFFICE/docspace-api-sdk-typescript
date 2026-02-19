@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,15 +21,11 @@
 
 /**
  * The request parameters for updating a photo.
- * @export
- * @interface UpdatePhotoMemberRequest
  */
 export interface UpdatePhotoMemberRequest {
     /**
      * The avatar photo URL.
-     * @type {string}
-     * @memberof UpdatePhotoMemberRequest
      */
-    'files'?: string | null;
+    'files'?: string;
 }
 

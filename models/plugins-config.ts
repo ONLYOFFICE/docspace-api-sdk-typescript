@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,15 +21,11 @@
 
 /**
  * The configuration settings to connect the special add-ons.
- * @export
- * @interface PluginsConfig
  */
 export interface PluginsConfig {
     /**
      * The array of absolute URLs to the plugin configuration files.
-     * @type {Array<string>}
-     * @memberof PluginsConfig
      */
-    'pluginsData'?: Array<string> | null;
+    'pluginsData'?: Array<string>;
 }
 

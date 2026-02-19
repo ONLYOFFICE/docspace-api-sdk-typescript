@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,20 +21,14 @@
 
 /**
  * The Firebase-related request parameters.
- * @export
- * @interface FirebaseRequestsDto
  */
 export interface FirebaseRequestsDto {
     /**
      * The Firebase device token.
-     * @type {string}
-     * @memberof FirebaseRequestsDto
      */
-    'firebaseDeviceToken'?: string | null;
+    'firebaseDeviceToken'?: string;
     /**
      * Specifies whether the user is subscribed to the push notifications or not.
-     * @type {boolean}
-     * @memberof FirebaseRequestsDto
      */
     'isSubscribed'?: boolean;
 }

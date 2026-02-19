@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -25,88 +27,54 @@ import type { RecaptchaType } from './recaptcha-type';
 
 /**
  * The parameters required for the user authentication requests.
- * @export
- * @interface AuthRequestsDto
  */
 export interface AuthRequestsDto {
     /**
      * The username or email used for authentication.
-     * @type {string}
-     * @memberof AuthRequestsDto
      */
-    'userName'?: string | null;
+    'userName'?: string;
     /**
      * The password in plain text for user authentication.
-     * @type {string}
-     * @memberof AuthRequestsDto
      */
-    'password'?: string | null;
+    'password'?: string;
     /**
      * The hashed password for secure verification.
-     * @type {string}
-     * @memberof AuthRequestsDto
      */
-    'passwordHash'?: string | null;
+    'passwordHash'?: string;
     /**
      * The type of authentication provider (e.g., internal, Google, Azure).
-     * @type {string}
-     * @memberof AuthRequestsDto
      */
-    'provider'?: string | null;
+    'provider'?: string;
     /**
      * The access token used for authentication with external providers.
-     * @type {string}
-     * @memberof AuthRequestsDto
      */
-    'accessToken'?: string | null;
+    'accessToken'?: string;
     /**
      * The serialized user profile data, if applicable.
-     * @type {string}
-     * @memberof AuthRequestsDto
      */
-    'serializedProfile'?: string | null;
+    'serializedProfile'?: string;
     /**
      * The code for two-factor authentication.
-     * @type {string}
-     * @memberof AuthRequestsDto
      */
-    'code'?: string | null;
+    'code'?: string;
     /**
      * The authorization code used for obtaining OAuth tokens.
-     * @type {string}
-     * @memberof AuthRequestsDto
      */
-    'codeOAuth'?: string | null;
+    'codeOAuth'?: string;
     /**
      * Specifies whether the authentication is session-based.
-     * @type {boolean}
-     * @memberof AuthRequestsDto
      */
     'session'?: boolean;
-    /**
-     * 
-     * @type {ConfirmData}
-     * @memberof AuthRequestsDto
-     */
     'confirmData'?: ConfirmData;
-    /**
-     * 
-     * @type {RecaptchaType}
-     * @memberof AuthRequestsDto
-     */
     'recaptchaType'?: RecaptchaType;
     /**
      * The user\'s response to the CAPTCHA challenge.
-     * @type {string}
-     * @memberof AuthRequestsDto
      */
-    'recaptchaResponse'?: string | null;
+    'recaptchaResponse'?: string;
     /**
      * The culture code for localization during authentication.
-     * @type {string}
-     * @memberof AuthRequestsDto
      */
-    'culture'?: string | null;
+    'culture'?: string;
 }
 
 

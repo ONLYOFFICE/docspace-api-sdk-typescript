@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -22,75 +24,48 @@ import type { ApiDateTime } from './api-date-time';
 
 /**
  * The active connection item parameters.
- * @export
- * @interface ActiveConnectionsItemDto
  */
 export interface ActiveConnectionsItemDto {
     /**
      * The active connection ID.
-     * @type {number}
-     * @memberof ActiveConnectionsItemDto
      */
     'id': number;
     /**
      * The tenant ID.
-     * @type {number}
-     * @memberof ActiveConnectionsItemDto
      */
     'tenantId': number;
     /**
      * The user ID.
-     * @type {string}
-     * @memberof ActiveConnectionsItemDto
      */
     'userId': string;
     /**
      * Specifies if the active connection has a mobile phone or not.
-     * @type {boolean}
-     * @memberof ActiveConnectionsItemDto
      */
     'mobile'?: boolean;
     /**
      * The IP address of the active connection.
-     * @type {string}
-     * @memberof ActiveConnectionsItemDto
      */
-    'ip'?: string | null;
+    'ip'?: string;
     /**
      * The active connection country.
-     * @type {string}
-     * @memberof ActiveConnectionsItemDto
      */
-    'country'?: string | null;
+    'country'?: string;
     /**
      * The active connection city.
-     * @type {string}
-     * @memberof ActiveConnectionsItemDto
      */
-    'city'?: string | null;
+    'city'?: string;
     /**
      * The active connection browser.
-     * @type {string}
-     * @memberof ActiveConnectionsItemDto
      */
-    'browser'?: string | null;
+    'browser'?: string;
     /**
      * The active connection platform.
-     * @type {string}
-     * @memberof ActiveConnectionsItemDto
      */
-    'platform'?: string | null;
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof ActiveConnectionsItemDto
-     */
+    'platform'?: string;
     'date'?: ApiDateTime;
     /**
      * The active connection page.
-     * @type {string}
-     * @memberof ActiveConnectionsItemDto
      */
-    'page'?: string | null;
+    'page'?: string;
 }
 

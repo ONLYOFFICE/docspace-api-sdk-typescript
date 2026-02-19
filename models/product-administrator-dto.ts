@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,26 +21,18 @@
 
 /**
  * The product administrator parameters.
- * @export
- * @interface ProductAdministratorDto
  */
 export interface ProductAdministratorDto {
     /**
      * The product ID.
-     * @type {string}
-     * @memberof ProductAdministratorDto
      */
     'productId': string;
     /**
      * The user unique identifier.
-     * @type {string}
-     * @memberof ProductAdministratorDto
      */
     'userId': string;
     /**
      * Indicates whether the user has administrator privileges for the product.
-     * @type {boolean}
-     * @memberof ProductAdministratorDto
      */
     'administrator': boolean;
 }

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,15 +21,11 @@
 
 /**
  * The request parameters for managing the greeting settings.
- * @export
- * @interface GreetingSettingsRequestsDto
  */
 export interface GreetingSettingsRequestsDto {
     /**
      * The title of the tenant greeting settings.
-     * @type {string}
-     * @memberof GreetingSettingsRequestsDto
      */
-    'title': string | null;
+    'title': string;
 }
 

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2025
@@ -19,27 +21,19 @@
 
 /**
  * The group request parameters.
- * @export
- * @interface GroupRequestDto
  */
 export interface GroupRequestDto {
     /**
      * The list of group member IDs.
-     * @type {Array<string>}
-     * @memberof GroupRequestDto
      */
-    'members'?: Array<string> | null;
+    'members'?: Array<string>;
     /**
      * The group manager ID.
-     * @type {string}
-     * @memberof GroupRequestDto
      */
     'groupManager': string;
     /**
      * The group name.
-     * @type {string}
-     * @memberof GroupRequestDto
      */
-    'groupName'?: string | null;
+    'groupName'?: string;
 }
 

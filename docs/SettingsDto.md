@@ -48,6 +48,7 @@ Name | Type | Description | Notes
 **maxImageUploadSize** | **number** | The maximum image upload size. | [optional] [default to undefined]
 **logoText** | **string** | The white label logo text. | [optional] [default to undefined]
 **externalResources** | [**CultureSpecificExternalResources**](CultureSpecificExternalResources.md) |  | [optional] [default to undefined]
+**defaultFolderType** | [**FolderType**](FolderType.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -97,6 +98,7 @@ const instance: SettingsDto = {
     maxImageUploadSize,
     logoText,
     externalResources,
+    defaultFolderType,
 };
 ```
 
