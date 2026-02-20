@@ -34,7 +34,7 @@ export interface EmailMemberRequestDto {
     /**
      * The user\'s response to the CAPTCHA challenge.
      */
-    'recaptchaResponse'?: string;
+    'recaptchaResponse'?: string | null;
 }
 
 

@@ -26,23 +26,23 @@ export interface WizardRequestsDto {
     /**
      * The user\'s email address for authentication and communication.
      */
-    'email': string;
+    'email': string | null;
     /**
      * The hashed representation of the user\'s password.
      */
-    'passwordHash': string;
+    'passwordHash': string | null;
     /**
      * The user\'s preferred interface language code.
      */
-    'lng'?: string;
+    'lng'?: string | null;
     /**
      * The user\'s time zone identifier.
      */
-    'timeZone'?: string;
+    'timeZone'?: string | null;
     /**
      * The Amazon Machine Image (AMI) identifier.
      */
-    'amiId'?: string;
+    'amiId'?: string | null;
     /**
      * Specifies whether the user opted in for site communications.
      */

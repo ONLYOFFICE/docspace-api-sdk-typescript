@@ -23,6 +23,6 @@ export interface IconRequest {
     /**
      * Group icon
      */
-    'icon'?: string;
+    'icon'?: string | null;
 }
 

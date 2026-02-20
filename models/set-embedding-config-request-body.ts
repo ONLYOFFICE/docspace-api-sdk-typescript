@@ -30,7 +30,7 @@ export interface SetEmbeddingConfigRequestBody {
     /**
      * The API key for the selected embedding provider. Pass null to keep the existing key unchanged.
      */
-    'key'?: string;
+    'key'?: string | null;
 }
 
 

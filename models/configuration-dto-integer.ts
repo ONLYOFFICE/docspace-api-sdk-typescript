@@ -48,39 +48,39 @@ export interface ConfigurationDtoInteger {
     /**
      * The document type.
      */
-    'documentType': string;
+    'documentType': string | null;
     'editorConfig': EditorConfigurationDto;
     'editorType': EditorType;
     /**
      * The editor URL.
      */
-    'editorUrl': string;
+    'editorUrl': string | null;
     /**
      * The token of the file configuration.
      */
-    'token'?: string;
+    'token'?: string | null;
     /**
      * The platform type.
      */
-    'type'?: string;
+    'type'?: string | null;
     'file': FileDtoInteger;
     /**
      * The error message.
      */
-    'errorMessage'?: string;
+    'errorMessage'?: string | null;
     /**
      * Specifies if the file filling has started or not.
      */
-    'startFilling'?: boolean;
+    'startFilling'?: boolean | null;
     /**
      * The file filling status.
      */
-    'fillingStatus'?: boolean;
+    'fillingStatus'?: boolean | null;
     'startFillingMode'?: StartFillingMode;
     /**
      * The file filling session ID.
      */
-    'fillingSessionId'?: string;
+    'fillingSessionId'?: string | null;
     'quotaExceededScope'?: QuotaScope;
     'generationToolCallState'?: EditorToolCallStateDto;
 }

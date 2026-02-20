@@ -81,13 +81,13 @@ export type FileEntryDtoInteger = FileEntryBaseDto &  {
      * @type {string}
      * @memberof FileEntryDtoInteger
      */
-    'originTitle'?: string;
+    'originTitle'?: string | null;
     /**
      * The origin room title of the file entry.
      * @type {string}
      * @memberof FileEntryDtoInteger
      */
-    'originRoomTitle'?: string;
+    'originRoomTitle'?: string | null;
     /**
      * Specifies if the file entry can be shared or not.
      * @type {boolean}
@@ -99,31 +99,31 @@ export type FileEntryDtoInteger = FileEntryBaseDto &  {
      * @type {FileEntryDtoIntegerAllOfShareSettings}
      * @memberof FileEntryDtoInteger
      */
-    'shareSettings'?: FileEntryDtoIntegerAllOfShareSettings;
+    'shareSettings'?: FileEntryDtoIntegerAllOfShareSettings | null;
     /**
      * 
      * @type {FileEntryDtoIntegerAllOfSecurity}
      * @memberof FileEntryDtoInteger
      */
-    'security'?: FileEntryDtoIntegerAllOfSecurity;
+    'security'?: FileEntryDtoIntegerAllOfSecurity | null;
     /**
      * 
      * @type {FileEntryDtoIntegerAllOfAvailableShareRights}
      * @memberof FileEntryDtoInteger
      */
-    'availableShareRights'?: FileEntryDtoIntegerAllOfAvailableShareRights;
+    'availableShareRights'?: FileEntryDtoIntegerAllOfAvailableShareRights | null;
     /**
      * The request token of the file entry.
      * @type {string}
      * @memberof FileEntryDtoInteger
      */
-    'requestToken'?: string;
+    'requestToken'?: string | null;
     /**
      * Specifies if the folder can be accessed via an external link or not.
      * @type {boolean}
      * @memberof FileEntryDtoInteger
      */
-    'external'?: boolean;
+    'external'?: boolean | null;
     /**
      * 
      * @type {ApiDateTime}
@@ -135,7 +135,7 @@ export type FileEntryDtoInteger = FileEntryBaseDto &  {
      * @type {boolean}
      * @memberof FileEntryDtoInteger
      */
-    'isLinkExpired'?: boolean;
+    'isLinkExpired'?: boolean | null;
 };
 
 

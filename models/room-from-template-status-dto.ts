@@ -34,7 +34,7 @@ export interface RoomFromTemplateStatusDto {
     /**
      * The error message that is sent when a room is not created successfully from the template.
      */
-    'error': string;
+    'error': string | null;
     /**
      * Specifies whether the process of creating a room from the template is completed.
      */

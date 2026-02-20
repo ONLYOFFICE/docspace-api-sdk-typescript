@@ -26,7 +26,7 @@ export interface FilesStatisticsFolder {
     /**
      * The folder title.
      */
-    'title'?: string;
+    'title'?: string | null;
     /**
      * The used space in the folder.
      */

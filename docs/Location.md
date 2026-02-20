@@ -1,13 +1,13 @@
 # Location
 
-The location context of the request.
+[1 - Room, 2 - Documents, 3 - Link]
 
 ## Enum
 
-* `NUMBER_1` (value: `1`)
+* `Room` (value: `1`)
 
-* `NUMBER_2` (value: `2`)
+* `Documents` (value: `2`)
 
-* `NUMBER_3` (value: `3`)
+* `Link` (value: `3`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

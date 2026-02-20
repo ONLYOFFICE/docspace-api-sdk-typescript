@@ -26,6 +26,6 @@ export interface WebhookRetryRequestsDto {
     /**
      * The list of webhook delivery IDs to retry.
      */
-    'ids'?: Array<number>;
+    'ids'?: Array<number> | null;
 }
 

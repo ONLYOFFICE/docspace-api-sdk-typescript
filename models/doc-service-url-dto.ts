@@ -26,31 +26,31 @@ export interface DocServiceUrlDto {
     /**
      * The version of the document service.
      */
-    'version': string;
+    'version': string | null;
     /**
      * The document service URL API.
      */
-    'docServiceUrlApi': string;
+    'docServiceUrlApi': string | null;
     /**
      * The document service URL.
      */
-    'docServiceUrl': string;
+    'docServiceUrl': string | null;
     /**
      * The URL used to preload the document service scripts.
      */
-    'docServicePreloadUrl': string;
+    'docServicePreloadUrl': string | null;
     /**
      * The internal document service URL.
      */
-    'docServiceUrlInternal': string;
+    'docServiceUrlInternal': string | null;
     /**
      * The document service portal URL.
      */
-    'docServicePortalUrl': string;
+    'docServicePortalUrl': string | null;
     /**
      * The document service signature header.
      */
-    'docServiceSignatureHeader': string;
+    'docServiceSignatureHeader': string | null;
     /**
      * Specifies if the document service SSL verification is enabled.
      */

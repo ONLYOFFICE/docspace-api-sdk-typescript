@@ -26,11 +26,11 @@ export interface UsageSpaceStatItemDto {
     /**
      * The item name.
      */
-    'name'?: string;
+    'name'?: string | null;
     /**
      * The item icon path.
      */
-    'icon'?: string;
+    'icon'?: string | null;
     /**
      * Specifies if the item is disabled or not.
      */
@@ -38,10 +38,10 @@ export interface UsageSpaceStatItemDto {
     /**
      * The item used space.
      */
-    'size'?: string;
+    'size'?: string | null;
     /**
      * The item URL.
      */
-    'url'?: string;
+    'url'?: string | null;
 }
 

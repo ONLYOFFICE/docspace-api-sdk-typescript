@@ -1,13 +1,13 @@
 # MessageContentType
 
-The type of content block within a chat message.
+[]
 
 ## Enum
 
-* `NUMBER_0` (value: `0`)
+* `Text` (value: `0`)
 
-* `NUMBER_1` (value: `1`)
+* `Tool` (value: `1`)
 
-* `NUMBER_2` (value: `2`)
+* `Attachment` (value: `2`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -29,24 +29,27 @@ export interface TenantQuotaFeatureDto {
     /**
      * The ID of the tenant quota feature.
      */
-    'id'?: string;
+    'id'?: string | null;
     /**
      * The title of the tenant quota feature.
      */
-    'title'?: string;
+    'title'?: string | null;
     /**
      * The image URL of the tenant quota feature.
      */
-    'image'?: string;
-    'value'?: any;
+    'image'?: string | null;
+    /**
+     * The value of the tenant quota feature.
+     */
+    'value'?: any | null;
     /**
      * The type of the tenant quota feature.
      */
-    'type'?: string;
+    'type'?: string | null;
     'used'?: FeatureUsedDto;
     /**
      * The price title of the tenant quota feature.
      */
-    'priceTitle'?: string;
+    'priceTitle'?: string | null;
 }
 

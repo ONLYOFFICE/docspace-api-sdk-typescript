@@ -26,19 +26,19 @@ export interface UserConfig {
     /**
      * The user ID.
      */
-    'id'?: string;
+    'id'?: string | null;
     /**
      * The full name of the user.
      */
-    'name'?: string;
+    'name'?: string | null;
     /**
      * The path to the user\'s avatar.
      */
-    'image'?: string;
+    'image'?: string | null;
     /**
      * Roles
      */
-    'roles'?: Array<string>;
-    'customerId'?: string;
+    'roles'?: Array<string> | null;
+    'customerId'?: string | null;
 }
 

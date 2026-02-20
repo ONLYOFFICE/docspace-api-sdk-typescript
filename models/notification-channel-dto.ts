@@ -26,7 +26,7 @@ export interface NotificationChannelDto {
     /**
      * The notification channel name.
      */
-    'name': string;
+    'name': string | null;
     /**
      * Specifies whether the notification channel is enabled.
      */

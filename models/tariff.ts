@@ -49,15 +49,15 @@ export interface Tariff {
     /**
      * The tariff customer ID.
      */
-    'customerId'?: string;
+    'customerId'?: string | null;
     /**
      * The list of tariff quotas.
      */
-    'quotas': Array<Quota>;
+    'quotas': Array<Quota> | null;
     /**
      * The list of overdue tariff quotas.
      */
-    'overdueQuotas'?: Array<Quota>;
+    'overdueQuotas'?: Array<Quota> | null;
 }
 
 

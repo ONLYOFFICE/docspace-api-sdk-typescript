@@ -7,7 +7,7 @@ The external resource parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **domain** | **string** | The external resource domain. | [optional] [default to undefined]
-**entries** | **{ [key: string]: string; }** | The external resource entries. | [optional] [default to undefined]
+**entries** | **{ [key: string]: string | null; }** | The external resource entries. | [optional] [default to undefined]
 
 ## Example
 

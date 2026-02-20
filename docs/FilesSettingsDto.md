@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **extsWebCommented** | **Array&lt;string&gt;** | The list of extensions of the commented files. | [optional] [default to undefined]
 **extsWebTemplate** | **Array&lt;string&gt;** | The list of extensions of the template files. | [optional] [default to undefined]
 **extsMustConvert** | **Array&lt;string&gt;** | The list of extensions of the files that must be converted. | [optional] [default to undefined]
-**extsConvertible** | **{ [key: string]: Array&lt;string&gt;; }** | The list of the convertible extensions. | [optional] [default to undefined]
+**extsConvertible** | **{ [key: string]: Array&lt;string&gt; | null; }** | The list of the convertible extensions. | [optional] [default to undefined]
 **extsUploadable** | **Array&lt;string&gt;** | The list of the uploadable extensions. | [optional] [default to undefined]
 **extsArchive** | **Array&lt;string&gt;** | The list of extensions of the archive files. | [optional] [default to undefined]
 **extsVideo** | **Array&lt;string&gt;** | The list of the video extensions. | [optional] [default to undefined]

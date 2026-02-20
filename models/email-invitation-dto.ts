@@ -26,6 +26,6 @@ export interface EmailInvitationDto {
     /**
      * The email address.
      */
-    'email'?: string;
+    'email'?: string | null;
 }
 

@@ -33,6 +33,6 @@ export interface InviteUsersRequestDto {
     /**
      * The culture code of invitations.
      */
-    'culture'?: string;
+    'culture'?: string | null;
 }
 

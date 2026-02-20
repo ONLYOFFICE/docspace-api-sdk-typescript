@@ -26,19 +26,19 @@ export interface UpdateServerRequestBody {
     /**
      * New display name for the server. Only letters, numbers, underscores, and hyphens are allowed. Maximum 128 characters.
      */
-    'name'?: string;
+    'name'?: string | null;
     /**
      * New human-readable description of the server\'s purpose. Maximum 255 characters.
      */
-    'description'?: string;
+    'description'?: string | null;
     /**
      * New base URL of the MCP server endpoint. If changed, the system will re-verify connectivity before saving.
      */
-    'endpoint'?: string;
+    'endpoint'?: string | null;
     /**
      * New HTTP headers to include with every request. If changed alongside the endpoint, connectivity is re-verified.
      */
-    'headers'?: { [key: string]: string; };
+    'headers'?: { [key: string]: string; } | null;
     /**
      * Set to true to update the server icon. When true, the Icon field value (or null to remove) will be applied.
      */
@@ -46,6 +46,6 @@ export interface UpdateServerRequestBody {
     /**
      * New Base64-encoded icon image for the server, or null to remove the existing icon. Only applied when UpdateIcon is true.
      */
-    'icon'?: string;
+    'icon'?: string | null;
 }
 

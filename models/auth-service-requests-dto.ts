@@ -29,19 +29,19 @@ export interface AuthServiceRequestsDto {
     /**
      * The name of the authorization service.
      */
-    'name'?: string;
+    'name'?: string | null;
     /**
      * The user-friendly display title of the authorization service.
      */
-    'title'?: string;
+    'title'?: string | null;
     /**
      * The brief description of the authorization service.
      */
-    'description'?: string;
+    'description'?: string | null;
     /**
      * The detailed instructions for configuring or using the authorization service.
      */
-    'instruction'?: string;
+    'instruction'?: string | null;
     /**
      * Specifies whether the authorization service can be configured by the user.
      */
@@ -53,6 +53,6 @@ export interface AuthServiceRequestsDto {
     /**
      * The collection of authorization keys associated with the authorization service.
      */
-    'props'?: Array<AuthKey>;
+    'props'?: Array<AuthKey> | null;
 }
 

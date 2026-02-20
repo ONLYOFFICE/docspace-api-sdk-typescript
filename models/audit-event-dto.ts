@@ -49,7 +49,7 @@ export interface AuditEventDto {
     /**
      * The name of the user who triggered the audit event.
      */
-    'user'?: string;
+    'user'?: string | null;
     /**
      * The ID of the user who triggered the audit event.
      */
@@ -57,47 +57,47 @@ export interface AuditEventDto {
     /**
      * The audit event action.
      */
-    'action'?: string;
+    'action'?: string | null;
     'actionId'?: MessageAction;
     /**
      * The audit event IP.
      */
-    'ip'?: string;
+    'ip'?: string | null;
     /**
      * The audit event country.
      */
-    'country'?: string;
+    'country'?: string | null;
     /**
      * The audit event city.
      */
-    'city'?: string;
+    'city'?: string | null;
     /**
      * The audit event browser.
      */
-    'browser'?: string;
+    'browser'?: string | null;
     /**
      * The audit event platform.
      */
-    'platform'?: string;
+    'platform'?: string | null;
     /**
      * The audit event page.
      */
-    'page'?: string;
+    'page'?: string | null;
     'actionType'?: ActionType;
     'product'?: ProductType;
     'location'?: LocationType;
     /**
      * The list of target objects affected by the audit event (e.g., document ID, user account).
      */
-    'target'?: Array<string>;
+    'target'?: Array<string> | null;
     /**
      * The list of audit entry types (e.g., Folder, User, File).
      */
-    'entries'?: Array<EntryType>;
+    'entries'?: Array<EntryType> | null;
     /**
      * The audit event context.
      */
-    'context'?: string;
+    'context'?: string | null;
 }
 
 

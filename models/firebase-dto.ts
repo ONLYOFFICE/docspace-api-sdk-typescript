@@ -26,34 +26,34 @@ export interface FirebaseDto {
     /**
      * The Firebase API key.
      */
-    'apiKey': string;
+    'apiKey': string | null;
     /**
      * The Firebase authentication domain.
      */
-    'authDomain': string;
+    'authDomain': string | null;
     /**
      * The Firebase project ID.
      */
-    'projectId': string;
+    'projectId': string | null;
     /**
      * The Firebase storage bucket.
      */
-    'storageBucket': string;
+    'storageBucket': string | null;
     /**
      * The Firebase messaging sender ID.
      */
-    'messagingSenderId': string;
+    'messagingSenderId': string | null;
     /**
      * The Firebase application ID.
      */
-    'appId': string;
+    'appId': string | null;
     /**
      * The Firebase measurement ID.
      */
-    'measurementId': string;
+    'measurementId': string | null;
     /**
      * The Firebase database URL.
      */
-    'databaseURL': string;
+    'databaseURL': string | null;
 }
 

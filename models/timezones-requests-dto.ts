@@ -26,10 +26,10 @@ export interface TimezonesRequestsDto {
     /**
      * The IANA time zone identifier.
      */
-    'id': string;
+    'id': string | null;
     /**
      * The user-friendly name for the time zone.
      */
-    'displayName': string;
+    'displayName': string | null;
 }
 

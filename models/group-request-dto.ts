@@ -26,7 +26,7 @@ export interface GroupRequestDto {
     /**
      * The list of group member IDs.
      */
-    'members'?: Array<string>;
+    'members'?: Array<string> | null;
     /**
      * The group manager ID.
      */
@@ -34,6 +34,6 @@ export interface GroupRequestDto {
     /**
      * The group name.
      */
-    'groupName'?: string;
+    'groupName'?: string | null;
 }
 

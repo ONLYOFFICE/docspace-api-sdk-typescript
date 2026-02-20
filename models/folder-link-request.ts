@@ -38,11 +38,11 @@ export interface FolderLinkRequest {
     /**
      * The link name.
      */
-    'title'?: string;
+    'title'?: string | null;
     /**
      * The link password.
      */
-    'password'?: string;
+    'password'?: string | null;
     /**
      * Specifies if downloading the file from the link is disabled or not.
      */

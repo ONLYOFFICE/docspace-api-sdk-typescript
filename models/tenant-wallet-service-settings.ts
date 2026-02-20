@@ -26,7 +26,7 @@ export interface TenantWalletServiceSettings {
     /**
      * The list of the enabled wallet services.
      */
-    'enabledServices'?: Array<TenantWalletServiceSettingsEnabledServicesEnum>;
+    'enabledServices'?: Array<TenantWalletServiceSettingsEnabledServicesEnum> | null;
     /**
      * The date and time when the wallet services settings were last modified.
      */

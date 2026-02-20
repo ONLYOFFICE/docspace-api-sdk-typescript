@@ -30,30 +30,30 @@ export interface FileReference {
     /**
      * The error message text.
      */
-    'error'?: string;
+    'error'?: string | null;
     /**
      * The file name or relative path for the formula editor.
      */
-    'path'?: string;
+    'path'?: string | null;
     /**
      * The URL address to download the current file.
      */
-    'url'?: string;
+    'url'?: string | null;
     /**
      * An extension of the document specified with the url parameter.
      */
-    'fileType'?: string;
+    'fileType'?: string | null;
     /**
      * The unique document identifier used by the service to take the data from the co-editing session.
      */
-    'key'?: string;
+    'key'?: string | null;
     /**
      * The file URL.
      */
-    'link'?: string;
+    'link'?: string | null;
     /**
      * The encrypted signature added to the parameter in the form of a token.
      */
-    'token'?: string;
+    'token'?: string | null;
 }
 

@@ -30,6 +30,6 @@ export interface SubmitForm {
     /**
      * A message displayed after forms are submitted.
      */
-    'resultMessage'?: string;
+    'resultMessage'?: string | null;
 }
 

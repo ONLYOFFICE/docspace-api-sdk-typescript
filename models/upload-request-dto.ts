@@ -32,13 +32,13 @@ export interface UploadRequestDto {
     /**
      * The file to be uploaded.
      */
-    'file'?: File;
+    'file'?: File | null;
     'contentType'?: ContentType;
     'contentDisposition'?: ContentDisposition;
     /**
      * The list of files when specified as multipart/form-data.
      */
-    'files'?: Array<File>;
+    'files'?: Array<File> | null;
     /**
      * Specifies whether to create the new file if it already exists or not.
      */
@@ -46,7 +46,7 @@ export interface UploadRequestDto {
     /**
      * Specifies whether to upload documents in the original formats as well or not.
      */
-    'storeOriginalFileFlag'?: boolean;
+    'storeOriginalFileFlag'?: boolean | null;
     /**
      * Specifies whether to keep the file converting status or not.
      */
@@ -54,6 +54,6 @@ export interface UploadRequestDto {
     /**
      * The request input stream.
      */
-    'stream'?: File;
+    'stream'?: File | null;
 }
 

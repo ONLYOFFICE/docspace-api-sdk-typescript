@@ -38,7 +38,7 @@ export interface DocumentConfigDto {
     /**
      * The file type of the document.
      */
-    'fileType'?: string;
+    'fileType'?: string | null;
     'info'?: InfoConfigDto;
     /**
      * Specifies if the documnet is linked for current user.
@@ -47,25 +47,25 @@ export interface DocumentConfigDto {
     /**
      * The document key.
      */
-    'key'?: string;
+    'key'?: string | null;
     'permissions'?: PermissionsConfig;
     /**
      * The shared link parameter of the document.
      */
-    'sharedLinkParam'?: string;
+    'sharedLinkParam'?: string | null;
     /**
      * The shared link key of the document.
      */
-    'sharedLinkKey'?: string;
+    'sharedLinkKey'?: string | null;
     'referenceData'?: FileReferenceData;
     /**
      * The document title.
      */
-    'title'?: string;
+    'title'?: string | null;
     /**
      * The document url.
      */
-    'url'?: string;
+    'url'?: string | null;
     /**
      * Indicates whether this is a form.
      */

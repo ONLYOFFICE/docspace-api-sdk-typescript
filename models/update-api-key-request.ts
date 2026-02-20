@@ -26,14 +26,14 @@ export interface UpdateApiKeyRequest {
     /**
      * The new name for the API key.
      */
-    'name'?: string;
+    'name'?: string | null;
     /**
      * The new list of permissions for the API key.
      */
-    'permissions'?: Array<string>;
+    'permissions'?: Array<string> | null;
     /**
      * Indicates whether the API key should be active or not.
      */
-    'isActive'?: boolean;
+    'isActive'?: boolean | null;
 }
 

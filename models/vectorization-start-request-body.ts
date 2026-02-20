@@ -26,6 +26,6 @@ export interface VectorizationStartRequestBody {
     /**
      * The set of file identifiers to submit for vectorization.
      */
-    'files': Set<number>;
+    'files': Set<number> | null;
 }
 

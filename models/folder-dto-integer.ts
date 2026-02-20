@@ -90,7 +90,7 @@ export type FolderDtoInteger = FileEntryDtoInteger &  {
      * @type {boolean}
      * @memberof FolderDtoInteger
      */
-    'isShareable'?: boolean;
+    'isShareable'?: boolean | null;
     /**
      * The new element index in the folder.
      * @type {number}
@@ -108,7 +108,7 @@ export type FolderDtoInteger = FileEntryDtoInteger &  {
      * @type {Array<string>}
      * @memberof FolderDtoInteger
      */
-    'tags'?: Array<string>;
+    'tags'?: Array<string> | null;
     /**
      * 
      * @type {Logo}
@@ -168,38 +168,38 @@ export type FolderDtoInteger = FileEntryDtoInteger &  {
      * @type {boolean}
      * @memberof FolderDtoInteger
      */
-    'inRoom'?: boolean;
+    'inRoom'?: boolean | null;
     /**
      * The folder quota limit.
      * @type {number}
      * @memberof FolderDtoInteger
      */
-    'quotaLimit'?: number;
+    'quotaLimit'?: number | null;
     /**
      * Specifies if the folder room has a custom quota or not.
      * @type {boolean}
      * @memberof FolderDtoInteger
      */
-    'isCustomQuota'?: boolean;
+    'isCustomQuota'?: boolean | null;
     /**
      * How much folder space is used (counter).
      * @type {number}
      * @memberof FolderDtoInteger
      */
-    'usedSpace'?: number;
+    'usedSpace'?: number | null;
     /**
      * Specifies if the folder is password protected or not.
      * @type {boolean}
      * @memberof FolderDtoInteger
      */
-    'passwordProtected'?: boolean;
+    'passwordProtected'?: boolean | null;
     /**
      * Specifies if an external link to the folder is expired or not.
      * @type {boolean}
      * @memberof FolderDtoInteger
      * @deprecated
      */
-    'expired'?: boolean;
+    'expired'?: boolean | null;
     /**
      * 
      * @type {ChatSettings}

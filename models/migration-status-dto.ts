@@ -33,7 +33,7 @@ export interface MigrationStatusDto {
     /**
      * The migration error.
      */
-    'error'?: string;
+    'error'?: string | null;
     'parseResult'?: MigrationApiInfo;
     /**
      * Specifies whether the migration is completed or not.

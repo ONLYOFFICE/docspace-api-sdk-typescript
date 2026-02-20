@@ -26,22 +26,22 @@ export interface DefaultTemplateItemDto {
     /**
      * File id to use as a default template
      */
-    'selectedFile'?: number;
+    'selectedFile'?: number | null;
     /**
      * Extension of a default template
      */
-    'fileExtension': string;
+    'fileExtension': string | null;
     /**
      * Title of a default template
      */
-    'fileTitle'?: string;
+    'fileTitle'?: string | null;
     /**
      * Last modified date of a default template
      */
-    'lastModified'?: string;
+    'lastModified'?: string | null;
     /**
      * View url of a default template
      */
-    'viewUrl'?: string;
+    'viewUrl'?: string | null;
 }
 

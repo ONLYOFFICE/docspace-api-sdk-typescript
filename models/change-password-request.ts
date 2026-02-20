@@ -26,10 +26,10 @@ export interface ChangePasswordRequest {
     /**
      * The user password.
      */
-    'password'?: string;
+    'password'?: string | null;
     /**
      * The user password hash.
      */
-    'passwordHash'?: string;
+    'passwordHash'?: string | null;
 }
 

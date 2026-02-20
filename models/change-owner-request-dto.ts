@@ -29,11 +29,11 @@ export interface ChangeOwnerRequestDto {
     /**
      * The list of folder IDs to change the owner.
      */
-    'folderIds'?: Array<BatchRequestDtoAllOfFileIds>;
+    'folderIds'?: Array<BatchRequestDtoAllOfFileIds> | null;
     /**
      * The list of file IDs to change the owner.
      */
-    'fileIds'?: Array<BatchRequestDtoAllOfFileIds>;
+    'fileIds'?: Array<BatchRequestDtoAllOfFileIds> | null;
     /**
      * The new file owner ID.
      */

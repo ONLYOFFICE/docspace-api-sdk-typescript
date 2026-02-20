@@ -33,6 +33,6 @@ export interface ActiveConnectionsDto {
     /**
      * The list of active connection items.
      */
-    'items'?: Array<ActiveConnectionsItemDto>;
+    'items'?: Array<ActiveConnectionsItemDto> | null;
 }
 

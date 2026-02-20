@@ -7,7 +7,7 @@ The file sharing information and access rights.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **access** | [**FileShare**](FileShare.md) |  | [optional] [default to undefined]
-**sharedTo** | **any** |  | [optional] [default to undefined]
+**sharedTo** | **any** | The user who has the access to the specified file. | [optional] [default to undefined]
 **sharedToUser** | [**EmployeeFullDto**](EmployeeFullDto.md) |  | [optional] [default to undefined]
 **sharedToGroup** | [**GroupSummaryDto**](GroupSummaryDto.md) |  | [optional] [default to undefined]
 **sharedLink** | [**FileShareLink**](FileShareLink.md) |  | [optional] [default to undefined]

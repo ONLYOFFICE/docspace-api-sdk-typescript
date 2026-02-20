@@ -26,6 +26,6 @@ export interface DeleteServersRequestBody {
     /**
      * Set of unique identifiers of the MCP servers to permanently remove. All room associations and connection data will also be deleted.
      */
-    'servers': Set<string>;
+    'servers': Set<string> | null;
 }
 

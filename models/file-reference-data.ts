@@ -26,15 +26,15 @@ export interface FileReferenceData {
     /**
      * The unique document identifier used by the service to get a link to the file.
      */
-    'fileKey'?: string;
+    'fileKey'?: string | null;
     /**
      * The unique system identifier.
      */
-    'instanceId'?: string;
+    'instanceId'?: string | null;
     /**
      * Room ID
      */
-    'roomId'?: string;
+    'roomId'?: string | null;
     /**
      * Specifies if the room can be edited out or not.
      */

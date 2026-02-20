@@ -26,14 +26,14 @@ export interface CurrenciesDto {
     /**
      * The ISO country code.
      */
-    'isoCountryCode'?: string;
+    'isoCountryCode'?: string | null;
     /**
      * The ISO currency symbol.
      */
-    'isoCurrencySymbol'?: string;
+    'isoCurrencySymbol'?: string | null;
     /**
      * The currency native name.
      */
-    'currencyNativeName'?: string;
+    'currencyNativeName'?: string | null;
 }
 

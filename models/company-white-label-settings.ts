@@ -26,23 +26,23 @@ export interface CompanyWhiteLabelSettings {
     /**
      * The company name.
      */
-    'companyName'?: string;
+    'companyName'?: string | null;
     /**
      * The company site.
      */
-    'site'?: string;
+    'site'?: string | null;
     /**
      * The company email address.
      */
-    'email'?: string;
+    'email'?: string | null;
     /**
      * The company address.
      */
-    'address'?: string;
+    'address'?: string | null;
     /**
      * The company phone number.
      */
-    'phone'?: string;
+    'phone'?: string | null;
     /**
      * Specifies if a company is a licensor or not.
      */

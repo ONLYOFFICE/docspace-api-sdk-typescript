@@ -29,7 +29,7 @@ export interface EncryptionSettings {
     /**
      * The encryption password.
      */
-    'password'?: string;
+    'password'?: string | null;
     'status'?: EncryprtionStatus;
     /**
      * Specifies if the users will be notified about the encryption operation or not.

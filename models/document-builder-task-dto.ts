@@ -29,11 +29,11 @@ export interface DocumentBuilderTaskDto {
     /**
      * The Document Builder task ID.
      */
-    'id': string;
+    'id': string | null;
     /**
      * The error message occurred during the document building process.
      */
-    'error': string;
+    'error': string | null;
     /**
      * The progress percentage of the document building process.
      */
@@ -43,15 +43,18 @@ export interface DocumentBuilderTaskDto {
      */
     'isCompleted': boolean;
     'status': DistributedTaskStatus;
-    'resultFileId': any;
+    /**
+     * The result file ID.
+     */
+    'resultFileId': any | null;
     /**
      * The result file name.
      */
-    'resultFileName': string;
+    'resultFileName': string | null;
     /**
      * The result file URL.
      */
-    'resultFileUrl': string;
+    'resultFileUrl': string | null;
 }
 
 

@@ -33,6 +33,6 @@ export interface Paragraph {
     /**
      * The list of text runs from the paragraph.
      */
-    'runs'?: Array<Run>;
+    'runs'?: Array<Run> | null;
 }
 

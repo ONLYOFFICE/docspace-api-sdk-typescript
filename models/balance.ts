@@ -33,6 +33,6 @@ export interface Balance {
     /**
      * A list of sub-accounts.
      */
-    'subAccounts'?: Array<SubAccount>;
+    'subAccounts'?: Array<SubAccount> | null;
 }
 

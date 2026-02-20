@@ -22,6 +22,6 @@
 export interface PasswordHasher {
     'size'?: number;
     'iterations'?: number;
-    'salt'?: string;
+    'salt'?: string | null;
 }
 

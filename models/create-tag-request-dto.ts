@@ -26,6 +26,6 @@ export interface CreateTagRequestDto {
     /**
      * The tag name.
      */
-    'name': string;
+    'name': string | null;
 }
 

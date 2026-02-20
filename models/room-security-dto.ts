@@ -32,11 +32,11 @@ export interface RoomSecurityDto {
     /**
      * The list of room members.
      */
-    'members'?: Array<FileShareDto>;
+    'members'?: Array<FileShareDto> | null;
     /**
      * The warning message.
      */
-    'warning'?: string;
+    'warning'?: string | null;
     'error'?: RoomSecurityError;
 }
 

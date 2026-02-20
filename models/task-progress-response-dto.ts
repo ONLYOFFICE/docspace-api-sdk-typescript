@@ -29,11 +29,11 @@ export interface TaskProgressResponseDto {
     /**
      * The task progress ID.
      */
-    'id': string;
+    'id': string | null;
     /**
      * The task progress error message.
      */
-    'error'?: string;
+    'error'?: string | null;
     /**
      * The percentage of the task progress.
      */

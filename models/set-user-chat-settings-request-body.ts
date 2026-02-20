@@ -26,6 +26,6 @@ export interface SetUserChatSettingsRequestBody {
     /**
      * Indicates whether the AI assistant is allowed to perform web searches when generating responses.
      */
-    'webSearchEnabled'?: boolean;
+    'webSearchEnabled'?: boolean | null;
 }
 

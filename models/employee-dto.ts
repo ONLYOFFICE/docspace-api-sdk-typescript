@@ -30,35 +30,35 @@ export interface EmployeeDto {
     /**
      * The HTML-encoded user\'s display name formatted according to the default format for the current culture.
      */
-    'displayName'?: string;
+    'displayName'?: string | null;
     /**
      * The user title.
      */
-    'title'?: string;
+    'title'?: string | null;
     /**
      * The user avatar.
      */
-    'avatar'?: string;
+    'avatar'?: string | null;
     /**
      * The user original size avatar.
      */
-    'avatarOriginal'?: string;
+    'avatarOriginal'?: string | null;
     /**
      * The user maximum size avatar.
      */
-    'avatarMax'?: string;
+    'avatarMax'?: string | null;
     /**
      * The user medium size avatar.
      */
-    'avatarMedium'?: string;
+    'avatarMedium'?: string | null;
     /**
      * The user small size avatar.
      */
-    'avatarSmall'?: string;
+    'avatarSmall'?: string | null;
     /**
      * The user profile URL.
      */
-    'profileUrl'?: string;
+    'profileUrl'?: string | null;
     /**
      * Specifies if the user has an avatar or not.
      */

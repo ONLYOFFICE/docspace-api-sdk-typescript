@@ -29,20 +29,20 @@ export interface EditHistoryDataDto {
     /**
      * The URL address of the file with the document changes data.
      */
-    'changesUrl'?: string;
+    'changesUrl'?: string | null;
     /**
      * The document identifier used to unambiguously identify the document file.
      */
-    'key': string;
+    'key': string | null;
     'previous'?: EditHistoryUrl;
     /**
      * The encrypted signature added to the parameter in the form of a token.
      */
-    'token'?: string;
+    'token'?: string | null;
     /**
      * The URL address of the current document version.
      */
-    'url': string;
+    'url': string | null;
     /**
      * The document version number.
      */
@@ -50,6 +50,6 @@ export interface EditHistoryDataDto {
     /**
      * The document extension.
      */
-    'fileType': string;
+    'fileType': string | null;
 }
 

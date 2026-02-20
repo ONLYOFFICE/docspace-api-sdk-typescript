@@ -30,10 +30,10 @@ export interface DefaultProviderDto {
     /**
      * Default model identifier used with this provider.
      */
-    'defaultModel': string;
+    'defaultModel': string | null;
     /**
      * AI provider title.
      */
-    'providerTitle'?: string;
+    'providerTitle'?: string | null;
 }
 

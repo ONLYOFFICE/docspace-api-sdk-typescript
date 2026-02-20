@@ -45,13 +45,13 @@ export type BatchRequestDto = FileOperationRequestBaseDto &  {
      * @type {Array<BatchRequestDtoAllOfFolderIds>}
      * @memberof BatchRequestDto
      */
-    'folderIds'?: Array<BatchRequestDtoAllOfFolderIds>;
+    'folderIds'?: Array<BatchRequestDtoAllOfFolderIds> | null;
     /**
      * The list of file IDs to be copied/moved.
      * @type {Array<BatchRequestDtoAllOfFileIds>}
      * @memberof BatchRequestDto
      */
-    'fileIds'?: Array<BatchRequestDtoAllOfFileIds>;
+    'fileIds'?: Array<BatchRequestDtoAllOfFileIds> | null;
     /**
      * 
      * @type {BatchRequestDtoAllOfDestFolderId}

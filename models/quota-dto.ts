@@ -42,7 +42,7 @@ export interface QuotaDto {
     /**
      * The quota title.
      */
-    'title': string;
+    'title': string | null;
     'price': PriceDto;
     /**
      * Specifies if the quota is nonprofit or not.
@@ -59,7 +59,7 @@ export interface QuotaDto {
     /**
      * The list of tenant quota features.
      */
-    'features': Array<TenantQuotaFeatureDto>;
+    'features': Array<TenantQuotaFeatureDto> | null;
     'usersQuota'?: TenantEntityQuotaSettings;
     'roomsQuota'?: TenantEntityQuotaSettings;
     'aiAgentsQuota'?: TenantEntityQuotaSettings;
@@ -67,6 +67,6 @@ export interface QuotaDto {
     /**
      * The due date.
      */
-    'dueDate'?: string;
+    'dueDate'?: string | null;
 }
 

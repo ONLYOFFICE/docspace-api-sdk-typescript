@@ -29,20 +29,20 @@ export interface AdminMessageSettingsRequestsDto {
     /**
      * The content of the administrator message to be sent.
      */
-    'message': string;
+    'message': string | null;
     /**
      * Email
      */
-    'email': string;
+    'email': string | null;
     /**
      * Culture
      */
-    'culture'?: string;
+    'culture'?: string | null;
     'recaptchaType'?: RecaptchaType;
     /**
      * The user\'s response to the CAPTCHA challenge.
      */
-    'recaptchaResponse'?: string;
+    'recaptchaResponse'?: string | null;
 }
 
 

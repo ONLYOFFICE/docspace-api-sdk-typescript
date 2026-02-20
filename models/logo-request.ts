@@ -26,7 +26,7 @@ export interface LogoRequest {
     /**
      * The path to the temporary image file.
      */
-    'tmpFile'?: string;
+    'tmpFile'?: string | null;
     /**
      * The X coordinate of the rectangle starting point.
      */

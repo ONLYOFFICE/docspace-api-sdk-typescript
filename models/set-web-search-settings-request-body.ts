@@ -34,7 +34,7 @@ export interface SetWebSearchSettingsRequestBody {
     /**
      * The API key for the selected web search engine. Pass null to keep the existing key unchanged.
      */
-    'key'?: string;
+    'key'?: string | null;
 }
 
 

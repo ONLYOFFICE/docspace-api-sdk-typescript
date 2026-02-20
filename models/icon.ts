@@ -20,9 +20,9 @@
 
 
 export interface Icon {
-    'icon48': string;
-    'icon32': string;
-    'icon24': string;
-    'icon16': string;
+    'icon48': string | null;
+    'icon32': string | null;
+    'icon24': string | null;
+    'icon16': string | null;
 }
 

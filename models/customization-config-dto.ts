@@ -57,7 +57,7 @@ export interface CustomizationConfigDto {
     /**
      * Specifies if the customization should be force saved.
      */
-    'forcesave'?: boolean;
+    'forcesave'?: boolean | null;
     'goback'?: GobackConfig;
     'review'?: ReviewConfig;
     'logo'?: LogoConfigDto;

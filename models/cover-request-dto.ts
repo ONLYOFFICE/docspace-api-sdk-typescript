@@ -26,10 +26,10 @@ export interface CoverRequestDto {
     /**
      * The cover color.
      */
-    'color'?: string;
+    'color'?: string | null;
     /**
      * The cover name.
      */
-    'cover'?: string;
+    'cover'?: string | null;
 }
 

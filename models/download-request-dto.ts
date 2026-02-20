@@ -42,19 +42,19 @@ export type DownloadRequestDto = FileOperationRequestBaseDto &  {
      * @type {Array<DownloadRequestDtoAllOfFolderIds>}
      * @memberof DownloadRequestDto
      */
-    'folderIds'?: Array<DownloadRequestDtoAllOfFolderIds>;
+    'folderIds'?: Array<DownloadRequestDtoAllOfFolderIds> | null;
     /**
      * The list of file IDs to be downloaded.
      * @type {Array<DownloadRequestDtoAllOfFileIds>}
      * @memberof DownloadRequestDto
      */
-    'fileIds'?: Array<DownloadRequestDtoAllOfFileIds>;
+    'fileIds'?: Array<DownloadRequestDtoAllOfFileIds> | null;
     /**
      * The list of file IDs which will be converted.
      * @type {Array<DownloadRequestItemDto>}
      * @memberof DownloadRequestDto
      */
-    'fileConvertIds'?: Array<DownloadRequestItemDto>;
+    'fileConvertIds'?: Array<DownloadRequestItemDto> | null;
 };
 
 

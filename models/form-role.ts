@@ -30,11 +30,11 @@ export interface FormRole {
     /**
      * The role name.
      */
-    'roleName'?: string;
+    'roleName'?: string | null;
     /**
      * The role color.
      */
-    'roleColor'?: string;
+    'roleColor'?: string | null;
     /**
      * The user ID.
      */

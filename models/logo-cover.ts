@@ -26,10 +26,10 @@ export interface LogoCover {
     /**
      * The logo cover ID.
      */
-    'id': string;
+    'id': string | null;
     /**
      * The logo cover data.
      */
-    'data': string;
+    'data': string | null;
 }
 

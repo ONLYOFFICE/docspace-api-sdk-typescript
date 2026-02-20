@@ -38,7 +38,7 @@ export interface FileLinkRequest {
     /**
      * The link name.
      */
-    'title'?: string;
+    'title'?: string | null;
     /**
      * The link scope, whether it is internal or not.
      */
@@ -54,7 +54,7 @@ export interface FileLinkRequest {
     /**
      * Password for access via link.
      */
-    'password'?: string;
+    'password'?: string | null;
 }
 
 

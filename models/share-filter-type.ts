@@ -29,6 +29,7 @@ export const ShareFilterType = {
     ExternalLink: 2,
     AdditionalExternalLink: 4,
     PrimaryExternalLink: 8,
+    Link: 15,
     User: 16,
     Group: 32
 } as const;

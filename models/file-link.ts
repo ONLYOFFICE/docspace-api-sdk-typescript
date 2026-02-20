@@ -26,14 +26,14 @@ export interface FileLink {
     /**
      * The type of the file for the source viewed or edited document.
      */
-    'filetype': string;
+    'filetype': string | null;
     /**
      * The encrypted signature added to the config in the form of a token.
      */
-    'token'?: string;
+    'token'?: string | null;
     /**
      * The absolute URL where the source viewed or edited document is stored.
      */
-    'url': string;
+    'url': string | null;
 }
 

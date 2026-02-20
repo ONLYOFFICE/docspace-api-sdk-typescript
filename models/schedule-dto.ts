@@ -27,9 +27,9 @@ import type { CronParams } from './cron-params';
 
 export interface ScheduleDto {
     'storageType': BackupStorageType;
-    'storageParams': { [key: string]: string; };
+    'storageParams': { [key: string]: string | null; } | null;
     'cronParams': CronParams;
-    'backupsStored'?: number;
+    'backupsStored'?: number | null;
     'lastBackupTime': string;
     'dump': boolean;
 }

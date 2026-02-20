@@ -33,7 +33,7 @@ export interface WebhooksLogDto {
     /**
      * The webhook configuration name.
      */
-    'configName'?: string;
+    'configName'?: string | null;
     'trigger'?: WebhookTrigger;
     /**
      * The webhook creation time.
@@ -42,27 +42,27 @@ export interface WebhooksLogDto {
     /**
      * The webhook method.
      */
-    'method'?: string;
+    'method'?: string | null;
     /**
      * The webhook route.
      */
-    'route'?: string;
+    'route'?: string | null;
     /**
      * The webhook request headers.
      */
-    'requestHeaders'?: string;
+    'requestHeaders'?: string | null;
     /**
      * The webhook request payload.
      */
-    'requestPayload'?: string;
+    'requestPayload'?: string | null;
     /**
      * The webhook response headers.
      */
-    'responseHeaders'?: string;
+    'responseHeaders'?: string | null;
     /**
      * The webhook response payload.
      */
-    'responsePayload'?: string;
+    'responsePayload'?: string | null;
     /**
      * The webhook status.
      */
@@ -70,7 +70,7 @@ export interface WebhooksLogDto {
     /**
      * The webhook delivery time.
      */
-    'delivery'?: string;
+    'delivery'?: string | null;
 }
 
 

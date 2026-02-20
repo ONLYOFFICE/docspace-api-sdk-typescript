@@ -26,6 +26,6 @@ export interface MobileRequestsDto {
     /**
      * The user\'s mobile phone number.
      */
-    'mobilePhone'?: string;
+    'mobilePhone'?: string | null;
 }
 

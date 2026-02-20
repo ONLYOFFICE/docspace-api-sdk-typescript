@@ -27,9 +27,21 @@ import type { PaymentSettingsDto } from './payment-settings-dto';
 
 export interface PaymentSettingsWrapper {
     'response'?: PaymentSettingsDto;
+    /**
+     * The total number of items in the response
+     */
     'count'?: number;
+    /**
+     * List of links related to the response
+     */
     'links'?: Array<GetPortalPrices200ResponseLinksInner>;
+    /**
+     * HTTP status code of the response
+     */
     'status'?: number;
+    /**
+     * HTTP status code of the response (duplicate of status)
+     */
     'statusCode'?: number;
 }
 

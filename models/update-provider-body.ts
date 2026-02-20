@@ -26,14 +26,14 @@ export interface UpdateProviderBody {
     /**
      * The new display title for the AI provider. If null, the title is not changed.
      */
-    'title'?: string;
+    'title'?: string | null;
     /**
      * The new API endpoint URL for the AI provider. If null, the URL is not changed.
      */
-    'url'?: string;
+    'url'?: string | null;
     /**
      * The new authentication API key for the AI provider. If null, the key is not changed.
      */
-    'key'?: string;
+    'key'?: string | null;
 }
 

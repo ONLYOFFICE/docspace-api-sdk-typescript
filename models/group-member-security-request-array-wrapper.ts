@@ -27,9 +27,21 @@ import type { GroupMemberSecurityRequestDto } from './group-member-security-requ
 
 export interface GroupMemberSecurityRequestArrayWrapper {
     'response'?: Array<GroupMemberSecurityRequestDto>;
+    /**
+     * The total number of items in the response
+     */
     'count'?: number;
+    /**
+     * List of links related to the response
+     */
     'links'?: Array<GetPortalPrices200ResponseLinksInner>;
+    /**
+     * HTTP status code of the response
+     */
     'status'?: number;
+    /**
+     * HTTP status code of the response (duplicate of status)
+     */
     'statusCode'?: number;
 }
 

@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **storageType** | [**BackupStorageType**](BackupStorageType.md) |  | [default to undefined]
-**storageParams** | **{ [key: string]: string; }** |  | [default to undefined]
+**storageParams** | **{ [key: string]: string | null; }** |  | [default to undefined]
 **cronParams** | [**CronParams**](CronParams.md) |  | [default to undefined]
 **backupsStored** | **number** |  | [optional] [default to undefined]
 **lastBackupTime** | **string** |  | [default to undefined]

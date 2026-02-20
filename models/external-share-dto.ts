@@ -33,11 +33,11 @@ export interface ExternalShareDto {
     /**
      * The external data ID.
      */
-    'id': string;
+    'id': string | null;
     /**
      * The external data title.
      */
-    'title': string;
+    'title': string | null;
     'type'?: FileEntryType;
     /**
      * The tenant ID.
@@ -46,16 +46,16 @@ export interface ExternalShareDto {
     /**
      * The unique identifier of the shared entity.
      */
-    'entityId'?: string;
+    'entityId'?: string | null;
     /**
      * The title of the shared entity.
      */
-    'entityTitle'?: string;
+    'entityTitle'?: string | null;
     'entityType'?: FileEntryType;
     /**
      * Indicates whether the entity represents a room.
      */
-    'isRoom'?: boolean;
+    'isRoom'?: boolean | null;
     /**
      * Specifies whether to share the external data or not.
      */

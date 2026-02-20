@@ -30,6 +30,6 @@ export interface ExportChatRequestBodyInteger {
     /**
      * The file name (without extension) to use for the exported document.
      */
-    'title': string;
+    'title': string | null;
 }
 

@@ -30,6 +30,6 @@ export interface CustomColorThemesSettingsRequestsDto {
     /**
      * Specifies the optional value indicating the selected custom color theme.
      */
-    'selected'?: number;
+    'selected'?: number | null;
 }
 

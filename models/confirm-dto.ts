@@ -30,15 +30,15 @@ export interface ConfirmDto {
     /**
      * The confirmation room ID.
      */
-    'roomId'?: string;
+    'roomId'?: string | null;
     /**
      * The confirmation title.
      */
-    'title'?: string;
+    'title'?: string | null;
     /**
      * The confirmation email.
      */
-    'email'?: string;
+    'email'?: string | null;
     /**
      * The confirmation is agent.
      */

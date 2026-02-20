@@ -26,7 +26,7 @@ export interface TenantDomainValidator {
     /**
      * The regex string to validate a domain.
      */
-    'regex'?: string;
+    'regex'?: string | null;
     /**
      * The minimum length of the valid domain.
      */

@@ -26,6 +26,6 @@ export interface DeleteRoomServersRequestBody {
     /**
      * Set of unique identifiers of MCP servers to remove from the room. Associated connections and tool configurations will also be cleaned up.
      */
-    'servers': Set<string>;
+    'servers': Set<string> | null;
 }
 

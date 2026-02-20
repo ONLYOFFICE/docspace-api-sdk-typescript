@@ -29,6 +29,6 @@ export interface DefaultTemplateSettingsDto {
     /**
      * Default templates list.
      */
-    'items': Array<DefaultTemplateItemDto>;
+    'items': Array<DefaultTemplateItemDto> | null;
 }
 

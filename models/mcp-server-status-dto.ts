@@ -36,7 +36,7 @@ export interface McpServerStatusDto {
     /**
      * Display name of the MCP server.
      */
-    'name': string;
+    'name': string | null;
     'serverType'?: ServerType;
     /**
      * Indicates whether the current user has an active connection to this server. For direct-connection servers this is always true; for OAuth-based servers it reflects whether the user has completed authorization.

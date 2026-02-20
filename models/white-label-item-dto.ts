@@ -36,7 +36,7 @@ export interface WhiteLabelItemDto {
     /**
      * The white label file name.
      */
-    'name'?: string;
+    'name'?: string | null;
     'size'?: IMagickGeometry;
     'path'?: WhiteLabelItemPathDto;
 }

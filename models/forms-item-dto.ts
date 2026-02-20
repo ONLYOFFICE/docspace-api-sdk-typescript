@@ -23,7 +23,7 @@
  * The forms item information.
  */
 export interface FormsItemDto {
-    'key'?: string;
-    'type'?: string;
+    'key'?: string | null;
+    'type'?: string | null;
 }
 

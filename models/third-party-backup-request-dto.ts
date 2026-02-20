@@ -26,26 +26,26 @@ export interface ThirdPartyBackupRequestDto {
     /**
      * The connection URL for the sharepoint.
      */
-    'url'?: string;
+    'url'?: string | null;
     /**
      * The login.
      */
-    'login'?: string;
+    'login'?: string | null;
     /**
      * The password.
      */
-    'password'?: string;
+    'password'?: string | null;
     /**
      * The authentication token.
      */
-    'token'?: string;
+    'token'?: string | null;
     /**
      * The customer title.
      */
-    'customerTitle'?: string;
+    'customerTitle'?: string | null;
     /**
      * The provider key.
      */
-    'providerKey'?: string;
+    'providerKey'?: string | null;
 }
 

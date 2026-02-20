@@ -23,10 +23,10 @@ export interface MultiSizeLogoCover {
     /**
      * The logo cover ID.
      */
-    'id': string;
+    'id': string | null;
     /**
      * The logo cover data.
      */
-    'data': { [key: string]: string; };
+    'data': { [key: string]: string | null; } | null;
 }
 

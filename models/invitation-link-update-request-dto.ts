@@ -30,10 +30,10 @@ export interface InvitationLinkUpdateRequestDto {
     /**
      * The expiration date of the invitation link.
      */
-    'expiration'?: string;
+    'expiration'?: string | null;
     /**
      * The maximum number of times the invitation link can be used.
      */
-    'maxUseCount'?: number;
+    'maxUseCount'?: number | null;
 }
 

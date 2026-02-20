@@ -29,6 +29,6 @@ export interface WebItemsSecurityRequestsDto {
     /**
      * The list of module security configurations.
      */
-    'items'?: Array<ItemKeyValuePairStringBoolean>;
+    'items'?: Array<ItemKeyValuePairStringBoolean> | null;
 }
 

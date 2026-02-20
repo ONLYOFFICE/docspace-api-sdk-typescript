@@ -32,12 +32,12 @@ export interface BackupRestoreDto {
     /**
      * The backup ID.
      */
-    'backupId': string;
+    'backupId': string | null;
     'storageType'?: BackupStorageType;
     /**
      * The backup storage parameters.
      */
-    'storageParams'?: Array<ItemKeyValuePairObjectObject>;
+    'storageParams'?: Array<ItemKeyValuePairObjectObject> | null;
     /**
      * Notifies users about the portal restoring process or not.
      */

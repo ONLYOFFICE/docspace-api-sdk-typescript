@@ -38,14 +38,14 @@ export interface ThirdPartyParams {
     /**
      * The customer title.
      */
-    'customer_title'?: string;
+    'customer_title'?: string | null;
     /**
      * The provider ID.
      */
-    'provider_id'?: number;
+    'provider_id'?: number | null;
     /**
      * The provider key.
      */
-    'provider_key'?: string;
+    'provider_key'?: string | null;
 }
 

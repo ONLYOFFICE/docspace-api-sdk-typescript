@@ -26,10 +26,10 @@ export interface LogoRequestsDto {
     /**
      * The URL or base64-encoded image data for the light theme logo.
      */
-    'light'?: string;
+    'light'?: string | null;
     /**
      * The URL or base64-encoded image data for the dark theme logo.
      */
-    'dark'?: string;
+    'dark'?: string | null;
 }
 

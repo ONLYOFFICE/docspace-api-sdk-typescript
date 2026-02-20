@@ -26,8 +26,8 @@ export interface UploadSessionResponseDtoInteger {
     'id'?: number;
     'folderId'?: number;
     'version'?: number;
-    'title'?: string;
-    'providerKey'?: string;
+    'title'?: string | null;
+    'providerKey'?: string | null;
     'uploaded'?: boolean;
     'file'?: FileDtoInteger;
 }

@@ -26,10 +26,10 @@ export interface CoversResultDto {
     /**
      * The cover unique identifier.
      */
-    'id': string;
+    'id': string | null;
     /**
      * The cover image data.
      */
-    'data': string;
+    'data': string | null;
 }
 

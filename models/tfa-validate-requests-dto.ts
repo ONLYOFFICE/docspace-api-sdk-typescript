@@ -26,6 +26,6 @@ export interface TfaValidateRequestsDto {
     /**
      * The verification code provided by the user.
      */
-    'code': string;
+    'code': string | null;
 }
 

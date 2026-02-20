@@ -26,11 +26,11 @@ export interface CreateTextOrHtmlFile {
     /**
      * The file title for text or HTML file.
      */
-    'title': string;
+    'title': string | null;
     /**
      * The text or HTML file contents.
      */
-    'content'?: string;
+    'content'?: string | null;
     /**
      * Specifies whether to create a new text or HTML file if it exists or not.
      */

@@ -26,14 +26,14 @@ export interface EncryptionKeysConfig {
     /**
      * The crypto engine ID of the encryption key.
      */
-    'cryptoEngineId'?: string;
+    'cryptoEngineId'?: string | null;
     /**
      * The private key.
      */
-    'privateKeyEnc'?: string;
+    'privateKeyEnc'?: string | null;
     /**
      * The public key.
      */
-    'publicKey'?: string;
+    'publicKey'?: string | null;
 }
 

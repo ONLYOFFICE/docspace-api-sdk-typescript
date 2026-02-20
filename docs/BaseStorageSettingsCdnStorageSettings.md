@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **module** | **string** |  | [optional] [default to undefined]
-**props** | **{ [key: string]: string; }** |  | [optional] [default to undefined]
+**props** | **{ [key: string]: string | null; }** |  | [optional] [default to undefined]
 **lastModified** | **string** |  | [optional] [default to undefined]
 
 ## Example

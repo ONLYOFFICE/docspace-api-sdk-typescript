@@ -26,10 +26,10 @@ export interface PaymentUrlRequestsDto {
     /**
      * The URL where the user will be redirected after payment processing.
      */
-    'backUrl'?: string;
+    'backUrl'?: string | null;
     /**
      * The payment quantity.
      */
-    'quantity'?: { [key: string]: number; };
+    'quantity'?: { [key: string]: number; } | null;
 }
 

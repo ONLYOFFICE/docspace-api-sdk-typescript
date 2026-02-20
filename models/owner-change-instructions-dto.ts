@@ -30,6 +30,6 @@ export interface OwnerChangeInstructionsDto {
     /**
      * The owner change instructions message.
      */
-    'message'?: string;
+    'message'?: string | null;
 }
 

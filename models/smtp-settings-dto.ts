@@ -26,27 +26,27 @@ export interface SmtpSettingsDto {
     /**
      * The SMTP host.
      */
-    'host'?: string;
+    'host'?: string | null;
     /**
      * The SMTP port.
      */
-    'port'?: number;
+    'port'?: number | null;
     /**
      * The sender address.
      */
-    'senderAddress'?: string;
+    'senderAddress'?: string | null;
     /**
      * The sender display name.
      */
-    'senderDisplayName'?: string;
+    'senderDisplayName'?: string | null;
     /**
      * The credentials username.
      */
-    'credentialsUserName'?: string;
+    'credentialsUserName'?: string | null;
     /**
      * The credentials user password.
      */
-    'credentialsUserPassword'?: string;
+    'credentialsUserPassword'?: string | null;
     /**
      * Specifies whether the SSL is enabled or not.
      */

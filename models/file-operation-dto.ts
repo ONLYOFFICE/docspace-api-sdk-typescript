@@ -35,7 +35,7 @@ export interface FileOperationDto {
     /**
      * The file operation ID.
      */
-    'id': string;
+    'id': string | null;
     'Operation': FileOperationType;
     /**
      * The file operation progress in percentage.
@@ -44,11 +44,11 @@ export interface FileOperationDto {
     /**
      * The file operation error message.
      */
-    'error': string;
+    'error': string | null;
     /**
      * The file operation processing status.
      */
-    'processed': string;
+    'processed': string | null;
     /**
      * Specifies if the file operation is finished or not.
      */
@@ -56,15 +56,15 @@ export interface FileOperationDto {
     /**
      * The file operation URL.
      */
-    'url'?: string;
+    'url'?: string | null;
     /**
      * The list of files of the file operation.
      */
-    'files'?: Array<FileEntryBaseDto>;
+    'files'?: Array<FileEntryBaseDto> | null;
     /**
      * The list of folders of the file operation.
      */
-    'folders'?: Array<FileEntryBaseDto>;
+    'folders'?: Array<FileEntryBaseDto> | null;
     'status'?: DistributedTaskStatus;
 }
 

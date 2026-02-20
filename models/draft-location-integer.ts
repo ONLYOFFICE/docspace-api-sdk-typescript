@@ -30,7 +30,7 @@ export interface DraftLocationInteger {
     /**
      * The InProcess folder title of the draft.
      */
-    'folderTitle'?: string;
+    'folderTitle'?: string | null;
     /**
      * The draft ID.
      */
@@ -38,6 +38,6 @@ export interface DraftLocationInteger {
     /**
      * The draft title.
      */
-    'fileTitle'?: string;
+    'fileTitle'?: string | null;
 }
 

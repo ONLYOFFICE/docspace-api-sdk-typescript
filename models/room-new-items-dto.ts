@@ -30,6 +30,6 @@ export interface RoomNewItemsDto {
     /**
      * The list of file entry items.
      */
-    'items'?: Array<FileEntryBaseDto>;
+    'items'?: Array<FileEntryBaseDto> | null;
 }
 

@@ -26,6 +26,6 @@ export interface LinkAccountRequestDto {
     /**
      * The third-party profile in the serialized format.
      */
-    'serializedProfile'?: string;
+    'serializedProfile'?: string | null;
 }
 

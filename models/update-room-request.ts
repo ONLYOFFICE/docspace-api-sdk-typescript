@@ -38,34 +38,34 @@ export interface UpdateRoomRequest {
     /**
      * The room title.
      */
-    'title'?: string;
+    'title'?: string | null;
     /**
      * The room quota.
      */
-    'quota'?: number;
+    'quota'?: number | null;
     /**
      * Specifies whether to create a third-party room with indexing.
      */
-    'indexing'?: boolean;
+    'indexing'?: boolean | null;
     /**
      * Specifies whether to deny downloads from the third-party room.
      */
-    'denyDownload'?: boolean;
+    'denyDownload'?: boolean | null;
     'lifetime'?: RoomDataLifetimeDto;
     'watermark'?: WatermarkRequestDto;
     'logo'?: LogoRequest;
     /**
      * The list of tags.
      */
-    'tags'?: Array<string>;
+    'tags'?: Array<string> | null;
     /**
      * The room color.
      */
-    'color'?: string;
+    'color'?: string | null;
     /**
      * The room cover.
      */
-    'cover'?: string;
+    'cover'?: string | null;
     'chatSettings'?: ChatSettings;
 }
 

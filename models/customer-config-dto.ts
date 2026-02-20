@@ -26,26 +26,26 @@ export interface CustomerConfigDto {
     /**
      * The address of the customer configuration.
      */
-    'address'?: string;
+    'address'?: string | null;
     /**
      * The logo of the customer configuration.
      */
-    'logo'?: string;
+    'logo'?: string | null;
     /**
      * The dark logo of the customer configuration.
      */
-    'logoDark'?: string;
+    'logoDark'?: string | null;
     /**
      * The mail address of the customer configuration.
      */
-    'mail'?: string;
+    'mail'?: string | null;
     /**
      * The name of the customer configuration.
      */
-    'name'?: string;
+    'name'?: string | null;
     /**
      * The site web address of the customer configuration.
      */
-    'www'?: string;
+    'www'?: string | null;
 }
 

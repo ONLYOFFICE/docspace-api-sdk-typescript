@@ -26,11 +26,11 @@ export interface ProviderDto {
     /**
      * The provider name.
      */
-    'name'?: string;
+    'name'?: string | null;
     /**
      * The provider key.
      */
-    'key'?: string;
+    'key'?: string | null;
     /**
      * Specifies whether the provider is connected.
      */
@@ -42,7 +42,7 @@ export interface ProviderDto {
     /**
      * The provider redirect URL.
      */
-    'redirectUrl'?: string;
+    'redirectUrl'?: string | null;
     /**
      * The required connection URL flag.
      */
@@ -50,6 +50,6 @@ export interface ProviderDto {
     /**
      * The provider OAuth client ID.
      */
-    'clientId'?: string;
+    'clientId'?: string | null;
 }
 

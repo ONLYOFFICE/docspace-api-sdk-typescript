@@ -39,57 +39,57 @@ export interface UserInfo {
     /**
      * The user first name.
      */
-    'firstName'?: string;
+    'firstName'?: string | null;
     /**
      * The user last name.
      */
-    'lastName'?: string;
+    'lastName'?: string | null;
     /**
      * The user username.
      */
-    'userName'?: string;
+    'userName'?: string | null;
     /**
      * The user birthday.
      */
-    'birthDate'?: string;
+    'birthDate'?: string | null;
     /**
      * The user sex (male or female).
      */
-    'sex'?: boolean;
+    'sex'?: boolean | null;
     'status'?: EmployeeStatus;
     'activationStatus'?: EmployeeActivationStatus;
     /**
      * The date and time when the user account was terminated.
      */
-    'terminatedDate'?: string;
+    'terminatedDate'?: string | null;
     /**
      * The user title.
      */
-    'title'?: string;
+    'title'?: string | null;
     /**
      * The user registration date.
      */
-    'workFromDate'?: string;
+    'workFromDate'?: string | null;
     /**
      * The user email address.
      */
-    'email'?: string;
+    'email'?: string | null;
     /**
      * The list of user contacts in the string format.
      */
-    'contacts'?: string;
+    'contacts'?: string | null;
     /**
      * The list of user contacts.
      */
-    'contactsList'?: Array<string>;
+    'contactsList'?: Array<string> | null;
     /**
      * The user location.
      */
-    'location'?: string;
+    'location'?: string | null;
     /**
      * The user notes.
      */
-    'notes'?: string;
+    'notes'?: string | null;
     /**
      * Specifies if the user account was removed or not.
      */
@@ -109,16 +109,16 @@ export interface UserInfo {
     /**
      * The user culture code.
      */
-    'cultureName'?: string;
+    'cultureName'?: string | null;
     /**
      * The user mobile phone.
      */
-    'mobilePhone'?: string;
+    'mobilePhone'?: string | null;
     'mobilePhoneActivationStatus'?: MobilePhoneActivationStatus;
     /**
      * The LDAP user identificator.
      */
-    'sid'?: string;
+    'sid'?: string | null;
     /**
      * The LDAP user quota attribute.
      */
@@ -126,11 +126,11 @@ export interface UserInfo {
     /**
      * The SSO SAML user identificator.
      */
-    'ssoNameId'?: string;
+    'ssoNameId'?: string | null;
     /**
      * The SSO SAML user session identificator.
      */
-    'ssoSessionId'?: string;
+    'ssoSessionId'?: string | null;
     /**
      * The date and time when the user account was created.
      */
@@ -138,11 +138,11 @@ export interface UserInfo {
     /**
      * The ID of the user who created the current user account.
      */
-    'createdBy'?: string;
+    'createdBy'?: string | null;
     /**
      * Specifies if tips, updates and offers are allowed to be sent to the user or not.
      */
-    'spam'?: boolean;
+    'spam'?: boolean | null;
     'checkActivation'?: boolean;
 }
 

@@ -26,6 +26,6 @@ export interface CreateFolder {
     /**
      * The folder title to create.
      */
-    'title': string;
+    'title': string | null;
 }
 

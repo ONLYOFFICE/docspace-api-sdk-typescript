@@ -23,8 +23,8 @@ Name | Type | Description | Notes
 **url** | **string** | The web plugin URL. | [default to undefined]
 **cssUrl** | **string** | The web plugin css URL. | [default to undefined]
 **settings** | **string** | The web plugin settings. | [default to undefined]
-**nameLocale** | **{ [key: string]: string; }** | The web plugin localized name. | [optional] [default to undefined]
-**descriptionLocale** | **{ [key: string]: string; }** | The web plugin localized description. | [optional] [default to undefined]
+**nameLocale** | **{ [key: string]: string | null; }** | The web plugin localized name. | [optional] [default to undefined]
+**descriptionLocale** | **{ [key: string]: string | null; }** | The web plugin localized description. | [optional] [default to undefined]
 
 ## Example
 

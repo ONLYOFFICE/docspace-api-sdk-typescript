@@ -33,7 +33,7 @@ export interface BackupDto {
     /**
      * The backup storage parameters.
      */
-    'storageParams'?: Array<ItemKeyValuePairObjectObject>;
+    'storageParams'?: Array<ItemKeyValuePairObjectObject> | null;
     /**
      * Specifies if a dump will be created or not.
      */

@@ -39,7 +39,11 @@ import type { SubjectType } from './subject-type';
  */
 export interface FileShareDto {
     'access'?: FileShare;
-    'sharedTo'?: any;
+    /**
+     * The user who has the access to the specified file.
+     * @deprecated
+     */
+    'sharedTo'?: any | null;
     'sharedToUser'?: EmployeeFullDto;
     'sharedToGroup'?: GroupSummaryDto;
     'sharedLink'?: FileShareLink;

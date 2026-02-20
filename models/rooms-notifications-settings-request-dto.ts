@@ -23,7 +23,10 @@
  * The request parameters for configuring notification settings for the chat or collaboration rooms.
  */
 export interface RoomsNotificationsSettingsRequestDto {
-    'roomsId'?: any;
+    /**
+     * The target room identifier.
+     */
+    'roomsId'?: any | null;
     /**
      * Specifies whether the notifications will be delivered to the specified room or not.
      */

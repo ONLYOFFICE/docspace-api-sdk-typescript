@@ -34,7 +34,7 @@ export interface PaymentCalculation {
     /**
      * The three-character ISO 4217 currency symbol used for the payment calculation.
      */
-    'currency'?: string;
+    'currency'?: string | null;
     /**
      * The quantity associated with the payment calculation.
      */

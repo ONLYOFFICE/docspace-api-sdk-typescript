@@ -26,11 +26,11 @@ export interface GetReferenceDataDtoInteger {
     /**
      * The unique document identifier used by the service to get a link to the file.
      */
-    'fileKey': string;
+    'fileKey': string | null;
     /**
      * The unique system identifier.
      */
-    'instanceId': string;
+    'instanceId': string | null;
     /**
      * The source file ID.
      */
@@ -38,10 +38,10 @@ export interface GetReferenceDataDtoInteger {
     /**
      * The file name or relative path for the formula editor.
      */
-    'path'?: string;
+    'path'?: string | null;
     /**
      * The file link.
      */
-    'link'?: string;
+    'link'?: string | null;
 }
 

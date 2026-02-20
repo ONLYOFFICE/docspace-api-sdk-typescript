@@ -38,31 +38,31 @@ export type MigratingApiUser = ImportableApiEntity &  {
      * @type {string}
      * @memberof MigratingApiUser
      */
-    'key'?: string;
+    'key'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MigratingApiUser
      */
-    'email'?: string;
+    'email'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MigratingApiUser
      */
-    'displayName'?: string;
+    'displayName'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MigratingApiUser
      */
-    'firstName'?: string;
+    'firstName'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MigratingApiUser
      */
-    'lastName'?: string;
+    'lastName'?: string | null;
     /**
      * 
      * @type {EmployeeType}

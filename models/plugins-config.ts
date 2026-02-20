@@ -26,6 +26,6 @@ export interface PluginsConfig {
     /**
      * The array of absolute URLs to the plugin configuration files.
      */
-    'pluginsData'?: Array<string>;
+    'pluginsData'?: Array<string> | null;
 }
 

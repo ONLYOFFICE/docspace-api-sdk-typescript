@@ -20,13 +20,13 @@
 
 
 /**
- * The type of content block within a chat message.
+ * []
  */
 
 export const MessageContentType = {
-    NUMBER_0: 0,
-    NUMBER_1: 1,
-    NUMBER_2: 2
+    Text: 0,
+    Tool: 1,
+    Attachment: 2
 } as const;
 
 export type MessageContentType = typeof MessageContentType[keyof typeof MessageContentType];

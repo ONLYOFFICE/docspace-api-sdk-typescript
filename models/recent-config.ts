@@ -26,14 +26,14 @@ export interface RecentConfig {
     /**
      * The folder where the document is stored.
      */
-    'folder'?: string;
+    'folder'?: string | null;
     /**
      * The document title that will be displayed in the Open Recent... menu option.
      */
-    'title'?: string;
+    'title'?: string | null;
     /**
      * The absolute URL to the document where it is stored.
      */
-    'url'?: string;
+    'url'?: string | null;
 }
 

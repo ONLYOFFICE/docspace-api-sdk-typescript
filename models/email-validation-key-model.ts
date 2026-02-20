@@ -32,29 +32,29 @@ export interface EmailValidationKeyModel {
     /**
      * The email validation key.
      */
-    'key'?: string;
+    'key'?: string | null;
     'emplType'?: EmployeeType;
     /**
      * The email address.
      */
-    'email'?: string;
+    'email'?: string | null;
     /**
      * The encrypted email address.
      */
-    'encEmail'?: string;
+    'encEmail'?: string | null;
     /**
      * The user ID.
      */
-    'uiD'?: string;
+    'uiD'?: string | null;
     'type'?: ConfirmType;
     /**
      * Specifies whether it is the first time account access or not.
      */
-    'first'?: string;
+    'first'?: string | null;
     /**
      * The room ID.
      */
-    'roomId'?: string;
+    'roomId'?: string | null;
 }
 
 

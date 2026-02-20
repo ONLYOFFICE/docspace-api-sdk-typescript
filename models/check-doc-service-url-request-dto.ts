@@ -26,26 +26,26 @@ export interface CheckDocServiceUrlRequestDto {
     /**
      * The ONLYOFFICE Docs URL address.
      */
-    'docServiceUrl': string;
+    'docServiceUrl': string | null;
     /**
      * The ONLYOFFICE Docs URL address in the local private network.
      */
-    'docServiceUrlInternal'?: string;
+    'docServiceUrlInternal'?: string | null;
     /**
      * The ONLYOFFICE Docs URL address.
      */
-    'docServiceUrlPortal'?: string;
+    'docServiceUrlPortal'?: string | null;
     /**
      * The signature secret of the ONLYOFFICE Docs.
      */
-    'docServiceSignatureSecret'?: string;
+    'docServiceSignatureSecret'?: string | null;
     /**
      * The signature header of the ONLYOFFICE Docs.
      */
-    'docServiceSignatureHeader'?: string;
+    'docServiceSignatureHeader'?: string | null;
     /**
      * Specifies if the SSL verification of the ONLYOFFICE Docs is enabled or not.
      */
-    'docServiceSslVerification'?: boolean;
+    'docServiceSslVerification'?: boolean | null;
 }
 

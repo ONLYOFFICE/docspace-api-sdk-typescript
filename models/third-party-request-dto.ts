@@ -26,30 +26,30 @@ export interface ThirdPartyRequestDto {
     /**
      * The connection URL for the sharepoint.
      */
-    'url'?: string;
+    'url'?: string | null;
     /**
      * The third-party request login.
      */
-    'login'?: string;
+    'login'?: string | null;
     /**
      * The third-party request password.
      */
-    'password'?: string;
+    'password'?: string | null;
     /**
      * The authentication token.
      */
-    'token'?: string;
+    'token'?: string | null;
     /**
      * The customer title.
      */
-    'customerTitle': string;
+    'customerTitle': string | null;
     /**
      * The provider key.
      */
-    'providerKey': string;
+    'providerKey': string | null;
     /**
      * The provider ID.
      */
-    'providerId'?: number;
+    'providerId'?: number | null;
 }
 

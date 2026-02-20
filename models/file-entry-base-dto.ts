@@ -41,7 +41,7 @@ export interface FileEntryBaseDto {
     /**
      * The file entry title.
      */
-    'title'?: string;
+    'title'?: string | null;
     'access'?: FileShare;
     'sharedBy'?: EmployeeDto;
     'ownedBy'?: EmployeeDto;
@@ -60,7 +60,7 @@ export interface FileEntryBaseDto {
     /**
      * The short Web URL.
      */
-    'shortWebUrl'?: string;
+    'shortWebUrl'?: string | null;
     'created'?: ApiDateTime;
     'createdBy'?: EmployeeDto;
     'updated'?: ApiDateTime;
@@ -71,23 +71,23 @@ export interface FileEntryBaseDto {
     /**
      * Specifies if the file entry provider is specified or not.
      */
-    'providerItem'?: boolean;
+    'providerItem'?: boolean | null;
     /**
      * The provider key of the file entry.
      */
-    'providerKey'?: string;
+    'providerKey'?: string | null;
     /**
      * The provider ID of the file entry.
      */
-    'providerId'?: number;
+    'providerId'?: number | null;
     /**
      * The order of the file entry.
      */
-    'order'?: string;
+    'order'?: string | null;
     /**
      * Specifies if the file is a favorite or not.
      */
-    'isFavorite'?: boolean;
+    'isFavorite'?: boolean | null;
     'fileEntryType'?: FileEntryType;
 }
 

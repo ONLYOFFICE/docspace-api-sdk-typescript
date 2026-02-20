@@ -39,7 +39,7 @@ export interface EditHistoryDto {
     /**
      * The document identifier used to unambiguously identify the document file.
      */
-    'key'?: string;
+    'key'?: string | null;
     /**
      * The document version number.
      */
@@ -53,14 +53,14 @@ export interface EditHistoryDto {
     /**
      * The file history changes in the string format.
      */
-    'changesHistory'?: string;
+    'changesHistory'?: string | null;
     /**
      * The list of file history changes.
      */
-    'changes'?: Array<EditHistoryChangesWrapper>;
+    'changes'?: Array<EditHistoryChangesWrapper> | null;
     /**
      * The current server version number.
      */
-    'serverVersion'?: string;
+    'serverVersion'?: string | null;
 }
 

@@ -26,7 +26,7 @@ export interface IsDefaultWhiteLabelLogosDto {
     /**
      * The white label logo name.
      */
-    'name': string;
+    'name': string | null;
     /**
      * Specifies if the white label logo is default or not.
      */

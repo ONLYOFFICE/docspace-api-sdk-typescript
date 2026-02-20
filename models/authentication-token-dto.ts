@@ -26,7 +26,7 @@ export interface AuthenticationTokenDto {
     /**
      * The authentication token.
      */
-    'token'?: string;
+    'token'?: string | null;
     /**
      * The token expiration time.
      */
@@ -38,7 +38,7 @@ export interface AuthenticationTokenDto {
     /**
      * The phone number.
      */
-    'phoneNoise'?: string;
+    'phoneNoise'?: string | null;
     /**
      * Specifies if the two-factor application is used or not.
      */
@@ -46,10 +46,10 @@ export interface AuthenticationTokenDto {
     /**
      * The two-factor authentication key.
      */
-    'tfaKey'?: string;
+    'tfaKey'?: string | null;
     /**
      * The confirmation email URL.
      */
-    'confirmUrl'?: string;
+    'confirmUrl'?: string | null;
 }
 

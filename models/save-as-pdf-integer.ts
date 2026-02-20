@@ -30,6 +30,6 @@ export interface SaveAsPdfInteger {
     /**
      * The file title to save as PDF.
      */
-    'title': string;
+    'title': string | null;
 }
 

@@ -36,20 +36,20 @@ export interface McpServerDto {
     /**
      * Display name of the MCP server.
      */
-    'name'?: string;
+    'name'?: string | null;
     /**
      * Human-readable description of the server\'s purpose and capabilities.
      */
-    'description'?: string;
+    'description'?: string | null;
     /**
      * Base URL of the MCP server endpoint.
      */
-    'endpoint'?: string;
+    'endpoint'?: string | null;
     'serverType'?: ServerType;
     /**
      * HTTP headers sent with every request to the server (e.g., authentication tokens).
      */
-    'headers'?: { [key: string]: string; };
+    'headers'?: { [key: string]: string; } | null;
     /**
      * Indicates whether the server is currently enabled and available for room assignment.
      */

@@ -26,11 +26,11 @@ export interface TfaSettingsDto {
     /**
      * The ID of the TFA configuration.
      */
-    'id': string;
+    'id': string | null;
     /**
      * The display name or description of the TFA configuration.
      */
-    'title': string;
+    'title': string | null;
     /**
      * Indicates whether the TFA configuration is currently active.
      */
@@ -42,14 +42,14 @@ export interface TfaSettingsDto {
     /**
      * The list of IP addresses that are exempt from TFA requirements.
      */
-    'trustedIps'?: Array<string>;
+    'trustedIps'?: Array<string> | null;
     /**
      * The list of user IDs that are required to use TFA.
      */
-    'mandatoryUsers'?: Array<string>;
+    'mandatoryUsers'?: Array<string> | null;
     /**
      * The list of group IDs whose members are required to use TFA.
      */
-    'mandatoryGroups'?: Array<string>;
+    'mandatoryGroups'?: Array<string> | null;
 }
 

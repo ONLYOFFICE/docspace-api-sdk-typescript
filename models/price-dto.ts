@@ -26,14 +26,14 @@ export interface PriceDto {
     /**
      * The price value.
      */
-    'value'?: number;
+    'value'?: number | null;
     /**
      * The currency symbol.
      */
-    'currencySymbol'?: string;
+    'currencySymbol'?: string | null;
     /**
      * The three-character ISO 4217 currency symbol.
      */
-    'isoCurrencySymbol'?: string;
+    'isoCurrencySymbol'?: string | null;
 }
 

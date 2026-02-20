@@ -28,13 +28,13 @@ import type { DistributedTaskStatus } from './distributed-task-status';
 export interface BackupProgress {
     'isCompleted'?: boolean;
     'progress'?: number;
-    'error'?: string;
-    'warning'?: string;
-    'link'?: string;
+    'error'?: string | null;
+    'warning'?: string | null;
+    'link'?: string | null;
     'tenantId'?: number;
     'backupProgressEnum'?: BackupProgressEnum;
     'status'?: DistributedTaskStatus;
-    'taskId'?: string;
+    'taskId'?: string | null;
 }
 
 

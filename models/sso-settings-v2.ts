@@ -42,21 +42,21 @@ export interface SsoSettingsV2 {
     /**
      * Specifies if the SSO settings are enabled or not.
      */
-    'enableSso'?: boolean;
+    'enableSso'?: boolean | null;
     'idpSettings'?: SsoIdpSettings;
     /**
      * The list of the IdP certificates.
      */
-    'idpCertificates'?: Array<SsoCertificate>;
+    'idpCertificates'?: Array<SsoCertificate> | null;
     'idpCertificateAdvanced'?: SsoIdpCertificateAdvanced;
     /**
      * The SP login label.
      */
-    'spLoginLabel'?: string;
+    'spLoginLabel'?: string | null;
     /**
      * The list of the SP certificates.
      */
-    'spCertificates'?: Array<SsoCertificate>;
+    'spCertificates'?: Array<SsoCertificate> | null;
     'spCertificateAdvanced'?: SsoSpCertificateAdvanced;
     'fieldMapping'?: SsoFieldMapping;
     /**

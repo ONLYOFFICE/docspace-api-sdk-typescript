@@ -38,55 +38,55 @@ export interface MemberRequestDto {
     /**
      * The user password.
      */
-    'password'?: string;
+    'password'?: string | null;
     /**
      * The user password hash.
      */
-    'passwordHash'?: string;
+    'passwordHash'?: string | null;
     /**
      * The user email address.
      */
-    'email'?: string;
+    'email'?: string | null;
     'type'?: EmployeeType;
     /**
      * Specifies if this is a guest or a user.
      */
-    'isUser'?: boolean;
+    'isUser'?: boolean | null;
     /**
      * The user first name.
      */
-    'firstName'?: string;
+    'firstName'?: string | null;
     /**
      * The user last name.
      */
-    'lastName'?: string;
+    'lastName'?: string | null;
     /**
      * The list of the user departments IDs.
      */
-    'department'?: Array<string>;
+    'department'?: Array<string> | null;
     /**
      * The user title.
      */
-    'title'?: string;
+    'title'?: string | null;
     /**
      * The user location.
      */
-    'location'?: string;
+    'location'?: string | null;
     'sex'?: SexEnum;
     'birthday'?: ApiDateTime;
     'worksfrom'?: ApiDateTime;
     /**
      * The user comment.
      */
-    'comment'?: string;
+    'comment'?: string | null;
     /**
      * The list of the user contacts.
      */
-    'contacts'?: Array<Contact>;
+    'contacts'?: Array<Contact> | null;
     /**
      * The avatar photo URL.
      */
-    'files'?: string;
+    'files'?: string | null;
     /**
      * Specifies if the user is added via the invitation link or not.
      */
@@ -94,11 +94,11 @@ export interface MemberRequestDto {
     /**
      * The user key.
      */
-    'key'?: string;
+    'key'?: string | null;
     /**
      * The user culture code.
      */
-    'cultureName'?: string;
+    'cultureName'?: string | null;
     /**
      * The user target ID.
      */
@@ -106,7 +106,7 @@ export interface MemberRequestDto {
     /**
      * Specifies if tips, updates and offers are allowed to be sent to the user or not.
      */
-    'spam'?: boolean;
+    'spam'?: boolean | null;
 }
 
 

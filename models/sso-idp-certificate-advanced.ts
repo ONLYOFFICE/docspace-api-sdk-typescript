@@ -26,7 +26,7 @@ export interface SsoIdpCertificateAdvanced {
     /**
      * The certificate verification algorithm.
      */
-    'verifyAlgorithm'?: string;
+    'verifyAlgorithm'?: string | null;
     /**
      * Specifies if the signatures of the SAML authentication responses sent to SP will be verified or not.
      */
@@ -42,7 +42,7 @@ export interface SsoIdpCertificateAdvanced {
     /**
      * The certificate decryption algorithm.
      */
-    'decryptAlgorithm'?: string;
+    'decryptAlgorithm'?: string | null;
     /**
      * Specifies if the assertions will be decrypted or not.
      */

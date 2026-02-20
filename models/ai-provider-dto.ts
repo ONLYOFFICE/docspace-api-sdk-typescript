@@ -36,12 +36,12 @@ export interface AiProviderDto {
     /**
      * AI provider display title.
      */
-    'title': string;
+    'title': string | null;
     'type'?: ProviderType;
     /**
      * API endpoint URL for the AI provider.
      */
-    'url'?: string;
+    'url'?: string | null;
     'createdOn': ApiDateTime;
     'modifiedOn': ApiDateTime;
     /**

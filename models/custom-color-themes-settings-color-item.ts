@@ -26,10 +26,10 @@ export interface CustomColorThemesSettingsColorItem {
     /**
      * The accent color.
      */
-    'accent'?: string;
+    'accent'?: string | null;
     /**
      * The button color.
      */
-    'buttons'?: string;
+    'buttons'?: string | null;
 }
 

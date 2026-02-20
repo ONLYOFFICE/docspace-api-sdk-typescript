@@ -54,31 +54,31 @@ export type EmployeeFullDto = EmployeeDto &  {
      * @type {string}
      * @memberof EmployeeFullDto
      */
-    'firstName'?: string;
+    'firstName'?: string | null;
     /**
      * The user last name.
      * @type {string}
      * @memberof EmployeeFullDto
      */
-    'lastName'?: string;
+    'lastName'?: string | null;
     /**
      * The user username.
      * @type {string}
      * @memberof EmployeeFullDto
      */
-    'userName'?: string;
+    'userName'?: string | null;
     /**
      * The user email.
      * @type {string}
      * @memberof EmployeeFullDto
      */
-    'email'?: string;
+    'email'?: string | null;
     /**
      * The list of user contacts.
      * @type {Array<Contact>}
      * @memberof EmployeeFullDto
      */
-    'contacts'?: Array<Contact>;
+    'contacts'?: Array<Contact> | null;
     /**
      * 
      * @type {ApiDateTime}
@@ -90,7 +90,7 @@ export type EmployeeFullDto = EmployeeDto &  {
      * @type {string}
      * @memberof EmployeeFullDto
      */
-    'sex'?: string;
+    'sex'?: string | null;
     /**
      * 
      * @type {EmployeeStatus}
@@ -114,7 +114,7 @@ export type EmployeeFullDto = EmployeeDto &  {
      * @type {string}
      * @memberof EmployeeFullDto
      */
-    'department'?: string;
+    'department'?: string | null;
     /**
      * 
      * @type {ApiDateTime}
@@ -126,19 +126,19 @@ export type EmployeeFullDto = EmployeeDto &  {
      * @type {Array<GroupSummaryDto>}
      * @memberof EmployeeFullDto
      */
-    'groups'?: Array<GroupSummaryDto>;
+    'groups'?: Array<GroupSummaryDto> | null;
     /**
      * The user location.
      * @type {string}
      * @memberof EmployeeFullDto
      */
-    'location'?: string;
+    'location'?: string | null;
     /**
      * The user notes.
      * @type {string}
      * @memberof EmployeeFullDto
      */
-    'notes'?: string;
+    'notes'?: string | null;
     /**
      * Specifies if the user is an administrator or not.
      * @type {boolean}
@@ -162,7 +162,7 @@ export type EmployeeFullDto = EmployeeDto &  {
      * @type {Array<string>}
      * @memberof EmployeeFullDto
      */
-    'listAdminModules'?: Array<string>;
+    'listAdminModules'?: Array<string> | null;
     /**
      * Specifies if the user is a portal owner or not.
      * @type {boolean}
@@ -186,13 +186,13 @@ export type EmployeeFullDto = EmployeeDto &  {
      * @type {string}
      * @memberof EmployeeFullDto
      */
-    'cultureName'?: string;
+    'cultureName'?: string | null;
     /**
      * The user mobile phone number.
      * @type {string}
      * @memberof EmployeeFullDto
      */
-    'mobilePhone'?: string;
+    'mobilePhone'?: string | null;
     /**
      * 
      * @type {MobilePhoneActivationStatus}
@@ -216,37 +216,37 @@ export type EmployeeFullDto = EmployeeDto &  {
      * @type {number}
      * @memberof EmployeeFullDto
      */
-    'quotaLimit'?: number;
+    'quotaLimit'?: number | null;
     /**
      * The portal used space of the user.
      * @type {number}
      * @memberof EmployeeFullDto
      */
-    'usedSpace'?: number;
+    'usedSpace'?: number | null;
     /**
      * Specifies if the user has access rights.
      * @type {boolean}
      * @memberof EmployeeFullDto
      */
-    'shared'?: boolean;
+    'shared'?: boolean | null;
     /**
      * Specifies if the user has a custom quota or not.
      * @type {boolean}
      * @memberof EmployeeFullDto
      */
-    'isCustomQuota'?: boolean;
+    'isCustomQuota'?: boolean | null;
     /**
      * The current login event ID.
      * @type {number}
      * @memberof EmployeeFullDto
      */
-    'loginEventId'?: number;
+    'loginEventId'?: number | null;
     /**
      * The auth cookie lifetime in seconds.
      * @type {number}
      * @memberof EmployeeFullDto
      */
-    'authCookieLifetime'?: number;
+    'authCookieLifetime'?: number | null;
     /**
      * 
      * @type {EmployeeDto}
@@ -264,13 +264,13 @@ export type EmployeeFullDto = EmployeeDto &  {
      * @type {boolean}
      * @memberof EmployeeFullDto
      */
-    'hasPersonalFolder'?: boolean;
+    'hasPersonalFolder'?: boolean | null;
     /**
      * Indicates whether the user has enabled two-factor authentication (TFA) using an authentication app.
      * @type {boolean}
      * @memberof EmployeeFullDto
      */
-    'tfaAppEnabled'?: boolean;
+    'tfaAppEnabled'?: boolean | null;
 };
 
 

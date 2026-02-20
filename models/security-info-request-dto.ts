@@ -32,15 +32,15 @@ export interface SecurityInfoRequestDto {
     /**
      * The list of the shared folder IDs.
      */
-    'folderIds'?: Array<DuplicateRequestDtoAllOfFileIds>;
+    'folderIds'?: Array<DuplicateRequestDtoAllOfFileIds> | null;
     /**
      * The list of the shared file IDs.
      */
-    'fileIds'?: Array<DuplicateRequestDtoAllOfFileIds>;
+    'fileIds'?: Array<DuplicateRequestDtoAllOfFileIds> | null;
     /**
      * The collection of sharing parameters.
      */
-    'share'?: Array<FileShareParams>;
+    'share'?: Array<FileShareParams> | null;
     /**
      * Specifies whether to notify users about the shared file or not.
      */
@@ -48,6 +48,6 @@ export interface SecurityInfoRequestDto {
     /**
      * The message to send when notifying about the shared file.
      */
-    'sharingMessage'?: string;
+    'sharingMessage'?: string | null;
 }
 

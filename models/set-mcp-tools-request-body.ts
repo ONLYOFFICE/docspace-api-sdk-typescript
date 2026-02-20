@@ -26,6 +26,6 @@ export interface SetMcpToolsRequestBody {
     /**
      * List of tool names to disable. Tools not included in this list will remain enabled. Pass an empty list to enable all tools.
      */
-    'disabledTools': Array<string>;
+    'disabledTools': Array<string> | null;
 }
 

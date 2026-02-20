@@ -19,17 +19,20 @@
  */
 
 
+/**
+ * [0 - PortalAi, 1 - OpenAi, 2 - TogetherAi, 3 - OpenAiCompatible, 4 - Anthropic, 5 - OpenRouter, 6 - DeepSeek, 7 - XAi, 8 - GoogleAi]
+ */
 
 export const ProviderType = {
-    NUMBER_0: 0,
-    NUMBER_1: 1,
-    NUMBER_2: 2,
-    NUMBER_3: 3,
-    NUMBER_4: 4,
-    NUMBER_5: 5,
-    NUMBER_6: 6,
-    NUMBER_7: 7,
-    NUMBER_8: 8
+    PortalAi: 0,
+    OpenAi: 1,
+    TogetherAi: 2,
+    OpenAiCompatible: 3,
+    Anthropic: 4,
+    OpenRouter: 5,
+    DeepSeek: 6,
+    XAi: 7,
+    GoogleAi: 8
 } as const;
 
 export type ProviderType = typeof ProviderType[keyof typeof ProviderType];

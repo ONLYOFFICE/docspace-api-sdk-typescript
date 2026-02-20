@@ -29,10 +29,10 @@ export interface WhiteLabelRequestsDto {
     /**
      * The text to display alongside or in place of the logo.
      */
-    'logoText'?: string;
+    'logoText'?: string | null;
     /**
      * The white label tenant IDs with their logos (light or dark).
      */
-    'logo'?: Array<ItemKeyValuePairStringLogoRequestsDto>;
+    'logo'?: Array<ItemKeyValuePairStringLogoRequestsDto> | null;
 }
 

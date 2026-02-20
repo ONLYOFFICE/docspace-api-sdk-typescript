@@ -34,11 +34,11 @@ export interface RoomDataLifetimeDto {
     /**
      * Specifies the time period value of the room data lifetime.
      */
-    'value'?: number;
+    'value'?: number | null;
     /**
      * Specifies whether the room data lifetime setting is enabled or not.
      */
-    'enabled'?: boolean;
+    'enabled'?: boolean | null;
 }
 
 

@@ -20,7 +20,7 @@
 
 
 export interface ItemKeyValuePairObjectObject {
-    'key'?: any;
-    'value'?: any;
+    'key'?: any | null;
+    'value'?: any | null;
 }
 

@@ -26,6 +26,6 @@ export interface UpdatePhotoMemberRequest {
     /**
      * The avatar photo URL.
      */
-    'files'?: string;
+    'files'?: string | null;
 }
 

@@ -26,26 +26,26 @@ export interface SsoIdpSettings {
     /**
      * The entity ID.
      */
-    'entityId'?: string;
+    'entityId'?: string | null;
     /**
      * The SSO URL.
      */
-    'ssoUrl'?: string;
+    'ssoUrl'?: string | null;
     /**
      * The SSO binding.
      */
-    'ssoBinding'?: string;
+    'ssoBinding'?: string | null;
     /**
      * The SLO URL.
      */
-    'sloUrl'?: string;
+    'sloUrl'?: string | null;
     /**
      * The SLO binding.
      */
-    'sloBinding'?: string;
+    'sloBinding'?: string | null;
     /**
      * The name ID format.
      */
-    'nameIdFormat'?: string;
+    'nameIdFormat'?: string | null;
 }
 

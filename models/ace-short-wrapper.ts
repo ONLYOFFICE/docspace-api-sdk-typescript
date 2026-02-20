@@ -26,11 +26,11 @@ export interface AceShortWrapper {
     /**
      * The name of the user the document will be shared with.
      */
-    'user'?: string;
+    'user'?: string | null;
     /**
      * The access rights for the user with the name above.  Can be Full Access, Read Only, or Deny Access.
      */
-    'permissions'?: string;
+    'permissions'?: string | null;
     /**
      * Specifies whether to change the user icon to the link icon.
      */

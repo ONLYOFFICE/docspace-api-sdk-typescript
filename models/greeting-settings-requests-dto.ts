@@ -26,6 +26,6 @@ export interface GreetingSettingsRequestsDto {
     /**
      * The title of the tenant greeting settings.
      */
-    'title': string;
+    'title': string | null;
 }
 

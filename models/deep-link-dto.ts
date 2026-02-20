@@ -26,14 +26,14 @@ export interface DeepLinkDto {
     /**
      * The Android package name.
      */
-    'androidPackageName': string;
+    'androidPackageName': string | null;
     /**
      * The deep link URL.
      */
-    'url': string;
+    'url': string | null;
     /**
      * The deep link IOS package ID.
      */
-    'iosPackageId': string;
+    'iosPackageId': string | null;
 }
 

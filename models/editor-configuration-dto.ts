@@ -50,23 +50,23 @@ export interface EditorConfigurationDto {
     /**
      * The callback URL of the editor.
      */
-    'callbackUrl'?: string;
+    'callbackUrl'?: string | null;
     'coEditing'?: CoEditingConfig;
     /**
      * The creation URL of the editor.
      */
-    'createUrl'?: string;
+    'createUrl'?: string | null;
     'customization'?: CustomizationConfigDto;
     'embedded'?: EmbeddedConfig;
     'encryptionKeys'?: EncryptionKeysConfig;
     /**
      * The language of the editor configuration.
      */
-    'lang': string;
+    'lang': string | null;
     /**
      * The mode of the editor configuration.
      */
-    'mode': string;
+    'mode': string | null;
     /**
      * Specifies if the mode is write of the editor configuration.
      */
@@ -75,11 +75,11 @@ export interface EditorConfigurationDto {
     /**
      * The recent configuration of the editor.
      */
-    'recent'?: Array<RecentConfig>;
+    'recent'?: Array<RecentConfig> | null;
     /**
      * The templates of the editor configuration.
      */
-    'templates'?: Array<TemplatesConfig>;
+    'templates'?: Array<TemplatesConfig> | null;
     'user': UserConfig;
 }
 

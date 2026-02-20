@@ -6,7 +6,7 @@ The configuration settings to connect the special add-ons.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**pluginsData** | **Array&lt;string&gt;** | The array of absolute URLs to the plugin configuration files. | [optional] [default to undefined]
+**pluginsData** | **Array&lt;string&gt;** | The array of absolute URLs to the plugin configuration files. | [optional] [readonly] [default to undefined]
 
 ## Example
 

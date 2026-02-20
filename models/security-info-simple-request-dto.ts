@@ -29,7 +29,7 @@ export interface SecurityInfoSimpleRequestDto {
     /**
      * The collection of sharing parameters.
      */
-    'share'?: Array<FileShareParams>;
+    'share'?: Array<FileShareParams> | null;
     /**
      * Specifies whether to notify users about the shared file or not.
      */
@@ -37,6 +37,6 @@ export interface SecurityInfoSimpleRequestDto {
     /**
      * The message to send when notifying about the shared file.
      */
-    'sharingMessage'?: string;
+    'sharingMessage'?: string | null;
 }
 

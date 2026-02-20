@@ -26,7 +26,7 @@ export interface FeedbackConfig {
     /**
      * The absolute URL to the website address which will be opened when clicking the Feedback & Support menu button.
      */
-    'url'?: string;
+    'url'?: string | null;
     /**
      * Shows or hides the Feedback & Support menu button.
      */

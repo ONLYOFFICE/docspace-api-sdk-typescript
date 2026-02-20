@@ -37,7 +37,7 @@ export interface LoginEventDto {
     /**
      * The user name of the login event.
      */
-    'user'?: string;
+    'user'?: string | null;
     /**
      * The user ID of the login event.
      */
@@ -45,36 +45,36 @@ export interface LoginEventDto {
     /**
      * The user login of the login event.
      */
-    'login'?: string;
+    'login'?: string | null;
     /**
      * The login event action.
      */
-    'action'?: string;
+    'action'?: string | null;
     'actionId'?: MessageAction;
     /**
      * The login event IP.
      */
-    'ip'?: string;
+    'ip'?: string | null;
     /**
      * The login event country.
      */
-    'country'?: string;
+    'country'?: string | null;
     /**
      * The login event city.
      */
-    'city'?: string;
+    'city'?: string | null;
     /**
      * The login event browser.
      */
-    'browser'?: string;
+    'browser'?: string | null;
     /**
      * The login event platform.
      */
-    'platform'?: string;
+    'platform'?: string | null;
     /**
      * The login event page.
      */
-    'page'?: string;
+    'page'?: string | null;
 }
 
 

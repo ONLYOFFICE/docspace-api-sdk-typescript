@@ -30,7 +30,7 @@ export interface CheckFillFormDraft {
     /**
      * The action with the form draft.
      */
-    'action'?: string;
+    'action'?: string | null;
     /**
      * Specifies whether to request the form for viewing or not.
      */

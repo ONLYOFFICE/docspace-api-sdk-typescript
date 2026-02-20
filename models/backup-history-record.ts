@@ -24,7 +24,7 @@ import type { BackupStorageType } from './backup-storage-type';
 
 export interface BackupHistoryRecord {
     'id': string;
-    'fileName': string;
+    'fileName': string | null;
     'storageType': BackupStorageType;
     'createdOn': string;
     'expiresOn': string;

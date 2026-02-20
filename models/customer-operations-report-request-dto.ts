@@ -26,22 +26,22 @@ export interface CustomerOperationsReportRequestDto {
     /**
      * The report start date.
      */
-    'startDate'?: string;
+    'startDate'?: string | null;
     /**
      * The report end date.
      */
-    'endDate'?: string;
+    'endDate'?: string | null;
     /**
      * The participant name.
      */
-    'participantName'?: string;
+    'participantName'?: string | null;
     /**
      * Specifies whether to include credit operations in the report.
      */
-    'credit'?: boolean;
+    'credit'?: boolean | null;
     /**
      * Specifies whether to include debit operations in the report.
      */
-    'debit'?: boolean;
+    'debit'?: boolean | null;
 }
 

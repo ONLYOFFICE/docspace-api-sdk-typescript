@@ -26,10 +26,10 @@ export interface WhiteLabelItemPathDto {
     /**
      * The path to the light theme logo.
      */
-    'light'?: string;
+    'light'?: string | null;
     /**
      * The path to the dark theme logo.
      */
-    'dark'?: string;
+    'dark'?: string | null;
 }
 

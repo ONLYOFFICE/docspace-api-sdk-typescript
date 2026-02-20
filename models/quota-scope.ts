@@ -20,13 +20,13 @@
 
 
 /**
- * The quota scope.
+ * [0 - User, 1 - Room, 2 - Tenant]
  */
 
 export const QuotaScope = {
-    NUMBER_0: 0,
-    NUMBER_1: 1,
-    NUMBER_2: 2
+    User: 0,
+    Room: 1,
+    Tenant: 2
 } as const;
 
 export type QuotaScope = typeof QuotaScope[keyof typeof QuotaScope];

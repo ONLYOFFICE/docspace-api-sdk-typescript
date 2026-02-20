@@ -26,10 +26,10 @@ export interface CultureSpecificExternalResource {
     /**
      * The external resource domain.
      */
-    'domain'?: string;
+    'domain'?: string | null;
     /**
      * The external resource entries.
      */
-    'entries'?: { [key: string]: string; };
+    'entries'?: { [key: string]: string | null; } | null;
 }
 

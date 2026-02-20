@@ -1,24 +1,25 @@
 # ProviderType
 
+[0 - PortalAi, 1 - OpenAi, 2 - TogetherAi, 3 - OpenAiCompatible, 4 - Anthropic, 5 - OpenRouter, 6 - DeepSeek, 7 - XAi, 8 - GoogleAi]
 
 ## Enum
 
-* `NUMBER_0` (value: `0`)
+* `PortalAi` (value: `0`)
 
-* `NUMBER_1` (value: `1`)
+* `OpenAi` (value: `1`)
 
-* `NUMBER_2` (value: `2`)
+* `TogetherAi` (value: `2`)
 
-* `NUMBER_3` (value: `3`)
+* `OpenAiCompatible` (value: `3`)
 
-* `NUMBER_4` (value: `4`)
+* `Anthropic` (value: `4`)
 
-* `NUMBER_5` (value: `5`)
+* `OpenRouter` (value: `5`)
 
-* `NUMBER_6` (value: `6`)
+* `DeepSeek` (value: `6`)
 
-* `NUMBER_7` (value: `7`)
+* `XAi` (value: `7`)
 
-* `NUMBER_8` (value: `8`)
+* `GoogleAi` (value: `8`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

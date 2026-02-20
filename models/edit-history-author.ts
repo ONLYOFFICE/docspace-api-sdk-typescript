@@ -26,10 +26,10 @@ export interface EditHistoryAuthor {
     /**
      * The author ID.
      */
-    'id': string;
+    'id': string | null;
     /**
      * The author name.
      */
-    'name'?: string;
+    'name'?: string | null;
 }
 

@@ -47,34 +47,34 @@ export interface AiSettingsDto {
     /**
      * The unique identifier of the portal-level MCP server, if configured.
      */
-    'portalMcpServerId'?: string;
+    'portalMcpServerId'?: string | null;
     /**
      * The name of the embedding model used for document vectorization.
      */
-    'embeddingModel': string;
+    'embeddingModel': string | null;
     /**
      * The tool name used by the AI assistant for knowledge base search.
      */
-    'knowledgeSearchToolName': string;
+    'knowledgeSearchToolName': string | null;
     /**
      * The tool name used by the AI assistant for web search.
      */
-    'webSearchToolName': string;
+    'webSearchToolName': string | null;
     /**
      * The tool name used by the AI assistant for web page crawling.
      */
-    'webCrawlingToolName': string;
+    'webCrawlingToolName': string | null;
     /**
      * The tool name used by the AI to launch docx creation in the editor.
      */
-    'generateDocxToolName': string;
+    'generateDocxToolName': string | null;
     /**
      * The tool name used by the AI assistant to launch form creation in the editor.
      */
-    'generateFormToolName': string;
+    'generateFormToolName': string | null;
     /**
      * The tool name used by the AI assistant to launch presentation creation in the editor.
      */
-    'generatePresentationToolName': string;
+    'generatePresentationToolName': string | null;
 }
 

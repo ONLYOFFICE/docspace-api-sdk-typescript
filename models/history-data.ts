@@ -26,6 +26,6 @@ export interface HistoryData {
     /**
      * The name of the action initiator.
      */
-    'initiatorName'?: string;
+    'initiatorName'?: string | null;
 }
 

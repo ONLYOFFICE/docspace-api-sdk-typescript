@@ -57,37 +57,37 @@ export type FileEntryDtoString = FileEntryBaseDto &  {
      * @type {string}
      * @memberof FileEntryDtoString
      */
-    'id'?: string;
+    'id'?: string | null;
     /**
      * The root folder ID of the file entry.
      * @type {string}
      * @memberof FileEntryDtoString
      */
-    'rootFolderId'?: string;
+    'rootFolderId'?: string | null;
     /**
      * The origin ID of the file entry.
      * @type {string}
      * @memberof FileEntryDtoString
      */
-    'originId'?: string;
+    'originId'?: string | null;
     /**
      * The origin room ID of the file entry.
      * @type {string}
      * @memberof FileEntryDtoString
      */
-    'originRoomId'?: string;
+    'originRoomId'?: string | null;
     /**
      * The origin title of the file entry.
      * @type {string}
      * @memberof FileEntryDtoString
      */
-    'originTitle'?: string;
+    'originTitle'?: string | null;
     /**
      * The origin room title of the file entry.
      * @type {string}
      * @memberof FileEntryDtoString
      */
-    'originRoomTitle'?: string;
+    'originRoomTitle'?: string | null;
     /**
      * Specifies if the file entry can be shared or not.
      * @type {boolean}
@@ -99,31 +99,31 @@ export type FileEntryDtoString = FileEntryBaseDto &  {
      * @type {FileEntryDtoIntegerAllOfShareSettings}
      * @memberof FileEntryDtoString
      */
-    'shareSettings'?: FileEntryDtoIntegerAllOfShareSettings;
+    'shareSettings'?: FileEntryDtoIntegerAllOfShareSettings | null;
     /**
      * 
      * @type {FileEntryDtoIntegerAllOfSecurity}
      * @memberof FileEntryDtoString
      */
-    'security'?: FileEntryDtoIntegerAllOfSecurity;
+    'security'?: FileEntryDtoIntegerAllOfSecurity | null;
     /**
      * 
      * @type {FileEntryDtoIntegerAllOfAvailableShareRights}
      * @memberof FileEntryDtoString
      */
-    'availableShareRights'?: FileEntryDtoIntegerAllOfAvailableShareRights;
+    'availableShareRights'?: FileEntryDtoIntegerAllOfAvailableShareRights | null;
     /**
      * The request token of the file entry.
      * @type {string}
      * @memberof FileEntryDtoString
      */
-    'requestToken'?: string;
+    'requestToken'?: string | null;
     /**
      * Specifies if the folder can be accessed via an external link or not.
      * @type {boolean}
      * @memberof FileEntryDtoString
      */
-    'external'?: boolean;
+    'external'?: boolean | null;
     /**
      * 
      * @type {ApiDateTime}
@@ -135,7 +135,7 @@ export type FileEntryDtoString = FileEntryBaseDto &  {
      * @type {boolean}
      * @memberof FileEntryDtoString
      */
-    'isLinkExpired'?: boolean;
+    'isLinkExpired'?: boolean | null;
 };
 
 

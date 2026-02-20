@@ -20,13 +20,13 @@
 
 
 /**
- * The registration Telegram status.
+ * []
  */
 
 export const RegStatus = {
-    NUMBER_0: 0,
-    NUMBER_1: 1,
-    NUMBER_2: 2
+    unlinked: 0,
+    linked: 1,
+    linking: 2
 } as const;
 
 export type RegStatus = typeof RegStatus[keyof typeof RegStatus];

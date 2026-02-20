@@ -37,7 +37,7 @@ export interface CreateWebhooksConfigRequestsDto {
     /**
      * The webhook secret key used to sign the webhook payloads for the security verification.
      */
-    'secretKey'?: string;
+    'secretKey'?: string | null;
     /**
      * Specifies whether the webhook configuration is active or not.
      */
@@ -50,7 +50,7 @@ export interface CreateWebhooksConfigRequestsDto {
     /**
      * Target ID
      */
-    'targetId'?: string;
+    'targetId'?: string | null;
 }
 
 

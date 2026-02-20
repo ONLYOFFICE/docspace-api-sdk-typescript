@@ -30,7 +30,7 @@ export interface TenantQuota {
     /**
      * The tenant name.
      */
-    'name'?: string;
+    'name'?: string | null;
     /**
      * The tenant price.
      */
@@ -38,23 +38,23 @@ export interface TenantQuota {
     /**
      * The tenant price currency symbol.
      */
-    'priceCurrencySymbol'?: string;
+    'priceCurrencySymbol'?: string | null;
     /**
      * The tenant price three-character ISO 4217 currency symbol.
      */
-    'priceISOCurrencySymbol'?: string;
+    'priceISOCurrencySymbol'?: string | null;
     /**
      * The tenant product ID.
      */
-    'productId'?: string;
+    'productId'?: string | null;
     /**
      * The service name.
      */
-    'serviceName'?: string;
+    'serviceName'?: string | null;
     /**
      * The service group.
      */
-    'serviceGroup'?: string;
+    'serviceGroup'?: string | null;
     /**
      * Specifies if the tenant quota is visible or not.
      */
@@ -66,11 +66,11 @@ export interface TenantQuota {
     /**
      * The quota due date.
      */
-    'dueDate'?: string;
+    'dueDate'?: string | null;
     /**
      * The tenant quota features.
      */
-    'features'?: string;
+    'features'?: string | null;
     /**
      * The tenant maximum file size.
      */

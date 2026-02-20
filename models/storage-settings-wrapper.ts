@@ -27,9 +27,21 @@ import type { StorageSettings } from './storage-settings';
 
 export interface StorageSettingsWrapper {
     'response'?: StorageSettings;
+    /**
+     * The total number of items in the response
+     */
     'count'?: number;
+    /**
+     * List of links related to the response
+     */
     'links'?: Array<GetPortalPrices200ResponseLinksInner>;
+    /**
+     * HTTP status code of the response
+     */
     'status'?: number;
+    /**
+     * HTTP status code of the response (duplicate of status)
+     */
     'statusCode'?: number;
 }
 

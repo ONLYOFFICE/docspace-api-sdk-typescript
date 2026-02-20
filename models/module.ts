@@ -30,31 +30,31 @@ export interface Module {
     /**
      * The module product class name.
      */
-    'appName'?: string;
+    'appName'?: string | null;
     /**
      * The module product class name.
      */
-    'title'?: string;
+    'title'?: string | null;
     /**
      * The URL to the module start page.
      */
-    'link'?: string;
+    'link'?: string | null;
     /**
      * The module icon URL.
      */
-    'iconUrl'?: string;
+    'iconUrl'?: string | null;
     /**
      * The module large image URL.
      */
-    'imageUrl'?: string;
+    'imageUrl'?: string | null;
     /**
      * The module help URL.
      */
-    'helpUrl'?: string;
+    'helpUrl'?: string | null;
     /**
      * The module description.
      */
-    'description'?: string;
+    'description'?: string | null;
     /**
      * Specifies if the module is primary or not.
      */

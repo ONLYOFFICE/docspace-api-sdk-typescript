@@ -26,6 +26,6 @@ export interface CspRequestsDto {
     /**
      * The collection of allowed domains in the Content Security Policy (CSP).
      */
-    'domains'?: Array<string>;
+    'domains'?: Array<string> | null;
 }
 

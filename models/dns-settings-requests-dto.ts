@@ -26,7 +26,7 @@ export interface DnsSettingsRequestsDto {
     /**
      * The DNS (Domain Name System) configuration name.
      */
-    'dnsName'?: string;
+    'dnsName'?: string | null;
     /**
      * Specifies whether the DNS settings are enabled.
      */

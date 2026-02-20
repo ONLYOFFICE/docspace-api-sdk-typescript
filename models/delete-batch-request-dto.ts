@@ -39,13 +39,13 @@ export type DeleteBatchRequestDto = FileOperationRequestBaseDto &  {
      * @type {Array<DeleteBatchRequestDtoAllOfFolderIds>}
      * @memberof DeleteBatchRequestDto
      */
-    'folderIds'?: Array<DeleteBatchRequestDtoAllOfFolderIds>;
+    'folderIds'?: Array<DeleteBatchRequestDtoAllOfFolderIds> | null;
     /**
      * The list of file IDs to be deleted.
      * @type {Array<DeleteBatchRequestDtoAllOfFileIds>}
      * @memberof DeleteBatchRequestDto
      */
-    'fileIds'?: Array<DeleteBatchRequestDtoAllOfFileIds>;
+    'fileIds'?: Array<DeleteBatchRequestDtoAllOfFileIds> | null;
     /**
      * Specifies whether to delete a file after the editing session is finished or not
      * @type {boolean}

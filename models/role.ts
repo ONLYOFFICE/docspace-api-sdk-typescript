@@ -19,10 +19,13 @@
  */
 
 
+/**
+ * [0 - User, 1 - Assistant]
+ */
 
 export const Role = {
-    NUMBER_0: 0,
-    NUMBER_1: 1
+    User: 0,
+    Assistant: 1
 } as const;
 
 export type Role = typeof Role[keyof typeof Role];

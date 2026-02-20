@@ -34,15 +34,15 @@ export interface TfaRequestsDto {
     /**
      * The list of IP addresses that bypass TFA verification.
      */
-    'trustedIps'?: Array<string>;
+    'trustedIps'?: Array<string> | null;
     /**
      * The list of user IDs for whom TFA is mandatory.
      */
-    'mandatoryUsers'?: Array<string>;
+    'mandatoryUsers'?: Array<string> | null;
     /**
      * The list group IDs whose members must use TFA.
      */
-    'mandatoryGroups'?: Array<string>;
+    'mandatoryGroups'?: Array<string> | null;
 }
 
 

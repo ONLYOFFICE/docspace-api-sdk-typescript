@@ -30,14 +30,14 @@ export interface GroupSummaryDto {
     /**
      * The group name.
      */
-    'name': string;
+    'name': string | null;
     /**
      * The group manager.
      */
-    'manager'?: string;
+    'manager'?: string | null;
     /**
      * Indicates whether the group is a system group.
      */
-    'isSystem'?: boolean;
+    'isSystem'?: boolean | null;
 }
 

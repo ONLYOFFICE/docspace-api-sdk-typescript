@@ -26,14 +26,14 @@ export interface Run {
     /**
      * The fill color of the text run in RGB format.
      */
-    'fill'?: Array<number>;
+    'fill'?: Array<number> | null;
     /**
      * The run text.
      */
-    'text'?: string;
+    'text'?: string | null;
     /**
      * The font size of the text run in points.
      */
-    'font-size'?: string;
+    'font-size'?: string | null;
 }
 

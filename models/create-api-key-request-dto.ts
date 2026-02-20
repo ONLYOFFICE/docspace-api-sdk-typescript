@@ -30,10 +30,10 @@ export interface CreateApiKeyRequestDto {
     /**
      * The list of permissions granted to the API key.
      */
-    'permissions'?: Array<string>;
+    'permissions'?: Array<string> | null;
     /**
      * The number of days until the API key expires (null for no expiration).
      */
-    'expiresInDays'?: number;
+    'expiresInDays'?: number | null;
 }
 

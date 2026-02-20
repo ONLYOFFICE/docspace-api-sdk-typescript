@@ -30,6 +30,6 @@ export interface SetDefaultProviderRequestDto {
     /**
      * Default model identifier to use with this provider.
      */
-    'defaultModel': string;
+    'defaultModel': string | null;
 }
 

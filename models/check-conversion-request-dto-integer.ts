@@ -42,11 +42,11 @@ export interface CheckConversionRequestDtoInteger {
     /**
      * The password of the converted file.
      */
-    'password'?: string;
+    'password'?: string | null;
     /**
      * The conversion output type.
      */
-    'outputType'?: string;
+    'outputType'?: string | null;
     /**
      * Specifies whether to create a new file if it exists or not.
      */

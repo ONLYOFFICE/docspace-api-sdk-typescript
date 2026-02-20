@@ -26,6 +26,6 @@ export interface AddRoomServersRequestBody {
     /**
      * Set of unique identifiers of MCP servers to associate with the room. A maximum of 5 servers can be assigned per room.
      */
-    'servers': Set<string>;
+    'servers': Set<string> | null;
 }
 

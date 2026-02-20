@@ -29,7 +29,7 @@ export interface CreateFileJsonElement {
     /**
      * The file title for creation.
      */
-    'title': string;
+    'title': string | null;
     'templateId'?: CreateFileJsonElementTemplateId;
     /**
      * Specifies whether to allow creating a file of an external extension or not.

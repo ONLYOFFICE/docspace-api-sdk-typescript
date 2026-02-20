@@ -29,6 +29,6 @@ export interface NotificationChannelStatusDto {
     /**
      * The list of notification channels.
      */
-    'channels'?: Array<NotificationChannelDto>;
+    'channels'?: Array<NotificationChannelDto> | null;
 }
 

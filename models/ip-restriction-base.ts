@@ -20,7 +20,7 @@
 
 
 export interface IpRestrictionBase {
-    'ip': string;
+    'ip': string | null;
     'forAdmin'?: boolean;
 }
 

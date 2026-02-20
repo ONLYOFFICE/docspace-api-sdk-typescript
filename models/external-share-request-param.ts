@@ -26,6 +26,6 @@ export interface ExternalShareRequestParam {
     /**
      * The password to share external data.
      */
-    'password'?: string;
+    'password'?: string | null;
 }
 

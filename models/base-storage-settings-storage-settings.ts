@@ -20,8 +20,8 @@
 
 
 export interface BaseStorageSettingsStorageSettings {
-    'module'?: string;
-    'props'?: { [key: string]: string; };
+    'module'?: string | null;
+    'props'?: { [key: string]: string | null; } | null;
     'lastModified'?: string;
 }
 

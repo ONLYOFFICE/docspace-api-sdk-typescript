@@ -27,10 +27,13 @@ export interface UploadResultDto {
      * Specifies if the upload operation is successful or not.
      */
     'success'?: boolean;
-    'data'?: any;
+    /**
+     * The uploaded data.
+     */
+    'data'?: any | null;
     /**
      * The message sent after the successful upload operation.
      */
-    'message'?: string;
+    'message'?: string | null;
 }
 

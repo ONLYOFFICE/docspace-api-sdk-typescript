@@ -29,10 +29,10 @@ export interface StartNewChatBody {
     /**
      * The initial user message to send to the AI assistant.
      */
-    'message': string;
+    'message': string | null;
     /**
      * The optional collection of file identifiers to attach as context for the AI model.
      */
-    'files'?: Array<ContinueChatBodyFilesInner>;
+    'files'?: Array<ContinueChatBodyFilesInner> | null;
 }
 

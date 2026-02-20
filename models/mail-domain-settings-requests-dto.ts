@@ -30,7 +30,7 @@ export interface MailDomainSettingsRequestsDto {
     /**
      * The list of authorized email domains that are considered trusted.
      */
-    'domains': Array<string>;
+    'domains': Array<string> | null;
     /**
      * Specifies the default permission level for the invited users (visitors or not).
      */

@@ -26,11 +26,11 @@ export interface UpdateGroupRequest {
     /**
      * The list of user IDs to add to the group.
      */
-    'membersToAdd'?: Array<string>;
+    'membersToAdd'?: Array<string> | null;
     /**
      * The list of user IDs to remove from the group.
      */
-    'membersToRemove'?: Array<string>;
+    'membersToRemove'?: Array<string> | null;
     /**
      * The group manager ID.
      */
@@ -38,6 +38,6 @@ export interface UpdateGroupRequest {
     /**
      * The group name.
      */
-    'groupName'?: string;
+    'groupName'?: string | null;
 }
 

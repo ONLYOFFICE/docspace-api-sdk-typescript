@@ -26,7 +26,7 @@ export interface SsoSpCertificateAdvanced {
     /**
      * The certificate signing algorithm.
      */
-    'signingAlgorithm'?: string;
+    'signingAlgorithm'?: string | null;
     /**
      * Specifies if SP will sign the SAML authentication requests sent to IdP or not.
      */
@@ -42,11 +42,11 @@ export interface SsoSpCertificateAdvanced {
     /**
      * The certificate encryption algorithm.
      */
-    'encryptAlgorithm'?: string;
+    'encryptAlgorithm'?: string | null;
     /**
      * The certificate decryption algorithm.
      */
-    'decryptAlgorithm'?: string;
+    'decryptAlgorithm'?: string | null;
     /**
      * Specifies if the assertions will be encrypted or not.
      */

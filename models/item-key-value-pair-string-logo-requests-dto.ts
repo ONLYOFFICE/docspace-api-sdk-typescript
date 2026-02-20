@@ -23,7 +23,7 @@
 import type { LogoRequestsDto } from './logo-requests-dto';
 
 export interface ItemKeyValuePairStringLogoRequestsDto {
-    'key'?: string;
+    'key'?: string | null;
     'value'?: LogoRequestsDto;
 }
 

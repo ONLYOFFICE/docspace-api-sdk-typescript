@@ -30,19 +30,19 @@ export interface OperationDto {
     /**
      * The service related to the operation.
      */
-    'service'?: string;
+    'service'?: string | null;
     /**
      * The brief operation description.
      */
-    'description'?: string;
+    'description'?: string | null;
     /**
      * The detailed information about the operation.
      */
-    'details'?: string;
+    'details'?: string | null;
     /**
      * The service unit.
      */
-    'serviceUnit'?: string;
+    'serviceUnit'?: string | null;
     /**
      * The quantity of the service used.
      */
@@ -50,7 +50,7 @@ export interface OperationDto {
     /**
      * The three-character ISO 4217 currency symbol of the operation.
      */
-    'currency'?: string;
+    'currency'?: string | null;
     /**
      * The credit amount of the operation.
      */
@@ -62,10 +62,10 @@ export interface OperationDto {
     /**
      * The participant original name.
      */
-    'participantName'?: string;
+    'participantName'?: string | null;
     /**
      * The participant display name.
      */
-    'participantDisplayName'?: string;
+    'participantDisplayName'?: string | null;
 }
 

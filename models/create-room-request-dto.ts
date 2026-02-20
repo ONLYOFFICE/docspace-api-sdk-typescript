@@ -44,34 +44,34 @@ export interface CreateRoomRequestDto {
     /**
      * The room name.
      */
-    'title': string;
+    'title': string | null;
     /**
      * The room quota.
      */
-    'quota'?: number;
+    'quota'?: number | null;
     /**
      * Specifies whether to create a room with indexing.
      */
-    'indexing'?: boolean;
+    'indexing'?: boolean | null;
     /**
      * Specifies whether to deny downloads from the room.
      */
-    'denyDownload'?: boolean;
+    'denyDownload'?: boolean | null;
     'lifetime'?: RoomDataLifetimeDto;
     'watermark'?: WatermarkRequestDto;
     'logo'?: LogoRequest;
     /**
      * The list of tags.
      */
-    'tags'?: Array<string>;
+    'tags'?: Array<string> | null;
     /**
      * The room color.
      */
-    'color'?: string;
+    'color'?: string | null;
     /**
      * The room cover.
      */
-    'cover'?: string;
+    'cover'?: string | null;
     'roomType': RoomType;
     /**
      * Specifies whether the room to be created is private or not.
@@ -80,7 +80,7 @@ export interface CreateRoomRequestDto {
     /**
      * The collection of sharing parameters.
      */
-    'share'?: Array<FileShareParams>;
+    'share'?: Array<FileShareParams> | null;
     'chatSettings'?: ChatSettings;
 }
 

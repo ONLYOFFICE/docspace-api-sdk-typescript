@@ -29,15 +29,15 @@ export interface StorageDto {
     /**
      * The storage ID.
      */
-    'id': string;
+    'id': string | null;
     /**
      * The storage title.
      */
-    'title': string;
+    'title': string | null;
     /**
      * The list of storage authentication keys.
      */
-    'properties'?: Array<AuthKey>;
+    'properties'?: Array<AuthKey> | null;
     /**
      * Specifies if this is the current portal storage or not.
      */

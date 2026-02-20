@@ -32,12 +32,12 @@ export interface CustomerInfoDto {
     /**
      * The portal ID.
      */
-    'portalId'?: string;
+    'portalId'?: string | null;
     'paymentMethodStatus'?: PaymentMethodStatus;
     /**
      * The customer email address.
      */
-    'email'?: string;
+    'email'?: string | null;
     'payer'?: EmployeeDto;
 }
 

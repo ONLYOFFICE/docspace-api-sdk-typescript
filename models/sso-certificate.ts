@@ -30,19 +30,19 @@ export interface SsoCertificate {
     /**
      * The CRT certificate file.
      */
-    'crt'?: string;
+    'crt'?: string | null;
     /**
      * The certificate key.
      */
-    'key'?: string;
+    'key'?: string | null;
     /**
      * The certificate action.
      */
-    'action'?: string;
+    'action'?: string | null;
     /**
      * The certificate domain name.
      */
-    'domainName'?: string;
+    'domainName'?: string | null;
     /**
      * The certificate start date.
      */

@@ -30,7 +30,7 @@ export interface WatermarkDto {
     /**
      * The watermark text.
      */
-    'text'?: string;
+    'text'?: string | null;
     /**
      * The watermark text and image rotate.
      */
@@ -42,7 +42,7 @@ export interface WatermarkDto {
     /**
      * The watermark image url.
      */
-    'imageUrl'?: string;
+    'imageUrl'?: string | null;
     /**
      * The watermark image height.
      */

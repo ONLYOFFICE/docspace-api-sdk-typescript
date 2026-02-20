@@ -26,23 +26,23 @@ export interface LogoConfigDto {
     /**
      * The image of the logo.
      */
-    'image'?: string;
+    'image'?: string | null;
     /**
      * The dark image of the logo.
      */
-    'imageDark'?: string;
+    'imageDark'?: string | null;
     /**
      * The light image of the logo.
      */
-    'imageLight'?: string;
+    'imageLight'?: string | null;
     /**
      * The embedded image of the logo.
      */
-    'imageEmbedded'?: string;
+    'imageEmbedded'?: string | null;
     /**
      * The url link of the logo.
      */
-    'url'?: string;
+    'url'?: string | null;
     /**
      * Specifies if the logo is visible.
      */

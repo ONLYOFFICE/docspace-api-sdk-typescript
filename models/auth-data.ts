@@ -29,23 +29,23 @@ export interface AuthData {
     /**
      * The authentication login.
      */
-    'login'?: string;
+    'login'?: string | null;
     /**
      * The authentication password.
      */
-    'password'?: string;
+    'password'?: string | null;
     /**
      * The authentication raw token.
      */
-    'rawToken'?: string;
+    'rawToken'?: string | null;
     /**
      * The authentication URL.
      */
-    'url'?: string;
+    'url'?: string | null;
     /**
      * The authentication provider.
      */
-    'provider'?: string;
+    'provider'?: string | null;
     'token'?: OAuth20Token;
 }
 

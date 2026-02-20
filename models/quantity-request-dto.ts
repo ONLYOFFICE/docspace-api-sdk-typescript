@@ -26,6 +26,6 @@ export interface QuantityRequestDto {
     /**
      * The mapping of item identifiers to their respective quantities in the payment.
      */
-    'quantity'?: { [key: string]: number; };
+    'quantity'?: { [key: string]: number; } | null;
 }
 

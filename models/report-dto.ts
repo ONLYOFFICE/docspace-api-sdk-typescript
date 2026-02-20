@@ -29,7 +29,7 @@ export interface ReportDto {
     /**
      * A collection of operations.
      */
-    'collection'?: Array<OperationDto>;
+    'collection'?: Array<OperationDto> | null;
     /**
      * The report data offset.
      */

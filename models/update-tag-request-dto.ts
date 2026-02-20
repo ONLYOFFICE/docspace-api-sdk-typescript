@@ -26,10 +26,10 @@ export interface UpdateTagRequestDto {
     /**
      * The old tag name.
      */
-    'oldName': string;
+    'oldName': string | null;
     /**
      * The new tag name.
      */
-    'newName': string;
+    'newName': string | null;
 }
 

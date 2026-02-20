@@ -30,10 +30,10 @@ export interface DownloadRequestItemDto {
     /**
      * The target format or conversion type for the file download.
      */
-    'value': string;
+    'value': string | null;
     /**
      * The optional password for accessing protected files.
      */
-    'password'?: string;
+    'password'?: string | null;
 }
 

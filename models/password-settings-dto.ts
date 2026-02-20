@@ -42,18 +42,18 @@ export interface PasswordSettingsDto {
     /**
      * The allowed password characters in the regex string format.
      */
-    'allowedCharactersRegexStr': string;
+    'allowedCharactersRegexStr': string | null;
     /**
      * The password digits in the regex string format.
      */
-    'digitsRegexStr': string;
+    'digitsRegexStr': string | null;
     /**
      * The password uppercase letters in the regex string format.
      */
-    'upperCaseRegexStr': string;
+    'upperCaseRegexStr': string | null;
     /**
      * The passaword special symbols in the regex string format.
      */
-    'specSymbolsRegexStr': string;
+    'specSymbolsRegexStr': string | null;
 }
 

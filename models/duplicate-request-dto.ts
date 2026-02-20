@@ -39,13 +39,13 @@ export type DuplicateRequestDto = FileOperationRequestBaseDto &  {
      * @type {Array<DuplicateRequestDtoAllOfFolderIds>}
      * @memberof DuplicateRequestDto
      */
-    'folderIds'?: Array<DuplicateRequestDtoAllOfFolderIds>;
+    'folderIds'?: Array<DuplicateRequestDtoAllOfFolderIds> | null;
     /**
      * The list of file IDs.
      * @type {Array<DuplicateRequestDtoAllOfFileIds>}
      * @memberof DuplicateRequestDto
      */
-    'fileIds'?: Array<DuplicateRequestDtoAllOfFileIds>;
+    'fileIds'?: Array<DuplicateRequestDtoAllOfFileIds> | null;
 };
 
 

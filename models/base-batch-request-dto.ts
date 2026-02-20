@@ -39,13 +39,13 @@ export type BaseBatchRequestDto = FileOperationRequestBaseDto &  {
      * @type {Array<BaseBatchRequestDtoAllOfFolderIds>}
      * @memberof BaseBatchRequestDto
      */
-    'folderIds'?: Array<BaseBatchRequestDtoAllOfFolderIds>;
+    'folderIds'?: Array<BaseBatchRequestDtoAllOfFolderIds> | null;
     /**
      * The list of file IDs of the base batch request.
      * @type {Array<BaseBatchRequestDtoAllOfFileIds>}
      * @memberof BaseBatchRequestDto
      */
-    'fileIds'?: Array<BaseBatchRequestDtoAllOfFileIds>;
+    'fileIds'?: Array<BaseBatchRequestDtoAllOfFileIds> | null;
 };
 
 

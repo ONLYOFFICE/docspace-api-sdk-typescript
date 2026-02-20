@@ -20,9 +20,9 @@
 
 
 export interface ContentDisposition {
-    'dispositionType'?: string;
-    'parameters'?: Array<any>;
-    'fileName'?: string;
+    'dispositionType'?: string | null;
+    'parameters'?: Array<any> | null;
+    'fileName'?: string | null;
     'creationDate'?: string;
     'modificationDate'?: string;
     'inline'?: boolean;

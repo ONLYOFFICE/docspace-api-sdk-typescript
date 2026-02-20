@@ -21,8 +21,8 @@
 
 export interface ChatSettings {
     'providerId'?: number;
-    'modelId'?: string;
-    'prompt'?: string;
+    'modelId'?: string | null;
+    'prompt'?: string | null;
     'internal'?: boolean;
 }
 

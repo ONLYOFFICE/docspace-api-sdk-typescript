@@ -29,10 +29,10 @@ export interface IpRestrictionsDto {
     /**
      * The list of IP restriction addresses.
      */
-    'ipRestrictions': Array<IpRestrictionBase>;
+    'ipRestrictions': Array<IpRestrictionBase> | null;
     /**
      * Specifies whether to enable IP restrictions or not.
      */
-    'enable'?: boolean;
+    'enable'?: boolean | null;
 }
 

@@ -36,7 +36,7 @@ export interface CreateThirdPartyRoom {
     /**
      * The third-party room name to be created.
      */
-    'title': string;
+    'title': string | null;
     'roomType': RoomType;
     /**
      * Specifies whether to create the private third-party room or not.
@@ -53,15 +53,15 @@ export interface CreateThirdPartyRoom {
     /**
      * The color of the third-party room.
      */
-    'color'?: string;
+    'color'?: string | null;
     /**
      * The cover of the third-party room.
      */
-    'cover'?: string;
+    'cover'?: string | null;
     /**
      * The list of tags of the third-party room.
      */
-    'tags'?: Array<string>;
+    'tags'?: Array<string> | null;
     'logo'?: LogoRequest;
 }
 

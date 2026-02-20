@@ -26,10 +26,10 @@ export interface DefaultTemplateSettingsRequestDto {
     /**
      * File id to replace template with (or null to use default template)
      */
-    'selectedFile'?: number;
+    'selectedFile'?: number | null;
     /**
      * File extension of a template to replace
      */
-    'fileExtension': string;
+    'fileExtension': string | null;
 }
 

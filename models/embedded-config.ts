@@ -26,22 +26,22 @@ export interface EmbeddedConfig {
     /**
      * The absolute URL to the document serving as a source file for the document embedded into the web page.
      */
-    'embedUrl'?: string;
+    'embedUrl'?: string | null;
     /**
      * The absolute URL that will allow the document to be saved onto the user personal computer.
      */
-    'saveUrl'?: string;
+    'saveUrl'?: string | null;
     /**
      * The shared URL parameter.
      */
-    'shareLinkParam'?: string;
+    'shareLinkParam'?: string | null;
     /**
      * The absolute URL that will allow other users to share this document.
      */
-    'shareUrl'?: string;
+    'shareUrl'?: string | null;
     /**
      * The place for the embedded viewer toolbar, can be either top or bottom.
      */
-    'toolbarDocked'?: string;
+    'toolbarDocked'?: string | null;
 }
 

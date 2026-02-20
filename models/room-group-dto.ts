@@ -36,7 +36,7 @@ export interface RoomGroupDto {
     /**
      * Group name
      */
-    'name'?: string;
+    'name'?: string | null;
     'icon'?: MultiSizeLogoCover;
     /**
      * The user ID.
@@ -45,7 +45,7 @@ export interface RoomGroupDto {
     /**
      * The list of rooms in the group.
      */
-    'rooms'?: Array<FileEntryBaseDto>;
+    'rooms'?: Array<FileEntryBaseDto> | null;
     /**
      * Total number of rooms in the group.
      */

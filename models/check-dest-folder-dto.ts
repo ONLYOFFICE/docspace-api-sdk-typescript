@@ -33,7 +33,7 @@ export interface CheckDestFolderDto {
     /**
      * The list of files in the destination folder.
      */
-    'files'?: Array<FileEntryBaseDto>;
+    'files'?: Array<FileEntryBaseDto> | null;
 }
 
 

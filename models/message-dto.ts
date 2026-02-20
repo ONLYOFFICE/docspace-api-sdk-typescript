@@ -37,7 +37,7 @@ export interface MessageDto {
     /**
      * The ordered collection of content blocks that make up the message body (text, tool calls, or attachments).
      */
-    'contents'?: Array<MessageContentDto>;
+    'contents'?: Array<MessageContentDto> | null;
     'createdOn'?: ApiDateTime;
 }
 

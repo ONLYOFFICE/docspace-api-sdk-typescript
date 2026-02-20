@@ -72,7 +72,7 @@ export type FolderDtoString = FileEntryDtoString &  {
      * @type {string}
      * @memberof FolderDtoString
      */
-    'parentId'?: string;
+    'parentId'?: string | null;
     /**
      * The number of files that the folder contains.
      * @type {number}
@@ -90,7 +90,7 @@ export type FolderDtoString = FileEntryDtoString &  {
      * @type {boolean}
      * @memberof FolderDtoString
      */
-    'isShareable'?: boolean;
+    'isShareable'?: boolean | null;
     /**
      * The new element index in the folder.
      * @type {number}
@@ -108,7 +108,7 @@ export type FolderDtoString = FileEntryDtoString &  {
      * @type {Array<string>}
      * @memberof FolderDtoString
      */
-    'tags'?: Array<string>;
+    'tags'?: Array<string> | null;
     /**
      * 
      * @type {Logo}
@@ -168,38 +168,38 @@ export type FolderDtoString = FileEntryDtoString &  {
      * @type {boolean}
      * @memberof FolderDtoString
      */
-    'inRoom'?: boolean;
+    'inRoom'?: boolean | null;
     /**
      * The folder quota limit.
      * @type {number}
      * @memberof FolderDtoString
      */
-    'quotaLimit'?: number;
+    'quotaLimit'?: number | null;
     /**
      * Specifies if the folder room has a custom quota or not.
      * @type {boolean}
      * @memberof FolderDtoString
      */
-    'isCustomQuota'?: boolean;
+    'isCustomQuota'?: boolean | null;
     /**
      * How much folder space is used (counter).
      * @type {number}
      * @memberof FolderDtoString
      */
-    'usedSpace'?: number;
+    'usedSpace'?: number | null;
     /**
      * Specifies if the folder is password protected or not.
      * @type {boolean}
      * @memberof FolderDtoString
      */
-    'passwordProtected'?: boolean;
+    'passwordProtected'?: boolean | null;
     /**
      * Specifies if an external link to the folder is expired or not.
      * @type {boolean}
      * @memberof FolderDtoString
      * @deprecated
      */
-    'expired'?: boolean;
+    'expired'?: boolean | null;
     /**
      * 
      * @type {ChatSettings}

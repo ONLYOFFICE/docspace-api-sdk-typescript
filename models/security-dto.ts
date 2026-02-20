@@ -32,15 +32,15 @@ export interface SecurityDto {
     /**
      * The module ID.
      */
-    'webItemId'?: string;
+    'webItemId'?: string | null;
     /**
      * The list of users with the access to the module.
      */
-    'users'?: Array<EmployeeDto>;
+    'users'?: Array<EmployeeDto> | null;
     /**
      * The list of groups with the access to the module.
      */
-    'groups'?: Array<GroupSummaryDto>;
+    'groups'?: Array<GroupSummaryDto> | null;
     /**
      * Specifies if the security settings are enabled or not.
      */

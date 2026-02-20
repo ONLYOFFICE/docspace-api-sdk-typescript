@@ -30,6 +30,6 @@ export interface UpdateComment {
     /**
      * The comment text.
      */
-    'comment'?: string;
+    'comment'?: string | null;
 }
 

@@ -26,6 +26,6 @@ export interface StartFillingForm {
     /**
      * The caption of the button that starts filling out the form.
      */
-    'text'?: string;
+    'text'?: string | null;
 }
 

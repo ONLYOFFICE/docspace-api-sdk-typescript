@@ -30,6 +30,6 @@ export interface WebPluginRequests {
     /**
      * The JSON-formatted configuration settings for the web plugin.
      */
-    'settings': string;
+    'settings': string | null;
 }
 

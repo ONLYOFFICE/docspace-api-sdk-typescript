@@ -26,10 +26,10 @@ export interface ChangeEmailRequest {
     /**
      * The user email address.
      */
-    'email'?: string;
+    'email'?: string | null;
     /**
      * The user encrypted email address.
      */
-    'encEmail'?: string;
+    'encEmail'?: string | null;
 }
 

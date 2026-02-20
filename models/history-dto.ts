@@ -46,6 +46,6 @@ export interface HistoryDto {
     /**
      * The list of related history.
      */
-    'related'?: Array<HistoryDto>;
+    'related'?: Array<HistoryDto> | null;
 }
 

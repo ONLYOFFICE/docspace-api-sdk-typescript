@@ -30,6 +30,6 @@ export interface TopUpDepositRequestDto {
     /**
      * The three-character ISO 4217 currency symbol.
      */
-    'currency'?: string;
+    'currency'?: string | null;
 }
 

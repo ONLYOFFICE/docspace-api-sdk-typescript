@@ -45,27 +45,27 @@ export interface ActiveConnectionsItemDto {
     /**
      * The IP address of the active connection.
      */
-    'ip'?: string;
+    'ip'?: string | null;
     /**
      * The active connection country.
      */
-    'country'?: string;
+    'country'?: string | null;
     /**
      * The active connection city.
      */
-    'city'?: string;
+    'city'?: string | null;
     /**
      * The active connection browser.
      */
-    'browser'?: string;
+    'browser'?: string | null;
     /**
      * The active connection platform.
      */
-    'platform'?: string;
+    'platform'?: string | null;
     'date'?: ApiDateTime;
     /**
      * The active connection page.
      */
-    'page'?: string;
+    'page'?: string | null;
 }
 

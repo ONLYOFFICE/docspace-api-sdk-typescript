@@ -26,6 +26,6 @@ export interface RenameChatBody {
     /**
      * The new display name for the chat session (maximum 255 characters).
      */
-    'name': string;
+    'name': string | null;
 }
 

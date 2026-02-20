@@ -42,15 +42,15 @@ export interface DbTenant {
     /**
      * The tenant name.
      */
-    'name'?: string;
+    'name'?: string | null;
     /**
      * The tenant alias.
      */
-    'alias'?: string;
+    'alias'?: string | null;
     /**
      * Mapped domain
      */
-    'mappedDomain'?: string;
+    'mappedDomain'?: string | null;
     /**
      * The tenant version.
      */
@@ -58,7 +58,7 @@ export interface DbTenant {
     /**
      * The Version_changed field.
      */
-    'version_Changed'?: string;
+    'version_Changed'?: string | null;
     /**
      * The date and time when the version was changed.
      */
@@ -66,21 +66,21 @@ export interface DbTenant {
     /**
      * The tenant language.
      */
-    'language'?: string;
+    'language'?: string | null;
     /**
      * The tenant time zone.
      */
-    'timeZone'?: string;
+    'timeZone'?: string | null;
     /**
      * The tenant trusted domains raw.
      */
-    'trustedDomainsRaw'?: string;
+    'trustedDomainsRaw'?: string | null;
     'trustedDomainsEnabled'?: TenantTrustedDomainsType;
     'status'?: TenantStatus;
     /**
      * The date and time when the tenant status was changed.
      */
-    'statusChanged'?: string;
+    'statusChanged'?: string | null;
     /**
      * The hacked date and time when the tenant status was changed.
      */
@@ -92,11 +92,11 @@ export interface DbTenant {
     /**
      * The tenant owner ID.
      */
-    'ownerId'?: string;
+    'ownerId'?: string | null;
     /**
      * The tenant payment ID.
      */
-    'paymentId'?: string;
+    'paymentId'?: string | null;
     'industry'?: TenantIndustry;
     /**
      * The date and time when the tenant was last modified.

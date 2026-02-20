@@ -30,6 +30,6 @@ export interface FormResultsDto {
     /**
      * The list of forms data.
      */
-    'formsData'?: Array<FormsItemData>;
+    'formsData'?: Array<FormsItemData> | null;
 }
 

@@ -36,19 +36,19 @@ export interface ApiKeyResponseDto {
     /**
      * The API key name.
      */
-    'name': string;
+    'name': string | null;
     /**
      * The full API key value (only returned when creating a new key).
      */
-    'key': string;
+    'key': string | null;
     /**
      * The API key postfix (used for identification).
      */
-    'keyPostfix'?: string;
+    'keyPostfix'?: string | null;
     /**
      * The list of permissions granted to the API key.
      */
-    'permissions': Array<string>;
+    'permissions': Array<string> | null;
     'lastUsed'?: ApiDateTime;
     'createOn'?: ApiDateTime;
     'createBy'?: EmployeeDto;

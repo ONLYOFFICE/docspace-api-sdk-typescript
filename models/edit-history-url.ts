@@ -26,14 +26,14 @@ export interface EditHistoryUrl {
     /**
      * The document identifier of the previous version of the document.
      */
-    'key'?: string;
+    'key'?: string | null;
     /**
      * The url address of the previous version of the document.
      */
-    'url'?: string;
+    'url'?: string | null;
     /**
      * The document extension.
      */
-    'fileType'?: string;
+    'fileType'?: string | null;
 }
 

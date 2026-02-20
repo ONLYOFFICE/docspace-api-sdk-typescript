@@ -26,6 +26,6 @@ export interface ConnectServerRequestBody {
     /**
      * OAuth authorization code received from the provider\'s redirect. Used to exchange for access and refresh tokens.
      */
-    'code': string;
+    'code': string | null;
 }
 

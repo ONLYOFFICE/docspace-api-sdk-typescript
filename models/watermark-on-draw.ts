@@ -37,11 +37,11 @@ export interface WatermarkOnDraw {
     /**
      * Defines the watermark margins measured in millimeters.
      */
-    'margins'?: Array<number>;
+    'margins'?: Array<number> | null;
     /**
      * Defines the watermark fill color.
      */
-    'fill'?: string;
+    'fill'?: string | null;
     /**
      * Defines the watermark rotation angle.
      */
@@ -53,6 +53,6 @@ export interface WatermarkOnDraw {
     /**
      * The list of paragraphs of the watermark.
      */
-    'paragraphs'?: Array<Paragraph>;
+    'paragraphs'?: Array<Paragraph> | null;
 }
 

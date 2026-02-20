@@ -32,35 +32,35 @@ export interface AuthRequestsDto {
     /**
      * The username or email used for authentication.
      */
-    'userName'?: string;
+    'userName'?: string | null;
     /**
      * The password in plain text for user authentication.
      */
-    'password'?: string;
+    'password'?: string | null;
     /**
      * The hashed password for secure verification.
      */
-    'passwordHash'?: string;
+    'passwordHash'?: string | null;
     /**
      * The type of authentication provider (e.g., internal, Google, Azure).
      */
-    'provider'?: string;
+    'provider'?: string | null;
     /**
      * The access token used for authentication with external providers.
      */
-    'accessToken'?: string;
+    'accessToken'?: string | null;
     /**
      * The serialized user profile data, if applicable.
      */
-    'serializedProfile'?: string;
+    'serializedProfile'?: string | null;
     /**
      * The code for two-factor authentication.
      */
-    'code'?: string;
+    'code'?: string | null;
     /**
      * The authorization code used for obtaining OAuth tokens.
      */
-    'codeOAuth'?: string;
+    'codeOAuth'?: string | null;
     /**
      * Specifies whether the authentication is session-based.
      */
@@ -70,11 +70,11 @@ export interface AuthRequestsDto {
     /**
      * The user\'s response to the CAPTCHA challenge.
      */
-    'recaptchaResponse'?: string;
+    'recaptchaResponse'?: string | null;
     /**
      * The culture code for localization during authentication.
      */
-    'culture'?: string;
+    'culture'?: string | null;
 }
 
 

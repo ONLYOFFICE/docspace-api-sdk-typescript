@@ -26,7 +26,7 @@ export interface EditorToolCallStateDto {
     /**
      * The tool name.
      */
-    'toolName': string;
+    'toolName': string | null;
     /**
      * The editor tool call parameters.
      */

@@ -26,6 +26,6 @@ export interface SsoSettingsRequestsDto {
     /**
      * The JSON-serialized SSO configuration settings.
      */
-    'serializeSettings': string;
+    'serializeSettings': string | null;
 }
 

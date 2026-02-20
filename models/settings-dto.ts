@@ -59,16 +59,16 @@ export interface SettingsDto {
     /**
      * The time zone.
      */
-    'timezone'?: string;
+    'timezone'?: string | null;
     /**
      * The list of the trusted domains.
      */
-    'trustedDomains'?: Array<string>;
+    'trustedDomains'?: Array<string> | null;
     'trustedDomainsType'?: TenantTrustedDomainsType;
     /**
      * The language.
      */
-    'culture': string;
+    'culture': string | null;
     /**
      * The UTC offset in the TimeSpan format.
      */
@@ -80,7 +80,7 @@ export interface SettingsDto {
     /**
      * The greeting settings.
      */
-    'greetingSettings'?: string;
+    'greetingSettings'?: string | null;
     /**
      * The owner ID.
      */
@@ -88,19 +88,19 @@ export interface SettingsDto {
     /**
      * The team template ID.
      */
-    'nameSchemaId'?: string;
+    'nameSchemaId'?: string | null;
     /**
      * Specifies if a user can join the portal or not.
      */
-    'enabledJoin'?: boolean;
+    'enabledJoin'?: boolean | null;
     /**
      * Specifies if a user can send a message to the administrator when accessing the DocSpace portal or not.
      */
-    'enableAdmMess'?: boolean;
+    'enableAdmMess'?: boolean | null;
     /**
      * Specifies if a user can connect third-party providers to the portal or not.
      */
-    'thirdpartyEnable'?: boolean;
+    'thirdpartyEnable'?: boolean | null;
     /**
      * Specifies if this portal is a DocSpace portal or not.
      */
@@ -116,22 +116,22 @@ export interface SettingsDto {
     /**
      * The base domain.
      */
-    'baseDomain': string;
+    'baseDomain': string | null;
     /**
      * The wizard token.
      */
-    'wizardToken'?: string;
+    'wizardToken'?: string | null;
     'passwordHash'?: PasswordHasher;
     'firebase'?: FirebaseDto;
     /**
      * The portal version.
      */
-    'version'?: string;
+    'version'?: string | null;
     'recaptchaType'?: RecaptchaType;
     /**
      * The ReCAPTCHA public key.
      */
-    'recaptchaPublicKey'?: string;
+    'recaptchaPublicKey'?: string | null;
     /**
      * Specifies if the debug information will be sent or not.
      */
@@ -139,12 +139,12 @@ export interface SettingsDto {
     /**
      * The socket URL.
      */
-    'socketUrl'?: string;
+    'socketUrl'?: string | null;
     'tenantStatus'?: TenantStatus;
     /**
      * The tenant alias.
      */
-    'tenantAlias'?: string;
+    'tenantAlias'?: string | null;
     /**
      * Specifies whether to display the About portal section.
      */
@@ -153,11 +153,11 @@ export interface SettingsDto {
     /**
      * The Zendesk key.
      */
-    'zendeskKey'?: string;
+    'zendeskKey'?: string | null;
     /**
      * The tag manager ID.
      */
-    'tagManagerId'?: string;
+    'tagManagerId'?: string | null;
     /**
      * Specifies whether the cookie settings are enabled.
      */
@@ -177,11 +177,11 @@ export interface SettingsDto {
     /**
      * The user name validation regex.
      */
-    'userNameRegex'?: string;
+    'userNameRegex'?: string | null;
     /**
      * The maximum number of invitations to the portal.
      */
-    'invitationLimit'?: number;
+    'invitationLimit'?: number | null;
     'plugins'?: PluginsDto;
     'deepLink': DeepLinkDto;
     'formGallery'?: FormGalleryDto;
@@ -192,7 +192,7 @@ export interface SettingsDto {
     /**
      * The white label logo text.
      */
-    'logoText'?: string;
+    'logoText'?: string | null;
     'externalResources'?: CultureSpecificExternalResources;
     'defaultFolderType'?: FolderType;
 }

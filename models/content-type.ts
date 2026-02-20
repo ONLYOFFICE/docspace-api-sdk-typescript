@@ -20,10 +20,10 @@
 
 
 export interface ContentType {
-    'boundary'?: string;
-    'charSet'?: string;
-    'mediaType'?: string;
-    'name'?: string;
-    'parameters'?: Array<any>;
+    'boundary'?: string | null;
+    'charSet'?: string | null;
+    'mediaType'?: string | null;
+    'name'?: string | null;
+    'parameters'?: Array<any> | null;
 }
 

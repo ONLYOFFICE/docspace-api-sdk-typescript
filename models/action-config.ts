@@ -26,10 +26,10 @@ export interface ActionConfig {
     /**
      * The action data that will be scrolled to.
      */
-    'data'?: string;
+    'data'?: string | null;
     /**
      * The action type.
      */
-    'type'?: string;
+    'type'?: string | null;
 }
 

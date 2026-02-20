@@ -24,7 +24,7 @@ import type { RegStatus } from './reg-status';
 
 export interface TelegramStatusDto {
     'status': RegStatus;
-    'username'?: string;
+    'username'?: string | null;
 }
 
 

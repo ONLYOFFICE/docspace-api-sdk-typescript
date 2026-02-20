@@ -29,7 +29,7 @@ export interface UpdateRoomsQuotaRequestDtoInteger {
     /**
      * The list of room IDs.
      */
-    'roomIds'?: Array<ContinueChatBodyFilesInner>;
+    'roomIds'?: Array<ContinueChatBodyFilesInner> | null;
     /**
      * The room quota.
      */

@@ -26,11 +26,11 @@ export interface AccountInfoDto {
     /**
      * The account provider.
      */
-    'provider': string;
+    'provider': string | null;
     /**
      * The account URL.
      */
-    'url': string;
+    'url': string | null;
     /**
      * Specifies if an account is linked with other profiles or not.
      */

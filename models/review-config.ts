@@ -20,6 +20,6 @@
 
 
 export interface ReviewConfig {
-    'reviewDisplay'?: string;
+    'reviewDisplay'?: string | null;
 }
 

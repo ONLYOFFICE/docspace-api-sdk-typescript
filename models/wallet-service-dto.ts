@@ -45,7 +45,7 @@ export type WalletServiceDto = QuotaDto &  {
      * @type {Array<QuotaDto>}
      * @memberof WalletServiceDto
      */
-    'innerServices'?: Array<QuotaDto>;
+    'innerServices'?: Array<QuotaDto> | null;
 };
 
 

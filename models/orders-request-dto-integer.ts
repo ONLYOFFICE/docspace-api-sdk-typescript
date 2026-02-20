@@ -29,6 +29,6 @@ export interface OrdersRequestDtoInteger {
     /**
      * The list of items with their ordering information.
      */
-    'items': Array<OrdersItemRequestDtoInteger>;
+    'items': Array<OrdersItemRequestDtoInteger> | null;
 }
 

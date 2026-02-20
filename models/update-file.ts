@@ -26,7 +26,7 @@ export interface UpdateFile {
     /**
      * The file title to update.
      */
-    'title'?: string;
+    'title'?: string | null;
     /**
      * The number of the latest file version.
      */

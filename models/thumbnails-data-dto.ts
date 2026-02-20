@@ -26,26 +26,26 @@ export interface ThumbnailsDataDto {
     /**
      * The thumbnail original photo.
      */
-    'original'?: string;
+    'original'?: string | null;
     /**
      * The thumbnail retina.
      */
-    'retina'?: string;
+    'retina'?: string | null;
     /**
      * The thumbnail maximum size photo.
      */
-    'max'?: string;
+    'max'?: string | null;
     /**
      * The thumbnail big size photo.
      */
-    'big'?: string;
+    'big'?: string | null;
     /**
      * The thumbnail medium size photo.
      */
-    'medium'?: string;
+    'medium'?: string | null;
     /**
      * The thumbnail small size photo.
      */
-    'small'?: string;
+    'small'?: string | null;
 }
 

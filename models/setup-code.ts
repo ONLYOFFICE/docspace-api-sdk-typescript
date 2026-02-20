@@ -20,8 +20,8 @@
 
 
 export interface SetupCode {
-    'account'?: string;
-    'manualEntryKey'?: string;
-    'qrCodeSetupImageUrl'?: string;
+    'account'?: string | null;
+    'manualEntryKey'?: string | null;
+    'qrCodeSetupImageUrl'?: string | null;
 }
 

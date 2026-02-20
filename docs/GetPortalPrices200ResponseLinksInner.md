@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**href** | **string** |  | [optional] [default to undefined]
-**action** | **string** |  | [optional] [default to undefined]
+**href** | **string** | URL of the link | [optional] [default to undefined]
+**action** | **string** | Action associated with the link | [optional] [default to undefined]
 
 ## Example
 

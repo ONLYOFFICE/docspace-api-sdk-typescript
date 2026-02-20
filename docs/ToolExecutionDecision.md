@@ -1,12 +1,13 @@
 # ToolExecutionDecision
 
+[0 - Allow, 1 - AlwaysAllow, 2 - Deny]
 
 ## Enum
 
-* `NUMBER_0` (value: `0`)
+* `Allow` (value: `0`)
 
-* `NUMBER_1` (value: `1`)
+* `AlwaysAllow` (value: `1`)
 
-* `NUMBER_2` (value: `2`)
+* `Deny` (value: `2`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -29,7 +29,7 @@ export interface RoomInvitationRequest {
     /**
      * The collection of invitation parameters.
      */
-    'invitations'?: Array<RoomInvitation>;
+    'invitations'?: Array<RoomInvitation> | null;
     /**
      * Specifies whether to notify users about the shared room or not.
      */
@@ -37,11 +37,11 @@ export interface RoomInvitationRequest {
     /**
      * The message to send when notifying about the shared room.
      */
-    'message'?: string;
+    'message'?: string | null;
     /**
      * The language of the room invitation.
      */
-    'culture'?: string;
+    'culture'?: string | null;
     /**
      * Specifies whether to forcibly delete a user with form roles from the room.
      */

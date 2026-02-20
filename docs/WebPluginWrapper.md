@@ -6,10 +6,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **response** | [**WebPluginDto**](WebPluginDto.md) |  | [optional] [default to undefined]
-**count** | **number** |  | [optional] [default to undefined]
-**links** | [**Array&lt;GetPortalPrices200ResponseLinksInner&gt;**](GetPortalPrices200ResponseLinksInner.md) |  | [optional] [default to undefined]
-**status** | **number** |  | [optional] [default to undefined]
-**statusCode** | **number** |  | [optional] [default to undefined]
+**count** | **number** | The total number of items in the response | [optional] [default to undefined]
+**links** | [**Array&lt;GetPortalPrices200ResponseLinksInner&gt;**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] [default to undefined]
+**status** | **number** | HTTP status code of the response | [optional] [default to undefined]
+**statusCode** | **number** | HTTP status code of the response (duplicate of status) | [optional] [default to undefined]
 
 ## Example
 

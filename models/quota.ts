@@ -41,11 +41,11 @@ export interface Quota {
     /**
      * The quota due date.
      */
-    'dueDate'?: string;
+    'dueDate'?: string | null;
     /**
      * The quota next quantity.
      */
-    'nextQuantity'?: number;
+    'nextQuantity'?: number | null;
     'state'?: QuotaState;
 }
 

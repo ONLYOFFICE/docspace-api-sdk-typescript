@@ -33,6 +33,6 @@ export interface SaveFormRoleMappingDtoInteger {
     /**
      * The collection of roles.
      */
-    'roles': Array<FormRole>;
+    'roles': Array<FormRole> | null;
 }
 

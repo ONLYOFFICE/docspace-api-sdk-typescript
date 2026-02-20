@@ -20,7 +20,13 @@
 
 
 export interface GetPortalPrices200ResponseLinksInner {
+    /**
+     * URL of the link
+     */
     'href'?: string;
+    /**
+     * Action associated with the link
+     */
     'action'?: string;
 }
 

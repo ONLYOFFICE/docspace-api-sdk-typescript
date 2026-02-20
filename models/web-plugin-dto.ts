@@ -29,43 +29,43 @@ export interface WebPluginDto {
     /**
      * The web plugin name.
      */
-    'name': string;
+    'name': string | null;
     /**
      * The web plugin version.
      */
-    'version': string;
+    'version': string | null;
     /**
      * The minimum version of DocSpace with which the plugin is guaranteed to work.
      */
-    'minDocSpaceVersion'?: string;
+    'minDocSpaceVersion'?: string | null;
     /**
      * The web plugin description.
      */
-    'description': string;
+    'description': string | null;
     /**
      * The web plugin license.
      */
-    'license': string;
+    'license': string | null;
     /**
      * The web plugin author.
      */
-    'author': string;
+    'author': string | null;
     /**
      * The web plugin home page URL.
      */
-    'homePage': string;
+    'homePage': string | null;
     /**
      * The name by which the web plugin is registered in the window object.
      */
-    'pluginName': string;
+    'pluginName': string | null;
     /**
      * The web plugin scopes.
      */
-    'scopes': string;
+    'scopes': string | null;
     /**
      * The web plugin image.
      */
-    'image': string;
+    'image': string | null;
     'createBy': EmployeeDto;
     /**
      * The date and time when the web plugin was created.
@@ -82,22 +82,22 @@ export interface WebPluginDto {
     /**
      * The web plugin URL.
      */
-    'url': string;
+    'url': string | null;
     /**
      * The web plugin css URL.
      */
-    'cssUrl': string;
+    'cssUrl': string | null;
     /**
      * The web plugin settings.
      */
-    'settings': string;
+    'settings': string | null;
     /**
      * The web plugin localized name.
      */
-    'nameLocale'?: { [key: string]: string; };
+    'nameLocale'?: { [key: string]: string | null; } | null;
     /**
      * The web plugin localized description.
      */
-    'descriptionLocale'?: { [key: string]: string; };
+    'descriptionLocale'?: { [key: string]: string | null; } | null;
 }
 

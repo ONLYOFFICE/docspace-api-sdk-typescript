@@ -36,11 +36,11 @@ export interface WebhooksConfigDto {
     /**
      * The webhook name.
      */
-    'name'?: string;
+    'name'?: string | null;
     /**
      * The webhook URI.
      */
-    'uri'?: string;
+    'uri'?: string | null;
     /**
      * Specifies if the webhooks are enabled or not.
      */
@@ -53,29 +53,29 @@ export interface WebhooksConfigDto {
     /**
      * The webhook target ID.
      */
-    'targetId'?: string;
+    'targetId'?: string | null;
     'createdBy'?: EmployeeDto;
     /**
      * The date and time when the webhook was created.
      */
-    'createdOn'?: string;
+    'createdOn'?: string | null;
     'modifiedBy'?: EmployeeDto;
     /**
      * The date and time when the webhook was modified.
      */
-    'modifiedOn'?: string;
+    'modifiedOn'?: string | null;
     /**
      * The date and time of the webhook last failure.
      */
-    'lastFailureOn'?: string;
+    'lastFailureOn'?: string | null;
     /**
      * The webhook last failure content.
      */
-    'lastFailureContent'?: string;
+    'lastFailureContent'?: string | null;
     /**
      * The date and time of the webhook last success.
      */
-    'lastSuccessOn'?: string;
+    'lastSuccessOn'?: string | null;
 }
 
 

@@ -20,11 +20,11 @@
 
 
 export interface ChunkedUploadSessionResponseInteger {
-    'id'?: string;
-    'path'?: Array<number>;
+    'id'?: string | null;
+    'path'?: Array<number> | null;
     'created'?: string;
     'expired'?: string;
-    'location'?: string;
+    'location'?: string | null;
     'bytes_total'?: number;
 }
 

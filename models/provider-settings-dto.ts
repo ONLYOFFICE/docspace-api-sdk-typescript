@@ -30,7 +30,7 @@ export interface ProviderSettingsDto {
     /**
      * Default API endpoint URL for the provider type.
      */
-    'url': string;
+    'url': string | null;
 }
 
 

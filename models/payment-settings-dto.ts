@@ -29,15 +29,15 @@ export interface PaymentSettingsDto {
     /**
      * The email address for sales inquiries and support.
      */
-    'salesEmail': string;
+    'salesEmail': string | null;
     /**
      * The URL for accessing the feedback and support resources.
      */
-    'feedbackAndSupportUrl'?: string;
+    'feedbackAndSupportUrl'?: string | null;
     /**
      * The URL for purchasing or upgrading the product.
      */
-    'buyUrl': string;
+    'buyUrl': string | null;
     /**
      * Indicates whether the system is running in standalone mode.
      */

@@ -26,18 +26,18 @@ export interface FormsItemData {
     /**
      * The form data key.
      */
-    'key'?: string;
+    'key'?: string | null;
     /**
      * The form data tag.
      */
-    'tag'?: string;
+    'tag'?: string | null;
     /**
      * The form data value.
      */
-    'value'?: string;
+    'value'?: string | null;
     /**
      * The form data type.
      */
-    'type'?: string;
+    'type'?: string | null;
 }
 

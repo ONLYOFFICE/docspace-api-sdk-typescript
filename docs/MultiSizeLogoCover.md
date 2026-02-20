@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** | The logo cover ID. | [default to undefined]
-**data** | **{ [key: string]: string; }** | The logo cover data. | [default to undefined]
+**data** | **{ [key: string]: string | null; }** | The logo cover data. | [default to undefined]
 
 ## Example
 

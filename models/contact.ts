@@ -26,10 +26,10 @@ export interface Contact {
     /**
      * The contact type.
      */
-    'type'?: string;
+    'type'?: string | null;
     /**
      * The contact value.
      */
-    'value'?: string;
+    'value'?: string | null;
 }
 

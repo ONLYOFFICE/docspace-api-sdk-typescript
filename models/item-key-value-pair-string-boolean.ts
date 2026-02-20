@@ -20,7 +20,7 @@
 
 
 export interface ItemKeyValuePairStringBoolean {
-    'key'?: string;
+    'key'?: string | null;
     'value'?: boolean;
 }
 

@@ -29,6 +29,6 @@ export interface UpdateRoomsRoomIdsRequestDtoInteger {
     /**
      * The list of room IDs.
      */
-    'roomIds'?: Array<ContinueChatBodyFilesInner>;
+    'roomIds'?: Array<ContinueChatBodyFilesInner> | null;
 }
 

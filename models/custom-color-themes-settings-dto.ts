@@ -29,7 +29,7 @@ export interface CustomColorThemesSettingsDto {
     /**
      * The list of the custom color themes.
      */
-    'themes'?: Array<CustomColorThemesSettingsItem>;
+    'themes'?: Array<CustomColorThemesSettingsItem> | null;
     /**
      * Specifies whether the custom color theme is selected.
      */

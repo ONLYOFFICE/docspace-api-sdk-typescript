@@ -26,7 +26,7 @@ export interface UserInvitation {
     /**
      * The list of user IDs.
      */
-    'usersIds'?: Array<string>;
+    'usersIds'?: Array<string> | null;
     /**
      * Specifies whether to resend all user invitations or not.
      */

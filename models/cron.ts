@@ -34,7 +34,7 @@ export interface Cron {
     /**
      * The day of the week to start the backup process.
      */
-    'day'?: number;
+    'day'?: number | null;
 }
 
 

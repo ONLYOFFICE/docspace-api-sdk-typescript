@@ -27,10 +27,10 @@ export interface ModelDto {
     /**
      * The human-readable display name of the AI provider (e.g., OpenAI, Anthropic).
      */
-    'providerTitle': string;
+    'providerTitle': string | null;
     /**
      * The model identifier as recognized by the AI provider (e.g., gpt-4o, claude-sonnet-4-20250514).
      */
-    'modelId': string;
+    'modelId': string | null;
 }
 

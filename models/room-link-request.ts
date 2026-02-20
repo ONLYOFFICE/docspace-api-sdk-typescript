@@ -45,12 +45,12 @@ export interface RoomLinkRequest {
     /**
      * The link name.
      */
-    'title'?: string;
+    'title'?: string | null;
     'linkType'?: LinkType;
     /**
      * The link password.
      */
-    'password'?: string;
+    'password'?: string | null;
     /**
      * Specifies if downloading the file from the link is disabled or not.
      */
@@ -58,7 +58,7 @@ export interface RoomLinkRequest {
     /**
      * The maximum number of times the invitation link can be used.
      */
-    'maxUseCount'?: number;
+    'maxUseCount'?: number | null;
     /**
      * The current number of times the invitation link has been used.
      */

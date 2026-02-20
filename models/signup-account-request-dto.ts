@@ -30,31 +30,31 @@ export interface SignupAccountRequestDto {
     /**
      * The user first name.
      */
-    'firstName'?: string;
+    'firstName'?: string | null;
     /**
      * The user last name.
      */
-    'lastName'?: string;
+    'lastName'?: string | null;
     /**
      * The user email address.
      */
-    'email'?: string;
+    'email'?: string | null;
     /**
      * The user password hash.
      */
-    'passwordHash'?: string;
+    'passwordHash'?: string | null;
     /**
      * The user link key.
      */
-    'key': string;
+    'key': string | null;
     /**
      * The user culture code.
      */
-    'culture'?: string;
+    'culture'?: string | null;
     /**
      * The third-party profile in the serialized format
      */
-    'serializedProfile': string;
+    'serializedProfile': string | null;
 }
 
 

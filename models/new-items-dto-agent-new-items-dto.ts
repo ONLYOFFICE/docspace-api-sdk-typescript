@@ -33,6 +33,6 @@ export interface NewItemsDtoAgentNewItemsDto {
     /**
      * The list of items.
      */
-    'items': Array<AgentNewItemsDto>;
+    'items': Array<AgentNewItemsDto> | null;
 }
 

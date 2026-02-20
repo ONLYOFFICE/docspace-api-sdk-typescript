@@ -35,11 +35,11 @@ export interface TenantDto {
     /**
      * The affiliate ID.
      */
-    'affiliateId'?: string;
+    'affiliateId'?: string | null;
     /**
      * The tenant alias.
      */
-    'tenantAlias'?: string;
+    'tenantAlias'?: string | null;
     /**
      * Specifies if the calls are available for this tenant or not.
      */
@@ -47,7 +47,7 @@ export interface TenantDto {
     /**
      * The tenant campaign.
      */
-    'campaign'?: string;
+    'campaign'?: string | null;
     /**
      * The tenant creation date and time.
      */
@@ -55,7 +55,7 @@ export interface TenantDto {
     /**
      * The hosted region.
      */
-    'hostedRegion'?: string;
+    'hostedRegion'?: string | null;
     /**
      * The tenant ID.
      */
@@ -64,7 +64,7 @@ export interface TenantDto {
     /**
      * The tenant language.
      */
-    'language'?: string;
+    'language'?: string | null;
     /**
      * The date and time when the tenant was last modified.
      */
@@ -72,11 +72,11 @@ export interface TenantDto {
     /**
      * The tenant mapped domain.
      */
-    'mappedDomain'?: string;
+    'mappedDomain'?: string | null;
     /**
      * The tenant name.
      */
-    'name'?: string;
+    'name'?: string | null;
     /**
      * The tenant owner ID.
      */
@@ -84,7 +84,7 @@ export interface TenantDto {
     /**
      * The tenant payment ID.
      */
-    'paymentId'?: string;
+    'paymentId'?: string | null;
     /**
      * Specifies if the ONLYOFFICE newsletter is allowed or not.
      */
@@ -97,15 +97,15 @@ export interface TenantDto {
     /**
      * The tenant time zone.
      */
-    'timeZone'?: string;
+    'timeZone'?: string | null;
     /**
      * The list of tenant trusted domains.
      */
-    'trustedDomains'?: Array<string>;
+    'trustedDomains'?: Array<string> | null;
     /**
      * The tenant trusted domains in the string format.
      */
-    'trustedDomainsRaw'?: string;
+    'trustedDomainsRaw'?: string | null;
     'trustedDomainsType'?: TenantTrustedDomainsType;
     /**
      * The tenant version
@@ -118,7 +118,7 @@ export interface TenantDto {
     /**
      * The tenant AWS region.
      */
-    'region'?: string;
+    'region'?: string | null;
 }
 
 

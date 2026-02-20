@@ -30,10 +30,10 @@ export interface MentionMessageWrapper {
     /**
      * A list of emails that will receive the mention message.
      */
-    'emails'?: Array<string>;
+    'emails'?: Array<string> | null;
     /**
      * The mention message.
      */
-    'message'?: string;
+    'message'?: string | null;
 }
 

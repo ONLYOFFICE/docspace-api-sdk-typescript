@@ -33,6 +33,6 @@ export interface NewItemsDtoRoomNewItemsDto {
     /**
      * The list of items.
      */
-    'items': Array<RoomNewItemsDto>;
+    'items': Array<RoomNewItemsDto> | null;
 }
 

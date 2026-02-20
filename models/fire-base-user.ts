@@ -41,15 +41,15 @@ export interface FireBaseUser {
     /**
      * The Firebase device token.
      */
-    'firebaseDeviceToken'?: string;
+    'firebaseDeviceToken'?: string | null;
     /**
      * The Firebase application.
      */
-    'application'?: string;
+    'application'?: string | null;
     /**
      * Specifies if the user is subscribed to the push notifications or not.
      */
-    'isSubscribed'?: boolean;
+    'isSubscribed'?: boolean | null;
     'tenant'?: DbTenant;
 }
 

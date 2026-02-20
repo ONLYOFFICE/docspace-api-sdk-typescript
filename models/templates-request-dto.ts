@@ -26,6 +26,6 @@ export interface TemplatesRequestDto {
     /**
      * The list of file IDs.
      */
-    'fileIds'?: Array<number>;
+    'fileIds'?: Array<number> | null;
 }
 

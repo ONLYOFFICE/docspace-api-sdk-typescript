@@ -26,6 +26,6 @@ export interface MembersRequest {
     /**
      * The list of group member IDs.
      */
-    'members'?: Array<string>;
+    'members'?: Array<string> | null;
 }
 

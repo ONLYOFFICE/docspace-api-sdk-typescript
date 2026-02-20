@@ -26,6 +26,6 @@ export interface GobackConfig {
     /**
      * The absolute URL to the website address which will be opened when clicking the Open file location menu button.
      */
-    'url'?: string;
+    'url'?: string | null;
 }
 

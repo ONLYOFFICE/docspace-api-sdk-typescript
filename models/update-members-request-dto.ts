@@ -26,7 +26,7 @@ export interface UpdateMembersRequestDto {
     /**
      * The list of user IDs.
      */
-    'userIds'?: Array<string>;
+    'userIds'?: Array<string> | null;
     /**
      * Specifies whether to resend invitation letters to all the users or not.
      */

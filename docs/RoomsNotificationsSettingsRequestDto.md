@@ -6,7 +6,7 @@ The request parameters for configuring notification settings for the chat or col
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**roomsId** | **any** |  | [optional] [default to undefined]
+**roomsId** | **any** | The target room identifier. | [optional] [default to undefined]
 **mute** | **boolean** | Specifies whether the notifications will be delivered to the specified room or not. | [optional] [default to undefined]
 
 ## Example

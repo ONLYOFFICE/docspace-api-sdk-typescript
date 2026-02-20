@@ -21,6 +21,6 @@
 
 export interface KeyValuePairBooleanString {
     'key'?: boolean;
-    'value'?: string;
+    'value'?: string | null;
 }
 

@@ -26,14 +26,14 @@ export interface AuthKey {
     /**
      * The authorization key name.
      */
-    'name': string;
+    'name': string | null;
     /**
      * The authorization key value.
      */
-    'value': string;
+    'value': string | null;
     /**
      * The authorization key title.
      */
-    'title'?: string;
+    'title'?: string | null;
 }
 

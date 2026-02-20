@@ -29,12 +29,12 @@ export interface WatermarkRequestDto {
     /**
      * Specifies whether watermarks are on or off.
      */
-    'enabled'?: boolean;
+    'enabled'?: boolean | null;
     'additions'?: WatermarkAdditions;
     /**
      * The watermark text.
      */
-    'text'?: string;
+    'text'?: string | null;
     /**
      * The watermark text and image rotate angle.
      */
@@ -46,7 +46,7 @@ export interface WatermarkRequestDto {
     /**
      * The path to the temporary image file.
      */
-    'imageUrl'?: string;
+    'imageUrl'?: string | null;
     /**
      * The watermark image height.
      */

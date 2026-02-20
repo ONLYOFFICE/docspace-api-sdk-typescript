@@ -26,7 +26,7 @@ export interface ThumbnailsRequest {
     /**
      * The path to the temporary thumbnail file.
      */
-    'tmpFile'?: string;
+    'tmpFile'?: string | null;
     /**
      * The thumbnail horizontal coordinate.
      */

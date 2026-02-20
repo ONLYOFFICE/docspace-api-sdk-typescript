@@ -36,7 +36,7 @@ export interface McpServerShortDto {
     /**
      * Display name of the MCP server.
      */
-    'name'?: string;
+    'name'?: string | null;
     'serverType'?: ServerType;
     /**
      * Indicates whether the server is currently enabled and available for room assignment.

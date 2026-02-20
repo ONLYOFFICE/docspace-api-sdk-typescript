@@ -26,13 +26,13 @@ import type { MigratingApiGroup } from './migrating-api-group';
 import type { MigratingApiUser } from './migrating-api-user';
 
 export interface MigrationApiInfo {
-    'migratorName'?: string;
-    'operation'?: string;
-    'failedArchives'?: Array<string>;
-    'users'?: Array<MigratingApiUser>;
-    'withoutEmailUsers'?: Array<MigratingApiUser>;
-    'existUsers'?: Array<MigratingApiUser>;
-    'groups'?: Array<MigratingApiGroup>;
+    'migratorName'?: string | null;
+    'operation'?: string | null;
+    'failedArchives'?: Array<string> | null;
+    'users'?: Array<MigratingApiUser> | null;
+    'withoutEmailUsers'?: Array<MigratingApiUser> | null;
+    'existUsers'?: Array<MigratingApiUser> | null;
+    'groups'?: Array<MigratingApiGroup> | null;
     'importPersonalFiles'?: boolean;
     'importSharedFiles'?: boolean;
     'importSharedFolders'?: boolean;
@@ -41,7 +41,7 @@ export interface MigrationApiInfo {
     'importGroups'?: boolean;
     'successedUsers'?: number;
     'failedUsers'?: number;
-    'files'?: Array<string>;
-    'errors'?: Array<string>;
+    'files'?: Array<string> | null;
+    'errors'?: Array<string> | null;
 }
 

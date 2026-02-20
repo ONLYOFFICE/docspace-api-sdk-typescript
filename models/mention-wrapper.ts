@@ -30,15 +30,15 @@ export interface MentionWrapper {
     /**
      * The user email address.
      */
-    'email'?: string;
+    'email'?: string | null;
     /**
      * The user unique identification.
      */
-    'id'?: string;
+    'id'?: string | null;
     /**
      * The path to the user\'s avatar.
      */
-    'image'?: string;
+    'image'?: string | null;
     /**
      * Specifies whether the user has the access to the file where they are mentioned.
      */
@@ -46,6 +46,6 @@ export interface MentionWrapper {
     /**
      * The user full name.
      */
-    'name'?: string;
+    'name'?: string | null;
 }
 

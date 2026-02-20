@@ -27,7 +27,7 @@ import type { MessageAction } from './message-action';
  */
 export interface HistoryAction {
     'id'?: MessageAction;
-    'key'?: string;
+    'key'?: string | null;
 }
 
 

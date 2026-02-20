@@ -30,14 +30,14 @@ export interface DbTenantPartner {
     /**
      * The partner ID.
      */
-    'partnerId'?: string;
+    'partnerId'?: string | null;
     /**
      * The affiliate ID.
      */
-    'affiliateId'?: string;
+    'affiliateId'?: string | null;
     /**
      * The tenant partner campaign.
      */
-    'campaign'?: string;
+    'campaign'?: string | null;
 }
 

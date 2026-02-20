@@ -35,58 +35,58 @@ export interface UpdateMemberRequestDto {
     /**
      * The user ID.
      */
-    'userId'?: string;
+    'userId'?: string | null;
     /**
      * Specifies whether to disable a user or not.
      */
-    'disable'?: boolean;
+    'disable'?: boolean | null;
     /**
      * The user email address.
      */
-    'email'?: string;
+    'email'?: string | null;
     /**
      * Specifies if this is a guest or a user.
      */
-    'isUser'?: boolean;
+    'isUser'?: boolean | null;
     /**
      * The user first name.
      */
-    'firstName'?: string;
+    'firstName'?: string | null;
     /**
      * The user last name.
      */
-    'lastName'?: string;
+    'lastName'?: string | null;
     /**
      * The list of the user departments.
      */
-    'department'?: Array<string>;
+    'department'?: Array<string> | null;
     /**
      * The user title.
      */
-    'title'?: string;
+    'title'?: string | null;
     /**
      * The user location.
      */
-    'location'?: string;
+    'location'?: string | null;
     'sex'?: SexEnum;
     'birthday'?: ApiDateTime;
     'worksfrom'?: ApiDateTime;
     /**
      * The user comment.
      */
-    'comment'?: string;
+    'comment'?: string | null;
     /**
      * The list of the user contacts.
      */
-    'contacts'?: Array<Contact>;
+    'contacts'?: Array<Contact> | null;
     /**
      * The user avatar photo URL.
      */
-    'files'?: string;
+    'files'?: string | null;
     /**
      * Specifies if tips, updates and offers are allowed to be sent to the user or not.
      */
-    'spam'?: boolean;
+    'spam'?: boolean | null;
 }
 
 

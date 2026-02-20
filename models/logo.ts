@@ -29,23 +29,23 @@ export interface Logo {
     /**
      * The original logo.
      */
-    'original': string;
+    'original': string | null;
     /**
      * The large logo.
      */
-    'large': string;
+    'large': string | null;
     /**
      * The medium logo.
      */
-    'medium': string;
+    'medium': string | null;
     /**
      * The small logo.
      */
-    'small': string;
+    'small': string | null;
     /**
      * The logo color.
      */
-    'color'?: string;
+    'color'?: string | null;
     'cover'?: LogoCover;
 }
 

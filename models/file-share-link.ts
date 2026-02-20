@@ -36,25 +36,25 @@ export interface FileShareLink {
     /**
      * The title of the shared content.
      */
-    'title'?: string;
+    'title'?: string | null;
     /**
      * The URL for accessing the shared content.
      */
-    'shareLink'?: string;
+    'shareLink'?: string | null;
     'expirationDate'?: ApiDateTime;
     'linkType'?: LinkType;
     /**
      * The password protection for accessing the shared content.
      */
-    'password'?: string;
+    'password'?: string | null;
     /**
      * Indicates whether downloading of the shared content is prohibited.
      */
-    'denyDownload'?: boolean;
+    'denyDownload'?: boolean | null;
     /**
      * Indicates whether the shared link has expired.
      */
-    'isExpired'?: boolean;
+    'isExpired'?: boolean | null;
     /**
      * Indicates whether this is the primary shared link.
      */
@@ -62,19 +62,19 @@ export interface FileShareLink {
     /**
      * Indicates whether the link is for the internal sharing only.
      */
-    'internal'?: boolean;
+    'internal'?: boolean | null;
     /**
      * The token for validating access requests.
      */
-    'requestToken'?: string;
+    'requestToken'?: string | null;
     /**
      * The maximum number of times the invitation link can be used.
      */
-    'maxUseCount'?: number;
+    'maxUseCount'?: number | null;
     /**
      * The current number of times the invitation link has been used.
      */
-    'currentUseCount'?: number;
+    'currentUseCount'?: number | null;
 }
 
 

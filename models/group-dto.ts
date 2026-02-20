@@ -29,11 +29,11 @@ export interface GroupDto {
     /**
      * The group name.
      */
-    'name': string;
+    'name': string | null;
     /**
      * The parent group ID.
      */
-    'parent'?: string;
+    'parent'?: string | null;
     /**
      * The group category ID.
      */
@@ -49,16 +49,16 @@ export interface GroupDto {
     /**
      * Indicates whether the group is a system group.
      */
-    'isSystem'?: boolean;
+    'isSystem'?: boolean | null;
     'manager'?: EmployeeFullDto;
     /**
      * The list of group members.
      */
-    'members'?: Array<EmployeeFullDto>;
+    'members'?: Array<EmployeeFullDto> | null;
     /**
      * Specifies whether the group can be shared or not.
      */
-    'shared'?: boolean;
+    'shared'?: boolean | null;
     /**
      * The number of group members.
      */

@@ -27,9 +27,21 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 
 export interface CookieSettingsWrapper {
     'response'?: CookieSettingsDto;
+    /**
+     * The total number of items in the response
+     */
     'count'?: number;
+    /**
+     * List of links related to the response
+     */
     'links'?: Array<GetPortalPrices200ResponseLinksInner>;
+    /**
+     * HTTP status code of the response
+     */
     'status'?: number;
+    /**
+     * HTTP status code of the response (duplicate of status)
+     */
     'statusCode'?: number;
 }
 

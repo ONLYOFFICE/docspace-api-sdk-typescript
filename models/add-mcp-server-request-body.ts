@@ -26,22 +26,22 @@ export interface AddMcpServerRequestBody {
     /**
      * Unique display name for the server. Only letters, numbers, underscores, and hyphens are allowed. Maximum 128 characters.
      */
-    'name': string;
+    'name': string | null;
     /**
      * Human-readable description of the server\'s purpose and capabilities. Maximum 255 characters.
      */
-    'description': string;
+    'description': string | null;
     /**
      * Base URL of the MCP server endpoint. Must be a valid, reachable URL. The system will verify connectivity during registration.
      */
-    'endpoint': string;
+    'endpoint': string | null;
     /**
      * Optional HTTP headers to include with every request to the MCP server (e.g., authentication tokens or API keys).
      */
-    'headers'?: { [key: string]: string; };
+    'headers'?: { [key: string]: string; } | null;
     /**
      * Optional Base64-encoded icon image for the server. Used as the visual identifier in the UI.
      */
-    'icon'?: string;
+    'icon'?: string | null;
 }
 

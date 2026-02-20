@@ -30,15 +30,15 @@ export interface CreateProviderRequestDto {
     /**
      * The display title for the AI provider.
      */
-    'title': string;
+    'title': string | null;
     /**
      * The API endpoint URL for the AI provider. Required for OpenAiCompatible type; optional for other types that have default URLs.
      */
-    'url'?: string;
+    'url'?: string | null;
     /**
      * The authentication API key for the AI provider.
      */
-    'key': string;
+    'key': string | null;
 }
 
 

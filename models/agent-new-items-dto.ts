@@ -30,6 +30,6 @@ export interface AgentNewItemsDto {
     /**
      * The list of file entry items.
      */
-    'items': Array<FileEntryBaseDto>;
+    'items': Array<FileEntryBaseDto> | null;
 }
 

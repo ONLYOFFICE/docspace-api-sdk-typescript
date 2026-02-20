@@ -19,11 +19,14 @@
  */
 
 
+/**
+ * [0 - None, 1 - OpenAi, 2 - OpenRouter]
+ */
 
 export const EmbeddingProviderType = {
-    NUMBER_0: 0,
-    NUMBER_1: 1,
-    NUMBER_2: 2
+    None: 0,
+    OpenAi: 1,
+    OpenRouter: 2
 } as const;
 
 export type EmbeddingProviderType = typeof EmbeddingProviderType[keyof typeof EmbeddingProviderType];

@@ -26,10 +26,10 @@ export interface CspDto {
     /**
      * The list of CSP domains.
      */
-    'domains': Array<string>;
+    'domains': Array<string> | null;
     /**
      * The CSP header.
      */
-    'header': string;
+    'header': string | null;
 }
 

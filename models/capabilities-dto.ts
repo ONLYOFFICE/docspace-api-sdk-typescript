@@ -30,15 +30,15 @@ export interface CapabilitiesDto {
     /**
      * The LDAP domain.
      */
-    'ldapDomain'?: string;
+    'ldapDomain'?: string | null;
     /**
      * The list of providers.
      */
-    'providers': Array<string>;
+    'providers': Array<string> | null;
     /**
      * The SP login label.
      */
-    'ssoLabel': string;
+    'ssoLabel': string | null;
     /**
      * Specifies if OAuth is enabled or not.
      */
@@ -46,7 +46,7 @@ export interface CapabilitiesDto {
     /**
      * The SSO URL. If this parameter is empty, then the SSO settings are disabled.
      */
-    'ssoUrl': string;
+    'ssoUrl': string | null;
     /**
      * Specifies if identity server is enabled or not
      */

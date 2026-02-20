@@ -26,7 +26,7 @@ export interface WebItemSecurityRequestsDto {
     /**
      * The module ID.
      */
-    'id': string;
+    'id': string | null;
     /**
      * Controls whether the security restrictions are enforced for this module.
      */
@@ -34,6 +34,6 @@ export interface WebItemSecurityRequestsDto {
     /**
      * The collection of user and group identifiers granted access to the module.
      */
-    'subjects'?: Array<string>;
+    'subjects'?: Array<string> | null;
 }
 

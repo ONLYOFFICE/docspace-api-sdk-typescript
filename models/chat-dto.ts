@@ -33,7 +33,7 @@ export interface ChatDto {
     /**
      * The display title of the chat session.
      */
-    'title'?: string;
+    'title'?: string | null;
     'createdOn'?: ApiDateTime;
     'modifiedOn'?: ApiDateTime;
     'createdBy'?: EmployeeDto;

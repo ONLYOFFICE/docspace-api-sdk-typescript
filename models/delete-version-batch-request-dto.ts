@@ -45,7 +45,7 @@ export type DeleteVersionBatchRequestDto = FileOperationRequestBaseDto &  {
      * @type {Array<number>}
      * @memberof DeleteVersionBatchRequestDto
      */
-    'versions': Array<number>;
+    'versions': Array<number> | null;
 };
 
 

@@ -38,7 +38,7 @@ export interface TenantWalletSettings {
     /**
      * The three-character ISO 4217 currency symbol.
      */
-    'currency'?: string;
+    'currency'?: string | null;
     /**
      * The date and time when the tenant wallet settings were last modified.
      */

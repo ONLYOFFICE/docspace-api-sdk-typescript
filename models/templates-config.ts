@@ -26,14 +26,14 @@ export interface TemplatesConfig {
     /**
      * The absolute URL to the image for template.
      */
-    'image'?: string;
+    'image'?: string | null;
     /**
      * The template title that will be displayed in the Create New... menu option.
      */
-    'title'?: string;
+    'title'?: string | null;
     /**
      * The absolute URL to the document where it will be created and available after creation.
      */
-    'url'?: string;
+    'url'?: string | null;
 }
 

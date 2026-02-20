@@ -29,7 +29,7 @@ export interface SessionRequest {
     /**
      * The file name.
      */
-    'fileName': string;
+    'fileName': string | null;
     /**
      * The file size.
      */
@@ -37,7 +37,7 @@ export interface SessionRequest {
     /**
      * The relative path to the file.
      */
-    'relativePath'?: string;
+    'relativePath'?: string | null;
     'createOn'?: ApiDateTime;
     /**
      * Specifies whether the file is encrypted or not.

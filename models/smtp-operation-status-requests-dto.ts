@@ -30,15 +30,15 @@ export interface SmtpOperationStatusRequestsDto {
     /**
      * The unique identifier for tracking the SMTP operation.
      */
-    'id'?: string;
+    'id'?: string | null;
     /**
      * The error message if the SMTP operation encountered issues.
      */
-    'error'?: string;
+    'error'?: string | null;
     /**
      * The current state of the SMTP operation.
      */
-    'status'?: string;
+    'status'?: string | null;
     /**
      * The progress indicator showing completion percentage of the operation.
      */

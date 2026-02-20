@@ -34,7 +34,7 @@ export interface StartUpdateUserTypeDto {
     /**
      * The user ID to reassign.
      */
-    'reassignUserId'?: string;
+    'reassignUserId'?: string | null;
 }
 
 

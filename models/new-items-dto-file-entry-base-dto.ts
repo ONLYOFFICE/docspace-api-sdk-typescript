@@ -33,6 +33,6 @@ export interface NewItemsDtoFileEntryBaseDto {
     /**
      * The list of items.
      */
-    'items': Array<FileEntryBaseDto>;
+    'items': Array<FileEntryBaseDto> | null;
 }
 

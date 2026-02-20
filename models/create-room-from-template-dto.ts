@@ -39,7 +39,7 @@ export interface CreateRoomFromTemplateDto {
     /**
      * The room title.
      */
-    'title': string;
+    'title': string | null;
     'logo'?: LogoRequest;
     /**
      * Specifies whether to copy a logo or not.
@@ -48,32 +48,32 @@ export interface CreateRoomFromTemplateDto {
     /**
      * The collection of tags.
      */
-    'tags'?: Array<string>;
+    'tags'?: Array<string> | null;
     /**
      * The color of the room to be created.
      */
-    'color'?: string;
+    'color'?: string | null;
     /**
      * The cover of the room to be created.
      */
-    'cover'?: string;
+    'cover'?: string | null;
     /**
      * The room quota.
      */
-    'quota'?: number;
+    'quota'?: number | null;
     /**
      * Specifies whether to create a room with indexing.
      */
-    'indexing'?: boolean;
+    'indexing'?: boolean | null;
     /**
      * Specifies whether to deny downloads from the room.
      */
-    'denyDownload'?: boolean;
+    'denyDownload'?: boolean | null;
     'lifetime'?: RoomDataLifetimeDto;
     'watermark'?: WatermarkRequestDto;
     /**
      * Specifies whether the room to be created is private or not.
      */
-    'private'?: boolean;
+    'private'?: boolean | null;
 }
 

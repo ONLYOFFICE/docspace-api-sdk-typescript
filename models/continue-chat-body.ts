@@ -29,10 +29,10 @@ export interface ContinueChatBody {
     /**
      * The user message to append to the conversation.
      */
-    'message': string;
+    'message': string | null;
     /**
      * The optional collection of file identifiers to attach as context for the AI model.
      */
-    'files'?: Array<ContinueChatBodyFilesInner>;
+    'files'?: Array<ContinueChatBodyFilesInner> | null;
 }
 

@@ -33,7 +33,7 @@ export interface RoomTemplateDto {
     /**
      * The room template title.
      */
-    'title'?: string;
+    'title'?: string | null;
     'logo'?: LogoRequest;
     /**
      * Specifies whether to copy room logo or not.
@@ -42,11 +42,11 @@ export interface RoomTemplateDto {
     /**
      * The collection of email addresses of users with whom to share a room.
      */
-    'share'?: Array<string>;
+    'share'?: Array<string> | null;
     /**
      * The collection of groups with whom to share a room.
      */
-    'groups'?: Array<string>;
+    'groups'?: Array<string> | null;
     /**
      * Specifies whether the room template is public or not.
      */
@@ -54,18 +54,18 @@ export interface RoomTemplateDto {
     /**
      * The collection of tags.
      */
-    'tags'?: Array<string>;
+    'tags'?: Array<string> | null;
     /**
      * The color of the room template.
      */
-    'color'?: string;
+    'color'?: string | null;
     /**
      * The cover of the room template.
      */
-    'cover'?: string;
+    'cover'?: string | null;
     /**
      * Room quota
      */
-    'quota'?: number;
+    'quota'?: number | null;
 }
 

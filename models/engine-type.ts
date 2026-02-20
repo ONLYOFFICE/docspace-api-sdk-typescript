@@ -19,10 +19,13 @@
  */
 
 
+/**
+ * [0 - None, 1 - Exa]
+ */
 
 export const EngineType = {
-    NUMBER_0: 0,
-    NUMBER_1: 1
+    None: 0,
+    Exa: 1
 } as const;
 
 export type EngineType = typeof EngineType[keyof typeof EngineType];

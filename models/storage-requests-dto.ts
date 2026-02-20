@@ -29,10 +29,10 @@ export interface StorageRequestsDto {
     /**
      * The name for the storage module to be configured.
      */
-    'module': string;
+    'module': string | null;
     /**
      * The list of configuration key-value pairs for the storage module.
      */
-    'props'?: Array<ItemKeyValuePairStringString>;
+    'props'?: Array<ItemKeyValuePairStringString> | null;
 }
 

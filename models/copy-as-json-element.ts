@@ -29,7 +29,7 @@ export interface CopyAsJsonElement {
     /**
      * The copied file name.
      */
-    'destTitle': string;
+    'destTitle': string | null;
     'destFolderId': CopyAsJsonElementDestFolderId;
     /**
      * Specifies whether to allow creating the copied file of an external extension or not.
@@ -38,7 +38,7 @@ export interface CopyAsJsonElement {
     /**
      * The copied file password.
      */
-    'password'?: string;
+    'password'?: string | null;
     /**
      * Specifies whether to convert the file to form or not.
      */

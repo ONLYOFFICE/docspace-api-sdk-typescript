@@ -26,6 +26,6 @@ export interface CheckUploadRequest {
     /**
      * The list of file titles.
      */
-    'filesTitle'?: Array<string>;
+    'filesTitle'?: Array<string> | null;
 }
 

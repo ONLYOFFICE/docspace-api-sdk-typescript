@@ -32,19 +32,19 @@ export type MigratingApiGroup = ImportableApiEntity &  {
      * @type {string}
      * @memberof MigratingApiGroup
      */
-    'groupName'?: string;
+    'groupName'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MigratingApiGroup
      */
-    'moduleName'?: string;
+    'moduleName'?: string | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof MigratingApiGroup
      */
-    'userUidList'?: Array<string>;
+    'userUidList'?: Array<string> | null;
 };
 
 

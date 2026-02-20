@@ -26,10 +26,10 @@ export interface AdminMessageBaseSettingsRequestsDto {
     /**
      * The email address used for sending administrator messages.
      */
-    'email': string;
+    'email': string | null;
     /**
      * The locale identifier for message localization.
      */
-    'culture'?: string;
+    'culture'?: string | null;
 }
 

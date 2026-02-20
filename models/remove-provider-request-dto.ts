@@ -26,6 +26,6 @@ export interface RemoveProviderRequestDto {
     /**
      * The set of AI provider identifiers to delete.
      */
-    'ids': Set<number>;
+    'ids': Set<number> | null;
 }
 

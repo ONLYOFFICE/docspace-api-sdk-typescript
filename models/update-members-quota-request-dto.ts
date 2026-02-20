@@ -29,7 +29,7 @@ export interface UpdateMembersQuotaRequestDto {
     /**
      * The list of user IDs.
      */
-    'userIds'?: Array<string>;
+    'userIds'?: Array<string> | null;
     'quota'?: UpdateMembersQuotaRequestDtoQuota;
 }
 

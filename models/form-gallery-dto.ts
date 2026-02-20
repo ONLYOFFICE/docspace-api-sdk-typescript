@@ -26,30 +26,30 @@ export interface FormGalleryDto {
     /**
      * The form gallery path.
      */
-    'path': string;
+    'path': string | null;
     /**
      * The form gallery domain.
      */
-    'domain': string;
+    'domain': string | null;
     /**
      * The form gallery extension.
      */
-    'ext': string;
+    'ext': string | null;
     /**
      * The form gallery upload path.
      */
-    'uploadPath': string;
+    'uploadPath': string | null;
     /**
      * The form gallery upload domain.
      */
-    'uploadDomain': string;
+    'uploadDomain': string | null;
     /**
      * The form gallery upload extension.
      */
-    'uploadExt': string;
+    'uploadExt': string | null;
     /**
      * The form gallery upload dashboard.
      */
-    'uploadDashboard': string;
+    'uploadDashboard': string | null;
 }
 

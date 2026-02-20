@@ -32,11 +32,11 @@ export interface FormRoleDto {
     /**
      * The role name.
      */
-    'roleName': string;
+    'roleName': string | null;
     /**
      * The role color.
      */
-    'roleColor'?: string;
+    'roleColor'?: string | null;
     'user'?: EmployeeFullDto;
     /**
      * The role sequence.
@@ -50,7 +50,7 @@ export interface FormRoleDto {
     /**
      * The role history.
      */
-    'history'?: { [key: string]: string; };
+    'history'?: { [key: string]: string; } | null;
     'roleStatus'?: FormFillingStatus;
 }
 

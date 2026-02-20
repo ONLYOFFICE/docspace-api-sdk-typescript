@@ -26,14 +26,14 @@ export interface ConfirmData {
     /**
      * The email address to confirm the user\'s identity.
      */
-    'email'?: string;
+    'email'?: string | null;
     /**
      * Specifies whether this is the first access to the user\'s account.
      */
-    'first'?: boolean;
+    'first'?: boolean | null;
     /**
      * The unique confirmation key for validating user identity.
      */
-    'key'?: string;
+    'key'?: string | null;
 }
 

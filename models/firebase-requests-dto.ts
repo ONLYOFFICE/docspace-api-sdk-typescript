@@ -26,7 +26,7 @@ export interface FirebaseRequestsDto {
     /**
      * The Firebase device token.
      */
-    'firebaseDeviceToken'?: string;
+    'firebaseDeviceToken'?: string | null;
     /**
      * Specifies whether the user is subscribed to the push notifications or not.
      */

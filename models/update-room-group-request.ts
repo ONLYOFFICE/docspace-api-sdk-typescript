@@ -26,14 +26,14 @@ export interface UpdateRoomGroupRequest {
     /**
      * The list of room IDs to add to the group.
      */
-    'roomsToAdd'?: Array<DuplicateRequestDtoAllOfFileIds>;
+    'roomsToAdd'?: Array<DuplicateRequestDtoAllOfFileIds> | null;
     /**
      * The list of room IDs to remove from the group.
      */
-    'roomsToRemove'?: Array<DuplicateRequestDtoAllOfFileIds>;
+    'roomsToRemove'?: Array<DuplicateRequestDtoAllOfFileIds> | null;
     /**
      * The group name.
      */
-    'groupName'?: string;
+    'groupName'?: string | null;
 }
 

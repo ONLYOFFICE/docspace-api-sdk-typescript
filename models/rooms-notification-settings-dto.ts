@@ -26,6 +26,6 @@ export interface RoomsNotificationSettingsDto {
     /**
      * The list of rooms with the disabled notifications.
      */
-    'disabledRooms'?: Array<object>;
+    'disabledRooms'?: Array<object> | null;
 }
 

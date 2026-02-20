@@ -19,11 +19,14 @@
  */
 
 
+/**
+ * [0 - Allow, 1 - AlwaysAllow, 2 - Deny]
+ */
 
 export const ToolExecutionDecision = {
-    NUMBER_0: 0,
-    NUMBER_1: 1,
-    NUMBER_2: 2
+    Allow: 0,
+    AlwaysAllow: 1,
+    Deny: 2
 } as const;
 
 export type ToolExecutionDecision = typeof ToolExecutionDecision[keyof typeof ToolExecutionDecision];

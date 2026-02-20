@@ -26,7 +26,7 @@ export interface McpToolDto {
     /**
      * Name of the tool as reported by the MCP server.
      */
-    'name': string;
+    'name': string | null;
     /**
      * Indicates whether this tool is enabled (true) or disabled (false) for use in AI chat sessions within the room.
      */

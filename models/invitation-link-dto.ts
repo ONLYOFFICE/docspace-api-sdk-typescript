@@ -42,7 +42,7 @@ export interface InvitationLinkDto {
     /**
      * The maximum number of times the invitation link can be used.
      */
-    'maxUseCount'?: number;
+    'maxUseCount'?: number | null;
     /**
      * The current number of times the invitation link has been used.
      */
@@ -50,7 +50,7 @@ export interface InvitationLinkDto {
     /**
      * The URL of the invitation link.
      */
-    'url'?: string;
+    'url'?: string | null;
 }
 
 

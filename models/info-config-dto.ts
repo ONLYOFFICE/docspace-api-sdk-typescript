@@ -32,24 +32,24 @@ export interface InfoConfigDto {
     /**
      * Specifies if the file is favorite or not.
      */
-    'favorite'?: boolean;
+    'favorite'?: boolean | null;
     /**
      * The folder of the file.
      */
-    'folder'?: string;
+    'folder'?: string | null;
     /**
      * The file owner.
      */
-    'owner'?: string;
+    'owner'?: string | null;
     /**
      * The sharing settings of the file.
      */
-    'sharingSettings'?: Array<AceShortWrapper>;
+    'sharingSettings'?: Array<AceShortWrapper> | null;
     'type'?: EditorType;
     /**
      * The uploaded file.
      */
-    'uploaded'?: string;
+    'uploaded'?: string | null;
 }
 
 

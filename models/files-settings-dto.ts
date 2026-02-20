@@ -35,128 +35,128 @@ export interface FilesSettingsDto {
     /**
      * The list of extensions of the viewed images.
      */
-    'extsImagePreviewed'?: Array<string>;
+    'extsImagePreviewed'?: Array<string> | null;
     /**
      * The list of extensions of the viewed media files.
      */
-    'extsMediaPreviewed'?: Array<string>;
+    'extsMediaPreviewed'?: Array<string> | null;
     /**
      * The list of extensions of the viewed files.
      */
-    'extsWebPreviewed'?: Array<string>;
+    'extsWebPreviewed'?: Array<string> | null;
     /**
      * The list of extensions of the edited files.
      */
-    'extsWebEdited'?: Array<string>;
+    'extsWebEdited'?: Array<string> | null;
     /**
      * The list of extensions of the encrypted files.
      */
-    'extsWebEncrypt'?: Array<string>;
+    'extsWebEncrypt'?: Array<string> | null;
     /**
      * The list of extensions of the reviewed files.
      */
-    'extsWebReviewed'?: Array<string>;
+    'extsWebReviewed'?: Array<string> | null;
     /**
      * The list of extensions of the custom filter files.
      */
-    'extsWebCustomFilterEditing'?: Array<string>;
+    'extsWebCustomFilterEditing'?: Array<string> | null;
     /**
      * The list of extensions of the files that are restricted for editing.
      */
-    'extsWebRestrictedEditing'?: Array<string>;
+    'extsWebRestrictedEditing'?: Array<string> | null;
     /**
      * The list of extensions of the commented files.
      */
-    'extsWebCommented'?: Array<string>;
+    'extsWebCommented'?: Array<string> | null;
     /**
      * The list of extensions of the template files.
      */
-    'extsWebTemplate'?: Array<string>;
+    'extsWebTemplate'?: Array<string> | null;
     /**
      * The list of extensions of the files that must be converted.
      */
-    'extsMustConvert'?: Array<string>;
+    'extsMustConvert'?: Array<string> | null;
     /**
      * The list of the convertible extensions.
      */
-    'extsConvertible'?: { [key: string]: Array<string>; };
+    'extsConvertible'?: { [key: string]: Array<string> | null; } | null;
     /**
      * The list of the uploadable extensions.
      */
-    'extsUploadable'?: Array<string>;
+    'extsUploadable'?: Array<string> | null;
     /**
      * The list of extensions of the archive files.
      */
-    'extsArchive'?: Array<string>;
+    'extsArchive'?: Array<string> | null;
     /**
      * The list of the video extensions.
      */
-    'extsVideo'?: Array<string>;
+    'extsVideo'?: Array<string> | null;
     /**
      * The list of the audio extensions.
      */
-    'extsAudio'?: Array<string>;
+    'extsAudio'?: Array<string> | null;
     /**
      * The list of the image extensions.
      */
-    'extsImage'?: Array<string>;
+    'extsImage'?: Array<string> | null;
     /**
      * The list of the spreadsheet extensions.
      */
-    'extsSpreadsheet'?: Array<string>;
+    'extsSpreadsheet'?: Array<string> | null;
     /**
      * The list of the presentation extensions.
      */
-    'extsPresentation'?: Array<string>;
+    'extsPresentation'?: Array<string> | null;
     /**
      * The list of the text document extensions.
      */
-    'extsDocument'?: Array<string>;
+    'extsDocument'?: Array<string> | null;
     /**
      * The list of the diagram extensions.
      */
-    'extsDiagram'?: Array<string>;
-    'internalFormats'?: FilesSettingsDtoInternalFormats;
+    'extsDiagram'?: Array<string> | null;
+    'internalFormats'?: FilesSettingsDtoInternalFormats | null;
     /**
      * The master form extension.
      */
-    'masterFormExtension'?: string;
+    'masterFormExtension'?: string | null;
     /**
      * The URL parameter which specifies the file version.
      */
-    'paramVersion'?: string;
+    'paramVersion'?: string | null;
     /**
      * The URL parameter which specifies the output type of the converted file.
      */
-    'paramOutType'?: string;
+    'paramOutType'?: string | null;
     /**
      * The URL to download a file.
      */
-    'fileDownloadUrlString'?: string;
+    'fileDownloadUrlString'?: string | null;
     /**
      * The URL to the file web viewer.
      */
-    'fileWebViewerUrlString'?: string;
+    'fileWebViewerUrlString'?: string | null;
     /**
      * The external URL to the file web viewer.
      */
-    'fileWebViewerExternalUrlString'?: string;
+    'fileWebViewerExternalUrlString'?: string | null;
     /**
      * The URL to the file web editor.
      */
-    'fileWebEditorUrlString'?: string;
+    'fileWebEditorUrlString'?: string | null;
     /**
      * The external URL to the file web editor.
      */
-    'fileWebEditorExternalUrlString'?: string;
+    'fileWebEditorExternalUrlString'?: string | null;
     /**
      * The redirect URL to the file viewer.
      */
-    'fileRedirectPreviewUrlString'?: string;
+    'fileRedirectPreviewUrlString'?: string | null;
     /**
      * The URL to the file thumbnail.
      */
-    'fileThumbnailUrlString'?: string;
+    'fileThumbnailUrlString'?: string | null;
     /**
      * Specifies whether to confirm the file deletion or not.
      */
@@ -238,7 +238,7 @@ export interface FilesSettingsDto {
     /**
      * The default access rights in sharing settings.
      */
-    'defaultSharingAccessRights'?: Array<FilesSettingsDtoDefaultSharingAccessRightsEnum>;
+    'defaultSharingAccessRights'?: Array<FilesSettingsDtoDefaultSharingAccessRightsEnum> | null;
     /**
      * The maximum number of upload threads.
      */
@@ -258,7 +258,7 @@ export interface FilesSettingsDto {
     /**
      * List of extensions available for vectorization
      */
-    'extsFilesVectorized'?: Array<string>;
+    'extsFilesVectorized'?: Array<string> | null;
     /**
      * The maximum file size for vectorization
      */

@@ -26,26 +26,26 @@ export interface SsoFieldMapping {
     /**
      * The first name.
      */
-    'firstName'?: string;
+    'firstName'?: string | null;
     /**
      * The last name.
      */
-    'lastName'?: string;
+    'lastName'?: string | null;
     /**
      * The email address.
      */
-    'email'?: string;
+    'email'?: string | null;
     /**
      * The title.
      */
-    'title'?: string;
+    'title'?: string | null;
     /**
      * The location.
      */
-    'location'?: string;
+    'location'?: string | null;
     /**
      * The phone number.
      */
-    'phone'?: string;
+    'phone'?: string | null;
 }
 

@@ -36,11 +36,11 @@ export interface BackupScheduleDto {
     /**
      * The backup storage parameters.
      */
-    'storageParams'?: Array<ItemKeyValuePairObjectObject>;
+    'storageParams'?: Array<ItemKeyValuePairObjectObject> | null;
     /**
      * The maximum number of the stored backup copies.
      */
-    'backupsStored'?: number;
+    'backupsStored'?: number | null;
     'cronParams'?: Cron;
     /**
      * Specifies if a dump will be created or not.
