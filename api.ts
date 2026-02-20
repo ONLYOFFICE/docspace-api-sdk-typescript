@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,6 @@ export * from './api/authentication/authentication-api';
 export * from './api/backup/backup-api';
 export * from './api/capabilities/capabilities-api';
 export * from './api/files/files-api';
-export * from './api/files/files-files-api';
 export * from './api/files/folders-api';
 export * from './api/files/operations-api';
 export * from './api/files/quota-api';
@@ -63,6 +62,7 @@ export * from './api/portal/portal-quota-api';
 export * from './api/portal/portal-settings-api';
 export * from './api/portal/users-api';
 export * from './api/rooms/rooms-api';
+export * from './api/rooms/groups-api';
 export * from './api/security/security-access-to-dev-tools-api';
 export * from './api/security/active-connections-api';
 export * from './api/security/audit-trail-data-api';

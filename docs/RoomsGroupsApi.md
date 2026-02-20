@@ -1,4 +1,4 @@
-# FilesApi
+# GroupsApi
 
 All URIs are relative to *https://your-docspace.onlyoffice.com*
 
@@ -37,13 +37,13 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ```typescript
 import {
-    FilesApi,
+    RoomsGroupsApi,
     Configuration,
     RoomGroupRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
-const apiInstance = new FilesApi(configuration);
+const apiInstance = new RoomsGroupsApi(configuration);
 
 let roomGroupRequestDto: RoomGroupRequestDto; // (optional)
 
@@ -93,13 +93,13 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ```typescript
 import {
-    FilesApi,
+    RoomsGroupsApi,
     Configuration,
     IconRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
-const apiInstance = new FilesApi(configuration);
+const apiInstance = new RoomsGroupsApi(configuration);
 
 let id: number; //Group id (default to undefined)
 let iconRequest: IconRequest; //Icon update data. (optional)
@@ -151,12 +151,12 @@ void (empty response body)
 
 ```typescript
 import {
-    FilesApi,
+    RoomsGroupsApi,
     Configuration
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
-const apiInstance = new FilesApi(configuration);
+const apiInstance = new RoomsGroupsApi(configuration);
 
 let id: number; //The group unique identifier. (default to undefined)
 let includeMembers: boolean; //Whether to include group members. (optional) (default to undefined)
@@ -208,12 +208,12 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ```typescript
 import {
-    FilesApi,
+    RoomsGroupsApi,
     Configuration
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
-const apiInstance = new FilesApi(configuration);
+const apiInstance = new RoomsGroupsApi(configuration);
 
 let id: number; //The group unique identifier. (default to undefined)
 let includeMembers: boolean; //Whether to include group members. (optional) (default to undefined)
@@ -265,12 +265,12 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ```typescript
 import {
-    FilesApi,
+    RoomsGroupsApi,
     Configuration
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
-const apiInstance = new FilesApi(configuration);
+const apiInstance = new RoomsGroupsApi(configuration);
 
 let id: number; //The group unique identifier. (default to undefined)
 let includeMembers: boolean; //Whether to include group members. (optional) (default to undefined)
@@ -322,13 +322,13 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ```typescript
 import {
-    FilesApi,
+    RoomsGroupsApi,
     Configuration,
     UpdateRoomGroupRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
-const apiInstance = new FilesApi(configuration);
+const apiInstance = new RoomsGroupsApi(configuration);
 
 let id: number; //The group ID. (default to undefined)
 let updateRoomGroupRequest: UpdateRoomGroupRequest; //The request for updating a group.
