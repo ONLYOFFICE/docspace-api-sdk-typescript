@@ -1,12 +1,13 @@
 # TelegramStatusDto
 
+The Telegram connection status parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **status** | [**RegStatus**](RegStatus.md) |  | [default to undefined]
-**username** | **string** |  | [optional] [default to undefined]
+**username** | **string** | The Telegram username. | [optional] [default to undefined]
 
 ## Example
 

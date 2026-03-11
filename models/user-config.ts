@@ -39,6 +39,9 @@ export interface UserConfig {
      * Roles
      */
     'roles'?: Array<string> | null;
+    /**
+     * Customer identifier associated with the user.
+     */
     'customerId'?: string | null;
 }
 

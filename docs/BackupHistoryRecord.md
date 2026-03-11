@@ -1,15 +1,16 @@
 # BackupHistoryRecord
 
+The backup history parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** |  | [default to undefined]
-**fileName** | **string** |  | [default to undefined]
+**id** | **string** | The backup ID. | [default to undefined]
+**fileName** | **string** | The backup file name. | [default to undefined]
 **storageType** | [**BackupStorageType**](BackupStorageType.md) |  | [default to undefined]
-**createdOn** | **string** |  | [default to undefined]
-**expiresOn** | **string** |  | [default to undefined]
+**createdOn** | **string** | The backup creation date. | [default to undefined]
+**expiresOn** | **string** | The backup expiration date. | [default to undefined]
 
 ## Example
 

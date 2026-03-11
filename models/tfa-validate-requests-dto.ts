@@ -27,5 +27,9 @@ export interface TfaValidateRequestsDto {
      * The verification code provided by the user.
      */
     'code': string | null;
+    /**
+     * Specifies whether the authentication is session-based.
+     */
+    'session'?: boolean;
 }
 

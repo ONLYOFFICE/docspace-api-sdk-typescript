@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **defaultFolderType** | [**FolderType**](FolderType.md) |  | [optional] [default to undefined]
-**lastModified** | **string** |  | [optional] [default to undefined]
+**lastModified** | **string** | The timestamp indicating when the settings were last modified. | [optional] [default to undefined]
 
 ## Example
 

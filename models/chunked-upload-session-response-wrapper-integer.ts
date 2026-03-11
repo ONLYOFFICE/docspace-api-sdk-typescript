@@ -22,7 +22,13 @@
 // @ts-ignore
 import type { ChunkedUploadSessionResponseInteger } from './chunked-upload-session-response-integer';
 
+/**
+ * Represents a wrapper for the response of a chunked upload session operation.
+ */
 export interface ChunkedUploadSessionResponseWrapperInteger {
+    /**
+     * Gets or sets a value indicating whether the operation was successful.
+     */
     'success'?: boolean;
     'data'?: ChunkedUploadSessionResponseInteger;
 }

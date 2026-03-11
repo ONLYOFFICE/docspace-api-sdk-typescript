@@ -6,7 +6,7 @@ Default templates settings request parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**selectedFile** | **number** | File id to replace template with (or null to use default template) | [optional] [default to undefined]
+**selectedFile** | [**DefaultTemplateSettingsRequestDtoSelectedFile**](DefaultTemplateSettingsRequestDtoSelectedFile.md) |  | [default to undefined]
 **fileExtension** | **string** | File extension of a template to replace | [default to undefined]
 
 ## Example

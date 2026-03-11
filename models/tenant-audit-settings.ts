@@ -31,6 +31,9 @@ export interface TenantAuditSettings {
      * The audit trail lifetime.
      */
     'auditTrailLifeTime'?: number;
+    /**
+     * The timestamp indicating when the settings were last modified.
+     */
     'lastModified'?: string;
 }
 

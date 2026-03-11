@@ -19,12 +19,33 @@
  */
 
 
+/**
+ * Represents the response returned from a chunked upload session.
+ */
 export interface ChunkedUploadSessionResponseInteger {
+    /**
+     * The unique identifier for the entity.
+     */
     'id'?: string | null;
+    /**
+     * Represents the hierarchical path of folders associated with a chunked upload session.
+     */
     'path'?: Array<number> | null;
+    /**
+     * The timestamp indicating when the chunked upload session was created.
+     */
     'created'?: string;
+    /**
+     * The date and time when the chunked upload session is set to expire.
+     */
     'expired'?: string;
+    /**
+     * Represents the URI or path of the chunked upload session\'s current location.
+     */
     'location'?: string | null;
+    /**
+     * The total size, in bytes, of the file being uploaded in the chunked upload session.
+     */
     'bytes_total'?: number;
 }
 

@@ -25,6 +25,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**hideConfirmRoomLifetime**](#hideconfirmroomlifetime) | **PUT** /api/2.0/files/hideconfirmroomlifetime | Hide confirmation dialog when changing room lifetime settings|
 |[**isAvailablePrivacyRoomSettings**](#isavailableprivacyroomsettings) | **GET** /api/2.0/files/@privacy/available | Check the Private Room availability|
 |[**keepNewFileName**](#keepnewfilename) | **PUT** /api/2.0/files/keepnewfilename | Ask a new file name|
+|[**resetDefaultTemplate**](#resetdefaulttemplate) | **DELETE** /api/2.0/files/settings/defaulttemplate | Reset the default template setting|
 |[**setDefaultTemplate**](#setdefaulttemplate) | **PUT** /api/2.0/files/settings/defaulttemplate | Change the default template setting|
 |[**setOpenEditorInSameTab**](#setopeneditorinsametab) | **PUT** /api/2.0/files/settings/openeditorinsametab | Open document in the same browser tab|
 |[**setOrganizeRoomsGrouping**](#setorganizeroomsgrouping) | **PUT** /api/2.0/files/settings/organizegrouping | Organize rooms grouping|
@@ -928,7 +929,7 @@ const { status, data } = await apiInstance.hideConfirmCancelOperation(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **hideConfirmConvert**
-> ModuleWrapper hideConfirmConvert()
+> BooleanWrapper hideConfirmConvert()
 
 Hides the confirmation dialog for saving the file copy in the original format when converting a file.
 
@@ -943,7 +944,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-**ModuleWrapper**
+**BooleanWrapper**
 
 ### Authorization
 
@@ -1139,6 +1140,62 @@ const { status, data } = await apiInstance.keepNewFileName(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **resetDefaultTemplate**
+> DefaultTemplateSettingsWrapper resetDefaultTemplate()
+
+Resets the default template setting.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-default-template/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **defaultTemplateSettingsResetRequestDto** | **DefaultTemplateSettingsResetRequestDto**|  | |
+
+
+### Return type
+
+**DefaultTemplateSettingsWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    FilesSettingsApi,
+    Configuration,
+    DefaultTemplateSettingsResetRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new FilesSettingsApi(configuration);
+
+let defaultTemplateSettingsResetRequestDto: DefaultTemplateSettingsResetRequestDto; // (optional)
+
+const { status, data } = await apiInstance.resetDefaultTemplate(
+    defaultTemplateSettingsResetRequestDto
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | New default template settings |  -  |
+|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **setDefaultTemplate**
 > DefaultTemplateSettingsWrapper setDefaultTemplate()
 
@@ -1190,6 +1247,7 @@ const { status, data } = await apiInstance.setDefaultTemplate(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | New default template settings |  -  |
+|**400** | Incorrect or missing file |  -  |
 |**403** | You don\&#39;t have enough permission to perform the operation |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -1515,6 +1573,7 @@ const { status, data } = await apiInstance.uploadDefaultTemplate(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | New default template settings |  -  |
+|**400** | Incorrect or missing file |  -  |
 |**403** | You don\&#39;t have enough permission to perform the operation |  -  |
 |**401** | Unauthorized |  -  |
 

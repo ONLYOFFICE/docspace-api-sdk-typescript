@@ -35,6 +35,9 @@ export interface TenantQuotaSettings {
      * The date of the last tenant quota recalculation.
      */
     'lastRecalculateDate'?: string | null;
+    /**
+     * The timestamp indicating when the settings were last modified.
+     */
     'lastModified'?: string;
 }
 

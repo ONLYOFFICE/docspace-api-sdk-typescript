@@ -189,7 +189,7 @@ export const MCPApiAxiosParamCreator = function (configuration?: Configuration) 
          * @summary Connect an OAuth-based MCP server in a room
          * @param {number} roomId Identifier of the room containing the MCP server.
          * @param {string} serverId Unique identifier of the MCP server to connect.
-         * @param {ConnectServerRequestBody} connectServerRequestBody OAuth authorization parameters.
+         * @param {ConnectServerRequestBody} connectServerRequestBody The request body containing additional data necessary for connecting to the server,  such as authentication or operation-specific information.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for connectServer operation
@@ -968,7 +968,7 @@ export const MCPApiFp = function(configuration?: Configuration) {
          * @summary Connect an OAuth-based MCP server in a room
          * @param {number} roomId Identifier of the room containing the MCP server.
          * @param {string} serverId Unique identifier of the MCP server to connect.
-         * @param {ConnectServerRequestBody} connectServerRequestBody OAuth authorization parameters.
+         * @param {ConnectServerRequestBody} connectServerRequestBody The request body containing additional data necessary for connecting to the server,  such as authentication or operation-specific information.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for connectServer operation
@@ -1194,7 +1194,7 @@ export const MCPApiFactory = function (configuration?: Configuration, basePath?:
          * @summary Connect an OAuth-based MCP server in a room
          * @param {number} roomId Identifier of the room containing the MCP server.
          * @param {string} serverId Unique identifier of the MCP server to connect.
-         * @param {ConnectServerRequestBody} connectServerRequestBody OAuth authorization parameters.
+         * @param {ConnectServerRequestBody} connectServerRequestBody The request body containing additional data necessary for connecting to the server,  such as authentication or operation-specific information.
          * @param {*} [options] Override http request option.
          * REST API Reference for connectServer operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/connect-server/
@@ -1384,7 +1384,7 @@ export class MCPApi extends BaseAPI {
      * @summary Connect an OAuth-based MCP server in a room
      * @param {number} roomId Identifier of the room containing the MCP server.
      * @param {string} serverId Unique identifier of the MCP server to connect.
-     * @param {ConnectServerRequestBody} connectServerRequestBody OAuth authorization parameters.
+     * @param {ConnectServerRequestBody} connectServerRequestBody The request body containing additional data necessary for connecting to the server,  such as authentication or operation-specific information.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MCPApi

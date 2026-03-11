@@ -40,8 +40,8 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **sessionId** | [**string**] |  | defaults to undefined|
-| **folderId** | [**number**] |  | defaults to undefined|
+| **sessionId** | [**string**] | The session ID. | defaults to undefined|
+| **folderId** | [**number**] | The folder ID. | defaults to undefined|
 
 
 ### Return type
@@ -63,8 +63,8 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
 
-let sessionId: string; // (default to undefined)
-let folderId: number; // (default to undefined)
+let sessionId: string; //The session ID. (default to undefined)
+let folderId: number; //The folder ID. (default to undefined)
 
 const { status, data } = await apiInstance.abortUploadSession(
     sessionId,
@@ -826,8 +826,8 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **folderId** | [**number**] |  | defaults to undefined|
-| **sessionId** | [**string**] |  | defaults to undefined|
+| **folderId** | [**number**] | The folder ID. | defaults to undefined|
+| **sessionId** | [**string**] | The session ID. | defaults to undefined|
 
 
 ### Return type
@@ -849,8 +849,8 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
 
-let folderId: number; // (default to undefined)
-let sessionId: string; // (default to undefined)
+let folderId: number; //The folder ID. (default to undefined)
+let sessionId: string; //The session ID. (default to undefined)
 
 const { status, data } = await apiInstance.finalizeSession(
     folderId,
@@ -1272,10 +1272,10 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **folderId** | [**number**] |  | defaults to undefined|
-| **sessionId** | [**string**] |  | defaults to undefined|
-| **chunkNumber** | [**number**] |  | (optional) defaults to undefined|
-| **file** | [**File**] |  | (optional) defaults to undefined|
+| **folderId** | [**number**] | The folder ID. | defaults to undefined|
+| **sessionId** | [**string**] | The upload session ID. | defaults to undefined|
+| **chunkNumber** | [**number**] | The chunk number. | (optional) defaults to undefined|
+| **file** | [**File**] | The file chunk to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file chunk content from the HTTP request form for chunked upload operations.  The file chunk is accessed via the IFormFile interface which provides access to the chunk content and length. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -1297,10 +1297,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
 
-let folderId: number; // (default to undefined)
-let sessionId: string; // (default to undefined)
-let chunkNumber: number; // (optional) (default to undefined)
-let file: File; // (optional) (default to undefined)
+let folderId: number; //The folder ID. (default to undefined)
+let sessionId: string; //The upload session ID. (default to undefined)
+let chunkNumber: number; //The chunk number. (optional) (default to undefined)
+let file: File; //The file chunk to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file chunk content from the HTTP request form for chunked upload operations.  The file chunk is accessed via the IFormFile interface which provides access to the chunk content and length. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.uploadAsyncSession(
     folderId,
@@ -1335,9 +1335,9 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **folderId** | [**number**] |  | defaults to undefined|
-| **sessionId** | [**string**] |  | defaults to undefined|
-| **file** | [**File**] |  | (optional) defaults to undefined|
+| **folderId** | [**number**] | The folder ID. | defaults to undefined|
+| **sessionId** | [**string**] | The upload session ID. | defaults to undefined|
+| **file** | [**File**] | The file to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file content from the HTTP request form.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -1359,9 +1359,9 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
 
-let folderId: number; // (default to undefined)
-let sessionId: string; // (default to undefined)
-let file: File; // (optional) (default to undefined)
+let folderId: number; //The folder ID. (default to undefined)
+let sessionId: string; //The upload session ID. (default to undefined)
+let file: File; //The file to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file content from the HTTP request form.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.uploadSession(
     folderId,

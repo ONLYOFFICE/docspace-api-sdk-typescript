@@ -2120,9 +2120,9 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **fileId** | [**number**] | The editing file ID from the request. | defaults to undefined|
-| **fileExtension** | [**string**] | The editing file extension from the request. | (optional) defaults to undefined|
 | **downloadUri** | [**string**] | The URI to download the editing file. | (optional) defaults to undefined|
-| **file** | [**File**] | The request file stream. | (optional) defaults to undefined|
+| **fileExtension** | [**string**] | The editing file extension from the request. | (optional) defaults to undefined|
+| **file** | [**File**] | The edited file to be saved, uploaded as part of the multipart/form-data request.  This property represents the modified file content from the HTTP request form after editing operations.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream. | (optional) defaults to undefined|
 | **forcesave** | [**boolean**] | Specifies whether to force save the file or not. | (optional) defaults to undefined|
 
 
@@ -2146,15 +2146,15 @@ const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
 let fileId: number; //The editing file ID from the request. (default to undefined)
-let fileExtension: string; //The editing file extension from the request. (optional) (default to undefined)
 let downloadUri: string; //The URI to download the editing file. (optional) (default to undefined)
-let file: File; //The request file stream. (optional) (default to undefined)
+let fileExtension: string; //The editing file extension from the request. (optional) (default to undefined)
+let file: File; //The edited file to be saved, uploaded as part of the multipart/form-data request.  This property represents the modified file content from the HTTP request form after editing operations.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream. (optional) (default to undefined)
 let forcesave: boolean; //Specifies whether to force save the file or not. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.saveEditingFileFromForm(
     fileId,
-    fileExtension,
     downloadUri,
+    fileExtension,
     file,
     forcesave
 );

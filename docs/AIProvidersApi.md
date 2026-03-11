@@ -63,6 +63,7 @@ const { status, data } = await apiInstance.addProvider(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Created AI provider details |  -  |
+|**400** | Invalid connection data or provider with this name already exists |  -  |
 |**403** | You don\&#39;t have enough permission to manage providers |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -386,6 +387,7 @@ const { status, data } = await apiInstance.updateProvider(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Updated AI provider details |  -  |
+|**400** | Invalid connection data or provider with this name already exists |  -  |
 |**403** | You don\&#39;t have enough permission to manage providers |  -  |
 |**404** | The provider with the specified ID was not found |  -  |
 |**401** | Unauthorized |  -  |

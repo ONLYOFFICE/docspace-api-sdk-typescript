@@ -7,7 +7,7 @@ Available AI provider type settings.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | [**ProviderType**](ProviderType.md) |  | [optional] [default to undefined]
-**url** | **string** | Default API endpoint URL for the provider type. | [default to undefined]
+**url** | **string** | Default API endpoint URL for the provider type. | [optional] [default to undefined]
 
 ## Example
 

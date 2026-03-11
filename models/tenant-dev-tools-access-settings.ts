@@ -27,6 +27,9 @@ export interface TenantDevToolsAccessSettings {
      * Specifies if the Developer Tools access are limited for users or not.
      */
     'limitedAccessForUsers'?: boolean;
+    /**
+     * The timestamp indicating when the settings were last modified.
+     */
     'lastModified'?: string;
 }
 

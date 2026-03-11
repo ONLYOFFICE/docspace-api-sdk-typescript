@@ -22,12 +22,33 @@
 // @ts-ignore
 import type { FileDtoInteger } from './file-dto-integer';
 
+/**
+ * The upload session response parameters.
+ */
 export interface UploadSessionResponseDtoInteger {
+    /**
+     * The upload session ID.
+     */
     'id'?: number;
+    /**
+     * The folder ID where the file is being uploaded.
+     */
     'folderId'?: number;
+    /**
+     * The file version number.
+     */
     'version'?: number;
+    /**
+     * The file title.
+     */
     'title'?: string | null;
+    /**
+     * The third-party provider key.
+     */
     'providerKey'?: string | null;
+    /**
+     * Specifies whether the file has been uploaded.
+     */
     'uploaded'?: boolean;
     'file'?: FileDtoInteger;
 }

@@ -1,5 +1,6 @@
 # MessageContentDto
 
+The base class for message content blocks.
 
 ## Properties
 

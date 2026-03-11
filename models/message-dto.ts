@@ -28,6 +28,9 @@ import type { MessageContentDto } from './message-content-dto';
 // @ts-ignore
 import type { Role } from './role';
 
+/**
+ * The chat message information.
+ */
 export interface MessageDto {
     /**
      * The unique identifier of the message.

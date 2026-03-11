@@ -739,15 +739,11 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             // authentication OpenId required
 
             if (fromDate !== undefined) {
-                for (const [key, value] of Object.entries(fromDate)) {
-                    localVarQueryParameter[key] = value;
-                }
+                localVarQueryParameter['fromDate'] = fromDate;
             }
 
             if (toDate !== undefined) {
-                for (const [key, value] of Object.entries(toDate)) {
-                    localVarQueryParameter[key] = value;
-                }
+                localVarQueryParameter['toDate'] = toDate;
             }
 
             if (count !== undefined) {
@@ -1336,7 +1332,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             }
 
             if (extension) {
-                localVarQueryParameter['extension'] = extension.join(COLLECTION_FORMATS.csv);
+                localVarQueryParameter['extension'] = extension;
             }
 
             if (count !== undefined) {
@@ -2086,9 +2082,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             // authentication OpenId required
 
             if (inDto !== undefined) {
-                for (const [key, value] of Object.entries(inDto)) {
-                    localVarQueryParameter[key] = value;
-                }
+                localVarQueryParameter['inDto'] = inDto;
             }
 
 

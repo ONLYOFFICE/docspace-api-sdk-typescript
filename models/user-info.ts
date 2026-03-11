@@ -37,11 +37,11 @@ export interface UserInfo {
      */
     'id'?: string;
     /**
-     * The user first name.
+     * The user\'s first name.
      */
     'firstName'?: string | null;
     /**
-     * The user last name.
+     * The user\'s last name.
      */
     'lastName'?: string | null;
     /**
@@ -116,7 +116,7 @@ export interface UserInfo {
     'mobilePhone'?: string | null;
     'mobilePhoneActivationStatus'?: MobilePhoneActivationStatus;
     /**
-     * The LDAP user identificator.
+     * The LDAP user identifier.
      */
     'sid'?: string | null;
     /**
@@ -124,11 +124,11 @@ export interface UserInfo {
      */
     'ldapQouta'?: number;
     /**
-     * The SSO SAML user identificator.
+     * The SSO SAML user identifier.
      */
     'ssoNameId'?: string | null;
     /**
-     * The SSO SAML user session identificator.
+     * The SSO SAML user session identifier.
      */
     'ssoSessionId'?: string | null;
     /**
@@ -143,6 +143,9 @@ export interface UserInfo {
      * Specifies if tips, updates and offers are allowed to be sent to the user or not.
      */
     'spam'?: boolean | null;
+    /**
+     * Indicates whether the activation status of the employee or recipient is unchecked or inactive.  Depending on the context, this property evaluates the activation or eligibility status accordingly.
+     */
     'checkActivation'?: boolean;
 }
 

@@ -23,7 +23,13 @@
  * The forms item information.
  */
 export interface FormsItemDto {
+    /**
+     * The form item key.              <example>field_name</example>
+     */
     'key'?: string | null;
+    /**
+     * The form item type.              <example>text</example>
+     */
     'type'?: string | null;
 }
 

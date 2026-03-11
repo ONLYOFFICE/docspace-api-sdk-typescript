@@ -25,12 +25,27 @@ import type { BackupStorageType } from './backup-storage-type';
 // @ts-ignore
 import type { CronParams } from './cron-params';
 
+/**
+ * The backup schedule parameters.
+ */
 export interface ScheduleDto {
     'storageType': BackupStorageType;
+    /**
+     * The backup storage parameters.
+     */
     'storageParams': { [key: string]: string | null; } | null;
     'cronParams': CronParams;
+    /**
+     * The maximum number of the stored backup copies.
+     */
     'backupsStored'?: number | null;
+    /**
+     * The date and time when the last backup was reated.
+     */
     'lastBackupTime': string;
+    /**
+     * Specifies if a dump will be created or not.
+     */
     'dump': boolean;
 }
 

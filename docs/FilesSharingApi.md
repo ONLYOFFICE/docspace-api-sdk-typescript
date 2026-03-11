@@ -661,6 +661,9 @@ const { status, data } = await apiInstance.sendEditorNotify(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of access rights information |  -  |
+|**400** | The list of email addresses is empty |  -  |
+|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**404** | The required file was not found |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

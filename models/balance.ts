@@ -21,6 +21,9 @@
 // May contain unused imports in some cases
 // @ts-ignore
 import type { SubAccount } from './sub-account';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { TransactionInfo } from './transaction-info';
 
 /**
  * Represents a balance with an account number and a list of sub-accounts.
@@ -31,8 +34,21 @@ export interface Balance {
      */
     'accountNumber'?: number;
     /**
+     * The sub-account number.
+     */
+    'subAccountNumber'?: number;
+    /**
+     * The account name.
+     */
+    'accountName'?: string | null;
+    /**
+     * The account currency.
+     */
+    'accountCurrency'?: string | null;
+    /**
      * A list of sub-accounts.
      */
     'subAccounts'?: Array<SubAccount> | null;
+    'lastCredit'?: TransactionInfo;
 }
 

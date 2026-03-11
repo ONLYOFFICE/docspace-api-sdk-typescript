@@ -376,7 +376,7 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
             // authentication OpenId required
 
             if (ids) {
-                localVarQueryParameter['ids'] = ids.join(COLLECTION_FORMATS.csv);
+                localVarQueryParameter['ids'] = ids;
             }
 
 

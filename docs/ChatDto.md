@@ -1,5 +1,6 @@
 # ChatDto
 
+The chat session information.
 
 ## Properties
 

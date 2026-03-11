@@ -1,5 +1,6 @@
 # VectorizationSettingsDto
 
+The vectorization settings.
 
 ## Properties
 

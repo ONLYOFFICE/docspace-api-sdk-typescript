@@ -4,30 +4,92 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
+|[**buyWalletService**](#buywalletservice) | **POST** /api/2.0/portal/payment/buywalletservice | Purchases a wallet service with the specified quantity.|
 |[**calculateWalletPayment**](#calculatewalletpayment) | **PUT** /api/2.0/portal/payment/calculatewallet | Calculate the wallet payment amount|
-|[**changeTenantWalletServiceState**](#changetenantwalletservicestate) | **POST** /api/2.0/portal/payment/servicestate | Change wallet service state|
+|[**changeTenantWalletServiceState**](#changetenantwalletservicestate) | **POST** /api/2.0/portal/payment/servicestate | Change tenant wallet service state|
 |[**createCustomerOperationsReport**](#createcustomeroperationsreport) | **POST** /api/2.0/portal/payment/customer/operationsreport | Start the customer operations report generation|
+|[**getAiPrices**](#getaiprices) | **GET** /api/2.0/portal/payment/ai-prices | Get AI model prices|
 |[**getCheckoutSetupUrl**](#getcheckoutsetupurl) | **GET** /api/2.0/portal/payment/checkoutsetupurl | Get the checkout setup page URL|
 |[**getCustomerBalance**](#getcustomerbalance) | **GET** /api/2.0/portal/payment/customer/balance | Get the customer balance|
 |[**getCustomerInfo**](#getcustomerinfo) | **GET** /api/2.0/portal/payment/customerinfo | Get the customer information|
 |[**getCustomerOperations**](#getcustomeroperations) | **GET** /api/2.0/portal/payment/customer/operations | Get the customer operations|
 |[**getCustomerOperationsReport**](#getcustomeroperationsreport) | **GET** /api/2.0/portal/payment/customer/operationsreport | Get the status of the customer operations report generation|
+|[**getCustomerServiceQuota**](#getcustomerservicequota) | **GET** /api/2.0/portal/payment/customer/servicequota | Get the service quota|
 |[**getPaymentAccount**](#getpaymentaccount) | **GET** /api/2.0/portal/payment/account | Get the payment account|
 |[**getPaymentCurrencies**](#getpaymentcurrencies) | **GET** /api/2.0/portal/payment/currencies | Get currencies|
 |[**getPaymentQuotas**](#getpaymentquotas) | **GET** /api/2.0/portal/payment/quotas | Get quotas|
 |[**getPaymentUrl**](#getpaymenturl) | **PUT** /api/2.0/portal/payment/url | Get the payment page URL|
 |[**getPortalPrices**](#getportalprices) | **GET** /api/2.0/portal/payment/prices | Get prices|
 |[**getQuotaPaymentInformation**](#getquotapaymentinformation) | **GET** /api/2.0/portal/payment/quota | Get quota payment information|
-|[**getTenantWalletServiceSettings**](#gettenantwalletservicesettings) | **GET** /api/2.0/portal/payment/servicessettings | Get wallet services settings|
-|[**getTenantWalletSettings**](#gettenantwalletsettings) | **GET** /api/2.0/portal/payment/topupsettings | Get wallet auto top-up settings|
+|[**getRestrictedAiModels**](#getrestrictedaimodels) | **GET** /api/2.0/portal/payment/ai-model/restrictions | Get restricted AI models|
+|[**getTenantWalletServiceSettings**](#gettenantwalletservicesettings) | **GET** /api/2.0/portal/payment/servicessettings | Gets the wallet service settings for the tenant.|
+|[**getTenantWalletSettings**](#gettenantwalletsettings) | **GET** /api/2.0/portal/payment/topupsettings | Gets the tenant wallet auto top up settings|
 |[**getWalletService**](#getwalletservice) | **GET** /api/2.0/portal/payment/walletservice | Get wallet service|
 |[**getWalletServices**](#getwalletservices) | **GET** /api/2.0/portal/payment/walletservices | Get wallet services|
 |[**sendPaymentRequest**](#sendpaymentrequest) | **POST** /api/2.0/portal/payment/request | Send a payment request|
-|[**setTenantWalletSettings**](#settenantwalletsettings) | **POST** /api/2.0/portal/payment/topupsettings | Set wallet auto top-up settings|
+|[**setRestrictedAiModels**](#setrestrictedaimodels) | **PUT** /api/2.0/portal/payment/ai-model/restrictions | Set restricted AI models|
+|[**setTenantWalletSettings**](#settenantwalletsettings) | **POST** /api/2.0/portal/payment/topupsettings | Set the wallet auto top up settings|
 |[**terminateCustomerOperationsReport**](#terminatecustomeroperationsreport) | **DELETE** /api/2.0/portal/payment/customer/operationsreport | Terminate the customer operations report generation|
 |[**topUpDeposit**](#topupdeposit) | **POST** /api/2.0/portal/payment/deposit | Put money on deposit|
 |[**updatePayment**](#updatepayment) | **PUT** /api/2.0/portal/payment/update | Update the payment quantity|
 |[**updateWalletPayment**](#updatewalletpayment) | **PUT** /api/2.0/portal/payment/updatewallet | Update the wallet payment quantity|
+
+# **buyWalletService**
+> ServicePaymentWrapper buyWalletService()
+
+This method processes a payment for a wallet service using the configured payment method.  Requires the tariff service to be configured and a valid payment method to be set for the customer.  Rate limiting is applied according to the payments API policy.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/buy-wallet-service/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **buyWalletServiceRequestDto** | **BuyWalletServiceRequestDto**|  | |
+
+
+### Return type
+
+**ServicePaymentWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration,
+    BuyWalletServiceRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+let buyWalletServiceRequestDto: BuyWalletServiceRequestDto; // (optional)
+
+const { status, data } = await apiInstance.buyWalletService(
+    buyWalletServiceRequestDto
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The service payment information |  -  |
+|**403** | No permissions to perform this action |  -  |
+|**404** | Service could not be found |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **calculateWalletPayment**
 > PaymentCalculationWrapper calculateWalletPayment()
@@ -88,7 +150,7 @@ const { status, data } = await apiInstance.calculateWalletPayment(
 # **changeTenantWalletServiceState**
 > TenantWalletServiceSettingsWrapper changeTenantWalletServiceState()
 
-Changes the wallet service state.
+Changes the state of a wallet service for the current tenant.  Requires permission to edit portal settings and a configured tariff service.  Adds or removes the specified service from the enabled services list based on the enabled flag.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-tenant-wallet-service-state/).
 
@@ -135,7 +197,7 @@ const { status, data } = await apiInstance.changeTenantWalletServiceState(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | The wallet service settings |  -  |
+|**200** | The updated tenant wallet service settings |  -  |
 |**403** | No permissions to perform this action |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -192,6 +254,56 @@ const { status, data } = await apiInstance.createCustomerOperationsReport(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Ok |  -  |
+|**403** | No permissions to perform this action |  -  |
+|**404** | Service could not be found |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getAiPrices**
+> AiPricesResponseWrapper getAiPrices()
+
+Retrieves the pricing information for AI models including chat, embedding, and web search services.  The prices are returned in the configured currency and normalized per million tokens.  Requires administrator permissions to access.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-ai-prices/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**AiPricesResponseWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+const { status, data } = await apiInstance.getAiPrices();
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Prices for AI models |  -  |
+|**403** | No permissions to perform this action |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -372,13 +484,18 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
+| **offset** | [**number**] | The number of items to skip for pagination. The default value is 0. | (optional) defaults to undefined|
+| **limit** | [**number**] | The maximum number of items to return for pagination. The default value is 25. | (optional) defaults to undefined|
+| **serviceName** | [**string**] | The service name. | (optional) defaults to undefined|
 | **startDate** | [**string**] | The report start date. | (optional) defaults to undefined|
 | **endDate** | [**string**] | The report end date. | (optional) defaults to undefined|
 | **participantName** | [**string**] | The participant name. | (optional) defaults to undefined|
-| **credit** | [**boolean**] | Specifies whether to include credit operations in the report. The default value is true. | (optional) defaults to undefined|
-| **debit** | [**boolean**] | Specifies whether to include debit operations in the report. The default value is true. | (optional) defaults to undefined|
-| **offset** | [**number**] | The number of items to skip for pagination. The default value is 0. | (optional) defaults to undefined|
-| **limit** | [**number**] | The maximum number of items to return for pagination. The default value is 25. | (optional) defaults to undefined|
+| **credit** | [**boolean**] | Specifies whether to include credit operations in the report. | (optional) defaults to undefined|
+| **debit** | [**boolean**] | Specifies whether to include debit operations in the report. | (optional) defaults to undefined|
+| **types** | **OperationType** | List of operation types to filter by. | (optional) defaults to undefined|
+| **status** | **OperationStatus** | List of operation status to filter by. | (optional) defaults to undefined|
+| **orderBy** | [**string**] | The field to order by. | (optional) defaults to undefined|
+| **orderType** | **OperationOrderType** | Order direction: Ascending or Descending. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -400,22 +517,32 @@ import {
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
 
+let offset: number; //The number of items to skip for pagination. The default value is 0. (optional) (default to undefined)
+let limit: number; //The maximum number of items to return for pagination. The default value is 25. (optional) (default to undefined)
+let serviceName: string; //The service name. (optional) (default to undefined)
 let startDate: string; //The report start date. (optional) (default to undefined)
 let endDate: string; //The report end date. (optional) (default to undefined)
 let participantName: string; //The participant name. (optional) (default to undefined)
-let credit: boolean; //Specifies whether to include credit operations in the report. The default value is true. (optional) (default to undefined)
-let debit: boolean; //Specifies whether to include debit operations in the report. The default value is true. (optional) (default to undefined)
-let offset: number; //The number of items to skip for pagination. The default value is 0. (optional) (default to undefined)
-let limit: number; //The maximum number of items to return for pagination. The default value is 25. (optional) (default to undefined)
+let credit: boolean; //Specifies whether to include credit operations in the report. (optional) (default to undefined)
+let debit: boolean; //Specifies whether to include debit operations in the report. (optional) (default to undefined)
+let types: OperationType; //List of operation types to filter by. (optional) (default to undefined)
+let status: OperationStatus; //List of operation status to filter by. (optional) (default to undefined)
+let orderBy: string; //The field to order by. (optional) (default to undefined)
+let orderType: OperationOrderType; //Order direction: Ascending or Descending. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getCustomerOperations(
+    offset,
+    limit,
+    serviceName,
     startDate,
     endDate,
     participantName,
     credit,
     debit,
-    offset,
-    limit
+    types,
+    status,
+    orderBy,
+    orderType
 );
 ```
 
@@ -430,6 +557,7 @@ const { status, data } = await apiInstance.getCustomerOperations(
 |-------------|-------------|------------------|
 |**200** | The customer operations |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**404** | Service could not be found |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -477,6 +605,65 @@ const { status, data } = await apiInstance.getCustomerOperationsReport();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Ok |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getCustomerServiceQuota**
+> BalanceWrapper getCustomerServiceQuota()
+
+Returns the service quota from the accounting service.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-service-quota/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **serviceName** | [**string**] | The service name. | (optional) defaults to undefined|
+| **refresh** | [**boolean**] | Specifies whether to refresh the payment information cache or not. | (optional) defaults to undefined|
+
+
+### Return type
+
+**BalanceWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+let serviceName: string; //The service name. (optional) (default to undefined)
+let refresh: boolean; //Specifies whether to refresh the payment information cache or not. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getCustomerServiceQuota(
+    serviceName,
+    refresh
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The service quota |  -  |
+|**403** | No permissions to perform this action |  -  |
+|**404** | Service could not be found |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -648,7 +835,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **paymentUrlRequestsDto** | **PaymentUrlRequestsDto**|  | |
+| **paymentUrlRequestDto** | **PaymentUrlRequestDto**|  | |
 
 
 ### Return type
@@ -665,16 +852,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     PortalPaymentApi,
     Configuration,
-    PaymentUrlRequestsDto
+    PaymentUrlRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
 
-let paymentUrlRequestsDto: PaymentUrlRequestsDto; // (optional)
+let paymentUrlRequestDto: PaymentUrlRequestDto; // (optional)
 
 const { status, data } = await apiInstance.getPaymentUrl(
-    paymentUrlRequestsDto
+    paymentUrlRequestDto
 );
 ```
 
@@ -795,10 +982,58 @@ const { status, data } = await apiInstance.getQuotaPaymentInformation(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **getRestrictedAiModels**
+> RestrictedModelsResponseWrapper getRestrictedAiModels()
+
+Returns the list of AI chat model IDs that are restricted (disabled) for the current tenant.  Restricted models cannot be used for AI chat conversations by any user within the portal.  Only DocSpace administrators can access this endpoint.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-restricted-ai-models/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**RestrictedModelsResponseWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+const { status, data } = await apiInstance.getRestrictedAiModels();
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The list of restricted AI model IDs |  -  |
+|**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **getTenantWalletServiceSettings**
 > TenantWalletServiceSettingsWrapper getTenantWalletServiceSettings()
 
-Returns the wallet services settings.
+Retrieves configuration settings related to the wallet service associated with the current tenant.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-wallet-service-settings/).
 
@@ -837,7 +1072,7 @@ const { status, data } = await apiInstance.getTenantWalletServiceSettings();
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | The wallet services settings |  -  |
+|**200** | The wallet service settings for the tenant |  -  |
 |**403** | No permissions to perform this action |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -846,7 +1081,7 @@ const { status, data } = await apiInstance.getTenantWalletServiceSettings();
 # **getTenantWalletSettings**
 > TenantWalletSettingsWrapper getTenantWalletSettings()
 
-Returns the wallet auto top-up settings.
+Returns the wallet auto top up settings for the current tenant.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-wallet-settings/).
 
@@ -1049,10 +1284,66 @@ const { status, data } = await apiInstance.sendPaymentRequest(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **setRestrictedAiModels**
+> RestrictedModelsResponseWrapper setRestrictedAiModels()
+
+Overwrites the entire set of restricted AI model IDs for the current tenant.  The request body must contain the complete desired set — to add a restriction, include the new model alongside existing ones;  to remove one, omit it. An empty set lifts all restrictions. Only the portal payer can perform this action.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-restricted-ai-models/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **setRestrictedAiModelsRequestDto** | **SetRestrictedAiModelsRequestDto**|  | |
+
+
+### Return type
+
+**RestrictedModelsResponseWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PortalPaymentApi,
+    Configuration,
+    SetRestrictedAiModelsRequestDto
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PortalPaymentApi(configuration);
+
+let setRestrictedAiModelsRequestDto: SetRestrictedAiModelsRequestDto; // (optional)
+
+const { status, data } = await apiInstance.setRestrictedAiModels(
+    setRestrictedAiModelsRequestDto
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The updated list of restricted AI model IDs |  -  |
+|**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **setTenantWalletSettings**
 > TenantWalletSettingsWrapper setTenantWalletSettings()
 
-Sets the wallet auto top-up settings.
+Updates the wallet auto top up settings for the current tenant.  Requires the tariff service to be configured and the user to be authorized as a payer.  Returns null if the tariff service is not configured or customer information/balance cannot be retrieved.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-wallet-settings/).
 

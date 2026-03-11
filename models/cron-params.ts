@@ -22,9 +22,18 @@
 // @ts-ignore
 import type { BackupPeriod } from './backup-period';
 
+/**
+ * The backup cron parameters.
+ */
 export interface CronParams {
     'period'?: BackupPeriod;
+    /**
+     * The time of the day to start the backup process.
+     */
     'hour'?: number;
+    /**
+     * The day of the week to start the backup process.
+     */
     'day'?: number;
 }
 

@@ -33,6 +33,10 @@ export interface StartNewChatBody {
     /**
      * The optional collection of file identifiers to attach as context for the AI model.
      */
+    'contextFolderId'?: number | null;
+    /**
+     * The list of attached files.
+     */
     'files'?: Array<ContinueChatBodyFilesInner> | null;
 }
 

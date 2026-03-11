@@ -27,6 +27,9 @@ export interface EmailActivationSettings {
      * Specifies whether the email activation settings are shown or hidden.
      */
     'show'?: boolean;
+    /**
+     * The timestamp indicating when the settings were last modified.
+     */
     'lastModified'?: string;
 }
 

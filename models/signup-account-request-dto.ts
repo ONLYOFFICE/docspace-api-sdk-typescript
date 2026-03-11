@@ -28,22 +28,6 @@ import type { EmployeeType } from './employee-type';
 export interface SignupAccountRequestDto {
     'employeeType'?: EmployeeType;
     /**
-     * The user first name.
-     */
-    'firstName'?: string | null;
-    /**
-     * The user last name.
-     */
-    'lastName'?: string | null;
-    /**
-     * The user email address.
-     */
-    'email'?: string | null;
-    /**
-     * The user password hash.
-     */
-    'passwordHash'?: string | null;
-    /**
      * The user link key.
      */
     'key': string | null;

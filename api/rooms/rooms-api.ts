@@ -1506,7 +1506,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
             // authentication OpenId required
 
             if (type) {
-                localVarQueryParameter['type'] = type.join(COLLECTION_FORMATS.csv);
+                localVarQueryParameter['type'] = type;
             }
 
             if (subjectId !== undefined) {
@@ -1694,18 +1694,19 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * Checks if a specific custom tag has linked items.
          * @summary Has tag links
-         * @param {string} tagName 
+         * @param {string} tagName2 
+         * @param {string} [tagName] Represents the name of a tag
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for hasTagLinks operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/has-tag-links/
          */
-        hasTagLinks: async (tagName: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'tagName' is not null or undefined
-            assertParamExists('hasTagLinks', 'tagName', tagName)
+        hasTagLinks: async (tagName2: string, tagName?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tagName2' is not null or undefined
+            assertParamExists('hasTagLinks', 'tagName2', tagName2)
 
             const localVarPath = `/api/2.0/files/tags/{tagName}/haslinks`
-                .replace(`{${"tagName"}}`, encodeURIComponent(String(tagName)));
+                .replace(`{${"tagName"}}`, encodeURIComponent(String(tagName2)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1735,6 +1736,10 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             // authentication OpenId required
+
+            if (tagName !== undefined) {
+                localVarQueryParameter['tagName'] = tagName;
+            }
 
 
     
@@ -2933,14 +2938,15 @@ export const RoomsApiFp = function(configuration?: Configuration) {
         /**
          * Checks if a specific custom tag has linked items.
          * @summary Has tag links
-         * @param {string} tagName 
+         * @param {string} tagName2 
+         * @param {string} [tagName] Represents the name of a tag
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for hasTagLinks operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/has-tag-links/
          */
-        async hasTagLinks(tagName: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.hasTagLinks(tagName, options);
+        async hasTagLinks(tagName2: string, tagName?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.hasTagLinks(tagName2, tagName, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.hasTagLinks']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3493,14 +3499,15 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
         /**
          * Checks if a specific custom tag has linked items.
          * @summary Has tag links
-         * @param {string} tagName 
+         * @param {string} tagName2 
+         * @param {string} [tagName] Represents the name of a tag
          * @param {*} [options] Override http request option.
          * REST API Reference for hasTagLinks operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/has-tag-links/
          * @throws {RequiredError}
          */
-        hasTagLinks(tagName: string, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.hasTagLinks(tagName, options).then((request) => request(axios, basePath));
+        hasTagLinks(tagName2: string, tagName?: string, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.hasTagLinks(tagName2, tagName, options).then((request) => request(axios, basePath));
         },
         /**
          * Pins a room with the ID specified in the request to the top of the list.
@@ -4011,13 +4018,14 @@ export class RoomsApi extends BaseAPI {
     /**
      * Checks if a specific custom tag has linked items.
      * @summary Has tag links
-     * @param {string} tagName 
+     * @param {string} tagName2 
+     * @param {string} [tagName] Represents the name of a tag
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public hasTagLinks(tagName: string, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).hasTagLinks(tagName, options).then((request) => request(this.axios, this.basePath));
+    public hasTagLinks(tagName2: string, tagName?: string, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).hasTagLinks(tagName2, tagName, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

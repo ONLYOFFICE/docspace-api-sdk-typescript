@@ -19,6 +19,9 @@
  */
 
 
+/**
+ * The AI model information.
+ */
 export interface ModelDto {
     /**
      * The unique identifier of the AI provider that offers this model.

@@ -1,5 +1,6 @@
 # WebSearchSettingsDto
 
+The web search settings.
 
 ## Properties
 

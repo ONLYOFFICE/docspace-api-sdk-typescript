@@ -22,11 +22,26 @@
 // @ts-ignore
 import type { BackupStorageType } from './backup-storage-type';
 
+/**
+ * The backup history parameters.
+ */
 export interface BackupHistoryRecord {
+    /**
+     * The backup ID.
+     */
     'id': string;
+    /**
+     * The backup file name.
+     */
     'fileName': string | null;
     'storageType': BackupStorageType;
+    /**
+     * The backup creation date.
+     */
     'createdOn': string;
+    /**
+     * The backup expiration date.
+     */
     'expiresOn': string;
 }
 

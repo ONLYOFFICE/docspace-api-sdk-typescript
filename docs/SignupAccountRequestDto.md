@@ -7,10 +7,6 @@ The request parameters for creating a third-party account.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **employeeType** | [**EmployeeType**](EmployeeType.md) |  | [optional] [default to undefined]
-**firstName** | **string** | The user first name. | [optional] [default to undefined]
-**lastName** | **string** | The user last name. | [optional] [default to undefined]
-**email** | **string** | The user email address. | [optional] [default to undefined]
-**passwordHash** | **string** | The user password hash. | [optional] [default to undefined]
 **key** | **string** | The user link key. | [default to undefined]
 **culture** | **string** | The user culture code. | [optional] [default to undefined]
 **serializedProfile** | **string** | The third-party profile in the serialized format | [default to undefined]
@@ -22,10 +18,6 @@ import { SignupAccountRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: SignupAccountRequestDto = {
     employeeType,
-    firstName,
-    lastName,
-    email,
-    passwordHash,
     key,
     culture,
     serializedProfile,

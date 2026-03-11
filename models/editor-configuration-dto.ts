@@ -80,6 +80,6 @@ export interface EditorConfigurationDto {
      * The templates of the editor configuration.
      */
     'templates'?: Array<TemplatesConfig> | null;
-    'user': UserConfig;
+    'user'?: UserConfig;
 }
 

@@ -23,7 +23,7 @@
 import type { ApiDateTime } from './api-date-time';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ChatSettings } from './chat-settings';
+import type { ChatSettingsDto } from './chat-settings-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { EmployeeDto } from './employee-dto';
@@ -202,10 +202,10 @@ export type FolderDtoString = FileEntryDtoString &  {
     'expired'?: boolean | null;
     /**
      * 
-     * @type {ChatSettings}
+     * @type {ChatSettingsDto}
      * @memberof FolderDtoString
      */
-    'chatSettings'?: ChatSettings;
+    'chatSettings'?: ChatSettingsDto;
     /**
      * 
      * @type {RoomType}

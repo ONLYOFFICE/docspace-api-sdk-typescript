@@ -19,6 +19,9 @@
  */
 
 
+/**
+ * The user chat settings.
+ */
 export interface UserChatSettingsDto {
     /**
      * Indicates whether the AI assistant is allowed to perform web searches when generating responses in this room.

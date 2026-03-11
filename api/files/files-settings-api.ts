@@ -34,6 +34,8 @@ import type { CheckDocServiceUrlRequestDto } from '../../models';
 // @ts-ignore
 import type { DefaultTemplateSettingsRequestDto } from '../../models';
 // @ts-ignore
+import type { DefaultTemplateSettingsResetRequestDto } from '../../models';
+// @ts-ignore
 import type { DefaultTemplateSettingsWrapper } from '../../models';
 // @ts-ignore
 import type { DisplayRequestDto } from '../../models';
@@ -1175,6 +1177,62 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
+         * Resets the default template setting.
+         * @summary Reset the default template setting
+         * @param {DefaultTemplateSettingsResetRequestDto} [defaultTemplateSettingsResetRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for resetDefaultTemplate operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-default-template/
+         */
+        resetDefaultTemplate: async (defaultTemplateSettingsResetRequestDto?: DefaultTemplateSettingsResetRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/files/settings/defaulttemplate`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(defaultTemplateSettingsResetRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Changes the default template setting.
          * @summary Change the default template setting
          * @param {DefaultTemplateSettingsRequestDto} [defaultTemplateSettingsRequestDto] 
@@ -1845,7 +1903,7 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
          * REST API Reference for hideConfirmConvert operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/hide-confirm-convert/
          */
-        async hideConfirmConvert(hideConfirmConvertRequestDto?: HideConfirmConvertRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModuleWrapper>> {
+        async hideConfirmConvert(hideConfirmConvertRequestDto?: HideConfirmConvertRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.hideConfirmConvert(hideConfirmConvertRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesSettingsApi.hideConfirmConvert']?.[localVarOperationServerIndex]?.url;
@@ -1893,6 +1951,21 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.keepNewFileName(settingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesSettingsApi.keepNewFileName']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Resets the default template setting.
+         * @summary Reset the default template setting
+         * @param {DefaultTemplateSettingsResetRequestDto} [defaultTemplateSettingsResetRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for resetDefaultTemplate operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-default-template/
+         */
+        async resetDefaultTemplate(defaultTemplateSettingsResetRequestDto?: DefaultTemplateSettingsResetRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DefaultTemplateSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.resetDefaultTemplate(defaultTemplateSettingsResetRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesSettingsApi.resetDefaultTemplate']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2218,7 +2291,7 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/hide-confirm-convert/
          * @throws {RequiredError}
          */
-        hideConfirmConvert(hideConfirmConvertRequestDto?: HideConfirmConvertRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<ModuleWrapper> {
+        hideConfirmConvert(hideConfirmConvertRequestDto?: HideConfirmConvertRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
             return localVarFp.hideConfirmConvert(hideConfirmConvertRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2255,6 +2328,18 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
          */
         keepNewFileName(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
             return localVarFp.keepNewFileName(settingsRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Resets the default template setting.
+         * @summary Reset the default template setting
+         * @param {DefaultTemplateSettingsResetRequestDto} [defaultTemplateSettingsResetRequestDto] 
+         * @param {*} [options] Override http request option.
+         * REST API Reference for resetDefaultTemplate operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-default-template/
+         * @throws {RequiredError}
+         */
+        resetDefaultTemplate(defaultTemplateSettingsResetRequestDto?: DefaultTemplateSettingsResetRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<DefaultTemplateSettingsWrapper> {
+            return localVarFp.resetDefaultTemplate(defaultTemplateSettingsResetRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Changes the default template setting.
@@ -2594,6 +2679,18 @@ export class FilesSettingsApi extends BaseAPI {
      */
     public keepNewFileName(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig) {
         return FilesSettingsApiFp(this.configuration).keepNewFileName(settingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Resets the default template setting.
+     * @summary Reset the default template setting
+     * @param {DefaultTemplateSettingsResetRequestDto} [defaultTemplateSettingsResetRequestDto] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesSettingsApi
+     */
+    public resetDefaultTemplate(defaultTemplateSettingsResetRequestDto?: DefaultTemplateSettingsResetRequestDto, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).resetDefaultTemplate(defaultTemplateSettingsResetRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

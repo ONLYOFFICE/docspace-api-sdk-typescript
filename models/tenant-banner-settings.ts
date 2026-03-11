@@ -27,6 +27,9 @@ export interface TenantBannerSettings {
      * The banners visibility flag.
      */
     'hidden'?: boolean;
+    /**
+     * The timestamp indicating when the settings were last modified.
+     */
     'lastModified'?: string;
 }
 

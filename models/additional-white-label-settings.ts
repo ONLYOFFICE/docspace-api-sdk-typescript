@@ -47,6 +47,9 @@ export interface AdditionalWhiteLabelSettings {
      * Specifies if the License Agreements link is available or not.
      */
     'licenseAgreementsEnabled'?: boolean;
+    /**
+     * The timestamp indicating when the settings were last modified.
+     */
     'lastModified'?: string;
 }
 

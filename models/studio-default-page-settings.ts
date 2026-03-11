@@ -24,6 +24,9 @@ import type { FolderType } from './folder-type';
 
 export interface StudioDefaultPageSettings {
     'defaultFolderType'?: FolderType;
+    /**
+     * The timestamp indicating when the settings were last modified.
+     */
     'lastModified'?: string;
 }
 

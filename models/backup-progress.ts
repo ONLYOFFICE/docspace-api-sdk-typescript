@@ -25,15 +25,39 @@ import type { BackupProgressEnum } from './backup-progress-enum';
 // @ts-ignore
 import type { DistributedTaskStatus } from './distributed-task-status';
 
+/**
+ * The backup progress parameters.
+ */
 export interface BackupProgress {
+    /**
+     * Specifies if the backup is completed or not.
+     */
     'isCompleted'?: boolean;
+    /**
+     * The backup progress in percentage.
+     */
     'progress'?: number;
+    /**
+     * The backup error message.
+     */
     'error'?: string | null;
+    /**
+     * The backup warning message.
+     */
     'warning'?: string | null;
+    /**
+     * The backup link.
+     */
     'link'?: string | null;
+    /**
+     * The tenant ID.
+     */
     'tenantId'?: number;
     'backupProgressEnum'?: BackupProgressEnum;
     'status'?: DistributedTaskStatus;
+    /**
+     * The task ID.
+     */
     'taskId'?: string | null;
 }
 

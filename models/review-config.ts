@@ -19,7 +19,13 @@
  */
 
 
+/**
+ * Configuration for review display settings.
+ */
 export interface ReviewConfig {
+    /**
+     * The review display string representation.
+     */
     'reviewDisplay'?: string | null;
 }
 

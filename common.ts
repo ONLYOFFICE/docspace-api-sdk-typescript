@@ -39,7 +39,7 @@ export const setApiKeyToObject = async function (object: any, keyParamName: stri
         const localVarApiKeyValue = typeof configuration.apiKey === 'function'
             ? await configuration.apiKey(keyParamName)
             : await configuration.apiKey;
-        
+            
         if (!localVarApiKeyValue) return;
 
         const clean = localVarApiKeyValue.trim();
@@ -59,7 +59,7 @@ export const setBearerAuthToObject = async function (object: any, configuration?
         const accessToken = typeof configuration.accessToken === 'function'
             ? await configuration.accessToken()
             : await configuration.accessToken;
-        
+
         const token = normalizeToken(accessToken);
 
         if (!token) return;
@@ -72,13 +72,14 @@ export const setOAuthToObject = async function (object: any, name: string, scope
         const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
             ? await configuration.accessToken(name, scopes)
             : await configuration.accessToken;
-        
+
         const token = normalizeToken(localVarAccessTokenValue);
 
         if (!token) return;
         object["Authorization"] = "Bearer " + localVarAccessTokenValue;
     }
 }
+
 
 const normalizeToken = (value?: string | null): string | null => {
     if (!value) return null;

@@ -26,6 +26,6 @@ export interface BatchTagsRequestDto {
     /**
      * The list of tag names.
      */
-    'names'?: Array<string> | null;
+    'names': Array<string>;
 }
 

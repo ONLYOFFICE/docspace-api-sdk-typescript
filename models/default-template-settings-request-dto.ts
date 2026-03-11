@@ -18,15 +18,15 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { DefaultTemplateSettingsRequestDtoSelectedFile } from './default-template-settings-request-dto-selected-file';
 
 /**
  * Default templates settings request parameters.
  */
 export interface DefaultTemplateSettingsRequestDto {
-    /**
-     * File id to replace template with (or null to use default template)
-     */
-    'selectedFile'?: number | null;
+    'selectedFile': DefaultTemplateSettingsRequestDtoSelectedFile;
     /**
      * File extension of a template to replace
      */

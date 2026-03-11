@@ -19,6 +19,9 @@
  */
 
 
+/**
+ * The AI module settings.
+ */
 export interface AiSettingsDto {
     /**
      * Indicates whether web search is enabled for AI chat sessions.
@@ -52,6 +55,10 @@ export interface AiSettingsDto {
      * The name of the embedding model used for document vectorization.
      */
     'embeddingModel': string | null;
+    /**
+     * Mapping of model identifiers to human-readable aliases.
+     */
+    'modelAliases': { [key: string]: string; } | null;
     /**
      * The tool name used by the AI assistant for knowledge base search.
      */

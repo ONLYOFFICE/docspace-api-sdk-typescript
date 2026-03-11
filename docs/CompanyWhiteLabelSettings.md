@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **phone** | **string** | The company phone number. | [optional] [default to undefined]
 **IsLicensor** | **boolean** | Specifies if a company is a licensor or not. | [optional] [default to undefined]
 **hideAbout** | **boolean** | Specifies if the About page is visible or not | [optional] [default to undefined]
-**lastModified** | **string** |  | [optional] [default to undefined]
+**lastModified** | **string** | The timestamp indicating when the settings were last modified. | [optional] [default to undefined]
 
 ## Example
 

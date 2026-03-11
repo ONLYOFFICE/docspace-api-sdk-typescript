@@ -25,6 +25,9 @@ import type { ApiDateTime } from './api-date-time';
 // @ts-ignore
 import type { EmployeeDto } from './employee-dto';
 
+/**
+ * The chat session information.
+ */
 export interface ChatDto {
     /**
      * The unique identifier of the AI chat session.

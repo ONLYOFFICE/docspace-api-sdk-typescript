@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **userForumEnabled** | **boolean** | Specifies if the user forum is available or not. | [optional] [default to undefined]
 **videoGuidesEnabled** | **boolean** | Specifies if the Video Guides link is available or not. | [optional] [default to undefined]
 **licenseAgreementsEnabled** | **boolean** | Specifies if the License Agreements link is available or not. | [optional] [default to undefined]
-**lastModified** | **string** |  | [optional] [default to undefined]
+**lastModified** | **string** | The timestamp indicating when the settings were last modified. | [optional] [default to undefined]
 
 ## Example
 

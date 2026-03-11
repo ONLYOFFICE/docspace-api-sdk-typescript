@@ -1,5 +1,6 @@
 # AiSettingsDto
 
+The AI module settings.
 
 ## Properties
 
@@ -13,6 +14,7 @@ Name | Type | Description | Notes
 **aiReadyNeedReset** | **boolean** | Indicates whether the AI provider API key needs to be reconfigured. | [optional] [default to undefined]
 **portalMcpServerId** | **string** | The unique identifier of the portal-level MCP server, if configured. | [optional] [default to undefined]
 **embeddingModel** | **string** | The name of the embedding model used for document vectorization. | [default to undefined]
+**modelAliases** | **{ [key: string]: string; }** | Mapping of model identifiers to human-readable aliases. | [default to undefined]
 **knowledgeSearchToolName** | **string** | The tool name used by the AI assistant for knowledge base search. | [default to undefined]
 **webSearchToolName** | **string** | The tool name used by the AI assistant for web search. | [default to undefined]
 **webCrawlingToolName** | **string** | The tool name used by the AI assistant for web page crawling. | [default to undefined]
@@ -34,6 +36,7 @@ const instance: AiSettingsDto = {
     aiReadyNeedReset,
     portalMcpServerId,
     embeddingModel,
+    modelAliases,
     knowledgeSearchToolName,
     webSearchToolName,
     webCrawlingToolName,

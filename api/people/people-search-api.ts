@@ -142,7 +142,7 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
             }
 
             if (employeeTypes) {
-                localVarQueryParameter['employeeTypes'] = employeeTypes.join(COLLECTION_FORMATS.csv);
+                localVarQueryParameter['employeeTypes'] = employeeTypes;
             }
 
             if (count !== undefined) {
@@ -258,7 +258,7 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
             }
 
             if (employeeTypes) {
-                localVarQueryParameter['employeeTypes'] = employeeTypes.join(COLLECTION_FORMATS.csv);
+                localVarQueryParameter['employeeTypes'] = employeeTypes;
             }
 
             if (count !== undefined) {
@@ -374,7 +374,7 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
             }
 
             if (employeeTypes) {
-                localVarQueryParameter['employeeTypes'] = employeeTypes.join(COLLECTION_FORMATS.csv);
+                localVarQueryParameter['employeeTypes'] = employeeTypes;
             }
 
             if (count !== undefined) {
@@ -548,7 +548,7 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
             }
 
             if (employeeTypes) {
-                localVarQueryParameter['employeeTypes'] = employeeTypes.join(COLLECTION_FORMATS.csv);
+                localVarQueryParameter['employeeTypes'] = employeeTypes;
             }
 
             if (isAdministrator !== undefined) {
@@ -711,7 +711,7 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
             }
 
             if (employeeTypes) {
-                localVarQueryParameter['employeeTypes'] = employeeTypes.join(COLLECTION_FORMATS.csv);
+                localVarQueryParameter['employeeTypes'] = employeeTypes;
             }
 
             if (count !== undefined) {
@@ -827,7 +827,7 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
             }
 
             if (employeeTypes) {
-                localVarQueryParameter['employeeTypes'] = employeeTypes.join(COLLECTION_FORMATS.csv);
+                localVarQueryParameter['employeeTypes'] = employeeTypes;
             }
 
             if (count !== undefined) {
@@ -943,7 +943,7 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
             }
 
             if (employeeTypes) {
-                localVarQueryParameter['employeeTypes'] = employeeTypes.join(COLLECTION_FORMATS.csv);
+                localVarQueryParameter['employeeTypes'] = employeeTypes;
             }
 
             if (count !== undefined) {
@@ -1051,7 +1051,7 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
             }
 
             if (employeeTypes) {
-                localVarQueryParameter['employeeTypes'] = employeeTypes.join(COLLECTION_FORMATS.csv);
+                localVarQueryParameter['employeeTypes'] = employeeTypes;
             }
 
             if (isAdministrator !== undefined) {

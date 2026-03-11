@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **attemptCount** | **number** | The maximum number of consecutive failed login attempts allowed before triggering account suspension. | [default to undefined]
 **blockTime** | **number** | The duration (in minutes) for which an account remains suspended after exceeding maximum login attempts. | [default to undefined]
 **checkPeriod** | **number** | The maximum time (in seconds) allowed for server to process and respond to login requests. | [default to undefined]
-**isDefault** | **boolean** | Specifies if these settings are default or not | [default to undefined]
+**isDefault** | **boolean** | Specifies whether the login settings are default or not. | [default to undefined]
 
 ## Example
 

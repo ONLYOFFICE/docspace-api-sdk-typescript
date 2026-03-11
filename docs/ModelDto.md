@@ -1,5 +1,6 @@
 # ModelDto
 
+The AI model information.
 
 ## Properties
 

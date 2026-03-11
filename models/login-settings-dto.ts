@@ -36,7 +36,7 @@ export interface LoginSettingsDto {
      */
     'checkPeriod': number;
     /**
-     * Specifies if these settings are default or not
+     * Specifies whether the login settings are default or not.
      */
     'isDefault': boolean;
 }

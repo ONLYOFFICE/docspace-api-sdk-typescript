@@ -176,7 +176,7 @@ export interface TenantQuota {
      */
     'countFreeBackup'?: number;
     /**
-     * Specifies if the backup anabled as a wallet service or not.
+     * Specifies if the backup enabled as a wallet service or not.
      */
     'backup'?: boolean;
     /**
@@ -184,76 +184,8 @@ export interface TenantQuota {
      */
     'countAIAgent'?: number;
     /**
-     * Specifies if the AI tools anabled as a wallet service or not.
+     * Specifies if the AI tools enabled as a wallet service or not.
      */
     'aiTools'?: boolean;
-    /**
-     * Specifies whether the web search is enabled as a subservice of AI tools.
-     */
-    'aiToolsWebSearch'?: boolean;
-    /**
-     * Specifies whether the web fetch is enabled as a subservice of AI tools
-     */
-    'aiToolsWebFetch'?: boolean;
-    /**
-     * Specifies whether the embedding is enabled as a subservice of AI tools
-     */
-    'aiToolsEmbedding'?: boolean;
-    /**
-     * Specifies whether the Deepseek 3.1 input tokens is enabled as a subservice of AI tools
-     */
-    'aiToolsDeepseek31Input'?: boolean;
-    /**
-     * Specifies whether the Deepseek 3.1 output tokens is enabled as a subservice of AI tools
-     */
-    'aiToolsDeepseek31Output'?: boolean;
-    /**
-     * Specifies whether the Claude 4.5 input tokens is enabled as a subservice of AI tools
-     */
-    'aiToolsClaude45Input'?: boolean;
-    /**
-     * Specifies whether the Claude 4.5 output tokens is enabled as a subservice of AI tools
-     */
-    'aiToolsClaude45Output'?: boolean;
-    /**
-     * Specifies whether the GPT 5 input tokens is enabled as a subservice of AI tools
-     */
-    'aiToolsGPT5Input'?: boolean;
-    /**
-     * Specifies whether the GPT 5 output tokens is enabled as a subservice of AI tools
-     */
-    'aiToolsGPT5Output'?: boolean;
-    /**
-     * Specifies whether the Deepseek 3.2 input tokens is enabled as a subservice of AI tools
-     */
-    'aiToolsDeepseek32Input'?: boolean;
-    /**
-     * Specifies whether the Deepseek 3.2 output tokens is enabled as a subservice of AI tools
-     */
-    'aiToolsDeepseek32Output'?: boolean;
-    /**
-     * Specifies whether the GPT 5.2 input tokens is enabled as a subservice of AI tools
-     */
-    'aiToolsGPT52Input'?: boolean;
-    /**
-     * Specifies whether the GPT 5.2 output tokens is enabled as a subservice of AI tools
-     */
-    'aiToolsGPT52Output'?: boolean;
-    /**
-     * Specifies whether the Gemini 3 Pro input tokens is enabled as a subservice of AI tools
-     */
-    'aiToolsGemini3ProInput'?: boolean;
-    /**
-     * Specifies whether the Gemini 3 Pro output tokens is enabled as a subservice of AI tools
-     */
-    'aiToolsGemini3ProOutput'?: boolean;
-    /**
-     * Specifies whether the Gemini 3 Flash input tokens is enabled as a subservice of AI tools
-     */
-    'aiToolsGemini3FlashInput'?: boolean;
-    /**
-     * Specifies whether the Gemini 3 Flash output tokens is enabled as a subservice of AI tools
-     */
-    'aiToolsGemini3FlashOutput'?: boolean;
 }
 

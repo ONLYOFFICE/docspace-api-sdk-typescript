@@ -74,8 +74,8 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
         /**
          * This method allows users to cancel an ongoing upload session identified by the session ID.  Once the session is aborted, the associated resources will be cleaned up, and the session will no longer accept further uploads.
          * @summary Aborts an in-progress file upload session.
-         * @param {string} sessionId 
-         * @param {number} folderId 
+         * @param {string} sessionId The session ID.
+         * @param {number} folderId The folder ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for abortUploadSession operation
@@ -868,8 +868,8 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
         /**
          * Finalizes the upload session by processing the uploaded file chunks and marking the upload as complete.  This method consolidates chunked uploads into a complete file if required, sends notifications about the upload event,  and performs any additional cleanup or related actions, such as socket updates and webhook publishing.
          * @summary Finalize an upload session
-         * @param {number} folderId 
-         * @param {string} sessionId 
+         * @param {number} folderId The folder ID.
+         * @param {string} sessionId The session ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for finalizeSession operation
@@ -1279,10 +1279,10 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
         /**
          * This method allows the caller to upload a specific chunk of a file to an ongoing upload session.  The session is identified by the session ID provided in the request. The chunk can be of any size  within the limits allowed during the session initialization. Each chunk must be uploaded in the  correct order for the server to process it appropriately.  The server updates the upload session status and stores the progress information after processing  each chunk. The updated session details are returned in the response.
          * @summary Handles the upload of a chunk for an existing upload session.
-         * @param {number} folderId 
-         * @param {string} sessionId 
-         * @param {number} [chunkNumber] 
-         * @param {File} [file] 
+         * @param {number} folderId The folder ID.
+         * @param {string} sessionId The upload session ID.
+         * @param {number} [chunkNumber] The chunk number.
+         * @param {File} [file] The file chunk to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file chunk content from the HTTP request form for chunked upload operations.  The file chunk is accessed via the IFormFile interface which provides access to the chunk content and length.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for uploadAsyncSession operation
@@ -1353,9 +1353,9 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
         /**
          * This method allows continuing an interrupted or partially completed file upload session by uploading subsequent data chunks.  The server will validate each uploaded chunk, update the session state, and respond with the status of the current upload. Once  the total bytes uploaded match the total file size, the file upload process is finalized and related events are triggered.  If the file is newly uploaded, the server responds with a 201 Created status upon completion. If it overwrites an existing file,  versioning information is updated accordingly. The method also triggers associated webhooks and socket notifications to reflect  the updated file state.
          * @summary Resumes an ongoing file upload session for uploading additional chunks of data.
-         * @param {number} folderId 
-         * @param {string} sessionId 
-         * @param {File} [file] 
+         * @param {number} folderId The folder ID.
+         * @param {string} sessionId The upload session ID.
+         * @param {File} [file] The file to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file content from the HTTP request form.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for uploadSession operation
@@ -1432,8 +1432,8 @@ export const OperationsApiFp = function(configuration?: Configuration) {
         /**
          * This method allows users to cancel an ongoing upload session identified by the session ID.  Once the session is aborted, the associated resources will be cleaned up, and the session will no longer accept further uploads.
          * @summary Aborts an in-progress file upload session.
-         * @param {string} sessionId 
-         * @param {number} folderId 
+         * @param {string} sessionId The session ID.
+         * @param {number} folderId The folder ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for abortUploadSession operation
@@ -1647,8 +1647,8 @@ export const OperationsApiFp = function(configuration?: Configuration) {
         /**
          * Finalizes the upload session by processing the uploaded file chunks and marking the upload as complete.  This method consolidates chunked uploads into a complete file if required, sends notifications about the upload event,  and performs any additional cleanup or related actions, such as socket updates and webhook publishing.
          * @summary Finalize an upload session
-         * @param {number} folderId 
-         * @param {string} sessionId 
+         * @param {number} folderId The folder ID.
+         * @param {string} sessionId The session ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for finalizeSession operation
@@ -1771,10 +1771,10 @@ export const OperationsApiFp = function(configuration?: Configuration) {
         /**
          * This method allows the caller to upload a specific chunk of a file to an ongoing upload session.  The session is identified by the session ID provided in the request. The chunk can be of any size  within the limits allowed during the session initialization. Each chunk must be uploaded in the  correct order for the server to process it appropriately.  The server updates the upload session status and stores the progress information after processing  each chunk. The updated session details are returned in the response.
          * @summary Handles the upload of a chunk for an existing upload session.
-         * @param {number} folderId 
-         * @param {string} sessionId 
-         * @param {number} [chunkNumber] 
-         * @param {File} [file] 
+         * @param {number} folderId The folder ID.
+         * @param {string} sessionId The upload session ID.
+         * @param {number} [chunkNumber] The chunk number.
+         * @param {File} [file] The file chunk to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file chunk content from the HTTP request form for chunked upload operations.  The file chunk is accessed via the IFormFile interface which provides access to the chunk content and length.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for uploadAsyncSession operation
@@ -1789,9 +1789,9 @@ export const OperationsApiFp = function(configuration?: Configuration) {
         /**
          * This method allows continuing an interrupted or partially completed file upload session by uploading subsequent data chunks.  The server will validate each uploaded chunk, update the session state, and respond with the status of the current upload. Once  the total bytes uploaded match the total file size, the file upload process is finalized and related events are triggered.  If the file is newly uploaded, the server responds with a 201 Created status upon completion. If it overwrites an existing file,  versioning information is updated accordingly. The method also triggers associated webhooks and socket notifications to reflect  the updated file state.
          * @summary Resumes an ongoing file upload session for uploading additional chunks of data.
-         * @param {number} folderId 
-         * @param {string} sessionId 
-         * @param {File} [file] 
+         * @param {number} folderId The folder ID.
+         * @param {string} sessionId The upload session ID.
+         * @param {File} [file] The file to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file content from the HTTP request form.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for uploadSession operation
@@ -1816,8 +1816,8 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
         /**
          * This method allows users to cancel an ongoing upload session identified by the session ID.  Once the session is aborted, the associated resources will be cleaned up, and the session will no longer accept further uploads.
          * @summary Aborts an in-progress file upload session.
-         * @param {string} sessionId 
-         * @param {number} folderId 
+         * @param {string} sessionId The session ID.
+         * @param {number} folderId The folder ID.
          * @param {*} [options] Override http request option.
          * REST API Reference for abortUploadSession operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/abort-upload-session/
@@ -1989,8 +1989,8 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
         /**
          * Finalizes the upload session by processing the uploaded file chunks and marking the upload as complete.  This method consolidates chunked uploads into a complete file if required, sends notifications about the upload event,  and performs any additional cleanup or related actions, such as socket updates and webhook publishing.
          * @summary Finalize an upload session
-         * @param {number} folderId 
-         * @param {string} sessionId 
+         * @param {number} folderId The folder ID.
+         * @param {string} sessionId The session ID.
          * @param {*} [options] Override http request option.
          * REST API Reference for finalizeSession operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/finalize-session/
@@ -2089,10 +2089,10 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
         /**
          * This method allows the caller to upload a specific chunk of a file to an ongoing upload session.  The session is identified by the session ID provided in the request. The chunk can be of any size  within the limits allowed during the session initialization. Each chunk must be uploaded in the  correct order for the server to process it appropriately.  The server updates the upload session status and stores the progress information after processing  each chunk. The updated session details are returned in the response.
          * @summary Handles the upload of a chunk for an existing upload session.
-         * @param {number} folderId 
-         * @param {string} sessionId 
-         * @param {number} [chunkNumber] 
-         * @param {File} [file] 
+         * @param {number} folderId The folder ID.
+         * @param {string} sessionId The upload session ID.
+         * @param {number} [chunkNumber] The chunk number.
+         * @param {File} [file] The file chunk to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file chunk content from the HTTP request form for chunked upload operations.  The file chunk is accessed via the IFormFile interface which provides access to the chunk content and length.
          * @param {*} [options] Override http request option.
          * REST API Reference for uploadAsyncSession operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-async-session/
@@ -2104,9 +2104,9 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
         /**
          * This method allows continuing an interrupted or partially completed file upload session by uploading subsequent data chunks.  The server will validate each uploaded chunk, update the session state, and respond with the status of the current upload. Once  the total bytes uploaded match the total file size, the file upload process is finalized and related events are triggered.  If the file is newly uploaded, the server responds with a 201 Created status upon completion. If it overwrites an existing file,  versioning information is updated accordingly. The method also triggers associated webhooks and socket notifications to reflect  the updated file state.
          * @summary Resumes an ongoing file upload session for uploading additional chunks of data.
-         * @param {number} folderId 
-         * @param {string} sessionId 
-         * @param {File} [file] 
+         * @param {number} folderId The folder ID.
+         * @param {string} sessionId The upload session ID.
+         * @param {File} [file] The file to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file content from the HTTP request form.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream.
          * @param {*} [options] Override http request option.
          * REST API Reference for uploadSession operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-session/
@@ -2128,8 +2128,8 @@ export class OperationsApi extends BaseAPI {
     /**
      * This method allows users to cancel an ongoing upload session identified by the session ID.  Once the session is aborted, the associated resources will be cleaned up, and the session will no longer accept further uploads.
      * @summary Aborts an in-progress file upload session.
-     * @param {string} sessionId 
-     * @param {number} folderId 
+     * @param {string} sessionId The session ID.
+     * @param {number} folderId The folder ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi
@@ -2301,8 +2301,8 @@ export class OperationsApi extends BaseAPI {
     /**
      * Finalizes the upload session by processing the uploaded file chunks and marking the upload as complete.  This method consolidates chunked uploads into a complete file if required, sends notifications about the upload event,  and performs any additional cleanup or related actions, such as socket updates and webhook publishing.
      * @summary Finalize an upload session
-     * @param {number} folderId 
-     * @param {string} sessionId 
+     * @param {number} folderId The folder ID.
+     * @param {string} sessionId The session ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi
@@ -2401,10 +2401,10 @@ export class OperationsApi extends BaseAPI {
     /**
      * This method allows the caller to upload a specific chunk of a file to an ongoing upload session.  The session is identified by the session ID provided in the request. The chunk can be of any size  within the limits allowed during the session initialization. Each chunk must be uploaded in the  correct order for the server to process it appropriately.  The server updates the upload session status and stores the progress information after processing  each chunk. The updated session details are returned in the response.
      * @summary Handles the upload of a chunk for an existing upload session.
-     * @param {number} folderId 
-     * @param {string} sessionId 
-     * @param {number} [chunkNumber] 
-     * @param {File} [file] 
+     * @param {number} folderId The folder ID.
+     * @param {string} sessionId The upload session ID.
+     * @param {number} [chunkNumber] The chunk number.
+     * @param {File} [file] The file chunk to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file chunk content from the HTTP request form for chunked upload operations.  The file chunk is accessed via the IFormFile interface which provides access to the chunk content and length.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi
@@ -2416,9 +2416,9 @@ export class OperationsApi extends BaseAPI {
     /**
      * This method allows continuing an interrupted or partially completed file upload session by uploading subsequent data chunks.  The server will validate each uploaded chunk, update the session state, and respond with the status of the current upload. Once  the total bytes uploaded match the total file size, the file upload process is finalized and related events are triggered.  If the file is newly uploaded, the server responds with a 201 Created status upon completion. If it overwrites an existing file,  versioning information is updated accordingly. The method also triggers associated webhooks and socket notifications to reflect  the updated file state.
      * @summary Resumes an ongoing file upload session for uploading additional chunks of data.
-     * @param {number} folderId 
-     * @param {string} sessionId 
-     * @param {File} [file] 
+     * @param {number} folderId The folder ID.
+     * @param {string} sessionId The upload session ID.
+     * @param {File} [file] The file to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file content from the HTTP request form.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi

@@ -27,6 +27,9 @@ export interface WizardSettings {
      * Specifies if the Wizard settings are completed or not
      */
     'completed'?: boolean;
+    /**
+     * The timestamp indicating when the settings were last modified.
+     */
     'lastModified'?: string;
 }
 

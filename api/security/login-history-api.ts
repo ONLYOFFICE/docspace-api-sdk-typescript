@@ -202,15 +202,11 @@ export const LoginHistoryApiAxiosParamCreator = function (configuration?: Config
             }
 
             if (from !== undefined) {
-                for (const [key, value] of Object.entries(from)) {
-                    localVarQueryParameter[key] = value;
-                }
+                localVarQueryParameter['from'] = from;
             }
 
             if (to !== undefined) {
-                for (const [key, value] of Object.entries(to)) {
-                    localVarQueryParameter[key] = value;
-                }
+                localVarQueryParameter['to'] = to;
             }
 
             if (count !== undefined) {

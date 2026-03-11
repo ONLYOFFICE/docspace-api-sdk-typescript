@@ -24,6 +24,8 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
+import type { BooleanWrapper } from '../../models';
+// @ts-ignore
 import type { Culture } from '../../models';
 // @ts-ignore
 import type { EmployeeArrayWrapper } from '../../models';
@@ -104,6 +106,73 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(memberRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns a boolean indicating whether a user with the specified email exists on the portal.
+         * @summary Check if a user exists by email
+         * @param {string} [email] The user email address.
+         * @param {string} [encemail] The user encrypted email address.
+         * @param {string} [culture] Culture
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for checkUserExistsByEmail operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-user-exists-by-email/
+         */
+        checkUserExistsByEmail: async (email?: string, encemail?: string, culture?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/people/exists`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (email !== undefined) {
+                localVarQueryParameter['email'] = email;
+            }
+
+            if (encemail !== undefined) {
+                localVarQueryParameter['encemail'] = encemail;
+            }
+
+            if (culture !== undefined) {
+                localVarQueryParameter['culture'] = culture;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -851,6 +920,23 @@ export const ProfilesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns a boolean indicating whether a user with the specified email exists on the portal.
+         * @summary Check if a user exists by email
+         * @param {string} [email] The user email address.
+         * @param {string} [encemail] The user encrypted email address.
+         * @param {string} [culture] Culture
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for checkUserExistsByEmail operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-user-exists-by-email/
+         */
+        async checkUserExistsByEmail(email?: string, encemail?: string, culture?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.checkUserExistsByEmail(email, encemail, culture, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ProfilesApi.checkUserExistsByEmail']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Deletes a user with the ID specified in the request from the portal.
          * @summary Delete a user
          * @param {string} userid The user ID.
@@ -1060,6 +1146,20 @@ export const ProfilesApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.addMember(memberRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns a boolean indicating whether a user with the specified email exists on the portal.
+         * @summary Check if a user exists by email
+         * @param {string} [email] The user email address.
+         * @param {string} [encemail] The user encrypted email address.
+         * @param {string} [culture] Culture
+         * @param {*} [options] Override http request option.
+         * REST API Reference for checkUserExistsByEmail operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-user-exists-by-email/
+         * @throws {RequiredError}
+         */
+        checkUserExistsByEmail(email?: string, encemail?: string, culture?: string, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.checkUserExistsByEmail(email, encemail, culture, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Deletes a user with the ID specified in the request from the portal.
          * @summary Delete a user
          * @param {string} userid The user ID.
@@ -1230,6 +1330,20 @@ export class ProfilesApi extends BaseAPI {
      */
     public addMember(memberRequestDto?: MemberRequestDto, options?: RawAxiosRequestConfig) {
         return ProfilesApiFp(this.configuration).addMember(memberRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns a boolean indicating whether a user with the specified email exists on the portal.
+     * @summary Check if a user exists by email
+     * @param {string} [email] The user email address.
+     * @param {string} [encemail] The user encrypted email address.
+     * @param {string} [culture] Culture
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProfilesApi
+     */
+    public checkUserExistsByEmail(email?: string, encemail?: string, culture?: string, options?: RawAxiosRequestConfig) {
+        return ProfilesApiFp(this.configuration).checkUserExistsByEmail(email, encemail, culture, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

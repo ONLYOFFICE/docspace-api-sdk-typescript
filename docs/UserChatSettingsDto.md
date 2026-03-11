@@ -1,5 +1,6 @@
 # UserChatSettingsDto
 
+The user chat settings.
 
 ## Properties
 

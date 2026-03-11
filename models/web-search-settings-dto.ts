@@ -22,6 +22,9 @@
 // @ts-ignore
 import type { EngineType } from './engine-type';
 
+/**
+ * The web search settings.
+ */
 export interface WebSearchSettingsDto {
     /**
      * Indicates whether web search is currently enabled.

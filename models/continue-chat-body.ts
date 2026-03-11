@@ -33,6 +33,10 @@ export interface ContinueChatBody {
     /**
      * The optional collection of file identifiers to attach as context for the AI model.
      */
+    'contextFolderId'?: number;
+    /**
+     * The list of attached files.
+     */
     'files'?: Array<ContinueChatBodyFilesInner> | null;
 }
 

@@ -1,16 +1,17 @@
 # UploadSessionResponseDtoInteger
 
+The upload session response parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **number** |  | [optional] [default to undefined]
-**folderId** | **number** |  | [optional] [default to undefined]
-**version** | **number** |  | [optional] [default to undefined]
-**title** | **string** |  | [optional] [default to undefined]
-**providerKey** | **string** |  | [optional] [default to undefined]
-**uploaded** | **boolean** |  | [optional] [default to undefined]
+**id** | **number** | The upload session ID. | [optional] [default to undefined]
+**folderId** | **number** | The folder ID where the file is being uploaded. | [optional] [default to undefined]
+**version** | **number** | The file version number. | [optional] [default to undefined]
+**title** | **string** | The file title. | [optional] [default to undefined]
+**providerKey** | **string** | The third-party provider key. | [optional] [default to undefined]
+**uploaded** | **boolean** | Specifies whether the file has been uploaded. | [optional] [default to undefined]
 **file** | [**FileDtoInteger**](FileDtoInteger.md) |  | [optional] [default to undefined]
 
 ## Example

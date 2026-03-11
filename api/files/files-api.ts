@@ -1271,15 +1271,11 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             // authentication OpenId required
 
             if (fromDate !== undefined) {
-                for (const [key, value] of Object.entries(fromDate)) {
-                    localVarQueryParameter[key] = value;
-                }
+                localVarQueryParameter['fromDate'] = fromDate;
             }
 
             if (toDate !== undefined) {
-                for (const [key, value] of Object.entries(toDate)) {
-                    localVarQueryParameter[key] = value;
-                }
+                localVarQueryParameter['toDate'] = toDate;
             }
 
             if (count !== undefined) {
@@ -2102,16 +2098,16 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * Saves edits to a file with the ID specified in the request.
          * @summary Save file edits
          * @param {number} fileId The editing file ID from the request.
-         * @param {string} [fileExtension] The editing file extension from the request.
          * @param {string} [downloadUri] The URI to download the editing file.
-         * @param {File} [file] The request file stream.
+         * @param {string} [fileExtension] The editing file extension from the request.
+         * @param {File} [file] The edited file to be saved, uploaded as part of the multipart/form-data request.  This property represents the modified file content from the HTTP request form after editing operations.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream.
          * @param {boolean} [forcesave] Specifies whether to force save the file or not.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveEditingFileFromForm operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-editing-file-from-form/
          */
-        saveEditingFileFromForm: async (fileId: number, fileExtension?: string, downloadUri?: string, file?: File, forcesave?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        saveEditingFileFromForm: async (fileId: number, downloadUri?: string, fileExtension?: string, file?: File, forcesave?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('saveEditingFileFromForm', 'fileId', fileId)
 
@@ -2148,13 +2144,13 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
 
             // authentication OpenId required
 
+            if (downloadUri !== undefined) {
+                localVarQueryParameter['DownloadUri'] = downloadUri;
+            }
+
 
             if (fileExtension !== undefined) { 
                 localVarFormParams.append('FileExtension', fileExtension as any);
-            }
-    
-            if (downloadUri !== undefined) { 
-                localVarFormParams.append('DownloadUri', downloadUri as any);
             }
     
             if (file !== undefined) { 
@@ -3377,17 +3373,17 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * Saves edits to a file with the ID specified in the request.
          * @summary Save file edits
          * @param {number} fileId The editing file ID from the request.
-         * @param {string} [fileExtension] The editing file extension from the request.
          * @param {string} [downloadUri] The URI to download the editing file.
-         * @param {File} [file] The request file stream.
+         * @param {string} [fileExtension] The editing file extension from the request.
+         * @param {File} [file] The edited file to be saved, uploaded as part of the multipart/form-data request.  This property represents the modified file content from the HTTP request form after editing operations.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream.
          * @param {boolean} [forcesave] Specifies whether to force save the file or not.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveEditingFileFromForm operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-editing-file-from-form/
          */
-        async saveEditingFileFromForm(fileId: number, fileExtension?: string, downloadUri?: string, file?: File, forcesave?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.saveEditingFileFromForm(fileId, fileExtension, downloadUri, file, forcesave, options);
+        async saveEditingFileFromForm(fileId: number, downloadUri?: string, fileExtension?: string, file?: File, forcesave?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.saveEditingFileFromForm(fileId, downloadUri, fileExtension, file, forcesave, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.saveEditingFileFromForm']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -4042,17 +4038,17 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * Saves edits to a file with the ID specified in the request.
          * @summary Save file edits
          * @param {number} fileId The editing file ID from the request.
-         * @param {string} [fileExtension] The editing file extension from the request.
          * @param {string} [downloadUri] The URI to download the editing file.
-         * @param {File} [file] The request file stream.
+         * @param {string} [fileExtension] The editing file extension from the request.
+         * @param {File} [file] The edited file to be saved, uploaded as part of the multipart/form-data request.  This property represents the modified file content from the HTTP request form after editing operations.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream.
          * @param {boolean} [forcesave] Specifies whether to force save the file or not.
          * @param {*} [options] Override http request option.
          * REST API Reference for saveEditingFileFromForm operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-editing-file-from-form/
          * @throws {RequiredError}
          */
-        saveEditingFileFromForm(fileId: number, fileExtension?: string, downloadUri?: string, file?: File, forcesave?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
-            return localVarFp.saveEditingFileFromForm(fileId, fileExtension, downloadUri, file, forcesave, options).then((request) => request(axios, basePath));
+        saveEditingFileFromForm(fileId: number, downloadUri?: string, fileExtension?: string, file?: File, forcesave?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
+            return localVarFp.saveEditingFileFromForm(fileId, downloadUri, fileExtension, file, forcesave, options).then((request) => request(axios, basePath));
         },
         /**
          * Saves a file with the identifier specified in the request as a PDF document.
@@ -4671,16 +4667,16 @@ export class FilesApi extends BaseAPI {
      * Saves edits to a file with the ID specified in the request.
      * @summary Save file edits
      * @param {number} fileId The editing file ID from the request.
-     * @param {string} [fileExtension] The editing file extension from the request.
      * @param {string} [downloadUri] The URI to download the editing file.
-     * @param {File} [file] The request file stream.
+     * @param {string} [fileExtension] The editing file extension from the request.
+     * @param {File} [file] The edited file to be saved, uploaded as part of the multipart/form-data request.  This property represents the modified file content from the HTTP request form after editing operations.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream.
      * @param {boolean} [forcesave] Specifies whether to force save the file or not.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public saveEditingFileFromForm(fileId: number, fileExtension?: string, downloadUri?: string, file?: File, forcesave?: boolean, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).saveEditingFileFromForm(fileId, fileExtension, downloadUri, file, forcesave, options).then((request) => request(this.axios, this.basePath));
+    public saveEditingFileFromForm(fileId: number, downloadUri?: string, fileExtension?: string, file?: File, forcesave?: boolean, options?: RawAxiosRequestConfig) {
+        return FilesApiFp(this.configuration).saveEditingFileFromForm(fileId, downloadUri, fileExtension, file, forcesave, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

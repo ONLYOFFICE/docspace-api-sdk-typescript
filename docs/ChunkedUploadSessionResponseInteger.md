@@ -1,16 +1,17 @@
 # ChunkedUploadSessionResponseInteger
 
+Represents the response returned from a chunked upload session.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** |  | [optional] [default to undefined]
-**path** | **Array&lt;number&gt;** |  | [optional] [default to undefined]
-**created** | **string** |  | [optional] [default to undefined]
-**expired** | **string** |  | [optional] [default to undefined]
-**location** | **string** |  | [optional] [default to undefined]
-**bytes_total** | **number** |  | [optional] [default to undefined]
+**id** | **string** | The unique identifier for the entity. | [optional] [default to undefined]
+**path** | **Array&lt;number&gt;** | Represents the hierarchical path of folders associated with a chunked upload session. | [optional] [default to undefined]
+**created** | **string** | The timestamp indicating when the chunked upload session was created. | [optional] [default to undefined]
+**expired** | **string** | The date and time when the chunked upload session is set to expire. | [optional] [default to undefined]
+**location** | **string** | Represents the URI or path of the chunked upload session\&#39;s current location. | [optional] [default to undefined]
+**bytes_total** | **number** | The total size, in bytes, of the file being uploaded in the chunked upload session. | [optional] [default to undefined]
 
 ## Example
 

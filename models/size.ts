@@ -19,8 +19,17 @@
  */
 
 
+/**
+ * Represents dimensions with width and height values.
+ */
 export interface Size {
+    /**
+     * Gets or sets the height dimension of an object, typically measured in pixels or other unit.  It defines the vertical size of the object.
+     */
     'height'?: number;
+    /**
+     * Gets or sets the width dimension of an object, typically measured in pixels or other unit.
+     */
     'width'?: number;
 }
 

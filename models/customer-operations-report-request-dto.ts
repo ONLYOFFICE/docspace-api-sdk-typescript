@@ -18,11 +18,24 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { OperationOrderType } from './operation-order-type';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { OperationStatus } from './operation-status';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { OperationType } from './operation-type';
 
 /**
  * The request parameters for generating a report on client operations.
  */
 export interface CustomerOperationsReportRequestDto {
+    /**
+     * The service name.
+     */
+    'serviceName'?: string | null;
     /**
      * The report start date.
      */
@@ -43,5 +56,14 @@ export interface CustomerOperationsReportRequestDto {
      * Specifies whether to include debit operations in the report.
      */
     'debit'?: boolean | null;
+    'types'?: OperationType;
+    'status'?: OperationStatus;
+    /**
+     * The field to order by.
+     */
+    'orderBy'?: string | null;
+    'orderType'?: OperationOrderType;
 }
+
+
 

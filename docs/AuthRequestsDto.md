@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 **provider** | **string** | The type of authentication provider (e.g., internal, Google, Azure). | [optional] [default to undefined]
 **accessToken** | **string** | The access token used for authentication with external providers. | [optional] [default to undefined]
 **serializedProfile** | **string** | The serialized user profile data, if applicable. | [optional] [default to undefined]
-**code** | **string** | The code for two-factor authentication. | [optional] [default to undefined]
 **codeOAuth** | **string** | The authorization code used for obtaining OAuth tokens. | [optional] [default to undefined]
 **session** | **boolean** | Specifies whether the authentication is session-based. | [optional] [default to undefined]
 **confirmData** | [**ConfirmData**](ConfirmData.md) |  | [optional] [default to undefined]
@@ -32,7 +31,6 @@ const instance: AuthRequestsDto = {
     provider,
     accessToken,
     serializedProfile,
-    code,
     codeOAuth,
     session,
     confirmData,

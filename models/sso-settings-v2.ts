@@ -38,6 +38,9 @@ import type { SsoSpCertificateAdvanced } from './sso-sp-certificate-advanced';
  * The SSO portal settings.
  */
 export interface SsoSettingsV2 {
+    /**
+     * The timestamp indicating when the settings were last modified.
+     */
     'lastModified'?: string;
     /**
      * Specifies if the SSO settings are enabled or not.

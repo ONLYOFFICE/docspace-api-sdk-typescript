@@ -7,6 +7,7 @@ The request parameters for validating the two-factor authentication codes.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **code** | **string** | The verification code provided by the user. | [default to undefined]
+**session** | **boolean** | Specifies whether the authentication is session-based. | [optional] [default to undefined]
 
 ## Example
 
@@ -15,6 +16,7 @@ import { TfaValidateRequestsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TfaValidateRequestsDto = {
     code,
+    session,
 };
 ```
 

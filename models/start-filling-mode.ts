@@ -20,13 +20,14 @@
 
 
 /**
- * [0 - None, 1 - Share to fill out, 2 - Start filling]
+ * [0 - None, 1 - Share to fill out, 2 - Start filling, 3 - Start filling form room]
  */
 
 export const StartFillingMode = {
     None: 0,
     ShareToFillOut: 1,
-    StartFilling: 2
+    StartFilling: 2,
+    StartFillingFormRoom: 3
 } as const;
 
 export type StartFillingMode = typeof StartFillingMode[keyof typeof StartFillingMode];

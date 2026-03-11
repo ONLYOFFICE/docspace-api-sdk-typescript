@@ -40,6 +40,10 @@ export interface DefaultTemplateItemDto {
      */
     'lastModified'?: string | null;
     /**
+     * Filesize (in bytes) of a default template
+     */
+    'fileSize'?: number | null;
+    /**
      * View url of a default template
      */
     'viewUrl'?: string | null;

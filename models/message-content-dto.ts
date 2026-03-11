@@ -22,6 +22,9 @@
 // @ts-ignore
 import type { MessageContentType } from './message-content-type';
 
+/**
+ * The base class for message content blocks.
+ */
 export interface MessageContentDto {
     'type'?: MessageContentType;
 }

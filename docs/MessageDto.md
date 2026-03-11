@@ -1,5 +1,6 @@
 # MessageDto
 
+The chat message information.
 
 ## Properties
 

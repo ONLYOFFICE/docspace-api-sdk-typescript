@@ -81,7 +81,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **authRequestsDto** | **AuthRequestsDto**|  | |
+| **authWithCodeRequestsDto** | **AuthWithCodeRequestsDto**|  | |
 | **code** | [**string**] |  | defaults to undefined|
 
 
@@ -99,18 +99,18 @@ No authorization required
 import {
     AuthenticationApi,
     Configuration,
-    AuthRequestsDto
+    AuthWithCodeRequestsDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new AuthenticationApi(configuration);
 
 let code: string; // (default to undefined)
-let authRequestsDto: AuthRequestsDto; // (optional)
+let authWithCodeRequestsDto: AuthWithCodeRequestsDto; // (optional)
 
 const { status, data } = await apiInstance.authenticateMeFromBodyWithCode(
     code,
-    authRequestsDto
+    authWithCodeRequestsDto
 );
 ```
 

@@ -20,13 +20,14 @@
 
 
 /**
- * []
+ * [0 - Text, 1 - Tool, 2 - Attachment]
  */
 
 export const MessageContentType = {
     Text: 0,
     Tool: 1,
-    Attachment: 2
+    Attachment: 2,
+    Data: 3
 } as const;
 
 export type MessageContentType = typeof MessageContentType[keyof typeof MessageContentType];

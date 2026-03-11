@@ -54,10 +54,6 @@ export interface AuthRequestsDto {
      */
     'serializedProfile'?: string | null;
     /**
-     * The code for two-factor authentication.
-     */
-    'code'?: string | null;
-    /**
      * The authorization code used for obtaining OAuth tokens.
      */
     'codeOAuth'?: string | null;

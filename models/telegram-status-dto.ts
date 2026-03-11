@@ -22,8 +22,14 @@
 // @ts-ignore
 import type { RegStatus } from './reg-status';
 
+/**
+ * The Telegram connection status parameters.
+ */
 export interface TelegramStatusDto {
     'status': RegStatus;
+    /**
+     * The Telegram username.
+     */
     'username'?: string | null;
 }
 

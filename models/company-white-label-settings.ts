@@ -51,6 +51,9 @@ export interface CompanyWhiteLabelSettings {
      * Specifies if the About page is visible or not
      */
     'hideAbout'?: boolean;
+    /**
+     * The timestamp indicating when the settings were last modified.
+     */
     'lastModified'?: string;
 }
 

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **fileExtension** | **string** | Extension of a default template | [default to undefined]
 **fileTitle** | **string** | Title of a default template | [optional] [default to undefined]
 **lastModified** | **string** | Last modified date of a default template | [optional] [default to undefined]
+**fileSize** | **number** | Filesize (in bytes) of a default template | [optional] [default to undefined]
 **viewUrl** | **string** | View url of a default template | [optional] [default to undefined]
 
 ## Example
@@ -22,6 +23,7 @@ const instance: DefaultTemplateItemDto = {
     fileExtension,
     fileTitle,
     lastModified,
+    fileSize,
     viewUrl,
 };
 ```

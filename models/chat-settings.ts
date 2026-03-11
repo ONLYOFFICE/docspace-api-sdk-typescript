@@ -19,10 +19,25 @@
  */
 
 
+/**
+ * The chat settings.
+ */
 export interface ChatSettings {
+    /**
+     * The provider ID.
+     */
     'providerId'?: number;
+    /**
+     * The model ID.
+     */
     'modelId'?: string | null;
+    /**
+     * The prompt.
+     */
     'prompt'?: string | null;
+    /**
+     * Specifies whether the provider is internal or not.
+     */
     'internal'?: boolean;
 }
 

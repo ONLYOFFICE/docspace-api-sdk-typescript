@@ -44,26 +44,9 @@ Name | Type | Description | Notes
 **thirdParty** | **boolean** | Specifies if the third-party accounts linking is available or not. | [optional] [default to undefined]
 **year** | **boolean** | Specifies if the tenant quota is yearly subscription or not. | [optional] [default to undefined]
 **countFreeBackup** | **number** | The number of free backups within a month. | [optional] [default to undefined]
-**backup** | **boolean** | Specifies if the backup anabled as a wallet service or not. | [optional] [default to undefined]
+**backup** | **boolean** | Specifies if the backup enabled as a wallet service or not. | [optional] [default to undefined]
 **countAIAgent** | **number** | The number of AI agents. | [optional] [default to undefined]
-**aiTools** | **boolean** | Specifies if the AI tools anabled as a wallet service or not. | [optional] [default to undefined]
-**aiToolsWebSearch** | **boolean** | Specifies whether the web search is enabled as a subservice of AI tools. | [optional] [default to undefined]
-**aiToolsWebFetch** | **boolean** | Specifies whether the web fetch is enabled as a subservice of AI tools | [optional] [default to undefined]
-**aiToolsEmbedding** | **boolean** | Specifies whether the embedding is enabled as a subservice of AI tools | [optional] [default to undefined]
-**aiToolsDeepseek31Input** | **boolean** | Specifies whether the Deepseek 3.1 input tokens is enabled as a subservice of AI tools | [optional] [default to undefined]
-**aiToolsDeepseek31Output** | **boolean** | Specifies whether the Deepseek 3.1 output tokens is enabled as a subservice of AI tools | [optional] [default to undefined]
-**aiToolsClaude45Input** | **boolean** | Specifies whether the Claude 4.5 input tokens is enabled as a subservice of AI tools | [optional] [default to undefined]
-**aiToolsClaude45Output** | **boolean** | Specifies whether the Claude 4.5 output tokens is enabled as a subservice of AI tools | [optional] [default to undefined]
-**aiToolsGPT5Input** | **boolean** | Specifies whether the GPT 5 input tokens is enabled as a subservice of AI tools | [optional] [default to undefined]
-**aiToolsGPT5Output** | **boolean** | Specifies whether the GPT 5 output tokens is enabled as a subservice of AI tools | [optional] [default to undefined]
-**aiToolsDeepseek32Input** | **boolean** | Specifies whether the Deepseek 3.2 input tokens is enabled as a subservice of AI tools | [optional] [default to undefined]
-**aiToolsDeepseek32Output** | **boolean** | Specifies whether the Deepseek 3.2 output tokens is enabled as a subservice of AI tools | [optional] [default to undefined]
-**aiToolsGPT52Input** | **boolean** | Specifies whether the GPT 5.2 input tokens is enabled as a subservice of AI tools | [optional] [default to undefined]
-**aiToolsGPT52Output** | **boolean** | Specifies whether the GPT 5.2 output tokens is enabled as a subservice of AI tools | [optional] [default to undefined]
-**aiToolsGemini3ProInput** | **boolean** | Specifies whether the Gemini 3 Pro input tokens is enabled as a subservice of AI tools | [optional] [default to undefined]
-**aiToolsGemini3ProOutput** | **boolean** | Specifies whether the Gemini 3 Pro output tokens is enabled as a subservice of AI tools | [optional] [default to undefined]
-**aiToolsGemini3FlashInput** | **boolean** | Specifies whether the Gemini 3 Flash input tokens is enabled as a subservice of AI tools | [optional] [default to undefined]
-**aiToolsGemini3FlashOutput** | **boolean** | Specifies whether the Gemini 3 Flash output tokens is enabled as a subservice of AI tools | [optional] [default to undefined]
+**aiTools** | **boolean** | Specifies if the AI tools enabled as a wallet service or not. | [optional] [default to undefined]
 
 ## Example
 
@@ -112,23 +95,6 @@ const instance: TenantQuota = {
     backup,
     countAIAgent,
     aiTools,
-    aiToolsWebSearch,
-    aiToolsWebFetch,
-    aiToolsEmbedding,
-    aiToolsDeepseek31Input,
-    aiToolsDeepseek31Output,
-    aiToolsClaude45Input,
-    aiToolsClaude45Output,
-    aiToolsGPT5Input,
-    aiToolsGPT5Output,
-    aiToolsDeepseek32Input,
-    aiToolsDeepseek32Output,
-    aiToolsGPT52Input,
-    aiToolsGPT52Output,
-    aiToolsGemini3ProInput,
-    aiToolsGemini3ProOutput,
-    aiToolsGemini3FlashInput,
-    aiToolsGemini3FlashOutput,
 };
 ```
 

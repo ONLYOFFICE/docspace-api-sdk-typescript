@@ -22,6 +22,9 @@
 // @ts-ignore
 import type { EmbeddingProviderType } from './embedding-provider-type';
 
+/**
+ * The vectorization settings.
+ */
 export interface VectorizationSettingsDto {
     'type'?: EmbeddingProviderType;
     /**

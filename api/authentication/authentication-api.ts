@@ -26,6 +26,8 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { AuthRequestsDto } from '../../models';
 // @ts-ignore
+import type { AuthWithCodeRequestsDto } from '../../models';
+// @ts-ignore
 import type { AuthenticationTokenWrapper } from '../../models';
 // @ts-ignore
 import type { BooleanWrapper } from '../../models';
@@ -86,13 +88,13 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
          * Authenticates the current user by SMS or two-factor authentication code.
          * @summary Authenticate a user by code
          * @param {string} code 
-         * @param {AuthRequestsDto} [authRequestsDto] 
+         * @param {AuthWithCodeRequestsDto} [authWithCodeRequestsDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for authenticateMeFromBodyWithCode operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/authenticate-me-from-body-with-code/
          */
-        authenticateMeFromBodyWithCode: async (code: string, authRequestsDto?: AuthRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        authenticateMeFromBodyWithCode: async (code: string, authWithCodeRequestsDto?: AuthWithCodeRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'code' is not null or undefined
             assertParamExists('authenticateMeFromBodyWithCode', 'code', code)
 
@@ -116,7 +118,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(authRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(authWithCodeRequestsDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -348,14 +350,14 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
          * Authenticates the current user by SMS or two-factor authentication code.
          * @summary Authenticate a user by code
          * @param {string} code 
-         * @param {AuthRequestsDto} [authRequestsDto] 
+         * @param {AuthWithCodeRequestsDto} [authWithCodeRequestsDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for authenticateMeFromBodyWithCode operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/authenticate-me-from-body-with-code/
          */
-        async authenticateMeFromBodyWithCode(code: string, authRequestsDto?: AuthRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthenticationTokenWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authenticateMeFromBodyWithCode(code, authRequestsDto, options);
+        async authenticateMeFromBodyWithCode(code: string, authWithCodeRequestsDto?: AuthWithCodeRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthenticationTokenWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.authenticateMeFromBodyWithCode(code, authWithCodeRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AuthenticationApi.authenticateMeFromBodyWithCode']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -459,14 +461,14 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
          * Authenticates the current user by SMS or two-factor authentication code.
          * @summary Authenticate a user by code
          * @param {string} code 
-         * @param {AuthRequestsDto} [authRequestsDto] 
+         * @param {AuthWithCodeRequestsDto} [authWithCodeRequestsDto] 
          * @param {*} [options] Override http request option.
          * REST API Reference for authenticateMeFromBodyWithCode operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/authenticate-me-from-body-with-code/
          * @throws {RequiredError}
          */
-        authenticateMeFromBodyWithCode(code: string, authRequestsDto?: AuthRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<AuthenticationTokenWrapper> {
-            return localVarFp.authenticateMeFromBodyWithCode(code, authRequestsDto, options).then((request) => request(axios, basePath));
+        authenticateMeFromBodyWithCode(code: string, authWithCodeRequestsDto?: AuthWithCodeRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<AuthenticationTokenWrapper> {
+            return localVarFp.authenticateMeFromBodyWithCode(code, authWithCodeRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Opens a confirmation email URL to validate a certain action (employee invitation, portal removal, phone activation, etc.).
@@ -552,13 +554,13 @@ export class AuthenticationApi extends BaseAPI {
      * Authenticates the current user by SMS or two-factor authentication code.
      * @summary Authenticate a user by code
      * @param {string} code 
-     * @param {AuthRequestsDto} [authRequestsDto] 
+     * @param {AuthWithCodeRequestsDto} [authWithCodeRequestsDto] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthenticationApi
      */
-    public authenticateMeFromBodyWithCode(code: string, authRequestsDto?: AuthRequestsDto, options?: RawAxiosRequestConfig) {
-        return AuthenticationApiFp(this.configuration).authenticateMeFromBodyWithCode(code, authRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public authenticateMeFromBodyWithCode(code: string, authWithCodeRequestsDto?: AuthWithCodeRequestsDto, options?: RawAxiosRequestConfig) {
+        return AuthenticationApiFp(this.configuration).authenticateMeFromBodyWithCode(code, authWithCodeRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

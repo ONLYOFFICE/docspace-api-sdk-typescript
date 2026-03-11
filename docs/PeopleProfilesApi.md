@@ -5,6 +5,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**addMember**](#addmember) | **POST** /api/2.0/people | Add a user|
+|[**checkUserExistsByEmail**](#checkuserexistsbyemail) | **GET** /api/2.0/people/exists | Check if a user exists by email|
 |[**deleteMember**](#deletemember) | **DELETE** /api/2.0/people/{userid} | Delete a user|
 |[**deleteProfile**](#deleteprofile) | **DELETE** /api/2.0/people/@self | Delete my profile|
 |[**getAllProfiles**](#getallprofiles) | **GET** /api/2.0/people | Get profiles|
@@ -70,6 +71,67 @@ const { status, data } = await apiInstance.addMember(
 |-------------|-------------|------------------|
 |**200** | Newly added user with the detailed information |  -  |
 |**403** | The invitation link is invalid or its validity has expired |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **checkUserExistsByEmail**
+> BooleanWrapper checkUserExistsByEmail()
+
+Returns a boolean indicating whether a user with the specified email exists on the portal.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/check-user-exists-by-email/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **email** | [**string**] | The user email address. | (optional) defaults to undefined|
+| **encemail** | [**string**] | The user encrypted email address. | (optional) defaults to undefined|
+| **culture** | [**string**] | Culture | (optional) defaults to undefined|
+
+
+### Return type
+
+**BooleanWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleProfilesApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleProfilesApi(configuration);
+
+let email: string; //The user email address. (optional) (default to undefined)
+let encemail: string; //The user encrypted email address. (optional) (default to undefined)
+let culture: string; //Culture (optional) (default to undefined)
+
+const { status, data } = await apiInstance.checkUserExistsByEmail(
+    email,
+    encemail,
+    culture
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Boolean result |  -  |
+|**400** | Incorrect email |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -354,6 +416,8 @@ const { status, data } = await apiInstance.getProfileByEmail(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Detailed profile information |  -  |
+|**400** | Incorrect email |  -  |
+|**403** | No permissions to perform this action |  -  |
 |**404** | User not found |  -  |
 |**401** | Unauthorized |  -  |
 

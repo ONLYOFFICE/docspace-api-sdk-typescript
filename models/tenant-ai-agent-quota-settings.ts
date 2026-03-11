@@ -29,7 +29,7 @@ import type { TenantEntityQuotaSettings } from './tenant-entity-quota-settings';
  */
 export type TenantAiAgentQuotaSettings = TenantEntityQuotaSettings &  {
     /**
-     * 
+     * The timestamp indicating when the settings were last modified.
      * @type {string}
      * @memberof TenantAiAgentQuotaSettings
      */

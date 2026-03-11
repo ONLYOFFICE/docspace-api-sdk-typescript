@@ -33,11 +33,11 @@ export interface ExternalShareDto {
     /**
      * The external data ID.
      */
-    'id': string | null;
+    'id'?: string | null;
     /**
      * The external data title.
      */
-    'title': string | null;
+    'title'?: string | null;
     'type'?: FileEntryType;
     /**
      * The tenant ID.

@@ -7,8 +7,8 @@ The external sharing information and validation data.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **status** | [**Status**](Status.md) |  | [default to undefined]
-**id** | **string** | The external data ID. | [default to undefined]
-**title** | **string** | The external data title. | [default to undefined]
+**id** | **string** | The external data ID. | [optional] [default to undefined]
+**title** | **string** | The external data title. | [optional] [default to undefined]
 **type** | [**FileEntryType**](FileEntryType.md) |  | [optional] [default to undefined]
 **tenantId** | **number** | The tenant ID. | [default to undefined]
 **entityId** | **string** | The unique identifier of the shared entity. | [optional] [default to undefined]

@@ -48,7 +48,7 @@ export interface CapabilitiesDto {
      */
     'ssoUrl': string | null;
     /**
-     * Specifies if identity server is enabled or not
+     * Specifies if an identity server is enabled or not.
      */
     'identityServerEnabled': boolean;
 }

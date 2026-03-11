@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **name** | **string** | The full name of the user. | [optional] [default to undefined]
 **image** | **string** | The path to the user\&#39;s avatar. | [optional] [default to undefined]
 **roles** | **Array&lt;string&gt;** | Roles | [optional] [default to undefined]
-**customerId** | **string** |  | [optional] [default to undefined]
+**customerId** | **string** | Customer identifier associated with the user. | [optional] [default to undefined]
 
 ## Example
 

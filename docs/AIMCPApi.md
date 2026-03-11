@@ -148,7 +148,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **connectServerRequestBody** | **ConnectServerRequestBody**| OAuth authorization parameters. | |
+| **connectServerRequestBody** | **ConnectServerRequestBody**| The request body containing additional data necessary for connecting to the server,  such as authentication or operation-specific information. | |
 | **roomId** | [**number**] | Identifier of the room containing the MCP server. | defaults to undefined|
 | **serverId** | [**string**] | Unique identifier of the MCP server to connect. | defaults to undefined|
 
@@ -175,7 +175,7 @@ const apiInstance = new AIMCPApi(configuration);
 
 let roomId: number; //Identifier of the room containing the MCP server. (default to undefined)
 let serverId: string; //Unique identifier of the MCP server to connect. (default to undefined)
-let connectServerRequestBody: ConnectServerRequestBody; //OAuth authorization parameters.
+let connectServerRequestBody: ConnectServerRequestBody; //The request body containing additional data necessary for connecting to the server,  such as authentication or operation-specific information.
 
 const { status, data } = await apiInstance.connectServer(
     roomId,
