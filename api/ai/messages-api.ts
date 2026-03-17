@@ -134,18 +134,38 @@ export const MessagesApiFactory = function (configuration?: Configuration, baseP
         /**
          * Exports a specific AI chat message as a document into the specified folder. The system verifies that the message exists  and belongs to a chat accessible by the current user, then publishes an asynchronous export task to the event bus.  The exported document will be created in the target folder with the given title once the background task completes.
          * @summary Export a single AI message to a document
-         * @param {number} messageId The unique identifier of the AI chat message to export.
-         * @param {ExportMessageRequestBodyInteger} exportMessageRequestBodyInteger The export parameters including destination folder and file title.
+         * @param {MessagesApiExportMessageRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for exportMessage operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/export-message/
          * @throws {RequiredError}
          */
-        exportMessage(messageId: number, exportMessageRequestBodyInteger: ExportMessageRequestBodyInteger, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.exportMessage(messageId, exportMessageRequestBodyInteger, options).then((request) => request(axios, basePath));
+        exportMessage(requestParameters: MessagesApiExportMessageRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.exportMessage(requestParameters.messageId, requestParameters.exportMessageRequestBodyInteger, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for exportMessage operation in MessagesApi.
+ * @export
+ * @interface MessagesApiExportMessageRequest
+ */
+export interface MessagesApiExportMessageRequest {
+    /**
+     * The unique identifier of the AI chat message to export.
+     * @type {number}
+     * @memberof MessagesApiExportMessage
+     */
+    readonly messageId: number
+
+    /**
+     * The export parameters including destination folder and file title.
+     * @type {ExportMessageRequestBodyInteger}
+     * @memberof MessagesApiExportMessage
+     */
+    readonly exportMessageRequestBodyInteger: ExportMessageRequestBodyInteger
+}
 
 /**
  * MessagesApi - object-oriented interface
@@ -157,14 +177,13 @@ export class MessagesApi extends BaseAPI {
     /**
      * Exports a specific AI chat message as a document into the specified folder. The system verifies that the message exists  and belongs to a chat accessible by the current user, then publishes an asynchronous export task to the event bus.  The exported document will be created in the target folder with the given title once the background task completes.
      * @summary Export a single AI message to a document
-     * @param {number} messageId The unique identifier of the AI chat message to export.
-     * @param {ExportMessageRequestBodyInteger} exportMessageRequestBodyInteger The export parameters including destination folder and file title.
+     * @param {AIMessagesApiExportMessageRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MessagesApi
      */
-    public exportMessage(messageId: number, exportMessageRequestBodyInteger: ExportMessageRequestBodyInteger, options?: RawAxiosRequestConfig) {
-        return MessagesApiFp(this.configuration).exportMessage(messageId, exportMessageRequestBodyInteger, options).then((request) => request(this.axios, this.basePath));
+    public exportMessage(requestParameters: MessagesApiExportMessageRequest, options?: RawAxiosRequestConfig) {
+        return MessagesApiFp(this.configuration).exportMessage(requestParameters.messageId, requestParameters.exportMessageRequestBodyInteger, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

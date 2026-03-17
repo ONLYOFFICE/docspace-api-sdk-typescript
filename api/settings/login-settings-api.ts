@@ -283,17 +283,31 @@ export const LoginSettingsApiFactory = function (configuration?: Configuration, 
         /**
          * Updates the login settings with the parameters specified in the request.
          * @summary Update the login settings
-         * @param {LoginSettingsRequestDto} [loginSettingsRequestDto] 
+         * @param {LoginSettingsApiUpdateLoginSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateLoginSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-login-settings/
          * @throws {RequiredError}
          */
-        updateLoginSettings(loginSettingsRequestDto?: LoginSettingsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<LoginSettingsWrapper> {
-            return localVarFp.updateLoginSettings(loginSettingsRequestDto, options).then((request) => request(axios, basePath));
+        updateLoginSettings(requestParameters: LoginSettingsApiUpdateLoginSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<LoginSettingsWrapper> {
+            return localVarFp.updateLoginSettings(requestParameters.loginSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for updateLoginSettings operation in LoginSettingsApi.
+ * @export
+ * @interface LoginSettingsApiUpdateLoginSettingsRequest
+ */
+export interface LoginSettingsApiUpdateLoginSettingsRequest {
+    /**
+     * 
+     * @type {LoginSettingsRequestDto}
+     * @memberof LoginSettingsApiUpdateLoginSettings
+     */
+    readonly loginSettingsRequestDto?: LoginSettingsRequestDto
+}
 
 /**
  * LoginSettingsApi - object-oriented interface
@@ -327,13 +341,13 @@ export class LoginSettingsApi extends BaseAPI {
     /**
      * Updates the login settings with the parameters specified in the request.
      * @summary Update the login settings
-     * @param {LoginSettingsRequestDto} [loginSettingsRequestDto] 
+     * @param {SettingsLoginSettingsApiUpdateLoginSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof LoginSettingsApi
      */
-    public updateLoginSettings(loginSettingsRequestDto?: LoginSettingsRequestDto, options?: RawAxiosRequestConfig) {
-        return LoginSettingsApiFp(this.configuration).updateLoginSettings(loginSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public updateLoginSettings(requestParameters: LoginSettingsApiUpdateLoginSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return LoginSettingsApiFp(this.configuration).updateLoginSettings(requestParameters.loginSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -127,17 +127,31 @@ export const StatisticsApiFactory = function (configuration?: Configuration, bas
         /**
          * Returns the space usage statistics for the module with the ID specified in the request.
          * @summary Get the space usage statistics
-         * @param {string} id The ID extracted from the route parameters.
+         * @param {StatisticsApiGetSpaceUsageStatisticsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getSpaceUsageStatistics operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-space-usage-statistics/
          * @throws {RequiredError}
          */
-        getSpaceUsageStatistics(id: string, options?: RawAxiosRequestConfig): AxiosPromise<UsageSpaceStatItemArrayWrapper> {
-            return localVarFp.getSpaceUsageStatistics(id, options).then((request) => request(axios, basePath));
+        getSpaceUsageStatistics(requestParameters: StatisticsApiGetSpaceUsageStatisticsRequest, options?: RawAxiosRequestConfig): AxiosPromise<UsageSpaceStatItemArrayWrapper> {
+            return localVarFp.getSpaceUsageStatistics(requestParameters.id, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for getSpaceUsageStatistics operation in StatisticsApi.
+ * @export
+ * @interface StatisticsApiGetSpaceUsageStatisticsRequest
+ */
+export interface StatisticsApiGetSpaceUsageStatisticsRequest {
+    /**
+     * The ID extracted from the route parameters.
+     * @type {string}
+     * @memberof StatisticsApiGetSpaceUsageStatistics
+     */
+    readonly id: string
+}
 
 /**
  * StatisticsApi - object-oriented interface
@@ -149,13 +163,13 @@ export class StatisticsApi extends BaseAPI {
     /**
      * Returns the space usage statistics for the module with the ID specified in the request.
      * @summary Get the space usage statistics
-     * @param {string} id The ID extracted from the route parameters.
+     * @param {SettingsStatisticsApiGetSpaceUsageStatisticsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof StatisticsApi
      */
-    public getSpaceUsageStatistics(id: string, options?: RawAxiosRequestConfig) {
-        return StatisticsApiFp(this.configuration).getSpaceUsageStatistics(id, options).then((request) => request(this.axios, this.basePath));
+    public getSpaceUsageStatistics(requestParameters: StatisticsApiGetSpaceUsageStatisticsRequest, options?: RawAxiosRequestConfig) {
+        return StatisticsApiFp(this.configuration).getSpaceUsageStatistics(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

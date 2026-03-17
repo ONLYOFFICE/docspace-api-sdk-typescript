@@ -448,39 +448,38 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
         /**
          * Authenticates the current user by SMS, authenticator app, or without two-factor authentication.
          * @summary Authenticate a user
-         * @param {AuthRequestsDto} [authRequestsDto] 
+         * @param {AuthenticationApiAuthenticateMeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for authenticateMe operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/authenticate-me/
          * @throws {RequiredError}
          */
-        authenticateMe(authRequestsDto?: AuthRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<AuthenticationTokenWrapper> {
-            return localVarFp.authenticateMe(authRequestsDto, options).then((request) => request(axios, basePath));
+        authenticateMe(requestParameters: AuthenticationApiAuthenticateMeRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<AuthenticationTokenWrapper> {
+            return localVarFp.authenticateMe(requestParameters.authRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Authenticates the current user by SMS or two-factor authentication code.
          * @summary Authenticate a user by code
-         * @param {string} code 
-         * @param {AuthWithCodeRequestsDto} [authWithCodeRequestsDto] 
+         * @param {AuthenticationApiAuthenticateMeFromBodyWithCodeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for authenticateMeFromBodyWithCode operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/authenticate-me-from-body-with-code/
          * @throws {RequiredError}
          */
-        authenticateMeFromBodyWithCode(code: string, authWithCodeRequestsDto?: AuthWithCodeRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<AuthenticationTokenWrapper> {
-            return localVarFp.authenticateMeFromBodyWithCode(code, authWithCodeRequestsDto, options).then((request) => request(axios, basePath));
+        authenticateMeFromBodyWithCode(requestParameters: AuthenticationApiAuthenticateMeFromBodyWithCodeRequest, options?: RawAxiosRequestConfig): AxiosPromise<AuthenticationTokenWrapper> {
+            return localVarFp.authenticateMeFromBodyWithCode(requestParameters.code, requestParameters.authWithCodeRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Opens a confirmation email URL to validate a certain action (employee invitation, portal removal, phone activation, etc.).
          * @summary Open confirmation email URL
-         * @param {EmailValidationKeyModel} [emailValidationKeyModel] 
+         * @param {AuthenticationApiCheckConfirmRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for checkConfirm operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-confirm/
          * @throws {RequiredError}
          */
-        checkConfirm(emailValidationKeyModel?: EmailValidationKeyModel, options?: RawAxiosRequestConfig): AxiosPromise<ConfirmWrapper> {
-            return localVarFp.checkConfirm(emailValidationKeyModel, options).then((request) => request(axios, basePath));
+        checkConfirm(requestParameters: AuthenticationApiCheckConfirmRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ConfirmWrapper> {
+            return localVarFp.checkConfirm(requestParameters.emailValidationKeyModel, options).then((request) => request(axios, basePath));
         },
         /**
          * Checks if the current user is authenticated or not.
@@ -507,29 +506,106 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
         /**
          * Sets a mobile phone for the current user.
          * @summary Set a mobile phone
-         * @param {MobileRequestsDto} [mobileRequestsDto] 
+         * @param {AuthenticationApiSaveMobilePhoneRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for saveMobilePhone operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-mobile-phone/
          * @throws {RequiredError}
          */
-        saveMobilePhone(mobileRequestsDto?: MobileRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<AuthenticationTokenWrapper> {
-            return localVarFp.saveMobilePhone(mobileRequestsDto, options).then((request) => request(axios, basePath));
+        saveMobilePhone(requestParameters: AuthenticationApiSaveMobilePhoneRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<AuthenticationTokenWrapper> {
+            return localVarFp.saveMobilePhone(requestParameters.mobileRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Sends SMS with an authentication code.
          * @summary Send SMS code
-         * @param {AuthRequestsDto} [authRequestsDto] 
+         * @param {AuthenticationApiSendSmsCodeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for sendSmsCode operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-sms-code/
          * @throws {RequiredError}
          */
-        sendSmsCode(authRequestsDto?: AuthRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<AuthenticationTokenWrapper> {
-            return localVarFp.sendSmsCode(authRequestsDto, options).then((request) => request(axios, basePath));
+        sendSmsCode(requestParameters: AuthenticationApiSendSmsCodeRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<AuthenticationTokenWrapper> {
+            return localVarFp.sendSmsCode(requestParameters.authRequestsDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for authenticateMe operation in AuthenticationApi.
+ * @export
+ * @interface AuthenticationApiAuthenticateMeRequest
+ */
+export interface AuthenticationApiAuthenticateMeRequest {
+    /**
+     * 
+     * @type {AuthRequestsDto}
+     * @memberof AuthenticationApiAuthenticateMe
+     */
+    readonly authRequestsDto?: AuthRequestsDto
+}
+
+/**
+ * Request parameters for authenticateMeFromBodyWithCode operation in AuthenticationApi.
+ * @export
+ * @interface AuthenticationApiAuthenticateMeFromBodyWithCodeRequest
+ */
+export interface AuthenticationApiAuthenticateMeFromBodyWithCodeRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthenticationApiAuthenticateMeFromBodyWithCode
+     */
+    readonly code: string
+
+    /**
+     * 
+     * @type {AuthWithCodeRequestsDto}
+     * @memberof AuthenticationApiAuthenticateMeFromBodyWithCode
+     */
+    readonly authWithCodeRequestsDto?: AuthWithCodeRequestsDto
+}
+
+/**
+ * Request parameters for checkConfirm operation in AuthenticationApi.
+ * @export
+ * @interface AuthenticationApiCheckConfirmRequest
+ */
+export interface AuthenticationApiCheckConfirmRequest {
+    /**
+     * 
+     * @type {EmailValidationKeyModel}
+     * @memberof AuthenticationApiCheckConfirm
+     */
+    readonly emailValidationKeyModel?: EmailValidationKeyModel
+}
+
+/**
+ * Request parameters for saveMobilePhone operation in AuthenticationApi.
+ * @export
+ * @interface AuthenticationApiSaveMobilePhoneRequest
+ */
+export interface AuthenticationApiSaveMobilePhoneRequest {
+    /**
+     * 
+     * @type {MobileRequestsDto}
+     * @memberof AuthenticationApiSaveMobilePhone
+     */
+    readonly mobileRequestsDto?: MobileRequestsDto
+}
+
+/**
+ * Request parameters for sendSmsCode operation in AuthenticationApi.
+ * @export
+ * @interface AuthenticationApiSendSmsCodeRequest
+ */
+export interface AuthenticationApiSendSmsCodeRequest {
+    /**
+     * 
+     * @type {AuthRequestsDto}
+     * @memberof AuthenticationApiSendSmsCode
+     */
+    readonly authRequestsDto?: AuthRequestsDto
+}
 
 /**
  * AuthenticationApi - object-oriented interface
@@ -541,38 +617,37 @@ export class AuthenticationApi extends BaseAPI {
     /**
      * Authenticates the current user by SMS, authenticator app, or without two-factor authentication.
      * @summary Authenticate a user
-     * @param {AuthRequestsDto} [authRequestsDto] 
+     * @param {AuthenticationApiAuthenticateMeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthenticationApi
      */
-    public authenticateMe(authRequestsDto?: AuthRequestsDto, options?: RawAxiosRequestConfig) {
-        return AuthenticationApiFp(this.configuration).authenticateMe(authRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public authenticateMe(requestParameters: AuthenticationApiAuthenticateMeRequest = {}, options?: RawAxiosRequestConfig) {
+        return AuthenticationApiFp(this.configuration).authenticateMe(requestParameters.authRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Authenticates the current user by SMS or two-factor authentication code.
      * @summary Authenticate a user by code
-     * @param {string} code 
-     * @param {AuthWithCodeRequestsDto} [authWithCodeRequestsDto] 
+     * @param {AuthenticationApiAuthenticateMeFromBodyWithCodeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthenticationApi
      */
-    public authenticateMeFromBodyWithCode(code: string, authWithCodeRequestsDto?: AuthWithCodeRequestsDto, options?: RawAxiosRequestConfig) {
-        return AuthenticationApiFp(this.configuration).authenticateMeFromBodyWithCode(code, authWithCodeRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public authenticateMeFromBodyWithCode(requestParameters: AuthenticationApiAuthenticateMeFromBodyWithCodeRequest, options?: RawAxiosRequestConfig) {
+        return AuthenticationApiFp(this.configuration).authenticateMeFromBodyWithCode(requestParameters.code, requestParameters.authWithCodeRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Opens a confirmation email URL to validate a certain action (employee invitation, portal removal, phone activation, etc.).
      * @summary Open confirmation email URL
-     * @param {EmailValidationKeyModel} [emailValidationKeyModel] 
+     * @param {AuthenticationApiCheckConfirmRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthenticationApi
      */
-    public checkConfirm(emailValidationKeyModel?: EmailValidationKeyModel, options?: RawAxiosRequestConfig) {
-        return AuthenticationApiFp(this.configuration).checkConfirm(emailValidationKeyModel, options).then((request) => request(this.axios, this.basePath));
+    public checkConfirm(requestParameters: AuthenticationApiCheckConfirmRequest = {}, options?: RawAxiosRequestConfig) {
+        return AuthenticationApiFp(this.configuration).checkConfirm(requestParameters.emailValidationKeyModel, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -600,25 +675,25 @@ export class AuthenticationApi extends BaseAPI {
     /**
      * Sets a mobile phone for the current user.
      * @summary Set a mobile phone
-     * @param {MobileRequestsDto} [mobileRequestsDto] 
+     * @param {AuthenticationApiSaveMobilePhoneRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthenticationApi
      */
-    public saveMobilePhone(mobileRequestsDto?: MobileRequestsDto, options?: RawAxiosRequestConfig) {
-        return AuthenticationApiFp(this.configuration).saveMobilePhone(mobileRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public saveMobilePhone(requestParameters: AuthenticationApiSaveMobilePhoneRequest = {}, options?: RawAxiosRequestConfig) {
+        return AuthenticationApiFp(this.configuration).saveMobilePhone(requestParameters.mobileRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Sends SMS with an authentication code.
      * @summary Send SMS code
-     * @param {AuthRequestsDto} [authRequestsDto] 
+     * @param {AuthenticationApiSendSmsCodeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthenticationApi
      */
-    public sendSmsCode(authRequestsDto?: AuthRequestsDto, options?: RawAxiosRequestConfig) {
-        return AuthenticationApiFp(this.configuration).sendSmsCode(authRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public sendSmsCode(requestParameters: AuthenticationApiSendSmsCodeRequest = {}, options?: RawAxiosRequestConfig) {
+        return AuthenticationApiFp(this.configuration).sendSmsCode(requestParameters.authRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

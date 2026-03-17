@@ -693,51 +693,51 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
         /**
          * Returns an invitation link for joining the portal.
          * @summary Create an invitation link
-         * @param {InvitationLinkCreateRequestDto} [invitationLinkCreateRequestDto] 
+         * @param {UsersApiCreateInvitationLinkRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for createInvitationLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-invitation-link/
          * @throws {RequiredError}
          */
-        createInvitationLink(invitationLinkCreateRequestDto?: InvitationLinkCreateRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<InvitationLinkWrapper> {
-            return localVarFp.createInvitationLink(invitationLinkCreateRequestDto, options).then((request) => request(axios, basePath));
+        createInvitationLink(requestParameters: UsersApiCreateInvitationLinkRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<InvitationLinkWrapper> {
+            return localVarFp.createInvitationLink(requestParameters.invitationLinkCreateRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Ensures that the current user has permission to delete the specified invitation link.  Throws security or not-found exceptions if required conditions are not met.
          * @summary Deletes an invitation link.
-         * @param {InvitationLinkDeleteRequestDto} [invitationLinkDeleteRequestDto] The data transfer object containing the details of the invitation link to be deleted.
+         * @param {UsersApiDeleteInvitationLinkRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteInvitationLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-invitation-link/
          * @throws {RequiredError}
          */
-        deleteInvitationLink(invitationLinkDeleteRequestDto?: InvitationLinkDeleteRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.deleteInvitationLink(invitationLinkDeleteRequestDto, options).then((request) => request(axios, basePath));
+        deleteInvitationLink(requestParameters: UsersApiDeleteInvitationLinkRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.deleteInvitationLink(requestParameters.invitationLinkDeleteRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns an invitation link for joining the portal.
          * @summary Get an invitation link
-         * @param {EmployeeType} employeeType The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User).
+         * @param {UsersApiGetInvitationLinkRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @deprecated
          * REST API Reference for getInvitationLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-invitation-link/
          * @throws {RequiredError}
          */
-        getInvitationLink(employeeType: EmployeeType, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.getInvitationLink(employeeType, options).then((request) => request(axios, basePath));
+        getInvitationLink(requestParameters: UsersApiGetInvitationLinkRequest, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.getInvitationLink(requestParameters.employeeType, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns an invitation link for joining the portal.
          * @summary Get an invitation link
-         * @param {EmployeeType} employeeType The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User).
+         * @param {UsersApiGetInvitationLinkByEmployeeTypeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getInvitationLinkByEmployeeType operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-invitation-link-by-employee-type/
          * @throws {RequiredError}
          */
-        getInvitationLinkByEmployeeType(employeeType: EmployeeType, options?: RawAxiosRequestConfig): AxiosPromise<InvitationLinkWrapper> {
-            return localVarFp.getInvitationLinkByEmployeeType(employeeType, options).then((request) => request(axios, basePath));
+        getInvitationLinkByEmployeeType(requestParameters: UsersApiGetInvitationLinkByEmployeeTypeRequest, options?: RawAxiosRequestConfig): AxiosPromise<InvitationLinkWrapper> {
+            return localVarFp.getInvitationLinkByEmployeeType(requestParameters.employeeType, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a number of portal users.
@@ -753,14 +753,14 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
         /**
          * Returns a user with the ID specified in the request from the current portal.
          * @summary Get a user by ID
-         * @param {string} userID The user ID extracted from the route parameters.
+         * @param {UsersApiGetUserByIdRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getUserById operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-by-id/
          * @throws {RequiredError}
          */
-        getUserById(userID: string, options?: RawAxiosRequestConfig): AxiosPromise<UserInfoWrapper> {
-            return localVarFp.getUserById(userID, options).then((request) => request(axios, basePath));
+        getUserById(requestParameters: UsersApiGetUserByIdRequest, options?: RawAxiosRequestConfig): AxiosPromise<UserInfoWrapper> {
+            return localVarFp.getUserById(requestParameters.userID, options).then((request) => request(axios, basePath));
         },
         /**
          * Marks a gift message as read.
@@ -776,30 +776,134 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
         /**
          * Sends congratulations to the user after registering a portal.
          * @summary Send congratulations
-         * @param {string} userid The user ID to receive the congratulatory message.
-         * @param {string} key The template identifier or email configuration key.
+         * @param {UsersApiSendCongratulationsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for sendCongratulations operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-congratulations/
          * @throws {RequiredError}
          */
-        sendCongratulations(userid: string, key: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.sendCongratulations(userid, key, options).then((request) => request(axios, basePath));
+        sendCongratulations(requestParameters: UsersApiSendCongratulationsRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.sendCongratulations(requestParameters.userid, requestParameters.key, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns an invitation link for joining the portal.
          * @summary Update an invitation link
-         * @param {InvitationLinkUpdateRequestDto} [invitationLinkUpdateRequestDto] 
+         * @param {UsersApiUpdateInvitationLinkRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateInvitationLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-invitation-link/
          * @throws {RequiredError}
          */
-        updateInvitationLink(invitationLinkUpdateRequestDto?: InvitationLinkUpdateRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<InvitationLinkWrapper> {
-            return localVarFp.updateInvitationLink(invitationLinkUpdateRequestDto, options).then((request) => request(axios, basePath));
+        updateInvitationLink(requestParameters: UsersApiUpdateInvitationLinkRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<InvitationLinkWrapper> {
+            return localVarFp.updateInvitationLink(requestParameters.invitationLinkUpdateRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for createInvitationLink operation in UsersApi.
+ * @export
+ * @interface UsersApiCreateInvitationLinkRequest
+ */
+export interface UsersApiCreateInvitationLinkRequest {
+    /**
+     * 
+     * @type {InvitationLinkCreateRequestDto}
+     * @memberof UsersApiCreateInvitationLink
+     */
+    readonly invitationLinkCreateRequestDto?: InvitationLinkCreateRequestDto
+}
+
+/**
+ * Request parameters for deleteInvitationLink operation in UsersApi.
+ * @export
+ * @interface UsersApiDeleteInvitationLinkRequest
+ */
+export interface UsersApiDeleteInvitationLinkRequest {
+    /**
+     * The data transfer object containing the details of the invitation link to be deleted.
+     * @type {InvitationLinkDeleteRequestDto}
+     * @memberof UsersApiDeleteInvitationLink
+     */
+    readonly invitationLinkDeleteRequestDto?: InvitationLinkDeleteRequestDto
+}
+
+/**
+ * Request parameters for getInvitationLink operation in UsersApi.
+ * @export
+ * @interface UsersApiGetInvitationLinkRequest
+ */
+export interface UsersApiGetInvitationLinkRequest {
+    /**
+     * The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User).
+     * @type {EmployeeType}
+     * @memberof UsersApiGetInvitationLink
+     */
+    readonly employeeType: EmployeeType
+}
+
+/**
+ * Request parameters for getInvitationLinkByEmployeeType operation in UsersApi.
+ * @export
+ * @interface UsersApiGetInvitationLinkByEmployeeTypeRequest
+ */
+export interface UsersApiGetInvitationLinkByEmployeeTypeRequest {
+    /**
+     * The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User).
+     * @type {EmployeeType}
+     * @memberof UsersApiGetInvitationLinkByEmployeeType
+     */
+    readonly employeeType: EmployeeType
+}
+
+/**
+ * Request parameters for getUserById operation in UsersApi.
+ * @export
+ * @interface UsersApiGetUserByIdRequest
+ */
+export interface UsersApiGetUserByIdRequest {
+    /**
+     * The user ID extracted from the route parameters.
+     * @type {string}
+     * @memberof UsersApiGetUserById
+     */
+    readonly userID: string
+}
+
+/**
+ * Request parameters for sendCongratulations operation in UsersApi.
+ * @export
+ * @interface UsersApiSendCongratulationsRequest
+ */
+export interface UsersApiSendCongratulationsRequest {
+    /**
+     * The user ID to receive the congratulatory message.
+     * @type {string}
+     * @memberof UsersApiSendCongratulations
+     */
+    readonly userid: string
+
+    /**
+     * The template identifier or email configuration key.
+     * @type {string}
+     * @memberof UsersApiSendCongratulations
+     */
+    readonly key: string
+}
+
+/**
+ * Request parameters for updateInvitationLink operation in UsersApi.
+ * @export
+ * @interface UsersApiUpdateInvitationLinkRequest
+ */
+export interface UsersApiUpdateInvitationLinkRequest {
+    /**
+     * 
+     * @type {InvitationLinkUpdateRequestDto}
+     * @memberof UsersApiUpdateInvitationLink
+     */
+    readonly invitationLinkUpdateRequestDto?: InvitationLinkUpdateRequestDto
+}
 
 /**
  * UsersApi - object-oriented interface
@@ -811,50 +915,50 @@ export class UsersApi extends BaseAPI {
     /**
      * Returns an invitation link for joining the portal.
      * @summary Create an invitation link
-     * @param {InvitationLinkCreateRequestDto} [invitationLinkCreateRequestDto] 
+     * @param {PortalUsersApiCreateInvitationLinkRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    public createInvitationLink(invitationLinkCreateRequestDto?: InvitationLinkCreateRequestDto, options?: RawAxiosRequestConfig) {
-        return UsersApiFp(this.configuration).createInvitationLink(invitationLinkCreateRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public createInvitationLink(requestParameters: UsersApiCreateInvitationLinkRequest = {}, options?: RawAxiosRequestConfig) {
+        return UsersApiFp(this.configuration).createInvitationLink(requestParameters.invitationLinkCreateRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Ensures that the current user has permission to delete the specified invitation link.  Throws security or not-found exceptions if required conditions are not met.
      * @summary Deletes an invitation link.
-     * @param {InvitationLinkDeleteRequestDto} [invitationLinkDeleteRequestDto] The data transfer object containing the details of the invitation link to be deleted.
+     * @param {PortalUsersApiDeleteInvitationLinkRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    public deleteInvitationLink(invitationLinkDeleteRequestDto?: InvitationLinkDeleteRequestDto, options?: RawAxiosRequestConfig) {
-        return UsersApiFp(this.configuration).deleteInvitationLink(invitationLinkDeleteRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public deleteInvitationLink(requestParameters: UsersApiDeleteInvitationLinkRequest = {}, options?: RawAxiosRequestConfig) {
+        return UsersApiFp(this.configuration).deleteInvitationLink(requestParameters.invitationLinkDeleteRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns an invitation link for joining the portal.
      * @summary Get an invitation link
-     * @param {EmployeeType} employeeType The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User).
+     * @param {PortalUsersApiGetInvitationLinkRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @deprecated
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    public getInvitationLink(employeeType: EmployeeType, options?: RawAxiosRequestConfig) {
-        return UsersApiFp(this.configuration).getInvitationLink(employeeType, options).then((request) => request(this.axios, this.basePath));
+    public getInvitationLink(requestParameters: UsersApiGetInvitationLinkRequest, options?: RawAxiosRequestConfig) {
+        return UsersApiFp(this.configuration).getInvitationLink(requestParameters.employeeType, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns an invitation link for joining the portal.
      * @summary Get an invitation link
-     * @param {EmployeeType} employeeType The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User).
+     * @param {PortalUsersApiGetInvitationLinkByEmployeeTypeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    public getInvitationLinkByEmployeeType(employeeType: EmployeeType, options?: RawAxiosRequestConfig) {
-        return UsersApiFp(this.configuration).getInvitationLinkByEmployeeType(employeeType, options).then((request) => request(this.axios, this.basePath));
+    public getInvitationLinkByEmployeeType(requestParameters: UsersApiGetInvitationLinkByEmployeeTypeRequest, options?: RawAxiosRequestConfig) {
+        return UsersApiFp(this.configuration).getInvitationLinkByEmployeeType(requestParameters.employeeType, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -871,13 +975,13 @@ export class UsersApi extends BaseAPI {
     /**
      * Returns a user with the ID specified in the request from the current portal.
      * @summary Get a user by ID
-     * @param {string} userID The user ID extracted from the route parameters.
+     * @param {PortalUsersApiGetUserByIdRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    public getUserById(userID: string, options?: RawAxiosRequestConfig) {
-        return UsersApiFp(this.configuration).getUserById(userID, options).then((request) => request(this.axios, this.basePath));
+    public getUserById(requestParameters: UsersApiGetUserByIdRequest, options?: RawAxiosRequestConfig) {
+        return UsersApiFp(this.configuration).getUserById(requestParameters.userID, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -894,26 +998,25 @@ export class UsersApi extends BaseAPI {
     /**
      * Sends congratulations to the user after registering a portal.
      * @summary Send congratulations
-     * @param {string} userid The user ID to receive the congratulatory message.
-     * @param {string} key The template identifier or email configuration key.
+     * @param {PortalUsersApiSendCongratulationsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    public sendCongratulations(userid: string, key: string, options?: RawAxiosRequestConfig) {
-        return UsersApiFp(this.configuration).sendCongratulations(userid, key, options).then((request) => request(this.axios, this.basePath));
+    public sendCongratulations(requestParameters: UsersApiSendCongratulationsRequest, options?: RawAxiosRequestConfig) {
+        return UsersApiFp(this.configuration).sendCongratulations(requestParameters.userid, requestParameters.key, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns an invitation link for joining the portal.
      * @summary Update an invitation link
-     * @param {InvitationLinkUpdateRequestDto} [invitationLinkUpdateRequestDto] 
+     * @param {PortalUsersApiUpdateInvitationLinkRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    public updateInvitationLink(invitationLinkUpdateRequestDto?: InvitationLinkUpdateRequestDto, options?: RawAxiosRequestConfig) {
-        return UsersApiFp(this.configuration).updateInvitationLink(invitationLinkUpdateRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public updateInvitationLink(requestParameters: UsersApiUpdateInvitationLinkRequest = {}, options?: RawAxiosRequestConfig) {
+        return UsersApiFp(this.configuration).updateInvitationLink(requestParameters.invitationLinkUpdateRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

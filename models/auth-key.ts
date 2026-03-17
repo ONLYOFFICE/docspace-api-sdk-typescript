@@ -35,5 +35,21 @@ export interface AuthKey {
      * The authorization key title.
      */
     'title'?: string | null;
+    /**
+     * The field type: text, password, select, toggle.
+     */
+    'type'?: string | null;
+    /**
+     * The list of options for select type fields.
+     */
+    'options'?: Array<string> | null;
+    /**
+     * The name of another key this field depends on for visibility.
+     */
+    'dependsOn'?: string | null;
+    /**
+     * The value of ASC.Web.Studio.UserControls.Management.AuthKey.DependsOn key that makes this field visible.
+     */
+    'dependsOnValue'?: string | null;
 }
 

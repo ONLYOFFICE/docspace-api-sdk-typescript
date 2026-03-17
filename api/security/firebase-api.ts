@@ -200,29 +200,57 @@ export const FirebaseApiFactory = function (configuration?: Configuration, baseP
         /**
          * Saves the Firebase device token specified in the request for the Documents application.
          * @summary Save the Documents Firebase device token
-         * @param {FirebaseRequestsDto} [firebaseRequestsDto] 
+         * @param {FirebaseApiDocRegisterPusnNotificationDeviceRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for docRegisterPusnNotificationDevice operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/doc-register-pusn-notification-device/
          * @throws {RequiredError}
          */
-        docRegisterPusnNotificationDevice(firebaseRequestsDto?: FirebaseRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<FireBaseUserWrapper> {
-            return localVarFp.docRegisterPusnNotificationDevice(firebaseRequestsDto, options).then((request) => request(axios, basePath));
+        docRegisterPusnNotificationDevice(requestParameters: FirebaseApiDocRegisterPusnNotificationDeviceRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FireBaseUserWrapper> {
+            return localVarFp.docRegisterPusnNotificationDevice(requestParameters.firebaseRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Subscribes to the Documents push notification.
          * @summary Subscribe to Documents push notification
-         * @param {FirebaseRequestsDto} [firebaseRequestsDto] 
+         * @param {FirebaseApiSubscribeDocumentsPushNotificationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for subscribeDocumentsPushNotification operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/subscribe-documents-push-notification/
          * @throws {RequiredError}
          */
-        subscribeDocumentsPushNotification(firebaseRequestsDto?: FirebaseRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<FireBaseUserWrapper> {
-            return localVarFp.subscribeDocumentsPushNotification(firebaseRequestsDto, options).then((request) => request(axios, basePath));
+        subscribeDocumentsPushNotification(requestParameters: FirebaseApiSubscribeDocumentsPushNotificationRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FireBaseUserWrapper> {
+            return localVarFp.subscribeDocumentsPushNotification(requestParameters.firebaseRequestsDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for docRegisterPusnNotificationDevice operation in FirebaseApi.
+ * @export
+ * @interface FirebaseApiDocRegisterPusnNotificationDeviceRequest
+ */
+export interface FirebaseApiDocRegisterPusnNotificationDeviceRequest {
+    /**
+     * 
+     * @type {FirebaseRequestsDto}
+     * @memberof FirebaseApiDocRegisterPusnNotificationDevice
+     */
+    readonly firebaseRequestsDto?: FirebaseRequestsDto
+}
+
+/**
+ * Request parameters for subscribeDocumentsPushNotification operation in FirebaseApi.
+ * @export
+ * @interface FirebaseApiSubscribeDocumentsPushNotificationRequest
+ */
+export interface FirebaseApiSubscribeDocumentsPushNotificationRequest {
+    /**
+     * 
+     * @type {FirebaseRequestsDto}
+     * @memberof FirebaseApiSubscribeDocumentsPushNotification
+     */
+    readonly firebaseRequestsDto?: FirebaseRequestsDto
+}
 
 /**
  * FirebaseApi - object-oriented interface
@@ -234,25 +262,25 @@ export class FirebaseApi extends BaseAPI {
     /**
      * Saves the Firebase device token specified in the request for the Documents application.
      * @summary Save the Documents Firebase device token
-     * @param {FirebaseRequestsDto} [firebaseRequestsDto] 
+     * @param {SecurityFirebaseApiDocRegisterPusnNotificationDeviceRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FirebaseApi
      */
-    public docRegisterPusnNotificationDevice(firebaseRequestsDto?: FirebaseRequestsDto, options?: RawAxiosRequestConfig) {
-        return FirebaseApiFp(this.configuration).docRegisterPusnNotificationDevice(firebaseRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public docRegisterPusnNotificationDevice(requestParameters: FirebaseApiDocRegisterPusnNotificationDeviceRequest = {}, options?: RawAxiosRequestConfig) {
+        return FirebaseApiFp(this.configuration).docRegisterPusnNotificationDevice(requestParameters.firebaseRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Subscribes to the Documents push notification.
      * @summary Subscribe to Documents push notification
-     * @param {FirebaseRequestsDto} [firebaseRequestsDto] 
+     * @param {SecurityFirebaseApiSubscribeDocumentsPushNotificationRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FirebaseApi
      */
-    public subscribeDocumentsPushNotification(firebaseRequestsDto?: FirebaseRequestsDto, options?: RawAxiosRequestConfig) {
-        return FirebaseApiFp(this.configuration).subscribeDocumentsPushNotification(firebaseRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public subscribeDocumentsPushNotification(requestParameters: FirebaseApiSubscribeDocumentsPushNotificationRequest = {}, options?: RawAxiosRequestConfig) {
+        return FirebaseApiFp(this.configuration).subscribeDocumentsPushNotification(requestParameters.firebaseRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

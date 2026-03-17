@@ -779,39 +779,38 @@ export const UserDataApiFactory = function (configuration?: Configuration, baseP
         /**
          * Returns the progress of the started data reassignment for the user with the ID specified in the request.
          * @summary Get the reassignment progress
-         * @param {string} userid The user ID.
+         * @param {UserDataApiGetReassignProgressRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getReassignProgress operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-reassign-progress/
          * @throws {RequiredError}
          */
-        getReassignProgress(userid: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskProgressResponseWrapper> {
-            return localVarFp.getReassignProgress(userid, options).then((request) => request(axios, basePath));
+        getReassignProgress(requestParameters: UserDataApiGetReassignProgressRequest, options?: RawAxiosRequestConfig): AxiosPromise<TaskProgressResponseWrapper> {
+            return localVarFp.getReassignProgress(requestParameters.userid, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the progress of the started data deletion for the user with the ID specified in the request.
          * @summary Get the deletion progress
-         * @param {string} userid The user ID.
+         * @param {UserDataApiGetRemoveProgressRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getRemoveProgress operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-remove-progress/
          * @throws {RequiredError}
          */
-        getRemoveProgress(userid: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskProgressResponseWrapper> {
-            return localVarFp.getRemoveProgress(userid, options).then((request) => request(axios, basePath));
+        getRemoveProgress(requestParameters: UserDataApiGetRemoveProgressRequest, options?: RawAxiosRequestConfig): AxiosPromise<TaskProgressResponseWrapper> {
+            return localVarFp.getRemoveProgress(requestParameters.userid, options).then((request) => request(axios, basePath));
         },
         /**
          * Checks whether the reassignment of rooms and shared files is required.
          * @summary Check data for reassignment need
-         * @param {string} [userId] The user ID.
-         * @param {EmployeeType} [type] The expected user type.
+         * @param {UserDataApiNecessaryReassignRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for necessaryReassign operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/necessary-reassign/
          * @throws {RequiredError}
          */
-        necessaryReassign(userId?: string, type?: EmployeeType, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.necessaryReassign(userId, type, options).then((request) => request(axios, basePath));
+        necessaryReassign(requestParameters: UserDataApiNecessaryReassignRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.necessaryReassign(requestParameters.userId, requestParameters.type, options).then((request) => request(axios, basePath));
         },
         /**
          * Sends the instructions for deleting a user profile.
@@ -838,53 +837,158 @@ export const UserDataApiFactory = function (configuration?: Configuration, baseP
         /**
          * Starts the data reassignment for the user with the ID specified in the request.
          * @summary Start the data reassignment
-         * @param {StartReassignRequestDto} [startReassignRequestDto] 
+         * @param {UserDataApiStartReassignRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for startReassign operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-reassign/
          * @throws {RequiredError}
          */
-        startReassign(startReassignRequestDto?: StartReassignRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<TaskProgressResponseWrapper> {
-            return localVarFp.startReassign(startReassignRequestDto, options).then((request) => request(axios, basePath));
+        startReassign(requestParameters: UserDataApiStartReassignRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TaskProgressResponseWrapper> {
+            return localVarFp.startReassign(requestParameters.startReassignRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Starts the data deletion for the user with the ID specified in the request.
          * @summary Start the data deletion
-         * @param {TerminateRequestDto} [terminateRequestDto] 
+         * @param {UserDataApiStartRemoveRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for startRemove operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-remove/
          * @throws {RequiredError}
          */
-        startRemove(terminateRequestDto?: TerminateRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<TaskProgressResponseWrapper> {
-            return localVarFp.startRemove(terminateRequestDto, options).then((request) => request(axios, basePath));
+        startRemove(requestParameters: UserDataApiStartRemoveRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TaskProgressResponseWrapper> {
+            return localVarFp.startRemove(requestParameters.terminateRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Terminates the data reassignment for the user with the ID specified in the request.
          * @summary Terminate the data reassignment
-         * @param {TerminateRequestDto} [terminateRequestDto] 
+         * @param {UserDataApiTerminateReassignRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for terminateReassign operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-reassign/
          * @throws {RequiredError}
          */
-        terminateReassign(terminateRequestDto?: TerminateRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<TaskProgressResponseWrapper> {
-            return localVarFp.terminateReassign(terminateRequestDto, options).then((request) => request(axios, basePath));
+        terminateReassign(requestParameters: UserDataApiTerminateReassignRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TaskProgressResponseWrapper> {
+            return localVarFp.terminateReassign(requestParameters.terminateRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Terminates the data deletion for the user with the ID specified in the request.
          * @summary Terminate the data deletion
-         * @param {TerminateRequestDto} [terminateRequestDto] 
+         * @param {UserDataApiTerminateRemoveRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for terminateRemove operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-remove/
          * @throws {RequiredError}
          */
-        terminateRemove(terminateRequestDto?: TerminateRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.terminateRemove(terminateRequestDto, options).then((request) => request(axios, basePath));
+        terminateRemove(requestParameters: UserDataApiTerminateRemoveRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.terminateRemove(requestParameters.terminateRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for getReassignProgress operation in UserDataApi.
+ * @export
+ * @interface UserDataApiGetReassignProgressRequest
+ */
+export interface UserDataApiGetReassignProgressRequest {
+    /**
+     * The user ID.
+     * @type {string}
+     * @memberof UserDataApiGetReassignProgress
+     */
+    readonly userid: string
+}
+
+/**
+ * Request parameters for getRemoveProgress operation in UserDataApi.
+ * @export
+ * @interface UserDataApiGetRemoveProgressRequest
+ */
+export interface UserDataApiGetRemoveProgressRequest {
+    /**
+     * The user ID.
+     * @type {string}
+     * @memberof UserDataApiGetRemoveProgress
+     */
+    readonly userid: string
+}
+
+/**
+ * Request parameters for necessaryReassign operation in UserDataApi.
+ * @export
+ * @interface UserDataApiNecessaryReassignRequest
+ */
+export interface UserDataApiNecessaryReassignRequest {
+    /**
+     * The user ID.
+     * @type {string}
+     * @memberof UserDataApiNecessaryReassign
+     */
+    readonly userId?: string
+
+    /**
+     * The expected user type.
+     * @type {EmployeeType}
+     * @memberof UserDataApiNecessaryReassign
+     */
+    readonly type?: EmployeeType
+}
+
+/**
+ * Request parameters for startReassign operation in UserDataApi.
+ * @export
+ * @interface UserDataApiStartReassignRequest
+ */
+export interface UserDataApiStartReassignRequest {
+    /**
+     * 
+     * @type {StartReassignRequestDto}
+     * @memberof UserDataApiStartReassign
+     */
+    readonly startReassignRequestDto?: StartReassignRequestDto
+}
+
+/**
+ * Request parameters for startRemove operation in UserDataApi.
+ * @export
+ * @interface UserDataApiStartRemoveRequest
+ */
+export interface UserDataApiStartRemoveRequest {
+    /**
+     * 
+     * @type {TerminateRequestDto}
+     * @memberof UserDataApiStartRemove
+     */
+    readonly terminateRequestDto?: TerminateRequestDto
+}
+
+/**
+ * Request parameters for terminateReassign operation in UserDataApi.
+ * @export
+ * @interface UserDataApiTerminateReassignRequest
+ */
+export interface UserDataApiTerminateReassignRequest {
+    /**
+     * 
+     * @type {TerminateRequestDto}
+     * @memberof UserDataApiTerminateReassign
+     */
+    readonly terminateRequestDto?: TerminateRequestDto
+}
+
+/**
+ * Request parameters for terminateRemove operation in UserDataApi.
+ * @export
+ * @interface UserDataApiTerminateRemoveRequest
+ */
+export interface UserDataApiTerminateRemoveRequest {
+    /**
+     * 
+     * @type {TerminateRequestDto}
+     * @memberof UserDataApiTerminateRemove
+     */
+    readonly terminateRequestDto?: TerminateRequestDto
+}
 
 /**
  * UserDataApi - object-oriented interface
@@ -907,38 +1011,37 @@ export class UserDataApi extends BaseAPI {
     /**
      * Returns the progress of the started data reassignment for the user with the ID specified in the request.
      * @summary Get the reassignment progress
-     * @param {string} userid The user ID.
+     * @param {PeopleUserDataApiGetReassignProgressRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserDataApi
      */
-    public getReassignProgress(userid: string, options?: RawAxiosRequestConfig) {
-        return UserDataApiFp(this.configuration).getReassignProgress(userid, options).then((request) => request(this.axios, this.basePath));
+    public getReassignProgress(requestParameters: UserDataApiGetReassignProgressRequest, options?: RawAxiosRequestConfig) {
+        return UserDataApiFp(this.configuration).getReassignProgress(requestParameters.userid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the progress of the started data deletion for the user with the ID specified in the request.
      * @summary Get the deletion progress
-     * @param {string} userid The user ID.
+     * @param {PeopleUserDataApiGetRemoveProgressRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserDataApi
      */
-    public getRemoveProgress(userid: string, options?: RawAxiosRequestConfig) {
-        return UserDataApiFp(this.configuration).getRemoveProgress(userid, options).then((request) => request(this.axios, this.basePath));
+    public getRemoveProgress(requestParameters: UserDataApiGetRemoveProgressRequest, options?: RawAxiosRequestConfig) {
+        return UserDataApiFp(this.configuration).getRemoveProgress(requestParameters.userid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Checks whether the reassignment of rooms and shared files is required.
      * @summary Check data for reassignment need
-     * @param {string} [userId] The user ID.
-     * @param {EmployeeType} [type] The expected user type.
+     * @param {PeopleUserDataApiNecessaryReassignRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserDataApi
      */
-    public necessaryReassign(userId?: string, type?: EmployeeType, options?: RawAxiosRequestConfig) {
-        return UserDataApiFp(this.configuration).necessaryReassign(userId, type, options).then((request) => request(this.axios, this.basePath));
+    public necessaryReassign(requestParameters: UserDataApiNecessaryReassignRequest = {}, options?: RawAxiosRequestConfig) {
+        return UserDataApiFp(this.configuration).necessaryReassign(requestParameters.userId, requestParameters.type, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -966,49 +1069,49 @@ export class UserDataApi extends BaseAPI {
     /**
      * Starts the data reassignment for the user with the ID specified in the request.
      * @summary Start the data reassignment
-     * @param {StartReassignRequestDto} [startReassignRequestDto] 
+     * @param {PeopleUserDataApiStartReassignRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserDataApi
      */
-    public startReassign(startReassignRequestDto?: StartReassignRequestDto, options?: RawAxiosRequestConfig) {
-        return UserDataApiFp(this.configuration).startReassign(startReassignRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public startReassign(requestParameters: UserDataApiStartReassignRequest = {}, options?: RawAxiosRequestConfig) {
+        return UserDataApiFp(this.configuration).startReassign(requestParameters.startReassignRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Starts the data deletion for the user with the ID specified in the request.
      * @summary Start the data deletion
-     * @param {TerminateRequestDto} [terminateRequestDto] 
+     * @param {PeopleUserDataApiStartRemoveRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserDataApi
      */
-    public startRemove(terminateRequestDto?: TerminateRequestDto, options?: RawAxiosRequestConfig) {
-        return UserDataApiFp(this.configuration).startRemove(terminateRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public startRemove(requestParameters: UserDataApiStartRemoveRequest = {}, options?: RawAxiosRequestConfig) {
+        return UserDataApiFp(this.configuration).startRemove(requestParameters.terminateRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Terminates the data reassignment for the user with the ID specified in the request.
      * @summary Terminate the data reassignment
-     * @param {TerminateRequestDto} [terminateRequestDto] 
+     * @param {PeopleUserDataApiTerminateReassignRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserDataApi
      */
-    public terminateReassign(terminateRequestDto?: TerminateRequestDto, options?: RawAxiosRequestConfig) {
-        return UserDataApiFp(this.configuration).terminateReassign(terminateRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public terminateReassign(requestParameters: UserDataApiTerminateReassignRequest = {}, options?: RawAxiosRequestConfig) {
+        return UserDataApiFp(this.configuration).terminateReassign(requestParameters.terminateRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Terminates the data deletion for the user with the ID specified in the request.
      * @summary Terminate the data deletion
-     * @param {TerminateRequestDto} [terminateRequestDto] 
+     * @param {PeopleUserDataApiTerminateRemoveRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserDataApi
      */
-    public terminateRemove(terminateRequestDto?: TerminateRequestDto, options?: RawAxiosRequestConfig) {
-        return UserDataApiFp(this.configuration).terminateRemove(terminateRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public terminateRemove(requestParameters: UserDataApiTerminateRemoveRequest = {}, options?: RawAxiosRequestConfig) {
+        return UserDataApiFp(this.configuration).terminateRemove(requestParameters.terminateRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

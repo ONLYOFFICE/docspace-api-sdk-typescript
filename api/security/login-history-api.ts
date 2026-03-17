@@ -324,22 +324,66 @@ export const LoginHistoryApiFactory = function (configuration?: Configuration, b
         /**
          * Returns a list of the login events by the parameters specified in the request.
          * @summary Get filtered login events
-         * @param {string} [userId] The ID of the user whose login events are being queried.
-         * @param {MessageAction} [action] The login-related action to filter events by.
-         * @param {ApiDateTime} [from] The starting date and time for filtering login events.
-         * @param {ApiDateTime} [to] The ending date and time for filtering login events.
-         * @param {number} [count] The number of login events to retrieve in the query.
-         * @param {number} [startIndex] The starting index for fetching a subset of login events from the query results.
+         * @param {LoginHistoryApiGetLoginEventsByFilterRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getLoginEventsByFilter operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-login-events-by-filter/
          * @throws {RequiredError}
          */
-        getLoginEventsByFilter(userId?: string, action?: MessageAction, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): AxiosPromise<LoginEventArrayWrapper> {
-            return localVarFp.getLoginEventsByFilter(userId, action, from, to, count, startIndex, options).then((request) => request(axios, basePath));
+        getLoginEventsByFilter(requestParameters: LoginHistoryApiGetLoginEventsByFilterRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<LoginEventArrayWrapper> {
+            return localVarFp.getLoginEventsByFilter(requestParameters.userId, requestParameters.action, requestParameters.from, requestParameters.to, requestParameters.count, requestParameters.startIndex, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for getLoginEventsByFilter operation in LoginHistoryApi.
+ * @export
+ * @interface LoginHistoryApiGetLoginEventsByFilterRequest
+ */
+export interface LoginHistoryApiGetLoginEventsByFilterRequest {
+    /**
+     * The ID of the user whose login events are being queried.
+     * @type {string}
+     * @memberof LoginHistoryApiGetLoginEventsByFilter
+     */
+    readonly userId?: string
+
+    /**
+     * The login-related action to filter events by.
+     * @type {MessageAction}
+     * @memberof LoginHistoryApiGetLoginEventsByFilter
+     */
+    readonly action?: MessageAction
+
+    /**
+     * The starting date and time for filtering login events.
+     * @type {ApiDateTime}
+     * @memberof LoginHistoryApiGetLoginEventsByFilter
+     */
+    readonly from?: ApiDateTime
+
+    /**
+     * The ending date and time for filtering login events.
+     * @type {ApiDateTime}
+     * @memberof LoginHistoryApiGetLoginEventsByFilter
+     */
+    readonly to?: ApiDateTime
+
+    /**
+     * The number of login events to retrieve in the query.
+     * @type {number}
+     * @memberof LoginHistoryApiGetLoginEventsByFilter
+     */
+    readonly count?: number
+
+    /**
+     * The starting index for fetching a subset of login events from the query results.
+     * @type {number}
+     * @memberof LoginHistoryApiGetLoginEventsByFilter
+     */
+    readonly startIndex?: number
+}
 
 /**
  * LoginHistoryApi - object-oriented interface
@@ -373,18 +417,13 @@ export class LoginHistoryApi extends BaseAPI {
     /**
      * Returns a list of the login events by the parameters specified in the request.
      * @summary Get filtered login events
-     * @param {string} [userId] The ID of the user whose login events are being queried.
-     * @param {MessageAction} [action] The login-related action to filter events by.
-     * @param {ApiDateTime} [from] The starting date and time for filtering login events.
-     * @param {ApiDateTime} [to] The ending date and time for filtering login events.
-     * @param {number} [count] The number of login events to retrieve in the query.
-     * @param {number} [startIndex] The starting index for fetching a subset of login events from the query results.
+     * @param {SecurityLoginHistoryApiGetLoginEventsByFilterRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof LoginHistoryApi
      */
-    public getLoginEventsByFilter(userId?: string, action?: MessageAction, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, options?: RawAxiosRequestConfig) {
-        return LoginHistoryApiFp(this.configuration).getLoginEventsByFilter(userId, action, from, to, count, startIndex, options).then((request) => request(this.axios, this.basePath));
+    public getLoginEventsByFilter(requestParameters: LoginHistoryApiGetLoginEventsByFilterRequest = {}, options?: RawAxiosRequestConfig) {
+        return LoginHistoryApiFp(this.configuration).getLoginEventsByFilter(requestParameters.userId, requestParameters.action, requestParameters.from, requestParameters.to, requestParameters.count, requestParameters.startIndex, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

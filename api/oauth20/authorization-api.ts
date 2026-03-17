@@ -289,50 +289,146 @@ export const AuthorizationApiFactory = function (configuration?: Configuration, 
         /**
          * Initiates the OAuth2 authorization flow.
          * @summary OAuth2 authorization endpoint
-         * @param {string} responseType The OAuth 2.0 response type, must be \&#39;code\&#39; for authorization code flow.
-         * @param {string} clientId The client identifier issued to the client during registration.
-         * @param {string} redirectUri The URL to redirect to after authorization is complete.
-         * @param {string} scope The space-separated list of requested scope permissions.
+         * @param {AuthorizationApiAuthorizeOAuthRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for authorizeOAuth operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/authorize-oauth/
          * @throws {RequiredError}
          */
-        authorizeOAuth(responseType: string, clientId: string, redirectUri: string, scope: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.authorizeOAuth(responseType, clientId, redirectUri, scope, options).then((request) => request(axios, basePath));
+        authorizeOAuth(requestParameters: AuthorizationApiAuthorizeOAuthRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.authorizeOAuth(requestParameters.responseType, requestParameters.clientId, requestParameters.redirectUri, requestParameters.scope, options).then((request) => request(axios, basePath));
         },
         /**
          * Exchanges an authorization code specified in the request for the access token.
          * @summary OAuth2 token endpoint
-         * @param {string} [grantType] The OAuth2 grant type, must be \\\&#39;authorization_code\\\&#39; for the authorization code flow.
-         * @param {string} [code] A temporary authorization code that is sent to the client to be exchanged for a token.
-         * @param {string} [redirectUri] The URL where the user will be redirected after successful or unsuccessful authentication.
-         * @param {string} [clientId] The client identifier issued to the client during registration.
-         * @param {string} [clientSecret] The client secret issued to the client during registration.
+         * @param {AuthorizationApiExchangeTokenRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for exchangeToken operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/exchange-token/
          * @throws {RequiredError}
          */
-        exchangeToken(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, options?: RawAxiosRequestConfig): AxiosPromise<ExchangeToken200Response> {
-            return localVarFp.exchangeToken(grantType, code, redirectUri, clientId, clientSecret, options).then((request) => request(axios, basePath));
+        exchangeToken(requestParameters: AuthorizationApiExchangeTokenRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ExchangeToken200Response> {
+            return localVarFp.exchangeToken(requestParameters.grantType, requestParameters.code, requestParameters.redirectUri, requestParameters.clientId, requestParameters.clientSecret, options).then((request) => request(axios, basePath));
         },
         /**
          * Sends a consent request with the specified parameters.
          * @summary OAuth2 consent endpoint
-         * @param {string} [clientId] The client identifier issued to the client during registration.
-         * @param {string} [state] The random string used to solve the CSRF vulnerability problem.
-         * @param {string} [scope] The space-separated list of requested scope permissions.
+         * @param {AuthorizationApiSubmitConsentRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for submitConsent operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/submit-consent/
          * @throws {RequiredError}
          */
-        submitConsent(clientId?: string, state?: string, scope?: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.submitConsent(clientId, state, scope, options).then((request) => request(axios, basePath));
+        submitConsent(requestParameters: AuthorizationApiSubmitConsentRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.submitConsent(requestParameters.clientId, requestParameters.state, requestParameters.scope, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for authorizeOAuth operation in AuthorizationApi.
+ * @export
+ * @interface AuthorizationApiAuthorizeOAuthRequest
+ */
+export interface AuthorizationApiAuthorizeOAuthRequest {
+    /**
+     * The OAuth 2.0 response type, must be \&#39;code\&#39; for authorization code flow.
+     * @type {string}
+     * @memberof AuthorizationApiAuthorizeOAuth
+     */
+    readonly responseType: string
+
+    /**
+     * The client identifier issued to the client during registration.
+     * @type {string}
+     * @memberof AuthorizationApiAuthorizeOAuth
+     */
+    readonly clientId: string
+
+    /**
+     * The URL to redirect to after authorization is complete.
+     * @type {string}
+     * @memberof AuthorizationApiAuthorizeOAuth
+     */
+    readonly redirectUri: string
+
+    /**
+     * The space-separated list of requested scope permissions.
+     * @type {string}
+     * @memberof AuthorizationApiAuthorizeOAuth
+     */
+    readonly scope: string
+}
+
+/**
+ * Request parameters for exchangeToken operation in AuthorizationApi.
+ * @export
+ * @interface AuthorizationApiExchangeTokenRequest
+ */
+export interface AuthorizationApiExchangeTokenRequest {
+    /**
+     * The OAuth2 grant type, must be \\\&#39;authorization_code\\\&#39; for the authorization code flow.
+     * @type {string}
+     * @memberof AuthorizationApiExchangeToken
+     */
+    readonly grantType?: string
+
+    /**
+     * A temporary authorization code that is sent to the client to be exchanged for a token.
+     * @type {string}
+     * @memberof AuthorizationApiExchangeToken
+     */
+    readonly code?: string
+
+    /**
+     * The URL where the user will be redirected after successful or unsuccessful authentication.
+     * @type {string}
+     * @memberof AuthorizationApiExchangeToken
+     */
+    readonly redirectUri?: string
+
+    /**
+     * The client identifier issued to the client during registration.
+     * @type {string}
+     * @memberof AuthorizationApiExchangeToken
+     */
+    readonly clientId?: string
+
+    /**
+     * The client secret issued to the client during registration.
+     * @type {string}
+     * @memberof AuthorizationApiExchangeToken
+     */
+    readonly clientSecret?: string
+}
+
+/**
+ * Request parameters for submitConsent operation in AuthorizationApi.
+ * @export
+ * @interface AuthorizationApiSubmitConsentRequest
+ */
+export interface AuthorizationApiSubmitConsentRequest {
+    /**
+     * The client identifier issued to the client during registration.
+     * @type {string}
+     * @memberof AuthorizationApiSubmitConsent
+     */
+    readonly clientId?: string
+
+    /**
+     * The random string used to solve the CSRF vulnerability problem.
+     * @type {string}
+     * @memberof AuthorizationApiSubmitConsent
+     */
+    readonly state?: string
+
+    /**
+     * The space-separated list of requested scope permissions.
+     * @type {string}
+     * @memberof AuthorizationApiSubmitConsent
+     */
+    readonly scope?: string
+}
 
 /**
  * AuthorizationApi - object-oriented interface
@@ -344,46 +440,37 @@ export class AuthorizationApi extends BaseAPI {
     /**
      * Initiates the OAuth2 authorization flow.
      * @summary OAuth2 authorization endpoint
-     * @param {string} responseType The OAuth 2.0 response type, must be \&#39;code\&#39; for authorization code flow.
-     * @param {string} clientId The client identifier issued to the client during registration.
-     * @param {string} redirectUri The URL to redirect to after authorization is complete.
-     * @param {string} scope The space-separated list of requested scope permissions.
+     * @param {OAuth20AuthorizationApiAuthorizeOAuthRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthorizationApi
      */
-    public authorizeOAuth(responseType: string, clientId: string, redirectUri: string, scope: string, options?: RawAxiosRequestConfig) {
-        return AuthorizationApiFp(this.configuration).authorizeOAuth(responseType, clientId, redirectUri, scope, options).then((request) => request(this.axios, this.basePath));
+    public authorizeOAuth(requestParameters: AuthorizationApiAuthorizeOAuthRequest, options?: RawAxiosRequestConfig) {
+        return AuthorizationApiFp(this.configuration).authorizeOAuth(requestParameters.responseType, requestParameters.clientId, requestParameters.redirectUri, requestParameters.scope, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Exchanges an authorization code specified in the request for the access token.
      * @summary OAuth2 token endpoint
-     * @param {string} [grantType] The OAuth2 grant type, must be \\\&#39;authorization_code\\\&#39; for the authorization code flow.
-     * @param {string} [code] A temporary authorization code that is sent to the client to be exchanged for a token.
-     * @param {string} [redirectUri] The URL where the user will be redirected after successful or unsuccessful authentication.
-     * @param {string} [clientId] The client identifier issued to the client during registration.
-     * @param {string} [clientSecret] The client secret issued to the client during registration.
+     * @param {OAuth20AuthorizationApiExchangeTokenRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthorizationApi
      */
-    public exchangeToken(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, options?: RawAxiosRequestConfig) {
-        return AuthorizationApiFp(this.configuration).exchangeToken(grantType, code, redirectUri, clientId, clientSecret, options).then((request) => request(this.axios, this.basePath));
+    public exchangeToken(requestParameters: AuthorizationApiExchangeTokenRequest = {}, options?: RawAxiosRequestConfig) {
+        return AuthorizationApiFp(this.configuration).exchangeToken(requestParameters.grantType, requestParameters.code, requestParameters.redirectUri, requestParameters.clientId, requestParameters.clientSecret, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Sends a consent request with the specified parameters.
      * @summary OAuth2 consent endpoint
-     * @param {string} [clientId] The client identifier issued to the client during registration.
-     * @param {string} [state] The random string used to solve the CSRF vulnerability problem.
-     * @param {string} [scope] The space-separated list of requested scope permissions.
+     * @param {OAuth20AuthorizationApiSubmitConsentRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthorizationApi
      */
-    public submitConsent(clientId?: string, state?: string, scope?: string, options?: RawAxiosRequestConfig) {
-        return AuthorizationApiFp(this.configuration).submitConsent(clientId, state, scope, options).then((request) => request(this.axios, this.basePath));
+    public submitConsent(requestParameters: AuthorizationApiSubmitConsentRequest = {}, options?: RawAxiosRequestConfig) {
+        return AuthorizationApiFp(this.configuration).submitConsent(requestParameters.clientId, requestParameters.state, requestParameters.scope, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

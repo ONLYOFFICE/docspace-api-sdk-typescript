@@ -6,6 +6,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |------------- | ------------- | -------------|
 |[**getAuthServices**](#getauthservices) | **GET** /api/2.0/settings/authservice | Get the authorization services|
 |[**saveAuthKeys**](#saveauthkeys) | **POST** /api/2.0/settings/authservice | Save the authorization keys|
+|[**testExternalDatabaseConnection**](#testexternaldatabaseconnection) | **POST** /api/2.0/settings/authservice/externaldb/test | Test external database connection|
 
 # **getAuthServices**
 > AuthServiceRequestsArrayWrapper getAuthServices()
@@ -107,6 +108,61 @@ const { status, data } = await apiInstance.saveAuthKeys(
 |**200** | Boolean value: true if the authorization keys are changed |  -  |
 |**400** | Bad keys |  -  |
 |**402** | Your pricing plan does not support this option |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **testExternalDatabaseConnection**
+> ConnectionTestResultWrapper testExternalDatabaseConnection()
+
+Tests an external database connection with the provided settings without saving them.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/test-external-database-connection/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **externalDatabaseSettings** | **ExternalDatabaseSettings**|  | |
+
+
+### Return type
+
+**ConnectionTestResultWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SettingsAuthorizationApi,
+    Configuration,
+    ExternalDatabaseSettings
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SettingsAuthorizationApi(configuration);
+
+let externalDatabaseSettings: ExternalDatabaseSettings; // (optional)
+
+const { status, data } = await apiInstance.testExternalDatabaseConnection(
+    externalDatabaseSettings
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Connection test result with Success flag and optional Error message |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

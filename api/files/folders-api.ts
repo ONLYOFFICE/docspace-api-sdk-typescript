@@ -2634,84 +2634,74 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
         /**
          * Checks the file uploads to the folder with the ID specified in the request.
          * @summary Check file uploads
-         * @param {number} folderId The folder ID.
-         * @param {CheckUploadRequest} checkUploadRequest The request parameters for checking file uploads.
+         * @param {FoldersApiCheckUploadRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for checkUpload operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-upload/
          * @throws {RequiredError}
          */
-        checkUpload(folderId: number, checkUploadRequest: CheckUploadRequest, options?: RawAxiosRequestConfig): AxiosPromise<STRINGArrayWrapper> {
-            return localVarFp.checkUpload(folderId, checkUploadRequest, options).then((request) => request(axios, basePath));
+        checkUpload(requestParameters: FoldersApiCheckUploadRequest, options?: RawAxiosRequestConfig): AxiosPromise<STRINGArrayWrapper> {
+            return localVarFp.checkUpload(requestParameters.folderId, requestParameters.checkUploadRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Creates a new folder with the title specified in the request. The parent folder ID can be also specified.
          * @summary Create a folder
-         * @param {number} folderId The folder ID for the folder creation.
-         * @param {CreateFolder} createFolder The parameters for creating a folder.
+         * @param {FoldersApiCreateFolderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for createFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-folder/
          * @throws {RequiredError}
          */
-        createFolder(folderId: number, createFolder: CreateFolder, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
-            return localVarFp.createFolder(folderId, createFolder, options).then((request) => request(axios, basePath));
+        createFolder(requestParameters: FoldersApiCreateFolderRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
+            return localVarFp.createFolder(requestParameters.folderId, requestParameters.createFolder, options).then((request) => request(axios, basePath));
         },
         /**
          * Creates a primary external link by the identifier specified in the request.
          * @summary Create primary external link
-         * @param {number} id The folder ID.
-         * @param {FolderLinkRequest} folderLinkRequest The folder link parameters.
+         * @param {FoldersApiCreateFolderPrimaryExternalLinkRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for createFolderPrimaryExternalLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-folder-primary-external-link/
          * @throws {RequiredError}
          */
-        createFolderPrimaryExternalLink(id: number, folderLinkRequest: FolderLinkRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
-            return localVarFp.createFolderPrimaryExternalLink(id, folderLinkRequest, options).then((request) => request(axios, basePath));
+        createFolderPrimaryExternalLink(requestParameters: FoldersApiCreateFolderPrimaryExternalLinkRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
+            return localVarFp.createFolderPrimaryExternalLink(requestParameters.id, requestParameters.folderLinkRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Generates the activity history of a folder.
          * @summary Generates folder history
-         * @param {number} folderId 
+         * @param {FoldersApiCreateReportFolderHistoryRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for createReportFolderHistory operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-report-folder-history/
          * @throws {RequiredError}
          */
-        createReportFolderHistory(folderId: number, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.createReportFolderHistory(folderId, options).then((request) => request(axios, basePath));
+        createReportFolderHistory(requestParameters: FoldersApiCreateReportFolderHistoryRequest, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.createReportFolderHistory(requestParameters.folderId, options).then((request) => request(axios, basePath));
         },
         /**
          * Deletes a folder with the ID specified in the request.
          * @summary Delete a folder
-         * @param {number} folderId The folder ID to delete.
-         * @param {DeleteFolder} deleteFolder The parameters for deleting a folder.
+         * @param {FoldersApiDeleteFolderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-folder/
          * @throws {RequiredError}
          */
-        deleteFolder(folderId: number, deleteFolder: DeleteFolder, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
-            return localVarFp.deleteFolder(folderId, deleteFolder, options).then((request) => request(axios, basePath));
+        deleteFolder(requestParameters: FoldersApiDeleteFolderRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
+            return localVarFp.deleteFolder(requestParameters.folderId, requestParameters.deleteFolder, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the detailed list of files and folders located in the Favorites section.
          * @summary Get the Favorites section
-         * @param {string} [userIdOrGroupId] The user or group ID.
-         * @param {FilterType} [filterType] The filter type.
-         * @param {number} [count] The maximum number of items to retrieve in the request.
-         * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated list.
-         * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text used as a filter or search criterion for folder content queries.
+         * @param {FoldersApiGetFavoritesFolderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getFavoritesFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-favorites-folder/
          * @throws {RequiredError}
          */
-        getFavoritesFolder(userIdOrGroupId?: string, filterType?: FilterType, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
-            return localVarFp.getFavoritesFolder(userIdOrGroupId, filterType, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(axios, basePath));
+        getFavoritesFolder(requestParameters: FoldersApiGetFavoritesFolderRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
+            return localVarFp.getFavoritesFolder(requestParameters.userIdOrGroupId, requestParameters.filterType, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the used space of files in the root folders.
@@ -2727,343 +2717,1307 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
         /**
          * Returns the form filter of a folder with the ID specified in the request.
          * @summary Get folder form filter
-         * @param {number} folderId The folder unique identifier.
+         * @param {FoldersApiGetFolderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder/
          * @throws {RequiredError}
          */
-        getFolder(folderId: number, options?: RawAxiosRequestConfig): AxiosPromise<FormsItemArrayWrapper> {
-            return localVarFp.getFolder(folderId, options).then((request) => request(axios, basePath));
+        getFolder(requestParameters: FoldersApiGetFolderRequest, options?: RawAxiosRequestConfig): AxiosPromise<FormsItemArrayWrapper> {
+            return localVarFp.getFolder(requestParameters.folderId, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the detailed list of files and folders located in the folder with the ID specified in the request.
          * @summary Get a folder by ID
-         * @param {number} folderId The folder ID.
-         * @param {string} [userIdOrGroupId] The user or group ID.
-         * @param {string} [sharedBy] The identifier of the user who shared the folder or file.
-         * @param {FilterType} [filterType] The filter type.
-         * @param {number} [roomId] The room ID.
-         * @param {boolean} [excludeSubject] Specifies whether to exclude search by user or group ID.
-         * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders, or all elements from the specified folder.
-         * @param {string} [extension] Specifies whether to search for the specific file extension.
-         * @param {SearchArea} [searchArea] The search area.
-         * @param {string} [formsItemKey] The forms item key.
-         * @param {string} [formsItemType] The forms item type.
-         * @param {number} [count] The maximum number of items to retrieve in the request.
-         * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated request.
-         * @param {string} [sortBy] The property used for sorting the folder request results.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text value used as a filter parameter for folder content queries.
-         * @param {Location} [location] The location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link.
+         * @param {FoldersApiGetFolderByFolderIdRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getFolderByFolderId operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-by-folder-id/
          * @throws {RequiredError}
          */
-        getFolderByFolderId(folderId: number, userIdOrGroupId?: string, sharedBy?: string, filterType?: FilterType, roomId?: number, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, extension?: string, searchArea?: SearchArea, formsItemKey?: string, formsItemType?: string, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, location?: Location, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
-            return localVarFp.getFolderByFolderId(folderId, userIdOrGroupId, sharedBy, filterType, roomId, excludeSubject, applyFilterOption, extension, searchArea, formsItemKey, formsItemType, count, startIndex, sortBy, sortOrder, filterValue, location, options).then((request) => request(axios, basePath));
+        getFolderByFolderId(requestParameters: FoldersApiGetFolderByFolderIdRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
+            return localVarFp.getFolderByFolderId(requestParameters.folderId, requestParameters.userIdOrGroupId, requestParameters.sharedBy, requestParameters.filterType, requestParameters.roomId, requestParameters.excludeSubject, requestParameters.applyFilterOption, requestParameters.extension, requestParameters.searchArea, requestParameters.formsItemKey, requestParameters.formsItemType, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, requestParameters.location, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the activity history of a folder with a specified identifier.
          * @summary Get folder history
-         * @param {number} folderId The folder ID of the history request.
-         * @param {ApiDateTime} [fromDate] The start date of the history request.
-         * @param {ApiDateTime} [toDate] The end date of the history request.
-         * @param {number} [count] The number of records to retrieve for the folder history.
-         * @param {number} [startIndex] The starting index from which the history records are retrieved in the request.
+         * @param {FoldersApiGetFolderHistoryRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getFolderHistory operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-history/
          * @throws {RequiredError}
          */
-        getFolderHistory(folderId: number, fromDate?: ApiDateTime, toDate?: ApiDateTime, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): AxiosPromise<HistoryArrayWrapper> {
-            return localVarFp.getFolderHistory(folderId, fromDate, toDate, count, startIndex, options).then((request) => request(axios, basePath));
+        getFolderHistory(requestParameters: FoldersApiGetFolderHistoryRequest, options?: RawAxiosRequestConfig): AxiosPromise<HistoryArrayWrapper> {
+            return localVarFp.getFolderHistory(requestParameters.folderId, requestParameters.fromDate, requestParameters.toDate, requestParameters.count, requestParameters.startIndex, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the detailed information about a folder with the ID specified in the request.
          * @summary Get folder information
-         * @param {number} folderId The folder unique identifier.
+         * @param {FoldersApiGetFolderInfoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getFolderInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-info/
          * @throws {RequiredError}
          */
-        getFolderInfo(folderId: number, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
-            return localVarFp.getFolderInfo(folderId, options).then((request) => request(axios, basePath));
+        getFolderInfo(requestParameters: FoldersApiGetFolderInfoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
+            return localVarFp.getFolderInfo(requestParameters.folderId, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the links of the folder with the ID specified in the request.
          * @summary Get the folder links
-         * @param {number} id The folder ID.
+         * @param {FoldersApiGetFolderLinksRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getFolderLinks operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-links/
          * @throws {RequiredError}
          */
-        getFolderLinks(id: number, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
-            return localVarFp.getFolderLinks(id, options).then((request) => request(axios, basePath));
+        getFolderLinks(requestParameters: FoldersApiGetFolderLinksRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
+            return localVarFp.getFolderLinks(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a path to the folder with the ID specified in the request.
          * @summary Get the folder path
-         * @param {number} folderId The folder unique identifier.
+         * @param {FoldersApiGetFolderPathRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getFolderPath operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-path/
          * @throws {RequiredError}
          */
-        getFolderPath(folderId: number, options?: RawAxiosRequestConfig): AxiosPromise<FileEntryBaseArrayWrapper> {
-            return localVarFp.getFolderPath(folderId, options).then((request) => request(axios, basePath));
+        getFolderPath(requestParameters: FoldersApiGetFolderPathRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileEntryBaseArrayWrapper> {
+            return localVarFp.getFolderPath(requestParameters.folderId, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the primary external link by the identifier specified in the request.
          * @summary Get primary external link
-         * @param {number} id The folder unique identifier.
-         * @param {number} [count] The number of items to retrieve in the request.
-         * @param {number} [startIndex] The starting index for the query results.
+         * @param {FoldersApiGetFolderPrimaryExternalLinkRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getFolderPrimaryExternalLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-primary-external-link/
          * @throws {RequiredError}
          */
-        getFolderPrimaryExternalLink(id: number, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
-            return localVarFp.getFolderPrimaryExternalLink(id, count, startIndex, options).then((request) => request(axios, basePath));
+        getFolderPrimaryExternalLink(requestParameters: FoldersApiGetFolderPrimaryExternalLinkRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
+            return localVarFp.getFolderPrimaryExternalLink(requestParameters.id, requestParameters.count, requestParameters.startIndex, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of all the subfolders from a folder with the ID specified in the request.
          * @summary Get subfolders
-         * @param {number} folderId The folder unique identifier.
+         * @param {FoldersApiGetFoldersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getFolders operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folders/
          * @throws {RequiredError}
          */
-        getFolders(folderId: number, options?: RawAxiosRequestConfig): AxiosPromise<FileEntryBaseArrayWrapper> {
-            return localVarFp.getFolders(folderId, options).then((request) => request(axios, basePath));
+        getFolders(requestParameters: FoldersApiGetFoldersRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileEntryBaseArrayWrapper> {
+            return localVarFp.getFolders(requestParameters.folderId, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the detailed list of files and folders located in the My documents section.
          * @summary Get the My documents section
-         * @param {string} [userIdOrGroupId] The user or group ID.
-         * @param {FilterType} [filterType] The filter type.
-         * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
-         * @param {number} [count] The maximum number of items to retrieve in the response.
-         * @param {number} [startIndex] The starting position of the items to be retrieved.
-         * @param {string} [sortBy] The property used to specify the sorting criteria for folder contents.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text used for filtering or searching folder contents.
+         * @param {FoldersApiGetMyFolderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getMyFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-my-folder/
          * @throws {RequiredError}
          */
-        getMyFolder(userIdOrGroupId?: string, filterType?: FilterType, applyFilterOption?: ApplyFilterOption, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
-            return localVarFp.getMyFolder(userIdOrGroupId, filterType, applyFilterOption, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(axios, basePath));
+        getMyFolder(requestParameters: FoldersApiGetMyFolderRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
+            return localVarFp.getMyFolder(requestParameters.userIdOrGroupId, requestParameters.filterType, requestParameters.applyFilterOption, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of all the new items from a folder with the ID specified in the request.
          * @summary Get new folder items
-         * @param {number} folderId The folder unique identifier.
+         * @param {FoldersApiGetNewFolderItemsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getNewFolderItems operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-new-folder-items/
          * @throws {RequiredError}
          */
-        getNewFolderItems(folderId: number, options?: RawAxiosRequestConfig): AxiosPromise<FileEntryBaseArrayWrapper> {
-            return localVarFp.getNewFolderItems(folderId, options).then((request) => request(axios, basePath));
+        getNewFolderItems(requestParameters: FoldersApiGetNewFolderItemsRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileEntryBaseArrayWrapper> {
+            return localVarFp.getNewFolderItems(requestParameters.folderId, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the detailed list of files and folders located in the Private Room section.
          * @summary Get the Private Room section
-         * @param {string} [userIdOrGroupId] The user or group ID.
-         * @param {FilterType} [filterType] The filter type.
-         * @param {number} [count] The maximum number of items to retrieve in the request.
-         * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated list.
-         * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text used as a filter or search criterion for folder content queries.
+         * @param {FoldersApiGetPrivacyFolderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getPrivacyFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-privacy-folder/
          * @throws {RequiredError}
          */
-        getPrivacyFolder(userIdOrGroupId?: string, filterType?: FilterType, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
-            return localVarFp.getPrivacyFolder(userIdOrGroupId, filterType, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(axios, basePath));
+        getPrivacyFolder(requestParameters: FoldersApiGetPrivacyFolderRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
+            return localVarFp.getPrivacyFolder(requestParameters.userIdOrGroupId, requestParameters.filterType, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the detailed list of files located in the Recent section.
          * @summary Get the Recent section
-         * @param {string} [userIdOrGroupId] The user or group ID.
-         * @param {FilterType} [filterType] The filter type.
-         * @param {boolean} [excludeSubject] Specifies whether to exclude search by user or group ID.
-         * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
-         * @param {SearchArea} [searchArea] The search area.
-         * @param {Array<string>} [extension] Specifies whether to search for a specific file extension in the Recent folder.
-         * @param {number} [count] The maximum number of items to return.
-         * @param {number} [startIndex] The starting position of the results to be returned in the query response.
-         * @param {string} [sortBy] Specifies the sorting criteria for the folder request.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text used for filtering or searching folder contents.
+         * @param {FoldersApiGetRecentFolderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getRecentFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-recent-folder/
          * @throws {RequiredError}
          */
-        getRecentFolder(userIdOrGroupId?: string, filterType?: FilterType, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, searchArea?: SearchArea, extension?: Array<string>, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
-            return localVarFp.getRecentFolder(userIdOrGroupId, filterType, excludeSubject, applyFilterOption, searchArea, extension, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(axios, basePath));
+        getRecentFolder(requestParameters: FoldersApiGetRecentFolderRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
+            return localVarFp.getRecentFolder(requestParameters.userIdOrGroupId, requestParameters.filterType, requestParameters.excludeSubject, requestParameters.applyFilterOption, requestParameters.searchArea, requestParameters.extension, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns all the sections matching the parameters specified in the request.
          * @summary Get filtered sections
-         * @param {string} [userIdOrGroupId] The user or group ID.
-         * @param {FilterType} [filterType] The filter type.
-         * @param {boolean} [withoutTrash] Specifies whether to return the Trash section or not.
-         * @param {number} [count] The maximum number of items to retrieve in the response.
-         * @param {number} [startIndex] The starting position of the items to be retrieved.
-         * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text used as a filter for searching or retrieving folder contents.
+         * @param {FoldersApiGetRootFoldersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getRootFolders operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-root-folders/
          * @throws {RequiredError}
          */
-        getRootFolders(userIdOrGroupId?: string, filterType?: FilterType, withoutTrash?: boolean, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerArrayWrapper> {
-            return localVarFp.getRootFolders(userIdOrGroupId, filterType, withoutTrash, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(axios, basePath));
+        getRootFolders(requestParameters: FoldersApiGetRootFoldersRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerArrayWrapper> {
+            return localVarFp.getRootFolders(requestParameters.userIdOrGroupId, requestParameters.filterType, requestParameters.withoutTrash, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the detailed list of files and folders located in the Trash section.
          * @summary Get the Trash section
-         * @param {string} [userIdOrGroupId] The user or group ID.
-         * @param {FilterType} [filterType] The filter type.
-         * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
-         * @param {number} [count] The maximum number of items to retrieve in the response.
-         * @param {number} [startIndex] The starting position of the items to be retrieved.
-         * @param {string} [sortBy] The property used to specify the sorting criteria for folder contents.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text used for filtering or searching folder contents.
+         * @param {FoldersApiGetTrashFolderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getTrashFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-trash-folder/
          * @throws {RequiredError}
          */
-        getTrashFolder(userIdOrGroupId?: string, filterType?: FilterType, applyFilterOption?: ApplyFilterOption, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
-            return localVarFp.getTrashFolder(userIdOrGroupId, filterType, applyFilterOption, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(axios, basePath));
+        getTrashFolder(requestParameters: FoldersApiGetTrashFolderRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
+            return localVarFp.getTrashFolder(requestParameters.userIdOrGroupId, requestParameters.filterType, requestParameters.applyFilterOption, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Inserts a file specified in the request to the selected folder by single file uploading.
          * @summary Insert a file
-         * @param {number} folderId The folder ID for inserting a file.
-         * @param {File} [insertFileFile] The file to be inserted.
-         * @param {string} [insertFileTitle] The file title to be inserted.
-         * @param {boolean} [insertFileCreateNewIfExist] Specifies whether to create a new file if it already exists or not.
-         * @param {boolean} [insertFileKeepConvertStatus] Specifies whether to keep the file converting status or not.
-         * @param {boolean} [insertFileStreamCanRead] 
-         * @param {boolean} [insertFileStreamCanWrite] 
-         * @param {boolean} [insertFileStreamCanSeek] 
-         * @param {boolean} [insertFileStreamCanTimeout] 
-         * @param {number} [insertFileStreamLength] 
-         * @param {number} [insertFileStreamPosition] 
-         * @param {number} [insertFileStreamReadTimeout] 
-         * @param {number} [insertFileStreamWriteTimeout] 
+         * @param {FoldersApiInsertFileRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for insertFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/insert-file/
          * @throws {RequiredError}
          */
-        insertFile(folderId: number, insertFileFile?: File, insertFileTitle?: string, insertFileCreateNewIfExist?: boolean, insertFileKeepConvertStatus?: boolean, insertFileStreamCanRead?: boolean, insertFileStreamCanWrite?: boolean, insertFileStreamCanSeek?: boolean, insertFileStreamCanTimeout?: boolean, insertFileStreamLength?: number, insertFileStreamPosition?: number, insertFileStreamReadTimeout?: number, insertFileStreamWriteTimeout?: number, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
-            return localVarFp.insertFile(folderId, insertFileFile, insertFileTitle, insertFileCreateNewIfExist, insertFileKeepConvertStatus, insertFileStreamCanRead, insertFileStreamCanWrite, insertFileStreamCanSeek, insertFileStreamCanTimeout, insertFileStreamLength, insertFileStreamPosition, insertFileStreamReadTimeout, insertFileStreamWriteTimeout, options).then((request) => request(axios, basePath));
+        insertFile(requestParameters: FoldersApiInsertFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
+            return localVarFp.insertFile(requestParameters.folderId, requestParameters.insertFileFile, requestParameters.insertFileTitle, requestParameters.insertFileCreateNewIfExist, requestParameters.insertFileKeepConvertStatus, requestParameters.insertFileStreamCanRead, requestParameters.insertFileStreamCanWrite, requestParameters.insertFileStreamCanSeek, requestParameters.insertFileStreamCanTimeout, requestParameters.insertFileStreamLength, requestParameters.insertFileStreamPosition, requestParameters.insertFileStreamReadTimeout, requestParameters.insertFileStreamWriteTimeout, options).then((request) => request(axios, basePath));
         },
         /**
          * Inserts a file specified in the request to the My documents section by single file uploading.
          * @summary Insert a file to the My documents section
-         * @param {File} [file] The file to be inserted.
-         * @param {string} [title] The file title to be inserted.
-         * @param {boolean} [createNewIfExist] Specifies whether to create a new file if it already exists or not.
-         * @param {boolean} [keepConvertStatus] Specifies whether to keep the file converting status or not.
-         * @param {boolean} [streamCanRead] 
-         * @param {boolean} [streamCanWrite] 
-         * @param {boolean} [streamCanSeek] 
-         * @param {boolean} [streamCanTimeout] 
-         * @param {number} [streamLength] 
-         * @param {number} [streamPosition] 
-         * @param {number} [streamReadTimeout] 
-         * @param {number} [streamWriteTimeout] 
+         * @param {FoldersApiInsertFileToMyFromBodyRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for insertFileToMyFromBody operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/insert-file-to-my-from-body/
          * @throws {RequiredError}
          */
-        insertFileToMyFromBody(file?: File, title?: string, createNewIfExist?: boolean, keepConvertStatus?: boolean, streamCanRead?: boolean, streamCanWrite?: boolean, streamCanSeek?: boolean, streamCanTimeout?: boolean, streamLength?: number, streamPosition?: number, streamReadTimeout?: number, streamWriteTimeout?: number, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
-            return localVarFp.insertFileToMyFromBody(file, title, createNewIfExist, keepConvertStatus, streamCanRead, streamCanWrite, streamCanSeek, streamCanTimeout, streamLength, streamPosition, streamReadTimeout, streamWriteTimeout, options).then((request) => request(axios, basePath));
+        insertFileToMyFromBody(requestParameters: FoldersApiInsertFileToMyFromBodyRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
+            return localVarFp.insertFileToMyFromBody(requestParameters.file, requestParameters.title, requestParameters.createNewIfExist, requestParameters.keepConvertStatus, requestParameters.streamCanRead, requestParameters.streamCanWrite, requestParameters.streamCanSeek, requestParameters.streamCanTimeout, requestParameters.streamLength, requestParameters.streamPosition, requestParameters.streamReadTimeout, requestParameters.streamWriteTimeout, options).then((request) => request(axios, basePath));
         },
         /**
          * Renames the selected folder with a new title specified in the request.
          * @summary Rename a folder
-         * @param {number} folderId The folder ID for the folder creation.
-         * @param {CreateFolder} createFolder The parameters for creating a folder.
+         * @param {FoldersApiRenameFolderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for renameFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/rename-folder/
          * @throws {RequiredError}
          */
-        renameFolder(folderId: number, createFolder: CreateFolder, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
-            return localVarFp.renameFolder(folderId, createFolder, options).then((request) => request(axios, basePath));
+        renameFolder(requestParameters: FoldersApiRenameFolderRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
+            return localVarFp.renameFolder(requestParameters.folderId, requestParameters.createFolder, options).then((request) => request(axios, basePath));
         },
         /**
          * Sets the order of a folder with ID specified in the request.
          * @summary Set folder order
-         * @param {number} folderId The folder unique identifier.
-         * @param {OrderRequestDto} [orderRequestDto] The folder order information.
+         * @param {FoldersApiSetFolderOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setFolderOrder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-order/
          * @throws {RequiredError}
          */
-        setFolderOrder(folderId: number, orderRequestDto?: OrderRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
-            return localVarFp.setFolderOrder(folderId, orderRequestDto, options).then((request) => request(axios, basePath));
+        setFolderOrder(requestParameters: FoldersApiSetFolderOrderRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
+            return localVarFp.setFolderOrder(requestParameters.folderId, requestParameters.orderRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Sets the folder external link with the ID specified in the request.
          * @summary Set the folder external link
-         * @param {number} id The folder ID.
-         * @param {FolderLinkRequest} folderLinkRequest The folder link parameters.
+         * @param {FoldersApiSetFolderPrimaryExternalLinkRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setFolderPrimaryExternalLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-primary-external-link/
          * @throws {RequiredError}
          */
-        setFolderPrimaryExternalLink(id: number, folderLinkRequest: FolderLinkRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
-            return localVarFp.setFolderPrimaryExternalLink(id, folderLinkRequest, options).then((request) => request(axios, basePath));
+        setFolderPrimaryExternalLink(requestParameters: FoldersApiSetFolderPrimaryExternalLinkRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
+            return localVarFp.setFolderPrimaryExternalLink(requestParameters.id, requestParameters.folderLinkRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
          * @summary Upload a file
-         * @param {number} folderId The folder ID to upload a file.
-         * @param {UploadRequestDto} [uploadRequestDto] The request parameters for uploading a file.
+         * @param {FoldersApiUploadFileRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for uploadFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file/
          * @throws {RequiredError}
          */
-        uploadFile(folderId: number, uploadRequestDto?: UploadRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
-            return localVarFp.uploadFile(folderId, uploadRequestDto, options).then((request) => request(axios, basePath));
+        uploadFile(requestParameters: FoldersApiUploadFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
+            return localVarFp.uploadFile(requestParameters.folderId, requestParameters.uploadRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
          * @summary Upload a file to the My documents section
-         * @param {UploadRequestDto} [inDto] The request parameters for uploading a file.
+         * @param {FoldersApiUploadFileToMyRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for uploadFileToMy operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file-to-my/
          * @throws {RequiredError}
          */
-        uploadFileToMy(inDto?: UploadRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
-            return localVarFp.uploadFileToMy(inDto, options).then((request) => request(axios, basePath));
+        uploadFileToMy(requestParameters: FoldersApiUploadFileToMyRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
+            return localVarFp.uploadFileToMy(requestParameters.inDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for checkUpload operation in FoldersApi.
+ * @export
+ * @interface FoldersApiCheckUploadRequest
+ */
+export interface FoldersApiCheckUploadRequest {
+    /**
+     * The folder ID.
+     * @type {number}
+     * @memberof FoldersApiCheckUpload
+     */
+    readonly folderId: number
+
+    /**
+     * The request parameters for checking file uploads.
+     * @type {CheckUploadRequest}
+     * @memberof FoldersApiCheckUpload
+     */
+    readonly checkUploadRequest: CheckUploadRequest
+}
+
+/**
+ * Request parameters for createFolder operation in FoldersApi.
+ * @export
+ * @interface FoldersApiCreateFolderRequest
+ */
+export interface FoldersApiCreateFolderRequest {
+    /**
+     * The folder ID for the folder creation.
+     * @type {number}
+     * @memberof FoldersApiCreateFolder
+     */
+    readonly folderId: number
+
+    /**
+     * The parameters for creating a folder.
+     * @type {CreateFolder}
+     * @memberof FoldersApiCreateFolder
+     */
+    readonly createFolder: CreateFolder
+}
+
+/**
+ * Request parameters for createFolderPrimaryExternalLink operation in FoldersApi.
+ * @export
+ * @interface FoldersApiCreateFolderPrimaryExternalLinkRequest
+ */
+export interface FoldersApiCreateFolderPrimaryExternalLinkRequest {
+    /**
+     * The folder ID.
+     * @type {number}
+     * @memberof FoldersApiCreateFolderPrimaryExternalLink
+     */
+    readonly id: number
+
+    /**
+     * The folder link parameters.
+     * @type {FolderLinkRequest}
+     * @memberof FoldersApiCreateFolderPrimaryExternalLink
+     */
+    readonly folderLinkRequest: FolderLinkRequest
+}
+
+/**
+ * Request parameters for createReportFolderHistory operation in FoldersApi.
+ * @export
+ * @interface FoldersApiCreateReportFolderHistoryRequest
+ */
+export interface FoldersApiCreateReportFolderHistoryRequest {
+    /**
+     * 
+     * @type {number}
+     * @memberof FoldersApiCreateReportFolderHistory
+     */
+    readonly folderId: number
+}
+
+/**
+ * Request parameters for deleteFolder operation in FoldersApi.
+ * @export
+ * @interface FoldersApiDeleteFolderRequest
+ */
+export interface FoldersApiDeleteFolderRequest {
+    /**
+     * The folder ID to delete.
+     * @type {number}
+     * @memberof FoldersApiDeleteFolder
+     */
+    readonly folderId: number
+
+    /**
+     * The parameters for deleting a folder.
+     * @type {DeleteFolder}
+     * @memberof FoldersApiDeleteFolder
+     */
+    readonly deleteFolder: DeleteFolder
+}
+
+/**
+ * Request parameters for getFavoritesFolder operation in FoldersApi.
+ * @export
+ * @interface FoldersApiGetFavoritesFolderRequest
+ */
+export interface FoldersApiGetFavoritesFolderRequest {
+    /**
+     * The user or group ID.
+     * @type {string}
+     * @memberof FoldersApiGetFavoritesFolder
+     */
+    readonly userIdOrGroupId?: string
+
+    /**
+     * The filter type.
+     * @type {FilterType}
+     * @memberof FoldersApiGetFavoritesFolder
+     */
+    readonly filterType?: FilterType
+
+    /**
+     * The maximum number of items to retrieve in the request.
+     * @type {number}
+     * @memberof FoldersApiGetFavoritesFolder
+     */
+    readonly count?: number
+
+    /**
+     * The zero-based index of the first item to retrieve in a paginated list.
+     * @type {number}
+     * @memberof FoldersApiGetFavoritesFolder
+     */
+    readonly startIndex?: number
+
+    /**
+     * Specifies the field by which the folder content should be sorted.
+     * @type {string}
+     * @memberof FoldersApiGetFavoritesFolder
+     */
+    readonly sortBy?: string
+
+    /**
+     * The order in which the results are sorted.
+     * @type {SortOrder}
+     * @memberof FoldersApiGetFavoritesFolder
+     */
+    readonly sortOrder?: SortOrder
+
+    /**
+     * The text used as a filter or search criterion for folder content queries.
+     * @type {string}
+     * @memberof FoldersApiGetFavoritesFolder
+     */
+    readonly filterValue?: string
+}
+
+/**
+ * Request parameters for getFolder operation in FoldersApi.
+ * @export
+ * @interface FoldersApiGetFolderRequest
+ */
+export interface FoldersApiGetFolderRequest {
+    /**
+     * The folder unique identifier.
+     * @type {number}
+     * @memberof FoldersApiGetFolder
+     */
+    readonly folderId: number
+}
+
+/**
+ * Request parameters for getFolderByFolderId operation in FoldersApi.
+ * @export
+ * @interface FoldersApiGetFolderByFolderIdRequest
+ */
+export interface FoldersApiGetFolderByFolderIdRequest {
+    /**
+     * The folder ID.
+     * @type {number}
+     * @memberof FoldersApiGetFolderByFolderId
+     */
+    readonly folderId: number
+
+    /**
+     * The user or group ID.
+     * @type {string}
+     * @memberof FoldersApiGetFolderByFolderId
+     */
+    readonly userIdOrGroupId?: string
+
+    /**
+     * The identifier of the user who shared the folder or file.
+     * @type {string}
+     * @memberof FoldersApiGetFolderByFolderId
+     */
+    readonly sharedBy?: string
+
+    /**
+     * The filter type.
+     * @type {FilterType}
+     * @memberof FoldersApiGetFolderByFolderId
+     */
+    readonly filterType?: FilterType
+
+    /**
+     * The room ID.
+     * @type {number}
+     * @memberof FoldersApiGetFolderByFolderId
+     */
+    readonly roomId?: number
+
+    /**
+     * Specifies whether to exclude search by user or group ID.
+     * @type {boolean}
+     * @memberof FoldersApiGetFolderByFolderId
+     */
+    readonly excludeSubject?: boolean
+
+    /**
+     * Specifies whether to return only files, only folders, or all elements from the specified folder.
+     * @type {ApplyFilterOption}
+     * @memberof FoldersApiGetFolderByFolderId
+     */
+    readonly applyFilterOption?: ApplyFilterOption
+
+    /**
+     * Specifies whether to search for the specific file extension.
+     * @type {string}
+     * @memberof FoldersApiGetFolderByFolderId
+     */
+    readonly extension?: string
+
+    /**
+     * The search area.
+     * @type {SearchArea}
+     * @memberof FoldersApiGetFolderByFolderId
+     */
+    readonly searchArea?: SearchArea
+
+    /**
+     * The forms item key.
+     * @type {string}
+     * @memberof FoldersApiGetFolderByFolderId
+     */
+    readonly formsItemKey?: string
+
+    /**
+     * The forms item type.
+     * @type {string}
+     * @memberof FoldersApiGetFolderByFolderId
+     */
+    readonly formsItemType?: string
+
+    /**
+     * The maximum number of items to retrieve in the request.
+     * @type {number}
+     * @memberof FoldersApiGetFolderByFolderId
+     */
+    readonly count?: number
+
+    /**
+     * The zero-based index of the first item to retrieve in a paginated request.
+     * @type {number}
+     * @memberof FoldersApiGetFolderByFolderId
+     */
+    readonly startIndex?: number
+
+    /**
+     * The property used for sorting the folder request results.
+     * @type {string}
+     * @memberof FoldersApiGetFolderByFolderId
+     */
+    readonly sortBy?: string
+
+    /**
+     * The order in which the results are sorted.
+     * @type {SortOrder}
+     * @memberof FoldersApiGetFolderByFolderId
+     */
+    readonly sortOrder?: SortOrder
+
+    /**
+     * The text value used as a filter parameter for folder content queries.
+     * @type {string}
+     * @memberof FoldersApiGetFolderByFolderId
+     */
+    readonly filterValue?: string
+
+    /**
+     * The location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link.
+     * @type {Location}
+     * @memberof FoldersApiGetFolderByFolderId
+     */
+    readonly location?: Location
+}
+
+/**
+ * Request parameters for getFolderHistory operation in FoldersApi.
+ * @export
+ * @interface FoldersApiGetFolderHistoryRequest
+ */
+export interface FoldersApiGetFolderHistoryRequest {
+    /**
+     * The folder ID of the history request.
+     * @type {number}
+     * @memberof FoldersApiGetFolderHistory
+     */
+    readonly folderId: number
+
+    /**
+     * The start date of the history request.
+     * @type {ApiDateTime}
+     * @memberof FoldersApiGetFolderHistory
+     */
+    readonly fromDate?: ApiDateTime
+
+    /**
+     * The end date of the history request.
+     * @type {ApiDateTime}
+     * @memberof FoldersApiGetFolderHistory
+     */
+    readonly toDate?: ApiDateTime
+
+    /**
+     * The number of records to retrieve for the folder history.
+     * @type {number}
+     * @memberof FoldersApiGetFolderHistory
+     */
+    readonly count?: number
+
+    /**
+     * The starting index from which the history records are retrieved in the request.
+     * @type {number}
+     * @memberof FoldersApiGetFolderHistory
+     */
+    readonly startIndex?: number
+}
+
+/**
+ * Request parameters for getFolderInfo operation in FoldersApi.
+ * @export
+ * @interface FoldersApiGetFolderInfoRequest
+ */
+export interface FoldersApiGetFolderInfoRequest {
+    /**
+     * The folder unique identifier.
+     * @type {number}
+     * @memberof FoldersApiGetFolderInfo
+     */
+    readonly folderId: number
+}
+
+/**
+ * Request parameters for getFolderLinks operation in FoldersApi.
+ * @export
+ * @interface FoldersApiGetFolderLinksRequest
+ */
+export interface FoldersApiGetFolderLinksRequest {
+    /**
+     * The folder ID.
+     * @type {number}
+     * @memberof FoldersApiGetFolderLinks
+     */
+    readonly id: number
+}
+
+/**
+ * Request parameters for getFolderPath operation in FoldersApi.
+ * @export
+ * @interface FoldersApiGetFolderPathRequest
+ */
+export interface FoldersApiGetFolderPathRequest {
+    /**
+     * The folder unique identifier.
+     * @type {number}
+     * @memberof FoldersApiGetFolderPath
+     */
+    readonly folderId: number
+}
+
+/**
+ * Request parameters for getFolderPrimaryExternalLink operation in FoldersApi.
+ * @export
+ * @interface FoldersApiGetFolderPrimaryExternalLinkRequest
+ */
+export interface FoldersApiGetFolderPrimaryExternalLinkRequest {
+    /**
+     * The folder unique identifier.
+     * @type {number}
+     * @memberof FoldersApiGetFolderPrimaryExternalLink
+     */
+    readonly id: number
+
+    /**
+     * The number of items to retrieve in the request.
+     * @type {number}
+     * @memberof FoldersApiGetFolderPrimaryExternalLink
+     */
+    readonly count?: number
+
+    /**
+     * The starting index for the query results.
+     * @type {number}
+     * @memberof FoldersApiGetFolderPrimaryExternalLink
+     */
+    readonly startIndex?: number
+}
+
+/**
+ * Request parameters for getFolders operation in FoldersApi.
+ * @export
+ * @interface FoldersApiGetFoldersRequest
+ */
+export interface FoldersApiGetFoldersRequest {
+    /**
+     * The folder unique identifier.
+     * @type {number}
+     * @memberof FoldersApiGetFolders
+     */
+    readonly folderId: number
+}
+
+/**
+ * Request parameters for getMyFolder operation in FoldersApi.
+ * @export
+ * @interface FoldersApiGetMyFolderRequest
+ */
+export interface FoldersApiGetMyFolderRequest {
+    /**
+     * The user or group ID.
+     * @type {string}
+     * @memberof FoldersApiGetMyFolder
+     */
+    readonly userIdOrGroupId?: string
+
+    /**
+     * The filter type.
+     * @type {FilterType}
+     * @memberof FoldersApiGetMyFolder
+     */
+    readonly filterType?: FilterType
+
+    /**
+     * Specifies whether to return only files, only folders or all elements.
+     * @type {ApplyFilterOption}
+     * @memberof FoldersApiGetMyFolder
+     */
+    readonly applyFilterOption?: ApplyFilterOption
+
+    /**
+     * The maximum number of items to retrieve in the response.
+     * @type {number}
+     * @memberof FoldersApiGetMyFolder
+     */
+    readonly count?: number
+
+    /**
+     * The starting position of the items to be retrieved.
+     * @type {number}
+     * @memberof FoldersApiGetMyFolder
+     */
+    readonly startIndex?: number
+
+    /**
+     * The property used to specify the sorting criteria for folder contents.
+     * @type {string}
+     * @memberof FoldersApiGetMyFolder
+     */
+    readonly sortBy?: string
+
+    /**
+     * The order in which the results are sorted.
+     * @type {SortOrder}
+     * @memberof FoldersApiGetMyFolder
+     */
+    readonly sortOrder?: SortOrder
+
+    /**
+     * The text used for filtering or searching folder contents.
+     * @type {string}
+     * @memberof FoldersApiGetMyFolder
+     */
+    readonly filterValue?: string
+}
+
+/**
+ * Request parameters for getNewFolderItems operation in FoldersApi.
+ * @export
+ * @interface FoldersApiGetNewFolderItemsRequest
+ */
+export interface FoldersApiGetNewFolderItemsRequest {
+    /**
+     * The folder unique identifier.
+     * @type {number}
+     * @memberof FoldersApiGetNewFolderItems
+     */
+    readonly folderId: number
+}
+
+/**
+ * Request parameters for getPrivacyFolder operation in FoldersApi.
+ * @export
+ * @interface FoldersApiGetPrivacyFolderRequest
+ */
+export interface FoldersApiGetPrivacyFolderRequest {
+    /**
+     * The user or group ID.
+     * @type {string}
+     * @memberof FoldersApiGetPrivacyFolder
+     */
+    readonly userIdOrGroupId?: string
+
+    /**
+     * The filter type.
+     * @type {FilterType}
+     * @memberof FoldersApiGetPrivacyFolder
+     */
+    readonly filterType?: FilterType
+
+    /**
+     * The maximum number of items to retrieve in the request.
+     * @type {number}
+     * @memberof FoldersApiGetPrivacyFolder
+     */
+    readonly count?: number
+
+    /**
+     * The zero-based index of the first item to retrieve in a paginated list.
+     * @type {number}
+     * @memberof FoldersApiGetPrivacyFolder
+     */
+    readonly startIndex?: number
+
+    /**
+     * Specifies the field by which the folder content should be sorted.
+     * @type {string}
+     * @memberof FoldersApiGetPrivacyFolder
+     */
+    readonly sortBy?: string
+
+    /**
+     * The order in which the results are sorted.
+     * @type {SortOrder}
+     * @memberof FoldersApiGetPrivacyFolder
+     */
+    readonly sortOrder?: SortOrder
+
+    /**
+     * The text used as a filter or search criterion for folder content queries.
+     * @type {string}
+     * @memberof FoldersApiGetPrivacyFolder
+     */
+    readonly filterValue?: string
+}
+
+/**
+ * Request parameters for getRecentFolder operation in FoldersApi.
+ * @export
+ * @interface FoldersApiGetRecentFolderRequest
+ */
+export interface FoldersApiGetRecentFolderRequest {
+    /**
+     * The user or group ID.
+     * @type {string}
+     * @memberof FoldersApiGetRecentFolder
+     */
+    readonly userIdOrGroupId?: string
+
+    /**
+     * The filter type.
+     * @type {FilterType}
+     * @memberof FoldersApiGetRecentFolder
+     */
+    readonly filterType?: FilterType
+
+    /**
+     * Specifies whether to exclude search by user or group ID.
+     * @type {boolean}
+     * @memberof FoldersApiGetRecentFolder
+     */
+    readonly excludeSubject?: boolean
+
+    /**
+     * Specifies whether to return only files, only folders or all elements.
+     * @type {ApplyFilterOption}
+     * @memberof FoldersApiGetRecentFolder
+     */
+    readonly applyFilterOption?: ApplyFilterOption
+
+    /**
+     * The search area.
+     * @type {SearchArea}
+     * @memberof FoldersApiGetRecentFolder
+     */
+    readonly searchArea?: SearchArea
+
+    /**
+     * Specifies whether to search for a specific file extension in the Recent folder.
+     * @type {Array<string>}
+     * @memberof FoldersApiGetRecentFolder
+     */
+    readonly extension?: Array<string>
+
+    /**
+     * The maximum number of items to return.
+     * @type {number}
+     * @memberof FoldersApiGetRecentFolder
+     */
+    readonly count?: number
+
+    /**
+     * The starting position of the results to be returned in the query response.
+     * @type {number}
+     * @memberof FoldersApiGetRecentFolder
+     */
+    readonly startIndex?: number
+
+    /**
+     * Specifies the sorting criteria for the folder request.
+     * @type {string}
+     * @memberof FoldersApiGetRecentFolder
+     */
+    readonly sortBy?: string
+
+    /**
+     * The order in which the results are sorted.
+     * @type {SortOrder}
+     * @memberof FoldersApiGetRecentFolder
+     */
+    readonly sortOrder?: SortOrder
+
+    /**
+     * The text used for filtering or searching folder contents.
+     * @type {string}
+     * @memberof FoldersApiGetRecentFolder
+     */
+    readonly filterValue?: string
+}
+
+/**
+ * Request parameters for getRootFolders operation in FoldersApi.
+ * @export
+ * @interface FoldersApiGetRootFoldersRequest
+ */
+export interface FoldersApiGetRootFoldersRequest {
+    /**
+     * The user or group ID.
+     * @type {string}
+     * @memberof FoldersApiGetRootFolders
+     */
+    readonly userIdOrGroupId?: string
+
+    /**
+     * The filter type.
+     * @type {FilterType}
+     * @memberof FoldersApiGetRootFolders
+     */
+    readonly filterType?: FilterType
+
+    /**
+     * Specifies whether to return the Trash section or not.
+     * @type {boolean}
+     * @memberof FoldersApiGetRootFolders
+     */
+    readonly withoutTrash?: boolean
+
+    /**
+     * The maximum number of items to retrieve in the response.
+     * @type {number}
+     * @memberof FoldersApiGetRootFolders
+     */
+    readonly count?: number
+
+    /**
+     * The starting position of the items to be retrieved.
+     * @type {number}
+     * @memberof FoldersApiGetRootFolders
+     */
+    readonly startIndex?: number
+
+    /**
+     * Specifies the field by which the folder content should be sorted.
+     * @type {string}
+     * @memberof FoldersApiGetRootFolders
+     */
+    readonly sortBy?: string
+
+    /**
+     * The order in which the results are sorted.
+     * @type {SortOrder}
+     * @memberof FoldersApiGetRootFolders
+     */
+    readonly sortOrder?: SortOrder
+
+    /**
+     * The text used as a filter for searching or retrieving folder contents.
+     * @type {string}
+     * @memberof FoldersApiGetRootFolders
+     */
+    readonly filterValue?: string
+}
+
+/**
+ * Request parameters for getTrashFolder operation in FoldersApi.
+ * @export
+ * @interface FoldersApiGetTrashFolderRequest
+ */
+export interface FoldersApiGetTrashFolderRequest {
+    /**
+     * The user or group ID.
+     * @type {string}
+     * @memberof FoldersApiGetTrashFolder
+     */
+    readonly userIdOrGroupId?: string
+
+    /**
+     * The filter type.
+     * @type {FilterType}
+     * @memberof FoldersApiGetTrashFolder
+     */
+    readonly filterType?: FilterType
+
+    /**
+     * Specifies whether to return only files, only folders or all elements.
+     * @type {ApplyFilterOption}
+     * @memberof FoldersApiGetTrashFolder
+     */
+    readonly applyFilterOption?: ApplyFilterOption
+
+    /**
+     * The maximum number of items to retrieve in the response.
+     * @type {number}
+     * @memberof FoldersApiGetTrashFolder
+     */
+    readonly count?: number
+
+    /**
+     * The starting position of the items to be retrieved.
+     * @type {number}
+     * @memberof FoldersApiGetTrashFolder
+     */
+    readonly startIndex?: number
+
+    /**
+     * The property used to specify the sorting criteria for folder contents.
+     * @type {string}
+     * @memberof FoldersApiGetTrashFolder
+     */
+    readonly sortBy?: string
+
+    /**
+     * The order in which the results are sorted.
+     * @type {SortOrder}
+     * @memberof FoldersApiGetTrashFolder
+     */
+    readonly sortOrder?: SortOrder
+
+    /**
+     * The text used for filtering or searching folder contents.
+     * @type {string}
+     * @memberof FoldersApiGetTrashFolder
+     */
+    readonly filterValue?: string
+}
+
+/**
+ * Request parameters for insertFile operation in FoldersApi.
+ * @export
+ * @interface FoldersApiInsertFileRequest
+ */
+export interface FoldersApiInsertFileRequest {
+    /**
+     * The folder ID for inserting a file.
+     * @type {number}
+     * @memberof FoldersApiInsertFile
+     */
+    readonly folderId: number
+
+    /**
+     * The file to be inserted.
+     * @type {File}
+     * @memberof FoldersApiInsertFile
+     */
+    readonly insertFileFile?: File
+
+    /**
+     * The file title to be inserted.
+     * @type {string}
+     * @memberof FoldersApiInsertFile
+     */
+    readonly insertFileTitle?: string
+
+    /**
+     * Specifies whether to create a new file if it already exists or not.
+     * @type {boolean}
+     * @memberof FoldersApiInsertFile
+     */
+    readonly insertFileCreateNewIfExist?: boolean
+
+    /**
+     * Specifies whether to keep the file converting status or not.
+     * @type {boolean}
+     * @memberof FoldersApiInsertFile
+     */
+    readonly insertFileKeepConvertStatus?: boolean
+
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FoldersApiInsertFile
+     */
+    readonly insertFileStreamCanRead?: boolean
+
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FoldersApiInsertFile
+     */
+    readonly insertFileStreamCanWrite?: boolean
+
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FoldersApiInsertFile
+     */
+    readonly insertFileStreamCanSeek?: boolean
+
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FoldersApiInsertFile
+     */
+    readonly insertFileStreamCanTimeout?: boolean
+
+    /**
+     * 
+     * @type {number}
+     * @memberof FoldersApiInsertFile
+     */
+    readonly insertFileStreamLength?: number
+
+    /**
+     * 
+     * @type {number}
+     * @memberof FoldersApiInsertFile
+     */
+    readonly insertFileStreamPosition?: number
+
+    /**
+     * 
+     * @type {number}
+     * @memberof FoldersApiInsertFile
+     */
+    readonly insertFileStreamReadTimeout?: number
+
+    /**
+     * 
+     * @type {number}
+     * @memberof FoldersApiInsertFile
+     */
+    readonly insertFileStreamWriteTimeout?: number
+}
+
+/**
+ * Request parameters for insertFileToMyFromBody operation in FoldersApi.
+ * @export
+ * @interface FoldersApiInsertFileToMyFromBodyRequest
+ */
+export interface FoldersApiInsertFileToMyFromBodyRequest {
+    /**
+     * The file to be inserted.
+     * @type {File}
+     * @memberof FoldersApiInsertFileToMyFromBody
+     */
+    readonly file?: File
+
+    /**
+     * The file title to be inserted.
+     * @type {string}
+     * @memberof FoldersApiInsertFileToMyFromBody
+     */
+    readonly title?: string
+
+    /**
+     * Specifies whether to create a new file if it already exists or not.
+     * @type {boolean}
+     * @memberof FoldersApiInsertFileToMyFromBody
+     */
+    readonly createNewIfExist?: boolean
+
+    /**
+     * Specifies whether to keep the file converting status or not.
+     * @type {boolean}
+     * @memberof FoldersApiInsertFileToMyFromBody
+     */
+    readonly keepConvertStatus?: boolean
+
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FoldersApiInsertFileToMyFromBody
+     */
+    readonly streamCanRead?: boolean
+
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FoldersApiInsertFileToMyFromBody
+     */
+    readonly streamCanWrite?: boolean
+
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FoldersApiInsertFileToMyFromBody
+     */
+    readonly streamCanSeek?: boolean
+
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FoldersApiInsertFileToMyFromBody
+     */
+    readonly streamCanTimeout?: boolean
+
+    /**
+     * 
+     * @type {number}
+     * @memberof FoldersApiInsertFileToMyFromBody
+     */
+    readonly streamLength?: number
+
+    /**
+     * 
+     * @type {number}
+     * @memberof FoldersApiInsertFileToMyFromBody
+     */
+    readonly streamPosition?: number
+
+    /**
+     * 
+     * @type {number}
+     * @memberof FoldersApiInsertFileToMyFromBody
+     */
+    readonly streamReadTimeout?: number
+
+    /**
+     * 
+     * @type {number}
+     * @memberof FoldersApiInsertFileToMyFromBody
+     */
+    readonly streamWriteTimeout?: number
+}
+
+/**
+ * Request parameters for renameFolder operation in FoldersApi.
+ * @export
+ * @interface FoldersApiRenameFolderRequest
+ */
+export interface FoldersApiRenameFolderRequest {
+    /**
+     * The folder ID for the folder creation.
+     * @type {number}
+     * @memberof FoldersApiRenameFolder
+     */
+    readonly folderId: number
+
+    /**
+     * The parameters for creating a folder.
+     * @type {CreateFolder}
+     * @memberof FoldersApiRenameFolder
+     */
+    readonly createFolder: CreateFolder
+}
+
+/**
+ * Request parameters for setFolderOrder operation in FoldersApi.
+ * @export
+ * @interface FoldersApiSetFolderOrderRequest
+ */
+export interface FoldersApiSetFolderOrderRequest {
+    /**
+     * The folder unique identifier.
+     * @type {number}
+     * @memberof FoldersApiSetFolderOrder
+     */
+    readonly folderId: number
+
+    /**
+     * The folder order information.
+     * @type {OrderRequestDto}
+     * @memberof FoldersApiSetFolderOrder
+     */
+    readonly orderRequestDto?: OrderRequestDto
+}
+
+/**
+ * Request parameters for setFolderPrimaryExternalLink operation in FoldersApi.
+ * @export
+ * @interface FoldersApiSetFolderPrimaryExternalLinkRequest
+ */
+export interface FoldersApiSetFolderPrimaryExternalLinkRequest {
+    /**
+     * The folder ID.
+     * @type {number}
+     * @memberof FoldersApiSetFolderPrimaryExternalLink
+     */
+    readonly id: number
+
+    /**
+     * The folder link parameters.
+     * @type {FolderLinkRequest}
+     * @memberof FoldersApiSetFolderPrimaryExternalLink
+     */
+    readonly folderLinkRequest: FolderLinkRequest
+}
+
+/**
+ * Request parameters for uploadFile operation in FoldersApi.
+ * @export
+ * @interface FoldersApiUploadFileRequest
+ */
+export interface FoldersApiUploadFileRequest {
+    /**
+     * The folder ID to upload a file.
+     * @type {number}
+     * @memberof FoldersApiUploadFile
+     */
+    readonly folderId: number
+
+    /**
+     * The request parameters for uploading a file.
+     * @type {UploadRequestDto}
+     * @memberof FoldersApiUploadFile
+     */
+    readonly uploadRequestDto?: UploadRequestDto
+}
+
+/**
+ * Request parameters for uploadFileToMy operation in FoldersApi.
+ * @export
+ * @interface FoldersApiUploadFileToMyRequest
+ */
+export interface FoldersApiUploadFileToMyRequest {
+    /**
+     * The request parameters for uploading a file.
+     * @type {UploadRequestDto}
+     * @memberof FoldersApiUploadFileToMy
+     */
+    readonly inDto?: UploadRequestDto
+}
 
 /**
  * FoldersApi - object-oriented interface
@@ -3075,83 +4029,73 @@ export class FoldersApi extends BaseAPI {
     /**
      * Checks the file uploads to the folder with the ID specified in the request.
      * @summary Check file uploads
-     * @param {number} folderId The folder ID.
-     * @param {CheckUploadRequest} checkUploadRequest The request parameters for checking file uploads.
+     * @param {FilesFoldersApiCheckUploadRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public checkUpload(folderId: number, checkUploadRequest: CheckUploadRequest, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).checkUpload(folderId, checkUploadRequest, options).then((request) => request(this.axios, this.basePath));
+    public checkUpload(requestParameters: FoldersApiCheckUploadRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).checkUpload(requestParameters.folderId, requestParameters.checkUploadRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Creates a new folder with the title specified in the request. The parent folder ID can be also specified.
      * @summary Create a folder
-     * @param {number} folderId The folder ID for the folder creation.
-     * @param {CreateFolder} createFolder The parameters for creating a folder.
+     * @param {FilesFoldersApiCreateFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public createFolder(folderId: number, createFolder: CreateFolder, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).createFolder(folderId, createFolder, options).then((request) => request(this.axios, this.basePath));
+    public createFolder(requestParameters: FoldersApiCreateFolderRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).createFolder(requestParameters.folderId, requestParameters.createFolder, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Creates a primary external link by the identifier specified in the request.
      * @summary Create primary external link
-     * @param {number} id The folder ID.
-     * @param {FolderLinkRequest} folderLinkRequest The folder link parameters.
+     * @param {FilesFoldersApiCreateFolderPrimaryExternalLinkRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public createFolderPrimaryExternalLink(id: number, folderLinkRequest: FolderLinkRequest, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).createFolderPrimaryExternalLink(id, folderLinkRequest, options).then((request) => request(this.axios, this.basePath));
+    public createFolderPrimaryExternalLink(requestParameters: FoldersApiCreateFolderPrimaryExternalLinkRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).createFolderPrimaryExternalLink(requestParameters.id, requestParameters.folderLinkRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Generates the activity history of a folder.
      * @summary Generates folder history
-     * @param {number} folderId 
+     * @param {FilesFoldersApiCreateReportFolderHistoryRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public createReportFolderHistory(folderId: number, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).createReportFolderHistory(folderId, options).then((request) => request(this.axios, this.basePath));
+    public createReportFolderHistory(requestParameters: FoldersApiCreateReportFolderHistoryRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).createReportFolderHistory(requestParameters.folderId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Deletes a folder with the ID specified in the request.
      * @summary Delete a folder
-     * @param {number} folderId The folder ID to delete.
-     * @param {DeleteFolder} deleteFolder The parameters for deleting a folder.
+     * @param {FilesFoldersApiDeleteFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public deleteFolder(folderId: number, deleteFolder: DeleteFolder, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).deleteFolder(folderId, deleteFolder, options).then((request) => request(this.axios, this.basePath));
+    public deleteFolder(requestParameters: FoldersApiDeleteFolderRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).deleteFolder(requestParameters.folderId, requestParameters.deleteFolder, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the detailed list of files and folders located in the Favorites section.
      * @summary Get the Favorites section
-     * @param {string} [userIdOrGroupId] The user or group ID.
-     * @param {FilterType} [filterType] The filter type.
-     * @param {number} [count] The maximum number of items to retrieve in the request.
-     * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated list.
-     * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
-     * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-     * @param {string} [filterValue] The text used as a filter or search criterion for folder content queries.
+     * @param {FilesFoldersApiGetFavoritesFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public getFavoritesFolder(userIdOrGroupId?: string, filterType?: FilterType, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).getFavoritesFolder(userIdOrGroupId, filterType, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(this.axios, this.basePath));
+    public getFavoritesFolder(requestParameters: FoldersApiGetFavoritesFolderRequest = {}, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).getFavoritesFolder(requestParameters.userIdOrGroupId, requestParameters.filterType, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3168,339 +4112,253 @@ export class FoldersApi extends BaseAPI {
     /**
      * Returns the form filter of a folder with the ID specified in the request.
      * @summary Get folder form filter
-     * @param {number} folderId The folder unique identifier.
+     * @param {FilesFoldersApiGetFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public getFolder(folderId: number, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).getFolder(folderId, options).then((request) => request(this.axios, this.basePath));
+    public getFolder(requestParameters: FoldersApiGetFolderRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).getFolder(requestParameters.folderId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the detailed list of files and folders located in the folder with the ID specified in the request.
      * @summary Get a folder by ID
-     * @param {number} folderId The folder ID.
-     * @param {string} [userIdOrGroupId] The user or group ID.
-     * @param {string} [sharedBy] The identifier of the user who shared the folder or file.
-     * @param {FilterType} [filterType] The filter type.
-     * @param {number} [roomId] The room ID.
-     * @param {boolean} [excludeSubject] Specifies whether to exclude search by user or group ID.
-     * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders, or all elements from the specified folder.
-     * @param {string} [extension] Specifies whether to search for the specific file extension.
-     * @param {SearchArea} [searchArea] The search area.
-     * @param {string} [formsItemKey] The forms item key.
-     * @param {string} [formsItemType] The forms item type.
-     * @param {number} [count] The maximum number of items to retrieve in the request.
-     * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated request.
-     * @param {string} [sortBy] The property used for sorting the folder request results.
-     * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-     * @param {string} [filterValue] The text value used as a filter parameter for folder content queries.
-     * @param {Location} [location] The location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link.
+     * @param {FilesFoldersApiGetFolderByFolderIdRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public getFolderByFolderId(folderId: number, userIdOrGroupId?: string, sharedBy?: string, filterType?: FilterType, roomId?: number, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, extension?: string, searchArea?: SearchArea, formsItemKey?: string, formsItemType?: string, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, location?: Location, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).getFolderByFolderId(folderId, userIdOrGroupId, sharedBy, filterType, roomId, excludeSubject, applyFilterOption, extension, searchArea, formsItemKey, formsItemType, count, startIndex, sortBy, sortOrder, filterValue, location, options).then((request) => request(this.axios, this.basePath));
+    public getFolderByFolderId(requestParameters: FoldersApiGetFolderByFolderIdRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).getFolderByFolderId(requestParameters.folderId, requestParameters.userIdOrGroupId, requestParameters.sharedBy, requestParameters.filterType, requestParameters.roomId, requestParameters.excludeSubject, requestParameters.applyFilterOption, requestParameters.extension, requestParameters.searchArea, requestParameters.formsItemKey, requestParameters.formsItemType, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, requestParameters.location, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the activity history of a folder with a specified identifier.
      * @summary Get folder history
-     * @param {number} folderId The folder ID of the history request.
-     * @param {ApiDateTime} [fromDate] The start date of the history request.
-     * @param {ApiDateTime} [toDate] The end date of the history request.
-     * @param {number} [count] The number of records to retrieve for the folder history.
-     * @param {number} [startIndex] The starting index from which the history records are retrieved in the request.
+     * @param {FilesFoldersApiGetFolderHistoryRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public getFolderHistory(folderId: number, fromDate?: ApiDateTime, toDate?: ApiDateTime, count?: number, startIndex?: number, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).getFolderHistory(folderId, fromDate, toDate, count, startIndex, options).then((request) => request(this.axios, this.basePath));
+    public getFolderHistory(requestParameters: FoldersApiGetFolderHistoryRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).getFolderHistory(requestParameters.folderId, requestParameters.fromDate, requestParameters.toDate, requestParameters.count, requestParameters.startIndex, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the detailed information about a folder with the ID specified in the request.
      * @summary Get folder information
-     * @param {number} folderId The folder unique identifier.
+     * @param {FilesFoldersApiGetFolderInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public getFolderInfo(folderId: number, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).getFolderInfo(folderId, options).then((request) => request(this.axios, this.basePath));
+    public getFolderInfo(requestParameters: FoldersApiGetFolderInfoRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).getFolderInfo(requestParameters.folderId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the links of the folder with the ID specified in the request.
      * @summary Get the folder links
-     * @param {number} id The folder ID.
+     * @param {FilesFoldersApiGetFolderLinksRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public getFolderLinks(id: number, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).getFolderLinks(id, options).then((request) => request(this.axios, this.basePath));
+    public getFolderLinks(requestParameters: FoldersApiGetFolderLinksRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).getFolderLinks(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns a path to the folder with the ID specified in the request.
      * @summary Get the folder path
-     * @param {number} folderId The folder unique identifier.
+     * @param {FilesFoldersApiGetFolderPathRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public getFolderPath(folderId: number, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).getFolderPath(folderId, options).then((request) => request(this.axios, this.basePath));
+    public getFolderPath(requestParameters: FoldersApiGetFolderPathRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).getFolderPath(requestParameters.folderId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the primary external link by the identifier specified in the request.
      * @summary Get primary external link
-     * @param {number} id The folder unique identifier.
-     * @param {number} [count] The number of items to retrieve in the request.
-     * @param {number} [startIndex] The starting index for the query results.
+     * @param {FilesFoldersApiGetFolderPrimaryExternalLinkRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public getFolderPrimaryExternalLink(id: number, count?: number, startIndex?: number, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).getFolderPrimaryExternalLink(id, count, startIndex, options).then((request) => request(this.axios, this.basePath));
+    public getFolderPrimaryExternalLink(requestParameters: FoldersApiGetFolderPrimaryExternalLinkRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).getFolderPrimaryExternalLink(requestParameters.id, requestParameters.count, requestParameters.startIndex, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns a list of all the subfolders from a folder with the ID specified in the request.
      * @summary Get subfolders
-     * @param {number} folderId The folder unique identifier.
+     * @param {FilesFoldersApiGetFoldersRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public getFolders(folderId: number, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).getFolders(folderId, options).then((request) => request(this.axios, this.basePath));
+    public getFolders(requestParameters: FoldersApiGetFoldersRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).getFolders(requestParameters.folderId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the detailed list of files and folders located in the My documents section.
      * @summary Get the My documents section
-     * @param {string} [userIdOrGroupId] The user or group ID.
-     * @param {FilterType} [filterType] The filter type.
-     * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
-     * @param {number} [count] The maximum number of items to retrieve in the response.
-     * @param {number} [startIndex] The starting position of the items to be retrieved.
-     * @param {string} [sortBy] The property used to specify the sorting criteria for folder contents.
-     * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-     * @param {string} [filterValue] The text used for filtering or searching folder contents.
+     * @param {FilesFoldersApiGetMyFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public getMyFolder(userIdOrGroupId?: string, filterType?: FilterType, applyFilterOption?: ApplyFilterOption, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).getMyFolder(userIdOrGroupId, filterType, applyFilterOption, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(this.axios, this.basePath));
+    public getMyFolder(requestParameters: FoldersApiGetMyFolderRequest = {}, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).getMyFolder(requestParameters.userIdOrGroupId, requestParameters.filterType, requestParameters.applyFilterOption, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns a list of all the new items from a folder with the ID specified in the request.
      * @summary Get new folder items
-     * @param {number} folderId The folder unique identifier.
+     * @param {FilesFoldersApiGetNewFolderItemsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public getNewFolderItems(folderId: number, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).getNewFolderItems(folderId, options).then((request) => request(this.axios, this.basePath));
+    public getNewFolderItems(requestParameters: FoldersApiGetNewFolderItemsRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).getNewFolderItems(requestParameters.folderId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the detailed list of files and folders located in the Private Room section.
      * @summary Get the Private Room section
-     * @param {string} [userIdOrGroupId] The user or group ID.
-     * @param {FilterType} [filterType] The filter type.
-     * @param {number} [count] The maximum number of items to retrieve in the request.
-     * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated list.
-     * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
-     * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-     * @param {string} [filterValue] The text used as a filter or search criterion for folder content queries.
+     * @param {FilesFoldersApiGetPrivacyFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public getPrivacyFolder(userIdOrGroupId?: string, filterType?: FilterType, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).getPrivacyFolder(userIdOrGroupId, filterType, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(this.axios, this.basePath));
+    public getPrivacyFolder(requestParameters: FoldersApiGetPrivacyFolderRequest = {}, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).getPrivacyFolder(requestParameters.userIdOrGroupId, requestParameters.filterType, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the detailed list of files located in the Recent section.
      * @summary Get the Recent section
-     * @param {string} [userIdOrGroupId] The user or group ID.
-     * @param {FilterType} [filterType] The filter type.
-     * @param {boolean} [excludeSubject] Specifies whether to exclude search by user or group ID.
-     * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
-     * @param {SearchArea} [searchArea] The search area.
-     * @param {Array<string>} [extension] Specifies whether to search for a specific file extension in the Recent folder.
-     * @param {number} [count] The maximum number of items to return.
-     * @param {number} [startIndex] The starting position of the results to be returned in the query response.
-     * @param {string} [sortBy] Specifies the sorting criteria for the folder request.
-     * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-     * @param {string} [filterValue] The text used for filtering or searching folder contents.
+     * @param {FilesFoldersApiGetRecentFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public getRecentFolder(userIdOrGroupId?: string, filterType?: FilterType, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, searchArea?: SearchArea, extension?: Array<string>, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).getRecentFolder(userIdOrGroupId, filterType, excludeSubject, applyFilterOption, searchArea, extension, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(this.axios, this.basePath));
+    public getRecentFolder(requestParameters: FoldersApiGetRecentFolderRequest = {}, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).getRecentFolder(requestParameters.userIdOrGroupId, requestParameters.filterType, requestParameters.excludeSubject, requestParameters.applyFilterOption, requestParameters.searchArea, requestParameters.extension, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns all the sections matching the parameters specified in the request.
      * @summary Get filtered sections
-     * @param {string} [userIdOrGroupId] The user or group ID.
-     * @param {FilterType} [filterType] The filter type.
-     * @param {boolean} [withoutTrash] Specifies whether to return the Trash section or not.
-     * @param {number} [count] The maximum number of items to retrieve in the response.
-     * @param {number} [startIndex] The starting position of the items to be retrieved.
-     * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
-     * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-     * @param {string} [filterValue] The text used as a filter for searching or retrieving folder contents.
+     * @param {FilesFoldersApiGetRootFoldersRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public getRootFolders(userIdOrGroupId?: string, filterType?: FilterType, withoutTrash?: boolean, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).getRootFolders(userIdOrGroupId, filterType, withoutTrash, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(this.axios, this.basePath));
+    public getRootFolders(requestParameters: FoldersApiGetRootFoldersRequest = {}, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).getRootFolders(requestParameters.userIdOrGroupId, requestParameters.filterType, requestParameters.withoutTrash, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the detailed list of files and folders located in the Trash section.
      * @summary Get the Trash section
-     * @param {string} [userIdOrGroupId] The user or group ID.
-     * @param {FilterType} [filterType] The filter type.
-     * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
-     * @param {number} [count] The maximum number of items to retrieve in the response.
-     * @param {number} [startIndex] The starting position of the items to be retrieved.
-     * @param {string} [sortBy] The property used to specify the sorting criteria for folder contents.
-     * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-     * @param {string} [filterValue] The text used for filtering or searching folder contents.
+     * @param {FilesFoldersApiGetTrashFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public getTrashFolder(userIdOrGroupId?: string, filterType?: FilterType, applyFilterOption?: ApplyFilterOption, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).getTrashFolder(userIdOrGroupId, filterType, applyFilterOption, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(this.axios, this.basePath));
+    public getTrashFolder(requestParameters: FoldersApiGetTrashFolderRequest = {}, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).getTrashFolder(requestParameters.userIdOrGroupId, requestParameters.filterType, requestParameters.applyFilterOption, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Inserts a file specified in the request to the selected folder by single file uploading.
      * @summary Insert a file
-     * @param {number} folderId The folder ID for inserting a file.
-     * @param {File} [insertFileFile] The file to be inserted.
-     * @param {string} [insertFileTitle] The file title to be inserted.
-     * @param {boolean} [insertFileCreateNewIfExist] Specifies whether to create a new file if it already exists or not.
-     * @param {boolean} [insertFileKeepConvertStatus] Specifies whether to keep the file converting status or not.
-     * @param {boolean} [insertFileStreamCanRead] 
-     * @param {boolean} [insertFileStreamCanWrite] 
-     * @param {boolean} [insertFileStreamCanSeek] 
-     * @param {boolean} [insertFileStreamCanTimeout] 
-     * @param {number} [insertFileStreamLength] 
-     * @param {number} [insertFileStreamPosition] 
-     * @param {number} [insertFileStreamReadTimeout] 
-     * @param {number} [insertFileStreamWriteTimeout] 
+     * @param {FilesFoldersApiInsertFileRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public insertFile(folderId: number, insertFileFile?: File, insertFileTitle?: string, insertFileCreateNewIfExist?: boolean, insertFileKeepConvertStatus?: boolean, insertFileStreamCanRead?: boolean, insertFileStreamCanWrite?: boolean, insertFileStreamCanSeek?: boolean, insertFileStreamCanTimeout?: boolean, insertFileStreamLength?: number, insertFileStreamPosition?: number, insertFileStreamReadTimeout?: number, insertFileStreamWriteTimeout?: number, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).insertFile(folderId, insertFileFile, insertFileTitle, insertFileCreateNewIfExist, insertFileKeepConvertStatus, insertFileStreamCanRead, insertFileStreamCanWrite, insertFileStreamCanSeek, insertFileStreamCanTimeout, insertFileStreamLength, insertFileStreamPosition, insertFileStreamReadTimeout, insertFileStreamWriteTimeout, options).then((request) => request(this.axios, this.basePath));
+    public insertFile(requestParameters: FoldersApiInsertFileRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).insertFile(requestParameters.folderId, requestParameters.insertFileFile, requestParameters.insertFileTitle, requestParameters.insertFileCreateNewIfExist, requestParameters.insertFileKeepConvertStatus, requestParameters.insertFileStreamCanRead, requestParameters.insertFileStreamCanWrite, requestParameters.insertFileStreamCanSeek, requestParameters.insertFileStreamCanTimeout, requestParameters.insertFileStreamLength, requestParameters.insertFileStreamPosition, requestParameters.insertFileStreamReadTimeout, requestParameters.insertFileStreamWriteTimeout, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Inserts a file specified in the request to the My documents section by single file uploading.
      * @summary Insert a file to the My documents section
-     * @param {File} [file] The file to be inserted.
-     * @param {string} [title] The file title to be inserted.
-     * @param {boolean} [createNewIfExist] Specifies whether to create a new file if it already exists or not.
-     * @param {boolean} [keepConvertStatus] Specifies whether to keep the file converting status or not.
-     * @param {boolean} [streamCanRead] 
-     * @param {boolean} [streamCanWrite] 
-     * @param {boolean} [streamCanSeek] 
-     * @param {boolean} [streamCanTimeout] 
-     * @param {number} [streamLength] 
-     * @param {number} [streamPosition] 
-     * @param {number} [streamReadTimeout] 
-     * @param {number} [streamWriteTimeout] 
+     * @param {FilesFoldersApiInsertFileToMyFromBodyRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public insertFileToMyFromBody(file?: File, title?: string, createNewIfExist?: boolean, keepConvertStatus?: boolean, streamCanRead?: boolean, streamCanWrite?: boolean, streamCanSeek?: boolean, streamCanTimeout?: boolean, streamLength?: number, streamPosition?: number, streamReadTimeout?: number, streamWriteTimeout?: number, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).insertFileToMyFromBody(file, title, createNewIfExist, keepConvertStatus, streamCanRead, streamCanWrite, streamCanSeek, streamCanTimeout, streamLength, streamPosition, streamReadTimeout, streamWriteTimeout, options).then((request) => request(this.axios, this.basePath));
+    public insertFileToMyFromBody(requestParameters: FoldersApiInsertFileToMyFromBodyRequest = {}, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).insertFileToMyFromBody(requestParameters.file, requestParameters.title, requestParameters.createNewIfExist, requestParameters.keepConvertStatus, requestParameters.streamCanRead, requestParameters.streamCanWrite, requestParameters.streamCanSeek, requestParameters.streamCanTimeout, requestParameters.streamLength, requestParameters.streamPosition, requestParameters.streamReadTimeout, requestParameters.streamWriteTimeout, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Renames the selected folder with a new title specified in the request.
      * @summary Rename a folder
-     * @param {number} folderId The folder ID for the folder creation.
-     * @param {CreateFolder} createFolder The parameters for creating a folder.
+     * @param {FilesFoldersApiRenameFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public renameFolder(folderId: number, createFolder: CreateFolder, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).renameFolder(folderId, createFolder, options).then((request) => request(this.axios, this.basePath));
+    public renameFolder(requestParameters: FoldersApiRenameFolderRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).renameFolder(requestParameters.folderId, requestParameters.createFolder, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Sets the order of a folder with ID specified in the request.
      * @summary Set folder order
-     * @param {number} folderId The folder unique identifier.
-     * @param {OrderRequestDto} [orderRequestDto] The folder order information.
+     * @param {FilesFoldersApiSetFolderOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public setFolderOrder(folderId: number, orderRequestDto?: OrderRequestDto, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).setFolderOrder(folderId, orderRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public setFolderOrder(requestParameters: FoldersApiSetFolderOrderRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).setFolderOrder(requestParameters.folderId, requestParameters.orderRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Sets the folder external link with the ID specified in the request.
      * @summary Set the folder external link
-     * @param {number} id The folder ID.
-     * @param {FolderLinkRequest} folderLinkRequest The folder link parameters.
+     * @param {FilesFoldersApiSetFolderPrimaryExternalLinkRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public setFolderPrimaryExternalLink(id: number, folderLinkRequest: FolderLinkRequest, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).setFolderPrimaryExternalLink(id, folderLinkRequest, options).then((request) => request(this.axios, this.basePath));
+    public setFolderPrimaryExternalLink(requestParameters: FoldersApiSetFolderPrimaryExternalLinkRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).setFolderPrimaryExternalLink(requestParameters.id, requestParameters.folderLinkRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
      * @summary Upload a file
-     * @param {number} folderId The folder ID to upload a file.
-     * @param {UploadRequestDto} [uploadRequestDto] The request parameters for uploading a file.
+     * @param {FilesFoldersApiUploadFileRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public uploadFile(folderId: number, uploadRequestDto?: UploadRequestDto, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).uploadFile(folderId, uploadRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public uploadFile(requestParameters: FoldersApiUploadFileRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).uploadFile(requestParameters.folderId, requestParameters.uploadRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
      * @summary Upload a file to the My documents section
-     * @param {UploadRequestDto} [inDto] The request parameters for uploading a file.
+     * @param {FilesFoldersApiUploadFileToMyRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
-    public uploadFileToMy(inDto?: UploadRequestDto, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).uploadFileToMy(inDto, options).then((request) => request(this.axios, this.basePath));
+    public uploadFileToMy(requestParameters: FoldersApiUploadFileToMyRequest = {}, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).uploadFileToMy(requestParameters.inDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

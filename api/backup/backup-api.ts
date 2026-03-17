@@ -1000,100 +1000,98 @@ export const BackupApiFactory = function (configuration?: Configuration, basePat
         /**
          * Creates the backup schedule of the current portal with the parameters specified in the request.
          * @summary Create the backup schedule
-         * @param {BackupScheduleDto} [backupScheduleDto] 
+         * @param {BackupApiCreateBackupScheduleRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for createBackupSchedule operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-backup-schedule/
          * @throws {RequiredError}
          */
-        createBackupSchedule(backupScheduleDto?: BackupScheduleDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.createBackupSchedule(backupScheduleDto, options).then((request) => request(axios, basePath));
+        createBackupSchedule(requestParameters: BackupApiCreateBackupScheduleRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.createBackupSchedule(requestParameters.backupScheduleDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Deletes the backup with the ID specified in the request.
          * @summary Delete the backup
-         * @param {string} id The backup ID.
+         * @param {BackupApiDeleteBackupRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteBackup operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-backup/
          * @throws {RequiredError}
          */
-        deleteBackup(id: string, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.deleteBackup(id, options).then((request) => request(axios, basePath));
+        deleteBackup(requestParameters: BackupApiDeleteBackupRequest, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.deleteBackup(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * Deletes the backup history from the current portal.
          * @summary Delete the backup history
-         * @param {boolean} [dump] Specifies if a dump will be created or not.
+         * @param {BackupApiDeleteBackupHistoryRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteBackupHistory operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-backup-history/
          * @throws {RequiredError}
          */
-        deleteBackupHistory(dump?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.deleteBackupHistory(dump, options).then((request) => request(axios, basePath));
+        deleteBackupHistory(requestParameters: BackupApiDeleteBackupHistoryRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.deleteBackupHistory(requestParameters.dump, options).then((request) => request(axios, basePath));
         },
         /**
          * Deletes the backup schedule of the current portal.
          * @summary Delete the backup schedule
-         * @param {boolean} [dump] Specifies if a dump will be created or not.
+         * @param {BackupApiDeleteBackupScheduleRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteBackupSchedule operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-backup-schedule/
          * @throws {RequiredError}
          */
-        deleteBackupSchedule(dump?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.deleteBackupSchedule(dump, options).then((request) => request(axios, basePath));
+        deleteBackupSchedule(requestParameters: BackupApiDeleteBackupScheduleRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.deleteBackupSchedule(requestParameters.dump, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the history of the started backup.
          * @summary Get the backup history
-         * @param {boolean} [dump] Specifies if a dump will be created or not.
+         * @param {BackupApiGetBackupHistoryRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getBackupHistory operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backup-history/
          * @throws {RequiredError}
          */
-        getBackupHistory(dump?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<BackupHistoryRecordArrayWrapper> {
-            return localVarFp.getBackupHistory(dump, options).then((request) => request(axios, basePath));
+        getBackupHistory(requestParameters: BackupApiGetBackupHistoryRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BackupHistoryRecordArrayWrapper> {
+            return localVarFp.getBackupHistory(requestParameters.dump, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the progress of the started backup.
          * @summary Get the backup progress
-         * @param {boolean} [dump] Specifies if a dump will be created or not.
+         * @param {BackupApiGetBackupProgressRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getBackupProgress operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backup-progress/
          * @throws {RequiredError}
          */
-        getBackupProgress(dump?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<BackupProgressWrapper> {
-            return localVarFp.getBackupProgress(dump, options).then((request) => request(axios, basePath));
+        getBackupProgress(requestParameters: BackupApiGetBackupProgressRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BackupProgressWrapper> {
+            return localVarFp.getBackupProgress(requestParameters.dump, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the backup schedule of the current portal.
          * @summary Get the backup schedule
-         * @param {boolean} [dump] Specifies if a dump will be created or not.
+         * @param {BackupApiGetBackupScheduleRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getBackupSchedule operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backup-schedule/
          * @throws {RequiredError}
          */
-        getBackupSchedule(dump?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<ScheduleWrapper> {
-            return localVarFp.getBackupSchedule(dump, options).then((request) => request(axios, basePath));
+        getBackupSchedule(requestParameters: BackupApiGetBackupScheduleRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ScheduleWrapper> {
+            return localVarFp.getBackupSchedule(requestParameters.dump, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the number of backups for a period of time. The default is one month.
          * @summary Get the number of backups
-         * @param {string} [from] The from date.
-         * @param {string} [to] The to date.
-         * @param {boolean} [paid] Specifies if the backups are paid or not.
+         * @param {BackupApiGetBackupsCountRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getBackupsCount operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backups-count/
          * @throws {RequiredError}
          */
-        getBackupsCount(from?: string, to?: string, paid?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<Int32Wrapper> {
-            return localVarFp.getBackupsCount(from, to, paid, options).then((request) => request(axios, basePath));
+        getBackupsCount(requestParameters: BackupApiGetBackupsCountRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<Int32Wrapper> {
+            return localVarFp.getBackupsCount(requestParameters.from, requestParameters.to, requestParameters.paid, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the backup service state.
@@ -1109,41 +1107,209 @@ export const BackupApiFactory = function (configuration?: Configuration, basePat
         /**
          * Returns the progress of the started restoring process.
          * @summary Get the restoring progress
-         * @param {boolean} [dump] Specifies if a dump will be created or not.
+         * @param {BackupApiGetRestoreProgressRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getRestoreProgress operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-restore-progress/
          * @throws {RequiredError}
          */
-        getRestoreProgress(dump?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<BackupProgressWrapper> {
-            return localVarFp.getRestoreProgress(dump, options).then((request) => request(axios, basePath));
+        getRestoreProgress(requestParameters: BackupApiGetRestoreProgressRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BackupProgressWrapper> {
+            return localVarFp.getRestoreProgress(requestParameters.dump, options).then((request) => request(axios, basePath));
         },
         /**
          * Starts the backup of the current portal with the parameters specified in the request.
          * @summary Start the backup
-         * @param {BackupDto} [backupDto] 
+         * @param {BackupApiStartBackupRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for startBackup operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-backup/
          * @throws {RequiredError}
          */
-        startBackup(backupDto?: BackupDto, options?: RawAxiosRequestConfig): AxiosPromise<BackupProgressWrapper> {
-            return localVarFp.startBackup(backupDto, options).then((request) => request(axios, basePath));
+        startBackup(requestParameters: BackupApiStartBackupRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BackupProgressWrapper> {
+            return localVarFp.startBackup(requestParameters.backupDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Starts the data restoring process of the current portal with the parameters specified in the request.
          * @summary Start the restoring process
-         * @param {BackupRestoreDto} [backupRestoreDto] 
+         * @param {BackupApiStartBackupRestoreRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for startBackupRestore operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-backup-restore/
          * @throws {RequiredError}
          */
-        startBackupRestore(backupRestoreDto?: BackupRestoreDto, options?: RawAxiosRequestConfig): AxiosPromise<BackupProgressWrapper> {
-            return localVarFp.startBackupRestore(backupRestoreDto, options).then((request) => request(axios, basePath));
+        startBackupRestore(requestParameters: BackupApiStartBackupRestoreRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BackupProgressWrapper> {
+            return localVarFp.startBackupRestore(requestParameters.backupRestoreDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for createBackupSchedule operation in BackupApi.
+ * @export
+ * @interface BackupApiCreateBackupScheduleRequest
+ */
+export interface BackupApiCreateBackupScheduleRequest {
+    /**
+     * 
+     * @type {BackupScheduleDto}
+     * @memberof BackupApiCreateBackupSchedule
+     */
+    readonly backupScheduleDto?: BackupScheduleDto
+}
+
+/**
+ * Request parameters for deleteBackup operation in BackupApi.
+ * @export
+ * @interface BackupApiDeleteBackupRequest
+ */
+export interface BackupApiDeleteBackupRequest {
+    /**
+     * The backup ID.
+     * @type {string}
+     * @memberof BackupApiDeleteBackup
+     */
+    readonly id: string
+}
+
+/**
+ * Request parameters for deleteBackupHistory operation in BackupApi.
+ * @export
+ * @interface BackupApiDeleteBackupHistoryRequest
+ */
+export interface BackupApiDeleteBackupHistoryRequest {
+    /**
+     * Specifies if a dump will be created or not.
+     * @type {boolean}
+     * @memberof BackupApiDeleteBackupHistory
+     */
+    readonly dump?: boolean
+}
+
+/**
+ * Request parameters for deleteBackupSchedule operation in BackupApi.
+ * @export
+ * @interface BackupApiDeleteBackupScheduleRequest
+ */
+export interface BackupApiDeleteBackupScheduleRequest {
+    /**
+     * Specifies if a dump will be created or not.
+     * @type {boolean}
+     * @memberof BackupApiDeleteBackupSchedule
+     */
+    readonly dump?: boolean
+}
+
+/**
+ * Request parameters for getBackupHistory operation in BackupApi.
+ * @export
+ * @interface BackupApiGetBackupHistoryRequest
+ */
+export interface BackupApiGetBackupHistoryRequest {
+    /**
+     * Specifies if a dump will be created or not.
+     * @type {boolean}
+     * @memberof BackupApiGetBackupHistory
+     */
+    readonly dump?: boolean
+}
+
+/**
+ * Request parameters for getBackupProgress operation in BackupApi.
+ * @export
+ * @interface BackupApiGetBackupProgressRequest
+ */
+export interface BackupApiGetBackupProgressRequest {
+    /**
+     * Specifies if a dump will be created or not.
+     * @type {boolean}
+     * @memberof BackupApiGetBackupProgress
+     */
+    readonly dump?: boolean
+}
+
+/**
+ * Request parameters for getBackupSchedule operation in BackupApi.
+ * @export
+ * @interface BackupApiGetBackupScheduleRequest
+ */
+export interface BackupApiGetBackupScheduleRequest {
+    /**
+     * Specifies if a dump will be created or not.
+     * @type {boolean}
+     * @memberof BackupApiGetBackupSchedule
+     */
+    readonly dump?: boolean
+}
+
+/**
+ * Request parameters for getBackupsCount operation in BackupApi.
+ * @export
+ * @interface BackupApiGetBackupsCountRequest
+ */
+export interface BackupApiGetBackupsCountRequest {
+    /**
+     * The from date.
+     * @type {string}
+     * @memberof BackupApiGetBackupsCount
+     */
+    readonly from?: string
+
+    /**
+     * The to date.
+     * @type {string}
+     * @memberof BackupApiGetBackupsCount
+     */
+    readonly to?: string
+
+    /**
+     * Specifies if the backups are paid or not.
+     * @type {boolean}
+     * @memberof BackupApiGetBackupsCount
+     */
+    readonly paid?: boolean
+}
+
+/**
+ * Request parameters for getRestoreProgress operation in BackupApi.
+ * @export
+ * @interface BackupApiGetRestoreProgressRequest
+ */
+export interface BackupApiGetRestoreProgressRequest {
+    /**
+     * Specifies if a dump will be created or not.
+     * @type {boolean}
+     * @memberof BackupApiGetRestoreProgress
+     */
+    readonly dump?: boolean
+}
+
+/**
+ * Request parameters for startBackup operation in BackupApi.
+ * @export
+ * @interface BackupApiStartBackupRequest
+ */
+export interface BackupApiStartBackupRequest {
+    /**
+     * 
+     * @type {BackupDto}
+     * @memberof BackupApiStartBackup
+     */
+    readonly backupDto?: BackupDto
+}
+
+/**
+ * Request parameters for startBackupRestore operation in BackupApi.
+ * @export
+ * @interface BackupApiStartBackupRestoreRequest
+ */
+export interface BackupApiStartBackupRestoreRequest {
+    /**
+     * 
+     * @type {BackupRestoreDto}
+     * @memberof BackupApiStartBackupRestore
+     */
+    readonly backupRestoreDto?: BackupRestoreDto
+}
 
 /**
  * BackupApi - object-oriented interface
@@ -1166,99 +1332,97 @@ export class BackupApi extends BaseAPI {
     /**
      * Creates the backup schedule of the current portal with the parameters specified in the request.
      * @summary Create the backup schedule
-     * @param {BackupScheduleDto} [backupScheduleDto] 
+     * @param {BackupApiCreateBackupScheduleRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BackupApi
      */
-    public createBackupSchedule(backupScheduleDto?: BackupScheduleDto, options?: RawAxiosRequestConfig) {
-        return BackupApiFp(this.configuration).createBackupSchedule(backupScheduleDto, options).then((request) => request(this.axios, this.basePath));
+    public createBackupSchedule(requestParameters: BackupApiCreateBackupScheduleRequest = {}, options?: RawAxiosRequestConfig) {
+        return BackupApiFp(this.configuration).createBackupSchedule(requestParameters.backupScheduleDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Deletes the backup with the ID specified in the request.
      * @summary Delete the backup
-     * @param {string} id The backup ID.
+     * @param {BackupApiDeleteBackupRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BackupApi
      */
-    public deleteBackup(id: string, options?: RawAxiosRequestConfig) {
-        return BackupApiFp(this.configuration).deleteBackup(id, options).then((request) => request(this.axios, this.basePath));
+    public deleteBackup(requestParameters: BackupApiDeleteBackupRequest, options?: RawAxiosRequestConfig) {
+        return BackupApiFp(this.configuration).deleteBackup(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Deletes the backup history from the current portal.
      * @summary Delete the backup history
-     * @param {boolean} [dump] Specifies if a dump will be created or not.
+     * @param {BackupApiDeleteBackupHistoryRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BackupApi
      */
-    public deleteBackupHistory(dump?: boolean, options?: RawAxiosRequestConfig) {
-        return BackupApiFp(this.configuration).deleteBackupHistory(dump, options).then((request) => request(this.axios, this.basePath));
+    public deleteBackupHistory(requestParameters: BackupApiDeleteBackupHistoryRequest = {}, options?: RawAxiosRequestConfig) {
+        return BackupApiFp(this.configuration).deleteBackupHistory(requestParameters.dump, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Deletes the backup schedule of the current portal.
      * @summary Delete the backup schedule
-     * @param {boolean} [dump] Specifies if a dump will be created or not.
+     * @param {BackupApiDeleteBackupScheduleRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BackupApi
      */
-    public deleteBackupSchedule(dump?: boolean, options?: RawAxiosRequestConfig) {
-        return BackupApiFp(this.configuration).deleteBackupSchedule(dump, options).then((request) => request(this.axios, this.basePath));
+    public deleteBackupSchedule(requestParameters: BackupApiDeleteBackupScheduleRequest = {}, options?: RawAxiosRequestConfig) {
+        return BackupApiFp(this.configuration).deleteBackupSchedule(requestParameters.dump, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the history of the started backup.
      * @summary Get the backup history
-     * @param {boolean} [dump] Specifies if a dump will be created or not.
+     * @param {BackupApiGetBackupHistoryRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BackupApi
      */
-    public getBackupHistory(dump?: boolean, options?: RawAxiosRequestConfig) {
-        return BackupApiFp(this.configuration).getBackupHistory(dump, options).then((request) => request(this.axios, this.basePath));
+    public getBackupHistory(requestParameters: BackupApiGetBackupHistoryRequest = {}, options?: RawAxiosRequestConfig) {
+        return BackupApiFp(this.configuration).getBackupHistory(requestParameters.dump, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the progress of the started backup.
      * @summary Get the backup progress
-     * @param {boolean} [dump] Specifies if a dump will be created or not.
+     * @param {BackupApiGetBackupProgressRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BackupApi
      */
-    public getBackupProgress(dump?: boolean, options?: RawAxiosRequestConfig) {
-        return BackupApiFp(this.configuration).getBackupProgress(dump, options).then((request) => request(this.axios, this.basePath));
+    public getBackupProgress(requestParameters: BackupApiGetBackupProgressRequest = {}, options?: RawAxiosRequestConfig) {
+        return BackupApiFp(this.configuration).getBackupProgress(requestParameters.dump, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the backup schedule of the current portal.
      * @summary Get the backup schedule
-     * @param {boolean} [dump] Specifies if a dump will be created or not.
+     * @param {BackupApiGetBackupScheduleRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BackupApi
      */
-    public getBackupSchedule(dump?: boolean, options?: RawAxiosRequestConfig) {
-        return BackupApiFp(this.configuration).getBackupSchedule(dump, options).then((request) => request(this.axios, this.basePath));
+    public getBackupSchedule(requestParameters: BackupApiGetBackupScheduleRequest = {}, options?: RawAxiosRequestConfig) {
+        return BackupApiFp(this.configuration).getBackupSchedule(requestParameters.dump, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the number of backups for a period of time. The default is one month.
      * @summary Get the number of backups
-     * @param {string} [from] The from date.
-     * @param {string} [to] The to date.
-     * @param {boolean} [paid] Specifies if the backups are paid or not.
+     * @param {BackupApiGetBackupsCountRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BackupApi
      */
-    public getBackupsCount(from?: string, to?: string, paid?: boolean, options?: RawAxiosRequestConfig) {
-        return BackupApiFp(this.configuration).getBackupsCount(from, to, paid, options).then((request) => request(this.axios, this.basePath));
+    public getBackupsCount(requestParameters: BackupApiGetBackupsCountRequest = {}, options?: RawAxiosRequestConfig) {
+        return BackupApiFp(this.configuration).getBackupsCount(requestParameters.from, requestParameters.to, requestParameters.paid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1275,37 +1439,37 @@ export class BackupApi extends BaseAPI {
     /**
      * Returns the progress of the started restoring process.
      * @summary Get the restoring progress
-     * @param {boolean} [dump] Specifies if a dump will be created or not.
+     * @param {BackupApiGetRestoreProgressRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BackupApi
      */
-    public getRestoreProgress(dump?: boolean, options?: RawAxiosRequestConfig) {
-        return BackupApiFp(this.configuration).getRestoreProgress(dump, options).then((request) => request(this.axios, this.basePath));
+    public getRestoreProgress(requestParameters: BackupApiGetRestoreProgressRequest = {}, options?: RawAxiosRequestConfig) {
+        return BackupApiFp(this.configuration).getRestoreProgress(requestParameters.dump, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Starts the backup of the current portal with the parameters specified in the request.
      * @summary Start the backup
-     * @param {BackupDto} [backupDto] 
+     * @param {BackupApiStartBackupRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BackupApi
      */
-    public startBackup(backupDto?: BackupDto, options?: RawAxiosRequestConfig) {
-        return BackupApiFp(this.configuration).startBackup(backupDto, options).then((request) => request(this.axios, this.basePath));
+    public startBackup(requestParameters: BackupApiStartBackupRequest = {}, options?: RawAxiosRequestConfig) {
+        return BackupApiFp(this.configuration).startBackup(requestParameters.backupDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Starts the data restoring process of the current portal with the parameters specified in the request.
      * @summary Start the restoring process
-     * @param {BackupRestoreDto} [backupRestoreDto] 
+     * @param {BackupApiStartBackupRestoreRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BackupApi
      */
-    public startBackupRestore(backupRestoreDto?: BackupRestoreDto, options?: RawAxiosRequestConfig) {
-        return BackupApiFp(this.configuration).startBackupRestore(backupRestoreDto, options).then((request) => request(this.axios, this.basePath));
+    public startBackupRestore(requestParameters: BackupApiStartBackupRestoreRequest = {}, options?: RawAxiosRequestConfig) {
+        return BackupApiFp(this.configuration).startBackupRestore(requestParameters.backupRestoreDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

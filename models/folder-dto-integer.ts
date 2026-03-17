@@ -212,6 +212,18 @@ export type FolderDtoInteger = FileEntryDtoInteger &  {
      * @memberof FolderDtoInteger
      */
     'rootRoomType'?: RoomType;
+    /**
+     * Specifies whether to save form data as XLSX file.
+     * @type {boolean}
+     * @memberof FolderDtoInteger
+     */
+    'saveFormAsXLSX'?: boolean | null;
+    /**
+     * Specifies whether to send form data to external database.
+     * @type {boolean}
+     * @memberof FolderDtoInteger
+     */
+    'sendFormToExternalDB'?: boolean | null;
 };
 
 

@@ -237,41 +237,83 @@ export const SettingsMessagesApiFactory = function (configuration?: Configuratio
         /**
          * Displays the contact form on the Sign In page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.
          * @summary Enable the administrator message settings
-         * @param {TurnOnAdminMessageSettingsRequestDto} [turnOnAdminMessageSettingsRequestDto] 
+         * @param {SettingsMessagesApiEnableAdminMessageSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for enableAdminMessageSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/enable-admin-message-settings/
          * @throws {RequiredError}
          */
-        enableAdminMessageSettings(turnOnAdminMessageSettingsRequestDto?: TurnOnAdminMessageSettingsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.enableAdminMessageSettings(turnOnAdminMessageSettingsRequestDto, options).then((request) => request(axios, basePath));
+        enableAdminMessageSettings(requestParameters: SettingsMessagesApiEnableAdminMessageSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.enableAdminMessageSettings(requestParameters.turnOnAdminMessageSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Sends a message to the administrator email when unauthorized users encounter issues accessing DocSpace.
          * @summary Send a message to the administrator
-         * @param {AdminMessageSettingsRequestsDto} [adminMessageSettingsRequestsDto] 
+         * @param {SettingsMessagesApiSendAdminMailRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for sendAdminMail operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-admin-mail/
          * @throws {RequiredError}
          */
-        sendAdminMail(adminMessageSettingsRequestsDto?: AdminMessageSettingsRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.sendAdminMail(adminMessageSettingsRequestsDto, options).then((request) => request(axios, basePath));
+        sendAdminMail(requestParameters: SettingsMessagesApiSendAdminMailRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.sendAdminMail(requestParameters.adminMessageSettingsRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Sends an invitation email with a link to the DocSpace.
          * @summary Sends an invitation email
-         * @param {AdminMessageBaseSettingsRequestsDto} [adminMessageBaseSettingsRequestsDto] 
+         * @param {SettingsMessagesApiSendJoinInviteMailRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for sendJoinInviteMail operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-join-invite-mail/
          * @throws {RequiredError}
          */
-        sendJoinInviteMail(adminMessageBaseSettingsRequestsDto?: AdminMessageBaseSettingsRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.sendJoinInviteMail(adminMessageBaseSettingsRequestsDto, options).then((request) => request(axios, basePath));
+        sendJoinInviteMail(requestParameters: SettingsMessagesApiSendJoinInviteMailRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.sendJoinInviteMail(requestParameters.adminMessageBaseSettingsRequestsDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for enableAdminMessageSettings operation in SettingsMessagesApi.
+ * @export
+ * @interface SettingsMessagesApiEnableAdminMessageSettingsRequest
+ */
+export interface SettingsMessagesApiEnableAdminMessageSettingsRequest {
+    /**
+     * 
+     * @type {TurnOnAdminMessageSettingsRequestDto}
+     * @memberof SettingsMessagesApiEnableAdminMessageSettings
+     */
+    readonly turnOnAdminMessageSettingsRequestDto?: TurnOnAdminMessageSettingsRequestDto
+}
+
+/**
+ * Request parameters for sendAdminMail operation in SettingsMessagesApi.
+ * @export
+ * @interface SettingsMessagesApiSendAdminMailRequest
+ */
+export interface SettingsMessagesApiSendAdminMailRequest {
+    /**
+     * 
+     * @type {AdminMessageSettingsRequestsDto}
+     * @memberof SettingsMessagesApiSendAdminMail
+     */
+    readonly adminMessageSettingsRequestsDto?: AdminMessageSettingsRequestsDto
+}
+
+/**
+ * Request parameters for sendJoinInviteMail operation in SettingsMessagesApi.
+ * @export
+ * @interface SettingsMessagesApiSendJoinInviteMailRequest
+ */
+export interface SettingsMessagesApiSendJoinInviteMailRequest {
+    /**
+     * 
+     * @type {AdminMessageBaseSettingsRequestsDto}
+     * @memberof SettingsMessagesApiSendJoinInviteMail
+     */
+    readonly adminMessageBaseSettingsRequestsDto?: AdminMessageBaseSettingsRequestsDto
+}
 
 /**
  * SettingsMessagesApi - object-oriented interface
@@ -283,37 +325,37 @@ export class SettingsMessagesApi extends BaseAPI {
     /**
      * Displays the contact form on the Sign In page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.
      * @summary Enable the administrator message settings
-     * @param {TurnOnAdminMessageSettingsRequestDto} [turnOnAdminMessageSettingsRequestDto] 
+     * @param {SettingsMessagesApiEnableAdminMessageSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SettingsMessagesApi
      */
-    public enableAdminMessageSettings(turnOnAdminMessageSettingsRequestDto?: TurnOnAdminMessageSettingsRequestDto, options?: RawAxiosRequestConfig) {
-        return SettingsMessagesApiFp(this.configuration).enableAdminMessageSettings(turnOnAdminMessageSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public enableAdminMessageSettings(requestParameters: SettingsMessagesApiEnableAdminMessageSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return SettingsMessagesApiFp(this.configuration).enableAdminMessageSettings(requestParameters.turnOnAdminMessageSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Sends a message to the administrator email when unauthorized users encounter issues accessing DocSpace.
      * @summary Send a message to the administrator
-     * @param {AdminMessageSettingsRequestsDto} [adminMessageSettingsRequestsDto] 
+     * @param {SettingsMessagesApiSendAdminMailRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SettingsMessagesApi
      */
-    public sendAdminMail(adminMessageSettingsRequestsDto?: AdminMessageSettingsRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsMessagesApiFp(this.configuration).sendAdminMail(adminMessageSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public sendAdminMail(requestParameters: SettingsMessagesApiSendAdminMailRequest = {}, options?: RawAxiosRequestConfig) {
+        return SettingsMessagesApiFp(this.configuration).sendAdminMail(requestParameters.adminMessageSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Sends an invitation email with a link to the DocSpace.
      * @summary Sends an invitation email
-     * @param {AdminMessageBaseSettingsRequestsDto} [adminMessageBaseSettingsRequestsDto] 
+     * @param {SettingsMessagesApiSendJoinInviteMailRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SettingsMessagesApi
      */
-    public sendJoinInviteMail(adminMessageBaseSettingsRequestsDto?: AdminMessageBaseSettingsRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsMessagesApiFp(this.configuration).sendJoinInviteMail(adminMessageBaseSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public sendJoinInviteMail(requestParameters: SettingsMessagesApiSendJoinInviteMailRequest = {}, options?: RawAxiosRequestConfig) {
+        return SettingsMessagesApiFp(this.configuration).sendJoinInviteMail(requestParameters.adminMessageBaseSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

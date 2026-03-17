@@ -768,26 +768,26 @@ export const WebhooksApiFactory = function (configuration?: Configuration, baseP
         /**
          * Creates a new tenant webhook with the parameters specified in the request.
          * @summary Create a webhook
-         * @param {CreateWebhooksConfigRequestsDto} [createWebhooksConfigRequestsDto] 
+         * @param {WebhooksApiCreateWebhookRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for createWebhook operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-webhook/
          * @throws {RequiredError}
          */
-        createWebhook(createWebhooksConfigRequestsDto?: CreateWebhooksConfigRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksConfigWrapper> {
-            return localVarFp.createWebhook(createWebhooksConfigRequestsDto, options).then((request) => request(axios, basePath));
+        createWebhook(requestParameters: WebhooksApiCreateWebhookRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksConfigWrapper> {
+            return localVarFp.createWebhook(requestParameters.createWebhooksConfigRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Enables or disables a tenant webhook with the parameters specified in the request.
          * @summary Enable a webhook
-         * @param {UpdateWebhooksConfigRequestsDto} [updateWebhooksConfigRequestsDto] 
+         * @param {WebhooksApiEnableWebhookRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for enableWebhook operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/enable-webhook/
          * @throws {RequiredError}
          */
-        enableWebhook(updateWebhooksConfigRequestsDto?: UpdateWebhooksConfigRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksConfigWrapper> {
-            return localVarFp.enableWebhook(updateWebhooksConfigRequestsDto, options).then((request) => request(axios, basePath));
+        enableWebhook(requestParameters: WebhooksApiEnableWebhookRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksConfigWrapper> {
+            return localVarFp.enableWebhook(requestParameters.updateWebhooksConfigRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of the tenant webhooks.
@@ -814,74 +814,226 @@ export const WebhooksApiFactory = function (configuration?: Configuration, baseP
         /**
          * Returns the logs of the webhook activities.
          * @summary Get webhook logs
-         * @param {string} [deliveryFrom] The delivery start time for filtering webhook logs.
-         * @param {string} [deliveryTo] The delivery end time for filtering webhook logs.
-         * @param {string} [hookUri] The destination URL where webhooks are delivered.
-         * @param {number} [configId] The webhook configuration identifier.
-         * @param {number} [eventId] The unique identifier of the event that triggered the webhook.
-         * @param {WebhookGroupStatus} [groupStatus] The status of the webhook delivery group.
-         * @param {string} [userId] The identifier of the user associated with the webhook event.
-         * @param {WebhookTrigger} [trigger] The type of event that triggered the webhook.
-         * @param {number} [count] The maximum number of webhook log records to return in the query response.
-         * @param {number} [startIndex] Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries.
+         * @param {WebhooksApiGetWebhooksLogsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getWebhooksLogs operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-webhooks-logs/
          * @throws {RequiredError}
          */
-        getWebhooksLogs(deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksLogArrayWrapper> {
-            return localVarFp.getWebhooksLogs(deliveryFrom, deliveryTo, hookUri, configId, eventId, groupStatus, userId, trigger, count, startIndex, options).then((request) => request(axios, basePath));
+        getWebhooksLogs(requestParameters: WebhooksApiGetWebhooksLogsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksLogArrayWrapper> {
+            return localVarFp.getWebhooksLogs(requestParameters.deliveryFrom, requestParameters.deliveryTo, requestParameters.hookUri, requestParameters.configId, requestParameters.eventId, requestParameters.groupStatus, requestParameters.userId, requestParameters.trigger, requestParameters.count, requestParameters.startIndex, options).then((request) => request(axios, basePath));
         },
         /**
          * Removes a tenant webhook with the ID specified in the request.
          * @summary Remove a webhook
-         * @param {number} id The ID extracted from the route parameters.
+         * @param {WebhooksApiRemoveWebhookRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for removeWebhook operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/remove-webhook/
          * @throws {RequiredError}
          */
-        removeWebhook(id: number, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksConfigWrapper> {
-            return localVarFp.removeWebhook(id, options).then((request) => request(axios, basePath));
+        removeWebhook(requestParameters: WebhooksApiRemoveWebhookRequest, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksConfigWrapper> {
+            return localVarFp.removeWebhook(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * Retries a webhook with the ID specified in the request.
          * @summary Retry a webhook
-         * @param {number} id The ID extracted from the route parameters.
+         * @param {WebhooksApiRetryWebhookRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for retryWebhook operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/retry-webhook/
          * @throws {RequiredError}
          */
-        retryWebhook(id: number, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksLogWrapper> {
-            return localVarFp.retryWebhook(id, options).then((request) => request(axios, basePath));
+        retryWebhook(requestParameters: WebhooksApiRetryWebhookRequest, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksLogWrapper> {
+            return localVarFp.retryWebhook(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * Retries all the webhooks with the IDs specified in the request.
          * @summary Retry webhooks
-         * @param {WebhookRetryRequestsDto} [webhookRetryRequestsDto] 
+         * @param {WebhooksApiRetryWebhooksRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for retryWebhooks operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/retry-webhooks/
          * @throws {RequiredError}
          */
-        retryWebhooks(webhookRetryRequestsDto?: WebhookRetryRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksLogArrayWrapper> {
-            return localVarFp.retryWebhooks(webhookRetryRequestsDto, options).then((request) => request(axios, basePath));
+        retryWebhooks(requestParameters: WebhooksApiRetryWebhooksRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksLogArrayWrapper> {
+            return localVarFp.retryWebhooks(requestParameters.webhookRetryRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates a tenant webhook with the parameters specified in the request.
          * @summary Update a webhook
-         * @param {UpdateWebhooksConfigRequestsDto} [updateWebhooksConfigRequestsDto] 
+         * @param {WebhooksApiUpdateWebhookRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateWebhook operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-webhook/
          * @throws {RequiredError}
          */
-        updateWebhook(updateWebhooksConfigRequestsDto?: UpdateWebhooksConfigRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksConfigWrapper> {
-            return localVarFp.updateWebhook(updateWebhooksConfigRequestsDto, options).then((request) => request(axios, basePath));
+        updateWebhook(requestParameters: WebhooksApiUpdateWebhookRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksConfigWrapper> {
+            return localVarFp.updateWebhook(requestParameters.updateWebhooksConfigRequestsDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for createWebhook operation in WebhooksApi.
+ * @export
+ * @interface WebhooksApiCreateWebhookRequest
+ */
+export interface WebhooksApiCreateWebhookRequest {
+    /**
+     * 
+     * @type {CreateWebhooksConfigRequestsDto}
+     * @memberof WebhooksApiCreateWebhook
+     */
+    readonly createWebhooksConfigRequestsDto?: CreateWebhooksConfigRequestsDto
+}
+
+/**
+ * Request parameters for enableWebhook operation in WebhooksApi.
+ * @export
+ * @interface WebhooksApiEnableWebhookRequest
+ */
+export interface WebhooksApiEnableWebhookRequest {
+    /**
+     * 
+     * @type {UpdateWebhooksConfigRequestsDto}
+     * @memberof WebhooksApiEnableWebhook
+     */
+    readonly updateWebhooksConfigRequestsDto?: UpdateWebhooksConfigRequestsDto
+}
+
+/**
+ * Request parameters for getWebhooksLogs operation in WebhooksApi.
+ * @export
+ * @interface WebhooksApiGetWebhooksLogsRequest
+ */
+export interface WebhooksApiGetWebhooksLogsRequest {
+    /**
+     * The delivery start time for filtering webhook logs.
+     * @type {string}
+     * @memberof WebhooksApiGetWebhooksLogs
+     */
+    readonly deliveryFrom?: string
+
+    /**
+     * The delivery end time for filtering webhook logs.
+     * @type {string}
+     * @memberof WebhooksApiGetWebhooksLogs
+     */
+    readonly deliveryTo?: string
+
+    /**
+     * The destination URL where webhooks are delivered.
+     * @type {string}
+     * @memberof WebhooksApiGetWebhooksLogs
+     */
+    readonly hookUri?: string
+
+    /**
+     * The webhook configuration identifier.
+     * @type {number}
+     * @memberof WebhooksApiGetWebhooksLogs
+     */
+    readonly configId?: number
+
+    /**
+     * The unique identifier of the event that triggered the webhook.
+     * @type {number}
+     * @memberof WebhooksApiGetWebhooksLogs
+     */
+    readonly eventId?: number
+
+    /**
+     * The status of the webhook delivery group.
+     * @type {WebhookGroupStatus}
+     * @memberof WebhooksApiGetWebhooksLogs
+     */
+    readonly groupStatus?: WebhookGroupStatus
+
+    /**
+     * The identifier of the user associated with the webhook event.
+     * @type {string}
+     * @memberof WebhooksApiGetWebhooksLogs
+     */
+    readonly userId?: string
+
+    /**
+     * The type of event that triggered the webhook.
+     * @type {WebhookTrigger}
+     * @memberof WebhooksApiGetWebhooksLogs
+     */
+    readonly trigger?: WebhookTrigger
+
+    /**
+     * The maximum number of webhook log records to return in the query response.
+     * @type {number}
+     * @memberof WebhooksApiGetWebhooksLogs
+     */
+    readonly count?: number
+
+    /**
+     * Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries.
+     * @type {number}
+     * @memberof WebhooksApiGetWebhooksLogs
+     */
+    readonly startIndex?: number
+}
+
+/**
+ * Request parameters for removeWebhook operation in WebhooksApi.
+ * @export
+ * @interface WebhooksApiRemoveWebhookRequest
+ */
+export interface WebhooksApiRemoveWebhookRequest {
+    /**
+     * The ID extracted from the route parameters.
+     * @type {number}
+     * @memberof WebhooksApiRemoveWebhook
+     */
+    readonly id: number
+}
+
+/**
+ * Request parameters for retryWebhook operation in WebhooksApi.
+ * @export
+ * @interface WebhooksApiRetryWebhookRequest
+ */
+export interface WebhooksApiRetryWebhookRequest {
+    /**
+     * The ID extracted from the route parameters.
+     * @type {number}
+     * @memberof WebhooksApiRetryWebhook
+     */
+    readonly id: number
+}
+
+/**
+ * Request parameters for retryWebhooks operation in WebhooksApi.
+ * @export
+ * @interface WebhooksApiRetryWebhooksRequest
+ */
+export interface WebhooksApiRetryWebhooksRequest {
+    /**
+     * 
+     * @type {WebhookRetryRequestsDto}
+     * @memberof WebhooksApiRetryWebhooks
+     */
+    readonly webhookRetryRequestsDto?: WebhookRetryRequestsDto
+}
+
+/**
+ * Request parameters for updateWebhook operation in WebhooksApi.
+ * @export
+ * @interface WebhooksApiUpdateWebhookRequest
+ */
+export interface WebhooksApiUpdateWebhookRequest {
+    /**
+     * 
+     * @type {UpdateWebhooksConfigRequestsDto}
+     * @memberof WebhooksApiUpdateWebhook
+     */
+    readonly updateWebhooksConfigRequestsDto?: UpdateWebhooksConfigRequestsDto
+}
 
 /**
  * WebhooksApi - object-oriented interface
@@ -893,25 +1045,25 @@ export class WebhooksApi extends BaseAPI {
     /**
      * Creates a new tenant webhook with the parameters specified in the request.
      * @summary Create a webhook
-     * @param {CreateWebhooksConfigRequestsDto} [createWebhooksConfigRequestsDto] 
+     * @param {SettingsWebhooksApiCreateWebhookRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WebhooksApi
      */
-    public createWebhook(createWebhooksConfigRequestsDto?: CreateWebhooksConfigRequestsDto, options?: RawAxiosRequestConfig) {
-        return WebhooksApiFp(this.configuration).createWebhook(createWebhooksConfigRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public createWebhook(requestParameters: WebhooksApiCreateWebhookRequest = {}, options?: RawAxiosRequestConfig) {
+        return WebhooksApiFp(this.configuration).createWebhook(requestParameters.createWebhooksConfigRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Enables or disables a tenant webhook with the parameters specified in the request.
      * @summary Enable a webhook
-     * @param {UpdateWebhooksConfigRequestsDto} [updateWebhooksConfigRequestsDto] 
+     * @param {SettingsWebhooksApiEnableWebhookRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WebhooksApi
      */
-    public enableWebhook(updateWebhooksConfigRequestsDto?: UpdateWebhooksConfigRequestsDto, options?: RawAxiosRequestConfig) {
-        return WebhooksApiFp(this.configuration).enableWebhook(updateWebhooksConfigRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public enableWebhook(requestParameters: WebhooksApiEnableWebhookRequest = {}, options?: RawAxiosRequestConfig) {
+        return WebhooksApiFp(this.configuration).enableWebhook(requestParameters.updateWebhooksConfigRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -939,70 +1091,61 @@ export class WebhooksApi extends BaseAPI {
     /**
      * Returns the logs of the webhook activities.
      * @summary Get webhook logs
-     * @param {string} [deliveryFrom] The delivery start time for filtering webhook logs.
-     * @param {string} [deliveryTo] The delivery end time for filtering webhook logs.
-     * @param {string} [hookUri] The destination URL where webhooks are delivered.
-     * @param {number} [configId] The webhook configuration identifier.
-     * @param {number} [eventId] The unique identifier of the event that triggered the webhook.
-     * @param {WebhookGroupStatus} [groupStatus] The status of the webhook delivery group.
-     * @param {string} [userId] The identifier of the user associated with the webhook event.
-     * @param {WebhookTrigger} [trigger] The type of event that triggered the webhook.
-     * @param {number} [count] The maximum number of webhook log records to return in the query response.
-     * @param {number} [startIndex] Specifies the starting index for retrieving webhook logs.  Used for pagination in the webhook delivery log queries.
+     * @param {SettingsWebhooksApiGetWebhooksLogsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WebhooksApi
      */
-    public getWebhooksLogs(deliveryFrom?: string, deliveryTo?: string, hookUri?: string, configId?: number, eventId?: number, groupStatus?: WebhookGroupStatus, userId?: string, trigger?: WebhookTrigger, count?: number, startIndex?: number, options?: RawAxiosRequestConfig) {
-        return WebhooksApiFp(this.configuration).getWebhooksLogs(deliveryFrom, deliveryTo, hookUri, configId, eventId, groupStatus, userId, trigger, count, startIndex, options).then((request) => request(this.axios, this.basePath));
+    public getWebhooksLogs(requestParameters: WebhooksApiGetWebhooksLogsRequest = {}, options?: RawAxiosRequestConfig) {
+        return WebhooksApiFp(this.configuration).getWebhooksLogs(requestParameters.deliveryFrom, requestParameters.deliveryTo, requestParameters.hookUri, requestParameters.configId, requestParameters.eventId, requestParameters.groupStatus, requestParameters.userId, requestParameters.trigger, requestParameters.count, requestParameters.startIndex, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Removes a tenant webhook with the ID specified in the request.
      * @summary Remove a webhook
-     * @param {number} id The ID extracted from the route parameters.
+     * @param {SettingsWebhooksApiRemoveWebhookRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WebhooksApi
      */
-    public removeWebhook(id: number, options?: RawAxiosRequestConfig) {
-        return WebhooksApiFp(this.configuration).removeWebhook(id, options).then((request) => request(this.axios, this.basePath));
+    public removeWebhook(requestParameters: WebhooksApiRemoveWebhookRequest, options?: RawAxiosRequestConfig) {
+        return WebhooksApiFp(this.configuration).removeWebhook(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Retries a webhook with the ID specified in the request.
      * @summary Retry a webhook
-     * @param {number} id The ID extracted from the route parameters.
+     * @param {SettingsWebhooksApiRetryWebhookRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WebhooksApi
      */
-    public retryWebhook(id: number, options?: RawAxiosRequestConfig) {
-        return WebhooksApiFp(this.configuration).retryWebhook(id, options).then((request) => request(this.axios, this.basePath));
+    public retryWebhook(requestParameters: WebhooksApiRetryWebhookRequest, options?: RawAxiosRequestConfig) {
+        return WebhooksApiFp(this.configuration).retryWebhook(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Retries all the webhooks with the IDs specified in the request.
      * @summary Retry webhooks
-     * @param {WebhookRetryRequestsDto} [webhookRetryRequestsDto] 
+     * @param {SettingsWebhooksApiRetryWebhooksRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WebhooksApi
      */
-    public retryWebhooks(webhookRetryRequestsDto?: WebhookRetryRequestsDto, options?: RawAxiosRequestConfig) {
-        return WebhooksApiFp(this.configuration).retryWebhooks(webhookRetryRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public retryWebhooks(requestParameters: WebhooksApiRetryWebhooksRequest = {}, options?: RawAxiosRequestConfig) {
+        return WebhooksApiFp(this.configuration).retryWebhooks(requestParameters.webhookRetryRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Updates a tenant webhook with the parameters specified in the request.
      * @summary Update a webhook
-     * @param {UpdateWebhooksConfigRequestsDto} [updateWebhooksConfigRequestsDto] 
+     * @param {SettingsWebhooksApiUpdateWebhookRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WebhooksApi
      */
-    public updateWebhook(updateWebhooksConfigRequestsDto?: UpdateWebhooksConfigRequestsDto, options?: RawAxiosRequestConfig) {
-        return WebhooksApiFp(this.configuration).updateWebhook(updateWebhooksConfigRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public updateWebhook(requestParameters: WebhooksApiUpdateWebhookRequest = {}, options?: RawAxiosRequestConfig) {
+        return WebhooksApiFp(this.configuration).updateWebhook(requestParameters.updateWebhooksConfigRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

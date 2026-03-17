@@ -212,6 +212,18 @@ export type FolderDtoString = FileEntryDtoString &  {
      * @memberof FolderDtoString
      */
     'rootRoomType'?: RoomType;
+    /**
+     * Specifies whether to save form data as XLSX file.
+     * @type {boolean}
+     * @memberof FolderDtoString
+     */
+    'saveFormAsXLSX'?: boolean | null;
+    /**
+     * Specifies whether to send form data to external database.
+     * @type {boolean}
+     * @memberof FolderDtoString
+     */
+    'sendFormToExternalDB'?: boolean | null;
 };
 
 

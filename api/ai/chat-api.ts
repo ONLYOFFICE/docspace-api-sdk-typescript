@@ -995,159 +995,387 @@ export const ChatApiFactory = function (configuration?: Configuration, basePath?
         /**
          * Appends a new user message to an existing chat session and streams the AI assistant\'s response.  The full conversation history of the chat is sent to the AI provider to maintain context.  The response is delivered as a Server-Sent Events (SSE) stream with periodic keep-alive pings.  File references can optionally be attached to provide additional context.
          * @summary Send a message to an existing AI chat
-         * @param {string} chatId The unique identifier of the existing AI chat session to continue.
-         * @param {ContinueChatBody} continueChatBody The message and optional file attachments.
+         * @param {ChatApiContinueChatRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for continueChat operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/continue-chat/
          * @throws {RequiredError}
          */
-        continueChat(chatId: string, continueChatBody: ContinueChatBody, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.continueChat(chatId, continueChatBody, options).then((request) => request(axios, basePath));
+        continueChat(requestParameters: ChatApiContinueChatRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.continueChat(requestParameters.chatId, requestParameters.continueChatBody, options).then((request) => request(axios, basePath));
         },
         /**
          * Permanently deletes an AI chat session along with all of its messages.  Only the chat owner can delete their own chat sessions. This action cannot be undone.
          * @summary Delete an AI chat
-         * @param {string} chatId The unique identifier of the AI chat session to delete.
+         * @param {ChatApiDeleteChatRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteChat operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-chat/
          * @throws {RequiredError}
          */
-        deleteChat(chatId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.deleteChat(chatId, options).then((request) => request(axios, basePath));
+        deleteChat(requestParameters: ChatApiDeleteChatRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteChat(requestParameters.chatId, options).then((request) => request(axios, basePath));
         },
         /**
          * Exports the entire message history of an AI chat session and saves it as a document in the specified folder.  The exported file is created with the provided title. Only the chat owner can export their own chat sessions.
          * @summary Export AI chat messages to a file
-         * @param {string} chatId The unique identifier of the AI chat session to export.
-         * @param {ExportChatRequestBodyInteger} exportChatRequestBodyInteger The export parameters including destination folder and file title.
+         * @param {ChatApiExportChatRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for exportChat operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/export-chat/
          * @throws {RequiredError}
          */
-        exportChat(chatId: string, exportChatRequestBodyInteger: ExportChatRequestBodyInteger, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.exportChat(chatId, exportChatRequestBodyInteger, options).then((request) => request(axios, basePath));
+        exportChat(requestParameters: ChatApiExportChatRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.exportChat(requestParameters.chatId, requestParameters.exportChatRequestBodyInteger, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieves the metadata of a single AI chat session, including its title, creation date, and the user who created it.  Only the chat owner can access their own chat sessions.
          * @summary Get an AI chat by ID
-         * @param {string} chatId The unique identifier of the AI chat session to retrieve.
+         * @param {ChatApiGetChatRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getChat operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-chat/
          * @throws {RequiredError}
          */
-        getChat(chatId: string, options?: RawAxiosRequestConfig): AxiosPromise<ChatWrapper> {
-            return localVarFp.getChat(chatId, options).then((request) => request(axios, basePath));
+        getChat(requestParameters: ChatApiGetChatRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChatWrapper> {
+            return localVarFp.getChat(requestParameters.chatId, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the list of AI models available for chat conversations.  Optionally filters the results to models from a specific provider when the provider query parameter is specified.  Each model entry includes the provider ID, provider display name, and the model identifier.
          * @summary Get available AI models
-         * @param {number} [provider] The optional AI provider identifier to filter models by. When set to 0, models from all providers are returned.
+         * @param {ChatApiGetChatModelsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getChatModels operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-chat-models/
          * @throws {RequiredError}
          */
-        getChatModels(provider?: number, options?: RawAxiosRequestConfig): AxiosPromise<ModelArrayWrapper> {
-            return localVarFp.getChatModels(provider, options).then((request) => request(axios, basePath));
+        getChatModels(requestParameters: ChatApiGetChatModelsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelArrayWrapper> {
+            return localVarFp.getChatModels(requestParameters.provider, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a paginated list of AI chat sessions that belong to the current user within the specified room.  Supports pagination via the startIndex and count query parameters. The total number of chats is included in the response metadata.
          * @summary Get AI chats in a room
-         * @param {number} roomId The identifier of the room whose AI chat sessions are to be listed.
-         * @param {number} [startIndex] The number of items to skip before returning results (zero-based offset). Defaults to 0.
-         * @param {number} [count] The maximum number of items to return per page. Defaults to 100.
+         * @param {ChatApiGetChatsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getChats operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-chats/
          * @throws {RequiredError}
          */
-        getChats(roomId: number, startIndex?: number, count?: number, options?: RawAxiosRequestConfig): AxiosPromise<ChatArrayWrapper> {
-            return localVarFp.getChats(roomId, startIndex, count, options).then((request) => request(axios, basePath));
+        getChats(requestParameters: ChatApiGetChatsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChatArrayWrapper> {
+            return localVarFp.getChats(requestParameters.roomId, requestParameters.startIndex, requestParameters.count, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a paginated list of messages from an AI chat session owned by the current user.  Each message includes its role (user or assistant), content blocks (text, tool calls, attachments), and timestamp.  Supports pagination via the startIndex and count query parameters. The total number of messages is included in the response metadata.
          * @summary Get messages of an AI chat
-         * @param {string} chatId The unique identifier of the AI chat session whose messages are to be listed.
-         * @param {number} [startIndex] The number of items to skip before returning results (zero-based offset). Defaults to 0.
-         * @param {number} [count] The maximum number of items to return per page. Defaults to 100.
+         * @param {ChatApiGetMessagesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getMessages operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-messages/
          * @throws {RequiredError}
          */
-        getMessages(chatId: string, startIndex?: number, count?: number, options?: RawAxiosRequestConfig): AxiosPromise<MessageArrayWrapper> {
-            return localVarFp.getMessages(chatId, startIndex, count, options).then((request) => request(axios, basePath));
+        getMessages(requestParameters: ChatApiGetMessagesRequest, options?: RawAxiosRequestConfig): AxiosPromise<MessageArrayWrapper> {
+            return localVarFp.getMessages(requestParameters.chatId, requestParameters.startIndex, requestParameters.count, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieves the current user\'s personal AI chat preferences for the specified room,  including whether web search is enabled for AI-assisted responses.
          * @summary Get user chat settings for a room
-         * @param {number} roomId The identifier of the room whose chat settings are to be retrieved.
+         * @param {ChatApiGetUserChatsSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getUserChatsSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-chats-settings/
          * @throws {RequiredError}
          */
-        getUserChatsSettings(roomId: number, options?: RawAxiosRequestConfig): AxiosPromise<UserChatSettingsWrapper> {
-            return localVarFp.getUserChatsSettings(roomId, options).then((request) => request(axios, basePath));
+        getUserChatsSettings(requestParameters: ChatApiGetUserChatsSettingsRequest, options?: RawAxiosRequestConfig): AxiosPromise<UserChatSettingsWrapper> {
+            return localVarFp.getUserChatsSettings(requestParameters.roomId, options).then((request) => request(axios, basePath));
         },
         /**
          * Provides the user\'s approval or denial decision for a pending MCP (Model Context Protocol) tool execution request.  When an AI assistant attempts to invoke an external tool that requires explicit user consent,  the client receives a permission prompt via the SSE stream. This endpoint is used to submit the user\'s decision  so that the AI chat session can proceed accordingly.
          * @summary Submit a tool execution permission decision
-         * @param {string} callId The unique identifier of the pending tool execution call awaiting a permission decision.
-         * @param {ToolDecisionRequestBody} toolDecisionRequestBody The permission decision parameters.
+         * @param {ChatApiProvidePermissionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for providePermission operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/provide-permission/
          * @throws {RequiredError}
          */
-        providePermission(callId: string, toolDecisionRequestBody: ToolDecisionRequestBody, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.providePermission(callId, toolDecisionRequestBody, options).then((request) => request(axios, basePath));
+        providePermission(requestParameters: ChatApiProvidePermissionRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.providePermission(requestParameters.callId, requestParameters.toolDecisionRequestBody, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates the display title of an existing AI chat session owned by the current user.  The new name must not exceed 255 characters.
          * @summary Rename an AI chat
-         * @param {string} chatId The unique identifier of the AI chat session to rename.
-         * @param {RenameChatBody} renameChatBody The new chat name.
+         * @param {ChatApiRenameChatRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for renameChat operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/rename-chat/
          * @throws {RequiredError}
          */
-        renameChat(chatId: string, renameChatBody: RenameChatBody, options?: RawAxiosRequestConfig): AxiosPromise<ChatWrapper> {
-            return localVarFp.renameChat(chatId, renameChatBody, options).then((request) => request(axios, basePath));
+        renameChat(requestParameters: ChatApiRenameChatRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChatWrapper> {
+            return localVarFp.renameChat(requestParameters.chatId, requestParameters.renameChatBody, options).then((request) => request(axios, basePath));
         },
         /**
          * Saves the current user\'s personal AI chat preferences for the specified room.  Currently supports toggling the web search capability, which allows the AI assistant to search the internet when generating responses.
          * @summary Update user chat settings for a room
-         * @param {number} roomId The identifier of the room whose chat settings are to be updated.
-         * @param {SetUserChatSettingsRequestBody} setUserChatSettingsRequestBody The chat settings to apply.
+         * @param {ChatApiSetUserChatsSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setUserChatsSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-user-chats-settings/
          * @throws {RequiredError}
          */
-        setUserChatsSettings(roomId: number, setUserChatSettingsRequestBody: SetUserChatSettingsRequestBody, options?: RawAxiosRequestConfig): AxiosPromise<UserChatSettingsWrapper> {
-            return localVarFp.setUserChatsSettings(roomId, setUserChatSettingsRequestBody, options).then((request) => request(axios, basePath));
+        setUserChatsSettings(requestParameters: ChatApiSetUserChatsSettingsRequest, options?: RawAxiosRequestConfig): AxiosPromise<UserChatSettingsWrapper> {
+            return localVarFp.setUserChatsSettings(requestParameters.roomId, requestParameters.setUserChatSettingsRequestBody, options).then((request) => request(axios, basePath));
         },
         /**
          * Creates a new AI chat session within the specified room and sends the initial message to the configured AI provider.  The response is delivered as a Server-Sent Events (SSE) stream containing completion chunks (text deltas, tool calls, tool results, and message lifecycle events)  with periodic keep-alive pings every 5 seconds. File references can be included as context for the AI model.
          * @summary Start a new AI chat
-         * @param {number} roomId The identifier of the room in which to create the new AI chat session.
-         * @param {StartNewChatBody} startNewChatBody The initial message and optional file attachments.
+         * @param {ChatApiStartNewChatRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for startNewChat operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-new-chat/
          * @throws {RequiredError}
          */
-        startNewChat(roomId: number, startNewChatBody: StartNewChatBody, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.startNewChat(roomId, startNewChatBody, options).then((request) => request(axios, basePath));
+        startNewChat(requestParameters: ChatApiStartNewChatRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.startNewChat(requestParameters.roomId, requestParameters.startNewChatBody, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for continueChat operation in ChatApi.
+ * @export
+ * @interface ChatApiContinueChatRequest
+ */
+export interface ChatApiContinueChatRequest {
+    /**
+     * The unique identifier of the existing AI chat session to continue.
+     * @type {string}
+     * @memberof ChatApiContinueChat
+     */
+    readonly chatId: string
+
+    /**
+     * The message and optional file attachments.
+     * @type {ContinueChatBody}
+     * @memberof ChatApiContinueChat
+     */
+    readonly continueChatBody: ContinueChatBody
+}
+
+/**
+ * Request parameters for deleteChat operation in ChatApi.
+ * @export
+ * @interface ChatApiDeleteChatRequest
+ */
+export interface ChatApiDeleteChatRequest {
+    /**
+     * The unique identifier of the AI chat session to delete.
+     * @type {string}
+     * @memberof ChatApiDeleteChat
+     */
+    readonly chatId: string
+}
+
+/**
+ * Request parameters for exportChat operation in ChatApi.
+ * @export
+ * @interface ChatApiExportChatRequest
+ */
+export interface ChatApiExportChatRequest {
+    /**
+     * The unique identifier of the AI chat session to export.
+     * @type {string}
+     * @memberof ChatApiExportChat
+     */
+    readonly chatId: string
+
+    /**
+     * The export parameters including destination folder and file title.
+     * @type {ExportChatRequestBodyInteger}
+     * @memberof ChatApiExportChat
+     */
+    readonly exportChatRequestBodyInteger: ExportChatRequestBodyInteger
+}
+
+/**
+ * Request parameters for getChat operation in ChatApi.
+ * @export
+ * @interface ChatApiGetChatRequest
+ */
+export interface ChatApiGetChatRequest {
+    /**
+     * The unique identifier of the AI chat session to retrieve.
+     * @type {string}
+     * @memberof ChatApiGetChat
+     */
+    readonly chatId: string
+}
+
+/**
+ * Request parameters for getChatModels operation in ChatApi.
+ * @export
+ * @interface ChatApiGetChatModelsRequest
+ */
+export interface ChatApiGetChatModelsRequest {
+    /**
+     * The optional AI provider identifier to filter models by. When set to 0, models from all providers are returned.
+     * @type {number}
+     * @memberof ChatApiGetChatModels
+     */
+    readonly provider?: number
+}
+
+/**
+ * Request parameters for getChats operation in ChatApi.
+ * @export
+ * @interface ChatApiGetChatsRequest
+ */
+export interface ChatApiGetChatsRequest {
+    /**
+     * The identifier of the room whose AI chat sessions are to be listed.
+     * @type {number}
+     * @memberof ChatApiGetChats
+     */
+    readonly roomId: number
+
+    /**
+     * The number of items to skip before returning results (zero-based offset). Defaults to 0.
+     * @type {number}
+     * @memberof ChatApiGetChats
+     */
+    readonly startIndex?: number
+
+    /**
+     * The maximum number of items to return per page. Defaults to 100.
+     * @type {number}
+     * @memberof ChatApiGetChats
+     */
+    readonly count?: number
+}
+
+/**
+ * Request parameters for getMessages operation in ChatApi.
+ * @export
+ * @interface ChatApiGetMessagesRequest
+ */
+export interface ChatApiGetMessagesRequest {
+    /**
+     * The unique identifier of the AI chat session whose messages are to be listed.
+     * @type {string}
+     * @memberof ChatApiGetMessages
+     */
+    readonly chatId: string
+
+    /**
+     * The number of items to skip before returning results (zero-based offset). Defaults to 0.
+     * @type {number}
+     * @memberof ChatApiGetMessages
+     */
+    readonly startIndex?: number
+
+    /**
+     * The maximum number of items to return per page. Defaults to 100.
+     * @type {number}
+     * @memberof ChatApiGetMessages
+     */
+    readonly count?: number
+}
+
+/**
+ * Request parameters for getUserChatsSettings operation in ChatApi.
+ * @export
+ * @interface ChatApiGetUserChatsSettingsRequest
+ */
+export interface ChatApiGetUserChatsSettingsRequest {
+    /**
+     * The identifier of the room whose chat settings are to be retrieved.
+     * @type {number}
+     * @memberof ChatApiGetUserChatsSettings
+     */
+    readonly roomId: number
+}
+
+/**
+ * Request parameters for providePermission operation in ChatApi.
+ * @export
+ * @interface ChatApiProvidePermissionRequest
+ */
+export interface ChatApiProvidePermissionRequest {
+    /**
+     * The unique identifier of the pending tool execution call awaiting a permission decision.
+     * @type {string}
+     * @memberof ChatApiProvidePermission
+     */
+    readonly callId: string
+
+    /**
+     * The permission decision parameters.
+     * @type {ToolDecisionRequestBody}
+     * @memberof ChatApiProvidePermission
+     */
+    readonly toolDecisionRequestBody: ToolDecisionRequestBody
+}
+
+/**
+ * Request parameters for renameChat operation in ChatApi.
+ * @export
+ * @interface ChatApiRenameChatRequest
+ */
+export interface ChatApiRenameChatRequest {
+    /**
+     * The unique identifier of the AI chat session to rename.
+     * @type {string}
+     * @memberof ChatApiRenameChat
+     */
+    readonly chatId: string
+
+    /**
+     * The new chat name.
+     * @type {RenameChatBody}
+     * @memberof ChatApiRenameChat
+     */
+    readonly renameChatBody: RenameChatBody
+}
+
+/**
+ * Request parameters for setUserChatsSettings operation in ChatApi.
+ * @export
+ * @interface ChatApiSetUserChatsSettingsRequest
+ */
+export interface ChatApiSetUserChatsSettingsRequest {
+    /**
+     * The identifier of the room whose chat settings are to be updated.
+     * @type {number}
+     * @memberof ChatApiSetUserChatsSettings
+     */
+    readonly roomId: number
+
+    /**
+     * The chat settings to apply.
+     * @type {SetUserChatSettingsRequestBody}
+     * @memberof ChatApiSetUserChatsSettings
+     */
+    readonly setUserChatSettingsRequestBody: SetUserChatSettingsRequestBody
+}
+
+/**
+ * Request parameters for startNewChat operation in ChatApi.
+ * @export
+ * @interface ChatApiStartNewChatRequest
+ */
+export interface ChatApiStartNewChatRequest {
+    /**
+     * The identifier of the room in which to create the new AI chat session.
+     * @type {number}
+     * @memberof ChatApiStartNewChat
+     */
+    readonly roomId: number
+
+    /**
+     * The initial message and optional file attachments.
+     * @type {StartNewChatBody}
+     * @memberof ChatApiStartNewChat
+     */
+    readonly startNewChatBody: StartNewChatBody
+}
 
 /**
  * ChatApi - object-oriented interface
@@ -1159,155 +1387,145 @@ export class ChatApi extends BaseAPI {
     /**
      * Appends a new user message to an existing chat session and streams the AI assistant\'s response.  The full conversation history of the chat is sent to the AI provider to maintain context.  The response is delivered as a Server-Sent Events (SSE) stream with periodic keep-alive pings.  File references can optionally be attached to provide additional context.
      * @summary Send a message to an existing AI chat
-     * @param {string} chatId The unique identifier of the existing AI chat session to continue.
-     * @param {ContinueChatBody} continueChatBody The message and optional file attachments.
+     * @param {AIChatApiContinueChatRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ChatApi
      */
-    public continueChat(chatId: string, continueChatBody: ContinueChatBody, options?: RawAxiosRequestConfig) {
-        return ChatApiFp(this.configuration).continueChat(chatId, continueChatBody, options).then((request) => request(this.axios, this.basePath));
+    public continueChat(requestParameters: ChatApiContinueChatRequest, options?: RawAxiosRequestConfig) {
+        return ChatApiFp(this.configuration).continueChat(requestParameters.chatId, requestParameters.continueChatBody, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Permanently deletes an AI chat session along with all of its messages.  Only the chat owner can delete their own chat sessions. This action cannot be undone.
      * @summary Delete an AI chat
-     * @param {string} chatId The unique identifier of the AI chat session to delete.
+     * @param {AIChatApiDeleteChatRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ChatApi
      */
-    public deleteChat(chatId: string, options?: RawAxiosRequestConfig) {
-        return ChatApiFp(this.configuration).deleteChat(chatId, options).then((request) => request(this.axios, this.basePath));
+    public deleteChat(requestParameters: ChatApiDeleteChatRequest, options?: RawAxiosRequestConfig) {
+        return ChatApiFp(this.configuration).deleteChat(requestParameters.chatId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Exports the entire message history of an AI chat session and saves it as a document in the specified folder.  The exported file is created with the provided title. Only the chat owner can export their own chat sessions.
      * @summary Export AI chat messages to a file
-     * @param {string} chatId The unique identifier of the AI chat session to export.
-     * @param {ExportChatRequestBodyInteger} exportChatRequestBodyInteger The export parameters including destination folder and file title.
+     * @param {AIChatApiExportChatRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ChatApi
      */
-    public exportChat(chatId: string, exportChatRequestBodyInteger: ExportChatRequestBodyInteger, options?: RawAxiosRequestConfig) {
-        return ChatApiFp(this.configuration).exportChat(chatId, exportChatRequestBodyInteger, options).then((request) => request(this.axios, this.basePath));
+    public exportChat(requestParameters: ChatApiExportChatRequest, options?: RawAxiosRequestConfig) {
+        return ChatApiFp(this.configuration).exportChat(requestParameters.chatId, requestParameters.exportChatRequestBodyInteger, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Retrieves the metadata of a single AI chat session, including its title, creation date, and the user who created it.  Only the chat owner can access their own chat sessions.
      * @summary Get an AI chat by ID
-     * @param {string} chatId The unique identifier of the AI chat session to retrieve.
+     * @param {AIChatApiGetChatRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ChatApi
      */
-    public getChat(chatId: string, options?: RawAxiosRequestConfig) {
-        return ChatApiFp(this.configuration).getChat(chatId, options).then((request) => request(this.axios, this.basePath));
+    public getChat(requestParameters: ChatApiGetChatRequest, options?: RawAxiosRequestConfig) {
+        return ChatApiFp(this.configuration).getChat(requestParameters.chatId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the list of AI models available for chat conversations.  Optionally filters the results to models from a specific provider when the provider query parameter is specified.  Each model entry includes the provider ID, provider display name, and the model identifier.
      * @summary Get available AI models
-     * @param {number} [provider] The optional AI provider identifier to filter models by. When set to 0, models from all providers are returned.
+     * @param {AIChatApiGetChatModelsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ChatApi
      */
-    public getChatModels(provider?: number, options?: RawAxiosRequestConfig) {
-        return ChatApiFp(this.configuration).getChatModels(provider, options).then((request) => request(this.axios, this.basePath));
+    public getChatModels(requestParameters: ChatApiGetChatModelsRequest = {}, options?: RawAxiosRequestConfig) {
+        return ChatApiFp(this.configuration).getChatModels(requestParameters.provider, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns a paginated list of AI chat sessions that belong to the current user within the specified room.  Supports pagination via the startIndex and count query parameters. The total number of chats is included in the response metadata.
      * @summary Get AI chats in a room
-     * @param {number} roomId The identifier of the room whose AI chat sessions are to be listed.
-     * @param {number} [startIndex] The number of items to skip before returning results (zero-based offset). Defaults to 0.
-     * @param {number} [count] The maximum number of items to return per page. Defaults to 100.
+     * @param {AIChatApiGetChatsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ChatApi
      */
-    public getChats(roomId: number, startIndex?: number, count?: number, options?: RawAxiosRequestConfig) {
-        return ChatApiFp(this.configuration).getChats(roomId, startIndex, count, options).then((request) => request(this.axios, this.basePath));
+    public getChats(requestParameters: ChatApiGetChatsRequest, options?: RawAxiosRequestConfig) {
+        return ChatApiFp(this.configuration).getChats(requestParameters.roomId, requestParameters.startIndex, requestParameters.count, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns a paginated list of messages from an AI chat session owned by the current user.  Each message includes its role (user or assistant), content blocks (text, tool calls, attachments), and timestamp.  Supports pagination via the startIndex and count query parameters. The total number of messages is included in the response metadata.
      * @summary Get messages of an AI chat
-     * @param {string} chatId The unique identifier of the AI chat session whose messages are to be listed.
-     * @param {number} [startIndex] The number of items to skip before returning results (zero-based offset). Defaults to 0.
-     * @param {number} [count] The maximum number of items to return per page. Defaults to 100.
+     * @param {AIChatApiGetMessagesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ChatApi
      */
-    public getMessages(chatId: string, startIndex?: number, count?: number, options?: RawAxiosRequestConfig) {
-        return ChatApiFp(this.configuration).getMessages(chatId, startIndex, count, options).then((request) => request(this.axios, this.basePath));
+    public getMessages(requestParameters: ChatApiGetMessagesRequest, options?: RawAxiosRequestConfig) {
+        return ChatApiFp(this.configuration).getMessages(requestParameters.chatId, requestParameters.startIndex, requestParameters.count, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Retrieves the current user\'s personal AI chat preferences for the specified room,  including whether web search is enabled for AI-assisted responses.
      * @summary Get user chat settings for a room
-     * @param {number} roomId The identifier of the room whose chat settings are to be retrieved.
+     * @param {AIChatApiGetUserChatsSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ChatApi
      */
-    public getUserChatsSettings(roomId: number, options?: RawAxiosRequestConfig) {
-        return ChatApiFp(this.configuration).getUserChatsSettings(roomId, options).then((request) => request(this.axios, this.basePath));
+    public getUserChatsSettings(requestParameters: ChatApiGetUserChatsSettingsRequest, options?: RawAxiosRequestConfig) {
+        return ChatApiFp(this.configuration).getUserChatsSettings(requestParameters.roomId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Provides the user\'s approval or denial decision for a pending MCP (Model Context Protocol) tool execution request.  When an AI assistant attempts to invoke an external tool that requires explicit user consent,  the client receives a permission prompt via the SSE stream. This endpoint is used to submit the user\'s decision  so that the AI chat session can proceed accordingly.
      * @summary Submit a tool execution permission decision
-     * @param {string} callId The unique identifier of the pending tool execution call awaiting a permission decision.
-     * @param {ToolDecisionRequestBody} toolDecisionRequestBody The permission decision parameters.
+     * @param {AIChatApiProvidePermissionRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ChatApi
      */
-    public providePermission(callId: string, toolDecisionRequestBody: ToolDecisionRequestBody, options?: RawAxiosRequestConfig) {
-        return ChatApiFp(this.configuration).providePermission(callId, toolDecisionRequestBody, options).then((request) => request(this.axios, this.basePath));
+    public providePermission(requestParameters: ChatApiProvidePermissionRequest, options?: RawAxiosRequestConfig) {
+        return ChatApiFp(this.configuration).providePermission(requestParameters.callId, requestParameters.toolDecisionRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Updates the display title of an existing AI chat session owned by the current user.  The new name must not exceed 255 characters.
      * @summary Rename an AI chat
-     * @param {string} chatId The unique identifier of the AI chat session to rename.
-     * @param {RenameChatBody} renameChatBody The new chat name.
+     * @param {AIChatApiRenameChatRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ChatApi
      */
-    public renameChat(chatId: string, renameChatBody: RenameChatBody, options?: RawAxiosRequestConfig) {
-        return ChatApiFp(this.configuration).renameChat(chatId, renameChatBody, options).then((request) => request(this.axios, this.basePath));
+    public renameChat(requestParameters: ChatApiRenameChatRequest, options?: RawAxiosRequestConfig) {
+        return ChatApiFp(this.configuration).renameChat(requestParameters.chatId, requestParameters.renameChatBody, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Saves the current user\'s personal AI chat preferences for the specified room.  Currently supports toggling the web search capability, which allows the AI assistant to search the internet when generating responses.
      * @summary Update user chat settings for a room
-     * @param {number} roomId The identifier of the room whose chat settings are to be updated.
-     * @param {SetUserChatSettingsRequestBody} setUserChatSettingsRequestBody The chat settings to apply.
+     * @param {AIChatApiSetUserChatsSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ChatApi
      */
-    public setUserChatsSettings(roomId: number, setUserChatSettingsRequestBody: SetUserChatSettingsRequestBody, options?: RawAxiosRequestConfig) {
-        return ChatApiFp(this.configuration).setUserChatsSettings(roomId, setUserChatSettingsRequestBody, options).then((request) => request(this.axios, this.basePath));
+    public setUserChatsSettings(requestParameters: ChatApiSetUserChatsSettingsRequest, options?: RawAxiosRequestConfig) {
+        return ChatApiFp(this.configuration).setUserChatsSettings(requestParameters.roomId, requestParameters.setUserChatSettingsRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Creates a new AI chat session within the specified room and sends the initial message to the configured AI provider.  The response is delivered as a Server-Sent Events (SSE) stream containing completion chunks (text deltas, tool calls, tool results, and message lifecycle events)  with periodic keep-alive pings every 5 seconds. File references can be included as context for the AI model.
      * @summary Start a new AI chat
-     * @param {number} roomId The identifier of the room in which to create the new AI chat session.
-     * @param {StartNewChatBody} startNewChatBody The initial message and optional file attachments.
+     * @param {AIChatApiStartNewChatRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ChatApi
      */
-    public startNewChat(roomId: number, startNewChatBody: StartNewChatBody, options?: RawAxiosRequestConfig) {
-        return ChatApiFp(this.configuration).startNewChat(roomId, startNewChatBody, options).then((request) => request(this.axios, this.basePath));
+    public startNewChat(requestParameters: ChatApiStartNewChatRequest, options?: RawAxiosRequestConfig) {
+        return ChatApiFp(this.configuration).startNewChat(requestParameters.roomId, requestParameters.startNewChatBody, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

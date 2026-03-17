@@ -1358,28 +1358,26 @@ export const RebrandingApiFactory = function (configuration?: Configuration, bas
         /**
          * Specifies if the white label logo text is default or not.
          * @summary Check the default white label logo text
-         * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-         * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+         * @param {RebrandingApiGetIsDefaultWhiteLabelLogoTextRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getIsDefaultWhiteLabelLogoText operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-default-white-label-logo-text/
          * @throws {RequiredError}
          */
-        getIsDefaultWhiteLabelLogoText(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<IsDefaultWhiteLabelLogosWrapper> {
-            return localVarFp.getIsDefaultWhiteLabelLogoText(isDark, isDefault, options).then((request) => request(axios, basePath));
+        getIsDefaultWhiteLabelLogoText(requestParameters: RebrandingApiGetIsDefaultWhiteLabelLogoTextRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<IsDefaultWhiteLabelLogosWrapper> {
+            return localVarFp.getIsDefaultWhiteLabelLogoText(requestParameters.isDark, requestParameters.isDefault, options).then((request) => request(axios, basePath));
         },
         /**
          * Specifies if the white label logos are default or not.
          * @summary Check the default white label logos
-         * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-         * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+         * @param {RebrandingApiGetIsDefaultWhiteLabelLogosRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getIsDefaultWhiteLabelLogos operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-default-white-label-logos/
          * @throws {RequiredError}
          */
-        getIsDefaultWhiteLabelLogos(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<IsDefaultWhiteLabelLogosArrayWrapper> {
-            return localVarFp.getIsDefaultWhiteLabelLogos(isDark, isDefault, options).then((request) => request(axios, basePath));
+        getIsDefaultWhiteLabelLogos(requestParameters: RebrandingApiGetIsDefaultWhiteLabelLogosRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<IsDefaultWhiteLabelLogosArrayWrapper> {
+            return localVarFp.getIsDefaultWhiteLabelLogos(requestParameters.isDark, requestParameters.isDefault, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the licensor data.
@@ -1395,122 +1393,344 @@ export const RebrandingApiFactory = function (configuration?: Configuration, bas
         /**
          * Returns the white label logo text.
          * @summary Get the white label logo text
-         * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-         * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+         * @param {RebrandingApiGetWhiteLabelLogoTextRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getWhiteLabelLogoText operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-white-label-logo-text/
          * @throws {RequiredError}
          */
-        getWhiteLabelLogoText(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.getWhiteLabelLogoText(isDark, isDefault, options).then((request) => request(axios, basePath));
+        getWhiteLabelLogoText(requestParameters: RebrandingApiGetWhiteLabelLogoTextRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.getWhiteLabelLogoText(requestParameters.isDark, requestParameters.isDefault, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the white label logos.
          * @summary Get the white label logos
-         * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-         * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+         * @param {RebrandingApiGetWhiteLabelLogosRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getWhiteLabelLogos operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-white-label-logos/
          * @throws {RequiredError}
          */
-        getWhiteLabelLogos(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<WhiteLabelItemArrayWrapper> {
-            return localVarFp.getWhiteLabelLogos(isDark, isDefault, options).then((request) => request(axios, basePath));
+        getWhiteLabelLogos(requestParameters: RebrandingApiGetWhiteLabelLogosRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<WhiteLabelItemArrayWrapper> {
+            return localVarFp.getWhiteLabelLogos(requestParameters.isDark, requestParameters.isDefault, options).then((request) => request(axios, basePath));
         },
         /**
          * Restores the white label logo text.
          * @summary Restore the white label logo text
-         * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-         * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+         * @param {RebrandingApiRestoreWhiteLabelLogoTextRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for restoreWhiteLabelLogoText operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/restore-white-label-logo-text/
          * @throws {RequiredError}
          */
-        restoreWhiteLabelLogoText(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.restoreWhiteLabelLogoText(isDark, isDefault, options).then((request) => request(axios, basePath));
+        restoreWhiteLabelLogoText(requestParameters: RebrandingApiRestoreWhiteLabelLogoTextRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.restoreWhiteLabelLogoText(requestParameters.isDark, requestParameters.isDefault, options).then((request) => request(axios, basePath));
         },
         /**
          * Restores the white label logos.
          * @summary Restore the white label logos
-         * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-         * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+         * @param {RebrandingApiRestoreWhiteLabelLogosRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for restoreWhiteLabelLogos operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/restore-white-label-logos/
          * @throws {RequiredError}
          */
-        restoreWhiteLabelLogos(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.restoreWhiteLabelLogos(isDark, isDefault, options).then((request) => request(axios, basePath));
+        restoreWhiteLabelLogos(requestParameters: RebrandingApiRestoreWhiteLabelLogosRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.restoreWhiteLabelLogos(requestParameters.isDark, requestParameters.isDefault, options).then((request) => request(axios, basePath));
         },
         /**
          * Saves the additional white label settings specified in the request.
          * @summary Save the additional white label settings
-         * @param {AdditionalWhiteLabelSettingsWrapper} [additionalWhiteLabelSettingsWrapper] 
+         * @param {RebrandingApiSaveAdditionalWhiteLabelSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for saveAdditionalWhiteLabelSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-additional-white-label-settings/
          * @throws {RequiredError}
          */
-        saveAdditionalWhiteLabelSettings(additionalWhiteLabelSettingsWrapper?: AdditionalWhiteLabelSettingsWrapper, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.saveAdditionalWhiteLabelSettings(additionalWhiteLabelSettingsWrapper, options).then((request) => request(axios, basePath));
+        saveAdditionalWhiteLabelSettings(requestParameters: RebrandingApiSaveAdditionalWhiteLabelSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.saveAdditionalWhiteLabelSettings(requestParameters.additionalWhiteLabelSettingsWrapper, options).then((request) => request(axios, basePath));
         },
         /**
          * Saves the company white label settings specified in the request.
          * @summary Save the company white label settings
-         * @param {CompanyWhiteLabelSettingsWrapper} [companyWhiteLabelSettingsWrapper] 
+         * @param {RebrandingApiSaveCompanyWhiteLabelSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for saveCompanyWhiteLabelSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-company-white-label-settings/
          * @throws {RequiredError}
          */
-        saveCompanyWhiteLabelSettings(companyWhiteLabelSettingsWrapper?: CompanyWhiteLabelSettingsWrapper, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.saveCompanyWhiteLabelSettings(companyWhiteLabelSettingsWrapper, options).then((request) => request(axios, basePath));
+        saveCompanyWhiteLabelSettings(requestParameters: RebrandingApiSaveCompanyWhiteLabelSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.saveCompanyWhiteLabelSettings(requestParameters.companyWhiteLabelSettingsWrapper, options).then((request) => request(axios, basePath));
         },
         /**
          * Saves the white label logo text specified in the request.
          * @summary Save the white label logo text settings
-         * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-         * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
-         * @param {WhiteLabelRequestsDto} [whiteLabelRequestsDto] 
+         * @param {RebrandingApiSaveWhiteLabelLogoTextRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for saveWhiteLabelLogoText operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-white-label-logo-text/
          * @throws {RequiredError}
          */
-        saveWhiteLabelLogoText(isDark?: boolean, isDefault?: boolean, whiteLabelRequestsDto?: WhiteLabelRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.saveWhiteLabelLogoText(isDark, isDefault, whiteLabelRequestsDto, options).then((request) => request(axios, basePath));
+        saveWhiteLabelLogoText(requestParameters: RebrandingApiSaveWhiteLabelLogoTextRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.saveWhiteLabelLogoText(requestParameters.isDark, requestParameters.isDefault, requestParameters.whiteLabelRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Saves the white label logos specified in the request.
          * @summary Save the white label logos
-         * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-         * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
-         * @param {WhiteLabelRequestsDto} [whiteLabelRequestsDto] 
+         * @param {RebrandingApiSaveWhiteLabelSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for saveWhiteLabelSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-white-label-settings/
          * @throws {RequiredError}
          */
-        saveWhiteLabelSettings(isDark?: boolean, isDefault?: boolean, whiteLabelRequestsDto?: WhiteLabelRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.saveWhiteLabelSettings(isDark, isDefault, whiteLabelRequestsDto, options).then((request) => request(axios, basePath));
+        saveWhiteLabelSettings(requestParameters: RebrandingApiSaveWhiteLabelSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.saveWhiteLabelSettings(requestParameters.isDark, requestParameters.isDefault, requestParameters.whiteLabelRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Saves the white label logos from files.
          * @summary Save the white label logos from files
-         * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-         * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+         * @param {RebrandingApiSaveWhiteLabelSettingsFromFilesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for saveWhiteLabelSettingsFromFiles operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-white-label-settings-from-files/
          * @throws {RequiredError}
          */
-        saveWhiteLabelSettingsFromFiles(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.saveWhiteLabelSettingsFromFiles(isDark, isDefault, options).then((request) => request(axios, basePath));
+        saveWhiteLabelSettingsFromFiles(requestParameters: RebrandingApiSaveWhiteLabelSettingsFromFilesRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.saveWhiteLabelSettingsFromFiles(requestParameters.isDark, requestParameters.isDefault, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for getIsDefaultWhiteLabelLogoText operation in RebrandingApi.
+ * @export
+ * @interface RebrandingApiGetIsDefaultWhiteLabelLogoTextRequest
+ */
+export interface RebrandingApiGetIsDefaultWhiteLabelLogoTextRequest {
+    /**
+     * Specifies if the white label logo is for the dark theme or not.
+     * @type {boolean}
+     * @memberof RebrandingApiGetIsDefaultWhiteLabelLogoText
+     */
+    readonly isDark?: boolean
+
+    /**
+     * Specifies if the logo is for a default tenant or not.
+     * @type {boolean}
+     * @memberof RebrandingApiGetIsDefaultWhiteLabelLogoText
+     */
+    readonly isDefault?: boolean
+}
+
+/**
+ * Request parameters for getIsDefaultWhiteLabelLogos operation in RebrandingApi.
+ * @export
+ * @interface RebrandingApiGetIsDefaultWhiteLabelLogosRequest
+ */
+export interface RebrandingApiGetIsDefaultWhiteLabelLogosRequest {
+    /**
+     * Specifies if the white label logo is for the dark theme or not.
+     * @type {boolean}
+     * @memberof RebrandingApiGetIsDefaultWhiteLabelLogos
+     */
+    readonly isDark?: boolean
+
+    /**
+     * Specifies if the logo is for a default tenant or not.
+     * @type {boolean}
+     * @memberof RebrandingApiGetIsDefaultWhiteLabelLogos
+     */
+    readonly isDefault?: boolean
+}
+
+/**
+ * Request parameters for getWhiteLabelLogoText operation in RebrandingApi.
+ * @export
+ * @interface RebrandingApiGetWhiteLabelLogoTextRequest
+ */
+export interface RebrandingApiGetWhiteLabelLogoTextRequest {
+    /**
+     * Specifies if the white label logo is for the dark theme or not.
+     * @type {boolean}
+     * @memberof RebrandingApiGetWhiteLabelLogoText
+     */
+    readonly isDark?: boolean
+
+    /**
+     * Specifies if the logo is for a default tenant or not.
+     * @type {boolean}
+     * @memberof RebrandingApiGetWhiteLabelLogoText
+     */
+    readonly isDefault?: boolean
+}
+
+/**
+ * Request parameters for getWhiteLabelLogos operation in RebrandingApi.
+ * @export
+ * @interface RebrandingApiGetWhiteLabelLogosRequest
+ */
+export interface RebrandingApiGetWhiteLabelLogosRequest {
+    /**
+     * Specifies if the white label logo is for the dark theme or not.
+     * @type {boolean}
+     * @memberof RebrandingApiGetWhiteLabelLogos
+     */
+    readonly isDark?: boolean
+
+    /**
+     * Specifies if the logo is for a default tenant or not.
+     * @type {boolean}
+     * @memberof RebrandingApiGetWhiteLabelLogos
+     */
+    readonly isDefault?: boolean
+}
+
+/**
+ * Request parameters for restoreWhiteLabelLogoText operation in RebrandingApi.
+ * @export
+ * @interface RebrandingApiRestoreWhiteLabelLogoTextRequest
+ */
+export interface RebrandingApiRestoreWhiteLabelLogoTextRequest {
+    /**
+     * Specifies if the white label logo is for the dark theme or not.
+     * @type {boolean}
+     * @memberof RebrandingApiRestoreWhiteLabelLogoText
+     */
+    readonly isDark?: boolean
+
+    /**
+     * Specifies if the logo is for a default tenant or not.
+     * @type {boolean}
+     * @memberof RebrandingApiRestoreWhiteLabelLogoText
+     */
+    readonly isDefault?: boolean
+}
+
+/**
+ * Request parameters for restoreWhiteLabelLogos operation in RebrandingApi.
+ * @export
+ * @interface RebrandingApiRestoreWhiteLabelLogosRequest
+ */
+export interface RebrandingApiRestoreWhiteLabelLogosRequest {
+    /**
+     * Specifies if the white label logo is for the dark theme or not.
+     * @type {boolean}
+     * @memberof RebrandingApiRestoreWhiteLabelLogos
+     */
+    readonly isDark?: boolean
+
+    /**
+     * Specifies if the logo is for a default tenant or not.
+     * @type {boolean}
+     * @memberof RebrandingApiRestoreWhiteLabelLogos
+     */
+    readonly isDefault?: boolean
+}
+
+/**
+ * Request parameters for saveAdditionalWhiteLabelSettings operation in RebrandingApi.
+ * @export
+ * @interface RebrandingApiSaveAdditionalWhiteLabelSettingsRequest
+ */
+export interface RebrandingApiSaveAdditionalWhiteLabelSettingsRequest {
+    /**
+     * 
+     * @type {AdditionalWhiteLabelSettingsWrapper}
+     * @memberof RebrandingApiSaveAdditionalWhiteLabelSettings
+     */
+    readonly additionalWhiteLabelSettingsWrapper?: AdditionalWhiteLabelSettingsWrapper
+}
+
+/**
+ * Request parameters for saveCompanyWhiteLabelSettings operation in RebrandingApi.
+ * @export
+ * @interface RebrandingApiSaveCompanyWhiteLabelSettingsRequest
+ */
+export interface RebrandingApiSaveCompanyWhiteLabelSettingsRequest {
+    /**
+     * 
+     * @type {CompanyWhiteLabelSettingsWrapper}
+     * @memberof RebrandingApiSaveCompanyWhiteLabelSettings
+     */
+    readonly companyWhiteLabelSettingsWrapper?: CompanyWhiteLabelSettingsWrapper
+}
+
+/**
+ * Request parameters for saveWhiteLabelLogoText operation in RebrandingApi.
+ * @export
+ * @interface RebrandingApiSaveWhiteLabelLogoTextRequest
+ */
+export interface RebrandingApiSaveWhiteLabelLogoTextRequest {
+    /**
+     * Specifies if the white label logo is for the dark theme or not.
+     * @type {boolean}
+     * @memberof RebrandingApiSaveWhiteLabelLogoText
+     */
+    readonly isDark?: boolean
+
+    /**
+     * Specifies if the logo is for a default tenant or not.
+     * @type {boolean}
+     * @memberof RebrandingApiSaveWhiteLabelLogoText
+     */
+    readonly isDefault?: boolean
+
+    /**
+     * 
+     * @type {WhiteLabelRequestsDto}
+     * @memberof RebrandingApiSaveWhiteLabelLogoText
+     */
+    readonly whiteLabelRequestsDto?: WhiteLabelRequestsDto
+}
+
+/**
+ * Request parameters for saveWhiteLabelSettings operation in RebrandingApi.
+ * @export
+ * @interface RebrandingApiSaveWhiteLabelSettingsRequest
+ */
+export interface RebrandingApiSaveWhiteLabelSettingsRequest {
+    /**
+     * Specifies if the white label logo is for the dark theme or not.
+     * @type {boolean}
+     * @memberof RebrandingApiSaveWhiteLabelSettings
+     */
+    readonly isDark?: boolean
+
+    /**
+     * Specifies if the logo is for a default tenant or not.
+     * @type {boolean}
+     * @memberof RebrandingApiSaveWhiteLabelSettings
+     */
+    readonly isDefault?: boolean
+
+    /**
+     * 
+     * @type {WhiteLabelRequestsDto}
+     * @memberof RebrandingApiSaveWhiteLabelSettings
+     */
+    readonly whiteLabelRequestsDto?: WhiteLabelRequestsDto
+}
+
+/**
+ * Request parameters for saveWhiteLabelSettingsFromFiles operation in RebrandingApi.
+ * @export
+ * @interface RebrandingApiSaveWhiteLabelSettingsFromFilesRequest
+ */
+export interface RebrandingApiSaveWhiteLabelSettingsFromFilesRequest {
+    /**
+     * Specifies if the white label logo is for the dark theme or not.
+     * @type {boolean}
+     * @memberof RebrandingApiSaveWhiteLabelSettingsFromFiles
+     */
+    readonly isDark?: boolean
+
+    /**
+     * Specifies if the logo is for a default tenant or not.
+     * @type {boolean}
+     * @memberof RebrandingApiSaveWhiteLabelSettingsFromFiles
+     */
+    readonly isDefault?: boolean
+}
 
 /**
  * RebrandingApi - object-oriented interface
@@ -1577,27 +1797,25 @@ export class RebrandingApi extends BaseAPI {
     /**
      * Specifies if the white label logo text is default or not.
      * @summary Check the default white label logo text
-     * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-     * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+     * @param {SettingsRebrandingApiGetIsDefaultWhiteLabelLogoTextRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RebrandingApi
      */
-    public getIsDefaultWhiteLabelLogoText(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig) {
-        return RebrandingApiFp(this.configuration).getIsDefaultWhiteLabelLogoText(isDark, isDefault, options).then((request) => request(this.axios, this.basePath));
+    public getIsDefaultWhiteLabelLogoText(requestParameters: RebrandingApiGetIsDefaultWhiteLabelLogoTextRequest = {}, options?: RawAxiosRequestConfig) {
+        return RebrandingApiFp(this.configuration).getIsDefaultWhiteLabelLogoText(requestParameters.isDark, requestParameters.isDefault, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Specifies if the white label logos are default or not.
      * @summary Check the default white label logos
-     * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-     * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+     * @param {SettingsRebrandingApiGetIsDefaultWhiteLabelLogosRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RebrandingApi
      */
-    public getIsDefaultWhiteLabelLogos(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig) {
-        return RebrandingApiFp(this.configuration).getIsDefaultWhiteLabelLogos(isDark, isDefault, options).then((request) => request(this.axios, this.basePath));
+    public getIsDefaultWhiteLabelLogos(requestParameters: RebrandingApiGetIsDefaultWhiteLabelLogosRequest = {}, options?: RawAxiosRequestConfig) {
+        return RebrandingApiFp(this.configuration).getIsDefaultWhiteLabelLogos(requestParameters.isDark, requestParameters.isDefault, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1614,118 +1832,109 @@ export class RebrandingApi extends BaseAPI {
     /**
      * Returns the white label logo text.
      * @summary Get the white label logo text
-     * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-     * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+     * @param {SettingsRebrandingApiGetWhiteLabelLogoTextRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RebrandingApi
      */
-    public getWhiteLabelLogoText(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig) {
-        return RebrandingApiFp(this.configuration).getWhiteLabelLogoText(isDark, isDefault, options).then((request) => request(this.axios, this.basePath));
+    public getWhiteLabelLogoText(requestParameters: RebrandingApiGetWhiteLabelLogoTextRequest = {}, options?: RawAxiosRequestConfig) {
+        return RebrandingApiFp(this.configuration).getWhiteLabelLogoText(requestParameters.isDark, requestParameters.isDefault, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the white label logos.
      * @summary Get the white label logos
-     * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-     * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+     * @param {SettingsRebrandingApiGetWhiteLabelLogosRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RebrandingApi
      */
-    public getWhiteLabelLogos(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig) {
-        return RebrandingApiFp(this.configuration).getWhiteLabelLogos(isDark, isDefault, options).then((request) => request(this.axios, this.basePath));
+    public getWhiteLabelLogos(requestParameters: RebrandingApiGetWhiteLabelLogosRequest = {}, options?: RawAxiosRequestConfig) {
+        return RebrandingApiFp(this.configuration).getWhiteLabelLogos(requestParameters.isDark, requestParameters.isDefault, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Restores the white label logo text.
      * @summary Restore the white label logo text
-     * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-     * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+     * @param {SettingsRebrandingApiRestoreWhiteLabelLogoTextRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RebrandingApi
      */
-    public restoreWhiteLabelLogoText(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig) {
-        return RebrandingApiFp(this.configuration).restoreWhiteLabelLogoText(isDark, isDefault, options).then((request) => request(this.axios, this.basePath));
+    public restoreWhiteLabelLogoText(requestParameters: RebrandingApiRestoreWhiteLabelLogoTextRequest = {}, options?: RawAxiosRequestConfig) {
+        return RebrandingApiFp(this.configuration).restoreWhiteLabelLogoText(requestParameters.isDark, requestParameters.isDefault, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Restores the white label logos.
      * @summary Restore the white label logos
-     * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-     * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+     * @param {SettingsRebrandingApiRestoreWhiteLabelLogosRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RebrandingApi
      */
-    public restoreWhiteLabelLogos(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig) {
-        return RebrandingApiFp(this.configuration).restoreWhiteLabelLogos(isDark, isDefault, options).then((request) => request(this.axios, this.basePath));
+    public restoreWhiteLabelLogos(requestParameters: RebrandingApiRestoreWhiteLabelLogosRequest = {}, options?: RawAxiosRequestConfig) {
+        return RebrandingApiFp(this.configuration).restoreWhiteLabelLogos(requestParameters.isDark, requestParameters.isDefault, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Saves the additional white label settings specified in the request.
      * @summary Save the additional white label settings
-     * @param {AdditionalWhiteLabelSettingsWrapper} [additionalWhiteLabelSettingsWrapper] 
+     * @param {SettingsRebrandingApiSaveAdditionalWhiteLabelSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RebrandingApi
      */
-    public saveAdditionalWhiteLabelSettings(additionalWhiteLabelSettingsWrapper?: AdditionalWhiteLabelSettingsWrapper, options?: RawAxiosRequestConfig) {
-        return RebrandingApiFp(this.configuration).saveAdditionalWhiteLabelSettings(additionalWhiteLabelSettingsWrapper, options).then((request) => request(this.axios, this.basePath));
+    public saveAdditionalWhiteLabelSettings(requestParameters: RebrandingApiSaveAdditionalWhiteLabelSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return RebrandingApiFp(this.configuration).saveAdditionalWhiteLabelSettings(requestParameters.additionalWhiteLabelSettingsWrapper, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Saves the company white label settings specified in the request.
      * @summary Save the company white label settings
-     * @param {CompanyWhiteLabelSettingsWrapper} [companyWhiteLabelSettingsWrapper] 
+     * @param {SettingsRebrandingApiSaveCompanyWhiteLabelSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RebrandingApi
      */
-    public saveCompanyWhiteLabelSettings(companyWhiteLabelSettingsWrapper?: CompanyWhiteLabelSettingsWrapper, options?: RawAxiosRequestConfig) {
-        return RebrandingApiFp(this.configuration).saveCompanyWhiteLabelSettings(companyWhiteLabelSettingsWrapper, options).then((request) => request(this.axios, this.basePath));
+    public saveCompanyWhiteLabelSettings(requestParameters: RebrandingApiSaveCompanyWhiteLabelSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return RebrandingApiFp(this.configuration).saveCompanyWhiteLabelSettings(requestParameters.companyWhiteLabelSettingsWrapper, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Saves the white label logo text specified in the request.
      * @summary Save the white label logo text settings
-     * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-     * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
-     * @param {WhiteLabelRequestsDto} [whiteLabelRequestsDto] 
+     * @param {SettingsRebrandingApiSaveWhiteLabelLogoTextRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RebrandingApi
      */
-    public saveWhiteLabelLogoText(isDark?: boolean, isDefault?: boolean, whiteLabelRequestsDto?: WhiteLabelRequestsDto, options?: RawAxiosRequestConfig) {
-        return RebrandingApiFp(this.configuration).saveWhiteLabelLogoText(isDark, isDefault, whiteLabelRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public saveWhiteLabelLogoText(requestParameters: RebrandingApiSaveWhiteLabelLogoTextRequest = {}, options?: RawAxiosRequestConfig) {
+        return RebrandingApiFp(this.configuration).saveWhiteLabelLogoText(requestParameters.isDark, requestParameters.isDefault, requestParameters.whiteLabelRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Saves the white label logos specified in the request.
      * @summary Save the white label logos
-     * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-     * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
-     * @param {WhiteLabelRequestsDto} [whiteLabelRequestsDto] 
+     * @param {SettingsRebrandingApiSaveWhiteLabelSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RebrandingApi
      */
-    public saveWhiteLabelSettings(isDark?: boolean, isDefault?: boolean, whiteLabelRequestsDto?: WhiteLabelRequestsDto, options?: RawAxiosRequestConfig) {
-        return RebrandingApiFp(this.configuration).saveWhiteLabelSettings(isDark, isDefault, whiteLabelRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public saveWhiteLabelSettings(requestParameters: RebrandingApiSaveWhiteLabelSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return RebrandingApiFp(this.configuration).saveWhiteLabelSettings(requestParameters.isDark, requestParameters.isDefault, requestParameters.whiteLabelRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Saves the white label logos from files.
      * @summary Save the white label logos from files
-     * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-     * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+     * @param {SettingsRebrandingApiSaveWhiteLabelSettingsFromFilesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RebrandingApi
      */
-    public saveWhiteLabelSettingsFromFiles(isDark?: boolean, isDefault?: boolean, options?: RawAxiosRequestConfig) {
-        return RebrandingApiFp(this.configuration).saveWhiteLabelSettingsFromFiles(isDark, isDefault, options).then((request) => request(this.axios, this.basePath));
+    public saveWhiteLabelSettingsFromFiles(requestParameters: RebrandingApiSaveWhiteLabelSettingsFromFilesRequest = {}, options?: RawAxiosRequestConfig) {
+        return RebrandingApiFp(this.configuration).saveWhiteLabelSettingsFromFiles(requestParameters.isDark, requestParameters.isDefault, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

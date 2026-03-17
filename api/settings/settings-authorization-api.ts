@@ -29,6 +29,10 @@ import type { AuthServiceRequestsArrayWrapper } from '../../models';
 import type { AuthServiceRequestsDto } from '../../models';
 // @ts-ignore
 import type { BooleanWrapper } from '../../models';
+// @ts-ignore
+import type { ConnectionTestResultWrapper } from '../../models';
+// @ts-ignore
+import type { ExternalDatabaseSettings } from '../../models';
 /**
  * SettingsAuthorizationApi - axios parameter creator
  * @export
@@ -145,6 +149,62 @@ export const SettingsAuthorizationApiAxiosParamCreator = function (configuration
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Tests an external database connection with the provided settings without saving them.
+         * @summary Test external database connection
+         * @param {ExternalDatabaseSettings} [externalDatabaseSettings] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for testExternalDatabaseConnection operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/test-external-database-connection/
+         */
+        testExternalDatabaseConnection: async (externalDatabaseSettings?: ExternalDatabaseSettings, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/settings/authservice/externaldb/test`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(externalDatabaseSettings, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -184,6 +244,21 @@ export const SettingsAuthorizationApiFp = function(configuration?: Configuration
             const localVarOperationServerBasePath = operationServerMap['SettingsAuthorizationApi.saveAuthKeys']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * Tests an external database connection with the provided settings without saving them.
+         * @summary Test external database connection
+         * @param {ExternalDatabaseSettings} [externalDatabaseSettings] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for testExternalDatabaseConnection operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/test-external-database-connection/
+         */
+        async testExternalDatabaseConnection(externalDatabaseSettings?: ExternalDatabaseSettings, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ConnectionTestResultWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.testExternalDatabaseConnection(externalDatabaseSettings, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SettingsAuthorizationApi.testExternalDatabaseConnection']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -208,17 +283,57 @@ export const SettingsAuthorizationApiFactory = function (configuration?: Configu
         /**
          * Saves the authorization keys.
          * @summary Save the authorization keys
-         * @param {AuthServiceRequestsDto} [authServiceRequestsDto] 
+         * @param {SettingsAuthorizationApiSaveAuthKeysRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for saveAuthKeys operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-auth-keys/
          * @throws {RequiredError}
          */
-        saveAuthKeys(authServiceRequestsDto?: AuthServiceRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.saveAuthKeys(authServiceRequestsDto, options).then((request) => request(axios, basePath));
+        saveAuthKeys(requestParameters: SettingsAuthorizationApiSaveAuthKeysRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.saveAuthKeys(requestParameters.authServiceRequestsDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Tests an external database connection with the provided settings without saving them.
+         * @summary Test external database connection
+         * @param {SettingsAuthorizationApiTestExternalDatabaseConnectionRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for testExternalDatabaseConnection operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/test-external-database-connection/
+         * @throws {RequiredError}
+         */
+        testExternalDatabaseConnection(requestParameters: SettingsAuthorizationApiTestExternalDatabaseConnectionRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ConnectionTestResultWrapper> {
+            return localVarFp.testExternalDatabaseConnection(requestParameters.externalDatabaseSettings, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for saveAuthKeys operation in SettingsAuthorizationApi.
+ * @export
+ * @interface SettingsAuthorizationApiSaveAuthKeysRequest
+ */
+export interface SettingsAuthorizationApiSaveAuthKeysRequest {
+    /**
+     * 
+     * @type {AuthServiceRequestsDto}
+     * @memberof SettingsAuthorizationApiSaveAuthKeys
+     */
+    readonly authServiceRequestsDto?: AuthServiceRequestsDto
+}
+
+/**
+ * Request parameters for testExternalDatabaseConnection operation in SettingsAuthorizationApi.
+ * @export
+ * @interface SettingsAuthorizationApiTestExternalDatabaseConnectionRequest
+ */
+export interface SettingsAuthorizationApiTestExternalDatabaseConnectionRequest {
+    /**
+     * 
+     * @type {ExternalDatabaseSettings}
+     * @memberof SettingsAuthorizationApiTestExternalDatabaseConnection
+     */
+    readonly externalDatabaseSettings?: ExternalDatabaseSettings
+}
 
 /**
  * SettingsAuthorizationApi - object-oriented interface
@@ -241,13 +356,25 @@ export class SettingsAuthorizationApi extends BaseAPI {
     /**
      * Saves the authorization keys.
      * @summary Save the authorization keys
-     * @param {AuthServiceRequestsDto} [authServiceRequestsDto] 
+     * @param {SettingsAuthorizationApiSaveAuthKeysRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SettingsAuthorizationApi
      */
-    public saveAuthKeys(authServiceRequestsDto?: AuthServiceRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsAuthorizationApiFp(this.configuration).saveAuthKeys(authServiceRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public saveAuthKeys(requestParameters: SettingsAuthorizationApiSaveAuthKeysRequest = {}, options?: RawAxiosRequestConfig) {
+        return SettingsAuthorizationApiFp(this.configuration).saveAuthKeys(requestParameters.authServiceRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Tests an external database connection with the provided settings without saving them.
+     * @summary Test external database connection
+     * @param {SettingsAuthorizationApiTestExternalDatabaseConnectionRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SettingsAuthorizationApi
+     */
+    public testExternalDatabaseConnection(requestParameters: SettingsAuthorizationApiTestExternalDatabaseConnectionRequest = {}, options?: RawAxiosRequestConfig) {
+        return SettingsAuthorizationApiFp(this.configuration).testExternalDatabaseConnection(requestParameters.externalDatabaseSettings, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -422,14 +422,14 @@ export const NotificationsApiFactory = function (configuration?: Configuration, 
         /**
          * Checks if the notification type specified in the request is enabled or not.
          * @summary Check notification availability
-         * @param {NotificationType} type The type of notification to query, specified in the route.
+         * @param {NotificationsApiGetNotificationSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getNotificationSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-notification-settings/
          * @throws {RequiredError}
          */
-        getNotificationSettings(type: NotificationType, options?: RawAxiosRequestConfig): AxiosPromise<NotificationSettingsWrapper> {
-            return localVarFp.getNotificationSettings(type, options).then((request) => request(axios, basePath));
+        getNotificationSettings(requestParameters: NotificationsApiGetNotificationSettingsRequest, options?: RawAxiosRequestConfig): AxiosPromise<NotificationSettingsWrapper> {
+            return localVarFp.getNotificationSettings(requestParameters.type, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of rooms with the disabled notifications.
@@ -445,29 +445,71 @@ export const NotificationsApiFactory = function (configuration?: Configuration, 
         /**
          * Enables the notification type specified in the request.
          * @summary Enable notifications
-         * @param {NotificationSettingsRequestsDto} [notificationSettingsRequestsDto] 
+         * @param {NotificationsApiSetNotificationSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setNotificationSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-notification-settings/
          * @throws {RequiredError}
          */
-        setNotificationSettings(notificationSettingsRequestsDto?: NotificationSettingsRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<NotificationSettingsWrapper> {
-            return localVarFp.setNotificationSettings(notificationSettingsRequestsDto, options).then((request) => request(axios, basePath));
+        setNotificationSettings(requestParameters: NotificationsApiSetNotificationSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<NotificationSettingsWrapper> {
+            return localVarFp.setNotificationSettings(requestParameters.notificationSettingsRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Sets a notification status for a room with the ID specified in the request.
          * @summary Set room notification status
-         * @param {RoomsNotificationsSettingsRequestDto} [roomsNotificationsSettingsRequestDto] 
+         * @param {NotificationsApiSetRoomsNotificationStatusRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setRoomsNotificationStatus operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-rooms-notification-status/
          * @throws {RequiredError}
          */
-        setRoomsNotificationStatus(roomsNotificationsSettingsRequestDto?: RoomsNotificationsSettingsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<RoomsNotificationSettingsWrapper> {
-            return localVarFp.setRoomsNotificationStatus(roomsNotificationsSettingsRequestDto, options).then((request) => request(axios, basePath));
+        setRoomsNotificationStatus(requestParameters: NotificationsApiSetRoomsNotificationStatusRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<RoomsNotificationSettingsWrapper> {
+            return localVarFp.setRoomsNotificationStatus(requestParameters.roomsNotificationsSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for getNotificationSettings operation in NotificationsApi.
+ * @export
+ * @interface NotificationsApiGetNotificationSettingsRequest
+ */
+export interface NotificationsApiGetNotificationSettingsRequest {
+    /**
+     * The type of notification to query, specified in the route.
+     * @type {NotificationType}
+     * @memberof NotificationsApiGetNotificationSettings
+     */
+    readonly type: NotificationType
+}
+
+/**
+ * Request parameters for setNotificationSettings operation in NotificationsApi.
+ * @export
+ * @interface NotificationsApiSetNotificationSettingsRequest
+ */
+export interface NotificationsApiSetNotificationSettingsRequest {
+    /**
+     * 
+     * @type {NotificationSettingsRequestsDto}
+     * @memberof NotificationsApiSetNotificationSettings
+     */
+    readonly notificationSettingsRequestsDto?: NotificationSettingsRequestsDto
+}
+
+/**
+ * Request parameters for setRoomsNotificationStatus operation in NotificationsApi.
+ * @export
+ * @interface NotificationsApiSetRoomsNotificationStatusRequest
+ */
+export interface NotificationsApiSetRoomsNotificationStatusRequest {
+    /**
+     * 
+     * @type {RoomsNotificationsSettingsRequestDto}
+     * @memberof NotificationsApiSetRoomsNotificationStatus
+     */
+    readonly roomsNotificationsSettingsRequestDto?: RoomsNotificationsSettingsRequestDto
+}
 
 /**
  * NotificationsApi - object-oriented interface
@@ -490,13 +532,13 @@ export class NotificationsApi extends BaseAPI {
     /**
      * Checks if the notification type specified in the request is enabled or not.
      * @summary Check notification availability
-     * @param {NotificationType} type The type of notification to query, specified in the route.
+     * @param {SettingsNotificationsApiGetNotificationSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof NotificationsApi
      */
-    public getNotificationSettings(type: NotificationType, options?: RawAxiosRequestConfig) {
-        return NotificationsApiFp(this.configuration).getNotificationSettings(type, options).then((request) => request(this.axios, this.basePath));
+    public getNotificationSettings(requestParameters: NotificationsApiGetNotificationSettingsRequest, options?: RawAxiosRequestConfig) {
+        return NotificationsApiFp(this.configuration).getNotificationSettings(requestParameters.type, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -513,25 +555,25 @@ export class NotificationsApi extends BaseAPI {
     /**
      * Enables the notification type specified in the request.
      * @summary Enable notifications
-     * @param {NotificationSettingsRequestsDto} [notificationSettingsRequestsDto] 
+     * @param {SettingsNotificationsApiSetNotificationSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof NotificationsApi
      */
-    public setNotificationSettings(notificationSettingsRequestsDto?: NotificationSettingsRequestsDto, options?: RawAxiosRequestConfig) {
-        return NotificationsApiFp(this.configuration).setNotificationSettings(notificationSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public setNotificationSettings(requestParameters: NotificationsApiSetNotificationSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return NotificationsApiFp(this.configuration).setNotificationSettings(requestParameters.notificationSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Sets a notification status for a room with the ID specified in the request.
      * @summary Set room notification status
-     * @param {RoomsNotificationsSettingsRequestDto} [roomsNotificationsSettingsRequestDto] 
+     * @param {SettingsNotificationsApiSetRoomsNotificationStatusRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof NotificationsApi
      */
-    public setRoomsNotificationStatus(roomsNotificationsSettingsRequestDto?: RoomsNotificationsSettingsRequestDto, options?: RawAxiosRequestConfig) {
-        return NotificationsApiFp(this.configuration).setRoomsNotificationStatus(roomsNotificationsSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public setRoomsNotificationStatus(requestParameters: NotificationsApiSetRoomsNotificationStatusRequest = {}, options?: RawAxiosRequestConfig) {
+        return NotificationsApiFp(this.configuration).setRoomsNotificationStatus(requestParameters.roomsNotificationsSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

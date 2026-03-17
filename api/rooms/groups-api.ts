@@ -520,82 +520,196 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
         /**
          * Creates a new room group with the specified name, icon, and list of rooms.
          * @summary Add a new room group
-         * @param {RoomGroupRequestDto} [roomGroupRequestDto] 
+         * @param {GroupsApiAddRoomGroupRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for addRoomGroup operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-room-group/
          * @throws {RequiredError}
          */
-        addRoomGroup(roomGroupRequestDto?: RoomGroupRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<RoomGroupWrapper> {
-            return localVarFp.addRoomGroup(roomGroupRequestDto, options).then((request) => request(axios, basePath));
+        addRoomGroup(requestParameters: GroupsApiAddRoomGroupRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<RoomGroupWrapper> {
+            return localVarFp.addRoomGroup(requestParameters.roomGroupRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Changes the icon of an existing room group.
          * @summary Change group icon
-         * @param {number} id Group id
-         * @param {IconRequest} [iconRequest] Icon update data.
+         * @param {GroupsApiChangeRoomGroupIconRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for changeRoomGroupIcon operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-room-group-icon/
          * @throws {RequiredError}
          */
-        changeRoomGroupIcon(id: number, iconRequest?: IconRequest, options?: RawAxiosRequestConfig): AxiosPromise<RoomGroupWrapper> {
-            return localVarFp.changeRoomGroupIcon(id, iconRequest, options).then((request) => request(axios, basePath));
+        changeRoomGroupIcon(requestParameters: GroupsApiChangeRoomGroupIconRequest, options?: RawAxiosRequestConfig): AxiosPromise<RoomGroupWrapper> {
+            return localVarFp.changeRoomGroupIcon(requestParameters.id, requestParameters.iconRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Deletes the specified room group.
          * @summary Delete group
-         * @param {number} id The group unique identifier.
-         * @param {boolean} [includeMembers] Whether to include group members.
+         * @param {GroupsApiDeleteRoomGroupRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteRoomGroup operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-group/
          * @throws {RequiredError}
          */
-        deleteRoomGroup(id: number, includeMembers?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.deleteRoomGroup(id, includeMembers, options).then((request) => request(axios, basePath));
+        deleteRoomGroup(requestParameters: GroupsApiDeleteRoomGroupRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteRoomGroup(requestParameters.id, requestParameters.includeMembers, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns detailed information about a room group.
          * @summary Get room group info
-         * @param {number} id The group unique identifier.
-         * @param {boolean} [includeMembers] Whether to include group members.
+         * @param {GroupsApiGetRoomGroupInfoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getRoomGroupInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-group-info/
          * @throws {RequiredError}
          */
-        getRoomGroupInfo(id: number, includeMembers?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<RoomGroupWrapper> {
-            return localVarFp.getRoomGroupInfo(id, includeMembers, options).then((request) => request(axios, basePath));
+        getRoomGroupInfo(requestParameters: GroupsApiGetRoomGroupInfoRequest, options?: RawAxiosRequestConfig): AxiosPromise<RoomGroupWrapper> {
+            return localVarFp.getRoomGroupInfo(requestParameters.id, requestParameters.includeMembers, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of all room groups for the current user.
          * @summary List room groups
-         * @param {number} id The group unique identifier.
-         * @param {boolean} [includeMembers] Whether to include group members.
+         * @param {GroupsApiGetRoomGroupsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getRoomGroups operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-groups/
          * @throws {RequiredError}
          */
-        getRoomGroups(id: number, includeMembers?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<RoomGroupArrayWrapper> {
-            return localVarFp.getRoomGroups(id, includeMembers, options).then((request) => request(axios, basePath));
+        getRoomGroups(requestParameters: GroupsApiGetRoomGroupsRequest, options?: RawAxiosRequestConfig): AxiosPromise<RoomGroupArrayWrapper> {
+            return localVarFp.getRoomGroups(requestParameters.id, requestParameters.includeMembers, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates room group properties and adds or removes rooms.
          * @summary Update room group
-         * @param {number} id The group ID.
-         * @param {UpdateRoomGroupRequest} updateRoomGroupRequest The request for updating a group.
+         * @param {GroupsApiUpdateRoomGroupRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateRoomGroup operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-room-group/
          * @throws {RequiredError}
          */
-        updateRoomGroup(id: number, updateRoomGroupRequest: UpdateRoomGroupRequest, options?: RawAxiosRequestConfig): AxiosPromise<RoomGroupWrapper> {
-            return localVarFp.updateRoomGroup(id, updateRoomGroupRequest, options).then((request) => request(axios, basePath));
+        updateRoomGroup(requestParameters: GroupsApiUpdateRoomGroupRequest, options?: RawAxiosRequestConfig): AxiosPromise<RoomGroupWrapper> {
+            return localVarFp.updateRoomGroup(requestParameters.id, requestParameters.updateRoomGroupRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for addRoomGroup operation in GroupsApi.
+ * @export
+ * @interface GroupsApiAddRoomGroupRequest
+ */
+export interface GroupsApiAddRoomGroupRequest {
+    /**
+     * 
+     * @type {RoomGroupRequestDto}
+     * @memberof GroupsApiAddRoomGroup
+     */
+    readonly roomGroupRequestDto?: RoomGroupRequestDto
+}
+
+/**
+ * Request parameters for changeRoomGroupIcon operation in GroupsApi.
+ * @export
+ * @interface GroupsApiChangeRoomGroupIconRequest
+ */
+export interface GroupsApiChangeRoomGroupIconRequest {
+    /**
+     * Group id
+     * @type {number}
+     * @memberof GroupsApiChangeRoomGroupIcon
+     */
+    readonly id: number
+
+    /**
+     * Icon update data.
+     * @type {IconRequest}
+     * @memberof GroupsApiChangeRoomGroupIcon
+     */
+    readonly iconRequest?: IconRequest
+}
+
+/**
+ * Request parameters for deleteRoomGroup operation in GroupsApi.
+ * @export
+ * @interface GroupsApiDeleteRoomGroupRequest
+ */
+export interface GroupsApiDeleteRoomGroupRequest {
+    /**
+     * The group unique identifier.
+     * @type {number}
+     * @memberof GroupsApiDeleteRoomGroup
+     */
+    readonly id: number
+
+    /**
+     * Whether to include group members.
+     * @type {boolean}
+     * @memberof GroupsApiDeleteRoomGroup
+     */
+    readonly includeMembers?: boolean
+}
+
+/**
+ * Request parameters for getRoomGroupInfo operation in GroupsApi.
+ * @export
+ * @interface GroupsApiGetRoomGroupInfoRequest
+ */
+export interface GroupsApiGetRoomGroupInfoRequest {
+    /**
+     * The group unique identifier.
+     * @type {number}
+     * @memberof GroupsApiGetRoomGroupInfo
+     */
+    readonly id: number
+
+    /**
+     * Whether to include group members.
+     * @type {boolean}
+     * @memberof GroupsApiGetRoomGroupInfo
+     */
+    readonly includeMembers?: boolean
+}
+
+/**
+ * Request parameters for getRoomGroups operation in GroupsApi.
+ * @export
+ * @interface GroupsApiGetRoomGroupsRequest
+ */
+export interface GroupsApiGetRoomGroupsRequest {
+    /**
+     * The group unique identifier.
+     * @type {number}
+     * @memberof GroupsApiGetRoomGroups
+     */
+    readonly id: number
+
+    /**
+     * Whether to include group members.
+     * @type {boolean}
+     * @memberof GroupsApiGetRoomGroups
+     */
+    readonly includeMembers?: boolean
+}
+
+/**
+ * Request parameters for updateRoomGroup operation in GroupsApi.
+ * @export
+ * @interface GroupsApiUpdateRoomGroupRequest
+ */
+export interface GroupsApiUpdateRoomGroupRequest {
+    /**
+     * The group ID.
+     * @type {number}
+     * @memberof GroupsApiUpdateRoomGroup
+     */
+    readonly id: number
+
+    /**
+     * The request for updating a group.
+     * @type {UpdateRoomGroupRequest}
+     * @memberof GroupsApiUpdateRoomGroup
+     */
+    readonly updateRoomGroupRequest: UpdateRoomGroupRequest
+}
 
 /**
  * GroupsApi - object-oriented interface
@@ -607,78 +721,73 @@ export class GroupsApi extends BaseAPI {
     /**
      * Creates a new room group with the specified name, icon, and list of rooms.
      * @summary Add a new room group
-     * @param {RoomGroupRequestDto} [roomGroupRequestDto] 
+     * @param {RoomsGroupsApiAddRoomGroupRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    public addRoomGroup(roomGroupRequestDto?: RoomGroupRequestDto, options?: RawAxiosRequestConfig) {
-        return GroupsApiFp(this.configuration).addRoomGroup(roomGroupRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public addRoomGroup(requestParameters: GroupsApiAddRoomGroupRequest = {}, options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).addRoomGroup(requestParameters.roomGroupRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Changes the icon of an existing room group.
      * @summary Change group icon
-     * @param {number} id Group id
-     * @param {IconRequest} [iconRequest] Icon update data.
+     * @param {RoomsGroupsApiChangeRoomGroupIconRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    public changeRoomGroupIcon(id: number, iconRequest?: IconRequest, options?: RawAxiosRequestConfig) {
-        return GroupsApiFp(this.configuration).changeRoomGroupIcon(id, iconRequest, options).then((request) => request(this.axios, this.basePath));
+    public changeRoomGroupIcon(requestParameters: GroupsApiChangeRoomGroupIconRequest, options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).changeRoomGroupIcon(requestParameters.id, requestParameters.iconRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Deletes the specified room group.
      * @summary Delete group
-     * @param {number} id The group unique identifier.
-     * @param {boolean} [includeMembers] Whether to include group members.
+     * @param {RoomsGroupsApiDeleteRoomGroupRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    public deleteRoomGroup(id: number, includeMembers?: boolean, options?: RawAxiosRequestConfig) {
-        return GroupsApiFp(this.configuration).deleteRoomGroup(id, includeMembers, options).then((request) => request(this.axios, this.basePath));
+    public deleteRoomGroup(requestParameters: GroupsApiDeleteRoomGroupRequest, options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).deleteRoomGroup(requestParameters.id, requestParameters.includeMembers, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns detailed information about a room group.
      * @summary Get room group info
-     * @param {number} id The group unique identifier.
-     * @param {boolean} [includeMembers] Whether to include group members.
+     * @param {RoomsGroupsApiGetRoomGroupInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    public getRoomGroupInfo(id: number, includeMembers?: boolean, options?: RawAxiosRequestConfig) {
-        return GroupsApiFp(this.configuration).getRoomGroupInfo(id, includeMembers, options).then((request) => request(this.axios, this.basePath));
+    public getRoomGroupInfo(requestParameters: GroupsApiGetRoomGroupInfoRequest, options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).getRoomGroupInfo(requestParameters.id, requestParameters.includeMembers, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns a list of all room groups for the current user.
      * @summary List room groups
-     * @param {number} id The group unique identifier.
-     * @param {boolean} [includeMembers] Whether to include group members.
+     * @param {RoomsGroupsApiGetRoomGroupsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    public getRoomGroups(id: number, includeMembers?: boolean, options?: RawAxiosRequestConfig) {
-        return GroupsApiFp(this.configuration).getRoomGroups(id, includeMembers, options).then((request) => request(this.axios, this.basePath));
+    public getRoomGroups(requestParameters: GroupsApiGetRoomGroupsRequest, options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).getRoomGroups(requestParameters.id, requestParameters.includeMembers, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Updates room group properties and adds or removes rooms.
      * @summary Update room group
-     * @param {number} id The group ID.
-     * @param {UpdateRoomGroupRequest} updateRoomGroupRequest The request for updating a group.
+     * @param {RoomsGroupsApiUpdateRoomGroupRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    public updateRoomGroup(id: number, updateRoomGroupRequest: UpdateRoomGroupRequest, options?: RawAxiosRequestConfig) {
-        return GroupsApiFp(this.configuration).updateRoomGroup(id, updateRoomGroupRequest, options).then((request) => request(this.axios, this.basePath));
+    public updateRoomGroup(requestParameters: GroupsApiUpdateRoomGroupRequest, options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).updateRoomGroup(requestParameters.id, requestParameters.updateRoomGroupRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -561,14 +561,14 @@ export const PortalSettingsApiFactory = function (configuration?: Configuration,
         /**
          * Returns the full absolute path to the current portal.
          * @summary Get a path to the portal
-         * @param {string} [virtualPath] The virtual path for the portal resource access.
+         * @param {PortalSettingsApiGetPortalPathRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getPortalPath operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-path/
          * @throws {RequiredError}
          */
-        getPortalPath(virtualPath?: string, options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
-            return localVarFp.getPortalPath(virtualPath, options).then((request) => request(axios, basePath));
+        getPortalPath(requestParameters: PortalSettingsApiGetPortalPathRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
+            return localVarFp.getPortalPath(requestParameters.virtualPath, options).then((request) => request(axios, basePath));
         },
         /**
          * Sends the instructions to remove the current portal.
@@ -605,6 +605,20 @@ export const PortalSettingsApiFactory = function (configuration?: Configuration,
         },
     };
 };
+
+/**
+ * Request parameters for getPortalPath operation in PortalSettingsApi.
+ * @export
+ * @interface PortalSettingsApiGetPortalPathRequest
+ */
+export interface PortalSettingsApiGetPortalPathRequest {
+    /**
+     * The virtual path for the portal resource access.
+     * @type {string}
+     * @memberof PortalSettingsApiGetPortalPath
+     */
+    readonly virtualPath?: string
+}
 
 /**
  * PortalSettingsApi - object-oriented interface
@@ -649,13 +663,13 @@ export class PortalSettingsApi extends BaseAPI {
     /**
      * Returns the full absolute path to the current portal.
      * @summary Get a path to the portal
-     * @param {string} [virtualPath] The virtual path for the portal resource access.
+     * @param {PortalSettingsApiGetPortalPathRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PortalSettingsApi
      */
-    public getPortalPath(virtualPath?: string, options?: RawAxiosRequestConfig) {
-        return PortalSettingsApiFp(this.configuration).getPortalPath(virtualPath, options).then((request) => request(this.axios, this.basePath));
+    public getPortalPath(requestParameters: PortalSettingsApiGetPortalPathRequest = {}, options?: RawAxiosRequestConfig) {
+        return PortalSettingsApiFp(this.configuration).getPortalPath(requestParameters.virtualPath, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

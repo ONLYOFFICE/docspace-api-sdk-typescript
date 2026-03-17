@@ -341,53 +341,167 @@ export const SearchApiFactory = function (configuration?: Configuration, basePat
         /**
          * Returns groups with their sharing settings for a file with the ID specified in request.
          * @summary Get groups with file sharing settings
-         * @param {number} id The group ID.
-         * @param {boolean} [excludeShared] Specifies whether to exclude the group sharing settings from the response.
-         * @param {number} [count] The number of groups to retrieve in the request.
-         * @param {number} [startIndex] The starting index from which to begin retrieving groups with their sharing settings.
-         * @param {string} [filterValue] The text used as a filter for retrieving groups with their sharing settings.
+         * @param {SearchApiGetGroupsWithFilesSharedRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getGroupsWithFilesShared operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-with-files-shared/
          * @throws {RequiredError}
          */
-        getGroupsWithFilesShared(id: number, excludeShared?: boolean, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<GroupArrayWrapper> {
-            return localVarFp.getGroupsWithFilesShared(id, excludeShared, count, startIndex, filterValue, options).then((request) => request(axios, basePath));
+        getGroupsWithFilesShared(requestParameters: SearchApiGetGroupsWithFilesSharedRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupArrayWrapper> {
+            return localVarFp.getGroupsWithFilesShared(requestParameters.id, requestParameters.excludeShared, requestParameters.count, requestParameters.startIndex, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns groups with their sharing settings in a folder with the ID specified in request.
          * @summary Get groups with folder sharing settings
-         * @param {number} id The group ID.
-         * @param {boolean} [excludeShared] Specifies whether to exclude the group sharing settings from the response.
-         * @param {number} [count] The number of groups to retrieve in the request.
-         * @param {number} [startIndex] The starting index from which to begin retrieving groups with their sharing settings.
-         * @param {string} [filterValue] The text used as a filter for retrieving groups with their sharing settings.
+         * @param {SearchApiGetGroupsWithFoldersSharedRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getGroupsWithFoldersShared operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-with-folders-shared/
          * @throws {RequiredError}
          */
-        getGroupsWithFoldersShared(id: number, excludeShared?: boolean, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<GroupArrayWrapper> {
-            return localVarFp.getGroupsWithFoldersShared(id, excludeShared, count, startIndex, filterValue, options).then((request) => request(axios, basePath));
+        getGroupsWithFoldersShared(requestParameters: SearchApiGetGroupsWithFoldersSharedRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupArrayWrapper> {
+            return localVarFp.getGroupsWithFoldersShared(requestParameters.id, requestParameters.excludeShared, requestParameters.count, requestParameters.startIndex, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns groups with their sharing settings in a room with the ID specified in request.
          * @summary Get groups with room sharing settings
-         * @param {number} id The group ID.
-         * @param {boolean} [excludeShared] Specifies whether to exclude the group sharing settings from the response.
-         * @param {number} [count] The number of groups to retrieve in the request.
-         * @param {number} [startIndex] The starting index from which to begin retrieving groups with their sharing settings.
-         * @param {string} [filterValue] The text used as a filter for retrieving groups with their sharing settings.
+         * @param {SearchApiGetGroupsWithRoomsSharedRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getGroupsWithRoomsShared operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-with-rooms-shared/
          * @throws {RequiredError}
          */
-        getGroupsWithRoomsShared(id: number, excludeShared?: boolean, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<GroupArrayWrapper> {
-            return localVarFp.getGroupsWithRoomsShared(id, excludeShared, count, startIndex, filterValue, options).then((request) => request(axios, basePath));
+        getGroupsWithRoomsShared(requestParameters: SearchApiGetGroupsWithRoomsSharedRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupArrayWrapper> {
+            return localVarFp.getGroupsWithRoomsShared(requestParameters.id, requestParameters.excludeShared, requestParameters.count, requestParameters.startIndex, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for getGroupsWithFilesShared operation in SearchApi.
+ * @export
+ * @interface SearchApiGetGroupsWithFilesSharedRequest
+ */
+export interface SearchApiGetGroupsWithFilesSharedRequest {
+    /**
+     * The group ID.
+     * @type {number}
+     * @memberof SearchApiGetGroupsWithFilesShared
+     */
+    readonly id: number
+
+    /**
+     * Specifies whether to exclude the group sharing settings from the response.
+     * @type {boolean}
+     * @memberof SearchApiGetGroupsWithFilesShared
+     */
+    readonly excludeShared?: boolean
+
+    /**
+     * The number of groups to retrieve in the request.
+     * @type {number}
+     * @memberof SearchApiGetGroupsWithFilesShared
+     */
+    readonly count?: number
+
+    /**
+     * The starting index from which to begin retrieving groups with their sharing settings.
+     * @type {number}
+     * @memberof SearchApiGetGroupsWithFilesShared
+     */
+    readonly startIndex?: number
+
+    /**
+     * The text used as a filter for retrieving groups with their sharing settings.
+     * @type {string}
+     * @memberof SearchApiGetGroupsWithFilesShared
+     */
+    readonly filterValue?: string
+}
+
+/**
+ * Request parameters for getGroupsWithFoldersShared operation in SearchApi.
+ * @export
+ * @interface SearchApiGetGroupsWithFoldersSharedRequest
+ */
+export interface SearchApiGetGroupsWithFoldersSharedRequest {
+    /**
+     * The group ID.
+     * @type {number}
+     * @memberof SearchApiGetGroupsWithFoldersShared
+     */
+    readonly id: number
+
+    /**
+     * Specifies whether to exclude the group sharing settings from the response.
+     * @type {boolean}
+     * @memberof SearchApiGetGroupsWithFoldersShared
+     */
+    readonly excludeShared?: boolean
+
+    /**
+     * The number of groups to retrieve in the request.
+     * @type {number}
+     * @memberof SearchApiGetGroupsWithFoldersShared
+     */
+    readonly count?: number
+
+    /**
+     * The starting index from which to begin retrieving groups with their sharing settings.
+     * @type {number}
+     * @memberof SearchApiGetGroupsWithFoldersShared
+     */
+    readonly startIndex?: number
+
+    /**
+     * The text used as a filter for retrieving groups with their sharing settings.
+     * @type {string}
+     * @memberof SearchApiGetGroupsWithFoldersShared
+     */
+    readonly filterValue?: string
+}
+
+/**
+ * Request parameters for getGroupsWithRoomsShared operation in SearchApi.
+ * @export
+ * @interface SearchApiGetGroupsWithRoomsSharedRequest
+ */
+export interface SearchApiGetGroupsWithRoomsSharedRequest {
+    /**
+     * The group ID.
+     * @type {number}
+     * @memberof SearchApiGetGroupsWithRoomsShared
+     */
+    readonly id: number
+
+    /**
+     * Specifies whether to exclude the group sharing settings from the response.
+     * @type {boolean}
+     * @memberof SearchApiGetGroupsWithRoomsShared
+     */
+    readonly excludeShared?: boolean
+
+    /**
+     * The number of groups to retrieve in the request.
+     * @type {number}
+     * @memberof SearchApiGetGroupsWithRoomsShared
+     */
+    readonly count?: number
+
+    /**
+     * The starting index from which to begin retrieving groups with their sharing settings.
+     * @type {number}
+     * @memberof SearchApiGetGroupsWithRoomsShared
+     */
+    readonly startIndex?: number
+
+    /**
+     * The text used as a filter for retrieving groups with their sharing settings.
+     * @type {string}
+     * @memberof SearchApiGetGroupsWithRoomsShared
+     */
+    readonly filterValue?: string
+}
 
 /**
  * SearchApi - object-oriented interface
@@ -399,49 +513,37 @@ export class SearchApi extends BaseAPI {
     /**
      * Returns groups with their sharing settings for a file with the ID specified in request.
      * @summary Get groups with file sharing settings
-     * @param {number} id The group ID.
-     * @param {boolean} [excludeShared] Specifies whether to exclude the group sharing settings from the response.
-     * @param {number} [count] The number of groups to retrieve in the request.
-     * @param {number} [startIndex] The starting index from which to begin retrieving groups with their sharing settings.
-     * @param {string} [filterValue] The text used as a filter for retrieving groups with their sharing settings.
+     * @param {GroupSearchApiGetGroupsWithFilesSharedRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SearchApi
      */
-    public getGroupsWithFilesShared(id: number, excludeShared?: boolean, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig) {
-        return SearchApiFp(this.configuration).getGroupsWithFilesShared(id, excludeShared, count, startIndex, filterValue, options).then((request) => request(this.axios, this.basePath));
+    public getGroupsWithFilesShared(requestParameters: SearchApiGetGroupsWithFilesSharedRequest, options?: RawAxiosRequestConfig) {
+        return SearchApiFp(this.configuration).getGroupsWithFilesShared(requestParameters.id, requestParameters.excludeShared, requestParameters.count, requestParameters.startIndex, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns groups with their sharing settings in a folder with the ID specified in request.
      * @summary Get groups with folder sharing settings
-     * @param {number} id The group ID.
-     * @param {boolean} [excludeShared] Specifies whether to exclude the group sharing settings from the response.
-     * @param {number} [count] The number of groups to retrieve in the request.
-     * @param {number} [startIndex] The starting index from which to begin retrieving groups with their sharing settings.
-     * @param {string} [filterValue] The text used as a filter for retrieving groups with their sharing settings.
+     * @param {GroupSearchApiGetGroupsWithFoldersSharedRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SearchApi
      */
-    public getGroupsWithFoldersShared(id: number, excludeShared?: boolean, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig) {
-        return SearchApiFp(this.configuration).getGroupsWithFoldersShared(id, excludeShared, count, startIndex, filterValue, options).then((request) => request(this.axios, this.basePath));
+    public getGroupsWithFoldersShared(requestParameters: SearchApiGetGroupsWithFoldersSharedRequest, options?: RawAxiosRequestConfig) {
+        return SearchApiFp(this.configuration).getGroupsWithFoldersShared(requestParameters.id, requestParameters.excludeShared, requestParameters.count, requestParameters.startIndex, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns groups with their sharing settings in a room with the ID specified in request.
      * @summary Get groups with room sharing settings
-     * @param {number} id The group ID.
-     * @param {boolean} [excludeShared] Specifies whether to exclude the group sharing settings from the response.
-     * @param {number} [count] The number of groups to retrieve in the request.
-     * @param {number} [startIndex] The starting index from which to begin retrieving groups with their sharing settings.
-     * @param {string} [filterValue] The text used as a filter for retrieving groups with their sharing settings.
+     * @param {GroupSearchApiGetGroupsWithRoomsSharedRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SearchApi
      */
-    public getGroupsWithRoomsShared(id: number, excludeShared?: boolean, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig) {
-        return SearchApiFp(this.configuration).getGroupsWithRoomsShared(id, excludeShared, count, startIndex, filterValue, options).then((request) => request(this.axios, this.basePath));
+    public getGroupsWithRoomsShared(requestParameters: SearchApiGetGroupsWithRoomsSharedRequest, options?: RawAxiosRequestConfig) {
+        return SearchApiFp(this.configuration).getGroupsWithRoomsShared(requestParameters.id, requestParameters.excludeShared, requestParameters.count, requestParameters.startIndex, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

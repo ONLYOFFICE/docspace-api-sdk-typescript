@@ -797,15 +797,14 @@ export const SecurityApiFactory = function (configuration?: Configuration, baseP
         /**
          * Checks if the selected user is an administrator of a product with the ID specified in the request.
          * @summary Check a product administrator
-         * @param {string} productid The ID of the product extracted from the query parameters.
-         * @param {string} userid The user ID extracted from the query parameters.
+         * @param {SecurityApiGetIsProductAdministratorRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getIsProductAdministrator operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-product-administrator/
          * @throws {RequiredError}
          */
-        getIsProductAdministrator(productid: string, userid: string, options?: RawAxiosRequestConfig): AxiosPromise<ProductAdministratorWrapper> {
-            return localVarFp.getIsProductAdministrator(productid, userid, options).then((request) => request(axios, basePath));
+        getIsProductAdministrator(requestParameters: SecurityApiGetIsProductAdministratorRequest, options?: RawAxiosRequestConfig): AxiosPromise<ProductAdministratorWrapper> {
+            return localVarFp.getIsProductAdministrator(requestParameters.productid, requestParameters.userid, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the portal password settings.
@@ -821,89 +820,208 @@ export const SecurityApiFactory = function (configuration?: Configuration, baseP
         /**
          * Returns a list of all the administrators of a product with the ID specified in the request.
          * @summary Get the product administrators
-         * @param {string} productid The ID of the product extracted from the route parameters.
+         * @param {SecurityApiGetProductAdministratorsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getProductAdministrators operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-product-administrators/
          * @throws {RequiredError}
          */
-        getProductAdministrators(productid: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeArrayWrapper> {
-            return localVarFp.getProductAdministrators(productid, options).then((request) => request(axios, basePath));
+        getProductAdministrators(requestParameters: SecurityApiGetProductAdministratorsRequest, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeArrayWrapper> {
+            return localVarFp.getProductAdministrators(requestParameters.productid, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the availability of the module with the ID specified in the request.
          * @summary Get the module availability
-         * @param {string} id The ID extracted from the route parameters.
+         * @param {SecurityApiGetWebItemSecurityInfoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getWebItemSecurityInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-web-item-security-info/
          * @throws {RequiredError}
          */
-        getWebItemSecurityInfo(id: string, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.getWebItemSecurityInfo(id, options).then((request) => request(axios, basePath));
+        getWebItemSecurityInfo(requestParameters: SecurityApiGetWebItemSecurityInfoRequest, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.getWebItemSecurityInfo(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the security settings for the modules specified in the request.
          * @summary Get the security settings
-         * @param {Array<string>} [ids] The list of module identifiers for which to retrieve the security settings.
+         * @param {SecurityApiGetWebItemSettingsSecurityInfoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getWebItemSettingsSecurityInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-web-item-settings-security-info/
          * @throws {RequiredError}
          */
-        getWebItemSettingsSecurityInfo(ids?: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<SecurityArrayWrapper> {
-            return localVarFp.getWebItemSettingsSecurityInfo(ids, options).then((request) => request(axios, basePath));
+        getWebItemSettingsSecurityInfo(requestParameters: SecurityApiGetWebItemSettingsSecurityInfoRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<SecurityArrayWrapper> {
+            return localVarFp.getWebItemSettingsSecurityInfo(requestParameters.ids, options).then((request) => request(axios, basePath));
         },
         /**
          * Sets the security settings to the modules with the IDs specified in the request.
          * @summary Set the security settings to modules
-         * @param {WebItemsSecurityRequestsDto} [webItemsSecurityRequestsDto] 
+         * @param {SecurityApiSetAccessToWebItemsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setAccessToWebItems operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-access-to-web-items/
          * @throws {RequiredError}
          */
-        setAccessToWebItems(webItemsSecurityRequestsDto?: WebItemsSecurityRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<SecurityArrayWrapper> {
-            return localVarFp.setAccessToWebItems(webItemsSecurityRequestsDto, options).then((request) => request(axios, basePath));
+        setAccessToWebItems(requestParameters: SecurityApiSetAccessToWebItemsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<SecurityArrayWrapper> {
+            return localVarFp.setAccessToWebItems(requestParameters.webItemsSecurityRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Sets the selected user as an administrator of a product with the ID specified in the request.
          * @summary Set a product administrator
-         * @param {SecurityRequestsDto} [securityRequestsDto] 
+         * @param {SecurityApiSetProductAdministratorRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setProductAdministrator operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-product-administrator/
          * @throws {RequiredError}
          */
-        setProductAdministrator(securityRequestsDto?: SecurityRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<ProductAdministratorWrapper> {
-            return localVarFp.setProductAdministrator(securityRequestsDto, options).then((request) => request(axios, basePath));
+        setProductAdministrator(requestParameters: SecurityApiSetProductAdministratorRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ProductAdministratorWrapper> {
+            return localVarFp.setProductAdministrator(requestParameters.securityRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Sets the security settings to the module with the ID specified in the request.
          * @summary Set the module security settings
-         * @param {WebItemSecurityRequestsDto} [webItemSecurityRequestsDto] 
+         * @param {SecurityApiSetWebItemSecurityRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setWebItemSecurity operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-web-item-security/
          * @throws {RequiredError}
          */
-        setWebItemSecurity(webItemSecurityRequestsDto?: WebItemSecurityRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<SecurityArrayWrapper> {
-            return localVarFp.setWebItemSecurity(webItemSecurityRequestsDto, options).then((request) => request(axios, basePath));
+        setWebItemSecurity(requestParameters: SecurityApiSetWebItemSecurityRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<SecurityArrayWrapper> {
+            return localVarFp.setWebItemSecurity(requestParameters.webItemSecurityRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Sets the portal password settings.
          * @summary Set the password settings
-         * @param {PasswordSettingsRequestsDto} [passwordSettingsRequestsDto] 
+         * @param {SecurityApiUpdatePasswordSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updatePasswordSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-password-settings/
          * @throws {RequiredError}
          */
-        updatePasswordSettings(passwordSettingsRequestsDto?: PasswordSettingsRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<PasswordSettingsWrapper> {
-            return localVarFp.updatePasswordSettings(passwordSettingsRequestsDto, options).then((request) => request(axios, basePath));
+        updatePasswordSettings(requestParameters: SecurityApiUpdatePasswordSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<PasswordSettingsWrapper> {
+            return localVarFp.updatePasswordSettings(requestParameters.passwordSettingsRequestsDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for getIsProductAdministrator operation in SecurityApi.
+ * @export
+ * @interface SecurityApiGetIsProductAdministratorRequest
+ */
+export interface SecurityApiGetIsProductAdministratorRequest {
+    /**
+     * The ID of the product extracted from the query parameters.
+     * @type {string}
+     * @memberof SecurityApiGetIsProductAdministrator
+     */
+    readonly productid: string
+
+    /**
+     * The user ID extracted from the query parameters.
+     * @type {string}
+     * @memberof SecurityApiGetIsProductAdministrator
+     */
+    readonly userid: string
+}
+
+/**
+ * Request parameters for getProductAdministrators operation in SecurityApi.
+ * @export
+ * @interface SecurityApiGetProductAdministratorsRequest
+ */
+export interface SecurityApiGetProductAdministratorsRequest {
+    /**
+     * The ID of the product extracted from the route parameters.
+     * @type {string}
+     * @memberof SecurityApiGetProductAdministrators
+     */
+    readonly productid: string
+}
+
+/**
+ * Request parameters for getWebItemSecurityInfo operation in SecurityApi.
+ * @export
+ * @interface SecurityApiGetWebItemSecurityInfoRequest
+ */
+export interface SecurityApiGetWebItemSecurityInfoRequest {
+    /**
+     * The ID extracted from the route parameters.
+     * @type {string}
+     * @memberof SecurityApiGetWebItemSecurityInfo
+     */
+    readonly id: string
+}
+
+/**
+ * Request parameters for getWebItemSettingsSecurityInfo operation in SecurityApi.
+ * @export
+ * @interface SecurityApiGetWebItemSettingsSecurityInfoRequest
+ */
+export interface SecurityApiGetWebItemSettingsSecurityInfoRequest {
+    /**
+     * The list of module identifiers for which to retrieve the security settings.
+     * @type {Array<string>}
+     * @memberof SecurityApiGetWebItemSettingsSecurityInfo
+     */
+    readonly ids?: Array<string>
+}
+
+/**
+ * Request parameters for setAccessToWebItems operation in SecurityApi.
+ * @export
+ * @interface SecurityApiSetAccessToWebItemsRequest
+ */
+export interface SecurityApiSetAccessToWebItemsRequest {
+    /**
+     * 
+     * @type {WebItemsSecurityRequestsDto}
+     * @memberof SecurityApiSetAccessToWebItems
+     */
+    readonly webItemsSecurityRequestsDto?: WebItemsSecurityRequestsDto
+}
+
+/**
+ * Request parameters for setProductAdministrator operation in SecurityApi.
+ * @export
+ * @interface SecurityApiSetProductAdministratorRequest
+ */
+export interface SecurityApiSetProductAdministratorRequest {
+    /**
+     * 
+     * @type {SecurityRequestsDto}
+     * @memberof SecurityApiSetProductAdministrator
+     */
+    readonly securityRequestsDto?: SecurityRequestsDto
+}
+
+/**
+ * Request parameters for setWebItemSecurity operation in SecurityApi.
+ * @export
+ * @interface SecurityApiSetWebItemSecurityRequest
+ */
+export interface SecurityApiSetWebItemSecurityRequest {
+    /**
+     * 
+     * @type {WebItemSecurityRequestsDto}
+     * @memberof SecurityApiSetWebItemSecurity
+     */
+    readonly webItemSecurityRequestsDto?: WebItemSecurityRequestsDto
+}
+
+/**
+ * Request parameters for updatePasswordSettings operation in SecurityApi.
+ * @export
+ * @interface SecurityApiUpdatePasswordSettingsRequest
+ */
+export interface SecurityApiUpdatePasswordSettingsRequest {
+    /**
+     * 
+     * @type {PasswordSettingsRequestsDto}
+     * @memberof SecurityApiUpdatePasswordSettings
+     */
+    readonly passwordSettingsRequestsDto?: PasswordSettingsRequestsDto
+}
 
 /**
  * SecurityApi - object-oriented interface
@@ -926,14 +1044,13 @@ export class SecurityApi extends BaseAPI {
     /**
      * Checks if the selected user is an administrator of a product with the ID specified in the request.
      * @summary Check a product administrator
-     * @param {string} productid The ID of the product extracted from the query parameters.
-     * @param {string} userid The user ID extracted from the query parameters.
+     * @param {SettingsSecurityApiGetIsProductAdministratorRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SecurityApi
      */
-    public getIsProductAdministrator(productid: string, userid: string, options?: RawAxiosRequestConfig) {
-        return SecurityApiFp(this.configuration).getIsProductAdministrator(productid, userid, options).then((request) => request(this.axios, this.basePath));
+    public getIsProductAdministrator(requestParameters: SecurityApiGetIsProductAdministratorRequest, options?: RawAxiosRequestConfig) {
+        return SecurityApiFp(this.configuration).getIsProductAdministrator(requestParameters.productid, requestParameters.userid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -950,85 +1067,85 @@ export class SecurityApi extends BaseAPI {
     /**
      * Returns a list of all the administrators of a product with the ID specified in the request.
      * @summary Get the product administrators
-     * @param {string} productid The ID of the product extracted from the route parameters.
+     * @param {SettingsSecurityApiGetProductAdministratorsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SecurityApi
      */
-    public getProductAdministrators(productid: string, options?: RawAxiosRequestConfig) {
-        return SecurityApiFp(this.configuration).getProductAdministrators(productid, options).then((request) => request(this.axios, this.basePath));
+    public getProductAdministrators(requestParameters: SecurityApiGetProductAdministratorsRequest, options?: RawAxiosRequestConfig) {
+        return SecurityApiFp(this.configuration).getProductAdministrators(requestParameters.productid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the availability of the module with the ID specified in the request.
      * @summary Get the module availability
-     * @param {string} id The ID extracted from the route parameters.
+     * @param {SettingsSecurityApiGetWebItemSecurityInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SecurityApi
      */
-    public getWebItemSecurityInfo(id: string, options?: RawAxiosRequestConfig) {
-        return SecurityApiFp(this.configuration).getWebItemSecurityInfo(id, options).then((request) => request(this.axios, this.basePath));
+    public getWebItemSecurityInfo(requestParameters: SecurityApiGetWebItemSecurityInfoRequest, options?: RawAxiosRequestConfig) {
+        return SecurityApiFp(this.configuration).getWebItemSecurityInfo(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the security settings for the modules specified in the request.
      * @summary Get the security settings
-     * @param {Array<string>} [ids] The list of module identifiers for which to retrieve the security settings.
+     * @param {SettingsSecurityApiGetWebItemSettingsSecurityInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SecurityApi
      */
-    public getWebItemSettingsSecurityInfo(ids?: Array<string>, options?: RawAxiosRequestConfig) {
-        return SecurityApiFp(this.configuration).getWebItemSettingsSecurityInfo(ids, options).then((request) => request(this.axios, this.basePath));
+    public getWebItemSettingsSecurityInfo(requestParameters: SecurityApiGetWebItemSettingsSecurityInfoRequest = {}, options?: RawAxiosRequestConfig) {
+        return SecurityApiFp(this.configuration).getWebItemSettingsSecurityInfo(requestParameters.ids, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Sets the security settings to the modules with the IDs specified in the request.
      * @summary Set the security settings to modules
-     * @param {WebItemsSecurityRequestsDto} [webItemsSecurityRequestsDto] 
+     * @param {SettingsSecurityApiSetAccessToWebItemsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SecurityApi
      */
-    public setAccessToWebItems(webItemsSecurityRequestsDto?: WebItemsSecurityRequestsDto, options?: RawAxiosRequestConfig) {
-        return SecurityApiFp(this.configuration).setAccessToWebItems(webItemsSecurityRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public setAccessToWebItems(requestParameters: SecurityApiSetAccessToWebItemsRequest = {}, options?: RawAxiosRequestConfig) {
+        return SecurityApiFp(this.configuration).setAccessToWebItems(requestParameters.webItemsSecurityRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Sets the selected user as an administrator of a product with the ID specified in the request.
      * @summary Set a product administrator
-     * @param {SecurityRequestsDto} [securityRequestsDto] 
+     * @param {SettingsSecurityApiSetProductAdministratorRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SecurityApi
      */
-    public setProductAdministrator(securityRequestsDto?: SecurityRequestsDto, options?: RawAxiosRequestConfig) {
-        return SecurityApiFp(this.configuration).setProductAdministrator(securityRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public setProductAdministrator(requestParameters: SecurityApiSetProductAdministratorRequest = {}, options?: RawAxiosRequestConfig) {
+        return SecurityApiFp(this.configuration).setProductAdministrator(requestParameters.securityRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Sets the security settings to the module with the ID specified in the request.
      * @summary Set the module security settings
-     * @param {WebItemSecurityRequestsDto} [webItemSecurityRequestsDto] 
+     * @param {SettingsSecurityApiSetWebItemSecurityRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SecurityApi
      */
-    public setWebItemSecurity(webItemSecurityRequestsDto?: WebItemSecurityRequestsDto, options?: RawAxiosRequestConfig) {
-        return SecurityApiFp(this.configuration).setWebItemSecurity(webItemSecurityRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public setWebItemSecurity(requestParameters: SecurityApiSetWebItemSecurityRequest = {}, options?: RawAxiosRequestConfig) {
+        return SecurityApiFp(this.configuration).setWebItemSecurity(requestParameters.webItemSecurityRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Sets the portal password settings.
      * @summary Set the password settings
-     * @param {PasswordSettingsRequestsDto} [passwordSettingsRequestsDto] 
+     * @param {SettingsSecurityApiUpdatePasswordSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SecurityApi
      */
-    public updatePasswordSettings(passwordSettingsRequestsDto?: PasswordSettingsRequestsDto, options?: RawAxiosRequestConfig) {
-        return SecurityApiFp(this.configuration).updatePasswordSettings(passwordSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public updatePasswordSettings(requestParameters: SecurityApiUpdatePasswordSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return SecurityApiFp(this.configuration).updatePasswordSettings(requestParameters.passwordSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

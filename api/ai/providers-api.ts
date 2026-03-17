@@ -577,26 +577,26 @@ export const ProvidersApiFactory = function (configuration?: Configuration, base
         /**
          * Registers a new AI provider for the current tenant by specifying its type, display title, API endpoint URL, and authentication key.  The provider becomes available for AI chat conversations after creation. This action is rate-limited.
          * @summary Add an AI provider
-         * @param {CreateProviderRequestDto} [createProviderRequestDto] 
+         * @param {ProvidersApiAddProviderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for addProvider operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-provider/
          * @throws {RequiredError}
          */
-        addProvider(createProviderRequestDto?: CreateProviderRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<AiProviderWrapper> {
-            return localVarFp.addProvider(createProviderRequestDto, options).then((request) => request(axios, basePath));
+        addProvider(requestParameters: ProvidersApiAddProviderRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<AiProviderWrapper> {
+            return localVarFp.addProvider(requestParameters.createProviderRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Permanently deletes one or more AI providers by their identifiers.  All specified providers are removed from the current tenant. This action cannot be undone.
          * @summary Delete AI providers
-         * @param {RemoveProviderRequestDto} [removeProviderRequestDto] 
+         * @param {ProvidersApiDeleteProvidersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteProviders operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-providers/
          * @throws {RequiredError}
          */
-        deleteProviders(removeProviderRequestDto?: RemoveProviderRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.deleteProviders(removeProviderRequestDto, options).then((request) => request(axios, basePath));
+        deleteProviders(requestParameters: ProvidersApiDeleteProvidersRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteProviders(requestParameters.removeProviderRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the list of AI provider types that are available for configuration on the current instance.  Each entry includes the provider type identifier and the default API endpoint URL.
@@ -623,43 +623,125 @@ export const ProvidersApiFactory = function (configuration?: Configuration, base
         /**
          * Returns a paginated list of AI providers configured for the current tenant.  Supports pagination via the startIndex and count query parameters. The total number of providers is included in the response metadata.
          * @summary Get AI providers
-         * @param {number} [startIndex] The number of items to skip before returning results (zero-based offset). Defaults to 0.
-         * @param {number} [count] The maximum number of items to return per page. Defaults to 100.
+         * @param {ProvidersApiGetProvidersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getProviders operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-providers/
          * @throws {RequiredError}
          */
-        getProviders(startIndex?: number, count?: number, options?: RawAxiosRequestConfig): AxiosPromise<AiProviderArrayWrapper> {
-            return localVarFp.getProviders(startIndex, count, options).then((request) => request(axios, basePath));
+        getProviders(requestParameters: ProvidersApiGetProvidersRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<AiProviderArrayWrapper> {
+            return localVarFp.getProviders(requestParameters.startIndex, requestParameters.count, options).then((request) => request(axios, basePath));
         },
         /**
          * Sets the default AI provider and model for the current tenant.  The specified provider and model will be used as the default for all new AI chat sessions within the tenant.
          * @summary Set the default AI provider
-         * @param {SetDefaultProviderRequestDto} [setDefaultProviderRequestDto] 
+         * @param {ProvidersApiSetDefaultProviderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setDefaultProvider operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-default-provider/
          * @throws {RequiredError}
          */
-        setDefaultProvider(setDefaultProviderRequestDto?: SetDefaultProviderRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<DefaultProviderWrapper> {
-            return localVarFp.setDefaultProvider(setDefaultProviderRequestDto, options).then((request) => request(axios, basePath));
+        setDefaultProvider(requestParameters: ProvidersApiSetDefaultProviderRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<DefaultProviderWrapper> {
+            return localVarFp.setDefaultProvider(requestParameters.setDefaultProviderRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates the configuration of an existing AI provider, including its display title, API endpoint URL, and authentication key.  Only the fields provided in the request body will be updated. This action is rate-limited.
          * @summary Update an AI provider
-         * @param {number} id The identifier of the AI provider to update.
-         * @param {UpdateProviderBody} updateProviderBody The AI provider configuration parameters to update.
+         * @param {ProvidersApiUpdateProviderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateProvider operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-provider/
          * @throws {RequiredError}
          */
-        updateProvider(id: number, updateProviderBody: UpdateProviderBody, options?: RawAxiosRequestConfig): AxiosPromise<AiProviderWrapper> {
-            return localVarFp.updateProvider(id, updateProviderBody, options).then((request) => request(axios, basePath));
+        updateProvider(requestParameters: ProvidersApiUpdateProviderRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiProviderWrapper> {
+            return localVarFp.updateProvider(requestParameters.id, requestParameters.updateProviderBody, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for addProvider operation in ProvidersApi.
+ * @export
+ * @interface ProvidersApiAddProviderRequest
+ */
+export interface ProvidersApiAddProviderRequest {
+    /**
+     * 
+     * @type {CreateProviderRequestDto}
+     * @memberof ProvidersApiAddProvider
+     */
+    readonly createProviderRequestDto?: CreateProviderRequestDto
+}
+
+/**
+ * Request parameters for deleteProviders operation in ProvidersApi.
+ * @export
+ * @interface ProvidersApiDeleteProvidersRequest
+ */
+export interface ProvidersApiDeleteProvidersRequest {
+    /**
+     * 
+     * @type {RemoveProviderRequestDto}
+     * @memberof ProvidersApiDeleteProviders
+     */
+    readonly removeProviderRequestDto?: RemoveProviderRequestDto
+}
+
+/**
+ * Request parameters for getProviders operation in ProvidersApi.
+ * @export
+ * @interface ProvidersApiGetProvidersRequest
+ */
+export interface ProvidersApiGetProvidersRequest {
+    /**
+     * The number of items to skip before returning results (zero-based offset). Defaults to 0.
+     * @type {number}
+     * @memberof ProvidersApiGetProviders
+     */
+    readonly startIndex?: number
+
+    /**
+     * The maximum number of items to return per page. Defaults to 100.
+     * @type {number}
+     * @memberof ProvidersApiGetProviders
+     */
+    readonly count?: number
+}
+
+/**
+ * Request parameters for setDefaultProvider operation in ProvidersApi.
+ * @export
+ * @interface ProvidersApiSetDefaultProviderRequest
+ */
+export interface ProvidersApiSetDefaultProviderRequest {
+    /**
+     * 
+     * @type {SetDefaultProviderRequestDto}
+     * @memberof ProvidersApiSetDefaultProvider
+     */
+    readonly setDefaultProviderRequestDto?: SetDefaultProviderRequestDto
+}
+
+/**
+ * Request parameters for updateProvider operation in ProvidersApi.
+ * @export
+ * @interface ProvidersApiUpdateProviderRequest
+ */
+export interface ProvidersApiUpdateProviderRequest {
+    /**
+     * The identifier of the AI provider to update.
+     * @type {number}
+     * @memberof ProvidersApiUpdateProvider
+     */
+    readonly id: number
+
+    /**
+     * The AI provider configuration parameters to update.
+     * @type {UpdateProviderBody}
+     * @memberof ProvidersApiUpdateProvider
+     */
+    readonly updateProviderBody: UpdateProviderBody
+}
 
 /**
  * ProvidersApi - object-oriented interface
@@ -671,25 +753,25 @@ export class ProvidersApi extends BaseAPI {
     /**
      * Registers a new AI provider for the current tenant by specifying its type, display title, API endpoint URL, and authentication key.  The provider becomes available for AI chat conversations after creation. This action is rate-limited.
      * @summary Add an AI provider
-     * @param {CreateProviderRequestDto} [createProviderRequestDto] 
+     * @param {AIProvidersApiAddProviderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProvidersApi
      */
-    public addProvider(createProviderRequestDto?: CreateProviderRequestDto, options?: RawAxiosRequestConfig) {
-        return ProvidersApiFp(this.configuration).addProvider(createProviderRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public addProvider(requestParameters: ProvidersApiAddProviderRequest = {}, options?: RawAxiosRequestConfig) {
+        return ProvidersApiFp(this.configuration).addProvider(requestParameters.createProviderRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Permanently deletes one or more AI providers by their identifiers.  All specified providers are removed from the current tenant. This action cannot be undone.
      * @summary Delete AI providers
-     * @param {RemoveProviderRequestDto} [removeProviderRequestDto] 
+     * @param {AIProvidersApiDeleteProvidersRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProvidersApi
      */
-    public deleteProviders(removeProviderRequestDto?: RemoveProviderRequestDto, options?: RawAxiosRequestConfig) {
-        return ProvidersApiFp(this.configuration).deleteProviders(removeProviderRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public deleteProviders(requestParameters: ProvidersApiDeleteProvidersRequest = {}, options?: RawAxiosRequestConfig) {
+        return ProvidersApiFp(this.configuration).deleteProviders(requestParameters.removeProviderRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -717,39 +799,37 @@ export class ProvidersApi extends BaseAPI {
     /**
      * Returns a paginated list of AI providers configured for the current tenant.  Supports pagination via the startIndex and count query parameters. The total number of providers is included in the response metadata.
      * @summary Get AI providers
-     * @param {number} [startIndex] The number of items to skip before returning results (zero-based offset). Defaults to 0.
-     * @param {number} [count] The maximum number of items to return per page. Defaults to 100.
+     * @param {AIProvidersApiGetProvidersRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProvidersApi
      */
-    public getProviders(startIndex?: number, count?: number, options?: RawAxiosRequestConfig) {
-        return ProvidersApiFp(this.configuration).getProviders(startIndex, count, options).then((request) => request(this.axios, this.basePath));
+    public getProviders(requestParameters: ProvidersApiGetProvidersRequest = {}, options?: RawAxiosRequestConfig) {
+        return ProvidersApiFp(this.configuration).getProviders(requestParameters.startIndex, requestParameters.count, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Sets the default AI provider and model for the current tenant.  The specified provider and model will be used as the default for all new AI chat sessions within the tenant.
      * @summary Set the default AI provider
-     * @param {SetDefaultProviderRequestDto} [setDefaultProviderRequestDto] 
+     * @param {AIProvidersApiSetDefaultProviderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProvidersApi
      */
-    public setDefaultProvider(setDefaultProviderRequestDto?: SetDefaultProviderRequestDto, options?: RawAxiosRequestConfig) {
-        return ProvidersApiFp(this.configuration).setDefaultProvider(setDefaultProviderRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public setDefaultProvider(requestParameters: ProvidersApiSetDefaultProviderRequest = {}, options?: RawAxiosRequestConfig) {
+        return ProvidersApiFp(this.configuration).setDefaultProvider(requestParameters.setDefaultProviderRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Updates the configuration of an existing AI provider, including its display title, API endpoint URL, and authentication key.  Only the fields provided in the request body will be updated. This action is rate-limited.
      * @summary Update an AI provider
-     * @param {number} id The identifier of the AI provider to update.
-     * @param {UpdateProviderBody} updateProviderBody The AI provider configuration parameters to update.
+     * @param {AIProvidersApiUpdateProviderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProvidersApi
      */
-    public updateProvider(id: number, updateProviderBody: UpdateProviderBody, options?: RawAxiosRequestConfig) {
-        return ProvidersApiFp(this.configuration).updateProvider(id, updateProviderBody, options).then((request) => request(this.axios, this.basePath));
+    public updateProvider(requestParameters: ProvidersApiUpdateProviderRequest, options?: RawAxiosRequestConfig) {
+        return ProvidersApiFp(this.configuration).updateProvider(requestParameters.id, requestParameters.updateProviderBody, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

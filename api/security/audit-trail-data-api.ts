@@ -592,23 +592,14 @@ export const AuditTrailDataApiFactory = function (configuration?: Configuration,
         /**
          * Returns a list of the audit events by the parameters specified in the request.
          * @summary Get filtered audit trail data
-         * @param {string} [userId] The ID of the user who triggered the audit event.
-         * @param {LocationType} [moduleType] The location where the audit event occurred.
-         * @param {ActionType} [actionType] The type of action performed in the audit event (e.g., Create, Update, Delete).
-         * @param {MessageAction} [action] The specific action that occurred within the audit event.
-         * @param {EntryType} [entryType] The type of audit entry (e.g., Folder, User, File).
-         * @param {string} [target] The target object affected by the audit event (e.g., document ID, user account).
-         * @param {ApiDateTime} [from] The starting date and time for filtering audit events.
-         * @param {ApiDateTime} [to] The ending date and time for filtering audit events.
-         * @param {number} [count] The maximum number of audit event records to retrieve.
-         * @param {number} [startIndex] The index of the first audit event record to retrieve in a paged query.
+         * @param {AuditTrailDataApiGetAuditEventsByFilterRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getAuditEventsByFilter operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-events-by-filter/
          * @throws {RequiredError}
          */
-        getAuditEventsByFilter(userId?: string, moduleType?: LocationType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): AxiosPromise<AuditEventArrayWrapper> {
-            return localVarFp.getAuditEventsByFilter(userId, moduleType, actionType, action, entryType, target, from, to, count, startIndex, options).then((request) => request(axios, basePath));
+        getAuditEventsByFilter(requestParameters: AuditTrailDataApiGetAuditEventsByFilterRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<AuditEventArrayWrapper> {
+            return localVarFp.getAuditEventsByFilter(requestParameters.userId, requestParameters.moduleType, requestParameters.actionType, requestParameters.action, requestParameters.entryType, requestParameters.target, requestParameters.from, requestParameters.to, requestParameters.count, requestParameters.startIndex, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the audit trail settings.
@@ -624,15 +615,14 @@ export const AuditTrailDataApiFactory = function (configuration?: Configuration,
         /**
          * Returns the mappers for the audit trail types.
          * @summary Get audit trail mappers
-         * @param {ProductType} [productType] The type of product related to the audit trail.
-         * @param {LocationType} [moduleType] The location associated with the audit trail.
+         * @param {AuditTrailDataApiGetAuditTrailMappersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getAuditTrailMappers operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-trail-mappers/
          * @throws {RequiredError}
          */
-        getAuditTrailMappers(productType?: ProductType, moduleType?: LocationType, options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
-            return localVarFp.getAuditTrailMappers(productType, moduleType, options).then((request) => request(axios, basePath));
+        getAuditTrailMappers(requestParameters: AuditTrailDataApiGetAuditTrailMappersRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
+            return localVarFp.getAuditTrailMappers(requestParameters.productType, requestParameters.moduleType, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns all the available audit trail types.
@@ -659,17 +649,129 @@ export const AuditTrailDataApiFactory = function (configuration?: Configuration,
         /**
          * Sets the audit trail settings for the current portal.
          * @summary Set the audit trail settings
-         * @param {TenantAuditSettingsWrapper} [tenantAuditSettingsWrapper] 
+         * @param {AuditTrailDataApiSetAuditSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setAuditSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-audit-settings/
          * @throws {RequiredError}
          */
-        setAuditSettings(tenantAuditSettingsWrapper?: TenantAuditSettingsWrapper, options?: RawAxiosRequestConfig): AxiosPromise<TenantAuditSettingsWrapper> {
-            return localVarFp.setAuditSettings(tenantAuditSettingsWrapper, options).then((request) => request(axios, basePath));
+        setAuditSettings(requestParameters: AuditTrailDataApiSetAuditSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantAuditSettingsWrapper> {
+            return localVarFp.setAuditSettings(requestParameters.tenantAuditSettingsWrapper, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for getAuditEventsByFilter operation in AuditTrailDataApi.
+ * @export
+ * @interface AuditTrailDataApiGetAuditEventsByFilterRequest
+ */
+export interface AuditTrailDataApiGetAuditEventsByFilterRequest {
+    /**
+     * The ID of the user who triggered the audit event.
+     * @type {string}
+     * @memberof AuditTrailDataApiGetAuditEventsByFilter
+     */
+    readonly userId?: string
+
+    /**
+     * The location where the audit event occurred.
+     * @type {LocationType}
+     * @memberof AuditTrailDataApiGetAuditEventsByFilter
+     */
+    readonly moduleType?: LocationType
+
+    /**
+     * The type of action performed in the audit event (e.g., Create, Update, Delete).
+     * @type {ActionType}
+     * @memberof AuditTrailDataApiGetAuditEventsByFilter
+     */
+    readonly actionType?: ActionType
+
+    /**
+     * The specific action that occurred within the audit event.
+     * @type {MessageAction}
+     * @memberof AuditTrailDataApiGetAuditEventsByFilter
+     */
+    readonly action?: MessageAction
+
+    /**
+     * The type of audit entry (e.g., Folder, User, File).
+     * @type {EntryType}
+     * @memberof AuditTrailDataApiGetAuditEventsByFilter
+     */
+    readonly entryType?: EntryType
+
+    /**
+     * The target object affected by the audit event (e.g., document ID, user account).
+     * @type {string}
+     * @memberof AuditTrailDataApiGetAuditEventsByFilter
+     */
+    readonly target?: string
+
+    /**
+     * The starting date and time for filtering audit events.
+     * @type {ApiDateTime}
+     * @memberof AuditTrailDataApiGetAuditEventsByFilter
+     */
+    readonly from?: ApiDateTime
+
+    /**
+     * The ending date and time for filtering audit events.
+     * @type {ApiDateTime}
+     * @memberof AuditTrailDataApiGetAuditEventsByFilter
+     */
+    readonly to?: ApiDateTime
+
+    /**
+     * The maximum number of audit event records to retrieve.
+     * @type {number}
+     * @memberof AuditTrailDataApiGetAuditEventsByFilter
+     */
+    readonly count?: number
+
+    /**
+     * The index of the first audit event record to retrieve in a paged query.
+     * @type {number}
+     * @memberof AuditTrailDataApiGetAuditEventsByFilter
+     */
+    readonly startIndex?: number
+}
+
+/**
+ * Request parameters for getAuditTrailMappers operation in AuditTrailDataApi.
+ * @export
+ * @interface AuditTrailDataApiGetAuditTrailMappersRequest
+ */
+export interface AuditTrailDataApiGetAuditTrailMappersRequest {
+    /**
+     * The type of product related to the audit trail.
+     * @type {ProductType}
+     * @memberof AuditTrailDataApiGetAuditTrailMappers
+     */
+    readonly productType?: ProductType
+
+    /**
+     * The location associated with the audit trail.
+     * @type {LocationType}
+     * @memberof AuditTrailDataApiGetAuditTrailMappers
+     */
+    readonly moduleType?: LocationType
+}
+
+/**
+ * Request parameters for setAuditSettings operation in AuditTrailDataApi.
+ * @export
+ * @interface AuditTrailDataApiSetAuditSettingsRequest
+ */
+export interface AuditTrailDataApiSetAuditSettingsRequest {
+    /**
+     * 
+     * @type {TenantAuditSettingsWrapper}
+     * @memberof AuditTrailDataApiSetAuditSettings
+     */
+    readonly tenantAuditSettingsWrapper?: TenantAuditSettingsWrapper
+}
 
 /**
  * AuditTrailDataApi - object-oriented interface
@@ -692,22 +794,13 @@ export class AuditTrailDataApi extends BaseAPI {
     /**
      * Returns a list of the audit events by the parameters specified in the request.
      * @summary Get filtered audit trail data
-     * @param {string} [userId] The ID of the user who triggered the audit event.
-     * @param {LocationType} [moduleType] The location where the audit event occurred.
-     * @param {ActionType} [actionType] The type of action performed in the audit event (e.g., Create, Update, Delete).
-     * @param {MessageAction} [action] The specific action that occurred within the audit event.
-     * @param {EntryType} [entryType] The type of audit entry (e.g., Folder, User, File).
-     * @param {string} [target] The target object affected by the audit event (e.g., document ID, user account).
-     * @param {ApiDateTime} [from] The starting date and time for filtering audit events.
-     * @param {ApiDateTime} [to] The ending date and time for filtering audit events.
-     * @param {number} [count] The maximum number of audit event records to retrieve.
-     * @param {number} [startIndex] The index of the first audit event record to retrieve in a paged query.
+     * @param {SecurityAuditTrailDataApiGetAuditEventsByFilterRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuditTrailDataApi
      */
-    public getAuditEventsByFilter(userId?: string, moduleType?: LocationType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, options?: RawAxiosRequestConfig) {
-        return AuditTrailDataApiFp(this.configuration).getAuditEventsByFilter(userId, moduleType, actionType, action, entryType, target, from, to, count, startIndex, options).then((request) => request(this.axios, this.basePath));
+    public getAuditEventsByFilter(requestParameters: AuditTrailDataApiGetAuditEventsByFilterRequest = {}, options?: RawAxiosRequestConfig) {
+        return AuditTrailDataApiFp(this.configuration).getAuditEventsByFilter(requestParameters.userId, requestParameters.moduleType, requestParameters.actionType, requestParameters.action, requestParameters.entryType, requestParameters.target, requestParameters.from, requestParameters.to, requestParameters.count, requestParameters.startIndex, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -724,14 +817,13 @@ export class AuditTrailDataApi extends BaseAPI {
     /**
      * Returns the mappers for the audit trail types.
      * @summary Get audit trail mappers
-     * @param {ProductType} [productType] The type of product related to the audit trail.
-     * @param {LocationType} [moduleType] The location associated with the audit trail.
+     * @param {SecurityAuditTrailDataApiGetAuditTrailMappersRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuditTrailDataApi
      */
-    public getAuditTrailMappers(productType?: ProductType, moduleType?: LocationType, options?: RawAxiosRequestConfig) {
-        return AuditTrailDataApiFp(this.configuration).getAuditTrailMappers(productType, moduleType, options).then((request) => request(this.axios, this.basePath));
+    public getAuditTrailMappers(requestParameters: AuditTrailDataApiGetAuditTrailMappersRequest = {}, options?: RawAxiosRequestConfig) {
+        return AuditTrailDataApiFp(this.configuration).getAuditTrailMappers(requestParameters.productType, requestParameters.moduleType, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -759,13 +851,13 @@ export class AuditTrailDataApi extends BaseAPI {
     /**
      * Sets the audit trail settings for the current portal.
      * @summary Set the audit trail settings
-     * @param {TenantAuditSettingsWrapper} [tenantAuditSettingsWrapper] 
+     * @param {SecurityAuditTrailDataApiSetAuditSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuditTrailDataApi
      */
-    public setAuditSettings(tenantAuditSettingsWrapper?: TenantAuditSettingsWrapper, options?: RawAxiosRequestConfig) {
-        return AuditTrailDataApiFp(this.configuration).setAuditSettings(tenantAuditSettingsWrapper, options).then((request) => request(this.axios, this.basePath));
+    public setAuditSettings(requestParameters: AuditTrailDataApiSetAuditSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return AuditTrailDataApiFp(this.configuration).setAuditSettings(requestParameters.tenantAuditSettingsWrapper, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

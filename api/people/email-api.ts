@@ -211,30 +211,64 @@ export const EmailApiFactory = function (configuration?: Configuration, basePath
         /**
          * Sets a new email to the user with the ID specified in the request.
          * @summary Change a user email
-         * @param {string} userid The user ID.
-         * @param {ChangeEmailRequest} changeEmailRequest The request parameters for updating a user email.
+         * @param {EmailApiChangeUserEmailRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for changeUserEmail operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-user-email/
          * @throws {RequiredError}
          */
-        changeUserEmail(userid: string, changeEmailRequest: ChangeEmailRequest, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
-            return localVarFp.changeUserEmail(userid, changeEmailRequest, options).then((request) => request(axios, basePath));
+        changeUserEmail(requestParameters: EmailApiChangeUserEmailRequest, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
+            return localVarFp.changeUserEmail(requestParameters.userid, requestParameters.changeEmailRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Sends a message to the user email with the instructions to change the email address connected to the portal.
          * @summary Send instructions to change email
-         * @param {UpdateMemberRequestDto} [updateMemberRequestDto] 
+         * @param {EmailApiSendEmailChangeInstructionsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for sendEmailChangeInstructions operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-email-change-instructions/
          * @throws {RequiredError}
          */
-        sendEmailChangeInstructions(updateMemberRequestDto?: UpdateMemberRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.sendEmailChangeInstructions(updateMemberRequestDto, options).then((request) => request(axios, basePath));
+        sendEmailChangeInstructions(requestParameters: EmailApiSendEmailChangeInstructionsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.sendEmailChangeInstructions(requestParameters.updateMemberRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for changeUserEmail operation in EmailApi.
+ * @export
+ * @interface EmailApiChangeUserEmailRequest
+ */
+export interface EmailApiChangeUserEmailRequest {
+    /**
+     * The user ID.
+     * @type {string}
+     * @memberof EmailApiChangeUserEmail
+     */
+    readonly userid: string
+
+    /**
+     * The request parameters for updating a user email.
+     * @type {ChangeEmailRequest}
+     * @memberof EmailApiChangeUserEmail
+     */
+    readonly changeEmailRequest: ChangeEmailRequest
+}
+
+/**
+ * Request parameters for sendEmailChangeInstructions operation in EmailApi.
+ * @export
+ * @interface EmailApiSendEmailChangeInstructionsRequest
+ */
+export interface EmailApiSendEmailChangeInstructionsRequest {
+    /**
+     * 
+     * @type {UpdateMemberRequestDto}
+     * @memberof EmailApiSendEmailChangeInstructions
+     */
+    readonly updateMemberRequestDto?: UpdateMemberRequestDto
+}
 
 /**
  * EmailApi - object-oriented interface
@@ -246,26 +280,25 @@ export class EmailApi extends BaseAPI {
     /**
      * Sets a new email to the user with the ID specified in the request.
      * @summary Change a user email
-     * @param {string} userid The user ID.
-     * @param {ChangeEmailRequest} changeEmailRequest The request parameters for updating a user email.
+     * @param {PeopleEmailApiChangeUserEmailRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof EmailApi
      */
-    public changeUserEmail(userid: string, changeEmailRequest: ChangeEmailRequest, options?: RawAxiosRequestConfig) {
-        return EmailApiFp(this.configuration).changeUserEmail(userid, changeEmailRequest, options).then((request) => request(this.axios, this.basePath));
+    public changeUserEmail(requestParameters: EmailApiChangeUserEmailRequest, options?: RawAxiosRequestConfig) {
+        return EmailApiFp(this.configuration).changeUserEmail(requestParameters.userid, requestParameters.changeEmailRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Sends a message to the user email with the instructions to change the email address connected to the portal.
      * @summary Send instructions to change email
-     * @param {UpdateMemberRequestDto} [updateMemberRequestDto] 
+     * @param {PeopleEmailApiSendEmailChangeInstructionsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof EmailApi
      */
-    public sendEmailChangeInstructions(updateMemberRequestDto?: UpdateMemberRequestDto, options?: RawAxiosRequestConfig) {
-        return EmailApiFp(this.configuration).sendEmailChangeInstructions(updateMemberRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public sendEmailChangeInstructions(requestParameters: EmailApiSendEmailChangeInstructionsRequest = {}, options?: RawAxiosRequestConfig) {
+        return EmailApiFp(this.configuration).sendEmailChangeInstructions(requestParameters.updateMemberRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

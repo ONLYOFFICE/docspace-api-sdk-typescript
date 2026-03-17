@@ -21,6 +21,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**deleteFile**](#deletefile) | **DELETE** /api/2.0/files/file/{fileId} | Delete a file|
 |[**deleteRecent**](#deleterecent) | **DELETE** /api/2.0/files/recent | Delete recent files|
 |[**deleteTemplates**](#deletetemplates) | **DELETE** /api/2.0/files/templates | Delete template files|
+|[**generateXlsx**](#generatexlsx) | **POST** /api/2.0/files/file/{fileId}/xlsx | Generate XLSX report|
 |[**getAllFormRoles**](#getallformroles) | **GET** /api/2.0/files/file/{fileId}/formroles | Get form roles|
 |[**getEditDiffUrl**](#geteditdiffurl) | **GET** /api/2.0/files/file/{fileId}/edit/diff | Get changes URL|
 |[**getEditHistory**](#getedithistory) | **GET** /api/2.0/files/file/{fileId}/edit/history | Get version history|
@@ -865,6 +866,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 |------------- | ------------- | ------------- | -------------|
 | **_delete** | **Delete**| The parameters for deleting a file. | |
 | **fileId** | [**number**] | The file ID to delete. | defaults to undefined|
+| **returnSingleOperation** | [**boolean**] | Specifies whether to return only the current operation | (optional) defaults to undefined|
 
 
 ### Return type
@@ -889,10 +891,12 @@ const apiInstance = new FilesFilesApi(configuration);
 
 let fileId: number; //The file ID to delete. (default to undefined)
 let _delete: Delete; //The parameters for deleting a file.
+let returnSingleOperation: boolean; //Specifies whether to return only the current operation (optional) (default to undefined)
 
 const { status, data } = await apiInstance.deleteFile(
     fileId,
-    _delete
+    _delete,
+    returnSingleOperation
 );
 ```
 
@@ -1015,6 +1019,62 @@ const { status, data } = await apiInstance.deleteTemplates(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Boolean value: true if the operation is successful |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **generateXlsx**
+> generateXlsx()
+
+Triggers asynchronous XLSX report generation for the specified form file.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/generate-xlsx/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **fileId** | [**number**] | The file unique identifier. | defaults to undefined|
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    FilesFilesApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new FilesFilesApi(configuration);
+
+let fileId: number; //The file unique identifier. (default to undefined)
+
+const { status, data } = await apiInstance.generateXlsx(
+    fileId
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | XLSX report generation has been queued |  -  |
+|**403** | You do not have enough permissions to perform this action |  -  |
+|**404** | Form file not found |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1536,7 +1596,7 @@ const { status, data } = await apiInstance.getFillResult(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getFormSubmissions**
-> FormResultsArrayWrapper getFormSubmissions()
+> FormSubmissionsWrapper getFormSubmissions()
 
 Returns the results of form submissions.
 
@@ -1551,7 +1611,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-**FormResultsArrayWrapper**
+**FormSubmissionsWrapper**
 
 ### Authorization
 

@@ -129,17 +129,31 @@ export const VectorizationApiFactory = function (configuration?: Configuration, 
         /**
          * Submits the specified files for vectorization. Each file is processed asynchronously by the configured embedding provider  and indexed for semantic search in AI chat sessions. Only files accessible to the current user can be vectorized.
          * @summary Start a vectorization task
-         * @param {VectorizationStartRequestBody} vectorizationStartRequestBody The vectorization parameters including file identifiers.
+         * @param {VectorizationApiStartTaskRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for startTask operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-task/
          * @throws {RequiredError}
          */
-        startTask(vectorizationStartRequestBody: VectorizationStartRequestBody, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.startTask(vectorizationStartRequestBody, options).then((request) => request(axios, basePath));
+        startTask(requestParameters: VectorizationApiStartTaskRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.startTask(requestParameters.vectorizationStartRequestBody, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for startTask operation in VectorizationApi.
+ * @export
+ * @interface VectorizationApiStartTaskRequest
+ */
+export interface VectorizationApiStartTaskRequest {
+    /**
+     * The vectorization parameters including file identifiers.
+     * @type {VectorizationStartRequestBody}
+     * @memberof VectorizationApiStartTask
+     */
+    readonly vectorizationStartRequestBody: VectorizationStartRequestBody
+}
 
 /**
  * VectorizationApi - object-oriented interface
@@ -151,13 +165,13 @@ export class VectorizationApi extends BaseAPI {
     /**
      * Submits the specified files for vectorization. Each file is processed asynchronously by the configured embedding provider  and indexed for semantic search in AI chat sessions. Only files accessible to the current user can be vectorized.
      * @summary Start a vectorization task
-     * @param {VectorizationStartRequestBody} vectorizationStartRequestBody The vectorization parameters including file identifiers.
+     * @param {AIVectorizationApiStartTaskRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof VectorizationApi
      */
-    public startTask(vectorizationStartRequestBody: VectorizationStartRequestBody, options?: RawAxiosRequestConfig) {
-        return VectorizationApiFp(this.configuration).startTask(vectorizationStartRequestBody, options).then((request) => request(this.axios, this.basePath));
+    public startTask(requestParameters: VectorizationApiStartTaskRequest, options?: RawAxiosRequestConfig) {
+        return VectorizationApiFp(this.configuration).startTask(requestParameters.vectorizationStartRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

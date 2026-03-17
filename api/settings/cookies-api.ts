@@ -208,17 +208,31 @@ export const CookiesApiFactory = function (configuration?: Configuration, basePa
         /**
          * Updates the cookies lifetime value in minutes.
          * @summary Update cookies lifetime
-         * @param {CookieSettingsRequestsDto} [cookieSettingsRequestsDto] 
+         * @param {CookiesApiUpdateCookieSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateCookieSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-cookie-settings/
          * @throws {RequiredError}
          */
-        updateCookieSettings(cookieSettingsRequestsDto?: CookieSettingsRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.updateCookieSettings(cookieSettingsRequestsDto, options).then((request) => request(axios, basePath));
+        updateCookieSettings(requestParameters: CookiesApiUpdateCookieSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.updateCookieSettings(requestParameters.cookieSettingsRequestsDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for updateCookieSettings operation in CookiesApi.
+ * @export
+ * @interface CookiesApiUpdateCookieSettingsRequest
+ */
+export interface CookiesApiUpdateCookieSettingsRequest {
+    /**
+     * 
+     * @type {CookieSettingsRequestsDto}
+     * @memberof CookiesApiUpdateCookieSettings
+     */
+    readonly cookieSettingsRequestsDto?: CookieSettingsRequestsDto
+}
 
 /**
  * CookiesApi - object-oriented interface
@@ -241,13 +255,13 @@ export class CookiesApi extends BaseAPI {
     /**
      * Updates the cookies lifetime value in minutes.
      * @summary Update cookies lifetime
-     * @param {CookieSettingsRequestsDto} [cookieSettingsRequestsDto] 
+     * @param {SettingsCookiesApiUpdateCookieSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CookiesApi
      */
-    public updateCookieSettings(cookieSettingsRequestsDto?: CookieSettingsRequestsDto, options?: RawAxiosRequestConfig) {
-        return CookiesApiFp(this.configuration).updateCookieSettings(cookieSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public updateCookieSettings(requestParameters: CookiesApiUpdateCookieSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return CookiesApiFp(this.configuration).updateCookieSettings(requestParameters.cookieSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -328,56 +328,130 @@ export const ThirdPartyAccountsApiFactory = function (configuration?: Configurat
         /**
          * Returns a list of the available third-party accounts.
          * @summary Get third-party accounts
-         * @param {boolean} [inviteView] Specifies whether to return providers that are available for invitation links, i.e. the user can login or register through these providers.
-         * @param {boolean} [settingsView] Specifies whether to display the provider settings in a pop-up window (true) or redirect them to the desktop application (false).
-         * @param {string} [clientCallback] The method that is called after authentication.
-         * @param {string} [fromOnly] The provider name if a response is required only from this provider.
+         * @param {ThirdPartyAccountsApiGetThirdPartyAuthProvidersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getThirdPartyAuthProviders operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-third-party-auth-providers/
          * @throws {RequiredError}
          */
-        getThirdPartyAuthProviders(inviteView?: boolean, settingsView?: boolean, clientCallback?: string, fromOnly?: string, options?: RawAxiosRequestConfig): AxiosPromise<AccountInfoArrayWrapper> {
-            return localVarFp.getThirdPartyAuthProviders(inviteView, settingsView, clientCallback, fromOnly, options).then((request) => request(axios, basePath));
+        getThirdPartyAuthProviders(requestParameters: ThirdPartyAccountsApiGetThirdPartyAuthProvidersRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<AccountInfoArrayWrapper> {
+            return localVarFp.getThirdPartyAuthProviders(requestParameters.inviteView, requestParameters.settingsView, requestParameters.clientCallback, requestParameters.fromOnly, options).then((request) => request(axios, basePath));
         },
         /**
          * Links a third-party account specified in the request to the user profile.
          * @summary Link a third-pary account
-         * @param {LinkAccountRequestDto} [linkAccountRequestDto] 
+         * @param {ThirdPartyAccountsApiLinkThirdPartyAccountRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for linkThirdPartyAccount operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/link-third-party-account/
          * @throws {RequiredError}
          */
-        linkThirdPartyAccount(linkAccountRequestDto?: LinkAccountRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.linkThirdPartyAccount(linkAccountRequestDto, options).then((request) => request(axios, basePath));
+        linkThirdPartyAccount(requestParameters: ThirdPartyAccountsApiLinkThirdPartyAccountRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.linkThirdPartyAccount(requestParameters.linkAccountRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Creates a third-party account with the parameters specified in the request.
          * @summary Create a third-pary account
-         * @param {SignupAccountRequestDto} [signupAccountRequestDto] 
+         * @param {ThirdPartyAccountsApiSignupThirdPartyAccountRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for signupThirdPartyAccount operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/signup-third-party-account/
          * @throws {RequiredError}
          */
-        signupThirdPartyAccount(signupAccountRequestDto?: SignupAccountRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeWrapper> {
-            return localVarFp.signupThirdPartyAccount(signupAccountRequestDto, options).then((request) => request(axios, basePath));
+        signupThirdPartyAccount(requestParameters: ThirdPartyAccountsApiSignupThirdPartyAccountRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeWrapper> {
+            return localVarFp.signupThirdPartyAccount(requestParameters.signupAccountRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Unlinks a third-party account specified in the request from the user profile.
          * @summary Unlink a third-pary account
-         * @param {string} [provider] The provider name.
+         * @param {ThirdPartyAccountsApiUnlinkThirdPartyAccountRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for unlinkThirdPartyAccount operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/unlink-third-party-account/
          * @throws {RequiredError}
          */
-        unlinkThirdPartyAccount(provider?: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.unlinkThirdPartyAccount(provider, options).then((request) => request(axios, basePath));
+        unlinkThirdPartyAccount(requestParameters: ThirdPartyAccountsApiUnlinkThirdPartyAccountRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.unlinkThirdPartyAccount(requestParameters.provider, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for getThirdPartyAuthProviders operation in ThirdPartyAccountsApi.
+ * @export
+ * @interface ThirdPartyAccountsApiGetThirdPartyAuthProvidersRequest
+ */
+export interface ThirdPartyAccountsApiGetThirdPartyAuthProvidersRequest {
+    /**
+     * Specifies whether to return providers that are available for invitation links, i.e. the user can login or register through these providers.
+     * @type {boolean}
+     * @memberof ThirdPartyAccountsApiGetThirdPartyAuthProviders
+     */
+    readonly inviteView?: boolean
+
+    /**
+     * Specifies whether to display the provider settings in a pop-up window (true) or redirect them to the desktop application (false).
+     * @type {boolean}
+     * @memberof ThirdPartyAccountsApiGetThirdPartyAuthProviders
+     */
+    readonly settingsView?: boolean
+
+    /**
+     * The method that is called after authentication.
+     * @type {string}
+     * @memberof ThirdPartyAccountsApiGetThirdPartyAuthProviders
+     */
+    readonly clientCallback?: string
+
+    /**
+     * The provider name if a response is required only from this provider.
+     * @type {string}
+     * @memberof ThirdPartyAccountsApiGetThirdPartyAuthProviders
+     */
+    readonly fromOnly?: string
+}
+
+/**
+ * Request parameters for linkThirdPartyAccount operation in ThirdPartyAccountsApi.
+ * @export
+ * @interface ThirdPartyAccountsApiLinkThirdPartyAccountRequest
+ */
+export interface ThirdPartyAccountsApiLinkThirdPartyAccountRequest {
+    /**
+     * 
+     * @type {LinkAccountRequestDto}
+     * @memberof ThirdPartyAccountsApiLinkThirdPartyAccount
+     */
+    readonly linkAccountRequestDto?: LinkAccountRequestDto
+}
+
+/**
+ * Request parameters for signupThirdPartyAccount operation in ThirdPartyAccountsApi.
+ * @export
+ * @interface ThirdPartyAccountsApiSignupThirdPartyAccountRequest
+ */
+export interface ThirdPartyAccountsApiSignupThirdPartyAccountRequest {
+    /**
+     * 
+     * @type {SignupAccountRequestDto}
+     * @memberof ThirdPartyAccountsApiSignupThirdPartyAccount
+     */
+    readonly signupAccountRequestDto?: SignupAccountRequestDto
+}
+
+/**
+ * Request parameters for unlinkThirdPartyAccount operation in ThirdPartyAccountsApi.
+ * @export
+ * @interface ThirdPartyAccountsApiUnlinkThirdPartyAccountRequest
+ */
+export interface ThirdPartyAccountsApiUnlinkThirdPartyAccountRequest {
+    /**
+     * The provider name.
+     * @type {string}
+     * @memberof ThirdPartyAccountsApiUnlinkThirdPartyAccount
+     */
+    readonly provider?: string
+}
 
 /**
  * ThirdPartyAccountsApi - object-oriented interface
@@ -389,52 +463,49 @@ export class ThirdPartyAccountsApi extends BaseAPI {
     /**
      * Returns a list of the available third-party accounts.
      * @summary Get third-party accounts
-     * @param {boolean} [inviteView] Specifies whether to return providers that are available for invitation links, i.e. the user can login or register through these providers.
-     * @param {boolean} [settingsView] Specifies whether to display the provider settings in a pop-up window (true) or redirect them to the desktop application (false).
-     * @param {string} [clientCallback] The method that is called after authentication.
-     * @param {string} [fromOnly] The provider name if a response is required only from this provider.
+     * @param {PeopleThirdPartyAccountsApiGetThirdPartyAuthProvidersRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ThirdPartyAccountsApi
      */
-    public getThirdPartyAuthProviders(inviteView?: boolean, settingsView?: boolean, clientCallback?: string, fromOnly?: string, options?: RawAxiosRequestConfig) {
-        return ThirdPartyAccountsApiFp(this.configuration).getThirdPartyAuthProviders(inviteView, settingsView, clientCallback, fromOnly, options).then((request) => request(this.axios, this.basePath));
+    public getThirdPartyAuthProviders(requestParameters: ThirdPartyAccountsApiGetThirdPartyAuthProvidersRequest = {}, options?: RawAxiosRequestConfig) {
+        return ThirdPartyAccountsApiFp(this.configuration).getThirdPartyAuthProviders(requestParameters.inviteView, requestParameters.settingsView, requestParameters.clientCallback, requestParameters.fromOnly, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Links a third-party account specified in the request to the user profile.
      * @summary Link a third-pary account
-     * @param {LinkAccountRequestDto} [linkAccountRequestDto] 
+     * @param {PeopleThirdPartyAccountsApiLinkThirdPartyAccountRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ThirdPartyAccountsApi
      */
-    public linkThirdPartyAccount(linkAccountRequestDto?: LinkAccountRequestDto, options?: RawAxiosRequestConfig) {
-        return ThirdPartyAccountsApiFp(this.configuration).linkThirdPartyAccount(linkAccountRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public linkThirdPartyAccount(requestParameters: ThirdPartyAccountsApiLinkThirdPartyAccountRequest = {}, options?: RawAxiosRequestConfig) {
+        return ThirdPartyAccountsApiFp(this.configuration).linkThirdPartyAccount(requestParameters.linkAccountRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Creates a third-party account with the parameters specified in the request.
      * @summary Create a third-pary account
-     * @param {SignupAccountRequestDto} [signupAccountRequestDto] 
+     * @param {PeopleThirdPartyAccountsApiSignupThirdPartyAccountRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ThirdPartyAccountsApi
      */
-    public signupThirdPartyAccount(signupAccountRequestDto?: SignupAccountRequestDto, options?: RawAxiosRequestConfig) {
-        return ThirdPartyAccountsApiFp(this.configuration).signupThirdPartyAccount(signupAccountRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public signupThirdPartyAccount(requestParameters: ThirdPartyAccountsApiSignupThirdPartyAccountRequest = {}, options?: RawAxiosRequestConfig) {
+        return ThirdPartyAccountsApiFp(this.configuration).signupThirdPartyAccount(requestParameters.signupAccountRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Unlinks a third-party account specified in the request from the user profile.
      * @summary Unlink a third-pary account
-     * @param {string} [provider] The provider name.
+     * @param {PeopleThirdPartyAccountsApiUnlinkThirdPartyAccountRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ThirdPartyAccountsApi
      */
-    public unlinkThirdPartyAccount(provider?: string, options?: RawAxiosRequestConfig) {
-        return ThirdPartyAccountsApiFp(this.configuration).unlinkThirdPartyAccount(provider, options).then((request) => request(this.axios, this.basePath));
+    public unlinkThirdPartyAccount(requestParameters: ThirdPartyAccountsApiUnlinkThirdPartyAccountRequest = {}, options?: RawAxiosRequestConfig) {
+        return ThirdPartyAccountsApiFp(this.configuration).unlinkThirdPartyAccount(requestParameters.provider, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

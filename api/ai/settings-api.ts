@@ -441,29 +441,57 @@ export const SettingsApiFactory = function (configuration?: Configuration, baseP
         /**
          * Configures the embedding provider used for document vectorization at the portal level.  Vectorization enables semantic search and knowledge retrieval capabilities in AI chat sessions.  Allows selecting the embedding provider type and providing the API key for the chosen provider.  Only portal administrators can modify these settings.
          * @summary Update vectorization settings
-         * @param {SetEmbeddingConfigRequestBody} setEmbeddingConfigRequestBody The embedding provider configuration parameters.
+         * @param {SettingsApiSetVectorizationSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setVectorizationSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-vectorization-settings/
          * @throws {RequiredError}
          */
-        setVectorizationSettings(setEmbeddingConfigRequestBody: SetEmbeddingConfigRequestBody, options?: RawAxiosRequestConfig): AxiosPromise<VectorizationSettingsWrapper> {
-            return localVarFp.setVectorizationSettings(setEmbeddingConfigRequestBody, options).then((request) => request(axios, basePath));
+        setVectorizationSettings(requestParameters: SettingsApiSetVectorizationSettingsRequest, options?: RawAxiosRequestConfig): AxiosPromise<VectorizationSettingsWrapper> {
+            return localVarFp.setVectorizationSettings(requestParameters.setEmbeddingConfigRequestBody, options).then((request) => request(axios, basePath));
         },
         /**
          * Configures the web search integration for AI chat sessions at the portal level.  Allows enabling or disabling web search, selecting the search engine type, and providing the API key for the chosen engine.  Only portal administrators can modify these settings.
          * @summary Update web search settings
-         * @param {SetWebSearchSettingsRequestBody} setWebSearchSettingsRequestBody The web search configuration parameters.
+         * @param {SettingsApiSetWebSearchSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setWebSearchSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-web-search-settings/
          * @throws {RequiredError}
          */
-        setWebSearchSettings(setWebSearchSettingsRequestBody: SetWebSearchSettingsRequestBody, options?: RawAxiosRequestConfig): AxiosPromise<WebSearchSettingsWrapper> {
-            return localVarFp.setWebSearchSettings(setWebSearchSettingsRequestBody, options).then((request) => request(axios, basePath));
+        setWebSearchSettings(requestParameters: SettingsApiSetWebSearchSettingsRequest, options?: RawAxiosRequestConfig): AxiosPromise<WebSearchSettingsWrapper> {
+            return localVarFp.setWebSearchSettings(requestParameters.setWebSearchSettingsRequestBody, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for setVectorizationSettings operation in SettingsApi.
+ * @export
+ * @interface SettingsApiSetVectorizationSettingsRequest
+ */
+export interface SettingsApiSetVectorizationSettingsRequest {
+    /**
+     * The embedding provider configuration parameters.
+     * @type {SetEmbeddingConfigRequestBody}
+     * @memberof SettingsApiSetVectorizationSettings
+     */
+    readonly setEmbeddingConfigRequestBody: SetEmbeddingConfigRequestBody
+}
+
+/**
+ * Request parameters for setWebSearchSettings operation in SettingsApi.
+ * @export
+ * @interface SettingsApiSetWebSearchSettingsRequest
+ */
+export interface SettingsApiSetWebSearchSettingsRequest {
+    /**
+     * The web search configuration parameters.
+     * @type {SetWebSearchSettingsRequestBody}
+     * @memberof SettingsApiSetWebSearchSettings
+     */
+    readonly setWebSearchSettingsRequestBody: SetWebSearchSettingsRequestBody
+}
 
 /**
  * SettingsApi - object-oriented interface
@@ -508,25 +536,25 @@ export class SettingsApi extends BaseAPI {
     /**
      * Configures the embedding provider used for document vectorization at the portal level.  Vectorization enables semantic search and knowledge retrieval capabilities in AI chat sessions.  Allows selecting the embedding provider type and providing the API key for the chosen provider.  Only portal administrators can modify these settings.
      * @summary Update vectorization settings
-     * @param {SetEmbeddingConfigRequestBody} setEmbeddingConfigRequestBody The embedding provider configuration parameters.
+     * @param {AISettingsApiSetVectorizationSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SettingsApi
      */
-    public setVectorizationSettings(setEmbeddingConfigRequestBody: SetEmbeddingConfigRequestBody, options?: RawAxiosRequestConfig) {
-        return SettingsApiFp(this.configuration).setVectorizationSettings(setEmbeddingConfigRequestBody, options).then((request) => request(this.axios, this.basePath));
+    public setVectorizationSettings(requestParameters: SettingsApiSetVectorizationSettingsRequest, options?: RawAxiosRequestConfig) {
+        return SettingsApiFp(this.configuration).setVectorizationSettings(requestParameters.setEmbeddingConfigRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Configures the web search integration for AI chat sessions at the portal level.  Allows enabling or disabling web search, selecting the search engine type, and providing the API key for the chosen engine.  Only portal administrators can modify these settings.
      * @summary Update web search settings
-     * @param {SetWebSearchSettingsRequestBody} setWebSearchSettingsRequestBody The web search configuration parameters.
+     * @param {AISettingsApiSetWebSearchSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SettingsApi
      */
-    public setWebSearchSettings(setWebSearchSettingsRequestBody: SetWebSearchSettingsRequestBody, options?: RawAxiosRequestConfig) {
-        return SettingsApiFp(this.configuration).setWebSearchSettings(setWebSearchSettingsRequestBody, options).then((request) => request(this.axios, this.basePath));
+    public setWebSearchSettings(requestParameters: SettingsApiSetWebSearchSettingsRequest, options?: RawAxiosRequestConfig) {
+        return SettingsApiFp(this.configuration).setWebSearchSettings(requestParameters.setWebSearchSettingsRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

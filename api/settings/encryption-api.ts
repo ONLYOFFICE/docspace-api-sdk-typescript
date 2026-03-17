@@ -287,17 +287,31 @@ export const EncryptionApiFactory = function (configuration?: Configuration, bas
         /**
          * Starts the storage encryption process.
          * @summary Start the storage encryption process
-         * @param {StorageEncryptionRequestsDto} [storageEncryptionRequestsDto] 
+         * @param {EncryptionApiStartStorageEncryptionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for startStorageEncryption operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-storage-encryption/
          * @throws {RequiredError}
          */
-        startStorageEncryption(storageEncryptionRequestsDto?: StorageEncryptionRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.startStorageEncryption(storageEncryptionRequestsDto, options).then((request) => request(axios, basePath));
+        startStorageEncryption(requestParameters: EncryptionApiStartStorageEncryptionRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.startStorageEncryption(requestParameters.storageEncryptionRequestsDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for startStorageEncryption operation in EncryptionApi.
+ * @export
+ * @interface EncryptionApiStartStorageEncryptionRequest
+ */
+export interface EncryptionApiStartStorageEncryptionRequest {
+    /**
+     * 
+     * @type {StorageEncryptionRequestsDto}
+     * @memberof EncryptionApiStartStorageEncryption
+     */
+    readonly storageEncryptionRequestsDto?: StorageEncryptionRequestsDto
+}
 
 /**
  * EncryptionApi - object-oriented interface
@@ -331,13 +345,13 @@ export class EncryptionApi extends BaseAPI {
     /**
      * Starts the storage encryption process.
      * @summary Start the storage encryption process
-     * @param {StorageEncryptionRequestsDto} [storageEncryptionRequestsDto] 
+     * @param {SettingsEncryptionApiStartStorageEncryptionRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof EncryptionApi
      */
-    public startStorageEncryption(storageEncryptionRequestsDto?: StorageEncryptionRequestsDto, options?: RawAxiosRequestConfig) {
-        return EncryptionApiFp(this.configuration).startStorageEncryption(storageEncryptionRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public startStorageEncryption(requestParameters: EncryptionApiStartStorageEncryptionRequest = {}, options?: RawAxiosRequestConfig) {
+        return EncryptionApiFp(this.configuration).startStorageEncryption(requestParameters.storageEncryptionRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

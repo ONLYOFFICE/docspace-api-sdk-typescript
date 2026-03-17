@@ -341,14 +341,14 @@ export const PortalQuotaApiFactory = function (configuration?: Configuration, ba
         /**
          * Returns the current portal tariff.
          * @summary Get a portal tariff
-         * @param {boolean} [refresh] The value indicating whether the current portal tariff information should be refreshed.
+         * @param {PortalQuotaApiGetPortalTariffRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getPortalTariff operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-tariff/
          * @throws {RequiredError}
          */
-        getPortalTariff(refresh?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<TariffWrapper> {
-            return localVarFp.getPortalTariff(refresh, options).then((request) => request(axios, basePath));
+        getPortalTariff(requestParameters: PortalQuotaApiGetPortalTariffRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TariffWrapper> {
+            return localVarFp.getPortalTariff(requestParameters.refresh, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the used space of the current portal.
@@ -376,6 +376,20 @@ export const PortalQuotaApiFactory = function (configuration?: Configuration, ba
 };
 
 /**
+ * Request parameters for getPortalTariff operation in PortalQuotaApi.
+ * @export
+ * @interface PortalQuotaApiGetPortalTariffRequest
+ */
+export interface PortalQuotaApiGetPortalTariffRequest {
+    /**
+     * The value indicating whether the current portal tariff information should be refreshed.
+     * @type {boolean}
+     * @memberof PortalQuotaApiGetPortalTariff
+     */
+    readonly refresh?: boolean
+}
+
+/**
  * PortalQuotaApi - object-oriented interface
  * @export
  * @class PortalQuotaApi
@@ -396,13 +410,13 @@ export class PortalQuotaApi extends BaseAPI {
     /**
      * Returns the current portal tariff.
      * @summary Get a portal tariff
-     * @param {boolean} [refresh] The value indicating whether the current portal tariff information should be refreshed.
+     * @param {PortalQuotaApiGetPortalTariffRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PortalQuotaApi
      */
-    public getPortalTariff(refresh?: boolean, options?: RawAxiosRequestConfig) {
-        return PortalQuotaApiFp(this.configuration).getPortalTariff(refresh, options).then((request) => request(this.axios, this.basePath));
+    public getPortalTariff(requestParameters: PortalQuotaApiGetPortalTariffRequest = {}, options?: RawAxiosRequestConfig) {
+        return PortalQuotaApiFp(this.configuration).getPortalTariff(requestParameters.refresh, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

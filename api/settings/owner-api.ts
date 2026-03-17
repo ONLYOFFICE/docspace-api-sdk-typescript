@@ -200,29 +200,57 @@ export const OwnerApiFactory = function (configuration?: Configuration, basePath
         /**
          * Sends the instructions to change the DocSpace owner.
          * @summary Send the owner change instructions
-         * @param {OwnerIdSettingsRequestDto} [ownerIdSettingsRequestDto] 
+         * @param {OwnerApiSendOwnerChangeInstructionsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for sendOwnerChangeInstructions operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-owner-change-instructions/
          * @throws {RequiredError}
          */
-        sendOwnerChangeInstructions(ownerIdSettingsRequestDto?: OwnerIdSettingsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<OwnerChangeInstructionsWrapper> {
-            return localVarFp.sendOwnerChangeInstructions(ownerIdSettingsRequestDto, options).then((request) => request(axios, basePath));
+        sendOwnerChangeInstructions(requestParameters: OwnerApiSendOwnerChangeInstructionsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<OwnerChangeInstructionsWrapper> {
+            return localVarFp.sendOwnerChangeInstructions(requestParameters.ownerIdSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates the current portal owner with a new one specified in the request.
          * @summary Update the portal owner
-         * @param {OwnerIdSettingsRequestDto} [ownerIdSettingsRequestDto] 
+         * @param {OwnerApiUpdatePortalOwnerRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updatePortalOwner operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-portal-owner/
          * @throws {RequiredError}
          */
-        updatePortalOwner(ownerIdSettingsRequestDto?: OwnerIdSettingsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.updatePortalOwner(ownerIdSettingsRequestDto, options).then((request) => request(axios, basePath));
+        updatePortalOwner(requestParameters: OwnerApiUpdatePortalOwnerRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.updatePortalOwner(requestParameters.ownerIdSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for sendOwnerChangeInstructions operation in OwnerApi.
+ * @export
+ * @interface OwnerApiSendOwnerChangeInstructionsRequest
+ */
+export interface OwnerApiSendOwnerChangeInstructionsRequest {
+    /**
+     * 
+     * @type {OwnerIdSettingsRequestDto}
+     * @memberof OwnerApiSendOwnerChangeInstructions
+     */
+    readonly ownerIdSettingsRequestDto?: OwnerIdSettingsRequestDto
+}
+
+/**
+ * Request parameters for updatePortalOwner operation in OwnerApi.
+ * @export
+ * @interface OwnerApiUpdatePortalOwnerRequest
+ */
+export interface OwnerApiUpdatePortalOwnerRequest {
+    /**
+     * 
+     * @type {OwnerIdSettingsRequestDto}
+     * @memberof OwnerApiUpdatePortalOwner
+     */
+    readonly ownerIdSettingsRequestDto?: OwnerIdSettingsRequestDto
+}
 
 /**
  * OwnerApi - object-oriented interface
@@ -234,25 +262,25 @@ export class OwnerApi extends BaseAPI {
     /**
      * Sends the instructions to change the DocSpace owner.
      * @summary Send the owner change instructions
-     * @param {OwnerIdSettingsRequestDto} [ownerIdSettingsRequestDto] 
+     * @param {SettingsOwnerApiSendOwnerChangeInstructionsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OwnerApi
      */
-    public sendOwnerChangeInstructions(ownerIdSettingsRequestDto?: OwnerIdSettingsRequestDto, options?: RawAxiosRequestConfig) {
-        return OwnerApiFp(this.configuration).sendOwnerChangeInstructions(ownerIdSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public sendOwnerChangeInstructions(requestParameters: OwnerApiSendOwnerChangeInstructionsRequest = {}, options?: RawAxiosRequestConfig) {
+        return OwnerApiFp(this.configuration).sendOwnerChangeInstructions(requestParameters.ownerIdSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Updates the current portal owner with a new one specified in the request.
      * @summary Update the portal owner
-     * @param {OwnerIdSettingsRequestDto} [ownerIdSettingsRequestDto] 
+     * @param {SettingsOwnerApiUpdatePortalOwnerRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OwnerApi
      */
-    public updatePortalOwner(ownerIdSettingsRequestDto?: OwnerIdSettingsRequestDto, options?: RawAxiosRequestConfig) {
-        return OwnerApiFp(this.configuration).updatePortalOwner(ownerIdSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public updatePortalOwner(requestParameters: OwnerApiUpdatePortalOwnerRequest = {}, options?: RawAxiosRequestConfig) {
+        return OwnerApiFp(this.configuration).updatePortalOwner(requestParameters.ownerIdSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

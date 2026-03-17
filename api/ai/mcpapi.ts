@@ -1167,185 +1167,453 @@ export const MCPApiFactory = function (configuration?: Configuration, basePath?:
         /**
          * Associates one or more MCP servers with a specific room, making them available for AI chat sessions  within that room. A maximum of 5 MCP servers can be assigned to a single room. If OAuth-based servers  are included, each room member will need to individually authorize their connection.  Requires room edit permissions.
          * @summary Assign MCP servers to a room
-         * @param {number} roomId Identifier of the room to which MCP servers will be assigned.
-         * @param {AddRoomServersRequestBody} addRoomServersRequestBody Server identifiers to assign.
+         * @param {MCPApiAddRoomServersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for addRoomServers operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-room-servers/
          * @throws {RequiredError}
          */
-        addRoomServers(roomId: number, addRoomServersRequestBody: AddRoomServersRequestBody, options?: RawAxiosRequestConfig): AxiosPromise<McpServerStatusArrayWrapper> {
-            return localVarFp.addRoomServers(roomId, addRoomServersRequestBody, options).then((request) => request(axios, basePath));
+        addRoomServers(requestParameters: MCPApiAddRoomServersRequest, options?: RawAxiosRequestConfig): AxiosPromise<McpServerStatusArrayWrapper> {
+            return localVarFp.addRoomServers(requestParameters.roomId, requestParameters.addRoomServersRequestBody, options).then((request) => request(axios, basePath));
         },
         /**
          * Registers a new custom MCP (Model Context Protocol) server for the current tenant.  The system validates the server name (only letters, numbers, underscores, and hyphens are allowed),  checks that it is not reserved or already taken, and then attempts to connect to the provided endpoint  to verify reachability and credentials before persisting the configuration.  Requires DocSpace administrator privileges.
          * @summary Register a custom MCP server
-         * @param {AddMcpServerRequestBody} addMcpServerRequestBody MCP server registration parameters.
+         * @param {MCPApiAddServerRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for addServer operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-server/
          * @throws {RequiredError}
          */
-        addServer(addMcpServerRequestBody: AddMcpServerRequestBody, options?: RawAxiosRequestConfig): AxiosPromise<McpServerWrapper> {
-            return localVarFp.addServer(addMcpServerRequestBody, options).then((request) => request(axios, basePath));
+        addServer(requestParameters: MCPApiAddServerRequest, options?: RawAxiosRequestConfig): AxiosPromise<McpServerWrapper> {
+            return localVarFp.addServer(requestParameters.addMcpServerRequestBody, options).then((request) => request(axios, basePath));
         },
         /**
          * Completes the OAuth authorization flow for an MCP server within a specific room on behalf of the  current user. The authorization code obtained from the OAuth provider must be passed in the request body.  Upon successful token exchange, the system verifies connectivity to the server and stores  the credentials for the current user. Requires room edit permissions.
          * @summary Connect an OAuth-based MCP server in a room
-         * @param {number} roomId Identifier of the room containing the MCP server.
-         * @param {string} serverId Unique identifier of the MCP server to connect.
-         * @param {ConnectServerRequestBody} connectServerRequestBody The request body containing additional data necessary for connecting to the server,  such as authentication or operation-specific information.
+         * @param {MCPApiConnectServerRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for connectServer operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/connect-server/
          * @throws {RequiredError}
          */
-        connectServer(roomId: number, serverId: string, connectServerRequestBody: ConnectServerRequestBody, options?: RawAxiosRequestConfig): AxiosPromise<McpServerStatusWrapper> {
-            return localVarFp.connectServer(roomId, serverId, connectServerRequestBody, options).then((request) => request(axios, basePath));
+        connectServer(requestParameters: MCPApiConnectServerRequest, options?: RawAxiosRequestConfig): AxiosPromise<McpServerStatusWrapper> {
+            return localVarFp.connectServer(requestParameters.roomId, requestParameters.serverId, requestParameters.connectServerRequestBody, options).then((request) => request(axios, basePath));
         },
         /**
          * Detaches one or more MCP servers from the specified room. After removal, the servers will no longer  be available in AI chat sessions within this room. Existing connections and tool configurations for  the removed servers are also cleaned up. Requires room edit permissions.
          * @summary Remove MCP servers from a room
-         * @param {number} roomId Identifier of the room from which MCP servers will be removed.
-         * @param {DeleteRoomServersRequestBody} deleteRoomServersRequestBody Server identifiers to remove.
+         * @param {MCPApiDeleteRoomServersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteRoomServers operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-servers/
          * @throws {RequiredError}
          */
-        deleteRoomServers(roomId: number, deleteRoomServersRequestBody: DeleteRoomServersRequestBody, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.deleteRoomServers(roomId, deleteRoomServersRequestBody, options).then((request) => request(axios, basePath));
+        deleteRoomServers(requestParameters: MCPApiDeleteRoomServersRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteRoomServers(requestParameters.roomId, requestParameters.deleteRoomServersRequestBody, options).then((request) => request(axios, basePath));
         },
         /**
          * Permanently removes one or more MCP servers from the current tenant by their IDs.  All room associations and connection data for the deleted servers are also cleaned up.  This action is irreversible. Requires DocSpace administrator privileges.
          * @summary Delete MCP servers
-         * @param {DeleteServersRequestBody} deleteServersRequestBody Server identifiers to delete.
+         * @param {MCPApiDeleteServerRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteServer operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-server/
          * @throws {RequiredError}
          */
-        deleteServer(deleteServersRequestBody: DeleteServersRequestBody, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.deleteServer(deleteServersRequestBody, options).then((request) => request(axios, basePath));
+        deleteServer(requestParameters: MCPApiDeleteServerRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteServer(requestParameters.deleteServersRequestBody, options).then((request) => request(axios, basePath));
         },
         /**
          * Revokes the current user\'s OAuth connection to an MCP server within the specified room. After  disconnection, the server\'s tools will no longer be available to this user in AI chat sessions  until they re-authorize. Other room members\' connections are not affected.  Requires room edit permissions.
          * @summary Disconnect an MCP server in a room
-         * @param {number} roomId Identifier of the room containing the MCP server.
-         * @param {string} serverId Unique identifier of the MCP server to disconnect from.
+         * @param {MCPApiDisconnectServerRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for disconnectServer operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/disconnect-server/
          * @throws {RequiredError}
          */
-        disconnectServer(roomId: number, serverId: string, options?: RawAxiosRequestConfig): AxiosPromise<McpServerStatusWrapper> {
-            return localVarFp.disconnectServer(roomId, serverId, options).then((request) => request(axios, basePath));
+        disconnectServer(requestParameters: MCPApiDisconnectServerRequest, options?: RawAxiosRequestConfig): AxiosPromise<McpServerStatusWrapper> {
+            return localVarFp.disconnectServer(requestParameters.roomId, requestParameters.serverId, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a paginated list of MCP servers that are currently active (enabled) and available for  assignment to rooms. Only servers in the enabled state are included. Each entry contains a compact  summary with the server name, type, icon, and status. Supports pagination via startIndex and count.  The total count of available servers is included in the response metadata.
          * @summary Get available MCP servers
-         * @param {number} [startIndex] The number of items to skip before returning results (zero-based offset). Defaults to 0.
-         * @param {number} [count] The maximum number of items to return per page. Defaults to 100.
+         * @param {MCPApiGetAvailableServersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getAvailableServers operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-available-servers/
          * @throws {RequiredError}
          */
-        getAvailableServers(startIndex?: number, count?: number, options?: RawAxiosRequestConfig): AxiosPromise<McpServerShortArrayWrapper> {
-            return localVarFp.getAvailableServers(startIndex, count, options).then((request) => request(axios, basePath));
+        getAvailableServers(requestParameters: MCPApiGetAvailableServersRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<McpServerShortArrayWrapper> {
+            return localVarFp.getAvailableServers(requestParameters.startIndex, requestParameters.count, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the list of MCP servers currently assigned to the specified room along with their connection  statuses for the current user. For OAuth-based servers, the connection status reflects whether the  current user has completed authorization. Requires access to the room\'s AI chat.
          * @summary Get MCP servers assigned to a room
-         * @param {number} roomId Identifier of the room whose assigned MCP servers are being retrieved.
+         * @param {MCPApiGetRoomServersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getRoomServers operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-servers/
          * @throws {RequiredError}
          */
-        getRoomServers(roomId: number, options?: RawAxiosRequestConfig): AxiosPromise<McpServerStatusArrayWrapper> {
-            return localVarFp.getRoomServers(roomId, options).then((request) => request(axios, basePath));
+        getRoomServers(requestParameters: MCPApiGetRoomServersRequest, options?: RawAxiosRequestConfig): AxiosPromise<McpServerStatusArrayWrapper> {
+            return localVarFp.getRoomServers(requestParameters.roomId, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieves a summary view of a single MCP server by its unique identifier, including its name,  type, enabled state, and icon. This endpoint returns a compact representation without  sensitive details such as endpoint URL or authentication headers.  Requires DocSpace administrator privileges.
          * @summary Get an MCP server by ID
-         * @param {string} id Unique identifier of the MCP server to retrieve.
+         * @param {MCPApiGetServerRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getServer operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-server/
          * @throws {RequiredError}
          */
-        getServer(id: string, options?: RawAxiosRequestConfig): AxiosPromise<McpServerShortWrapper> {
-            return localVarFp.getServer(id, options).then((request) => request(axios, basePath));
+        getServer(requestParameters: MCPApiGetServerRequest, options?: RawAxiosRequestConfig): AxiosPromise<McpServerShortWrapper> {
+            return localVarFp.getServer(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a paginated list of all MCP servers registered for the current tenant, including both  enabled and disabled servers. Each entry contains the full configuration (endpoint, headers,  icon, type, and status). Supports pagination via the startIndex and count query parameters.  The total number of servers is included in the response metadata.  Requires DocSpace administrator privileges.
          * @summary Get all MCP servers
-         * @param {number} [startIndex] The number of items to skip before returning results (zero-based offset). Defaults to 0.
-         * @param {number} [count] The maximum number of items to return per page. Defaults to 100.
+         * @param {MCPApiGetServersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getServers operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-servers/
          * @throws {RequiredError}
          */
-        getServers(startIndex?: number, count?: number, options?: RawAxiosRequestConfig): AxiosPromise<McpServerArrayWrapper> {
-            return localVarFp.getServers(startIndex, count, options).then((request) => request(axios, basePath));
+        getServers(requestParameters: MCPApiGetServersRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<McpServerArrayWrapper> {
+            return localVarFp.getServers(requestParameters.startIndex, requestParameters.count, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieves the full list of tools exposed by an MCP server within the context of a specific room,  along with each tool\'s enabled or disabled state. Disabled tools will not be invoked during  AI chat sessions in this room. Requires access to the room\'s AI chat.
          * @summary Get MCP server tools in a room
-         * @param {number} roomId Identifier of the room containing the MCP server.
-         * @param {string} serverId Unique identifier of the MCP server whose tools are being retrieved.
+         * @param {MCPApiGetToolsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getTools operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tools/
          * @throws {RequiredError}
          */
-        getTools(roomId: number, serverId: string, options?: RawAxiosRequestConfig): AxiosPromise<McpToolArrayWrapper> {
-            return localVarFp.getTools(roomId, serverId, options).then((request) => request(axios, basePath));
+        getTools(requestParameters: MCPApiGetToolsRequest, options?: RawAxiosRequestConfig): AxiosPromise<McpToolArrayWrapper> {
+            return localVarFp.getTools(requestParameters.roomId, requestParameters.serverId, options).then((request) => request(axios, basePath));
         },
         /**
          * Toggles the enabled/disabled state of an MCP server. When a server is disabled, it becomes  unavailable for assignment to rooms and will not be used during AI chat sessions.  Enabling a previously disabled server restores its availability across the tenant.  Requires DocSpace administrator privileges.
          * @summary Enable or disable an MCP server
-         * @param {string} id Unique identifier of the MCP server whose status is being changed.
-         * @param {SetServerStatusRequestBody} setServerStatusRequestBody New status value.
+         * @param {MCPApiSetServerStatusRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setServerStatus operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-server-status/
          * @throws {RequiredError}
          */
-        setServerStatus(id: string, setServerStatusRequestBody: SetServerStatusRequestBody, options?: RawAxiosRequestConfig): AxiosPromise<McpServerWrapper> {
-            return localVarFp.setServerStatus(id, setServerStatusRequestBody, options).then((request) => request(axios, basePath));
+        setServerStatus(requestParameters: MCPApiSetServerStatusRequest, options?: RawAxiosRequestConfig): AxiosPromise<McpServerWrapper> {
+            return localVarFp.setServerStatus(requestParameters.id, requestParameters.setServerStatusRequestBody, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates the set of disabled tools for an MCP server within a specific room. Pass a list of tool names  that should be disabled — all other tools exposed by the server will remain enabled. This allows  room administrators to restrict which MCP capabilities are available during AI chat sessions.  Requires room edit permissions.
          * @summary Configure MCP server tools in a room
-         * @param {number} roomId Identifier of the room containing the MCP server.
-         * @param {string} serverId Unique identifier of the MCP server whose tools are being configured.
-         * @param {SetMcpToolsRequestBody} setMcpToolsRequestBody Tool configuration parameters.
+         * @param {MCPApiSetToolsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setTools operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tools/
          * @throws {RequiredError}
          */
-        setTools(roomId: number, serverId: string, setMcpToolsRequestBody: SetMcpToolsRequestBody, options?: RawAxiosRequestConfig): AxiosPromise<McpToolArrayWrapper> {
-            return localVarFp.setTools(roomId, serverId, setMcpToolsRequestBody, options).then((request) => request(axios, basePath));
+        setTools(requestParameters: MCPApiSetToolsRequest, options?: RawAxiosRequestConfig): AxiosPromise<McpToolArrayWrapper> {
+            return localVarFp.setTools(requestParameters.roomId, requestParameters.serverId, requestParameters.setMcpToolsRequestBody, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates the configuration of an existing custom MCP server identified by its unique ID.  Any combination of fields (name, description, endpoint, headers, icon) can be updated in a single request.  If the endpoint or headers are changed, the system re-validates connectivity by attempting to reach  the new endpoint before saving. Name uniqueness and format rules are enforced on every update.  Requires DocSpace administrator privileges.
          * @summary Update a custom MCP server
-         * @param {string} id Unique identifier of the MCP server to update.
-         * @param {UpdateServerRequestBody} updateServerRequestBody Updated server configuration fields.
+         * @param {MCPApiUpdateServerRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateServer operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-server/
          * @throws {RequiredError}
          */
-        updateServer(id: string, updateServerRequestBody: UpdateServerRequestBody, options?: RawAxiosRequestConfig): AxiosPromise<McpServerWrapper> {
-            return localVarFp.updateServer(id, updateServerRequestBody, options).then((request) => request(axios, basePath));
+        updateServer(requestParameters: MCPApiUpdateServerRequest, options?: RawAxiosRequestConfig): AxiosPromise<McpServerWrapper> {
+            return localVarFp.updateServer(requestParameters.id, requestParameters.updateServerRequestBody, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for addRoomServers operation in MCPApi.
+ * @export
+ * @interface MCPApiAddRoomServersRequest
+ */
+export interface MCPApiAddRoomServersRequest {
+    /**
+     * Identifier of the room to which MCP servers will be assigned.
+     * @type {number}
+     * @memberof MCPApiAddRoomServers
+     */
+    readonly roomId: number
+
+    /**
+     * Server identifiers to assign.
+     * @type {AddRoomServersRequestBody}
+     * @memberof MCPApiAddRoomServers
+     */
+    readonly addRoomServersRequestBody: AddRoomServersRequestBody
+}
+
+/**
+ * Request parameters for addServer operation in MCPApi.
+ * @export
+ * @interface MCPApiAddServerRequest
+ */
+export interface MCPApiAddServerRequest {
+    /**
+     * MCP server registration parameters.
+     * @type {AddMcpServerRequestBody}
+     * @memberof MCPApiAddServer
+     */
+    readonly addMcpServerRequestBody: AddMcpServerRequestBody
+}
+
+/**
+ * Request parameters for connectServer operation in MCPApi.
+ * @export
+ * @interface MCPApiConnectServerRequest
+ */
+export interface MCPApiConnectServerRequest {
+    /**
+     * Identifier of the room containing the MCP server.
+     * @type {number}
+     * @memberof MCPApiConnectServer
+     */
+    readonly roomId: number
+
+    /**
+     * Unique identifier of the MCP server to connect.
+     * @type {string}
+     * @memberof MCPApiConnectServer
+     */
+    readonly serverId: string
+
+    /**
+     * The request body containing additional data necessary for connecting to the server,  such as authentication or operation-specific information.
+     * @type {ConnectServerRequestBody}
+     * @memberof MCPApiConnectServer
+     */
+    readonly connectServerRequestBody: ConnectServerRequestBody
+}
+
+/**
+ * Request parameters for deleteRoomServers operation in MCPApi.
+ * @export
+ * @interface MCPApiDeleteRoomServersRequest
+ */
+export interface MCPApiDeleteRoomServersRequest {
+    /**
+     * Identifier of the room from which MCP servers will be removed.
+     * @type {number}
+     * @memberof MCPApiDeleteRoomServers
+     */
+    readonly roomId: number
+
+    /**
+     * Server identifiers to remove.
+     * @type {DeleteRoomServersRequestBody}
+     * @memberof MCPApiDeleteRoomServers
+     */
+    readonly deleteRoomServersRequestBody: DeleteRoomServersRequestBody
+}
+
+/**
+ * Request parameters for deleteServer operation in MCPApi.
+ * @export
+ * @interface MCPApiDeleteServerRequest
+ */
+export interface MCPApiDeleteServerRequest {
+    /**
+     * Server identifiers to delete.
+     * @type {DeleteServersRequestBody}
+     * @memberof MCPApiDeleteServer
+     */
+    readonly deleteServersRequestBody: DeleteServersRequestBody
+}
+
+/**
+ * Request parameters for disconnectServer operation in MCPApi.
+ * @export
+ * @interface MCPApiDisconnectServerRequest
+ */
+export interface MCPApiDisconnectServerRequest {
+    /**
+     * Identifier of the room containing the MCP server.
+     * @type {number}
+     * @memberof MCPApiDisconnectServer
+     */
+    readonly roomId: number
+
+    /**
+     * Unique identifier of the MCP server to disconnect from.
+     * @type {string}
+     * @memberof MCPApiDisconnectServer
+     */
+    readonly serverId: string
+}
+
+/**
+ * Request parameters for getAvailableServers operation in MCPApi.
+ * @export
+ * @interface MCPApiGetAvailableServersRequest
+ */
+export interface MCPApiGetAvailableServersRequest {
+    /**
+     * The number of items to skip before returning results (zero-based offset). Defaults to 0.
+     * @type {number}
+     * @memberof MCPApiGetAvailableServers
+     */
+    readonly startIndex?: number
+
+    /**
+     * The maximum number of items to return per page. Defaults to 100.
+     * @type {number}
+     * @memberof MCPApiGetAvailableServers
+     */
+    readonly count?: number
+}
+
+/**
+ * Request parameters for getRoomServers operation in MCPApi.
+ * @export
+ * @interface MCPApiGetRoomServersRequest
+ */
+export interface MCPApiGetRoomServersRequest {
+    /**
+     * Identifier of the room whose assigned MCP servers are being retrieved.
+     * @type {number}
+     * @memberof MCPApiGetRoomServers
+     */
+    readonly roomId: number
+}
+
+/**
+ * Request parameters for getServer operation in MCPApi.
+ * @export
+ * @interface MCPApiGetServerRequest
+ */
+export interface MCPApiGetServerRequest {
+    /**
+     * Unique identifier of the MCP server to retrieve.
+     * @type {string}
+     * @memberof MCPApiGetServer
+     */
+    readonly id: string
+}
+
+/**
+ * Request parameters for getServers operation in MCPApi.
+ * @export
+ * @interface MCPApiGetServersRequest
+ */
+export interface MCPApiGetServersRequest {
+    /**
+     * The number of items to skip before returning results (zero-based offset). Defaults to 0.
+     * @type {number}
+     * @memberof MCPApiGetServers
+     */
+    readonly startIndex?: number
+
+    /**
+     * The maximum number of items to return per page. Defaults to 100.
+     * @type {number}
+     * @memberof MCPApiGetServers
+     */
+    readonly count?: number
+}
+
+/**
+ * Request parameters for getTools operation in MCPApi.
+ * @export
+ * @interface MCPApiGetToolsRequest
+ */
+export interface MCPApiGetToolsRequest {
+    /**
+     * Identifier of the room containing the MCP server.
+     * @type {number}
+     * @memberof MCPApiGetTools
+     */
+    readonly roomId: number
+
+    /**
+     * Unique identifier of the MCP server whose tools are being retrieved.
+     * @type {string}
+     * @memberof MCPApiGetTools
+     */
+    readonly serverId: string
+}
+
+/**
+ * Request parameters for setServerStatus operation in MCPApi.
+ * @export
+ * @interface MCPApiSetServerStatusRequest
+ */
+export interface MCPApiSetServerStatusRequest {
+    /**
+     * Unique identifier of the MCP server whose status is being changed.
+     * @type {string}
+     * @memberof MCPApiSetServerStatus
+     */
+    readonly id: string
+
+    /**
+     * New status value.
+     * @type {SetServerStatusRequestBody}
+     * @memberof MCPApiSetServerStatus
+     */
+    readonly setServerStatusRequestBody: SetServerStatusRequestBody
+}
+
+/**
+ * Request parameters for setTools operation in MCPApi.
+ * @export
+ * @interface MCPApiSetToolsRequest
+ */
+export interface MCPApiSetToolsRequest {
+    /**
+     * Identifier of the room containing the MCP server.
+     * @type {number}
+     * @memberof MCPApiSetTools
+     */
+    readonly roomId: number
+
+    /**
+     * Unique identifier of the MCP server whose tools are being configured.
+     * @type {string}
+     * @memberof MCPApiSetTools
+     */
+    readonly serverId: string
+
+    /**
+     * Tool configuration parameters.
+     * @type {SetMcpToolsRequestBody}
+     * @memberof MCPApiSetTools
+     */
+    readonly setMcpToolsRequestBody: SetMcpToolsRequestBody
+}
+
+/**
+ * Request parameters for updateServer operation in MCPApi.
+ * @export
+ * @interface MCPApiUpdateServerRequest
+ */
+export interface MCPApiUpdateServerRequest {
+    /**
+     * Unique identifier of the MCP server to update.
+     * @type {string}
+     * @memberof MCPApiUpdateServer
+     */
+    readonly id: string
+
+    /**
+     * Updated server configuration fields.
+     * @type {UpdateServerRequestBody}
+     * @memberof MCPApiUpdateServer
+     */
+    readonly updateServerRequestBody: UpdateServerRequestBody
+}
 
 /**
  * MCPApi - object-oriented interface
@@ -1357,181 +1625,169 @@ export class MCPApi extends BaseAPI {
     /**
      * Associates one or more MCP servers with a specific room, making them available for AI chat sessions  within that room. A maximum of 5 MCP servers can be assigned to a single room. If OAuth-based servers  are included, each room member will need to individually authorize their connection.  Requires room edit permissions.
      * @summary Assign MCP servers to a room
-     * @param {number} roomId Identifier of the room to which MCP servers will be assigned.
-     * @param {AddRoomServersRequestBody} addRoomServersRequestBody Server identifiers to assign.
+     * @param {AIMCPApiAddRoomServersRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MCPApi
      */
-    public addRoomServers(roomId: number, addRoomServersRequestBody: AddRoomServersRequestBody, options?: RawAxiosRequestConfig) {
-        return MCPApiFp(this.configuration).addRoomServers(roomId, addRoomServersRequestBody, options).then((request) => request(this.axios, this.basePath));
+    public addRoomServers(requestParameters: MCPApiAddRoomServersRequest, options?: RawAxiosRequestConfig) {
+        return MCPApiFp(this.configuration).addRoomServers(requestParameters.roomId, requestParameters.addRoomServersRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Registers a new custom MCP (Model Context Protocol) server for the current tenant.  The system validates the server name (only letters, numbers, underscores, and hyphens are allowed),  checks that it is not reserved or already taken, and then attempts to connect to the provided endpoint  to verify reachability and credentials before persisting the configuration.  Requires DocSpace administrator privileges.
      * @summary Register a custom MCP server
-     * @param {AddMcpServerRequestBody} addMcpServerRequestBody MCP server registration parameters.
+     * @param {AIMCPApiAddServerRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MCPApi
      */
-    public addServer(addMcpServerRequestBody: AddMcpServerRequestBody, options?: RawAxiosRequestConfig) {
-        return MCPApiFp(this.configuration).addServer(addMcpServerRequestBody, options).then((request) => request(this.axios, this.basePath));
+    public addServer(requestParameters: MCPApiAddServerRequest, options?: RawAxiosRequestConfig) {
+        return MCPApiFp(this.configuration).addServer(requestParameters.addMcpServerRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Completes the OAuth authorization flow for an MCP server within a specific room on behalf of the  current user. The authorization code obtained from the OAuth provider must be passed in the request body.  Upon successful token exchange, the system verifies connectivity to the server and stores  the credentials for the current user. Requires room edit permissions.
      * @summary Connect an OAuth-based MCP server in a room
-     * @param {number} roomId Identifier of the room containing the MCP server.
-     * @param {string} serverId Unique identifier of the MCP server to connect.
-     * @param {ConnectServerRequestBody} connectServerRequestBody The request body containing additional data necessary for connecting to the server,  such as authentication or operation-specific information.
+     * @param {AIMCPApiConnectServerRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MCPApi
      */
-    public connectServer(roomId: number, serverId: string, connectServerRequestBody: ConnectServerRequestBody, options?: RawAxiosRequestConfig) {
-        return MCPApiFp(this.configuration).connectServer(roomId, serverId, connectServerRequestBody, options).then((request) => request(this.axios, this.basePath));
+    public connectServer(requestParameters: MCPApiConnectServerRequest, options?: RawAxiosRequestConfig) {
+        return MCPApiFp(this.configuration).connectServer(requestParameters.roomId, requestParameters.serverId, requestParameters.connectServerRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Detaches one or more MCP servers from the specified room. After removal, the servers will no longer  be available in AI chat sessions within this room. Existing connections and tool configurations for  the removed servers are also cleaned up. Requires room edit permissions.
      * @summary Remove MCP servers from a room
-     * @param {number} roomId Identifier of the room from which MCP servers will be removed.
-     * @param {DeleteRoomServersRequestBody} deleteRoomServersRequestBody Server identifiers to remove.
+     * @param {AIMCPApiDeleteRoomServersRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MCPApi
      */
-    public deleteRoomServers(roomId: number, deleteRoomServersRequestBody: DeleteRoomServersRequestBody, options?: RawAxiosRequestConfig) {
-        return MCPApiFp(this.configuration).deleteRoomServers(roomId, deleteRoomServersRequestBody, options).then((request) => request(this.axios, this.basePath));
+    public deleteRoomServers(requestParameters: MCPApiDeleteRoomServersRequest, options?: RawAxiosRequestConfig) {
+        return MCPApiFp(this.configuration).deleteRoomServers(requestParameters.roomId, requestParameters.deleteRoomServersRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Permanently removes one or more MCP servers from the current tenant by their IDs.  All room associations and connection data for the deleted servers are also cleaned up.  This action is irreversible. Requires DocSpace administrator privileges.
      * @summary Delete MCP servers
-     * @param {DeleteServersRequestBody} deleteServersRequestBody Server identifiers to delete.
+     * @param {AIMCPApiDeleteServerRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MCPApi
      */
-    public deleteServer(deleteServersRequestBody: DeleteServersRequestBody, options?: RawAxiosRequestConfig) {
-        return MCPApiFp(this.configuration).deleteServer(deleteServersRequestBody, options).then((request) => request(this.axios, this.basePath));
+    public deleteServer(requestParameters: MCPApiDeleteServerRequest, options?: RawAxiosRequestConfig) {
+        return MCPApiFp(this.configuration).deleteServer(requestParameters.deleteServersRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Revokes the current user\'s OAuth connection to an MCP server within the specified room. After  disconnection, the server\'s tools will no longer be available to this user in AI chat sessions  until they re-authorize. Other room members\' connections are not affected.  Requires room edit permissions.
      * @summary Disconnect an MCP server in a room
-     * @param {number} roomId Identifier of the room containing the MCP server.
-     * @param {string} serverId Unique identifier of the MCP server to disconnect from.
+     * @param {AIMCPApiDisconnectServerRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MCPApi
      */
-    public disconnectServer(roomId: number, serverId: string, options?: RawAxiosRequestConfig) {
-        return MCPApiFp(this.configuration).disconnectServer(roomId, serverId, options).then((request) => request(this.axios, this.basePath));
+    public disconnectServer(requestParameters: MCPApiDisconnectServerRequest, options?: RawAxiosRequestConfig) {
+        return MCPApiFp(this.configuration).disconnectServer(requestParameters.roomId, requestParameters.serverId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns a paginated list of MCP servers that are currently active (enabled) and available for  assignment to rooms. Only servers in the enabled state are included. Each entry contains a compact  summary with the server name, type, icon, and status. Supports pagination via startIndex and count.  The total count of available servers is included in the response metadata.
      * @summary Get available MCP servers
-     * @param {number} [startIndex] The number of items to skip before returning results (zero-based offset). Defaults to 0.
-     * @param {number} [count] The maximum number of items to return per page. Defaults to 100.
+     * @param {AIMCPApiGetAvailableServersRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MCPApi
      */
-    public getAvailableServers(startIndex?: number, count?: number, options?: RawAxiosRequestConfig) {
-        return MCPApiFp(this.configuration).getAvailableServers(startIndex, count, options).then((request) => request(this.axios, this.basePath));
+    public getAvailableServers(requestParameters: MCPApiGetAvailableServersRequest = {}, options?: RawAxiosRequestConfig) {
+        return MCPApiFp(this.configuration).getAvailableServers(requestParameters.startIndex, requestParameters.count, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the list of MCP servers currently assigned to the specified room along with their connection  statuses for the current user. For OAuth-based servers, the connection status reflects whether the  current user has completed authorization. Requires access to the room\'s AI chat.
      * @summary Get MCP servers assigned to a room
-     * @param {number} roomId Identifier of the room whose assigned MCP servers are being retrieved.
+     * @param {AIMCPApiGetRoomServersRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MCPApi
      */
-    public getRoomServers(roomId: number, options?: RawAxiosRequestConfig) {
-        return MCPApiFp(this.configuration).getRoomServers(roomId, options).then((request) => request(this.axios, this.basePath));
+    public getRoomServers(requestParameters: MCPApiGetRoomServersRequest, options?: RawAxiosRequestConfig) {
+        return MCPApiFp(this.configuration).getRoomServers(requestParameters.roomId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Retrieves a summary view of a single MCP server by its unique identifier, including its name,  type, enabled state, and icon. This endpoint returns a compact representation without  sensitive details such as endpoint URL or authentication headers.  Requires DocSpace administrator privileges.
      * @summary Get an MCP server by ID
-     * @param {string} id Unique identifier of the MCP server to retrieve.
+     * @param {AIMCPApiGetServerRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MCPApi
      */
-    public getServer(id: string, options?: RawAxiosRequestConfig) {
-        return MCPApiFp(this.configuration).getServer(id, options).then((request) => request(this.axios, this.basePath));
+    public getServer(requestParameters: MCPApiGetServerRequest, options?: RawAxiosRequestConfig) {
+        return MCPApiFp(this.configuration).getServer(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns a paginated list of all MCP servers registered for the current tenant, including both  enabled and disabled servers. Each entry contains the full configuration (endpoint, headers,  icon, type, and status). Supports pagination via the startIndex and count query parameters.  The total number of servers is included in the response metadata.  Requires DocSpace administrator privileges.
      * @summary Get all MCP servers
-     * @param {number} [startIndex] The number of items to skip before returning results (zero-based offset). Defaults to 0.
-     * @param {number} [count] The maximum number of items to return per page. Defaults to 100.
+     * @param {AIMCPApiGetServersRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MCPApi
      */
-    public getServers(startIndex?: number, count?: number, options?: RawAxiosRequestConfig) {
-        return MCPApiFp(this.configuration).getServers(startIndex, count, options).then((request) => request(this.axios, this.basePath));
+    public getServers(requestParameters: MCPApiGetServersRequest = {}, options?: RawAxiosRequestConfig) {
+        return MCPApiFp(this.configuration).getServers(requestParameters.startIndex, requestParameters.count, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Retrieves the full list of tools exposed by an MCP server within the context of a specific room,  along with each tool\'s enabled or disabled state. Disabled tools will not be invoked during  AI chat sessions in this room. Requires access to the room\'s AI chat.
      * @summary Get MCP server tools in a room
-     * @param {number} roomId Identifier of the room containing the MCP server.
-     * @param {string} serverId Unique identifier of the MCP server whose tools are being retrieved.
+     * @param {AIMCPApiGetToolsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MCPApi
      */
-    public getTools(roomId: number, serverId: string, options?: RawAxiosRequestConfig) {
-        return MCPApiFp(this.configuration).getTools(roomId, serverId, options).then((request) => request(this.axios, this.basePath));
+    public getTools(requestParameters: MCPApiGetToolsRequest, options?: RawAxiosRequestConfig) {
+        return MCPApiFp(this.configuration).getTools(requestParameters.roomId, requestParameters.serverId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Toggles the enabled/disabled state of an MCP server. When a server is disabled, it becomes  unavailable for assignment to rooms and will not be used during AI chat sessions.  Enabling a previously disabled server restores its availability across the tenant.  Requires DocSpace administrator privileges.
      * @summary Enable or disable an MCP server
-     * @param {string} id Unique identifier of the MCP server whose status is being changed.
-     * @param {SetServerStatusRequestBody} setServerStatusRequestBody New status value.
+     * @param {AIMCPApiSetServerStatusRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MCPApi
      */
-    public setServerStatus(id: string, setServerStatusRequestBody: SetServerStatusRequestBody, options?: RawAxiosRequestConfig) {
-        return MCPApiFp(this.configuration).setServerStatus(id, setServerStatusRequestBody, options).then((request) => request(this.axios, this.basePath));
+    public setServerStatus(requestParameters: MCPApiSetServerStatusRequest, options?: RawAxiosRequestConfig) {
+        return MCPApiFp(this.configuration).setServerStatus(requestParameters.id, requestParameters.setServerStatusRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Updates the set of disabled tools for an MCP server within a specific room. Pass a list of tool names  that should be disabled — all other tools exposed by the server will remain enabled. This allows  room administrators to restrict which MCP capabilities are available during AI chat sessions.  Requires room edit permissions.
      * @summary Configure MCP server tools in a room
-     * @param {number} roomId Identifier of the room containing the MCP server.
-     * @param {string} serverId Unique identifier of the MCP server whose tools are being configured.
-     * @param {SetMcpToolsRequestBody} setMcpToolsRequestBody Tool configuration parameters.
+     * @param {AIMCPApiSetToolsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MCPApi
      */
-    public setTools(roomId: number, serverId: string, setMcpToolsRequestBody: SetMcpToolsRequestBody, options?: RawAxiosRequestConfig) {
-        return MCPApiFp(this.configuration).setTools(roomId, serverId, setMcpToolsRequestBody, options).then((request) => request(this.axios, this.basePath));
+    public setTools(requestParameters: MCPApiSetToolsRequest, options?: RawAxiosRequestConfig) {
+        return MCPApiFp(this.configuration).setTools(requestParameters.roomId, requestParameters.serverId, requestParameters.setMcpToolsRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Updates the configuration of an existing custom MCP server identified by its unique ID.  Any combination of fields (name, description, endpoint, headers, icon) can be updated in a single request.  If the endpoint or headers are changed, the system re-validates connectivity by attempting to reach  the new endpoint before saving. Name uniqueness and format rules are enforced on every update.  Requires DocSpace administrator privileges.
      * @summary Update a custom MCP server
-     * @param {string} id Unique identifier of the MCP server to update.
-     * @param {UpdateServerRequestBody} updateServerRequestBody Updated server configuration fields.
+     * @param {AIMCPApiUpdateServerRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MCPApi
      */
-    public updateServer(id: string, updateServerRequestBody: UpdateServerRequestBody, options?: RawAxiosRequestConfig) {
-        return MCPApiFp(this.configuration).updateServer(id, updateServerRequestBody, options).then((request) => request(this.axios, this.basePath));
+    public updateServer(requestParameters: MCPApiUpdateServerRequest, options?: RawAxiosRequestConfig) {
+        return MCPApiFp(this.configuration).updateServer(requestParameters.id, requestParameters.updateServerRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

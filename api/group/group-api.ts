@@ -942,150 +942,382 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
         /**
          * Adds a new group with the group manager, name, and members specified in the request.
          * @summary Add a new group
-         * @param {GroupRequestDto} [groupRequestDto] 
+         * @param {GroupApiAddGroupRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for addGroup operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-group/
          * @throws {RequiredError}
          */
-        addGroup(groupRequestDto?: GroupRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
-            return localVarFp.addGroup(groupRequestDto, options).then((request) => request(axios, basePath));
+        addGroup(requestParameters: GroupApiAddGroupRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
+            return localVarFp.addGroup(requestParameters.groupRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Adds new group members to the group with the ID specified in the request.
          * @summary Add group members
-         * @param {string} id The group ID.
-         * @param {MembersRequest} membersRequest The member request.
+         * @param {GroupApiAddMembersToRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for addMembersTo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-members-to/
          * @throws {RequiredError}
          */
-        addMembersTo(id: string, membersRequest: MembersRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
-            return localVarFp.addMembersTo(id, membersRequest, options).then((request) => request(axios, basePath));
+        addMembersTo(requestParameters: GroupApiAddMembersToRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
+            return localVarFp.addMembersTo(requestParameters.id, requestParameters.membersRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Deletes a group with the ID specified in the request from the list of groups on the portal.
          * @summary Delete a group
-         * @param {string} id The group ID.
+         * @param {GroupApiDeleteGroupRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteGroup operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-group/
          * @throws {RequiredError}
          */
-        deleteGroup(id: string, options?: RawAxiosRequestConfig): AxiosPromise<NoContentResultWrapper> {
-            return localVarFp.deleteGroup(id, options).then((request) => request(axios, basePath));
+        deleteGroup(requestParameters: GroupApiDeleteGroupRequest, options?: RawAxiosRequestConfig): AxiosPromise<NoContentResultWrapper> {
+            return localVarFp.deleteGroup(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the detailed information about the selected group.
          * @summary Get a group
-         * @param {string} id The group ID.
-         * @param {boolean} [includeMembers] Specifies whether to include the group members or not.
+         * @param {GroupApiGetGroupRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getGroup operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-group/
          * @throws {RequiredError}
          */
-        getGroup(id: string, includeMembers?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
-            return localVarFp.getGroup(id, includeMembers, options).then((request) => request(axios, basePath));
+        getGroup(requestParameters: GroupApiGetGroupRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
+            return localVarFp.getGroup(requestParameters.id, requestParameters.includeMembers, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of groups for the user with the ID specified in the request.
          * @summary Get user groups
-         * @param {string} userid The user ID.
+         * @param {GroupApiGetGroupByUserIdRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getGroupByUserId operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-group-by-user-id/
          * @throws {RequiredError}
          */
-        getGroupByUserId(userid: string, options?: RawAxiosRequestConfig): AxiosPromise<GroupSummaryArrayWrapper> {
-            return localVarFp.getGroupByUserId(userid, options).then((request) => request(axios, basePath));
+        getGroupByUserId(requestParameters: GroupApiGetGroupByUserIdRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupSummaryArrayWrapper> {
+            return localVarFp.getGroupByUserId(requestParameters.userid, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the general information about all the groups, such as group ID and group manager.
          * @summary Get groups
-         * @param {string} [userId] The user ID.
-         * @param {boolean} [manager] Specifies if the user is a manager or not.
-         * @param {number} [count] The number of records to retrieve.
-         * @param {number} [startIndex] The starting index for paginated results.
-         * @param {string} [sortBy] Specifies the property used to sort the query results.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text used for filtering or searching group data.
+         * @param {GroupApiGetGroupsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getGroups operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups/
          * @throws {RequiredError}
          */
-        getGroups(userId?: string, manager?: boolean, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<GroupArrayWrapper> {
-            return localVarFp.getGroups(userId, manager, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(axios, basePath));
+        getGroups(requestParameters: GroupApiGetGroupsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<GroupArrayWrapper> {
+            return localVarFp.getGroups(requestParameters.userId, requestParameters.manager, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Moves all the members from the selected group to another one specified in the request.
          * @summary Move group members
-         * @param {string} fromId The group ID to move from.
-         * @param {string} toId The group ID to move to.
+         * @param {GroupApiMoveMembersToRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for moveMembersTo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/move-members-to/
          * @throws {RequiredError}
          */
-        moveMembersTo(fromId: string, toId: string, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
-            return localVarFp.moveMembersTo(fromId, toId, options).then((request) => request(axios, basePath));
+        moveMembersTo(requestParameters: GroupApiMoveMembersToRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
+            return localVarFp.moveMembersTo(requestParameters.fromId, requestParameters.toId, options).then((request) => request(axios, basePath));
         },
         /**
          * Removes the group members specified in the request from the selected group.
          * @summary Remove group members
-         * @param {string} id The group ID.
-         * @param {MembersRequest} membersRequest The member request.
+         * @param {GroupApiRemoveMembersFromRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for removeMembersFrom operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/remove-members-from/
          * @throws {RequiredError}
          */
-        removeMembersFrom(id: string, membersRequest: MembersRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
-            return localVarFp.removeMembersFrom(id, membersRequest, options).then((request) => request(axios, basePath));
+        removeMembersFrom(requestParameters: GroupApiRemoveMembersFromRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
+            return localVarFp.removeMembersFrom(requestParameters.id, requestParameters.membersRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Sets a user with the ID specified in the request as a group manager.
          * @summary Set a group manager
-         * @param {string} id The group ID.
-         * @param {SetManagerRequest} setManagerRequest The request for setting a group manager.
+         * @param {GroupApiSetGroupManagerRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setGroupManager operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-group-manager/
          * @throws {RequiredError}
          */
-        setGroupManager(id: string, setManagerRequest: SetManagerRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
-            return localVarFp.setGroupManager(id, setManagerRequest, options).then((request) => request(axios, basePath));
+        setGroupManager(requestParameters: GroupApiSetGroupManagerRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
+            return localVarFp.setGroupManager(requestParameters.id, requestParameters.setManagerRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Replaces the group members with those specified in the request.
          * @summary Replace group members
-         * @param {string} id The group ID.
-         * @param {MembersRequest} membersRequest The member request.
+         * @param {GroupApiSetMembersToRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setMembersTo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-members-to/
          * @throws {RequiredError}
          */
-        setMembersTo(id: string, membersRequest: MembersRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
-            return localVarFp.setMembersTo(id, membersRequest, options).then((request) => request(axios, basePath));
+        setMembersTo(requestParameters: GroupApiSetMembersToRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
+            return localVarFp.setMembersTo(requestParameters.id, requestParameters.membersRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates the existing group changing the group manager, name, and/or members.
          * @summary Update a group
-         * @param {string} id The group ID.
-         * @param {UpdateGroupRequest} updateGroupRequest The request for updating a group.
+         * @param {GroupApiUpdateGroupRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateGroup operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-group/
          * @throws {RequiredError}
          */
-        updateGroup(id: string, updateGroupRequest: UpdateGroupRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
-            return localVarFp.updateGroup(id, updateGroupRequest, options).then((request) => request(axios, basePath));
+        updateGroup(requestParameters: GroupApiUpdateGroupRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupWrapper> {
+            return localVarFp.updateGroup(requestParameters.id, requestParameters.updateGroupRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for addGroup operation in GroupApi.
+ * @export
+ * @interface GroupApiAddGroupRequest
+ */
+export interface GroupApiAddGroupRequest {
+    /**
+     * 
+     * @type {GroupRequestDto}
+     * @memberof GroupApiAddGroup
+     */
+    readonly groupRequestDto?: GroupRequestDto
+}
+
+/**
+ * Request parameters for addMembersTo operation in GroupApi.
+ * @export
+ * @interface GroupApiAddMembersToRequest
+ */
+export interface GroupApiAddMembersToRequest {
+    /**
+     * The group ID.
+     * @type {string}
+     * @memberof GroupApiAddMembersTo
+     */
+    readonly id: string
+
+    /**
+     * The member request.
+     * @type {MembersRequest}
+     * @memberof GroupApiAddMembersTo
+     */
+    readonly membersRequest: MembersRequest
+}
+
+/**
+ * Request parameters for deleteGroup operation in GroupApi.
+ * @export
+ * @interface GroupApiDeleteGroupRequest
+ */
+export interface GroupApiDeleteGroupRequest {
+    /**
+     * The group ID.
+     * @type {string}
+     * @memberof GroupApiDeleteGroup
+     */
+    readonly id: string
+}
+
+/**
+ * Request parameters for getGroup operation in GroupApi.
+ * @export
+ * @interface GroupApiGetGroupRequest
+ */
+export interface GroupApiGetGroupRequest {
+    /**
+     * The group ID.
+     * @type {string}
+     * @memberof GroupApiGetGroup
+     */
+    readonly id: string
+
+    /**
+     * Specifies whether to include the group members or not.
+     * @type {boolean}
+     * @memberof GroupApiGetGroup
+     */
+    readonly includeMembers?: boolean
+}
+
+/**
+ * Request parameters for getGroupByUserId operation in GroupApi.
+ * @export
+ * @interface GroupApiGetGroupByUserIdRequest
+ */
+export interface GroupApiGetGroupByUserIdRequest {
+    /**
+     * The user ID.
+     * @type {string}
+     * @memberof GroupApiGetGroupByUserId
+     */
+    readonly userid: string
+}
+
+/**
+ * Request parameters for getGroups operation in GroupApi.
+ * @export
+ * @interface GroupApiGetGroupsRequest
+ */
+export interface GroupApiGetGroupsRequest {
+    /**
+     * The user ID.
+     * @type {string}
+     * @memberof GroupApiGetGroups
+     */
+    readonly userId?: string
+
+    /**
+     * Specifies if the user is a manager or not.
+     * @type {boolean}
+     * @memberof GroupApiGetGroups
+     */
+    readonly manager?: boolean
+
+    /**
+     * The number of records to retrieve.
+     * @type {number}
+     * @memberof GroupApiGetGroups
+     */
+    readonly count?: number
+
+    /**
+     * The starting index for paginated results.
+     * @type {number}
+     * @memberof GroupApiGetGroups
+     */
+    readonly startIndex?: number
+
+    /**
+     * Specifies the property used to sort the query results.
+     * @type {string}
+     * @memberof GroupApiGetGroups
+     */
+    readonly sortBy?: string
+
+    /**
+     * The order in which the results are sorted.
+     * @type {SortOrder}
+     * @memberof GroupApiGetGroups
+     */
+    readonly sortOrder?: SortOrder
+
+    /**
+     * The text used for filtering or searching group data.
+     * @type {string}
+     * @memberof GroupApiGetGroups
+     */
+    readonly filterValue?: string
+}
+
+/**
+ * Request parameters for moveMembersTo operation in GroupApi.
+ * @export
+ * @interface GroupApiMoveMembersToRequest
+ */
+export interface GroupApiMoveMembersToRequest {
+    /**
+     * The group ID to move from.
+     * @type {string}
+     * @memberof GroupApiMoveMembersTo
+     */
+    readonly fromId: string
+
+    /**
+     * The group ID to move to.
+     * @type {string}
+     * @memberof GroupApiMoveMembersTo
+     */
+    readonly toId: string
+}
+
+/**
+ * Request parameters for removeMembersFrom operation in GroupApi.
+ * @export
+ * @interface GroupApiRemoveMembersFromRequest
+ */
+export interface GroupApiRemoveMembersFromRequest {
+    /**
+     * The group ID.
+     * @type {string}
+     * @memberof GroupApiRemoveMembersFrom
+     */
+    readonly id: string
+
+    /**
+     * The member request.
+     * @type {MembersRequest}
+     * @memberof GroupApiRemoveMembersFrom
+     */
+    readonly membersRequest: MembersRequest
+}
+
+/**
+ * Request parameters for setGroupManager operation in GroupApi.
+ * @export
+ * @interface GroupApiSetGroupManagerRequest
+ */
+export interface GroupApiSetGroupManagerRequest {
+    /**
+     * The group ID.
+     * @type {string}
+     * @memberof GroupApiSetGroupManager
+     */
+    readonly id: string
+
+    /**
+     * The request for setting a group manager.
+     * @type {SetManagerRequest}
+     * @memberof GroupApiSetGroupManager
+     */
+    readonly setManagerRequest: SetManagerRequest
+}
+
+/**
+ * Request parameters for setMembersTo operation in GroupApi.
+ * @export
+ * @interface GroupApiSetMembersToRequest
+ */
+export interface GroupApiSetMembersToRequest {
+    /**
+     * The group ID.
+     * @type {string}
+     * @memberof GroupApiSetMembersTo
+     */
+    readonly id: string
+
+    /**
+     * The member request.
+     * @type {MembersRequest}
+     * @memberof GroupApiSetMembersTo
+     */
+    readonly membersRequest: MembersRequest
+}
+
+/**
+ * Request parameters for updateGroup operation in GroupApi.
+ * @export
+ * @interface GroupApiUpdateGroupRequest
+ */
+export interface GroupApiUpdateGroupRequest {
+    /**
+     * The group ID.
+     * @type {string}
+     * @memberof GroupApiUpdateGroup
+     */
+    readonly id: string
+
+    /**
+     * The request for updating a group.
+     * @type {UpdateGroupRequest}
+     * @memberof GroupApiUpdateGroup
+     */
+    readonly updateGroupRequest: UpdateGroupRequest
+}
 
 /**
  * GroupApi - object-oriented interface
@@ -1097,146 +1329,133 @@ export class GroupApi extends BaseAPI {
     /**
      * Adds a new group with the group manager, name, and members specified in the request.
      * @summary Add a new group
-     * @param {GroupRequestDto} [groupRequestDto] 
+     * @param {GroupApiAddGroupRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupApi
      */
-    public addGroup(groupRequestDto?: GroupRequestDto, options?: RawAxiosRequestConfig) {
-        return GroupApiFp(this.configuration).addGroup(groupRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public addGroup(requestParameters: GroupApiAddGroupRequest = {}, options?: RawAxiosRequestConfig) {
+        return GroupApiFp(this.configuration).addGroup(requestParameters.groupRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Adds new group members to the group with the ID specified in the request.
      * @summary Add group members
-     * @param {string} id The group ID.
-     * @param {MembersRequest} membersRequest The member request.
+     * @param {GroupApiAddMembersToRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupApi
      */
-    public addMembersTo(id: string, membersRequest: MembersRequest, options?: RawAxiosRequestConfig) {
-        return GroupApiFp(this.configuration).addMembersTo(id, membersRequest, options).then((request) => request(this.axios, this.basePath));
+    public addMembersTo(requestParameters: GroupApiAddMembersToRequest, options?: RawAxiosRequestConfig) {
+        return GroupApiFp(this.configuration).addMembersTo(requestParameters.id, requestParameters.membersRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Deletes a group with the ID specified in the request from the list of groups on the portal.
      * @summary Delete a group
-     * @param {string} id The group ID.
+     * @param {GroupApiDeleteGroupRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupApi
      */
-    public deleteGroup(id: string, options?: RawAxiosRequestConfig) {
-        return GroupApiFp(this.configuration).deleteGroup(id, options).then((request) => request(this.axios, this.basePath));
+    public deleteGroup(requestParameters: GroupApiDeleteGroupRequest, options?: RawAxiosRequestConfig) {
+        return GroupApiFp(this.configuration).deleteGroup(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the detailed information about the selected group.
      * @summary Get a group
-     * @param {string} id The group ID.
-     * @param {boolean} [includeMembers] Specifies whether to include the group members or not.
+     * @param {GroupApiGetGroupRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupApi
      */
-    public getGroup(id: string, includeMembers?: boolean, options?: RawAxiosRequestConfig) {
-        return GroupApiFp(this.configuration).getGroup(id, includeMembers, options).then((request) => request(this.axios, this.basePath));
+    public getGroup(requestParameters: GroupApiGetGroupRequest, options?: RawAxiosRequestConfig) {
+        return GroupApiFp(this.configuration).getGroup(requestParameters.id, requestParameters.includeMembers, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns a list of groups for the user with the ID specified in the request.
      * @summary Get user groups
-     * @param {string} userid The user ID.
+     * @param {GroupApiGetGroupByUserIdRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupApi
      */
-    public getGroupByUserId(userid: string, options?: RawAxiosRequestConfig) {
-        return GroupApiFp(this.configuration).getGroupByUserId(userid, options).then((request) => request(this.axios, this.basePath));
+    public getGroupByUserId(requestParameters: GroupApiGetGroupByUserIdRequest, options?: RawAxiosRequestConfig) {
+        return GroupApiFp(this.configuration).getGroupByUserId(requestParameters.userid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the general information about all the groups, such as group ID and group manager.
      * @summary Get groups
-     * @param {string} [userId] The user ID.
-     * @param {boolean} [manager] Specifies if the user is a manager or not.
-     * @param {number} [count] The number of records to retrieve.
-     * @param {number} [startIndex] The starting index for paginated results.
-     * @param {string} [sortBy] Specifies the property used to sort the query results.
-     * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-     * @param {string} [filterValue] The text used for filtering or searching group data.
+     * @param {GroupApiGetGroupsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupApi
      */
-    public getGroups(userId?: string, manager?: boolean, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig) {
-        return GroupApiFp(this.configuration).getGroups(userId, manager, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(this.axios, this.basePath));
+    public getGroups(requestParameters: GroupApiGetGroupsRequest = {}, options?: RawAxiosRequestConfig) {
+        return GroupApiFp(this.configuration).getGroups(requestParameters.userId, requestParameters.manager, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Moves all the members from the selected group to another one specified in the request.
      * @summary Move group members
-     * @param {string} fromId The group ID to move from.
-     * @param {string} toId The group ID to move to.
+     * @param {GroupApiMoveMembersToRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupApi
      */
-    public moveMembersTo(fromId: string, toId: string, options?: RawAxiosRequestConfig) {
-        return GroupApiFp(this.configuration).moveMembersTo(fromId, toId, options).then((request) => request(this.axios, this.basePath));
+    public moveMembersTo(requestParameters: GroupApiMoveMembersToRequest, options?: RawAxiosRequestConfig) {
+        return GroupApiFp(this.configuration).moveMembersTo(requestParameters.fromId, requestParameters.toId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Removes the group members specified in the request from the selected group.
      * @summary Remove group members
-     * @param {string} id The group ID.
-     * @param {MembersRequest} membersRequest The member request.
+     * @param {GroupApiRemoveMembersFromRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupApi
      */
-    public removeMembersFrom(id: string, membersRequest: MembersRequest, options?: RawAxiosRequestConfig) {
-        return GroupApiFp(this.configuration).removeMembersFrom(id, membersRequest, options).then((request) => request(this.axios, this.basePath));
+    public removeMembersFrom(requestParameters: GroupApiRemoveMembersFromRequest, options?: RawAxiosRequestConfig) {
+        return GroupApiFp(this.configuration).removeMembersFrom(requestParameters.id, requestParameters.membersRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Sets a user with the ID specified in the request as a group manager.
      * @summary Set a group manager
-     * @param {string} id The group ID.
-     * @param {SetManagerRequest} setManagerRequest The request for setting a group manager.
+     * @param {GroupApiSetGroupManagerRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupApi
      */
-    public setGroupManager(id: string, setManagerRequest: SetManagerRequest, options?: RawAxiosRequestConfig) {
-        return GroupApiFp(this.configuration).setGroupManager(id, setManagerRequest, options).then((request) => request(this.axios, this.basePath));
+    public setGroupManager(requestParameters: GroupApiSetGroupManagerRequest, options?: RawAxiosRequestConfig) {
+        return GroupApiFp(this.configuration).setGroupManager(requestParameters.id, requestParameters.setManagerRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Replaces the group members with those specified in the request.
      * @summary Replace group members
-     * @param {string} id The group ID.
-     * @param {MembersRequest} membersRequest The member request.
+     * @param {GroupApiSetMembersToRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupApi
      */
-    public setMembersTo(id: string, membersRequest: MembersRequest, options?: RawAxiosRequestConfig) {
-        return GroupApiFp(this.configuration).setMembersTo(id, membersRequest, options).then((request) => request(this.axios, this.basePath));
+    public setMembersTo(requestParameters: GroupApiSetMembersToRequest, options?: RawAxiosRequestConfig) {
+        return GroupApiFp(this.configuration).setMembersTo(requestParameters.id, requestParameters.membersRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Updates the existing group changing the group manager, name, and/or members.
      * @summary Update a group
-     * @param {string} id The group ID.
-     * @param {UpdateGroupRequest} updateGroupRequest The request for updating a group.
+     * @param {GroupApiUpdateGroupRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupApi
      */
-    public updateGroup(id: string, updateGroupRequest: UpdateGroupRequest, options?: RawAxiosRequestConfig) {
-        return GroupApiFp(this.configuration).updateGroup(id, updateGroupRequest, options).then((request) => request(this.axios, this.basePath));
+    public updateGroup(requestParameters: GroupApiUpdateGroupRequest, options?: RawAxiosRequestConfig) {
+        return GroupApiFp(this.configuration).updateGroup(requestParameters.id, requestParameters.updateGroupRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

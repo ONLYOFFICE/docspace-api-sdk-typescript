@@ -724,61 +724,50 @@ export const AgentsApiFactory = function (configuration?: Configuration, basePat
         /**
          * Creates an ai agent.
          * @summary Create an ai agent
-         * @param {CreateAgentRequestDto} [createAgentRequestDto] 
+         * @param {AgentsApiCreateAgentRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for createAgent operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-agent/
          * @throws {RequiredError}
          */
-        createAgent(createAgentRequestDto?: CreateAgentRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
-            return localVarFp.createAgent(createAgentRequestDto, options).then((request) => request(axios, basePath));
+        createAgent(requestParameters: AgentsApiCreateAgentRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
+            return localVarFp.createAgent(requestParameters.createAgentRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Removes an ai agent.
          * @summary Remove an ai agent
-         * @param {number} id The room ID.
-         * @param {DeleteRoomRequest} deleteRoomRequest The parameters for deleting a room.
+         * @param {AgentsApiDeleteAgentRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteAgent operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-agent/
          * @throws {RequiredError}
          */
-        deleteAgent(id: number, deleteRoomRequest: DeleteRoomRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationWrapper> {
-            return localVarFp.deleteAgent(id, deleteRoomRequest, options).then((request) => request(axios, basePath));
+        deleteAgent(requestParameters: AgentsApiDeleteAgentRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationWrapper> {
+            return localVarFp.deleteAgent(requestParameters.id, requestParameters.deleteRoomRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns an ai agent.
          * @summary Return an ai agent
-         * @param {number} id The room ID.
+         * @param {AgentsApiGetAgentInfoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getAgentInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-agent-info/
          * @throws {RequiredError}
          */
-        getAgentInfo(id: number, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
-            return localVarFp.getAgentInfo(id, options).then((request) => request(axios, basePath));
+        getAgentInfo(requestParameters: AgentsApiGetAgentInfoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
+            return localVarFp.getAgentInfo(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * Get ai agents
          * @summary Get ai agents
-         * @param {string} [subjectId] The filter by user ID.
-         * @param {boolean} [withoutTags] Specifies whether to search by tags or not.
-         * @param {string} [tags] The tags in the serialized format.
-         * @param {boolean} [excludeSubject] Specifies whether to exclude search by user or group ID.
-         * @param {SubjectFilter} [subjectFilter] The filter by user (Owner - 0, Member - 1).
-         * @param {QuotaFilter} [quotaFilter] The filter by quota (All - 0, Default - 1, Custom - 2).
-         * @param {number} [count] Specifies the maximum number of items to retrieve.
-         * @param {number} [startIndex] The index from which to start retrieving the room content.
-         * @param {string} [sortBy] Specifies the field by which the room content should be sorted.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text filter value used to refine search or query operations.
+         * @param {AgentsApiGetAgentsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getAgents operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-agents/
          * @throws {RequiredError}
          */
-        getAgents(subjectId?: string, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
-            return localVarFp.getAgents(subjectId, withoutTags, tags, excludeSubject, subjectFilter, quotaFilter, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(axios, basePath));
+        getAgents(requestParameters: AgentsApiGetAgentsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
+            return localVarFp.getAgents(requestParameters.subjectId, requestParameters.withoutTags, requestParameters.tags, requestParameters.excludeSubject, requestParameters.subjectFilter, requestParameters.quotaFilter, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the room new items.
@@ -794,42 +783,223 @@ export const AgentsApiFactory = function (configuration?: Configuration, basePat
         /**
          * Resets the quota limit for the AI agents with the IDs specified in the request.
          * @summary Reset the AI agents quota limit
-         * @param {UpdateRoomsRoomIdsRequestDtoInteger} [updateRoomsRoomIdsRequestDtoInteger] 
+         * @param {AgentsApiResetAgentsQuotaRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for resetAgentsQuota operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-agents-quota/
          * @throws {RequiredError}
          */
-        resetAgentsQuota(updateRoomsRoomIdsRequestDtoInteger?: UpdateRoomsRoomIdsRequestDtoInteger, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerArrayWrapper> {
-            return localVarFp.resetAgentsQuota(updateRoomsRoomIdsRequestDtoInteger, options).then((request) => request(axios, basePath));
+        resetAgentsQuota(requestParameters: AgentsApiResetAgentsQuotaRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerArrayWrapper> {
+            return localVarFp.resetAgentsQuota(requestParameters.updateRoomsRoomIdsRequestDtoInteger, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates an ai agent.
          * @summary Update an ai agent
-         * @param {number} id The room ID.
-         * @param {UpdateRoomRequest} updateRoomRequest The request parameters for updating a room.
+         * @param {AgentsApiUpdateAgentRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateAgent operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-agent/
          * @throws {RequiredError}
          */
-        updateAgent(id: number, updateRoomRequest: UpdateRoomRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
-            return localVarFp.updateAgent(id, updateRoomRequest, options).then((request) => request(axios, basePath));
+        updateAgent(requestParameters: AgentsApiUpdateAgentRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
+            return localVarFp.updateAgent(requestParameters.id, requestParameters.updateRoomRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Changes the quota limit for the AI agents with the IDs specified in the request.
          * @summary Change the AI agent quota limit
-         * @param {UpdateRoomsQuotaRequestDtoInteger} [updateRoomsQuotaRequestDtoInteger] 
+         * @param {AgentsApiUpdateAgentsQuotaRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateAgentsQuota operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-agents-quota/
          * @throws {RequiredError}
          */
-        updateAgentsQuota(updateRoomsQuotaRequestDtoInteger?: UpdateRoomsQuotaRequestDtoInteger, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerArrayWrapper> {
-            return localVarFp.updateAgentsQuota(updateRoomsQuotaRequestDtoInteger, options).then((request) => request(axios, basePath));
+        updateAgentsQuota(requestParameters: AgentsApiUpdateAgentsQuotaRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerArrayWrapper> {
+            return localVarFp.updateAgentsQuota(requestParameters.updateRoomsQuotaRequestDtoInteger, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for createAgent operation in AgentsApi.
+ * @export
+ * @interface AgentsApiCreateAgentRequest
+ */
+export interface AgentsApiCreateAgentRequest {
+    /**
+     * 
+     * @type {CreateAgentRequestDto}
+     * @memberof AgentsApiCreateAgent
+     */
+    readonly createAgentRequestDto?: CreateAgentRequestDto
+}
+
+/**
+ * Request parameters for deleteAgent operation in AgentsApi.
+ * @export
+ * @interface AgentsApiDeleteAgentRequest
+ */
+export interface AgentsApiDeleteAgentRequest {
+    /**
+     * The room ID.
+     * @type {number}
+     * @memberof AgentsApiDeleteAgent
+     */
+    readonly id: number
+
+    /**
+     * The parameters for deleting a room.
+     * @type {DeleteRoomRequest}
+     * @memberof AgentsApiDeleteAgent
+     */
+    readonly deleteRoomRequest: DeleteRoomRequest
+}
+
+/**
+ * Request parameters for getAgentInfo operation in AgentsApi.
+ * @export
+ * @interface AgentsApiGetAgentInfoRequest
+ */
+export interface AgentsApiGetAgentInfoRequest {
+    /**
+     * The room ID.
+     * @type {number}
+     * @memberof AgentsApiGetAgentInfo
+     */
+    readonly id: number
+}
+
+/**
+ * Request parameters for getAgents operation in AgentsApi.
+ * @export
+ * @interface AgentsApiGetAgentsRequest
+ */
+export interface AgentsApiGetAgentsRequest {
+    /**
+     * The filter by user ID.
+     * @type {string}
+     * @memberof AgentsApiGetAgents
+     */
+    readonly subjectId?: string
+
+    /**
+     * Specifies whether to search by tags or not.
+     * @type {boolean}
+     * @memberof AgentsApiGetAgents
+     */
+    readonly withoutTags?: boolean
+
+    /**
+     * The tags in the serialized format.
+     * @type {string}
+     * @memberof AgentsApiGetAgents
+     */
+    readonly tags?: string
+
+    /**
+     * Specifies whether to exclude search by user or group ID.
+     * @type {boolean}
+     * @memberof AgentsApiGetAgents
+     */
+    readonly excludeSubject?: boolean
+
+    /**
+     * The filter by user (Owner - 0, Member - 1).
+     * @type {SubjectFilter}
+     * @memberof AgentsApiGetAgents
+     */
+    readonly subjectFilter?: SubjectFilter
+
+    /**
+     * The filter by quota (All - 0, Default - 1, Custom - 2).
+     * @type {QuotaFilter}
+     * @memberof AgentsApiGetAgents
+     */
+    readonly quotaFilter?: QuotaFilter
+
+    /**
+     * Specifies the maximum number of items to retrieve.
+     * @type {number}
+     * @memberof AgentsApiGetAgents
+     */
+    readonly count?: number
+
+    /**
+     * The index from which to start retrieving the room content.
+     * @type {number}
+     * @memberof AgentsApiGetAgents
+     */
+    readonly startIndex?: number
+
+    /**
+     * Specifies the field by which the room content should be sorted.
+     * @type {string}
+     * @memberof AgentsApiGetAgents
+     */
+    readonly sortBy?: string
+
+    /**
+     * The order in which the results are sorted.
+     * @type {SortOrder}
+     * @memberof AgentsApiGetAgents
+     */
+    readonly sortOrder?: SortOrder
+
+    /**
+     * The text filter value used to refine search or query operations.
+     * @type {string}
+     * @memberof AgentsApiGetAgents
+     */
+    readonly filterValue?: string
+}
+
+/**
+ * Request parameters for resetAgentsQuota operation in AgentsApi.
+ * @export
+ * @interface AgentsApiResetAgentsQuotaRequest
+ */
+export interface AgentsApiResetAgentsQuotaRequest {
+    /**
+     * 
+     * @type {UpdateRoomsRoomIdsRequestDtoInteger}
+     * @memberof AgentsApiResetAgentsQuota
+     */
+    readonly updateRoomsRoomIdsRequestDtoInteger?: UpdateRoomsRoomIdsRequestDtoInteger
+}
+
+/**
+ * Request parameters for updateAgent operation in AgentsApi.
+ * @export
+ * @interface AgentsApiUpdateAgentRequest
+ */
+export interface AgentsApiUpdateAgentRequest {
+    /**
+     * The room ID.
+     * @type {number}
+     * @memberof AgentsApiUpdateAgent
+     */
+    readonly id: number
+
+    /**
+     * The request parameters for updating a room.
+     * @type {UpdateRoomRequest}
+     * @memberof AgentsApiUpdateAgent
+     */
+    readonly updateRoomRequest: UpdateRoomRequest
+}
+
+/**
+ * Request parameters for updateAgentsQuota operation in AgentsApi.
+ * @export
+ * @interface AgentsApiUpdateAgentsQuotaRequest
+ */
+export interface AgentsApiUpdateAgentsQuotaRequest {
+    /**
+     * 
+     * @type {UpdateRoomsQuotaRequestDtoInteger}
+     * @memberof AgentsApiUpdateAgentsQuota
+     */
+    readonly updateRoomsQuotaRequestDtoInteger?: UpdateRoomsQuotaRequestDtoInteger
+}
 
 /**
  * AgentsApi - object-oriented interface
@@ -841,60 +1011,49 @@ export class AgentsApi extends BaseAPI {
     /**
      * Creates an ai agent.
      * @summary Create an ai agent
-     * @param {CreateAgentRequestDto} [createAgentRequestDto] 
+     * @param {AIAgentsApiCreateAgentRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AgentsApi
      */
-    public createAgent(createAgentRequestDto?: CreateAgentRequestDto, options?: RawAxiosRequestConfig) {
-        return AgentsApiFp(this.configuration).createAgent(createAgentRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public createAgent(requestParameters: AgentsApiCreateAgentRequest = {}, options?: RawAxiosRequestConfig) {
+        return AgentsApiFp(this.configuration).createAgent(requestParameters.createAgentRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Removes an ai agent.
      * @summary Remove an ai agent
-     * @param {number} id The room ID.
-     * @param {DeleteRoomRequest} deleteRoomRequest The parameters for deleting a room.
+     * @param {AIAgentsApiDeleteAgentRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AgentsApi
      */
-    public deleteAgent(id: number, deleteRoomRequest: DeleteRoomRequest, options?: RawAxiosRequestConfig) {
-        return AgentsApiFp(this.configuration).deleteAgent(id, deleteRoomRequest, options).then((request) => request(this.axios, this.basePath));
+    public deleteAgent(requestParameters: AgentsApiDeleteAgentRequest, options?: RawAxiosRequestConfig) {
+        return AgentsApiFp(this.configuration).deleteAgent(requestParameters.id, requestParameters.deleteRoomRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns an ai agent.
      * @summary Return an ai agent
-     * @param {number} id The room ID.
+     * @param {AIAgentsApiGetAgentInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AgentsApi
      */
-    public getAgentInfo(id: number, options?: RawAxiosRequestConfig) {
-        return AgentsApiFp(this.configuration).getAgentInfo(id, options).then((request) => request(this.axios, this.basePath));
+    public getAgentInfo(requestParameters: AgentsApiGetAgentInfoRequest, options?: RawAxiosRequestConfig) {
+        return AgentsApiFp(this.configuration).getAgentInfo(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Get ai agents
      * @summary Get ai agents
-     * @param {string} [subjectId] The filter by user ID.
-     * @param {boolean} [withoutTags] Specifies whether to search by tags or not.
-     * @param {string} [tags] The tags in the serialized format.
-     * @param {boolean} [excludeSubject] Specifies whether to exclude search by user or group ID.
-     * @param {SubjectFilter} [subjectFilter] The filter by user (Owner - 0, Member - 1).
-     * @param {QuotaFilter} [quotaFilter] The filter by quota (All - 0, Default - 1, Custom - 2).
-     * @param {number} [count] Specifies the maximum number of items to retrieve.
-     * @param {number} [startIndex] The index from which to start retrieving the room content.
-     * @param {string} [sortBy] Specifies the field by which the room content should be sorted.
-     * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-     * @param {string} [filterValue] The text filter value used to refine search or query operations.
+     * @param {AIAgentsApiGetAgentsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AgentsApi
      */
-    public getAgents(subjectId?: string, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig) {
-        return AgentsApiFp(this.configuration).getAgents(subjectId, withoutTags, tags, excludeSubject, subjectFilter, quotaFilter, count, startIndex, sortBy, sortOrder, filterValue, options).then((request) => request(this.axios, this.basePath));
+    public getAgents(requestParameters: AgentsApiGetAgentsRequest = {}, options?: RawAxiosRequestConfig) {
+        return AgentsApiFp(this.configuration).getAgents(requestParameters.subjectId, requestParameters.withoutTags, requestParameters.tags, requestParameters.excludeSubject, requestParameters.subjectFilter, requestParameters.quotaFilter, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -911,38 +1070,37 @@ export class AgentsApi extends BaseAPI {
     /**
      * Resets the quota limit for the AI agents with the IDs specified in the request.
      * @summary Reset the AI agents quota limit
-     * @param {UpdateRoomsRoomIdsRequestDtoInteger} [updateRoomsRoomIdsRequestDtoInteger] 
+     * @param {AIAgentsApiResetAgentsQuotaRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AgentsApi
      */
-    public resetAgentsQuota(updateRoomsRoomIdsRequestDtoInteger?: UpdateRoomsRoomIdsRequestDtoInteger, options?: RawAxiosRequestConfig) {
-        return AgentsApiFp(this.configuration).resetAgentsQuota(updateRoomsRoomIdsRequestDtoInteger, options).then((request) => request(this.axios, this.basePath));
+    public resetAgentsQuota(requestParameters: AgentsApiResetAgentsQuotaRequest = {}, options?: RawAxiosRequestConfig) {
+        return AgentsApiFp(this.configuration).resetAgentsQuota(requestParameters.updateRoomsRoomIdsRequestDtoInteger, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Updates an ai agent.
      * @summary Update an ai agent
-     * @param {number} id The room ID.
-     * @param {UpdateRoomRequest} updateRoomRequest The request parameters for updating a room.
+     * @param {AIAgentsApiUpdateAgentRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AgentsApi
      */
-    public updateAgent(id: number, updateRoomRequest: UpdateRoomRequest, options?: RawAxiosRequestConfig) {
-        return AgentsApiFp(this.configuration).updateAgent(id, updateRoomRequest, options).then((request) => request(this.axios, this.basePath));
+    public updateAgent(requestParameters: AgentsApiUpdateAgentRequest, options?: RawAxiosRequestConfig) {
+        return AgentsApiFp(this.configuration).updateAgent(requestParameters.id, requestParameters.updateRoomRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Changes the quota limit for the AI agents with the IDs specified in the request.
      * @summary Change the AI agent quota limit
-     * @param {UpdateRoomsQuotaRequestDtoInteger} [updateRoomsQuotaRequestDtoInteger] 
+     * @param {AIAgentsApiUpdateAgentsQuotaRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AgentsApi
      */
-    public updateAgentsQuota(updateRoomsQuotaRequestDtoInteger?: UpdateRoomsQuotaRequestDtoInteger, options?: RawAxiosRequestConfig) {
-        return AgentsApiFp(this.configuration).updateAgentsQuota(updateRoomsQuotaRequestDtoInteger, options).then((request) => request(this.axios, this.basePath));
+    public updateAgentsQuota(requestParameters: AgentsApiUpdateAgentsQuotaRequest = {}, options?: RawAxiosRequestConfig) {
+        return AgentsApiFp(this.configuration).updateAgentsQuota(requestParameters.updateRoomsQuotaRequestDtoInteger, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

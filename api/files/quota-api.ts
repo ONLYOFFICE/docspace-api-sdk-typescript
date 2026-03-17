@@ -202,29 +202,57 @@ export const QuotaApiFactory = function (configuration?: Configuration, basePath
         /**
          * Resets the quota limit for the rooms with the IDs specified in the request.
          * @summary Reset the room quota limit
-         * @param {UpdateRoomsRoomIdsRequestDtoInteger} [updateRoomsRoomIdsRequestDtoInteger] 
+         * @param {QuotaApiResetRoomQuotaRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for resetRoomQuota operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-room-quota/
          * @throws {RequiredError}
          */
-        resetRoomQuota(updateRoomsRoomIdsRequestDtoInteger?: UpdateRoomsRoomIdsRequestDtoInteger, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerArrayWrapper> {
-            return localVarFp.resetRoomQuota(updateRoomsRoomIdsRequestDtoInteger, options).then((request) => request(axios, basePath));
+        resetRoomQuota(requestParameters: QuotaApiResetRoomQuotaRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerArrayWrapper> {
+            return localVarFp.resetRoomQuota(requestParameters.updateRoomsRoomIdsRequestDtoInteger, options).then((request) => request(axios, basePath));
         },
         /**
          * Changes the quota limit for the rooms with the IDs specified in the request.
          * @summary Change the room quota limit
-         * @param {UpdateRoomsQuotaRequestDtoInteger} [updateRoomsQuotaRequestDtoInteger] 
+         * @param {QuotaApiUpdateRoomsQuotaRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateRoomsQuota operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-rooms-quota/
          * @throws {RequiredError}
          */
-        updateRoomsQuota(updateRoomsQuotaRequestDtoInteger?: UpdateRoomsQuotaRequestDtoInteger, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerArrayWrapper> {
-            return localVarFp.updateRoomsQuota(updateRoomsQuotaRequestDtoInteger, options).then((request) => request(axios, basePath));
+        updateRoomsQuota(requestParameters: QuotaApiUpdateRoomsQuotaRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerArrayWrapper> {
+            return localVarFp.updateRoomsQuota(requestParameters.updateRoomsQuotaRequestDtoInteger, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for resetRoomQuota operation in QuotaApi.
+ * @export
+ * @interface QuotaApiResetRoomQuotaRequest
+ */
+export interface QuotaApiResetRoomQuotaRequest {
+    /**
+     * 
+     * @type {UpdateRoomsRoomIdsRequestDtoInteger}
+     * @memberof QuotaApiResetRoomQuota
+     */
+    readonly updateRoomsRoomIdsRequestDtoInteger?: UpdateRoomsRoomIdsRequestDtoInteger
+}
+
+/**
+ * Request parameters for updateRoomsQuota operation in QuotaApi.
+ * @export
+ * @interface QuotaApiUpdateRoomsQuotaRequest
+ */
+export interface QuotaApiUpdateRoomsQuotaRequest {
+    /**
+     * 
+     * @type {UpdateRoomsQuotaRequestDtoInteger}
+     * @memberof QuotaApiUpdateRoomsQuota
+     */
+    readonly updateRoomsQuotaRequestDtoInteger?: UpdateRoomsQuotaRequestDtoInteger
+}
 
 /**
  * QuotaApi - object-oriented interface
@@ -236,25 +264,25 @@ export class QuotaApi extends BaseAPI {
     /**
      * Resets the quota limit for the rooms with the IDs specified in the request.
      * @summary Reset the room quota limit
-     * @param {UpdateRoomsRoomIdsRequestDtoInteger} [updateRoomsRoomIdsRequestDtoInteger] 
+     * @param {FilesQuotaApiResetRoomQuotaRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QuotaApi
      */
-    public resetRoomQuota(updateRoomsRoomIdsRequestDtoInteger?: UpdateRoomsRoomIdsRequestDtoInteger, options?: RawAxiosRequestConfig) {
-        return QuotaApiFp(this.configuration).resetRoomQuota(updateRoomsRoomIdsRequestDtoInteger, options).then((request) => request(this.axios, this.basePath));
+    public resetRoomQuota(requestParameters: QuotaApiResetRoomQuotaRequest = {}, options?: RawAxiosRequestConfig) {
+        return QuotaApiFp(this.configuration).resetRoomQuota(requestParameters.updateRoomsRoomIdsRequestDtoInteger, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Changes the quota limit for the rooms with the IDs specified in the request.
      * @summary Change the room quota limit
-     * @param {UpdateRoomsQuotaRequestDtoInteger} [updateRoomsQuotaRequestDtoInteger] 
+     * @param {FilesQuotaApiUpdateRoomsQuotaRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QuotaApi
      */
-    public updateRoomsQuota(updateRoomsQuotaRequestDtoInteger?: UpdateRoomsQuotaRequestDtoInteger, options?: RawAxiosRequestConfig) {
-        return QuotaApiFp(this.configuration).updateRoomsQuota(updateRoomsQuotaRequestDtoInteger, options).then((request) => request(this.axios, this.basePath));
+    public updateRoomsQuota(requestParameters: QuotaApiUpdateRoomsQuotaRequest = {}, options?: RawAxiosRequestConfig) {
+        return QuotaApiFp(this.configuration).updateRoomsQuota(requestParameters.updateRoomsQuotaRequestDtoInteger, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

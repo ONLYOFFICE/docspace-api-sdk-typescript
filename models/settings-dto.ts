@@ -195,6 +195,10 @@ export interface SettingsDto {
     'logoText'?: string | null;
     'externalResources'?: CultureSpecificExternalResources;
     'defaultFolderType'?: FolderType;
+    /**
+     * Specifies if an external database is connected for storing form results.
+     */
+    'externalDbEnabled'?: boolean;
 }
 
 

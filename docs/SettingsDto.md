@@ -49,6 +49,7 @@ Name | Type | Description | Notes
 **logoText** | **string** | The white label logo text. | [optional] [default to undefined]
 **externalResources** | [**CultureSpecificExternalResources**](CultureSpecificExternalResources.md) |  | [optional] [default to undefined]
 **defaultFolderType** | [**FolderType**](FolderType.md) |  | [optional] [default to undefined]
+**externalDbEnabled** | **boolean** | Specifies if an external database is connected for storing form results. | [optional] [default to undefined]
 
 ## Example
 
@@ -99,6 +100,7 @@ const instance: SettingsDto = {
     logoText,
     externalResources,
     defaultFolderType,
+    externalDbEnabled,
 };
 ```
 

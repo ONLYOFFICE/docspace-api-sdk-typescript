@@ -2215,50 +2215,50 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
         /**
          * This method processes a payment for a wallet service using the configured payment method.  Requires the tariff service to be configured and a valid payment method to be set for the customer.  Rate limiting is applied according to the payments API policy.
          * @summary Purchases a wallet service with the specified quantity.
-         * @param {BuyWalletServiceRequestDto} [buyWalletServiceRequestDto] 
+         * @param {PaymentApiBuyWalletServiceRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for buyWalletService operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/buy-wallet-service/
          * @throws {RequiredError}
          */
-        buyWalletService(buyWalletServiceRequestDto?: BuyWalletServiceRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<ServicePaymentWrapper> {
-            return localVarFp.buyWalletService(buyWalletServiceRequestDto, options).then((request) => request(axios, basePath));
+        buyWalletService(requestParameters: PaymentApiBuyWalletServiceRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ServicePaymentWrapper> {
+            return localVarFp.buyWalletService(requestParameters.buyWalletServiceRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Calculates an amount of the wallet payment with the parameters specified in the request.
          * @summary Calculate the wallet payment amount
-         * @param {WalletQuantityRequestDto} [walletQuantityRequestDto] 
+         * @param {PaymentApiCalculateWalletPaymentRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for calculateWalletPayment operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/calculate-wallet-payment/
          * @throws {RequiredError}
          */
-        calculateWalletPayment(walletQuantityRequestDto?: WalletQuantityRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<PaymentCalculationWrapper> {
-            return localVarFp.calculateWalletPayment(walletQuantityRequestDto, options).then((request) => request(axios, basePath));
+        calculateWalletPayment(requestParameters: PaymentApiCalculateWalletPaymentRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<PaymentCalculationWrapper> {
+            return localVarFp.calculateWalletPayment(requestParameters.walletQuantityRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Changes the state of a wallet service for the current tenant.  Requires permission to edit portal settings and a configured tariff service.  Adds or removes the specified service from the enabled services list based on the enabled flag.
          * @summary Change tenant wallet service state
-         * @param {ChangeWalletServiceStateRequestDto} [changeWalletServiceStateRequestDto] 
+         * @param {PaymentApiChangeTenantWalletServiceStateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for changeTenantWalletServiceState operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-tenant-wallet-service-state/
          * @throws {RequiredError}
          */
-        changeTenantWalletServiceState(changeWalletServiceStateRequestDto?: ChangeWalletServiceStateRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<TenantWalletServiceSettingsWrapper> {
-            return localVarFp.changeTenantWalletServiceState(changeWalletServiceStateRequestDto, options).then((request) => request(axios, basePath));
+        changeTenantWalletServiceState(requestParameters: PaymentApiChangeTenantWalletServiceStateRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantWalletServiceSettingsWrapper> {
+            return localVarFp.changeTenantWalletServiceState(requestParameters.changeWalletServiceStateRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Starts generating a customer operations report as an xlsx file and saves it in Documents.
          * @summary Start the customer operations report generation
-         * @param {CustomerOperationsReportRequestDto} [customerOperationsReportRequestDto] 
+         * @param {PaymentApiCreateCustomerOperationsReportRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for createCustomerOperationsReport operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-customer-operations-report/
          * @throws {RequiredError}
          */
-        createCustomerOperationsReport(customerOperationsReportRequestDto?: CustomerOperationsReportRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<DocumentBuilderTaskWrapper> {
-            return localVarFp.createCustomerOperationsReport(customerOperationsReportRequestDto, options).then((request) => request(axios, basePath));
+        createCustomerOperationsReport(requestParameters: PaymentApiCreateCustomerOperationsReportRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<DocumentBuilderTaskWrapper> {
+            return localVarFp.createCustomerOperationsReport(requestParameters.customerOperationsReportRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieves the pricing information for AI models including chat, embedding, and web search services.  The prices are returned in the configured currency and normalized per million tokens.  Requires administrator permissions to access.
@@ -2274,61 +2274,50 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
         /**
          * Returns the URL to the checkout setup page.
          * @summary Get the checkout setup page URL
-         * @param {string} [backUrl] The URL where the user will be redirected after completing the setup.
+         * @param {PaymentApiGetCheckoutSetupUrlRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getCheckoutSetupUrl operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-checkout-setup-url/
          * @throws {RequiredError}
          */
-        getCheckoutSetupUrl(backUrl?: string, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.getCheckoutSetupUrl(backUrl, options).then((request) => request(axios, basePath));
+        getCheckoutSetupUrl(requestParameters: PaymentApiGetCheckoutSetupUrlRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.getCheckoutSetupUrl(requestParameters.backUrl, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the customer balance from the accounting service.
          * @summary Get the customer balance
-         * @param {boolean} [refresh] Specifies whether to refresh the payment information cache or not.
+         * @param {PaymentApiGetCustomerBalanceRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getCustomerBalance operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-balance/
          * @throws {RequiredError}
          */
-        getCustomerBalance(refresh?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<BalanceWrapper> {
-            return localVarFp.getCustomerBalance(refresh, options).then((request) => request(axios, basePath));
+        getCustomerBalance(requestParameters: PaymentApiGetCustomerBalanceRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BalanceWrapper> {
+            return localVarFp.getCustomerBalance(requestParameters.refresh, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the customer information.
          * @summary Get the customer information
-         * @param {boolean} [refresh] Specifies whether to refresh the payment information cache or not.
+         * @param {PaymentApiGetCustomerInfoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getCustomerInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-info/
          * @throws {RequiredError}
          */
-        getCustomerInfo(refresh?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<CustomerInfoWrapper> {
-            return localVarFp.getCustomerInfo(refresh, options).then((request) => request(axios, basePath));
+        getCustomerInfo(requestParameters: PaymentApiGetCustomerInfoRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<CustomerInfoWrapper> {
+            return localVarFp.getCustomerInfo(requestParameters.refresh, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the report of customer operations from the accounting service.
          * @summary Get the customer operations
-         * @param {number} [offset] The number of items to skip for pagination. The default value is 0.
-         * @param {number} [limit] The maximum number of items to return for pagination. The default value is 25.
-         * @param {string} [serviceName] The service name.
-         * @param {string} [startDate] The report start date.
-         * @param {string} [endDate] The report end date.
-         * @param {string} [participantName] The participant name.
-         * @param {boolean} [credit] Specifies whether to include credit operations in the report.
-         * @param {boolean} [debit] Specifies whether to include debit operations in the report.
-         * @param {OperationType} [types] List of operation types to filter by.
-         * @param {OperationStatus} [status] List of operation status to filter by.
-         * @param {string} [orderBy] The field to order by.
-         * @param {OperationOrderType} [orderType] Order direction: Ascending or Descending.
+         * @param {PaymentApiGetCustomerOperationsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getCustomerOperations operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-operations/
          * @throws {RequiredError}
          */
-        getCustomerOperations(offset?: number, limit?: number, serviceName?: string, startDate?: string, endDate?: string, participantName?: string, credit?: boolean, debit?: boolean, types?: OperationType, status?: OperationStatus, orderBy?: string, orderType?: OperationOrderType, options?: RawAxiosRequestConfig): AxiosPromise<ReportWrapper> {
-            return localVarFp.getCustomerOperations(offset, limit, serviceName, startDate, endDate, participantName, credit, debit, types, status, orderBy, orderType, options).then((request) => request(axios, basePath));
+        getCustomerOperations(requestParameters: PaymentApiGetCustomerOperationsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ReportWrapper> {
+            return localVarFp.getCustomerOperations(requestParameters.offset, requestParameters.limit, requestParameters.serviceName, requestParameters.startDate, requestParameters.endDate, requestParameters.participantName, requestParameters.credit, requestParameters.debit, requestParameters.types, requestParameters.status, requestParameters.orderBy, requestParameters.orderType, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the status of generating a customer operations report.
@@ -2344,27 +2333,26 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
         /**
          * Returns the service quota from the accounting service.
          * @summary Get the service quota
-         * @param {string} [serviceName] The service name.
-         * @param {boolean} [refresh] Specifies whether to refresh the payment information cache or not.
+         * @param {PaymentApiGetCustomerServiceQuotaRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getCustomerServiceQuota operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-service-quota/
          * @throws {RequiredError}
          */
-        getCustomerServiceQuota(serviceName?: string, refresh?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<BalanceWrapper> {
-            return localVarFp.getCustomerServiceQuota(serviceName, refresh, options).then((request) => request(axios, basePath));
+        getCustomerServiceQuota(requestParameters: PaymentApiGetCustomerServiceQuotaRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BalanceWrapper> {
+            return localVarFp.getCustomerServiceQuota(requestParameters.serviceName, requestParameters.refresh, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the URL to the payment account.
          * @summary Get the payment account
-         * @param {string} [backUrl] The URL where the user will be redirected after payment processing.
+         * @param {PaymentApiGetPaymentAccountRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getPaymentAccount operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-account/
          * @throws {RequiredError}
          */
-        getPaymentAccount(backUrl?: string, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.getPaymentAccount(backUrl, options).then((request) => request(axios, basePath));
+        getPaymentAccount(requestParameters: PaymentApiGetPaymentAccountRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.getPaymentAccount(requestParameters.backUrl, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the available portal currencies.
@@ -2380,26 +2368,26 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
         /**
          * Returns the available portal quotas.
          * @summary Get quotas
-         * @param {boolean} [wallet] Specifies whether to return the wallet quotas only.
+         * @param {PaymentApiGetPaymentQuotasRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getPaymentQuotas operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-quotas/
          * @throws {RequiredError}
          */
-        getPaymentQuotas(wallet?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<QuotaArrayWrapper> {
-            return localVarFp.getPaymentQuotas(wallet, options).then((request) => request(axios, basePath));
+        getPaymentQuotas(requestParameters: PaymentApiGetPaymentQuotasRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<QuotaArrayWrapper> {
+            return localVarFp.getPaymentQuotas(requestParameters.wallet, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the URL to the payment page.
          * @summary Get the payment page URL
-         * @param {PaymentUrlRequestDto} [paymentUrlRequestDto] 
+         * @param {PaymentApiGetPaymentUrlRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getPaymentUrl operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-url/
          * @throws {RequiredError}
          */
-        getPaymentUrl(paymentUrlRequestDto?: PaymentUrlRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.getPaymentUrl(paymentUrlRequestDto, options).then((request) => request(axios, basePath));
+        getPaymentUrl(requestParameters: PaymentApiGetPaymentUrlRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.getPaymentUrl(requestParameters.paymentUrlRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the available portal prices.
@@ -2415,14 +2403,14 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
         /**
          * Returns the payment information about the current portal quota.
          * @summary Get quota payment information
-         * @param {boolean} [refresh] Specifies whether to refresh the payment information cache or not.
+         * @param {PaymentApiGetQuotaPaymentInformationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getQuotaPaymentInformation operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-quota-payment-information/
          * @throws {RequiredError}
          */
-        getQuotaPaymentInformation(refresh?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<QuotaWrapper> {
-            return localVarFp.getQuotaPaymentInformation(refresh, options).then((request) => request(axios, basePath));
+        getQuotaPaymentInformation(requestParameters: PaymentApiGetQuotaPaymentInformationRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<QuotaWrapper> {
+            return localVarFp.getQuotaPaymentInformation(requestParameters.refresh, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the list of AI chat model IDs that are restricted (disabled) for the current tenant.  Restricted models cannot be used for AI chat conversations by any user within the portal.  Only DocSpace administrators can access this endpoint.
@@ -2460,14 +2448,14 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
         /**
          * Returns the specified wallet service.
          * @summary Get wallet service
-         * @param {TenantWalletService} service The wallet service type.
+         * @param {PaymentApiGetWalletServiceRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getWalletService operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-wallet-service/
          * @throws {RequiredError}
          */
-        getWalletService(service: TenantWalletService, options?: RawAxiosRequestConfig): AxiosPromise<QuotaWrapper> {
-            return localVarFp.getWalletService(service, options).then((request) => request(axios, basePath));
+        getWalletService(requestParameters: PaymentApiGetWalletServiceRequest, options?: RawAxiosRequestConfig): AxiosPromise<QuotaWrapper> {
+            return localVarFp.getWalletService(requestParameters.service, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the available wallet services.
@@ -2483,38 +2471,38 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
         /**
          * Sends a request for the portal payment.
          * @summary Send a payment request
-         * @param {SalesRequestsDto} [salesRequestsDto] 
+         * @param {PaymentApiSendPaymentRequestRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for sendPaymentRequest operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-payment-request/
          * @throws {RequiredError}
          */
-        sendPaymentRequest(salesRequestsDto?: SalesRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.sendPaymentRequest(salesRequestsDto, options).then((request) => request(axios, basePath));
+        sendPaymentRequest(requestParameters: PaymentApiSendPaymentRequestRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.sendPaymentRequest(requestParameters.salesRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Overwrites the entire set of restricted AI model IDs for the current tenant.  The request body must contain the complete desired set — to add a restriction, include the new model alongside existing ones;  to remove one, omit it. An empty set lifts all restrictions. Only the portal payer can perform this action.
          * @summary Set restricted AI models
-         * @param {SetRestrictedAiModelsRequestDto} [setRestrictedAiModelsRequestDto] 
+         * @param {PaymentApiSetRestrictedAiModelsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setRestrictedAiModels operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-restricted-ai-models/
          * @throws {RequiredError}
          */
-        setRestrictedAiModels(setRestrictedAiModelsRequestDto?: SetRestrictedAiModelsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<RestrictedModelsResponseWrapper> {
-            return localVarFp.setRestrictedAiModels(setRestrictedAiModelsRequestDto, options).then((request) => request(axios, basePath));
+        setRestrictedAiModels(requestParameters: PaymentApiSetRestrictedAiModelsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<RestrictedModelsResponseWrapper> {
+            return localVarFp.setRestrictedAiModels(requestParameters.setRestrictedAiModelsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates the wallet auto top up settings for the current tenant.  Requires the tariff service to be configured and the user to be authorized as a payer.  Returns null if the tariff service is not configured or customer information/balance cannot be retrieved.
          * @summary Set the wallet auto top up settings
-         * @param {TenantWalletSettingsWrapper} [tenantWalletSettingsWrapper] 
+         * @param {PaymentApiSetTenantWalletSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setTenantWalletSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-wallet-settings/
          * @throws {RequiredError}
          */
-        setTenantWalletSettings(tenantWalletSettingsWrapper?: TenantWalletSettingsWrapper, options?: RawAxiosRequestConfig): AxiosPromise<TenantWalletSettingsWrapper> {
-            return localVarFp.setTenantWalletSettings(tenantWalletSettingsWrapper, options).then((request) => request(axios, basePath));
+        setTenantWalletSettings(requestParameters: PaymentApiSetTenantWalletSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantWalletSettingsWrapper> {
+            return localVarFp.setTenantWalletSettings(requestParameters.tenantWalletSettingsWrapper, options).then((request) => request(axios, basePath));
         },
         /**
          * Terminates generating a customer operations report.
@@ -2530,41 +2518,405 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
         /**
          * Returns the result of putting money on deposit.
          * @summary Put money on deposit
-         * @param {TopUpDepositRequestDto} [topUpDepositRequestDto] 
+         * @param {PaymentApiTopUpDepositRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for topUpDeposit operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/top-up-deposit/
          * @throws {RequiredError}
          */
-        topUpDeposit(topUpDepositRequestDto?: TopUpDepositRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.topUpDeposit(topUpDepositRequestDto, options).then((request) => request(axios, basePath));
+        topUpDeposit(requestParameters: PaymentApiTopUpDepositRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.topUpDeposit(requestParameters.topUpDepositRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates the payment quantity with the parameters specified in the request.
          * @summary Update the payment quantity
-         * @param {QuantityRequestDto} [quantityRequestDto] 
+         * @param {PaymentApiUpdatePaymentRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updatePayment operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-payment/
          * @throws {RequiredError}
          */
-        updatePayment(quantityRequestDto?: QuantityRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.updatePayment(quantityRequestDto, options).then((request) => request(axios, basePath));
+        updatePayment(requestParameters: PaymentApiUpdatePaymentRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.updatePayment(requestParameters.quantityRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates the wallet payment quantity with the parameters specified in the request.
          * @summary Update the wallet payment quantity
-         * @param {WalletQuantityRequestDto} [walletQuantityRequestDto] 
+         * @param {PaymentApiUpdateWalletPaymentRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateWalletPayment operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-wallet-payment/
          * @throws {RequiredError}
          */
-        updateWalletPayment(walletQuantityRequestDto?: WalletQuantityRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.updateWalletPayment(walletQuantityRequestDto, options).then((request) => request(axios, basePath));
+        updateWalletPayment(requestParameters: PaymentApiUpdateWalletPaymentRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.updateWalletPayment(requestParameters.walletQuantityRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for buyWalletService operation in PaymentApi.
+ * @export
+ * @interface PaymentApiBuyWalletServiceRequest
+ */
+export interface PaymentApiBuyWalletServiceRequest {
+    /**
+     * 
+     * @type {BuyWalletServiceRequestDto}
+     * @memberof PaymentApiBuyWalletService
+     */
+    readonly buyWalletServiceRequestDto?: BuyWalletServiceRequestDto
+}
+
+/**
+ * Request parameters for calculateWalletPayment operation in PaymentApi.
+ * @export
+ * @interface PaymentApiCalculateWalletPaymentRequest
+ */
+export interface PaymentApiCalculateWalletPaymentRequest {
+    /**
+     * 
+     * @type {WalletQuantityRequestDto}
+     * @memberof PaymentApiCalculateWalletPayment
+     */
+    readonly walletQuantityRequestDto?: WalletQuantityRequestDto
+}
+
+/**
+ * Request parameters for changeTenantWalletServiceState operation in PaymentApi.
+ * @export
+ * @interface PaymentApiChangeTenantWalletServiceStateRequest
+ */
+export interface PaymentApiChangeTenantWalletServiceStateRequest {
+    /**
+     * 
+     * @type {ChangeWalletServiceStateRequestDto}
+     * @memberof PaymentApiChangeTenantWalletServiceState
+     */
+    readonly changeWalletServiceStateRequestDto?: ChangeWalletServiceStateRequestDto
+}
+
+/**
+ * Request parameters for createCustomerOperationsReport operation in PaymentApi.
+ * @export
+ * @interface PaymentApiCreateCustomerOperationsReportRequest
+ */
+export interface PaymentApiCreateCustomerOperationsReportRequest {
+    /**
+     * 
+     * @type {CustomerOperationsReportRequestDto}
+     * @memberof PaymentApiCreateCustomerOperationsReport
+     */
+    readonly customerOperationsReportRequestDto?: CustomerOperationsReportRequestDto
+}
+
+/**
+ * Request parameters for getCheckoutSetupUrl operation in PaymentApi.
+ * @export
+ * @interface PaymentApiGetCheckoutSetupUrlRequest
+ */
+export interface PaymentApiGetCheckoutSetupUrlRequest {
+    /**
+     * The URL where the user will be redirected after completing the setup.
+     * @type {string}
+     * @memberof PaymentApiGetCheckoutSetupUrl
+     */
+    readonly backUrl?: string
+}
+
+/**
+ * Request parameters for getCustomerBalance operation in PaymentApi.
+ * @export
+ * @interface PaymentApiGetCustomerBalanceRequest
+ */
+export interface PaymentApiGetCustomerBalanceRequest {
+    /**
+     * Specifies whether to refresh the payment information cache or not.
+     * @type {boolean}
+     * @memberof PaymentApiGetCustomerBalance
+     */
+    readonly refresh?: boolean
+}
+
+/**
+ * Request parameters for getCustomerInfo operation in PaymentApi.
+ * @export
+ * @interface PaymentApiGetCustomerInfoRequest
+ */
+export interface PaymentApiGetCustomerInfoRequest {
+    /**
+     * Specifies whether to refresh the payment information cache or not.
+     * @type {boolean}
+     * @memberof PaymentApiGetCustomerInfo
+     */
+    readonly refresh?: boolean
+}
+
+/**
+ * Request parameters for getCustomerOperations operation in PaymentApi.
+ * @export
+ * @interface PaymentApiGetCustomerOperationsRequest
+ */
+export interface PaymentApiGetCustomerOperationsRequest {
+    /**
+     * The number of items to skip for pagination. The default value is 0.
+     * @type {number}
+     * @memberof PaymentApiGetCustomerOperations
+     */
+    readonly offset?: number
+
+    /**
+     * The maximum number of items to return for pagination. The default value is 25.
+     * @type {number}
+     * @memberof PaymentApiGetCustomerOperations
+     */
+    readonly limit?: number
+
+    /**
+     * The service name.
+     * @type {string}
+     * @memberof PaymentApiGetCustomerOperations
+     */
+    readonly serviceName?: string
+
+    /**
+     * The report start date.
+     * @type {string}
+     * @memberof PaymentApiGetCustomerOperations
+     */
+    readonly startDate?: string
+
+    /**
+     * The report end date.
+     * @type {string}
+     * @memberof PaymentApiGetCustomerOperations
+     */
+    readonly endDate?: string
+
+    /**
+     * The participant name.
+     * @type {string}
+     * @memberof PaymentApiGetCustomerOperations
+     */
+    readonly participantName?: string
+
+    /**
+     * Specifies whether to include credit operations in the report.
+     * @type {boolean}
+     * @memberof PaymentApiGetCustomerOperations
+     */
+    readonly credit?: boolean
+
+    /**
+     * Specifies whether to include debit operations in the report.
+     * @type {boolean}
+     * @memberof PaymentApiGetCustomerOperations
+     */
+    readonly debit?: boolean
+
+    /**
+     * List of operation types to filter by.
+     * @type {OperationType}
+     * @memberof PaymentApiGetCustomerOperations
+     */
+    readonly types?: OperationType
+
+    /**
+     * List of operation status to filter by.
+     * @type {OperationStatus}
+     * @memberof PaymentApiGetCustomerOperations
+     */
+    readonly status?: OperationStatus
+
+    /**
+     * The field to order by.
+     * @type {string}
+     * @memberof PaymentApiGetCustomerOperations
+     */
+    readonly orderBy?: string
+
+    /**
+     * Order direction: Ascending or Descending.
+     * @type {OperationOrderType}
+     * @memberof PaymentApiGetCustomerOperations
+     */
+    readonly orderType?: OperationOrderType
+}
+
+/**
+ * Request parameters for getCustomerServiceQuota operation in PaymentApi.
+ * @export
+ * @interface PaymentApiGetCustomerServiceQuotaRequest
+ */
+export interface PaymentApiGetCustomerServiceQuotaRequest {
+    /**
+     * The service name.
+     * @type {string}
+     * @memberof PaymentApiGetCustomerServiceQuota
+     */
+    readonly serviceName?: string
+
+    /**
+     * Specifies whether to refresh the payment information cache or not.
+     * @type {boolean}
+     * @memberof PaymentApiGetCustomerServiceQuota
+     */
+    readonly refresh?: boolean
+}
+
+/**
+ * Request parameters for getPaymentAccount operation in PaymentApi.
+ * @export
+ * @interface PaymentApiGetPaymentAccountRequest
+ */
+export interface PaymentApiGetPaymentAccountRequest {
+    /**
+     * The URL where the user will be redirected after payment processing.
+     * @type {string}
+     * @memberof PaymentApiGetPaymentAccount
+     */
+    readonly backUrl?: string
+}
+
+/**
+ * Request parameters for getPaymentQuotas operation in PaymentApi.
+ * @export
+ * @interface PaymentApiGetPaymentQuotasRequest
+ */
+export interface PaymentApiGetPaymentQuotasRequest {
+    /**
+     * Specifies whether to return the wallet quotas only.
+     * @type {boolean}
+     * @memberof PaymentApiGetPaymentQuotas
+     */
+    readonly wallet?: boolean
+}
+
+/**
+ * Request parameters for getPaymentUrl operation in PaymentApi.
+ * @export
+ * @interface PaymentApiGetPaymentUrlRequest
+ */
+export interface PaymentApiGetPaymentUrlRequest {
+    /**
+     * 
+     * @type {PaymentUrlRequestDto}
+     * @memberof PaymentApiGetPaymentUrl
+     */
+    readonly paymentUrlRequestDto?: PaymentUrlRequestDto
+}
+
+/**
+ * Request parameters for getQuotaPaymentInformation operation in PaymentApi.
+ * @export
+ * @interface PaymentApiGetQuotaPaymentInformationRequest
+ */
+export interface PaymentApiGetQuotaPaymentInformationRequest {
+    /**
+     * Specifies whether to refresh the payment information cache or not.
+     * @type {boolean}
+     * @memberof PaymentApiGetQuotaPaymentInformation
+     */
+    readonly refresh?: boolean
+}
+
+/**
+ * Request parameters for getWalletService operation in PaymentApi.
+ * @export
+ * @interface PaymentApiGetWalletServiceRequest
+ */
+export interface PaymentApiGetWalletServiceRequest {
+    /**
+     * The wallet service type.
+     * @type {TenantWalletService}
+     * @memberof PaymentApiGetWalletService
+     */
+    readonly service: TenantWalletService
+}
+
+/**
+ * Request parameters for sendPaymentRequest operation in PaymentApi.
+ * @export
+ * @interface PaymentApiSendPaymentRequestRequest
+ */
+export interface PaymentApiSendPaymentRequestRequest {
+    /**
+     * 
+     * @type {SalesRequestsDto}
+     * @memberof PaymentApiSendPaymentRequest
+     */
+    readonly salesRequestsDto?: SalesRequestsDto
+}
+
+/**
+ * Request parameters for setRestrictedAiModels operation in PaymentApi.
+ * @export
+ * @interface PaymentApiSetRestrictedAiModelsRequest
+ */
+export interface PaymentApiSetRestrictedAiModelsRequest {
+    /**
+     * 
+     * @type {SetRestrictedAiModelsRequestDto}
+     * @memberof PaymentApiSetRestrictedAiModels
+     */
+    readonly setRestrictedAiModelsRequestDto?: SetRestrictedAiModelsRequestDto
+}
+
+/**
+ * Request parameters for setTenantWalletSettings operation in PaymentApi.
+ * @export
+ * @interface PaymentApiSetTenantWalletSettingsRequest
+ */
+export interface PaymentApiSetTenantWalletSettingsRequest {
+    /**
+     * 
+     * @type {TenantWalletSettingsWrapper}
+     * @memberof PaymentApiSetTenantWalletSettings
+     */
+    readonly tenantWalletSettingsWrapper?: TenantWalletSettingsWrapper
+}
+
+/**
+ * Request parameters for topUpDeposit operation in PaymentApi.
+ * @export
+ * @interface PaymentApiTopUpDepositRequest
+ */
+export interface PaymentApiTopUpDepositRequest {
+    /**
+     * 
+     * @type {TopUpDepositRequestDto}
+     * @memberof PaymentApiTopUpDeposit
+     */
+    readonly topUpDepositRequestDto?: TopUpDepositRequestDto
+}
+
+/**
+ * Request parameters for updatePayment operation in PaymentApi.
+ * @export
+ * @interface PaymentApiUpdatePaymentRequest
+ */
+export interface PaymentApiUpdatePaymentRequest {
+    /**
+     * 
+     * @type {QuantityRequestDto}
+     * @memberof PaymentApiUpdatePayment
+     */
+    readonly quantityRequestDto?: QuantityRequestDto
+}
+
+/**
+ * Request parameters for updateWalletPayment operation in PaymentApi.
+ * @export
+ * @interface PaymentApiUpdateWalletPaymentRequest
+ */
+export interface PaymentApiUpdateWalletPaymentRequest {
+    /**
+     * 
+     * @type {WalletQuantityRequestDto}
+     * @memberof PaymentApiUpdateWalletPayment
+     */
+    readonly walletQuantityRequestDto?: WalletQuantityRequestDto
+}
 
 /**
  * PaymentApi - object-oriented interface
@@ -2576,49 +2928,49 @@ export class PaymentApi extends BaseAPI {
     /**
      * This method processes a payment for a wallet service using the configured payment method.  Requires the tariff service to be configured and a valid payment method to be set for the customer.  Rate limiting is applied according to the payments API policy.
      * @summary Purchases a wallet service with the specified quantity.
-     * @param {BuyWalletServiceRequestDto} [buyWalletServiceRequestDto] 
+     * @param {PortalPaymentApiBuyWalletServiceRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
      */
-    public buyWalletService(buyWalletServiceRequestDto?: BuyWalletServiceRequestDto, options?: RawAxiosRequestConfig) {
-        return PaymentApiFp(this.configuration).buyWalletService(buyWalletServiceRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public buyWalletService(requestParameters: PaymentApiBuyWalletServiceRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).buyWalletService(requestParameters.buyWalletServiceRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Calculates an amount of the wallet payment with the parameters specified in the request.
      * @summary Calculate the wallet payment amount
-     * @param {WalletQuantityRequestDto} [walletQuantityRequestDto] 
+     * @param {PortalPaymentApiCalculateWalletPaymentRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
      */
-    public calculateWalletPayment(walletQuantityRequestDto?: WalletQuantityRequestDto, options?: RawAxiosRequestConfig) {
-        return PaymentApiFp(this.configuration).calculateWalletPayment(walletQuantityRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public calculateWalletPayment(requestParameters: PaymentApiCalculateWalletPaymentRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).calculateWalletPayment(requestParameters.walletQuantityRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Changes the state of a wallet service for the current tenant.  Requires permission to edit portal settings and a configured tariff service.  Adds or removes the specified service from the enabled services list based on the enabled flag.
      * @summary Change tenant wallet service state
-     * @param {ChangeWalletServiceStateRequestDto} [changeWalletServiceStateRequestDto] 
+     * @param {PortalPaymentApiChangeTenantWalletServiceStateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
      */
-    public changeTenantWalletServiceState(changeWalletServiceStateRequestDto?: ChangeWalletServiceStateRequestDto, options?: RawAxiosRequestConfig) {
-        return PaymentApiFp(this.configuration).changeTenantWalletServiceState(changeWalletServiceStateRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public changeTenantWalletServiceState(requestParameters: PaymentApiChangeTenantWalletServiceStateRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).changeTenantWalletServiceState(requestParameters.changeWalletServiceStateRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Starts generating a customer operations report as an xlsx file and saves it in Documents.
      * @summary Start the customer operations report generation
-     * @param {CustomerOperationsReportRequestDto} [customerOperationsReportRequestDto] 
+     * @param {PortalPaymentApiCreateCustomerOperationsReportRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
      */
-    public createCustomerOperationsReport(customerOperationsReportRequestDto?: CustomerOperationsReportRequestDto, options?: RawAxiosRequestConfig) {
-        return PaymentApiFp(this.configuration).createCustomerOperationsReport(customerOperationsReportRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public createCustomerOperationsReport(requestParameters: PaymentApiCreateCustomerOperationsReportRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).createCustomerOperationsReport(requestParameters.customerOperationsReportRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2635,60 +2987,49 @@ export class PaymentApi extends BaseAPI {
     /**
      * Returns the URL to the checkout setup page.
      * @summary Get the checkout setup page URL
-     * @param {string} [backUrl] The URL where the user will be redirected after completing the setup.
+     * @param {PortalPaymentApiGetCheckoutSetupUrlRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
      */
-    public getCheckoutSetupUrl(backUrl?: string, options?: RawAxiosRequestConfig) {
-        return PaymentApiFp(this.configuration).getCheckoutSetupUrl(backUrl, options).then((request) => request(this.axios, this.basePath));
+    public getCheckoutSetupUrl(requestParameters: PaymentApiGetCheckoutSetupUrlRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).getCheckoutSetupUrl(requestParameters.backUrl, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the customer balance from the accounting service.
      * @summary Get the customer balance
-     * @param {boolean} [refresh] Specifies whether to refresh the payment information cache or not.
+     * @param {PortalPaymentApiGetCustomerBalanceRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
      */
-    public getCustomerBalance(refresh?: boolean, options?: RawAxiosRequestConfig) {
-        return PaymentApiFp(this.configuration).getCustomerBalance(refresh, options).then((request) => request(this.axios, this.basePath));
+    public getCustomerBalance(requestParameters: PaymentApiGetCustomerBalanceRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).getCustomerBalance(requestParameters.refresh, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the customer information.
      * @summary Get the customer information
-     * @param {boolean} [refresh] Specifies whether to refresh the payment information cache or not.
+     * @param {PortalPaymentApiGetCustomerInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
      */
-    public getCustomerInfo(refresh?: boolean, options?: RawAxiosRequestConfig) {
-        return PaymentApiFp(this.configuration).getCustomerInfo(refresh, options).then((request) => request(this.axios, this.basePath));
+    public getCustomerInfo(requestParameters: PaymentApiGetCustomerInfoRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).getCustomerInfo(requestParameters.refresh, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the report of customer operations from the accounting service.
      * @summary Get the customer operations
-     * @param {number} [offset] The number of items to skip for pagination. The default value is 0.
-     * @param {number} [limit] The maximum number of items to return for pagination. The default value is 25.
-     * @param {string} [serviceName] The service name.
-     * @param {string} [startDate] The report start date.
-     * @param {string} [endDate] The report end date.
-     * @param {string} [participantName] The participant name.
-     * @param {boolean} [credit] Specifies whether to include credit operations in the report.
-     * @param {boolean} [debit] Specifies whether to include debit operations in the report.
-     * @param {OperationType} [types] List of operation types to filter by.
-     * @param {OperationStatus} [status] List of operation status to filter by.
-     * @param {string} [orderBy] The field to order by.
-     * @param {OperationOrderType} [orderType] Order direction: Ascending or Descending.
+     * @param {PortalPaymentApiGetCustomerOperationsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
      */
-    public getCustomerOperations(offset?: number, limit?: number, serviceName?: string, startDate?: string, endDate?: string, participantName?: string, credit?: boolean, debit?: boolean, types?: OperationType, status?: OperationStatus, orderBy?: string, orderType?: OperationOrderType, options?: RawAxiosRequestConfig) {
-        return PaymentApiFp(this.configuration).getCustomerOperations(offset, limit, serviceName, startDate, endDate, participantName, credit, debit, types, status, orderBy, orderType, options).then((request) => request(this.axios, this.basePath));
+    public getCustomerOperations(requestParameters: PaymentApiGetCustomerOperationsRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).getCustomerOperations(requestParameters.offset, requestParameters.limit, requestParameters.serviceName, requestParameters.startDate, requestParameters.endDate, requestParameters.participantName, requestParameters.credit, requestParameters.debit, requestParameters.types, requestParameters.status, requestParameters.orderBy, requestParameters.orderType, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2705,26 +3046,25 @@ export class PaymentApi extends BaseAPI {
     /**
      * Returns the service quota from the accounting service.
      * @summary Get the service quota
-     * @param {string} [serviceName] The service name.
-     * @param {boolean} [refresh] Specifies whether to refresh the payment information cache or not.
+     * @param {PortalPaymentApiGetCustomerServiceQuotaRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
      */
-    public getCustomerServiceQuota(serviceName?: string, refresh?: boolean, options?: RawAxiosRequestConfig) {
-        return PaymentApiFp(this.configuration).getCustomerServiceQuota(serviceName, refresh, options).then((request) => request(this.axios, this.basePath));
+    public getCustomerServiceQuota(requestParameters: PaymentApiGetCustomerServiceQuotaRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).getCustomerServiceQuota(requestParameters.serviceName, requestParameters.refresh, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the URL to the payment account.
      * @summary Get the payment account
-     * @param {string} [backUrl] The URL where the user will be redirected after payment processing.
+     * @param {PortalPaymentApiGetPaymentAccountRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
      */
-    public getPaymentAccount(backUrl?: string, options?: RawAxiosRequestConfig) {
-        return PaymentApiFp(this.configuration).getPaymentAccount(backUrl, options).then((request) => request(this.axios, this.basePath));
+    public getPaymentAccount(requestParameters: PaymentApiGetPaymentAccountRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).getPaymentAccount(requestParameters.backUrl, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2741,25 +3081,25 @@ export class PaymentApi extends BaseAPI {
     /**
      * Returns the available portal quotas.
      * @summary Get quotas
-     * @param {boolean} [wallet] Specifies whether to return the wallet quotas only.
+     * @param {PortalPaymentApiGetPaymentQuotasRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
      */
-    public getPaymentQuotas(wallet?: boolean, options?: RawAxiosRequestConfig) {
-        return PaymentApiFp(this.configuration).getPaymentQuotas(wallet, options).then((request) => request(this.axios, this.basePath));
+    public getPaymentQuotas(requestParameters: PaymentApiGetPaymentQuotasRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).getPaymentQuotas(requestParameters.wallet, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the URL to the payment page.
      * @summary Get the payment page URL
-     * @param {PaymentUrlRequestDto} [paymentUrlRequestDto] 
+     * @param {PortalPaymentApiGetPaymentUrlRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
      */
-    public getPaymentUrl(paymentUrlRequestDto?: PaymentUrlRequestDto, options?: RawAxiosRequestConfig) {
-        return PaymentApiFp(this.configuration).getPaymentUrl(paymentUrlRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public getPaymentUrl(requestParameters: PaymentApiGetPaymentUrlRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).getPaymentUrl(requestParameters.paymentUrlRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2776,13 +3116,13 @@ export class PaymentApi extends BaseAPI {
     /**
      * Returns the payment information about the current portal quota.
      * @summary Get quota payment information
-     * @param {boolean} [refresh] Specifies whether to refresh the payment information cache or not.
+     * @param {PortalPaymentApiGetQuotaPaymentInformationRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
      */
-    public getQuotaPaymentInformation(refresh?: boolean, options?: RawAxiosRequestConfig) {
-        return PaymentApiFp(this.configuration).getQuotaPaymentInformation(refresh, options).then((request) => request(this.axios, this.basePath));
+    public getQuotaPaymentInformation(requestParameters: PaymentApiGetQuotaPaymentInformationRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).getQuotaPaymentInformation(requestParameters.refresh, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2821,13 +3161,13 @@ export class PaymentApi extends BaseAPI {
     /**
      * Returns the specified wallet service.
      * @summary Get wallet service
-     * @param {TenantWalletService} service The wallet service type.
+     * @param {PortalPaymentApiGetWalletServiceRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
      */
-    public getWalletService(service: TenantWalletService, options?: RawAxiosRequestConfig) {
-        return PaymentApiFp(this.configuration).getWalletService(service, options).then((request) => request(this.axios, this.basePath));
+    public getWalletService(requestParameters: PaymentApiGetWalletServiceRequest, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).getWalletService(requestParameters.service, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2844,37 +3184,37 @@ export class PaymentApi extends BaseAPI {
     /**
      * Sends a request for the portal payment.
      * @summary Send a payment request
-     * @param {SalesRequestsDto} [salesRequestsDto] 
+     * @param {PortalPaymentApiSendPaymentRequestRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
      */
-    public sendPaymentRequest(salesRequestsDto?: SalesRequestsDto, options?: RawAxiosRequestConfig) {
-        return PaymentApiFp(this.configuration).sendPaymentRequest(salesRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public sendPaymentRequest(requestParameters: PaymentApiSendPaymentRequestRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).sendPaymentRequest(requestParameters.salesRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Overwrites the entire set of restricted AI model IDs for the current tenant.  The request body must contain the complete desired set — to add a restriction, include the new model alongside existing ones;  to remove one, omit it. An empty set lifts all restrictions. Only the portal payer can perform this action.
      * @summary Set restricted AI models
-     * @param {SetRestrictedAiModelsRequestDto} [setRestrictedAiModelsRequestDto] 
+     * @param {PortalPaymentApiSetRestrictedAiModelsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
      */
-    public setRestrictedAiModels(setRestrictedAiModelsRequestDto?: SetRestrictedAiModelsRequestDto, options?: RawAxiosRequestConfig) {
-        return PaymentApiFp(this.configuration).setRestrictedAiModels(setRestrictedAiModelsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public setRestrictedAiModels(requestParameters: PaymentApiSetRestrictedAiModelsRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).setRestrictedAiModels(requestParameters.setRestrictedAiModelsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Updates the wallet auto top up settings for the current tenant.  Requires the tariff service to be configured and the user to be authorized as a payer.  Returns null if the tariff service is not configured or customer information/balance cannot be retrieved.
      * @summary Set the wallet auto top up settings
-     * @param {TenantWalletSettingsWrapper} [tenantWalletSettingsWrapper] 
+     * @param {PortalPaymentApiSetTenantWalletSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
      */
-    public setTenantWalletSettings(tenantWalletSettingsWrapper?: TenantWalletSettingsWrapper, options?: RawAxiosRequestConfig) {
-        return PaymentApiFp(this.configuration).setTenantWalletSettings(tenantWalletSettingsWrapper, options).then((request) => request(this.axios, this.basePath));
+    public setTenantWalletSettings(requestParameters: PaymentApiSetTenantWalletSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).setTenantWalletSettings(requestParameters.tenantWalletSettingsWrapper, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2891,37 +3231,37 @@ export class PaymentApi extends BaseAPI {
     /**
      * Returns the result of putting money on deposit.
      * @summary Put money on deposit
-     * @param {TopUpDepositRequestDto} [topUpDepositRequestDto] 
+     * @param {PortalPaymentApiTopUpDepositRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
      */
-    public topUpDeposit(topUpDepositRequestDto?: TopUpDepositRequestDto, options?: RawAxiosRequestConfig) {
-        return PaymentApiFp(this.configuration).topUpDeposit(topUpDepositRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public topUpDeposit(requestParameters: PaymentApiTopUpDepositRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).topUpDeposit(requestParameters.topUpDepositRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Updates the payment quantity with the parameters specified in the request.
      * @summary Update the payment quantity
-     * @param {QuantityRequestDto} [quantityRequestDto] 
+     * @param {PortalPaymentApiUpdatePaymentRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
      */
-    public updatePayment(quantityRequestDto?: QuantityRequestDto, options?: RawAxiosRequestConfig) {
-        return PaymentApiFp(this.configuration).updatePayment(quantityRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public updatePayment(requestParameters: PaymentApiUpdatePaymentRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).updatePayment(requestParameters.quantityRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Updates the wallet payment quantity with the parameters specified in the request.
      * @summary Update the wallet payment quantity
-     * @param {WalletQuantityRequestDto} [walletQuantityRequestDto] 
+     * @param {PortalPaymentApiUpdateWalletPaymentRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
      */
-    public updateWalletPayment(walletQuantityRequestDto?: WalletQuantityRequestDto, options?: RawAxiosRequestConfig) {
-        return PaymentApiFp(this.configuration).updateWalletPayment(walletQuantityRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public updateWalletPayment(requestParameters: PaymentApiUpdateWalletPaymentRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).updateWalletPayment(requestParameters.walletQuantityRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

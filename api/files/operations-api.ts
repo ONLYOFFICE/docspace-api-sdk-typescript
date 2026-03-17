@@ -1816,307 +1816,721 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
         /**
          * This method allows users to cancel an ongoing upload session identified by the session ID.  Once the session is aborted, the associated resources will be cleaned up, and the session will no longer accept further uploads.
          * @summary Aborts an in-progress file upload session.
-         * @param {string} sessionId The session ID.
-         * @param {number} folderId The folder ID.
+         * @param {OperationsApiAbortUploadSessionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for abortUploadSession operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/abort-upload-session/
          * @throws {RequiredError}
          */
-        abortUploadSession(sessionId: string, folderId: number, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.abortUploadSession(sessionId, folderId, options).then((request) => request(axios, basePath));
+        abortUploadSession(requestParameters: OperationsApiAbortUploadSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.abortUploadSession(requestParameters.sessionId, requestParameters.folderId, options).then((request) => request(axios, basePath));
         },
         /**
          * Adds files and folders with the IDs specified in the request to the favorite list.
          * @summary Add favorite files and folders
-         * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
+         * @param {OperationsApiAddFavoritesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for addFavorites operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-favorites/
          * @throws {RequiredError}
          */
-        addFavorites(baseBatchRequestDto?: BaseBatchRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.addFavorites(baseBatchRequestDto, options).then((request) => request(axios, basePath));
+        addFavorites(requestParameters: OperationsApiAddFavoritesRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.addFavorites(requestParameters.baseBatchRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Starts the download process of files and folders with the IDs specified in the request.
          * @summary Bulk download
-         * @param {DownloadRequestDto} [downloadRequestDto] 
+         * @param {OperationsApiBulkDownloadRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for bulkDownload operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/bulk-download/
          * @throws {RequiredError}
          */
-        bulkDownload(downloadRequestDto?: DownloadRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
-            return localVarFp.bulkDownload(downloadRequestDto, options).then((request) => request(axios, basePath));
+        bulkDownload(requestParameters: OperationsApiBulkDownloadRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
+            return localVarFp.bulkDownload(requestParameters.downloadRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Checks the conversion status of a file with the ID specified in the request.
          * @summary Get conversion status
-         * @param {number} fileId The file ID to check conversion status.
-         * @param {boolean} [start] Specifies whether a conversion operation is started or not.
+         * @param {OperationsApiCheckConversionStatusRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for checkConversionStatus operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-conversion-status/
          * @throws {RequiredError}
          */
-        checkConversionStatus(fileId: number, start?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<ConversationResultArrayWrapper> {
-            return localVarFp.checkConversionStatus(fileId, start, options).then((request) => request(axios, basePath));
+        checkConversionStatus(requestParameters: OperationsApiCheckConversionStatusRequest, options?: RawAxiosRequestConfig): AxiosPromise<ConversationResultArrayWrapper> {
+            return localVarFp.checkConversionStatus(requestParameters.fileId, requestParameters.start, options).then((request) => request(axios, basePath));
         },
         /**
          * Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
          * @summary Move or copy files to a folder
-         * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
+         * @param {OperationsApiCheckMoveOrCopyBatchItemsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for checkMoveOrCopyBatchItems operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-move-or-copy-batch-items/
          * @throws {RequiredError}
          */
-        checkMoveOrCopyBatchItems(inDto?: BatchRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FileEntryBaseArrayWrapper> {
-            return localVarFp.checkMoveOrCopyBatchItems(inDto, options).then((request) => request(axios, basePath));
+        checkMoveOrCopyBatchItems(requestParameters: OperationsApiCheckMoveOrCopyBatchItemsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileEntryBaseArrayWrapper> {
+            return localVarFp.checkMoveOrCopyBatchItems(requestParameters.inDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Checks if files can be moved or copied to the specified folder.
          * @summary Check for moving or copying files to a folder
-         * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
+         * @param {OperationsApiCheckMoveOrCopyDestFolderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for checkMoveOrCopyDestFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-move-or-copy-dest-folder/
          * @throws {RequiredError}
          */
-        checkMoveOrCopyDestFolder(inDto?: BatchRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<CheckDestFolderWrapper> {
-            return localVarFp.checkMoveOrCopyDestFolder(inDto, options).then((request) => request(axios, basePath));
+        checkMoveOrCopyDestFolder(requestParameters: OperationsApiCheckMoveOrCopyDestFolderRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<CheckDestFolderWrapper> {
+            return localVarFp.checkMoveOrCopyDestFolder(requestParameters.inDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Copies all the selected files and folders to the folder with the ID specified in the request.
          * @summary Copy to the folder
-         * @param {BatchRequestDto} [batchRequestDto] 
+         * @param {OperationsApiCopyBatchItemsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for copyBatchItems operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/copy-batch-items/
          * @throws {RequiredError}
          */
-        copyBatchItems(batchRequestDto?: BatchRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
-            return localVarFp.copyBatchItems(batchRequestDto, options).then((request) => request(axios, basePath));
+        copyBatchItems(requestParameters: OperationsApiCopyBatchItemsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
+            return localVarFp.copyBatchItems(requestParameters.batchRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Creates the session to upload large files in multiple chunks to the folder with the ID specified in the request.
          * @summary Chunked upload
-         * @param {number} folderId The session folder ID.
-         * @param {SessionRequest} sessionRequest The session parameters.
+         * @param {OperationsApiCreateUploadSessionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @deprecated
          * REST API Reference for createUploadSession operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session/
          * @throws {RequiredError}
          */
-        createUploadSession(folderId: number, sessionRequest: SessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseWrapperIntegerWrapper> {
-            return localVarFp.createUploadSession(folderId, sessionRequest, options).then((request) => request(axios, basePath));
+        createUploadSession(requestParameters: OperationsApiCreateUploadSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseWrapperIntegerWrapper> {
+            return localVarFp.createUploadSession(requestParameters.folderId, requestParameters.sessionRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * The session allows the user to upload a file in smaller chunks to the folder identified by its ID.  The file information, such as name, size, and additional metadata, must be provided in the request.  This method facilitates large file upload scenarios by enabling chunked file uploads.
          * @summary Creates a session for uploading a file to a specific folder in chunks.
-         * @param {number} folderId The session folder ID.
-         * @param {SessionRequest} sessionRequest The session parameters.
+         * @param {OperationsApiCreateUploadSessionInFolderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for createUploadSessionInFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session-in-folder/
          * @throws {RequiredError}
          */
-        createUploadSessionInFolder(folderId: number, sessionRequest: SessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseIntegerWrapper> {
-            return localVarFp.createUploadSessionInFolder(folderId, sessionRequest, options).then((request) => request(axios, basePath));
+        createUploadSessionInFolder(requestParameters: OperationsApiCreateUploadSessionInFolderRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseIntegerWrapper> {
+            return localVarFp.createUploadSessionInFolder(requestParameters.folderId, requestParameters.sessionRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Deletes the files and folders with the IDs specified in the request.
          * @summary Delete files and folders
-         * @param {DeleteBatchRequestDto} [deleteBatchRequestDto] 
+         * @param {OperationsApiDeleteBatchItemsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteBatchItems operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-batch-items/
          * @throws {RequiredError}
          */
-        deleteBatchItems(deleteBatchRequestDto?: DeleteBatchRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
-            return localVarFp.deleteBatchItems(deleteBatchRequestDto, options).then((request) => request(axios, basePath));
+        deleteBatchItems(requestParameters: OperationsApiDeleteBatchItemsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
+            return localVarFp.deleteBatchItems(requestParameters.deleteBatchRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Removes files and folders with the IDs specified in the request from the favorite list. This method uses the body parameters.
          * @summary Delete favorite files and folders (using body parameters)
-         * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
+         * @param {OperationsApiDeleteFavoritesFromBodyRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteFavoritesFromBody operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-favorites-from-body/
          * @throws {RequiredError}
          */
-        deleteFavoritesFromBody(baseBatchRequestDto?: BaseBatchRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.deleteFavoritesFromBody(baseBatchRequestDto, options).then((request) => request(axios, basePath));
+        deleteFavoritesFromBody(requestParameters: OperationsApiDeleteFavoritesFromBodyRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.deleteFavoritesFromBody(requestParameters.baseBatchRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Deletes the file versions with the IDs specified in the request.
          * @summary Delete file versions
-         * @param {DeleteVersionBatchRequestDto} [deleteVersionBatchRequestDto] 
+         * @param {OperationsApiDeleteFileVersionsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteFileVersions operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-file-versions/
          * @throws {RequiredError}
          */
-        deleteFileVersions(deleteVersionBatchRequestDto?: DeleteVersionBatchRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationWrapper> {
-            return localVarFp.deleteFileVersions(deleteVersionBatchRequestDto, options).then((request) => request(axios, basePath));
+        deleteFileVersions(requestParameters: OperationsApiDeleteFileVersionsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationWrapper> {
+            return localVarFp.deleteFileVersions(requestParameters.deleteVersionBatchRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Duplicates all the selected files and folders.
          * @summary Duplicate files and folders
-         * @param {DuplicateRequestDto} [duplicateRequestDto] 
+         * @param {OperationsApiDuplicateBatchItemsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for duplicateBatchItems operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/duplicate-batch-items/
          * @throws {RequiredError}
          */
-        duplicateBatchItems(duplicateRequestDto?: DuplicateRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
-            return localVarFp.duplicateBatchItems(duplicateRequestDto, options).then((request) => request(axios, basePath));
+        duplicateBatchItems(requestParameters: OperationsApiDuplicateBatchItemsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
+            return localVarFp.duplicateBatchItems(requestParameters.duplicateRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Deletes all the files and folders from the Trash folder.
          * @summary Empty the Trash folder
-         * @param {boolean} [single] Specifies whether to return only the current operation
+         * @param {OperationsApiEmptyTrashRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for emptyTrash operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/empty-trash/
          * @throws {RequiredError}
          */
-        emptyTrash(single?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
-            return localVarFp.emptyTrash(single, options).then((request) => request(axios, basePath));
+        emptyTrash(requestParameters: OperationsApiEmptyTrashRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
+            return localVarFp.emptyTrash(requestParameters.single, options).then((request) => request(axios, basePath));
         },
         /**
          * Finalizes the upload session by processing the uploaded file chunks and marking the upload as complete.  This method consolidates chunked uploads into a complete file if required, sends notifications about the upload event,  and performs any additional cleanup or related actions, such as socket updates and webhook publishing.
          * @summary Finalize an upload session
-         * @param {number} folderId The folder ID.
-         * @param {string} sessionId The session ID.
+         * @param {OperationsApiFinalizeSessionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for finalizeSession operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/finalize-session/
          * @throws {RequiredError}
          */
-        finalizeSession(folderId: number, sessionId: string, options?: RawAxiosRequestConfig): AxiosPromise<UploadSessionResponseIntegerWrapper> {
-            return localVarFp.finalizeSession(folderId, sessionId, options).then((request) => request(axios, basePath));
+        finalizeSession(requestParameters: OperationsApiFinalizeSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<UploadSessionResponseIntegerWrapper> {
+            return localVarFp.finalizeSession(requestParameters.folderId, requestParameters.sessionId, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of all the active file operations.
          * @summary Get active file operations
-         * @param {string} [id] The ID of the file operation.
+         * @param {OperationsApiGetOperationStatusesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getOperationStatuses operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-operation-statuses/
          * @throws {RequiredError}
          */
-        getOperationStatuses(id?: string, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
-            return localVarFp.getOperationStatuses(id, options).then((request) => request(axios, basePath));
+        getOperationStatuses(requestParameters: OperationsApiGetOperationStatusesRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
+            return localVarFp.getOperationStatuses(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieves the statuses of operations filtered by the specified operation type.
          * @summary Get file operation statuses
-         * @param {FileOperationType} operationType Specifies the type of file operation to be retrieved.
-         * @param {string} [id] The ID of the file operation.
+         * @param {OperationsApiGetOperationStatusesByTypeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getOperationStatusesByType operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-operation-statuses-by-type/
          * @throws {RequiredError}
          */
-        getOperationStatusesByType(operationType: FileOperationType, id?: string, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
-            return localVarFp.getOperationStatusesByType(operationType, id, options).then((request) => request(axios, basePath));
+        getOperationStatusesByType(requestParameters: OperationsApiGetOperationStatusesByTypeRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
+            return localVarFp.getOperationStatusesByType(requestParameters.operationType, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * Marks the files and folders with the IDs specified in the request as read.
          * @summary Mark as read
-         * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
+         * @param {OperationsApiMarkAsReadRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for markAsRead operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/mark-as-read/
          * @throws {RequiredError}
          */
-        markAsRead(baseBatchRequestDto?: BaseBatchRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
-            return localVarFp.markAsRead(baseBatchRequestDto, options).then((request) => request(axios, basePath));
+        markAsRead(requestParameters: OperationsApiMarkAsReadRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
+            return localVarFp.markAsRead(requestParameters.baseBatchRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Moves or copies all the selected files and folders to the folder with the ID specified in the request.
          * @summary Move or copy to a folder
-         * @param {BatchRequestDto} [batchRequestDto] 
+         * @param {OperationsApiMoveBatchItemsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for moveBatchItems operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/move-batch-items/
          * @throws {RequiredError}
          */
-        moveBatchItems(batchRequestDto?: BatchRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
-            return localVarFp.moveBatchItems(batchRequestDto, options).then((request) => request(axios, basePath));
+        moveBatchItems(requestParameters: OperationsApiMoveBatchItemsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
+            return localVarFp.moveBatchItems(requestParameters.batchRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Starts a conversion operation of a file with the ID specified in the request.
          * @summary Start file conversion
-         * @param {number} fileId The file ID to start conversion proccess.
-         * @param {CheckConversionRequestDtoInteger} [checkConversionRequestDtoInteger] The parameters for checking file conversion.
+         * @param {OperationsApiStartFileConversionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for startFileConversion operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-file-conversion/
          * @throws {RequiredError}
          */
-        startFileConversion(fileId: number, checkConversionRequestDtoInteger?: CheckConversionRequestDtoInteger, options?: RawAxiosRequestConfig): AxiosPromise<ConversationResultArrayWrapper> {
-            return localVarFp.startFileConversion(fileId, checkConversionRequestDtoInteger, options).then((request) => request(axios, basePath));
+        startFileConversion(requestParameters: OperationsApiStartFileConversionRequest, options?: RawAxiosRequestConfig): AxiosPromise<ConversationResultArrayWrapper> {
+            return localVarFp.startFileConversion(requestParameters.fileId, requestParameters.checkConversionRequestDtoInteger, options).then((request) => request(axios, basePath));
         },
         /**
          * Finishes an operation with the ID specified in the request or all the active operations.
          * @summary Finish active operations
-         * @param {string} id The operation unique identifier.
+         * @param {OperationsApiTerminateTasksRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for terminateTasks operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-tasks/
          * @throws {RequiredError}
          */
-        terminateTasks(id: string, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
-            return localVarFp.terminateTasks(id, options).then((request) => request(axios, basePath));
+        terminateTasks(requestParameters: OperationsApiTerminateTasksRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
+            return localVarFp.terminateTasks(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates a comment in a file with the ID specified in the request.
          * @summary Update a comment
-         * @param {number} fileId The file ID where the comment is located.
-         * @param {UpdateComment} updateComment The parameters for updating a comment.
+         * @param {OperationsApiUpdateFileCommentRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateFileComment operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file-comment/
          * @throws {RequiredError}
          */
-        updateFileComment(fileId: number, updateComment: UpdateComment, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.updateFileComment(fileId, updateComment, options).then((request) => request(axios, basePath));
+        updateFileComment(requestParameters: OperationsApiUpdateFileCommentRequest, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.updateFileComment(requestParameters.fileId, requestParameters.updateComment, options).then((request) => request(axios, basePath));
         },
         /**
          * This method allows the caller to upload a specific chunk of a file to an ongoing upload session.  The session is identified by the session ID provided in the request. The chunk can be of any size  within the limits allowed during the session initialization. Each chunk must be uploaded in the  correct order for the server to process it appropriately.  The server updates the upload session status and stores the progress information after processing  each chunk. The updated session details are returned in the response.
          * @summary Handles the upload of a chunk for an existing upload session.
-         * @param {number} folderId The folder ID.
-         * @param {string} sessionId The upload session ID.
-         * @param {number} [chunkNumber] The chunk number.
-         * @param {File} [file] The file chunk to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file chunk content from the HTTP request form for chunked upload operations.  The file chunk is accessed via the IFormFile interface which provides access to the chunk content and length.
+         * @param {OperationsApiUploadAsyncSessionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for uploadAsyncSession operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-async-session/
          * @throws {RequiredError}
          */
-        uploadAsyncSession(folderId: number, sessionId: string, chunkNumber?: number, file?: File, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseIntegerWrapper> {
-            return localVarFp.uploadAsyncSession(folderId, sessionId, chunkNumber, file, options).then((request) => request(axios, basePath));
+        uploadAsyncSession(requestParameters: OperationsApiUploadAsyncSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseIntegerWrapper> {
+            return localVarFp.uploadAsyncSession(requestParameters.folderId, requestParameters.sessionId, requestParameters.chunkNumber, requestParameters.file, options).then((request) => request(axios, basePath));
         },
         /**
          * This method allows continuing an interrupted or partially completed file upload session by uploading subsequent data chunks.  The server will validate each uploaded chunk, update the session state, and respond with the status of the current upload. Once  the total bytes uploaded match the total file size, the file upload process is finalized and related events are triggered.  If the file is newly uploaded, the server responds with a 201 Created status upon completion. If it overwrites an existing file,  versioning information is updated accordingly. The method also triggers associated webhooks and socket notifications to reflect  the updated file state.
          * @summary Resumes an ongoing file upload session for uploading additional chunks of data.
-         * @param {number} folderId The folder ID.
-         * @param {string} sessionId The upload session ID.
-         * @param {File} [file] The file to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file content from the HTTP request form.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream.
+         * @param {OperationsApiUploadSessionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for uploadSession operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-session/
          * @throws {RequiredError}
          */
-        uploadSession(folderId: number, sessionId: string, file?: File, options?: RawAxiosRequestConfig): AxiosPromise<UploadSessionResponseIntegerWrapper> {
-            return localVarFp.uploadSession(folderId, sessionId, file, options).then((request) => request(axios, basePath));
+        uploadSession(requestParameters: OperationsApiUploadSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<UploadSessionResponseIntegerWrapper> {
+            return localVarFp.uploadSession(requestParameters.folderId, requestParameters.sessionId, requestParameters.file, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for abortUploadSession operation in OperationsApi.
+ * @export
+ * @interface OperationsApiAbortUploadSessionRequest
+ */
+export interface OperationsApiAbortUploadSessionRequest {
+    /**
+     * The session ID.
+     * @type {string}
+     * @memberof OperationsApiAbortUploadSession
+     */
+    readonly sessionId: string
+
+    /**
+     * The folder ID.
+     * @type {number}
+     * @memberof OperationsApiAbortUploadSession
+     */
+    readonly folderId: number
+}
+
+/**
+ * Request parameters for addFavorites operation in OperationsApi.
+ * @export
+ * @interface OperationsApiAddFavoritesRequest
+ */
+export interface OperationsApiAddFavoritesRequest {
+    /**
+     * 
+     * @type {BaseBatchRequestDto}
+     * @memberof OperationsApiAddFavorites
+     */
+    readonly baseBatchRequestDto?: BaseBatchRequestDto
+}
+
+/**
+ * Request parameters for bulkDownload operation in OperationsApi.
+ * @export
+ * @interface OperationsApiBulkDownloadRequest
+ */
+export interface OperationsApiBulkDownloadRequest {
+    /**
+     * 
+     * @type {DownloadRequestDto}
+     * @memberof OperationsApiBulkDownload
+     */
+    readonly downloadRequestDto?: DownloadRequestDto
+}
+
+/**
+ * Request parameters for checkConversionStatus operation in OperationsApi.
+ * @export
+ * @interface OperationsApiCheckConversionStatusRequest
+ */
+export interface OperationsApiCheckConversionStatusRequest {
+    /**
+     * The file ID to check conversion status.
+     * @type {number}
+     * @memberof OperationsApiCheckConversionStatus
+     */
+    readonly fileId: number
+
+    /**
+     * Specifies whether a conversion operation is started or not.
+     * @type {boolean}
+     * @memberof OperationsApiCheckConversionStatus
+     */
+    readonly start?: boolean
+}
+
+/**
+ * Request parameters for checkMoveOrCopyBatchItems operation in OperationsApi.
+ * @export
+ * @interface OperationsApiCheckMoveOrCopyBatchItemsRequest
+ */
+export interface OperationsApiCheckMoveOrCopyBatchItemsRequest {
+    /**
+     * The request parameters for copying/moving files.
+     * @type {BatchRequestDto}
+     * @memberof OperationsApiCheckMoveOrCopyBatchItems
+     */
+    readonly inDto?: BatchRequestDto
+}
+
+/**
+ * Request parameters for checkMoveOrCopyDestFolder operation in OperationsApi.
+ * @export
+ * @interface OperationsApiCheckMoveOrCopyDestFolderRequest
+ */
+export interface OperationsApiCheckMoveOrCopyDestFolderRequest {
+    /**
+     * The request parameters for copying/moving files.
+     * @type {BatchRequestDto}
+     * @memberof OperationsApiCheckMoveOrCopyDestFolder
+     */
+    readonly inDto?: BatchRequestDto
+}
+
+/**
+ * Request parameters for copyBatchItems operation in OperationsApi.
+ * @export
+ * @interface OperationsApiCopyBatchItemsRequest
+ */
+export interface OperationsApiCopyBatchItemsRequest {
+    /**
+     * 
+     * @type {BatchRequestDto}
+     * @memberof OperationsApiCopyBatchItems
+     */
+    readonly batchRequestDto?: BatchRequestDto
+}
+
+/**
+ * Request parameters for createUploadSession operation in OperationsApi.
+ * @export
+ * @interface OperationsApiCreateUploadSessionRequest
+ */
+export interface OperationsApiCreateUploadSessionRequest {
+    /**
+     * The session folder ID.
+     * @type {number}
+     * @memberof OperationsApiCreateUploadSession
+     */
+    readonly folderId: number
+
+    /**
+     * The session parameters.
+     * @type {SessionRequest}
+     * @memberof OperationsApiCreateUploadSession
+     */
+    readonly sessionRequest: SessionRequest
+}
+
+/**
+ * Request parameters for createUploadSessionInFolder operation in OperationsApi.
+ * @export
+ * @interface OperationsApiCreateUploadSessionInFolderRequest
+ */
+export interface OperationsApiCreateUploadSessionInFolderRequest {
+    /**
+     * The session folder ID.
+     * @type {number}
+     * @memberof OperationsApiCreateUploadSessionInFolder
+     */
+    readonly folderId: number
+
+    /**
+     * The session parameters.
+     * @type {SessionRequest}
+     * @memberof OperationsApiCreateUploadSessionInFolder
+     */
+    readonly sessionRequest: SessionRequest
+}
+
+/**
+ * Request parameters for deleteBatchItems operation in OperationsApi.
+ * @export
+ * @interface OperationsApiDeleteBatchItemsRequest
+ */
+export interface OperationsApiDeleteBatchItemsRequest {
+    /**
+     * 
+     * @type {DeleteBatchRequestDto}
+     * @memberof OperationsApiDeleteBatchItems
+     */
+    readonly deleteBatchRequestDto?: DeleteBatchRequestDto
+}
+
+/**
+ * Request parameters for deleteFavoritesFromBody operation in OperationsApi.
+ * @export
+ * @interface OperationsApiDeleteFavoritesFromBodyRequest
+ */
+export interface OperationsApiDeleteFavoritesFromBodyRequest {
+    /**
+     * 
+     * @type {BaseBatchRequestDto}
+     * @memberof OperationsApiDeleteFavoritesFromBody
+     */
+    readonly baseBatchRequestDto?: BaseBatchRequestDto
+}
+
+/**
+ * Request parameters for deleteFileVersions operation in OperationsApi.
+ * @export
+ * @interface OperationsApiDeleteFileVersionsRequest
+ */
+export interface OperationsApiDeleteFileVersionsRequest {
+    /**
+     * 
+     * @type {DeleteVersionBatchRequestDto}
+     * @memberof OperationsApiDeleteFileVersions
+     */
+    readonly deleteVersionBatchRequestDto?: DeleteVersionBatchRequestDto
+}
+
+/**
+ * Request parameters for duplicateBatchItems operation in OperationsApi.
+ * @export
+ * @interface OperationsApiDuplicateBatchItemsRequest
+ */
+export interface OperationsApiDuplicateBatchItemsRequest {
+    /**
+     * 
+     * @type {DuplicateRequestDto}
+     * @memberof OperationsApiDuplicateBatchItems
+     */
+    readonly duplicateRequestDto?: DuplicateRequestDto
+}
+
+/**
+ * Request parameters for emptyTrash operation in OperationsApi.
+ * @export
+ * @interface OperationsApiEmptyTrashRequest
+ */
+export interface OperationsApiEmptyTrashRequest {
+    /**
+     * Specifies whether to return only the current operation
+     * @type {boolean}
+     * @memberof OperationsApiEmptyTrash
+     */
+    readonly single?: boolean
+}
+
+/**
+ * Request parameters for finalizeSession operation in OperationsApi.
+ * @export
+ * @interface OperationsApiFinalizeSessionRequest
+ */
+export interface OperationsApiFinalizeSessionRequest {
+    /**
+     * The folder ID.
+     * @type {number}
+     * @memberof OperationsApiFinalizeSession
+     */
+    readonly folderId: number
+
+    /**
+     * The session ID.
+     * @type {string}
+     * @memberof OperationsApiFinalizeSession
+     */
+    readonly sessionId: string
+}
+
+/**
+ * Request parameters for getOperationStatuses operation in OperationsApi.
+ * @export
+ * @interface OperationsApiGetOperationStatusesRequest
+ */
+export interface OperationsApiGetOperationStatusesRequest {
+    /**
+     * The ID of the file operation.
+     * @type {string}
+     * @memberof OperationsApiGetOperationStatuses
+     */
+    readonly id?: string
+}
+
+/**
+ * Request parameters for getOperationStatusesByType operation in OperationsApi.
+ * @export
+ * @interface OperationsApiGetOperationStatusesByTypeRequest
+ */
+export interface OperationsApiGetOperationStatusesByTypeRequest {
+    /**
+     * Specifies the type of file operation to be retrieved.
+     * @type {FileOperationType}
+     * @memberof OperationsApiGetOperationStatusesByType
+     */
+    readonly operationType: FileOperationType
+
+    /**
+     * The ID of the file operation.
+     * @type {string}
+     * @memberof OperationsApiGetOperationStatusesByType
+     */
+    readonly id?: string
+}
+
+/**
+ * Request parameters for markAsRead operation in OperationsApi.
+ * @export
+ * @interface OperationsApiMarkAsReadRequest
+ */
+export interface OperationsApiMarkAsReadRequest {
+    /**
+     * 
+     * @type {BaseBatchRequestDto}
+     * @memberof OperationsApiMarkAsRead
+     */
+    readonly baseBatchRequestDto?: BaseBatchRequestDto
+}
+
+/**
+ * Request parameters for moveBatchItems operation in OperationsApi.
+ * @export
+ * @interface OperationsApiMoveBatchItemsRequest
+ */
+export interface OperationsApiMoveBatchItemsRequest {
+    /**
+     * 
+     * @type {BatchRequestDto}
+     * @memberof OperationsApiMoveBatchItems
+     */
+    readonly batchRequestDto?: BatchRequestDto
+}
+
+/**
+ * Request parameters for startFileConversion operation in OperationsApi.
+ * @export
+ * @interface OperationsApiStartFileConversionRequest
+ */
+export interface OperationsApiStartFileConversionRequest {
+    /**
+     * The file ID to start conversion proccess.
+     * @type {number}
+     * @memberof OperationsApiStartFileConversion
+     */
+    readonly fileId: number
+
+    /**
+     * The parameters for checking file conversion.
+     * @type {CheckConversionRequestDtoInteger}
+     * @memberof OperationsApiStartFileConversion
+     */
+    readonly checkConversionRequestDtoInteger?: CheckConversionRequestDtoInteger
+}
+
+/**
+ * Request parameters for terminateTasks operation in OperationsApi.
+ * @export
+ * @interface OperationsApiTerminateTasksRequest
+ */
+export interface OperationsApiTerminateTasksRequest {
+    /**
+     * The operation unique identifier.
+     * @type {string}
+     * @memberof OperationsApiTerminateTasks
+     */
+    readonly id: string
+}
+
+/**
+ * Request parameters for updateFileComment operation in OperationsApi.
+ * @export
+ * @interface OperationsApiUpdateFileCommentRequest
+ */
+export interface OperationsApiUpdateFileCommentRequest {
+    /**
+     * The file ID where the comment is located.
+     * @type {number}
+     * @memberof OperationsApiUpdateFileComment
+     */
+    readonly fileId: number
+
+    /**
+     * The parameters for updating a comment.
+     * @type {UpdateComment}
+     * @memberof OperationsApiUpdateFileComment
+     */
+    readonly updateComment: UpdateComment
+}
+
+/**
+ * Request parameters for uploadAsyncSession operation in OperationsApi.
+ * @export
+ * @interface OperationsApiUploadAsyncSessionRequest
+ */
+export interface OperationsApiUploadAsyncSessionRequest {
+    /**
+     * The folder ID.
+     * @type {number}
+     * @memberof OperationsApiUploadAsyncSession
+     */
+    readonly folderId: number
+
+    /**
+     * The upload session ID.
+     * @type {string}
+     * @memberof OperationsApiUploadAsyncSession
+     */
+    readonly sessionId: string
+
+    /**
+     * The chunk number.
+     * @type {number}
+     * @memberof OperationsApiUploadAsyncSession
+     */
+    readonly chunkNumber?: number
+
+    /**
+     * The file chunk to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file chunk content from the HTTP request form for chunked upload operations.  The file chunk is accessed via the IFormFile interface which provides access to the chunk content and length.
+     * @type {File}
+     * @memberof OperationsApiUploadAsyncSession
+     */
+    readonly file?: File
+}
+
+/**
+ * Request parameters for uploadSession operation in OperationsApi.
+ * @export
+ * @interface OperationsApiUploadSessionRequest
+ */
+export interface OperationsApiUploadSessionRequest {
+    /**
+     * The folder ID.
+     * @type {number}
+     * @memberof OperationsApiUploadSession
+     */
+    readonly folderId: number
+
+    /**
+     * The upload session ID.
+     * @type {string}
+     * @memberof OperationsApiUploadSession
+     */
+    readonly sessionId: string
+
+    /**
+     * The file to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file content from the HTTP request form.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream.
+     * @type {File}
+     * @memberof OperationsApiUploadSession
+     */
+    readonly file?: File
+}
 
 /**
  * OperationsApi - object-oriented interface
@@ -2128,303 +2542,290 @@ export class OperationsApi extends BaseAPI {
     /**
      * This method allows users to cancel an ongoing upload session identified by the session ID.  Once the session is aborted, the associated resources will be cleaned up, and the session will no longer accept further uploads.
      * @summary Aborts an in-progress file upload session.
-     * @param {string} sessionId The session ID.
-     * @param {number} folderId The folder ID.
+     * @param {FilesOperationsApiAbortUploadSessionRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public abortUploadSession(sessionId: string, folderId: number, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).abortUploadSession(sessionId, folderId, options).then((request) => request(this.axios, this.basePath));
+    public abortUploadSession(requestParameters: OperationsApiAbortUploadSessionRequest, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).abortUploadSession(requestParameters.sessionId, requestParameters.folderId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Adds files and folders with the IDs specified in the request to the favorite list.
      * @summary Add favorite files and folders
-     * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
+     * @param {FilesOperationsApiAddFavoritesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public addFavorites(baseBatchRequestDto?: BaseBatchRequestDto, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).addFavorites(baseBatchRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public addFavorites(requestParameters: OperationsApiAddFavoritesRequest = {}, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).addFavorites(requestParameters.baseBatchRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Starts the download process of files and folders with the IDs specified in the request.
      * @summary Bulk download
-     * @param {DownloadRequestDto} [downloadRequestDto] 
+     * @param {FilesOperationsApiBulkDownloadRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public bulkDownload(downloadRequestDto?: DownloadRequestDto, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).bulkDownload(downloadRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public bulkDownload(requestParameters: OperationsApiBulkDownloadRequest = {}, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).bulkDownload(requestParameters.downloadRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Checks the conversion status of a file with the ID specified in the request.
      * @summary Get conversion status
-     * @param {number} fileId The file ID to check conversion status.
-     * @param {boolean} [start] Specifies whether a conversion operation is started or not.
+     * @param {FilesOperationsApiCheckConversionStatusRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public checkConversionStatus(fileId: number, start?: boolean, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).checkConversionStatus(fileId, start, options).then((request) => request(this.axios, this.basePath));
+    public checkConversionStatus(requestParameters: OperationsApiCheckConversionStatusRequest, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).checkConversionStatus(requestParameters.fileId, requestParameters.start, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
      * @summary Move or copy files to a folder
-     * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
+     * @param {FilesOperationsApiCheckMoveOrCopyBatchItemsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public checkMoveOrCopyBatchItems(inDto?: BatchRequestDto, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).checkMoveOrCopyBatchItems(inDto, options).then((request) => request(this.axios, this.basePath));
+    public checkMoveOrCopyBatchItems(requestParameters: OperationsApiCheckMoveOrCopyBatchItemsRequest = {}, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).checkMoveOrCopyBatchItems(requestParameters.inDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Checks if files can be moved or copied to the specified folder.
      * @summary Check for moving or copying files to a folder
-     * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
+     * @param {FilesOperationsApiCheckMoveOrCopyDestFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public checkMoveOrCopyDestFolder(inDto?: BatchRequestDto, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).checkMoveOrCopyDestFolder(inDto, options).then((request) => request(this.axios, this.basePath));
+    public checkMoveOrCopyDestFolder(requestParameters: OperationsApiCheckMoveOrCopyDestFolderRequest = {}, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).checkMoveOrCopyDestFolder(requestParameters.inDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Copies all the selected files and folders to the folder with the ID specified in the request.
      * @summary Copy to the folder
-     * @param {BatchRequestDto} [batchRequestDto] 
+     * @param {FilesOperationsApiCopyBatchItemsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public copyBatchItems(batchRequestDto?: BatchRequestDto, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).copyBatchItems(batchRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public copyBatchItems(requestParameters: OperationsApiCopyBatchItemsRequest = {}, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).copyBatchItems(requestParameters.batchRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Creates the session to upload large files in multiple chunks to the folder with the ID specified in the request.
      * @summary Chunked upload
-     * @param {number} folderId The session folder ID.
-     * @param {SessionRequest} sessionRequest The session parameters.
+     * @param {FilesOperationsApiCreateUploadSessionRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @deprecated
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public createUploadSession(folderId: number, sessionRequest: SessionRequest, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).createUploadSession(folderId, sessionRequest, options).then((request) => request(this.axios, this.basePath));
+    public createUploadSession(requestParameters: OperationsApiCreateUploadSessionRequest, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).createUploadSession(requestParameters.folderId, requestParameters.sessionRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * The session allows the user to upload a file in smaller chunks to the folder identified by its ID.  The file information, such as name, size, and additional metadata, must be provided in the request.  This method facilitates large file upload scenarios by enabling chunked file uploads.
      * @summary Creates a session for uploading a file to a specific folder in chunks.
-     * @param {number} folderId The session folder ID.
-     * @param {SessionRequest} sessionRequest The session parameters.
+     * @param {FilesOperationsApiCreateUploadSessionInFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public createUploadSessionInFolder(folderId: number, sessionRequest: SessionRequest, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).createUploadSessionInFolder(folderId, sessionRequest, options).then((request) => request(this.axios, this.basePath));
+    public createUploadSessionInFolder(requestParameters: OperationsApiCreateUploadSessionInFolderRequest, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).createUploadSessionInFolder(requestParameters.folderId, requestParameters.sessionRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Deletes the files and folders with the IDs specified in the request.
      * @summary Delete files and folders
-     * @param {DeleteBatchRequestDto} [deleteBatchRequestDto] 
+     * @param {FilesOperationsApiDeleteBatchItemsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public deleteBatchItems(deleteBatchRequestDto?: DeleteBatchRequestDto, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).deleteBatchItems(deleteBatchRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public deleteBatchItems(requestParameters: OperationsApiDeleteBatchItemsRequest = {}, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).deleteBatchItems(requestParameters.deleteBatchRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Removes files and folders with the IDs specified in the request from the favorite list. This method uses the body parameters.
      * @summary Delete favorite files and folders (using body parameters)
-     * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
+     * @param {FilesOperationsApiDeleteFavoritesFromBodyRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public deleteFavoritesFromBody(baseBatchRequestDto?: BaseBatchRequestDto, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).deleteFavoritesFromBody(baseBatchRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public deleteFavoritesFromBody(requestParameters: OperationsApiDeleteFavoritesFromBodyRequest = {}, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).deleteFavoritesFromBody(requestParameters.baseBatchRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Deletes the file versions with the IDs specified in the request.
      * @summary Delete file versions
-     * @param {DeleteVersionBatchRequestDto} [deleteVersionBatchRequestDto] 
+     * @param {FilesOperationsApiDeleteFileVersionsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public deleteFileVersions(deleteVersionBatchRequestDto?: DeleteVersionBatchRequestDto, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).deleteFileVersions(deleteVersionBatchRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public deleteFileVersions(requestParameters: OperationsApiDeleteFileVersionsRequest = {}, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).deleteFileVersions(requestParameters.deleteVersionBatchRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Duplicates all the selected files and folders.
      * @summary Duplicate files and folders
-     * @param {DuplicateRequestDto} [duplicateRequestDto] 
+     * @param {FilesOperationsApiDuplicateBatchItemsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public duplicateBatchItems(duplicateRequestDto?: DuplicateRequestDto, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).duplicateBatchItems(duplicateRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public duplicateBatchItems(requestParameters: OperationsApiDuplicateBatchItemsRequest = {}, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).duplicateBatchItems(requestParameters.duplicateRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Deletes all the files and folders from the Trash folder.
      * @summary Empty the Trash folder
-     * @param {boolean} [single] Specifies whether to return only the current operation
+     * @param {FilesOperationsApiEmptyTrashRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public emptyTrash(single?: boolean, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).emptyTrash(single, options).then((request) => request(this.axios, this.basePath));
+    public emptyTrash(requestParameters: OperationsApiEmptyTrashRequest = {}, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).emptyTrash(requestParameters.single, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Finalizes the upload session by processing the uploaded file chunks and marking the upload as complete.  This method consolidates chunked uploads into a complete file if required, sends notifications about the upload event,  and performs any additional cleanup or related actions, such as socket updates and webhook publishing.
      * @summary Finalize an upload session
-     * @param {number} folderId The folder ID.
-     * @param {string} sessionId The session ID.
+     * @param {FilesOperationsApiFinalizeSessionRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public finalizeSession(folderId: number, sessionId: string, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).finalizeSession(folderId, sessionId, options).then((request) => request(this.axios, this.basePath));
+    public finalizeSession(requestParameters: OperationsApiFinalizeSessionRequest, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).finalizeSession(requestParameters.folderId, requestParameters.sessionId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns a list of all the active file operations.
      * @summary Get active file operations
-     * @param {string} [id] The ID of the file operation.
+     * @param {FilesOperationsApiGetOperationStatusesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public getOperationStatuses(id?: string, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).getOperationStatuses(id, options).then((request) => request(this.axios, this.basePath));
+    public getOperationStatuses(requestParameters: OperationsApiGetOperationStatusesRequest = {}, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).getOperationStatuses(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Retrieves the statuses of operations filtered by the specified operation type.
      * @summary Get file operation statuses
-     * @param {FileOperationType} operationType Specifies the type of file operation to be retrieved.
-     * @param {string} [id] The ID of the file operation.
+     * @param {FilesOperationsApiGetOperationStatusesByTypeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public getOperationStatusesByType(operationType: FileOperationType, id?: string, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).getOperationStatusesByType(operationType, id, options).then((request) => request(this.axios, this.basePath));
+    public getOperationStatusesByType(requestParameters: OperationsApiGetOperationStatusesByTypeRequest, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).getOperationStatusesByType(requestParameters.operationType, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Marks the files and folders with the IDs specified in the request as read.
      * @summary Mark as read
-     * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
+     * @param {FilesOperationsApiMarkAsReadRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public markAsRead(baseBatchRequestDto?: BaseBatchRequestDto, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).markAsRead(baseBatchRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public markAsRead(requestParameters: OperationsApiMarkAsReadRequest = {}, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).markAsRead(requestParameters.baseBatchRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Moves or copies all the selected files and folders to the folder with the ID specified in the request.
      * @summary Move or copy to a folder
-     * @param {BatchRequestDto} [batchRequestDto] 
+     * @param {FilesOperationsApiMoveBatchItemsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public moveBatchItems(batchRequestDto?: BatchRequestDto, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).moveBatchItems(batchRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public moveBatchItems(requestParameters: OperationsApiMoveBatchItemsRequest = {}, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).moveBatchItems(requestParameters.batchRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Starts a conversion operation of a file with the ID specified in the request.
      * @summary Start file conversion
-     * @param {number} fileId The file ID to start conversion proccess.
-     * @param {CheckConversionRequestDtoInteger} [checkConversionRequestDtoInteger] The parameters for checking file conversion.
+     * @param {FilesOperationsApiStartFileConversionRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public startFileConversion(fileId: number, checkConversionRequestDtoInteger?: CheckConversionRequestDtoInteger, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).startFileConversion(fileId, checkConversionRequestDtoInteger, options).then((request) => request(this.axios, this.basePath));
+    public startFileConversion(requestParameters: OperationsApiStartFileConversionRequest, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).startFileConversion(requestParameters.fileId, requestParameters.checkConversionRequestDtoInteger, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Finishes an operation with the ID specified in the request or all the active operations.
      * @summary Finish active operations
-     * @param {string} id The operation unique identifier.
+     * @param {FilesOperationsApiTerminateTasksRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public terminateTasks(id: string, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).terminateTasks(id, options).then((request) => request(this.axios, this.basePath));
+    public terminateTasks(requestParameters: OperationsApiTerminateTasksRequest, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).terminateTasks(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Updates a comment in a file with the ID specified in the request.
      * @summary Update a comment
-     * @param {number} fileId The file ID where the comment is located.
-     * @param {UpdateComment} updateComment The parameters for updating a comment.
+     * @param {FilesOperationsApiUpdateFileCommentRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public updateFileComment(fileId: number, updateComment: UpdateComment, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).updateFileComment(fileId, updateComment, options).then((request) => request(this.axios, this.basePath));
+    public updateFileComment(requestParameters: OperationsApiUpdateFileCommentRequest, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).updateFileComment(requestParameters.fileId, requestParameters.updateComment, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * This method allows the caller to upload a specific chunk of a file to an ongoing upload session.  The session is identified by the session ID provided in the request. The chunk can be of any size  within the limits allowed during the session initialization. Each chunk must be uploaded in the  correct order for the server to process it appropriately.  The server updates the upload session status and stores the progress information after processing  each chunk. The updated session details are returned in the response.
      * @summary Handles the upload of a chunk for an existing upload session.
-     * @param {number} folderId The folder ID.
-     * @param {string} sessionId The upload session ID.
-     * @param {number} [chunkNumber] The chunk number.
-     * @param {File} [file] The file chunk to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file chunk content from the HTTP request form for chunked upload operations.  The file chunk is accessed via the IFormFile interface which provides access to the chunk content and length.
+     * @param {FilesOperationsApiUploadAsyncSessionRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public uploadAsyncSession(folderId: number, sessionId: string, chunkNumber?: number, file?: File, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).uploadAsyncSession(folderId, sessionId, chunkNumber, file, options).then((request) => request(this.axios, this.basePath));
+    public uploadAsyncSession(requestParameters: OperationsApiUploadAsyncSessionRequest, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).uploadAsyncSession(requestParameters.folderId, requestParameters.sessionId, requestParameters.chunkNumber, requestParameters.file, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * This method allows continuing an interrupted or partially completed file upload session by uploading subsequent data chunks.  The server will validate each uploaded chunk, update the session state, and respond with the status of the current upload. Once  the total bytes uploaded match the total file size, the file upload process is finalized and related events are triggered.  If the file is newly uploaded, the server responds with a 201 Created status upon completion. If it overwrites an existing file,  versioning information is updated accordingly. The method also triggers associated webhooks and socket notifications to reflect  the updated file state.
      * @summary Resumes an ongoing file upload session for uploading additional chunks of data.
-     * @param {number} folderId The folder ID.
-     * @param {string} sessionId The upload session ID.
-     * @param {File} [file] The file to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file content from the HTTP request form.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream.
+     * @param {FilesOperationsApiUploadSessionRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public uploadSession(folderId: number, sessionId: string, file?: File, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).uploadSession(folderId, sessionId, file, options).then((request) => request(this.axios, this.basePath));
+    public uploadSession(requestParameters: OperationsApiUploadSessionRequest, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).uploadSession(requestParameters.folderId, requestParameters.sessionId, requestParameters.file, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

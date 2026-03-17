@@ -726,26 +726,26 @@ export const TFASettingsApiFactory = function (configuration?: Configuration, ba
         /**
          * Validates the two-factor authentication code specified in the request.
          * @summary Validate the TFA code
-         * @param {TfaValidateRequestsDto} [tfaValidateRequestsDto] 
+         * @param {TFASettingsApiTfaValidateAuthCodeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for tfaValidateAuthCode operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/tfa-validate-auth-code/
          * @throws {RequiredError}
          */
-        tfaValidateAuthCode(tfaValidateRequestsDto?: TfaValidateRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.tfaValidateAuthCode(tfaValidateRequestsDto, options).then((request) => request(axios, basePath));
+        tfaValidateAuthCode(requestParameters: TFASettingsApiTfaValidateAuthCodeRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.tfaValidateAuthCode(requestParameters.tfaValidateRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Unlinks the current two-factor authentication application from the user account specified in the request.
          * @summary Unlink the TFA application
-         * @param {TfaRequestsDto} [tfaRequestsDto] 
+         * @param {TFASettingsApiUnlinkTfaAppRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for unlinkTfaApp operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/unlink-tfa-app/
          * @throws {RequiredError}
          */
-        unlinkTfaApp(tfaRequestsDto?: TfaRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.unlinkTfaApp(tfaRequestsDto, options).then((request) => request(axios, basePath));
+        unlinkTfaApp(requestParameters: TFASettingsApiUnlinkTfaAppRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.unlinkTfaApp(requestParameters.tfaRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Requests the new backup codes for the two-factor authentication application.
@@ -761,29 +761,85 @@ export const TFASettingsApiFactory = function (configuration?: Configuration, ba
         /**
          * Updates the two-factor authentication settings with the parameters specified in the request.
          * @summary Update the TFA settings
-         * @param {TfaRequestsDto} [tfaRequestsDto] 
+         * @param {TFASettingsApiUpdateTfaSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateTfaSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-tfa-settings/
          * @throws {RequiredError}
          */
-        updateTfaSettings(tfaRequestsDto?: TfaRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.updateTfaSettings(tfaRequestsDto, options).then((request) => request(axios, basePath));
+        updateTfaSettings(requestParameters: TFASettingsApiUpdateTfaSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.updateTfaSettings(requestParameters.tfaRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the confirmation email URL for updating TFA settings.
          * @summary Get a confirmation email for updating TFA settings
-         * @param {TfaRequestsDto} [tfaRequestsDto] 
+         * @param {TFASettingsApiUpdateTfaSettingsLinkRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateTfaSettingsLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-tfa-settings-link/
          * @throws {RequiredError}
          */
-        updateTfaSettingsLink(tfaRequestsDto?: TfaRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.updateTfaSettingsLink(tfaRequestsDto, options).then((request) => request(axios, basePath));
+        updateTfaSettingsLink(requestParameters: TFASettingsApiUpdateTfaSettingsLinkRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.updateTfaSettingsLink(requestParameters.tfaRequestsDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for tfaValidateAuthCode operation in TFASettingsApi.
+ * @export
+ * @interface TFASettingsApiTfaValidateAuthCodeRequest
+ */
+export interface TFASettingsApiTfaValidateAuthCodeRequest {
+    /**
+     * 
+     * @type {TfaValidateRequestsDto}
+     * @memberof TFASettingsApiTfaValidateAuthCode
+     */
+    readonly tfaValidateRequestsDto?: TfaValidateRequestsDto
+}
+
+/**
+ * Request parameters for unlinkTfaApp operation in TFASettingsApi.
+ * @export
+ * @interface TFASettingsApiUnlinkTfaAppRequest
+ */
+export interface TFASettingsApiUnlinkTfaAppRequest {
+    /**
+     * 
+     * @type {TfaRequestsDto}
+     * @memberof TFASettingsApiUnlinkTfaApp
+     */
+    readonly tfaRequestsDto?: TfaRequestsDto
+}
+
+/**
+ * Request parameters for updateTfaSettings operation in TFASettingsApi.
+ * @export
+ * @interface TFASettingsApiUpdateTfaSettingsRequest
+ */
+export interface TFASettingsApiUpdateTfaSettingsRequest {
+    /**
+     * 
+     * @type {TfaRequestsDto}
+     * @memberof TFASettingsApiUpdateTfaSettings
+     */
+    readonly tfaRequestsDto?: TfaRequestsDto
+}
+
+/**
+ * Request parameters for updateTfaSettingsLink operation in TFASettingsApi.
+ * @export
+ * @interface TFASettingsApiUpdateTfaSettingsLinkRequest
+ */
+export interface TFASettingsApiUpdateTfaSettingsLinkRequest {
+    /**
+     * 
+     * @type {TfaRequestsDto}
+     * @memberof TFASettingsApiUpdateTfaSettingsLink
+     */
+    readonly tfaRequestsDto?: TfaRequestsDto
+}
 
 /**
  * TFASettingsApi - object-oriented interface
@@ -839,25 +895,25 @@ export class TFASettingsApi extends BaseAPI {
     /**
      * Validates the two-factor authentication code specified in the request.
      * @summary Validate the TFA code
-     * @param {TfaValidateRequestsDto} [tfaValidateRequestsDto] 
+     * @param {SettingsTFASettingsApiTfaValidateAuthCodeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TFASettingsApi
      */
-    public tfaValidateAuthCode(tfaValidateRequestsDto?: TfaValidateRequestsDto, options?: RawAxiosRequestConfig) {
-        return TFASettingsApiFp(this.configuration).tfaValidateAuthCode(tfaValidateRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public tfaValidateAuthCode(requestParameters: TFASettingsApiTfaValidateAuthCodeRequest = {}, options?: RawAxiosRequestConfig) {
+        return TFASettingsApiFp(this.configuration).tfaValidateAuthCode(requestParameters.tfaValidateRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Unlinks the current two-factor authentication application from the user account specified in the request.
      * @summary Unlink the TFA application
-     * @param {TfaRequestsDto} [tfaRequestsDto] 
+     * @param {SettingsTFASettingsApiUnlinkTfaAppRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TFASettingsApi
      */
-    public unlinkTfaApp(tfaRequestsDto?: TfaRequestsDto, options?: RawAxiosRequestConfig) {
-        return TFASettingsApiFp(this.configuration).unlinkTfaApp(tfaRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public unlinkTfaApp(requestParameters: TFASettingsApiUnlinkTfaAppRequest = {}, options?: RawAxiosRequestConfig) {
+        return TFASettingsApiFp(this.configuration).unlinkTfaApp(requestParameters.tfaRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -874,25 +930,25 @@ export class TFASettingsApi extends BaseAPI {
     /**
      * Updates the two-factor authentication settings with the parameters specified in the request.
      * @summary Update the TFA settings
-     * @param {TfaRequestsDto} [tfaRequestsDto] 
+     * @param {SettingsTFASettingsApiUpdateTfaSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TFASettingsApi
      */
-    public updateTfaSettings(tfaRequestsDto?: TfaRequestsDto, options?: RawAxiosRequestConfig) {
-        return TFASettingsApiFp(this.configuration).updateTfaSettings(tfaRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public updateTfaSettings(requestParameters: TFASettingsApiUpdateTfaSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return TFASettingsApiFp(this.configuration).updateTfaSettings(requestParameters.tfaRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the confirmation email URL for updating TFA settings.
      * @summary Get a confirmation email for updating TFA settings
-     * @param {TfaRequestsDto} [tfaRequestsDto] 
+     * @param {SettingsTFASettingsApiUpdateTfaSettingsLinkRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TFASettingsApi
      */
-    public updateTfaSettingsLink(tfaRequestsDto?: TfaRequestsDto, options?: RawAxiosRequestConfig) {
-        return TFASettingsApiFp(this.configuration).updateTfaSettingsLink(tfaRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public updateTfaSettingsLink(requestParameters: TFASettingsApiUpdateTfaSettingsLinkRequest = {}, options?: RawAxiosRequestConfig) {
+        return TFASettingsApiFp(this.configuration).updateTfaSettingsLink(requestParameters.tfaRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -356,41 +356,83 @@ export const SettingsQuotaApiFactory = function (configuration?: Configuration, 
         /**
          * Saves the AI Agent quota settings specified in the request to the current portal.
          * @summary Save the AI Agent quota settings
-         * @param {QuotaSettingsRequestsDto} [quotaSettingsRequestsDto] 
+         * @param {SettingsQuotaApiSaveAiAgentQuotaSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for saveAiAgentQuotaSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-ai-agent-quota-settings/
          * @throws {RequiredError}
          */
-        saveAiAgentQuotaSettings(quotaSettingsRequestsDto?: QuotaSettingsRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<TenantAiAgentQuotaSettingsWrapper> {
-            return localVarFp.saveAiAgentQuotaSettings(quotaSettingsRequestsDto, options).then((request) => request(axios, basePath));
+        saveAiAgentQuotaSettings(requestParameters: SettingsQuotaApiSaveAiAgentQuotaSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantAiAgentQuotaSettingsWrapper> {
+            return localVarFp.saveAiAgentQuotaSettings(requestParameters.quotaSettingsRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Saves the room quota settings specified in the request to the current portal.
          * @summary Save the room quota settings
-         * @param {QuotaSettingsRequestsDto} [quotaSettingsRequestsDto] 
+         * @param {SettingsQuotaApiSaveRoomQuotaSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for saveRoomQuotaSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-room-quota-settings/
          * @throws {RequiredError}
          */
-        saveRoomQuotaSettings(quotaSettingsRequestsDto?: QuotaSettingsRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<TenantRoomQuotaSettingsWrapper> {
-            return localVarFp.saveRoomQuotaSettings(quotaSettingsRequestsDto, options).then((request) => request(axios, basePath));
+        saveRoomQuotaSettings(requestParameters: SettingsQuotaApiSaveRoomQuotaSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantRoomQuotaSettingsWrapper> {
+            return localVarFp.saveRoomQuotaSettings(requestParameters.quotaSettingsRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Saves the tenant quota settings specified in the request to the current portal.
          * @summary Save the tenant quota settings
-         * @param {TenantQuotaSettingsRequestsDto} [tenantQuotaSettingsRequestsDto] 
+         * @param {SettingsQuotaApiSetTenantQuotaSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setTenantQuotaSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-quota-settings/
          * @throws {RequiredError}
          */
-        setTenantQuotaSettings(tenantQuotaSettingsRequestsDto?: TenantQuotaSettingsRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<TenantQuotaSettingsWrapper> {
-            return localVarFp.setTenantQuotaSettings(tenantQuotaSettingsRequestsDto, options).then((request) => request(axios, basePath));
+        setTenantQuotaSettings(requestParameters: SettingsQuotaApiSetTenantQuotaSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantQuotaSettingsWrapper> {
+            return localVarFp.setTenantQuotaSettings(requestParameters.tenantQuotaSettingsRequestsDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for saveAiAgentQuotaSettings operation in SettingsQuotaApi.
+ * @export
+ * @interface SettingsQuotaApiSaveAiAgentQuotaSettingsRequest
+ */
+export interface SettingsQuotaApiSaveAiAgentQuotaSettingsRequest {
+    /**
+     * 
+     * @type {QuotaSettingsRequestsDto}
+     * @memberof SettingsQuotaApiSaveAiAgentQuotaSettings
+     */
+    readonly quotaSettingsRequestsDto?: QuotaSettingsRequestsDto
+}
+
+/**
+ * Request parameters for saveRoomQuotaSettings operation in SettingsQuotaApi.
+ * @export
+ * @interface SettingsQuotaApiSaveRoomQuotaSettingsRequest
+ */
+export interface SettingsQuotaApiSaveRoomQuotaSettingsRequest {
+    /**
+     * 
+     * @type {QuotaSettingsRequestsDto}
+     * @memberof SettingsQuotaApiSaveRoomQuotaSettings
+     */
+    readonly quotaSettingsRequestsDto?: QuotaSettingsRequestsDto
+}
+
+/**
+ * Request parameters for setTenantQuotaSettings operation in SettingsQuotaApi.
+ * @export
+ * @interface SettingsQuotaApiSetTenantQuotaSettingsRequest
+ */
+export interface SettingsQuotaApiSetTenantQuotaSettingsRequest {
+    /**
+     * 
+     * @type {TenantQuotaSettingsRequestsDto}
+     * @memberof SettingsQuotaApiSetTenantQuotaSettings
+     */
+    readonly tenantQuotaSettingsRequestsDto?: TenantQuotaSettingsRequestsDto
+}
 
 /**
  * SettingsQuotaApi - object-oriented interface
@@ -413,37 +455,37 @@ export class SettingsQuotaApi extends BaseAPI {
     /**
      * Saves the AI Agent quota settings specified in the request to the current portal.
      * @summary Save the AI Agent quota settings
-     * @param {QuotaSettingsRequestsDto} [quotaSettingsRequestsDto] 
+     * @param {SettingsQuotaApiSaveAiAgentQuotaSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SettingsQuotaApi
      */
-    public saveAiAgentQuotaSettings(quotaSettingsRequestsDto?: QuotaSettingsRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsQuotaApiFp(this.configuration).saveAiAgentQuotaSettings(quotaSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public saveAiAgentQuotaSettings(requestParameters: SettingsQuotaApiSaveAiAgentQuotaSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return SettingsQuotaApiFp(this.configuration).saveAiAgentQuotaSettings(requestParameters.quotaSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Saves the room quota settings specified in the request to the current portal.
      * @summary Save the room quota settings
-     * @param {QuotaSettingsRequestsDto} [quotaSettingsRequestsDto] 
+     * @param {SettingsQuotaApiSaveRoomQuotaSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SettingsQuotaApi
      */
-    public saveRoomQuotaSettings(quotaSettingsRequestsDto?: QuotaSettingsRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsQuotaApiFp(this.configuration).saveRoomQuotaSettings(quotaSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public saveRoomQuotaSettings(requestParameters: SettingsQuotaApiSaveRoomQuotaSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return SettingsQuotaApiFp(this.configuration).saveRoomQuotaSettings(requestParameters.quotaSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Saves the tenant quota settings specified in the request to the current portal.
      * @summary Save the tenant quota settings
-     * @param {TenantQuotaSettingsRequestsDto} [tenantQuotaSettingsRequestsDto] 
+     * @param {SettingsQuotaApiSetTenantQuotaSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SettingsQuotaApi
      */
-    public setTenantQuotaSettings(tenantQuotaSettingsRequestsDto?: TenantQuotaSettingsRequestsDto, options?: RawAxiosRequestConfig) {
-        return SettingsQuotaApiFp(this.configuration).setTenantQuotaSettings(tenantQuotaSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public setTenantQuotaSettings(requestParameters: SettingsQuotaApiSetTenantQuotaSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return SettingsQuotaApiFp(this.configuration).setTenantQuotaSettings(requestParameters.tenantQuotaSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

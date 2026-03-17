@@ -176,14 +176,14 @@ export const CSPApiFactory = function (configuration?: Configuration, basePath?:
         /**
          * Configures the CSP (Content Security Policy) settings for the current portal.
          * @summary Configure CSP settings
-         * @param {CspRequestsDto} [cspRequestsDto] 
+         * @param {CSPApiConfigureCspRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for configureCsp operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/configure-csp/
          * @throws {RequiredError}
          */
-        configureCsp(cspRequestsDto?: CspRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<CspWrapper> {
-            return localVarFp.configureCsp(cspRequestsDto, options).then((request) => request(axios, basePath));
+        configureCsp(requestParameters: CSPApiConfigureCspRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<CspWrapper> {
+            return localVarFp.configureCsp(requestParameters.cspRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the CSP (Content Security Policy) settings for the current portal.
@@ -200,6 +200,20 @@ export const CSPApiFactory = function (configuration?: Configuration, basePath?:
 };
 
 /**
+ * Request parameters for configureCsp operation in CSPApi.
+ * @export
+ * @interface CSPApiConfigureCspRequest
+ */
+export interface CSPApiConfigureCspRequest {
+    /**
+     * 
+     * @type {CspRequestsDto}
+     * @memberof CSPApiConfigureCsp
+     */
+    readonly cspRequestsDto?: CspRequestsDto
+}
+
+/**
  * CSPApi - object-oriented interface
  * @export
  * @class CSPApi
@@ -209,13 +223,13 @@ export class CSPApi extends BaseAPI {
     /**
      * Configures the CSP (Content Security Policy) settings for the current portal.
      * @summary Configure CSP settings
-     * @param {CspRequestsDto} [cspRequestsDto] 
+     * @param {SecurityCSPApiConfigureCspRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CSPApi
      */
-    public configureCsp(cspRequestsDto?: CspRequestsDto, options?: RawAxiosRequestConfig) {
-        return CSPApiFp(this.configuration).configureCsp(cspRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public configureCsp(requestParameters: CSPApiConfigureCspRequest = {}, options?: RawAxiosRequestConfig) {
+        return CSPApiFp(this.configuration).configureCsp(requestParameters.cspRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
