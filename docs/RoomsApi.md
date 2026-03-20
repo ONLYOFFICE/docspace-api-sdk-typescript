@@ -99,7 +99,7 @@ const { status, data } = await apiInstance.addRoomTags(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Room information |  -  |
-|**403** | You don\&#39;t have permission to edit the room |  -  |
+|**403** | You don\'t have permission to edit the room |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -216,7 +216,7 @@ const { status, data } = await apiInstance.changeRoomCover(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Room cover |  -  |
-|**403** | You don\&#39;t have permission to change cover |  -  |
+|**403** | You don\'t have permission to change cover |  -  |
 |**404** | The required room was not found |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -442,7 +442,7 @@ const { status, data } = await apiInstance.createRoomTag(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | New tag name |  -  |
-|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**403** | You don\'t have enough permission to perform the operation |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -611,7 +611,7 @@ const { status, data } = await apiInstance.deleteCustomTags(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Ok |  -  |
-|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**403** | You don\'t have enough permission to perform the operation |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -782,7 +782,7 @@ const { status, data } = await apiInstance.deleteRoomTags(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Room information |  -  |
-|**403** | You don\&#39;t have permission to edit the room |  -  |
+|**403** | You don\'t have permission to edit the room |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1414,7 +1414,7 @@ const { status, data } = await apiInstance.getRoomsFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Returns the contents of the Rooms section |  -  |
-|**403** | You don\&#39;t have enough permission to view the room content |  -  |
+|**403** | You don\'t have enough permission to view the room content |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2239,7 +2239,7 @@ const { status, data } = await apiInstance.updateRoomTag(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Updated tag name |  -  |
-|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**403** | You don\'t have enough permission to perform the operation |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

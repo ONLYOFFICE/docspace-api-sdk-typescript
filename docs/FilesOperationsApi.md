@@ -137,7 +137,7 @@ const { status, data } = await apiInstance.addFavorites(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Boolean value: true if the operation is successful |  -  |
-|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**403** | You don\'t have enough permission to perform the operation |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -193,7 +193,7 @@ const { status, data } = await apiInstance.bulkDownload(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of file operations |  -  |
-|**403** | You don\&#39;t have enough permission to download |  -  |
+|**403** | You don\'t have enough permission to download |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -305,7 +305,7 @@ const { status, data } = await apiInstance.checkMoveOrCopyBatchItems(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of file entry information |  -  |
-|**403** | You don\&#39;t have enough permission to create |  -  |
+|**403** | You don\'t have enough permission to create |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -361,7 +361,7 @@ const { status, data } = await apiInstance.checkMoveOrCopyDestFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Result |  -  |
-|**403** | You don\&#39;t have enough permission to create |  -  |
+|**403** | You don\'t have enough permission to create |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -417,7 +417,7 @@ const { status, data } = await apiInstance.copyBatchItems(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of file operations |  -  |
-|**403** | You don\&#39;t have enough permission to copy |  -  |
+|**403** | You don\'t have enough permission to copy |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -476,7 +476,7 @@ const { status, data } = await apiInstance.createUploadSession(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Information about created session |  -  |
-|**403** | You don\&#39;t have enough permission to create |  -  |
+|**403** | You don\'t have enough permission to create |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -590,7 +590,7 @@ const { status, data } = await apiInstance.deleteBatchItems(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of file operations |  -  |
-|**403** | You don\&#39;t have enough permission to delete |  -  |
+|**403** | You don\'t have enough permission to delete |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -756,7 +756,7 @@ const { status, data } = await apiInstance.duplicateBatchItems(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of file operations |  -  |
-|**403** | You don\&#39;t have enough permission to duplicate |  -  |
+|**403** | You don\'t have enough permission to duplicate |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1087,7 +1087,7 @@ const { status, data } = await apiInstance.moveBatchItems(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of file operations |  -  |
-|**403** | You don\&#39;t have enough permission to move |  -  |
+|**403** | You don\'t have enough permission to move |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

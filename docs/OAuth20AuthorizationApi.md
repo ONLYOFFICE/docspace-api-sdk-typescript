@@ -192,7 +192,7 @@ const { status, data } = await apiInstance.submitConsent(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**302** | Redirect to the client\&#39;s redirect URI with authorization code |  -  |
+|**302** | Redirect to the client\'s redirect URI with authorization code |  -  |
 |**400** | Invalid request parameters |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

@@ -276,7 +276,7 @@ const { status, data } = await apiInstance.checkFillFormDraft(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Link to the form |  -  |
-|**403** | You don\&#39;t have enough permission to view the file |  -  |
+|**403** | You don\'t have enough permission to view the file |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -335,7 +335,7 @@ const { status, data } = await apiInstance.copyFileAs(
 |-------------|-------------|------------------|
 |**200** | Copied file entry information |  -  |
 |**400** | No file id or folder id toFolderId determine provider |  -  |
-|**403** | You don\&#39;t have enough permission to create |  -  |
+|**403** | You don\'t have enough permission to create |  -  |
 |**404** | File not found |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -394,7 +394,7 @@ const { status, data } = await apiInstance.createEditSession(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Information about created session |  -  |
-|**403** | You don\&#39;t have enough permission to edit the file |  -  |
+|**403** | You don\'t have enough permission to edit the file |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -625,7 +625,7 @@ const { status, data } = await apiInstance.createHtmlFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | New file information |  -  |
-|**403** | You don\&#39;t have enough permission to create |  -  |
+|**403** | You don\'t have enough permission to create |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -681,7 +681,7 @@ const { status, data } = await apiInstance.createHtmlFileInMyDocuments(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | New file information |  -  |
-|**403** | You don\&#39;t have enough permission to create |  -  |
+|**403** | You don\'t have enough permission to create |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1307,7 +1307,7 @@ const { status, data } = await apiInstance.getFileHistory(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of actions performed on the file |  -  |
-|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**403** | You don\'t have enough permission to perform the operation |  -  |
 |**404** | The required file was not found |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -2103,7 +2103,7 @@ const { status, data } = await apiInstance.openEditFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Configuration parameters |  -  |
-|**403** | You don\&#39;t have enough permission to view the file |  -  |
+|**403** | You don\'t have enough permission to view the file |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2524,7 +2524,7 @@ const { status, data } = await apiInstance.setFileOrder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Updated file information |  -  |
-|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**403** | You don\'t have enough permission to perform the operation |  -  |
 |**404** | Not Found |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -2639,7 +2639,7 @@ const { status, data } = await apiInstance.startEditFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | File key for Document Service |  -  |
-|**403** | You don\&#39;t have enough permission to view the file |  -  |
+|**403** | You don\'t have enough permission to view the file |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2751,7 +2751,7 @@ const { status, data } = await apiInstance.toggleFileFavorite(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Boolean value: true - the file is favorite, false - the file is not favorite |  -  |
-|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**403** | You don\'t have enough permission to perform the operation |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2815,7 +2815,7 @@ const { status, data } = await apiInstance.trackEditFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | File changes |  -  |
-|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**403** | You don\'t have enough permission to perform the operation |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

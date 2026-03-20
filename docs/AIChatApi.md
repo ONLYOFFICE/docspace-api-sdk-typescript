@@ -72,7 +72,7 @@ const { status, data } = await apiInstance.continueChat(
 |-------------|-------------|------------------|
 |**200** | SSE stream of ChatCompletion events (text/event-stream) |  -  |
 |**400** | The message is empty or one or more file attachments could not be processed |  -  |
-|**403** | You don\&#39;t have enough permission to access the chat in this room |  -  |
+|**403** | You don\'t have enough permission to access the chat in this room |  -  |
 |**404** | The specified chat, room, or AI provider was not found |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -357,7 +357,7 @@ const { status, data } = await apiInstance.getChats(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Paginated list of chat sessions in the room |  -  |
-|**403** | You don\&#39;t have enough permission to access chats in this room |  -  |
+|**403** | You don\'t have enough permission to access chats in this room |  -  |
 |**404** | The room with the specified ID was not found |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -474,7 +474,7 @@ const { status, data } = await apiInstance.getUserChatsSettings(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Current user chat settings |  -  |
-|**403** | You don\&#39;t have enough permission to access chats in this room |  -  |
+|**403** | You don\'t have enough permission to access chats in this room |  -  |
 |**404** | The room with the specified ID was not found |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -651,7 +651,7 @@ const { status, data } = await apiInstance.setUserChatsSettings(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Updated user chat settings |  -  |
-|**403** | You don\&#39;t have enough permission to access chats in this room |  -  |
+|**403** | You don\'t have enough permission to access chats in this room |  -  |
 |**404** | The room with the specified ID was not found |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -712,7 +712,7 @@ const { status, data } = await apiInstance.startNewChat(
 |-------------|-------------|------------------|
 |**200** | SSE stream of ChatCompletion events (text/event-stream) |  -  |
 |**400** | The message is empty or one or more file attachments could not be processed |  -  |
-|**403** | You don\&#39;t have enough permission to access the chat in this room |  -  |
+|**403** | You don\'t have enough permission to access the chat in this room |  -  |
 |**404** | The specified room or AI provider was not found |  -  |
 |**401** | Unauthorized |  -  |
 

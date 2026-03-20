@@ -258,7 +258,7 @@ const { status, data } = await apiInstance.createReportFolderHistory(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | URL to the report file |  -  |
-|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**403** | You don\'t have enough permission to perform the operation |  -  |
 |**404** | The required folder was not found |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -390,7 +390,7 @@ const { status, data } = await apiInstance.getFavoritesFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The Favorites section contents |  -  |
-|**403** | You don\&#39;t have enough permission to view the folder content |  -  |
+|**403** | You don\'t have enough permission to view the folder content |  -  |
 |**404** | The required folder was not found |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -594,7 +594,7 @@ const { status, data } = await apiInstance.getFolderByFolderId(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Folder contents |  -  |
-|**403** | You don\&#39;t have enough permission to view the folder content |  -  |
+|**403** | You don\'t have enough permission to view the folder content |  -  |
 |**404** | The required folder was not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -663,7 +663,7 @@ const { status, data } = await apiInstance.getFolderHistory(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of actions in the folder |  -  |
-|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**403** | You don\'t have enough permission to perform the operation |  -  |
 |**404** | The required folder was not found |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -826,7 +826,7 @@ const { status, data } = await apiInstance.getFolderPath(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of file entry information |  -  |
-|**403** | You don\&#39;t have enough permission to view the folder content |  -  |
+|**403** | You don\'t have enough permission to view the folder content |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -941,7 +941,7 @@ const { status, data } = await apiInstance.getFolders(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of file entry information |  -  |
-|**403** | You don\&#39;t have enough permission to view the folder content |  -  |
+|**403** | You don\'t have enough permission to view the folder content |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1017,7 +1017,7 @@ const { status, data } = await apiInstance.getMyFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The My documents section contents |  -  |
-|**403** | You don\&#39;t have enough permission to view the folder content |  -  |
+|**403** | You don\'t have enough permission to view the folder content |  -  |
 |**404** | The required folder was not found |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -1073,7 +1073,7 @@ const { status, data } = await apiInstance.getNewFolderItems(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of file entry information |  -  |
-|**403** | You don\&#39;t have enough permission to view the folder content |  -  |
+|**403** | You don\'t have enough permission to view the folder content |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1146,7 +1146,7 @@ const { status, data } = await apiInstance.getPrivacyFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The Private Room section contents |  -  |
-|**403** | You don\&#39;t have enough permission to view the folder content |  -  |
+|**403** | You don\'t have enough permission to view the folder content |  -  |
 |**404** | The required folder was not found |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -1232,7 +1232,7 @@ const { status, data } = await apiInstance.getRecentFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The Recent section contents |  -  |
-|**403** | You don\&#39;t have enough permission to view the folder content |  -  |
+|**403** | You don\'t have enough permission to view the folder content |  -  |
 |**404** | The required folder was not found |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -1309,7 +1309,7 @@ const { status, data } = await apiInstance.getRootFolders(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of section contents with the following parameters |  -  |
-|**403** | You don\&#39;t have enough permission to view the folder content |  -  |
+|**403** | You don\'t have enough permission to view the folder content |  -  |
 |**404** | The required folder was not found |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -1386,7 +1386,7 @@ const { status, data } = await apiInstance.getTrashFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The Trash section contents |  -  |
-|**403** | You don\&#39;t have enough permission to view the folder content |  -  |
+|**403** | You don\'t have enough permission to view the folder content |  -  |
 |**404** | The required folder was not found |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -1478,7 +1478,7 @@ const { status, data } = await apiInstance.insertFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Inserted file |  -  |
-|**403** | You don\&#39;t have enough permission to create |  -  |
+|**403** | You don\'t have enough permission to create |  -  |
 |**404** | Folder not found |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -1567,7 +1567,7 @@ const { status, data } = await apiInstance.insertFileToMyFromBody(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Inserted file |  -  |
-|**403** | You don\&#39;t have enough permission to create |  -  |
+|**403** | You don\'t have enough permission to create |  -  |
 |**404** | Folder not found |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -1627,7 +1627,7 @@ const { status, data } = await apiInstance.renameFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Folder parameters |  -  |
-|**403** | You don\&#39;t have enough permission to rename the folder |  -  |
+|**403** | You don\'t have enough permission to rename the folder |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1802,7 +1802,7 @@ const { status, data } = await apiInstance.uploadFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Inserted file |  -  |
-|**403** | You don\&#39;t have enough permission to create |  -  |
+|**403** | You don\'t have enough permission to create |  -  |
 |**404** | Folder not found |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -1859,7 +1859,7 @@ const { status, data } = await apiInstance.uploadFileToMy(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Uploaded file(s) |  -  |
-|**403** | You don\&#39;t have enough permission to create |  -  |
+|**403** | You don\'t have enough permission to create |  -  |
 |**404** | File not found |  -  |
 |**401** | Unauthorized |  -  |
 

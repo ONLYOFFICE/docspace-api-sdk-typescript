@@ -186,7 +186,7 @@ const { status, data } = await apiInstance.deleteMember(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Deleted user detailed information |  -  |
-|**403** | You don\&#39;t have enough permission to perform the operation or user is not suspended |  -  |
+|**403** | You don\'t have enough permission to perform the operation or user is not suspended |  -  |
 |**404** | User not found |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -235,7 +235,7 @@ const { status, data } = await apiInstance.deleteProfile();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Detailed information about my profile |  -  |
-|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**403** | You don\'t have enough permission to perform the operation |  -  |
 |**404** | User not found |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -753,7 +753,7 @@ const { status, data } = await apiInstance.updateMember(
 |-------------|-------------|------------------|
 |**200** | Updated user with the detailed information |  -  |
 |**400** | Incorrect user name |  -  |
-|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**403** | You don\'t have enough permission to perform the operation |  -  |
 |**404** | User not found |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -814,7 +814,7 @@ const { status, data } = await apiInstance.updateMemberCulture(
 |-------------|-------------|------------------|
 |**200** | Detailed user information |  -  |
 |**400** | The specified culture is not in the list of available ones |  -  |
-|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**403** | You don\'t have enough permission to perform the operation |  -  |
 |**404** | User not found |  -  |
 |**401** | Unauthorized |  -  |
 
