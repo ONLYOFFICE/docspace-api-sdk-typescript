@@ -20,28 +20,28 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AiChatPrice } from './ai-chat-price';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { CurrencyInfo } from './currency-info';
+import type { TenantAiAccessSettings } from './tenant-ai-access-settings';
 
-/**
- * The AI model information.
- */
-export interface ModelDto {
+export interface TenantAiAccessSettingsWrapper {
+    'response'?: TenantAiAccessSettings;
     /**
-     * The unique identifier of the AI provider that offers this model.
+     * The total number of items in the response
      */
-    'providerId'?: number;
+    'count'?: number;
     /**
-     * The human-readable display name of the AI provider (e.g., OpenAI, Anthropic).
+     * List of links related to the response
      */
-    'providerTitle': string | null;
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
     /**
-     * The model identifier as recognized by the AI provider (e.g., gpt-4o, claude-sonnet-4-20250514).
+     * HTTP status code of the response
      */
-    'modelId': string | null;
-    'price'?: AiChatPrice;
-    'currency'?: CurrencyInfo;
+    'status'?: number;
+    /**
+     * HTTP status code of the response (duplicate of status)
+     */
+    'statusCode'?: number;
 }
 

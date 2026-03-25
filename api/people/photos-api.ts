@@ -26,8 +26,6 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { FileUploadResultWrapper } from '../../models';
 // @ts-ignore
-import type { KeyValuePairStringStringValues } from '../../models';
-// @ts-ignore
 import type { ThumbnailsDataWrapper } from '../../models';
 // @ts-ignore
 import type { ThumbnailsRequest } from '../../models';
@@ -281,17 +279,18 @@ export const PhotosApiAxiosParamCreator = function (configuration?: Configuratio
          * Uploads a photo of the user with the ID specified in the request.
          * @summary Upload a user photo
          * @param {string} userid The user ID.
-         * @param {Array<KeyValuePairStringStringValues>} formCollection The image data.
+         * @param {File} file The image data.
+         * @param {boolean} [autosave] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for uploadMemberPhoto operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-member-photo/
          */
-        uploadMemberPhoto: async (userid: string, formCollection: Array<KeyValuePairStringStringValues>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        uploadMemberPhoto: async (userid: string, file: File, autosave?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userid' is not null or undefined
             assertParamExists('uploadMemberPhoto', 'userid', userid)
-            // verify required parameter 'formCollection' is not null or undefined
-            assertParamExists('uploadMemberPhoto', 'formCollection', formCollection)
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('uploadMemberPhoto', 'file', file)
 
             const localVarPath = `/api/2.0/people/{userid}/photo`
                 .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
@@ -326,12 +325,14 @@ export const PhotosApiAxiosParamCreator = function (configuration?: Configuratio
 
             // authentication OpenId required
 
-            if (formCollection) {
-                formCollection.forEach((element) => {
-                    localVarFormParams.append('formCollection', element as any);
-                })
-            }
 
+            if (file !== undefined) { 
+                localVarFormParams.append('File', file as any);
+            }
+    
+            if (autosave !== undefined) { 
+                localVarFormParams.append('Autosave', String(autosave) as any);
+            }
     
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
@@ -422,14 +423,15 @@ export const PhotosApiFp = function(configuration?: Configuration) {
          * Uploads a photo of the user with the ID specified in the request.
          * @summary Upload a user photo
          * @param {string} userid The user ID.
-         * @param {Array<KeyValuePairStringStringValues>} formCollection The image data.
+         * @param {File} file The image data.
+         * @param {boolean} [autosave] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for uploadMemberPhoto operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-member-photo/
          */
-        async uploadMemberPhoto(userid: string, formCollection: Array<KeyValuePairStringStringValues>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileUploadResultWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadMemberPhoto(userid, formCollection, options);
+        async uploadMemberPhoto(userid: string, file: File, autosave?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileUploadResultWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadMemberPhoto(userid, file, autosave, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PhotosApi.uploadMemberPhoto']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -502,7 +504,7 @@ export const PhotosApiFactory = function (configuration?: Configuration, basePat
          * @throws {RequiredError}
          */
         uploadMemberPhoto(requestParameters: PhotosApiUploadMemberPhotoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileUploadResultWrapper> {
-            return localVarFp.uploadMemberPhoto(requestParameters.userid, requestParameters.formCollection, options).then((request) => request(axios, basePath));
+            return localVarFp.uploadMemberPhoto(requestParameters.userid, requestParameters.file, requestParameters.autosave, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -592,10 +594,17 @@ export interface PhotosApiUploadMemberPhotoRequest {
 
     /**
      * The image data.
-     * @type {Array<KeyValuePairStringStringValues>}
+     * @type {File}
      * @memberof PhotosApiUploadMemberPhoto
      */
-    readonly formCollection: Array<KeyValuePairStringStringValues>
+    readonly file: File
+
+    /**
+     * 
+     * @type {boolean}
+     * @memberof PhotosApiUploadMemberPhoto
+     */
+    readonly autosave?: boolean
 }
 
 /**
@@ -662,7 +671,7 @@ export class PhotosApi extends BaseAPI {
      * @memberof PhotosApi
      */
     public uploadMemberPhoto(requestParameters: PhotosApiUploadMemberPhotoRequest, options?: RawAxiosRequestConfig) {
-        return PhotosApiFp(this.configuration).uploadMemberPhoto(requestParameters.userid, requestParameters.formCollection, options).then((request) => request(this.axios, this.basePath));
+        return PhotosApiFp(this.configuration).uploadMemberPhoto(requestParameters.userid, requestParameters.file, requestParameters.autosave, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

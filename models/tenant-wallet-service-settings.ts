@@ -34,7 +34,6 @@ export interface TenantWalletServiceSettings {
 }
 
 export const TenantWalletServiceSettingsEnabledServicesEnum = {
-    WebSearch: -14,
     AITools: -13,
     Backup: -12,
     Storage: -11

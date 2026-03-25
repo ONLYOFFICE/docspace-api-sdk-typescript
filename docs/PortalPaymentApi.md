@@ -487,6 +487,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 | **offset** | [**number**] | The number of items to skip for pagination. The default value is 0. | (optional) defaults to undefined|
 | **limit** | [**number**] | The maximum number of items to return for pagination. The default value is 25. | (optional) defaults to undefined|
 | **serviceName** | [**string**] | The service name. | (optional) defaults to undefined|
+| **writeOffServiceQuota** | [**boolean**] | Write-off of the quota for the service | (optional) defaults to undefined|
 | **startDate** | [**string**] | The report start date. | (optional) defaults to undefined|
 | **endDate** | [**string**] | The report end date. | (optional) defaults to undefined|
 | **participantName** | [**string**] | The participant name. | (optional) defaults to undefined|
@@ -520,6 +521,7 @@ const apiInstance = new PortalPaymentApi(configuration);
 let offset: number; //The number of items to skip for pagination. The default value is 0. (optional) (default to undefined)
 let limit: number; //The maximum number of items to return for pagination. The default value is 25. (optional) (default to undefined)
 let serviceName: string; //The service name. (optional) (default to undefined)
+let writeOffServiceQuota: boolean; //Write-off of the quota for the service (optional) (default to undefined)
 let startDate: string; //The report start date. (optional) (default to undefined)
 let endDate: string; //The report end date. (optional) (default to undefined)
 let participantName: string; //The participant name. (optional) (default to undefined)
@@ -534,6 +536,7 @@ const { status, data } = await apiInstance.getCustomerOperations(
     offset,
     limit,
     serviceName,
+    writeOffServiceQuota,
     startDate,
     endDate,
     participantName,
@@ -1127,7 +1130,7 @@ const { status, data } = await apiInstance.getTenantWalletSettings();
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getWalletService**
-> QuotaWrapper getWalletService()
+> WalletServiceWrapper getWalletService()
 
 Returns the specified wallet service.
 
@@ -1142,7 +1145,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-**QuotaWrapper**
+**WalletServiceWrapper**
 
 ### Authorization
 

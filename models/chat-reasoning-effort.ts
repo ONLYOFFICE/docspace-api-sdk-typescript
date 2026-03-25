@@ -18,20 +18,20 @@
  *
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { ChatReasoningEffort } from './chat-reasoning-effort';
 
 /**
- * The user chat settings.
+ * []
  */
-export interface UserChatSettingsDto {
-    /**
-     * Indicates whether the AI assistant is allowed to perform web searches when generating responses in this room.
-     */
-    'webSearchEnabled'?: boolean;
-    'reasoningEffort'?: ChatReasoningEffort;
-}
+
+export const ChatReasoningEffort = {
+    None: 0,
+    Low: 1,
+    Medium: 2,
+    High: 3,
+    XHigh: 4
+} as const;
+
+export type ChatReasoningEffort = typeof ChatReasoningEffort[keyof typeof ChatReasoningEffort];
 
 
 

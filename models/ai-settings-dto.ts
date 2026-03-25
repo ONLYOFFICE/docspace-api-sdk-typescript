@@ -83,5 +83,9 @@ export interface AiSettingsDto {
      * The tool name used by the AI assistant to launch presentation creation in the editor.
      */
     'generatePresentationToolName': string | null;
+    /**
+     * Indicates whether the system-level AI provider is enabled.
+     */
+    'systemAiEnabled'?: boolean;
 }
 

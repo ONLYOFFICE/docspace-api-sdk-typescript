@@ -18,9 +18,13 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ExternalDatabaseType } from './external-database-type';
 
 export interface ExternalDatabaseSettings {
     'databaseType'?: string | null;
+    'databaseTypeEnum'?: ExternalDatabaseType;
     'dbHost'?: string | null;
     'dbPort'?: number;
     'dbName'?: string | null;
@@ -29,4 +33,6 @@ export interface ExternalDatabaseSettings {
     'dbSsl'?: boolean;
     'sqliteFilePath'?: string | null;
 }
+
+
 

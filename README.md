@@ -1991,7 +1991,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get the progress of updating user type</td>
       </tr>
       <tr>
-        <td><a href="docs/PeopleUserTypeApi.md#starusertypetupdate"><strong>starUserTypetUpdate</strong></a></td>
+        <td><a href="docs/PeopleUserTypeApi.md#startusertypeupdate"><strong>startUserTypeUpdate</strong></a></td>
         <td><strong>POST</strong> /api/2.0/people/type</td>
         <td>Start updating user type</td>
       </tr>
@@ -2822,6 +2822,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get supported languages</td>
       </tr>
       <tr>
+        <td><a href="docs/SettingsCommonSettingsApi.md#gettenantaiaccesssettings"><strong>getTenantAiAccessSettings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/ai-access</td>
+        <td>Get the AI access settings for the portal</td>
+      </tr>
+      <tr>
         <td><a href="docs/SettingsCommonSettingsApi.md#gettenantuserinvitationsettings"><strong>getTenantUserInvitationSettings</strong></a></td>
         <td><strong>GET</strong> /api/2.0/settings/invitationsettings</td>
         <td>Get the user invitation settings</td>
@@ -2850,6 +2855,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td><a href="docs/SettingsCommonSettingsApi.md#saveportalcolortheme"><strong>savePortalColorTheme</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/settings/colortheme</td>
         <td>Save a color theme</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsCommonSettingsApi.md#settenantaiaccesssettings"><strong>setTenantAiAccessSettings</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/ai-access</td>
+        <td>Set the AI access for the portal</td>
       </tr>
       <tr>
         <td><a href="docs/SettingsCommonSettingsApi.md#updateemailactivationsettings"><strong>updateEmailActivationSettings</strong></a></td>
@@ -3552,6 +3562,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [ChatDto](docs/ChatDto.md)
  - [ChatImageMultimodalSettingsDto](docs/ChatImageMultimodalSettingsDto.md)
  - [ChatMultimodalSettingsDto](docs/ChatMultimodalSettingsDto.md)
+ - [ChatReasoningEffort](docs/ChatReasoningEffort.md)
  - [ChatSettings](docs/ChatSettings.md)
  - [ChatSettingsDto](docs/ChatSettingsDto.md)
  - [ChatWrapper](docs/ChatWrapper.md)
@@ -3719,6 +3730,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [ExportChatRequestBodyInteger](docs/ExportChatRequestBodyInteger.md)
  - [ExportMessageRequestBodyInteger](docs/ExportMessageRequestBodyInteger.md)
  - [ExternalDatabaseSettings](docs/ExternalDatabaseSettings.md)
+ - [ExternalDatabaseType](docs/ExternalDatabaseType.md)
  - [ExternalShareDto](docs/ExternalShareDto.md)
  - [ExternalShareRequestParam](docs/ExternalShareRequestParam.md)
  - [ExternalShareWrapper](docs/ExternalShareWrapper.md)
@@ -3847,7 +3859,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [ItemKeyValuePairStringString](docs/ItemKeyValuePairStringString.md)
  - [KeyValuePairBooleanString](docs/KeyValuePairBooleanString.md)
  - [KeyValuePairBooleanStringWrapper](docs/KeyValuePairBooleanStringWrapper.md)
- - [KeyValuePairStringStringValues](docs/KeyValuePairStringStringValues.md)
  - [LinkAccountRequestDto](docs/LinkAccountRequestDto.md)
  - [LinkType](docs/LinkType.md)
  - [Location](docs/Location.md)
@@ -4083,6 +4094,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [TelegramStatusWrapper](docs/TelegramStatusWrapper.md)
  - [TemplatesConfig](docs/TemplatesConfig.md)
  - [TemplatesRequestDto](docs/TemplatesRequestDto.md)
+ - [TenantAiAccessSettings](docs/TenantAiAccessSettings.md)
+ - [TenantAiAccessSettingsDto](docs/TenantAiAccessSettingsDto.md)
+ - [TenantAiAccessSettingsWrapper](docs/TenantAiAccessSettingsWrapper.md)
  - [TenantAiAgentQuotaSettings](docs/TenantAiAgentQuotaSettings.md)
  - [TenantAiAgentQuotaSettingsWrapper](docs/TenantAiAgentQuotaSettingsWrapper.md)
  - [TenantAuditSettings](docs/TenantAuditSettings.md)
@@ -4181,6 +4195,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [WalletQuantityRequestDto](docs/WalletQuantityRequestDto.md)
  - [WalletServiceArrayWrapper](docs/WalletServiceArrayWrapper.md)
  - [WalletServiceDto](docs/WalletServiceDto.md)
+ - [WalletServiceWrapper](docs/WalletServiceWrapper.md)
  - [WatermarkAdditions](docs/WatermarkAdditions.md)
  - [WatermarkDto](docs/WatermarkDto.md)
  - [WatermarkOnDraw](docs/WatermarkOnDraw.md)

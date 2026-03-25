@@ -52,6 +52,10 @@ import type { StringWrapper } from '../../models';
 // @ts-ignore
 import type { StudioDefaultPageSettingsWrapper } from '../../models';
 // @ts-ignore
+import type { TenantAiAccessSettingsDto } from '../../models';
+// @ts-ignore
+import type { TenantAiAccessSettingsWrapper } from '../../models';
+// @ts-ignore
 import type { TenantDeepLinkSettingsWrapper } from '../../models';
 // @ts-ignore
 import type { TenantUserInvitationSettingsRequestDto } from '../../models';
@@ -640,6 +644,58 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
+         * Returns the current portal-level AI access settings that control whether all AI functionality  (chat, agents, vectorization) is available for the portal. AI is enabled by default.
+         * @summary Get the AI access settings for the portal
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getTenantAiAccessSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-ai-access-settings/
+         */
+        getTenantAiAccessSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/settings/ai-access`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns the portal user invitation settings.
          * @summary Get the user invitation settings
          * @param {*} [options] Override http request option.
@@ -949,6 +1005,62 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
+         * Updates the portal-level AI access settings. When AI is disabled, all AI features are turned off:  the AI Agents folder is hidden from root folder listings, AI status checks immediately return disabled,  and AI chat endpoints become inaccessible. Only users with the DocSpaceAdmin role  (EditPortalSettings permission) can change this setting.
+         * @summary Set the AI access for the portal
+         * @param {TenantAiAccessSettingsDto} [tenantAiAccessSettingsDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setTenantAiAccessSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-ai-access-settings/
+         */
+        setTenantAiAccessSettings: async (tenantAiAccessSettingsDto?: TenantAiAccessSettingsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/settings/ai-access`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tenantAiAccessSettingsDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Updates the email activation settings.
          * @summary Update the email activation settings
          * @param {EmailActivationSettings} [emailActivationSettings] 
@@ -1243,6 +1355,20 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns the current portal-level AI access settings that control whether all AI functionality  (chat, agents, vectorization) is available for the portal. AI is enabled by default.
+         * @summary Get the AI access settings for the portal
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getTenantAiAccessSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-ai-access-settings/
+         */
+        async getTenantAiAccessSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantAiAccessSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getTenantAiAccessSettings(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.getTenantAiAccessSettings']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns the portal user invitation settings.
          * @summary Get the user invitation settings
          * @param {*} [options] Override http request option.
@@ -1328,6 +1454,21 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.savePortalColorTheme(customColorThemesSettingsRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.savePortalColorTheme']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Updates the portal-level AI access settings. When AI is disabled, all AI features are turned off:  the AI Agents folder is hidden from root folder listings, AI status checks immediately return disabled,  and AI chat endpoints become inaccessible. Only users with the DocSpaceAdmin role  (EditPortalSettings permission) can change this setting.
+         * @summary Set the AI access for the portal
+         * @param {TenantAiAccessSettingsDto} [tenantAiAccessSettingsDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setTenantAiAccessSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-ai-access-settings/
+         */
+        async setTenantAiAccessSettings(tenantAiAccessSettingsDto?: TenantAiAccessSettingsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantAiAccessSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setTenantAiAccessSettings(tenantAiAccessSettingsDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.setTenantAiAccessSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1507,6 +1648,17 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
             return localVarFp.getSupportedCultures(options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns the current portal-level AI access settings that control whether all AI functionality  (chat, agents, vectorization) is available for the portal. AI is enabled by default.
+         * @summary Get the AI access settings for the portal
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getTenantAiAccessSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-ai-access-settings/
+         * @throws {RequiredError}
+         */
+        getTenantAiAccessSettings(options?: RawAxiosRequestConfig): AxiosPromise<TenantAiAccessSettingsWrapper> {
+            return localVarFp.getTenantAiAccessSettings(options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns the portal user invitation settings.
          * @summary Get the user invitation settings
          * @param {*} [options] Override http request option.
@@ -1575,6 +1727,18 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
          */
         savePortalColorTheme(requestParameters: CommonSettingsApiSavePortalColorThemeRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<CustomColorThemesSettingsWrapper> {
             return localVarFp.savePortalColorTheme(requestParameters.customColorThemesSettingsRequestsDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Updates the portal-level AI access settings. When AI is disabled, all AI features are turned off:  the AI Agents folder is hidden from root folder listings, AI status checks immediately return disabled,  and AI chat endpoints become inaccessible. Only users with the DocSpaceAdmin role  (EditPortalSettings permission) can change this setting.
+         * @summary Set the AI access for the portal
+         * @param {CommonSettingsApiSetTenantAiAccessSettingsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for setTenantAiAccessSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-ai-access-settings/
+         * @throws {RequiredError}
+         */
+        setTenantAiAccessSettings(requestParameters: CommonSettingsApiSetTenantAiAccessSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantAiAccessSettingsWrapper> {
+            return localVarFp.setTenantAiAccessSettings(requestParameters.tenantAiAccessSettingsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates the email activation settings.
@@ -1713,6 +1877,20 @@ export interface CommonSettingsApiSavePortalColorThemeRequest {
      * @memberof CommonSettingsApiSavePortalColorTheme
      */
     readonly customColorThemesSettingsRequestsDto?: CustomColorThemesSettingsRequestsDto
+}
+
+/**
+ * Request parameters for setTenantAiAccessSettings operation in CommonSettingsApi.
+ * @export
+ * @interface CommonSettingsApiSetTenantAiAccessSettingsRequest
+ */
+export interface CommonSettingsApiSetTenantAiAccessSettingsRequest {
+    /**
+     * 
+     * @type {TenantAiAccessSettingsDto}
+     * @memberof CommonSettingsApiSetTenantAiAccessSettings
+     */
+    readonly tenantAiAccessSettingsDto?: TenantAiAccessSettingsDto
 }
 
 /**
@@ -1887,6 +2065,17 @@ export class CommonSettingsApi extends BaseAPI {
     }
 
     /**
+     * Returns the current portal-level AI access settings that control whether all AI functionality  (chat, agents, vectorization) is available for the portal. AI is enabled by default.
+     * @summary Get the AI access settings for the portal
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CommonSettingsApi
+     */
+    public getTenantAiAccessSettings(options?: RawAxiosRequestConfig) {
+        return CommonSettingsApiFp(this.configuration).getTenantAiAccessSettings(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Returns the portal user invitation settings.
      * @summary Get the user invitation settings
      * @param {*} [options] Override http request option.
@@ -1954,6 +2143,18 @@ export class CommonSettingsApi extends BaseAPI {
      */
     public savePortalColorTheme(requestParameters: CommonSettingsApiSavePortalColorThemeRequest = {}, options?: RawAxiosRequestConfig) {
         return CommonSettingsApiFp(this.configuration).savePortalColorTheme(requestParameters.customColorThemesSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Updates the portal-level AI access settings. When AI is disabled, all AI features are turned off:  the AI Agents folder is hidden from root folder listings, AI status checks immediately return disabled,  and AI chat endpoints become inaccessible. Only users with the DocSpaceAdmin role  (EditPortalSettings permission) can change this setting.
+     * @summary Set the AI access for the portal
+     * @param {SettingsCommonSettingsApiSetTenantAiAccessSettingsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CommonSettingsApi
+     */
+    public setTenantAiAccessSettings(requestParameters: CommonSettingsApiSetTenantAiAccessSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return CommonSettingsApiFp(this.configuration).setTenantAiAccessSettings(requestParameters.tenantAiAccessSettingsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

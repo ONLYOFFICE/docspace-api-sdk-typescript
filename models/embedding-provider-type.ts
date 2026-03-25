@@ -20,13 +20,14 @@
 
 
 /**
- * [0 - None, 1 - OpenAi, 2 - OpenRouter]
+ * [0 - None, 1 - OpenAi, 2 - OpenRouter, 3 - PortalAi]
  */
 
 export const EmbeddingProviderType = {
     None: 0,
     OpenAi: 1,
-    OpenRouter: 2
+    OpenRouter: 2,
+    PortalAi: 3
 } as const;
 
 export type EmbeddingProviderType = typeof EmbeddingProviderType[keyof typeof EmbeddingProviderType];

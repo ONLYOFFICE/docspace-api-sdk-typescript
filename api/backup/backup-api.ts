@@ -499,7 +499,7 @@ export const BackupApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * Returns the number of backups for a period of time. The default is one month.
+         * Returns the number of backups for a period of time. The default is the current calendar month.
          * @summary Get the number of backups
          * @param {string} [from] The from date.
          * @param {string} [to] The to date.
@@ -901,7 +901,7 @@ export const BackupApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the number of backups for a period of time. The default is one month.
+         * Returns the number of backups for a period of time. The default is the current calendar month.
          * @summary Get the number of backups
          * @param {string} [from] The from date.
          * @param {string} [to] The to date.
@@ -1082,7 +1082,7 @@ export const BackupApiFactory = function (configuration?: Configuration, basePat
             return localVarFp.getBackupSchedule(requestParameters.dump, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the number of backups for a period of time. The default is one month.
+         * Returns the number of backups for a period of time. The default is the current calendar month.
          * @summary Get the number of backups
          * @param {BackupApiGetBackupsCountRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1414,7 +1414,7 @@ export class BackupApi extends BaseAPI {
     }
 
     /**
-     * Returns the number of backups for a period of time. The default is one month.
+     * Returns the number of backups for a period of time. The default is the current calendar month.
      * @summary Get the number of backups
      * @param {BackupApiGetBackupsCountRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

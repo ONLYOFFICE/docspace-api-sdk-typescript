@@ -5,7 +5,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**getUserTypeUpdateProgress**](#getusertypeupdateprogress) | **GET** /api/2.0/people/type/progress/{userid} | Get the progress of updating user type|
-|[**starUserTypetUpdate**](#starusertypetupdate) | **POST** /api/2.0/people/type | Start updating user type|
+|[**startUserTypeUpdate**](#startusertypeupdate) | **POST** /api/2.0/people/type | Start updating user type|
 |[**terminateUserTypeUpdate**](#terminateusertypeupdate) | **PUT** /api/2.0/people/type/terminate | Terminate updating user type|
 |[**updateUserType**](#updateusertype) | **PUT** /api/2.0/people/type/{type} | Change a user type|
 
@@ -63,12 +63,12 @@ const { status, data } = await apiInstance.getUserTypeUpdateProgress(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **starUserTypetUpdate**
-> TaskProgressResponseWrapper starUserTypetUpdate()
+# **startUserTypeUpdate**
+> TaskProgressResponseWrapper startUserTypeUpdate()
 
 Starts updating the type of the user or guest when reassigning rooms and shared files.
 
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/star-user-typet-update/).
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-user-type-update/).
 
 ### Parameters
 
@@ -99,7 +99,7 @@ const apiInstance = new PeopleUserTypeApi(configuration);
 
 let startUpdateUserTypeDto: StartUpdateUserTypeDto; // (optional)
 
-const { status, data } = await apiInstance.starUserTypetUpdate(
+const { status, data } = await apiInstance.startUserTypeUpdate(
     startUpdateUserTypeDto
 );
 ```

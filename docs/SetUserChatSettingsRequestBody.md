@@ -7,6 +7,7 @@ Parameters for updating user chat settings.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **webSearchEnabled** | **boolean** | Indicates whether the AI assistant is allowed to perform web searches when generating responses. | [optional] [default to undefined]
+**reasoningEffort** | [**ChatReasoningEffort**](ChatReasoningEffort.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -15,6 +16,7 @@ import { SetUserChatSettingsRequestBody } from '@onlyoffice/docspace-api-sdk';
 
 const instance: SetUserChatSettingsRequestBody = {
     webSearchEnabled,
+    reasoningEffort,
 };
 ```
 

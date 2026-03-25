@@ -18,7 +18,8 @@ Name | Type | Description | Notes
 **aiAgentsQuota** | [**TenantEntityQuotaSettings**](TenantEntityQuotaSettings.md) |  | [optional] [default to undefined]
 **tenantCustomQuota** | [**TenantQuotaSettings**](TenantQuotaSettings.md) |  | [optional] [default to undefined]
 **dueDate** | **string** | The due date. | [optional] [default to undefined]
-**innerServices** | [**Array&lt;QuotaDto&gt;**](QuotaDto.md) | The list of inner services. | [optional] [default to undefined]
+**innerServices** | [**Array&lt;WalletServiceDto&gt;**](WalletServiceDto.md) | The list of inner services. | [optional] [default to undefined]
+**serviceName** | **string** | The service name. | [optional] [default to undefined]
 
 ## Example
 
@@ -39,6 +40,7 @@ const instance: WalletServiceDto = {
     tenantCustomQuota,
     dueDate,
     innerServices,
+    serviceName,
 };
 ```
 

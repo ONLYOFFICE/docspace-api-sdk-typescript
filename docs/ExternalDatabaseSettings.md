@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **databaseType** | **string** |  | [optional] [default to undefined]
+**databaseTypeEnum** | [**ExternalDatabaseType**](ExternalDatabaseType.md) |  | [optional] [default to undefined]
 **dbHost** | **string** |  | [optional] [default to undefined]
 **dbPort** | **number** |  | [optional] [default to undefined]
 **dbName** | **string** |  | [optional] [default to undefined]
@@ -21,6 +22,7 @@ import { ExternalDatabaseSettings } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ExternalDatabaseSettings = {
     databaseType,
+    databaseTypeEnum,
     dbHost,
     dbPort,
     dbName,

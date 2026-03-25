@@ -18,20 +18,17 @@
  *
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { ChatReasoningEffort } from './chat-reasoning-effort';
 
 /**
- * The user chat settings.
+ * []
  */
-export interface UserChatSettingsDto {
-    /**
-     * Indicates whether the AI assistant is allowed to perform web searches when generating responses in this room.
-     */
-    'webSearchEnabled'?: boolean;
-    'reasoningEffort'?: ChatReasoningEffort;
-}
+
+export const ExternalDatabaseType = {
+    MySql: 0,
+    Sqlite: 1
+} as const;
+
+export type ExternalDatabaseType = typeof ExternalDatabaseType[keyof typeof ExternalDatabaseType];
 
 
 

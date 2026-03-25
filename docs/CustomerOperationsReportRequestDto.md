@@ -7,6 +7,7 @@ The request parameters for generating a report on client operations.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **serviceName** | **string** | The service name. | [optional] [default to undefined]
+**writeOffServiceQuota** | **boolean** | Write-off of the quota for the service | [optional] [default to undefined]
 **startDate** | **string** | The report start date. | [optional] [default to undefined]
 **endDate** | **string** | The report end date. | [optional] [default to undefined]
 **participantName** | **string** | The participant name. | [optional] [default to undefined]
@@ -24,6 +25,7 @@ import { CustomerOperationsReportRequestDto } from '@onlyoffice/docspace-api-sdk
 
 const instance: CustomerOperationsReportRequestDto = {
     serviceName,
+    writeOffServiceQuota,
     startDate,
     endDate,
     participantName,

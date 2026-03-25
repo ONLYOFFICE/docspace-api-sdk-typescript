@@ -83,6 +83,8 @@ import type { TopUpDepositRequestDto } from '../../models';
 import type { WalletQuantityRequestDto } from '../../models';
 // @ts-ignore
 import type { WalletServiceArrayWrapper } from '../../models';
+// @ts-ignore
+import type { WalletServiceWrapper } from '../../models';
 /**
  * PaymentApi - axios parameter creator
  * @export
@@ -544,6 +546,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [offset] The number of items to skip for pagination. The default value is 0.
          * @param {number} [limit] The maximum number of items to return for pagination. The default value is 25.
          * @param {string} [serviceName] The service name.
+         * @param {boolean} [writeOffServiceQuota] Write-off of the quota for the service
          * @param {string} [startDate] The report start date.
          * @param {string} [endDate] The report end date.
          * @param {string} [participantName] The participant name.
@@ -558,7 +561,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * REST API Reference for getCustomerOperations operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-operations/
          */
-        getCustomerOperations: async (offset?: number, limit?: number, serviceName?: string, startDate?: string, endDate?: string, participantName?: string, credit?: boolean, debit?: boolean, types?: OperationType, status?: OperationStatus, orderBy?: string, orderType?: OperationOrderType, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getCustomerOperations: async (offset?: number, limit?: number, serviceName?: string, writeOffServiceQuota?: boolean, startDate?: string, endDate?: string, participantName?: string, credit?: boolean, debit?: boolean, types?: OperationType, status?: OperationStatus, orderBy?: string, orderType?: OperationOrderType, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/portal/payment/customer/operations`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -601,6 +604,10 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
 
             if (serviceName !== undefined) {
                 localVarQueryParameter['ServiceName'] = serviceName;
+            }
+
+            if (writeOffServiceQuota !== undefined) {
+                localVarQueryParameter['WriteOffServiceQuota'] = writeOffServiceQuota;
             }
 
             if (startDate !== undefined) {
@@ -1889,6 +1896,7 @@ export const PaymentApiFp = function(configuration?: Configuration) {
          * @param {number} [offset] The number of items to skip for pagination. The default value is 0.
          * @param {number} [limit] The maximum number of items to return for pagination. The default value is 25.
          * @param {string} [serviceName] The service name.
+         * @param {boolean} [writeOffServiceQuota] Write-off of the quota for the service
          * @param {string} [startDate] The report start date.
          * @param {string} [endDate] The report end date.
          * @param {string} [participantName] The participant name.
@@ -1903,8 +1911,8 @@ export const PaymentApiFp = function(configuration?: Configuration) {
          * REST API Reference for getCustomerOperations operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-operations/
          */
-        async getCustomerOperations(offset?: number, limit?: number, serviceName?: string, startDate?: string, endDate?: string, participantName?: string, credit?: boolean, debit?: boolean, types?: OperationType, status?: OperationStatus, orderBy?: string, orderType?: OperationOrderType, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ReportWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getCustomerOperations(offset, limit, serviceName, startDate, endDate, participantName, credit, debit, types, status, orderBy, orderType, options);
+        async getCustomerOperations(offset?: number, limit?: number, serviceName?: string, writeOffServiceQuota?: boolean, startDate?: string, endDate?: string, participantName?: string, credit?: boolean, debit?: boolean, types?: OperationType, status?: OperationStatus, orderBy?: string, orderType?: OperationOrderType, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ReportWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCustomerOperations(offset, limit, serviceName, writeOffServiceQuota, startDate, endDate, participantName, credit, debit, types, status, orderBy, orderType, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaymentApi.getCustomerOperations']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -2078,7 +2086,7 @@ export const PaymentApiFp = function(configuration?: Configuration) {
          * REST API Reference for getWalletService operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-wallet-service/
          */
-        async getWalletService(service: TenantWalletService, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QuotaWrapper>> {
+        async getWalletService(service: TenantWalletService, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WalletServiceWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getWalletService(service, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaymentApi.getWalletService']?.[localVarOperationServerIndex]?.url;
@@ -2317,7 +2325,7 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          * @throws {RequiredError}
          */
         getCustomerOperations(requestParameters: PaymentApiGetCustomerOperationsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ReportWrapper> {
-            return localVarFp.getCustomerOperations(requestParameters.offset, requestParameters.limit, requestParameters.serviceName, requestParameters.startDate, requestParameters.endDate, requestParameters.participantName, requestParameters.credit, requestParameters.debit, requestParameters.types, requestParameters.status, requestParameters.orderBy, requestParameters.orderType, options).then((request) => request(axios, basePath));
+            return localVarFp.getCustomerOperations(requestParameters.offset, requestParameters.limit, requestParameters.serviceName, requestParameters.writeOffServiceQuota, requestParameters.startDate, requestParameters.endDate, requestParameters.participantName, requestParameters.credit, requestParameters.debit, requestParameters.types, requestParameters.status, requestParameters.orderBy, requestParameters.orderType, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the status of generating a customer operations report.
@@ -2454,7 +2462,7 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-wallet-service/
          * @throws {RequiredError}
          */
-        getWalletService(requestParameters: PaymentApiGetWalletServiceRequest, options?: RawAxiosRequestConfig): AxiosPromise<QuotaWrapper> {
+        getWalletService(requestParameters: PaymentApiGetWalletServiceRequest, options?: RawAxiosRequestConfig): AxiosPromise<WalletServiceWrapper> {
             return localVarFp.getWalletService(requestParameters.service, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2678,6 +2686,13 @@ export interface PaymentApiGetCustomerOperationsRequest {
      * @memberof PaymentApiGetCustomerOperations
      */
     readonly serviceName?: string
+
+    /**
+     * Write-off of the quota for the service
+     * @type {boolean}
+     * @memberof PaymentApiGetCustomerOperations
+     */
+    readonly writeOffServiceQuota?: boolean
 
     /**
      * The report start date.
@@ -3029,7 +3044,7 @@ export class PaymentApi extends BaseAPI {
      * @memberof PaymentApi
      */
     public getCustomerOperations(requestParameters: PaymentApiGetCustomerOperationsRequest = {}, options?: RawAxiosRequestConfig) {
-        return PaymentApiFp(this.configuration).getCustomerOperations(requestParameters.offset, requestParameters.limit, requestParameters.serviceName, requestParameters.startDate, requestParameters.endDate, requestParameters.participantName, requestParameters.credit, requestParameters.debit, requestParameters.types, requestParameters.status, requestParameters.orderBy, requestParameters.orderType, options).then((request) => request(this.axios, this.basePath));
+        return PaymentApiFp(this.configuration).getCustomerOperations(requestParameters.offset, requestParameters.limit, requestParameters.serviceName, requestParameters.writeOffServiceQuota, requestParameters.startDate, requestParameters.endDate, requestParameters.participantName, requestParameters.credit, requestParameters.debit, requestParameters.types, requestParameters.status, requestParameters.orderBy, requestParameters.orderType, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

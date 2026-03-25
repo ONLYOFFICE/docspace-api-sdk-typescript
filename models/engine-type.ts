@@ -20,12 +20,13 @@
 
 
 /**
- * [0 - None, 1 - Exa]
+ * [0 - None, 1 - Exa, 2 - PortalAi]
  */
 
 export const EngineType = {
     None: 0,
-    Exa: 1
+    Exa: 1,
+    PortalAi: 2
 } as const;
 
 export type EngineType = typeof EngineType[keyof typeof EngineType];

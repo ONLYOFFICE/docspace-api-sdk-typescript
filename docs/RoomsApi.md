@@ -2255,7 +2255,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **formCollection** | **Array&lt;KeyValuePairStringStringValues&gt;** | The image data. | (optional) defaults to undefined|
+| **file** | [**File**] | The image data. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -2277,10 +2277,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
 
-let formCollection: Array<KeyValuePairStringStringValues>; //The image data. (optional) (default to undefined)
+let file: File; //The image data. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.uploadRoomLogo(
-    formCollection
+    file
 );
 ```
 

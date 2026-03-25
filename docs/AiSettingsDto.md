@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **generateDocxToolName** | **string** | The tool name used by the AI to launch docx creation in the editor. | [default to undefined]
 **generateFormToolName** | **string** | The tool name used by the AI assistant to launch form creation in the editor. | [default to undefined]
 **generatePresentationToolName** | **string** | The tool name used by the AI assistant to launch presentation creation in the editor. | [default to undefined]
+**systemAiEnabled** | **boolean** | Indicates whether the system-level AI provider is enabled. | [optional] [default to undefined]
 
 ## Example
 
@@ -43,6 +44,7 @@ const instance: AiSettingsDto = {
     generateDocxToolName,
     generateFormToolName,
     generatePresentationToolName,
+    systemAiEnabled,
 };
 ```
 

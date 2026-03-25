@@ -18,6 +18,9 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ChatReasoningEffort } from './chat-reasoning-effort';
 
 /**
  * Parameters for updating user chat settings.
@@ -27,5 +30,8 @@ export interface SetUserChatSettingsRequestBody {
      * Indicates whether the AI assistant is allowed to perform web searches when generating responses.
      */
     'webSearchEnabled'?: boolean | null;
+    'reasoningEffort'?: ChatReasoningEffort;
 }
+
+
 

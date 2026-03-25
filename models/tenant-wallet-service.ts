@@ -20,11 +20,10 @@
 
 
 /**
- * [-14 - WebSearch, -13 - AITools, -12 - Backup, -11 - Storage]
+ * [-13 - AITools, -12 - Backup, -11 - Storage]
  */
 
 export const TenantWalletService = {
-    WebSearch: -14,
     AITools: -13,
     Backup: -12,
     Storage: -11

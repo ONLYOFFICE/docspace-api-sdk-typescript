@@ -44,6 +44,10 @@ export interface ChatSettingsDto {
     'prompt'?: string | null;
     'multimodal'?: ChatMultimodalSettingsDto;
     /**
+     * Indicates whether the model supports extended thinking mode.
+     */
+    'thinking'?: boolean;
+    /**
      * Indicates whether this is an internal AI gateway provider.
      */
     'internal'?: boolean;

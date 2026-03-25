@@ -18,20 +18,18 @@
  *
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { ChatReasoningEffort } from './chat-reasoning-effort';
 
 /**
- * The user chat settings.
+ * The tenant-level settings for enabling or disabling all AI functionality in DocSpace.
  */
-export interface UserChatSettingsDto {
+export interface TenantAiAccessSettings {
     /**
-     * Indicates whether the AI assistant is allowed to perform web searches when generating responses in this room.
+     * Specifies whether AI functionality is enabled for the tenant.  When set to `false`, all AI features (chat, agents, vectorization) are disabled tenant-wide.
      */
-    'webSearchEnabled'?: boolean;
-    'reasoningEffort'?: ChatReasoningEffort;
+    'enabled'?: boolean;
+    /**
+     * The timestamp indicating when the settings were last modified.
+     */
+    'lastModified'?: string;
 }
-
-
 

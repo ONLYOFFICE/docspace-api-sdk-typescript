@@ -37,6 +37,10 @@ export interface CustomerOperationsReportRequestDto {
      */
     'serviceName'?: string | null;
     /**
+     * Write-off of the quota for the service
+     */
+    'writeOffServiceQuota'?: boolean;
+    /**
      * The report start date.
      */
     'startDate'?: string | null;

@@ -65,6 +65,7 @@ Name | Type | Description | Notes
 **customFilterEnabled** | **boolean** | Specifies if the Custom Filter editing mode is enabled for a file or not. | [optional] [default to undefined]
 **customFilterEnabledBy** | **string** | The name of the user who enabled a Custom Filter editing mode for a file. | [optional] [default to undefined]
 **startFilling** | **boolean** | Specifies if the filling has started or not. | [optional] [default to undefined]
+**isFillingPreparing** | **boolean** | Specifies if the form filling has started but the file is still being saved by the document editor. Filling and editing are not allowed. | [optional] [default to undefined]
 **inProcessFolderId** | **number** | The InProcess folder ID of the file. | [optional] [default to undefined]
 **inProcessFolderTitle** | **string** | The InProcess folder title of the file. | [optional] [default to undefined]
 **draftLocation** | [**DraftLocationInteger**](DraftLocationInteger.md) |  | [optional] [default to undefined]
@@ -139,6 +140,7 @@ const instance: FileDtoInteger = {
     customFilterEnabled,
     customFilterEnabledBy,
     startFilling,
+    isFillingPreparing,
     inProcessFolderId,
     inProcessFolderTitle,
     draftLocation,

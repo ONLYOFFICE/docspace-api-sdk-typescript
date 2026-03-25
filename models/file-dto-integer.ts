@@ -221,6 +221,12 @@ export type FileDtoInteger = FileEntryDtoInteger &  {
      */
     'startFilling'?: boolean | null;
     /**
+     * Specifies if the form filling has started but the file is still being saved by the document editor. Filling and editing are not allowed.
+     * @type {boolean}
+     * @memberof FileDtoInteger
+     */
+    'isFillingPreparing'?: boolean | null;
+    /**
      * The InProcess folder ID of the file.
      * @type {number}
      * @memberof FileDtoInteger

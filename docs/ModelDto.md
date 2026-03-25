@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **providerId** | **number** | The unique identifier of the AI provider that offers this model. | [optional] [default to undefined]
 **providerTitle** | **string** | The human-readable display name of the AI provider (e.g., OpenAI, Anthropic). | [default to undefined]
 **modelId** | **string** | The model identifier as recognized by the AI provider (e.g., gpt-4o, claude-sonnet-4-20250514). | [default to undefined]
+**price** | [**AiChatPrice**](AiChatPrice.md) |  | [optional] [default to undefined]
+**currency** | [**CurrencyInfo**](CurrencyInfo.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -19,6 +21,8 @@ const instance: ModelDto = {
     providerId,
     providerTitle,
     modelId,
+    price,
+    currency,
 };
 ```
 

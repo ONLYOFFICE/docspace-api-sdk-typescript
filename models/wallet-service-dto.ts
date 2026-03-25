@@ -42,10 +42,16 @@ import type { TenantQuotaSettings } from './tenant-quota-settings';
 export type WalletServiceDto = QuotaDto &  {
     /**
      * The list of inner services.
-     * @type {Array<QuotaDto>}
+     * @type {Array<WalletServiceDto>}
      * @memberof WalletServiceDto
      */
-    'innerServices'?: Array<QuotaDto> | null;
+    'innerServices'?: Array<WalletServiceDto> | null;
+    /**
+     * The service name.
+     * @type {string}
+     * @memberof WalletServiceDto
+     */
+    'serviceName'?: string | null;
 };
 
 

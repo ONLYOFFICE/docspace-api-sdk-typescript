@@ -58,8 +58,6 @@ import type { FolderIntegerWrapper } from '../../models';
 // @ts-ignore
 import type { FolderStringWrapper } from '../../models';
 // @ts-ignore
-import type { KeyValuePairStringStringValues } from '../../models';
-// @ts-ignore
 import type { LinkType } from '../../models';
 // @ts-ignore
 import type { LogoRequest } from '../../models';
@@ -2451,13 +2449,13 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * Uploads a temporary image to create a room logo.
          * @summary Upload a room logo image
-         * @param {Array<KeyValuePairStringStringValues>} [formCollection] The image data.
+         * @param {File} [file] The image data.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for uploadRoomLogo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-room-logo/
          */
-        uploadRoomLogo: async (formCollection?: Array<KeyValuePairStringStringValues>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        uploadRoomLogo: async (file?: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/files/logos`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2491,12 +2489,10 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
 
             // authentication OpenId required
 
-            if (formCollection) {
-                formCollection.forEach((element) => {
-                    localVarFormParams.append('FormCollection', element as any);
-                })
-            }
 
+            if (file !== undefined) { 
+                localVarFormParams.append('File', file as any);
+            }
     
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
@@ -3138,14 +3134,14 @@ export const RoomsApiFp = function(configuration?: Configuration) {
         /**
          * Uploads a temporary image to create a room logo.
          * @summary Upload a room logo image
-         * @param {Array<KeyValuePairStringStringValues>} [formCollection] The image data.
+         * @param {File} [file] The image data.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for uploadRoomLogo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-room-logo/
          */
-        async uploadRoomLogo(formCollection?: Array<KeyValuePairStringStringValues>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UploadResultWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadRoomLogo(formCollection, options);
+        async uploadRoomLogo(file?: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UploadResultWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadRoomLogo(file, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.uploadRoomLogo']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3632,7 +3628,7 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         uploadRoomLogo(requestParameters: RoomsApiUploadRoomLogoRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<UploadResultWrapper> {
-            return localVarFp.uploadRoomLogo(requestParameters.formCollection, options).then((request) => request(axios, basePath));
+            return localVarFp.uploadRoomLogo(requestParameters.file, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -4352,10 +4348,10 @@ export interface RoomsApiUpdateRoomTagRequest {
 export interface RoomsApiUploadRoomLogoRequest {
     /**
      * The image data.
-     * @type {Array<KeyValuePairStringStringValues>}
+     * @type {File}
      * @memberof RoomsApiUploadRoomLogo
      */
-    readonly formCollection?: Array<KeyValuePairStringStringValues>
+    readonly file?: File
 }
 
 /**
@@ -4836,7 +4832,7 @@ export class RoomsApi extends BaseAPI {
      * @memberof RoomsApi
      */
     public uploadRoomLogo(requestParameters: RoomsApiUploadRoomLogoRequest = {}, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).uploadRoomLogo(requestParameters.formCollection, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).uploadRoomLogo(requestParameters.file, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

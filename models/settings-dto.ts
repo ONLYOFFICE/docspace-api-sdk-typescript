@@ -175,6 +175,10 @@ export interface SettingsDto {
      */
     'displayBanners'?: boolean;
     /**
+     * Specifies whether AI functionality (chat, agents, vectorization) is enabled for the current tenant.  When `false`, all AI features are disabled and the AI Agents folder is hidden.
+     */
+    'aiEnabled'?: boolean;
+    /**
      * The user name validation regex.
      */
     'userNameRegex'?: string | null;

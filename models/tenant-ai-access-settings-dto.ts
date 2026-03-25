@@ -18,20 +18,14 @@
  *
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { ChatReasoningEffort } from './chat-reasoning-effort';
 
 /**
- * The user chat settings.
+ * The request parameters for managing the tenant-level AI access settings.
  */
-export interface UserChatSettingsDto {
+export interface TenantAiAccessSettingsDto {
     /**
-     * Indicates whether the AI assistant is allowed to perform web searches when generating responses in this room.
+     * Specifies whether AI functionality is enabled for the tenant.  Set to `true` to enable all AI features or `false` to disable them tenant-wide.
      */
-    'webSearchEnabled'?: boolean;
-    'reasoningEffort'?: ChatReasoningEffort;
+    'enabled'?: boolean;
 }
-
-
 
