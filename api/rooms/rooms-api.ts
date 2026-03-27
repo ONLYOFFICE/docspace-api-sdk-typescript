@@ -1328,7 +1328,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * Returns a list of custom tags.
          * @summary Get the room tags
          * @param {number} [count] Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.
-         * @param {number} [startIndex] Represents the starting index from which the tags\&#39; information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.
+         * @param {number} [startIndex] Represents the starting index from which the tags\' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.
          * @param {string} [filterValue] Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2845,7 +2845,7 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * Returns a list of custom tags.
          * @summary Get the room tags
          * @param {number} [count] Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.
-         * @param {number} [startIndex] Represents the starting index from which the tags\&#39; information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.
+         * @param {number} [startIndex] Represents the starting index from which the tags\' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.
          * @param {string} [filterValue] Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3983,7 +3983,7 @@ export interface RoomsApiGetRoomTagsInfoRequest {
     readonly count?: number
 
     /**
-     * Represents the starting index from which the tags\&#39; information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.
+     * Represents the starting index from which the tags\' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.
      * @type {number}
      * @memberof RoomsApiGetRoomTagsInfo
      */

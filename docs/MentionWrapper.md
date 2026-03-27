@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **user** | [**UserInfo**](UserInfo.md) |  | [optional] [default to undefined]
 **email** | **string** | The user email address. | [optional] [readonly] [default to undefined]
 **id** | **string** | The user unique identification. | [optional] [readonly] [default to undefined]
-**image** | **string** | The path to the user\&#39;s avatar. | [optional] [readonly] [default to undefined]
+**image** | **string** | The path to the user\'s avatar. | [optional] [readonly] [default to undefined]
 **hasAccess** | **boolean** | Specifies whether the user has the access to the file where they are mentioned. | [optional] [readonly] [default to undefined]
 **name** | **string** | The user full name. | [optional] [readonly] [default to undefined]
 

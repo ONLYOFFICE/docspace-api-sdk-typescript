@@ -6,7 +6,7 @@ The parameters required for the mobile phone verification.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**mobilePhone** | **string** | The user\&#39;s mobile phone number. | [optional] [default to undefined]
+**mobilePhone** | **string** | The user\'s mobile phone number. | [optional] [default to undefined]
 
 ## Example
 

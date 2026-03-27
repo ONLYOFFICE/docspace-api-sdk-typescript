@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **session** | **boolean** | Specifies whether the authentication is session-based. | [optional] [default to undefined]
 **confirmData** | [**ConfirmData**](ConfirmData.md) |  | [optional] [default to undefined]
 **recaptchaType** | [**RecaptchaType**](RecaptchaType.md) |  | [optional] [default to undefined]
-**recaptchaResponse** | **string** | The user\&#39;s response to the CAPTCHA challenge. | [optional] [default to undefined]
+**recaptchaResponse** | **string** | The user\'s response to the CAPTCHA challenge. | [optional] [default to undefined]
 **culture** | **string** | The culture code for localization during authentication. | [optional] [default to undefined]
 
 ## Example

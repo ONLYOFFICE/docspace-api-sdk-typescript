@@ -36,7 +36,7 @@ export const AuthorizationApiAxiosParamCreator = function (configuration?: Confi
         /**
          * Initiates the OAuth2 authorization flow.
          * @summary OAuth2 authorization endpoint
-         * @param {string} responseType The OAuth 2.0 response type, must be \&#39;code\&#39; for authorization code flow.
+         * @param {string} responseType The OAuth 2.0 response type, must be \'code\' for authorization code flow.
          * @param {string} clientId The client identifier issued to the client during registration.
          * @param {string} redirectUri The URL to redirect to after authorization is complete.
          * @param {string} scope The space-separated list of requested scope permissions.
@@ -99,7 +99,7 @@ export const AuthorizationApiAxiosParamCreator = function (configuration?: Confi
         /**
          * Exchanges an authorization code specified in the request for the access token.
          * @summary OAuth2 token endpoint
-         * @param {string} [grantType] The OAuth2 grant type, must be \\\&#39;authorization_code\\\&#39; for the authorization code flow.
+         * @param {string} [grantType] The OAuth2 grant type, must be \\\'authorization_code\\\' for the authorization code flow.
          * @param {string} [code] A temporary authorization code that is sent to the client to be exchanged for a token.
          * @param {string} [redirectUri] The URL where the user will be redirected after successful or unsuccessful authentication.
          * @param {string} [clientId] The client identifier issued to the client during registration.
@@ -225,7 +225,7 @@ export const AuthorizationApiFp = function(configuration?: Configuration) {
         /**
          * Initiates the OAuth2 authorization flow.
          * @summary OAuth2 authorization endpoint
-         * @param {string} responseType The OAuth 2.0 response type, must be \&#39;code\&#39; for authorization code flow.
+         * @param {string} responseType The OAuth 2.0 response type, must be \'code\' for authorization code flow.
          * @param {string} clientId The client identifier issued to the client during registration.
          * @param {string} redirectUri The URL to redirect to after authorization is complete.
          * @param {string} scope The space-separated list of requested scope permissions.
@@ -243,7 +243,7 @@ export const AuthorizationApiFp = function(configuration?: Configuration) {
         /**
          * Exchanges an authorization code specified in the request for the access token.
          * @summary OAuth2 token endpoint
-         * @param {string} [grantType] The OAuth2 grant type, must be \\\&#39;authorization_code\\\&#39; for the authorization code flow.
+         * @param {string} [grantType] The OAuth2 grant type, must be \\\'authorization_code\\\' for the authorization code flow.
          * @param {string} [code] A temporary authorization code that is sent to the client to be exchanged for a token.
          * @param {string} [redirectUri] The URL where the user will be redirected after successful or unsuccessful authentication.
          * @param {string} [clientId] The client identifier issued to the client during registration.
@@ -332,7 +332,7 @@ export const AuthorizationApiFactory = function (configuration?: Configuration, 
  */
 export interface AuthorizationApiAuthorizeOAuthRequest {
     /**
-     * The OAuth 2.0 response type, must be \&#39;code\&#39; for authorization code flow.
+     * The OAuth 2.0 response type, must be \'code\' for authorization code flow.
      * @type {string}
      * @memberof AuthorizationApiAuthorizeOAuth
      */
@@ -367,7 +367,7 @@ export interface AuthorizationApiAuthorizeOAuthRequest {
  */
 export interface AuthorizationApiExchangeTokenRequest {
     /**
-     * The OAuth2 grant type, must be \\\&#39;authorization_code\\\&#39; for the authorization code flow.
+     * The OAuth2 grant type, must be \\\'authorization_code\\\' for the authorization code flow.
      * @type {string}
      * @memberof AuthorizationApiExchangeToken
      */

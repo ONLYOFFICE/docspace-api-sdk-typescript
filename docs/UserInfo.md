@@ -7,8 +7,8 @@ The user information.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** | The user ID. | [optional] [default to undefined]
-**firstName** | **string** | The user\&#39;s first name. | [optional] [default to undefined]
-**lastName** | **string** | The user\&#39;s last name. | [optional] [default to undefined]
+**firstName** | **string** | The user\'s first name. | [optional] [default to undefined]
+**lastName** | **string** | The user\'s last name. | [optional] [default to undefined]
 **userName** | **string** | The user username. | [optional] [default to undefined]
 **birthDate** | **string** | The user birthday. | [optional] [default to undefined]
 **sex** | **boolean** | The user sex (male or female). | [optional] [default to undefined]

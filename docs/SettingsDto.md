@@ -40,7 +40,7 @@ Name | Type | Description | Notes
 **limitedAccessSpace** | **boolean** | Specifies whether the access to the space management is limited or not. | [optional] [default to undefined]
 **limitedAccessDevToolsForUsers** | **boolean** | Specifies whether the access to the Developer Tools is limited for users or not. | [optional] [default to undefined]
 **displayBanners** | **boolean** | Specifies whether to display the promotional banners. | [optional] [default to undefined]
-**aiEnabled** | **boolean** | Specifies whether AI functionality (chat, agents, vectorization) is enabled for the current tenant.  When &#x60;false&#x60;, all AI features are disabled and the AI Agents folder is hidden. | [optional] [default to undefined]
+**aiEnabled** | **boolean** | Specifies whether AI functionality (chat, agents, vectorization) is enabled for the current tenant.  When `false`, all AI features are disabled and the AI Agents folder is hidden. | [optional] [default to undefined]
 **userNameRegex** | **string** | The user name validation regex. | [optional] [default to undefined]
 **invitationLimit** | **number** | The maximum number of invitations to the portal. | [optional] [default to undefined]
 **plugins** | [**PluginsDto**](PluginsDto.md) |  | [optional] [default to undefined]

@@ -19,7 +19,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **responseType** | [**string**] | The OAuth 2.0 response type, must be \&#39;code\&#39; for authorization code flow. | defaults to undefined|
+| **responseType** | [**string**] | The OAuth 2.0 response type, must be \'code\' for authorization code flow. | defaults to undefined|
 | **clientId** | [**string**] | The client identifier issued to the client during registration. | defaults to undefined|
 | **redirectUri** | [**string**] | The URL to redirect to after authorization is complete. | defaults to undefined|
 | **scope** | [**string**] | The space-separated list of requested scope permissions. | defaults to undefined|
@@ -82,7 +82,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **grantType** | [**string**] | The OAuth2 grant type, must be \\\&#39;authorization_code\\\&#39; for the authorization code flow. | (optional) defaults to undefined|
+| **grantType** | [**string**] | The OAuth2 grant type, must be \\\'authorization_code\\\' for the authorization code flow. | (optional) defaults to undefined|
 | **code** | [**string**] | A temporary authorization code that is sent to the client to be exchanged for a token. | (optional) defaults to undefined|
 | **redirectUri** | [**string**] | The URL where the user will be redirected after successful or unsuccessful authentication. | (optional) defaults to undefined|
 | **clientId** | [**string**] | The client identifier issued to the client during registration. | (optional) defaults to undefined|

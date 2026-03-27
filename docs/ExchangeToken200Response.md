@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **access_token** | **string** | The access token issued by the authorization server. | [optional] [default to undefined]
-**token_type** | **string** | The type of token issued, typically \&#39;Bearer\&#39;. | [optional] [default to undefined]
+**token_type** | **string** | The type of token issued, typically \'Bearer\'. | [optional] [default to undefined]
 **expires_in** | **number** | The number of seconds until the access token expires. | [optional] [default to undefined]
 **refresh_token** | **string** | The token used to obtain a new access token when the current one expires. | [optional] [default to undefined]
 

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** | Unique identifier of the MCP server. | [optional] [default to undefined]
 **name** | **string** | Display name of the MCP server. | [optional] [default to undefined]
-**description** | **string** | Human-readable description of the server\&#39;s purpose and capabilities. | [optional] [default to undefined]
+**description** | **string** | Human-readable description of the server\'s purpose and capabilities. | [optional] [default to undefined]
 **endpoint** | **string** | Base URL of the MCP server endpoint. | [optional] [default to undefined]
 **serverType** | [**ServerType**](ServerType.md) |  | [optional] [default to undefined]
 **headers** | **{ [key: string]: string; }** | HTTP headers sent with every request to the server (e.g., authentication tokens). | [optional] [default to undefined]

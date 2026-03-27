@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **email** | **string** | Email | [default to undefined]
 **culture** | **string** | Culture | [optional] [default to undefined]
 **recaptchaType** | [**RecaptchaType**](RecaptchaType.md) |  | [optional] [default to undefined]
-**recaptchaResponse** | **string** | The user\&#39;s response to the CAPTCHA challenge. | [optional] [default to undefined]
+**recaptchaResponse** | **string** | The user\'s response to the CAPTCHA challenge. | [optional] [default to undefined]
 
 ## Example
 
