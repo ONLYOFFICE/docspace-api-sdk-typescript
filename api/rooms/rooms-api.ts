@@ -1451,6 +1451,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * @summary Get rooms
          * @param {Array<RoomType>} [type] The filter by room type.
          * @param {string} [subjectId] The filter by user ID.
+         * @param {string} [subjectOwnerId] The filter by room owner ID.
          * @param {SearchArea} [searchArea] The room search area (Active, Archive, Any, Recent by links).
          * @param {boolean} [withoutTags] Specifies whether to search by tags or not.
          * @param {string} [tags] The tags in the serialized format.
@@ -1470,7 +1471,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for getRoomsFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-folder/
          */
-        getRoomsFolder: async (type?: Array<RoomType>, subjectId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, groupId?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getRoomsFolder: async (type?: Array<RoomType>, subjectId?: string, subjectOwnerId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, groupId?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/files/rooms`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1509,6 +1510,10 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
 
             if (subjectId !== undefined) {
                 localVarQueryParameter['subjectId'] = subjectId;
+            }
+
+            if (subjectOwnerId !== undefined) {
+                localVarQueryParameter['subjectOwnerId'] = subjectOwnerId;
             }
 
             if (searchArea !== undefined) {
@@ -2877,6 +2882,7 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * @summary Get rooms
          * @param {Array<RoomType>} [type] The filter by room type.
          * @param {string} [subjectId] The filter by user ID.
+         * @param {string} [subjectOwnerId] The filter by room owner ID.
          * @param {SearchArea} [searchArea] The room search area (Active, Archive, Any, Recent by links).
          * @param {boolean} [withoutTags] Specifies whether to search by tags or not.
          * @param {string} [tags] The tags in the serialized format.
@@ -2896,8 +2902,8 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * REST API Reference for getRoomsFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-folder/
          */
-        async getRoomsFolder(type?: Array<RoomType>, subjectId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, groupId?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomsFolder(type, subjectId, searchArea, withoutTags, tags, excludeSubject, provider, subjectFilter, quotaFilter, storageFilter, count, startIndex, sortBy, sortOrder, filterValue, groupId, options);
+        async getRoomsFolder(type?: Array<RoomType>, subjectId?: string, subjectOwnerId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, groupId?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomsFolder(type, subjectId, subjectOwnerId, searchArea, withoutTags, tags, excludeSubject, provider, subjectFilter, quotaFilter, storageFilter, count, startIndex, sortBy, sortOrder, filterValue, groupId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomsFolder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3438,7 +3444,7 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         getRoomsFolder(requestParameters: RoomsApiGetRoomsFolderRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
-            return localVarFp.getRoomsFolder(requestParameters.type, requestParameters.subjectId, requestParameters.searchArea, requestParameters.withoutTags, requestParameters.tags, requestParameters.excludeSubject, requestParameters.provider, requestParameters.subjectFilter, requestParameters.quotaFilter, requestParameters.storageFilter, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, requestParameters.groupId, options).then((request) => request(axios, basePath));
+            return localVarFp.getRoomsFolder(requestParameters.type, requestParameters.subjectId, requestParameters.subjectOwnerId, requestParameters.searchArea, requestParameters.withoutTags, requestParameters.tags, requestParameters.excludeSubject, requestParameters.provider, requestParameters.subjectFilter, requestParameters.quotaFilter, requestParameters.storageFilter, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, requestParameters.groupId, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the room new items.
@@ -4016,6 +4022,13 @@ export interface RoomsApiGetRoomsFolderRequest {
      * @memberof RoomsApiGetRoomsFolder
      */
     readonly subjectId?: string
+
+    /**
+     * The filter by room owner ID.
+     * @type {string}
+     * @memberof RoomsApiGetRoomsFolder
+     */
+    readonly subjectOwnerId?: string
 
     /**
      * The room search area (Active, Archive, Any, Recent by links).
@@ -4642,7 +4655,7 @@ export class RoomsApi extends BaseAPI {
      * @memberof RoomsApi
      */
     public getRoomsFolder(requestParameters: RoomsApiGetRoomsFolderRequest = {}, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).getRoomsFolder(requestParameters.type, requestParameters.subjectId, requestParameters.searchArea, requestParameters.withoutTags, requestParameters.tags, requestParameters.excludeSubject, requestParameters.provider, requestParameters.subjectFilter, requestParameters.quotaFilter, requestParameters.storageFilter, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, requestParameters.groupId, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).getRoomsFolder(requestParameters.type, requestParameters.subjectId, requestParameters.subjectOwnerId, requestParameters.searchArea, requestParameters.withoutTags, requestParameters.tags, requestParameters.excludeSubject, requestParameters.provider, requestParameters.subjectFilter, requestParameters.quotaFilter, requestParameters.storageFilter, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, requestParameters.groupId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

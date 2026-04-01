@@ -255,7 +255,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 |------------- | ------------- | ------------- | -------------|
 | **userid** | [**string**] | The user ID. | defaults to undefined|
 | **file** | [**File**] | The image data. | defaults to undefined|
-| **autosave** | [**boolean**] |  | (optional) defaults to undefined|
+| **autosave** | [**boolean**] | Specifies whether to autosave a photo or not. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -279,7 +279,7 @@ const apiInstance = new PeoplePhotosApi(configuration);
 
 let userid: string; //The user ID. (default to undefined)
 let file: File; //The image data. (default to undefined)
-let autosave: boolean; // (optional) (default to undefined)
+let autosave: boolean; //Specifies whether to autosave a photo or not. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.uploadMemberPhoto(
     userid,

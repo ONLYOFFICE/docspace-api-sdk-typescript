@@ -19,13 +19,12 @@
  */
 
 
-/**
- * Client activation change request
- */
-export interface ChangeClientActivationRequest {
-    /**
-     * The activation status of the client
-     */
-    'status': boolean;
+export interface ProblemDetail {
+    'type'?: string;
+    'title'?: string;
+    'status'?: number;
+    'detail'?: string;
+    'instance'?: string;
+    'properties'?: { [key: string]: object; };
 }
 

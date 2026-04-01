@@ -20,7 +20,7 @@
 
 
 /**
- * The request parameters for creating a client.
+ * Client creation request containing client details
  */
 export interface CreateClientRequest {
     /**
@@ -28,47 +28,48 @@ export interface CreateClientRequest {
      */
     'name'?: string;
     /**
-     * The client description.
+     * The description of the client
      */
     'description'?: string;
     /**
-     * The client logo in base64 format.
+     * The logo of the client in base64 format
      */
     'logo'?: string;
     /**
-     * The client scopes.
+     * The scopes for the client
      */
     'scopes'?: Set<string>;
+    'public'?: boolean;
     /**
-     * Indicates whether PKCE is allowed for the client.
+     * Indicates whether PKCE is allowed for the client
      */
     'allow_pkce'?: boolean;
     /**
-     * Indicates whether the client is accessible by third-party tenants.
+     * Indicates if the client is public
      */
     'is_public'?: boolean;
     /**
-     * The URL to the client\'s website.
+     * The website URL of the client
      */
     'website_url'?: string;
     /**
-     * The URL to the client\'s terms of service.
+     * The terms URL of the client
      */
     'terms_url'?: string;
     /**
-     * The URL to the client\'s privacy policy.
+     * The policy URL of the client
      */
     'policy_url'?: string;
     /**
-     * The list of allowed redirect URIs.
+     * The redirect URIs for the client
      */
     'redirect_uris': Set<string>;
     /**
-     * The list of allowed CORS origins.
+     * The allowed origins for the client
      */
     'allowed_origins': Set<string>;
     /**
-     * The list of allowed logout redirect URIs.
+     * The logout redirect URI for the client
      */
     'logout_redirect_uri'?: string;
 }

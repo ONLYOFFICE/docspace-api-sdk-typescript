@@ -394,6 +394,62 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * Triggers asynchronous XLSX report generation for the specified form results folder.
+         * @summary Generate XLSX report by folder
+         * @param {number} folderId The folder unique identifier.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for generateXlsxByFolder operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/generate-xlsx-by-folder/
+         */
+        generateXlsxByFolder: async (folderId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'folderId' is not null or undefined
+            assertParamExists('generateXlsxByFolder', 'folderId', folderId)
+
+            const localVarPath = `/api/2.0/files/folder/{folderId}/xlsx`
+                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns the detailed list of files and folders located in the Favorites section.
          * @summary Get the Favorites section
          * @param {string} [userIdOrGroupId] The user or group ID.
@@ -2186,6 +2242,21 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Triggers asynchronous XLSX report generation for the specified form results folder.
+         * @summary Generate XLSX report by folder
+         * @param {number} folderId The folder unique identifier.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for generateXlsxByFolder operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/generate-xlsx-by-folder/
+         */
+        async generateXlsxByFolder(folderId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.generateXlsxByFolder(folderId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.generateXlsxByFolder']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns the detailed list of files and folders located in the Favorites section.
          * @summary Get the Favorites section
          * @param {string} [userIdOrGroupId] The user or group ID.
@@ -2692,6 +2763,18 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.deleteFolder(requestParameters.folderId, requestParameters.deleteFolder, options).then((request) => request(axios, basePath));
         },
         /**
+         * Triggers asynchronous XLSX report generation for the specified form results folder.
+         * @summary Generate XLSX report by folder
+         * @param {FoldersApiGenerateXlsxByFolderRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for generateXlsxByFolder operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/generate-xlsx-by-folder/
+         * @throws {RequiredError}
+         */
+        generateXlsxByFolder(requestParameters: FoldersApiGenerateXlsxByFolderRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
+            return localVarFp.generateXlsxByFolder(requestParameters.folderId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns the detailed list of files and folders located in the Favorites section.
          * @summary Get the Favorites section
          * @param {FoldersApiGetFavoritesFolderRequest} requestParameters Request parameters.
@@ -3065,6 +3148,20 @@ export interface FoldersApiDeleteFolderRequest {
      * @memberof FoldersApiDeleteFolder
      */
     readonly deleteFolder: DeleteFolder
+}
+
+/**
+ * Request parameters for generateXlsxByFolder operation in FoldersApi.
+ * @export
+ * @interface FoldersApiGenerateXlsxByFolderRequest
+ */
+export interface FoldersApiGenerateXlsxByFolderRequest {
+    /**
+     * The folder unique identifier.
+     * @type {number}
+     * @memberof FoldersApiGenerateXlsxByFolder
+     */
+    readonly folderId: number
 }
 
 /**
@@ -4084,6 +4181,18 @@ export class FoldersApi extends BaseAPI {
      */
     public deleteFolder(requestParameters: FoldersApiDeleteFolderRequest, options?: RawAxiosRequestConfig) {
         return FoldersApiFp(this.configuration).deleteFolder(requestParameters.folderId, requestParameters.deleteFolder, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Triggers asynchronous XLSX report generation for the specified form results folder.
+     * @summary Generate XLSX report by folder
+     * @param {FilesFoldersApiGenerateXlsxByFolderRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public generateXlsxByFolder(requestParameters: FoldersApiGenerateXlsxByFolderRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).generateXlsxByFolder(requestParameters.folderId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

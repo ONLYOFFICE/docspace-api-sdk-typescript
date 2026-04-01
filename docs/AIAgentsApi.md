@@ -192,6 +192,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **subjectId** | [**string**] | The filter by user ID. | (optional) defaults to undefined|
+| **subjectOwnerId** | [**string**] | The filter by room owner ID. | (optional) defaults to undefined|
 | **withoutTags** | [**boolean**] | Specifies whether to search by tags or not. | (optional) defaults to undefined|
 | **tags** | [**string**] | The tags in the serialized format. | (optional) defaults to undefined|
 | **excludeSubject** | [**boolean**] | Specifies whether to exclude search by user or group ID. | (optional) defaults to undefined|
@@ -224,6 +225,7 @@ const configuration = new Configuration();
 const apiInstance = new AIAgentsApi(configuration);
 
 let subjectId: string; //The filter by user ID. (optional) (default to undefined)
+let subjectOwnerId: string; //The filter by room owner ID. (optional) (default to undefined)
 let withoutTags: boolean; //Specifies whether to search by tags or not. (optional) (default to undefined)
 let tags: string; //The tags in the serialized format. (optional) (default to undefined)
 let excludeSubject: boolean; //Specifies whether to exclude search by user or group ID. (optional) (default to undefined)
@@ -237,6 +239,7 @@ let filterValue: string; //The text filter value used to refine search or query 
 
 const { status, data } = await apiInstance.getAgents(
     subjectId,
+    subjectOwnerId,
     withoutTags,
     tags,
     excludeSubject,

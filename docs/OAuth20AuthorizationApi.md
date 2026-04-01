@@ -4,8 +4,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**authorizeOAuth**](#authorizeoauth) | **GET** /oauth2/authorize | OAuth2 authorization endpoint|
-|[**exchangeToken**](#exchangetoken) | **POST** /oauth2/token | OAuth2 token endpoint|
+|[**authorizeOAuth**](#authorizeoauth) | **GET** /oauth2/authorize | OAuth2 Authorization Endpoint|
+|[**exchangeToken**](#exchangetoken) | **POST** /oauth2/token | OAuth2 Token Endpoint|
 |[**submitConsent**](#submitconsent) | **POST** /oauth2/authorize | OAuth2 consent endpoint|
 
 # **authorizeOAuth**
@@ -31,7 +31,7 @@ void (empty response body)
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 
@@ -74,7 +74,7 @@ const { status, data } = await apiInstance.authorizeOAuth(
 # **exchangeToken**
 > ExchangeToken200Response exchangeToken()
 
-Exchanges an authorization code specified in the request for the access token.
+Exchange authorization code for access token
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/exchange-token/).
 
@@ -132,7 +132,7 @@ const { status, data } = await apiInstance.exchangeToken(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | The authorization code was successfully exchanged for the access token |  -  |
+|**200** | Successfully exchanged authorization code for access token |  -  |
 |**400** | Invalid request parameters |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -140,7 +140,7 @@ const { status, data } = await apiInstance.exchangeToken(
 # **submitConsent**
 > submitConsent()
 
-Sends a consent request with the specified parameters.
+Sends consent approval
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/submit-consent/).
 
@@ -159,7 +159,7 @@ void (empty response body)
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 

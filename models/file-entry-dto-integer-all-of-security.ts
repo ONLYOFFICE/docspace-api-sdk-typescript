@@ -66,5 +66,6 @@ export interface FileEntryDtoIntegerAllOfSecurity {
     'Vectorization'?: boolean;
     'AskAi'?: boolean;
     'UseChat'?: boolean;
+    'UpdateXlsx'?: boolean;
 }
 

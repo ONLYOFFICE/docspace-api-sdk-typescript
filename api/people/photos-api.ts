@@ -280,7 +280,7 @@ export const PhotosApiAxiosParamCreator = function (configuration?: Configuratio
          * @summary Upload a user photo
          * @param {string} userid The user ID.
          * @param {File} file The image data.
-         * @param {boolean} [autosave] 
+         * @param {boolean} [autosave] Specifies whether to autosave a photo or not.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for uploadMemberPhoto operation
@@ -424,7 +424,7 @@ export const PhotosApiFp = function(configuration?: Configuration) {
          * @summary Upload a user photo
          * @param {string} userid The user ID.
          * @param {File} file The image data.
-         * @param {boolean} [autosave] 
+         * @param {boolean} [autosave] Specifies whether to autosave a photo or not.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for uploadMemberPhoto operation
@@ -600,7 +600,7 @@ export interface PhotosApiUploadMemberPhotoRequest {
     readonly file: File
 
     /**
-     * 
+     * Specifies whether to autosave a photo or not.
      * @type {boolean}
      * @memberof PhotosApiUploadMemberPhoto
      */

@@ -49,6 +49,7 @@ Name | Type | Description | Notes
 **Vectorization** | **boolean** |  | [optional] [default to undefined]
 **AskAi** | **boolean** |  | [optional] [default to undefined]
 **UseChat** | **boolean** |  | [optional] [default to undefined]
+**UpdateXlsx** | **boolean** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -99,6 +100,7 @@ const instance: FileEntryDtoIntegerAllOfSecurity = {
     Vectorization,
     AskAi,
     UseChat,
+    UpdateXlsx,
 };
 ```
 

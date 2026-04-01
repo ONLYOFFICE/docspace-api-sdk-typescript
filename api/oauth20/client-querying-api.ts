@@ -28,13 +28,13 @@ import type { ClientInfoResponse } from '../../models';
 // @ts-ignore
 import type { ClientResponse } from '../../models';
 // @ts-ignore
-import type { ErrorResponse } from '../../models';
-// @ts-ignore
 import type { PageableModificationResponse } from '../../models';
 // @ts-ignore
 import type { PageableResponse } from '../../models';
 // @ts-ignore
 import type { PageableResponseClientInfoResponse } from '../../models';
+// @ts-ignore
+import type { ProblemDetail } from '../../models';
 /**
  * ClientQueryingApi - axios parameter creator
  * @export
@@ -46,7 +46,7 @@ export const ClientQueryingApiAxiosParamCreator = function (configuration?: Conf
         /**
          * Retrieves detailed information about a specific OAuth2 client including its name, description, redirect URIs, and scopes.
          * @summary Get client details
-         * @param {string} clientId The client identifier.
+         * @param {string} clientId ID of the client to retrieve
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getClient operation
@@ -69,7 +69,7 @@ export const ClientQueryingApiAxiosParamCreator = function (configuration?: Conf
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication asc_auth_key required
+            // authentication x-signature required
 
 
     
@@ -84,8 +84,8 @@ export const ClientQueryingApiAxiosParamCreator = function (configuration?: Conf
         },
         /**
          * Retrieves the detailed information for a client with the ID specified in the request.
-         * @summary Get detailed client information
-         * @param {string} clientId The client identifier.
+         * @summary Retrieves detailed information for a specific client
+         * @param {string} clientId ID of the client to retrieve
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getClientInfo operation
@@ -108,7 +108,7 @@ export const ClientQueryingApiAxiosParamCreator = function (configuration?: Conf
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication asc_auth_key required
+            // authentication x-signature required
 
 
     
@@ -122,11 +122,11 @@ export const ClientQueryingApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Retrieves a paginated list of OAuth2 clients. The results can be paginated using the \'limit\' parameter and the last seen client ID or creation date.
-         * @summary Get clients
-         * @param {number} limit The maximum number of results returned per page.
-         * @param {string} [lastClientId] The ID of the last retrieved client.
-         * @param {string} [lastCreatedOn] The creation date of the last retrieved client.
+         * Retrieves a paginated list of OAuth2 clients. The results can be paginated using the limit parameter and last seen client ID/creation date.
+         * @summary List clients
+         * @param {number} limit Pagination limit
+         * @param {string} [lastClientId] ID of the last retrieved client
+         * @param {string} [lastCreatedOn] Date of the last retrieved client
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getClients operation
@@ -148,7 +148,7 @@ export const ClientQueryingApiAxiosParamCreator = function (configuration?: Conf
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication asc_auth_key required
+            // authentication x-signature required
 
             if (limit !== undefined) {
                 localVarQueryParameter['limit'] = limit;
@@ -177,10 +177,10 @@ export const ClientQueryingApiAxiosParamCreator = function (configuration?: Conf
         },
         /**
          * Retrieves a paginated list of information for all clients.
-         * @summary Get detailed information of clients
-         * @param {number} limit The maximum number of results returned per page.
-         * @param {string} [lastClientId] The identifier of the last retrieved client.
-         * @param {string} [lastCreatedOn] The creation date of the last retrieved client.
+         * @summary Retrieves a pageable list of client information
+         * @param {number} limit Pagination limit
+         * @param {string} [lastClientId] ID of the last retrieved client
+         * @param {string} [lastCreatedOn] Date of the last retrieved client
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getClientsInfo operation
@@ -202,7 +202,7 @@ export const ClientQueryingApiAxiosParamCreator = function (configuration?: Conf
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication asc_auth_key required
+            // authentication x-signature required
 
             if (limit !== undefined) {
                 localVarQueryParameter['limit'] = limit;
@@ -231,9 +231,9 @@ export const ClientQueryingApiAxiosParamCreator = function (configuration?: Conf
         },
         /**
          * Retrieves a paginated list of user consents.
-         * @summary Get user consents
-         * @param {number} limit The maximum number of results returned per page.
-         * @param {string} [lastModifiedOn] The date when the user consent was last modified.
+         * @summary Retrieves a pageable list of consents
+         * @param {number} limit Pagination limit
+         * @param {string} [lastModifiedOn] Date of the last retrieved consent
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getConsents operation
@@ -255,7 +255,7 @@ export const ClientQueryingApiAxiosParamCreator = function (configuration?: Conf
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication asc_auth_key required
+            // authentication x-signature required
 
             if (limit !== undefined) {
                 localVarQueryParameter['limit'] = limit;
@@ -279,9 +279,9 @@ export const ClientQueryingApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Returns the public information for a client with the ID secified din the request.
-         * @summary Get public client information
-         * @param {string} clientId The client identifier.
+         * 
+         * @summary Handles the GET request for public client information
+         * @param {string} clientId ID of the client to retrieve
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getPublicClientInfo operation
@@ -328,7 +328,7 @@ export const ClientQueryingApiFp = function(configuration?: Configuration) {
         /**
          * Retrieves detailed information about a specific OAuth2 client including its name, description, redirect URIs, and scopes.
          * @summary Get client details
-         * @param {string} clientId The client identifier.
+         * @param {string} clientId ID of the client to retrieve
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getClient operation
@@ -342,8 +342,8 @@ export const ClientQueryingApiFp = function(configuration?: Configuration) {
         },
         /**
          * Retrieves the detailed information for a client with the ID specified in the request.
-         * @summary Get detailed client information
-         * @param {string} clientId The client identifier.
+         * @summary Retrieves detailed information for a specific client
+         * @param {string} clientId ID of the client to retrieve
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getClientInfo operation
@@ -356,11 +356,11 @@ export const ClientQueryingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Retrieves a paginated list of OAuth2 clients. The results can be paginated using the \'limit\' parameter and the last seen client ID or creation date.
-         * @summary Get clients
-         * @param {number} limit The maximum number of results returned per page.
-         * @param {string} [lastClientId] The ID of the last retrieved client.
-         * @param {string} [lastCreatedOn] The creation date of the last retrieved client.
+         * Retrieves a paginated list of OAuth2 clients. The results can be paginated using the limit parameter and last seen client ID/creation date.
+         * @summary List clients
+         * @param {number} limit Pagination limit
+         * @param {string} [lastClientId] ID of the last retrieved client
+         * @param {string} [lastCreatedOn] Date of the last retrieved client
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getClients operation
@@ -374,10 +374,10 @@ export const ClientQueryingApiFp = function(configuration?: Configuration) {
         },
         /**
          * Retrieves a paginated list of information for all clients.
-         * @summary Get detailed information of clients
-         * @param {number} limit The maximum number of results returned per page.
-         * @param {string} [lastClientId] The identifier of the last retrieved client.
-         * @param {string} [lastCreatedOn] The creation date of the last retrieved client.
+         * @summary Retrieves a pageable list of client information
+         * @param {number} limit Pagination limit
+         * @param {string} [lastClientId] ID of the last retrieved client
+         * @param {string} [lastCreatedOn] Date of the last retrieved client
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getClientsInfo operation
@@ -391,9 +391,9 @@ export const ClientQueryingApiFp = function(configuration?: Configuration) {
         },
         /**
          * Retrieves a paginated list of user consents.
-         * @summary Get user consents
-         * @param {number} limit The maximum number of results returned per page.
-         * @param {string} [lastModifiedOn] The date when the user consent was last modified.
+         * @summary Retrieves a pageable list of consents
+         * @param {number} limit Pagination limit
+         * @param {string} [lastModifiedOn] Date of the last retrieved consent
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getConsents operation
@@ -406,9 +406,9 @@ export const ClientQueryingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the public information for a client with the ID secified din the request.
-         * @summary Get public client information
-         * @param {string} clientId The client identifier.
+         * 
+         * @summary Handles the GET request for public client information
+         * @param {string} clientId ID of the client to retrieve
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getPublicClientInfo operation
@@ -444,7 +444,7 @@ export const ClientQueryingApiFactory = function (configuration?: Configuration,
         },
         /**
          * Retrieves the detailed information for a client with the ID specified in the request.
-         * @summary Get detailed client information
+         * @summary Retrieves detailed information for a specific client
          * @param {ClientQueryingApiGetClientInfoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getClientInfo operation
@@ -455,8 +455,8 @@ export const ClientQueryingApiFactory = function (configuration?: Configuration,
             return localVarFp.getClientInfo(requestParameters.clientId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Retrieves a paginated list of OAuth2 clients. The results can be paginated using the \'limit\' parameter and the last seen client ID or creation date.
-         * @summary Get clients
+         * Retrieves a paginated list of OAuth2 clients. The results can be paginated using the limit parameter and last seen client ID/creation date.
+         * @summary List clients
          * @param {ClientQueryingApiGetClientsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getClients operation
@@ -468,7 +468,7 @@ export const ClientQueryingApiFactory = function (configuration?: Configuration,
         },
         /**
          * Retrieves a paginated list of information for all clients.
-         * @summary Get detailed information of clients
+         * @summary Retrieves a pageable list of client information
          * @param {ClientQueryingApiGetClientsInfoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getClientsInfo operation
@@ -480,7 +480,7 @@ export const ClientQueryingApiFactory = function (configuration?: Configuration,
         },
         /**
          * Retrieves a paginated list of user consents.
-         * @summary Get user consents
+         * @summary Retrieves a pageable list of consents
          * @param {ClientQueryingApiGetConsentsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getConsents operation
@@ -491,8 +491,8 @@ export const ClientQueryingApiFactory = function (configuration?: Configuration,
             return localVarFp.getConsents(requestParameters.limit, requestParameters.lastModifiedOn, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the public information for a client with the ID secified din the request.
-         * @summary Get public client information
+         * 
+         * @summary Handles the GET request for public client information
          * @param {ClientQueryingApiGetPublicClientInfoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getPublicClientInfo operation
@@ -512,7 +512,7 @@ export const ClientQueryingApiFactory = function (configuration?: Configuration,
  */
 export interface ClientQueryingApiGetClientRequest {
     /**
-     * The client identifier.
+     * ID of the client to retrieve
      * @type {string}
      * @memberof ClientQueryingApiGetClient
      */
@@ -526,7 +526,7 @@ export interface ClientQueryingApiGetClientRequest {
  */
 export interface ClientQueryingApiGetClientInfoRequest {
     /**
-     * The client identifier.
+     * ID of the client to retrieve
      * @type {string}
      * @memberof ClientQueryingApiGetClientInfo
      */
@@ -540,21 +540,21 @@ export interface ClientQueryingApiGetClientInfoRequest {
  */
 export interface ClientQueryingApiGetClientsRequest {
     /**
-     * The maximum number of results returned per page.
+     * Pagination limit
      * @type {number}
      * @memberof ClientQueryingApiGetClients
      */
     readonly limit: number
 
     /**
-     * The ID of the last retrieved client.
+     * ID of the last retrieved client
      * @type {string}
      * @memberof ClientQueryingApiGetClients
      */
     readonly lastClientId?: string
 
     /**
-     * The creation date of the last retrieved client.
+     * Date of the last retrieved client
      * @type {string}
      * @memberof ClientQueryingApiGetClients
      */
@@ -568,21 +568,21 @@ export interface ClientQueryingApiGetClientsRequest {
  */
 export interface ClientQueryingApiGetClientsInfoRequest {
     /**
-     * The maximum number of results returned per page.
+     * Pagination limit
      * @type {number}
      * @memberof ClientQueryingApiGetClientsInfo
      */
     readonly limit: number
 
     /**
-     * The identifier of the last retrieved client.
+     * ID of the last retrieved client
      * @type {string}
      * @memberof ClientQueryingApiGetClientsInfo
      */
     readonly lastClientId?: string
 
     /**
-     * The creation date of the last retrieved client.
+     * Date of the last retrieved client
      * @type {string}
      * @memberof ClientQueryingApiGetClientsInfo
      */
@@ -596,14 +596,14 @@ export interface ClientQueryingApiGetClientsInfoRequest {
  */
 export interface ClientQueryingApiGetConsentsRequest {
     /**
-     * The maximum number of results returned per page.
+     * Pagination limit
      * @type {number}
      * @memberof ClientQueryingApiGetConsents
      */
     readonly limit: number
 
     /**
-     * The date when the user consent was last modified.
+     * Date of the last retrieved consent
      * @type {string}
      * @memberof ClientQueryingApiGetConsents
      */
@@ -617,7 +617,7 @@ export interface ClientQueryingApiGetConsentsRequest {
  */
 export interface ClientQueryingApiGetPublicClientInfoRequest {
     /**
-     * The client identifier.
+     * ID of the client to retrieve
      * @type {string}
      * @memberof ClientQueryingApiGetPublicClientInfo
      */
@@ -645,7 +645,7 @@ export class ClientQueryingApi extends BaseAPI {
 
     /**
      * Retrieves the detailed information for a client with the ID specified in the request.
-     * @summary Get detailed client information
+     * @summary Retrieves detailed information for a specific client
      * @param {OAuth20ClientQueryingApiGetClientInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -656,8 +656,8 @@ export class ClientQueryingApi extends BaseAPI {
     }
 
     /**
-     * Retrieves a paginated list of OAuth2 clients. The results can be paginated using the \'limit\' parameter and the last seen client ID or creation date.
-     * @summary Get clients
+     * Retrieves a paginated list of OAuth2 clients. The results can be paginated using the limit parameter and last seen client ID/creation date.
+     * @summary List clients
      * @param {OAuth20ClientQueryingApiGetClientsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -669,7 +669,7 @@ export class ClientQueryingApi extends BaseAPI {
 
     /**
      * Retrieves a paginated list of information for all clients.
-     * @summary Get detailed information of clients
+     * @summary Retrieves a pageable list of client information
      * @param {OAuth20ClientQueryingApiGetClientsInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -681,7 +681,7 @@ export class ClientQueryingApi extends BaseAPI {
 
     /**
      * Retrieves a paginated list of user consents.
-     * @summary Get user consents
+     * @summary Retrieves a pageable list of consents
      * @param {OAuth20ClientQueryingApiGetConsentsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -692,8 +692,8 @@ export class ClientQueryingApi extends BaseAPI {
     }
 
     /**
-     * Returns the public information for a client with the ID secified din the request.
-     * @summary Get public client information
+     * 
+     * @summary Handles the GET request for public client information
      * @param {OAuth20ClientQueryingApiGetPublicClientInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

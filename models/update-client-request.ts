@@ -20,31 +20,32 @@
 
 
 /**
- * The request for updating client details.
+ * Client update request containing modified client details
  */
 export interface UpdateClientRequest {
     /**
-     * The client name.
+     * The name of the client
      */
     'name'?: string;
     /**
-     * The client description
+     * The description of the client
      */
     'description'?: string;
     /**
-     * The client logo in base64 format.
+     * The logo of the client in base64 format
      */
     'logo'?: string;
+    'public'?: boolean;
     /**
-     * Indicates whether PKCE is allowed for the client.
+     * Indicates whether PKCE is allowed for the client
      */
     'allow_pkce'?: boolean;
     /**
-     * Indicates whether the client is accessible by third-party tenants.
+     * Indicates whether client is accessible by third-party tenants
      */
     'is_public'?: boolean;
     /**
-     * The allowed origins for the client.
+     * The allowed origins for the client
      */
     'allowed_origins'?: Set<string>;
 }

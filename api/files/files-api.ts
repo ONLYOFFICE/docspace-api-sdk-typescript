@@ -3136,7 +3136,7 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for generateXlsx operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/generate-xlsx/
          */
-        async generateXlsx(fileId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async generateXlsx(fileId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.generateXlsx(fileId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.generateXlsx']?.[localVarOperationServerIndex]?.url;
@@ -3864,7 +3864,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/generate-xlsx/
          * @throws {RequiredError}
          */
-        generateXlsx(requestParameters: FilesApiGenerateXlsxRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        generateXlsx(requestParameters: FilesApiGenerateXlsxRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
             return localVarFp.generateXlsx(requestParameters.fileId, options).then((request) => request(axios, basePath));
         },
         /**

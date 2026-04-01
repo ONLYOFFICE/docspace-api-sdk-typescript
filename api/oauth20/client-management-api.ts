@@ -32,7 +32,7 @@ import type { ClientSecretResponse } from '../../models';
 // @ts-ignore
 import type { CreateClientRequest } from '../../models';
 // @ts-ignore
-import type { ErrorResponse } from '../../models';
+import type { ProblemDetail } from '../../models';
 // @ts-ignore
 import type { UpdateClientRequest } from '../../models';
 /**
@@ -45,8 +45,8 @@ export const ClientManagementApiAxiosParamCreator = function (configuration?: Co
     return {
         /**
          * Activates or deactivates an OAuth2 client. When deactivated, the client cannot request new access tokens, but existing tokens will remain valid until they expire.
-         * @summary Change the client activation status
-         * @param {string} clientId The client identifier.
+         * @summary Change client activation status
+         * @param {string} clientId ID of the client to change activation for
          * @param {ChangeClientActivationRequest} changeClientActivationRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -72,7 +72,7 @@ export const ClientManagementApiAxiosParamCreator = function (configuration?: Co
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication asc_auth_key required
+            // authentication x-signature required
 
 
     
@@ -113,7 +113,7 @@ export const ClientManagementApiAxiosParamCreator = function (configuration?: Co
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication asc_auth_key required
+            // authentication x-signature required
 
 
     
@@ -130,9 +130,9 @@ export const ClientManagementApiAxiosParamCreator = function (configuration?: Co
             };
         },
         /**
-         * Permanently deletes an OAuth2 client and all associated data. All access and refresh tokens issued to this client will be invalidated. This operation cannot be undone.
+         * Permanently deletes an OAuth2 client and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
          * @summary Delete an OAuth2 client
-         * @param {string} clientId The client identifier.
+         * @param {string} clientId ID of the client to delete
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deleteClient operation
@@ -155,7 +155,77 @@ export const ClientManagementApiAxiosParamCreator = function (configuration?: Co
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication asc_auth_key required
+            // authentication x-signature required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Permanently deletes tenant OAuth2 clients and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
+         * @summary Delete all tenant OAuth2 clients
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for deleteTenantClients operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-tenant-clients/
+         */
+        deleteTenantClients: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/clients/tenant`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication x-signature required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Permanently deletes user OAuth2 clients and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
+         * @summary Delete all user OAuth2 clients
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for deleteUserClients operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-user-clients/
+         */
+        deleteUserClients: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/clients`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication x-signature required
 
 
     
@@ -170,8 +240,8 @@ export const ClientManagementApiAxiosParamCreator = function (configuration?: Co
         },
         /**
          * Generates a new client secret for the specified OAuth2 client. The old secret will be immediately invalidated. This operation should be used with caution as it requires updating the secret in all client applications.
-         * @summary Regenerate the client secret
-         * @param {string} clientId The client identifier.
+         * @summary Regenerate client secret
+         * @param {string} clientId ID of the client to regenerate secret for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for regenerateSecret operation
@@ -194,7 +264,7 @@ export const ClientManagementApiAxiosParamCreator = function (configuration?: Co
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication asc_auth_key required
+            // authentication x-signature required
 
 
     
@@ -210,7 +280,7 @@ export const ClientManagementApiAxiosParamCreator = function (configuration?: Co
         /**
          * Revokes all user consents for the specified OAuth2 client. This will invalidate all access tokens and refresh tokens issued to this client for the current user. The user will need to re-authorize the client to access their resources.
          * @summary Revoke client consent
-         * @param {string} clientId The client identifier.
+         * @param {string} clientId ID of the client to revoke consent for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for revokeUserClient operation
@@ -233,7 +303,7 @@ export const ClientManagementApiAxiosParamCreator = function (configuration?: Co
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication asc_auth_key required
+            // authentication x-signature required
 
 
     
@@ -247,9 +317,9 @@ export const ClientManagementApiAxiosParamCreator = function (configuration?: Co
             };
         },
         /**
-         * Updates the configuration of an existing OAuth2 client, allowing modifications to the client name, description, redirect URIs, and other settings. The client ID cannot be modified.
+         * Updates the configuration of an existing OAuth2 client. Allows modification of client name, description, redirect URIs, and other settings. The client ID cannot be modified.
          * @summary Update an existing OAuth2 client
-         * @param {string} clientId The client identifier.
+         * @param {string} clientId ID of the client to update
          * @param {UpdateClientRequest} updateClientRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -275,7 +345,7 @@ export const ClientManagementApiAxiosParamCreator = function (configuration?: Co
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication asc_auth_key required
+            // authentication x-signature required
 
 
     
@@ -303,8 +373,8 @@ export const ClientManagementApiFp = function(configuration?: Configuration) {
     return {
         /**
          * Activates or deactivates an OAuth2 client. When deactivated, the client cannot request new access tokens, but existing tokens will remain valid until they expire.
-         * @summary Change the client activation status
-         * @param {string} clientId The client identifier.
+         * @summary Change client activation status
+         * @param {string} clientId ID of the client to change activation for
          * @param {ChangeClientActivationRequest} changeClientActivationRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -333,9 +403,9 @@ export const ClientManagementApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Permanently deletes an OAuth2 client and all associated data. All access and refresh tokens issued to this client will be invalidated. This operation cannot be undone.
+         * Permanently deletes an OAuth2 client and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
          * @summary Delete an OAuth2 client
-         * @param {string} clientId The client identifier.
+         * @param {string} clientId ID of the client to delete
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deleteClient operation
@@ -348,9 +418,37 @@ export const ClientManagementApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Permanently deletes tenant OAuth2 clients and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
+         * @summary Delete all tenant OAuth2 clients
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for deleteTenantClients operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-tenant-clients/
+         */
+        async deleteTenantClients(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteTenantClients(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ClientManagementApi.deleteTenantClients']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Permanently deletes user OAuth2 clients and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
+         * @summary Delete all user OAuth2 clients
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for deleteUserClients operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-user-clients/
+         */
+        async deleteUserClients(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteUserClients(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ClientManagementApi.deleteUserClients']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Generates a new client secret for the specified OAuth2 client. The old secret will be immediately invalidated. This operation should be used with caution as it requires updating the secret in all client applications.
-         * @summary Regenerate the client secret
-         * @param {string} clientId The client identifier.
+         * @summary Regenerate client secret
+         * @param {string} clientId ID of the client to regenerate secret for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for regenerateSecret operation
@@ -365,7 +463,7 @@ export const ClientManagementApiFp = function(configuration?: Configuration) {
         /**
          * Revokes all user consents for the specified OAuth2 client. This will invalidate all access tokens and refresh tokens issued to this client for the current user. The user will need to re-authorize the client to access their resources.
          * @summary Revoke client consent
-         * @param {string} clientId The client identifier.
+         * @param {string} clientId ID of the client to revoke consent for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for revokeUserClient operation
@@ -378,9 +476,9 @@ export const ClientManagementApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Updates the configuration of an existing OAuth2 client, allowing modifications to the client name, description, redirect URIs, and other settings. The client ID cannot be modified.
+         * Updates the configuration of an existing OAuth2 client. Allows modification of client name, description, redirect URIs, and other settings. The client ID cannot be modified.
          * @summary Update an existing OAuth2 client
-         * @param {string} clientId The client identifier.
+         * @param {string} clientId ID of the client to update
          * @param {UpdateClientRequest} updateClientRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -405,7 +503,7 @@ export const ClientManagementApiFactory = function (configuration?: Configuratio
     return {
         /**
          * Activates or deactivates an OAuth2 client. When deactivated, the client cannot request new access tokens, but existing tokens will remain valid until they expire.
-         * @summary Change the client activation status
+         * @summary Change client activation status
          * @param {ClientManagementApiChangeActivationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for changeActivation operation
@@ -428,7 +526,7 @@ export const ClientManagementApiFactory = function (configuration?: Configuratio
             return localVarFp.createClient(requestParameters.createClientRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Permanently deletes an OAuth2 client and all associated data. All access and refresh tokens issued to this client will be invalidated. This operation cannot be undone.
+         * Permanently deletes an OAuth2 client and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
          * @summary Delete an OAuth2 client
          * @param {ClientManagementApiDeleteClientRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -440,8 +538,30 @@ export const ClientManagementApiFactory = function (configuration?: Configuratio
             return localVarFp.deleteClient(requestParameters.clientId, options).then((request) => request(axios, basePath));
         },
         /**
+         * Permanently deletes tenant OAuth2 clients and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
+         * @summary Delete all tenant OAuth2 clients
+         * @param {*} [options] Override http request option.
+         * REST API Reference for deleteTenantClients operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-tenant-clients/
+         * @throws {RequiredError}
+         */
+        deleteTenantClients(options?: RawAxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.deleteTenantClients(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Permanently deletes user OAuth2 clients and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
+         * @summary Delete all user OAuth2 clients
+         * @param {*} [options] Override http request option.
+         * REST API Reference for deleteUserClients operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-user-clients/
+         * @throws {RequiredError}
+         */
+        deleteUserClients(options?: RawAxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.deleteUserClients(options).then((request) => request(axios, basePath));
+        },
+        /**
          * Generates a new client secret for the specified OAuth2 client. The old secret will be immediately invalidated. This operation should be used with caution as it requires updating the secret in all client applications.
-         * @summary Regenerate the client secret
+         * @summary Regenerate client secret
          * @param {ClientManagementApiRegenerateSecretRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for regenerateSecret operation
@@ -464,7 +584,7 @@ export const ClientManagementApiFactory = function (configuration?: Configuratio
             return localVarFp.revokeUserClient(requestParameters.clientId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Updates the configuration of an existing OAuth2 client, allowing modifications to the client name, description, redirect URIs, and other settings. The client ID cannot be modified.
+         * Updates the configuration of an existing OAuth2 client. Allows modification of client name, description, redirect URIs, and other settings. The client ID cannot be modified.
          * @summary Update an existing OAuth2 client
          * @param {ClientManagementApiUpdateClientRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -485,7 +605,7 @@ export const ClientManagementApiFactory = function (configuration?: Configuratio
  */
 export interface ClientManagementApiChangeActivationRequest {
     /**
-     * The client identifier.
+     * ID of the client to change activation for
      * @type {string}
      * @memberof ClientManagementApiChangeActivation
      */
@@ -520,7 +640,7 @@ export interface ClientManagementApiCreateClientRequest {
  */
 export interface ClientManagementApiDeleteClientRequest {
     /**
-     * The client identifier.
+     * ID of the client to delete
      * @type {string}
      * @memberof ClientManagementApiDeleteClient
      */
@@ -534,7 +654,7 @@ export interface ClientManagementApiDeleteClientRequest {
  */
 export interface ClientManagementApiRegenerateSecretRequest {
     /**
-     * The client identifier.
+     * ID of the client to regenerate secret for
      * @type {string}
      * @memberof ClientManagementApiRegenerateSecret
      */
@@ -548,7 +668,7 @@ export interface ClientManagementApiRegenerateSecretRequest {
  */
 export interface ClientManagementApiRevokeUserClientRequest {
     /**
-     * The client identifier.
+     * ID of the client to revoke consent for
      * @type {string}
      * @memberof ClientManagementApiRevokeUserClient
      */
@@ -562,7 +682,7 @@ export interface ClientManagementApiRevokeUserClientRequest {
  */
 export interface ClientManagementApiUpdateClientRequest {
     /**
-     * The client identifier.
+     * ID of the client to update
      * @type {string}
      * @memberof ClientManagementApiUpdateClient
      */
@@ -585,7 +705,7 @@ export interface ClientManagementApiUpdateClientRequest {
 export class ClientManagementApi extends BaseAPI {
     /**
      * Activates or deactivates an OAuth2 client. When deactivated, the client cannot request new access tokens, but existing tokens will remain valid until they expire.
-     * @summary Change the client activation status
+     * @summary Change client activation status
      * @param {OAuth20ClientManagementApiChangeActivationRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -608,7 +728,7 @@ export class ClientManagementApi extends BaseAPI {
     }
 
     /**
-     * Permanently deletes an OAuth2 client and all associated data. All access and refresh tokens issued to this client will be invalidated. This operation cannot be undone.
+     * Permanently deletes an OAuth2 client and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
      * @summary Delete an OAuth2 client
      * @param {OAuth20ClientManagementApiDeleteClientRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -620,8 +740,30 @@ export class ClientManagementApi extends BaseAPI {
     }
 
     /**
+     * Permanently deletes tenant OAuth2 clients and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
+     * @summary Delete all tenant OAuth2 clients
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClientManagementApi
+     */
+    public deleteTenantClients(options?: RawAxiosRequestConfig) {
+        return ClientManagementApiFp(this.configuration).deleteTenantClients(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Permanently deletes user OAuth2 clients and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
+     * @summary Delete all user OAuth2 clients
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClientManagementApi
+     */
+    public deleteUserClients(options?: RawAxiosRequestConfig) {
+        return ClientManagementApiFp(this.configuration).deleteUserClients(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Generates a new client secret for the specified OAuth2 client. The old secret will be immediately invalidated. This operation should be used with caution as it requires updating the secret in all client applications.
-     * @summary Regenerate the client secret
+     * @summary Regenerate client secret
      * @param {OAuth20ClientManagementApiRegenerateSecretRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -644,7 +786,7 @@ export class ClientManagementApi extends BaseAPI {
     }
 
     /**
-     * Updates the configuration of an existing OAuth2 client, allowing modifications to the client name, description, redirect URIs, and other settings. The client ID cannot be modified.
+     * Updates the configuration of an existing OAuth2 client. Allows modification of client name, description, redirect URIs, and other settings. The client ID cannot be modified.
      * @summary Update an existing OAuth2 client
      * @param {OAuth20ClientManagementApiUpdateClientRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

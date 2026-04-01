@@ -1024,7 +1024,7 @@ const { status, data } = await apiInstance.deleteTemplates(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **generateXlsx**
-> generateXlsx()
+> FileIntegerWrapper generateXlsx()
 
 Triggers asynchronous XLSX report generation for the specified form file.
 
@@ -1039,7 +1039,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-void (empty response body)
+**FileIntegerWrapper**
 
 ### Authorization
 
@@ -1066,15 +1066,15 @@ const { status, data } = await apiInstance.generateXlsx(
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | XLSX report generation has been queued |  -  |
+|**200** | Original form file information |  -  |
 |**403** | You do not have enough permissions to perform this action |  -  |
-|**404** | Form file not found |  -  |
+|**404** | File not found |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

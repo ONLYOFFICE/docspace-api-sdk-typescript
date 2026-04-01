@@ -4,10 +4,12 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**changeActivation**](#changeactivation) | **PATCH** /api/2.0/clients/{clientId}/activation | Change the client activation status|
+|[**changeActivation**](#changeactivation) | **PATCH** /api/2.0/clients/{clientId}/activation | Change client activation status|
 |[**createClient**](#createclient) | **POST** /api/2.0/clients | Create a new OAuth2 client|
 |[**deleteClient**](#deleteclient) | **DELETE** /api/2.0/clients/{clientId} | Delete an OAuth2 client|
-|[**regenerateSecret**](#regeneratesecret) | **PATCH** /api/2.0/clients/{clientId}/regenerate | Regenerate the client secret|
+|[**deleteTenantClients**](#deletetenantclients) | **DELETE** /api/2.0/clients/tenant | Delete all tenant OAuth2 clients|
+|[**deleteUserClients**](#deleteuserclients) | **DELETE** /api/2.0/clients | Delete all user OAuth2 clients|
+|[**regenerateSecret**](#regeneratesecret) | **PATCH** /api/2.0/clients/{clientId}/regenerate | Regenerate client secret|
 |[**revokeUserClient**](#revokeuserclient) | **DELETE** /api/2.0/clients/{clientId}/revoke | Revoke client consent|
 |[**updateClient**](#updateclient) | **PUT** /api/2.0/clients/{clientId} | Update an existing OAuth2 client|
 
@@ -23,7 +25,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **changeClientActivationRequest** | **ChangeClientActivationRequest**|  | |
-| **clientId** | [**string**] | The client identifier. | defaults to undefined|
+| **clientId** | [**string**] | ID of the client to change activation for | defaults to undefined|
 
 
 ### Return type
@@ -32,7 +34,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 
@@ -46,7 +48,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new OAuth20ClientManagementApi(configuration);
 
-let clientId: string; //The client identifier. (default to undefined)
+let clientId: string; //ID of the client to change activation for (default to undefined)
 let changeClientActivationRequest: ChangeClientActivationRequest; //
 
 const { status, data } = await apiInstance.changeActivation(
@@ -68,6 +70,7 @@ const { status, data } = await apiInstance.changeActivation(
 |**400** | Invalid client ID format or activation status |  -  |
 |**403** | Insufficient permissions to change client activation |  -  |
 |**404** | Client not found |  -  |
+|**415** | Unsupported media type |  -  |
 |**429** | Too many requests - rate limit exceeded |  -  |
 |**500** | Internal server error occurred |  -  |
 
@@ -93,7 +96,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 
@@ -125,7 +128,8 @@ const { status, data } = await apiInstance.createClient(
 |-------------|-------------|------------------|
 |**201** | Client successfully created |  -  |
 |**400** | Invalid request - missing required fields or validation failed |  -  |
-|**403** | Insufficient permissions to create a client |  -  |
+|**403** | Insufficient permissions to create client |  -  |
+|**415** | Unsupported media type |  -  |
 |**429** | Too many requests - rate limit exceeded |  -  |
 |**500** | Internal server error occurred |  -  |
 
@@ -134,7 +138,7 @@ const { status, data } = await apiInstance.createClient(
 # **deleteClient**
 > object deleteClient()
 
-Permanently deletes an OAuth2 client and all associated data. All access and refresh tokens issued to this client will be invalidated. This operation cannot be undone.
+Permanently deletes an OAuth2 client and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-client/).
 
@@ -142,7 +146,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **clientId** | [**string**] | The client identifier. | defaults to undefined|
+| **clientId** | [**string**] | ID of the client to delete | defaults to undefined|
 
 
 ### Return type
@@ -151,7 +155,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 
@@ -164,7 +168,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new OAuth20ClientManagementApi(configuration);
 
-let clientId: string; //The client identifier. (default to undefined)
+let clientId: string; //ID of the client to delete (default to undefined)
 
 const { status, data } = await apiInstance.deleteClient(
     clientId
@@ -189,27 +193,24 @@ const { status, data } = await apiInstance.deleteClient(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **regenerateSecret**
-> ClientSecretResponse regenerateSecret()
+# **deleteTenantClients**
+> object deleteTenantClients()
 
-Generates a new client secret for the specified OAuth2 client. The old secret will be immediately invalidated. This operation should be used with caution as it requires updating the secret in all client applications.
+Permanently deletes tenant OAuth2 clients and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
 
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/regenerate-secret/).
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-tenant-clients/).
 
 ### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **clientId** | [**string**] | The client identifier. | defaults to undefined|
+This endpoint does not have any parameters.
 
 
 ### Return type
 
-**ClientSecretResponse**
+**object**
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 
@@ -222,7 +223,108 @@ import {
 const configuration = new Configuration();
 const apiInstance = new OAuth20ClientManagementApi(configuration);
 
-let clientId: string; //The client identifier. (default to undefined)
+const { status, data } = await apiInstance.deleteTenantClients();
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Client successfully deleted |  -  |
+|**403** | Insufficient permissions to delete tenant clients |  -  |
+|**429** | Too many requests - rate limit exceeded |  -  |
+|**500** | Internal server error occurred |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **deleteUserClients**
+> object deleteUserClients()
+
+Permanently deletes user OAuth2 clients and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-user-clients/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**object**
+
+### Authorization
+
+[x-signature](../README.md#x-signature)
+
+### Example
+
+```typescript
+import {
+    OAuth20ClientManagementApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new OAuth20ClientManagementApi(configuration);
+
+const { status, data } = await apiInstance.deleteUserClients();
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Client successfully deleted |  -  |
+|**403** | Insufficient permissions to delete user clients |  -  |
+|**429** | Too many requests - rate limit exceeded |  -  |
+|**500** | Internal server error occurred |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **regenerateSecret**
+> ClientSecretResponse regenerateSecret()
+
+Generates a new client secret for the specified OAuth2 client. The old secret will be immediately invalidated. This operation should be used with caution as it requires updating the secret in all client applications.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/regenerate-secret/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **clientId** | [**string**] | ID of the client to regenerate secret for | defaults to undefined|
+
+
+### Return type
+
+**ClientSecretResponse**
+
+### Authorization
+
+[x-signature](../README.md#x-signature)
+
+### Example
+
+```typescript
+import {
+    OAuth20ClientManagementApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new OAuth20ClientManagementApi(configuration);
+
+let clientId: string; //ID of the client to regenerate secret for (default to undefined)
 
 const { status, data } = await apiInstance.regenerateSecret(
     clientId
@@ -258,7 +360,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **clientId** | [**string**] | The client identifier. | defaults to undefined|
+| **clientId** | [**string**] | ID of the client to revoke consent for | defaults to undefined|
 
 
 ### Return type
@@ -267,7 +369,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 
@@ -280,7 +382,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new OAuth20ClientManagementApi(configuration);
 
-let clientId: string; //The client identifier. (default to undefined)
+let clientId: string; //ID of the client to revoke consent for (default to undefined)
 
 const { status, data } = await apiInstance.revokeUserClient(
     clientId
@@ -309,7 +411,7 @@ const { status, data } = await apiInstance.revokeUserClient(
 # **updateClient**
 > object updateClient(updateClientRequest)
 
-Updates the configuration of an existing OAuth2 client, allowing modifications to the client name, description, redirect URIs, and other settings. The client ID cannot be modified.
+Updates the configuration of an existing OAuth2 client. Allows modification of client name, description, redirect URIs, and other settings. The client ID cannot be modified.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-client/).
 
@@ -318,7 +420,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **updateClientRequest** | **UpdateClientRequest**|  | |
-| **clientId** | [**string**] | The client identifier. | defaults to undefined|
+| **clientId** | [**string**] | ID of the client to update | defaults to undefined|
 
 
 ### Return type
@@ -327,7 +429,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 
@@ -341,7 +443,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new OAuth20ClientManagementApi(configuration);
 
-let clientId: string; //The client identifier. (default to undefined)
+let clientId: string; //ID of the client to update (default to undefined)
 let updateClientRequest: UpdateClientRequest; //
 
 const { status, data } = await apiInstance.updateClient(
@@ -363,6 +465,7 @@ const { status, data } = await apiInstance.updateClient(
 |**400** | Invalid request - missing required fields or validation failed |  -  |
 |**403** | Insufficient permissions to update client |  -  |
 |**404** | Client not found |  -  |
+|**415** | Unsupported media type |  -  |
 |**429** | Too many requests - rate limit exceeded |  -  |
 |**500** | Internal server error occurred |  -  |
 

@@ -24,7 +24,7 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
-import type { ErrorResponse } from '../../models';
+import type { ProblemDetail } from '../../models';
 // @ts-ignore
 import type { ScopeResponse } from '../../models';
 /**
@@ -37,7 +37,7 @@ export const ScopeManagementApiAxiosParamCreator = function (configuration?: Con
     return {
         /**
          * Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the \'openid\' scope always appearing first.
-         * @summary Get available OAuth2 scopes
+         * @summary List available OAuth2 scopes
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getScopes operation
@@ -57,7 +57,7 @@ export const ScopeManagementApiAxiosParamCreator = function (configuration?: Con
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication asc_auth_key required
+            // authentication x-signature required
 
 
     
@@ -82,7 +82,7 @@ export const ScopeManagementApiFp = function(configuration?: Configuration) {
     return {
         /**
          * Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the \'openid\' scope always appearing first.
-         * @summary Get available OAuth2 scopes
+         * @summary List available OAuth2 scopes
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getScopes operation
@@ -106,7 +106,7 @@ export const ScopeManagementApiFactory = function (configuration?: Configuration
     return {
         /**
          * Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the \'openid\' scope always appearing first.
-         * @summary Get available OAuth2 scopes
+         * @summary List available OAuth2 scopes
          * @param {*} [options] Override http request option.
          * REST API Reference for getScopes operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-scopes/
@@ -127,7 +127,7 @@ export const ScopeManagementApiFactory = function (configuration?: Configuration
 export class ScopeManagementApi extends BaseAPI {
     /**
      * Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the \'openid\' scope always appearing first.
-     * @summary Get available OAuth2 scopes
+     * @summary List available OAuth2 scopes
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ScopeManagementApi

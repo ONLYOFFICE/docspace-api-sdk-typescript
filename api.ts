@@ -43,6 +43,7 @@ export * from './api/migration/migration-api';
 export * from './api/oauth20/authorization-api';
 export * from './api/oauth20/client-management-api';
 export * from './api/oauth20/client-querying-api';
+export * from './api/oauth20/discovery-api';
 export * from './api/oauth20/scope-management-api';
 export * from './api/people/email-api';
 export * from './api/people/guests-api';

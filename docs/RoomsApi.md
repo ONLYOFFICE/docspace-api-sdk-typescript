@@ -1332,6 +1332,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 |------------- | ------------- | ------------- | -------------|
 | **type** | **Array&lt;RoomType&gt;** | The filter by room type. | (optional) defaults to undefined|
 | **subjectId** | [**string**] | The filter by user ID. | (optional) defaults to undefined|
+| **subjectOwnerId** | [**string**] | The filter by room owner ID. | (optional) defaults to undefined|
 | **searchArea** | **SearchArea** | The room search area (Active, Archive, Any, Recent by links). | (optional) defaults to undefined|
 | **withoutTags** | [**boolean**] | Specifies whether to search by tags or not. | (optional) defaults to undefined|
 | **tags** | [**string**] | The tags in the serialized format. | (optional) defaults to undefined|
@@ -1369,6 +1370,7 @@ const apiInstance = new RoomsApi(configuration);
 
 let type: Array<RoomType>; //The filter by room type. (optional) (default to undefined)
 let subjectId: string; //The filter by user ID. (optional) (default to undefined)
+let subjectOwnerId: string; //The filter by room owner ID. (optional) (default to undefined)
 let searchArea: SearchArea; //The room search area (Active, Archive, Any, Recent by links). (optional) (default to undefined)
 let withoutTags: boolean; //Specifies whether to search by tags or not. (optional) (default to undefined)
 let tags: string; //The tags in the serialized format. (optional) (default to undefined)
@@ -1387,6 +1389,7 @@ let groupId: number; //The group ID (optional) (default to undefined)
 const { status, data } = await apiInstance.getRoomsFolder(
     type,
     subjectId,
+    subjectOwnerId,
     searchArea,
     withoutTags,
     tags,

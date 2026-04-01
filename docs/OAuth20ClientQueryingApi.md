@@ -5,11 +5,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**getClient**](#getclient) | **GET** /api/2.0/clients/{clientId} | Get client details|
-|[**getClientInfo**](#getclientinfo) | **GET** /api/2.0/clients/{clientId}/info | Get detailed client information|
-|[**getClients**](#getclients) | **GET** /api/2.0/clients | Get clients|
-|[**getClientsInfo**](#getclientsinfo) | **GET** /api/2.0/clients/info | Get detailed information of clients|
-|[**getConsents**](#getconsents) | **GET** /api/2.0/clients/consents | Get user consents|
-|[**getPublicClientInfo**](#getpublicclientinfo) | **GET** /api/2.0/clients/{clientId}/public/info | Get public client information|
+|[**getClientInfo**](#getclientinfo) | **GET** /api/2.0/clients/{clientId}/info | Retrieves detailed information for a specific client|
+|[**getClients**](#getclients) | **GET** /api/2.0/clients | List clients|
+|[**getClientsInfo**](#getclientsinfo) | **GET** /api/2.0/clients/info | Retrieves a pageable list of client information|
+|[**getConsents**](#getconsents) | **GET** /api/2.0/clients/consents | Retrieves a pageable list of consents|
+|[**getPublicClientInfo**](#getpublicclientinfo) | **GET** /api/2.0/clients/{clientId}/public/info | Handles the GET request for public client information|
 
 # **getClient**
 > ClientResponse getClient()
@@ -22,7 +22,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **clientId** | [**string**] | The client identifier. | defaults to undefined|
+| **clientId** | [**string**] | ID of the client to retrieve | defaults to undefined|
 
 
 ### Return type
@@ -31,7 +31,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 
@@ -44,7 +44,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new OAuth20ClientQueryingApi(configuration);
 
-let clientId: string; //The client identifier. (default to undefined)
+let clientId: string; //ID of the client to retrieve (default to undefined)
 
 const { status, data } = await apiInstance.getClient(
     clientId
@@ -80,7 +80,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **clientId** | [**string**] | The client identifier. | defaults to undefined|
+| **clientId** | [**string**] | ID of the client to retrieve | defaults to undefined|
 
 
 ### Return type
@@ -89,7 +89,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 
@@ -102,7 +102,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new OAuth20ClientQueryingApi(configuration);
 
-let clientId: string; //The client identifier. (default to undefined)
+let clientId: string; //ID of the client to retrieve (default to undefined)
 
 const { status, data } = await apiInstance.getClientInfo(
     clientId
@@ -128,7 +128,7 @@ const { status, data } = await apiInstance.getClientInfo(
 # **getClients**
 > PageableResponse getClients()
 
-Retrieves a paginated list of OAuth2 clients. The results can be paginated using the \'limit\' parameter and the last seen client ID or creation date.
+Retrieves a paginated list of OAuth2 clients. The results can be paginated using the limit parameter and last seen client ID/creation date.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-clients/).
 
@@ -136,9 +136,9 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **limit** | [**number**] | The maximum number of results returned per page. | defaults to undefined|
-| **lastClientId** | [**string**] | The ID of the last retrieved client. | (optional) defaults to undefined|
-| **lastCreatedOn** | [**string**] | The creation date of the last retrieved client. | (optional) defaults to undefined|
+| **limit** | [**number**] | Pagination limit | defaults to 30|
+| **lastClientId** | [**string**] | ID of the last retrieved client | (optional) defaults to undefined|
+| **lastCreatedOn** | [**string**] | Date of the last retrieved client | (optional) defaults to undefined|
 
 
 ### Return type
@@ -147,7 +147,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 
@@ -160,9 +160,9 @@ import {
 const configuration = new Configuration();
 const apiInstance = new OAuth20ClientQueryingApi(configuration);
 
-let limit: number; //The maximum number of results returned per page. (default to undefined)
-let lastClientId: string; //The ID of the last retrieved client. (optional) (default to undefined)
-let lastCreatedOn: string; //The creation date of the last retrieved client. (optional) (default to undefined)
+let limit: number; //Pagination limit (default to 30)
+let lastClientId: string; //ID of the last retrieved client (optional) (default to undefined)
+let lastCreatedOn: string; //Date of the last retrieved client (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getClients(
     limit,
@@ -182,7 +182,7 @@ const { status, data } = await apiInstance.getClients(
 |-------------|-------------|------------------|
 |**200** | Client list successfully retrieved |  -  |
 |**400** | Invalid pagination parameters |  -  |
-|**403** | Insufficient permissions to create a client list |  -  |
+|**403** | Insufficient permissions to list clients |  -  |
 |**429** | Too many requests - rate limit exceeded |  -  |
 |**500** | Internal server error occurred |  -  |
 
@@ -199,9 +199,9 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **limit** | [**number**] | The maximum number of results returned per page. | defaults to undefined|
-| **lastClientId** | [**string**] | The identifier of the last retrieved client. | (optional) defaults to undefined|
-| **lastCreatedOn** | [**string**] | The creation date of the last retrieved client. | (optional) defaults to undefined|
+| **limit** | [**number**] | Pagination limit | defaults to undefined|
+| **lastClientId** | [**string**] | ID of the last retrieved client | (optional) defaults to undefined|
+| **lastCreatedOn** | [**string**] | Date of the last retrieved client | (optional) defaults to undefined|
 
 
 ### Return type
@@ -210,7 +210,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 
@@ -223,9 +223,9 @@ import {
 const configuration = new Configuration();
 const apiInstance = new OAuth20ClientQueryingApi(configuration);
 
-let limit: number; //The maximum number of results returned per page. (default to undefined)
-let lastClientId: string; //The identifier of the last retrieved client. (optional) (default to undefined)
-let lastCreatedOn: string; //The creation date of the last retrieved client. (optional) (default to undefined)
+let limit: number; //Pagination limit (default to undefined)
+let lastClientId: string; //ID of the last retrieved client (optional) (default to undefined)
+let lastCreatedOn: string; //Date of the last retrieved client (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getClientsInfo(
     limit,
@@ -261,8 +261,8 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **limit** | [**number**] | The maximum number of results returned per page. | defaults to undefined|
-| **lastModifiedOn** | [**string**] | The date when the user consent was last modified. | (optional) defaults to undefined|
+| **limit** | [**number**] | Pagination limit | defaults to undefined|
+| **lastModifiedOn** | [**string**] | Date of the last retrieved consent | (optional) defaults to undefined|
 
 
 ### Return type
@@ -271,7 +271,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 
@@ -284,8 +284,8 @@ import {
 const configuration = new Configuration();
 const apiInstance = new OAuth20ClientQueryingApi(configuration);
 
-let limit: number; //The maximum number of results returned per page. (default to undefined)
-let lastModifiedOn: string; //The date when the user consent was last modified. (optional) (default to undefined)
+let limit: number; //Pagination limit (default to undefined)
+let lastModifiedOn: string; //Date of the last retrieved consent (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getConsents(
     limit,
@@ -309,7 +309,6 @@ const { status, data } = await apiInstance.getConsents(
 # **getPublicClientInfo**
 > ClientInfoResponse getPublicClientInfo()
 
-Returns the public information for a client with the ID secified din the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-public-client-info/).
 
@@ -317,7 +316,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **clientId** | [**string**] | The client identifier. | defaults to undefined|
+| **clientId** | [**string**] | ID of the client to retrieve | defaults to undefined|
 
 
 ### Return type
@@ -339,7 +338,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new OAuth20ClientQueryingApi(configuration);
 
-let clientId: string; //The client identifier. (default to undefined)
+let clientId: string; //ID of the client to retrieve (default to undefined)
 
 const { status, data } = await apiInstance.getPublicClientInfo(
     clientId

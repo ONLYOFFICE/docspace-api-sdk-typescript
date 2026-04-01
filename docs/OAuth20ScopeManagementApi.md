@@ -4,7 +4,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**getScopes**](#getscopes) | **GET** /api/2.0/scopes | Get available OAuth2 scopes|
+|[**getScopes**](#getscopes) | **GET** /api/2.0/scopes | List available OAuth2 scopes|
 
 # **getScopes**
 > ScopeResponse getScopes()
@@ -23,7 +23,7 @@ This endpoint does not have any parameters.
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 
@@ -50,7 +50,7 @@ const { status, data } = await apiInstance.getScopes();
 |-------------|-------------|------------------|
 |**200** | Scopes successfully retrieved |  -  |
 |**400** | Invalid request parameters |  -  |
-|**403** | Insufficient permissions to get a list of scopes |  -  |
+|**403** | Insufficient permissions to list scopes |  -  |
 |**429** | Too many requests - rate limit exceeded |  -  |
 |**500** | Internal server error occurred |  -  |
 

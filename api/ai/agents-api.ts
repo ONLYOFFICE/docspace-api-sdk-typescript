@@ -238,6 +238,7 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
          * Get ai agents
          * @summary Get ai agents
          * @param {string} [subjectId] The filter by user ID.
+         * @param {string} [subjectOwnerId] The filter by room owner ID.
          * @param {boolean} [withoutTags] Specifies whether to search by tags or not.
          * @param {string} [tags] The tags in the serialized format.
          * @param {boolean} [excludeSubject] Specifies whether to exclude search by user or group ID.
@@ -253,7 +254,7 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
          * REST API Reference for getAgents operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-agents/
          */
-        getAgents: async (subjectId?: string, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAgents: async (subjectId?: string, subjectOwnerId?: string, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/ai/agents`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -288,6 +289,10 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
 
             if (subjectId !== undefined) {
                 localVarQueryParameter['subjectId'] = subjectId;
+            }
+
+            if (subjectOwnerId !== undefined) {
+                localVarQueryParameter['subjectOwnerId'] = subjectOwnerId;
             }
 
             if (withoutTags !== undefined) {
@@ -630,6 +635,7 @@ export const AgentsApiFp = function(configuration?: Configuration) {
          * Get ai agents
          * @summary Get ai agents
          * @param {string} [subjectId] The filter by user ID.
+         * @param {string} [subjectOwnerId] The filter by room owner ID.
          * @param {boolean} [withoutTags] Specifies whether to search by tags or not.
          * @param {string} [tags] The tags in the serialized format.
          * @param {boolean} [excludeSubject] Specifies whether to exclude search by user or group ID.
@@ -645,8 +651,8 @@ export const AgentsApiFp = function(configuration?: Configuration) {
          * REST API Reference for getAgents operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-agents/
          */
-        async getAgents(subjectId?: string, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAgents(subjectId, withoutTags, tags, excludeSubject, subjectFilter, quotaFilter, count, startIndex, sortBy, sortOrder, filterValue, options);
+        async getAgents(subjectId?: string, subjectOwnerId?: string, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAgents(subjectId, subjectOwnerId, withoutTags, tags, excludeSubject, subjectFilter, quotaFilter, count, startIndex, sortBy, sortOrder, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AgentsApi.getAgents']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -767,7 +773,7 @@ export const AgentsApiFactory = function (configuration?: Configuration, basePat
          * @throws {RequiredError}
          */
         getAgents(requestParameters: AgentsApiGetAgentsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
-            return localVarFp.getAgents(requestParameters.subjectId, requestParameters.withoutTags, requestParameters.tags, requestParameters.excludeSubject, requestParameters.subjectFilter, requestParameters.quotaFilter, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(axios, basePath));
+            return localVarFp.getAgents(requestParameters.subjectId, requestParameters.subjectOwnerId, requestParameters.withoutTags, requestParameters.tags, requestParameters.excludeSubject, requestParameters.subjectFilter, requestParameters.quotaFilter, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the room new items.
@@ -880,6 +886,13 @@ export interface AgentsApiGetAgentsRequest {
      * @memberof AgentsApiGetAgents
      */
     readonly subjectId?: string
+
+    /**
+     * The filter by room owner ID.
+     * @type {string}
+     * @memberof AgentsApiGetAgents
+     */
+    readonly subjectOwnerId?: string
 
     /**
      * Specifies whether to search by tags or not.
@@ -1053,7 +1066,7 @@ export class AgentsApi extends BaseAPI {
      * @memberof AgentsApi
      */
     public getAgents(requestParameters: AgentsApiGetAgentsRequest = {}, options?: RawAxiosRequestConfig) {
-        return AgentsApiFp(this.configuration).getAgents(requestParameters.subjectId, requestParameters.withoutTags, requestParameters.tags, requestParameters.excludeSubject, requestParameters.subjectFilter, requestParameters.quotaFilter, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
+        return AgentsApiFp(this.configuration).getAgents(requestParameters.subjectId, requestParameters.subjectOwnerId, requestParameters.withoutTags, requestParameters.tags, requestParameters.excludeSubject, requestParameters.subjectFilter, requestParameters.quotaFilter, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

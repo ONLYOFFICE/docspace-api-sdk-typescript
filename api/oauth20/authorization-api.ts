@@ -35,7 +35,7 @@ export const AuthorizationApiAxiosParamCreator = function (configuration?: Confi
     return {
         /**
          * Initiates the OAuth2 authorization flow.
-         * @summary OAuth2 authorization endpoint
+         * @summary OAuth2 Authorization Endpoint
          * @param {string} responseType The OAuth 2.0 response type, must be \'code\' for authorization code flow.
          * @param {string} clientId The client identifier issued to the client during registration.
          * @param {string} redirectUri The URL to redirect to after authorization is complete.
@@ -67,7 +67,7 @@ export const AuthorizationApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication asc_auth_key required
+            // authentication x-signature required
 
             if (responseType !== undefined) {
                 localVarQueryParameter['response_type'] = responseType;
@@ -97,8 +97,8 @@ export const AuthorizationApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Exchanges an authorization code specified in the request for the access token.
-         * @summary OAuth2 token endpoint
+         * Exchange authorization code for access token
+         * @summary OAuth2 Token Endpoint
          * @param {string} [grantType] The OAuth2 grant type, must be \\\'authorization_code\\\' for the authorization code flow.
          * @param {string} [code] A temporary authorization code that is sent to the client to be exchanged for a token.
          * @param {string} [redirectUri] The URL where the user will be redirected after successful or unsuccessful authentication.
@@ -159,7 +159,7 @@ export const AuthorizationApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Sends a consent request with the specified parameters.
+         * Sends consent approval
          * @summary OAuth2 consent endpoint
          * @param {string} [clientId] The client identifier issued to the client during registration.
          * @param {string} [state] The random string used to solve the CSRF vulnerability problem.
@@ -184,7 +184,7 @@ export const AuthorizationApiAxiosParamCreator = function (configuration?: Confi
             const localVarQueryParameter = {} as any;
             const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
 
-            // authentication asc_auth_key required
+            // authentication x-signature required
 
 
             if (clientId !== undefined) { 
@@ -224,7 +224,7 @@ export const AuthorizationApiFp = function(configuration?: Configuration) {
     return {
         /**
          * Initiates the OAuth2 authorization flow.
-         * @summary OAuth2 authorization endpoint
+         * @summary OAuth2 Authorization Endpoint
          * @param {string} responseType The OAuth 2.0 response type, must be \'code\' for authorization code flow.
          * @param {string} clientId The client identifier issued to the client during registration.
          * @param {string} redirectUri The URL to redirect to after authorization is complete.
@@ -241,8 +241,8 @@ export const AuthorizationApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Exchanges an authorization code specified in the request for the access token.
-         * @summary OAuth2 token endpoint
+         * Exchange authorization code for access token
+         * @summary OAuth2 Token Endpoint
          * @param {string} [grantType] The OAuth2 grant type, must be \\\'authorization_code\\\' for the authorization code flow.
          * @param {string} [code] A temporary authorization code that is sent to the client to be exchanged for a token.
          * @param {string} [redirectUri] The URL where the user will be redirected after successful or unsuccessful authentication.
@@ -260,7 +260,7 @@ export const AuthorizationApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Sends a consent request with the specified parameters.
+         * Sends consent approval
          * @summary OAuth2 consent endpoint
          * @param {string} [clientId] The client identifier issued to the client during registration.
          * @param {string} [state] The random string used to solve the CSRF vulnerability problem.
@@ -288,7 +288,7 @@ export const AuthorizationApiFactory = function (configuration?: Configuration, 
     return {
         /**
          * Initiates the OAuth2 authorization flow.
-         * @summary OAuth2 authorization endpoint
+         * @summary OAuth2 Authorization Endpoint
          * @param {AuthorizationApiAuthorizeOAuthRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for authorizeOAuth operation
@@ -299,8 +299,8 @@ export const AuthorizationApiFactory = function (configuration?: Configuration, 
             return localVarFp.authorizeOAuth(requestParameters.responseType, requestParameters.clientId, requestParameters.redirectUri, requestParameters.scope, options).then((request) => request(axios, basePath));
         },
         /**
-         * Exchanges an authorization code specified in the request for the access token.
-         * @summary OAuth2 token endpoint
+         * Exchange authorization code for access token
+         * @summary OAuth2 Token Endpoint
          * @param {AuthorizationApiExchangeTokenRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for exchangeToken operation
@@ -311,7 +311,7 @@ export const AuthorizationApiFactory = function (configuration?: Configuration, 
             return localVarFp.exchangeToken(requestParameters.grantType, requestParameters.code, requestParameters.redirectUri, requestParameters.clientId, requestParameters.clientSecret, options).then((request) => request(axios, basePath));
         },
         /**
-         * Sends a consent request with the specified parameters.
+         * Sends consent approval
          * @summary OAuth2 consent endpoint
          * @param {AuthorizationApiSubmitConsentRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -439,7 +439,7 @@ export interface AuthorizationApiSubmitConsentRequest {
 export class AuthorizationApi extends BaseAPI {
     /**
      * Initiates the OAuth2 authorization flow.
-     * @summary OAuth2 authorization endpoint
+     * @summary OAuth2 Authorization Endpoint
      * @param {OAuth20AuthorizationApiAuthorizeOAuthRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -450,8 +450,8 @@ export class AuthorizationApi extends BaseAPI {
     }
 
     /**
-     * Exchanges an authorization code specified in the request for the access token.
-     * @summary OAuth2 token endpoint
+     * Exchange authorization code for access token
+     * @summary OAuth2 Token Endpoint
      * @param {OAuth20AuthorizationApiExchangeTokenRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -462,7 +462,7 @@ export class AuthorizationApi extends BaseAPI {
     }
 
     /**
-     * Sends a consent request with the specified parameters.
+     * Sends consent approval
      * @summary OAuth2 consent endpoint
      * @param {OAuth20AuthorizationApiSubmitConsentRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

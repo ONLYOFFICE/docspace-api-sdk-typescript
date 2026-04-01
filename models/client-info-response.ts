@@ -35,6 +35,7 @@ export interface ClientInfoResponse {
      * The client scopes.
      */
     'scopes'?: Set<string>;
+    'public'?: boolean;
     /**
      * The client ID.
      */
