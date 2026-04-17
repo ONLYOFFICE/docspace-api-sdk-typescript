@@ -38,7 +38,6 @@ export interface ConfigurationParameters {
     serverIndex?: number;
     baseOptions?: any;
     formDataCtor?: new () => any;
-    origin?: string;
 }
 
 export class Configuration {
@@ -92,10 +91,6 @@ export class Configuration {
      * @type {new () => FormData}
      */
     formDataCtor?: new () => any;
-    /**
-     * custom origin header value
-     */
-    origin?: string;
 
     constructor(param: ConfigurationParameters = {}) {
         this.apiKey = param.apiKey;
@@ -105,13 +100,10 @@ export class Configuration {
         this.awsv4 = param.awsv4;
         this.basePath = param.basePath;
         this.serverIndex = param.serverIndex;
-        
-        this.origin = param.origin;
         this.baseOptions = {
             ...param.baseOptions,
             headers: {
                 ...param.baseOptions?.headers,
-                ...(this.origin && { 'Origin': this.origin }),
             },
         };
         this.formDataCtor = param.formDataCtor;

@@ -28,7 +28,7 @@ export const EmployeeType = {
     RoomAdmin: 'RoomAdmin',
     Guest: 'Guest',
     DocSpaceAdmin: 'DocSpaceAdmin',
-    User: 'User'
+    User: 'User',
 } as const;
 
 export type EmployeeType = typeof EmployeeType[keyof typeof EmployeeType];

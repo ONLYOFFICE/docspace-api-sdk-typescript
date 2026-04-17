@@ -277,7 +277,7 @@ export const FilesSettingsDtoDefaultSharingAccessRightsEnum = {
     CustomFilter: 8,
     RoomManager: 9,
     Editing: 10,
-    ContentCreator: 11
+    ContentCreator: 11,
 } as const;
 
 export type FilesSettingsDtoDefaultSharingAccessRightsEnum = typeof FilesSettingsDtoDefaultSharingAccessRightsEnum[keyof typeof FilesSettingsDtoDefaultSharingAccessRightsEnum];

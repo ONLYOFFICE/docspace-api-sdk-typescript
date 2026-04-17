@@ -26,7 +26,7 @@
 export const RoomDataLifetimePeriod = {
     Day: 0,
     Month: 1,
-    Year: 2
+    Year: 2,
 } as const;
 
 export type RoomDataLifetimePeriod = typeof RoomDataLifetimePeriod[keyof typeof RoomDataLifetimePeriod];

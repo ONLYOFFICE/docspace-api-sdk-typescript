@@ -26,7 +26,7 @@
 export const Location = {
     Room: 1,
     Documents: 2,
-    Link: 3
+    Link: 3,
 } as const;
 
 export type Location = typeof Location[keyof typeof Location];

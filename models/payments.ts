@@ -25,7 +25,7 @@
 
 export const Payments = {
     Paid: 0,
-    Free: 1
+    Free: 1,
 } as const;
 
 export type Payments = typeof Payments[keyof typeof Payments];

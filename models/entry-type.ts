@@ -31,7 +31,7 @@ export const EntryType = {
     Group: 24,
     Room: 25,
     Tag: 26,
-    Agent: 27
+    Agent: 27,
 } as const;
 
 export type EntryType = typeof EntryType[keyof typeof EntryType];

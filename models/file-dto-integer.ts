@@ -29,19 +29,7 @@ import type { DraftLocationInteger } from './draft-location-integer';
 import type { EmployeeDto } from './employee-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FileDtoIntegerAllOfViewAccessibility } from './file-dto-integer-all-of-view-accessibility';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { FileEntryDtoInteger } from './file-entry-dto-integer';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { FileEntryDtoIntegerAllOfAvailableShareRights } from './file-entry-dto-integer-all-of-available-share-rights';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { FileEntryDtoIntegerAllOfSecurity } from './file-entry-dto-integer-all-of-security';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { FileEntryDtoIntegerAllOfShareSettings } from './file-entry-dto-integer-all-of-share-settings';
+import type { FileDtoIntegerViewAccessibility } from './file-dto-integer-view-accessibility';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { FileEntryType } from './file-entry-type';
@@ -54,6 +42,15 @@ import type { FileStatus } from './file-status';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { FileType } from './file-type';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { FolderDtoIntegerAvailableShareRights } from './folder-dto-integer-available-share-rights';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { FolderDtoIntegerSecurity } from './folder-dto-integer-security';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { FolderDtoIntegerShareSettings } from './folder-dto-integer-share-settings';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { FolderType } from './folder-type';
@@ -71,209 +68,207 @@ import type { Thumbnail } from './thumbnail';
 import type { VectorizationStatus } from './vectorization-status';
 
 /**
- * @type FileDtoInteger
  * The file parameters.
- * @export
  */
-export type FileDtoInteger = FileEntryDtoInteger &  {
+export interface FileDtoInteger {
+    /**
+     * The file entry title.
+     */
+    'title'?: string | null;
+    'access'?: FileShare;
+    'sharedBy'?: EmployeeDto;
+    'ownedBy'?: EmployeeDto;
+    /**
+     * Specifies if the file entry is shared via link or not.
+     */
+    'shared'?: boolean;
+    /**
+     * Specifies if the file entry is shared for user or not.
+     */
+    'sharedForUser'?: boolean;
+    /**
+     * Indicates whether the parent entity is shared.
+     */
+    'parentShared'?: boolean;
+    /**
+     * The short Web URL.
+     */
+    'shortWebUrl'?: string | null;
+    'created'?: ApiDateTime;
+    'createdBy'?: EmployeeDto;
+    'updated'?: ApiDateTime;
+    'autoDelete'?: ApiDateTime;
+    'rootFolderType'?: FolderType;
+    'parentRoomType'?: FolderType;
+    'updatedBy'?: EmployeeDto;
+    /**
+     * Specifies if the file entry provider is specified or not.
+     */
+    'providerItem'?: boolean | null;
+    /**
+     * The provider key of the file entry.
+     */
+    'providerKey'?: string | null;
+    /**
+     * The provider ID of the file entry.
+     */
+    'providerId'?: number | null;
+    /**
+     * The order of the file entry.
+     */
+    'order'?: string | null;
+    /**
+     * Specifies if the file is a favorite or not.
+     */
+    'isFavorite'?: boolean | null;
+    /**
+     * The file entry ID.
+     */
+    'id'?: number;
+    /**
+     * The root folder ID of the file entry.
+     */
+    'rootFolderId'?: number;
+    /**
+     * The origin ID of the file entry.
+     */
+    'originId'?: number;
+    /**
+     * The origin room ID of the file entry.
+     */
+    'originRoomId'?: number;
+    /**
+     * The origin title of the file entry.
+     */
+    'originTitle'?: string | null;
+    /**
+     * The origin room title of the file entry.
+     */
+    'originRoomTitle'?: string | null;
+    /**
+     * Specifies if the file entry can be shared or not.
+     */
+    'canShare'?: boolean;
+    'shareSettings'?: FolderDtoIntegerShareSettings | null;
+    'security'?: FolderDtoIntegerSecurity | null;
+    'availableShareRights'?: FolderDtoIntegerAvailableShareRights | null;
+    /**
+     * The request token of the file entry.
+     */
+    'requestToken'?: string | null;
+    /**
+     * Specifies if the folder can be accessed via an external link or not.
+     */
+    'external'?: boolean | null;
+    'expirationDate'?: ApiDateTime;
+    /**
+     * Indicates whether the shareable link associated with the file or folder has expired.
+     */
+    'isLinkExpired'?: boolean | null;
     /**
      * The folder ID where the file is located.
-     * @type {number}
-     * @memberof FileDtoInteger
      */
     'folderId'?: number;
     /**
      * The file version.
-     * @type {number}
-     * @memberof FileDtoInteger
      */
     'version'?: number;
     /**
      * The version group of the file.
-     * @type {number}
-     * @memberof FileDtoInteger
      */
     'versionGroup'?: number;
     /**
      * The content length of the file.
-     * @type {string}
-     * @memberof FileDtoInteger
      */
     'contentLength'?: string | null;
     /**
      * The pure content length of the file.
-     * @type {number}
-     * @memberof FileDtoInteger
      */
     'pureContentLength'?: number | null;
-    /**
-     * 
-     * @type {FileStatus}
-     * @memberof FileDtoInteger
-     */
     'fileStatus'?: FileStatus;
     /**
      * The list of users editing the file.
-     * @type {{ [key: string]: string | null; }}
-     * @memberof FileDtoInteger
      */
     'editingBy'?: { [key: string]: string | null; } | null;
     /**
      * Specifies if the file is muted or not.
-     * @type {boolean}
-     * @memberof FileDtoInteger
      */
     'mute'?: boolean;
     /**
      * The URL link to view the file.
-     * @type {string}
-     * @memberof FileDtoInteger
      */
     'viewUrl'?: string | null;
     /**
      * The Web URL link to the file.
-     * @type {string}
-     * @memberof FileDtoInteger
      */
     'webUrl'?: string | null;
-    /**
-     * 
-     * @type {FileType}
-     * @memberof FileDtoInteger
-     */
     'fileType'?: FileType;
     /**
      * The file extension.
-     * @type {string}
-     * @memberof FileDtoInteger
      */
     'fileExst'?: string | null;
     /**
      * The comment to the file.
-     * @type {string}
-     * @memberof FileDtoInteger
      */
     'comment'?: string | null;
     /**
      * Specifies if the file is encrypted or not.
-     * @type {boolean}
-     * @memberof FileDtoInteger
      */
     'encrypted'?: boolean | null;
     /**
      * The thumbnail URL of the file.
-     * @type {string}
-     * @memberof FileDtoInteger
      */
     'thumbnailUrl'?: string | null;
-    /**
-     * 
-     * @type {Thumbnail}
-     * @memberof FileDtoInteger
-     */
     'thumbnailStatus'?: Thumbnail;
     /**
      * Specifies if the file is locked or not.
-     * @type {boolean}
-     * @memberof FileDtoInteger
      */
     'locked'?: boolean | null;
     /**
      * The user ID of the person who locked the file.
-     * @type {string}
-     * @memberof FileDtoInteger
      */
     'lockedBy'?: string | null;
     /**
      * Specifies if the file has a draft or not.
-     * @type {boolean}
-     * @memberof FileDtoInteger
      */
     'hasDraft'?: boolean | null;
-    /**
-     * 
-     * @type {FormFillingStatus}
-     * @memberof FileDtoInteger
-     */
     'formFillingStatus'?: FormFillingStatus;
     /**
      * Specifies if the file is a form or not.
-     * @type {boolean}
-     * @memberof FileDtoInteger
      */
     'isForm'?: boolean | null;
     /**
      * Specifies if the Custom Filter editing mode is enabled for a file or not.
-     * @type {boolean}
-     * @memberof FileDtoInteger
      */
     'customFilterEnabled'?: boolean | null;
     /**
      * The name of the user who enabled a Custom Filter editing mode for a file.
-     * @type {string}
-     * @memberof FileDtoInteger
      */
     'customFilterEnabledBy'?: string | null;
     /**
      * Specifies if the filling has started or not.
-     * @type {boolean}
-     * @memberof FileDtoInteger
      */
     'startFilling'?: boolean | null;
     /**
      * Specifies if the form filling has started but the file is still being saved by the document editor. Filling and editing are not allowed.
-     * @type {boolean}
-     * @memberof FileDtoInteger
      */
     'isFillingPreparing'?: boolean | null;
     /**
      * The InProcess folder ID of the file.
-     * @type {number}
-     * @memberof FileDtoInteger
      */
     'inProcessFolderId'?: number | null;
     /**
      * The InProcess folder title of the file.
-     * @type {string}
-     * @memberof FileDtoInteger
      */
     'inProcessFolderTitle'?: string | null;
-    /**
-     * 
-     * @type {DraftLocationInteger}
-     * @memberof FileDtoInteger
-     */
     'draftLocation'?: DraftLocationInteger;
-    /**
-     * 
-     * @type {FileDtoIntegerAllOfViewAccessibility}
-     * @memberof FileDtoInteger
-     */
-    'viewAccessibility'?: FileDtoIntegerAllOfViewAccessibility | null;
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof FileDtoInteger
-     */
+    'viewAccessibility'?: FileDtoIntegerViewAccessibility | null;
     'lastOpened'?: ApiDateTime;
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof FileDtoInteger
-     */
     'expired'?: ApiDateTime;
-    /**
-     * 
-     * @type {VectorizationStatus}
-     * @memberof FileDtoInteger
-     */
+    'fileEntryType'?: FileEntryType;
     'vectorizationStatus'?: VectorizationStatus;
-    /**
-     * 
-     * @type {Size}
-     * @memberof FileDtoInteger
-     */
     'dimensions'?: Size;
-};
+}
+
 
 

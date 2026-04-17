@@ -40,7 +40,7 @@ export const TenantIndustry = {
     PublicSector: 13,
     Publishing: 14,
     RetailSales: 15,
-    Telecommunications: 16
+    Telecommunications: 16,
 } as const;
 
 export type TenantIndustry = typeof TenantIndustry[keyof typeof TenantIndustry];

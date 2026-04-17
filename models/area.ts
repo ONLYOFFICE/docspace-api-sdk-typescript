@@ -26,7 +26,7 @@
 export const Area = {
     All: 0,
     People: 1,
-    Guests: 2
+    Guests: 2,
 } as const;
 
 export type Area = typeof Area[keyof typeof Area];

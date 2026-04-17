@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** | The user ID. | [optional] [default to undefined]
 **displayName** | **string** | The HTML-encoded user\'s display name formatted according to the default format for the current culture. | [optional] [default to undefined]
-**title** | **string** | The user title. | [optional] [default to undefined]
 **avatar** | **string** | The user avatar. | [optional] [default to undefined]
 **avatarOriginal** | **string** | The user original size avatar. | [optional] [default to undefined]
 **avatarMax** | **string** | The user maximum size avatar. | [optional] [default to undefined]
@@ -22,13 +21,10 @@ Name | Type | Description | Notes
 **userName** | **string** | The user username. | [optional] [default to undefined]
 **email** | **string** | The user email. | [optional] [default to undefined]
 **contacts** | [**Array&lt;Contact&gt;**](Contact.md) | The list of user contacts. | [optional] [default to undefined]
-**birthday** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
-**sex** | **string** | The user sex. | [optional] [default to undefined]
 **status** | [**EmployeeStatus**](EmployeeStatus.md) |  | [optional] [default to undefined]
 **activationStatus** | [**EmployeeActivationStatus**](EmployeeActivationStatus.md) |  | [optional] [default to undefined]
 **terminated** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
 **department** | **string** | The user department. | [optional] [default to undefined]
-**workFrom** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
 **groups** | [**Array&lt;GroupSummaryDto&gt;**](GroupSummaryDto.md) | The list of user groups. | [optional] [default to undefined]
 **location** | **string** | The user location. | [optional] [default to undefined]
 **notes** | **string** | The user notes. | [optional] [default to undefined]
@@ -63,7 +59,6 @@ import { EmployeeFullDto } from '@onlyoffice/docspace-api-sdk';
 const instance: EmployeeFullDto = {
     id,
     displayName,
-    title,
     avatar,
     avatarOriginal,
     avatarMax,
@@ -77,13 +72,10 @@ const instance: EmployeeFullDto = {
     userName,
     email,
     contacts,
-    birthday,
-    sex,
     status,
     activationStatus,
     terminated,
     department,
-    workFrom,
     groups,
     location,
     notes,

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **title** | **string** | The display title for the AI provider. | [default to undefined]
 **url** | **string** | The API endpoint URL for the AI provider. Required for OpenAiCompatible type; optional for other types that have default URLs. | [optional] [default to undefined]
 **key** | **string** | The authentication API key for the AI provider. | [default to undefined]
+**modelSettings** | [**Set&lt;ModelSettingsItemDto&gt;**](ModelSettingsItemDto.md) | Optional list of model settings to configure atomically with the provider creation. | [optional] [default to undefined]
 
 ## Example
 
@@ -21,6 +22,7 @@ const instance: CreateProviderRequestDto = {
     title,
     url,
     key,
+    modelSettings,
 };
 ```
 

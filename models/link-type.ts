@@ -25,7 +25,7 @@
 
 export const LinkType = {
     Invitation: 0,
-    External: 1
+    External: 1,
 } as const;
 
 export type LinkType = typeof LinkType[keyof typeof LinkType];

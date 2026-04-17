@@ -25,7 +25,7 @@
 
 export const Role = {
     User: 0,
-    Assistant: 1
+    Assistant: 1,
 } as const;
 
 export type Role = typeof Role[keyof typeof Role];

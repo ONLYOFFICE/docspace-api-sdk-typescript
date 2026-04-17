@@ -27,7 +27,7 @@ export const ProductQuantityType = {
     Set: 0,
     Add: 1,
     Sub: 2,
-    Renew: 3
+    Renew: 3,
 } as const;
 
 export type ProductQuantityType = typeof ProductQuantityType[keyof typeof ProductQuantityType];

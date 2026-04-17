@@ -26,7 +26,7 @@
 export const DeepLinkHandlingMode = {
     ProvideChoice: 0,
     Web: 1,
-    App: 2
+    App: 2,
 } as const;
 
 export type DeepLinkHandlingMode = typeof DeepLinkHandlingMode[keyof typeof DeepLinkHandlingMode];

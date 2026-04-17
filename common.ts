@@ -19,8 +19,9 @@
  */
 import type { Configuration } from "./configuration";
 import type { RequestArgs } from "./base";
-import type { AxiosInstance, AxiosResponse } from 'axios';
+import type { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 import { RequiredError } from "./base";
+import { DocSpaceApiError } from "./error";
 
 export const DUMMY_BASE_URL = 'https://example.com'
 
@@ -39,11 +40,6 @@ export const setApiKeyToObject = async function (object: any, keyParamName: stri
         const localVarApiKeyValue = typeof configuration.apiKey === 'function'
             ? await configuration.apiKey(keyParamName)
             : await configuration.apiKey;
-            
-        if (!localVarApiKeyValue) return;
-
-        const clean = localVarApiKeyValue.trim();
-        if (!clean) return;
         object[keyParamName] = localVarApiKeyValue;
     }
 }
@@ -59,10 +55,6 @@ export const setBearerAuthToObject = async function (object: any, configuration?
         const accessToken = typeof configuration.accessToken === 'function'
             ? await configuration.accessToken()
             : await configuration.accessToken;
-
-        const token = normalizeToken(accessToken);
-
-        if (!token) return;
         object["Authorization"] = "Bearer " + accessToken;
     }
 }
@@ -72,22 +64,10 @@ export const setOAuthToObject = async function (object: any, name: string, scope
         const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
             ? await configuration.accessToken(name, scopes)
             : await configuration.accessToken;
-
-        const token = normalizeToken(localVarAccessTokenValue);
-
-        if (!token) return;
         object["Authorization"] = "Bearer " + localVarAccessTokenValue;
     }
 }
 
-
-const normalizeToken = (value?: string | null): string | null => {
-    if (!value) return null;
-
-    const clean = value.replace(/^Bearer\s+/i, "").trim();
-
-    return clean.length > 0 ? clean : null;
-};
 
 function setFlattenedQueryParams(urlSearchParams: URLSearchParams, parameter: any, key: string = ""): void {
     if (parameter == null) return;
@@ -147,6 +127,11 @@ export const toPathString = function (url: URL) {
 export const createRequestFunction = function (axiosArgs: RequestArgs, globalAxios: AxiosInstance, BASE_PATH: string, configuration?: Configuration) {
     return <T = unknown, R = AxiosResponse<T>>(axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
         const axiosRequestArgs = {...axiosArgs.options, url: (axios.defaults.baseURL ? '' : configuration?.basePath ?? basePath) + axiosArgs.url};
-        return axios.request<T, R>(axiosRequestArgs);
+        return axios.request<T, R>(axiosRequestArgs).catch((error: AxiosError) => {
+            if (error?.response) {
+                throw DocSpaceApiError.fromAxiosError(error);
+            }
+            throw error;
+        });
     };
 }

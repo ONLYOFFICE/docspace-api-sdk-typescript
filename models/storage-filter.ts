@@ -26,7 +26,7 @@
 export const StorageFilter = {
     None: 0,
     Internal: 1,
-    ThirdParty: 2
+    ThirdParty: 2,
 } as const;
 
 export type StorageFilter = typeof StorageFilter[keyof typeof StorageFilter];

@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **prompt** | **string** | The system prompt for the chat. | [optional] [default to undefined]
 **multimodal** | [**ChatMultimodalSettingsDto**](ChatMultimodalSettingsDto.md) |  | [optional] [default to undefined]
 **thinking** | **boolean** | Indicates whether the model supports extended thinking mode. | [optional] [default to undefined]
+**capabilities** | [**AiModelCapabilities**](AiModelCapabilities.md) |  | [optional] [default to undefined]
 **internal** | **boolean** | Indicates whether this is an internal AI gateway provider. | [optional] [readonly] [default to undefined]
 
 ## Example
@@ -26,6 +27,7 @@ const instance: ChatSettingsDto = {
     prompt,
     multimodal,
     thinking,
+    capabilities,
     internal,
 };
 ```

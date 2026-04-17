@@ -25,7 +25,7 @@
 
 export const MobilePhoneActivationStatus = {
     NotActivated: 0,
-    Activated: 1
+    Activated: 1,
 } as const;
 
 export type MobilePhoneActivationStatus = typeof MobilePhoneActivationStatus[keyof typeof MobilePhoneActivationStatus];

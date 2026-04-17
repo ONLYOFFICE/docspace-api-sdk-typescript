@@ -29,7 +29,7 @@ export const Status = {
     Expired: 2,
     RequiredPassword: 3,
     InvalidPassword: 4,
-    ExternalAccessDenied: 5
+    ExternalAccessDenied: 5,
 } as const;
 
 export type Status = typeof Status[keyof typeof Status];

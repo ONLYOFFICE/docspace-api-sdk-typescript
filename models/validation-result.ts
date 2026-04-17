@@ -30,7 +30,7 @@ export const ValidationResult = {
     TariffLimit: 3,
     UserExisted: 4,
     UserExcluded: 5,
-    QuotaFailed: 6
+    QuotaFailed: 6,
 } as const;
 
 export type ValidationResult = typeof ValidationResult[keyof typeof ValidationResult];

@@ -42,7 +42,7 @@ export const ConfirmType = {
     TfaActivation: 'TfaActivation',
     TfaAuth: 'TfaAuth',
     Wizard: 'Wizard',
-    GuestShareLink: 'GuestShareLink'
+    GuestShareLink: 'GuestShareLink',
 } as const;
 
 export type ConfirmType = typeof ConfirmType[keyof typeof ConfirmType];

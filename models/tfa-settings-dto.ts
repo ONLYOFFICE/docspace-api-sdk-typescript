@@ -38,7 +38,7 @@ export interface TfaSettingsDto {
     /**
      * Indicates whether the TFA configuration can be used.
      */
-    'avaliable': boolean;
+    'available': boolean;
     /**
      * The list of IP addresses that are exempt from TFA requirements.
      */

@@ -18,6 +18,9 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ModelSettingsItemDto } from './model-settings-item-dto';
 
 /**
  * Parameters for updating an AI provider\'s configuration.
@@ -35,5 +38,9 @@ export interface UpdateProviderBody {
      * The new authentication API key for the AI provider. If null, the key is not changed.
      */
     'key'?: string | null;
+    /**
+     * Optional list of model settings changes to apply atomically with the provider update.
+     */
+    'modelSettings'?: Set<ModelSettingsItemDto> | null;
 }
 

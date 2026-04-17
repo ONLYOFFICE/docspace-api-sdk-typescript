@@ -20,6 +20,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { AiModelCapabilities } from './ai-model-capabilities';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { ChatMultimodalSettingsDto } from './chat-multimodal-settings-dto';
 
 /**
@@ -45,8 +48,10 @@ export interface ChatSettingsDto {
     'multimodal'?: ChatMultimodalSettingsDto;
     /**
      * Indicates whether the model supports extended thinking mode.
+     * @deprecated
      */
     'thinking'?: boolean;
+    'capabilities'?: AiModelCapabilities;
     /**
      * Indicates whether this is an internal AI gateway provider.
      */

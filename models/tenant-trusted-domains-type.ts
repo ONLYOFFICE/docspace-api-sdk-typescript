@@ -26,7 +26,7 @@
 export const TenantTrustedDomainsType = {
     None: 0,
     Custom: 1,
-    All: 2
+    All: 2,
 } as const;
 
 export type TenantTrustedDomainsType = typeof TenantTrustedDomainsType[keyof typeof TenantTrustedDomainsType];

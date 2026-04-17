@@ -33,7 +33,7 @@ export const ProviderFilter = {
     SharePoint: 6,
     WebDav: 7,
     Yandex: 8,
-    Storage: 9
+    Storage: 9,
 } as const;
 
 export type ProviderFilter = typeof ProviderFilter[keyof typeof ProviderFilter];

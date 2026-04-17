@@ -25,7 +25,7 @@
 
 export const FileEntryType = {
     Folder: 1,
-    File: 2
+    File: 2,
 } as const;
 
 export type FileEntryType = typeof FileEntryType[keyof typeof FileEntryType];

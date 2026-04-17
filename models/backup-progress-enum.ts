@@ -26,7 +26,7 @@
 export const BackupProgressEnum = {
     Backup: 0,
     Restore: 1,
-    Transfer: 2
+    Transfer: 2,
 } as const;
 
 export type BackupProgressEnum = typeof BackupProgressEnum[keyof typeof BackupProgressEnum];

@@ -28,7 +28,7 @@ export const EmployeeStatus = {
     Terminated: 2,
     Pending: 4,
     Default: 5,
-    All: 7
+    All: 7,
 } as const;
 
 export type EmployeeStatus = typeof EmployeeStatus[keyof typeof EmployeeStatus];

@@ -26,7 +26,7 @@
 export const BackupPeriod = {
     EveryDay: 0,
     EveryWeek: 1,
-    EveryMonth: 2
+    EveryMonth: 2,
 } as const;
 
 export type BackupPeriod = typeof BackupPeriod[keyof typeof BackupPeriod];

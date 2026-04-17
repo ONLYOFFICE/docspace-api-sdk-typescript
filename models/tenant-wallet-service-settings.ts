@@ -36,7 +36,7 @@ export interface TenantWalletServiceSettings {
 export const TenantWalletServiceSettingsEnabledServicesEnum = {
     AITools: -13,
     Backup: -12,
-    Storage: -11
+    Storage: -11,
 } as const;
 
 export type TenantWalletServiceSettingsEnabledServicesEnum = typeof TenantWalletServiceSettingsEnabledServicesEnum[keyof typeof TenantWalletServiceSettingsEnabledServicesEnum];

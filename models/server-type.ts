@@ -27,7 +27,7 @@ export const ServerType = {
     Custom: 0,
     DocSpace: 1,
     Github: 2,
-    Box: 3
+    Box: 3,
 } as const;
 
 export type ServerType = typeof ServerType[keyof typeof ServerType];

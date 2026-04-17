@@ -48,6 +48,8 @@ import type { CustomFilterParameters } from '../../models';
 // @ts-ignore
 import type { Delete } from '../../models';
 // @ts-ignore
+import type { DocumentBuilderTaskWrapper } from '../../models';
+// @ts-ignore
 import type { EditHistoryArrayWrapper } from '../../models';
 // @ts-ignore
 import type { EditHistoryDataWrapper } from '../../models';
@@ -111,6 +113,8 @@ import type { StringWrapper } from '../../models';
 import type { TemplatesRequestDto } from '../../models';
 // @ts-ignore
 import type { UpdateFile } from '../../models';
+// @ts-ignore
+import type { XlsxReportResponseWrapper } from '../../models';
 /**
  * FilesApi - axios parameter creator
  * @export
@@ -1869,6 +1873,62 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
+         * Returns the status of the XLSX report generation task for the specified form.
+         * @summary Get XLSX report generation status
+         * @param {number} fileId The file unique identifier.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getXlsx operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-xlsx/
+         */
+        getXlsx: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'fileId' is not null or undefined
+            assertParamExists('getXlsx', 'fileId', fileId)
+
+            const localVarPath = `/api/2.0/files/file/{fileId}/xlsx`
+                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Checks if the PDF file is a form or not.
          * @summary Check the PDF file
          * @param {number} fileId The file unique identifier.
@@ -3136,7 +3196,7 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for generateXlsx operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/generate-xlsx/
          */
-        async generateXlsx(fileId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerWrapper>> {
+        async generateXlsx(fileId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<XlsxReportResponseWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.generateXlsx(fileId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.generateXlsx']?.[localVarOperationServerIndex]?.url;
@@ -3360,6 +3420,21 @@ export const FilesApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getReferenceData(getReferenceDataDtoInteger, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.getReferenceData']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the status of the XLSX report generation task for the specified form.
+         * @summary Get XLSX report generation status
+         * @param {number} fileId The file unique identifier.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getXlsx operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-xlsx/
+         */
+        async getXlsx(fileId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentBuilderTaskWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getXlsx(fileId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesApi.getXlsx']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -3864,7 +3939,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/generate-xlsx/
          * @throws {RequiredError}
          */
-        generateXlsx(requestParameters: FilesApiGenerateXlsxRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
+        generateXlsx(requestParameters: FilesApiGenerateXlsxRequest, options?: RawAxiosRequestConfig): AxiosPromise<XlsxReportResponseWrapper> {
             return localVarFp.generateXlsx(requestParameters.fileId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4034,6 +4109,18 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          */
         getReferenceData(requestParameters: FilesApiGetReferenceDataRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileReferenceWrapper> {
             return localVarFp.getReferenceData(requestParameters.getReferenceDataDtoInteger, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the status of the XLSX report generation task for the specified form.
+         * @summary Get XLSX report generation status
+         * @param {FilesApiGetXlsxRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getXlsx operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-xlsx/
+         * @throws {RequiredError}
+         */
+        getXlsx(requestParameters: FilesApiGetXlsxRequest, options?: RawAxiosRequestConfig): AxiosPromise<DocumentBuilderTaskWrapper> {
+            return localVarFp.getXlsx(requestParameters.fileId, options).then((request) => request(axios, basePath));
         },
         /**
          * Checks if the PDF file is a form or not.
@@ -4831,6 +4918,20 @@ export interface FilesApiGetReferenceDataRequest {
 }
 
 /**
+ * Request parameters for getXlsx operation in FilesApi.
+ * @export
+ * @interface FilesApiGetXlsxRequest
+ */
+export interface FilesApiGetXlsxRequest {
+    /**
+     * The file unique identifier.
+     * @type {number}
+     * @memberof FilesApiGetXlsx
+     */
+    readonly fileId: number
+}
+
+/**
  * Request parameters for isFormPDF operation in FilesApi.
  * @export
  * @interface FilesApiIsFormPDFRequest
@@ -5625,6 +5726,18 @@ export class FilesApi extends BaseAPI {
      */
     public getReferenceData(requestParameters: FilesApiGetReferenceDataRequest = {}, options?: RawAxiosRequestConfig) {
         return FilesApiFp(this.configuration).getReferenceData(requestParameters.getReferenceDataDtoInteger, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the status of the XLSX report generation task for the specified form.
+     * @summary Get XLSX report generation status
+     * @param {FilesFilesApiGetXlsxRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesApi
+     */
+    public getXlsx(requestParameters: FilesApiGetXlsxRequest, options?: RawAxiosRequestConfig) {
+        return FilesApiFp(this.configuration).getXlsx(requestParameters.fileId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

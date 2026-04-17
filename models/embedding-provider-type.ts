@@ -27,7 +27,7 @@ export const EmbeddingProviderType = {
     None: 0,
     OpenAi: 1,
     OpenRouter: 2,
-    PortalAi: 3
+    PortalAi: 3,
 } as const;
 
 export type EmbeddingProviderType = typeof EmbeddingProviderType[keyof typeof EmbeddingProviderType];

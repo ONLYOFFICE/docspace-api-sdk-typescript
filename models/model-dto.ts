@@ -23,6 +23,9 @@
 import type { AiChatPrice } from './ai-chat-price';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { AiModelCapabilities } from './ai-model-capabilities';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { CurrencyInfo } from './currency-info';
 
 /**
@@ -41,6 +44,11 @@ export interface ModelDto {
      * The model identifier as recognized by the AI provider (e.g., gpt-4o, claude-sonnet-4-20250514).
      */
     'modelId': string | null;
+    /**
+     * The display name for the model.
+     */
+    'alias'?: string | null;
+    'capabilities'?: AiModelCapabilities;
     'price'?: AiChatPrice;
     'currency'?: CurrencyInfo;
 }

@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **providerId** | **number** | AI provider identifier. | [optional] [default to undefined]
 **defaultModel** | **string** | Default model identifier used with this provider. | [default to undefined]
 **providerTitle** | **string** | AI provider title. | [optional] [default to undefined]
+**providerType** | [**ProviderType**](ProviderType.md) |  | [optional] [default to undefined]
+**defaultModelAlias** | **string** | Display alias of the default model. | [optional] [default to undefined]
 
 ## Example
 
@@ -19,6 +21,8 @@ const instance: DefaultProviderDto = {
     providerId,
     defaultModel,
     providerTitle,
+    providerType,
+    defaultModelAlias,
 };
 ```
 

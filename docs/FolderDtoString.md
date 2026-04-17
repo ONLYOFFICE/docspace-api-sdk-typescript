@@ -26,7 +26,6 @@ Name | Type | Description | Notes
 **providerId** | **number** | The provider ID of the file entry. | [optional] [default to undefined]
 **order** | **string** | The order of the file entry. | [optional] [default to undefined]
 **isFavorite** | **boolean** | Specifies if the file is a favorite or not. | [optional] [default to undefined]
-**fileEntryType** | [**FileEntryType**](FileEntryType.md) |  | [optional] [default to undefined]
 **id** | **string** | The file entry ID. | [optional] [default to undefined]
 **rootFolderId** | **string** | The root folder ID of the file entry. | [optional] [default to undefined]
 **originId** | **string** | The origin ID of the file entry. | [optional] [default to undefined]
@@ -34,9 +33,9 @@ Name | Type | Description | Notes
 **originTitle** | **string** | The origin title of the file entry. | [optional] [default to undefined]
 **originRoomTitle** | **string** | The origin room title of the file entry. | [optional] [default to undefined]
 **canShare** | **boolean** | Specifies if the file entry can be shared or not. | [optional] [default to undefined]
-**shareSettings** | [**FileEntryDtoIntegerAllOfShareSettings**](FileEntryDtoIntegerAllOfShareSettings.md) |  | [optional] [default to undefined]
-**security** | [**FileEntryDtoIntegerAllOfSecurity**](FileEntryDtoIntegerAllOfSecurity.md) |  | [optional] [default to undefined]
-**availableShareRights** | [**FileEntryDtoIntegerAllOfAvailableShareRights**](FileEntryDtoIntegerAllOfAvailableShareRights.md) |  | [optional] [default to undefined]
+**shareSettings** | [**FolderDtoIntegerShareSettings**](FolderDtoIntegerShareSettings.md) |  | [optional] [default to undefined]
+**security** | [**FolderDtoIntegerSecurity**](FolderDtoIntegerSecurity.md) |  | [optional] [default to undefined]
+**availableShareRights** | [**FolderDtoIntegerAvailableShareRights**](FolderDtoIntegerAvailableShareRights.md) |  | [optional] [default to undefined]
 **requestToken** | **string** | The request token of the file entry. | [optional] [default to undefined]
 **external** | **boolean** | Specifies if the folder can be accessed via an external link or not. | [optional] [default to undefined]
 **expirationDate** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
@@ -63,6 +62,7 @@ Name | Type | Description | Notes
 **usedSpace** | **number** | How much folder space is used (counter). | [optional] [default to undefined]
 **passwordProtected** | **boolean** | Specifies if the folder is password protected or not. | [optional] [default to undefined]
 **expired** | **boolean** | Specifies if an external link to the folder is expired or not. | [optional] [default to undefined]
+**fileEntryType** | [**FileEntryType**](FileEntryType.md) |  | [optional] [default to undefined]
 **chatSettings** | [**ChatSettingsDto**](ChatSettingsDto.md) |  | [optional] [default to undefined]
 **rootRoomType** | [**RoomType**](RoomType.md) |  | [optional] [default to undefined]
 **saveFormAsXLSX** | **boolean** | Specifies whether to save form data as XLSX file. | [optional] [default to undefined]
@@ -94,7 +94,6 @@ const instance: FolderDtoString = {
     providerId,
     order,
     isFavorite,
-    fileEntryType,
     id,
     rootFolderId,
     originId,
@@ -131,6 +130,7 @@ const instance: FolderDtoString = {
     usedSpace,
     passwordProtected,
     expired,
+    fileEntryType,
     chatSettings,
     rootRoomType,
     saveFormAsXLSX,

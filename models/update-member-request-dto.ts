@@ -20,13 +20,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ApiDateTime } from './api-date-time';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { Contact } from './contact';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { SexEnum } from './sex-enum';
 
 /**
  * The request parameters for updating the user information.
@@ -61,16 +55,9 @@ export interface UpdateMemberRequestDto {
      */
     'department'?: Array<string> | null;
     /**
-     * The user title.
-     */
-    'title'?: string | null;
-    /**
      * The user location.
      */
     'location'?: string | null;
-    'sex'?: SexEnum;
-    'birthday'?: ApiDateTime;
-    'worksfrom'?: ApiDateTime;
     /**
      * The user comment.
      */
@@ -88,6 +75,4 @@ export interface UpdateMemberRequestDto {
      */
     'spam'?: boolean | null;
 }
-
-
 

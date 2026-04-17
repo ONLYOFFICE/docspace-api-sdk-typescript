@@ -28,7 +28,7 @@ export const OperationStatus = {
     Pending: 1,
     Completed: 2,
     Rejected: 4,
-    Canceled: 8
+    Canceled: 8,
 } as const;
 
 export type OperationStatus = typeof OperationStatus[keyof typeof OperationStatus];

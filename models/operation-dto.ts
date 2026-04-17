@@ -67,5 +67,13 @@ export interface OperationDto {
      * The participant display name.
      */
     'participantDisplayName'?: string | null;
+    /**
+     * AI Agent id.
+     */
+    'agentId'?: string | null;
+    /**
+     * AI Agent name.
+     */
+    'agentTitle'?: string | null;
 }
 

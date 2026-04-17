@@ -27,7 +27,7 @@ export const ProductType = {
     Documents: 2,
     Login: 3,
     Settings: 7,
-    Contacts: 8
+    Contacts: 8,
 } as const;
 
 export type ProductType = typeof ProductType[keyof typeof ProductType];

@@ -25,7 +25,7 @@
 
 export const RoomSecurityError = {
     None: 0,
-    FormRoleBlockingDeletion: 1
+    FormRoleBlockingDeletion: 1,
 } as const;
 
 export type RoomSecurityError = typeof RoomSecurityError[keyof typeof RoomSecurityError];

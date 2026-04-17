@@ -32,10 +32,6 @@ export interface EmployeeDto {
      */
     'displayName'?: string | null;
     /**
-     * The user title.
-     */
-    'title'?: string | null;
-    /**
      * The user avatar.
      */
     'avatar'?: string | null;

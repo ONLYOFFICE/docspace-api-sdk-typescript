@@ -27,7 +27,7 @@ export const EncryprtionStatus = {
     Decrypted: 0,
     EncryptionStarted: 1,
     Encrypted: 2,
-    DecryptionStarted: 3
+    DecryptionStarted: 3,
 } as const;
 
 export type EncryprtionStatus = typeof EncryprtionStatus[keyof typeof EncryprtionStatus];

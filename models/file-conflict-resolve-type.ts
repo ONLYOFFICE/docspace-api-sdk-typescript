@@ -26,7 +26,7 @@
 export const FileConflictResolveType = {
     Skip: 'Skip',
     Overwrite: 'Overwrite',
-    Duplicate: 'Duplicate'
+    Duplicate: 'Duplicate',
 } as const;
 
 export type FileConflictResolveType = typeof FileConflictResolveType[keyof typeof FileConflictResolveType];

@@ -26,7 +26,7 @@
 export const PaymentMethodStatus = {
     None: 0,
     Set: 1,
-    Expired: 2
+    Expired: 2,
 } as const;
 
 export type PaymentMethodStatus = typeof PaymentMethodStatus[keyof typeof PaymentMethodStatus];

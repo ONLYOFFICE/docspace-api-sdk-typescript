@@ -31,7 +31,7 @@ export const ShareFilterType = {
     PrimaryExternalLink: 8,
     Link: 15,
     User: 16,
-    Group: 32
+    Group: 32,
 } as const;
 
 export type ShareFilterType = typeof ShareFilterType[keyof typeof ShareFilterType];

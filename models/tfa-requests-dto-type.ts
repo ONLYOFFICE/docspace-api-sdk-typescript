@@ -26,7 +26,7 @@
 export const TfaRequestsDtoType = {
     None: 0,
     Sms: 1,
-    App: 2
+    App: 2,
 } as const;
 
 export type TfaRequestsDtoType = typeof TfaRequestsDtoType[keyof typeof TfaRequestsDtoType];

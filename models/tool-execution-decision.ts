@@ -26,7 +26,7 @@
 export const ToolExecutionDecision = {
     Allow: 0,
     AlwaysAllow: 1,
-    Deny: 2
+    Deny: 2,
 } as const;
 
 export type ToolExecutionDecision = typeof ToolExecutionDecision[keyof typeof ToolExecutionDecision];

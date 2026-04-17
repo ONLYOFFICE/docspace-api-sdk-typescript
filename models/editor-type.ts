@@ -26,7 +26,7 @@
 export const EditorType = {
     Desktop: 0,
     Mobile: 1,
-    Embedded: 2
+    Embedded: 2,
 } as const;
 
 export type EditorType = typeof EditorType[keyof typeof EditorType];

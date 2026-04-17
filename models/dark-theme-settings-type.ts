@@ -26,7 +26,7 @@
 export const DarkThemeSettingsType = {
     Base: 'Base',
     Dark: 'Dark',
-    System: 'System'
+    System: 'System',
 } as const;
 
 export type DarkThemeSettingsType = typeof DarkThemeSettingsType[keyof typeof DarkThemeSettingsType];

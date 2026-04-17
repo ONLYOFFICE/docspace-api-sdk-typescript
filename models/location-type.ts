@@ -31,7 +31,7 @@ export const LocationType = {
     Rooms: 27,
     Settings: 29,
     Contacts: 30,
-    Agents: 31
+    Agents: 31,
 } as const;
 
 export type LocationType = typeof LocationType[keyof typeof LocationType];

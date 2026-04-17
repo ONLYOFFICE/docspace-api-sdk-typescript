@@ -29,7 +29,7 @@ export const FormFillingStatus = {
     YouTurn: 2,
     InProgress: 3,
     Complete: 4,
-    Stoped: 5
+    Stoped: 5,
 } as const;
 
 export type FormFillingStatus = typeof FormFillingStatus[keyof typeof FormFillingStatus];

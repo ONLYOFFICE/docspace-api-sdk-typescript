@@ -30,7 +30,7 @@ import type { ChatWrapper } from '../../models';
 // @ts-ignore
 import type { ContinueChatBody } from '../../models';
 // @ts-ignore
-import type { ExportChatRequestBodyInteger } from '../../models';
+import type { ExportChatRequestBody } from '../../models';
 // @ts-ignore
 import type { MessageArrayWrapper } from '../../models';
 // @ts-ignore
@@ -175,17 +175,17 @@ export const ChatApiAxiosParamCreator = function (configuration?: Configuration)
          * Exports the entire message history of an AI chat session and saves it as a document in the specified folder.  The exported file is created with the provided title. Only the chat owner can export their own chat sessions.
          * @summary Export AI chat messages to a file
          * @param {string} chatId The unique identifier of the AI chat session to export.
-         * @param {ExportChatRequestBodyInteger} exportChatRequestBodyInteger The export parameters including destination folder and file title.
+         * @param {ExportChatRequestBody} exportChatRequestBody The export parameters including destination folder and file title.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for exportChat operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/export-chat/
          */
-        exportChat: async (chatId: string, exportChatRequestBodyInteger: ExportChatRequestBodyInteger, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        exportChat: async (chatId: string, exportChatRequestBody: ExportChatRequestBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'chatId' is not null or undefined
             assertParamExists('exportChat', 'chatId', chatId)
-            // verify required parameter 'exportChatRequestBodyInteger' is not null or undefined
-            assertParamExists('exportChat', 'exportChatRequestBodyInteger', exportChatRequestBodyInteger)
+            // verify required parameter 'exportChatRequestBody' is not null or undefined
+            assertParamExists('exportChat', 'exportChatRequestBody', exportChatRequestBody)
 
             const localVarPath = `/api/2.0/ai/chats/{chatId}/messages/export`
                 .replace(`{${"chatId"}}`, encodeURIComponent(String(chatId)));
@@ -226,7 +226,7 @@ export const ChatApiAxiosParamCreator = function (configuration?: Configuration)
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(exportChatRequestBodyInteger, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(exportChatRequestBody, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -827,14 +827,14 @@ export const ChatApiFp = function(configuration?: Configuration) {
          * Exports the entire message history of an AI chat session and saves it as a document in the specified folder.  The exported file is created with the provided title. Only the chat owner can export their own chat sessions.
          * @summary Export AI chat messages to a file
          * @param {string} chatId The unique identifier of the AI chat session to export.
-         * @param {ExportChatRequestBodyInteger} exportChatRequestBodyInteger The export parameters including destination folder and file title.
+         * @param {ExportChatRequestBody} exportChatRequestBody The export parameters including destination folder and file title.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for exportChat operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/export-chat/
          */
-        async exportChat(chatId: string, exportChatRequestBodyInteger: ExportChatRequestBodyInteger, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.exportChat(chatId, exportChatRequestBodyInteger, options);
+        async exportChat(chatId: string, exportChatRequestBody: ExportChatRequestBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.exportChat(chatId, exportChatRequestBody, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ChatApi.exportChat']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1026,7 +1026,7 @@ export const ChatApiFactory = function (configuration?: Configuration, basePath?
          * @throws {RequiredError}
          */
         exportChat(requestParameters: ChatApiExportChatRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.exportChat(requestParameters.chatId, requestParameters.exportChatRequestBodyInteger, options).then((request) => request(axios, basePath));
+            return localVarFp.exportChat(requestParameters.chatId, requestParameters.exportChatRequestBody, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieves the metadata of a single AI chat session, including its title, creation date, and the user who created it.  Only the chat owner can access their own chat sessions.
@@ -1189,10 +1189,10 @@ export interface ChatApiExportChatRequest {
 
     /**
      * The export parameters including destination folder and file title.
-     * @type {ExportChatRequestBodyInteger}
+     * @type {ExportChatRequestBody}
      * @memberof ChatApiExportChat
      */
-    readonly exportChatRequestBodyInteger: ExportChatRequestBodyInteger
+    readonly exportChatRequestBody: ExportChatRequestBody
 }
 
 /**
@@ -1417,7 +1417,7 @@ export class ChatApi extends BaseAPI {
      * @memberof ChatApi
      */
     public exportChat(requestParameters: ChatApiExportChatRequest, options?: RawAxiosRequestConfig) {
-        return ChatApiFp(this.configuration).exportChat(requestParameters.chatId, requestParameters.exportChatRequestBodyInteger, options).then((request) => request(this.axios, this.basePath));
+        return ChatApiFp(this.configuration).exportChat(requestParameters.chatId, requestParameters.exportChatRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

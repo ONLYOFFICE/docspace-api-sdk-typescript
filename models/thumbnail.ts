@@ -28,7 +28,7 @@ export const Thumbnail = {
     Created: 1,
     Error: 2,
     NotRequired: 3,
-    Creating: 4
+    Creating: 4,
 } as const;
 
 export type Thumbnail = typeof Thumbnail[keyof typeof Thumbnail];

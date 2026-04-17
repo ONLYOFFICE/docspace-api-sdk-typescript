@@ -44,7 +44,7 @@ export const FilterType = {
     PdfForm: 23,
     VirtualDataRooms: 24,
     DiagramsOnly: 25,
-    AiRooms: 26
+    AiRooms: 26,
 } as const;
 
 export type FilterType = typeof FilterType[keyof typeof FilterType];

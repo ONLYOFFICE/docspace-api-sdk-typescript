@@ -26,7 +26,7 @@
 export const ApplyFilterOption = {
     All: 0,
     Files: 1,
-    Folders: 2
+    Folders: 2,
 } as const;
 
 export type ApplyFilterOption = typeof ApplyFilterOption[keyof typeof ApplyFilterOption];

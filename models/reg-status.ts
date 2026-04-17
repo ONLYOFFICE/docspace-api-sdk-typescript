@@ -26,7 +26,7 @@
 export const RegStatus = {
     unlinked: 0,
     linked: 1,
-    linking: 2
+    linking: 2,
 } as const;
 
 export type RegStatus = typeof RegStatus[keyof typeof RegStatus];

@@ -31,7 +31,7 @@ export const SearchArea = {
     Templates: 4,
     Knowledge: 5,
     ResultStorage: 6,
-    AiAgents: 7
+    AiAgents: 7,
 } as const;
 
 export type SearchArea = typeof SearchArea[keyof typeof SearchArea];

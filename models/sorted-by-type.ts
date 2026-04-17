@@ -36,7 +36,7 @@ export const SortedByType = {
     Room: 9,
     CustomOrder: 10,
     LastOpened: 11,
-    UsedSpace: 12
+    UsedSpace: 12,
 } as const;
 
 export type SortedByType = typeof SortedByType[keyof typeof SortedByType];

@@ -25,7 +25,7 @@
 
 export const SortOrder = {
     Ascending: 0,
-    Descending: 1
+    Descending: 1,
 } as const;
 
 export type SortOrder = typeof SortOrder[keyof typeof SortOrder];

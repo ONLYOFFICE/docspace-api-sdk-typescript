@@ -26,7 +26,7 @@
 export const QuotaFilter = {
     All: 0,
     Default: 1,
-    Custom: 2
+    Custom: 2,
 } as const;
 
 export type QuotaFilter = typeof QuotaFilter[keyof typeof QuotaFilter];

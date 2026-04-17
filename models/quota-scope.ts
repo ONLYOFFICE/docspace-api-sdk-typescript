@@ -26,7 +26,7 @@
 export const QuotaScope = {
     User: 0,
     Room: 1,
-    Tenant: 2
+    Tenant: 2,
 } as const;
 
 export type QuotaScope = typeof QuotaScope[keyof typeof QuotaScope];

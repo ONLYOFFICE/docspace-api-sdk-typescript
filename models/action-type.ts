@@ -43,7 +43,7 @@ export const ActionType = {
     Reassigns: 16,
     Follow: 17,
     Unfollow: 18,
-    Logout: 19
+    Logout: 19,
 } as const;
 
 export type ActionType = typeof ActionType[keyof typeof ActionType];

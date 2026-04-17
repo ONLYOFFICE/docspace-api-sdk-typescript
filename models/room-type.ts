@@ -29,7 +29,7 @@ export const RoomType = {
     CustomRoom: 5,
     PublicRoom: 6,
     VirtualDataRoom: 8,
-    AiRoom: 9
+    AiRoom: 9,
 } as const;
 
 export type RoomType = typeof RoomType[keyof typeof RoomType];

@@ -27,7 +27,7 @@ export const NotificationType = {
     Badges: 0,
     RoomsActivity: 1,
     DailyFeed: 2,
-    UsefullTips: 3
+    UsefullTips: 3,
 } as const;
 
 export type NotificationType = typeof NotificationType[keyof typeof NotificationType];

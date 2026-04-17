@@ -29,7 +29,7 @@ export const DateToAutoCleanUp = {
     OneMonth: 3,
     ThirtyDays: 4,
     TwoMonths: 5,
-    ThreeMonths: 6
+    ThreeMonths: 6,
 } as const;
 
 export type DateToAutoCleanUp = typeof DateToAutoCleanUp[keyof typeof DateToAutoCleanUp];

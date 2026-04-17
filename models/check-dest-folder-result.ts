@@ -26,7 +26,7 @@
 export const CheckDestFolderResult = {
     AllAllowed: 0,
     PartAllowed: 1,
-    NoneAllowed: 2
+    NoneAllowed: 2,
 } as const;
 
 export type CheckDestFolderResult = typeof CheckDestFolderResult[keyof typeof CheckDestFolderResult];

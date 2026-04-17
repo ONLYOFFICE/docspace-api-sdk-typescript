@@ -18,14 +18,11 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ErrorResponseError } from './error-response-error';
 
-/**
- * The error response containing the human-readable error explanation.
- */
 export interface ErrorResponse {
-    /**
-     * The human-readable error explanation.
-     */
-    'reason'?: string;
+    'error'?: ErrorResponseError;
 }
 

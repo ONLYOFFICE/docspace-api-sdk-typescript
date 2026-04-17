@@ -25,7 +25,7 @@
 
 export const OperationOrderType = {
     Descending: 0,
-    Ascending: 1
+    Ascending: 1,
 } as const;
 
 export type OperationOrderType = typeof OperationOrderType[keyof typeof OperationOrderType];

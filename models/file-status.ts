@@ -33,7 +33,7 @@ export const FileStatus = {
     IsFavorite: 32,
     IsTemplate: 64,
     IsFillFormDraft: 128,
-    IsCompletedForm: 256
+    IsCompletedForm: 256,
 } as const;
 
 export type FileStatus = typeof FileStatus[keyof typeof FileStatus];

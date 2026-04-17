@@ -25,7 +25,7 @@
 
 export const SubjectFilter = {
     Owner: 0,
-    Member: 1
+    Member: 1,
 } as const;
 
 export type SubjectFilter = typeof SubjectFilter[keyof typeof SubjectFilter];

@@ -27,7 +27,7 @@ export const MessageContentType = {
     Text: 0,
     Tool: 1,
     Attachment: 2,
-    Data: 3
+    Data: 3,
 } as const;
 
 export type MessageContentType = typeof MessageContentType[keyof typeof MessageContentType];

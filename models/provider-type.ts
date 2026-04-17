@@ -32,7 +32,7 @@ export const ProviderType = {
     OpenRouter: 5,
     DeepSeek: 6,
     XAi: 7,
-    GoogleAi: 8
+    GoogleAi: 8,
 } as const;
 
 export type ProviderType = typeof ProviderType[keyof typeof ProviderType];

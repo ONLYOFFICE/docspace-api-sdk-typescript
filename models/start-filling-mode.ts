@@ -27,7 +27,7 @@ export const StartFillingMode = {
     None: 0,
     ShareToFillOut: 1,
     StartFilling: 2,
-    StartFillingFormRoom: 3
+    StartFillingFormRoom: 3,
 } as const;
 
 export type StartFillingMode = typeof StartFillingMode[keyof typeof StartFillingMode];

@@ -33,7 +33,7 @@ export const FileType = {
     Presentation: 6,
     Document: 7,
     Pdf: 10,
-    Diagram: 11
+    Diagram: 11,
 } as const;
 
 export type FileType = typeof FileType[keyof typeof FileType];

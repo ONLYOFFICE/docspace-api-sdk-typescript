@@ -81,18 +81,6 @@ export type EmployeeFullDto = EmployeeDto &  {
     'contacts'?: Array<Contact> | null;
     /**
      * 
-     * @type {ApiDateTime}
-     * @memberof EmployeeFullDto
-     */
-    'birthday'?: ApiDateTime;
-    /**
-     * The user sex.
-     * @type {string}
-     * @memberof EmployeeFullDto
-     */
-    'sex'?: string | null;
-    /**
-     * 
      * @type {EmployeeStatus}
      * @memberof EmployeeFullDto
      */
@@ -115,12 +103,6 @@ export type EmployeeFullDto = EmployeeDto &  {
      * @memberof EmployeeFullDto
      */
     'department'?: string | null;
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof EmployeeFullDto
-     */
-    'workFrom'?: ApiDateTime;
     /**
      * The list of user groups.
      * @type {Array<GroupSummaryDto>}

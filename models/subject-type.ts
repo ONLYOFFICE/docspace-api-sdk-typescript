@@ -28,7 +28,7 @@ export const SubjectType = {
     ExternalLink: 1,
     Group: 2,
     InvitationLink: 3,
-    PrimaryExternalLink: 4
+    PrimaryExternalLink: 4,
 } as const;
 
 export type SubjectType = typeof SubjectType[keyof typeof SubjectType];

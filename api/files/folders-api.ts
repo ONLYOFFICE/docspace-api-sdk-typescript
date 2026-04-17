@@ -75,6 +75,8 @@ import type { SortOrder } from '../../models';
 import type { StringWrapper } from '../../models';
 // @ts-ignore
 import type { UploadRequestDto } from '../../models';
+// @ts-ignore
+import type { XlsxReportResponseWrapper } from '../../models';
 /**
  * FoldersApi - axios parameter creator
  * @export
@@ -2250,7 +2252,7 @@ export const FoldersApiFp = function(configuration?: Configuration) {
          * REST API Reference for generateXlsxByFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/generate-xlsx-by-folder/
          */
-        async generateXlsxByFolder(folderId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerWrapper>> {
+        async generateXlsxByFolder(folderId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<XlsxReportResponseWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.generateXlsxByFolder(folderId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.generateXlsxByFolder']?.[localVarOperationServerIndex]?.url;
@@ -2771,7 +2773,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/generate-xlsx-by-folder/
          * @throws {RequiredError}
          */
-        generateXlsxByFolder(requestParameters: FoldersApiGenerateXlsxByFolderRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
+        generateXlsxByFolder(requestParameters: FoldersApiGenerateXlsxByFolderRequest, options?: RawAxiosRequestConfig): AxiosPromise<XlsxReportResponseWrapper> {
             return localVarFp.generateXlsxByFolder(requestParameters.folderId, options).then((request) => request(axios, basePath));
         },
         /**

@@ -55,7 +55,7 @@ export const WebhookTrigger = {
     RoomCopied: 134217728,
     FormSubmit: 268435456,
     FormFilledOut: 536870912,
-    FormStopped: 1073741824
+    FormStopped: 1073741824,
 } as const;
 
 export type WebhookTrigger = typeof WebhookTrigger[keyof typeof WebhookTrigger];

@@ -27,7 +27,7 @@ export const RecaptchaType = {
     Default: 0,
     AndroidV2: 1,
     iOSV2: 2,
-    hCaptcha: 3
+    hCaptcha: 3,
 } as const;
 
 export type RecaptchaType = typeof RecaptchaType[keyof typeof RecaptchaType];

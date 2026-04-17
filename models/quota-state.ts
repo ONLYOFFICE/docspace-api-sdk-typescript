@@ -25,7 +25,7 @@
 
 export const QuotaState = {
     Active: 0,
-    Overdue: 1
+    Overdue: 1,
 } as const;
 
 export type QuotaState = typeof QuotaState[keyof typeof QuotaState];

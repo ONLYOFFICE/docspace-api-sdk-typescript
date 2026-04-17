@@ -27,7 +27,7 @@ export const TariffState = {
     Trial: 0,
     Paid: 1,
     Delay: 2,
-    NotPaid: 3
+    NotPaid: 3,
 } as const;
 
 export type TariffState = typeof TariffState[keyof typeof TariffState];

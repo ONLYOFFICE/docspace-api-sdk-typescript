@@ -52,7 +52,7 @@ export const FolderType = {
     Knowledge: 32,
     ResultStorage: 33,
     AiAgents: 34,
-    DefaultTemplates: 35
+    DefaultTemplates: 35,
 } as const;
 
 export type FolderType = typeof FolderType[keyof typeof FolderType];

@@ -26,7 +26,7 @@
 export const VectorizationStatus = {
     InProgress: 0,
     Completed: 1,
-    Failed: 2
+    Failed: 2,
 } as const;
 
 export type VectorizationStatus = typeof VectorizationStatus[keyof typeof VectorizationStatus];

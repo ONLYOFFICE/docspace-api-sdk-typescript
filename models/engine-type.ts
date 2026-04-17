@@ -26,7 +26,7 @@
 export const EngineType = {
     None: 0,
     Exa: 1,
-    PortalAi: 2
+    PortalAi: 2,
 } as const;
 
 export type EngineType = typeof EngineType[keyof typeof EngineType];

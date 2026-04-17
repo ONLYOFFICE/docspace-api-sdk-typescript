@@ -25,7 +25,7 @@
 
 export const CoEditingConfigMode = {
     Fast: 0,
-    Strict: 1
+    Strict: 1,
 } as const;
 
 export type CoEditingConfigMode = typeof CoEditingConfigMode[keyof typeof CoEditingConfigMode];

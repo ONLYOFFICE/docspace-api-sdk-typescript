@@ -27,7 +27,7 @@ export const FormFillingManageAction = {
     Stop: 0,
     Resume: 1,
     Start: 2,
-    Edit: 3
+    Edit: 3,
 } as const;
 
 export type FormFillingManageAction = typeof FormFillingManageAction[keyof typeof FormFillingManageAction];

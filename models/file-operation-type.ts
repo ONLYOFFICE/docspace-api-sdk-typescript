@@ -31,7 +31,7 @@ export const FileOperationType = {
     MarkAsRead: 4,
     Import: 5,
     Convert: 6,
-    Duplicate: 7
+    Duplicate: 7,
 } as const;
 
 export type FileOperationType = typeof FileOperationType[keyof typeof FileOperationType];

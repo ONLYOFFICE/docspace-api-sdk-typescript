@@ -42,7 +42,7 @@ export const OperationType = {
     BankWithdrawal: 16384,
     GoodwillCredit: 32768,
     WriteOffProfit: 65536,
-    WriteOffDifferenceCurrency: 131072
+    WriteOffDifferenceCurrency: 131072,
 } as const;
 
 export type OperationType = typeof OperationType[keyof typeof OperationType];

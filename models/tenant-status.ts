@@ -30,7 +30,7 @@ export const TenantStatus = {
     Transfering: 3,
     Restoring: 4,
     Migrating: 5,
-    Encryption: 6
+    Encryption: 6,
 } as const;
 
 export type TenantStatus = typeof TenantStatus[keyof typeof TenantStatus];

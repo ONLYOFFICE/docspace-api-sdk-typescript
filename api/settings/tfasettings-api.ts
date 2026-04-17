@@ -26,11 +26,11 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { BooleanWrapper } from '../../models';
 // @ts-ignore
-import type { ObjectArrayWrapper } from '../../models';
-// @ts-ignore
 import type { SetupCodeWrapper } from '../../models';
 // @ts-ignore
 import type { StringWrapper } from '../../models';
+// @ts-ignore
+import type { TfaAppCodeArrayWrapper } from '../../models';
 // @ts-ignore
 import type { TfaRequestsDto } from '../../models';
 // @ts-ignore
@@ -98,8 +98,8 @@ export const TFASettingsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Returns the confirmation email URL for authorization via SMS or TFA application.
-         * @summary Get confirmation email
+         * Returns the confirmation URL for authorization via SMS or TFA application.
+         * @summary Get TFA confirmation URL
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getTfaConfirmUrl operation
@@ -474,8 +474,8 @@ export const TFASettingsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Returns the confirmation email URL for updating TFA settings.
-         * @summary Get a confirmation email for updating TFA settings
+         * Updates TFA settings and returns the confirmation URL for authorization via SMS or TFA application.
+         * @summary Updates TFA settings
          * @param {TfaRequestsDto} [tfaRequestsDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -547,15 +547,15 @@ export const TFASettingsApiFp = function(configuration?: Configuration) {
          * REST API Reference for getTfaAppCodes operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tfa-app-codes/
          */
-        async getTfaAppCodes(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectArrayWrapper>> {
+        async getTfaAppCodes(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TfaAppCodeArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTfaAppCodes(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TFASettingsApi.getTfaAppCodes']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the confirmation email URL for authorization via SMS or TFA application.
-         * @summary Get confirmation email
+         * Returns the confirmation URL for authorization via SMS or TFA application.
+         * @summary Get TFA confirmation URL
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getTfaConfirmUrl operation
@@ -633,7 +633,7 @@ export const TFASettingsApiFp = function(configuration?: Configuration) {
          * REST API Reference for updateTfaAppCodes operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-tfa-app-codes/
          */
-        async updateTfaAppCodes(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectArrayWrapper>> {
+        async updateTfaAppCodes(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TfaAppCodeArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateTfaAppCodes(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TFASettingsApi.updateTfaAppCodes']?.[localVarOperationServerIndex]?.url;
@@ -655,8 +655,8 @@ export const TFASettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the confirmation email URL for updating TFA settings.
-         * @summary Get a confirmation email for updating TFA settings
+         * Updates TFA settings and returns the confirmation URL for authorization via SMS or TFA application.
+         * @summary Updates TFA settings
          * @param {TfaRequestsDto} [tfaRequestsDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -687,12 +687,12 @@ export const TFASettingsApiFactory = function (configuration?: Configuration, ba
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tfa-app-codes/
          * @throws {RequiredError}
          */
-        getTfaAppCodes(options?: RawAxiosRequestConfig): AxiosPromise<ObjectArrayWrapper> {
+        getTfaAppCodes(options?: RawAxiosRequestConfig): AxiosPromise<TfaAppCodeArrayWrapper> {
             return localVarFp.getTfaAppCodes(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the confirmation email URL for authorization via SMS or TFA application.
-         * @summary Get confirmation email
+         * Returns the confirmation URL for authorization via SMS or TFA application.
+         * @summary Get TFA confirmation URL
          * @param {*} [options] Override http request option.
          * REST API Reference for getTfaConfirmUrl operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tfa-confirm-url/
@@ -755,7 +755,7 @@ export const TFASettingsApiFactory = function (configuration?: Configuration, ba
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-tfa-app-codes/
          * @throws {RequiredError}
          */
-        updateTfaAppCodes(options?: RawAxiosRequestConfig): AxiosPromise<ObjectArrayWrapper> {
+        updateTfaAppCodes(options?: RawAxiosRequestConfig): AxiosPromise<TfaAppCodeArrayWrapper> {
             return localVarFp.updateTfaAppCodes(options).then((request) => request(axios, basePath));
         },
         /**
@@ -771,8 +771,8 @@ export const TFASettingsApiFactory = function (configuration?: Configuration, ba
             return localVarFp.updateTfaSettings(requestParameters.tfaRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the confirmation email URL for updating TFA settings.
-         * @summary Get a confirmation email for updating TFA settings
+         * Updates TFA settings and returns the confirmation URL for authorization via SMS or TFA application.
+         * @summary Updates TFA settings
          * @param {TFASettingsApiUpdateTfaSettingsLinkRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateTfaSettingsLink operation
@@ -860,8 +860,8 @@ export class TFASettingsApi extends BaseAPI {
     }
 
     /**
-     * Returns the confirmation email URL for authorization via SMS or TFA application.
-     * @summary Get confirmation email
+     * Returns the confirmation URL for authorization via SMS or TFA application.
+     * @summary Get TFA confirmation URL
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TFASettingsApi
@@ -940,8 +940,8 @@ export class TFASettingsApi extends BaseAPI {
     }
 
     /**
-     * Returns the confirmation email URL for updating TFA settings.
-     * @summary Get a confirmation email for updating TFA settings
+     * Updates TFA settings and returns the confirmation URL for authorization via SMS or TFA application.
+     * @summary Updates TFA settings
      * @param {SettingsTFASettingsApiUpdateTfaSettingsLinkRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

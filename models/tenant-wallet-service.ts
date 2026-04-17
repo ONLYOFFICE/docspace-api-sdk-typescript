@@ -26,7 +26,7 @@
 export const TenantWalletService = {
     AITools: -13,
     Backup: -12,
-    Storage: -11
+    Storage: -11,
 } as const;
 
 export type TenantWalletService = typeof TenantWalletService[keyof typeof TenantWalletService];

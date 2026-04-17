@@ -28,7 +28,7 @@ export const ChatReasoningEffort = {
     Low: 1,
     Medium: 2,
     High: 3,
-    XHigh: 4
+    XHigh: 4,
 } as const;
 
 export type ChatReasoningEffort = typeof ChatReasoningEffort[keyof typeof ChatReasoningEffort];

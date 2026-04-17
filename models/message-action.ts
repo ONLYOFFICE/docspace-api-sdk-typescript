@@ -356,7 +356,7 @@ export const MessageAction = {
     RevokeUserClient: 9907,
     GenerateAuthorizationCodeToken: 9908,
     GeneratePersonalAccessToken: 9909,
-    None: -1
+    None: -1,
 } as const;
 
 export type MessageAction = typeof MessageAction[keyof typeof MessageAction];

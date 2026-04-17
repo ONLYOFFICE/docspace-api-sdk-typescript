@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
  * (c) Copyright Ascensio System SIA 2026
@@ -16,39 +18,27 @@
  *
  */
 import axios from "axios";
-import { Configuration, RoomsApi, AuthenticationApi, FoldersApi } from "../dist/index";
+import { Configuration, RoomsApi, AuthenticationApi, FoldersApi, DocSpaceApiError } from "../dist/index";
 
-const baseURL = "https://your-docspace.onlyoffice.com";
-const expectedOrigin = "http://myclient.example.com";
+const baseURL = "http://localhost:8092";
 
 async function main() {
 
     // ---------- AUTH ----------
 
     const config = new Configuration({
-        basePath: baseURL,
-        origin: expectedOrigin
+        basePath: baseURL
     });
 
     const axiosInstance = axios.create();
 
-    // ---------- VERIFY ORIGIN ----------
-    axiosInstance.interceptors.request.use((request) => {
-        const sentOrigin = request.headers?.["Origin"];
-        if (sentOrigin !== expectedOrigin) {
-            throw new Error(`Origin mismatch: expected "${expectedOrigin}", got "${sentOrigin}"`);
-        }
-        console.log(`Origin header verified: ${sentOrigin}`);
-        return request;
-    });
-
-    const authApi = new AuthenticationApi(config, undefined, axiosInstance);
+    const authApi = new AuthenticationApi(config);
 
     const auth = await authApi.authenticateMe({
-        authRequestsDto: {userName: "example@onlyoffice.com", password: "11111111"}
+        authRequestsDto: {userName: "diana@mail.ru", password: "11111111"}
     });
 
-    const token = auth.data.response.token;
+    const token = auth.data.response?.token;
 
     axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
@@ -57,7 +47,7 @@ async function main() {
     const roomsApi = new RoomsApi(config, undefined, axiosInstance);
 
     const res = await roomsApi.getRoomsFolder({ type: [6,5]});
-    console.log(res.data.response.count);
+    console.log(res.data.response?.count);
     console.log(res.config.headers);
 
     const resCreateRoom = await roomsApi.createRoom({createRoomRequestDto: {title: "example", roomType: 6 }});
@@ -66,10 +56,17 @@ async function main() {
     // ---------- FOLDERS API ----------
 
     const foldersApi = new FoldersApi(config, undefined, axiosInstance);
-    const resFolderMy = await foldersApi.getMyFolder();
 
-    const folderMyId = resFolderMy.data.response.current.id;
-    console.log(folderMyId);
+    try {
+        const resFolderMy = await foldersApi.getMyFolder();
+        const folderMyId = resFolderMy.data.response?.current?.id;
+        console.log(folderMyId);
+    } catch (e) {
+        const err = e as DocSpaceApiError;
+        console.error("DocSpace API error:", err.message);
+        console.error("hresult:", err.hresult);
+        console.error("statusCode:", err.statusCode);
+    }
 }
 
 main();

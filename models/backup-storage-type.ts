@@ -29,7 +29,7 @@ export const BackupStorageType = {
     CustomCloud: 2,
     Local: 3,
     DataStore: 4,
-    ThirdPartyConsumer: 5
+    ThirdPartyConsumer: 5,
 } as const;
 
 export type BackupStorageType = typeof BackupStorageType[keyof typeof BackupStorageType];

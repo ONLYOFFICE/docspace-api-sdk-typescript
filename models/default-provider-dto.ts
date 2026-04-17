@@ -18,6 +18,9 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ProviderType } from './provider-type';
 
 /**
  * Default AI provider information.
@@ -35,5 +38,12 @@ export interface DefaultProviderDto {
      * AI provider title.
      */
     'providerTitle'?: string | null;
+    'providerType'?: ProviderType;
+    /**
+     * Display alias of the default model.
+     */
+    'defaultModelAlias'?: string | null;
 }
+
+
 

@@ -32,6 +32,10 @@ import type { CreateProviderRequestDto } from '../../models';
 // @ts-ignore
 import type { DefaultProviderWrapper } from '../../models';
 // @ts-ignore
+import type { ModelSettingsArrayWrapper } from '../../models';
+// @ts-ignore
+import type { PreviewProviderModelsRequestDto } from '../../models';
+// @ts-ignore
 import type { ProviderSettingsArrayWrapper } from '../../models';
 // @ts-ignore
 import type { RemoveProviderRequestDto } from '../../models';
@@ -267,6 +271,62 @@ export const ProvidersApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
+         * Returns the full list of AI models available from a provider, including both recommended and additional models.  Each model includes its current settings: enabled state, display alias, and capabilities (vision, tool calling, thinking).  Recommended models are enabled by default and their alias and capabilities come from configuration.  Additional models are disabled by default and can be configured by the admin.
+         * @summary Get all models for a provider with their settings
+         * @param {number} providerId The identifier of the AI provider.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getProviderModels operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-provider-models/
+         */
+        getProviderModels: async (providerId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'providerId' is not null or undefined
+            assertParamExists('getProviderModels', 'providerId', providerId)
+
+            const localVarPath = `/api/2.0/ai/providers/{providerId}/models`
+                .replace(`{${"providerId"}}`, encodeURIComponent(String(providerId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns a paginated list of AI providers configured for the current tenant.  Supports pagination via the startIndex and count query parameters. The total number of providers is included in the response metadata.
          * @summary Get AI providers
          * @param {number} [startIndex] The number of items to skip before returning results (zero-based offset). Defaults to 0.
@@ -325,6 +385,62 @@ export const ProvidersApiAxiosParamCreator = function (configuration?: Configura
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Connects to the specified AI provider using the provided credentials and returns the available models  with their default settings. This is used to preview models before saving the provider.  Recommended models are enabled by default with configuration-defined settings.  Additional models are disabled by default with empty capabilities.
+         * @summary Preview models for a new AI provider
+         * @param {PreviewProviderModelsRequestDto} [previewProviderModelsRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for previewProviderModels operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/preview-provider-models/
+         */
+        previewProviderModels: async (previewProviderModelsRequestDto?: PreviewProviderModelsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/ai/providers/models/preview`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(previewProviderModelsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -518,6 +634,21 @@ export const ProvidersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns the full list of AI models available from a provider, including both recommended and additional models.  Each model includes its current settings: enabled state, display alias, and capabilities (vision, tool calling, thinking).  Recommended models are enabled by default and their alias and capabilities come from configuration.  Additional models are disabled by default and can be configured by the admin.
+         * @summary Get all models for a provider with their settings
+         * @param {number} providerId The identifier of the AI provider.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getProviderModels operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-provider-models/
+         */
+        async getProviderModels(providerId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelSettingsArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getProviderModels(providerId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ProvidersApi.getProviderModels']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns a paginated list of AI providers configured for the current tenant.  Supports pagination via the startIndex and count query parameters. The total number of providers is included in the response metadata.
          * @summary Get AI providers
          * @param {number} [startIndex] The number of items to skip before returning results (zero-based offset). Defaults to 0.
@@ -531,6 +662,21 @@ export const ProvidersApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getProviders(startIndex, count, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ProvidersApi.getProviders']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Connects to the specified AI provider using the provided credentials and returns the available models  with their default settings. This is used to preview models before saving the provider.  Recommended models are enabled by default with configuration-defined settings.  Additional models are disabled by default with empty capabilities.
+         * @summary Preview models for a new AI provider
+         * @param {PreviewProviderModelsRequestDto} [previewProviderModelsRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for previewProviderModels operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/preview-provider-models/
+         */
+        async previewProviderModels(previewProviderModelsRequestDto?: PreviewProviderModelsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelSettingsArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.previewProviderModels(previewProviderModelsRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ProvidersApi.previewProviderModels']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -621,6 +767,18 @@ export const ProvidersApiFactory = function (configuration?: Configuration, base
             return localVarFp.getDefaultProvider(options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns the full list of AI models available from a provider, including both recommended and additional models.  Each model includes its current settings: enabled state, display alias, and capabilities (vision, tool calling, thinking).  Recommended models are enabled by default and their alias and capabilities come from configuration.  Additional models are disabled by default and can be configured by the admin.
+         * @summary Get all models for a provider with their settings
+         * @param {ProvidersApiGetProviderModelsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getProviderModels operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-provider-models/
+         * @throws {RequiredError}
+         */
+        getProviderModels(requestParameters: ProvidersApiGetProviderModelsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelSettingsArrayWrapper> {
+            return localVarFp.getProviderModels(requestParameters.providerId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns a paginated list of AI providers configured for the current tenant.  Supports pagination via the startIndex and count query parameters. The total number of providers is included in the response metadata.
          * @summary Get AI providers
          * @param {ProvidersApiGetProvidersRequest} requestParameters Request parameters.
@@ -631,6 +789,18 @@ export const ProvidersApiFactory = function (configuration?: Configuration, base
          */
         getProviders(requestParameters: ProvidersApiGetProvidersRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<AiProviderArrayWrapper> {
             return localVarFp.getProviders(requestParameters.startIndex, requestParameters.count, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Connects to the specified AI provider using the provided credentials and returns the available models  with their default settings. This is used to preview models before saving the provider.  Recommended models are enabled by default with configuration-defined settings.  Additional models are disabled by default with empty capabilities.
+         * @summary Preview models for a new AI provider
+         * @param {ProvidersApiPreviewProviderModelsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for previewProviderModels operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/preview-provider-models/
+         * @throws {RequiredError}
+         */
+        previewProviderModels(requestParameters: ProvidersApiPreviewProviderModelsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelSettingsArrayWrapper> {
+            return localVarFp.previewProviderModels(requestParameters.previewProviderModelsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Sets the default AI provider and model for the current tenant.  The specified provider and model will be used as the default for all new AI chat sessions within the tenant.
@@ -688,6 +858,20 @@ export interface ProvidersApiDeleteProvidersRequest {
 }
 
 /**
+ * Request parameters for getProviderModels operation in ProvidersApi.
+ * @export
+ * @interface ProvidersApiGetProviderModelsRequest
+ */
+export interface ProvidersApiGetProviderModelsRequest {
+    /**
+     * The identifier of the AI provider.
+     * @type {number}
+     * @memberof ProvidersApiGetProviderModels
+     */
+    readonly providerId: number
+}
+
+/**
  * Request parameters for getProviders operation in ProvidersApi.
  * @export
  * @interface ProvidersApiGetProvidersRequest
@@ -706,6 +890,20 @@ export interface ProvidersApiGetProvidersRequest {
      * @memberof ProvidersApiGetProviders
      */
     readonly count?: number
+}
+
+/**
+ * Request parameters for previewProviderModels operation in ProvidersApi.
+ * @export
+ * @interface ProvidersApiPreviewProviderModelsRequest
+ */
+export interface ProvidersApiPreviewProviderModelsRequest {
+    /**
+     * 
+     * @type {PreviewProviderModelsRequestDto}
+     * @memberof ProvidersApiPreviewProviderModels
+     */
+    readonly previewProviderModelsRequestDto?: PreviewProviderModelsRequestDto
 }
 
 /**
@@ -797,6 +995,18 @@ export class ProvidersApi extends BaseAPI {
     }
 
     /**
+     * Returns the full list of AI models available from a provider, including both recommended and additional models.  Each model includes its current settings: enabled state, display alias, and capabilities (vision, tool calling, thinking).  Recommended models are enabled by default and their alias and capabilities come from configuration.  Additional models are disabled by default and can be configured by the admin.
+     * @summary Get all models for a provider with their settings
+     * @param {AIProvidersApiGetProviderModelsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProvidersApi
+     */
+    public getProviderModels(requestParameters: ProvidersApiGetProviderModelsRequest, options?: RawAxiosRequestConfig) {
+        return ProvidersApiFp(this.configuration).getProviderModels(requestParameters.providerId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Returns a paginated list of AI providers configured for the current tenant.  Supports pagination via the startIndex and count query parameters. The total number of providers is included in the response metadata.
      * @summary Get AI providers
      * @param {AIProvidersApiGetProvidersRequest} requestParameters Request parameters.
@@ -806,6 +1016,18 @@ export class ProvidersApi extends BaseAPI {
      */
     public getProviders(requestParameters: ProvidersApiGetProvidersRequest = {}, options?: RawAxiosRequestConfig) {
         return ProvidersApiFp(this.configuration).getProviders(requestParameters.startIndex, requestParameters.count, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Connects to the specified AI provider using the provided credentials and returns the available models  with their default settings. This is used to preview models before saving the provider.  Recommended models are enabled by default with configuration-defined settings.  Additional models are disabled by default with empty capabilities.
+     * @summary Preview models for a new AI provider
+     * @param {AIProvidersApiPreviewProviderModelsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProvidersApi
+     */
+    public previewProviderModels(requestParameters: ProvidersApiPreviewProviderModelsRequest = {}, options?: RawAxiosRequestConfig) {
+        return ProvidersApiFp(this.configuration).previewProviderModels(requestParameters.previewProviderModelsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

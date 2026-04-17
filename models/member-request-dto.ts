@@ -20,16 +20,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ApiDateTime } from './api-date-time';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { Contact } from './contact';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { EmployeeType } from './employee-type';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { SexEnum } from './sex-enum';
 
 /**
  * The user request parameters.
@@ -65,16 +59,9 @@ export interface MemberRequestDto {
      */
     'department'?: Array<string> | null;
     /**
-     * The user title.
-     */
-    'title'?: string | null;
-    /**
      * The user location.
      */
     'location'?: string | null;
-    'sex'?: SexEnum;
-    'birthday'?: ApiDateTime;
-    'worksfrom'?: ApiDateTime;
     /**
      * The user comment.
      */

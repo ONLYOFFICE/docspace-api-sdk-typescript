@@ -28,7 +28,7 @@ export const DistributedTaskStatus = {
     Running: 1,
     Completed: 2,
     Canceled: 3,
-    Failted: 4
+    Failted: 4,
 } as const;
 
 export type DistributedTaskStatus = typeof DistributedTaskStatus[keyof typeof DistributedTaskStatus];

@@ -28,7 +28,7 @@ export const WatermarkAdditions = {
     UserEmail: 2,
     UserIpAdress: 4,
     CurrentDate: 8,
-    RoomName: 16
+    RoomName: 16,
 } as const;
 
 export type WatermarkAdditions = typeof WatermarkAdditions[keyof typeof WatermarkAdditions];

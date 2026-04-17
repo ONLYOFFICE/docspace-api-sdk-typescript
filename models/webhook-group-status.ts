@@ -29,7 +29,7 @@ export const WebhookGroupStatus = {
     Status2xx: 2,
     Status3xx: 4,
     Status4xx: 8,
-    Status5xx: 16
+    Status5xx: 16,
 } as const;
 
 export type WebhookGroupStatus = typeof WebhookGroupStatus[keyof typeof WebhookGroupStatus];

@@ -17,6 +17,8 @@ Name | Type | Description | Notes
 **debit** | **number** | The debit amount of the operation. | [optional] [default to undefined]
 **participantName** | **string** | The participant original name. | [optional] [default to undefined]
 **participantDisplayName** | **string** | The participant display name. | [optional] [default to undefined]
+**agentId** | **string** | AI Agent id. | [optional] [default to undefined]
+**agentTitle** | **string** | AI Agent name. | [optional] [default to undefined]
 
 ## Example
 
@@ -35,6 +37,8 @@ const instance: OperationDto = {
     debit,
     participantName,
     participantDisplayName,
+    agentId,
+    agentTitle,
 };
 ```
 

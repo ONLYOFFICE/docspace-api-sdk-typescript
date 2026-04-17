@@ -39,7 +39,7 @@ export const WhiteLabelLogoType = {
     PdfEditor: 13,
     PdfEditorEmbed: 14,
     DiagramEditor: 15,
-    DiagramEditorEmbed: 16
+    DiagramEditorEmbed: 16,
 } as const;
 
 export type WhiteLabelLogoType = typeof WhiteLabelLogoType[keyof typeof WhiteLabelLogoType];

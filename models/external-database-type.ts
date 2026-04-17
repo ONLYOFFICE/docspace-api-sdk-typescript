@@ -25,7 +25,7 @@
 
 export const ExternalDatabaseType = {
     MySql: 0,
-    Sqlite: 1
+    Sqlite: 1,
 } as const;
 
 export type ExternalDatabaseType = typeof ExternalDatabaseType[keyof typeof ExternalDatabaseType];

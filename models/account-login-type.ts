@@ -26,7 +26,7 @@
 export const AccountLoginType = {
     SSO: 0,
     LDAP: 1,
-    Standart: 2
+    Standart: 2,
 } as const;
 
 export type AccountLoginType = typeof AccountLoginType[keyof typeof AccountLoginType];
