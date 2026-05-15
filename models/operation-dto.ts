@@ -21,6 +21,9 @@
 // May contain unused imports in some cases
 // @ts-ignore
 import type { ApiDateTime } from './api-date-time';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { OperationType } from './operation-type';
 
 /**
  * Represents an operation.
@@ -75,5 +78,8 @@ export interface OperationDto {
      * AI Agent name.
      */
     'agentTitle'?: string | null;
+    'type'?: OperationType;
 }
+
+
 

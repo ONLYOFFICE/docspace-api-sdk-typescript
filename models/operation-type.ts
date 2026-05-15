@@ -20,29 +20,30 @@
 
 
 /**
- * [0 - Any, 1 - Unknown, 2 - ServicePayment, 4 - PackagePayment, 8 - ServiceUsage, 16 - Deposit, 32 - ReceiveProviderInvoice, 64 - ProcessProviderInvoice, 128 - WriteOffServiceProfit, 256 - Profit, 512 - PartnerAccrual, 1024 - ProviderPayment, 2048 - PartnerPayment, 4096 - Refund, 8192 - BankDeposit, 16384 - BankWithdrawal, 32768 - GoodwillCredit, 65536 - WriteOffProfit, 131072 - WriteOffDifferenceCurrency]
+ * [0 - Unknown, 1 - ServicePayment, 2 - PackagePayment, 3 - AiServicePayment, 4 - Deposit, 5 - ReceiveProviderInvoice, 6 - ProcessProviderInvoice, 7 - WriteOffServiceProfit, 8 - Profit, 9 - PartnerAccrual, 10 - ProviderPayment, 11 - PartnerPayment, 12 - Refund, 13 - BankDeposit, 14 - BankWithdrawal, 15 - GoodwillCredit, 16 - WriteOffProfit, 17 - WriteOffDifferenceCurrency, 18 - AiDebit, 19 - AiCredit]
  */
 
 export const OperationType = {
-    Any: 0,
-    Unknown: 1,
-    ServicePayment: 2,
-    PackagePayment: 4,
-    ServiceUsage: 8,
-    Deposit: 16,
-    ReceiveProviderInvoice: 32,
-    ProcessProviderInvoice: 64,
-    WriteOffServiceProfit: 128,
-    Profit: 256,
-    PartnerAccrual: 512,
-    ProviderPayment: 1024,
-    PartnerPayment: 2048,
-    Refund: 4096,
-    BankDeposit: 8192,
-    BankWithdrawal: 16384,
-    GoodwillCredit: 32768,
-    WriteOffProfit: 65536,
-    WriteOffDifferenceCurrency: 131072,
+    Unknown: 0,
+    ServicePayment: 1,
+    PackagePayment: 2,
+    AiServicePayment: 3,
+    Deposit: 4,
+    ReceiveProviderInvoice: 5,
+    ProcessProviderInvoice: 6,
+    WriteOffServiceProfit: 7,
+    Profit: 8,
+    PartnerAccrual: 9,
+    ProviderPayment: 10,
+    PartnerPayment: 11,
+    Refund: 12,
+    BankDeposit: 13,
+    BankWithdrawal: 14,
+    GoodwillCredit: 15,
+    WriteOffProfit: 16,
+    WriteOffDifferenceCurrency: 17,
+    AiDebit: 18,
+    AiCredit: 19,
 } as const;
 
 export type OperationType = typeof OperationType[keyof typeof OperationType];

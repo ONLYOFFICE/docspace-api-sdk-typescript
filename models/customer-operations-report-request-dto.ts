@@ -37,10 +37,6 @@ export interface CustomerOperationsReportRequestDto {
      */
     'serviceName'?: string | null;
     /**
-     * Write-off of the quota for the service
-     */
-    'writeOffServiceQuota'?: boolean;
-    /**
      * The report start date.
      */
     'startDate'?: string | null;
@@ -60,7 +56,7 @@ export interface CustomerOperationsReportRequestDto {
      * Specifies whether to include debit operations in the report.
      */
     'debit'?: boolean | null;
-    'types'?: OperationType;
+    'type'?: OperationType;
     'status'?: OperationStatus;
     /**
      * The field to order by.

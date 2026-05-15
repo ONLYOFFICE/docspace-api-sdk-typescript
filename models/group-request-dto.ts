@@ -30,10 +30,10 @@ export interface GroupRequestDto {
     /**
      * The group manager ID.
      */
-    'groupManager': string;
+    'groupManager'?: string;
     /**
      * The group name.
      */
-    'groupName'?: string | null;
+    'groupName': string | null;
 }
 

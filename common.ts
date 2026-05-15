@@ -19,9 +19,8 @@
  */
 import type { Configuration } from "./configuration";
 import type { RequestArgs } from "./base";
-import type { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
+import type { AxiosInstance, AxiosResponse } from 'axios';
 import { RequiredError } from "./base";
-import { DocSpaceApiError } from "./error";
 
 export const DUMMY_BASE_URL = 'https://example.com'
 
@@ -102,7 +101,8 @@ export const setSearchParams = function (url: URL, ...objects: any[]) {
  * This function will run for every key-value pair encountered by JSON.stringify while traversing an object.
  * Converting a set to a string will return an empty object, so an intermediate conversion to an array is required.
  */
-export const replaceWithSerializableTypeIfNeeded = function(key: any, value: any) {
+// @ts-ignore
+export const replaceWithSerializableTypeIfNeeded = function(key: string, value: any) {
     if (value instanceof Set) {
         return Array.from(value);
     } else {
@@ -127,11 +127,6 @@ export const toPathString = function (url: URL) {
 export const createRequestFunction = function (axiosArgs: RequestArgs, globalAxios: AxiosInstance, BASE_PATH: string, configuration?: Configuration) {
     return <T = unknown, R = AxiosResponse<T>>(axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
         const axiosRequestArgs = {...axiosArgs.options, url: (axios.defaults.baseURL ? '' : configuration?.basePath ?? basePath) + axiosArgs.url};
-        return axios.request<T, R>(axiosRequestArgs).catch((error: AxiosError) => {
-            if (error?.response) {
-                throw DocSpaceApiError.fromAxiosError(error);
-            }
-            throw error;
-        });
+        return axios.request<T, R>(axiosRequestArgs);
     };
 }

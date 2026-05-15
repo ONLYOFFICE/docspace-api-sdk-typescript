@@ -26,8 +26,6 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { CreateWebhooksConfigRequestsDto } from '../../models';
 // @ts-ignore
-import type { GetWebhookTriggers200Response } from '../../models';
-// @ts-ignore
 import type { UpdateWebhooksConfigRequestsDto } from '../../models';
 // @ts-ignore
 import type { WebhookGroupStatus } from '../../models';
@@ -35,6 +33,8 @@ import type { WebhookGroupStatus } from '../../models';
 import type { WebhookRetryRequestsDto } from '../../models';
 // @ts-ignore
 import type { WebhookTrigger } from '../../models';
+// @ts-ignore
+import type { WebhookTriggerArrayWrapper } from '../../models';
 // @ts-ignore
 import type { WebhooksConfigWithStatusArrayWrapper } from '../../models';
 // @ts-ignore
@@ -219,7 +219,7 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Returns a list of triggers for a webhook.
+         * Returns a list of triggers for a webhook with their availability for the current user.
          * @summary Get webhook triggers
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -658,14 +658,14 @@ export const WebhooksApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns a list of triggers for a webhook.
+         * Returns a list of triggers for a webhook with their availability for the current user.
          * @summary Get webhook triggers
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getWebhookTriggers operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-webhook-triggers/
          */
-        async getWebhookTriggers(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetWebhookTriggers200Response>> {
+        async getWebhookTriggers(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhookTriggerArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getWebhookTriggers(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['WebhooksApi.getWebhookTriggers']?.[localVarOperationServerIndex]?.url;
@@ -801,14 +801,14 @@ export const WebhooksApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.getTenantWebhooks(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of triggers for a webhook.
+         * Returns a list of triggers for a webhook with their availability for the current user.
          * @summary Get webhook triggers
          * @param {*} [options] Override http request option.
          * REST API Reference for getWebhookTriggers operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-webhook-triggers/
          * @throws {RequiredError}
          */
-        getWebhookTriggers(options?: RawAxiosRequestConfig): AxiosPromise<GetWebhookTriggers200Response> {
+        getWebhookTriggers(options?: RawAxiosRequestConfig): AxiosPromise<WebhookTriggerArrayWrapper> {
             return localVarFp.getWebhookTriggers(options).then((request) => request(axios, basePath));
         },
         /**
@@ -1078,7 +1078,7 @@ export class WebhooksApi extends BaseAPI {
     }
 
     /**
-     * Returns a list of triggers for a webhook.
+     * Returns a list of triggers for a webhook with their availability for the current user.
      * @summary Get webhook triggers
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

@@ -82,6 +82,14 @@ export interface CreateRoomRequestDto {
      */
     'share'?: Array<FileShareParams> | null;
     'chatSettings'?: ChatSettings;
+    /**
+     * Specifies whether to send form data to external database.
+     */
+    'sendFormToExternalDB'?: boolean | null;
+    /**
+     * Specifies whether to save form data as XLSX file.
+     */
+    'saveFormAsXLSX'?: boolean | null;
 }
 
 

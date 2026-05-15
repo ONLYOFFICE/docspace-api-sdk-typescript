@@ -1,45 +1,47 @@
 # OperationType
 
-[0 - Any, 1 - Unknown, 2 - ServicePayment, 4 - PackagePayment, 8 - ServiceUsage, 16 - Deposit, 32 - ReceiveProviderInvoice, 64 - ProcessProviderInvoice, 128 - WriteOffServiceProfit, 256 - Profit, 512 - PartnerAccrual, 1024 - ProviderPayment, 2048 - PartnerPayment, 4096 - Refund, 8192 - BankDeposit, 16384 - BankWithdrawal, 32768 - GoodwillCredit, 65536 - WriteOffProfit, 131072 - WriteOffDifferenceCurrency]
+[0 - Unknown, 1 - ServicePayment, 2 - PackagePayment, 3 - AiServicePayment, 4 - Deposit, 5 - ReceiveProviderInvoice, 6 - ProcessProviderInvoice, 7 - WriteOffServiceProfit, 8 - Profit, 9 - PartnerAccrual, 10 - ProviderPayment, 11 - PartnerPayment, 12 - Refund, 13 - BankDeposit, 14 - BankWithdrawal, 15 - GoodwillCredit, 16 - WriteOffProfit, 17 - WriteOffDifferenceCurrency, 18 - AiDebit, 19 - AiCredit]
 
 ## Enum
 
-* `Any` (value: `0`)
+* `Unknown` (value: `0`)
 
-* `Unknown` (value: `1`)
+* `ServicePayment` (value: `1`)
 
-* `ServicePayment` (value: `2`)
+* `PackagePayment` (value: `2`)
 
-* `PackagePayment` (value: `4`)
+* `AiServicePayment` (value: `3`)
 
-* `ServiceUsage` (value: `8`)
+* `Deposit` (value: `4`)
 
-* `Deposit` (value: `16`)
+* `ReceiveProviderInvoice` (value: `5`)
 
-* `ReceiveProviderInvoice` (value: `32`)
+* `ProcessProviderInvoice` (value: `6`)
 
-* `ProcessProviderInvoice` (value: `64`)
+* `WriteOffServiceProfit` (value: `7`)
 
-* `WriteOffServiceProfit` (value: `128`)
+* `Profit` (value: `8`)
 
-* `Profit` (value: `256`)
+* `PartnerAccrual` (value: `9`)
 
-* `PartnerAccrual` (value: `512`)
+* `ProviderPayment` (value: `10`)
 
-* `ProviderPayment` (value: `1024`)
+* `PartnerPayment` (value: `11`)
 
-* `PartnerPayment` (value: `2048`)
+* `Refund` (value: `12`)
 
-* `Refund` (value: `4096`)
+* `BankDeposit` (value: `13`)
 
-* `BankDeposit` (value: `8192`)
+* `BankWithdrawal` (value: `14`)
 
-* `BankWithdrawal` (value: `16384`)
+* `GoodwillCredit` (value: `15`)
 
-* `GoodwillCredit` (value: `32768`)
+* `WriteOffProfit` (value: `16`)
 
-* `WriteOffProfit` (value: `65536`)
+* `WriteOffDifferenceCurrency` (value: `17`)
 
-* `WriteOffDifferenceCurrency` (value: `131072`)
+* `AiDebit` (value: `18`)
+
+* `AiCredit` (value: `19`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

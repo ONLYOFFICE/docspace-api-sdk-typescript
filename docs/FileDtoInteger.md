@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **providerId** | **number** | The provider ID of the file entry. | [optional] [default to undefined]
 **order** | **string** | The order of the file entry. | [optional] [default to undefined]
 **isFavorite** | **boolean** | Specifies if the file is a favorite or not. | [optional] [default to undefined]
+**fileEntryType** | [**FileEntryType**](FileEntryType.md) |  | [optional] [default to undefined]
 **id** | **number** | The file entry ID. | [optional] [default to undefined]
 **rootFolderId** | **number** | The root folder ID of the file entry. | [optional] [default to undefined]
 **originId** | **number** | The origin ID of the file entry. | [optional] [default to undefined]
@@ -33,9 +34,9 @@ Name | Type | Description | Notes
 **originTitle** | **string** | The origin title of the file entry. | [optional] [default to undefined]
 **originRoomTitle** | **string** | The origin room title of the file entry. | [optional] [default to undefined]
 **canShare** | **boolean** | Specifies if the file entry can be shared or not. | [optional] [default to undefined]
-**shareSettings** | [**FolderDtoIntegerShareSettings**](FolderDtoIntegerShareSettings.md) |  | [optional] [default to undefined]
-**security** | [**FolderDtoIntegerSecurity**](FolderDtoIntegerSecurity.md) |  | [optional] [default to undefined]
-**availableShareRights** | [**FolderDtoIntegerAvailableShareRights**](FolderDtoIntegerAvailableShareRights.md) |  | [optional] [default to undefined]
+**shareSettings** | [**FileEntryDtoIntegerAllOfShareSettings**](FileEntryDtoIntegerAllOfShareSettings.md) |  | [optional] [default to undefined]
+**security** | [**FileEntryDtoIntegerAllOfSecurity**](FileEntryDtoIntegerAllOfSecurity.md) |  | [optional] [default to undefined]
+**availableShareRights** | [**FileEntryDtoIntegerAllOfAvailableShareRights**](FileEntryDtoIntegerAllOfAvailableShareRights.md) |  | [optional] [default to undefined]
 **requestToken** | **string** | The request token of the file entry. | [optional] [default to undefined]
 **external** | **boolean** | Specifies if the folder can be accessed via an external link or not. | [optional] [default to undefined]
 **expirationDate** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
@@ -67,12 +68,13 @@ Name | Type | Description | Notes
 **isFillingPreparing** | **boolean** | Specifies if the form filling has started but the file is still being saved by the document editor. Filling and editing are not allowed. | [optional] [default to undefined]
 **inProcessFolderId** | **number** | The InProcess folder ID of the file. | [optional] [default to undefined]
 **inProcessFolderTitle** | **string** | The InProcess folder title of the file. | [optional] [default to undefined]
+**resultsFolderId** | **number** | The ID of the FormFillingFolderDone folder that corresponds to this original form. | [optional] [default to undefined]
 **draftLocation** | [**DraftLocationInteger**](DraftLocationInteger.md) |  | [optional] [default to undefined]
-**viewAccessibility** | [**FileDtoIntegerViewAccessibility**](FileDtoIntegerViewAccessibility.md) |  | [optional] [default to undefined]
+**viewAccessibility** | [**FileDtoIntegerAllOfViewAccessibility**](FileDtoIntegerAllOfViewAccessibility.md) |  | [optional] [default to undefined]
 **lastOpened** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
 **expired** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
-**fileEntryType** | [**FileEntryType**](FileEntryType.md) |  | [optional] [default to undefined]
 **vectorizationStatus** | [**VectorizationStatus**](VectorizationStatus.md) |  | [optional] [default to undefined]
+**externalDbTableName** | **string** | The name of the table in the external database that corresponds to this form. | [optional] [default to undefined]
 **dimensions** | [**Size**](Size.md) |  | [optional] [default to undefined]
 
 ## Example
@@ -101,6 +103,7 @@ const instance: FileDtoInteger = {
     providerId,
     order,
     isFavorite,
+    fileEntryType,
     id,
     rootFolderId,
     originId,
@@ -142,12 +145,13 @@ const instance: FileDtoInteger = {
     isFillingPreparing,
     inProcessFolderId,
     inProcessFolderTitle,
+    resultsFolderId,
     draftLocation,
     viewAccessibility,
     lastOpened,
     expired,
-    fileEntryType,
     vectorizationStatus,
+    externalDbTableName,
     dimensions,
 };
 ```

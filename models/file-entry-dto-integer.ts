@@ -26,123 +26,116 @@ import type { ApiDateTime } from './api-date-time';
 import type { EmployeeDto } from './employee-dto';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { FileEntryBaseDto } from './file-entry-base-dto';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { FileEntryDtoIntegerAllOfAvailableShareRights } from './file-entry-dto-integer-all-of-available-share-rights';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { FileEntryDtoIntegerAllOfSecurity } from './file-entry-dto-integer-all-of-security';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { FileEntryDtoIntegerAllOfShareSettings } from './file-entry-dto-integer-all-of-share-settings';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { FileEntryType } from './file-entry-type';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { FileShare } from './file-share';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FolderDtoIntegerAvailableShareRights } from './folder-dto-integer-available-share-rights';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { FolderDtoIntegerSecurity } from './folder-dto-integer-security';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { FolderDtoIntegerShareSettings } from './folder-dto-integer-share-settings';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { FolderType } from './folder-type';
 
 /**
+ * @type FileEntryDtoInteger
  * The generic file entry information.
+ * @export
  */
-export interface FileEntryDtoInteger {
-    /**
-     * The file entry title.
-     */
-    'title'?: string | null;
-    'access'?: FileShare;
-    'sharedBy'?: EmployeeDto;
-    'ownedBy'?: EmployeeDto;
-    /**
-     * Specifies if the file entry is shared via link or not.
-     */
-    'shared'?: boolean;
-    /**
-     * Specifies if the file entry is shared for user or not.
-     */
-    'sharedForUser'?: boolean;
-    /**
-     * Indicates whether the parent entity is shared.
-     */
-    'parentShared'?: boolean;
-    /**
-     * The short Web URL.
-     */
-    'shortWebUrl'?: string | null;
-    'created'?: ApiDateTime;
-    'createdBy'?: EmployeeDto;
-    'updated'?: ApiDateTime;
-    'autoDelete'?: ApiDateTime;
-    'rootFolderType'?: FolderType;
-    'parentRoomType'?: FolderType;
-    'updatedBy'?: EmployeeDto;
-    /**
-     * Specifies if the file entry provider is specified or not.
-     */
-    'providerItem'?: boolean | null;
-    /**
-     * The provider key of the file entry.
-     */
-    'providerKey'?: string | null;
-    /**
-     * The provider ID of the file entry.
-     */
-    'providerId'?: number | null;
-    /**
-     * The order of the file entry.
-     */
-    'order'?: string | null;
-    /**
-     * Specifies if the file is a favorite or not.
-     */
-    'isFavorite'?: boolean | null;
-    'fileEntryType'?: FileEntryType;
+export type FileEntryDtoInteger = FileEntryBaseDto &  {
     /**
      * The file entry ID.
+     * @type {number}
+     * @memberof FileEntryDtoInteger
      */
     'id'?: number;
     /**
      * The root folder ID of the file entry.
+     * @type {number}
+     * @memberof FileEntryDtoInteger
      */
     'rootFolderId'?: number;
     /**
      * The origin ID of the file entry.
+     * @type {number}
+     * @memberof FileEntryDtoInteger
      */
     'originId'?: number;
     /**
      * The origin room ID of the file entry.
+     * @type {number}
+     * @memberof FileEntryDtoInteger
      */
     'originRoomId'?: number;
     /**
      * The origin title of the file entry.
+     * @type {string}
+     * @memberof FileEntryDtoInteger
      */
     'originTitle'?: string | null;
     /**
      * The origin room title of the file entry.
+     * @type {string}
+     * @memberof FileEntryDtoInteger
      */
     'originRoomTitle'?: string | null;
     /**
      * Specifies if the file entry can be shared or not.
+     * @type {boolean}
+     * @memberof FileEntryDtoInteger
      */
     'canShare'?: boolean;
-    'shareSettings'?: FolderDtoIntegerShareSettings | null;
-    'security'?: FolderDtoIntegerSecurity | null;
-    'availableShareRights'?: FolderDtoIntegerAvailableShareRights | null;
+    /**
+     * 
+     * @type {FileEntryDtoIntegerAllOfShareSettings}
+     * @memberof FileEntryDtoInteger
+     */
+    'shareSettings'?: FileEntryDtoIntegerAllOfShareSettings | null;
+    /**
+     * 
+     * @type {FileEntryDtoIntegerAllOfSecurity}
+     * @memberof FileEntryDtoInteger
+     */
+    'security'?: FileEntryDtoIntegerAllOfSecurity | null;
+    /**
+     * 
+     * @type {FileEntryDtoIntegerAllOfAvailableShareRights}
+     * @memberof FileEntryDtoInteger
+     */
+    'availableShareRights'?: FileEntryDtoIntegerAllOfAvailableShareRights | null;
     /**
      * The request token of the file entry.
+     * @type {string}
+     * @memberof FileEntryDtoInteger
      */
     'requestToken'?: string | null;
     /**
      * Specifies if the folder can be accessed via an external link or not.
+     * @type {boolean}
+     * @memberof FileEntryDtoInteger
      */
     'external'?: boolean | null;
+    /**
+     * 
+     * @type {ApiDateTime}
+     * @memberof FileEntryDtoInteger
+     */
     'expirationDate'?: ApiDateTime;
     /**
      * Indicates whether the shareable link associated with the file or folder has expired.
+     * @type {boolean}
+     * @memberof FileEntryDtoInteger
      */
     'isLinkExpired'?: boolean | null;
-}
-
+};
 
 

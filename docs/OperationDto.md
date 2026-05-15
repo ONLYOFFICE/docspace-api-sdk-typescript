@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **participantDisplayName** | **string** | The participant display name. | [optional] [default to undefined]
 **agentId** | **string** | AI Agent id. | [optional] [default to undefined]
 **agentTitle** | **string** | AI Agent name. | [optional] [default to undefined]
+**type** | [**OperationType**](OperationType.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -39,6 +40,7 @@ const instance: OperationDto = {
     participantDisplayName,
     agentId,
     agentTitle,
+    type,
 };
 ```
 

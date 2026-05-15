@@ -26,7 +26,7 @@ export interface PaymentUrlRequestDto {
     /**
      * The URL where the user will be redirected after payment processing.
      */
-    'backUrl'?: string | null;
+    'backUrl': string;
     /**
      * The payment quantity.
      */

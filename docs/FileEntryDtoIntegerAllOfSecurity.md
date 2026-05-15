@@ -50,6 +50,7 @@ Name | Type | Description | Notes
 **AskAi** | **boolean** |  | [optional] [default to undefined]
 **UseChat** | **boolean** |  | [optional] [default to undefined]
 **UpdateXlsx** | **boolean** |  | [optional] [default to undefined]
+**AnalyzeResponses** | **boolean** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -101,6 +102,7 @@ const instance: FileEntryDtoIntegerAllOfSecurity = {
     AskAi,
     UseChat,
     UpdateXlsx,
+    AnalyzeResponses,
 };
 ```
 

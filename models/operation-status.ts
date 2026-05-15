@@ -20,15 +20,14 @@
 
 
 /**
- * [0 - Any, 1 - Pending, 2 - Completed, 4 - Rejected, 8 - Canceled]
+ * [0 - Pending, 1 - Completed, 2 - Rejected, 3 - Canceled]
  */
 
 export const OperationStatus = {
-    Any: 0,
-    Pending: 1,
-    Completed: 2,
-    Rejected: 4,
-    Canceled: 8,
+    Pending: 0,
+    Completed: 1,
+    Rejected: 2,
+    Canceled: 3,
 } as const;
 
 export type OperationStatus = typeof OperationStatus[keyof typeof OperationStatus];

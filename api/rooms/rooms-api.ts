@@ -46,6 +46,8 @@ import type { DeleteRoomRequest } from '../../models';
 // @ts-ignore
 import type { DocumentBuilderTaskWrapper } from '../../models';
 // @ts-ignore
+import type { ExternalDbSyncTaskWrapper } from '../../models';
+// @ts-ignore
 import type { FileOperationWrapper } from '../../models';
 // @ts-ignore
 import type { FileShareArrayWrapper } from '../../models';
@@ -876,6 +878,62 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(batchTagsRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the status of the external DB synchronization task for the specified filling forms room.
+         * @summary Get external DB sync status
+         * @param {number} id The room ID.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getExternalDbSyncStatus operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-external-db-sync-status/
+         */
+        getExternalDbSyncStatus: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getExternalDbSyncStatus', 'id', id)
+
+            const localVarPath = `/api/2.0/files/rooms/{id}/externaldbsync`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -2110,6 +2168,62 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
+         * Triggers external DB synchronization for all form templates in the specified filling forms room.
+         * @summary Start external DB sync
+         * @param {number} id The room ID.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for startExternalDbSync operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-external-db-sync/
+         */
+        startExternalDbSync: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('startExternalDbSync', 'id', id)
+
+            const localVarPath = `/api/2.0/files/rooms/{id}/externaldbsync`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Starts the index export of a room with the ID specified in the request.
          * @summary Start the room index export
          * @param {number} id The room ID.
@@ -2725,6 +2839,21 @@ export const RoomsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns the status of the external DB synchronization task for the specified filling forms room.
+         * @summary Get external DB sync status
+         * @param {number} id The room ID.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getExternalDbSyncStatus operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-external-db-sync-status/
+         */
+        async getExternalDbSyncStatus(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ExternalDbSyncTaskWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getExternalDbSyncStatus(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getExternalDbSyncStatus']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns a list of all the new items from a room with the ID specified in the request.
          * @summary Get the new room items
          * @param {number} id The room ID.
@@ -3047,6 +3176,21 @@ export const RoomsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Triggers external DB synchronization for all form templates in the specified filling forms room.
+         * @summary Start external DB sync
+         * @param {number} id The room ID.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for startExternalDbSync operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-external-db-sync/
+         */
+        async startExternalDbSync(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ExternalDbSyncTaskWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.startExternalDbSync(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.startExternalDbSync']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Starts the index export of a room with the ID specified in the request.
          * @summary Start the room index export
          * @param {number} id The room ID.
@@ -3319,6 +3463,18 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.deleteRoomTags(requestParameters.id, requestParameters.batchTagsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns the status of the external DB synchronization task for the specified filling forms room.
+         * @summary Get external DB sync status
+         * @param {RoomsApiGetExternalDbSyncStatusRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getExternalDbSyncStatus operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-external-db-sync-status/
+         * @throws {RequiredError}
+         */
+        getExternalDbSyncStatus(requestParameters: RoomsApiGetExternalDbSyncStatusRequest, options?: RawAxiosRequestConfig): AxiosPromise<ExternalDbSyncTaskWrapper> {
+            return localVarFp.getExternalDbSyncStatus(requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns a list of all the new items from a room with the ID specified in the request.
          * @summary Get the new room items
          * @param {RoomsApiGetNewRoomItemsRequest} requestParameters Request parameters.
@@ -3552,6 +3708,18 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          */
         setRoomSecurity(requestParameters: RoomsApiSetRoomSecurityRequest, options?: RawAxiosRequestConfig): AxiosPromise<RoomSecurityWrapper> {
             return localVarFp.setRoomSecurity(requestParameters.id, requestParameters.roomInvitationRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Triggers external DB synchronization for all form templates in the specified filling forms room.
+         * @summary Start external DB sync
+         * @param {RoomsApiStartExternalDbSyncRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for startExternalDbSync operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-external-db-sync/
+         * @throws {RequiredError}
+         */
+        startExternalDbSync(requestParameters: RoomsApiStartExternalDbSyncRequest, options?: RawAxiosRequestConfig): AxiosPromise<ExternalDbSyncTaskWrapper> {
+            return localVarFp.startExternalDbSync(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * Starts the index export of a room with the ID specified in the request.
@@ -3868,6 +4036,20 @@ export interface RoomsApiDeleteRoomTagsRequest {
      * @memberof RoomsApiDeleteRoomTags
      */
     readonly batchTagsRequestDto?: BatchTagsRequestDto
+}
+
+/**
+ * Request parameters for getExternalDbSyncStatus operation in RoomsApi.
+ * @export
+ * @interface RoomsApiGetExternalDbSyncStatusRequest
+ */
+export interface RoomsApiGetExternalDbSyncStatusRequest {
+    /**
+     * The room ID.
+     * @type {number}
+     * @memberof RoomsApiGetExternalDbSyncStatus
+     */
+    readonly id: number
 }
 
 /**
@@ -4270,6 +4452,20 @@ export interface RoomsApiSetRoomSecurityRequest {
 }
 
 /**
+ * Request parameters for startExternalDbSync operation in RoomsApi.
+ * @export
+ * @interface RoomsApiStartExternalDbSyncRequest
+ */
+export interface RoomsApiStartExternalDbSyncRequest {
+    /**
+     * The room ID.
+     * @type {number}
+     * @memberof RoomsApiStartExternalDbSync
+     */
+    readonly id: number
+}
+
+/**
  * Request parameters for startRoomIndexExport operation in RoomsApi.
  * @export
  * @interface RoomsApiStartRoomIndexExportRequest
@@ -4531,6 +4727,18 @@ export class RoomsApi extends BaseAPI {
     }
 
     /**
+     * Returns the status of the external DB synchronization task for the specified filling forms room.
+     * @summary Get external DB sync status
+     * @param {RoomsApiGetExternalDbSyncStatusRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RoomsApi
+     */
+    public getExternalDbSyncStatus(requestParameters: RoomsApiGetExternalDbSyncStatusRequest, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).getExternalDbSyncStatus(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Returns a list of all the new items from a room with the ID specified in the request.
      * @summary Get the new room items
      * @param {RoomsApiGetNewRoomItemsRequest} requestParameters Request parameters.
@@ -4763,6 +4971,18 @@ export class RoomsApi extends BaseAPI {
      */
     public setRoomSecurity(requestParameters: RoomsApiSetRoomSecurityRequest, options?: RawAxiosRequestConfig) {
         return RoomsApiFp(this.configuration).setRoomSecurity(requestParameters.id, requestParameters.roomInvitationRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Triggers external DB synchronization for all form templates in the specified filling forms room.
+     * @summary Start external DB sync
+     * @param {RoomsApiStartExternalDbSyncRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RoomsApi
+     */
+    public startExternalDbSync(requestParameters: RoomsApiStartExternalDbSyncRequest, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).startExternalDbSync(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
