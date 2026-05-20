@@ -257,6 +257,7 @@ const { status, data } = await apiInstance.creditAiBalance(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The AI credit operation result |  -  |
+|**400** | Unsupported currency or insufficient balance |  -  |
 |**403** | No permissions to perform this action |  -  |
 |**404** | Customer could not be found |  -  |
 |**401** | Unauthorized |  -  |

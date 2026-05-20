@@ -36,6 +36,8 @@ import type { DeleteFolder } from '../../models';
 // @ts-ignore
 import type { FileEntryBaseArrayWrapper } from '../../models';
 // @ts-ignore
+import type { FileIntegerArrayWrapper } from '../../models';
+// @ts-ignore
 import type { FileIntegerWrapper } from '../../models';
 // @ts-ignore
 import type { FileOperationArrayWrapper } from '../../models';
@@ -62,8 +64,6 @@ import type { HistoryArrayWrapper } from '../../models';
 // @ts-ignore
 import type { Location } from '../../models';
 // @ts-ignore
-import type { ObjectWrapper } from '../../models';
-// @ts-ignore
 import type { OrderRequestDto } from '../../models';
 // @ts-ignore
 import type { STRINGArrayWrapper } from '../../models';
@@ -73,8 +73,6 @@ import type { SearchArea } from '../../models';
 import type { SortOrder } from '../../models';
 // @ts-ignore
 import type { StringWrapper } from '../../models';
-// @ts-ignore
-import type { UploadRequestDto } from '../../models';
 // @ts-ignore
 import type { XlsxReportResponseWrapper } from '../../models';
 /**
@@ -2046,13 +2044,16 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
          * Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
          * @summary Upload a file
          * @param {number} folderId The folder ID to upload a file.
-         * @param {UploadRequestDto} [uploadRequestDto] The request parameters for uploading a file.
+         * @param {boolean} [createNewIfExist] Specifies whether to create the new file if it already exists or not.
+         * @param {boolean} [storeOriginalFile] Specifies whether to upload documents in the original formats as well or not.
+         * @param {boolean} [keepConvertStatus] Specifies whether to keep the file converting status or not.
+         * @param {File} [file] The file to be uploaded.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for uploadFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file/
          */
-        uploadFile: async (folderId: number, uploadRequestDto?: UploadRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        uploadFile: async (folderId: number, createNewIfExist?: boolean, storeOriginalFile?: boolean, keepConvertStatus?: boolean, file?: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('uploadFile', 'folderId', folderId)
 
@@ -2068,6 +2069,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
 
             // authentication Basic required
             // http basic authentication required
@@ -2088,14 +2090,30 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
 
             // authentication OpenId required
 
+            if (createNewIfExist !== undefined) {
+                localVarQueryParameter['createNewIfExist'] = createNewIfExist;
+            }
 
+            if (storeOriginalFile !== undefined) {
+                localVarQueryParameter['storeOriginalFile'] = storeOriginalFile;
+            }
+
+            if (keepConvertStatus !== undefined) {
+                localVarQueryParameter['keepConvertStatus'] = keepConvertStatus;
+            }
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('File', file as any);
+            }
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(uploadRequestDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = localVarFormParams;
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -2105,13 +2123,16 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
          * @summary Upload a file to the My documents section
-         * @param {UploadRequestDto} [inDto] The request parameters for uploading a file.
+         * @param {boolean} [createNewIfExist] Specifies whether to create the new file if it already exists or not.
+         * @param {boolean} [storeOriginalFile] Specifies whether to upload documents in the original formats as well or not.
+         * @param {boolean} [keepConvertStatus] Specifies whether to keep the file converting status or not.
+         * @param {File} [file] The file to be uploaded.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for uploadFileToMy operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file-to-my/
          */
-        uploadFileToMy: async (inDto?: UploadRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        uploadFileToMy: async (createNewIfExist?: boolean, storeOriginalFile?: boolean, keepConvertStatus?: boolean, file?: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/files/@my/upload`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2124,6 +2145,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
 
             // authentication Basic required
             // http basic authentication required
@@ -2144,15 +2166,30 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
 
             // authentication OpenId required
 
-            if (inDto !== undefined) {
-                localVarQueryParameter['inDto'] = inDto;
+            if (createNewIfExist !== undefined) {
+                localVarQueryParameter['createNewIfExist'] = createNewIfExist;
+            }
+
+            if (storeOriginalFile !== undefined) {
+                localVarQueryParameter['storeOriginalFile'] = storeOriginalFile;
+            }
+
+            if (keepConvertStatus !== undefined) {
+                localVarQueryParameter['keepConvertStatus'] = keepConvertStatus;
             }
 
 
+            if (file !== undefined) { 
+                localVarFormParams.append('File', file as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -2673,14 +2710,17 @@ export const FoldersApiFp = function(configuration?: Configuration) {
          * Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
          * @summary Upload a file
          * @param {number} folderId The folder ID to upload a file.
-         * @param {UploadRequestDto} [uploadRequestDto] The request parameters for uploading a file.
+         * @param {boolean} [createNewIfExist] Specifies whether to create the new file if it already exists or not.
+         * @param {boolean} [storeOriginalFile] Specifies whether to upload documents in the original formats as well or not.
+         * @param {boolean} [keepConvertStatus] Specifies whether to keep the file converting status or not.
+         * @param {File} [file] The file to be uploaded.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for uploadFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file/
          */
-        async uploadFile(folderId: number, uploadRequestDto?: UploadRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadFile(folderId, uploadRequestDto, options);
+        async uploadFile(folderId: number, createNewIfExist?: boolean, storeOriginalFile?: boolean, keepConvertStatus?: boolean, file?: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadFile(folderId, createNewIfExist, storeOriginalFile, keepConvertStatus, file, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.uploadFile']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -2688,14 +2728,17 @@ export const FoldersApiFp = function(configuration?: Configuration) {
         /**
          * Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
          * @summary Upload a file to the My documents section
-         * @param {UploadRequestDto} [inDto] The request parameters for uploading a file.
+         * @param {boolean} [createNewIfExist] Specifies whether to create the new file if it already exists or not.
+         * @param {boolean} [storeOriginalFile] Specifies whether to upload documents in the original formats as well or not.
+         * @param {boolean} [keepConvertStatus] Specifies whether to keep the file converting status or not.
+         * @param {File} [file] The file to be uploaded.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for uploadFileToMy operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file-to-my/
          */
-        async uploadFileToMy(inDto?: UploadRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadFileToMy(inDto, options);
+        async uploadFileToMy(createNewIfExist?: boolean, storeOriginalFile?: boolean, keepConvertStatus?: boolean, file?: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadFileToMy(createNewIfExist, storeOriginalFile, keepConvertStatus, file, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.uploadFileToMy']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3042,8 +3085,8 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file/
          * @throws {RequiredError}
          */
-        uploadFile(requestParameters: FoldersApiUploadFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
-            return localVarFp.uploadFile(requestParameters.folderId, requestParameters.uploadRequestDto, options).then((request) => request(axios, basePath));
+        uploadFile(requestParameters: FoldersApiUploadFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerArrayWrapper> {
+            return localVarFp.uploadFile(requestParameters.folderId, requestParameters.createNewIfExist, requestParameters.storeOriginalFile, requestParameters.keepConvertStatus, requestParameters.file, options).then((request) => request(axios, basePath));
         },
         /**
          * Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
@@ -3054,8 +3097,8 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file-to-my/
          * @throws {RequiredError}
          */
-        uploadFileToMy(requestParameters: FoldersApiUploadFileToMyRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
-            return localVarFp.uploadFileToMy(requestParameters.inDto, options).then((request) => request(axios, basePath));
+        uploadFileToMy(requestParameters: FoldersApiUploadFileToMyRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerArrayWrapper> {
+            return localVarFp.uploadFileToMy(requestParameters.createNewIfExist, requestParameters.storeOriginalFile, requestParameters.keepConvertStatus, requestParameters.file, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -4110,11 +4153,32 @@ export interface FoldersApiUploadFileRequest {
     readonly folderId: number
 
     /**
-     * The request parameters for uploading a file.
-     * @type {UploadRequestDto}
+     * Specifies whether to create the new file if it already exists or not.
+     * @type {boolean}
      * @memberof FoldersApiUploadFile
      */
-    readonly uploadRequestDto?: UploadRequestDto
+    readonly createNewIfExist?: boolean
+
+    /**
+     * Specifies whether to upload documents in the original formats as well or not.
+     * @type {boolean}
+     * @memberof FoldersApiUploadFile
+     */
+    readonly storeOriginalFile?: boolean
+
+    /**
+     * Specifies whether to keep the file converting status or not.
+     * @type {boolean}
+     * @memberof FoldersApiUploadFile
+     */
+    readonly keepConvertStatus?: boolean
+
+    /**
+     * The file to be uploaded.
+     * @type {File}
+     * @memberof FoldersApiUploadFile
+     */
+    readonly file?: File
 }
 
 /**
@@ -4124,11 +4188,32 @@ export interface FoldersApiUploadFileRequest {
  */
 export interface FoldersApiUploadFileToMyRequest {
     /**
-     * The request parameters for uploading a file.
-     * @type {UploadRequestDto}
+     * Specifies whether to create the new file if it already exists or not.
+     * @type {boolean}
      * @memberof FoldersApiUploadFileToMy
      */
-    readonly inDto?: UploadRequestDto
+    readonly createNewIfExist?: boolean
+
+    /**
+     * Specifies whether to upload documents in the original formats as well or not.
+     * @type {boolean}
+     * @memberof FoldersApiUploadFileToMy
+     */
+    readonly storeOriginalFile?: boolean
+
+    /**
+     * Specifies whether to keep the file converting status or not.
+     * @type {boolean}
+     * @memberof FoldersApiUploadFileToMy
+     */
+    readonly keepConvertStatus?: boolean
+
+    /**
+     * The file to be uploaded.
+     * @type {File}
+     * @memberof FoldersApiUploadFileToMy
+     */
+    readonly file?: File
 }
 
 /**
@@ -4470,7 +4555,7 @@ export class FoldersApi extends BaseAPI {
      * @memberof FoldersApi
      */
     public uploadFile(requestParameters: FoldersApiUploadFileRequest, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).uploadFile(requestParameters.folderId, requestParameters.uploadRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return FoldersApiFp(this.configuration).uploadFile(requestParameters.folderId, requestParameters.createNewIfExist, requestParameters.storeOriginalFile, requestParameters.keepConvertStatus, requestParameters.file, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4482,7 +4567,7 @@ export class FoldersApi extends BaseAPI {
      * @memberof FoldersApi
      */
     public uploadFileToMy(requestParameters: FoldersApiUploadFileToMyRequest = {}, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).uploadFileToMy(requestParameters.inDto, options).then((request) => request(this.axios, this.basePath));
+        return FoldersApiFp(this.configuration).uploadFileToMy(requestParameters.createNewIfExist, requestParameters.storeOriginalFile, requestParameters.keepConvertStatus, requestParameters.file, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

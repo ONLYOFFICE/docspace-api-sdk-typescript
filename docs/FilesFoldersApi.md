@@ -1809,7 +1809,7 @@ const { status, data } = await apiInstance.setFolderPrimaryExternalLink(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **uploadFile**
-> ObjectWrapper uploadFile()
+> FileIntegerArrayWrapper uploadFile()
 
 Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
 
@@ -1819,13 +1819,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **uploadRequestDto** | **UploadRequestDto**| The request parameters for uploading a file. | |
 | **folderId** | [**number**] | The folder ID to upload a file. | defaults to undefined|
+| **createNewIfExist** | [**boolean**] | Specifies whether to create the new file if it already exists or not. | (optional) defaults to undefined|
+| **storeOriginalFile** | [**boolean**] | Specifies whether to upload documents in the original formats as well or not. | (optional) defaults to undefined|
+| **keepConvertStatus** | [**boolean**] | Specifies whether to keep the file converting status or not. | (optional) defaults to undefined|
+| **file** | [**File**] | The file to be uploaded. | (optional) defaults to undefined|
 
 
 ### Return type
 
-**ObjectWrapper**
+**FileIntegerArrayWrapper**
 
 ### Authorization
 
@@ -1836,25 +1839,30 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ```typescript
 import {
     FilesFoldersApi,
-    Configuration,
-    UploadRequestDto
+    Configuration
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFoldersApi(configuration);
 
 let folderId: number; //The folder ID to upload a file. (default to undefined)
-let uploadRequestDto: UploadRequestDto; //The request parameters for uploading a file. (optional)
+let createNewIfExist: boolean; //Specifies whether to create the new file if it already exists or not. (optional) (default to undefined)
+let storeOriginalFile: boolean; //Specifies whether to upload documents in the original formats as well or not. (optional) (default to undefined)
+let keepConvertStatus: boolean; //Specifies whether to keep the file converting status or not. (optional) (default to undefined)
+let file: File; //The file to be uploaded. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.uploadFile(
     folderId,
-    uploadRequestDto
+    createNewIfExist,
+    storeOriginalFile,
+    keepConvertStatus,
+    file
 );
 ```
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
 
@@ -1869,7 +1877,7 @@ const { status, data } = await apiInstance.uploadFile(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **uploadFileToMy**
-> ObjectWrapper uploadFileToMy()
+> FileIntegerArrayWrapper uploadFileToMy()
 
 Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
 
@@ -1879,12 +1887,15 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **inDto** | **UploadRequestDto** | The request parameters for uploading a file. | (optional) defaults to undefined|
+| **createNewIfExist** | [**boolean**] | Specifies whether to create the new file if it already exists or not. | (optional) defaults to undefined|
+| **storeOriginalFile** | [**boolean**] | Specifies whether to upload documents in the original formats as well or not. | (optional) defaults to undefined|
+| **keepConvertStatus** | [**boolean**] | Specifies whether to keep the file converting status or not. | (optional) defaults to undefined|
+| **file** | [**File**] | The file to be uploaded. | (optional) defaults to undefined|
 
 
 ### Return type
 
-**ObjectWrapper**
+**FileIntegerArrayWrapper**
 
 ### Authorization
 
@@ -1895,23 +1906,28 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ```typescript
 import {
     FilesFoldersApi,
-    Configuration,
-    UploadRequestDto
+    Configuration
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFoldersApi(configuration);
 
-let inDto: UploadRequestDto; //The request parameters for uploading a file. (optional) (default to undefined)
+let createNewIfExist: boolean; //Specifies whether to create the new file if it already exists or not. (optional) (default to undefined)
+let storeOriginalFile: boolean; //Specifies whether to upload documents in the original formats as well or not. (optional) (default to undefined)
+let keepConvertStatus: boolean; //Specifies whether to keep the file converting status or not. (optional) (default to undefined)
+let file: File; //The file to be uploaded. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.uploadFileToMy(
-    inDto
+    createNewIfExist,
+    storeOriginalFile,
+    keepConvertStatus,
+    file
 );
 ```
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
 

@@ -24,8 +24,6 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
-import type { BooleanWrapper } from '../../models';
-// @ts-ignore
 import type { Culture } from '../../models';
 // @ts-ignore
 import type { EmployeeArrayWrapper } from '../../models';
@@ -45,6 +43,8 @@ import type { SortOrder } from '../../models';
 import type { UpdateMemberRequestDto } from '../../models';
 // @ts-ignore
 import type { UpdateMembersRequestDto } from '../../models';
+// @ts-ignore
+import type { UserExistsResponseWrapper } from '../../models';
 /**
  * ProfilesApi - axios parameter creator
  * @export
@@ -113,7 +113,7 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Returns a boolean indicating whether a user with the specified email exists on the portal.
+         * Returns data indicating whether a user with the specified email exists on the portal.
          * @summary Check if a user exists by email
          * @param {string} [email] The user email address.
          * @param {string} [encemail] The user encrypted email address.
@@ -920,7 +920,7 @@ export const ProfilesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns a boolean indicating whether a user with the specified email exists on the portal.
+         * Returns data indicating whether a user with the specified email exists on the portal.
          * @summary Check if a user exists by email
          * @param {string} [email] The user email address.
          * @param {string} [encemail] The user encrypted email address.
@@ -930,7 +930,7 @@ export const ProfilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for checkUserExistsByEmail operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-user-exists-by-email/
          */
-        async checkUserExistsByEmail(email?: string, encemail?: string, culture?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+        async checkUserExistsByEmail(email?: string, encemail?: string, culture?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserExistsResponseWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.checkUserExistsByEmail(email, encemail, culture, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ProfilesApi.checkUserExistsByEmail']?.[localVarOperationServerIndex]?.url;
@@ -1146,7 +1146,7 @@ export const ProfilesApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.addMember(requestParameters.memberRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a boolean indicating whether a user with the specified email exists on the portal.
+         * Returns data indicating whether a user with the specified email exists on the portal.
          * @summary Check if a user exists by email
          * @param {ProfilesApiCheckUserExistsByEmailRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1154,7 +1154,7 @@ export const ProfilesApiFactory = function (configuration?: Configuration, baseP
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-user-exists-by-email/
          * @throws {RequiredError}
          */
-        checkUserExistsByEmail(requestParameters: ProfilesApiCheckUserExistsByEmailRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+        checkUserExistsByEmail(requestParameters: ProfilesApiCheckUserExistsByEmailRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<UserExistsResponseWrapper> {
             return localVarFp.checkUserExistsByEmail(requestParameters.email, requestParameters.encemail, requestParameters.culture, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1559,7 +1559,7 @@ export class ProfilesApi extends BaseAPI {
     }
 
     /**
-     * Returns a boolean indicating whether a user with the specified email exists on the portal.
+     * Returns data indicating whether a user with the specified email exists on the portal.
      * @summary Check if a user exists by email
      * @param {PeopleProfilesApiCheckUserExistsByEmailRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

@@ -76,9 +76,9 @@ const { status, data } = await apiInstance.addMember(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **checkUserExistsByEmail**
-> BooleanWrapper checkUserExistsByEmail()
+> UserExistsResponseWrapper checkUserExistsByEmail()
 
-Returns a boolean indicating whether a user with the specified email exists on the portal.
+Returns data indicating whether a user with the specified email exists on the portal.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/check-user-exists-by-email/).
 
@@ -93,7 +93,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-**BooleanWrapper**
+**UserExistsResponseWrapper**
 
 ### Authorization
 
@@ -130,7 +130,7 @@ const { status, data } = await apiInstance.checkUserExistsByEmail(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Boolean result |  -  |
+|**200** | User existence result |  -  |
 |**400** | Incorrect email |  -  |
 |**401** | Unauthorized |  -  |
 
