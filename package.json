@@ -26,8 +26,12 @@
   "files": [
     "dist"
   ],
+  "module": "./dist/esm/index.js",
+  "sideEffects": false,
   "scripts": {
-    "build": "tsc",
+    "build": "npm run build:cjs && npm run build:esm",
+    "build:cjs": "tsc",
+    "build:esm": "tsc --project tsconfig.esm.json",
     "prepare": "npm run build"
   },
   "dependencies": {

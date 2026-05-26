@@ -1576,6 +1576,7 @@ const { status, data } = await apiInstance.getRoomsPrimaryExternalLink(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Room security information |  -  |
+|**403** | You don\'t have enough permission to perform the operation |  -  |
 |**404** | Not Found |  -  |
 |**401** | Unauthorized |  -  |
 

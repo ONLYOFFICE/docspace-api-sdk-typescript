@@ -102,7 +102,7 @@ export const PasswordApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Reminds a password to the user using the email address specified in the request.
+         * Sends a password recovery email to the specified user address.  For unauthenticated requests, CAPTCHA validation is required when CAPTCHA is enabled in the configuration.
          * @summary Remind a user password
          * @param {EmailMemberRequestDto} [emailMemberRequestDto] 
          * @param {*} [options] Override http request option.
@@ -165,7 +165,7 @@ export const PasswordApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Reminds a password to the user using the email address specified in the request.
+         * Sends a password recovery email to the specified user address.  For unauthenticated requests, CAPTCHA validation is required when CAPTCHA is enabled in the configuration.
          * @summary Remind a user password
          * @param {EmailMemberRequestDto} [emailMemberRequestDto] 
          * @param {*} [options] Override http request option.
@@ -202,7 +202,7 @@ export const PasswordApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.changeUserPassword(requestParameters.userid, requestParameters.changePasswordRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Reminds a password to the user using the email address specified in the request.
+         * Sends a password recovery email to the specified user address.  For unauthenticated requests, CAPTCHA validation is required when CAPTCHA is enabled in the configuration.
          * @summary Remind a user password
          * @param {PasswordApiSendUserPasswordRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -271,7 +271,7 @@ export class PasswordApi extends BaseAPI {
     }
 
     /**
-     * Reminds a password to the user using the email address specified in the request.
+     * Sends a password recovery email to the specified user address.  For unauthenticated requests, CAPTCHA validation is required when CAPTCHA is enabled in the configuration.
      * @summary Remind a user password
      * @param {PeoplePasswordApiSendUserPasswordRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

@@ -209,6 +209,7 @@ const { status, data } = await apiInstance.getMigrationLogs();
 |-------------|-------------|------------------|
 |**200** | Ok |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**404** | No migration is in progress |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

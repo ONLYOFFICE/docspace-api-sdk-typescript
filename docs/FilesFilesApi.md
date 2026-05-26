@@ -569,6 +569,7 @@ const { status, data } = await apiInstance.createFilePrimaryExternalLink(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | File security information |  -  |
+|**403** | You don\'t have enough permission to perform the operation |  -  |
 |**404** | Not Found |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -1489,6 +1490,7 @@ const { status, data } = await apiInstance.getFilePrimaryExternalLink(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | File security information |  -  |
+|**403** | You don\'t have enough permission to perform the operation |  -  |
 |**404** | Not Found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

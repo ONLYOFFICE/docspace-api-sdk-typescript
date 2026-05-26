@@ -6,7 +6,7 @@ The logo request parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**tmpFile** | **string** | The path to the temporary image file. | [optional] [default to undefined]
+**tmpFile** | **string** | The path to the temporary image file. | [default to undefined]
 **x** | **number** | The X coordinate of the rectangle starting point. | [optional] [default to undefined]
 **y** | **number** | The Y coordinate of the rectangle starting point. | [optional] [default to undefined]
 **width** | **number** | The rectangle width. | [optional] [default to undefined]

@@ -204,6 +204,7 @@ const { status, data } = await apiInstance.createFolderPrimaryExternalLink(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Folders security information |  -  |
+|**403** | You don\'t have enough permission to perform the operation |  -  |
 |**404** | Not Found |  -  |
 |**401** | Unauthorized |  -  |
 
@@ -947,6 +948,7 @@ const { status, data } = await apiInstance.getFolderPrimaryExternalLink(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Folder security information |  -  |
+|**403** | You don\'t have enough permission to perform the operation |  -  |
 |**404** | Not Found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
