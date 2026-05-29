@@ -14,6 +14,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**getUserChatsSettings**](#getuserchatssettings) | **GET** /api/2.0/ai/rooms/{roomId}/chats/config | Get user chat settings for a room|
 |[**providePermission**](#providepermission) | **POST** /api/2.0/ai/chats/tool-permissions/{callId}/decision | Submit a tool execution permission decision|
 |[**renameChat**](#renamechat) | **PUT** /api/2.0/ai/chats/{chatId} | Rename an AI chat|
+|[**resolveEditorTool**](#resolveeditortool) | **POST** /api/2.0/ai/chats/tool-files/{callId}/decision | Resolve a pending editor file-generation tool|
 |[**setUserChatsSettings**](#setuserchatssettings) | **PUT** /api/2.0/ai/rooms/{roomId}/chats/config | Update user chat settings for a room|
 |[**startNewChat**](#startnewchat) | **POST** /api/2.0/ai/rooms/{roomId}/chats | Start a new AI chat|
 
@@ -593,6 +594,64 @@ const { status, data } = await apiInstance.renameChat(
 |-------------|-------------|------------------|
 |**200** | Updated chat session details |  -  |
 |**404** | The chat with the specified ID was not found or does not belong to the current user |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **resolveEditorTool**
+> GeneratedFileWrapper resolveEditorTool(editorToolDecisionRequestBody)
+
+Submits the user\'s approval or denial for a pending editor generation tool call (docx, form, presentation).  On approval the file is created from the original tool arguments and information about it is returned,  while the suspended chat tool is resumed with the same result so the AI session can continue.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/resolve-editor-tool/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **editorToolDecisionRequestBody** | **EditorToolDecisionRequestBody**| The decision parameters. | |
+| **callId** | [**string**] | The unique identifier of the pending tool call awaiting the user\'s decision. | defaults to undefined|
+
+
+### Return type
+
+**GeneratedFileWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    AIChatApi,
+    Configuration,
+    EditorToolDecisionRequestBody
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new AIChatApi(configuration);
+
+let callId: string; //The unique identifier of the pending tool call awaiting the user\'s decision. (default to undefined)
+let editorToolDecisionRequestBody: EditorToolDecisionRequestBody; //The decision parameters.
+
+const { status, data } = await apiInstance.resolveEditorTool(
+    callId,
+    editorToolDecisionRequestBody
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Information about the created file, or empty if the request was declined or has expired |  -  |
 |**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

@@ -372,13 +372,18 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Returns the URL to the checkout setup page.
          * @summary Get the checkout setup page URL
-         * @param {string} [backUrl] The URL where the user will be redirected after completing the setup.
+         * @param {string} backUrl The URL where the user will be redirected after setup cancellation.
+         * @param {string} successUrl The URL where the user will be redirected after successful payment.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getCheckoutSetupUrl operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-checkout-setup-url/
          */
-        getCheckoutSetupUrl: async (backUrl?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getCheckoutSetupUrl: async (backUrl: string, successUrl: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'backUrl' is not null or undefined
+            assertParamExists('getCheckoutSetupUrl', 'backUrl', backUrl)
+            // verify required parameter 'successUrl' is not null or undefined
+            assertParamExists('getCheckoutSetupUrl', 'successUrl', successUrl)
 
             const localVarPath = `/api/2.0/portal/payment/checkoutsetupurl`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -413,6 +418,10 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
 
             if (backUrl !== undefined) {
                 localVarQueryParameter['BackUrl'] = backUrl;
+            }
+
+            if (successUrl !== undefined) {
+                localVarQueryParameter['SuccessUrl'] = successUrl;
             }
 
 
@@ -1838,14 +1847,15 @@ export const PaymentApiFp = function(configuration?: Configuration) {
         /**
          * Returns the URL to the checkout setup page.
          * @summary Get the checkout setup page URL
-         * @param {string} [backUrl] The URL where the user will be redirected after completing the setup.
+         * @param {string} backUrl The URL where the user will be redirected after setup cancellation.
+         * @param {string} successUrl The URL where the user will be redirected after successful payment.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getCheckoutSetupUrl operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-checkout-setup-url/
          */
-        async getCheckoutSetupUrl(backUrl?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getCheckoutSetupUrl(backUrl, options);
+        async getCheckoutSetupUrl(backUrl: string, successUrl: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCheckoutSetupUrl(backUrl, successUrl, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaymentApi.getCheckoutSetupUrl']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -2276,8 +2286,8 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-checkout-setup-url/
          * @throws {RequiredError}
          */
-        getCheckoutSetupUrl(requestParameters: PaymentApiGetCheckoutSetupUrlRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.getCheckoutSetupUrl(requestParameters.backUrl, options).then((request) => request(axios, basePath));
+        getCheckoutSetupUrl(requestParameters: PaymentApiGetCheckoutSetupUrlRequest, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.getCheckoutSetupUrl(requestParameters.backUrl, requestParameters.successUrl, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the AI quota balance of a customer from the accounting service.
@@ -2613,11 +2623,18 @@ export interface PaymentApiCreditAiBalanceRequest {
  */
 export interface PaymentApiGetCheckoutSetupUrlRequest {
     /**
-     * The URL where the user will be redirected after completing the setup.
+     * The URL where the user will be redirected after setup cancellation.
      * @type {string}
      * @memberof PaymentApiGetCheckoutSetupUrl
      */
-    readonly backUrl?: string
+    readonly backUrl: string
+
+    /**
+     * The URL where the user will be redirected after successful payment.
+     * @type {string}
+     * @memberof PaymentApiGetCheckoutSetupUrl
+     */
+    readonly successUrl: string
 }
 
 /**
@@ -2981,8 +2998,8 @@ export class PaymentApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PaymentApi
      */
-    public getCheckoutSetupUrl(requestParameters: PaymentApiGetCheckoutSetupUrlRequest = {}, options?: RawAxiosRequestConfig) {
-        return PaymentApiFp(this.configuration).getCheckoutSetupUrl(requestParameters.backUrl, options).then((request) => request(this.axios, this.basePath));
+    public getCheckoutSetupUrl(requestParameters: PaymentApiGetCheckoutSetupUrlRequest, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).getCheckoutSetupUrl(requestParameters.backUrl, requestParameters.successUrl, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

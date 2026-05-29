@@ -30,7 +30,11 @@ import type { ChatWrapper } from '../../models';
 // @ts-ignore
 import type { ContinueChatBody } from '../../models';
 // @ts-ignore
+import type { EditorToolDecisionRequestBody } from '../../models';
+// @ts-ignore
 import type { ExportChatRequestBody } from '../../models';
+// @ts-ignore
+import type { GeneratedFileWrapper } from '../../models';
 // @ts-ignore
 import type { MessageArrayWrapper } from '../../models';
 // @ts-ignore
@@ -659,6 +663,68 @@ export const ChatApiAxiosParamCreator = function (configuration?: Configuration)
             };
         },
         /**
+         * Submits the user\'s approval or denial for a pending editor generation tool call (docx, form, presentation).  On approval the file is created from the original tool arguments and information about it is returned,  while the suspended chat tool is resumed with the same result so the AI session can continue.
+         * @summary Resolve a pending editor file-generation tool
+         * @param {string} callId The unique identifier of the pending tool call awaiting the user\'s decision.
+         * @param {EditorToolDecisionRequestBody} editorToolDecisionRequestBody The decision parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for resolveEditorTool operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/resolve-editor-tool/
+         */
+        resolveEditorTool: async (callId: string, editorToolDecisionRequestBody: EditorToolDecisionRequestBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'callId' is not null or undefined
+            assertParamExists('resolveEditorTool', 'callId', callId)
+            // verify required parameter 'editorToolDecisionRequestBody' is not null or undefined
+            assertParamExists('resolveEditorTool', 'editorToolDecisionRequestBody', editorToolDecisionRequestBody)
+
+            const localVarPath = `/api/2.0/ai/chats/tool-files/{callId}/decision`
+                .replace(`{${"callId"}}`, encodeURIComponent(String(callId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(editorToolDecisionRequestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Saves the current user\'s personal AI chat preferences for the specified room.  Currently supports toggling the web search capability, which allows the AI assistant to search the internet when generating responses.
          * @summary Update user chat settings for a room
          * @param {number} roomId The identifier of the room whose chat settings are to be updated.
@@ -951,6 +1017,22 @@ export const ChatApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Submits the user\'s approval or denial for a pending editor generation tool call (docx, form, presentation).  On approval the file is created from the original tool arguments and information about it is returned,  while the suspended chat tool is resumed with the same result so the AI session can continue.
+         * @summary Resolve a pending editor file-generation tool
+         * @param {string} callId The unique identifier of the pending tool call awaiting the user\'s decision.
+         * @param {EditorToolDecisionRequestBody} editorToolDecisionRequestBody The decision parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for resolveEditorTool operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/resolve-editor-tool/
+         */
+        async resolveEditorTool(callId: string, editorToolDecisionRequestBody: EditorToolDecisionRequestBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GeneratedFileWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.resolveEditorTool(callId, editorToolDecisionRequestBody, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ChatApi.resolveEditorTool']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Saves the current user\'s personal AI chat preferences for the specified room.  Currently supports toggling the web search capability, which allows the AI assistant to search the internet when generating responses.
          * @summary Update user chat settings for a room
          * @param {number} roomId The identifier of the room whose chat settings are to be updated.
@@ -1111,6 +1193,18 @@ export const ChatApiFactory = function (configuration?: Configuration, basePath?
          */
         renameChat(requestParameters: ChatApiRenameChatRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChatWrapper> {
             return localVarFp.renameChat(requestParameters.chatId, requestParameters.renameChatBody, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Submits the user\'s approval or denial for a pending editor generation tool call (docx, form, presentation).  On approval the file is created from the original tool arguments and information about it is returned,  while the suspended chat tool is resumed with the same result so the AI session can continue.
+         * @summary Resolve a pending editor file-generation tool
+         * @param {ChatApiResolveEditorToolRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for resolveEditorTool operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/resolve-editor-tool/
+         * @throws {RequiredError}
+         */
+        resolveEditorTool(requestParameters: ChatApiResolveEditorToolRequest, options?: RawAxiosRequestConfig): AxiosPromise<GeneratedFileWrapper> {
+            return localVarFp.resolveEditorTool(requestParameters.callId, requestParameters.editorToolDecisionRequestBody, options).then((request) => request(axios, basePath));
         },
         /**
          * Saves the current user\'s personal AI chat preferences for the specified room.  Currently supports toggling the web search capability, which allows the AI assistant to search the internet when generating responses.
@@ -1336,6 +1430,27 @@ export interface ChatApiRenameChatRequest {
 }
 
 /**
+ * Request parameters for resolveEditorTool operation in ChatApi.
+ * @export
+ * @interface ChatApiResolveEditorToolRequest
+ */
+export interface ChatApiResolveEditorToolRequest {
+    /**
+     * The unique identifier of the pending tool call awaiting the user\'s decision.
+     * @type {string}
+     * @memberof ChatApiResolveEditorTool
+     */
+    readonly callId: string
+
+    /**
+     * The decision parameters.
+     * @type {EditorToolDecisionRequestBody}
+     * @memberof ChatApiResolveEditorTool
+     */
+    readonly editorToolDecisionRequestBody: EditorToolDecisionRequestBody
+}
+
+/**
  * Request parameters for setUserChatsSettings operation in ChatApi.
  * @export
  * @interface ChatApiSetUserChatsSettingsRequest
@@ -1502,6 +1617,18 @@ export class ChatApi extends BaseAPI {
      */
     public renameChat(requestParameters: ChatApiRenameChatRequest, options?: RawAxiosRequestConfig) {
         return ChatApiFp(this.configuration).renameChat(requestParameters.chatId, requestParameters.renameChatBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Submits the user\'s approval or denial for a pending editor generation tool call (docx, form, presentation).  On approval the file is created from the original tool arguments and information about it is returned,  while the suspended chat tool is resumed with the same result so the AI session can continue.
+     * @summary Resolve a pending editor file-generation tool
+     * @param {AIChatApiResolveEditorToolRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ChatApi
+     */
+    public resolveEditorTool(requestParameters: ChatApiResolveEditorToolRequest, options?: RawAxiosRequestConfig) {
+        return ChatApiFp(this.configuration).resolveEditorTool(requestParameters.callId, requestParameters.editorToolDecisionRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

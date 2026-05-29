@@ -225,6 +225,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Rename an AI chat</td>
       </tr>
       <tr>
+        <td><a href="docs/AIChatApi.md#resolveeditortool"><strong>resolveEditorTool</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/chats/tool-files/{callId}/decision</td>
+        <td>Resolve a pending editor file-generation tool</td>
+      </tr>
+      <tr>
         <td><a href="docs/AIChatApi.md#setuserchatssettings"><strong>setUserChatsSettings</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/ai/rooms/{roomId}/chats/config</td>
         <td>Update user chat settings for a room</td>
@@ -3749,6 +3754,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [EditHistoryUrl](docs/EditHistoryUrl.md)
  - [EditorConfigurationDto](docs/EditorConfigurationDto.md)
  - [EditorToolCallStateDto](docs/EditorToolCallStateDto.md)
+ - [EditorToolDecisionRequestBody](docs/EditorToolDecisionRequestBody.md)
  - [EditorType](docs/EditorType.md)
  - [EmailActivationSettings](docs/EmailActivationSettings.md)
  - [EmailActivationSettingsWrapper](docs/EmailActivationSettingsWrapper.md)
@@ -3860,6 +3866,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [FormsItemArrayWrapper](docs/FormsItemArrayWrapper.md)
  - [FormsItemData](docs/FormsItemData.md)
  - [FormsItemDto](docs/FormsItemDto.md)
+ - [GeneratedFileDto](docs/GeneratedFileDto.md)
+ - [GeneratedFileWrapper](docs/GeneratedFileWrapper.md)
  - [GetPortalPrices200Response](docs/GetPortalPrices200Response.md)
  - [GetPortalPrices200ResponseLinksInner](docs/GetPortalPrices200ResponseLinksInner.md)
  - [GetReferenceDataDtoInteger](docs/GetReferenceDataDtoInteger.md)

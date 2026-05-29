@@ -20,20 +20,12 @@
 
 
 /**
- * The request parameters for the payment URL configuration with quantity information.
+ * Parameters for an editor file-generation tool decision.
  */
-export interface PaymentUrlRequestDto {
+export interface EditorToolDecisionRequestBody {
     /**
-     * The URL where the user will be redirected after payment cancellation.
+     * Whether the user approved creating the file.
      */
-    'backUrl': string;
-    /**
-     * The URL where the user will be redirected after successful payment.
-     */
-    'successUrl': string;
-    /**
-     * The payment quantity.
-     */
-    'quantity'?: { [key: string]: number; } | null;
+    'allow'?: boolean;
 }
 

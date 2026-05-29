@@ -18,22 +18,30 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { GeneratedFileDto } from './generated-file-dto';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
-/**
- * The request parameters for the payment URL configuration with quantity information.
- */
-export interface PaymentUrlRequestDto {
+export interface GeneratedFileWrapper {
+    'response'?: GeneratedFileDto;
     /**
-     * The URL where the user will be redirected after payment cancellation.
+     * The total number of items in the response
      */
-    'backUrl': string;
+    'count'?: number;
     /**
-     * The URL where the user will be redirected after successful payment.
+     * List of links related to the response
      */
-    'successUrl': string;
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
     /**
-     * The payment quantity.
+     * HTTP status code of the response
      */
-    'quantity'?: { [key: string]: number; } | null;
+    'status'?: number;
+    /**
+     * HTTP status code of the response (duplicate of status)
+     */
+    'statusCode'?: number;
 }
 

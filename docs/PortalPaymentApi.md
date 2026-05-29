@@ -323,7 +323,8 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **backUrl** | [**string**] | The URL where the user will be redirected after completing the setup. | (optional) defaults to undefined|
+| **backUrl** | [**string**] | The URL where the user will be redirected after setup cancellation. | defaults to undefined|
+| **successUrl** | [**string**] | The URL where the user will be redirected after successful payment. | defaults to undefined|
 
 
 ### Return type
@@ -345,10 +346,12 @@ import {
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
 
-let backUrl: string; //The URL where the user will be redirected after completing the setup. (optional) (default to undefined)
+let backUrl: string; //The URL where the user will be redirected after setup cancellation. (default to undefined)
+let successUrl: string; //The URL where the user will be redirected after successful payment. (default to undefined)
 
 const { status, data } = await apiInstance.getCheckoutSetupUrl(
-    backUrl
+    backUrl,
+    successUrl
 );
 ```
 

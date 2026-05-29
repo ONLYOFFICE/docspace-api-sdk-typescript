@@ -20,20 +20,20 @@
 
 
 /**
- * The request parameters for the payment URL configuration with quantity information.
+ * Information about a file created by an AI editor generation tool.
  */
-export interface PaymentUrlRequestDto {
+export interface GeneratedFileDto {
     /**
-     * The URL where the user will be redirected after payment cancellation.
+     * The unique identifier of the created file.
      */
-    'backUrl': string;
+    'id'?: number;
     /**
-     * The URL where the user will be redirected after successful payment.
+     * The file title, including extension.
      */
-    'successUrl': string;
+    'title': string | null;
     /**
-     * The payment quantity.
+     * The file extension.
      */
-    'quantity'?: { [key: string]: number; } | null;
+    'extension': string | null;
 }
 
