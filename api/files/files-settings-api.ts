@@ -42,6 +42,10 @@ import type { DisplayRequestDto } from '../../models';
 // @ts-ignore
 import type { DocServiceUrlWrapper } from '../../models';
 // @ts-ignore
+import type { ExternalSharingSettingsRequestDto } from '../../models';
+// @ts-ignore
+import type { ExternalSharingSettingsWrapper } from '../../models';
+// @ts-ignore
 import type { FileShareArrayWrapper } from '../../models';
 // @ts-ignore
 import type { FilesSettingsWrapper } from '../../models';
@@ -335,6 +339,62 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(displayRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Changes the Access Control external sharing settings.
+         * @summary Change the Access Control external sharing settings
+         * @param {ExternalSharingSettingsRequestDto} [externalSharingSettingsRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for changeExternalSharingSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-external-sharing-settings/
+         */
+        changeExternalSharingSettings: async (externalSharingSettingsRequestDto?: ExternalSharingSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/files/settings/externalsharingsettings`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(externalSharingSettingsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1720,6 +1780,21 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Changes the Access Control external sharing settings.
+         * @summary Change the Access Control external sharing settings
+         * @param {ExternalSharingSettingsRequestDto} [externalSharingSettingsRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for changeExternalSharingSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-external-sharing-settings/
+         */
+        async changeExternalSharingSettings(externalSharingSettingsRequestDto?: ExternalSharingSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ExternalSharingSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.changeExternalSharingSettings(externalSharingSettingsRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesSettingsApi.changeExternalSharingSettings']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Checks the document service location URL.
          * @summary Check the document service URL
          * @param {CheckDocServiceUrlRequestDto} [checkDocServiceUrlRequestDto] 
@@ -2144,6 +2219,18 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.changeDownloadZipFromBody(requestParameters.displayRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
+         * Changes the Access Control external sharing settings.
+         * @summary Change the Access Control external sharing settings
+         * @param {FilesSettingsApiChangeExternalSharingSettingsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for changeExternalSharingSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-external-sharing-settings/
+         * @throws {RequiredError}
+         */
+        changeExternalSharingSettings(requestParameters: FilesSettingsApiChangeExternalSharingSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ExternalSharingSettingsWrapper> {
+            return localVarFp.changeExternalSharingSettings(requestParameters.externalSharingSettingsRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Checks the document service location URL.
          * @summary Check the document service URL
          * @param {FilesSettingsApiCheckDocServiceUrlRequest} requestParameters Request parameters.
@@ -2498,6 +2585,20 @@ export interface FilesSettingsApiChangeDownloadZipFromBodyRequest {
 }
 
 /**
+ * Request parameters for changeExternalSharingSettings operation in FilesSettingsApi.
+ * @export
+ * @interface FilesSettingsApiChangeExternalSharingSettingsRequest
+ */
+export interface FilesSettingsApiChangeExternalSharingSettingsRequest {
+    /**
+     * 
+     * @type {ExternalSharingSettingsRequestDto}
+     * @memberof FilesSettingsApiChangeExternalSharingSettings
+     */
+    readonly externalSharingSettingsRequestDto?: ExternalSharingSettingsRequestDto
+}
+
+/**
  * Request parameters for checkDocServiceUrl operation in FilesSettingsApi.
  * @export
  * @interface FilesSettingsApiCheckDocServiceUrlRequest
@@ -2807,6 +2908,18 @@ export class FilesSettingsApi extends BaseAPI {
      */
     public changeDownloadZipFromBody(requestParameters: FilesSettingsApiChangeDownloadZipFromBodyRequest = {}, options?: RawAxiosRequestConfig) {
         return FilesSettingsApiFp(this.configuration).changeDownloadZipFromBody(requestParameters.displayRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Changes the Access Control external sharing settings.
+     * @summary Change the Access Control external sharing settings
+     * @param {FilesSettingsApiChangeExternalSharingSettingsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesSettingsApi
+     */
+    public changeExternalSharingSettings(requestParameters: FilesSettingsApiChangeExternalSharingSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).changeExternalSharingSettings(requestParameters.externalSharingSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

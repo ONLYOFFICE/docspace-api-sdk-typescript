@@ -1187,6 +1187,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Change the archive format (using body parameters)</td>
       </tr>
       <tr>
+        <td><a href="docs/FilesSettingsApi.md#changeexternalsharingsettings"><strong>changeExternalSharingSettings</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/settings/externalsharingsettings</td>
+        <td>Change the Access Control external sharing settings</td>
+      </tr>
+      <tr>
         <td><a href="docs/FilesSettingsApi.md#checkdocserviceurl"><strong>checkDocServiceUrl</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/docservice</td>
         <td>Check the document service URL</td>
@@ -3790,6 +3795,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [ExternalShareDto](docs/ExternalShareDto.md)
  - [ExternalShareRequestParam](docs/ExternalShareRequestParam.md)
  - [ExternalShareWrapper](docs/ExternalShareWrapper.md)
+ - [ExternalSharingSettingsDto](docs/ExternalSharingSettingsDto.md)
+ - [ExternalSharingSettingsRequestDto](docs/ExternalSharingSettingsRequestDto.md)
+ - [ExternalSharingSettingsWrapper](docs/ExternalSharingSettingsWrapper.md)
  - [FeatureUsedDto](docs/FeatureUsedDto.md)
  - [FeedbackConfig](docs/FeedbackConfig.md)
  - [FileConflictResolveType](docs/FileConflictResolveType.md)

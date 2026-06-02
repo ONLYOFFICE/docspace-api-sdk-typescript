@@ -64,6 +64,10 @@ Name | Type | Description | Notes
 **chunkUploadSize** | **number** | The size of a large file that is uploaded in chunks. | [optional] [default to undefined]
 **openEditorInSameTab** | **boolean** | Specifies whether to open the editor in the same tab or not. | [optional] [default to undefined]
 **organizeRoomsGrouping** | **boolean** | Specifies whether the grouping of rooms is enabled or not. | [optional] [default to undefined]
+**defaultShareLinkInternal** | **boolean** | Specifies the default sharing link type: true = DocSpace users only (internal), false = Anyone with the link. | [optional] [default to undefined]
+**externalShareApplyToDocuments** | **boolean** | When external sharing is restricted, specifies whether the restriction applies to the My Documents section. | [optional] [default to undefined]
+**externalShareApplyToRooms** | **boolean** | When external sharing is restricted, specifies whether the restriction applies to the Rooms section. | [optional] [default to undefined]
+**blockExistingLinksOnRestrict** | **boolean** | When external sharing is restricted, specifies whether existing public links are blocked immediately. | [optional] [default to undefined]
 **extsFilesVectorized** | **Array&lt;string&gt;** | List of extensions available for vectorization | [optional] [default to undefined]
 **maxVectorizationFileSize** | **number** | The maximum file size for vectorization | [optional] [default to undefined]
 
@@ -131,6 +135,10 @@ const instance: FilesSettingsDto = {
     chunkUploadSize,
     openEditorInSameTab,
     organizeRoomsGrouping,
+    defaultShareLinkInternal,
+    externalShareApplyToDocuments,
+    externalShareApplyToRooms,
+    blockExistingLinksOnRestrict,
     extsFilesVectorized,
     maxVectorizationFileSize,
 };

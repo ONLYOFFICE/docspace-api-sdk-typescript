@@ -256,6 +256,22 @@ export interface FilesSettingsDto {
      */
     'organizeRoomsGrouping'?: boolean;
     /**
+     * Specifies the default sharing link type: true = DocSpace users only (internal), false = Anyone with the link.
+     */
+    'defaultShareLinkInternal'?: boolean;
+    /**
+     * When external sharing is restricted, specifies whether the restriction applies to the My Documents section.
+     */
+    'externalShareApplyToDocuments'?: boolean;
+    /**
+     * When external sharing is restricted, specifies whether the restriction applies to the Rooms section.
+     */
+    'externalShareApplyToRooms'?: boolean;
+    /**
+     * When external sharing is restricted, specifies whether existing public links are blocked immediately.
+     */
+    'blockExistingLinksOnRestrict'?: boolean;
+    /**
      * List of extensions available for vectorization
      */
     'extsFilesVectorized'?: Array<string> | null;

@@ -54,6 +54,10 @@ export interface FileEntryBaseDto {
      */
     'sharedForUser'?: boolean;
     /**
+     * Specifies if the file entry is shared via a public (non-internal) external link.
+     */
+    'sharedExternal'?: boolean;
+    /**
      * Indicates whether the parent entity is shared.
      */
     'parentShared'?: boolean;
