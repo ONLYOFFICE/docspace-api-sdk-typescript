@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,38 +21,26 @@
 
 /**
  * The thumbnail request.
- * @export
- * @interface ThumbnailsRequest
  */
 export interface ThumbnailsRequest {
     /**
      * The path to the temporary thumbnail file.
-     * @type {string}
-     * @memberof ThumbnailsRequest
      */
     'tmpFile'?: string | null;
     /**
      * The thumbnail horizontal coordinate.
-     * @type {number}
-     * @memberof ThumbnailsRequest
      */
     'x'?: number;
     /**
      * The thumbnail vertical coordinate.
-     * @type {number}
-     * @memberof ThumbnailsRequest
      */
     'y'?: number;
     /**
      * The thumbnail width.
-     * @type {number}
-     * @memberof ThumbnailsRequest
      */
     'width'?: number;
     /**
      * The thumbnail height.
-     * @type {number}
-     * @memberof ThumbnailsRequest
      */
     'height'?: number;
 }

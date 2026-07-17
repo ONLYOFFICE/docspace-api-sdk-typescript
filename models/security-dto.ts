@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,38 +27,26 @@ import type { GroupSummaryDto } from './group-summary-dto';
 
 /**
  * The security information.
- * @export
- * @interface SecurityDto
  */
 export interface SecurityDto {
     /**
      * The module ID.
-     * @type {string}
-     * @memberof SecurityDto
      */
     'webItemId'?: string | null;
     /**
      * The list of users with the access to the module.
-     * @type {Array<EmployeeDto>}
-     * @memberof SecurityDto
      */
     'users'?: Array<EmployeeDto> | null;
     /**
      * The list of groups with the access to the module.
-     * @type {Array<GroupSummaryDto>}
-     * @memberof SecurityDto
      */
     'groups'?: Array<GroupSummaryDto> | null;
     /**
      * Specifies if the security settings are enabled or not.
-     * @type {boolean}
-     * @memberof SecurityDto
      */
     'enabled'?: boolean;
     /**
      * Specifies if the module is a subitem or not.
-     * @type {boolean}
-     * @memberof SecurityDto
      */
     'isSubItem'?: boolean;
 }

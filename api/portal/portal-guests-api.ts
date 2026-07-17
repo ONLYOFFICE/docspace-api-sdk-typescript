@@ -1,6 +1,6 @@
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -128,17 +127,31 @@ export const PortalGuestsApiFactory = function (configuration?: Configuration, b
         /**
          * Returns a link to share a guest with another user.
          * @summary Get a guest sharing link
-         * @param {string} userid The user ID.
+         * @param {PortalGuestsApiGetGuestSharingLinkRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getGuestSharingLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-guest-sharing-link/
          * @throws {RequiredError}
          */
-        getGuestSharingLink(userid: string, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.getGuestSharingLink(userid, options).then((request) => request(axios, basePath));
+        getGuestSharingLink(requestParameters: PortalGuestsApiGetGuestSharingLinkRequest, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.getGuestSharingLink(requestParameters.userid, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for getGuestSharingLink operation in PortalGuestsApi.
+ * @export
+ * @interface PortalGuestsApiGetGuestSharingLinkRequest
+ */
+export interface PortalGuestsApiGetGuestSharingLinkRequest {
+    /**
+     * The user ID.
+     * @type {string}
+     * @memberof PortalGuestsApiGetGuestSharingLink
+     */
+    readonly userid: string
+}
 
 /**
  * PortalGuestsApi - object-oriented interface
@@ -150,13 +163,13 @@ export class PortalGuestsApi extends BaseAPI {
     /**
      * Returns a link to share a guest with another user.
      * @summary Get a guest sharing link
-     * @param {string} userid The user ID.
+     * @param {PortalGuestsApiGetGuestSharingLinkRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PortalGuestsApi
      */
-    public getGuestSharingLink(userid: string, options?: RawAxiosRequestConfig) {
-        return PortalGuestsApiFp(this.configuration).getGuestSharingLink(userid, options).then((request) => request(this.axios, this.basePath));
+    public getGuestSharingLink(requestParameters: PortalGuestsApiGetGuestSharingLinkRequest, options?: RawAxiosRequestConfig) {
+        return PortalGuestsApiFp(this.configuration).getGuestSharingLink(requestParameters.userid, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -6,8 +6,8 @@ The forms item information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**key** | **string** |  | [optional] [default to undefined]
-**type** | **string** |  | [optional] [default to undefined]
+**key** | **string** | The form item key.              <example>field_name</example> | [optional] [default to undefined]
+**type** | **string** | The form item type.              <example>text</example> | [optional] [default to undefined]
 
 ## Example
 

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,56 +21,38 @@
 
 /**
  * The Firebase parameters.
- * @export
- * @interface FirebaseDto
  */
 export interface FirebaseDto {
     /**
      * The Firebase API key.
-     * @type {string}
-     * @memberof FirebaseDto
      */
     'apiKey': string | null;
     /**
      * The Firebase authentication domain.
-     * @type {string}
-     * @memberof FirebaseDto
      */
     'authDomain': string | null;
     /**
      * The Firebase project ID.
-     * @type {string}
-     * @memberof FirebaseDto
      */
     'projectId': string | null;
     /**
      * The Firebase storage bucket.
-     * @type {string}
-     * @memberof FirebaseDto
      */
     'storageBucket': string | null;
     /**
      * The Firebase messaging sender ID.
-     * @type {string}
-     * @memberof FirebaseDto
      */
     'messagingSenderId': string | null;
     /**
      * The Firebase application ID.
-     * @type {string}
-     * @memberof FirebaseDto
      */
     'appId': string | null;
     /**
      * The Firebase measurement ID.
-     * @type {string}
-     * @memberof FirebaseDto
      */
     'measurementId': string | null;
     /**
      * The Firebase database URL.
-     * @type {string}
-     * @memberof FirebaseDto
      */
     'databaseURL': string | null;
 }

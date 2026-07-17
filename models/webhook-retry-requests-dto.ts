@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,14 +21,10 @@
 
 /**
  * The parameters for requesting the webhook delivery retries.
- * @export
- * @interface WebhookRetryRequestsDto
  */
 export interface WebhookRetryRequestsDto {
     /**
      * The list of webhook delivery IDs to retry.
-     * @type {Array<number>}
-     * @memberof WebhookRetryRequestsDto
      */
     'ids'?: Array<number> | null;
 }

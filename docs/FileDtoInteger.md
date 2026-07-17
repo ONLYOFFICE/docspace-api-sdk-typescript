@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **ownedBy** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] [default to undefined]
 **shared** | **boolean** | Specifies if the file entry is shared via link or not. | [optional] [default to undefined]
 **sharedForUser** | **boolean** | Specifies if the file entry is shared for user or not. | [optional] [default to undefined]
+**sharedExternal** | **boolean** | Specifies if the file entry is shared via a public (non-internal) external link. | [optional] [default to undefined]
 **parentShared** | **boolean** | Indicates whether the parent entity is shared. | [optional] [default to undefined]
 **shortWebUrl** | **string** | The short Web URL. | [optional] [default to undefined]
 **created** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
@@ -47,6 +48,7 @@ Name | Type | Description | Notes
 **contentLength** | **string** | The content length of the file. | [optional] [default to undefined]
 **pureContentLength** | **number** | The pure content length of the file. | [optional] [default to undefined]
 **fileStatus** | [**FileStatus**](FileStatus.md) |  | [optional] [default to undefined]
+**editingBy** | **{ [key: string]: string | null; }** | The list of users editing the file. | [optional] [default to undefined]
 **mute** | **boolean** | Specifies if the file is muted or not. | [optional] [default to undefined]
 **viewUrl** | **string** | The URL link to view the file. | [optional] [default to undefined]
 **webUrl** | **string** | The Web URL link to the file. | [optional] [default to undefined]
@@ -64,13 +66,16 @@ Name | Type | Description | Notes
 **customFilterEnabled** | **boolean** | Specifies if the Custom Filter editing mode is enabled for a file or not. | [optional] [default to undefined]
 **customFilterEnabledBy** | **string** | The name of the user who enabled a Custom Filter editing mode for a file. | [optional] [default to undefined]
 **startFilling** | **boolean** | Specifies if the filling has started or not. | [optional] [default to undefined]
+**isFillingPreparing** | **boolean** | Specifies if the form filling has started but the file is still being saved by the document editor. Filling and editing are not allowed. | [optional] [default to undefined]
 **inProcessFolderId** | **number** | The InProcess folder ID of the file. | [optional] [default to undefined]
 **inProcessFolderTitle** | **string** | The InProcess folder title of the file. | [optional] [default to undefined]
+**resultsFolderId** | **number** | The ID of the FormFillingFolderDone folder that corresponds to this original form. | [optional] [default to undefined]
 **draftLocation** | [**DraftLocationInteger**](DraftLocationInteger.md) |  | [optional] [default to undefined]
 **viewAccessibility** | [**FileDtoIntegerAllOfViewAccessibility**](FileDtoIntegerAllOfViewAccessibility.md) |  | [optional] [default to undefined]
 **lastOpened** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
 **expired** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
 **vectorizationStatus** | [**VectorizationStatus**](VectorizationStatus.md) |  | [optional] [default to undefined]
+**externalDbTableName** | **string** | The name of the table in the external database that corresponds to this form. | [optional] [default to undefined]
 **dimensions** | [**Size**](Size.md) |  | [optional] [default to undefined]
 
 ## Example
@@ -85,6 +90,7 @@ const instance: FileDtoInteger = {
     ownedBy,
     shared,
     sharedForUser,
+    sharedExternal,
     parentShared,
     shortWebUrl,
     created,
@@ -120,6 +126,7 @@ const instance: FileDtoInteger = {
     contentLength,
     pureContentLength,
     fileStatus,
+    editingBy,
     mute,
     viewUrl,
     webUrl,
@@ -137,13 +144,16 @@ const instance: FileDtoInteger = {
     customFilterEnabled,
     customFilterEnabledBy,
     startFilling,
+    isFillingPreparing,
     inProcessFolderId,
     inProcessFolderTitle,
+    resultsFolderId,
     draftLocation,
     viewAccessibility,
     lastOpened,
     expired,
     vectorizationStatus,
+    externalDbTableName,
     dimensions,
 };
 ```

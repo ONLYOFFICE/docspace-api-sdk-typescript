@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,39 +21,16 @@
 
 /**
  * [0 - Ok, 1 - Invalid, 2 - Expired, 3 - Tariff limit, 4 - User existed, 5 - User excluded, 6 - Quota failed]
- * @export
- * @enum {number}
  */
 
 export const ValidationResult = {
-    /**
-    * Ok
-    */
     Ok: 0,
-    /**
-    * Invalid
-    */
     Invalid: 1,
-    /**
-    * Expired
-    */
     Expired: 2,
-    /**
-    * Tariff limit
-    */
     TariffLimit: 3,
-    /**
-    * User existed
-    */
     UserExisted: 4,
-    /**
-    * User excluded
-    */
     UserExcluded: 5,
-    /**
-    * Quota failed
-    */
-    QuotaFailed: 6
+    QuotaFailed: 6,
 } as const;
 
 export type ValidationResult = typeof ValidationResult[keyof typeof ValidationResult];

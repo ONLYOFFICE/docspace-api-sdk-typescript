@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,15 +20,13 @@
 
 
 /**
- * The location context of the request.
- * @export
- * @enum {number}
+ * [1 - Room, 2 - Documents, 3 - Link]
  */
 
 export const Location = {
-    NUMBER_1: 1,
-    NUMBER_2: 2,
-    NUMBER_3: 3
+    Room: 1,
+    Documents: 2,
+    Link: 3,
 } as const;
 
 export type Location = typeof Location[keyof typeof Location];

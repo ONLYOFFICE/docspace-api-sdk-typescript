@@ -1,6 +1,6 @@
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -47,7 +46,7 @@ export const StorageApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Returns a list of all the backup storages.
          * @summary Get the backup storages
-         * @param {boolean} [dump] 
+         * @param {boolean} [dump] Indicates whether the operation should perform a dump of backup storage data.  This property is used as a parameter in backup-related API requests to specify  if additional details or data dumping is required during the process.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getAllBackupStorages operation
@@ -538,7 +537,7 @@ export const StorageApiFp = function(configuration?: Configuration) {
         /**
          * Returns a list of all the backup storages.
          * @summary Get the backup storages
-         * @param {boolean} [dump] 
+         * @param {boolean} [dump] Indicates whether the operation should perform a dump of backup storage data.  This property is used as a parameter in backup-related API requests to specify  if additional details or data dumping is required during the process.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getAllBackupStorages operation
@@ -677,14 +676,14 @@ export const StorageApiFactory = function (configuration?: Configuration, basePa
         /**
          * Returns a list of all the backup storages.
          * @summary Get the backup storages
-         * @param {boolean} [dump] 
+         * @param {StorageApiGetAllBackupStoragesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getAllBackupStorages operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-backup-storages/
          * @throws {RequiredError}
          */
-        getAllBackupStorages(dump?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<StorageArrayWrapper> {
-            return localVarFp.getAllBackupStorages(dump, options).then((request) => request(axios, basePath));
+        getAllBackupStorages(requestParameters: StorageApiGetAllBackupStoragesRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StorageArrayWrapper> {
+            return localVarFp.getAllBackupStorages(requestParameters.dump, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of all the CDN storages.
@@ -755,29 +754,71 @@ export const StorageApiFactory = function (configuration?: Configuration, basePa
         /**
          * Updates the CDN storage with the parameters specified in the request.
          * @summary Update the CDN storage
-         * @param {StorageRequestsDto} [storageRequestsDto] 
+         * @param {StorageApiUpdateCdnStorageRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateCdnStorage operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-cdn-storage/
          * @throws {RequiredError}
          */
-        updateCdnStorage(storageRequestsDto?: StorageRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<CdnStorageSettingsWrapper> {
-            return localVarFp.updateCdnStorage(storageRequestsDto, options).then((request) => request(axios, basePath));
+        updateCdnStorage(requestParameters: StorageApiUpdateCdnStorageRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<CdnStorageSettingsWrapper> {
+            return localVarFp.updateCdnStorage(requestParameters.storageRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates a storage with the parameters specified in the request.
          * @summary Update a storage
-         * @param {StorageRequestsDto} [storageRequestsDto] 
+         * @param {StorageApiUpdateStorageRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateStorage operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-storage/
          * @throws {RequiredError}
          */
-        updateStorage(storageRequestsDto?: StorageRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<StorageSettingsWrapper> {
-            return localVarFp.updateStorage(storageRequestsDto, options).then((request) => request(axios, basePath));
+        updateStorage(requestParameters: StorageApiUpdateStorageRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StorageSettingsWrapper> {
+            return localVarFp.updateStorage(requestParameters.storageRequestsDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for getAllBackupStorages operation in StorageApi.
+ * @export
+ * @interface StorageApiGetAllBackupStoragesRequest
+ */
+export interface StorageApiGetAllBackupStoragesRequest {
+    /**
+     * Indicates whether the operation should perform a dump of backup storage data.  This property is used as a parameter in backup-related API requests to specify  if additional details or data dumping is required during the process.
+     * @type {boolean}
+     * @memberof StorageApiGetAllBackupStorages
+     */
+    readonly dump?: boolean
+}
+
+/**
+ * Request parameters for updateCdnStorage operation in StorageApi.
+ * @export
+ * @interface StorageApiUpdateCdnStorageRequest
+ */
+export interface StorageApiUpdateCdnStorageRequest {
+    /**
+     * 
+     * @type {StorageRequestsDto}
+     * @memberof StorageApiUpdateCdnStorage
+     */
+    readonly storageRequestsDto?: StorageRequestsDto
+}
+
+/**
+ * Request parameters for updateStorage operation in StorageApi.
+ * @export
+ * @interface StorageApiUpdateStorageRequest
+ */
+export interface StorageApiUpdateStorageRequest {
+    /**
+     * 
+     * @type {StorageRequestsDto}
+     * @memberof StorageApiUpdateStorage
+     */
+    readonly storageRequestsDto?: StorageRequestsDto
+}
 
 /**
  * StorageApi - object-oriented interface
@@ -789,13 +830,13 @@ export class StorageApi extends BaseAPI {
     /**
      * Returns a list of all the backup storages.
      * @summary Get the backup storages
-     * @param {boolean} [dump] 
+     * @param {SettingsStorageApiGetAllBackupStoragesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof StorageApi
      */
-    public getAllBackupStorages(dump?: boolean, options?: RawAxiosRequestConfig) {
-        return StorageApiFp(this.configuration).getAllBackupStorages(dump, options).then((request) => request(this.axios, this.basePath));
+    public getAllBackupStorages(requestParameters: StorageApiGetAllBackupStoragesRequest = {}, options?: RawAxiosRequestConfig) {
+        return StorageApiFp(this.configuration).getAllBackupStorages(requestParameters.dump, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -867,25 +908,25 @@ export class StorageApi extends BaseAPI {
     /**
      * Updates the CDN storage with the parameters specified in the request.
      * @summary Update the CDN storage
-     * @param {StorageRequestsDto} [storageRequestsDto] 
+     * @param {SettingsStorageApiUpdateCdnStorageRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof StorageApi
      */
-    public updateCdnStorage(storageRequestsDto?: StorageRequestsDto, options?: RawAxiosRequestConfig) {
-        return StorageApiFp(this.configuration).updateCdnStorage(storageRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public updateCdnStorage(requestParameters: StorageApiUpdateCdnStorageRequest = {}, options?: RawAxiosRequestConfig) {
+        return StorageApiFp(this.configuration).updateCdnStorage(requestParameters.storageRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Updates a storage with the parameters specified in the request.
      * @summary Update a storage
-     * @param {StorageRequestsDto} [storageRequestsDto] 
+     * @param {SettingsStorageApiUpdateStorageRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof StorageApi
      */
-    public updateStorage(storageRequestsDto?: StorageRequestsDto, options?: RawAxiosRequestConfig) {
-        return StorageApiFp(this.configuration).updateStorage(storageRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public updateStorage(requestParameters: StorageApiUpdateStorageRequest = {}, options?: RawAxiosRequestConfig) {
+        return StorageApiFp(this.configuration).updateStorage(requestParameters.storageRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

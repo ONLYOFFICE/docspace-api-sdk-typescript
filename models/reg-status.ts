@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,15 +20,13 @@
 
 
 /**
- * The registration Telegram status.
- * @export
- * @enum {number}
+ * []
  */
 
 export const RegStatus = {
-    NUMBER_0: 0,
-    NUMBER_1: 1,
-    NUMBER_2: 2
+    unlinked: 0,
+    linked: 1,
+    linking: 2,
 } as const;
 
 export type RegStatus = typeof RegStatus[keyof typeof RegStatus];

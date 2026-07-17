@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,21 +24,12 @@ import type { UpdateMembersQuotaRequestDtoQuota } from './update-members-quota-r
 
 /**
  * The request parameters for updating a user quota.
- * @export
- * @interface UpdateMembersQuotaRequestDto
  */
 export interface UpdateMembersQuotaRequestDto {
     /**
      * The list of user IDs.
-     * @type {Array<string>}
-     * @memberof UpdateMembersQuotaRequestDto
      */
     'userIds'?: Array<string> | null;
-    /**
-     * 
-     * @type {UpdateMembersQuotaRequestDtoQuota}
-     * @memberof UpdateMembersQuotaRequestDto
-     */
     'quota'?: UpdateMembersQuotaRequestDtoQuota;
 }
 

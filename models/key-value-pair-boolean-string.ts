@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,23 +19,8 @@
  */
 
 
-/**
- * 
- * @export
- * @interface KeyValuePairBooleanString
- */
 export interface KeyValuePairBooleanString {
-    /**
-     * 
-     * @type {boolean}
-     * @memberof KeyValuePairBooleanString
-     */
     'key'?: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof KeyValuePairBooleanString
-     */
     'value'?: string | null;
 }
 

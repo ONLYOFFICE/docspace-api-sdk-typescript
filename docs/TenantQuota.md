@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **priceISOCurrencySymbol** | **string** | The tenant price three-character ISO 4217 currency symbol. | [optional] [default to undefined]
 **productId** | **string** | The tenant product ID. | [optional] [default to undefined]
 **serviceName** | **string** | The service name. | [optional] [default to undefined]
+**serviceGroup** | **string** | The service group. | [optional] [default to undefined]
 **visible** | **boolean** | Specifies if the tenant quota is visible or not. | [optional] [default to undefined]
 **wallet** | **boolean** | Specifies if the tenant quota applies to the wallet or not | [optional] [default to undefined]
 **dueDate** | **string** | The quota due date. | [optional] [default to undefined]
@@ -35,6 +36,7 @@ Name | Type | Description | Notes
 **branding** | **boolean** | Specifies if the branding settings are available or not. | [optional] [default to undefined]
 **customization** | **boolean** | Specifies if the customization settings are available or not. | [optional] [default to undefined]
 **lifetime** | **boolean** | Specifies if the license has the lifetime settings or not. | [optional] [default to undefined]
+**automationApi** | **boolean** | Specifies if the Automation API is available or not. | [optional] [default to undefined]
 **custom** | **boolean** | Specifies if the custom domain URL is available or not. | [optional] [default to undefined]
 **restore** | **boolean** | Specifies if the restore is enabled or not. | [optional] [default to undefined]
 **oauth** | **boolean** | Specifies if Oauth is available or not. | [optional] [default to undefined]
@@ -42,8 +44,9 @@ Name | Type | Description | Notes
 **thirdParty** | **boolean** | Specifies if the third-party accounts linking is available or not. | [optional] [default to undefined]
 **year** | **boolean** | Specifies if the tenant quota is yearly subscription or not. | [optional] [default to undefined]
 **countFreeBackup** | **number** | The number of free backups within a month. | [optional] [default to undefined]
-**backup** | **boolean** | Specifies if the backup anabled as a wallet service or not. | [optional] [default to undefined]
+**backup** | **boolean** | Specifies if the backup enabled as a wallet service or not. | [optional] [default to undefined]
 **countAIAgent** | **number** | The number of AI agents. | [optional] [default to undefined]
+**aiTools** | **boolean** | Specifies if the AI tools enabled as a wallet service or not. | [optional] [default to undefined]
 
 ## Example
 
@@ -58,6 +61,7 @@ const instance: TenantQuota = {
     priceISOCurrencySymbol,
     productId,
     serviceName,
+    serviceGroup,
     visible,
     wallet,
     dueDate,
@@ -80,6 +84,7 @@ const instance: TenantQuota = {
     branding,
     customization,
     lifetime,
+    automationApi,
     custom,
     restore,
     oauth,
@@ -89,6 +94,7 @@ const instance: TenantQuota = {
     countFreeBackup,
     backup,
     countAIAgent,
+    aiTools,
 };
 ```
 

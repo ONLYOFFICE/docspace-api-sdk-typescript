@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,26 +21,18 @@
 
 /**
  * The file editing history URL parameters.
- * @export
- * @interface EditHistoryUrl
  */
 export interface EditHistoryUrl {
     /**
      * The document identifier of the previous version of the document.
-     * @type {string}
-     * @memberof EditHistoryUrl
      */
     'key'?: string | null;
     /**
      * The url address of the previous version of the document.
-     * @type {string}
-     * @memberof EditHistoryUrl
      */
     'url'?: string | null;
     /**
      * The document extension.
-     * @type {string}
-     * @memberof EditHistoryUrl
      */
     'fileType'?: string | null;
 }

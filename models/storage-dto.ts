@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,38 +24,26 @@ import type { AuthKey } from './auth-key';
 
 /**
  * The storage information.
- * @export
- * @interface StorageDto
  */
 export interface StorageDto {
     /**
      * The storage ID.
-     * @type {string}
-     * @memberof StorageDto
      */
     'id': string | null;
     /**
      * The storage title.
-     * @type {string}
-     * @memberof StorageDto
      */
     'title': string | null;
     /**
      * The list of storage authentication keys.
-     * @type {Array<AuthKey>}
-     * @memberof StorageDto
      */
     'properties'?: Array<AuthKey> | null;
     /**
      * Specifies if this is the current portal storage or not.
-     * @type {boolean}
-     * @memberof StorageDto
      */
     'current': boolean;
     /**
      * Specifies if this storage can be set or not.
-     * @type {boolean}
-     * @memberof StorageDto
      */
     'isSet': boolean;
 }

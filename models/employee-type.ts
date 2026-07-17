@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +21,6 @@
 
 /**
  * [All - All, RoomAdmin - Room admin, Guest - Guest, DocSpaceAdmin - DocSpace admin, User - User]
- * @export
- * @enum {string}
  */
 
 export const EmployeeType = {
@@ -28,7 +28,7 @@ export const EmployeeType = {
     RoomAdmin: 'RoomAdmin',
     Guest: 'Guest',
     DocSpaceAdmin: 'DocSpaceAdmin',
-    User: 'User'
+    User: 'User',
 } as const;
 
 export type EmployeeType = typeof EmployeeType[keyof typeof EmployeeType];

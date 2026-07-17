@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,44 +21,30 @@
 
 /**
  * The SSO field mapping.
- * @export
- * @interface SsoFieldMapping
  */
 export interface SsoFieldMapping {
     /**
      * The first name.
-     * @type {string}
-     * @memberof SsoFieldMapping
      */
     'firstName'?: string | null;
     /**
      * The last name.
-     * @type {string}
-     * @memberof SsoFieldMapping
      */
     'lastName'?: string | null;
     /**
      * The email address.
-     * @type {string}
-     * @memberof SsoFieldMapping
      */
     'email'?: string | null;
     /**
      * The title.
-     * @type {string}
-     * @memberof SsoFieldMapping
      */
     'title'?: string | null;
     /**
      * The location.
-     * @type {string}
-     * @memberof SsoFieldMapping
      */
     'location'?: string | null;
     /**
      * The phone number.
-     * @type {string}
-     * @memberof SsoFieldMapping
      */
     'phone'?: string | null;
 }

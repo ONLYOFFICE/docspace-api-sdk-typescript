@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,44 +21,30 @@
 
 /**
  * The third-party backup request parameters.
- * @export
- * @interface ThirdPartyBackupRequestDto
  */
 export interface ThirdPartyBackupRequestDto {
     /**
      * The connection URL for the sharepoint.
-     * @type {string}
-     * @memberof ThirdPartyBackupRequestDto
      */
     'url'?: string | null;
     /**
      * The login.
-     * @type {string}
-     * @memberof ThirdPartyBackupRequestDto
      */
     'login'?: string | null;
     /**
      * The password.
-     * @type {string}
-     * @memberof ThirdPartyBackupRequestDto
      */
     'password'?: string | null;
     /**
      * The authentication token.
-     * @type {string}
-     * @memberof ThirdPartyBackupRequestDto
      */
     'token'?: string | null;
     /**
      * The customer title.
-     * @type {string}
-     * @memberof ThirdPartyBackupRequestDto
      */
     'customerTitle'?: string | null;
     /**
      * The provider key.
-     * @type {string}
-     * @memberof ThirdPartyBackupRequestDto
      */
     'providerKey'?: string | null;
 }

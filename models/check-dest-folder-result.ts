@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,23 +21,12 @@
 
 /**
  * [0 - All allowed, 1 - Part allowed, 2 - None allowed]
- * @export
- * @enum {number}
  */
 
 export const CheckDestFolderResult = {
-    /**
-    * All allowed
-    */
     AllAllowed: 0,
-    /**
-    * Part allowed
-    */
     PartAllowed: 1,
-    /**
-    * None allowed
-    */
-    NoneAllowed: 2
+    NoneAllowed: 2,
 } as const;
 
 export type CheckDestFolderResult = typeof CheckDestFolderResult[keyof typeof CheckDestFolderResult];

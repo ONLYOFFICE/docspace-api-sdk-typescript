@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -111,6 +113,12 @@ export type FileDtoInteger = FileEntryDtoInteger &  {
      */
     'fileStatus'?: FileStatus;
     /**
+     * The list of users editing the file.
+     * @type {{ [key: string]: string | null; }}
+     * @memberof FileDtoInteger
+     */
+    'editingBy'?: { [key: string]: string | null; } | null;
+    /**
      * Specifies if the file is muted or not.
      * @type {boolean}
      * @memberof FileDtoInteger
@@ -213,6 +221,12 @@ export type FileDtoInteger = FileEntryDtoInteger &  {
      */
     'startFilling'?: boolean | null;
     /**
+     * Specifies if the form filling has started but the file is still being saved by the document editor. Filling and editing are not allowed.
+     * @type {boolean}
+     * @memberof FileDtoInteger
+     */
+    'isFillingPreparing'?: boolean | null;
+    /**
      * The InProcess folder ID of the file.
      * @type {number}
      * @memberof FileDtoInteger
@@ -224,6 +238,12 @@ export type FileDtoInteger = FileEntryDtoInteger &  {
      * @memberof FileDtoInteger
      */
     'inProcessFolderTitle'?: string | null;
+    /**
+     * The ID of the FormFillingFolderDone folder that corresponds to this original form.
+     * @type {number}
+     * @memberof FileDtoInteger
+     */
+    'resultsFolderId'?: number | null;
     /**
      * 
      * @type {DraftLocationInteger}
@@ -254,6 +274,12 @@ export type FileDtoInteger = FileEntryDtoInteger &  {
      * @memberof FileDtoInteger
      */
     'vectorizationStatus'?: VectorizationStatus;
+    /**
+     * The name of the table in the external database that corresponds to this form.
+     * @type {string}
+     * @memberof FileDtoInteger
+     */
+    'externalDbTableName'?: string | null;
     /**
      * 
      * @type {Size}

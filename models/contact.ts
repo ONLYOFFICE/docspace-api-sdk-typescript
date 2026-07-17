@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,20 +21,14 @@
 
 /**
  * The contact information.
- * @export
- * @interface Contact
  */
 export interface Contact {
     /**
      * The contact type.
-     * @type {string}
-     * @memberof Contact
      */
     'type'?: string | null;
     /**
      * The contact value.
-     * @type {string}
-     * @memberof Contact
      */
     'value'?: string | null;
 }

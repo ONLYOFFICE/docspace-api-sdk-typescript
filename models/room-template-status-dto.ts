@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,32 +21,22 @@
 
 /**
  * The room template status.
- * @export
- * @interface RoomTemplateStatusDto
  */
 export interface RoomTemplateStatusDto {
     /**
      * The room template ID.
-     * @type {number}
-     * @memberof RoomTemplateStatusDto
      */
     'templateId': number;
     /**
      * The progress of the room template creation process.
-     * @type {number}
-     * @memberof RoomTemplateStatusDto
      */
     'progress': number;
     /**
      * The error message that is sent when the room template is not created successfully.
-     * @type {string}
-     * @memberof RoomTemplateStatusDto
      */
     'error'?: string | null;
     /**
      * Specifies whether the process of creating the room template is completed.
-     * @type {boolean}
-     * @memberof RoomTemplateStatusDto
      */
     'isCompleted': boolean;
 }

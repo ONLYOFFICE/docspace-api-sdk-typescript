@@ -14,11 +14,7 @@ Name | Type | Description | Notes
 **firstName** | **string** | The user first name. | [optional] [default to undefined]
 **lastName** | **string** | The user last name. | [optional] [default to undefined]
 **department** | **Array&lt;string&gt;** | The list of the user departments IDs. | [optional] [default to undefined]
-**title** | **string** | The user title. | [optional] [default to undefined]
 **location** | **string** | The user location. | [optional] [default to undefined]
-**sex** | [**SexEnum**](SexEnum.md) |  | [optional] [default to undefined]
-**birthday** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
-**worksfrom** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
 **comment** | **string** | The user comment. | [optional] [default to undefined]
 **contacts** | [**Array&lt;Contact&gt;**](Contact.md) | The list of the user contacts. | [optional] [default to undefined]
 **files** | **string** | The avatar photo URL. | [optional] [default to undefined]
@@ -42,11 +38,7 @@ const instance: MemberRequestDto = {
     firstName,
     lastName,
     department,
-    title,
     location,
-    sex,
-    birthday,
-    worksfrom,
     comment,
     contacts,
     files,

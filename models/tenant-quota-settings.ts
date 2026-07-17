@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,32 +21,22 @@
 
 /**
  * The tenant quota settings.
- * @export
- * @interface TenantQuotaSettings
  */
 export interface TenantQuotaSettings {
     /**
      * Specifies if the tenant quota is enabled or not.
-     * @type {boolean}
-     * @memberof TenantQuotaSettings
      */
     'enableQuota'?: boolean;
     /**
      * The tenant quota.
-     * @type {number}
-     * @memberof TenantQuotaSettings
      */
     'quota'?: number;
     /**
      * The date of the last tenant quota recalculation.
-     * @type {string}
-     * @memberof TenantQuotaSettings
      */
     'lastRecalculateDate'?: string | null;
     /**
-     * 
-     * @type {string}
-     * @memberof TenantQuotaSettings
+     * The timestamp indicating when the settings were last modified.
      */
     'lastModified'?: string;
 }

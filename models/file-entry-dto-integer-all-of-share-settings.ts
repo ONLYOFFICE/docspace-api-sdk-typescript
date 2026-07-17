@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,39 +21,12 @@
 
 /**
  * A dictionary representing the sharing settings for the file entry.
- * @export
- * @interface FileEntryDtoIntegerAllOfShareSettings
  */
 export interface FileEntryDtoIntegerAllOfShareSettings {
-    /**
-     * 
-     * @type {number}
-     * @memberof FileEntryDtoIntegerAllOfShareSettings
-     */
     'User'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof FileEntryDtoIntegerAllOfShareSettings
-     */
     'ExternalLink'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof FileEntryDtoIntegerAllOfShareSettings
-     */
     'Group'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof FileEntryDtoIntegerAllOfShareSettings
-     */
     'InvitationLink'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof FileEntryDtoIntegerAllOfShareSettings
-     */
     'PrimaryExternalLink'?: number;
 }
 

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,59 +19,14 @@
  */
 
 
-/**
- * 
- * @export
- * @interface OAuth20Token
- */
 export interface OAuth20Token {
-    /**
-     * 
-     * @type {string}
-     * @memberof OAuth20Token
-     */
     'access_token'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof OAuth20Token
-     */
     'refresh_token'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof OAuth20Token
-     */
     'expires_in'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof OAuth20Token
-     */
     'client_id'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof OAuth20Token
-     */
     'client_secret'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof OAuth20Token
-     */
     'redirect_uri'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof OAuth20Token
-     */
     'timestamp'?: string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof OAuth20Token
-     */
     'isExpired'?: boolean;
 }
 

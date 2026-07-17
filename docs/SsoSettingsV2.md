@@ -6,7 +6,7 @@ The SSO portal settings.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**lastModified** | **string** |  | [optional] [default to undefined]
+**lastModified** | **string** | The timestamp indicating when the settings were last modified. | [optional] [default to undefined]
 **enableSso** | **boolean** | Specifies if the SSO settings are enabled or not. | [optional] [default to undefined]
 **idpSettings** | [**SsoIdpSettings**](SsoIdpSettings.md) |  | [optional] [default to undefined]
 **idpCertificates** | [**Array&lt;SsoCertificate&gt;**](SsoCertificate.md) | The list of the IdP certificates. | [optional] [default to undefined]

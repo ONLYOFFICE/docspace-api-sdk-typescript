@@ -1,6 +1,6 @@
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -33,9 +32,19 @@ import type { BooleanWrapper } from '../../models';
 // @ts-ignore
 import type { CheckDocServiceUrlRequestDto } from '../../models';
 // @ts-ignore
+import type { DefaultTemplateSettingsRequestDto } from '../../models';
+// @ts-ignore
+import type { DefaultTemplateSettingsResetRequestDto } from '../../models';
+// @ts-ignore
+import type { DefaultTemplateSettingsWrapper } from '../../models';
+// @ts-ignore
 import type { DisplayRequestDto } from '../../models';
 // @ts-ignore
 import type { DocServiceUrlWrapper } from '../../models';
+// @ts-ignore
+import type { ExternalSharingSettingsRequestDto } from '../../models';
+// @ts-ignore
+import type { ExternalSharingSettingsWrapper } from '../../models';
 // @ts-ignore
 import type { FileShareArrayWrapper } from '../../models';
 // @ts-ignore
@@ -330,6 +339,62 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(displayRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Changes the Access Control external sharing settings.
+         * @summary Change the Access Control external sharing settings
+         * @param {ExternalSharingSettingsRequestDto} [externalSharingSettingsRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for changeExternalSharingSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-external-sharing-settings/
+         */
+        changeExternalSharingSettings: async (externalSharingSettingsRequestDto?: ExternalSharingSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/files/settings/externalsharingsettings`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(externalSharingSettingsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -679,6 +744,58 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
         getAutomaticallyCleanUp: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/files/settings/autocleanup`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the default template setting.
+         * @summary Get the default template setting
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getDefaultTemplates operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-default-templates/
+         */
+        getDefaultTemplates: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/files/settings/defaulttemplate`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1120,6 +1237,118 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
+         * Resets the default template setting.
+         * @summary Reset the default template setting
+         * @param {DefaultTemplateSettingsResetRequestDto} [defaultTemplateSettingsResetRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for resetDefaultTemplate operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-default-template/
+         */
+        resetDefaultTemplate: async (defaultTemplateSettingsResetRequestDto?: DefaultTemplateSettingsResetRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/files/settings/defaulttemplate`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(defaultTemplateSettingsResetRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Changes the default template setting.
+         * @summary Change the default template setting
+         * @param {DefaultTemplateSettingsRequestDto} [defaultTemplateSettingsRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setDefaultTemplate operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-default-template/
+         */
+        setDefaultTemplate: async (defaultTemplateSettingsRequestDto?: DefaultTemplateSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/files/settings/defaulttemplate`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(defaultTemplateSettingsRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Changes the ability to open the document in the same browser tab.
          * @summary Open document in the same browser tab
          * @param {SettingsRequestDto} [settingsRequestDto] 
@@ -1131,6 +1360,62 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
         setOpenEditorInSameTab: async (settingsRequestDto?: SettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/files/settings/openeditorinsametab`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(settingsRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Changes the setting that allows the user to organize the grouping of rooms.
+         * @summary Organize rooms grouping
+         * @param {SettingsRequestDto} [settingsRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setOrganizeRoomsGrouping operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-organize-rooms-grouping/
+         */
+        setOrganizeRoomsGrouping: async (settingsRequestDto?: SettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/files/settings/organizegrouping`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1339,6 +1624,76 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Uploads a file to use as the default template setting.
+         * @summary Upload a file as the default template setting
+         * @param {string} fileExtension File extension of a template to replace
+         * @param {File} file File to replace template with
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for uploadDefaultTemplate operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-default-template/
+         */
+        uploadDefaultTemplate: async (fileExtension: string, file: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'fileExtension' is not null or undefined
+            assertParamExists('uploadDefaultTemplate', 'fileExtension', fileExtension)
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('uploadDefaultTemplate', 'file', file)
+
+            const localVarPath = `/api/2.0/files/settings/defaulttemplate`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (fileExtension !== undefined) {
+                localVarQueryParameter['FileExtension'] = fileExtension;
+            }
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('File', file as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -1422,6 +1777,21 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.changeDownloadZipFromBody(displayRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesSettingsApi.changeDownloadZipFromBody']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Changes the Access Control external sharing settings.
+         * @summary Change the Access Control external sharing settings
+         * @param {ExternalSharingSettingsRequestDto} [externalSharingSettingsRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for changeExternalSharingSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-external-sharing-settings/
+         */
+        async changeExternalSharingSettings(externalSharingSettingsRequestDto?: ExternalSharingSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ExternalSharingSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.changeExternalSharingSettings(externalSharingSettingsRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesSettingsApi.changeExternalSharingSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1528,6 +1898,20 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns the default template setting.
+         * @summary Get the default template setting
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getDefaultTemplates operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-default-templates/
+         */
+        async getDefaultTemplates(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DefaultTemplateSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getDefaultTemplates(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesSettingsApi.getDefaultTemplates']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns the URL address of the connected editors.
          * @summary Get the document service URL
          * @param {boolean} [version] Specifies whether to return the editor version or not.
@@ -1594,7 +1978,7 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
          * REST API Reference for hideConfirmConvert operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/hide-confirm-convert/
          */
-        async hideConfirmConvert(hideConfirmConvertRequestDto?: HideConfirmConvertRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModuleWrapper>> {
+        async hideConfirmConvert(hideConfirmConvertRequestDto?: HideConfirmConvertRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.hideConfirmConvert(hideConfirmConvertRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesSettingsApi.hideConfirmConvert']?.[localVarOperationServerIndex]?.url;
@@ -1645,6 +2029,36 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Resets the default template setting.
+         * @summary Reset the default template setting
+         * @param {DefaultTemplateSettingsResetRequestDto} [defaultTemplateSettingsResetRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for resetDefaultTemplate operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-default-template/
+         */
+        async resetDefaultTemplate(defaultTemplateSettingsResetRequestDto?: DefaultTemplateSettingsResetRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DefaultTemplateSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.resetDefaultTemplate(defaultTemplateSettingsResetRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesSettingsApi.resetDefaultTemplate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Changes the default template setting.
+         * @summary Change the default template setting
+         * @param {DefaultTemplateSettingsRequestDto} [defaultTemplateSettingsRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setDefaultTemplate operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-default-template/
+         */
+        async setDefaultTemplate(defaultTemplateSettingsRequestDto?: DefaultTemplateSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DefaultTemplateSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setDefaultTemplate(defaultTemplateSettingsRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesSettingsApi.setDefaultTemplate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Changes the ability to open the document in the same browser tab.
          * @summary Open document in the same browser tab
          * @param {SettingsRequestDto} [settingsRequestDto] 
@@ -1657,6 +2071,21 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setOpenEditorInSameTab(settingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesSettingsApi.setOpenEditorInSameTab']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Changes the setting that allows the user to organize the grouping of rooms.
+         * @summary Organize rooms grouping
+         * @param {SettingsRequestDto} [settingsRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setOrganizeRoomsGrouping operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-organize-rooms-grouping/
+         */
+        async setOrganizeRoomsGrouping(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setOrganizeRoomsGrouping(settingsRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesSettingsApi.setOrganizeRoomsGrouping']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1703,6 +2132,22 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['FilesSettingsApi.updateFileIfExist']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * Uploads a file to use as the default template setting.
+         * @summary Upload a file as the default template setting
+         * @param {string} fileExtension File extension of a template to replace
+         * @param {File} file File to replace template with
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for uploadDefaultTemplate operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-default-template/
+         */
+        async uploadDefaultTemplate(fileExtension: string, file: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DefaultTemplateSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadDefaultTemplate(fileExtension, file, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesSettingsApi.uploadDefaultTemplate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -1716,122 +2161,134 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
         /**
          * Changes the access to the third-party settings.
          * @summary Change the third-party settings access
-         * @param {SettingsRequestDto} [settingsRequestDto] 
+         * @param {FilesSettingsApiChangeAccessToThirdpartyRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for changeAccessToThirdparty operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-access-to-thirdparty/
          * @throws {RequiredError}
          */
-        changeAccessToThirdparty(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.changeAccessToThirdparty(settingsRequestDto, options).then((request) => request(axios, basePath));
+        changeAccessToThirdparty(requestParameters: FilesSettingsApiChangeAccessToThirdpartyRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.changeAccessToThirdparty(requestParameters.settingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates the trash bin auto-clearing setting.
          * @summary Update the trash bin auto-clearing setting
-         * @param {AutoCleanupRequestDto} [autoCleanupRequestDto] 
+         * @param {FilesSettingsApiChangeAutomaticallyCleanUpRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for changeAutomaticallyCleanUp operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-automatically-clean-up/
          * @throws {RequiredError}
          */
-        changeAutomaticallyCleanUp(autoCleanupRequestDto?: AutoCleanupRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<AutoCleanUpDataWrapper> {
-            return localVarFp.changeAutomaticallyCleanUp(autoCleanupRequestDto, options).then((request) => request(axios, basePath));
+        changeAutomaticallyCleanUp(requestParameters: FilesSettingsApiChangeAutomaticallyCleanUpRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<AutoCleanUpDataWrapper> {
+            return localVarFp.changeAutomaticallyCleanUp(requestParameters.autoCleanupRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Changes the default access rights in the sharing settings.
          * @summary Change the default access rights
-         * @param {Array<number>} [requestBody] Sharing rights (None, ReadWrite, Read, Restrict, Varies, Review, Comment, FillForms, CustomFilter, RoomAdmin, Editing, Collaborator).
+         * @param {FilesSettingsApiChangeDefaultAccessRightsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for changeDefaultAccessRights operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-default-access-rights/
          * @throws {RequiredError}
          */
-        changeDefaultAccessRights(requestBody?: Array<number>, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
-            return localVarFp.changeDefaultAccessRights(requestBody, options).then((request) => request(axios, basePath));
+        changeDefaultAccessRights(requestParameters: FilesSettingsApiChangeDefaultAccessRightsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
+            return localVarFp.changeDefaultAccessRights(requestParameters.requestBody, options).then((request) => request(axios, basePath));
         },
         /**
          * Specifies whether to confirm the file deletion or not.
          * @summary Confirm the file deletion
-         * @param {SettingsRequestDto} [settingsRequestDto] 
+         * @param {FilesSettingsApiChangeDeleteConfirmRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for changeDeleteConfirm operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-delete-confirm/
          * @throws {RequiredError}
          */
-        changeDeleteConfirm(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.changeDeleteConfirm(settingsRequestDto, options).then((request) => request(axios, basePath));
+        changeDeleteConfirm(requestParameters: FilesSettingsApiChangeDeleteConfirmRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.changeDeleteConfirm(requestParameters.settingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Changes the format of the downloaded archive from .zip to .tar.gz. This method uses the body parameters.
          * @summary Change the archive format (using body parameters)
-         * @param {DisplayRequestDto} [displayRequestDto] 
+         * @param {FilesSettingsApiChangeDownloadZipFromBodyRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for changeDownloadZipFromBody operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-download-zip-from-body/
          * @throws {RequiredError}
          */
-        changeDownloadZipFromBody(displayRequestDto?: DisplayRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<ICompressWrapper> {
-            return localVarFp.changeDownloadZipFromBody(displayRequestDto, options).then((request) => request(axios, basePath));
+        changeDownloadZipFromBody(requestParameters: FilesSettingsApiChangeDownloadZipFromBodyRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ICompressWrapper> {
+            return localVarFp.changeDownloadZipFromBody(requestParameters.displayRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Changes the Access Control external sharing settings.
+         * @summary Change the Access Control external sharing settings
+         * @param {FilesSettingsApiChangeExternalSharingSettingsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for changeExternalSharingSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-external-sharing-settings/
+         * @throws {RequiredError}
+         */
+        changeExternalSharingSettings(requestParameters: FilesSettingsApiChangeExternalSharingSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ExternalSharingSettingsWrapper> {
+            return localVarFp.changeExternalSharingSettings(requestParameters.externalSharingSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Checks the document service location URL.
          * @summary Check the document service URL
-         * @param {CheckDocServiceUrlRequestDto} [checkDocServiceUrlRequestDto] 
+         * @param {FilesSettingsApiCheckDocServiceUrlRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for checkDocServiceUrl operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-doc-service-url/
          * @throws {RequiredError}
          */
-        checkDocServiceUrl(checkDocServiceUrlRequestDto?: CheckDocServiceUrlRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<DocServiceUrlWrapper> {
-            return localVarFp.checkDocServiceUrl(checkDocServiceUrlRequestDto, options).then((request) => request(axios, basePath));
+        checkDocServiceUrl(requestParameters: FilesSettingsApiCheckDocServiceUrlRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<DocServiceUrlWrapper> {
+            return localVarFp.checkDocServiceUrl(requestParameters.checkDocServiceUrlRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Specifies whether to display a file extension or not.
          * @summary Display a file extension
-         * @param {SettingsRequestDto} [settingsRequestDto] 
+         * @param {FilesSettingsApiDisplayFileExtensionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for displayFileExtension operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/display-file-extension/
          * @throws {RequiredError}
          */
-        displayFileExtension(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.displayFileExtension(settingsRequestDto, options).then((request) => request(axios, basePath));
+        displayFileExtension(requestParameters: FilesSettingsApiDisplayFileExtensionRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.displayFileExtension(requestParameters.settingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Displays the Recent folder.
          * @summary Display the Recent folder
-         * @param {DisplayRequestDto} [displayRequestDto] 
+         * @param {FilesSettingsApiDisplayRecentRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for displayRecent operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/display-recent/
          * @throws {RequiredError}
          */
-        displayRecent(displayRequestDto?: DisplayRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.displayRecent(displayRequestDto, options).then((request) => request(axios, basePath));
+        displayRecent(requestParameters: FilesSettingsApiDisplayRecentRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.displayRecent(requestParameters.displayRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Changes the ability to share a file externally.
          * @summary Change the external sharing ability
-         * @param {DisplayRequestDto} [displayRequestDto] 
+         * @param {FilesSettingsApiExternalShareRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for externalShare operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/external-share/
          * @throws {RequiredError}
          */
-        externalShare(displayRequestDto?: DisplayRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.externalShare(displayRequestDto, options).then((request) => request(axios, basePath));
+        externalShare(requestParameters: FilesSettingsApiExternalShareRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.externalShare(requestParameters.displayRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Changes the ability to share a file externally on social networks.
          * @summary Change the external sharing ability on social networks
-         * @param {DisplayRequestDto} [displayRequestDto] 
+         * @param {FilesSettingsApiExternalShareSocialMediaRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for externalShareSocialMedia operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/external-share-social-media/
          * @throws {RequiredError}
          */
-        externalShareSocialMedia(displayRequestDto?: DisplayRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.externalShareSocialMedia(displayRequestDto, options).then((request) => request(axios, basePath));
+        externalShareSocialMedia(requestParameters: FilesSettingsApiExternalShareSocialMediaRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.externalShareSocialMedia(requestParameters.displayRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Specifies if the file forcesaving is enabled or not.
@@ -1856,16 +2313,27 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
             return localVarFp.getAutomaticallyCleanUp(options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns the default template setting.
+         * @summary Get the default template setting
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getDefaultTemplates operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-default-templates/
+         * @throws {RequiredError}
+         */
+        getDefaultTemplates(options?: RawAxiosRequestConfig): AxiosPromise<DefaultTemplateSettingsWrapper> {
+            return localVarFp.getDefaultTemplates(options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns the URL address of the connected editors.
          * @summary Get the document service URL
-         * @param {boolean} [version] Specifies whether to return the editor version or not.
+         * @param {FilesSettingsApiGetDocServiceUrlRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getDocServiceUrl operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-doc-service-url/
          * @throws {RequiredError}
          */
-        getDocServiceUrl(version?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<DocServiceUrlWrapper> {
-            return localVarFp.getDocServiceUrl(version, options).then((request) => request(axios, basePath));
+        getDocServiceUrl(requestParameters: FilesSettingsApiGetDocServiceUrlRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<DocServiceUrlWrapper> {
+            return localVarFp.getDocServiceUrl(requestParameters.version, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the information about the Documents module.
@@ -1892,38 +2360,38 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
         /**
          * Hides the confirmation dialog when canceling operations.
          * @summary Hide confirmation dialog when canceling operations
-         * @param {SettingsRequestDto} [settingsRequestDto] 
+         * @param {FilesSettingsApiHideConfirmCancelOperationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for hideConfirmCancelOperation operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/hide-confirm-cancel-operation/
          * @throws {RequiredError}
          */
-        hideConfirmCancelOperation(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.hideConfirmCancelOperation(settingsRequestDto, options).then((request) => request(axios, basePath));
+        hideConfirmCancelOperation(requestParameters: FilesSettingsApiHideConfirmCancelOperationRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.hideConfirmCancelOperation(requestParameters.settingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Hides the confirmation dialog for saving the file copy in the original format when converting a file.
          * @summary Hide the confirmation dialog when converting
-         * @param {HideConfirmConvertRequestDto} [hideConfirmConvertRequestDto] 
+         * @param {FilesSettingsApiHideConfirmConvertRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for hideConfirmConvert operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/hide-confirm-convert/
          * @throws {RequiredError}
          */
-        hideConfirmConvert(hideConfirmConvertRequestDto?: HideConfirmConvertRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<ModuleWrapper> {
-            return localVarFp.hideConfirmConvert(hideConfirmConvertRequestDto, options).then((request) => request(axios, basePath));
+        hideConfirmConvert(requestParameters: FilesSettingsApiHideConfirmConvertRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.hideConfirmConvert(requestParameters.hideConfirmConvertRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Hides the confirmation dialog when changing the room lifetime settings.
          * @summary Hide confirmation dialog when changing room lifetime settings
-         * @param {SettingsRequestDto} [settingsRequestDto] 
+         * @param {FilesSettingsApiHideConfirmRoomLifetimeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for hideConfirmRoomLifetime operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/hide-confirm-room-lifetime/
          * @throws {RequiredError}
          */
-        hideConfirmRoomLifetime(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.hideConfirmRoomLifetime(settingsRequestDto, options).then((request) => request(axios, basePath));
+        hideConfirmRoomLifetime(requestParameters: FilesSettingsApiHideConfirmRoomLifetimeRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.hideConfirmRoomLifetime(requestParameters.settingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Checks if the Private Room settings are available or not.
@@ -1939,26 +2407,62 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
         /**
          * Specifies whether to ask a user for a file name on creation or not.
          * @summary Ask a new file name
-         * @param {SettingsRequestDto} [settingsRequestDto] 
+         * @param {FilesSettingsApiKeepNewFileNameRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for keepNewFileName operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/keep-new-file-name/
          * @throws {RequiredError}
          */
-        keepNewFileName(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.keepNewFileName(settingsRequestDto, options).then((request) => request(axios, basePath));
+        keepNewFileName(requestParameters: FilesSettingsApiKeepNewFileNameRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.keepNewFileName(requestParameters.settingsRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Resets the default template setting.
+         * @summary Reset the default template setting
+         * @param {FilesSettingsApiResetDefaultTemplateRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for resetDefaultTemplate operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-default-template/
+         * @throws {RequiredError}
+         */
+        resetDefaultTemplate(requestParameters: FilesSettingsApiResetDefaultTemplateRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<DefaultTemplateSettingsWrapper> {
+            return localVarFp.resetDefaultTemplate(requestParameters.defaultTemplateSettingsResetRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Changes the default template setting.
+         * @summary Change the default template setting
+         * @param {FilesSettingsApiSetDefaultTemplateRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for setDefaultTemplate operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-default-template/
+         * @throws {RequiredError}
+         */
+        setDefaultTemplate(requestParameters: FilesSettingsApiSetDefaultTemplateRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<DefaultTemplateSettingsWrapper> {
+            return localVarFp.setDefaultTemplate(requestParameters.defaultTemplateSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Changes the ability to open the document in the same browser tab.
          * @summary Open document in the same browser tab
-         * @param {SettingsRequestDto} [settingsRequestDto] 
+         * @param {FilesSettingsApiSetOpenEditorInSameTabRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setOpenEditorInSameTab operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-open-editor-in-same-tab/
          * @throws {RequiredError}
          */
-        setOpenEditorInSameTab(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.setOpenEditorInSameTab(settingsRequestDto, options).then((request) => request(axios, basePath));
+        setOpenEditorInSameTab(requestParameters: FilesSettingsApiSetOpenEditorInSameTabRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.setOpenEditorInSameTab(requestParameters.settingsRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Changes the setting that allows the user to organize the grouping of rooms.
+         * @summary Organize rooms grouping
+         * @param {FilesSettingsApiSetOrganizeRoomsGroupingRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for setOrganizeRoomsGrouping operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-organize-rooms-grouping/
+         * @throws {RequiredError}
+         */
+        setOrganizeRoomsGrouping(requestParameters: FilesSettingsApiSetOrganizeRoomsGroupingRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.setOrganizeRoomsGrouping(requestParameters.settingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Changes the ability to store the forcesaved file versions.
@@ -1974,29 +2478,370 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
         /**
          * Changes the ability to upload documents in the original formats as well.
          * @summary Change the ability to upload original formats
-         * @param {SettingsRequestDto} [settingsRequestDto] 
+         * @param {FilesSettingsApiStoreOriginalRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for storeOriginal operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/store-original/
          * @throws {RequiredError}
          */
-        storeOriginal(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.storeOriginal(settingsRequestDto, options).then((request) => request(axios, basePath));
+        storeOriginal(requestParameters: FilesSettingsApiStoreOriginalRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.storeOriginal(requestParameters.settingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates a file version if a file with such a name already exists.
          * @summary Update a file version if it exists
-         * @param {SettingsRequestDto} [settingsRequestDto] 
+         * @param {FilesSettingsApiUpdateFileIfExistRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateFileIfExist operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file-if-exist/
          * @throws {RequiredError}
          */
-        updateFileIfExist(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.updateFileIfExist(settingsRequestDto, options).then((request) => request(axios, basePath));
+        updateFileIfExist(requestParameters: FilesSettingsApiUpdateFileIfExistRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.updateFileIfExist(requestParameters.settingsRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Uploads a file to use as the default template setting.
+         * @summary Upload a file as the default template setting
+         * @param {FilesSettingsApiUploadDefaultTemplateRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for uploadDefaultTemplate operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-default-template/
+         * @throws {RequiredError}
+         */
+        uploadDefaultTemplate(requestParameters: FilesSettingsApiUploadDefaultTemplateRequest, options?: RawAxiosRequestConfig): AxiosPromise<DefaultTemplateSettingsWrapper> {
+            return localVarFp.uploadDefaultTemplate(requestParameters.fileExtension, requestParameters.file, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for changeAccessToThirdparty operation in FilesSettingsApi.
+ * @export
+ * @interface FilesSettingsApiChangeAccessToThirdpartyRequest
+ */
+export interface FilesSettingsApiChangeAccessToThirdpartyRequest {
+    /**
+     * 
+     * @type {SettingsRequestDto}
+     * @memberof FilesSettingsApiChangeAccessToThirdparty
+     */
+    readonly settingsRequestDto?: SettingsRequestDto
+}
+
+/**
+ * Request parameters for changeAutomaticallyCleanUp operation in FilesSettingsApi.
+ * @export
+ * @interface FilesSettingsApiChangeAutomaticallyCleanUpRequest
+ */
+export interface FilesSettingsApiChangeAutomaticallyCleanUpRequest {
+    /**
+     * 
+     * @type {AutoCleanupRequestDto}
+     * @memberof FilesSettingsApiChangeAutomaticallyCleanUp
+     */
+    readonly autoCleanupRequestDto?: AutoCleanupRequestDto
+}
+
+/**
+ * Request parameters for changeDefaultAccessRights operation in FilesSettingsApi.
+ * @export
+ * @interface FilesSettingsApiChangeDefaultAccessRightsRequest
+ */
+export interface FilesSettingsApiChangeDefaultAccessRightsRequest {
+    /**
+     * Sharing rights (None, ReadWrite, Read, Restrict, Varies, Review, Comment, FillForms, CustomFilter, RoomAdmin, Editing, Collaborator).
+     * @type {Array<number>}
+     * @memberof FilesSettingsApiChangeDefaultAccessRights
+     */
+    readonly requestBody?: Array<number>
+}
+
+/**
+ * Request parameters for changeDeleteConfirm operation in FilesSettingsApi.
+ * @export
+ * @interface FilesSettingsApiChangeDeleteConfirmRequest
+ */
+export interface FilesSettingsApiChangeDeleteConfirmRequest {
+    /**
+     * 
+     * @type {SettingsRequestDto}
+     * @memberof FilesSettingsApiChangeDeleteConfirm
+     */
+    readonly settingsRequestDto?: SettingsRequestDto
+}
+
+/**
+ * Request parameters for changeDownloadZipFromBody operation in FilesSettingsApi.
+ * @export
+ * @interface FilesSettingsApiChangeDownloadZipFromBodyRequest
+ */
+export interface FilesSettingsApiChangeDownloadZipFromBodyRequest {
+    /**
+     * 
+     * @type {DisplayRequestDto}
+     * @memberof FilesSettingsApiChangeDownloadZipFromBody
+     */
+    readonly displayRequestDto?: DisplayRequestDto
+}
+
+/**
+ * Request parameters for changeExternalSharingSettings operation in FilesSettingsApi.
+ * @export
+ * @interface FilesSettingsApiChangeExternalSharingSettingsRequest
+ */
+export interface FilesSettingsApiChangeExternalSharingSettingsRequest {
+    /**
+     * 
+     * @type {ExternalSharingSettingsRequestDto}
+     * @memberof FilesSettingsApiChangeExternalSharingSettings
+     */
+    readonly externalSharingSettingsRequestDto?: ExternalSharingSettingsRequestDto
+}
+
+/**
+ * Request parameters for checkDocServiceUrl operation in FilesSettingsApi.
+ * @export
+ * @interface FilesSettingsApiCheckDocServiceUrlRequest
+ */
+export interface FilesSettingsApiCheckDocServiceUrlRequest {
+    /**
+     * 
+     * @type {CheckDocServiceUrlRequestDto}
+     * @memberof FilesSettingsApiCheckDocServiceUrl
+     */
+    readonly checkDocServiceUrlRequestDto?: CheckDocServiceUrlRequestDto
+}
+
+/**
+ * Request parameters for displayFileExtension operation in FilesSettingsApi.
+ * @export
+ * @interface FilesSettingsApiDisplayFileExtensionRequest
+ */
+export interface FilesSettingsApiDisplayFileExtensionRequest {
+    /**
+     * 
+     * @type {SettingsRequestDto}
+     * @memberof FilesSettingsApiDisplayFileExtension
+     */
+    readonly settingsRequestDto?: SettingsRequestDto
+}
+
+/**
+ * Request parameters for displayRecent operation in FilesSettingsApi.
+ * @export
+ * @interface FilesSettingsApiDisplayRecentRequest
+ */
+export interface FilesSettingsApiDisplayRecentRequest {
+    /**
+     * 
+     * @type {DisplayRequestDto}
+     * @memberof FilesSettingsApiDisplayRecent
+     */
+    readonly displayRequestDto?: DisplayRequestDto
+}
+
+/**
+ * Request parameters for externalShare operation in FilesSettingsApi.
+ * @export
+ * @interface FilesSettingsApiExternalShareRequest
+ */
+export interface FilesSettingsApiExternalShareRequest {
+    /**
+     * 
+     * @type {DisplayRequestDto}
+     * @memberof FilesSettingsApiExternalShare
+     */
+    readonly displayRequestDto?: DisplayRequestDto
+}
+
+/**
+ * Request parameters for externalShareSocialMedia operation in FilesSettingsApi.
+ * @export
+ * @interface FilesSettingsApiExternalShareSocialMediaRequest
+ */
+export interface FilesSettingsApiExternalShareSocialMediaRequest {
+    /**
+     * 
+     * @type {DisplayRequestDto}
+     * @memberof FilesSettingsApiExternalShareSocialMedia
+     */
+    readonly displayRequestDto?: DisplayRequestDto
+}
+
+/**
+ * Request parameters for getDocServiceUrl operation in FilesSettingsApi.
+ * @export
+ * @interface FilesSettingsApiGetDocServiceUrlRequest
+ */
+export interface FilesSettingsApiGetDocServiceUrlRequest {
+    /**
+     * Specifies whether to return the editor version or not.
+     * @type {boolean}
+     * @memberof FilesSettingsApiGetDocServiceUrl
+     */
+    readonly version?: boolean
+}
+
+/**
+ * Request parameters for hideConfirmCancelOperation operation in FilesSettingsApi.
+ * @export
+ * @interface FilesSettingsApiHideConfirmCancelOperationRequest
+ */
+export interface FilesSettingsApiHideConfirmCancelOperationRequest {
+    /**
+     * 
+     * @type {SettingsRequestDto}
+     * @memberof FilesSettingsApiHideConfirmCancelOperation
+     */
+    readonly settingsRequestDto?: SettingsRequestDto
+}
+
+/**
+ * Request parameters for hideConfirmConvert operation in FilesSettingsApi.
+ * @export
+ * @interface FilesSettingsApiHideConfirmConvertRequest
+ */
+export interface FilesSettingsApiHideConfirmConvertRequest {
+    /**
+     * 
+     * @type {HideConfirmConvertRequestDto}
+     * @memberof FilesSettingsApiHideConfirmConvert
+     */
+    readonly hideConfirmConvertRequestDto?: HideConfirmConvertRequestDto
+}
+
+/**
+ * Request parameters for hideConfirmRoomLifetime operation in FilesSettingsApi.
+ * @export
+ * @interface FilesSettingsApiHideConfirmRoomLifetimeRequest
+ */
+export interface FilesSettingsApiHideConfirmRoomLifetimeRequest {
+    /**
+     * 
+     * @type {SettingsRequestDto}
+     * @memberof FilesSettingsApiHideConfirmRoomLifetime
+     */
+    readonly settingsRequestDto?: SettingsRequestDto
+}
+
+/**
+ * Request parameters for keepNewFileName operation in FilesSettingsApi.
+ * @export
+ * @interface FilesSettingsApiKeepNewFileNameRequest
+ */
+export interface FilesSettingsApiKeepNewFileNameRequest {
+    /**
+     * 
+     * @type {SettingsRequestDto}
+     * @memberof FilesSettingsApiKeepNewFileName
+     */
+    readonly settingsRequestDto?: SettingsRequestDto
+}
+
+/**
+ * Request parameters for resetDefaultTemplate operation in FilesSettingsApi.
+ * @export
+ * @interface FilesSettingsApiResetDefaultTemplateRequest
+ */
+export interface FilesSettingsApiResetDefaultTemplateRequest {
+    /**
+     * 
+     * @type {DefaultTemplateSettingsResetRequestDto}
+     * @memberof FilesSettingsApiResetDefaultTemplate
+     */
+    readonly defaultTemplateSettingsResetRequestDto?: DefaultTemplateSettingsResetRequestDto
+}
+
+/**
+ * Request parameters for setDefaultTemplate operation in FilesSettingsApi.
+ * @export
+ * @interface FilesSettingsApiSetDefaultTemplateRequest
+ */
+export interface FilesSettingsApiSetDefaultTemplateRequest {
+    /**
+     * 
+     * @type {DefaultTemplateSettingsRequestDto}
+     * @memberof FilesSettingsApiSetDefaultTemplate
+     */
+    readonly defaultTemplateSettingsRequestDto?: DefaultTemplateSettingsRequestDto
+}
+
+/**
+ * Request parameters for setOpenEditorInSameTab operation in FilesSettingsApi.
+ * @export
+ * @interface FilesSettingsApiSetOpenEditorInSameTabRequest
+ */
+export interface FilesSettingsApiSetOpenEditorInSameTabRequest {
+    /**
+     * 
+     * @type {SettingsRequestDto}
+     * @memberof FilesSettingsApiSetOpenEditorInSameTab
+     */
+    readonly settingsRequestDto?: SettingsRequestDto
+}
+
+/**
+ * Request parameters for setOrganizeRoomsGrouping operation in FilesSettingsApi.
+ * @export
+ * @interface FilesSettingsApiSetOrganizeRoomsGroupingRequest
+ */
+export interface FilesSettingsApiSetOrganizeRoomsGroupingRequest {
+    /**
+     * 
+     * @type {SettingsRequestDto}
+     * @memberof FilesSettingsApiSetOrganizeRoomsGrouping
+     */
+    readonly settingsRequestDto?: SettingsRequestDto
+}
+
+/**
+ * Request parameters for storeOriginal operation in FilesSettingsApi.
+ * @export
+ * @interface FilesSettingsApiStoreOriginalRequest
+ */
+export interface FilesSettingsApiStoreOriginalRequest {
+    /**
+     * 
+     * @type {SettingsRequestDto}
+     * @memberof FilesSettingsApiStoreOriginal
+     */
+    readonly settingsRequestDto?: SettingsRequestDto
+}
+
+/**
+ * Request parameters for updateFileIfExist operation in FilesSettingsApi.
+ * @export
+ * @interface FilesSettingsApiUpdateFileIfExistRequest
+ */
+export interface FilesSettingsApiUpdateFileIfExistRequest {
+    /**
+     * 
+     * @type {SettingsRequestDto}
+     * @memberof FilesSettingsApiUpdateFileIfExist
+     */
+    readonly settingsRequestDto?: SettingsRequestDto
+}
+
+/**
+ * Request parameters for uploadDefaultTemplate operation in FilesSettingsApi.
+ * @export
+ * @interface FilesSettingsApiUploadDefaultTemplateRequest
+ */
+export interface FilesSettingsApiUploadDefaultTemplateRequest {
+    /**
+     * File extension of a template to replace
+     * @type {string}
+     * @memberof FilesSettingsApiUploadDefaultTemplate
+     */
+    readonly fileExtension: string
+
+    /**
+     * File to replace template with
+     * @type {File}
+     * @memberof FilesSettingsApiUploadDefaultTemplate
+     */
+    readonly file: File
+}
 
 /**
  * FilesSettingsApi - object-oriented interface
@@ -2008,121 +2853,133 @@ export class FilesSettingsApi extends BaseAPI {
     /**
      * Changes the access to the third-party settings.
      * @summary Change the third-party settings access
-     * @param {SettingsRequestDto} [settingsRequestDto] 
+     * @param {FilesSettingsApiChangeAccessToThirdpartyRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesSettingsApi
      */
-    public changeAccessToThirdparty(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig) {
-        return FilesSettingsApiFp(this.configuration).changeAccessToThirdparty(settingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public changeAccessToThirdparty(requestParameters: FilesSettingsApiChangeAccessToThirdpartyRequest = {}, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).changeAccessToThirdparty(requestParameters.settingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Updates the trash bin auto-clearing setting.
      * @summary Update the trash bin auto-clearing setting
-     * @param {AutoCleanupRequestDto} [autoCleanupRequestDto] 
+     * @param {FilesSettingsApiChangeAutomaticallyCleanUpRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesSettingsApi
      */
-    public changeAutomaticallyCleanUp(autoCleanupRequestDto?: AutoCleanupRequestDto, options?: RawAxiosRequestConfig) {
-        return FilesSettingsApiFp(this.configuration).changeAutomaticallyCleanUp(autoCleanupRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public changeAutomaticallyCleanUp(requestParameters: FilesSettingsApiChangeAutomaticallyCleanUpRequest = {}, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).changeAutomaticallyCleanUp(requestParameters.autoCleanupRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Changes the default access rights in the sharing settings.
      * @summary Change the default access rights
-     * @param {Array<number>} [requestBody] Sharing rights (None, ReadWrite, Read, Restrict, Varies, Review, Comment, FillForms, CustomFilter, RoomAdmin, Editing, Collaborator).
+     * @param {FilesSettingsApiChangeDefaultAccessRightsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesSettingsApi
      */
-    public changeDefaultAccessRights(requestBody?: Array<number>, options?: RawAxiosRequestConfig) {
-        return FilesSettingsApiFp(this.configuration).changeDefaultAccessRights(requestBody, options).then((request) => request(this.axios, this.basePath));
+    public changeDefaultAccessRights(requestParameters: FilesSettingsApiChangeDefaultAccessRightsRequest = {}, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).changeDefaultAccessRights(requestParameters.requestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Specifies whether to confirm the file deletion or not.
      * @summary Confirm the file deletion
-     * @param {SettingsRequestDto} [settingsRequestDto] 
+     * @param {FilesSettingsApiChangeDeleteConfirmRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesSettingsApi
      */
-    public changeDeleteConfirm(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig) {
-        return FilesSettingsApiFp(this.configuration).changeDeleteConfirm(settingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public changeDeleteConfirm(requestParameters: FilesSettingsApiChangeDeleteConfirmRequest = {}, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).changeDeleteConfirm(requestParameters.settingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Changes the format of the downloaded archive from .zip to .tar.gz. This method uses the body parameters.
      * @summary Change the archive format (using body parameters)
-     * @param {DisplayRequestDto} [displayRequestDto] 
+     * @param {FilesSettingsApiChangeDownloadZipFromBodyRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesSettingsApi
      */
-    public changeDownloadZipFromBody(displayRequestDto?: DisplayRequestDto, options?: RawAxiosRequestConfig) {
-        return FilesSettingsApiFp(this.configuration).changeDownloadZipFromBody(displayRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public changeDownloadZipFromBody(requestParameters: FilesSettingsApiChangeDownloadZipFromBodyRequest = {}, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).changeDownloadZipFromBody(requestParameters.displayRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Changes the Access Control external sharing settings.
+     * @summary Change the Access Control external sharing settings
+     * @param {FilesSettingsApiChangeExternalSharingSettingsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesSettingsApi
+     */
+    public changeExternalSharingSettings(requestParameters: FilesSettingsApiChangeExternalSharingSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).changeExternalSharingSettings(requestParameters.externalSharingSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Checks the document service location URL.
      * @summary Check the document service URL
-     * @param {CheckDocServiceUrlRequestDto} [checkDocServiceUrlRequestDto] 
+     * @param {FilesSettingsApiCheckDocServiceUrlRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesSettingsApi
      */
-    public checkDocServiceUrl(checkDocServiceUrlRequestDto?: CheckDocServiceUrlRequestDto, options?: RawAxiosRequestConfig) {
-        return FilesSettingsApiFp(this.configuration).checkDocServiceUrl(checkDocServiceUrlRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public checkDocServiceUrl(requestParameters: FilesSettingsApiCheckDocServiceUrlRequest = {}, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).checkDocServiceUrl(requestParameters.checkDocServiceUrlRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Specifies whether to display a file extension or not.
      * @summary Display a file extension
-     * @param {SettingsRequestDto} [settingsRequestDto] 
+     * @param {FilesSettingsApiDisplayFileExtensionRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesSettingsApi
      */
-    public displayFileExtension(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig) {
-        return FilesSettingsApiFp(this.configuration).displayFileExtension(settingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public displayFileExtension(requestParameters: FilesSettingsApiDisplayFileExtensionRequest = {}, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).displayFileExtension(requestParameters.settingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Displays the Recent folder.
      * @summary Display the Recent folder
-     * @param {DisplayRequestDto} [displayRequestDto] 
+     * @param {FilesSettingsApiDisplayRecentRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesSettingsApi
      */
-    public displayRecent(displayRequestDto?: DisplayRequestDto, options?: RawAxiosRequestConfig) {
-        return FilesSettingsApiFp(this.configuration).displayRecent(displayRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public displayRecent(requestParameters: FilesSettingsApiDisplayRecentRequest = {}, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).displayRecent(requestParameters.displayRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Changes the ability to share a file externally.
      * @summary Change the external sharing ability
-     * @param {DisplayRequestDto} [displayRequestDto] 
+     * @param {FilesSettingsApiExternalShareRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesSettingsApi
      */
-    public externalShare(displayRequestDto?: DisplayRequestDto, options?: RawAxiosRequestConfig) {
-        return FilesSettingsApiFp(this.configuration).externalShare(displayRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public externalShare(requestParameters: FilesSettingsApiExternalShareRequest = {}, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).externalShare(requestParameters.displayRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Changes the ability to share a file externally on social networks.
      * @summary Change the external sharing ability on social networks
-     * @param {DisplayRequestDto} [displayRequestDto] 
+     * @param {FilesSettingsApiExternalShareSocialMediaRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesSettingsApi
      */
-    public externalShareSocialMedia(displayRequestDto?: DisplayRequestDto, options?: RawAxiosRequestConfig) {
-        return FilesSettingsApiFp(this.configuration).externalShareSocialMedia(displayRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public externalShareSocialMedia(requestParameters: FilesSettingsApiExternalShareSocialMediaRequest = {}, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).externalShareSocialMedia(requestParameters.displayRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2148,15 +3005,26 @@ export class FilesSettingsApi extends BaseAPI {
     }
 
     /**
-     * Returns the URL address of the connected editors.
-     * @summary Get the document service URL
-     * @param {boolean} [version] Specifies whether to return the editor version or not.
+     * Returns the default template setting.
+     * @summary Get the default template setting
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesSettingsApi
      */
-    public getDocServiceUrl(version?: boolean, options?: RawAxiosRequestConfig) {
-        return FilesSettingsApiFp(this.configuration).getDocServiceUrl(version, options).then((request) => request(this.axios, this.basePath));
+    public getDefaultTemplates(options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).getDefaultTemplates(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the URL address of the connected editors.
+     * @summary Get the document service URL
+     * @param {FilesSettingsApiGetDocServiceUrlRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesSettingsApi
+     */
+    public getDocServiceUrl(requestParameters: FilesSettingsApiGetDocServiceUrlRequest = {}, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).getDocServiceUrl(requestParameters.version, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2184,37 +3052,37 @@ export class FilesSettingsApi extends BaseAPI {
     /**
      * Hides the confirmation dialog when canceling operations.
      * @summary Hide confirmation dialog when canceling operations
-     * @param {SettingsRequestDto} [settingsRequestDto] 
+     * @param {FilesSettingsApiHideConfirmCancelOperationRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesSettingsApi
      */
-    public hideConfirmCancelOperation(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig) {
-        return FilesSettingsApiFp(this.configuration).hideConfirmCancelOperation(settingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public hideConfirmCancelOperation(requestParameters: FilesSettingsApiHideConfirmCancelOperationRequest = {}, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).hideConfirmCancelOperation(requestParameters.settingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Hides the confirmation dialog for saving the file copy in the original format when converting a file.
      * @summary Hide the confirmation dialog when converting
-     * @param {HideConfirmConvertRequestDto} [hideConfirmConvertRequestDto] 
+     * @param {FilesSettingsApiHideConfirmConvertRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesSettingsApi
      */
-    public hideConfirmConvert(hideConfirmConvertRequestDto?: HideConfirmConvertRequestDto, options?: RawAxiosRequestConfig) {
-        return FilesSettingsApiFp(this.configuration).hideConfirmConvert(hideConfirmConvertRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public hideConfirmConvert(requestParameters: FilesSettingsApiHideConfirmConvertRequest = {}, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).hideConfirmConvert(requestParameters.hideConfirmConvertRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Hides the confirmation dialog when changing the room lifetime settings.
      * @summary Hide confirmation dialog when changing room lifetime settings
-     * @param {SettingsRequestDto} [settingsRequestDto] 
+     * @param {FilesSettingsApiHideConfirmRoomLifetimeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesSettingsApi
      */
-    public hideConfirmRoomLifetime(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig) {
-        return FilesSettingsApiFp(this.configuration).hideConfirmRoomLifetime(settingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public hideConfirmRoomLifetime(requestParameters: FilesSettingsApiHideConfirmRoomLifetimeRequest = {}, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).hideConfirmRoomLifetime(requestParameters.settingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2231,25 +3099,61 @@ export class FilesSettingsApi extends BaseAPI {
     /**
      * Specifies whether to ask a user for a file name on creation or not.
      * @summary Ask a new file name
-     * @param {SettingsRequestDto} [settingsRequestDto] 
+     * @param {FilesSettingsApiKeepNewFileNameRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesSettingsApi
      */
-    public keepNewFileName(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig) {
-        return FilesSettingsApiFp(this.configuration).keepNewFileName(settingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public keepNewFileName(requestParameters: FilesSettingsApiKeepNewFileNameRequest = {}, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).keepNewFileName(requestParameters.settingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Resets the default template setting.
+     * @summary Reset the default template setting
+     * @param {FilesSettingsApiResetDefaultTemplateRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesSettingsApi
+     */
+    public resetDefaultTemplate(requestParameters: FilesSettingsApiResetDefaultTemplateRequest = {}, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).resetDefaultTemplate(requestParameters.defaultTemplateSettingsResetRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Changes the default template setting.
+     * @summary Change the default template setting
+     * @param {FilesSettingsApiSetDefaultTemplateRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesSettingsApi
+     */
+    public setDefaultTemplate(requestParameters: FilesSettingsApiSetDefaultTemplateRequest = {}, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).setDefaultTemplate(requestParameters.defaultTemplateSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Changes the ability to open the document in the same browser tab.
      * @summary Open document in the same browser tab
-     * @param {SettingsRequestDto} [settingsRequestDto] 
+     * @param {FilesSettingsApiSetOpenEditorInSameTabRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesSettingsApi
      */
-    public setOpenEditorInSameTab(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig) {
-        return FilesSettingsApiFp(this.configuration).setOpenEditorInSameTab(settingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public setOpenEditorInSameTab(requestParameters: FilesSettingsApiSetOpenEditorInSameTabRequest = {}, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).setOpenEditorInSameTab(requestParameters.settingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Changes the setting that allows the user to organize the grouping of rooms.
+     * @summary Organize rooms grouping
+     * @param {FilesSettingsApiSetOrganizeRoomsGroupingRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesSettingsApi
+     */
+    public setOrganizeRoomsGrouping(requestParameters: FilesSettingsApiSetOrganizeRoomsGroupingRequest = {}, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).setOrganizeRoomsGrouping(requestParameters.settingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2266,25 +3170,37 @@ export class FilesSettingsApi extends BaseAPI {
     /**
      * Changes the ability to upload documents in the original formats as well.
      * @summary Change the ability to upload original formats
-     * @param {SettingsRequestDto} [settingsRequestDto] 
+     * @param {FilesSettingsApiStoreOriginalRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesSettingsApi
      */
-    public storeOriginal(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig) {
-        return FilesSettingsApiFp(this.configuration).storeOriginal(settingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public storeOriginal(requestParameters: FilesSettingsApiStoreOriginalRequest = {}, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).storeOriginal(requestParameters.settingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Updates a file version if a file with such a name already exists.
      * @summary Update a file version if it exists
-     * @param {SettingsRequestDto} [settingsRequestDto] 
+     * @param {FilesSettingsApiUpdateFileIfExistRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesSettingsApi
      */
-    public updateFileIfExist(settingsRequestDto?: SettingsRequestDto, options?: RawAxiosRequestConfig) {
-        return FilesSettingsApiFp(this.configuration).updateFileIfExist(settingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public updateFileIfExist(requestParameters: FilesSettingsApiUpdateFileIfExistRequest = {}, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).updateFileIfExist(requestParameters.settingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Uploads a file to use as the default template setting.
+     * @summary Upload a file as the default template setting
+     * @param {FilesSettingsApiUploadDefaultTemplateRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesSettingsApi
+     */
+    public uploadDefaultTemplate(requestParameters: FilesSettingsApiUploadDefaultTemplateRequest, options?: RawAxiosRequestConfig) {
+        return FilesSettingsApiFp(this.configuration).uploadDefaultTemplate(requestParameters.fileExtension, requestParameters.file, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

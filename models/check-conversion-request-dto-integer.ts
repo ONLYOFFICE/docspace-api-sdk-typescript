@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,50 +21,34 @@
 
 /**
  * The parameters for checking file conversion.
- * @export
- * @interface CheckConversionRequestDtoInteger
  */
 export interface CheckConversionRequestDtoInteger {
     /**
      * The file ID to check conversion proccess.
-     * @type {number}
-     * @memberof CheckConversionRequestDtoInteger
      */
     'fileId'?: number;
     /**
      * Specifies if the conversion process is synchronous or not.
-     * @type {boolean}
-     * @memberof CheckConversionRequestDtoInteger
      */
     'sync'?: boolean;
     /**
      * Specifies whether to start a conversion process or not.
-     * @type {boolean}
-     * @memberof CheckConversionRequestDtoInteger
      */
     'startConvert'?: boolean;
     /**
      * The file version that is converted.
-     * @type {number}
-     * @memberof CheckConversionRequestDtoInteger
      */
     'version'?: number;
     /**
      * The password of the converted file.
-     * @type {string}
-     * @memberof CheckConversionRequestDtoInteger
      */
     'password'?: string | null;
     /**
      * The conversion output type.
-     * @type {string}
-     * @memberof CheckConversionRequestDtoInteger
      */
     'outputType'?: string | null;
     /**
      * Specifies whether to create a new file if it exists or not.
-     * @type {boolean}
-     * @memberof CheckConversionRequestDtoInteger
      */
     'createNewIfExist'?: boolean;
 }

@@ -1,6 +1,6 @@
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -105,7 +104,7 @@ export const ThirdPartyIntegrationApiAxiosParamCreator = function (configuration
             };
         },
         /**
-         * Returns a list of all providers.   **Note**: Available provider keys: Dropbox, Box, WebDav, OneDrive, GoogleDrive, kDrive, ownCloud, Nextcloud.
+         * Returns a list of all providers.
          * @summary Get all providers
          * @param {boolean} [excludewebdav] Specifies whether WebDAV resources should be excluded from the result..
          * @param {*} [options] Override http request option.
@@ -214,7 +213,7 @@ export const ThirdPartyIntegrationApiAxiosParamCreator = function (configuration
             };
         },
         /**
-         * Returns the list of the available providers.   **Note**: Available provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
+         * Returns the list of the available providers.
          * @summary Get providers
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -370,7 +369,7 @@ export const ThirdPartyIntegrationApiAxiosParamCreator = function (configuration
             };
         },
         /**
-         * Saves the third-party storage service account. For WebDav, Yandex, kDrive and SharePoint, the login and password are used for authentication. For other providers, the authentication is performed using a token received via OAuth 2.0.   **Note**: List of provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
+         * Saves the third-party storage service account. For WebDav, Yandex, kDrive and SharePoint, the login and password are used for authentication. For other providers, the authentication is performed using a token received via OAuth 2.0.
          * @summary Save a third-party account
          * @param {ThirdPartyRequestDto} [thirdPartyRequestDto] 
          * @param {*} [options] Override http request option.
@@ -426,7 +425,7 @@ export const ThirdPartyIntegrationApiAxiosParamCreator = function (configuration
             };
         },
         /**
-         * Saves a backup of the connected third-party account.   **Note**: List of provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
+         * Saves a backup of the connected third-party account.
          * @summary Save a third-party account backup
          * @param {ThirdPartyBackupRequestDto} [thirdPartyBackupRequestDto] 
          * @param {*} [options] Override http request option.
@@ -507,7 +506,7 @@ export const ThirdPartyIntegrationApiFp = function(configuration?: Configuration
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns a list of all providers.   **Note**: Available provider keys: Dropbox, Box, WebDav, OneDrive, GoogleDrive, kDrive, ownCloud, Nextcloud.
+         * Returns a list of all providers.
          * @summary Get all providers
          * @param {boolean} [excludewebdav] Specifies whether WebDAV resources should be excluded from the result..
          * @param {*} [options] Override http request option.
@@ -536,7 +535,7 @@ export const ThirdPartyIntegrationApiFp = function(configuration?: Configuration
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the list of the available providers.   **Note**: Available provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
+         * Returns the list of the available providers.
          * @summary Get providers
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -578,7 +577,7 @@ export const ThirdPartyIntegrationApiFp = function(configuration?: Configuration
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Saves the third-party storage service account. For WebDav, Yandex, kDrive and SharePoint, the login and password are used for authentication. For other providers, the authentication is performed using a token received via OAuth 2.0.   **Note**: List of provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
+         * Saves the third-party storage service account. For WebDav, Yandex, kDrive and SharePoint, the login and password are used for authentication. For other providers, the authentication is performed using a token received via OAuth 2.0.
          * @summary Save a third-party account
          * @param {ThirdPartyRequestDto} [thirdPartyRequestDto] 
          * @param {*} [options] Override http request option.
@@ -593,7 +592,7 @@ export const ThirdPartyIntegrationApiFp = function(configuration?: Configuration
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Saves a backup of the connected third-party account.   **Note**: List of provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
+         * Saves a backup of the connected third-party account.
          * @summary Save a third-party account backup
          * @param {ThirdPartyBackupRequestDto} [thirdPartyBackupRequestDto] 
          * @param {*} [options] Override http request option.
@@ -620,26 +619,26 @@ export const ThirdPartyIntegrationApiFactory = function (configuration?: Configu
         /**
          * Removes the third-party storage service account with the ID specified in the request.
          * @summary Remove a third-party account
-         * @param {number} providerId The provider ID.
+         * @param {ThirdPartyIntegrationApiDeleteThirdPartyRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteThirdParty operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-third-party/
          * @throws {RequiredError}
          */
-        deleteThirdParty(providerId: number, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.deleteThirdParty(providerId, options).then((request) => request(axios, basePath));
+        deleteThirdParty(requestParameters: ThirdPartyIntegrationApiDeleteThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.deleteThirdParty(requestParameters.providerId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of all providers.   **Note**: Available provider keys: Dropbox, Box, WebDav, OneDrive, GoogleDrive, kDrive, ownCloud, Nextcloud.
+         * Returns a list of all providers.
          * @summary Get all providers
-         * @param {boolean} [excludewebdav] Specifies whether WebDAV resources should be excluded from the result..
+         * @param {ThirdPartyIntegrationApiGetAllProvidersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getAllProviders operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-providers/
          * @throws {RequiredError}
          */
-        getAllProviders(excludewebdav?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<ProviderArrayWrapper> {
-            return localVarFp.getAllProviders(excludewebdav, options).then((request) => request(axios, basePath));
+        getAllProviders(requestParameters: ThirdPartyIntegrationApiGetAllProvidersRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ProviderArrayWrapper> {
+            return localVarFp.getAllProviders(requestParameters.excludewebdav, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a backup of the connected third-party account.
@@ -653,7 +652,7 @@ export const ThirdPartyIntegrationApiFactory = function (configuration?: Configu
             return localVarFp.getBackupThirdPartyAccount(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the list of the available providers.   **Note**: Available provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
+         * Returns the list of the available providers.
          * @summary Get providers
          * @param {*} [options] Override http request option.
          * REST API Reference for getCapabilities operation
@@ -686,31 +685,87 @@ export const ThirdPartyIntegrationApiFactory = function (configuration?: Configu
             return localVarFp.getThirdPartyAccounts(options).then((request) => request(axios, basePath));
         },
         /**
-         * Saves the third-party storage service account. For WebDav, Yandex, kDrive and SharePoint, the login and password are used for authentication. For other providers, the authentication is performed using a token received via OAuth 2.0.   **Note**: List of provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
+         * Saves the third-party storage service account. For WebDav, Yandex, kDrive and SharePoint, the login and password are used for authentication. For other providers, the authentication is performed using a token received via OAuth 2.0.
          * @summary Save a third-party account
-         * @param {ThirdPartyRequestDto} [thirdPartyRequestDto] 
+         * @param {ThirdPartyIntegrationApiSaveThirdPartyRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for saveThirdParty operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-third-party/
          * @throws {RequiredError}
          */
-        saveThirdParty(thirdPartyRequestDto?: ThirdPartyRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FolderStringWrapper> {
-            return localVarFp.saveThirdParty(thirdPartyRequestDto, options).then((request) => request(axios, basePath));
+        saveThirdParty(requestParameters: ThirdPartyIntegrationApiSaveThirdPartyRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderStringWrapper> {
+            return localVarFp.saveThirdParty(requestParameters.thirdPartyRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Saves a backup of the connected third-party account.   **Note**: List of provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
+         * Saves a backup of the connected third-party account.
          * @summary Save a third-party account backup
-         * @param {ThirdPartyBackupRequestDto} [thirdPartyBackupRequestDto] 
+         * @param {ThirdPartyIntegrationApiSaveThirdPartyBackupRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for saveThirdPartyBackup operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-third-party-backup/
          * @throws {RequiredError}
          */
-        saveThirdPartyBackup(thirdPartyBackupRequestDto?: ThirdPartyBackupRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FolderStringWrapper> {
-            return localVarFp.saveThirdPartyBackup(thirdPartyBackupRequestDto, options).then((request) => request(axios, basePath));
+        saveThirdPartyBackup(requestParameters: ThirdPartyIntegrationApiSaveThirdPartyBackupRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderStringWrapper> {
+            return localVarFp.saveThirdPartyBackup(requestParameters.thirdPartyBackupRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for deleteThirdParty operation in ThirdPartyIntegrationApi.
+ * @export
+ * @interface ThirdPartyIntegrationApiDeleteThirdPartyRequest
+ */
+export interface ThirdPartyIntegrationApiDeleteThirdPartyRequest {
+    /**
+     * The provider ID.
+     * @type {number}
+     * @memberof ThirdPartyIntegrationApiDeleteThirdParty
+     */
+    readonly providerId: number
+}
+
+/**
+ * Request parameters for getAllProviders operation in ThirdPartyIntegrationApi.
+ * @export
+ * @interface ThirdPartyIntegrationApiGetAllProvidersRequest
+ */
+export interface ThirdPartyIntegrationApiGetAllProvidersRequest {
+    /**
+     * Specifies whether WebDAV resources should be excluded from the result..
+     * @type {boolean}
+     * @memberof ThirdPartyIntegrationApiGetAllProviders
+     */
+    readonly excludewebdav?: boolean
+}
+
+/**
+ * Request parameters for saveThirdParty operation in ThirdPartyIntegrationApi.
+ * @export
+ * @interface ThirdPartyIntegrationApiSaveThirdPartyRequest
+ */
+export interface ThirdPartyIntegrationApiSaveThirdPartyRequest {
+    /**
+     * 
+     * @type {ThirdPartyRequestDto}
+     * @memberof ThirdPartyIntegrationApiSaveThirdParty
+     */
+    readonly thirdPartyRequestDto?: ThirdPartyRequestDto
+}
+
+/**
+ * Request parameters for saveThirdPartyBackup operation in ThirdPartyIntegrationApi.
+ * @export
+ * @interface ThirdPartyIntegrationApiSaveThirdPartyBackupRequest
+ */
+export interface ThirdPartyIntegrationApiSaveThirdPartyBackupRequest {
+    /**
+     * 
+     * @type {ThirdPartyBackupRequestDto}
+     * @memberof ThirdPartyIntegrationApiSaveThirdPartyBackup
+     */
+    readonly thirdPartyBackupRequestDto?: ThirdPartyBackupRequestDto
+}
 
 /**
  * ThirdPartyIntegrationApi - object-oriented interface
@@ -722,25 +777,25 @@ export class ThirdPartyIntegrationApi extends BaseAPI {
     /**
      * Removes the third-party storage service account with the ID specified in the request.
      * @summary Remove a third-party account
-     * @param {number} providerId The provider ID.
+     * @param {FilesThirdPartyIntegrationApiDeleteThirdPartyRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ThirdPartyIntegrationApi
      */
-    public deleteThirdParty(providerId: number, options?: RawAxiosRequestConfig) {
-        return ThirdPartyIntegrationApiFp(this.configuration).deleteThirdParty(providerId, options).then((request) => request(this.axios, this.basePath));
+    public deleteThirdParty(requestParameters: ThirdPartyIntegrationApiDeleteThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return ThirdPartyIntegrationApiFp(this.configuration).deleteThirdParty(requestParameters.providerId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Returns a list of all providers.   **Note**: Available provider keys: Dropbox, Box, WebDav, OneDrive, GoogleDrive, kDrive, ownCloud, Nextcloud.
+     * Returns a list of all providers.
      * @summary Get all providers
-     * @param {boolean} [excludewebdav] Specifies whether WebDAV resources should be excluded from the result..
+     * @param {FilesThirdPartyIntegrationApiGetAllProvidersRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ThirdPartyIntegrationApi
      */
-    public getAllProviders(excludewebdav?: boolean, options?: RawAxiosRequestConfig) {
-        return ThirdPartyIntegrationApiFp(this.configuration).getAllProviders(excludewebdav, options).then((request) => request(this.axios, this.basePath));
+    public getAllProviders(requestParameters: ThirdPartyIntegrationApiGetAllProvidersRequest = {}, options?: RawAxiosRequestConfig) {
+        return ThirdPartyIntegrationApiFp(this.configuration).getAllProviders(requestParameters.excludewebdav, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -755,7 +810,7 @@ export class ThirdPartyIntegrationApi extends BaseAPI {
     }
 
     /**
-     * Returns the list of the available providers.   **Note**: Available provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
+     * Returns the list of the available providers.
      * @summary Get providers
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -788,27 +843,27 @@ export class ThirdPartyIntegrationApi extends BaseAPI {
     }
 
     /**
-     * Saves the third-party storage service account. For WebDav, Yandex, kDrive and SharePoint, the login and password are used for authentication. For other providers, the authentication is performed using a token received via OAuth 2.0.   **Note**: List of provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
+     * Saves the third-party storage service account. For WebDav, Yandex, kDrive and SharePoint, the login and password are used for authentication. For other providers, the authentication is performed using a token received via OAuth 2.0.
      * @summary Save a third-party account
-     * @param {ThirdPartyRequestDto} [thirdPartyRequestDto] 
+     * @param {FilesThirdPartyIntegrationApiSaveThirdPartyRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ThirdPartyIntegrationApi
      */
-    public saveThirdParty(thirdPartyRequestDto?: ThirdPartyRequestDto, options?: RawAxiosRequestConfig) {
-        return ThirdPartyIntegrationApiFp(this.configuration).saveThirdParty(thirdPartyRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public saveThirdParty(requestParameters: ThirdPartyIntegrationApiSaveThirdPartyRequest = {}, options?: RawAxiosRequestConfig) {
+        return ThirdPartyIntegrationApiFp(this.configuration).saveThirdParty(requestParameters.thirdPartyRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Saves a backup of the connected third-party account.   **Note**: List of provider keys: DropboxV2, Box, WebDav, Yandex, OneDrive, SharePoint, GoogleDrive, kDrive.
+     * Saves a backup of the connected third-party account.
      * @summary Save a third-party account backup
-     * @param {ThirdPartyBackupRequestDto} [thirdPartyBackupRequestDto] 
+     * @param {FilesThirdPartyIntegrationApiSaveThirdPartyBackupRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ThirdPartyIntegrationApi
      */
-    public saveThirdPartyBackup(thirdPartyBackupRequestDto?: ThirdPartyBackupRequestDto, options?: RawAxiosRequestConfig) {
-        return ThirdPartyIntegrationApiFp(this.configuration).saveThirdPartyBackup(thirdPartyBackupRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public saveThirdPartyBackup(requestParameters: ThirdPartyIntegrationApiSaveThirdPartyBackupRequest = {}, options?: RawAxiosRequestConfig) {
+        return ThirdPartyIntegrationApiFp(this.configuration).saveThirdPartyBackup(requestParameters.thirdPartyBackupRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

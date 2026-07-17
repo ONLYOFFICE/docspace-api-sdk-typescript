@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,26 +21,18 @@
 
 /**
  * The request parameters for managing user security and access permissions.
- * @export
- * @interface SecurityRequestsDto
  */
 export interface SecurityRequestsDto {
     /**
      * The product ID for which permissions are being set.
-     * @type {string}
-     * @memberof SecurityRequestsDto
      */
     'productId': string;
     /**
      * The ID of the user whose permissions are being configured.
-     * @type {string}
-     * @memberof SecurityRequestsDto
      */
     'userId': string;
     /**
      * Specifies whether the user has administrative privileges.
-     * @type {boolean}
-     * @memberof SecurityRequestsDto
      */
     'administrator'?: boolean;
 }

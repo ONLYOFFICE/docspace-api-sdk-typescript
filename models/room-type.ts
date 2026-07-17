@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,35 +21,15 @@
 
 /**
  * [1 - Form filling room, 2 - Collaboration room, 5 - Custom room, 6 - Public room, 8 - Virtual data room, 9 - AI Room]
- * @export
- * @enum {number}
  */
 
 export const RoomType = {
-    /**
-    * Form filling room
-    */
     FillingFormsRoom: 1,
-    /**
-    * Collaboration room
-    */
     EditingRoom: 2,
-    /**
-    * Custom room
-    */
     CustomRoom: 5,
-    /**
-    * Public room
-    */
     PublicRoom: 6,
-    /**
-    * Virtual data room
-    */
     VirtualDataRoom: 8,
-    /**
-    * AI Room
-    */
-    AiRoom: 9
+    AiRoom: 9,
 } as const;
 
 export type RoomType = typeof RoomType[keyof typeof RoomType];

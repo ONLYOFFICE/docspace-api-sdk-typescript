@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,14 +24,10 @@ import type { OrdersItemRequestDtoInteger } from './orders-item-request-dto-inte
 
 /**
  * The collection of items to be ordered.
- * @export
- * @interface OrdersRequestDtoInteger
  */
 export interface OrdersRequestDtoInteger {
     /**
      * The list of items with their ordering information.
-     * @type {Array<OrdersItemRequestDtoInteger>}
-     * @memberof OrdersRequestDtoInteger
      */
     'items': Array<OrdersItemRequestDtoInteger> | null;
 }

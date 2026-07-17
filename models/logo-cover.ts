@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,20 +21,14 @@
 
 /**
  * The logo cover information.
- * @export
- * @interface LogoCover
  */
 export interface LogoCover {
     /**
      * The logo cover ID.
-     * @type {string}
-     * @memberof LogoCover
      */
     'id': string | null;
     /**
      * The logo cover data.
-     * @type {string}
-     * @memberof LogoCover
      */
     'data': string | null;
 }

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,27 +21,19 @@
 
 /**
  * The group request parameters.
- * @export
- * @interface GroupRequestDto
  */
 export interface GroupRequestDto {
     /**
      * The list of group member IDs.
-     * @type {Array<string>}
-     * @memberof GroupRequestDto
      */
     'members'?: Array<string> | null;
     /**
      * The group manager ID.
-     * @type {string}
-     * @memberof GroupRequestDto
      */
-    'groupManager': string;
+    'groupManager'?: string;
     /**
      * The group name.
-     * @type {string}
-     * @memberof GroupRequestDto
      */
-    'groupName'?: string | null;
+    'groupName': string | null;
 }
 

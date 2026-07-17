@@ -7,8 +7,8 @@ The user information.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** | The user ID. | [optional] [default to undefined]
-**firstName** | **string** | The user first name. | [optional] [default to undefined]
-**lastName** | **string** | The user last name. | [optional] [default to undefined]
+**firstName** | **string** | The user\'s first name. | [optional] [default to undefined]
+**lastName** | **string** | The user\'s last name. | [optional] [default to undefined]
 **userName** | **string** | The user username. | [optional] [default to undefined]
 **birthDate** | **string** | The user birthday. | [optional] [default to undefined]
 **sex** | **boolean** | The user sex (male or female). | [optional] [default to undefined]
@@ -29,14 +29,14 @@ Name | Type | Description | Notes
 **cultureName** | **string** | The user culture code. | [optional] [default to undefined]
 **mobilePhone** | **string** | The user mobile phone. | [optional] [default to undefined]
 **mobilePhoneActivationStatus** | [**MobilePhoneActivationStatus**](MobilePhoneActivationStatus.md) |  | [optional] [default to undefined]
-**sid** | **string** | The LDAP user identificator. | [optional] [default to undefined]
+**sid** | **string** | The LDAP user identifier. | [optional] [default to undefined]
 **ldapQouta** | **number** | The LDAP user quota attribute. | [optional] [default to undefined]
-**ssoNameId** | **string** | The SSO SAML user identificator. | [optional] [default to undefined]
-**ssoSessionId** | **string** | The SSO SAML user session identificator. | [optional] [default to undefined]
+**ssoNameId** | **string** | The SSO SAML user identifier. | [optional] [default to undefined]
+**ssoSessionId** | **string** | The SSO SAML user session identifier. | [optional] [default to undefined]
 **createDate** | **string** | The date and time when the user account was created. | [optional] [default to undefined]
 **createdBy** | **string** | The ID of the user who created the current user account. | [optional] [default to undefined]
 **spam** | **boolean** | Specifies if tips, updates and offers are allowed to be sent to the user or not. | [optional] [default to undefined]
-**checkActivation** | **boolean** |  | [optional] [readonly] [default to undefined]
+**checkActivation** | **boolean** | Indicates whether the activation status of the employee or recipient is unchecked or inactive.  Depending on the context, this property evaluates the activation or eligibility status accordingly. | [optional] [readonly] [default to undefined]
 
 ## Example
 

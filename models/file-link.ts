@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,26 +21,18 @@
 
 /**
  * The file link properties.
- * @export
- * @interface FileLink
  */
 export interface FileLink {
     /**
      * The type of the file for the source viewed or edited document.
-     * @type {string}
-     * @memberof FileLink
      */
     'filetype': string | null;
     /**
      * The encrypted signature added to the config in the form of a token.
-     * @type {string}
-     * @memberof FileLink
      */
     'token'?: string | null;
     /**
      * The absolute URL where the source viewed or edited document is stored.
-     * @type {string}
-     * @memberof FileLink
      */
     'url': string | null;
 }

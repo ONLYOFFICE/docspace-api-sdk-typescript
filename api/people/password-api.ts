@@ -1,6 +1,6 @@
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -25,11 +24,11 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
+import type { ChangePasswordRequest } from '../../models';
+// @ts-ignore
 import type { EmailMemberRequestDto } from '../../models';
 // @ts-ignore
 import type { EmployeeFullWrapper } from '../../models';
-// @ts-ignore
-import type { MemberBaseRequestDto } from '../../models';
 // @ts-ignore
 import type { StringWrapper } from '../../models';
 /**
@@ -44,17 +43,17 @@ export const PasswordApiAxiosParamCreator = function (configuration?: Configurat
          * Sets a new password to the user with the ID specified in the request.
          * @summary Change a user password
          * @param {string} userid The user ID.
-         * @param {MemberBaseRequestDto} memberBaseRequestDto The request parameters for the user generic information.
+         * @param {ChangePasswordRequest} changePasswordRequest The request parameters for updating a user password.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for changeUserPassword operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-user-password/
          */
-        changeUserPassword: async (userid: string, memberBaseRequestDto: MemberBaseRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        changeUserPassword: async (userid: string, changePasswordRequest: ChangePasswordRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userid' is not null or undefined
             assertParamExists('changeUserPassword', 'userid', userid)
-            // verify required parameter 'memberBaseRequestDto' is not null or undefined
-            assertParamExists('changeUserPassword', 'memberBaseRequestDto', memberBaseRequestDto)
+            // verify required parameter 'changePasswordRequest' is not null or undefined
+            assertParamExists('changeUserPassword', 'changePasswordRequest', changePasswordRequest)
 
             const localVarPath = `/api/2.0/people/{userid}/password`
                 .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
@@ -95,7 +94,7 @@ export const PasswordApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(memberBaseRequestDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(changePasswordRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -103,7 +102,7 @@ export const PasswordApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Reminds a password to the user using the email address specified in the request.
+         * Sends a password recovery email to the specified user address.  For unauthenticated requests, CAPTCHA validation is required when CAPTCHA is enabled in the configuration.
          * @summary Remind a user password
          * @param {EmailMemberRequestDto} [emailMemberRequestDto] 
          * @param {*} [options] Override http request option.
@@ -153,20 +152,20 @@ export const PasswordApiFp = function(configuration?: Configuration) {
          * Sets a new password to the user with the ID specified in the request.
          * @summary Change a user password
          * @param {string} userid The user ID.
-         * @param {MemberBaseRequestDto} memberBaseRequestDto The request parameters for the user generic information.
+         * @param {ChangePasswordRequest} changePasswordRequest The request parameters for updating a user password.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for changeUserPassword operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-user-password/
          */
-        async changeUserPassword(userid: string, memberBaseRequestDto: MemberBaseRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.changeUserPassword(userid, memberBaseRequestDto, options);
+        async changeUserPassword(userid: string, changePasswordRequest: ChangePasswordRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.changeUserPassword(userid, changePasswordRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PasswordApi.changeUserPassword']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Reminds a password to the user using the email address specified in the request.
+         * Sends a password recovery email to the specified user address.  For unauthenticated requests, CAPTCHA validation is required when CAPTCHA is enabled in the configuration.
          * @summary Remind a user password
          * @param {EmailMemberRequestDto} [emailMemberRequestDto] 
          * @param {*} [options] Override http request option.
@@ -193,30 +192,64 @@ export const PasswordApiFactory = function (configuration?: Configuration, baseP
         /**
          * Sets a new password to the user with the ID specified in the request.
          * @summary Change a user password
-         * @param {string} userid The user ID.
-         * @param {MemberBaseRequestDto} memberBaseRequestDto The request parameters for the user generic information.
+         * @param {PasswordApiChangeUserPasswordRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for changeUserPassword operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-user-password/
          * @throws {RequiredError}
          */
-        changeUserPassword(userid: string, memberBaseRequestDto: MemberBaseRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
-            return localVarFp.changeUserPassword(userid, memberBaseRequestDto, options).then((request) => request(axios, basePath));
+        changeUserPassword(requestParameters: PasswordApiChangeUserPasswordRequest, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
+            return localVarFp.changeUserPassword(requestParameters.userid, requestParameters.changePasswordRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Reminds a password to the user using the email address specified in the request.
+         * Sends a password recovery email to the specified user address.  For unauthenticated requests, CAPTCHA validation is required when CAPTCHA is enabled in the configuration.
          * @summary Remind a user password
-         * @param {EmailMemberRequestDto} [emailMemberRequestDto] 
+         * @param {PasswordApiSendUserPasswordRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for sendUserPassword operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-user-password/
          * @throws {RequiredError}
          */
-        sendUserPassword(emailMemberRequestDto?: EmailMemberRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.sendUserPassword(emailMemberRequestDto, options).then((request) => request(axios, basePath));
+        sendUserPassword(requestParameters: PasswordApiSendUserPasswordRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.sendUserPassword(requestParameters.emailMemberRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for changeUserPassword operation in PasswordApi.
+ * @export
+ * @interface PasswordApiChangeUserPasswordRequest
+ */
+export interface PasswordApiChangeUserPasswordRequest {
+    /**
+     * The user ID.
+     * @type {string}
+     * @memberof PasswordApiChangeUserPassword
+     */
+    readonly userid: string
+
+    /**
+     * The request parameters for updating a user password.
+     * @type {ChangePasswordRequest}
+     * @memberof PasswordApiChangeUserPassword
+     */
+    readonly changePasswordRequest: ChangePasswordRequest
+}
+
+/**
+ * Request parameters for sendUserPassword operation in PasswordApi.
+ * @export
+ * @interface PasswordApiSendUserPasswordRequest
+ */
+export interface PasswordApiSendUserPasswordRequest {
+    /**
+     * 
+     * @type {EmailMemberRequestDto}
+     * @memberof PasswordApiSendUserPassword
+     */
+    readonly emailMemberRequestDto?: EmailMemberRequestDto
+}
 
 /**
  * PasswordApi - object-oriented interface
@@ -228,26 +261,25 @@ export class PasswordApi extends BaseAPI {
     /**
      * Sets a new password to the user with the ID specified in the request.
      * @summary Change a user password
-     * @param {string} userid The user ID.
-     * @param {MemberBaseRequestDto} memberBaseRequestDto The request parameters for the user generic information.
+     * @param {PeoplePasswordApiChangeUserPasswordRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PasswordApi
      */
-    public changeUserPassword(userid: string, memberBaseRequestDto: MemberBaseRequestDto, options?: RawAxiosRequestConfig) {
-        return PasswordApiFp(this.configuration).changeUserPassword(userid, memberBaseRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public changeUserPassword(requestParameters: PasswordApiChangeUserPasswordRequest, options?: RawAxiosRequestConfig) {
+        return PasswordApiFp(this.configuration).changeUserPassword(requestParameters.userid, requestParameters.changePasswordRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Reminds a password to the user using the email address specified in the request.
+     * Sends a password recovery email to the specified user address.  For unauthenticated requests, CAPTCHA validation is required when CAPTCHA is enabled in the configuration.
      * @summary Remind a user password
-     * @param {EmailMemberRequestDto} [emailMemberRequestDto] 
+     * @param {PeoplePasswordApiSendUserPasswordRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PasswordApi
      */
-    public sendUserPassword(emailMemberRequestDto?: EmailMemberRequestDto, options?: RawAxiosRequestConfig) {
-        return PasswordApiFp(this.configuration).sendUserPassword(emailMemberRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public sendUserPassword(requestParameters: PasswordApiSendUserPasswordRequest = {}, options?: RawAxiosRequestConfig) {
+        return PasswordApiFp(this.configuration).sendUserPassword(requestParameters.emailMemberRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,16 +20,12 @@
 
 
 /**
- * The culture code parameters.
- * @export
- * @interface Culture
+ * The culture name parameters.
  */
 export interface Culture {
     /**
-     * The user language.
-     * @type {string}
-     * @memberof Culture
+     * The user culture name (en-US, de, fr, es, ...).
      */
-    'cultureName'?: string | null;
+    'cultureName': string;
 }
 

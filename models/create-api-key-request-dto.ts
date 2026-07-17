@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,26 +21,18 @@
 
 /**
  * The request parameters for creating a new API key.
- * @export
- * @interface CreateApiKeyRequestDto
  */
 export interface CreateApiKeyRequestDto {
     /**
      * The API key name.
-     * @type {string}
-     * @memberof CreateApiKeyRequestDto
      */
     'name': string;
     /**
      * The list of permissions granted to the API key.
-     * @type {Array<string>}
-     * @memberof CreateApiKeyRequestDto
      */
     'permissions'?: Array<string> | null;
     /**
      * The number of days until the API key expires (null for no expiration).
-     * @type {number}
-     * @memberof CreateApiKeyRequestDto
      */
     'expiresInDays'?: number | null;
 }

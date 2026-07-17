@@ -1,6 +1,6 @@
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -1145,191 +1144,495 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
         /**
          * Applies a password specified in the request to get the external data.
          * @summary Apply external data password
-         * @param {string} key The unique document identifier.
-         * @param {ExternalShareRequestParam} externalShareRequestParam The external data share request parameters.
+         * @param {SharingApiApplyExternalSharePasswordRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for applyExternalSharePassword operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/apply-external-share-password/
          * @throws {RequiredError}
          */
-        applyExternalSharePassword(key: string, externalShareRequestParam: ExternalShareRequestParam, options?: RawAxiosRequestConfig): AxiosPromise<ExternalShareWrapper> {
-            return localVarFp.applyExternalSharePassword(key, externalShareRequestParam, options).then((request) => request(axios, basePath));
+        applyExternalSharePassword(requestParameters: SharingApiApplyExternalSharePasswordRequest, options?: RawAxiosRequestConfig): AxiosPromise<ExternalShareWrapper> {
+            return localVarFp.applyExternalSharePassword(requestParameters.key, requestParameters.externalShareRequestParam, options).then((request) => request(axios, basePath));
         },
         /**
          * Changes the owner of the file with the ID specified in the request.
          * @summary Change the file owner
-         * @param {ChangeOwnerRequestDto} [changeOwnerRequestDto] 
+         * @param {SharingApiChangeFileOwnerRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for changeFileOwner operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-file-owner/
          * @throws {RequiredError}
          */
-        changeFileOwner(changeOwnerRequestDto?: ChangeOwnerRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FileEntryBaseArrayWrapper> {
-            return localVarFp.changeFileOwner(changeOwnerRequestDto, options).then((request) => request(axios, basePath));
+        changeFileOwner(requestParameters: SharingApiChangeFileOwnerRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileEntryBaseArrayWrapper> {
+            return localVarFp.changeFileOwner(requestParameters.changeOwnerRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the external data by the key specified in the request.
          * @summary Get the external data
-         * @param {string} key The unique key of the external shared data.
-         * @param {string} [fileId] The unique document identifier.
-         * @param {string} [folderId] The unique folder identifier.
+         * @param {SharingApiGetExternalShareDataRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getExternalShareData operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-external-share-data/
          * @throws {RequiredError}
          */
-        getExternalShareData(key: string, fileId?: string, folderId?: string, options?: RawAxiosRequestConfig): AxiosPromise<ExternalShareWrapper> {
-            return localVarFp.getExternalShareData(key, fileId, folderId, options).then((request) => request(axios, basePath));
+        getExternalShareData(requestParameters: SharingApiGetExternalShareDataRequest, options?: RawAxiosRequestConfig): AxiosPromise<ExternalShareWrapper> {
+            return localVarFp.getExternalShareData(requestParameters.key, requestParameters.fileId, requestParameters.folderId, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the detailed information about the shared file with the ID specified in the request.
          * @summary Get the shared file information
-         * @param {number} id The file unique identifier.
-         * @param {number} [count] The number of items to retrieve in the request.
-         * @param {number} [startIndex] The starting index for the query results.
+         * @param {SharingApiGetFileSecurityInfoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getFileSecurityInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-security-info/
          * @throws {RequiredError}
          */
-        getFileSecurityInfo(id: number, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
-            return localVarFp.getFileSecurityInfo(id, count, startIndex, options).then((request) => request(axios, basePath));
+        getFileSecurityInfo(requestParameters: SharingApiGetFileSecurityInfoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
+            return localVarFp.getFileSecurityInfo(requestParameters.id, requestParameters.count, requestParameters.startIndex, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the detailed information about the shared folder with the ID specified in the request.
          * @summary Get the shared folder information
-         * @param {number} id The folder unique identifier.
-         * @param {number} [count] The number of items to retrieve in the request.
-         * @param {number} [startIndex] The starting index for the query results.
+         * @param {SharingApiGetFolderSecurityInfoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getFolderSecurityInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-security-info/
          * @throws {RequiredError}
          */
-        getFolderSecurityInfo(id: number, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
-            return localVarFp.getFolderSecurityInfo(id, count, startIndex, options).then((request) => request(axios, basePath));
+        getFolderSecurityInfo(requestParameters: SharingApiGetFolderSecurityInfoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
+            return localVarFp.getFolderSecurityInfo(requestParameters.id, requestParameters.count, requestParameters.startIndex, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the group members with their file security information.
          * @summary Get file group members with security information
-         * @param {number} fileId The file ID.
-         * @param {string} groupId The group ID.
-         * @param {number} [count] The number of items to be retrieved in the current query.
-         * @param {number} [startIndex] The starting index for the query result set.
-         * @param {string} [filterValue] The filter value used for searching or querying group members based on text input.
+         * @param {SharingApiGetGroupsMembersWithFileSecurityRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getGroupsMembersWithFileSecurity operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-file-security/
          * @throws {RequiredError}
          */
-        getGroupsMembersWithFileSecurity(fileId: number, groupId: string, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<GroupMemberSecurityRequestArrayWrapper> {
-            return localVarFp.getGroupsMembersWithFileSecurity(fileId, groupId, count, startIndex, filterValue, options).then((request) => request(axios, basePath));
+        getGroupsMembersWithFileSecurity(requestParameters: SharingApiGetGroupsMembersWithFileSecurityRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupMemberSecurityRequestArrayWrapper> {
+            return localVarFp.getGroupsMembersWithFileSecurity(requestParameters.fileId, requestParameters.groupId, requestParameters.count, requestParameters.startIndex, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the group members with their folder security information.
          * @summary Get folder group members with security information
-         * @param {number} folderId The folder ID.
-         * @param {string} groupId The group ID.
-         * @param {number} [count] The number of items to be retrieved in the current query.
-         * @param {number} [startIndex] The starting index for the query result set.
-         * @param {string} [filterValue] The filter value used for searching or querying group members based on text input.
+         * @param {SharingApiGetGroupsMembersWithFolderSecurityRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getGroupsMembersWithFolderSecurity operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-folder-security/
          * @throws {RequiredError}
          */
-        getGroupsMembersWithFolderSecurity(folderId: number, groupId: string, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<GroupMemberSecurityRequestArrayWrapper> {
-            return localVarFp.getGroupsMembersWithFolderSecurity(folderId, groupId, count, startIndex, filterValue, options).then((request) => request(axios, basePath));
+        getGroupsMembersWithFolderSecurity(requestParameters: SharingApiGetGroupsMembersWithFolderSecurityRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupMemberSecurityRequestArrayWrapper> {
+            return localVarFp.getGroupsMembersWithFolderSecurity(requestParameters.folderId, requestParameters.groupId, requestParameters.count, requestParameters.startIndex, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the sharing rights for all the files and folders specified in the request.
          * @summary Get the sharing rights
-         * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
+         * @param {SharingApiGetSecurityInfoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getSecurityInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-security-info/
          * @throws {RequiredError}
          */
-        getSecurityInfo(baseBatchRequestDto?: BaseBatchRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
-            return localVarFp.getSecurityInfo(baseBatchRequestDto, options).then((request) => request(axios, basePath));
+        getSecurityInfo(requestParameters: SharingApiGetSecurityInfoRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
+            return localVarFp.getSecurityInfo(requestParameters.baseBatchRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of users with their access rights to the file with the ID specified in the request.
          * @summary Get user access rights by file ID
-         * @param {number} fileId The file unique identifier.
+         * @param {SharingApiGetSharedUsersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getSharedUsers operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-shared-users/
          * @throws {RequiredError}
          */
-        getSharedUsers(fileId: number, options?: RawAxiosRequestConfig): AxiosPromise<MentionWrapperArrayWrapper> {
-            return localVarFp.getSharedUsers(fileId, options).then((request) => request(axios, basePath));
+        getSharedUsers(requestParameters: SharingApiGetSharedUsersRequest, options?: RawAxiosRequestConfig): AxiosPromise<MentionWrapperArrayWrapper> {
+            return localVarFp.getSharedUsers(requestParameters.fileId, options).then((request) => request(axios, basePath));
         },
         /**
          * Removes the sharing rights from all the files and folders specified in the request.
          * @summary Remove the sharing rights
-         * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
+         * @param {SharingApiRemoveSecurityInfoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for removeSecurityInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/remove-security-info/
          * @throws {RequiredError}
          */
-        removeSecurityInfo(baseBatchRequestDto?: BaseBatchRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.removeSecurityInfo(baseBatchRequestDto, options).then((request) => request(axios, basePath));
+        removeSecurityInfo(requestParameters: SharingApiRemoveSecurityInfoRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.removeSecurityInfo(requestParameters.baseBatchRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Sends a message to the users who are mentioned in the file with the ID specified in the request.
          * @summary Send the mention message
-         * @param {number} fileId The file ID with the mention message.
-         * @param {MentionMessageWrapper} [mentionMessageWrapper] The mention message.
+         * @param {SharingApiSendEditorNotifyRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for sendEditorNotify operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-editor-notify/
          * @throws {RequiredError}
          */
-        sendEditorNotify(fileId: number, mentionMessageWrapper?: MentionMessageWrapper, options?: RawAxiosRequestConfig): AxiosPromise<AceShortWrapperArrayWrapper> {
-            return localVarFp.sendEditorNotify(fileId, mentionMessageWrapper, options).then((request) => request(axios, basePath));
+        sendEditorNotify(requestParameters: SharingApiSendEditorNotifyRequest, options?: RawAxiosRequestConfig): AxiosPromise<AceShortWrapperArrayWrapper> {
+            return localVarFp.sendEditorNotify(requestParameters.fileId, requestParameters.mentionMessageWrapper, options).then((request) => request(axios, basePath));
         },
         /**
          * Sets the sharing settings to a file with the ID specified in the request.
          * @summary Share a file
-         * @param {number} fileId The file ID.
-         * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The parameters of the security information simple request.
+         * @param {SharingApiSetFileSecurityInfoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setFileSecurityInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-security-info/
          * @throws {RequiredError}
          */
-        setFileSecurityInfo(fileId: number, securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
-            return localVarFp.setFileSecurityInfo(fileId, securityInfoSimpleRequestDto, options).then((request) => request(axios, basePath));
+        setFileSecurityInfo(requestParameters: SharingApiSetFileSecurityInfoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
+            return localVarFp.setFileSecurityInfo(requestParameters.fileId, requestParameters.securityInfoSimpleRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Sets the sharing settings to a folder with the ID specified in the request.
          * @summary Share a folder
-         * @param {number} folderId The folder ID.
-         * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The parameters of the security information simple request.
+         * @param {SharingApiSetFolderSecurityInfoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setFolderSecurityInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-security-info/
          * @throws {RequiredError}
          */
-        setFolderSecurityInfo(folderId: number, securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
-            return localVarFp.setFolderSecurityInfo(folderId, securityInfoSimpleRequestDto, options).then((request) => request(axios, basePath));
+        setFolderSecurityInfo(requestParameters: SharingApiSetFolderSecurityInfoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
+            return localVarFp.setFolderSecurityInfo(requestParameters.folderId, requestParameters.securityInfoSimpleRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Sets the sharing rights to all the files and folders specified in the request.
          * @summary Set the sharing rights
-         * @param {SecurityInfoRequestDto} [securityInfoRequestDto] 
+         * @param {SharingApiSetSecurityInfoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setSecurityInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-security-info/
          * @throws {RequiredError}
          */
-        setSecurityInfo(securityInfoRequestDto?: SecurityInfoRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
-            return localVarFp.setSecurityInfo(securityInfoRequestDto, options).then((request) => request(axios, basePath));
+        setSecurityInfo(requestParameters: SharingApiSetSecurityInfoRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
+            return localVarFp.setSecurityInfo(requestParameters.securityInfoRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for applyExternalSharePassword operation in SharingApi.
+ * @export
+ * @interface SharingApiApplyExternalSharePasswordRequest
+ */
+export interface SharingApiApplyExternalSharePasswordRequest {
+    /**
+     * The unique document identifier.
+     * @type {string}
+     * @memberof SharingApiApplyExternalSharePassword
+     */
+    readonly key: string
+
+    /**
+     * The external data share request parameters.
+     * @type {ExternalShareRequestParam}
+     * @memberof SharingApiApplyExternalSharePassword
+     */
+    readonly externalShareRequestParam: ExternalShareRequestParam
+}
+
+/**
+ * Request parameters for changeFileOwner operation in SharingApi.
+ * @export
+ * @interface SharingApiChangeFileOwnerRequest
+ */
+export interface SharingApiChangeFileOwnerRequest {
+    /**
+     * 
+     * @type {ChangeOwnerRequestDto}
+     * @memberof SharingApiChangeFileOwner
+     */
+    readonly changeOwnerRequestDto?: ChangeOwnerRequestDto
+}
+
+/**
+ * Request parameters for getExternalShareData operation in SharingApi.
+ * @export
+ * @interface SharingApiGetExternalShareDataRequest
+ */
+export interface SharingApiGetExternalShareDataRequest {
+    /**
+     * The unique key of the external shared data.
+     * @type {string}
+     * @memberof SharingApiGetExternalShareData
+     */
+    readonly key: string
+
+    /**
+     * The unique document identifier.
+     * @type {string}
+     * @memberof SharingApiGetExternalShareData
+     */
+    readonly fileId?: string
+
+    /**
+     * The unique folder identifier.
+     * @type {string}
+     * @memberof SharingApiGetExternalShareData
+     */
+    readonly folderId?: string
+}
+
+/**
+ * Request parameters for getFileSecurityInfo operation in SharingApi.
+ * @export
+ * @interface SharingApiGetFileSecurityInfoRequest
+ */
+export interface SharingApiGetFileSecurityInfoRequest {
+    /**
+     * The file unique identifier.
+     * @type {number}
+     * @memberof SharingApiGetFileSecurityInfo
+     */
+    readonly id: number
+
+    /**
+     * The number of items to retrieve in the request.
+     * @type {number}
+     * @memberof SharingApiGetFileSecurityInfo
+     */
+    readonly count?: number
+
+    /**
+     * The starting index for the query results.
+     * @type {number}
+     * @memberof SharingApiGetFileSecurityInfo
+     */
+    readonly startIndex?: number
+}
+
+/**
+ * Request parameters for getFolderSecurityInfo operation in SharingApi.
+ * @export
+ * @interface SharingApiGetFolderSecurityInfoRequest
+ */
+export interface SharingApiGetFolderSecurityInfoRequest {
+    /**
+     * The folder unique identifier.
+     * @type {number}
+     * @memberof SharingApiGetFolderSecurityInfo
+     */
+    readonly id: number
+
+    /**
+     * The number of items to retrieve in the request.
+     * @type {number}
+     * @memberof SharingApiGetFolderSecurityInfo
+     */
+    readonly count?: number
+
+    /**
+     * The starting index for the query results.
+     * @type {number}
+     * @memberof SharingApiGetFolderSecurityInfo
+     */
+    readonly startIndex?: number
+}
+
+/**
+ * Request parameters for getGroupsMembersWithFileSecurity operation in SharingApi.
+ * @export
+ * @interface SharingApiGetGroupsMembersWithFileSecurityRequest
+ */
+export interface SharingApiGetGroupsMembersWithFileSecurityRequest {
+    /**
+     * The file ID.
+     * @type {number}
+     * @memberof SharingApiGetGroupsMembersWithFileSecurity
+     */
+    readonly fileId: number
+
+    /**
+     * The group ID.
+     * @type {string}
+     * @memberof SharingApiGetGroupsMembersWithFileSecurity
+     */
+    readonly groupId: string
+
+    /**
+     * The number of items to be retrieved in the current query.
+     * @type {number}
+     * @memberof SharingApiGetGroupsMembersWithFileSecurity
+     */
+    readonly count?: number
+
+    /**
+     * The starting index for the query result set.
+     * @type {number}
+     * @memberof SharingApiGetGroupsMembersWithFileSecurity
+     */
+    readonly startIndex?: number
+
+    /**
+     * The filter value used for searching or querying group members based on text input.
+     * @type {string}
+     * @memberof SharingApiGetGroupsMembersWithFileSecurity
+     */
+    readonly filterValue?: string
+}
+
+/**
+ * Request parameters for getGroupsMembersWithFolderSecurity operation in SharingApi.
+ * @export
+ * @interface SharingApiGetGroupsMembersWithFolderSecurityRequest
+ */
+export interface SharingApiGetGroupsMembersWithFolderSecurityRequest {
+    /**
+     * The folder ID.
+     * @type {number}
+     * @memberof SharingApiGetGroupsMembersWithFolderSecurity
+     */
+    readonly folderId: number
+
+    /**
+     * The group ID.
+     * @type {string}
+     * @memberof SharingApiGetGroupsMembersWithFolderSecurity
+     */
+    readonly groupId: string
+
+    /**
+     * The number of items to be retrieved in the current query.
+     * @type {number}
+     * @memberof SharingApiGetGroupsMembersWithFolderSecurity
+     */
+    readonly count?: number
+
+    /**
+     * The starting index for the query result set.
+     * @type {number}
+     * @memberof SharingApiGetGroupsMembersWithFolderSecurity
+     */
+    readonly startIndex?: number
+
+    /**
+     * The filter value used for searching or querying group members based on text input.
+     * @type {string}
+     * @memberof SharingApiGetGroupsMembersWithFolderSecurity
+     */
+    readonly filterValue?: string
+}
+
+/**
+ * Request parameters for getSecurityInfo operation in SharingApi.
+ * @export
+ * @interface SharingApiGetSecurityInfoRequest
+ */
+export interface SharingApiGetSecurityInfoRequest {
+    /**
+     * 
+     * @type {BaseBatchRequestDto}
+     * @memberof SharingApiGetSecurityInfo
+     */
+    readonly baseBatchRequestDto?: BaseBatchRequestDto
+}
+
+/**
+ * Request parameters for getSharedUsers operation in SharingApi.
+ * @export
+ * @interface SharingApiGetSharedUsersRequest
+ */
+export interface SharingApiGetSharedUsersRequest {
+    /**
+     * The file unique identifier.
+     * @type {number}
+     * @memberof SharingApiGetSharedUsers
+     */
+    readonly fileId: number
+}
+
+/**
+ * Request parameters for removeSecurityInfo operation in SharingApi.
+ * @export
+ * @interface SharingApiRemoveSecurityInfoRequest
+ */
+export interface SharingApiRemoveSecurityInfoRequest {
+    /**
+     * 
+     * @type {BaseBatchRequestDto}
+     * @memberof SharingApiRemoveSecurityInfo
+     */
+    readonly baseBatchRequestDto?: BaseBatchRequestDto
+}
+
+/**
+ * Request parameters for sendEditorNotify operation in SharingApi.
+ * @export
+ * @interface SharingApiSendEditorNotifyRequest
+ */
+export interface SharingApiSendEditorNotifyRequest {
+    /**
+     * The file ID with the mention message.
+     * @type {number}
+     * @memberof SharingApiSendEditorNotify
+     */
+    readonly fileId: number
+
+    /**
+     * The mention message.
+     * @type {MentionMessageWrapper}
+     * @memberof SharingApiSendEditorNotify
+     */
+    readonly mentionMessageWrapper?: MentionMessageWrapper
+}
+
+/**
+ * Request parameters for setFileSecurityInfo operation in SharingApi.
+ * @export
+ * @interface SharingApiSetFileSecurityInfoRequest
+ */
+export interface SharingApiSetFileSecurityInfoRequest {
+    /**
+     * The file ID.
+     * @type {number}
+     * @memberof SharingApiSetFileSecurityInfo
+     */
+    readonly fileId: number
+
+    /**
+     * The parameters of the security information simple request.
+     * @type {SecurityInfoSimpleRequestDto}
+     * @memberof SharingApiSetFileSecurityInfo
+     */
+    readonly securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto
+}
+
+/**
+ * Request parameters for setFolderSecurityInfo operation in SharingApi.
+ * @export
+ * @interface SharingApiSetFolderSecurityInfoRequest
+ */
+export interface SharingApiSetFolderSecurityInfoRequest {
+    /**
+     * The folder ID.
+     * @type {number}
+     * @memberof SharingApiSetFolderSecurityInfo
+     */
+    readonly folderId: number
+
+    /**
+     * The parameters of the security information simple request.
+     * @type {SecurityInfoSimpleRequestDto}
+     * @memberof SharingApiSetFolderSecurityInfo
+     */
+    readonly securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto
+}
+
+/**
+ * Request parameters for setSecurityInfo operation in SharingApi.
+ * @export
+ * @interface SharingApiSetSecurityInfoRequest
+ */
+export interface SharingApiSetSecurityInfoRequest {
+    /**
+     * 
+     * @type {SecurityInfoRequestDto}
+     * @memberof SharingApiSetSecurityInfo
+     */
+    readonly securityInfoRequestDto?: SecurityInfoRequestDto
+}
 
 /**
  * SharingApi - object-oriented interface
@@ -1341,187 +1644,169 @@ export class SharingApi extends BaseAPI {
     /**
      * Applies a password specified in the request to get the external data.
      * @summary Apply external data password
-     * @param {string} key The unique document identifier.
-     * @param {ExternalShareRequestParam} externalShareRequestParam The external data share request parameters.
+     * @param {FilesSharingApiApplyExternalSharePasswordRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SharingApi
      */
-    public applyExternalSharePassword(key: string, externalShareRequestParam: ExternalShareRequestParam, options?: RawAxiosRequestConfig) {
-        return SharingApiFp(this.configuration).applyExternalSharePassword(key, externalShareRequestParam, options).then((request) => request(this.axios, this.basePath));
+    public applyExternalSharePassword(requestParameters: SharingApiApplyExternalSharePasswordRequest, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).applyExternalSharePassword(requestParameters.key, requestParameters.externalShareRequestParam, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Changes the owner of the file with the ID specified in the request.
      * @summary Change the file owner
-     * @param {ChangeOwnerRequestDto} [changeOwnerRequestDto] 
+     * @param {FilesSharingApiChangeFileOwnerRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SharingApi
      */
-    public changeFileOwner(changeOwnerRequestDto?: ChangeOwnerRequestDto, options?: RawAxiosRequestConfig) {
-        return SharingApiFp(this.configuration).changeFileOwner(changeOwnerRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public changeFileOwner(requestParameters: SharingApiChangeFileOwnerRequest = {}, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).changeFileOwner(requestParameters.changeOwnerRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the external data by the key specified in the request.
      * @summary Get the external data
-     * @param {string} key The unique key of the external shared data.
-     * @param {string} [fileId] The unique document identifier.
-     * @param {string} [folderId] The unique folder identifier.
+     * @param {FilesSharingApiGetExternalShareDataRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SharingApi
      */
-    public getExternalShareData(key: string, fileId?: string, folderId?: string, options?: RawAxiosRequestConfig) {
-        return SharingApiFp(this.configuration).getExternalShareData(key, fileId, folderId, options).then((request) => request(this.axios, this.basePath));
+    public getExternalShareData(requestParameters: SharingApiGetExternalShareDataRequest, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).getExternalShareData(requestParameters.key, requestParameters.fileId, requestParameters.folderId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the detailed information about the shared file with the ID specified in the request.
      * @summary Get the shared file information
-     * @param {number} id The file unique identifier.
-     * @param {number} [count] The number of items to retrieve in the request.
-     * @param {number} [startIndex] The starting index for the query results.
+     * @param {FilesSharingApiGetFileSecurityInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SharingApi
      */
-    public getFileSecurityInfo(id: number, count?: number, startIndex?: number, options?: RawAxiosRequestConfig) {
-        return SharingApiFp(this.configuration).getFileSecurityInfo(id, count, startIndex, options).then((request) => request(this.axios, this.basePath));
+    public getFileSecurityInfo(requestParameters: SharingApiGetFileSecurityInfoRequest, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).getFileSecurityInfo(requestParameters.id, requestParameters.count, requestParameters.startIndex, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the detailed information about the shared folder with the ID specified in the request.
      * @summary Get the shared folder information
-     * @param {number} id The folder unique identifier.
-     * @param {number} [count] The number of items to retrieve in the request.
-     * @param {number} [startIndex] The starting index for the query results.
+     * @param {FilesSharingApiGetFolderSecurityInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SharingApi
      */
-    public getFolderSecurityInfo(id: number, count?: number, startIndex?: number, options?: RawAxiosRequestConfig) {
-        return SharingApiFp(this.configuration).getFolderSecurityInfo(id, count, startIndex, options).then((request) => request(this.axios, this.basePath));
+    public getFolderSecurityInfo(requestParameters: SharingApiGetFolderSecurityInfoRequest, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).getFolderSecurityInfo(requestParameters.id, requestParameters.count, requestParameters.startIndex, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the group members with their file security information.
      * @summary Get file group members with security information
-     * @param {number} fileId The file ID.
-     * @param {string} groupId The group ID.
-     * @param {number} [count] The number of items to be retrieved in the current query.
-     * @param {number} [startIndex] The starting index for the query result set.
-     * @param {string} [filterValue] The filter value used for searching or querying group members based on text input.
+     * @param {FilesSharingApiGetGroupsMembersWithFileSecurityRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SharingApi
      */
-    public getGroupsMembersWithFileSecurity(fileId: number, groupId: string, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig) {
-        return SharingApiFp(this.configuration).getGroupsMembersWithFileSecurity(fileId, groupId, count, startIndex, filterValue, options).then((request) => request(this.axios, this.basePath));
+    public getGroupsMembersWithFileSecurity(requestParameters: SharingApiGetGroupsMembersWithFileSecurityRequest, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).getGroupsMembersWithFileSecurity(requestParameters.fileId, requestParameters.groupId, requestParameters.count, requestParameters.startIndex, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the group members with their folder security information.
      * @summary Get folder group members with security information
-     * @param {number} folderId The folder ID.
-     * @param {string} groupId The group ID.
-     * @param {number} [count] The number of items to be retrieved in the current query.
-     * @param {number} [startIndex] The starting index for the query result set.
-     * @param {string} [filterValue] The filter value used for searching or querying group members based on text input.
+     * @param {FilesSharingApiGetGroupsMembersWithFolderSecurityRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SharingApi
      */
-    public getGroupsMembersWithFolderSecurity(folderId: number, groupId: string, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig) {
-        return SharingApiFp(this.configuration).getGroupsMembersWithFolderSecurity(folderId, groupId, count, startIndex, filterValue, options).then((request) => request(this.axios, this.basePath));
+    public getGroupsMembersWithFolderSecurity(requestParameters: SharingApiGetGroupsMembersWithFolderSecurityRequest, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).getGroupsMembersWithFolderSecurity(requestParameters.folderId, requestParameters.groupId, requestParameters.count, requestParameters.startIndex, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the sharing rights for all the files and folders specified in the request.
      * @summary Get the sharing rights
-     * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
+     * @param {FilesSharingApiGetSecurityInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SharingApi
      */
-    public getSecurityInfo(baseBatchRequestDto?: BaseBatchRequestDto, options?: RawAxiosRequestConfig) {
-        return SharingApiFp(this.configuration).getSecurityInfo(baseBatchRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public getSecurityInfo(requestParameters: SharingApiGetSecurityInfoRequest = {}, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).getSecurityInfo(requestParameters.baseBatchRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns a list of users with their access rights to the file with the ID specified in the request.
      * @summary Get user access rights by file ID
-     * @param {number} fileId The file unique identifier.
+     * @param {FilesSharingApiGetSharedUsersRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SharingApi
      */
-    public getSharedUsers(fileId: number, options?: RawAxiosRequestConfig) {
-        return SharingApiFp(this.configuration).getSharedUsers(fileId, options).then((request) => request(this.axios, this.basePath));
+    public getSharedUsers(requestParameters: SharingApiGetSharedUsersRequest, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).getSharedUsers(requestParameters.fileId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Removes the sharing rights from all the files and folders specified in the request.
      * @summary Remove the sharing rights
-     * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
+     * @param {FilesSharingApiRemoveSecurityInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SharingApi
      */
-    public removeSecurityInfo(baseBatchRequestDto?: BaseBatchRequestDto, options?: RawAxiosRequestConfig) {
-        return SharingApiFp(this.configuration).removeSecurityInfo(baseBatchRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public removeSecurityInfo(requestParameters: SharingApiRemoveSecurityInfoRequest = {}, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).removeSecurityInfo(requestParameters.baseBatchRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Sends a message to the users who are mentioned in the file with the ID specified in the request.
      * @summary Send the mention message
-     * @param {number} fileId The file ID with the mention message.
-     * @param {MentionMessageWrapper} [mentionMessageWrapper] The mention message.
+     * @param {FilesSharingApiSendEditorNotifyRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SharingApi
      */
-    public sendEditorNotify(fileId: number, mentionMessageWrapper?: MentionMessageWrapper, options?: RawAxiosRequestConfig) {
-        return SharingApiFp(this.configuration).sendEditorNotify(fileId, mentionMessageWrapper, options).then((request) => request(this.axios, this.basePath));
+    public sendEditorNotify(requestParameters: SharingApiSendEditorNotifyRequest, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).sendEditorNotify(requestParameters.fileId, requestParameters.mentionMessageWrapper, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Sets the sharing settings to a file with the ID specified in the request.
      * @summary Share a file
-     * @param {number} fileId The file ID.
-     * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The parameters of the security information simple request.
+     * @param {FilesSharingApiSetFileSecurityInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SharingApi
      */
-    public setFileSecurityInfo(fileId: number, securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto, options?: RawAxiosRequestConfig) {
-        return SharingApiFp(this.configuration).setFileSecurityInfo(fileId, securityInfoSimpleRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public setFileSecurityInfo(requestParameters: SharingApiSetFileSecurityInfoRequest, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).setFileSecurityInfo(requestParameters.fileId, requestParameters.securityInfoSimpleRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Sets the sharing settings to a folder with the ID specified in the request.
      * @summary Share a folder
-     * @param {number} folderId The folder ID.
-     * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The parameters of the security information simple request.
+     * @param {FilesSharingApiSetFolderSecurityInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SharingApi
      */
-    public setFolderSecurityInfo(folderId: number, securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto, options?: RawAxiosRequestConfig) {
-        return SharingApiFp(this.configuration).setFolderSecurityInfo(folderId, securityInfoSimpleRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public setFolderSecurityInfo(requestParameters: SharingApiSetFolderSecurityInfoRequest, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).setFolderSecurityInfo(requestParameters.folderId, requestParameters.securityInfoSimpleRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Sets the sharing rights to all the files and folders specified in the request.
      * @summary Set the sharing rights
-     * @param {SecurityInfoRequestDto} [securityInfoRequestDto] 
+     * @param {FilesSharingApiSetSecurityInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SharingApi
      */
-    public setSecurityInfo(securityInfoRequestDto?: SecurityInfoRequestDto, options?: RawAxiosRequestConfig) {
-        return SharingApiFp(this.configuration).setSecurityInfo(securityInfoRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public setSecurityInfo(requestParameters: SharingApiSetSecurityInfoRequest = {}, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).setSecurityInfo(requestParameters.securityInfoRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

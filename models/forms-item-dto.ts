@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,20 +21,14 @@
 
 /**
  * The forms item information.
- * @export
- * @interface FormsItemDto
  */
 export interface FormsItemDto {
     /**
-     * 
-     * @type {string}
-     * @memberof FormsItemDto
+     * The form item key.              <example>field_name</example>
      */
     'key'?: string | null;
     /**
-     * 
-     * @type {string}
-     * @memberof FormsItemDto
+     * The form item type.              <example>text</example>
      */
     'type'?: string | null;
 }

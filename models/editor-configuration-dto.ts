@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,87 +45,41 @@ import type { UserConfig } from './user-config';
 
 /**
  * The editor configuration parameters.
- * @export
- * @interface EditorConfigurationDto
  */
 export interface EditorConfigurationDto {
     /**
      * The callback URL of the editor.
-     * @type {string}
-     * @memberof EditorConfigurationDto
      */
     'callbackUrl'?: string | null;
-    /**
-     * 
-     * @type {CoEditingConfig}
-     * @memberof EditorConfigurationDto
-     */
     'coEditing'?: CoEditingConfig;
     /**
      * The creation URL of the editor.
-     * @type {string}
-     * @memberof EditorConfigurationDto
      */
     'createUrl'?: string | null;
-    /**
-     * 
-     * @type {CustomizationConfigDto}
-     * @memberof EditorConfigurationDto
-     */
     'customization'?: CustomizationConfigDto;
-    /**
-     * 
-     * @type {EmbeddedConfig}
-     * @memberof EditorConfigurationDto
-     */
     'embedded'?: EmbeddedConfig;
-    /**
-     * 
-     * @type {EncryptionKeysConfig}
-     * @memberof EditorConfigurationDto
-     */
     'encryptionKeys'?: EncryptionKeysConfig;
     /**
      * The language of the editor configuration.
-     * @type {string}
-     * @memberof EditorConfigurationDto
      */
     'lang': string | null;
     /**
      * The mode of the editor configuration.
-     * @type {string}
-     * @memberof EditorConfigurationDto
      */
     'mode': string | null;
     /**
      * Specifies if the mode is write of the editor configuration.
-     * @type {boolean}
-     * @memberof EditorConfigurationDto
      */
     'modeWrite'?: boolean;
-    /**
-     * 
-     * @type {PluginsConfig}
-     * @memberof EditorConfigurationDto
-     */
     'plugins'?: PluginsConfig;
     /**
      * The recent configuration of the editor.
-     * @type {Array<RecentConfig>}
-     * @memberof EditorConfigurationDto
      */
     'recent'?: Array<RecentConfig> | null;
     /**
      * The templates of the editor configuration.
-     * @type {Array<TemplatesConfig>}
-     * @memberof EditorConfigurationDto
      */
     'templates'?: Array<TemplatesConfig> | null;
-    /**
-     * 
-     * @type {UserConfig}
-     * @memberof EditorConfigurationDto
-     */
-    'user': UserConfig;
+    'user'?: UserConfig;
 }
 

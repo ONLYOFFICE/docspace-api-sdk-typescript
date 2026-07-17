@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,26 +21,18 @@
 
 /**
  * The currencies parameters.
- * @export
- * @interface CurrenciesDto
  */
 export interface CurrenciesDto {
     /**
      * The ISO country code.
-     * @type {string}
-     * @memberof CurrenciesDto
      */
     'isoCountryCode'?: string | null;
     /**
      * The ISO currency symbol.
-     * @type {string}
-     * @memberof CurrenciesDto
      */
     'isoCurrencySymbol'?: string | null;
     /**
      * The currency native name.
-     * @type {string}
-     * @memberof CurrenciesDto
      */
     'currencyNativeName'?: string | null;
 }

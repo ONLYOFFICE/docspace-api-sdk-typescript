@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,80 +33,39 @@ import type { TenantQuotaSettings } from './tenant-quota-settings';
 
 /**
  * The quota information.
- * @export
- * @interface QuotaDto
  */
 export interface QuotaDto {
     /**
      * The quota ID.
-     * @type {number}
-     * @memberof QuotaDto
      */
     'id': number;
     /**
      * The quota title.
-     * @type {string}
-     * @memberof QuotaDto
      */
     'title': string | null;
-    /**
-     * 
-     * @type {PriceDto}
-     * @memberof QuotaDto
-     */
     'price': PriceDto;
     /**
      * Specifies if the quota is nonprofit or not.
-     * @type {boolean}
-     * @memberof QuotaDto
      */
     'nonProfit': boolean;
     /**
      * Specifies if the quota is free or not.
-     * @type {boolean}
-     * @memberof QuotaDto
      */
     'free': boolean;
     /**
      * Specifies if the quota is trial or not.
-     * @type {boolean}
-     * @memberof QuotaDto
      */
     'trial': boolean;
     /**
      * The list of tenant quota features.
-     * @type {Array<TenantQuotaFeatureDto>}
-     * @memberof QuotaDto
      */
     'features': Array<TenantQuotaFeatureDto> | null;
-    /**
-     * 
-     * @type {TenantEntityQuotaSettings}
-     * @memberof QuotaDto
-     */
     'usersQuota'?: TenantEntityQuotaSettings;
-    /**
-     * 
-     * @type {TenantEntityQuotaSettings}
-     * @memberof QuotaDto
-     */
     'roomsQuota'?: TenantEntityQuotaSettings;
-    /**
-     * 
-     * @type {TenantEntityQuotaSettings}
-     * @memberof QuotaDto
-     */
     'aiAgentsQuota'?: TenantEntityQuotaSettings;
-    /**
-     * 
-     * @type {TenantQuotaSettings}
-     * @memberof QuotaDto
-     */
     'tenantCustomQuota'?: TenantQuotaSettings;
     /**
      * The due date.
-     * @type {string}
-     * @memberof QuotaDto
      */
     'dueDate'?: string | null;
 }

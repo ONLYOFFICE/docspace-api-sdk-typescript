@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,27 +23,16 @@
 import type { BackupPeriod } from './backup-period';
 
 /**
- * 
- * @export
- * @interface CronParams
+ * The backup cron parameters.
  */
 export interface CronParams {
-    /**
-     * 
-     * @type {BackupPeriod}
-     * @memberof CronParams
-     */
     'period'?: BackupPeriod;
     /**
-     * 
-     * @type {number}
-     * @memberof CronParams
+     * The time of the day to start the backup process.
      */
     'hour'?: number;
     /**
-     * 
-     * @type {number}
-     * @memberof CronParams
+     * The day of the week to start the backup process.
      */
     'day'?: number;
 }

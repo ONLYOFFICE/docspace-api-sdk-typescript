@@ -1,6 +1,6 @@
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -628,14 +627,14 @@ export const MigrationApiFactory = function (configuration?: Configuration, base
         /**
          * Finishes the migration process.
          * @summary Finish migration
-         * @param {FinishDto} [finishDto] 
+         * @param {MigrationApiFinishMigrationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for finishMigration operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/finish-migration/
          * @throws {RequiredError}
          */
-        finishMigration(finishDto?: FinishDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.finishMigration(finishDto, options).then((request) => request(axios, basePath));
+        finishMigration(requestParameters: MigrationApiFinishMigrationRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.finishMigration(requestParameters.finishDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the migration logs.
@@ -673,29 +672,71 @@ export const MigrationApiFactory = function (configuration?: Configuration, base
         /**
          * Starts the migration process.
          * @summary Start migration
-         * @param {MigrationApiInfo} [migrationApiInfo] 
+         * @param {MigrationApiStartMigrationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for startMigration operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-migration/
          * @throws {RequiredError}
          */
-        startMigration(migrationApiInfo?: MigrationApiInfo, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.startMigration(migrationApiInfo, options).then((request) => request(axios, basePath));
+        startMigration(requestParameters: MigrationApiStartMigrationRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.startMigration(requestParameters.migrationApiInfo, options).then((request) => request(axios, basePath));
         },
         /**
          * Uploads and initializes a migration with a migrator name specified in the request.
          * @summary Upload and initialize migration
-         * @param {string} migratorName The migrator name extracted from the route parameters.
+         * @param {MigrationApiUploadAndInitializeMigrationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for uploadAndInitializeMigration operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-and-initialize-migration/
          * @throws {RequiredError}
          */
-        uploadAndInitializeMigration(migratorName: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.uploadAndInitializeMigration(migratorName, options).then((request) => request(axios, basePath));
+        uploadAndInitializeMigration(requestParameters: MigrationApiUploadAndInitializeMigrationRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.uploadAndInitializeMigration(requestParameters.migratorName, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for finishMigration operation in MigrationApi.
+ * @export
+ * @interface MigrationApiFinishMigrationRequest
+ */
+export interface MigrationApiFinishMigrationRequest {
+    /**
+     * 
+     * @type {FinishDto}
+     * @memberof MigrationApiFinishMigration
+     */
+    readonly finishDto?: FinishDto
+}
+
+/**
+ * Request parameters for startMigration operation in MigrationApi.
+ * @export
+ * @interface MigrationApiStartMigrationRequest
+ */
+export interface MigrationApiStartMigrationRequest {
+    /**
+     * 
+     * @type {MigrationApiInfo}
+     * @memberof MigrationApiStartMigration
+     */
+    readonly migrationApiInfo?: MigrationApiInfo
+}
+
+/**
+ * Request parameters for uploadAndInitializeMigration operation in MigrationApi.
+ * @export
+ * @interface MigrationApiUploadAndInitializeMigrationRequest
+ */
+export interface MigrationApiUploadAndInitializeMigrationRequest {
+    /**
+     * The migrator name extracted from the route parameters.
+     * @type {string}
+     * @memberof MigrationApiUploadAndInitializeMigration
+     */
+    readonly migratorName: string
+}
 
 /**
  * MigrationApi - object-oriented interface
@@ -729,13 +770,13 @@ export class MigrationApi extends BaseAPI {
     /**
      * Finishes the migration process.
      * @summary Finish migration
-     * @param {FinishDto} [finishDto] 
+     * @param {MigrationApiFinishMigrationRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MigrationApi
      */
-    public finishMigration(finishDto?: FinishDto, options?: RawAxiosRequestConfig) {
-        return MigrationApiFp(this.configuration).finishMigration(finishDto, options).then((request) => request(this.axios, this.basePath));
+    public finishMigration(requestParameters: MigrationApiFinishMigrationRequest = {}, options?: RawAxiosRequestConfig) {
+        return MigrationApiFp(this.configuration).finishMigration(requestParameters.finishDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -774,25 +815,25 @@ export class MigrationApi extends BaseAPI {
     /**
      * Starts the migration process.
      * @summary Start migration
-     * @param {MigrationApiInfo} [migrationApiInfo] 
+     * @param {MigrationApiStartMigrationRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MigrationApi
      */
-    public startMigration(migrationApiInfo?: MigrationApiInfo, options?: RawAxiosRequestConfig) {
-        return MigrationApiFp(this.configuration).startMigration(migrationApiInfo, options).then((request) => request(this.axios, this.basePath));
+    public startMigration(requestParameters: MigrationApiStartMigrationRequest = {}, options?: RawAxiosRequestConfig) {
+        return MigrationApiFp(this.configuration).startMigration(requestParameters.migrationApiInfo, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Uploads and initializes a migration with a migrator name specified in the request.
      * @summary Upload and initialize migration
-     * @param {string} migratorName The migrator name extracted from the route parameters.
+     * @param {MigrationApiUploadAndInitializeMigrationRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MigrationApi
      */
-    public uploadAndInitializeMigration(migratorName: string, options?: RawAxiosRequestConfig) {
-        return MigrationApiFp(this.configuration).uploadAndInitializeMigration(migratorName, options).then((request) => request(this.axios, this.basePath));
+    public uploadAndInitializeMigration(requestParameters: MigrationApiUploadAndInitializeMigrationRequest, options?: RawAxiosRequestConfig) {
+        return MigrationApiFp(this.configuration).uploadAndInitializeMigration(requestParameters.migratorName, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

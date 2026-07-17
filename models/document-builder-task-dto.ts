@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,56 +24,35 @@ import type { DistributedTaskStatus } from './distributed-task-status';
 
 /**
  * The Document Builder task parameters.
- * @export
- * @interface DocumentBuilderTaskDto
  */
 export interface DocumentBuilderTaskDto {
     /**
      * The Document Builder task ID.
-     * @type {string}
-     * @memberof DocumentBuilderTaskDto
      */
     'id': string | null;
     /**
      * The error message occurred during the document building process.
-     * @type {string}
-     * @memberof DocumentBuilderTaskDto
      */
     'error': string | null;
     /**
      * The progress percentage of the document building process.
-     * @type {number}
-     * @memberof DocumentBuilderTaskDto
      */
     'percentage': number;
     /**
      * Specifies whether the document building process is completed or not.
-     * @type {boolean}
-     * @memberof DocumentBuilderTaskDto
      */
     'isCompleted': boolean;
-    /**
-     * 
-     * @type {DistributedTaskStatus}
-     * @memberof DocumentBuilderTaskDto
-     */
     'status': DistributedTaskStatus;
     /**
      * The result file ID.
-     * @type {any}
-     * @memberof DocumentBuilderTaskDto
      */
     'resultFileId': any | null;
     /**
      * The result file name.
-     * @type {string}
-     * @memberof DocumentBuilderTaskDto
      */
     'resultFileName': string | null;
     /**
      * The result file URL.
-     * @type {string}
-     * @memberof DocumentBuilderTaskDto
      */
     'resultFileUrl': string | null;
 }

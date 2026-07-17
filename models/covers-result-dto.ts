@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,20 +21,14 @@
 
 /**
  * The result of the cover request containing the cover image data.
- * @export
- * @interface CoversResultDto
  */
 export interface CoversResultDto {
     /**
      * The cover unique identifier.
-     * @type {string}
-     * @memberof CoversResultDto
      */
     'id': string | null;
     /**
      * The cover image data.
-     * @type {string}
-     * @memberof CoversResultDto
      */
     'data': string | null;
 }

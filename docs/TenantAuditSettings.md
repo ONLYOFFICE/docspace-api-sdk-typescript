@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **loginHistoryLifeTime** | **number** | The login history lifetime. | [optional] [default to undefined]
 **auditTrailLifeTime** | **number** | The audit trail lifetime. | [optional] [default to undefined]
-**lastModified** | **string** |  | [optional] [default to undefined]
+**lastModified** | **string** | The timestamp indicating when the settings were last modified. | [optional] [default to undefined]
 
 ## Example
 

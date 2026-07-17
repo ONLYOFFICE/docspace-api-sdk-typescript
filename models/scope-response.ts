@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,26 +21,18 @@
 
 /**
  * The response containing the scope information.
- * @export
- * @interface ScopeResponse
  */
 export interface ScopeResponse {
     /**
      * The scope name.
-     * @type {string}
-     * @memberof ScopeResponse
      */
     'name'?: string;
     /**
      * The group the scope belongs to.
-     * @type {string}
-     * @memberof ScopeResponse
      */
     'group'?: string;
     /**
      * The scope type.
-     * @type {string}
-     * @memberof ScopeResponse
      */
     'type'?: string;
 }

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,28 +20,24 @@
 
 
 /**
- * 
- * @export
- * @interface ChatSettings
+ * The chat settings.
  */
 export interface ChatSettings {
     /**
-     * 
-     * @type {number}
-     * @memberof ChatSettings
+     * The provider ID.
      */
     'providerId'?: number;
     /**
-     * 
-     * @type {string}
-     * @memberof ChatSettings
+     * The model ID.
      */
     'modelId'?: string | null;
     /**
-     * 
-     * @type {string}
-     * @memberof ChatSettings
+     * The prompt.
      */
     'prompt'?: string | null;
+    /**
+     * Specifies whether the provider is internal or not.
+     */
+    'internal'?: boolean;
 }
 

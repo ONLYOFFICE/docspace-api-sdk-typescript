@@ -1,6 +1,6 @@
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -37,7 +36,7 @@ export const ThirdPartyApiAxiosParamCreator = function (configuration?: Configur
     
     return {
         /**
-         * Returns a request to get the confirmation code from URL.   **Note**: List of providers: Google, Dropbox, Docusign, Box, OneDrive, Wordpress.
+         * Returns a request to get the confirmation code from URL.
          * @summary Get the code request
          * @param {LoginProvider} provider The identity provider used for authentication.
          * @param {*} [options] Override http request option.
@@ -103,7 +102,7 @@ export const ThirdPartyApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ThirdPartyApiAxiosParamCreator(configuration)
     return {
         /**
-         * Returns a request to get the confirmation code from URL.   **Note**: List of providers: Google, Dropbox, Docusign, Box, OneDrive, Wordpress.
+         * Returns a request to get the confirmation code from URL.
          * @summary Get the code request
          * @param {LoginProvider} provider The identity provider used for authentication.
          * @param {*} [options] Override http request option.
@@ -128,19 +127,33 @@ export const ThirdPartyApiFactory = function (configuration?: Configuration, bas
     const localVarFp = ThirdPartyApiFp(configuration)
     return {
         /**
-         * Returns a request to get the confirmation code from URL.   **Note**: List of providers: Google, Dropbox, Docusign, Box, OneDrive, Wordpress.
+         * Returns a request to get the confirmation code from URL.
          * @summary Get the code request
-         * @param {LoginProvider} provider The identity provider used for authentication.
+         * @param {ThirdPartyApiGetThirdPartyCodeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getThirdPartyCode operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-third-party-code/
          * @throws {RequiredError}
          */
-        getThirdPartyCode(provider: LoginProvider, options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
-            return localVarFp.getThirdPartyCode(provider, options).then((request) => request(axios, basePath));
+        getThirdPartyCode(requestParameters: ThirdPartyApiGetThirdPartyCodeRequest, options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
+            return localVarFp.getThirdPartyCode(requestParameters.provider, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for getThirdPartyCode operation in ThirdPartyApi.
+ * @export
+ * @interface ThirdPartyApiGetThirdPartyCodeRequest
+ */
+export interface ThirdPartyApiGetThirdPartyCodeRequest {
+    /**
+     * The identity provider used for authentication.
+     * @type {LoginProvider}
+     * @memberof ThirdPartyApiGetThirdPartyCode
+     */
+    readonly provider: LoginProvider
+}
 
 /**
  * ThirdPartyApi - object-oriented interface
@@ -150,15 +163,15 @@ export const ThirdPartyApiFactory = function (configuration?: Configuration, bas
  */
 export class ThirdPartyApi extends BaseAPI {
     /**
-     * Returns a request to get the confirmation code from URL.   **Note**: List of providers: Google, Dropbox, Docusign, Box, OneDrive, Wordpress.
+     * Returns a request to get the confirmation code from URL.
      * @summary Get the code request
-     * @param {LoginProvider} provider The identity provider used for authentication.
+     * @param {ThirdPartyApiGetThirdPartyCodeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ThirdPartyApi
      */
-    public getThirdPartyCode(provider: LoginProvider, options?: RawAxiosRequestConfig) {
-        return ThirdPartyApiFp(this.configuration).getThirdPartyCode(provider, options).then((request) => request(this.axios, this.basePath));
+    public getThirdPartyCode(requestParameters: ThirdPartyApiGetThirdPartyCodeRequest, options?: RawAxiosRequestConfig) {
+        return ThirdPartyApiFp(this.configuration).getThirdPartyCode(requestParameters.provider, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

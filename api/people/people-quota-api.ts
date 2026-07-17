@@ -1,6 +1,6 @@
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -201,29 +200,57 @@ export const PeopleQuotaApiFactory = function (configuration?: Configuration, ba
         /**
          * Resets a quota limit of users with the IDs specified in the request.
          * @summary Reset a user quota limit
-         * @param {UpdateMembersQuotaRequestDto} [updateMembersQuotaRequestDto] 
+         * @param {PeopleQuotaApiResetUsersQuotaRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for resetUsersQuota operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-users-quota/
          * @throws {RequiredError}
          */
-        resetUsersQuota(updateMembersQuotaRequestDto?: UpdateMembersQuotaRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
-            return localVarFp.resetUsersQuota(updateMembersQuotaRequestDto, options).then((request) => request(axios, basePath));
+        resetUsersQuota(requestParameters: PeopleQuotaApiResetUsersQuotaRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
+            return localVarFp.resetUsersQuota(requestParameters.updateMembersQuotaRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Changes a quota limit for the users with the IDs specified in the request.
          * @summary Change a user quota limit
-         * @param {UpdateMembersQuotaRequestDto} [updateMembersQuotaRequestDto] 
+         * @param {PeopleQuotaApiUpdateUserQuotaRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateUserQuota operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-user-quota/
          * @throws {RequiredError}
          */
-        updateUserQuota(updateMembersQuotaRequestDto?: UpdateMembersQuotaRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
-            return localVarFp.updateUserQuota(updateMembersQuotaRequestDto, options).then((request) => request(axios, basePath));
+        updateUserQuota(requestParameters: PeopleQuotaApiUpdateUserQuotaRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
+            return localVarFp.updateUserQuota(requestParameters.updateMembersQuotaRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for resetUsersQuota operation in PeopleQuotaApi.
+ * @export
+ * @interface PeopleQuotaApiResetUsersQuotaRequest
+ */
+export interface PeopleQuotaApiResetUsersQuotaRequest {
+    /**
+     * 
+     * @type {UpdateMembersQuotaRequestDto}
+     * @memberof PeopleQuotaApiResetUsersQuota
+     */
+    readonly updateMembersQuotaRequestDto?: UpdateMembersQuotaRequestDto
+}
+
+/**
+ * Request parameters for updateUserQuota operation in PeopleQuotaApi.
+ * @export
+ * @interface PeopleQuotaApiUpdateUserQuotaRequest
+ */
+export interface PeopleQuotaApiUpdateUserQuotaRequest {
+    /**
+     * 
+     * @type {UpdateMembersQuotaRequestDto}
+     * @memberof PeopleQuotaApiUpdateUserQuota
+     */
+    readonly updateMembersQuotaRequestDto?: UpdateMembersQuotaRequestDto
+}
 
 /**
  * PeopleQuotaApi - object-oriented interface
@@ -235,25 +262,25 @@ export class PeopleQuotaApi extends BaseAPI {
     /**
      * Resets a quota limit of users with the IDs specified in the request.
      * @summary Reset a user quota limit
-     * @param {UpdateMembersQuotaRequestDto} [updateMembersQuotaRequestDto] 
+     * @param {PeopleQuotaApiResetUsersQuotaRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PeopleQuotaApi
      */
-    public resetUsersQuota(updateMembersQuotaRequestDto?: UpdateMembersQuotaRequestDto, options?: RawAxiosRequestConfig) {
-        return PeopleQuotaApiFp(this.configuration).resetUsersQuota(updateMembersQuotaRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public resetUsersQuota(requestParameters: PeopleQuotaApiResetUsersQuotaRequest = {}, options?: RawAxiosRequestConfig) {
+        return PeopleQuotaApiFp(this.configuration).resetUsersQuota(requestParameters.updateMembersQuotaRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Changes a quota limit for the users with the IDs specified in the request.
      * @summary Change a user quota limit
-     * @param {UpdateMembersQuotaRequestDto} [updateMembersQuotaRequestDto] 
+     * @param {PeopleQuotaApiUpdateUserQuotaRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PeopleQuotaApi
      */
-    public updateUserQuota(updateMembersQuotaRequestDto?: UpdateMembersQuotaRequestDto, options?: RawAxiosRequestConfig) {
-        return PeopleQuotaApiFp(this.configuration).updateUserQuota(updateMembersQuotaRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public updateUserQuota(requestParameters: PeopleQuotaApiUpdateUserQuotaRequest = {}, options?: RawAxiosRequestConfig) {
+        return PeopleQuotaApiFp(this.configuration).updateUserQuota(requestParameters.updateMembersQuotaRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

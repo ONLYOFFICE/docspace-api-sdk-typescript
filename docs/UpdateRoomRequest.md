@@ -17,6 +17,8 @@ Name | Type | Description | Notes
 **color** | **string** | The room color. | [optional] [default to undefined]
 **cover** | **string** | The room cover. | [optional] [default to undefined]
 **chatSettings** | [**ChatSettings**](ChatSettings.md) |  | [optional] [default to undefined]
+**sendFormToExternalDB** | **boolean** | Specifies whether to send form data to external database. | [optional] [default to undefined]
+**saveFormAsXLSX** | **boolean** | Specifies whether to save form data as XLSX file. | [optional] [default to undefined]
 
 ## Example
 
@@ -35,6 +37,8 @@ const instance: UpdateRoomRequest = {
     color,
     cover,
     chatSettings,
+    sendFormToExternalDB,
+    saveFormAsXLSX,
 };
 ```
 

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,113 +25,23 @@ import type { MigratingApiGroup } from './migrating-api-group';
 // @ts-ignore
 import type { MigratingApiUser } from './migrating-api-user';
 
-/**
- * 
- * @export
- * @interface MigrationApiInfo
- */
 export interface MigrationApiInfo {
-    /**
-     * 
-     * @type {string}
-     * @memberof MigrationApiInfo
-     */
     'migratorName'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MigrationApiInfo
-     */
     'operation'?: string | null;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof MigrationApiInfo
-     */
     'failedArchives'?: Array<string> | null;
-    /**
-     * 
-     * @type {Array<MigratingApiUser>}
-     * @memberof MigrationApiInfo
-     */
     'users'?: Array<MigratingApiUser> | null;
-    /**
-     * 
-     * @type {Array<MigratingApiUser>}
-     * @memberof MigrationApiInfo
-     */
     'withoutEmailUsers'?: Array<MigratingApiUser> | null;
-    /**
-     * 
-     * @type {Array<MigratingApiUser>}
-     * @memberof MigrationApiInfo
-     */
     'existUsers'?: Array<MigratingApiUser> | null;
-    /**
-     * 
-     * @type {Array<MigratingApiGroup>}
-     * @memberof MigrationApiInfo
-     */
     'groups'?: Array<MigratingApiGroup> | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof MigrationApiInfo
-     */
     'importPersonalFiles'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof MigrationApiInfo
-     */
     'importSharedFiles'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof MigrationApiInfo
-     */
     'importSharedFolders'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof MigrationApiInfo
-     */
     'importCommonFiles'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof MigrationApiInfo
-     */
     'importProjectFiles'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof MigrationApiInfo
-     */
     'importGroups'?: boolean;
-    /**
-     * 
-     * @type {number}
-     * @memberof MigrationApiInfo
-     */
     'successedUsers'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof MigrationApiInfo
-     */
     'failedUsers'?: number;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof MigrationApiInfo
-     */
     'files'?: Array<string> | null;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof MigrationApiInfo
-     */
     'errors'?: Array<string> | null;
 }
 

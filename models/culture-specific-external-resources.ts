@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,63 +24,16 @@ import type { CultureSpecificExternalResource } from './culture-specific-externa
 
 /**
  * The external resources settings.
- * @export
- * @interface CultureSpecificExternalResources
  */
 export interface CultureSpecificExternalResources {
-    /**
-     * 
-     * @type {CultureSpecificExternalResource}
-     * @memberof CultureSpecificExternalResources
-     */
     'api'?: CultureSpecificExternalResource;
-    /**
-     * 
-     * @type {CultureSpecificExternalResource}
-     * @memberof CultureSpecificExternalResources
-     */
     'common'?: CultureSpecificExternalResource;
-    /**
-     * 
-     * @type {CultureSpecificExternalResource}
-     * @memberof CultureSpecificExternalResources
-     */
     'forum'?: CultureSpecificExternalResource;
-    /**
-     * 
-     * @type {CultureSpecificExternalResource}
-     * @memberof CultureSpecificExternalResources
-     */
     'helpcenter'?: CultureSpecificExternalResource;
-    /**
-     * 
-     * @type {CultureSpecificExternalResource}
-     * @memberof CultureSpecificExternalResources
-     */
     'integrations'?: CultureSpecificExternalResource;
-    /**
-     * 
-     * @type {CultureSpecificExternalResource}
-     * @memberof CultureSpecificExternalResources
-     */
     'site'?: CultureSpecificExternalResource;
-    /**
-     * 
-     * @type {CultureSpecificExternalResource}
-     * @memberof CultureSpecificExternalResources
-     */
     'socialNetworks'?: CultureSpecificExternalResource;
-    /**
-     * 
-     * @type {CultureSpecificExternalResource}
-     * @memberof CultureSpecificExternalResources
-     */
     'support'?: CultureSpecificExternalResource;
-    /**
-     * 
-     * @type {CultureSpecificExternalResource}
-     * @memberof CultureSpecificExternalResources
-     */
     'videoguides'?: CultureSpecificExternalResource;
 }
 

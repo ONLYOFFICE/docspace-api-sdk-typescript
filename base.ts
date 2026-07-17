@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,10 +26,6 @@ import globalAxios from 'axios';
 
 export const BASE_PATH = "http://localhost:8092".replace(/\/+$/, "");
 
-/**
- *
- * @export
- */
 export const COLLECTION_FORMATS = {
     csv: ",",
     ssv: " ",
@@ -35,21 +33,11 @@ export const COLLECTION_FORMATS = {
     pipes: "|",
 };
 
-/**
- *
- * @export
- * @interface RequestArgs
- */
 export interface RequestArgs {
     url: string;
     options: RawAxiosRequestConfig;
 }
 
-/**
- *
- * @export
- * @class BaseAPI
- */
 export class BaseAPI {
     protected configuration: Configuration | undefined;
 
@@ -61,12 +49,6 @@ export class BaseAPI {
     }
 };
 
-/**
- *
- * @export
- * @class RequiredError
- * @extends {Error}
- */
 export class RequiredError extends Error {
     constructor(public field: string, msg?: string) {
         super(msg);
@@ -81,9 +63,5 @@ interface ServerMap {
     }[];
 }
 
-/**
- *
- * @export
- */
 export const operationServerMap: ServerMap = {
 }

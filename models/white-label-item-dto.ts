@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,33 +30,14 @@ import type { WhiteLabelLogoType } from './white-label-logo-type';
 
 /**
  * The white label item parameters.
- * @export
- * @interface WhiteLabelItemDto
  */
 export interface WhiteLabelItemDto {
-    /**
-     * 
-     * @type {WhiteLabelLogoType}
-     * @memberof WhiteLabelItemDto
-     */
     'type'?: WhiteLabelLogoType;
     /**
      * The white label file name.
-     * @type {string}
-     * @memberof WhiteLabelItemDto
      */
     'name'?: string | null;
-    /**
-     * 
-     * @type {IMagickGeometry}
-     * @memberof WhiteLabelItemDto
-     */
     'size'?: IMagickGeometry;
-    /**
-     * 
-     * @type {WhiteLabelItemPathDto}
-     * @memberof WhiteLabelItemDto
-     */
     'path'?: WhiteLabelItemPathDto;
 }
 

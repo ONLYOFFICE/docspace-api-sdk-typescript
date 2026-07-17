@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,26 +24,15 @@ import type { ActionLinkConfig } from './action-link-config';
 
 /**
  * The mention message parameters.
- * @export
- * @interface MentionMessageWrapper
  */
 export interface MentionMessageWrapper {
-    /**
-     * 
-     * @type {ActionLinkConfig}
-     * @memberof MentionMessageWrapper
-     */
     'actionLink'?: ActionLinkConfig;
     /**
      * A list of emails that will receive the mention message.
-     * @type {Array<string>}
-     * @memberof MentionMessageWrapper
      */
     'emails'?: Array<string> | null;
     /**
      * The mention message.
-     * @type {string}
-     * @memberof MentionMessageWrapper
      */
     'message'?: string | null;
 }

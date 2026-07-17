@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,35 +21,15 @@
 
 /**
  * [0 - Ok, 1 - Invalid, 2 - Expired, 3 - Required password, 4 - Invalid password, 5 - External access denied]
- * @export
- * @enum {number}
  */
 
 export const Status = {
-    /**
-    * Ok
-    */
     Ok: 0,
-    /**
-    * Invalid
-    */
     Invalid: 1,
-    /**
-    * Expired
-    */
     Expired: 2,
-    /**
-    * Required password
-    */
     RequiredPassword: 3,
-    /**
-    * Invalid password
-    */
     InvalidPassword: 4,
-    /**
-    * External access denied
-    */
-    ExternalAccessDenied: 5
+    ExternalAccessDenied: 5,
 } as const;
 
 export type Status = typeof Status[keyof typeof Status];

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,58 +30,39 @@ import type { LinkType } from './link-type';
 
 /**
  * The room link parameters.
- * @export
- * @interface RoomLinkRequest
  */
 export interface RoomLinkRequest {
     /**
      * The room link ID.
-     * @type {string}
-     * @memberof RoomLinkRequest
      */
     'linkId'?: string;
-    /**
-     * 
-     * @type {FileShare}
-     * @memberof RoomLinkRequest
-     */
     'access'?: FileShare;
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof RoomLinkRequest
-     */
     'expirationDate'?: ApiDateTime;
     /**
      * The link scope, whether it is internal or not.
-     * @type {boolean}
-     * @memberof RoomLinkRequest
      */
     'internal'?: boolean;
     /**
      * The link name.
-     * @type {string}
-     * @memberof RoomLinkRequest
      */
     'title'?: string | null;
-    /**
-     * 
-     * @type {LinkType}
-     * @memberof RoomLinkRequest
-     */
     'linkType'?: LinkType;
     /**
      * The link password.
-     * @type {string}
-     * @memberof RoomLinkRequest
      */
     'password'?: string | null;
     /**
      * Specifies if downloading the file from the link is disabled or not.
-     * @type {boolean}
-     * @memberof RoomLinkRequest
      */
     'denyDownload'?: boolean;
+    /**
+     * The maximum number of times the invitation link can be used.
+     */
+    'maxUseCount'?: number | null;
+    /**
+     * The current number of times the invitation link has been used.
+     */
+    'currentUseCount'?: number;
 }
 
 

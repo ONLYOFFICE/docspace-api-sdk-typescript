@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,20 +21,14 @@
 
 /**
  * The request parameters for managing the tenant storage quota settings in a multi-tenant system.
- * @export
- * @interface TenantQuotaSettingsRequestsDto
  */
 export interface TenantQuotaSettingsRequestsDto {
     /**
      * The ID of the tenant whose quota is being configured.
-     * @type {number}
-     * @memberof TenantQuotaSettingsRequestsDto
      */
     'tenantId': number;
     /**
      * The storage quota limit in bytes allocated to the tenant.
-     * @type {number}
-     * @memberof TenantQuotaSettingsRequestsDto
      */
     'quota'?: number;
 }

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,15 +24,8 @@ import type { CompanyWhiteLabelSettings } from './company-white-label-settings';
 
 /**
  * The company white label settings wrapper.
- * @export
- * @interface CompanyWhiteLabelSettingsWrapper
  */
 export interface CompanyWhiteLabelSettingsWrapper {
-    /**
-     * 
-     * @type {CompanyWhiteLabelSettings}
-     * @memberof CompanyWhiteLabelSettingsWrapper
-     */
     'settings'?: CompanyWhiteLabelSettings;
 }
 

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,35 +21,15 @@
 
 /**
  * [0 - None, 1 - Draft, 2 - You turn, 3 - In progress, 4 - Complete, 5 - Stoped]
- * @export
- * @enum {number}
  */
 
 export const FormFillingStatus = {
-    /**
-    * None
-    */
     None: 0,
-    /**
-    * Draft
-    */
     Draft: 1,
-    /**
-    * You turn
-    */
     YouTurn: 2,
-    /**
-    * In progress
-    */
     InProgress: 3,
-    /**
-    * Complete
-    */
     Complete: 4,
-    /**
-    * Stoped
-    */
-    Stoped: 5
+    Stoped: 5,
 } as const;
 
 export type FormFillingStatus = typeof FormFillingStatus[keyof typeof FormFillingStatus];

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,32 +21,22 @@
 
 /**
  * The file draft parameters.
- * @export
- * @interface DraftLocationInteger
  */
 export interface DraftLocationInteger {
     /**
      * The InProcess folder ID of the draft.
-     * @type {number}
-     * @memberof DraftLocationInteger
      */
     'folderId'?: number;
     /**
      * The InProcess folder title of the draft.
-     * @type {string}
-     * @memberof DraftLocationInteger
      */
     'folderTitle'?: string | null;
     /**
      * The draft ID.
-     * @type {number}
-     * @memberof DraftLocationInteger
      */
     'fileId'?: number;
     /**
      * The draft title.
-     * @type {string}
-     * @memberof DraftLocationInteger
      */
     'fileTitle'?: string | null;
 }

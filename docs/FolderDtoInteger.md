@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **ownedBy** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] [default to undefined]
 **shared** | **boolean** | Specifies if the file entry is shared via link or not. | [optional] [default to undefined]
 **sharedForUser** | **boolean** | Specifies if the file entry is shared for user or not. | [optional] [default to undefined]
+**sharedExternal** | **boolean** | Specifies if the file entry is shared via a public (non-internal) external link. | [optional] [default to undefined]
 **parentShared** | **boolean** | Indicates whether the parent entity is shared. | [optional] [default to undefined]
 **shortWebUrl** | **string** | The short Web URL. | [optional] [default to undefined]
 **created** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
@@ -63,8 +64,11 @@ Name | Type | Description | Notes
 **usedSpace** | **number** | How much folder space is used (counter). | [optional] [default to undefined]
 **passwordProtected** | **boolean** | Specifies if the folder is password protected or not. | [optional] [default to undefined]
 **expired** | **boolean** | Specifies if an external link to the folder is expired or not. | [optional] [default to undefined]
-**chatSettings** | [**ChatSettings**](ChatSettings.md) |  | [optional] [default to undefined]
+**chatSettings** | [**ChatSettingsDto**](ChatSettingsDto.md) |  | [optional] [default to undefined]
 **rootRoomType** | [**RoomType**](RoomType.md) |  | [optional] [default to undefined]
+**saveFormAsXLSX** | **boolean** | Specifies whether to save form data as XLSX file. | [optional] [default to undefined]
+**sendFormToExternalDB** | **boolean** | Specifies whether to send form data to external database. | [optional] [default to undefined]
+**originalFormId** | **number** | The original form ID that corresponds to this FormFillingFolderDone folder. | [optional] [default to undefined]
 
 ## Example
 
@@ -78,6 +82,7 @@ const instance: FolderDtoInteger = {
     ownedBy,
     shared,
     sharedForUser,
+    sharedExternal,
     parentShared,
     shortWebUrl,
     created,
@@ -131,6 +136,9 @@ const instance: FolderDtoInteger = {
     expired,
     chatSettings,
     rootRoomType,
+    saveFormAsXLSX,
+    sendFormToExternalDB,
+    originalFormId,
 };
 ```
 

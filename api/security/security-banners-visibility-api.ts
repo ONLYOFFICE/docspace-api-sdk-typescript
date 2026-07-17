@@ -1,6 +1,6 @@
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -130,17 +129,31 @@ export const SecurityBannersVisibilityApiFactory = function (configuration?: Con
         /**
          * Sets the visibility settings of the promotional banners in the portal.
          * @summary Set the banners visibility
-         * @param {TenantBannerSettingsDto} [tenantBannerSettingsDto] 
+         * @param {SecurityBannersVisibilityApiSetTenantBannerSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setTenantBannerSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-banner-settings/
          * @throws {RequiredError}
          */
-        setTenantBannerSettings(tenantBannerSettingsDto?: TenantBannerSettingsDto, options?: RawAxiosRequestConfig): AxiosPromise<TenantBannerSettingsWrapper> {
-            return localVarFp.setTenantBannerSettings(tenantBannerSettingsDto, options).then((request) => request(axios, basePath));
+        setTenantBannerSettings(requestParameters: SecurityBannersVisibilityApiSetTenantBannerSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantBannerSettingsWrapper> {
+            return localVarFp.setTenantBannerSettings(requestParameters.tenantBannerSettingsDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for setTenantBannerSettings operation in SecurityBannersVisibilityApi.
+ * @export
+ * @interface SecurityBannersVisibilityApiSetTenantBannerSettingsRequest
+ */
+export interface SecurityBannersVisibilityApiSetTenantBannerSettingsRequest {
+    /**
+     * 
+     * @type {TenantBannerSettingsDto}
+     * @memberof SecurityBannersVisibilityApiSetTenantBannerSettings
+     */
+    readonly tenantBannerSettingsDto?: TenantBannerSettingsDto
+}
 
 /**
  * SecurityBannersVisibilityApi - object-oriented interface
@@ -152,13 +165,13 @@ export class SecurityBannersVisibilityApi extends BaseAPI {
     /**
      * Sets the visibility settings of the promotional banners in the portal.
      * @summary Set the banners visibility
-     * @param {TenantBannerSettingsDto} [tenantBannerSettingsDto] 
+     * @param {SecurityBannersVisibilityApiSetTenantBannerSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SecurityBannersVisibilityApi
      */
-    public setTenantBannerSettings(tenantBannerSettingsDto?: TenantBannerSettingsDto, options?: RawAxiosRequestConfig) {
-        return SecurityBannersVisibilityApiFp(this.configuration).setTenantBannerSettings(tenantBannerSettingsDto, options).then((request) => request(this.axios, this.basePath));
+    public setTenantBannerSettings(requestParameters: SecurityBannersVisibilityApiSetTenantBannerSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return SecurityBannersVisibilityApiFp(this.configuration).setTenantBannerSettings(requestParameters.tenantBannerSettingsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

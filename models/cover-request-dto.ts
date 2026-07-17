@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,20 +21,14 @@
 
 /**
  * The request parameters to change the room cover.
- * @export
- * @interface CoverRequestDto
  */
 export interface CoverRequestDto {
     /**
      * The cover color.
-     * @type {string}
-     * @memberof CoverRequestDto
      */
     'color'?: string | null;
     /**
      * The cover name.
-     * @type {string}
-     * @memberof CoverRequestDto
      */
     'cover'?: string | null;
 }

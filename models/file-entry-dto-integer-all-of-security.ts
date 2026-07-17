@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,267 +21,52 @@
 
 /**
  * The actions that can be performed with the file entry.
- * @export
- * @interface FileEntryDtoIntegerAllOfSecurity
  */
 export interface FileEntryDtoIntegerAllOfSecurity {
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'Read'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'Comment'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'FillForms'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'Review'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'Create'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'CreateFrom'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'Edit'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'Delete'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'CustomFilter'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'EditRoom'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'Rename'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'ReadHistory'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'Lock'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'EditHistory'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'CopyTo'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'Copy'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'MoveTo'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'Move'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'Pin'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'Mute'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'EditAccess'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'Duplicate'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'SubmitToFormGallery'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'Download'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'Convert'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'CopySharedLink'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'ReadLinks'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'Reconnect'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'CreateRoomFrom'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'CopyLink'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'Embed'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'ChangeOwner'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'IndexExport'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'StartFilling'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'FillingStatus'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'ResetFilling'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'StopFilling'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'OpenForm'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'EditInternal'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'EditExpiration'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'Vectorization'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'AskAi'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileEntryDtoIntegerAllOfSecurity
-     */
     'UseChat'?: boolean;
+    'UpdateXlsx'?: boolean;
+    'AnalyzeResponses'?: boolean;
 }
 

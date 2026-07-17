@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,31 +21,14 @@
 
 /**
  * [0 - Waiting, 1 - Created, 2 - Error, 3 - Not required, 4 - Creating]
- * @export
- * @enum {number}
  */
 
 export const Thumbnail = {
-    /**
-    * Waiting
-    */
     Waiting: 0,
-    /**
-    * Created
-    */
     Created: 1,
-    /**
-    * Error
-    */
     Error: 2,
-    /**
-    * Not required
-    */
     NotRequired: 3,
-    /**
-    * Creating
-    */
-    Creating: 4
+    Creating: 4,
 } as const;
 
 export type Thumbnail = typeof Thumbnail[keyof typeof Thumbnail];

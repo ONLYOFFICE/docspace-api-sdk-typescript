@@ -5,6 +5,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**addMember**](#addmember) | **POST** /api/2.0/people | Add a user|
+|[**checkUserExistsByEmail**](#checkuserexistsbyemail) | **GET** /api/2.0/people/exists | Check if a user exists by email|
 |[**deleteMember**](#deletemember) | **DELETE** /api/2.0/people/{userid} | Delete a user|
 |[**deleteProfile**](#deleteprofile) | **DELETE** /api/2.0/people/@self | Delete my profile|
 |[**getAllProfiles**](#getallprofiles) | **GET** /api/2.0/people | Get profiles|
@@ -15,9 +16,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**inviteUsers**](#inviteusers) | **POST** /api/2.0/people/invite | Invite users|
 |[**removeUsers**](#removeusers) | **PUT** /api/2.0/people/delete | Delete users|
 |[**resendUserInvites**](#resenduserinvites) | **PUT** /api/2.0/people/invite | Resend activation emails|
-|[**sendEmailChangeInstructions**](#sendemailchangeinstructions) | **POST** /api/2.0/people/email | Send instructions to change email|
 |[**updateMember**](#updatemember) | **PUT** /api/2.0/people/{userid} | Update a user|
-|[**updateMemberCulture**](#updatememberculture) | **PUT** /api/2.0/people/{userid}/culture | Update a user culture code|
+|[**updateMemberCulture**](#updatememberculture) | **PUT** /api/2.0/people/{userid}/culture | Update a user culture|
 
 # **addMember**
 > EmployeeFullWrapper addMember()
@@ -69,9 +69,76 @@ const { status, data } = await apiInstance.addMember(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Newly added user with the detailed information |  -  |
-|**401** | Unauthorized |  -  |
+|**200** | Newly added user with the detailed information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 |**403** | The invitation link is invalid or its validity has expired |  -  |
+|**401** | Unauthorized |  -  |
+|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **checkUserExistsByEmail**
+> UserExistsResponseWrapper checkUserExistsByEmail()
+
+Returns data indicating whether a user with the specified email exists on the portal.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/check-user-exists-by-email/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **email** | [**string**] | The user email address. | (optional) defaults to undefined|
+| **encemail** | [**string**] | The user encrypted email address. | (optional) defaults to undefined|
+| **culture** | [**string**] | Culture | (optional) defaults to undefined|
+
+
+### Return type
+
+**UserExistsResponseWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    PeopleProfilesApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new PeopleProfilesApi(configuration);
+
+let email: string; //The user email address. (optional) (default to undefined)
+let encemail: string; //The user encrypted email address. (optional) (default to undefined)
+let culture: string; //Culture (optional) (default to undefined)
+
+const { status, data } = await apiInstance.checkUserExistsByEmail(
+    email,
+    encemail,
+    culture
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | User existence result |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+|**400** | Incorrect email |  -  |
+|**401** | Unauthorized |  -  |
+|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -124,11 +191,13 @@ const { status, data } = await apiInstance.deleteMember(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Deleted user detailed information |  -  |
-|**400** | The user is not suspended |  -  |
-|**401** | Unauthorized |  -  |
-|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**200** | Deleted user detailed information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+|**403** | You don\'t have enough permission to perform the operation or user is not suspended |  -  |
 |**404** | User not found |  -  |
+|**401** | Unauthorized |  -  |
+|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -174,10 +243,13 @@ const { status, data } = await apiInstance.deleteProfile();
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Detailed information about my profile |  -  |
-|**401** | Unauthorized |  -  |
-|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**200** | Detailed information about my profile |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+|**403** | You don\'t have enough permission to perform the operation |  -  |
 |**404** | User not found |  -  |
+|**401** | Unauthorized |  -  |
+|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -248,8 +320,11 @@ const { status, data } = await apiInstance.getAllProfiles(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | List of users with the detailed information |  -  |
+|**200** | List of users with the detailed information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 |**401** | Unauthorized |  -  |
+|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -295,8 +370,11 @@ const { status, data } = await apiInstance.getClaims();
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Claims |  -  |
+|**200** | Claims |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 |**401** | Unauthorized |  -  |
+|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -355,9 +433,14 @@ const { status, data } = await apiInstance.getProfileByEmail(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Detailed profile information |  -  |
-|**401** | Unauthorized |  -  |
+|**200** | Detailed profile information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+|**400** | Incorrect email |  -  |
+|**403** | No permissions to perform this action |  -  |
 |**404** | User not found |  -  |
+|**401** | Unauthorized |  -  |
+|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -410,10 +493,13 @@ const { status, data } = await apiInstance.getProfileByUserId(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Detailed profile information |  -  |
-|**400** | Incorect UserId |  -  |
-|**401** | Unauthorized |  -  |
+|**200** | Detailed profile information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+|**400** | Incorrect UserId |  -  |
 |**404** | User not found |  -  |
+|**401** | Unauthorized |  -  |
+|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -459,8 +545,11 @@ const { status, data } = await apiInstance.getSelfProfile();
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Detailed information about my profile |  -  |
+|**200** | Detailed information about my profile |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 |**401** | Unauthorized |  -  |
+|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -515,8 +604,12 @@ const { status, data } = await apiInstance.inviteUsers(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of users |  -  |
-|**401** | Unauthorized |  -  |
+|**400** | Incorrect email or User disabled |  -  |
+|**402** | The number of admins exceeds the limit |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -570,9 +663,14 @@ const { status, data } = await apiInstance.removeUsers(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | List of users with the detailed information |  -  |
-|**401** | Unauthorized |  -  |
+|**200** | List of users with the detailed information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+|**400** | Incorrect UserIds |  -  |
+|**403** | No permissions to perform this action or users are not suspended |  -  |
 |**409** | Data reassign process is not complete |  -  |
+|**401** | Unauthorized |  -  |
+|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -626,67 +724,12 @@ const { status, data } = await apiInstance.resendUserInvites(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | List of users with the detailed information |  -  |
-|**401** | Unauthorized |  -  |
+|**200** | List of users with the detailed information |  * X-RateLimit-Limit - Rate limit: 5 requests per 15 minutes per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 |**403** | No permissions to perform this action |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **sendEmailChangeInstructions**
-> StringWrapper sendEmailChangeInstructions()
-
-Sends a message to the user email with the instructions to change the email address connected to the portal.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-email-change-instructions/).
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **updateMemberRequestDto** | **UpdateMemberRequestDto**|  | |
-
-
-### Return type
-
-**StringWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-```typescript
-import {
-    PeopleProfilesApi,
-    Configuration,
-    UpdateMemberRequestDto
-} from '@onlyoffice/docspace-api-sdk';
-
-const configuration = new Configuration();
-const apiInstance = new PeopleProfilesApi(configuration);
-
-let updateMemberRequestDto: UpdateMemberRequestDto; // (optional)
-
-const { status, data } = await apiInstance.sendEmailChangeInstructions(
-    updateMemberRequestDto
-);
-```
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Message text |  -  |
-|**400** | Incorrect userId or email |  -  |
 |**401** | Unauthorized |  -  |
-|**403** | No permissions to perform this action |  -  |
-|**404** | User not found |  -  |
+|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -743,18 +786,21 @@ const { status, data } = await apiInstance.updateMember(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Updated user with the detailed information |  -  |
+|**200** | Updated user with the detailed information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 |**400** | Incorrect user name |  -  |
-|**401** | Unauthorized |  -  |
-|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**403** | You don\'t have enough permission to perform the operation |  -  |
 |**404** | User not found |  -  |
+|**401** | Unauthorized |  -  |
+|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **updateMemberCulture**
 > EmployeeFullWrapper updateMemberCulture()
 
-Updates the user culture code with the parameters specified in the request.
+Updates the user culture with the parameters specified in the request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-member-culture/).
 
@@ -762,7 +808,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **culture** | **Culture**| The culture code parameters. | |
+| **culture** | **Culture**| The culture name parameters. | |
 | **userid** | [**string**] | The user ID. | defaults to undefined|
 
 
@@ -787,7 +833,7 @@ const configuration = new Configuration();
 const apiInstance = new PeopleProfilesApi(configuration);
 
 let userid: string; //The user ID. (default to undefined)
-let culture: Culture; //The culture code parameters. (optional)
+let culture: Culture; //The culture name parameters. (optional)
 
 const { status, data } = await apiInstance.updateMemberCulture(
     userid,
@@ -804,10 +850,14 @@ const { status, data } = await apiInstance.updateMemberCulture(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Detailed user information |  -  |
-|**401** | Unauthorized |  -  |
-|**403** | You don\&#39;t have enough permission to perform the operation |  -  |
+|**200** | Detailed user information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+|**400** | The specified culture is not in the list of available ones |  -  |
+|**403** | You don\'t have enough permission to perform the operation |  -  |
 |**404** | User not found |  -  |
+|**401** | Unauthorized |  -  |
+|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,32 +21,22 @@
 
 /**
  * The parameters of the calculated payment amount.
- * @export
- * @interface PaymentCalculation
  */
 export interface PaymentCalculation {
     /**
      * The operation unique identifier.
-     * @type {number}
-     * @memberof PaymentCalculation
      */
     'operationId'?: number;
     /**
      * The calculated payment amount.
-     * @type {number}
-     * @memberof PaymentCalculation
      */
     'amount'?: number;
     /**
      * The three-character ISO 4217 currency symbol used for the payment calculation.
-     * @type {string}
-     * @memberof PaymentCalculation
      */
     'currency'?: string | null;
     /**
      * The quantity associated with the payment calculation.
-     * @type {number}
-     * @memberof PaymentCalculation
      */
     'quantity'?: number;
 }

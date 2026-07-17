@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,45 +20,32 @@
 
 
 /**
- * The request for updating client details.
- * @export
- * @interface UpdateClientRequest
+ * Client update request containing modified client details
  */
 export interface UpdateClientRequest {
     /**
-     * The client name.
-     * @type {string}
-     * @memberof UpdateClientRequest
+     * The name of the client
      */
     'name'?: string;
     /**
-     * The client description
-     * @type {string}
-     * @memberof UpdateClientRequest
+     * The description of the client
      */
     'description'?: string;
     /**
-     * The client logo in base64 format.
-     * @type {string}
-     * @memberof UpdateClientRequest
+     * The logo of the client in base64 format
      */
     'logo'?: string;
+    'public'?: boolean;
     /**
-     * Indicates whether PKCE is allowed for the client.
-     * @type {boolean}
-     * @memberof UpdateClientRequest
+     * Indicates whether PKCE is allowed for the client
      */
     'allow_pkce'?: boolean;
     /**
-     * Indicates whether the client is accessible by third-party tenants.
-     * @type {boolean}
-     * @memberof UpdateClientRequest
+     * Indicates whether client is accessible by third-party tenants
      */
     'is_public'?: boolean;
     /**
-     * The allowed origins for the client.
-     * @type {Set<string>}
-     * @memberof UpdateClientRequest
+     * The allowed origins for the client
      */
     'allowed_origins'?: Set<string>;
 }

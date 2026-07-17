@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,50 +24,31 @@ import type { FileOperationType } from './file-operation-type';
 
 /**
  * The result of file convertion operation.
- * @export
- * @interface ConversationResultDto
  */
 export interface ConversationResultDto {
     /**
      * The conversion operation ID.
-     * @type {string}
-     * @memberof ConversationResultDto
      */
     'id': string | null;
-    /**
-     * 
-     * @type {FileOperationType}
-     * @memberof ConversationResultDto
-     */
     'Operation': FileOperationType;
     /**
      * The conversion operation progress.
-     * @type {number}
-     * @memberof ConversationResultDto
      */
     'progress': number;
     /**
      * The source file for the conversion.
-     * @type {string}
-     * @memberof ConversationResultDto
      */
     'source'?: string | null;
     /**
      * The resulting file after the conversion.
-     * @type {any}
-     * @memberof ConversationResultDto
      */
     'result'?: any | null;
     /**
      * The conversion operation error message.
-     * @type {string}
-     * @memberof ConversationResultDto
      */
     'error'?: string | null;
     /**
      * Specifies if the conversion operation is processed or not.
-     * @type {string}
-     * @memberof ConversationResultDto
      */
     'processed'?: string | null;
 }

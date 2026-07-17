@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,23 +21,12 @@
 
 /**
  * [0 - Backup, 1 - Restore, 2 - Transfer]
- * @export
- * @enum {number}
  */
 
 export const BackupProgressEnum = {
-    /**
-    * Backup
-    */
     Backup: 0,
-    /**
-    * Restore
-    */
     Restore: 1,
-    /**
-    * Transfer
-    */
-    Transfer: 2
+    Transfer: 2,
 } as const;
 
 export type BackupProgressEnum = typeof BackupProgressEnum[keyof typeof BackupProgressEnum];

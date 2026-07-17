@@ -1,16 +1,17 @@
 # ScheduleDto
 
+The backup schedule parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **storageType** | [**BackupStorageType**](BackupStorageType.md) |  | [default to undefined]
-**storageParams** | **{ [key: string]: string | null; }** |  | [default to undefined]
+**storageParams** | **{ [key: string]: string | null; }** | The backup storage parameters. | [default to undefined]
 **cronParams** | [**CronParams**](CronParams.md) |  | [default to undefined]
-**backupsStored** | **number** |  | [optional] [default to undefined]
-**lastBackupTime** | **string** |  | [default to undefined]
-**dump** | **boolean** |  | [default to undefined]
+**backupsStored** | **number** | The maximum number of the stored backup copies. | [optional] [default to undefined]
+**lastBackupTime** | **string** | The date and time when the last backup was reated. | [default to undefined]
+**dump** | **boolean** | Specifies if a dump will be created or not. | [default to undefined]
 
 ## Example
 

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,44 +27,21 @@ import type { FileShare } from './file-share';
 
 /**
  * The group member security information.
- * @export
- * @interface GroupMemberSecurityRequestDto
  */
 export interface GroupMemberSecurityRequestDto {
-    /**
-     * 
-     * @type {EmployeeFullDto}
-     * @memberof GroupMemberSecurityRequestDto
-     */
     'user': EmployeeFullDto;
-    /**
-     * 
-     * @type {FileShare}
-     * @memberof GroupMemberSecurityRequestDto
-     */
     'groupAccess': FileShare;
-    /**
-     * 
-     * @type {FileShare}
-     * @memberof GroupMemberSecurityRequestDto
-     */
     'userAccess'?: FileShare;
     /**
      * Specifies if the group access rights are overridden or not.
-     * @type {boolean}
-     * @memberof GroupMemberSecurityRequestDto
      */
     'overridden': boolean;
     /**
      * Specifies if the group member can edit the group access rights or not.
-     * @type {boolean}
-     * @memberof GroupMemberSecurityRequestDto
      */
     'canEditAccess': boolean;
     /**
      * Specifies if the group member is a group owner or not.
-     * @type {boolean}
-     * @memberof GroupMemberSecurityRequestDto
      */
     'owner': boolean;
 }

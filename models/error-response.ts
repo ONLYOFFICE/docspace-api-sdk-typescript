@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +18,11 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ErrorResponseError } from './error-response-error';
 
-/**
- * The error response containing the human-readable error explanation.
- * @export
- * @interface ErrorResponse
- */
 export interface ErrorResponse {
-    /**
-     * The human-readable error explanation.
-     * @type {string}
-     * @memberof ErrorResponse
-     */
-    'reason'?: string;
+    'error'?: ErrorResponseError;
 }
 

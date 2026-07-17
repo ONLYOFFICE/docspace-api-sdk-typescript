@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,26 +21,18 @@
 
 /**
  * The request parameters for starting the reassignment process.
- * @export
- * @interface StartReassignRequestDto
  */
 export interface StartReassignRequestDto {
     /**
      * The user ID whose data will be reassigned to another user.
-     * @type {string}
-     * @memberof StartReassignRequestDto
      */
     'fromUserId': string;
     /**
      * The user ID to whom all the data will be reassigned.
-     * @type {string}
-     * @memberof StartReassignRequestDto
      */
     'toUserId': string;
     /**
      * Specifies whether to delete a profile when the data reassignment will be finished or not.
-     * @type {boolean}
-     * @memberof StartReassignRequestDto
      */
     'deleteProfile'?: boolean;
 }

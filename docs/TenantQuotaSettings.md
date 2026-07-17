@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **enableQuota** | **boolean** | Specifies if the tenant quota is enabled or not. | [optional] [default to undefined]
 **quota** | **number** | The tenant quota. | [optional] [default to undefined]
 **lastRecalculateDate** | **string** | The date of the last tenant quota recalculation. | [optional] [default to undefined]
-**lastModified** | **string** |  | [optional] [default to undefined]
+**lastModified** | **string** | The timestamp indicating when the settings were last modified. | [optional] [default to undefined]
 
 ## Example
 

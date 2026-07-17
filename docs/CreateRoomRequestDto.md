@@ -20,6 +20,8 @@ Name | Type | Description | Notes
 **_private** | **boolean** | Specifies whether the room to be created is private or not. | [optional] [default to undefined]
 **share** | [**Array&lt;FileShareParams&gt;**](FileShareParams.md) | The collection of sharing parameters. | [optional] [default to undefined]
 **chatSettings** | [**ChatSettings**](ChatSettings.md) |  | [optional] [default to undefined]
+**sendFormToExternalDB** | **boolean** | Specifies whether to send form data to external database. | [optional] [default to undefined]
+**saveFormAsXLSX** | **boolean** | Specifies whether to save form data as XLSX file. | [optional] [default to undefined]
 
 ## Example
 
@@ -41,6 +43,8 @@ const instance: CreateRoomRequestDto = {
     _private,
     share,
     chatSettings,
+    sendFormToExternalDB,
+    saveFormAsXLSX,
 };
 ```
 

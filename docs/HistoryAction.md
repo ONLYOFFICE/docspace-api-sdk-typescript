@@ -7,7 +7,7 @@ The action performed on the file.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | [**MessageAction**](MessageAction.md) |  | [optional] [default to undefined]
-**key** | **string** |  | [optional] [default to undefined]
+**key** | **string** | The action performed on the file. | [optional] [default to undefined]
 
 ## Example
 

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,38 +24,23 @@ import type { RecaptchaType } from './recaptcha-type';
 
 /**
  * The request parameters for configuring the administrator message content.
- * @export
- * @interface AdminMessageSettingsRequestsDto
  */
 export interface AdminMessageSettingsRequestsDto {
     /**
      * The content of the administrator message to be sent.
-     * @type {string}
-     * @memberof AdminMessageSettingsRequestsDto
      */
     'message': string | null;
     /**
      * Email
-     * @type {string}
-     * @memberof AdminMessageSettingsRequestsDto
      */
     'email': string | null;
     /**
      * Culture
-     * @type {string}
-     * @memberof AdminMessageSettingsRequestsDto
      */
     'culture'?: string | null;
-    /**
-     * 
-     * @type {RecaptchaType}
-     * @memberof AdminMessageSettingsRequestsDto
-     */
     'recaptchaType'?: RecaptchaType;
     /**
      * The user\'s response to the CAPTCHA challenge.
-     * @type {string}
-     * @memberof AdminMessageSettingsRequestsDto
      */
     'recaptchaResponse'?: string | null;
 }

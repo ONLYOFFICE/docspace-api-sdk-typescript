@@ -1,6 +1,6 @@
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -425,66 +424,142 @@ export const WebpluginsApiFactory = function (configuration?: Configuration, bas
         /**
          * Adds a web plugin from a file to the current portal.
          * @summary Add a web plugin
-         * @param {boolean} [system] Specifies whether to load the system plugins or not.
+         * @param {WebpluginsApiAddWebPluginFromFileRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for addWebPluginFromFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-web-plugin-from-file/
          * @throws {RequiredError}
          */
-        addWebPluginFromFile(system?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<WebPluginWrapper> {
-            return localVarFp.addWebPluginFromFile(system, options).then((request) => request(axios, basePath));
+        addWebPluginFromFile(requestParameters: WebpluginsApiAddWebPluginFromFileRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<WebPluginWrapper> {
+            return localVarFp.addWebPluginFromFile(requestParameters.system, options).then((request) => request(axios, basePath));
         },
         /**
          * Deletes a web plugin by the name specified in the request.
          * @summary Delete a web plugin
-         * @param {string} name The web plugin name.
+         * @param {WebpluginsApiDeleteWebPluginRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteWebPlugin operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-web-plugin/
          * @throws {RequiredError}
          */
-        deleteWebPlugin(name: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.deleteWebPlugin(name, options).then((request) => request(axios, basePath));
+        deleteWebPlugin(requestParameters: WebpluginsApiDeleteWebPluginRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteWebPlugin(requestParameters.name, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a web plugin by the name specified in the request.
          * @summary Get a web plugin by name
-         * @param {string} name The web plugin name.
+         * @param {WebpluginsApiGetWebPluginRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getWebPlugin operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-web-plugin/
          * @throws {RequiredError}
          */
-        getWebPlugin(name: string, options?: RawAxiosRequestConfig): AxiosPromise<WebPluginWrapper> {
-            return localVarFp.getWebPlugin(name, options).then((request) => request(axios, basePath));
+        getWebPlugin(requestParameters: WebpluginsApiGetWebPluginRequest, options?: RawAxiosRequestConfig): AxiosPromise<WebPluginWrapper> {
+            return localVarFp.getWebPlugin(requestParameters.name, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the portal web plugins.
          * @summary Get web plugins
-         * @param {boolean} [enabled] The optional filter for the plugin enabled state.
+         * @param {WebpluginsApiGetWebPluginsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getWebPlugins operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-web-plugins/
          * @throws {RequiredError}
          */
-        getWebPlugins(enabled?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<WebPluginArrayWrapper> {
-            return localVarFp.getWebPlugins(enabled, options).then((request) => request(axios, basePath));
+        getWebPlugins(requestParameters: WebpluginsApiGetWebPluginsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<WebPluginArrayWrapper> {
+            return localVarFp.getWebPlugins(requestParameters.enabled, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates a web plugin with the parameters specified in the request.
          * @summary Update a web plugin
-         * @param {string} name The web plugin name.
-         * @param {WebPluginRequests} webPluginRequests The configuration settings for the web plugin instance.
+         * @param {WebpluginsApiUpdateWebPluginRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateWebPlugin operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-web-plugin/
          * @throws {RequiredError}
          */
-        updateWebPlugin(name: string, webPluginRequests: WebPluginRequests, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.updateWebPlugin(name, webPluginRequests, options).then((request) => request(axios, basePath));
+        updateWebPlugin(requestParameters: WebpluginsApiUpdateWebPluginRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.updateWebPlugin(requestParameters.name, requestParameters.webPluginRequests, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for addWebPluginFromFile operation in WebpluginsApi.
+ * @export
+ * @interface WebpluginsApiAddWebPluginFromFileRequest
+ */
+export interface WebpluginsApiAddWebPluginFromFileRequest {
+    /**
+     * Specifies whether to load the system plugins or not.
+     * @type {boolean}
+     * @memberof WebpluginsApiAddWebPluginFromFile
+     */
+    readonly system?: boolean
+}
+
+/**
+ * Request parameters for deleteWebPlugin operation in WebpluginsApi.
+ * @export
+ * @interface WebpluginsApiDeleteWebPluginRequest
+ */
+export interface WebpluginsApiDeleteWebPluginRequest {
+    /**
+     * The web plugin name.
+     * @type {string}
+     * @memberof WebpluginsApiDeleteWebPlugin
+     */
+    readonly name: string
+}
+
+/**
+ * Request parameters for getWebPlugin operation in WebpluginsApi.
+ * @export
+ * @interface WebpluginsApiGetWebPluginRequest
+ */
+export interface WebpluginsApiGetWebPluginRequest {
+    /**
+     * The web plugin name.
+     * @type {string}
+     * @memberof WebpluginsApiGetWebPlugin
+     */
+    readonly name: string
+}
+
+/**
+ * Request parameters for getWebPlugins operation in WebpluginsApi.
+ * @export
+ * @interface WebpluginsApiGetWebPluginsRequest
+ */
+export interface WebpluginsApiGetWebPluginsRequest {
+    /**
+     * The optional filter for the plugin enabled state.
+     * @type {boolean}
+     * @memberof WebpluginsApiGetWebPlugins
+     */
+    readonly enabled?: boolean
+}
+
+/**
+ * Request parameters for updateWebPlugin operation in WebpluginsApi.
+ * @export
+ * @interface WebpluginsApiUpdateWebPluginRequest
+ */
+export interface WebpluginsApiUpdateWebPluginRequest {
+    /**
+     * The web plugin name.
+     * @type {string}
+     * @memberof WebpluginsApiUpdateWebPlugin
+     */
+    readonly name: string
+
+    /**
+     * The configuration settings for the web plugin instance.
+     * @type {WebPluginRequests}
+     * @memberof WebpluginsApiUpdateWebPlugin
+     */
+    readonly webPluginRequests: WebPluginRequests
+}
 
 /**
  * WebpluginsApi - object-oriented interface
@@ -496,62 +571,61 @@ export class WebpluginsApi extends BaseAPI {
     /**
      * Adds a web plugin from a file to the current portal.
      * @summary Add a web plugin
-     * @param {boolean} [system] Specifies whether to load the system plugins or not.
+     * @param {SettingsWebpluginsApiAddWebPluginFromFileRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WebpluginsApi
      */
-    public addWebPluginFromFile(system?: boolean, options?: RawAxiosRequestConfig) {
-        return WebpluginsApiFp(this.configuration).addWebPluginFromFile(system, options).then((request) => request(this.axios, this.basePath));
+    public addWebPluginFromFile(requestParameters: WebpluginsApiAddWebPluginFromFileRequest = {}, options?: RawAxiosRequestConfig) {
+        return WebpluginsApiFp(this.configuration).addWebPluginFromFile(requestParameters.system, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Deletes a web plugin by the name specified in the request.
      * @summary Delete a web plugin
-     * @param {string} name The web plugin name.
+     * @param {SettingsWebpluginsApiDeleteWebPluginRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WebpluginsApi
      */
-    public deleteWebPlugin(name: string, options?: RawAxiosRequestConfig) {
-        return WebpluginsApiFp(this.configuration).deleteWebPlugin(name, options).then((request) => request(this.axios, this.basePath));
+    public deleteWebPlugin(requestParameters: WebpluginsApiDeleteWebPluginRequest, options?: RawAxiosRequestConfig) {
+        return WebpluginsApiFp(this.configuration).deleteWebPlugin(requestParameters.name, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns a web plugin by the name specified in the request.
      * @summary Get a web plugin by name
-     * @param {string} name The web plugin name.
+     * @param {SettingsWebpluginsApiGetWebPluginRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WebpluginsApi
      */
-    public getWebPlugin(name: string, options?: RawAxiosRequestConfig) {
-        return WebpluginsApiFp(this.configuration).getWebPlugin(name, options).then((request) => request(this.axios, this.basePath));
+    public getWebPlugin(requestParameters: WebpluginsApiGetWebPluginRequest, options?: RawAxiosRequestConfig) {
+        return WebpluginsApiFp(this.configuration).getWebPlugin(requestParameters.name, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the portal web plugins.
      * @summary Get web plugins
-     * @param {boolean} [enabled] The optional filter for the plugin enabled state.
+     * @param {SettingsWebpluginsApiGetWebPluginsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WebpluginsApi
      */
-    public getWebPlugins(enabled?: boolean, options?: RawAxiosRequestConfig) {
-        return WebpluginsApiFp(this.configuration).getWebPlugins(enabled, options).then((request) => request(this.axios, this.basePath));
+    public getWebPlugins(requestParameters: WebpluginsApiGetWebPluginsRequest = {}, options?: RawAxiosRequestConfig) {
+        return WebpluginsApiFp(this.configuration).getWebPlugins(requestParameters.enabled, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Updates a web plugin with the parameters specified in the request.
      * @summary Update a web plugin
-     * @param {string} name The web plugin name.
-     * @param {WebPluginRequests} webPluginRequests The configuration settings for the web plugin instance.
+     * @param {SettingsWebpluginsApiUpdateWebPluginRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WebpluginsApi
      */
-    public updateWebPlugin(name: string, webPluginRequests: WebPluginRequests, options?: RawAxiosRequestConfig) {
-        return WebpluginsApiFp(this.configuration).updateWebPlugin(name, webPluginRequests, options).then((request) => request(this.axios, this.basePath));
+    public updateWebPlugin(requestParameters: WebpluginsApiUpdateWebPluginRequest, options?: RawAxiosRequestConfig) {
+        return WebpluginsApiFp(this.configuration).updateWebPlugin(requestParameters.name, requestParameters.webPluginRequests, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

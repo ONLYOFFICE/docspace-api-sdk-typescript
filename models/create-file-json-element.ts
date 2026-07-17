@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,32 +24,19 @@ import type { CreateFileJsonElementTemplateId } from './create-file-json-element
 
 /**
  * The parameters for creating a file.
- * @export
- * @interface CreateFileJsonElement
  */
 export interface CreateFileJsonElement {
     /**
      * The file title for creation.
-     * @type {string}
-     * @memberof CreateFileJsonElement
      */
     'title': string | null;
-    /**
-     * 
-     * @type {CreateFileJsonElementTemplateId}
-     * @memberof CreateFileJsonElement
-     */
     'templateId'?: CreateFileJsonElementTemplateId;
     /**
      * Specifies whether to allow creating a file of an external extension or not.
-     * @type {boolean}
-     * @memberof CreateFileJsonElement
      */
     'enableExternalExt'?: boolean;
     /**
      * The form ID for creation.
-     * @type {number}
-     * @memberof CreateFileJsonElement
      */
     'formId'?: number;
 }

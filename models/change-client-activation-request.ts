@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,15 +20,11 @@
 
 
 /**
- * The request parameters for changing the client activation status.
- * @export
- * @interface ChangeClientActivationRequest
+ * Client activation change request
  */
 export interface ChangeClientActivationRequest {
     /**
-     * The client activation status.
-     * @type {boolean}
-     * @memberof ChangeClientActivationRequest
+     * The activation status of the client
      */
     'status': boolean;
 }

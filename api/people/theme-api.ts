@@ -1,6 +1,6 @@
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -196,14 +195,14 @@ export const ThemeApiFactory = function (configuration?: Configuration, basePath
         /**
          * Changes the current portal theme.
          * @summary Change the portal theme
-         * @param {DarkThemeSettingsRequestDto} [darkThemeSettingsRequestDto] 
+         * @param {ThemeApiChangePortalThemeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for changePortalTheme operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-portal-theme/
          * @throws {RequiredError}
          */
-        changePortalTheme(darkThemeSettingsRequestDto?: DarkThemeSettingsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<DarkThemeSettingsWrapper> {
-            return localVarFp.changePortalTheme(darkThemeSettingsRequestDto, options).then((request) => request(axios, basePath));
+        changePortalTheme(requestParameters: ThemeApiChangePortalThemeRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<DarkThemeSettingsWrapper> {
+            return localVarFp.changePortalTheme(requestParameters.darkThemeSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a theme which is set to the current portal.
@@ -220,6 +219,20 @@ export const ThemeApiFactory = function (configuration?: Configuration, basePath
 };
 
 /**
+ * Request parameters for changePortalTheme operation in ThemeApi.
+ * @export
+ * @interface ThemeApiChangePortalThemeRequest
+ */
+export interface ThemeApiChangePortalThemeRequest {
+    /**
+     * 
+     * @type {DarkThemeSettingsRequestDto}
+     * @memberof ThemeApiChangePortalTheme
+     */
+    readonly darkThemeSettingsRequestDto?: DarkThemeSettingsRequestDto
+}
+
+/**
  * ThemeApi - object-oriented interface
  * @export
  * @class ThemeApi
@@ -229,13 +242,13 @@ export class ThemeApi extends BaseAPI {
     /**
      * Changes the current portal theme.
      * @summary Change the portal theme
-     * @param {DarkThemeSettingsRequestDto} [darkThemeSettingsRequestDto] 
+     * @param {PeopleThemeApiChangePortalThemeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ThemeApi
      */
-    public changePortalTheme(darkThemeSettingsRequestDto?: DarkThemeSettingsRequestDto, options?: RawAxiosRequestConfig) {
-        return ThemeApiFp(this.configuration).changePortalTheme(darkThemeSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public changePortalTheme(requestParameters: ThemeApiChangePortalThemeRequest = {}, options?: RawAxiosRequestConfig) {
+        return ThemeApiFp(this.configuration).changePortalTheme(requestParameters.darkThemeSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

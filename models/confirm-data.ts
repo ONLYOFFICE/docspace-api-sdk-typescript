@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,26 +21,18 @@
 
 /**
  * The additional confirmation data required for authentication.
- * @export
- * @interface ConfirmData
  */
 export interface ConfirmData {
     /**
      * The email address to confirm the user\'s identity.
-     * @type {string}
-     * @memberof ConfirmData
      */
     'email'?: string | null;
     /**
      * Specifies whether this is the first access to the user\'s account.
-     * @type {boolean}
-     * @memberof ConfirmData
      */
     'first'?: boolean | null;
     /**
      * The unique confirmation key for validating user identity.
-     * @type {string}
-     * @memberof ConfirmData
      */
     'key'?: string | null;
 }

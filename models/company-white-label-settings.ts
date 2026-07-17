@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,56 +21,38 @@
 
 /**
  * The company white label settings.
- * @export
- * @interface CompanyWhiteLabelSettings
  */
 export interface CompanyWhiteLabelSettings {
     /**
      * The company name.
-     * @type {string}
-     * @memberof CompanyWhiteLabelSettings
      */
     'companyName'?: string | null;
     /**
      * The company site.
-     * @type {string}
-     * @memberof CompanyWhiteLabelSettings
      */
     'site'?: string | null;
     /**
      * The company email address.
-     * @type {string}
-     * @memberof CompanyWhiteLabelSettings
      */
     'email'?: string | null;
     /**
      * The company address.
-     * @type {string}
-     * @memberof CompanyWhiteLabelSettings
      */
     'address'?: string | null;
     /**
      * The company phone number.
-     * @type {string}
-     * @memberof CompanyWhiteLabelSettings
      */
     'phone'?: string | null;
     /**
      * Specifies if a company is a licensor or not.
-     * @type {boolean}
-     * @memberof CompanyWhiteLabelSettings
      */
     'IsLicensor'?: boolean;
     /**
      * Specifies if the About page is visible or not
-     * @type {boolean}
-     * @memberof CompanyWhiteLabelSettings
      */
     'hideAbout'?: boolean;
     /**
-     * 
-     * @type {string}
-     * @memberof CompanyWhiteLabelSettings
+     * The timestamp indicating when the settings were last modified.
      */
     'lastModified'?: string;
 }

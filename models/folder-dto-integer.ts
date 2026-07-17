@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +23,7 @@
 import type { ApiDateTime } from './api-date-time';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ChatSettings } from './chat-settings';
+import type { ChatSettingsDto } from './chat-settings-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { EmployeeDto } from './employee-dto';
@@ -200,16 +202,34 @@ export type FolderDtoInteger = FileEntryDtoInteger &  {
     'expired'?: boolean | null;
     /**
      * 
-     * @type {ChatSettings}
+     * @type {ChatSettingsDto}
      * @memberof FolderDtoInteger
      */
-    'chatSettings'?: ChatSettings;
+    'chatSettings'?: ChatSettingsDto;
     /**
      * 
      * @type {RoomType}
      * @memberof FolderDtoInteger
      */
     'rootRoomType'?: RoomType;
+    /**
+     * Specifies whether to save form data as XLSX file.
+     * @type {boolean}
+     * @memberof FolderDtoInteger
+     */
+    'saveFormAsXLSX'?: boolean | null;
+    /**
+     * Specifies whether to send form data to external database.
+     * @type {boolean}
+     * @memberof FolderDtoInteger
+     */
+    'sendFormToExternalDB'?: boolean | null;
+    /**
+     * The original form ID that corresponds to this FormFillingFolderDone folder.
+     * @type {number}
+     * @memberof FolderDtoInteger
+     */
+    'originalFormId'?: number | null;
 };
 
 

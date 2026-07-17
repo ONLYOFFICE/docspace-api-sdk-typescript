@@ -62,11 +62,13 @@ const { status, data } = await apiInstance.authenticateMe(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Authentication data |  -  |
+|**200** | Authentication data |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 |**400** | userName, password or passworHash is empty |  -  |
 |**401** | User authentication failed |  -  |
 |**404** | The user could not be found |  -  |
-|**429** | Too many login attempts. Please try again later |  -  |
+|**429** | Too many login attempts. Please try again later |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -81,7 +83,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **authRequestsDto** | **AuthRequestsDto**|  | |
+| **authWithCodeRequestsDto** | **AuthWithCodeRequestsDto**|  | |
 | **code** | [**string**] |  | defaults to undefined|
 
 
@@ -99,18 +101,18 @@ No authorization required
 import {
     AuthenticationApi,
     Configuration,
-    AuthRequestsDto
+    AuthWithCodeRequestsDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new AuthenticationApi(configuration);
 
 let code: string; // (default to undefined)
-let authRequestsDto: AuthRequestsDto; // (optional)
+let authWithCodeRequestsDto: AuthWithCodeRequestsDto; // (optional)
 
 const { status, data } = await apiInstance.authenticateMeFromBodyWithCode(
     code,
-    authRequestsDto
+    authWithCodeRequestsDto
 );
 ```
 
@@ -123,11 +125,13 @@ const { status, data } = await apiInstance.authenticateMeFromBodyWithCode(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Authentication data |  -  |
+|**200** | Authentication data |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 |**400** | userName, password or passworHash is empty |  -  |
 |**401** | User authentication failed |  -  |
 |**403** | Auth code is not available |  -  |
-|**429** | Too many login attempts. Please try again later |  -  |
+|**429** | Too many login attempts. Please try again later |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -181,7 +185,10 @@ const { status, data } = await apiInstance.checkConfirm(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Validation result: Ok, Invalid, or Expired |  -  |
+|**200** | Validation result: Ok, Invalid, or Expired |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -227,7 +234,10 @@ const { status, data } = await apiInstance.getIsAuthentificated();
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Boolean value: true if the current user is authenticated |  -  |
+|**200** | Boolean value: true if the current user is authenticated |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -273,7 +283,10 @@ const { status, data } = await apiInstance.logout();
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Ok |  -  |
+|**200** | Ok |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -327,8 +340,11 @@ const { status, data } = await apiInstance.saveMobilePhone(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Authentication data |  -  |
+|**200** | Authentication data |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 |**401** | Unauthorized |  -  |
+|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -382,9 +398,11 @@ const { status, data } = await apiInstance.sendSmsCode(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Authentication data |  -  |
+|**200** | Authentication data |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 |**400** | userName, password or passworHash is empty |  -  |
-|**429** | Too many login attempts. Please try again later |  -  |
+|**429** | Too many login attempts. Please try again later |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

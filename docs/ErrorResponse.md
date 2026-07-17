@@ -1,12 +1,11 @@
 # ErrorResponse
 
-The error response containing the human-readable error explanation.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**reason** | **string** | The human-readable error explanation. | [optional] [default to undefined]
+**error** | [**ErrorResponseError**](ErrorResponseError.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -14,7 +13,7 @@ Name | Type | Description | Notes
 import { ErrorResponse } from '@onlyoffice/docspace-api-sdk';
 
 const instance: ErrorResponse = {
-    reason,
+    error,
 };
 ```
 

@@ -1,6 +1,6 @@
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -359,29 +358,57 @@ export const IPRestrictionsApiFactory = function (configuration?: Configuration,
         /**
          * Updates the IP restrictions with the parameters specified in the request.
          * @summary Update the IP restrictions
-         * @param {IpRestrictionsDto} [ipRestrictionsDto] 
+         * @param {IPRestrictionsApiSaveIpRestrictionsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for saveIpRestrictions operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-ip-restrictions/
          * @throws {RequiredError}
          */
-        saveIpRestrictions(ipRestrictionsDto?: IpRestrictionsDto, options?: RawAxiosRequestConfig): AxiosPromise<IpRestrictionsWrapper> {
-            return localVarFp.saveIpRestrictions(ipRestrictionsDto, options).then((request) => request(axios, basePath));
+        saveIpRestrictions(requestParameters: IPRestrictionsApiSaveIpRestrictionsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<IpRestrictionsWrapper> {
+            return localVarFp.saveIpRestrictions(requestParameters.ipRestrictionsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates the IP restriction settings with the parameters specified in the request.
          * @summary Update the IP restriction settings
-         * @param {IpRestrictionsDto} [ipRestrictionsDto] 
+         * @param {IPRestrictionsApiUpdateIpRestrictionsSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateIpRestrictionsSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-ip-restrictions-settings/
          * @throws {RequiredError}
          */
-        updateIpRestrictionsSettings(ipRestrictionsDto?: IpRestrictionsDto, options?: RawAxiosRequestConfig): AxiosPromise<IpRestrictionsWrapper> {
-            return localVarFp.updateIpRestrictionsSettings(ipRestrictionsDto, options).then((request) => request(axios, basePath));
+        updateIpRestrictionsSettings(requestParameters: IPRestrictionsApiUpdateIpRestrictionsSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<IpRestrictionsWrapper> {
+            return localVarFp.updateIpRestrictionsSettings(requestParameters.ipRestrictionsDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for saveIpRestrictions operation in IPRestrictionsApi.
+ * @export
+ * @interface IPRestrictionsApiSaveIpRestrictionsRequest
+ */
+export interface IPRestrictionsApiSaveIpRestrictionsRequest {
+    /**
+     * 
+     * @type {IpRestrictionsDto}
+     * @memberof IPRestrictionsApiSaveIpRestrictions
+     */
+    readonly ipRestrictionsDto?: IpRestrictionsDto
+}
+
+/**
+ * Request parameters for updateIpRestrictionsSettings operation in IPRestrictionsApi.
+ * @export
+ * @interface IPRestrictionsApiUpdateIpRestrictionsSettingsRequest
+ */
+export interface IPRestrictionsApiUpdateIpRestrictionsSettingsRequest {
+    /**
+     * 
+     * @type {IpRestrictionsDto}
+     * @memberof IPRestrictionsApiUpdateIpRestrictionsSettings
+     */
+    readonly ipRestrictionsDto?: IpRestrictionsDto
+}
 
 /**
  * IPRestrictionsApi - object-oriented interface
@@ -415,25 +442,25 @@ export class IPRestrictionsApi extends BaseAPI {
     /**
      * Updates the IP restrictions with the parameters specified in the request.
      * @summary Update the IP restrictions
-     * @param {IpRestrictionsDto} [ipRestrictionsDto] 
+     * @param {SettingsIPRestrictionsApiSaveIpRestrictionsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof IPRestrictionsApi
      */
-    public saveIpRestrictions(ipRestrictionsDto?: IpRestrictionsDto, options?: RawAxiosRequestConfig) {
-        return IPRestrictionsApiFp(this.configuration).saveIpRestrictions(ipRestrictionsDto, options).then((request) => request(this.axios, this.basePath));
+    public saveIpRestrictions(requestParameters: IPRestrictionsApiSaveIpRestrictionsRequest = {}, options?: RawAxiosRequestConfig) {
+        return IPRestrictionsApiFp(this.configuration).saveIpRestrictions(requestParameters.ipRestrictionsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Updates the IP restriction settings with the parameters specified in the request.
      * @summary Update the IP restriction settings
-     * @param {IpRestrictionsDto} [ipRestrictionsDto] 
+     * @param {SettingsIPRestrictionsApiUpdateIpRestrictionsSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof IPRestrictionsApi
      */
-    public updateIpRestrictionsSettings(ipRestrictionsDto?: IpRestrictionsDto, options?: RawAxiosRequestConfig) {
-        return IPRestrictionsApiFp(this.configuration).updateIpRestrictionsSettings(ipRestrictionsDto, options).then((request) => request(this.axios, this.basePath));
+    public updateIpRestrictionsSettings(requestParameters: IPRestrictionsApiUpdateIpRestrictionsSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return IPRestrictionsApiFp(this.configuration).updateIpRestrictionsSettings(requestParameters.ipRestrictionsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

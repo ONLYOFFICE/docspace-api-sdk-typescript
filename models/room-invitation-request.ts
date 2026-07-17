@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,38 +24,26 @@ import type { RoomInvitation } from './room-invitation';
 
 /**
  * The request parameters for inviting users to the room.
- * @export
- * @interface RoomInvitationRequest
  */
 export interface RoomInvitationRequest {
     /**
      * The collection of invitation parameters.
-     * @type {Array<RoomInvitation>}
-     * @memberof RoomInvitationRequest
      */
     'invitations'?: Array<RoomInvitation> | null;
     /**
      * Specifies whether to notify users about the shared room or not.
-     * @type {boolean}
-     * @memberof RoomInvitationRequest
      */
     'notify'?: boolean;
     /**
      * The message to send when notifying about the shared room.
-     * @type {string}
-     * @memberof RoomInvitationRequest
      */
     'message'?: string | null;
     /**
      * The language of the room invitation.
-     * @type {string}
-     * @memberof RoomInvitationRequest
      */
     'culture'?: string | null;
     /**
      * Specifies whether to forcibly delete a user with form roles from the room.
-     * @type {boolean}
-     * @memberof RoomInvitationRequest
      */
     'force'?: boolean;
 }

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,29 +19,9 @@
  */
 
 
-/**
- * 
- * @export
- * @interface PasswordHasher
- */
 export interface PasswordHasher {
-    /**
-     * 
-     * @type {number}
-     * @memberof PasswordHasher
-     */
     'size'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PasswordHasher
-     */
     'iterations'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof PasswordHasher
-     */
     'salt'?: string | null;
 }
 

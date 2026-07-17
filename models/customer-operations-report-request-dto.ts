@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,42 +18,52 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { OperationOrderType } from './operation-order-type';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { OperationStatus } from './operation-status';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { OperationType } from './operation-type';
 
 /**
  * The request parameters for generating a report on client operations.
- * @export
- * @interface CustomerOperationsReportRequestDto
  */
 export interface CustomerOperationsReportRequestDto {
     /**
+     * The service name.
+     */
+    'serviceName'?: string | null;
+    /**
      * The report start date.
-     * @type {string}
-     * @memberof CustomerOperationsReportRequestDto
      */
     'startDate'?: string | null;
     /**
      * The report end date.
-     * @type {string}
-     * @memberof CustomerOperationsReportRequestDto
      */
     'endDate'?: string | null;
     /**
      * The participant name.
-     * @type {string}
-     * @memberof CustomerOperationsReportRequestDto
      */
     'participantName'?: string | null;
     /**
      * Specifies whether to include credit operations in the report.
-     * @type {boolean}
-     * @memberof CustomerOperationsReportRequestDto
      */
     'credit'?: boolean | null;
     /**
      * Specifies whether to include debit operations in the report.
-     * @type {boolean}
-     * @memberof CustomerOperationsReportRequestDto
      */
     'debit'?: boolean | null;
+    'type'?: OperationType;
+    'status'?: OperationStatus;
+    /**
+     * The field to order by.
+     */
+    'orderBy'?: string | null;
+    'orderType'?: OperationOrderType;
 }
+
+
 

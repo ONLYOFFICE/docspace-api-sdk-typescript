@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,44 +21,30 @@
 
 /**
  * The thumbnails data parameters.
- * @export
- * @interface ThumbnailsDataDto
  */
 export interface ThumbnailsDataDto {
     /**
      * The thumbnail original photo.
-     * @type {string}
-     * @memberof ThumbnailsDataDto
      */
     'original'?: string | null;
     /**
      * The thumbnail retina.
-     * @type {string}
-     * @memberof ThumbnailsDataDto
      */
     'retina'?: string | null;
     /**
      * The thumbnail maximum size photo.
-     * @type {string}
-     * @memberof ThumbnailsDataDto
      */
     'max'?: string | null;
     /**
      * The thumbnail big size photo.
-     * @type {string}
-     * @memberof ThumbnailsDataDto
      */
     'big'?: string | null;
     /**
      * The thumbnail medium size photo.
-     * @type {string}
-     * @memberof ThumbnailsDataDto
      */
     'medium'?: string | null;
     /**
      * The thumbnail small size photo.
-     * @type {string}
-     * @memberof ThumbnailsDataDto
      */
     'small'?: string | null;
 }

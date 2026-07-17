@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,78 +21,65 @@
 // May contain unused imports in some cases
 // @ts-ignore
 import type { ApiDateTime } from './api-date-time';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { OperationType } from './operation-type';
 
 /**
  * Represents an operation.
- * @export
- * @interface OperationDto
  */
 export interface OperationDto {
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof OperationDto
-     */
     'date'?: ApiDateTime;
     /**
      * The service related to the operation.
-     * @type {string}
-     * @memberof OperationDto
      */
     'service'?: string | null;
     /**
      * The brief operation description.
-     * @type {string}
-     * @memberof OperationDto
      */
     'description'?: string | null;
     /**
      * The detailed information about the operation.
-     * @type {string}
-     * @memberof OperationDto
      */
     'details'?: string | null;
     /**
      * The service unit.
-     * @type {string}
-     * @memberof OperationDto
      */
     'serviceUnit'?: string | null;
     /**
      * The quantity of the service used.
-     * @type {number}
-     * @memberof OperationDto
      */
     'quantity'?: number;
     /**
      * The three-character ISO 4217 currency symbol of the operation.
-     * @type {string}
-     * @memberof OperationDto
      */
     'currency'?: string | null;
     /**
      * The credit amount of the operation.
-     * @type {number}
-     * @memberof OperationDto
      */
     'credit'?: number;
     /**
      * The debit amount of the operation.
-     * @type {number}
-     * @memberof OperationDto
      */
     'debit'?: number;
     /**
      * The participant original name.
-     * @type {string}
-     * @memberof OperationDto
      */
     'participantName'?: string | null;
     /**
      * The participant display name.
-     * @type {string}
-     * @memberof OperationDto
      */
     'participantDisplayName'?: string | null;
+    /**
+     * AI Agent id.
+     */
+    'agentId'?: string | null;
+    /**
+     * AI Agent name.
+     */
+    'agentTitle'?: string | null;
+    'type'?: OperationType;
 }
+
+
 

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,21 +24,12 @@ import type { QuotaSettingsRequestsDtoDefaultQuota } from './quota-settings-requ
 
 /**
  * The request parameters for managing the user storage quota configurations.
- * @export
- * @interface QuotaSettingsRequestsDto
  */
 export interface QuotaSettingsRequestsDto {
     /**
      * Specifies whether the storage quota restrictions are enabled.
-     * @type {boolean}
-     * @memberof QuotaSettingsRequestsDto
      */
     'enableQuota'?: boolean;
-    /**
-     * 
-     * @type {QuotaSettingsRequestsDtoDefaultQuota}
-     * @memberof QuotaSettingsRequestsDto
-     */
     'defaultQuota': QuotaSettingsRequestsDtoDefaultQuota;
 }
 

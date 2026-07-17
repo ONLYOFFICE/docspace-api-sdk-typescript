@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,31 +21,14 @@
 
 /**
  * [0 - Created, 1 - Running, 2 - Completed, 3 - Canceled, 4 - Failted]
- * @export
- * @enum {number}
  */
 
 export const DistributedTaskStatus = {
-    /**
-    * Created
-    */
     Created: 0,
-    /**
-    * Running
-    */
     Running: 1,
-    /**
-    * Completed
-    */
     Completed: 2,
-    /**
-    * Canceled
-    */
     Canceled: 3,
-    /**
-    * Failted
-    */
-    Failted: 4
+    Failted: 4,
 } as const;
 
 export type DistributedTaskStatus = typeof DistributedTaskStatus[keyof typeof DistributedTaskStatus];

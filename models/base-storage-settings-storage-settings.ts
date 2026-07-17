@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,35 +19,9 @@
  */
 
 
-/**
- * 
- * @export
- * @interface BaseStorageSettingsStorageSettings
- */
 export interface BaseStorageSettingsStorageSettings {
-    /**
-     * 
-     * @type {string}
-     * @memberof BaseStorageSettingsStorageSettings
-     */
     'module'?: string | null;
-    /**
-     * 
-     * @type {{ [key: string]: string | null; }}
-     * @memberof BaseStorageSettingsStorageSettings
-     */
     'props'?: { [key: string]: string | null; } | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof BaseStorageSettingsStorageSettings
-     */
-    'id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BaseStorageSettingsStorageSettings
-     */
     'lastModified'?: string;
 }
 

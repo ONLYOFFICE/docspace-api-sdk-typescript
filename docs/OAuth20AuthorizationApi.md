@@ -1,11 +1,11 @@
-# OAuth20AuthorizationApi
+# AuthorizationApi
 
 All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**authorizeOAuth**](#authorizeoauth) | **GET** /oauth2/authorize | OAuth2 authorization endpoint|
-|[**exchangeToken**](#exchangetoken) | **POST** /oauth2/token | OAuth2 token endpoint|
+|[**authorizeOAuth**](#authorizeoauth) | **GET** /oauth2/authorize | OAuth2 Authorization Endpoint|
+|[**exchangeToken**](#exchangetoken) | **POST** /oauth2/token | OAuth2 Token Endpoint|
 |[**submitConsent**](#submitconsent) | **POST** /oauth2/authorize | OAuth2 consent endpoint|
 
 # **authorizeOAuth**
@@ -19,7 +19,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **responseType** | [**string**] | The OAuth 2.0 response type, must be \&#39;code\&#39; for authorization code flow. | defaults to undefined|
+| **responseType** | [**string**] | The OAuth 2.0 response type, must be \'code\' for authorization code flow. | defaults to undefined|
 | **clientId** | [**string**] | The client identifier issued to the client during registration. | defaults to undefined|
 | **redirectUri** | [**string**] | The URL to redirect to after authorization is complete. | defaults to undefined|
 | **scope** | [**string**] | The space-separated list of requested scope permissions. | defaults to undefined|
@@ -31,7 +31,7 @@ void (empty response body)
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 
@@ -74,7 +74,7 @@ const { status, data } = await apiInstance.authorizeOAuth(
 # **exchangeToken**
 > ExchangeToken200Response exchangeToken()
 
-Exchanges an authorization code specified in the request for the access token.
+Exchange authorization code for access token
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/exchange-token/).
 
@@ -82,7 +82,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **grantType** | [**string**] | The OAuth2 grant type, must be \\\&#39;authorization_code\\\&#39; for the authorization code flow. | (optional) defaults to undefined|
+| **grantType** | [**string**] | The OAuth2 grant type, must be \\\'authorization_code\\\' for the authorization code flow. | (optional) defaults to undefined|
 | **code** | [**string**] | A temporary authorization code that is sent to the client to be exchanged for a token. | (optional) defaults to undefined|
 | **redirectUri** | [**string**] | The URL where the user will be redirected after successful or unsuccessful authentication. | (optional) defaults to undefined|
 | **clientId** | [**string**] | The client identifier issued to the client during registration. | (optional) defaults to undefined|
@@ -132,7 +132,7 @@ const { status, data } = await apiInstance.exchangeToken(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | The authorization code was successfully exchanged for the access token |  -  |
+|**200** | Successfully exchanged authorization code for access token |  -  |
 |**400** | Invalid request parameters |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -140,7 +140,7 @@ const { status, data } = await apiInstance.exchangeToken(
 # **submitConsent**
 > submitConsent()
 
-Sends a consent request with the specified parameters.
+Sends consent approval
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/submit-consent/).
 
@@ -159,7 +159,7 @@ void (empty response body)
 
 ### Authorization
 
-[asc_auth_key](../README.md#asc_auth_key)
+[x-signature](../README.md#x-signature)
 
 ### Example
 
@@ -192,7 +192,7 @@ const { status, data } = await apiInstance.submitConsent(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**302** | Redirect to the client\&#39;s redirect URI with authorization code |  -  |
+|**302** | Redirect to the client\'s redirect URI with authorization code |  -  |
 |**400** | Invalid request parameters |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

@@ -17,6 +17,8 @@ Name | Type | Description | Notes
 **primary** | **boolean** | Indicates whether this is the primary shared link. | [optional] [default to undefined]
 **internal** | **boolean** | Indicates whether the link is for the internal sharing only. | [optional] [default to undefined]
 **requestToken** | **string** | The token for validating access requests. | [optional] [default to undefined]
+**maxUseCount** | **number** | The maximum number of times the invitation link can be used. | [optional] [default to undefined]
+**currentUseCount** | **number** | The current number of times the invitation link has been used. | [optional] [default to undefined]
 
 ## Example
 
@@ -35,6 +37,8 @@ const instance: FileShareLink = {
     primary,
     internal,
     requestToken,
+    maxUseCount,
+    currentUseCount,
 };
 ```
 

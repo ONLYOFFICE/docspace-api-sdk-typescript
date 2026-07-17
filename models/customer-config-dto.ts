@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,44 +21,30 @@
 
 /**
  * The customer config parameters.
- * @export
- * @interface CustomerConfigDto
  */
 export interface CustomerConfigDto {
     /**
      * The address of the customer configuration.
-     * @type {string}
-     * @memberof CustomerConfigDto
      */
     'address'?: string | null;
     /**
      * The logo of the customer configuration.
-     * @type {string}
-     * @memberof CustomerConfigDto
      */
     'logo'?: string | null;
     /**
      * The dark logo of the customer configuration.
-     * @type {string}
-     * @memberof CustomerConfigDto
      */
     'logoDark'?: string | null;
     /**
      * The mail address of the customer configuration.
-     * @type {string}
-     * @memberof CustomerConfigDto
      */
     'mail'?: string | null;
     /**
      * The name of the customer configuration.
-     * @type {string}
-     * @memberof CustomerConfigDto
      */
     'name'?: string | null;
     /**
      * The site web address of the customer configuration.
-     * @type {string}
-     * @memberof CustomerConfigDto
      */
     'www'?: string | null;
 }

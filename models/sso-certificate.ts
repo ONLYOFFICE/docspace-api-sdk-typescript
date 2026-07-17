@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,50 +21,34 @@
 
 /**
  * The SSO certificate parameters.
- * @export
- * @interface SsoCertificate
  */
 export interface SsoCertificate {
     /**
      * Specifies if a certificate is self-signed or not.
-     * @type {boolean}
-     * @memberof SsoCertificate
      */
     'selfSigned'?: boolean;
     /**
      * The CRT certificate file.
-     * @type {string}
-     * @memberof SsoCertificate
      */
     'crt'?: string | null;
     /**
      * The certificate key.
-     * @type {string}
-     * @memberof SsoCertificate
      */
     'key'?: string | null;
     /**
      * The certificate action.
-     * @type {string}
-     * @memberof SsoCertificate
      */
     'action'?: string | null;
     /**
      * The certificate domain name.
-     * @type {string}
-     * @memberof SsoCertificate
      */
     'domainName'?: string | null;
     /**
      * The certificate start date.
-     * @type {string}
-     * @memberof SsoCertificate
      */
     'startDate'?: string;
     /**
      * The certificate expiration date.
-     * @type {string}
-     * @memberof SsoCertificate
      */
     'expiredDate'?: string;
 }

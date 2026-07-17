@@ -19,6 +19,8 @@ Name | Type | Description | Notes
 **fillingStatus** | **boolean** | The file filling status. | [optional] [default to undefined]
 **startFillingMode** | [**StartFillingMode**](StartFillingMode.md) |  | [optional] [default to undefined]
 **fillingSessionId** | **string** | The file filling session ID. | [optional] [default to undefined]
+**quotaExceededScope** | [**QuotaScope**](QuotaScope.md) |  | [optional] [default to undefined]
+**generationToolCallState** | [**EditorToolCallStateDto**](EditorToolCallStateDto.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -39,6 +41,8 @@ const instance: ConfigurationDtoInteger = {
     fillingStatus,
     startFillingMode,
     fillingSessionId,
+    quotaExceededScope,
+    generationToolCallState,
 };
 ```
 

@@ -1,6 +1,6 @@
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -421,17 +420,31 @@ export const SSOApiFactory = function (configuration?: Configuration, basePath?:
         /**
          * Saves the SSO settings for the current portal.
          * @summary Save the SSO settings
-         * @param {SsoSettingsRequestsDto} [ssoSettingsRequestsDto] 
+         * @param {SSOApiSaveSsoSettingsV2Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for saveSsoSettingsV2 operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-sso-settings-v2/
          * @throws {RequiredError}
          */
-        saveSsoSettingsV2(ssoSettingsRequestsDto?: SsoSettingsRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<SsoSettingsV2Wrapper> {
-            return localVarFp.saveSsoSettingsV2(ssoSettingsRequestsDto, options).then((request) => request(axios, basePath));
+        saveSsoSettingsV2(requestParameters: SSOApiSaveSsoSettingsV2Request = {}, options?: RawAxiosRequestConfig): AxiosPromise<SsoSettingsV2Wrapper> {
+            return localVarFp.saveSsoSettingsV2(requestParameters.ssoSettingsRequestsDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for saveSsoSettingsV2 operation in SSOApi.
+ * @export
+ * @interface SSOApiSaveSsoSettingsV2Request
+ */
+export interface SSOApiSaveSsoSettingsV2Request {
+    /**
+     * 
+     * @type {SsoSettingsRequestsDto}
+     * @memberof SSOApiSaveSsoSettingsV2
+     */
+    readonly ssoSettingsRequestsDto?: SsoSettingsRequestsDto
+}
 
 /**
  * SSOApi - object-oriented interface
@@ -487,13 +500,13 @@ export class SSOApi extends BaseAPI {
     /**
      * Saves the SSO settings for the current portal.
      * @summary Save the SSO settings
-     * @param {SsoSettingsRequestsDto} [ssoSettingsRequestsDto] 
+     * @param {SettingsSSOApiSaveSsoSettingsV2Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SSOApi
      */
-    public saveSsoSettingsV2(ssoSettingsRequestsDto?: SsoSettingsRequestsDto, options?: RawAxiosRequestConfig) {
-        return SSOApiFp(this.configuration).saveSsoSettingsV2(ssoSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public saveSsoSettingsV2(requestParameters: SSOApiSaveSsoSettingsV2Request = {}, options?: RawAxiosRequestConfig) {
+        return SSOApiFp(this.configuration).saveSsoSettingsV2(requestParameters.ssoSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

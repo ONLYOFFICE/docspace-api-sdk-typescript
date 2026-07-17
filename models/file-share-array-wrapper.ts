@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,45 +20,27 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
+import type { FileShareDto } from './file-share-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FileShareDto } from './file-share-dto';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
-/**
- * 
- * @export
- * @interface FileShareArrayWrapper
- */
 export interface FileShareArrayWrapper {
-    /**
-     * 
-     * @type {Array<FileShareDto>}
-     * @memberof FileShareArrayWrapper
-     */
     'response'?: Array<FileShareDto>;
     /**
-     * 
-     * @type {number}
-     * @memberof FileShareArrayWrapper
+     * The total number of items in the response
      */
     'count'?: number;
     /**
-     * 
-     * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof FileShareArrayWrapper
+     * List of links related to the response
      */
-    'links'?: Array<ActiveConnectionsWrapperLinksInner>;
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
     /**
-     * 
-     * @type {number}
-     * @memberof FileShareArrayWrapper
+     * HTTP status code of the response
      */
     'status'?: number;
     /**
-     * 
-     * @type {number}
-     * @memberof FileShareArrayWrapper
+     * HTTP status code of the response (duplicate of status)
      */
     'statusCode'?: number;
 }

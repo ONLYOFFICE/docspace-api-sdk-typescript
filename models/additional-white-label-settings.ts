@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,50 +21,34 @@
 
 /**
  * The additional white label settings.
- * @export
- * @interface AdditionalWhiteLabelSettings
  */
 export interface AdditionalWhiteLabelSettings {
     /**
      * Specifies if the sample documents are displayed or hidden.
-     * @type {boolean}
-     * @memberof AdditionalWhiteLabelSettings
      */
     'startDocsEnabled'?: boolean;
     /**
      * Specifies if the Help Center link is available or not.
-     * @type {boolean}
-     * @memberof AdditionalWhiteLabelSettings
      */
     'helpCenterEnabled'?: boolean;
     /**
      * Specifies if the Feedback & Support link is available or not.
-     * @type {boolean}
-     * @memberof AdditionalWhiteLabelSettings
      */
     'feedbackAndSupportEnabled'?: boolean;
     /**
      * Specifies if the user forum is available or not.
-     * @type {boolean}
-     * @memberof AdditionalWhiteLabelSettings
      */
     'userForumEnabled'?: boolean;
     /**
      * Specifies if the Video Guides link is available or not.
-     * @type {boolean}
-     * @memberof AdditionalWhiteLabelSettings
      */
     'videoGuidesEnabled'?: boolean;
     /**
      * Specifies if the License Agreements link is available or not.
-     * @type {boolean}
-     * @memberof AdditionalWhiteLabelSettings
      */
     'licenseAgreementsEnabled'?: boolean;
     /**
-     * 
-     * @type {string}
-     * @memberof AdditionalWhiteLabelSettings
+     * The timestamp indicating when the settings were last modified.
      */
     'lastModified'?: string;
 }

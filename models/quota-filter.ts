@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,23 +21,12 @@
 
 /**
  * [0 - All, 1 - Default, 2 - Custom]
- * @export
- * @enum {number}
  */
 
 export const QuotaFilter = {
-    /**
-    * All
-    */
     All: 0,
-    /**
-    * Default
-    */
     Default: 1,
-    /**
-    * Custom
-    */
-    Custom: 2
+    Custom: 2,
 } as const;
 
 export type QuotaFilter = typeof QuotaFilter[keyof typeof QuotaFilter];

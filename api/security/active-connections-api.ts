@@ -1,6 +1,6 @@
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -412,14 +411,14 @@ export const ActiveConnectionsApiFactory = function (configuration?: Configurati
         /**
          * Logs out from the connection with the ID specified in the request.
          * @summary Log out from the connection
-         * @param {number} loginEventId The ID of the specific login event.
+         * @param {ActiveConnectionsApiLogOutActiveConnectionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for logOutActiveConnection operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/log-out-active-connection/
          * @throws {RequiredError}
          */
-        logOutActiveConnection(loginEventId: number, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.logOutActiveConnection(loginEventId, options).then((request) => request(axios, basePath));
+        logOutActiveConnection(requestParameters: ActiveConnectionsApiLogOutActiveConnectionRequest, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.logOutActiveConnection(requestParameters.loginEventId, options).then((request) => request(axios, basePath));
         },
         /**
          * Logs out from all the active connections for the current user and changes their password.
@@ -435,14 +434,14 @@ export const ActiveConnectionsApiFactory = function (configuration?: Configurati
         /**
          * Logs out from all the active connections for the user with the ID specified in the request.
          * @summary Log out for the user by ID
-         * @param {string} userId The user ID extracted from the route parameters.
+         * @param {ActiveConnectionsApiLogOutAllActiveConnectionsForUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for logOutAllActiveConnectionsForUser operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/log-out-all-active-connections-for-user/
          * @throws {RequiredError}
          */
-        logOutAllActiveConnectionsForUser(userId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.logOutAllActiveConnectionsForUser(userId, options).then((request) => request(axios, basePath));
+        logOutAllActiveConnectionsForUser(requestParameters: ActiveConnectionsApiLogOutAllActiveConnectionsForUserRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.logOutAllActiveConnectionsForUser(requestParameters.userId, options).then((request) => request(axios, basePath));
         },
         /**
          * Logs out from all the active connections except the current connection.
@@ -457,6 +456,34 @@ export const ActiveConnectionsApiFactory = function (configuration?: Configurati
         },
     };
 };
+
+/**
+ * Request parameters for logOutActiveConnection operation in ActiveConnectionsApi.
+ * @export
+ * @interface ActiveConnectionsApiLogOutActiveConnectionRequest
+ */
+export interface ActiveConnectionsApiLogOutActiveConnectionRequest {
+    /**
+     * The ID of the specific login event.
+     * @type {number}
+     * @memberof ActiveConnectionsApiLogOutActiveConnection
+     */
+    readonly loginEventId: number
+}
+
+/**
+ * Request parameters for logOutAllActiveConnectionsForUser operation in ActiveConnectionsApi.
+ * @export
+ * @interface ActiveConnectionsApiLogOutAllActiveConnectionsForUserRequest
+ */
+export interface ActiveConnectionsApiLogOutAllActiveConnectionsForUserRequest {
+    /**
+     * The user ID extracted from the route parameters.
+     * @type {string}
+     * @memberof ActiveConnectionsApiLogOutAllActiveConnectionsForUser
+     */
+    readonly userId: string
+}
 
 /**
  * ActiveConnectionsApi - object-oriented interface
@@ -479,13 +506,13 @@ export class ActiveConnectionsApi extends BaseAPI {
     /**
      * Logs out from the connection with the ID specified in the request.
      * @summary Log out from the connection
-     * @param {number} loginEventId The ID of the specific login event.
+     * @param {SecurityActiveConnectionsApiLogOutActiveConnectionRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ActiveConnectionsApi
      */
-    public logOutActiveConnection(loginEventId: number, options?: RawAxiosRequestConfig) {
-        return ActiveConnectionsApiFp(this.configuration).logOutActiveConnection(loginEventId, options).then((request) => request(this.axios, this.basePath));
+    public logOutActiveConnection(requestParameters: ActiveConnectionsApiLogOutActiveConnectionRequest, options?: RawAxiosRequestConfig) {
+        return ActiveConnectionsApiFp(this.configuration).logOutActiveConnection(requestParameters.loginEventId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -502,13 +529,13 @@ export class ActiveConnectionsApi extends BaseAPI {
     /**
      * Logs out from all the active connections for the user with the ID specified in the request.
      * @summary Log out for the user by ID
-     * @param {string} userId The user ID extracted from the route parameters.
+     * @param {SecurityActiveConnectionsApiLogOutAllActiveConnectionsForUserRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ActiveConnectionsApi
      */
-    public logOutAllActiveConnectionsForUser(userId: string, options?: RawAxiosRequestConfig) {
-        return ActiveConnectionsApiFp(this.configuration).logOutAllActiveConnectionsForUser(userId, options).then((request) => request(this.axios, this.basePath));
+    public logOutAllActiveConnectionsForUser(requestParameters: ActiveConnectionsApiLogOutAllActiveConnectionsForUserRequest, options?: RawAxiosRequestConfig) {
+        return ActiveConnectionsApiFp(this.configuration).logOutAllActiveConnectionsForUser(requestParameters.userId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

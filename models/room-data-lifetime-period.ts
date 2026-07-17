@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,23 +21,12 @@
 
 /**
  * [0 - Day, 1 - Month, 2 - Year]
- * @export
- * @enum {number}
  */
 
 export const RoomDataLifetimePeriod = {
-    /**
-    * Day
-    */
     Day: 0,
-    /**
-    * Month
-    */
     Month: 1,
-    /**
-    * Year
-    */
-    Year: 2
+    Year: 2,
 } as const;
 
 export type RoomDataLifetimePeriod = typeof RoomDataLifetimePeriod[keyof typeof RoomDataLifetimePeriod];

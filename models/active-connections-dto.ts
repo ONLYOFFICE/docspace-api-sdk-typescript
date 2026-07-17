@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,20 +24,14 @@ import type { ActiveConnectionsItemDto } from './active-connections-item-dto';
 
 /**
  * The active connections parameters.
- * @export
- * @interface ActiveConnectionsDto
  */
 export interface ActiveConnectionsDto {
     /**
      * The login event.
-     * @type {number}
-     * @memberof ActiveConnectionsDto
      */
     'loginEvent': number;
     /**
      * The list of active connection items.
-     * @type {Array<ActiveConnectionsItemDto>}
-     * @memberof ActiveConnectionsDto
      */
     'items'?: Array<ActiveConnectionsItemDto> | null;
 }

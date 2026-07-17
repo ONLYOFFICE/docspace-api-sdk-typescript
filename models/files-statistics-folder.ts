@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,20 +21,14 @@
 
 /**
  * The file statictics folder parameters.
- * @export
- * @interface FilesStatisticsFolder
  */
 export interface FilesStatisticsFolder {
     /**
      * The folder title.
-     * @type {string}
-     * @memberof FilesStatisticsFolder
      */
     'title'?: string | null;
     /**
      * The used space in the folder.
-     * @type {number}
-     * @memberof FilesStatisticsFolder
      */
     'usedSpace'?: number;
 }

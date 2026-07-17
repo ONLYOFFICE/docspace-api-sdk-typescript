@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,26 +24,15 @@ import type { RecaptchaType } from './recaptcha-type';
 
 /**
  * The request parameters for the user email.
- * @export
- * @interface EmailMemberRequestDto
  */
 export interface EmailMemberRequestDto {
     /**
      * The user email address.
-     * @type {string}
-     * @memberof EmailMemberRequestDto
      */
     'email': string;
-    /**
-     * 
-     * @type {RecaptchaType}
-     * @memberof EmailMemberRequestDto
-     */
     'recaptchaType'?: RecaptchaType;
     /**
      * The user\'s response to the CAPTCHA challenge.
-     * @type {string}
-     * @memberof EmailMemberRequestDto
      */
     'recaptchaResponse'?: string | null;
 }

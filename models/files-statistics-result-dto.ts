@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,39 +24,12 @@ import type { FilesStatisticsFolder } from './files-statistics-folder';
 
 /**
  * The file statistics result parameters.
- * @export
- * @interface FilesStatisticsResultDto
  */
 export interface FilesStatisticsResultDto {
-    /**
-     * 
-     * @type {FilesStatisticsFolder}
-     * @memberof FilesStatisticsResultDto
-     */
     'myDocumentsUsedSpace'?: FilesStatisticsFolder;
-    /**
-     * 
-     * @type {FilesStatisticsFolder}
-     * @memberof FilesStatisticsResultDto
-     */
     'trashUsedSpace'?: FilesStatisticsFolder;
-    /**
-     * 
-     * @type {FilesStatisticsFolder}
-     * @memberof FilesStatisticsResultDto
-     */
     'archiveUsedSpace'?: FilesStatisticsFolder;
-    /**
-     * 
-     * @type {FilesStatisticsFolder}
-     * @memberof FilesStatisticsResultDto
-     */
     'roomsUsedSpace'?: FilesStatisticsFolder;
-    /**
-     * 
-     * @type {FilesStatisticsFolder}
-     * @memberof FilesStatisticsResultDto
-     */
     'aiAgentsUsedSpace'?: FilesStatisticsFolder;
 }
 

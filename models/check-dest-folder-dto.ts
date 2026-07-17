@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,20 +27,11 @@ import type { FileEntryBaseDto } from './file-entry-base-dto';
 
 /**
  * The result of checking whether files can be moved or copied to the specified folder.
- * @export
- * @interface CheckDestFolderDto
  */
 export interface CheckDestFolderDto {
-    /**
-     * 
-     * @type {CheckDestFolderResult}
-     * @memberof CheckDestFolderDto
-     */
     'result'?: CheckDestFolderResult;
     /**
      * The list of files in the destination folder.
-     * @type {Array<FileEntryBaseDto>}
-     * @memberof CheckDestFolderDto
      */
     'files'?: Array<FileEntryBaseDto> | null;
 }

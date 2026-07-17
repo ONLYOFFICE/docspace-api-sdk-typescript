@@ -1,6 +1,6 @@
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -106,10 +105,10 @@ export const UserTypeApiAxiosParamCreator = function (configuration?: Configurat
          * @param {StartUpdateUserTypeDto} [startUpdateUserTypeDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for starUserTypetUpdate operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/star-user-typet-update/
+         * REST API Reference for startUserTypeUpdate operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-user-type-update/
          */
-        starUserTypetUpdate: async (startUpdateUserTypeDto?: StartUpdateUserTypeDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        startUserTypeUpdate: async (startUpdateUserTypeDto?: StartUpdateUserTypeDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/people/type`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -305,13 +304,13 @@ export const UserTypeApiFp = function(configuration?: Configuration) {
          * @param {StartUpdateUserTypeDto} [startUpdateUserTypeDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for starUserTypetUpdate operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/star-user-typet-update/
+         * REST API Reference for startUserTypeUpdate operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-user-type-update/
          */
-        async starUserTypetUpdate(startUpdateUserTypeDto?: StartUpdateUserTypeDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskProgressResponseWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.starUserTypetUpdate(startUpdateUserTypeDto, options);
+        async startUserTypeUpdate(startUpdateUserTypeDto?: StartUpdateUserTypeDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskProgressResponseWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.startUserTypeUpdate(startUpdateUserTypeDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['UserTypeApi.starUserTypetUpdate']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['UserTypeApi.startUserTypeUpdate']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -358,54 +357,116 @@ export const UserTypeApiFactory = function (configuration?: Configuration, baseP
         /**
          * Returns the progress of updating the user type.
          * @summary Get the progress of updating user type
-         * @param {string} userid The user ID.
+         * @param {UserTypeApiGetUserTypeUpdateProgressRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getUserTypeUpdateProgress operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-type-update-progress/
          * @throws {RequiredError}
          */
-        getUserTypeUpdateProgress(userid: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskProgressResponseWrapper> {
-            return localVarFp.getUserTypeUpdateProgress(userid, options).then((request) => request(axios, basePath));
+        getUserTypeUpdateProgress(requestParameters: UserTypeApiGetUserTypeUpdateProgressRequest, options?: RawAxiosRequestConfig): AxiosPromise<TaskProgressResponseWrapper> {
+            return localVarFp.getUserTypeUpdateProgress(requestParameters.userid, options).then((request) => request(axios, basePath));
         },
         /**
          * Starts updating the type of the user or guest when reassigning rooms and shared files.
          * @summary Start updating user type
-         * @param {StartUpdateUserTypeDto} [startUpdateUserTypeDto] 
+         * @param {UserTypeApiStartUserTypeUpdateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
-         * REST API Reference for starUserTypetUpdate operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/star-user-typet-update/
+         * REST API Reference for startUserTypeUpdate operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-user-type-update/
          * @throws {RequiredError}
          */
-        starUserTypetUpdate(startUpdateUserTypeDto?: StartUpdateUserTypeDto, options?: RawAxiosRequestConfig): AxiosPromise<TaskProgressResponseWrapper> {
-            return localVarFp.starUserTypetUpdate(startUpdateUserTypeDto, options).then((request) => request(axios, basePath));
+        startUserTypeUpdate(requestParameters: UserTypeApiStartUserTypeUpdateRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TaskProgressResponseWrapper> {
+            return localVarFp.startUserTypeUpdate(requestParameters.startUpdateUserTypeDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Terminates the process of updating the type of the user or guest.
          * @summary Terminate updating user type
-         * @param {TerminateRequestDto} [terminateRequestDto] 
+         * @param {UserTypeApiTerminateUserTypeUpdateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for terminateUserTypeUpdate operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-user-type-update/
          * @throws {RequiredError}
          */
-        terminateUserTypeUpdate(terminateRequestDto?: TerminateRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<TaskProgressResponseWrapper> {
-            return localVarFp.terminateUserTypeUpdate(terminateRequestDto, options).then((request) => request(axios, basePath));
+        terminateUserTypeUpdate(requestParameters: UserTypeApiTerminateUserTypeUpdateRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TaskProgressResponseWrapper> {
+            return localVarFp.terminateUserTypeUpdate(requestParameters.terminateRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Changes a type of the users with the IDs specified in the request.
          * @summary Change a user type
-         * @param {EmployeeType} type The new user type.
-         * @param {UpdateMembersRequestDto} updateMembersRequestDto The request parameters for updating the user information.
+         * @param {UserTypeApiUpdateUserTypeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateUserType operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-user-type/
          * @throws {RequiredError}
          */
-        updateUserType(type: EmployeeType, updateMembersRequestDto: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
-            return localVarFp.updateUserType(type, updateMembersRequestDto, options).then((request) => request(axios, basePath));
+        updateUserType(requestParameters: UserTypeApiUpdateUserTypeRequest, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
+            return localVarFp.updateUserType(requestParameters.type, requestParameters.updateMembersRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for getUserTypeUpdateProgress operation in UserTypeApi.
+ * @export
+ * @interface UserTypeApiGetUserTypeUpdateProgressRequest
+ */
+export interface UserTypeApiGetUserTypeUpdateProgressRequest {
+    /**
+     * The user ID.
+     * @type {string}
+     * @memberof UserTypeApiGetUserTypeUpdateProgress
+     */
+    readonly userid: string
+}
+
+/**
+ * Request parameters for startUserTypeUpdate operation in UserTypeApi.
+ * @export
+ * @interface UserTypeApiStartUserTypeUpdateRequest
+ */
+export interface UserTypeApiStartUserTypeUpdateRequest {
+    /**
+     * 
+     * @type {StartUpdateUserTypeDto}
+     * @memberof UserTypeApiStartUserTypeUpdate
+     */
+    readonly startUpdateUserTypeDto?: StartUpdateUserTypeDto
+}
+
+/**
+ * Request parameters for terminateUserTypeUpdate operation in UserTypeApi.
+ * @export
+ * @interface UserTypeApiTerminateUserTypeUpdateRequest
+ */
+export interface UserTypeApiTerminateUserTypeUpdateRequest {
+    /**
+     * 
+     * @type {TerminateRequestDto}
+     * @memberof UserTypeApiTerminateUserTypeUpdate
+     */
+    readonly terminateRequestDto?: TerminateRequestDto
+}
+
+/**
+ * Request parameters for updateUserType operation in UserTypeApi.
+ * @export
+ * @interface UserTypeApiUpdateUserTypeRequest
+ */
+export interface UserTypeApiUpdateUserTypeRequest {
+    /**
+     * The new user type.
+     * @type {EmployeeType}
+     * @memberof UserTypeApiUpdateUserType
+     */
+    readonly type: EmployeeType
+
+    /**
+     * The request parameters for updating the user information.
+     * @type {UpdateMembersRequestDto}
+     * @memberof UserTypeApiUpdateUserType
+     */
+    readonly updateMembersRequestDto: UpdateMembersRequestDto
+}
 
 /**
  * UserTypeApi - object-oriented interface
@@ -417,50 +478,49 @@ export class UserTypeApi extends BaseAPI {
     /**
      * Returns the progress of updating the user type.
      * @summary Get the progress of updating user type
-     * @param {string} userid The user ID.
+     * @param {PeopleUserTypeApiGetUserTypeUpdateProgressRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserTypeApi
      */
-    public getUserTypeUpdateProgress(userid: string, options?: RawAxiosRequestConfig) {
-        return UserTypeApiFp(this.configuration).getUserTypeUpdateProgress(userid, options).then((request) => request(this.axios, this.basePath));
+    public getUserTypeUpdateProgress(requestParameters: UserTypeApiGetUserTypeUpdateProgressRequest, options?: RawAxiosRequestConfig) {
+        return UserTypeApiFp(this.configuration).getUserTypeUpdateProgress(requestParameters.userid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Starts updating the type of the user or guest when reassigning rooms and shared files.
      * @summary Start updating user type
-     * @param {StartUpdateUserTypeDto} [startUpdateUserTypeDto] 
+     * @param {PeopleUserTypeApiStartUserTypeUpdateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserTypeApi
      */
-    public starUserTypetUpdate(startUpdateUserTypeDto?: StartUpdateUserTypeDto, options?: RawAxiosRequestConfig) {
-        return UserTypeApiFp(this.configuration).starUserTypetUpdate(startUpdateUserTypeDto, options).then((request) => request(this.axios, this.basePath));
+    public startUserTypeUpdate(requestParameters: UserTypeApiStartUserTypeUpdateRequest = {}, options?: RawAxiosRequestConfig) {
+        return UserTypeApiFp(this.configuration).startUserTypeUpdate(requestParameters.startUpdateUserTypeDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Terminates the process of updating the type of the user or guest.
      * @summary Terminate updating user type
-     * @param {TerminateRequestDto} [terminateRequestDto] 
+     * @param {PeopleUserTypeApiTerminateUserTypeUpdateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserTypeApi
      */
-    public terminateUserTypeUpdate(terminateRequestDto?: TerminateRequestDto, options?: RawAxiosRequestConfig) {
-        return UserTypeApiFp(this.configuration).terminateUserTypeUpdate(terminateRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public terminateUserTypeUpdate(requestParameters: UserTypeApiTerminateUserTypeUpdateRequest = {}, options?: RawAxiosRequestConfig) {
+        return UserTypeApiFp(this.configuration).terminateUserTypeUpdate(requestParameters.terminateRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Changes a type of the users with the IDs specified in the request.
      * @summary Change a user type
-     * @param {EmployeeType} type The new user type.
-     * @param {UpdateMembersRequestDto} updateMembersRequestDto The request parameters for updating the user information.
+     * @param {PeopleUserTypeApiUpdateUserTypeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserTypeApi
      */
-    public updateUserType(type: EmployeeType, updateMembersRequestDto: UpdateMembersRequestDto, options?: RawAxiosRequestConfig) {
-        return UserTypeApiFp(this.configuration).updateUserType(type, updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public updateUserType(requestParameters: UserTypeApiUpdateUserTypeRequest, options?: RawAxiosRequestConfig) {
+        return UserTypeApiFp(this.configuration).updateUserType(requestParameters.type, requestParameters.updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,27 +21,35 @@
 
 /**
  * The authorization key parameters.
- * @export
- * @interface AuthKey
  */
 export interface AuthKey {
     /**
      * The authorization key name.
-     * @type {string}
-     * @memberof AuthKey
      */
     'name': string | null;
     /**
      * The authorization key value.
-     * @type {string}
-     * @memberof AuthKey
      */
     'value': string | null;
     /**
      * The authorization key title.
-     * @type {string}
-     * @memberof AuthKey
      */
     'title'?: string | null;
+    /**
+     * The field type: text, password, select, toggle.
+     */
+    'type'?: string | null;
+    /**
+     * The list of options for select type fields.
+     */
+    'options'?: Array<string> | null;
+    /**
+     * The name of another key this field depends on for visibility.
+     */
+    'dependsOn'?: string | null;
+    /**
+     * The value of ASC.Web.Studio.UserControls.Management.AuthKey.DependsOn key that makes this field visible.
+     */
+    'dependsOnValue'?: string | null;
 }
 

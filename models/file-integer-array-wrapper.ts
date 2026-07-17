@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,45 +20,27 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
+import type { FileDtoInteger } from './file-dto-integer';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FileDtoInteger } from './file-dto-integer';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
-/**
- * 
- * @export
- * @interface FileIntegerArrayWrapper
- */
 export interface FileIntegerArrayWrapper {
-    /**
-     * 
-     * @type {Array<FileDtoInteger>}
-     * @memberof FileIntegerArrayWrapper
-     */
     'response'?: Array<FileDtoInteger>;
     /**
-     * 
-     * @type {number}
-     * @memberof FileIntegerArrayWrapper
+     * The total number of items in the response
      */
     'count'?: number;
     /**
-     * 
-     * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof FileIntegerArrayWrapper
+     * List of links related to the response
      */
-    'links'?: Array<ActiveConnectionsWrapperLinksInner>;
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
     /**
-     * 
-     * @type {number}
-     * @memberof FileIntegerArrayWrapper
+     * HTTP status code of the response
      */
     'status'?: number;
     /**
-     * 
-     * @type {number}
-     * @memberof FileIntegerArrayWrapper
+     * HTTP status code of the response (duplicate of status)
      */
     'statusCode'?: number;
 }

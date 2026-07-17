@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,50 +21,34 @@
 
 /**
  * The provider information.
- * @export
- * @interface ProviderDto
  */
 export interface ProviderDto {
     /**
      * The provider name.
-     * @type {string}
-     * @memberof ProviderDto
      */
     'name'?: string | null;
     /**
      * The provider key.
-     * @type {string}
-     * @memberof ProviderDto
      */
     'key'?: string | null;
     /**
      * Specifies whether the provider is connected.
-     * @type {boolean}
-     * @memberof ProviderDto
      */
     'connected'?: boolean;
     /**
      * Specifies if the provider is OAuth.
-     * @type {boolean}
-     * @memberof ProviderDto
      */
     'oauth'?: boolean;
     /**
      * The provider redirect URL.
-     * @type {string}
-     * @memberof ProviderDto
      */
     'redirectUrl'?: string | null;
     /**
      * The required connection URL flag.
-     * @type {boolean}
-     * @memberof ProviderDto
      */
     'requiredConnectionUrl'?: boolean;
     /**
      * The provider OAuth client ID.
-     * @type {string}
-     * @memberof ProviderDto
      */
     'clientId'?: string | null;
 }

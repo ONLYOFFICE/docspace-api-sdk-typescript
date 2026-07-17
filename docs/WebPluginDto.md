@@ -21,7 +21,10 @@ Name | Type | Description | Notes
 **enabled** | **boolean** | Specifies if the web plugin is enabled or not. | [default to undefined]
 **system** | **boolean** | Specifies if the web plugin is system or not. | [default to undefined]
 **url** | **string** | The web plugin URL. | [default to undefined]
+**cssUrl** | **string** | The web plugin css URL. | [default to undefined]
 **settings** | **string** | The web plugin settings. | [default to undefined]
+**nameLocale** | **{ [key: string]: string | null; }** | The web plugin localized name. | [optional] [default to undefined]
+**descriptionLocale** | **{ [key: string]: string | null; }** | The web plugin localized description. | [optional] [default to undefined]
 
 ## Example
 
@@ -44,7 +47,10 @@ const instance: WebPluginDto = {
     enabled,
     system,
     url,
+    cssUrl,
     settings,
+    nameLocale,
+    descriptionLocale,
 };
 ```
 

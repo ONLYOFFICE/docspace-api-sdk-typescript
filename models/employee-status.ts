@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,31 +21,14 @@
 
 /**
  * [1 - Active, 2 - Terminated, 4 - Pending, 5 - Default, 7 - All]
- * @export
- * @enum {number}
  */
 
 export const EmployeeStatus = {
-    /**
-    * Active
-    */
     Active: 1,
-    /**
-    * Terminated
-    */
     Terminated: 2,
-    /**
-    * Pending
-    */
     Pending: 4,
-    /**
-    * Default
-    */
     Default: 5,
-    /**
-    * All
-    */
-    All: 7
+    All: 7,
 } as const;
 
 export type EmployeeStatus = typeof EmployeeStatus[keyof typeof EmployeeStatus];

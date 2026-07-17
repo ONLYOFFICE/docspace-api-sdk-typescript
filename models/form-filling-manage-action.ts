@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,20 +20,14 @@
 
 
 /**
- * [0 - Stop, 1 - Resume]
- * @export
- * @enum {number}
+ * [0 - Stop, 1 - Resume, 2 - Start, 3 - Edit]
  */
 
 export const FormFillingManageAction = {
-    /**
-    * Stop
-    */
     Stop: 0,
-    /**
-    * Resume
-    */
-    Resume: 1
+    Resume: 1,
+    Start: 2,
+    Edit: 3,
 } as const;
 
 export type FormFillingManageAction = typeof FormFillingManageAction[keyof typeof FormFillingManageAction];

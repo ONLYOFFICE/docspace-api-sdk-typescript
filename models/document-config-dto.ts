@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,81 +33,43 @@ import type { PermissionsConfig } from './permissions-config';
 
 /**
  * The document config parameters.
- * @export
- * @interface DocumentConfigDto
  */
 export interface DocumentConfigDto {
     /**
      * The file type of the document.
-     * @type {string}
-     * @memberof DocumentConfigDto
      */
     'fileType'?: string | null;
-    /**
-     * 
-     * @type {InfoConfigDto}
-     * @memberof DocumentConfigDto
-     */
     'info'?: InfoConfigDto;
     /**
      * Specifies if the documnet is linked for current user.
-     * @type {boolean}
-     * @memberof DocumentConfigDto
      */
     'isLinkedForMe'?: boolean;
     /**
      * The document key.
-     * @type {string}
-     * @memberof DocumentConfigDto
      */
     'key'?: string | null;
-    /**
-     * 
-     * @type {PermissionsConfig}
-     * @memberof DocumentConfigDto
-     */
     'permissions'?: PermissionsConfig;
     /**
      * The shared link parameter of the document.
-     * @type {string}
-     * @memberof DocumentConfigDto
      */
     'sharedLinkParam'?: string | null;
     /**
      * The shared link key of the document.
-     * @type {string}
-     * @memberof DocumentConfigDto
      */
     'sharedLinkKey'?: string | null;
-    /**
-     * 
-     * @type {FileReferenceData}
-     * @memberof DocumentConfigDto
-     */
     'referenceData'?: FileReferenceData;
     /**
      * The document title.
-     * @type {string}
-     * @memberof DocumentConfigDto
      */
     'title'?: string | null;
     /**
      * The document url.
-     * @type {string}
-     * @memberof DocumentConfigDto
      */
     'url'?: string | null;
     /**
      * Indicates whether this is a form.
-     * @type {boolean}
-     * @memberof DocumentConfigDto
      */
     'isForm'?: boolean;
-    /**
-     * 
-     * @type {Options}
-     * @memberof DocumentConfigDto
-     */
     'options'?: Options;
 }
 

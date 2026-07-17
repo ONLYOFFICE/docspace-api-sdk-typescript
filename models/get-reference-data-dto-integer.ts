@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,38 +21,26 @@
 
 /**
  * The request parameters for getting reference data.
- * @export
- * @interface GetReferenceDataDtoInteger
  */
 export interface GetReferenceDataDtoInteger {
     /**
      * The unique document identifier used by the service to get a link to the file.
-     * @type {string}
-     * @memberof GetReferenceDataDtoInteger
      */
     'fileKey': string | null;
     /**
      * The unique system identifier.
-     * @type {string}
-     * @memberof GetReferenceDataDtoInteger
      */
     'instanceId': string | null;
     /**
      * The source file ID.
-     * @type {number}
-     * @memberof GetReferenceDataDtoInteger
      */
     'sourceFileId'?: number;
     /**
      * The file name or relative path for the formula editor.
-     * @type {string}
-     * @memberof GetReferenceDataDtoInteger
      */
     'path'?: string | null;
     /**
      * The file link.
-     * @type {string}
-     * @memberof GetReferenceDataDtoInteger
      */
     'link'?: string | null;
 }

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,32 +21,22 @@
 
 /**
  * The request for updating a group.
- * @export
- * @interface UpdateGroupRequest
  */
 export interface UpdateGroupRequest {
     /**
      * The list of user IDs to add to the group.
-     * @type {Array<string>}
-     * @memberof UpdateGroupRequest
      */
     'membersToAdd'?: Array<string> | null;
     /**
      * The list of user IDs to remove from the group.
-     * @type {Array<string>}
-     * @memberof UpdateGroupRequest
      */
     'membersToRemove'?: Array<string> | null;
     /**
      * The group manager ID.
-     * @type {string}
-     * @memberof UpdateGroupRequest
      */
     'groupManager'?: string;
     /**
      * The group name.
-     * @type {string}
-     * @memberof UpdateGroupRequest
      */
     'groupName'?: string | null;
 }

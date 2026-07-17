@@ -1,11 +1,12 @@
 # ReviewConfig
 
+Configuration for review display settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**reviewDisplay** | **string** |  | [optional] [readonly] [default to undefined]
+**reviewDisplay** | **string** | The review display string representation. | [optional] [readonly] [default to undefined]
 
 ## Example
 

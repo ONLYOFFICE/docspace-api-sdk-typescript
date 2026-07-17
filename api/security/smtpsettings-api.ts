@@ -1,6 +1,6 @@
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -429,14 +428,14 @@ export const SMTPSettingsApiFactory = function (configuration?: Configuration, b
         /**
          * Saves the SMTP settings for the current portal.
          * @summary Save the SMTP settings
-         * @param {SmtpSettingsDto} [smtpSettingsDto] 
+         * @param {SMTPSettingsApiSaveSmtpSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for saveSmtpSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-smtp-settings/
          * @throws {RequiredError}
          */
-        saveSmtpSettings(smtpSettingsDto?: SmtpSettingsDto, options?: RawAxiosRequestConfig): AxiosPromise<SmtpSettingsWrapper> {
-            return localVarFp.saveSmtpSettings(smtpSettingsDto, options).then((request) => request(axios, basePath));
+        saveSmtpSettings(requestParameters: SMTPSettingsApiSaveSmtpSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<SmtpSettingsWrapper> {
+            return localVarFp.saveSmtpSettings(requestParameters.smtpSettingsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Tests the SMTP settings for the current portal (sends test message to the user email).
@@ -451,6 +450,20 @@ export const SMTPSettingsApiFactory = function (configuration?: Configuration, b
         },
     };
 };
+
+/**
+ * Request parameters for saveSmtpSettings operation in SMTPSettingsApi.
+ * @export
+ * @interface SMTPSettingsApiSaveSmtpSettingsRequest
+ */
+export interface SMTPSettingsApiSaveSmtpSettingsRequest {
+    /**
+     * 
+     * @type {SmtpSettingsDto}
+     * @memberof SMTPSettingsApiSaveSmtpSettings
+     */
+    readonly smtpSettingsDto?: SmtpSettingsDto
+}
 
 /**
  * SMTPSettingsApi - object-oriented interface
@@ -495,13 +508,13 @@ export class SMTPSettingsApi extends BaseAPI {
     /**
      * Saves the SMTP settings for the current portal.
      * @summary Save the SMTP settings
-     * @param {SmtpSettingsDto} [smtpSettingsDto] 
+     * @param {SecuritySMTPSettingsApiSaveSmtpSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SMTPSettingsApi
      */
-    public saveSmtpSettings(smtpSettingsDto?: SmtpSettingsDto, options?: RawAxiosRequestConfig) {
-        return SMTPSettingsApiFp(this.configuration).saveSmtpSettings(smtpSettingsDto, options).then((request) => request(this.axios, this.basePath));
+    public saveSmtpSettings(requestParameters: SMTPSettingsApiSaveSmtpSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return SMTPSettingsApiFp(this.configuration).saveSmtpSettings(requestParameters.smtpSettingsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

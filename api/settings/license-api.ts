@@ -1,6 +1,6 @@
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -351,17 +350,31 @@ export const LicenseApiFactory = function (configuration?: Configuration, basePa
         /**
          * Uploads a portal license specified in the request.
          * @summary Upload a license
-         * @param {Array<File>} files The list of license files to be uploaded.
+         * @param {LicenseApiUploadLicenseRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for uploadLicense operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-license/
          * @throws {RequiredError}
          */
-        uploadLicense(files: Array<File>, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.uploadLicense(files, options).then((request) => request(axios, basePath));
+        uploadLicense(requestParameters: LicenseApiUploadLicenseRequest, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.uploadLicense(requestParameters.files, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for uploadLicense operation in LicenseApi.
+ * @export
+ * @interface LicenseApiUploadLicenseRequest
+ */
+export interface LicenseApiUploadLicenseRequest {
+    /**
+     * The list of license files to be uploaded.
+     * @type {Array<File>}
+     * @memberof LicenseApiUploadLicense
+     */
+    readonly files: Array<File>
+}
 
 /**
  * LicenseApi - object-oriented interface
@@ -406,13 +419,13 @@ export class LicenseApi extends BaseAPI {
     /**
      * Uploads a portal license specified in the request.
      * @summary Upload a license
-     * @param {Array<File>} files The list of license files to be uploaded.
+     * @param {SettingsLicenseApiUploadLicenseRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof LicenseApi
      */
-    public uploadLicense(files: Array<File>, options?: RawAxiosRequestConfig) {
-        return LicenseApiFp(this.configuration).uploadLicense(files, options).then((request) => request(this.axios, this.basePath));
+    public uploadLicense(requestParameters: LicenseApiUploadLicenseRequest, options?: RawAxiosRequestConfig) {
+        return LicenseApiFp(this.configuration).uploadLicense(requestParameters.files, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,27 +21,13 @@
 
 /**
  * [0 - Badges, 1 - Rooms activity, 2 - Daily feed, 3 - Usefull tips]
- * @export
- * @enum {number}
  */
 
 export const NotificationType = {
-    /**
-    * Badges
-    */
     Badges: 0,
-    /**
-    * Rooms activity
-    */
     RoomsActivity: 1,
-    /**
-    * Daily feed
-    */
     DailyFeed: 2,
-    /**
-    * Usefull tips
-    */
-    UsefullTips: 3
+    UsefullTips: 3,
 } as const;
 
 export type NotificationType = typeof NotificationType[keyof typeof NotificationType];

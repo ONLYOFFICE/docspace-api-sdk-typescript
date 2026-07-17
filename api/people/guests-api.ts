@@ -1,6 +1,6 @@
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -203,29 +202,57 @@ export const GuestsApiFactory = function (configuration?: Configuration, basePat
         /**
          * Approves a guest sharing link and returns the detailed information about a guest.
          * @summary Approve a guest sharing link
-         * @param {EmailMemberRequestDto} [emailMemberRequestDto] 
+         * @param {GuestsApiApproveGuestShareLinkRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for approveGuestShareLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/approve-guest-share-link/
          * @throws {RequiredError}
          */
-        approveGuestShareLink(emailMemberRequestDto?: EmailMemberRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
-            return localVarFp.approveGuestShareLink(emailMemberRequestDto, options).then((request) => request(axios, basePath));
+        approveGuestShareLink(requestParameters: GuestsApiApproveGuestShareLinkRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
+            return localVarFp.approveGuestShareLink(requestParameters.emailMemberRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Deletes guests from the list and excludes them from rooms to which they were invited.
          * @summary Delete guests
-         * @param {UpdateMembersRequestDto} [updateMembersRequestDto] 
+         * @param {GuestsApiDeleteGuestsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteGuests operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-guests/
          * @throws {RequiredError}
          */
-        deleteGuests(updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.deleteGuests(updateMembersRequestDto, options).then((request) => request(axios, basePath));
+        deleteGuests(requestParameters: GuestsApiDeleteGuestsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteGuests(requestParameters.updateMembersRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for approveGuestShareLink operation in GuestsApi.
+ * @export
+ * @interface GuestsApiApproveGuestShareLinkRequest
+ */
+export interface GuestsApiApproveGuestShareLinkRequest {
+    /**
+     * 
+     * @type {EmailMemberRequestDto}
+     * @memberof GuestsApiApproveGuestShareLink
+     */
+    readonly emailMemberRequestDto?: EmailMemberRequestDto
+}
+
+/**
+ * Request parameters for deleteGuests operation in GuestsApi.
+ * @export
+ * @interface GuestsApiDeleteGuestsRequest
+ */
+export interface GuestsApiDeleteGuestsRequest {
+    /**
+     * 
+     * @type {UpdateMembersRequestDto}
+     * @memberof GuestsApiDeleteGuests
+     */
+    readonly updateMembersRequestDto?: UpdateMembersRequestDto
+}
 
 /**
  * GuestsApi - object-oriented interface
@@ -237,25 +264,25 @@ export class GuestsApi extends BaseAPI {
     /**
      * Approves a guest sharing link and returns the detailed information about a guest.
      * @summary Approve a guest sharing link
-     * @param {EmailMemberRequestDto} [emailMemberRequestDto] 
+     * @param {PeopleGuestsApiApproveGuestShareLinkRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GuestsApi
      */
-    public approveGuestShareLink(emailMemberRequestDto?: EmailMemberRequestDto, options?: RawAxiosRequestConfig) {
-        return GuestsApiFp(this.configuration).approveGuestShareLink(emailMemberRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public approveGuestShareLink(requestParameters: GuestsApiApproveGuestShareLinkRequest = {}, options?: RawAxiosRequestConfig) {
+        return GuestsApiFp(this.configuration).approveGuestShareLink(requestParameters.emailMemberRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Deletes guests from the list and excludes them from rooms to which they were invited.
      * @summary Delete guests
-     * @param {UpdateMembersRequestDto} [updateMembersRequestDto] 
+     * @param {PeopleGuestsApiDeleteGuestsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GuestsApi
      */
-    public deleteGuests(updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig) {
-        return GuestsApiFp(this.configuration).deleteGuests(updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public deleteGuests(requestParameters: GuestsApiDeleteGuestsRequest = {}, options?: RawAxiosRequestConfig) {
+        return GuestsApiFp(this.configuration).deleteGuests(requestParameters.updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,76 +27,54 @@ import type { LinkType } from './link-type';
 
 /**
  * A shareable link for a file with its configuration and status.
- * @export
- * @interface FileShareLink
  */
 export interface FileShareLink {
     /**
      * The unique identifier of the shared link.
-     * @type {string}
-     * @memberof FileShareLink
      */
     'id'?: string;
     /**
      * The title of the shared content.
-     * @type {string}
-     * @memberof FileShareLink
      */
     'title'?: string | null;
     /**
      * The URL for accessing the shared content.
-     * @type {string}
-     * @memberof FileShareLink
      */
     'shareLink'?: string | null;
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof FileShareLink
-     */
     'expirationDate'?: ApiDateTime;
-    /**
-     * 
-     * @type {LinkType}
-     * @memberof FileShareLink
-     */
     'linkType'?: LinkType;
     /**
      * The password protection for accessing the shared content.
-     * @type {string}
-     * @memberof FileShareLink
      */
     'password'?: string | null;
     /**
      * Indicates whether downloading of the shared content is prohibited.
-     * @type {boolean}
-     * @memberof FileShareLink
      */
     'denyDownload'?: boolean | null;
     /**
      * Indicates whether the shared link has expired.
-     * @type {boolean}
-     * @memberof FileShareLink
      */
     'isExpired'?: boolean | null;
     /**
      * Indicates whether this is the primary shared link.
-     * @type {boolean}
-     * @memberof FileShareLink
      */
     'primary'?: boolean;
     /**
      * Indicates whether the link is for the internal sharing only.
-     * @type {boolean}
-     * @memberof FileShareLink
      */
     'internal'?: boolean | null;
     /**
      * The token for validating access requests.
-     * @type {string}
-     * @memberof FileShareLink
      */
     'requestToken'?: string | null;
+    /**
+     * The maximum number of times the invitation link can be used.
+     */
+    'maxUseCount'?: number | null;
+    /**
+     * The current number of times the invitation link has been used.
+     */
+    'currentUseCount'?: number | null;
 }
 
 

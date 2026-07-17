@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,20 +21,14 @@
 
 /**
  * The parameters for deleting a folder.
- * @export
- * @interface DeleteFolder
  */
 export interface DeleteFolder {
     /**
      * Specifies whether to delete a folder after the editing session is finished or not.
-     * @type {boolean}
-     * @memberof DeleteFolder
      */
     'deleteAfter'?: boolean;
     /**
      * Specifies whether to move a folder to the \\Trash\\ folder or delete it immediately.
-     * @type {boolean}
-     * @memberof DeleteFolder
      */
     'immediately'?: boolean;
 }

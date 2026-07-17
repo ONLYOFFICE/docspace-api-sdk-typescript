@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,21 +24,12 @@ import type { ProductQuantityType } from './product-quantity-type';
 
 /**
  * The request parameters for specifying wallet payment quantity.
- * @export
- * @interface WalletQuantityRequestDto
  */
 export interface WalletQuantityRequestDto {
     /**
      * The mapping of item identifiers to their respective quantities in the payment.
-     * @type {{ [key: string]: number | null; }}
-     * @memberof WalletQuantityRequestDto
      */
     'quantity'?: { [key: string]: number | null; } | null;
-    /**
-     * 
-     * @type {ProductQuantityType}
-     * @memberof WalletQuantityRequestDto
-     */
     'productQuantityType'?: ProductQuantityType;
 }
 

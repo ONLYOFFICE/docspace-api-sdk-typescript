@@ -1,23 +1,24 @@
 # CreateClientRequest
 
-The request parameters for creating a client.
+Client creation request containing client details
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **string** | The client name. | [optional] [default to undefined]
-**description** | **string** | The client description. | [optional] [default to undefined]
-**logo** | **string** | The client logo in base64 format. | [optional] [default to undefined]
-**scopes** | **Set&lt;string&gt;** | The client scopes. | [optional] [default to undefined]
-**allow_pkce** | **boolean** | Indicates whether PKCE is allowed for the client. | [optional] [default to undefined]
-**is_public** | **boolean** | Indicates whether the client is accessible by third-party tenants. | [optional] [default to undefined]
-**website_url** | **string** | The URL to the client\&#39;s website. | [optional] [default to undefined]
-**terms_url** | **string** | The URL to the client\&#39;s terms of service. | [optional] [default to undefined]
-**policy_url** | **string** | The URL to the client\&#39;s privacy policy. | [optional] [default to undefined]
-**redirect_uris** | **Set&lt;string&gt;** | The list of allowed redirect URIs. | [default to undefined]
-**allowed_origins** | **Set&lt;string&gt;** | The list of allowed CORS origins. | [default to undefined]
-**logout_redirect_uri** | **string** | The list of allowed logout redirect URIs. | [optional] [default to undefined]
+**description** | **string** | The description of the client | [optional] [default to undefined]
+**logo** | **string** | The logo of the client in base64 format | [optional] [default to undefined]
+**scopes** | **Set&lt;string&gt;** | The scopes for the client | [optional] [default to undefined]
+**_public** | **boolean** |  | [optional] [default to undefined]
+**allow_pkce** | **boolean** | Indicates whether PKCE is allowed for the client | [optional] [default to undefined]
+**is_public** | **boolean** | Indicates if the client is public | [optional] [default to undefined]
+**website_url** | **string** | The website URL of the client | [optional] [default to undefined]
+**terms_url** | **string** | The terms URL of the client | [optional] [default to undefined]
+**policy_url** | **string** | The policy URL of the client | [optional] [default to undefined]
+**redirect_uris** | **Set&lt;string&gt;** | The redirect URIs for the client | [default to undefined]
+**allowed_origins** | **Set&lt;string&gt;** | The allowed origins for the client | [default to undefined]
+**logout_redirect_uri** | **string** | The logout redirect URI for the client | [optional] [default to undefined]
 
 ## Example
 
@@ -29,6 +30,7 @@ const instance: CreateClientRequest = {
     description,
     logo,
     scopes,
+    _public,
     allow_pkce,
     is_public,
     website_url,

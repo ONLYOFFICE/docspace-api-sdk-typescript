@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,15 +24,8 @@ import type { TenantDeepLinkSettings } from './tenant-deep-link-settings';
 
 /**
  * The request parameters for managing the deep link configuration.
- * @export
- * @interface DeepLinkConfigurationRequestsDto
  */
 export interface DeepLinkConfigurationRequestsDto {
-    /**
-     * 
-     * @type {TenantDeepLinkSettings}
-     * @memberof DeepLinkConfigurationRequestsDto
-     */
     'deepLinkSettings'?: TenantDeepLinkSettings;
 }
 

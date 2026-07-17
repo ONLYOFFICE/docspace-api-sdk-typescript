@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,57 +27,30 @@ import type { FormFillingStatus } from './form-filling-status';
 
 /**
  * The form role parameters.
- * @export
- * @interface FormRoleDto
  */
 export interface FormRoleDto {
     /**
      * The role name.
-     * @type {string}
-     * @memberof FormRoleDto
      */
     'roleName': string | null;
     /**
      * The role color.
-     * @type {string}
-     * @memberof FormRoleDto
      */
     'roleColor'?: string | null;
-    /**
-     * 
-     * @type {EmployeeFullDto}
-     * @memberof FormRoleDto
-     */
     'user'?: EmployeeFullDto;
     /**
      * The role sequence.
-     * @type {number}
-     * @memberof FormRoleDto
      */
     'sequence': number;
     /**
      * Specifies if the role is submitted.
-     * @type {boolean}
-     * @memberof FormRoleDto
      */
     'submitted': boolean;
-    /**
-     * 
-     * @type {EmployeeFullDto}
-     * @memberof FormRoleDto
-     */
     'stopedBy'?: EmployeeFullDto;
     /**
      * The role history.
-     * @type {{ [key: string]: string; }}
-     * @memberof FormRoleDto
      */
     'history'?: { [key: string]: string; } | null;
-    /**
-     * 
-     * @type {FormFillingStatus}
-     * @memberof FormRoleDto
-     */
     'roleStatus'?: FormFillingStatus;
 }
 

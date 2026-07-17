@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,20 +21,14 @@
 
 /**
  * The parameters for changing version history.
- * @export
- * @interface ChangeHistory
  */
 export interface ChangeHistory {
     /**
      * The file version of the change history.
-     * @type {number}
-     * @memberof ChangeHistory
      */
     'version': number;
     /**
      * Specifies whether to start a new version or continue revision of the change history.
-     * @type {boolean}
-     * @memberof ChangeHistory
      */
     'continueVersion'?: boolean;
 }

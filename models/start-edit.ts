@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,14 +21,10 @@
 
 /**
  * The parameters for starting file editing.
- * @export
- * @interface StartEdit
  */
 export interface StartEdit {
     /**
      * Specifies whether to share the file with other users for editing or not.
-     * @type {boolean}
-     * @memberof StartEdit
      */
     'editingAlone'?: boolean;
 }

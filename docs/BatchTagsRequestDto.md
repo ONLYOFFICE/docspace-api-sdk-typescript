@@ -6,7 +6,7 @@ The parameters for managing room tags.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**names** | **Array&lt;string&gt;** | The list of tag names. | [optional] [default to undefined]
+**names** | **Array&lt;string&gt;** | The list of tag names. | [default to undefined]
 
 ## Example
 

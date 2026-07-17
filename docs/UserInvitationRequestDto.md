@@ -6,8 +6,8 @@ The user invitation parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**email** | **string** | The email address. | [optional] [default to undefined]
 **type** | [**EmployeeType**](EmployeeType.md) |  | [optional] [default to undefined]
-**email** | **string** | The user email address. | [optional] [default to undefined]
 
 ## Example
 
@@ -15,8 +15,8 @@ Name | Type | Description | Notes
 import { UserInvitationRequestDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: UserInvitationRequestDto = {
-    type,
     email,
+    type,
 };
 ```
 

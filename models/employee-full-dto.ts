@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -79,18 +81,6 @@ export type EmployeeFullDto = EmployeeDto &  {
     'contacts'?: Array<Contact> | null;
     /**
      * 
-     * @type {ApiDateTime}
-     * @memberof EmployeeFullDto
-     */
-    'birthday'?: ApiDateTime;
-    /**
-     * The user sex.
-     * @type {string}
-     * @memberof EmployeeFullDto
-     */
-    'sex'?: string | null;
-    /**
-     * 
      * @type {EmployeeStatus}
      * @memberof EmployeeFullDto
      */
@@ -113,12 +103,6 @@ export type EmployeeFullDto = EmployeeDto &  {
      * @memberof EmployeeFullDto
      */
     'department'?: string | null;
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof EmployeeFullDto
-     */
-    'workFrom'?: ApiDateTime;
     /**
      * The list of user groups.
      * @type {Array<GroupSummaryDto>}
@@ -262,7 +246,7 @@ export type EmployeeFullDto = EmployeeDto &  {
      * @type {boolean}
      * @memberof EmployeeFullDto
      */
-    'hasPersonalFolder'?: boolean;
+    'hasPersonalFolder'?: boolean | null;
     /**
      * Indicates whether the user has enabled two-factor authentication (TFA) using an authentication app.
      * @type {boolean}

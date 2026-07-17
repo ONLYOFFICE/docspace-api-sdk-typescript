@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,27 +20,23 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { EmailInvitationDto } from './email-invitation-dto';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { EmployeeType } from './employee-type';
 
 /**
+ * @type UserInvitationRequestDto
  * The user invitation parameters.
  * @export
- * @interface UserInvitationRequestDto
  */
-export interface UserInvitationRequestDto {
+export type UserInvitationRequestDto = EmailInvitationDto &  {
     /**
      * 
      * @type {EmployeeType}
      * @memberof UserInvitationRequestDto
      */
     'type'?: EmployeeType;
-    /**
-     * The user email address.
-     * @type {string}
-     * @memberof UserInvitationRequestDto
-     */
-    'email'?: string | null;
-}
-
+};
 
 

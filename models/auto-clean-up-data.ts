@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,21 +24,12 @@ import type { DateToAutoCleanUp } from './date-to-auto-clean-up';
 
 /**
  * The auto-clearing setting parameters.
- * @export
- * @interface AutoCleanUpData
  */
 export interface AutoCleanUpData {
     /**
      * Specifies whether to permanently delete files in the Trash folder.
-     * @type {boolean}
-     * @memberof AutoCleanUpData
      */
     'isAutoCleanUp'?: boolean;
-    /**
-     * 
-     * @type {DateToAutoCleanUp}
-     * @memberof AutoCleanUpData
-     */
     'gap'?: DateToAutoCleanUp;
 }
 

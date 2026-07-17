@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,26 +21,18 @@
 
 /**
  * The file upload result.
- * @export
- * @interface FileUploadResultDto
  */
 export interface FileUploadResultDto {
     /**
      * Specifies if the upload operation is successful or not.
-     * @type {boolean}
-     * @memberof FileUploadResultDto
      */
     'success'?: boolean;
     /**
      * The file upload result data.
-     * @type {any}
-     * @memberof FileUploadResultDto
      */
     'data'?: any | null;
     /**
      * The file upload result message.
-     * @type {string}
-     * @memberof FileUploadResultDto
      */
     'message'?: string | null;
 }

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,32 +21,22 @@
 
 /**
  * The group summary parameters.
- * @export
- * @interface GroupSummaryDto
  */
 export interface GroupSummaryDto {
     /**
      * The group ID.
-     * @type {string}
-     * @memberof GroupSummaryDto
      */
     'id': string;
     /**
      * The group name.
-     * @type {string}
-     * @memberof GroupSummaryDto
      */
     'name': string | null;
     /**
      * The group manager.
-     * @type {string}
-     * @memberof GroupSummaryDto
      */
     'manager'?: string | null;
     /**
      * Indicates whether the group is a system group.
-     * @type {boolean}
-     * @memberof GroupSummaryDto
      */
     'isSystem'?: boolean | null;
 }

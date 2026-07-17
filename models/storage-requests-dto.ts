@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,20 +24,14 @@ import type { ItemKeyValuePairStringString } from './item-key-value-pair-string-
 
 /**
  * The request parameters for configuring the storage module settings.
- * @export
- * @interface StorageRequestsDto
  */
 export interface StorageRequestsDto {
     /**
      * The name for the storage module to be configured.
-     * @type {string}
-     * @memberof StorageRequestsDto
      */
     'module': string | null;
     /**
      * The list of configuration key-value pairs for the storage module.
-     * @type {Array<ItemKeyValuePairStringString>}
-     * @memberof StorageRequestsDto
      */
     'props'?: Array<ItemKeyValuePairStringString> | null;
 }

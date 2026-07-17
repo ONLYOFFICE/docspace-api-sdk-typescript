@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,26 +24,18 @@ import type { BatchRequestDtoAllOfFileIds } from './batch-request-dto-all-of-fil
 
 /**
  * The request parameters for changing the file owner.
- * @export
- * @interface ChangeOwnerRequestDto
  */
 export interface ChangeOwnerRequestDto {
     /**
      * The list of folder IDs to change the owner.
-     * @type {Array<BatchRequestDtoAllOfFileIds>}
-     * @memberof ChangeOwnerRequestDto
      */
     'folderIds'?: Array<BatchRequestDtoAllOfFileIds> | null;
     /**
      * The list of file IDs to change the owner.
-     * @type {Array<BatchRequestDtoAllOfFileIds>}
-     * @memberof ChangeOwnerRequestDto
      */
     'fileIds'?: Array<BatchRequestDtoAllOfFileIds> | null;
     /**
      * The new file owner ID.
-     * @type {string}
-     * @memberof ChangeOwnerRequestDto
      */
     'userId': string;
 }

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,88 +36,45 @@ import type { SubjectType } from './subject-type';
 
 /**
  * The file sharing information and access rights.
- * @export
- * @interface FileShareDto
  */
 export interface FileShareDto {
-    /**
-     * 
-     * @type {FileShare}
-     * @memberof FileShareDto
-     */
     'access'?: FileShare;
     /**
      * The user who has the access to the specified file.
-     * @type {any}
-     * @memberof FileShareDto
      * @deprecated
      */
     'sharedTo'?: any | null;
-    /**
-     * 
-     * @type {EmployeeFullDto}
-     * @memberof FileShareDto
-     */
     'sharedToUser'?: EmployeeFullDto;
-    /**
-     * 
-     * @type {GroupSummaryDto}
-     * @memberof FileShareDto
-     */
     'sharedToGroup'?: GroupSummaryDto;
-    /**
-     * 
-     * @type {FileShareLink}
-     * @memberof FileShareDto
-     */
     'sharedLink'?: FileShareLink;
     /**
      * Specifies if the access right is locked or not.
-     * @type {boolean}
-     * @memberof FileShareDto
      */
     'isLocked': boolean;
     /**
      * Specifies if the user is an owner of the specified file or not.
-     * @type {boolean}
-     * @memberof FileShareDto
      */
     'isOwner': boolean;
     /**
      * Specifies if the user can edit the access to the specified file or not.
-     * @type {boolean}
-     * @memberof FileShareDto
      */
     'canEditAccess': boolean;
     /**
      * Indicates whether internal editing permissions are granted.
-     * @type {boolean}
-     * @memberof FileShareDto
      */
     'canEditInternal': boolean;
     /**
      * Determines whether the user has permission to modify the deny download setting for the file share.
-     * @type {boolean}
-     * @memberof FileShareDto
      */
     'canEditDenyDownload': boolean;
     /**
      * Indicates whether the expiration date of access permissions can be edited.
-     * @type {boolean}
-     * @memberof FileShareDto
      */
     'canEditExpirationDate': boolean;
     /**
      * Specifies whether the file sharing access can be revoked by the current user.
-     * @type {boolean}
-     * @memberof FileShareDto
      */
     'canRevoke': boolean;
-    /**
-     * 
-     * @type {SubjectType}
-     * @memberof FileShareDto
-     */
     'subjectType': SubjectType;
 }
 

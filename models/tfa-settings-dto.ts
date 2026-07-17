@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,50 +21,34 @@
 
 /**
  * The parameters representing the Two-Factor Authentication (TFA) configuration settings.
- * @export
- * @interface TfaSettingsDto
  */
 export interface TfaSettingsDto {
     /**
      * The ID of the TFA configuration.
-     * @type {string}
-     * @memberof TfaSettingsDto
      */
     'id': string | null;
     /**
      * The display name or description of the TFA configuration.
-     * @type {string}
-     * @memberof TfaSettingsDto
      */
     'title': string | null;
     /**
      * Indicates whether the TFA configuration is currently active.
-     * @type {boolean}
-     * @memberof TfaSettingsDto
      */
     'enabled': boolean;
     /**
      * Indicates whether the TFA configuration can be used.
-     * @type {boolean}
-     * @memberof TfaSettingsDto
      */
-    'avaliable': boolean;
+    'available': boolean;
     /**
      * The list of IP addresses that are exempt from TFA requirements.
-     * @type {Array<string>}
-     * @memberof TfaSettingsDto
      */
     'trustedIps'?: Array<string> | null;
     /**
      * The list of user IDs that are required to use TFA.
-     * @type {Array<string>}
-     * @memberof TfaSettingsDto
      */
     'mandatoryUsers'?: Array<string> | null;
     /**
      * The list of group IDs whose members are required to use TFA.
-     * @type {Array<string>}
-     * @memberof TfaSettingsDto
      */
     'mandatoryGroups'?: Array<string> | null;
 }

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,26 +21,18 @@
 
 /**
  * The price parameters.
- * @export
- * @interface PriceDto
  */
 export interface PriceDto {
     /**
      * The price value.
-     * @type {number}
-     * @memberof PriceDto
      */
     'value'?: number | null;
     /**
      * The currency symbol.
-     * @type {string}
-     * @memberof PriceDto
      */
     'currencySymbol'?: string | null;
     /**
      * The three-character ISO 4217 currency symbol.
-     * @type {string}
-     * @memberof PriceDto
      */
     'isoCurrencySymbol'?: string | null;
 }

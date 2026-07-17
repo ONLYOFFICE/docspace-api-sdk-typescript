@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,39 +23,24 @@
 import type { BackupStorageType } from './backup-storage-type';
 
 /**
- * 
- * @export
- * @interface BackupHistoryRecord
+ * The backup history parameters.
  */
 export interface BackupHistoryRecord {
     /**
-     * 
-     * @type {string}
-     * @memberof BackupHistoryRecord
+     * The backup ID.
      */
     'id': string;
     /**
-     * 
-     * @type {string}
-     * @memberof BackupHistoryRecord
+     * The backup file name.
      */
     'fileName': string | null;
-    /**
-     * 
-     * @type {BackupStorageType}
-     * @memberof BackupHistoryRecord
-     */
     'storageType': BackupStorageType;
     /**
-     * 
-     * @type {string}
-     * @memberof BackupHistoryRecord
+     * The backup creation date.
      */
     'createdOn': string;
     /**
-     * 
-     * @type {string}
-     * @memberof BackupHistoryRecord
+     * The backup expiration date.
      */
     'expiresOn': string;
 }

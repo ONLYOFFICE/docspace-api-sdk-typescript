@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,14 +21,10 @@
 
 /**
  * The parameters of the button that starts filling out the form.
- * @export
- * @interface StartFillingForm
  */
 export interface StartFillingForm {
     /**
      * The caption of the button that starts filling out the form.
-     * @type {string}
-     * @memberof StartFillingForm
      */
     'text'?: string | null;
 }

@@ -1,6 +1,6 @@
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -365,17 +364,31 @@ export const GreetingSettingsApiFactory = function (configuration?: Configuratio
         /**
          * Saves the greeting settings specified in the request to the current portal.
          * @summary Save the greeting settings
-         * @param {GreetingSettingsRequestsDto} [greetingSettingsRequestsDto] 
+         * @param {GreetingSettingsApiSaveGreetingSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for saveGreetingSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-greeting-settings/
          * @throws {RequiredError}
          */
-        saveGreetingSettings(greetingSettingsRequestsDto?: GreetingSettingsRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.saveGreetingSettings(greetingSettingsRequestsDto, options).then((request) => request(axios, basePath));
+        saveGreetingSettings(requestParameters: GreetingSettingsApiSaveGreetingSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.saveGreetingSettings(requestParameters.greetingSettingsRequestsDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for saveGreetingSettings operation in GreetingSettingsApi.
+ * @export
+ * @interface GreetingSettingsApiSaveGreetingSettingsRequest
+ */
+export interface GreetingSettingsApiSaveGreetingSettingsRequest {
+    /**
+     * 
+     * @type {GreetingSettingsRequestsDto}
+     * @memberof GreetingSettingsApiSaveGreetingSettings
+     */
+    readonly greetingSettingsRequestsDto?: GreetingSettingsRequestsDto
+}
 
 /**
  * GreetingSettingsApi - object-oriented interface
@@ -420,13 +433,13 @@ export class GreetingSettingsApi extends BaseAPI {
     /**
      * Saves the greeting settings specified in the request to the current portal.
      * @summary Save the greeting settings
-     * @param {GreetingSettingsRequestsDto} [greetingSettingsRequestsDto] 
+     * @param {SettingsGreetingSettingsApiSaveGreetingSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GreetingSettingsApi
      */
-    public saveGreetingSettings(greetingSettingsRequestsDto?: GreetingSettingsRequestsDto, options?: RawAxiosRequestConfig) {
-        return GreetingSettingsApiFp(this.configuration).saveGreetingSettings(greetingSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public saveGreetingSettings(requestParameters: GreetingSettingsApiSaveGreetingSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return GreetingSettingsApiFp(this.configuration).saveGreetingSettings(requestParameters.greetingSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

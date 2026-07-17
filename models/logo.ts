@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,45 +24,28 @@ import type { LogoCover } from './logo-cover';
 
 /**
  * The room logo information.
- * @export
- * @interface Logo
  */
 export interface Logo {
     /**
      * The original logo.
-     * @type {string}
-     * @memberof Logo
      */
     'original': string | null;
     /**
      * The large logo.
-     * @type {string}
-     * @memberof Logo
      */
     'large': string | null;
     /**
      * The medium logo.
-     * @type {string}
-     * @memberof Logo
      */
     'medium': string | null;
     /**
      * The small logo.
-     * @type {string}
-     * @memberof Logo
      */
     'small': string | null;
     /**
      * The logo color.
-     * @type {string}
-     * @memberof Logo
      */
     'color'?: string | null;
-    /**
-     * 
-     * @type {LogoCover}
-     * @memberof Logo
-     */
     'cover'?: LogoCover;
 }
 

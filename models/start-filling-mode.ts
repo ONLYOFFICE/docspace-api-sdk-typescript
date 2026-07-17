@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,24 +20,14 @@
 
 
 /**
- * [0 - None, 1 - Share to fill out, 2 - Start filling]
- * @export
- * @enum {number}
+ * [0 - None, 1 - Share to fill out, 2 - Start filling, 3 - Start filling form room]
  */
 
 export const StartFillingMode = {
-    /**
-    * None
-    */
     None: 0,
-    /**
-    * Share to fill out
-    */
     ShareToFillOut: 1,
-    /**
-    * Start filling
-    */
-    StartFilling: 2
+    StartFilling: 2,
+    StartFillingFormRoom: 3,
 } as const;
 
 export type StartFillingMode = typeof StartFillingMode[keyof typeof StartFillingMode];

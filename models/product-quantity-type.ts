@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,27 +21,13 @@
 
 /**
  * [0 - Set, 1 - Add, 2 - Sub, 3 - Renew]
- * @export
- * @enum {number}
  */
 
 export const ProductQuantityType = {
-    /**
-    * Set
-    */
     Set: 0,
-    /**
-    * Add
-    */
     Add: 1,
-    /**
-    * Sub
-    */
     Sub: 2,
-    /**
-    * Renew
-    */
-    Renew: 3
+    Renew: 3,
 } as const;
 
 export type ProductQuantityType = typeof ProductQuantityType[keyof typeof ProductQuantityType];

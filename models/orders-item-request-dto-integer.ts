@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,26 +24,15 @@ import type { FileEntryType } from './file-entry-type';
 
 /**
  * An item in the ordering request with its entry type and ID.
- * @export
- * @interface OrdersItemRequestDtoInteger
  */
 export interface OrdersItemRequestDtoInteger {
     /**
      * The entry unique identifier (file or folder).
-     * @type {number}
-     * @memberof OrdersItemRequestDtoInteger
      */
     'entryId': number;
-    /**
-     * 
-     * @type {FileEntryType}
-     * @memberof OrdersItemRequestDtoInteger
-     */
     'entryType': FileEntryType;
     /**
      * The order value.
-     * @type {number}
-     * @memberof OrdersItemRequestDtoInteger
      */
     'order': number;
 }

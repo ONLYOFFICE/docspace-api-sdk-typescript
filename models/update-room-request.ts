@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,75 +33,47 @@ import type { WatermarkRequestDto } from './watermark-request-dto';
 
 /**
  * The request parameters for updating a room.
- * @export
- * @interface UpdateRoomRequest
  */
 export interface UpdateRoomRequest {
     /**
      * The room title.
-     * @type {string}
-     * @memberof UpdateRoomRequest
      */
     'title'?: string | null;
     /**
      * The room quota.
-     * @type {number}
-     * @memberof UpdateRoomRequest
      */
     'quota'?: number | null;
     /**
      * Specifies whether to create a third-party room with indexing.
-     * @type {boolean}
-     * @memberof UpdateRoomRequest
      */
     'indexing'?: boolean | null;
     /**
      * Specifies whether to deny downloads from the third-party room.
-     * @type {boolean}
-     * @memberof UpdateRoomRequest
      */
     'denyDownload'?: boolean | null;
-    /**
-     * 
-     * @type {RoomDataLifetimeDto}
-     * @memberof UpdateRoomRequest
-     */
     'lifetime'?: RoomDataLifetimeDto;
-    /**
-     * 
-     * @type {WatermarkRequestDto}
-     * @memberof UpdateRoomRequest
-     */
     'watermark'?: WatermarkRequestDto;
-    /**
-     * 
-     * @type {LogoRequest}
-     * @memberof UpdateRoomRequest
-     */
     'logo'?: LogoRequest;
     /**
      * The list of tags.
-     * @type {Array<string>}
-     * @memberof UpdateRoomRequest
      */
     'tags'?: Array<string> | null;
     /**
      * The room color.
-     * @type {string}
-     * @memberof UpdateRoomRequest
      */
     'color'?: string | null;
     /**
      * The room cover.
-     * @type {string}
-     * @memberof UpdateRoomRequest
      */
     'cover'?: string | null;
-    /**
-     * 
-     * @type {ChatSettings}
-     * @memberof UpdateRoomRequest
-     */
     'chatSettings'?: ChatSettings;
+    /**
+     * Specifies whether to send form data to external database.
+     */
+    'sendFormToExternalDB'?: boolean | null;
+    /**
+     * Specifies whether to save form data as XLSX file.
+     */
+    'saveFormAsXLSX'?: boolean | null;
 }
 

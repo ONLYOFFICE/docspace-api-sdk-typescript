@@ -1,6 +1,6 @@
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -30,6 +29,8 @@ import type { CustomColorThemesSettingsRequestsDto } from '../../models';
 import type { CustomColorThemesSettingsWrapper } from '../../models';
 // @ts-ignore
 import type { DeepLinkConfigurationRequestsDto } from '../../models';
+// @ts-ignore
+import type { DefaultProductRequestDto } from '../../models';
 // @ts-ignore
 import type { DnsSettingsRequestsDto } from '../../models';
 // @ts-ignore
@@ -48,6 +49,12 @@ import type { STRINGArrayWrapper } from '../../models';
 import type { SettingsWrapper } from '../../models';
 // @ts-ignore
 import type { StringWrapper } from '../../models';
+// @ts-ignore
+import type { StudioDefaultPageSettingsWrapper } from '../../models';
+// @ts-ignore
+import type { TenantAiAccessSettingsDto } from '../../models';
+// @ts-ignore
+import type { TenantAiAccessSettingsWrapper } from '../../models';
 // @ts-ignore
 import type { TenantDeepLinkSettingsWrapper } from '../../models';
 // @ts-ignore
@@ -637,6 +644,58 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
+         * Returns the current portal-level AI access settings that control whether all AI functionality  (chat, agents, vectorization) is available for the portal. AI is enabled by default.
+         * @summary Get the AI access settings for the portal
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getTenantAiAccessSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-ai-access-settings/
+         */
+        getTenantAiAccessSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/settings/ai-access`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns the portal user invitation settings.
          * @summary Get the user invitation settings
          * @param {*} [options] Override http request option.
@@ -715,6 +774,62 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Sets the default folder.
+         * @summary Set the default folder
+         * @param {DefaultProductRequestDto} [defaultProductRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for saveDefaultFolder operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-default-folder/
+         */
+        saveDefaultFolder: async (defaultProductRequestDto?: DefaultProductRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/settings/defaultfolder`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(defaultProductRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -883,6 +998,62 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(customColorThemesSettingsRequestsDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Updates the portal-level AI access settings. When AI is disabled, all AI features are turned off:  the AI Agents folder is hidden from root folder listings, AI status checks immediately return disabled,  and AI chat endpoints become inaccessible. Only users with the DocSpaceAdmin role  (EditPortalSettings permission) can change this setting.
+         * @summary Set the AI access for the portal
+         * @param {TenantAiAccessSettingsDto} [tenantAiAccessSettingsDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setTenantAiAccessSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-ai-access-settings/
+         */
+        setTenantAiAccessSettings: async (tenantAiAccessSettingsDto?: TenantAiAccessSettingsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/settings/ai-access`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tenantAiAccessSettingsDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1184,6 +1355,20 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns the current portal-level AI access settings that control whether all AI functionality  (chat, agents, vectorization) is available for the portal. AI is enabled by default.
+         * @summary Get the AI access settings for the portal
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getTenantAiAccessSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-ai-access-settings/
+         */
+        async getTenantAiAccessSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantAiAccessSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getTenantAiAccessSettings(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.getTenantAiAccessSettings']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns the portal user invitation settings.
          * @summary Get the user invitation settings
          * @param {*} [options] Override http request option.
@@ -1209,6 +1394,21 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTimeZones(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.getTimeZones']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Sets the default folder.
+         * @summary Set the default folder
+         * @param {DefaultProductRequestDto} [defaultProductRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for saveDefaultFolder operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-default-folder/
+         */
+        async saveDefaultFolder(defaultProductRequestDto?: DefaultProductRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StudioDefaultPageSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.saveDefaultFolder(defaultProductRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.saveDefaultFolder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1254,6 +1454,21 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.savePortalColorTheme(customColorThemesSettingsRequestsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.savePortalColorTheme']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Updates the portal-level AI access settings. When AI is disabled, all AI features are turned off:  the AI Agents folder is hidden from root folder listings, AI status checks immediately return disabled,  and AI chat endpoints become inaccessible. Only users with the DocSpaceAdmin role  (EditPortalSettings permission) can change this setting.
+         * @summary Set the AI access for the portal
+         * @param {TenantAiAccessSettingsDto} [tenantAiAccessSettingsDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setTenantAiAccessSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-ai-access-settings/
+         */
+        async setTenantAiAccessSettings(tenantAiAccessSettingsDto?: TenantAiAccessSettingsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantAiAccessSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setTenantAiAccessSettings(tenantAiAccessSettingsDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.setTenantAiAccessSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1310,38 +1525,38 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
         /**
          * Completes the Wizard settings.
          * @summary Complete the Wizard settings
-         * @param {WizardRequestsDto} [wizardRequestsDto] 
+         * @param {CommonSettingsApiCompleteWizardRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for completeWizard operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/complete-wizard/
          * @throws {RequiredError}
          */
-        completeWizard(wizardRequestsDto?: WizardRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<WizardSettingsWrapper> {
-            return localVarFp.completeWizard(wizardRequestsDto, options).then((request) => request(axios, basePath));
+        completeWizard(requestParameters: CommonSettingsApiCompleteWizardRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<WizardSettingsWrapper> {
+            return localVarFp.completeWizard(requestParameters.wizardRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Saves the deep link configuration settings for the portal.
          * @summary Configure the deep link settings
-         * @param {DeepLinkConfigurationRequestsDto} [deepLinkConfigurationRequestsDto] 
+         * @param {CommonSettingsApiConfigureDeepLinkRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for configureDeepLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/configure-deep-link/
          * @throws {RequiredError}
          */
-        configureDeepLink(deepLinkConfigurationRequestsDto?: DeepLinkConfigurationRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<TenantDeepLinkSettingsWrapper> {
-            return localVarFp.configureDeepLink(deepLinkConfigurationRequestsDto, options).then((request) => request(axios, basePath));
+        configureDeepLink(requestParameters: CommonSettingsApiConfigureDeepLinkRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantDeepLinkSettingsWrapper> {
+            return localVarFp.configureDeepLink(requestParameters.deepLinkConfigurationRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Deletes the portal color theme with the ID specified in the request.
          * @summary Delete a color theme
-         * @param {number} id The ID of the portal theme to delete.
+         * @param {CommonSettingsApiDeletePortalColorThemeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for deletePortalColorTheme operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-portal-color-theme/
          * @throws {RequiredError}
          */
-        deletePortalColorTheme(id: number, options?: RawAxiosRequestConfig): AxiosPromise<CustomColorThemesSettingsWrapper> {
-            return localVarFp.deletePortalColorTheme(id, options).then((request) => request(axios, basePath));
+        deletePortalColorTheme(requestParameters: CommonSettingsApiDeletePortalColorThemeRequest, options?: RawAxiosRequestConfig): AxiosPromise<CustomColorThemesSettingsWrapper> {
+            return localVarFp.deletePortalColorTheme(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the deep link settings.
@@ -1401,14 +1616,14 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
         /**
          * Returns a list of all the available portal settings with the current values for each parameter.
          * @summary Get the portal settings
-         * @param {boolean} [withpassword] Specifies whether to include the password hashing configuration in the response.
+         * @param {CommonSettingsApiGetPortalSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getPortalSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-settings/
          * @throws {RequiredError}
          */
-        getPortalSettings(withpassword?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<SettingsWrapper> {
-            return localVarFp.getPortalSettings(withpassword, options).then((request) => request(axios, basePath));
+        getPortalSettings(requestParameters: CommonSettingsApiGetPortalSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<SettingsWrapper> {
+            return localVarFp.getPortalSettings(requestParameters.withpassword, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the socket settings.
@@ -1433,6 +1648,17 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
             return localVarFp.getSupportedCultures(options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns the current portal-level AI access settings that control whether all AI functionality  (chat, agents, vectorization) is available for the portal. AI is enabled by default.
+         * @summary Get the AI access settings for the portal
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getTenantAiAccessSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-ai-access-settings/
+         * @throws {RequiredError}
+         */
+        getTenantAiAccessSettings(options?: RawAxiosRequestConfig): AxiosPromise<TenantAiAccessSettingsWrapper> {
+            return localVarFp.getTenantAiAccessSettings(options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns the portal user invitation settings.
          * @summary Get the user invitation settings
          * @param {*} [options] Override http request option.
@@ -1455,67 +1681,245 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
             return localVarFp.getTimeZones(options).then((request) => request(axios, basePath));
         },
         /**
+         * Sets the default folder.
+         * @summary Set the default folder
+         * @param {CommonSettingsApiSaveDefaultFolderRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for saveDefaultFolder operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-default-folder/
+         * @throws {RequiredError}
+         */
+        saveDefaultFolder(requestParameters: CommonSettingsApiSaveDefaultFolderRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StudioDefaultPageSettingsWrapper> {
+            return localVarFp.saveDefaultFolder(requestParameters.defaultProductRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Saves the DNS settings specified in the request to the current portal.
          * @summary Save the DNS settings
-         * @param {DnsSettingsRequestsDto} [dnsSettingsRequestsDto] 
+         * @param {CommonSettingsApiSaveDnsSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for saveDnsSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-dns-settings/
          * @throws {RequiredError}
          */
-        saveDnsSettings(dnsSettingsRequestsDto?: DnsSettingsRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.saveDnsSettings(dnsSettingsRequestsDto, options).then((request) => request(axios, basePath));
+        saveDnsSettings(requestParameters: CommonSettingsApiSaveDnsSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.saveDnsSettings(requestParameters.dnsSettingsRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Saves the mail domain settings specified in the request to the portal.
          * @summary Save the mail domain settings
-         * @param {MailDomainSettingsRequestsDto} [mailDomainSettingsRequestsDto] 
+         * @param {CommonSettingsApiSaveMailDomainSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for saveMailDomainSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-mail-domain-settings/
          * @throws {RequiredError}
          */
-        saveMailDomainSettings(mailDomainSettingsRequestsDto?: MailDomainSettingsRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.saveMailDomainSettings(mailDomainSettingsRequestsDto, options).then((request) => request(axios, basePath));
+        saveMailDomainSettings(requestParameters: CommonSettingsApiSaveMailDomainSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.saveMailDomainSettings(requestParameters.mailDomainSettingsRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Saves the portal color theme specified in the request.
          * @summary Save a color theme
-         * @param {CustomColorThemesSettingsRequestsDto} [customColorThemesSettingsRequestsDto] 
+         * @param {CommonSettingsApiSavePortalColorThemeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for savePortalColorTheme operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-portal-color-theme/
          * @throws {RequiredError}
          */
-        savePortalColorTheme(customColorThemesSettingsRequestsDto?: CustomColorThemesSettingsRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<CustomColorThemesSettingsWrapper> {
-            return localVarFp.savePortalColorTheme(customColorThemesSettingsRequestsDto, options).then((request) => request(axios, basePath));
+        savePortalColorTheme(requestParameters: CommonSettingsApiSavePortalColorThemeRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<CustomColorThemesSettingsWrapper> {
+            return localVarFp.savePortalColorTheme(requestParameters.customColorThemesSettingsRequestsDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Updates the portal-level AI access settings. When AI is disabled, all AI features are turned off:  the AI Agents folder is hidden from root folder listings, AI status checks immediately return disabled,  and AI chat endpoints become inaccessible. Only users with the DocSpaceAdmin role  (EditPortalSettings permission) can change this setting.
+         * @summary Set the AI access for the portal
+         * @param {CommonSettingsApiSetTenantAiAccessSettingsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for setTenantAiAccessSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-ai-access-settings/
+         * @throws {RequiredError}
+         */
+        setTenantAiAccessSettings(requestParameters: CommonSettingsApiSetTenantAiAccessSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantAiAccessSettingsWrapper> {
+            return localVarFp.setTenantAiAccessSettings(requestParameters.tenantAiAccessSettingsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates the email activation settings.
          * @summary Update the email activation settings
-         * @param {EmailActivationSettings} [emailActivationSettings] 
+         * @param {CommonSettingsApiUpdateEmailActivationSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateEmailActivationSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-email-activation-settings/
          * @throws {RequiredError}
          */
-        updateEmailActivationSettings(emailActivationSettings?: EmailActivationSettings, options?: RawAxiosRequestConfig): AxiosPromise<EmailActivationSettingsWrapper> {
-            return localVarFp.updateEmailActivationSettings(emailActivationSettings, options).then((request) => request(axios, basePath));
+        updateEmailActivationSettings(requestParameters: CommonSettingsApiUpdateEmailActivationSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<EmailActivationSettingsWrapper> {
+            return localVarFp.updateEmailActivationSettings(requestParameters.emailActivationSettings, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates the portal user invitation settings.
          * @summary Update user invitation settings
-         * @param {TenantUserInvitationSettingsRequestDto} [tenantUserInvitationSettingsRequestDto] 
+         * @param {CommonSettingsApiUpdateInvitationSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateInvitationSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-invitation-settings/
          * @throws {RequiredError}
          */
-        updateInvitationSettings(tenantUserInvitationSettingsRequestDto?: TenantUserInvitationSettingsRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<TenantUserInvitationSettingsWrapper> {
-            return localVarFp.updateInvitationSettings(tenantUserInvitationSettingsRequestDto, options).then((request) => request(axios, basePath));
+        updateInvitationSettings(requestParameters: CommonSettingsApiUpdateInvitationSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantUserInvitationSettingsWrapper> {
+            return localVarFp.updateInvitationSettings(requestParameters.tenantUserInvitationSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for completeWizard operation in CommonSettingsApi.
+ * @export
+ * @interface CommonSettingsApiCompleteWizardRequest
+ */
+export interface CommonSettingsApiCompleteWizardRequest {
+    /**
+     * 
+     * @type {WizardRequestsDto}
+     * @memberof CommonSettingsApiCompleteWizard
+     */
+    readonly wizardRequestsDto?: WizardRequestsDto
+}
+
+/**
+ * Request parameters for configureDeepLink operation in CommonSettingsApi.
+ * @export
+ * @interface CommonSettingsApiConfigureDeepLinkRequest
+ */
+export interface CommonSettingsApiConfigureDeepLinkRequest {
+    /**
+     * 
+     * @type {DeepLinkConfigurationRequestsDto}
+     * @memberof CommonSettingsApiConfigureDeepLink
+     */
+    readonly deepLinkConfigurationRequestsDto?: DeepLinkConfigurationRequestsDto
+}
+
+/**
+ * Request parameters for deletePortalColorTheme operation in CommonSettingsApi.
+ * @export
+ * @interface CommonSettingsApiDeletePortalColorThemeRequest
+ */
+export interface CommonSettingsApiDeletePortalColorThemeRequest {
+    /**
+     * The ID of the portal theme to delete.
+     * @type {number}
+     * @memberof CommonSettingsApiDeletePortalColorTheme
+     */
+    readonly id: number
+}
+
+/**
+ * Request parameters for getPortalSettings operation in CommonSettingsApi.
+ * @export
+ * @interface CommonSettingsApiGetPortalSettingsRequest
+ */
+export interface CommonSettingsApiGetPortalSettingsRequest {
+    /**
+     * Specifies whether to include the password hashing configuration in the response.
+     * @type {boolean}
+     * @memberof CommonSettingsApiGetPortalSettings
+     */
+    readonly withpassword?: boolean
+}
+
+/**
+ * Request parameters for saveDefaultFolder operation in CommonSettingsApi.
+ * @export
+ * @interface CommonSettingsApiSaveDefaultFolderRequest
+ */
+export interface CommonSettingsApiSaveDefaultFolderRequest {
+    /**
+     * 
+     * @type {DefaultProductRequestDto}
+     * @memberof CommonSettingsApiSaveDefaultFolder
+     */
+    readonly defaultProductRequestDto?: DefaultProductRequestDto
+}
+
+/**
+ * Request parameters for saveDnsSettings operation in CommonSettingsApi.
+ * @export
+ * @interface CommonSettingsApiSaveDnsSettingsRequest
+ */
+export interface CommonSettingsApiSaveDnsSettingsRequest {
+    /**
+     * 
+     * @type {DnsSettingsRequestsDto}
+     * @memberof CommonSettingsApiSaveDnsSettings
+     */
+    readonly dnsSettingsRequestsDto?: DnsSettingsRequestsDto
+}
+
+/**
+ * Request parameters for saveMailDomainSettings operation in CommonSettingsApi.
+ * @export
+ * @interface CommonSettingsApiSaveMailDomainSettingsRequest
+ */
+export interface CommonSettingsApiSaveMailDomainSettingsRequest {
+    /**
+     * 
+     * @type {MailDomainSettingsRequestsDto}
+     * @memberof CommonSettingsApiSaveMailDomainSettings
+     */
+    readonly mailDomainSettingsRequestsDto?: MailDomainSettingsRequestsDto
+}
+
+/**
+ * Request parameters for savePortalColorTheme operation in CommonSettingsApi.
+ * @export
+ * @interface CommonSettingsApiSavePortalColorThemeRequest
+ */
+export interface CommonSettingsApiSavePortalColorThemeRequest {
+    /**
+     * 
+     * @type {CustomColorThemesSettingsRequestsDto}
+     * @memberof CommonSettingsApiSavePortalColorTheme
+     */
+    readonly customColorThemesSettingsRequestsDto?: CustomColorThemesSettingsRequestsDto
+}
+
+/**
+ * Request parameters for setTenantAiAccessSettings operation in CommonSettingsApi.
+ * @export
+ * @interface CommonSettingsApiSetTenantAiAccessSettingsRequest
+ */
+export interface CommonSettingsApiSetTenantAiAccessSettingsRequest {
+    /**
+     * 
+     * @type {TenantAiAccessSettingsDto}
+     * @memberof CommonSettingsApiSetTenantAiAccessSettings
+     */
+    readonly tenantAiAccessSettingsDto?: TenantAiAccessSettingsDto
+}
+
+/**
+ * Request parameters for updateEmailActivationSettings operation in CommonSettingsApi.
+ * @export
+ * @interface CommonSettingsApiUpdateEmailActivationSettingsRequest
+ */
+export interface CommonSettingsApiUpdateEmailActivationSettingsRequest {
+    /**
+     * 
+     * @type {EmailActivationSettings}
+     * @memberof CommonSettingsApiUpdateEmailActivationSettings
+     */
+    readonly emailActivationSettings?: EmailActivationSettings
+}
+
+/**
+ * Request parameters for updateInvitationSettings operation in CommonSettingsApi.
+ * @export
+ * @interface CommonSettingsApiUpdateInvitationSettingsRequest
+ */
+export interface CommonSettingsApiUpdateInvitationSettingsRequest {
+    /**
+     * 
+     * @type {TenantUserInvitationSettingsRequestDto}
+     * @memberof CommonSettingsApiUpdateInvitationSettings
+     */
+    readonly tenantUserInvitationSettingsRequestDto?: TenantUserInvitationSettingsRequestDto
+}
 
 /**
  * CommonSettingsApi - object-oriented interface
@@ -1538,37 +1942,37 @@ export class CommonSettingsApi extends BaseAPI {
     /**
      * Completes the Wizard settings.
      * @summary Complete the Wizard settings
-     * @param {WizardRequestsDto} [wizardRequestsDto] 
+     * @param {SettingsCommonSettingsApiCompleteWizardRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CommonSettingsApi
      */
-    public completeWizard(wizardRequestsDto?: WizardRequestsDto, options?: RawAxiosRequestConfig) {
-        return CommonSettingsApiFp(this.configuration).completeWizard(wizardRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public completeWizard(requestParameters: CommonSettingsApiCompleteWizardRequest = {}, options?: RawAxiosRequestConfig) {
+        return CommonSettingsApiFp(this.configuration).completeWizard(requestParameters.wizardRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Saves the deep link configuration settings for the portal.
      * @summary Configure the deep link settings
-     * @param {DeepLinkConfigurationRequestsDto} [deepLinkConfigurationRequestsDto] 
+     * @param {SettingsCommonSettingsApiConfigureDeepLinkRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CommonSettingsApi
      */
-    public configureDeepLink(deepLinkConfigurationRequestsDto?: DeepLinkConfigurationRequestsDto, options?: RawAxiosRequestConfig) {
-        return CommonSettingsApiFp(this.configuration).configureDeepLink(deepLinkConfigurationRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public configureDeepLink(requestParameters: CommonSettingsApiConfigureDeepLinkRequest = {}, options?: RawAxiosRequestConfig) {
+        return CommonSettingsApiFp(this.configuration).configureDeepLink(requestParameters.deepLinkConfigurationRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Deletes the portal color theme with the ID specified in the request.
      * @summary Delete a color theme
-     * @param {number} id The ID of the portal theme to delete.
+     * @param {SettingsCommonSettingsApiDeletePortalColorThemeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CommonSettingsApi
      */
-    public deletePortalColorTheme(id: number, options?: RawAxiosRequestConfig) {
-        return CommonSettingsApiFp(this.configuration).deletePortalColorTheme(id, options).then((request) => request(this.axios, this.basePath));
+    public deletePortalColorTheme(requestParameters: CommonSettingsApiDeletePortalColorThemeRequest, options?: RawAxiosRequestConfig) {
+        return CommonSettingsApiFp(this.configuration).deletePortalColorTheme(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1629,13 +2033,13 @@ export class CommonSettingsApi extends BaseAPI {
     /**
      * Returns a list of all the available portal settings with the current values for each parameter.
      * @summary Get the portal settings
-     * @param {boolean} [withpassword] Specifies whether to include the password hashing configuration in the response.
+     * @param {SettingsCommonSettingsApiGetPortalSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CommonSettingsApi
      */
-    public getPortalSettings(withpassword?: boolean, options?: RawAxiosRequestConfig) {
-        return CommonSettingsApiFp(this.configuration).getPortalSettings(withpassword, options).then((request) => request(this.axios, this.basePath));
+    public getPortalSettings(requestParameters: CommonSettingsApiGetPortalSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return CommonSettingsApiFp(this.configuration).getPortalSettings(requestParameters.withpassword, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1661,6 +2065,17 @@ export class CommonSettingsApi extends BaseAPI {
     }
 
     /**
+     * Returns the current portal-level AI access settings that control whether all AI functionality  (chat, agents, vectorization) is available for the portal. AI is enabled by default.
+     * @summary Get the AI access settings for the portal
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CommonSettingsApi
+     */
+    public getTenantAiAccessSettings(options?: RawAxiosRequestConfig) {
+        return CommonSettingsApiFp(this.configuration).getTenantAiAccessSettings(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Returns the portal user invitation settings.
      * @summary Get the user invitation settings
      * @param {*} [options] Override http request option.
@@ -1683,63 +2098,87 @@ export class CommonSettingsApi extends BaseAPI {
     }
 
     /**
-     * Saves the DNS settings specified in the request to the current portal.
-     * @summary Save the DNS settings
-     * @param {DnsSettingsRequestsDto} [dnsSettingsRequestsDto] 
+     * Sets the default folder.
+     * @summary Set the default folder
+     * @param {SettingsCommonSettingsApiSaveDefaultFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CommonSettingsApi
      */
-    public saveDnsSettings(dnsSettingsRequestsDto?: DnsSettingsRequestsDto, options?: RawAxiosRequestConfig) {
-        return CommonSettingsApiFp(this.configuration).saveDnsSettings(dnsSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public saveDefaultFolder(requestParameters: CommonSettingsApiSaveDefaultFolderRequest = {}, options?: RawAxiosRequestConfig) {
+        return CommonSettingsApiFp(this.configuration).saveDefaultFolder(requestParameters.defaultProductRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Saves the DNS settings specified in the request to the current portal.
+     * @summary Save the DNS settings
+     * @param {SettingsCommonSettingsApiSaveDnsSettingsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CommonSettingsApi
+     */
+    public saveDnsSettings(requestParameters: CommonSettingsApiSaveDnsSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return CommonSettingsApiFp(this.configuration).saveDnsSettings(requestParameters.dnsSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Saves the mail domain settings specified in the request to the portal.
      * @summary Save the mail domain settings
-     * @param {MailDomainSettingsRequestsDto} [mailDomainSettingsRequestsDto] 
+     * @param {SettingsCommonSettingsApiSaveMailDomainSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CommonSettingsApi
      */
-    public saveMailDomainSettings(mailDomainSettingsRequestsDto?: MailDomainSettingsRequestsDto, options?: RawAxiosRequestConfig) {
-        return CommonSettingsApiFp(this.configuration).saveMailDomainSettings(mailDomainSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public saveMailDomainSettings(requestParameters: CommonSettingsApiSaveMailDomainSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return CommonSettingsApiFp(this.configuration).saveMailDomainSettings(requestParameters.mailDomainSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Saves the portal color theme specified in the request.
      * @summary Save a color theme
-     * @param {CustomColorThemesSettingsRequestsDto} [customColorThemesSettingsRequestsDto] 
+     * @param {SettingsCommonSettingsApiSavePortalColorThemeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CommonSettingsApi
      */
-    public savePortalColorTheme(customColorThemesSettingsRequestsDto?: CustomColorThemesSettingsRequestsDto, options?: RawAxiosRequestConfig) {
-        return CommonSettingsApiFp(this.configuration).savePortalColorTheme(customColorThemesSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public savePortalColorTheme(requestParameters: CommonSettingsApiSavePortalColorThemeRequest = {}, options?: RawAxiosRequestConfig) {
+        return CommonSettingsApiFp(this.configuration).savePortalColorTheme(requestParameters.customColorThemesSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Updates the portal-level AI access settings. When AI is disabled, all AI features are turned off:  the AI Agents folder is hidden from root folder listings, AI status checks immediately return disabled,  and AI chat endpoints become inaccessible. Only users with the DocSpaceAdmin role  (EditPortalSettings permission) can change this setting.
+     * @summary Set the AI access for the portal
+     * @param {SettingsCommonSettingsApiSetTenantAiAccessSettingsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CommonSettingsApi
+     */
+    public setTenantAiAccessSettings(requestParameters: CommonSettingsApiSetTenantAiAccessSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return CommonSettingsApiFp(this.configuration).setTenantAiAccessSettings(requestParameters.tenantAiAccessSettingsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Updates the email activation settings.
      * @summary Update the email activation settings
-     * @param {EmailActivationSettings} [emailActivationSettings] 
+     * @param {SettingsCommonSettingsApiUpdateEmailActivationSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CommonSettingsApi
      */
-    public updateEmailActivationSettings(emailActivationSettings?: EmailActivationSettings, options?: RawAxiosRequestConfig) {
-        return CommonSettingsApiFp(this.configuration).updateEmailActivationSettings(emailActivationSettings, options).then((request) => request(this.axios, this.basePath));
+    public updateEmailActivationSettings(requestParameters: CommonSettingsApiUpdateEmailActivationSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return CommonSettingsApiFp(this.configuration).updateEmailActivationSettings(requestParameters.emailActivationSettings, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Updates the portal user invitation settings.
      * @summary Update user invitation settings
-     * @param {TenantUserInvitationSettingsRequestDto} [tenantUserInvitationSettingsRequestDto] 
+     * @param {SettingsCommonSettingsApiUpdateInvitationSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CommonSettingsApi
      */
-    public updateInvitationSettings(tenantUserInvitationSettingsRequestDto?: TenantUserInvitationSettingsRequestDto, options?: RawAxiosRequestConfig) {
-        return CommonSettingsApiFp(this.configuration).updateInvitationSettings(tenantUserInvitationSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public updateInvitationSettings(requestParameters: CommonSettingsApiUpdateInvitationSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return CommonSettingsApiFp(this.configuration).updateInvitationSettings(requestParameters.tenantUserInvitationSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

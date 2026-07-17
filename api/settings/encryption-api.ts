@@ -1,6 +1,6 @@
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -27,7 +26,7 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { BooleanWrapper } from '../../models';
 // @ts-ignore
-import type { DoubleWrapper } from '../../models';
+import type { DoubleNullableWrapper } from '../../models';
 // @ts-ignore
 import type { EncryptionSettingsWrapper } from '../../models';
 // @ts-ignore
@@ -218,7 +217,7 @@ export const EncryptionApiFp = function(configuration?: Configuration) {
          * REST API Reference for getStorageEncryptionProgress operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-storage-encryption-progress/
          */
-        async getStorageEncryptionProgress(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DoubleWrapper>> {
+        async getStorageEncryptionProgress(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DoubleNullableWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getStorageEncryptionProgress(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['EncryptionApi.getStorageEncryptionProgress']?.[localVarOperationServerIndex]?.url;
@@ -271,7 +270,7 @@ export const EncryptionApiFactory = function (configuration?: Configuration, bas
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-storage-encryption-progress/
          * @throws {RequiredError}
          */
-        getStorageEncryptionProgress(options?: RawAxiosRequestConfig): AxiosPromise<DoubleWrapper> {
+        getStorageEncryptionProgress(options?: RawAxiosRequestConfig): AxiosPromise<DoubleNullableWrapper> {
             return localVarFp.getStorageEncryptionProgress(options).then((request) => request(axios, basePath));
         },
         /**
@@ -288,17 +287,31 @@ export const EncryptionApiFactory = function (configuration?: Configuration, bas
         /**
          * Starts the storage encryption process.
          * @summary Start the storage encryption process
-         * @param {StorageEncryptionRequestsDto} [storageEncryptionRequestsDto] 
+         * @param {EncryptionApiStartStorageEncryptionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for startStorageEncryption operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-storage-encryption/
          * @throws {RequiredError}
          */
-        startStorageEncryption(storageEncryptionRequestsDto?: StorageEncryptionRequestsDto, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.startStorageEncryption(storageEncryptionRequestsDto, options).then((request) => request(axios, basePath));
+        startStorageEncryption(requestParameters: EncryptionApiStartStorageEncryptionRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.startStorageEncryption(requestParameters.storageEncryptionRequestsDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for startStorageEncryption operation in EncryptionApi.
+ * @export
+ * @interface EncryptionApiStartStorageEncryptionRequest
+ */
+export interface EncryptionApiStartStorageEncryptionRequest {
+    /**
+     * 
+     * @type {StorageEncryptionRequestsDto}
+     * @memberof EncryptionApiStartStorageEncryption
+     */
+    readonly storageEncryptionRequestsDto?: StorageEncryptionRequestsDto
+}
 
 /**
  * EncryptionApi - object-oriented interface
@@ -332,13 +345,13 @@ export class EncryptionApi extends BaseAPI {
     /**
      * Starts the storage encryption process.
      * @summary Start the storage encryption process
-     * @param {StorageEncryptionRequestsDto} [storageEncryptionRequestsDto] 
+     * @param {SettingsEncryptionApiStartStorageEncryptionRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof EncryptionApi
      */
-    public startStorageEncryption(storageEncryptionRequestsDto?: StorageEncryptionRequestsDto, options?: RawAxiosRequestConfig) {
-        return EncryptionApiFp(this.configuration).startStorageEncryption(storageEncryptionRequestsDto, options).then((request) => request(this.axios, this.basePath));
+    public startStorageEncryption(requestParameters: EncryptionApiStartStorageEncryptionRequest = {}, options?: RawAxiosRequestConfig) {
+        return EncryptionApiFp(this.configuration).startStorageEncryption(requestParameters.storageEncryptionRequestsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

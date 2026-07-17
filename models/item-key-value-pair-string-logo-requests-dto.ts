@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,23 +22,8 @@
 // @ts-ignore
 import type { LogoRequestsDto } from './logo-requests-dto';
 
-/**
- * 
- * @export
- * @interface ItemKeyValuePairStringLogoRequestsDto
- */
 export interface ItemKeyValuePairStringLogoRequestsDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof ItemKeyValuePairStringLogoRequestsDto
-     */
     'key'?: string | null;
-    /**
-     * 
-     * @type {LogoRequestsDto}
-     * @memberof ItemKeyValuePairStringLogoRequestsDto
-     */
     'value'?: LogoRequestsDto;
 }
 

@@ -1,6 +1,6 @@
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -41,11 +40,11 @@ import type { ObjectWrapper } from '../../models';
 // @ts-ignore
 import type { SortOrder } from '../../models';
 // @ts-ignore
-import type { StringWrapper } from '../../models';
-// @ts-ignore
 import type { UpdateMemberRequestDto } from '../../models';
 // @ts-ignore
 import type { UpdateMembersRequestDto } from '../../models';
+// @ts-ignore
+import type { UserExistsResponseWrapper } from '../../models';
 /**
  * ProfilesApi - axios parameter creator
  * @export
@@ -107,6 +106,73 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(memberRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns data indicating whether a user with the specified email exists on the portal.
+         * @summary Check if a user exists by email
+         * @param {string} [email] The user email address.
+         * @param {string} [encemail] The user encrypted email address.
+         * @param {string} [culture] Culture
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for checkUserExistsByEmail operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-user-exists-by-email/
+         */
+        checkUserExistsByEmail: async (email?: string, encemail?: string, culture?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/people/exists`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (email !== undefined) {
+                localVarQueryParameter['email'] = email;
+            }
+
+            if (encemail !== undefined) {
+                localVarQueryParameter['encemail'] = encemail;
+            }
+
+            if (culture !== undefined) {
+                localVarQueryParameter['culture'] = culture;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -707,62 +773,6 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Sends a message to the user email with the instructions to change the email address connected to the portal.
-         * @summary Send instructions to change email
-         * @param {UpdateMemberRequestDto} [updateMemberRequestDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for sendEmailChangeInstructions operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-email-change-instructions/
-         */
-        sendEmailChangeInstructions: async (updateMemberRequestDto?: UpdateMemberRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-
-            const localVarPath = `/api/2.0/people/email`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateMemberRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Updates the data for the selected portal user with the first name, last name, email address, and/or optional parameters specified in the request.
          * @summary Update a user
          * @param {string} userid The user ID.
@@ -825,10 +835,10 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Updates the user culture code with the parameters specified in the request.
-         * @summary Update a user culture code
+         * Updates the user culture with the parameters specified in the request.
+         * @summary Update a user culture
          * @param {string} userid The user ID.
-         * @param {Culture} [culture] The culture code parameters.
+         * @param {Culture} [culture] The culture name parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateMemberCulture operation
@@ -907,6 +917,23 @@ export const ProfilesApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.addMember(memberRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ProfilesApi.addMember']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns data indicating whether a user with the specified email exists on the portal.
+         * @summary Check if a user exists by email
+         * @param {string} [email] The user email address.
+         * @param {string} [encemail] The user encrypted email address.
+         * @param {string} [culture] Culture
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for checkUserExistsByEmail operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-user-exists-by-email/
+         */
+        async checkUserExistsByEmail(email?: string, encemail?: string, culture?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserExistsResponseWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.checkUserExistsByEmail(email, encemail, culture, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ProfilesApi.checkUserExistsByEmail']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1065,21 +1092,6 @@ export const ProfilesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Sends a message to the user email with the instructions to change the email address connected to the portal.
-         * @summary Send instructions to change email
-         * @param {UpdateMemberRequestDto} [updateMemberRequestDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for sendEmailChangeInstructions operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-email-change-instructions/
-         */
-        async sendEmailChangeInstructions(updateMemberRequestDto?: UpdateMemberRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.sendEmailChangeInstructions(updateMemberRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ProfilesApi.sendEmailChangeInstructions']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
          * Updates the data for the selected portal user with the first name, last name, email address, and/or optional parameters specified in the request.
          * @summary Update a user
          * @param {string} userid The user ID.
@@ -1096,10 +1108,10 @@ export const ProfilesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Updates the user culture code with the parameters specified in the request.
-         * @summary Update a user culture code
+         * Updates the user culture with the parameters specified in the request.
+         * @summary Update a user culture
          * @param {string} userid The user ID.
-         * @param {Culture} [culture] The culture code parameters.
+         * @param {Culture} [culture] The culture name parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateMemberCulture operation
@@ -1124,26 +1136,38 @@ export const ProfilesApiFactory = function (configuration?: Configuration, baseP
         /**
          * Adds a new portal user with the first name, last name, email address, and several optional parameters specified in the request.
          * @summary Add a user
-         * @param {MemberRequestDto} [memberRequestDto] 
+         * @param {ProfilesApiAddMemberRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for addMember operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-member/
          * @throws {RequiredError}
          */
-        addMember(memberRequestDto?: MemberRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
-            return localVarFp.addMember(memberRequestDto, options).then((request) => request(axios, basePath));
+        addMember(requestParameters: ProfilesApiAddMemberRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
+            return localVarFp.addMember(requestParameters.memberRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns data indicating whether a user with the specified email exists on the portal.
+         * @summary Check if a user exists by email
+         * @param {ProfilesApiCheckUserExistsByEmailRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for checkUserExistsByEmail operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-user-exists-by-email/
+         * @throws {RequiredError}
+         */
+        checkUserExistsByEmail(requestParameters: ProfilesApiCheckUserExistsByEmailRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<UserExistsResponseWrapper> {
+            return localVarFp.checkUserExistsByEmail(requestParameters.email, requestParameters.encemail, requestParameters.culture, options).then((request) => request(axios, basePath));
         },
         /**
          * Deletes a user with the ID specified in the request from the portal.
          * @summary Delete a user
-         * @param {string} userid The user ID.
+         * @param {ProfilesApiDeleteMemberRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteMember operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-member/
          * @throws {RequiredError}
          */
-        deleteMember(userid: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
-            return localVarFp.deleteMember(userid, options).then((request) => request(axios, basePath));
+        deleteMember(requestParameters: ProfilesApiDeleteMemberRequest, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
+            return localVarFp.deleteMember(requestParameters.userid, options).then((request) => request(axios, basePath));
         },
         /**
          * Deletes the current user profile.
@@ -1159,20 +1183,14 @@ export const ProfilesApiFactory = function (configuration?: Configuration, baseP
         /**
          * Returns a list of profiles for all the portal users.
          * @summary Get profiles
-         * @param {number} [count] The maximum number of items to be retrieved in the response.
-         * @param {number} [startIndex] The zero-based index of the first item to be retrieved in a filtered result set.
-         * @param {string} [filterBy] Specifies the filter criteria for user-related queries.
-         * @param {string} [sortBy] Specifies the property or field name by which the results should be sorted.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterSeparator] The character or string used to separate multiple filter values in a filtering query.
-         * @param {string} [filterValue] The text value used as an additional filter criterion for profiles retrieval.
+         * @param {ProfilesApiGetAllProfilesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getAllProfiles operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-profiles/
          * @throws {RequiredError}
          */
-        getAllProfiles(count?: number, startIndex?: number, filterBy?: string, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
-            return localVarFp.getAllProfiles(count, startIndex, filterBy, sortBy, sortOrder, filterSeparator, filterValue, options).then((request) => request(axios, basePath));
+        getAllProfiles(requestParameters: ProfilesApiGetAllProfilesRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
+            return localVarFp.getAllProfiles(requestParameters.count, requestParameters.startIndex, requestParameters.filterBy, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterSeparator, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the user claims.
@@ -1188,28 +1206,26 @@ export const ProfilesApiFactory = function (configuration?: Configuration, baseP
         /**
          * Returns the detailed information about a profile of the user with the email specified in the request.
          * @summary Get a profile by user email
-         * @param {string} [email] The user email address.
-         * @param {string} [encemail] The user encrypted email address.
-         * @param {string} [culture] Culture
+         * @param {ProfilesApiGetProfileByEmailRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getProfileByEmail operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-profile-by-email/
          * @throws {RequiredError}
          */
-        getProfileByEmail(email?: string, encemail?: string, culture?: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
-            return localVarFp.getProfileByEmail(email, encemail, culture, options).then((request) => request(axios, basePath));
+        getProfileByEmail(requestParameters: ProfilesApiGetProfileByEmailRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
+            return localVarFp.getProfileByEmail(requestParameters.email, requestParameters.encemail, requestParameters.culture, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the detailed information about a profile of the user with the ID specified in the request.
          * @summary Get a profile by user ID
-         * @param {string} userid The user ID.
+         * @param {ProfilesApiGetProfileByUserIdRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getProfileByUserId operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-profile-by-user-id/
          * @throws {RequiredError}
          */
-        getProfileByUserId(userid: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
-            return localVarFp.getProfileByUserId(userid, options).then((request) => request(axios, basePath));
+        getProfileByUserId(requestParameters: ProfilesApiGetProfileByUserIdRequest, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
+            return localVarFp.getProfileByUserId(requestParameters.userid, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the detailed information about the current user profile.
@@ -1225,79 +1241,303 @@ export const ProfilesApiFactory = function (configuration?: Configuration, baseP
         /**
          * Invites users specified in the request to the current portal.
          * @summary Invite users
-         * @param {InviteUsersRequestDto} [inviteUsersRequestDto] 
+         * @param {ProfilesApiInviteUsersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for inviteUsers operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/invite-users/
          * @throws {RequiredError}
          */
-        inviteUsers(inviteUsersRequestDto?: InviteUsersRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeArrayWrapper> {
-            return localVarFp.inviteUsers(inviteUsersRequestDto, options).then((request) => request(axios, basePath));
+        inviteUsers(requestParameters: ProfilesApiInviteUsersRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeArrayWrapper> {
+            return localVarFp.inviteUsers(requestParameters.inviteUsersRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Deletes a list of the users with the IDs specified in the request.
          * @summary Delete users
-         * @param {UpdateMembersRequestDto} [updateMembersRequestDto] 
+         * @param {ProfilesApiRemoveUsersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for removeUsers operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/remove-users/
          * @throws {RequiredError}
          */
-        removeUsers(updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
-            return localVarFp.removeUsers(updateMembersRequestDto, options).then((request) => request(axios, basePath));
+        removeUsers(requestParameters: ProfilesApiRemoveUsersRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
+            return localVarFp.removeUsers(requestParameters.updateMembersRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Resends emails to the users who have not activated their emails.
          * @summary Resend activation emails
-         * @param {UpdateMembersRequestDto} [updateMembersRequestDto] 
+         * @param {ProfilesApiResendUserInvitesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for resendUserInvites operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/resend-user-invites/
          * @throws {RequiredError}
          */
-        resendUserInvites(updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
-            return localVarFp.resendUserInvites(updateMembersRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Sends a message to the user email with the instructions to change the email address connected to the portal.
-         * @summary Send instructions to change email
-         * @param {UpdateMemberRequestDto} [updateMemberRequestDto] 
-         * @param {*} [options] Override http request option.
-         * REST API Reference for sendEmailChangeInstructions operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-email-change-instructions/
-         * @throws {RequiredError}
-         */
-        sendEmailChangeInstructions(updateMemberRequestDto?: UpdateMemberRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.sendEmailChangeInstructions(updateMemberRequestDto, options).then((request) => request(axios, basePath));
+        resendUserInvites(requestParameters: ProfilesApiResendUserInvitesRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
+            return localVarFp.resendUserInvites(requestParameters.updateMembersRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates the data for the selected portal user with the first name, last name, email address, and/or optional parameters specified in the request.
          * @summary Update a user
-         * @param {string} userid The user ID.
-         * @param {UpdateMemberRequestDto} updateMemberRequestDto The request parameters for updating the user information.
+         * @param {ProfilesApiUpdateMemberRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateMember operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-member/
          * @throws {RequiredError}
          */
-        updateMember(userid: string, updateMemberRequestDto: UpdateMemberRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
-            return localVarFp.updateMember(userid, updateMemberRequestDto, options).then((request) => request(axios, basePath));
+        updateMember(requestParameters: ProfilesApiUpdateMemberRequest, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
+            return localVarFp.updateMember(requestParameters.userid, requestParameters.updateMemberRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Updates the user culture code with the parameters specified in the request.
-         * @summary Update a user culture code
-         * @param {string} userid The user ID.
-         * @param {Culture} [culture] The culture code parameters.
+         * Updates the user culture with the parameters specified in the request.
+         * @summary Update a user culture
+         * @param {ProfilesApiUpdateMemberCultureRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateMemberCulture operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-member-culture/
          * @throws {RequiredError}
          */
-        updateMemberCulture(userid: string, culture?: Culture, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
-            return localVarFp.updateMemberCulture(userid, culture, options).then((request) => request(axios, basePath));
+        updateMemberCulture(requestParameters: ProfilesApiUpdateMemberCultureRequest, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
+            return localVarFp.updateMemberCulture(requestParameters.userid, requestParameters.culture, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for addMember operation in ProfilesApi.
+ * @export
+ * @interface ProfilesApiAddMemberRequest
+ */
+export interface ProfilesApiAddMemberRequest {
+    /**
+     * 
+     * @type {MemberRequestDto}
+     * @memberof ProfilesApiAddMember
+     */
+    readonly memberRequestDto?: MemberRequestDto
+}
+
+/**
+ * Request parameters for checkUserExistsByEmail operation in ProfilesApi.
+ * @export
+ * @interface ProfilesApiCheckUserExistsByEmailRequest
+ */
+export interface ProfilesApiCheckUserExistsByEmailRequest {
+    /**
+     * The user email address.
+     * @type {string}
+     * @memberof ProfilesApiCheckUserExistsByEmail
+     */
+    readonly email?: string
+
+    /**
+     * The user encrypted email address.
+     * @type {string}
+     * @memberof ProfilesApiCheckUserExistsByEmail
+     */
+    readonly encemail?: string
+
+    /**
+     * Culture
+     * @type {string}
+     * @memberof ProfilesApiCheckUserExistsByEmail
+     */
+    readonly culture?: string
+}
+
+/**
+ * Request parameters for deleteMember operation in ProfilesApi.
+ * @export
+ * @interface ProfilesApiDeleteMemberRequest
+ */
+export interface ProfilesApiDeleteMemberRequest {
+    /**
+     * The user ID.
+     * @type {string}
+     * @memberof ProfilesApiDeleteMember
+     */
+    readonly userid: string
+}
+
+/**
+ * Request parameters for getAllProfiles operation in ProfilesApi.
+ * @export
+ * @interface ProfilesApiGetAllProfilesRequest
+ */
+export interface ProfilesApiGetAllProfilesRequest {
+    /**
+     * The maximum number of items to be retrieved in the response.
+     * @type {number}
+     * @memberof ProfilesApiGetAllProfiles
+     */
+    readonly count?: number
+
+    /**
+     * The zero-based index of the first item to be retrieved in a filtered result set.
+     * @type {number}
+     * @memberof ProfilesApiGetAllProfiles
+     */
+    readonly startIndex?: number
+
+    /**
+     * Specifies the filter criteria for user-related queries.
+     * @type {string}
+     * @memberof ProfilesApiGetAllProfiles
+     */
+    readonly filterBy?: string
+
+    /**
+     * Specifies the property or field name by which the results should be sorted.
+     * @type {string}
+     * @memberof ProfilesApiGetAllProfiles
+     */
+    readonly sortBy?: string
+
+    /**
+     * The order in which the results are sorted.
+     * @type {SortOrder}
+     * @memberof ProfilesApiGetAllProfiles
+     */
+    readonly sortOrder?: SortOrder
+
+    /**
+     * The character or string used to separate multiple filter values in a filtering query.
+     * @type {string}
+     * @memberof ProfilesApiGetAllProfiles
+     */
+    readonly filterSeparator?: string
+
+    /**
+     * The text value used as an additional filter criterion for profiles retrieval.
+     * @type {string}
+     * @memberof ProfilesApiGetAllProfiles
+     */
+    readonly filterValue?: string
+}
+
+/**
+ * Request parameters for getProfileByEmail operation in ProfilesApi.
+ * @export
+ * @interface ProfilesApiGetProfileByEmailRequest
+ */
+export interface ProfilesApiGetProfileByEmailRequest {
+    /**
+     * The user email address.
+     * @type {string}
+     * @memberof ProfilesApiGetProfileByEmail
+     */
+    readonly email?: string
+
+    /**
+     * The user encrypted email address.
+     * @type {string}
+     * @memberof ProfilesApiGetProfileByEmail
+     */
+    readonly encemail?: string
+
+    /**
+     * Culture
+     * @type {string}
+     * @memberof ProfilesApiGetProfileByEmail
+     */
+    readonly culture?: string
+}
+
+/**
+ * Request parameters for getProfileByUserId operation in ProfilesApi.
+ * @export
+ * @interface ProfilesApiGetProfileByUserIdRequest
+ */
+export interface ProfilesApiGetProfileByUserIdRequest {
+    /**
+     * The user ID.
+     * @type {string}
+     * @memberof ProfilesApiGetProfileByUserId
+     */
+    readonly userid: string
+}
+
+/**
+ * Request parameters for inviteUsers operation in ProfilesApi.
+ * @export
+ * @interface ProfilesApiInviteUsersRequest
+ */
+export interface ProfilesApiInviteUsersRequest {
+    /**
+     * 
+     * @type {InviteUsersRequestDto}
+     * @memberof ProfilesApiInviteUsers
+     */
+    readonly inviteUsersRequestDto?: InviteUsersRequestDto
+}
+
+/**
+ * Request parameters for removeUsers operation in ProfilesApi.
+ * @export
+ * @interface ProfilesApiRemoveUsersRequest
+ */
+export interface ProfilesApiRemoveUsersRequest {
+    /**
+     * 
+     * @type {UpdateMembersRequestDto}
+     * @memberof ProfilesApiRemoveUsers
+     */
+    readonly updateMembersRequestDto?: UpdateMembersRequestDto
+}
+
+/**
+ * Request parameters for resendUserInvites operation in ProfilesApi.
+ * @export
+ * @interface ProfilesApiResendUserInvitesRequest
+ */
+export interface ProfilesApiResendUserInvitesRequest {
+    /**
+     * 
+     * @type {UpdateMembersRequestDto}
+     * @memberof ProfilesApiResendUserInvites
+     */
+    readonly updateMembersRequestDto?: UpdateMembersRequestDto
+}
+
+/**
+ * Request parameters for updateMember operation in ProfilesApi.
+ * @export
+ * @interface ProfilesApiUpdateMemberRequest
+ */
+export interface ProfilesApiUpdateMemberRequest {
+    /**
+     * The user ID.
+     * @type {string}
+     * @memberof ProfilesApiUpdateMember
+     */
+    readonly userid: string
+
+    /**
+     * The request parameters for updating the user information.
+     * @type {UpdateMemberRequestDto}
+     * @memberof ProfilesApiUpdateMember
+     */
+    readonly updateMemberRequestDto: UpdateMemberRequestDto
+}
+
+/**
+ * Request parameters for updateMemberCulture operation in ProfilesApi.
+ * @export
+ * @interface ProfilesApiUpdateMemberCultureRequest
+ */
+export interface ProfilesApiUpdateMemberCultureRequest {
+    /**
+     * The user ID.
+     * @type {string}
+     * @memberof ProfilesApiUpdateMemberCulture
+     */
+    readonly userid: string
+
+    /**
+     * The culture name parameters.
+     * @type {Culture}
+     * @memberof ProfilesApiUpdateMemberCulture
+     */
+    readonly culture?: Culture
+}
 
 /**
  * ProfilesApi - object-oriented interface
@@ -1309,25 +1549,37 @@ export class ProfilesApi extends BaseAPI {
     /**
      * Adds a new portal user with the first name, last name, email address, and several optional parameters specified in the request.
      * @summary Add a user
-     * @param {MemberRequestDto} [memberRequestDto] 
+     * @param {PeopleProfilesApiAddMemberRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProfilesApi
      */
-    public addMember(memberRequestDto?: MemberRequestDto, options?: RawAxiosRequestConfig) {
-        return ProfilesApiFp(this.configuration).addMember(memberRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public addMember(requestParameters: ProfilesApiAddMemberRequest = {}, options?: RawAxiosRequestConfig) {
+        return ProfilesApiFp(this.configuration).addMember(requestParameters.memberRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns data indicating whether a user with the specified email exists on the portal.
+     * @summary Check if a user exists by email
+     * @param {PeopleProfilesApiCheckUserExistsByEmailRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProfilesApi
+     */
+    public checkUserExistsByEmail(requestParameters: ProfilesApiCheckUserExistsByEmailRequest = {}, options?: RawAxiosRequestConfig) {
+        return ProfilesApiFp(this.configuration).checkUserExistsByEmail(requestParameters.email, requestParameters.encemail, requestParameters.culture, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Deletes a user with the ID specified in the request from the portal.
      * @summary Delete a user
-     * @param {string} userid The user ID.
+     * @param {PeopleProfilesApiDeleteMemberRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProfilesApi
      */
-    public deleteMember(userid: string, options?: RawAxiosRequestConfig) {
-        return ProfilesApiFp(this.configuration).deleteMember(userid, options).then((request) => request(this.axios, this.basePath));
+    public deleteMember(requestParameters: ProfilesApiDeleteMemberRequest, options?: RawAxiosRequestConfig) {
+        return ProfilesApiFp(this.configuration).deleteMember(requestParameters.userid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1344,19 +1596,13 @@ export class ProfilesApi extends BaseAPI {
     /**
      * Returns a list of profiles for all the portal users.
      * @summary Get profiles
-     * @param {number} [count] The maximum number of items to be retrieved in the response.
-     * @param {number} [startIndex] The zero-based index of the first item to be retrieved in a filtered result set.
-     * @param {string} [filterBy] Specifies the filter criteria for user-related queries.
-     * @param {string} [sortBy] Specifies the property or field name by which the results should be sorted.
-     * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-     * @param {string} [filterSeparator] The character or string used to separate multiple filter values in a filtering query.
-     * @param {string} [filterValue] The text value used as an additional filter criterion for profiles retrieval.
+     * @param {PeopleProfilesApiGetAllProfilesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProfilesApi
      */
-    public getAllProfiles(count?: number, startIndex?: number, filterBy?: string, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig) {
-        return ProfilesApiFp(this.configuration).getAllProfiles(count, startIndex, filterBy, sortBy, sortOrder, filterSeparator, filterValue, options).then((request) => request(this.axios, this.basePath));
+    public getAllProfiles(requestParameters: ProfilesApiGetAllProfilesRequest = {}, options?: RawAxiosRequestConfig) {
+        return ProfilesApiFp(this.configuration).getAllProfiles(requestParameters.count, requestParameters.startIndex, requestParameters.filterBy, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterSeparator, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1373,27 +1619,25 @@ export class ProfilesApi extends BaseAPI {
     /**
      * Returns the detailed information about a profile of the user with the email specified in the request.
      * @summary Get a profile by user email
-     * @param {string} [email] The user email address.
-     * @param {string} [encemail] The user encrypted email address.
-     * @param {string} [culture] Culture
+     * @param {PeopleProfilesApiGetProfileByEmailRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProfilesApi
      */
-    public getProfileByEmail(email?: string, encemail?: string, culture?: string, options?: RawAxiosRequestConfig) {
-        return ProfilesApiFp(this.configuration).getProfileByEmail(email, encemail, culture, options).then((request) => request(this.axios, this.basePath));
+    public getProfileByEmail(requestParameters: ProfilesApiGetProfileByEmailRequest = {}, options?: RawAxiosRequestConfig) {
+        return ProfilesApiFp(this.configuration).getProfileByEmail(requestParameters.email, requestParameters.encemail, requestParameters.culture, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the detailed information about a profile of the user with the ID specified in the request.
      * @summary Get a profile by user ID
-     * @param {string} userid The user ID.
+     * @param {PeopleProfilesApiGetProfileByUserIdRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProfilesApi
      */
-    public getProfileByUserId(userid: string, options?: RawAxiosRequestConfig) {
-        return ProfilesApiFp(this.configuration).getProfileByUserId(userid, options).then((request) => request(this.axios, this.basePath));
+    public getProfileByUserId(requestParameters: ProfilesApiGetProfileByUserIdRequest, options?: RawAxiosRequestConfig) {
+        return ProfilesApiFp(this.configuration).getProfileByUserId(requestParameters.userid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1410,75 +1654,61 @@ export class ProfilesApi extends BaseAPI {
     /**
      * Invites users specified in the request to the current portal.
      * @summary Invite users
-     * @param {InviteUsersRequestDto} [inviteUsersRequestDto] 
+     * @param {PeopleProfilesApiInviteUsersRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProfilesApi
      */
-    public inviteUsers(inviteUsersRequestDto?: InviteUsersRequestDto, options?: RawAxiosRequestConfig) {
-        return ProfilesApiFp(this.configuration).inviteUsers(inviteUsersRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public inviteUsers(requestParameters: ProfilesApiInviteUsersRequest = {}, options?: RawAxiosRequestConfig) {
+        return ProfilesApiFp(this.configuration).inviteUsers(requestParameters.inviteUsersRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Deletes a list of the users with the IDs specified in the request.
      * @summary Delete users
-     * @param {UpdateMembersRequestDto} [updateMembersRequestDto] 
+     * @param {PeopleProfilesApiRemoveUsersRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProfilesApi
      */
-    public removeUsers(updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig) {
-        return ProfilesApiFp(this.configuration).removeUsers(updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public removeUsers(requestParameters: ProfilesApiRemoveUsersRequest = {}, options?: RawAxiosRequestConfig) {
+        return ProfilesApiFp(this.configuration).removeUsers(requestParameters.updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Resends emails to the users who have not activated their emails.
      * @summary Resend activation emails
-     * @param {UpdateMembersRequestDto} [updateMembersRequestDto] 
+     * @param {PeopleProfilesApiResendUserInvitesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProfilesApi
      */
-    public resendUserInvites(updateMembersRequestDto?: UpdateMembersRequestDto, options?: RawAxiosRequestConfig) {
-        return ProfilesApiFp(this.configuration).resendUserInvites(updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Sends a message to the user email with the instructions to change the email address connected to the portal.
-     * @summary Send instructions to change email
-     * @param {UpdateMemberRequestDto} [updateMemberRequestDto] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProfilesApi
-     */
-    public sendEmailChangeInstructions(updateMemberRequestDto?: UpdateMemberRequestDto, options?: RawAxiosRequestConfig) {
-        return ProfilesApiFp(this.configuration).sendEmailChangeInstructions(updateMemberRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public resendUserInvites(requestParameters: ProfilesApiResendUserInvitesRequest = {}, options?: RawAxiosRequestConfig) {
+        return ProfilesApiFp(this.configuration).resendUserInvites(requestParameters.updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Updates the data for the selected portal user with the first name, last name, email address, and/or optional parameters specified in the request.
      * @summary Update a user
-     * @param {string} userid The user ID.
-     * @param {UpdateMemberRequestDto} updateMemberRequestDto The request parameters for updating the user information.
+     * @param {PeopleProfilesApiUpdateMemberRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProfilesApi
      */
-    public updateMember(userid: string, updateMemberRequestDto: UpdateMemberRequestDto, options?: RawAxiosRequestConfig) {
-        return ProfilesApiFp(this.configuration).updateMember(userid, updateMemberRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public updateMember(requestParameters: ProfilesApiUpdateMemberRequest, options?: RawAxiosRequestConfig) {
+        return ProfilesApiFp(this.configuration).updateMember(requestParameters.userid, requestParameters.updateMemberRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Updates the user culture code with the parameters specified in the request.
-     * @summary Update a user culture code
-     * @param {string} userid The user ID.
-     * @param {Culture} [culture] The culture code parameters.
+     * Updates the user culture with the parameters specified in the request.
+     * @summary Update a user culture
+     * @param {PeopleProfilesApiUpdateMemberCultureRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProfilesApi
      */
-    public updateMemberCulture(userid: string, culture?: Culture, options?: RawAxiosRequestConfig) {
-        return ProfilesApiFp(this.configuration).updateMemberCulture(userid, culture, options).then((request) => request(this.axios, this.basePath));
+    public updateMemberCulture(requestParameters: ProfilesApiUpdateMemberCultureRequest, options?: RawAxiosRequestConfig) {
+        return ProfilesApiFp(this.configuration).updateMemberCulture(requestParameters.userid, requestParameters.culture, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

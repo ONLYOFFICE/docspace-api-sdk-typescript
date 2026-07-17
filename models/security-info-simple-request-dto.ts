@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,26 +24,18 @@ import type { FileShareParams } from './file-share-params';
 
 /**
  * The parameters of the security information request.
- * @export
- * @interface SecurityInfoSimpleRequestDto
  */
 export interface SecurityInfoSimpleRequestDto {
     /**
      * The collection of sharing parameters.
-     * @type {Array<FileShareParams>}
-     * @memberof SecurityInfoSimpleRequestDto
      */
     'share'?: Array<FileShareParams> | null;
     /**
      * Specifies whether to notify users about the shared file or not.
-     * @type {boolean}
-     * @memberof SecurityInfoSimpleRequestDto
      */
     'notify'?: boolean;
     /**
      * The message to send when notifying about the shared file.
-     * @type {string}
-     * @memberof SecurityInfoSimpleRequestDto
      */
     'sharingMessage'?: string | null;
 }

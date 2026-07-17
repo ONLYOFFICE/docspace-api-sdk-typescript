@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,50 +21,34 @@
 
 /**
  * The form gallery parameters.
- * @export
- * @interface FormGalleryDto
  */
 export interface FormGalleryDto {
     /**
      * The form gallery path.
-     * @type {string}
-     * @memberof FormGalleryDto
      */
     'path': string | null;
     /**
      * The form gallery domain.
-     * @type {string}
-     * @memberof FormGalleryDto
      */
     'domain': string | null;
     /**
      * The form gallery extension.
-     * @type {string}
-     * @memberof FormGalleryDto
      */
     'ext': string | null;
     /**
      * The form gallery upload path.
-     * @type {string}
-     * @memberof FormGalleryDto
      */
     'uploadPath': string | null;
     /**
      * The form gallery upload domain.
-     * @type {string}
-     * @memberof FormGalleryDto
      */
     'uploadDomain': string | null;
     /**
      * The form gallery upload extension.
-     * @type {string}
-     * @memberof FormGalleryDto
      */
     'uploadExt': string | null;
     /**
      * The form gallery upload dashboard.
-     * @type {string}
-     * @memberof FormGalleryDto
      */
     'uploadDashboard': string | null;
 }

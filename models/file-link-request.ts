@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,56 +27,32 @@ import type { FileShare } from './file-share';
 
 /**
  * The external link request parameters.
- * @export
- * @interface FileLinkRequest
  */
 export interface FileLinkRequest {
     /**
      * The external link ID.
-     * @type {string}
-     * @memberof FileLinkRequest
      */
     'linkId'?: string;
-    /**
-     * 
-     * @type {FileShare}
-     * @memberof FileLinkRequest
-     */
     'access'?: FileShare;
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof FileLinkRequest
-     */
     'expirationDate'?: ApiDateTime;
     /**
      * The link name.
-     * @type {string}
-     * @memberof FileLinkRequest
      */
     'title'?: string | null;
     /**
      * The link scope, whether it is internal or not.
-     * @type {boolean}
-     * @memberof FileLinkRequest
      */
     'internal'?: boolean;
     /**
      * Specifies whether the file link is primary or not.
-     * @type {boolean}
-     * @memberof FileLinkRequest
      */
     'primary'?: boolean;
     /**
      * Specifies whether to deny downloading the file or not.
-     * @type {boolean}
-     * @memberof FileLinkRequest
      */
     'denyDownload'?: boolean;
     /**
      * Password for access via link.
-     * @type {string}
-     * @memberof FileLinkRequest
      */
     'password'?: string | null;
 }

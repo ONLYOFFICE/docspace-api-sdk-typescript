@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,20 +21,14 @@
 
 /**
  * The default white label logo parameters.
- * @export
- * @interface IsDefaultWhiteLabelLogosDto
  */
 export interface IsDefaultWhiteLabelLogosDto {
     /**
      * The white label logo name.
-     * @type {string}
-     * @memberof IsDefaultWhiteLabelLogosDto
      */
     'name': string | null;
     /**
      * Specifies if the white label logo is default or not.
-     * @type {boolean}
-     * @memberof IsDefaultWhiteLabelLogosDto
      */
     'default': boolean;
 }

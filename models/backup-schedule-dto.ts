@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,38 +30,20 @@ import type { ItemKeyValuePairObjectObject } from './item-key-value-pair-object-
 
 /**
  * The backup schedule parameters.
- * @export
- * @interface BackupScheduleDto
  */
 export interface BackupScheduleDto {
-    /**
-     * 
-     * @type {BackupStorageType}
-     * @memberof BackupScheduleDto
-     */
     'storageType'?: BackupStorageType;
     /**
      * The backup storage parameters.
-     * @type {Array<ItemKeyValuePairObjectObject>}
-     * @memberof BackupScheduleDto
      */
     'storageParams'?: Array<ItemKeyValuePairObjectObject> | null;
     /**
      * The maximum number of the stored backup copies.
-     * @type {number}
-     * @memberof BackupScheduleDto
      */
     'backupsStored'?: number | null;
-    /**
-     * 
-     * @type {Cron}
-     * @memberof BackupScheduleDto
-     */
     'cronParams'?: Cron;
     /**
      * Specifies if a dump will be created or not.
-     * @type {boolean}
-     * @memberof BackupScheduleDto
      */
     'dump'?: boolean;
 }

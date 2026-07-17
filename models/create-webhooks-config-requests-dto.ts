@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,50 +24,31 @@ import type { WebhookTrigger } from './webhook-trigger';
 
 /**
  * The request parameters for creating the webhook configuration.
- * @export
- * @interface CreateWebhooksConfigRequestsDto
  */
 export interface CreateWebhooksConfigRequestsDto {
     /**
      * The human-readable name of the webhook configuration.
-     * @type {string}
-     * @memberof CreateWebhooksConfigRequestsDto
      */
     'name': string;
     /**
      * The destination URL where the webhook events will be sent.
-     * @type {string}
-     * @memberof CreateWebhooksConfigRequestsDto
      */
     'uri': string;
     /**
      * The webhook secret key used to sign the webhook payloads for the security verification.
-     * @type {string}
-     * @memberof CreateWebhooksConfigRequestsDto
      */
     'secretKey'?: string | null;
     /**
      * Specifies whether the webhook configuration is active or not.
-     * @type {boolean}
-     * @memberof CreateWebhooksConfigRequestsDto
      */
     'enabled'?: boolean;
     /**
      * Specifies whether the SSL certificate verification is required or not.
-     * @type {boolean}
-     * @memberof CreateWebhooksConfigRequestsDto
      */
     'ssl'?: boolean;
-    /**
-     * 
-     * @type {WebhookTrigger}
-     * @memberof CreateWebhooksConfigRequestsDto
-     */
     'triggers'?: WebhookTrigger;
     /**
      * Target ID
-     * @type {string}
-     * @memberof CreateWebhooksConfigRequestsDto
      */
     'targetId'?: string | null;
 }

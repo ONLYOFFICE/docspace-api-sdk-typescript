@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,32 +21,22 @@
 
 /**
  * The database tenant partner parameters.
- * @export
- * @interface DbTenantPartner
  */
 export interface DbTenantPartner {
     /**
      * The tenant ID.
-     * @type {number}
-     * @memberof DbTenantPartner
      */
     'tenantId'?: number;
     /**
      * The partner ID.
-     * @type {string}
-     * @memberof DbTenantPartner
      */
     'partnerId'?: string | null;
     /**
      * The affiliate ID.
-     * @type {string}
-     * @memberof DbTenantPartner
      */
     'affiliateId'?: string | null;
     /**
      * The tenant partner campaign.
-     * @type {string}
-     * @memberof DbTenantPartner
      */
     'campaign'?: string | null;
 }

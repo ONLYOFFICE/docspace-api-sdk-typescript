@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,56 +27,35 @@ import type { FolderDtoInteger } from './folder-dto-integer';
 
 /**
  * The folder content information.
- * @export
- * @interface FolderContentDtoInteger
  */
 export interface FolderContentDtoInteger {
     /**
      * The list of files in the folder.
-     * @type {Array<FileEntryBaseDto>}
-     * @memberof FolderContentDtoInteger
      */
     'files'?: Array<FileEntryBaseDto> | null;
     /**
      * The list of folders in the folder.
-     * @type {Array<FileEntryBaseDto>}
-     * @memberof FolderContentDtoInteger
      */
     'folders'?: Array<FileEntryBaseDto> | null;
-    /**
-     * 
-     * @type {FolderDtoInteger}
-     * @memberof FolderContentDtoInteger
-     */
     'current'?: FolderDtoInteger;
     /**
      * The folder path.
-     * @type {any}
-     * @memberof FolderContentDtoInteger
      */
     'pathParts': any | null;
     /**
      * The folder start index.
-     * @type {number}
-     * @memberof FolderContentDtoInteger
      */
     'startIndex'?: number;
     /**
      * The number of folder elements.
-     * @type {number}
-     * @memberof FolderContentDtoInteger
      */
     'count'?: number;
     /**
      * The total number of elements in the folder.
-     * @type {number}
-     * @memberof FolderContentDtoInteger
      */
     'total': number;
     /**
      * The new element index in the folder.
-     * @type {number}
-     * @memberof FolderContentDtoInteger
      */
     'new'?: number;
 }

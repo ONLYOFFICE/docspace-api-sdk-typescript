@@ -7,8 +7,7 @@ The user parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** | The user ID. | [optional] [default to undefined]
-**displayName** | **string** | The user display name. | [optional] [default to undefined]
-**title** | **string** | The user title. | [optional] [default to undefined]
+**displayName** | **string** | The HTML-encoded user\'s display name formatted according to the default format for the current culture. | [optional] [default to undefined]
 **avatar** | **string** | The user avatar. | [optional] [default to undefined]
 **avatarOriginal** | **string** | The user original size avatar. | [optional] [default to undefined]
 **avatarMax** | **string** | The user maximum size avatar. | [optional] [default to undefined]
@@ -26,7 +25,6 @@ import { EmployeeDto } from '@onlyoffice/docspace-api-sdk';
 const instance: EmployeeDto = {
     id,
     displayName,
-    title,
     avatar,
     avatarOriginal,
     avatarMax,

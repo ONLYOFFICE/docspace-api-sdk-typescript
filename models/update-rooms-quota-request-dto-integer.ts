@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,24 +20,18 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { DuplicateRequestDtoAllOfFileIds } from './duplicate-request-dto-all-of-file-ids';
+import type { ContinueChatBodyFilesInner } from './continue-chat-body-files-inner';
 
 /**
  * The request parameters for updating the room quota.
- * @export
- * @interface UpdateRoomsQuotaRequestDtoInteger
  */
 export interface UpdateRoomsQuotaRequestDtoInteger {
     /**
      * The list of room IDs.
-     * @type {Array<DuplicateRequestDtoAllOfFileIds>}
-     * @memberof UpdateRoomsQuotaRequestDtoInteger
      */
-    'roomIds'?: Array<DuplicateRequestDtoAllOfFileIds> | null;
+    'roomIds'?: Array<ContinueChatBodyFilesInner> | null;
     /**
      * The room quota.
-     * @type {number}
-     * @memberof UpdateRoomsQuotaRequestDtoInteger
      */
     'quota'?: number;
 }

@@ -1,6 +1,6 @@
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -334,50 +333,146 @@ export const UserStatusApiFactory = function (configuration?: Configuration, bas
         /**
          * Returns a list of profiles filtered by the user status.
          * @summary Get profiles by status
-         * @param {EmployeeStatus} status The user status.
-         * @param {string} [filterBy] Specifies the criteria used to filter the profiles in the request.
-         * @param {number} [count] The maximum number of user profiles to retrieve.
-         * @param {number} [startIndex] The starting index for retrieving data in a paginated request.
-         * @param {string} [sortBy] Specifies the property or field name by which the results should be sorted.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterSeparator] Represents the separator used to split multiple filter criteria in a query string.
-         * @param {string} [filterValue] A string value representing additional filter criteria used in query parameters.
+         * @param {UserStatusApiGetByStatusRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getByStatus operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-by-status/
          * @throws {RequiredError}
          */
-        getByStatus(status: EmployeeStatus, filterBy?: string, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
-            return localVarFp.getByStatus(status, filterBy, count, startIndex, sortBy, sortOrder, filterSeparator, filterValue, options).then((request) => request(axios, basePath));
+        getByStatus(requestParameters: UserStatusApiGetByStatusRequest, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
+            return localVarFp.getByStatus(requestParameters.status, requestParameters.filterBy, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterSeparator, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Sets the required activation status to the list of users with the IDs specified in the request.
          * @summary Set an activation status to the users
-         * @param {EmployeeActivationStatus} activationstatus The new user activation status.
-         * @param {UpdateMembersRequestDto} updateMembersRequestDto The request parameters for updating the user information.
+         * @param {UserStatusApiUpdateUserActivationStatusRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateUserActivationStatus operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-user-activation-status/
          * @throws {RequiredError}
          */
-        updateUserActivationStatus(activationstatus: EmployeeActivationStatus, updateMembersRequestDto: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
-            return localVarFp.updateUserActivationStatus(activationstatus, updateMembersRequestDto, options).then((request) => request(axios, basePath));
+        updateUserActivationStatus(requestParameters: UserStatusApiUpdateUserActivationStatusRequest, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
+            return localVarFp.updateUserActivationStatus(requestParameters.activationstatus, requestParameters.updateMembersRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Changes a status of the users with the IDs specified in the request.
          * @summary Change a user status
-         * @param {EmployeeStatus} status The new user status.
-         * @param {UpdateMembersRequestDto} updateMembersRequestDto The request parameters for updating the user information.
+         * @param {UserStatusApiUpdateUserStatusRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateUserStatus operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-user-status/
          * @throws {RequiredError}
          */
-        updateUserStatus(status: EmployeeStatus, updateMembersRequestDto: UpdateMembersRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
-            return localVarFp.updateUserStatus(status, updateMembersRequestDto, options).then((request) => request(axios, basePath));
+        updateUserStatus(requestParameters: UserStatusApiUpdateUserStatusRequest, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
+            return localVarFp.updateUserStatus(requestParameters.status, requestParameters.updateMembersRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for getByStatus operation in UserStatusApi.
+ * @export
+ * @interface UserStatusApiGetByStatusRequest
+ */
+export interface UserStatusApiGetByStatusRequest {
+    /**
+     * The user status.
+     * @type {EmployeeStatus}
+     * @memberof UserStatusApiGetByStatus
+     */
+    readonly status: EmployeeStatus
+
+    /**
+     * Specifies the criteria used to filter the profiles in the request.
+     * @type {string}
+     * @memberof UserStatusApiGetByStatus
+     */
+    readonly filterBy?: string
+
+    /**
+     * The maximum number of user profiles to retrieve.
+     * @type {number}
+     * @memberof UserStatusApiGetByStatus
+     */
+    readonly count?: number
+
+    /**
+     * The starting index for retrieving data in a paginated request.
+     * @type {number}
+     * @memberof UserStatusApiGetByStatus
+     */
+    readonly startIndex?: number
+
+    /**
+     * Specifies the property or field name by which the results should be sorted.
+     * @type {string}
+     * @memberof UserStatusApiGetByStatus
+     */
+    readonly sortBy?: string
+
+    /**
+     * The order in which the results are sorted.
+     * @type {SortOrder}
+     * @memberof UserStatusApiGetByStatus
+     */
+    readonly sortOrder?: SortOrder
+
+    /**
+     * Represents the separator used to split multiple filter criteria in a query string.
+     * @type {string}
+     * @memberof UserStatusApiGetByStatus
+     */
+    readonly filterSeparator?: string
+
+    /**
+     * A string value representing additional filter criteria used in query parameters.
+     * @type {string}
+     * @memberof UserStatusApiGetByStatus
+     */
+    readonly filterValue?: string
+}
+
+/**
+ * Request parameters for updateUserActivationStatus operation in UserStatusApi.
+ * @export
+ * @interface UserStatusApiUpdateUserActivationStatusRequest
+ */
+export interface UserStatusApiUpdateUserActivationStatusRequest {
+    /**
+     * The new user activation status.
+     * @type {EmployeeActivationStatus}
+     * @memberof UserStatusApiUpdateUserActivationStatus
+     */
+    readonly activationstatus: EmployeeActivationStatus
+
+    /**
+     * The request parameters for updating the user information.
+     * @type {UpdateMembersRequestDto}
+     * @memberof UserStatusApiUpdateUserActivationStatus
+     */
+    readonly updateMembersRequestDto: UpdateMembersRequestDto
+}
+
+/**
+ * Request parameters for updateUserStatus operation in UserStatusApi.
+ * @export
+ * @interface UserStatusApiUpdateUserStatusRequest
+ */
+export interface UserStatusApiUpdateUserStatusRequest {
+    /**
+     * The new user status.
+     * @type {EmployeeStatus}
+     * @memberof UserStatusApiUpdateUserStatus
+     */
+    readonly status: EmployeeStatus
+
+    /**
+     * The request parameters for updating the user information.
+     * @type {UpdateMembersRequestDto}
+     * @memberof UserStatusApiUpdateUserStatus
+     */
+    readonly updateMembersRequestDto: UpdateMembersRequestDto
+}
 
 /**
  * UserStatusApi - object-oriented interface
@@ -389,46 +484,37 @@ export class UserStatusApi extends BaseAPI {
     /**
      * Returns a list of profiles filtered by the user status.
      * @summary Get profiles by status
-     * @param {EmployeeStatus} status The user status.
-     * @param {string} [filterBy] Specifies the criteria used to filter the profiles in the request.
-     * @param {number} [count] The maximum number of user profiles to retrieve.
-     * @param {number} [startIndex] The starting index for retrieving data in a paginated request.
-     * @param {string} [sortBy] Specifies the property or field name by which the results should be sorted.
-     * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-     * @param {string} [filterSeparator] Represents the separator used to split multiple filter criteria in a query string.
-     * @param {string} [filterValue] A string value representing additional filter criteria used in query parameters.
+     * @param {PeopleUserStatusApiGetByStatusRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserStatusApi
      */
-    public getByStatus(status: EmployeeStatus, filterBy?: string, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig) {
-        return UserStatusApiFp(this.configuration).getByStatus(status, filterBy, count, startIndex, sortBy, sortOrder, filterSeparator, filterValue, options).then((request) => request(this.axios, this.basePath));
+    public getByStatus(requestParameters: UserStatusApiGetByStatusRequest, options?: RawAxiosRequestConfig) {
+        return UserStatusApiFp(this.configuration).getByStatus(requestParameters.status, requestParameters.filterBy, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterSeparator, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Sets the required activation status to the list of users with the IDs specified in the request.
      * @summary Set an activation status to the users
-     * @param {EmployeeActivationStatus} activationstatus The new user activation status.
-     * @param {UpdateMembersRequestDto} updateMembersRequestDto The request parameters for updating the user information.
+     * @param {PeopleUserStatusApiUpdateUserActivationStatusRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserStatusApi
      */
-    public updateUserActivationStatus(activationstatus: EmployeeActivationStatus, updateMembersRequestDto: UpdateMembersRequestDto, options?: RawAxiosRequestConfig) {
-        return UserStatusApiFp(this.configuration).updateUserActivationStatus(activationstatus, updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public updateUserActivationStatus(requestParameters: UserStatusApiUpdateUserActivationStatusRequest, options?: RawAxiosRequestConfig) {
+        return UserStatusApiFp(this.configuration).updateUserActivationStatus(requestParameters.activationstatus, requestParameters.updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Changes a status of the users with the IDs specified in the request.
      * @summary Change a user status
-     * @param {EmployeeStatus} status The new user status.
-     * @param {UpdateMembersRequestDto} updateMembersRequestDto The request parameters for updating the user information.
+     * @param {PeopleUserStatusApiUpdateUserStatusRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserStatusApi
      */
-    public updateUserStatus(status: EmployeeStatus, updateMembersRequestDto: UpdateMembersRequestDto, options?: RawAxiosRequestConfig) {
-        return UserStatusApiFp(this.configuration).updateUserStatus(status, updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public updateUserStatus(requestParameters: UserStatusApiUpdateUserStatusRequest, options?: RawAxiosRequestConfig) {
+        return UserStatusApiFp(this.configuration).updateUserStatus(requestParameters.status, requestParameters.updateMembersRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,14 +21,10 @@
 
 /**
  * The request parameters for configuring the Content Security Policy (CSP) settings.
- * @export
- * @interface CspRequestsDto
  */
 export interface CspRequestsDto {
     /**
      * The collection of allowed domains in the Content Security Policy (CSP).
-     * @type {Array<string>}
-     * @memberof CspRequestsDto
      */
     'domains'?: Array<string> | null;
 }

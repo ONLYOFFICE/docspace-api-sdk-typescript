@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,44 +24,30 @@ import type { OperationDto } from './operation-dto';
 
 /**
  * Represents a report containing a collection of operations.
- * @export
- * @interface ReportDto
  */
 export interface ReportDto {
     /**
      * A collection of operations.
-     * @type {Array<OperationDto>}
-     * @memberof ReportDto
      */
     'collection'?: Array<OperationDto> | null;
     /**
      * The report data offset.
-     * @type {number}
-     * @memberof ReportDto
      */
     'offset'?: number;
     /**
      * The report data limit.
-     * @type {number}
-     * @memberof ReportDto
      */
     'limit'?: number;
     /**
      * The total quantity of operations in the report.
-     * @type {number}
-     * @memberof ReportDto
      */
     'totalQuantity'?: number;
     /**
      * The total number of pages in the report.
-     * @type {number}
-     * @memberof ReportDto
      */
     'totalPage'?: number;
     /**
      * The current page number of the report.
-     * @type {number}
-     * @memberof ReportDto
      */
     'currentPage'?: number;
 }

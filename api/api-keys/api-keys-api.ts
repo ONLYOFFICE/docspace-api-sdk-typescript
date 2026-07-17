@@ -1,6 +1,6 @@
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -485,26 +484,26 @@ export const ApiKeysApiFactory = function (configuration?: Configuration, basePa
         /**
          * Creates a user API key with the parameters specified in the request.
          * @summary Create a user API key
-         * @param {CreateApiKeyRequestDto} [createApiKeyRequestDto] 
+         * @param {ApiKeysApiCreateApiKeyRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for createApiKey operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-api-key/
          * @throws {RequiredError}
          */
-        createApiKey(createApiKeyRequestDto?: CreateApiKeyRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<ApiKeyResponseWrapper> {
-            return localVarFp.createApiKey(createApiKeyRequestDto, options).then((request) => request(axios, basePath));
+        createApiKey(requestParameters: ApiKeysApiCreateApiKeyRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ApiKeyResponseWrapper> {
+            return localVarFp.createApiKey(requestParameters.createApiKeyRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Deletes a user API key by its ID.
          * @summary Delete a user API key
-         * @param {string} keyId The API key ID.
+         * @param {ApiKeysApiDeleteApiKeyRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteApiKey operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-api-key/
          * @throws {RequiredError}
          */
-        deleteApiKey(keyId: string, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.deleteApiKey(keyId, options).then((request) => request(axios, basePath));
+        deleteApiKey(requestParameters: ApiKeysApiDeleteApiKeyRequest, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.deleteApiKey(requestParameters.keyId, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of all available permissions for the API key.
@@ -542,18 +541,66 @@ export const ApiKeysApiFactory = function (configuration?: Configuration, basePa
         /**
          * Updates an existing API key changing its name, permissions, and status.
          * @summary Update an API key
-         * @param {string} keyId The unique identifier of the API key to update.
-         * @param {UpdateApiKeyRequest} updateApiKeyRequest The request parameters for updating an existing API key.
+         * @param {ApiKeysApiUpdateApiKeyRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateApiKey operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-api-key/
          * @throws {RequiredError}
          */
-        updateApiKey(keyId: string, updateApiKeyRequest: UpdateApiKeyRequest, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.updateApiKey(keyId, updateApiKeyRequest, options).then((request) => request(axios, basePath));
+        updateApiKey(requestParameters: ApiKeysApiUpdateApiKeyRequest, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.updateApiKey(requestParameters.keyId, requestParameters.updateApiKeyRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for createApiKey operation in ApiKeysApi.
+ * @export
+ * @interface ApiKeysApiCreateApiKeyRequest
+ */
+export interface ApiKeysApiCreateApiKeyRequest {
+    /**
+     * 
+     * @type {CreateApiKeyRequestDto}
+     * @memberof ApiKeysApiCreateApiKey
+     */
+    readonly createApiKeyRequestDto?: CreateApiKeyRequestDto
+}
+
+/**
+ * Request parameters for deleteApiKey operation in ApiKeysApi.
+ * @export
+ * @interface ApiKeysApiDeleteApiKeyRequest
+ */
+export interface ApiKeysApiDeleteApiKeyRequest {
+    /**
+     * The API key ID.
+     * @type {string}
+     * @memberof ApiKeysApiDeleteApiKey
+     */
+    readonly keyId: string
+}
+
+/**
+ * Request parameters for updateApiKey operation in ApiKeysApi.
+ * @export
+ * @interface ApiKeysApiUpdateApiKeyRequest
+ */
+export interface ApiKeysApiUpdateApiKeyRequest {
+    /**
+     * The unique identifier of the API key to update.
+     * @type {string}
+     * @memberof ApiKeysApiUpdateApiKey
+     */
+    readonly keyId: string
+
+    /**
+     * The request parameters for updating an existing API key.
+     * @type {UpdateApiKeyRequest}
+     * @memberof ApiKeysApiUpdateApiKey
+     */
+    readonly updateApiKeyRequest: UpdateApiKeyRequest
+}
 
 /**
  * ApiKeysApi - object-oriented interface
@@ -565,25 +612,25 @@ export class ApiKeysApi extends BaseAPI {
     /**
      * Creates a user API key with the parameters specified in the request.
      * @summary Create a user API key
-     * @param {CreateApiKeyRequestDto} [createApiKeyRequestDto] 
+     * @param {ApiKeysApiCreateApiKeyRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ApiKeysApi
      */
-    public createApiKey(createApiKeyRequestDto?: CreateApiKeyRequestDto, options?: RawAxiosRequestConfig) {
-        return ApiKeysApiFp(this.configuration).createApiKey(createApiKeyRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public createApiKey(requestParameters: ApiKeysApiCreateApiKeyRequest = {}, options?: RawAxiosRequestConfig) {
+        return ApiKeysApiFp(this.configuration).createApiKey(requestParameters.createApiKeyRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Deletes a user API key by its ID.
      * @summary Delete a user API key
-     * @param {string} keyId The API key ID.
+     * @param {ApiKeysApiDeleteApiKeyRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ApiKeysApi
      */
-    public deleteApiKey(keyId: string, options?: RawAxiosRequestConfig) {
-        return ApiKeysApiFp(this.configuration).deleteApiKey(keyId, options).then((request) => request(this.axios, this.basePath));
+    public deleteApiKey(requestParameters: ApiKeysApiDeleteApiKeyRequest, options?: RawAxiosRequestConfig) {
+        return ApiKeysApiFp(this.configuration).deleteApiKey(requestParameters.keyId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -622,14 +669,13 @@ export class ApiKeysApi extends BaseAPI {
     /**
      * Updates an existing API key changing its name, permissions, and status.
      * @summary Update an API key
-     * @param {string} keyId The unique identifier of the API key to update.
-     * @param {UpdateApiKeyRequest} updateApiKeyRequest The request parameters for updating an existing API key.
+     * @param {ApiKeysApiUpdateApiKeyRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ApiKeysApi
      */
-    public updateApiKey(keyId: string, updateApiKeyRequest: UpdateApiKeyRequest, options?: RawAxiosRequestConfig) {
-        return ApiKeysApiFp(this.configuration).updateApiKey(keyId, updateApiKeyRequest, options).then((request) => request(this.axios, this.basePath));
+    public updateApiKey(requestParameters: ApiKeysApiUpdateApiKeyRequest, options?: RawAxiosRequestConfig) {
+        return ApiKeysApiFp(this.configuration).updateApiKey(requestParameters.keyId, requestParameters.updateApiKeyRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

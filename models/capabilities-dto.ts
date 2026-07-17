@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,50 +21,34 @@
 
 /**
  * The capabilities parameters.
- * @export
- * @interface CapabilitiesDto
  */
 export interface CapabilitiesDto {
     /**
      * Specifies if the LDAP settings are enabled or not.
-     * @type {boolean}
-     * @memberof CapabilitiesDto
      */
     'ldapEnabled': boolean;
     /**
      * The LDAP domain.
-     * @type {string}
-     * @memberof CapabilitiesDto
      */
     'ldapDomain'?: string | null;
     /**
      * The list of providers.
-     * @type {Array<string>}
-     * @memberof CapabilitiesDto
      */
     'providers': Array<string> | null;
     /**
      * The SP login label.
-     * @type {string}
-     * @memberof CapabilitiesDto
      */
     'ssoLabel': string | null;
     /**
      * Specifies if OAuth is enabled or not.
-     * @type {boolean}
-     * @memberof CapabilitiesDto
      */
     'oauthEnabled': boolean;
     /**
      * The SSO URL. If this parameter is empty, then the SSO settings are disabled.
-     * @type {string}
-     * @memberof CapabilitiesDto
      */
     'ssoUrl': string | null;
     /**
-     * Specifies if identity server is enabled or not
-     * @type {boolean}
-     * @memberof CapabilitiesDto
+     * Specifies if an identity server is enabled or not.
      */
     'identityServerEnabled': boolean;
 }

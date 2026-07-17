@@ -1,6 +1,6 @@
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -26,8 +25,6 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
 import type { FileUploadResultWrapper } from '../../models';
-// @ts-ignore
-import type { KeyValuePairStringStringValues } from '../../models';
 // @ts-ignore
 import type { ThumbnailsDataWrapper } from '../../models';
 // @ts-ignore
@@ -282,17 +279,18 @@ export const PhotosApiAxiosParamCreator = function (configuration?: Configuratio
          * Uploads a photo of the user with the ID specified in the request.
          * @summary Upload a user photo
          * @param {string} userid The user ID.
-         * @param {Array<KeyValuePairStringStringValues>} formCollection The image data.
+         * @param {File} file The image data.
+         * @param {boolean} [autosave] Specifies whether to autosave a photo or not.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for uploadMemberPhoto operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-member-photo/
          */
-        uploadMemberPhoto: async (userid: string, formCollection: Array<KeyValuePairStringStringValues>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        uploadMemberPhoto: async (userid: string, file: File, autosave?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userid' is not null or undefined
             assertParamExists('uploadMemberPhoto', 'userid', userid)
-            // verify required parameter 'formCollection' is not null or undefined
-            assertParamExists('uploadMemberPhoto', 'formCollection', formCollection)
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('uploadMemberPhoto', 'file', file)
 
             const localVarPath = `/api/2.0/people/{userid}/photo`
                 .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
@@ -327,12 +325,14 @@ export const PhotosApiAxiosParamCreator = function (configuration?: Configuratio
 
             // authentication OpenId required
 
-            if (formCollection) {
-                formCollection.forEach((element) => {
-                    localVarFormParams.append('formCollection', element as any);
-                })
-            }
 
+            if (file !== undefined) { 
+                localVarFormParams.append('File', file as any);
+            }
+    
+            if (autosave !== undefined) { 
+                localVarFormParams.append('Autosave', String(autosave) as any);
+            }
     
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
@@ -423,14 +423,15 @@ export const PhotosApiFp = function(configuration?: Configuration) {
          * Uploads a photo of the user with the ID specified in the request.
          * @summary Upload a user photo
          * @param {string} userid The user ID.
-         * @param {Array<KeyValuePairStringStringValues>} formCollection The image data.
+         * @param {File} file The image data.
+         * @param {boolean} [autosave] Specifies whether to autosave a photo or not.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for uploadMemberPhoto operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-member-photo/
          */
-        async uploadMemberPhoto(userid: string, formCollection: Array<KeyValuePairStringStringValues>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileUploadResultWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadMemberPhoto(userid, formCollection, options);
+        async uploadMemberPhoto(userid: string, file: File, autosave?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileUploadResultWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadMemberPhoto(userid, file, autosave, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PhotosApi.uploadMemberPhoto']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -448,68 +449,163 @@ export const PhotosApiFactory = function (configuration?: Configuration, basePat
         /**
          * Creates the user photo thumbnails by coordinates of the original image specified in the request.
          * @summary Create photo thumbnails
-         * @param {string} userid The user ID.
-         * @param {ThumbnailsRequest} thumbnailsRequest The thumbnail request.
+         * @param {PhotosApiCreateMemberPhotoThumbnailsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for createMemberPhotoThumbnails operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-member-photo-thumbnails/
          * @throws {RequiredError}
          */
-        createMemberPhotoThumbnails(userid: string, thumbnailsRequest: ThumbnailsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThumbnailsDataWrapper> {
-            return localVarFp.createMemberPhotoThumbnails(userid, thumbnailsRequest, options).then((request) => request(axios, basePath));
+        createMemberPhotoThumbnails(requestParameters: PhotosApiCreateMemberPhotoThumbnailsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThumbnailsDataWrapper> {
+            return localVarFp.createMemberPhotoThumbnails(requestParameters.userid, requestParameters.thumbnailsRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Deletes a photo of the user with the ID specified in the request.
          * @summary Delete a user photo
-         * @param {string} userid The user ID.
+         * @param {PhotosApiDeleteMemberPhotoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteMemberPhoto operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-member-photo/
          * @throws {RequiredError}
          */
-        deleteMemberPhoto(userid: string, options?: RawAxiosRequestConfig): AxiosPromise<ThumbnailsDataWrapper> {
-            return localVarFp.deleteMemberPhoto(userid, options).then((request) => request(axios, basePath));
+        deleteMemberPhoto(requestParameters: PhotosApiDeleteMemberPhotoRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThumbnailsDataWrapper> {
+            return localVarFp.deleteMemberPhoto(requestParameters.userid, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a photo of the user with the ID specified in the request.
          * @summary Get a user photo
-         * @param {string} userid The user ID.
+         * @param {PhotosApiGetMemberPhotoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getMemberPhoto operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-member-photo/
          * @throws {RequiredError}
          */
-        getMemberPhoto(userid: string, options?: RawAxiosRequestConfig): AxiosPromise<ThumbnailsDataWrapper> {
-            return localVarFp.getMemberPhoto(userid, options).then((request) => request(axios, basePath));
+        getMemberPhoto(requestParameters: PhotosApiGetMemberPhotoRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThumbnailsDataWrapper> {
+            return localVarFp.getMemberPhoto(requestParameters.userid, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates a photo of the user with the ID specified in the request.
          * @summary Update a user photo
-         * @param {string} userid The user ID.
-         * @param {UpdatePhotoMemberRequest} updatePhotoMemberRequest The request parameters for updating a photo.
+         * @param {PhotosApiUpdateMemberPhotoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateMemberPhoto operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-member-photo/
          * @throws {RequiredError}
          */
-        updateMemberPhoto(userid: string, updatePhotoMemberRequest: UpdatePhotoMemberRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThumbnailsDataWrapper> {
-            return localVarFp.updateMemberPhoto(userid, updatePhotoMemberRequest, options).then((request) => request(axios, basePath));
+        updateMemberPhoto(requestParameters: PhotosApiUpdateMemberPhotoRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThumbnailsDataWrapper> {
+            return localVarFp.updateMemberPhoto(requestParameters.userid, requestParameters.updatePhotoMemberRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Uploads a photo of the user with the ID specified in the request.
          * @summary Upload a user photo
-         * @param {string} userid The user ID.
-         * @param {Array<KeyValuePairStringStringValues>} formCollection The image data.
+         * @param {PhotosApiUploadMemberPhotoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for uploadMemberPhoto operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-member-photo/
          * @throws {RequiredError}
          */
-        uploadMemberPhoto(userid: string, formCollection: Array<KeyValuePairStringStringValues>, options?: RawAxiosRequestConfig): AxiosPromise<FileUploadResultWrapper> {
-            return localVarFp.uploadMemberPhoto(userid, formCollection, options).then((request) => request(axios, basePath));
+        uploadMemberPhoto(requestParameters: PhotosApiUploadMemberPhotoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileUploadResultWrapper> {
+            return localVarFp.uploadMemberPhoto(requestParameters.userid, requestParameters.file, requestParameters.autosave, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for createMemberPhotoThumbnails operation in PhotosApi.
+ * @export
+ * @interface PhotosApiCreateMemberPhotoThumbnailsRequest
+ */
+export interface PhotosApiCreateMemberPhotoThumbnailsRequest {
+    /**
+     * The user ID.
+     * @type {string}
+     * @memberof PhotosApiCreateMemberPhotoThumbnails
+     */
+    readonly userid: string
+
+    /**
+     * The thumbnail request.
+     * @type {ThumbnailsRequest}
+     * @memberof PhotosApiCreateMemberPhotoThumbnails
+     */
+    readonly thumbnailsRequest: ThumbnailsRequest
+}
+
+/**
+ * Request parameters for deleteMemberPhoto operation in PhotosApi.
+ * @export
+ * @interface PhotosApiDeleteMemberPhotoRequest
+ */
+export interface PhotosApiDeleteMemberPhotoRequest {
+    /**
+     * The user ID.
+     * @type {string}
+     * @memberof PhotosApiDeleteMemberPhoto
+     */
+    readonly userid: string
+}
+
+/**
+ * Request parameters for getMemberPhoto operation in PhotosApi.
+ * @export
+ * @interface PhotosApiGetMemberPhotoRequest
+ */
+export interface PhotosApiGetMemberPhotoRequest {
+    /**
+     * The user ID.
+     * @type {string}
+     * @memberof PhotosApiGetMemberPhoto
+     */
+    readonly userid: string
+}
+
+/**
+ * Request parameters for updateMemberPhoto operation in PhotosApi.
+ * @export
+ * @interface PhotosApiUpdateMemberPhotoRequest
+ */
+export interface PhotosApiUpdateMemberPhotoRequest {
+    /**
+     * The user ID.
+     * @type {string}
+     * @memberof PhotosApiUpdateMemberPhoto
+     */
+    readonly userid: string
+
+    /**
+     * The request parameters for updating a photo.
+     * @type {UpdatePhotoMemberRequest}
+     * @memberof PhotosApiUpdateMemberPhoto
+     */
+    readonly updatePhotoMemberRequest: UpdatePhotoMemberRequest
+}
+
+/**
+ * Request parameters for uploadMemberPhoto operation in PhotosApi.
+ * @export
+ * @interface PhotosApiUploadMemberPhotoRequest
+ */
+export interface PhotosApiUploadMemberPhotoRequest {
+    /**
+     * The user ID.
+     * @type {string}
+     * @memberof PhotosApiUploadMemberPhoto
+     */
+    readonly userid: string
+
+    /**
+     * The image data.
+     * @type {File}
+     * @memberof PhotosApiUploadMemberPhoto
+     */
+    readonly file: File
+
+    /**
+     * Specifies whether to autosave a photo or not.
+     * @type {boolean}
+     * @memberof PhotosApiUploadMemberPhoto
+     */
+    readonly autosave?: boolean
+}
 
 /**
  * PhotosApi - object-oriented interface
@@ -521,64 +617,61 @@ export class PhotosApi extends BaseAPI {
     /**
      * Creates the user photo thumbnails by coordinates of the original image specified in the request.
      * @summary Create photo thumbnails
-     * @param {string} userid The user ID.
-     * @param {ThumbnailsRequest} thumbnailsRequest The thumbnail request.
+     * @param {PeoplePhotosApiCreateMemberPhotoThumbnailsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PhotosApi
      */
-    public createMemberPhotoThumbnails(userid: string, thumbnailsRequest: ThumbnailsRequest, options?: RawAxiosRequestConfig) {
-        return PhotosApiFp(this.configuration).createMemberPhotoThumbnails(userid, thumbnailsRequest, options).then((request) => request(this.axios, this.basePath));
+    public createMemberPhotoThumbnails(requestParameters: PhotosApiCreateMemberPhotoThumbnailsRequest, options?: RawAxiosRequestConfig) {
+        return PhotosApiFp(this.configuration).createMemberPhotoThumbnails(requestParameters.userid, requestParameters.thumbnailsRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Deletes a photo of the user with the ID specified in the request.
      * @summary Delete a user photo
-     * @param {string} userid The user ID.
+     * @param {PeoplePhotosApiDeleteMemberPhotoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PhotosApi
      */
-    public deleteMemberPhoto(userid: string, options?: RawAxiosRequestConfig) {
-        return PhotosApiFp(this.configuration).deleteMemberPhoto(userid, options).then((request) => request(this.axios, this.basePath));
+    public deleteMemberPhoto(requestParameters: PhotosApiDeleteMemberPhotoRequest, options?: RawAxiosRequestConfig) {
+        return PhotosApiFp(this.configuration).deleteMemberPhoto(requestParameters.userid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns a photo of the user with the ID specified in the request.
      * @summary Get a user photo
-     * @param {string} userid The user ID.
+     * @param {PeoplePhotosApiGetMemberPhotoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PhotosApi
      */
-    public getMemberPhoto(userid: string, options?: RawAxiosRequestConfig) {
-        return PhotosApiFp(this.configuration).getMemberPhoto(userid, options).then((request) => request(this.axios, this.basePath));
+    public getMemberPhoto(requestParameters: PhotosApiGetMemberPhotoRequest, options?: RawAxiosRequestConfig) {
+        return PhotosApiFp(this.configuration).getMemberPhoto(requestParameters.userid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Updates a photo of the user with the ID specified in the request.
      * @summary Update a user photo
-     * @param {string} userid The user ID.
-     * @param {UpdatePhotoMemberRequest} updatePhotoMemberRequest The request parameters for updating a photo.
+     * @param {PeoplePhotosApiUpdateMemberPhotoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PhotosApi
      */
-    public updateMemberPhoto(userid: string, updatePhotoMemberRequest: UpdatePhotoMemberRequest, options?: RawAxiosRequestConfig) {
-        return PhotosApiFp(this.configuration).updateMemberPhoto(userid, updatePhotoMemberRequest, options).then((request) => request(this.axios, this.basePath));
+    public updateMemberPhoto(requestParameters: PhotosApiUpdateMemberPhotoRequest, options?: RawAxiosRequestConfig) {
+        return PhotosApiFp(this.configuration).updateMemberPhoto(requestParameters.userid, requestParameters.updatePhotoMemberRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Uploads a photo of the user with the ID specified in the request.
      * @summary Upload a user photo
-     * @param {string} userid The user ID.
-     * @param {Array<KeyValuePairStringStringValues>} formCollection The image data.
+     * @param {PeoplePhotosApiUploadMemberPhotoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PhotosApi
      */
-    public uploadMemberPhoto(userid: string, formCollection: Array<KeyValuePairStringStringValues>, options?: RawAxiosRequestConfig) {
-        return PhotosApiFp(this.configuration).uploadMemberPhoto(userid, formCollection, options).then((request) => request(this.axios, this.basePath));
+    public uploadMemberPhoto(requestParameters: PhotosApiUploadMemberPhotoRequest, options?: RawAxiosRequestConfig) {
+        return PhotosApiFp(this.configuration).uploadMemberPhoto(requestParameters.userid, requestParameters.file, requestParameters.autosave, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,46 +23,29 @@
 import type { QuotaState } from './quota-state';
 
 /**
- * The quota parameters.
- * @export
- * @interface Quota
+ * The quota parameters.  <example>  {    id: 1,    quantity: 50,    wallet: false,    dueDate: 2026-03-31T00:00:00Z,    nextQuantity: 100,    state: Active  }  </example>
  */
 export interface Quota {
     /**
      * The quota ID.
-     * @type {number}
-     * @memberof Quota
      */
     'id'?: number;
     /**
      * The quota quantity.
-     * @type {number}
-     * @memberof Quota
      */
     'quantity'?: number;
     /**
      * The quota applies to the wallet or not
-     * @type {boolean}
-     * @memberof Quota
      */
     'wallet'?: boolean;
     /**
      * The quota due date.
-     * @type {string}
-     * @memberof Quota
      */
     'dueDate'?: string | null;
     /**
      * The quota next quantity.
-     * @type {number}
-     * @memberof Quota
      */
     'nextQuantity'?: number | null;
-    /**
-     * 
-     * @type {QuotaState}
-     * @memberof Quota
-     */
     'state'?: QuotaState;
 }
 

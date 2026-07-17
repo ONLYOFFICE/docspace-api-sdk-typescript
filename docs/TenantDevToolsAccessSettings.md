@@ -7,7 +7,7 @@ The Developer Tools access settings.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **limitedAccessForUsers** | **boolean** | Specifies if the Developer Tools access are limited for users or not. | [optional] [default to undefined]
-**lastModified** | **string** |  | [optional] [default to undefined]
+**lastModified** | **string** | The timestamp indicating when the settings were last modified. | [optional] [default to undefined]
 
 ## Example
 

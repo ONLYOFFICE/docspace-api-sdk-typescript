@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **ssoLabel** | **string** | The SP login label. | [default to undefined]
 **oauthEnabled** | **boolean** | Specifies if OAuth is enabled or not. | [default to undefined]
 **ssoUrl** | **string** | The SSO URL. If this parameter is empty, then the SSO settings are disabled. | [default to undefined]
-**identityServerEnabled** | **boolean** | Specifies if identity server is enabled or not | [default to undefined]
+**identityServerEnabled** | **boolean** | Specifies if an identity server is enabled or not. | [default to undefined]
 
 ## Example
 

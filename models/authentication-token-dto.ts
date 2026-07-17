@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,50 +21,34 @@
 
 /**
  * The authentication token parameters.
- * @export
- * @interface AuthenticationTokenDto
  */
 export interface AuthenticationTokenDto {
     /**
      * The authentication token.
-     * @type {string}
-     * @memberof AuthenticationTokenDto
      */
     'token'?: string | null;
     /**
      * The token expiration time.
-     * @type {string}
-     * @memberof AuthenticationTokenDto
      */
     'expires'?: string;
     /**
      * Specifies if the authentication code is sent by SMS or not.
-     * @type {boolean}
-     * @memberof AuthenticationTokenDto
      */
     'sms'?: boolean;
     /**
      * The phone number.
-     * @type {string}
-     * @memberof AuthenticationTokenDto
      */
     'phoneNoise'?: string | null;
     /**
      * Specifies if the two-factor application is used or not.
-     * @type {boolean}
-     * @memberof AuthenticationTokenDto
      */
     'tfa'?: boolean;
     /**
      * The two-factor authentication key.
-     * @type {string}
-     * @memberof AuthenticationTokenDto
      */
     'tfaKey'?: string | null;
     /**
      * The confirmation email URL.
-     * @type {string}
-     * @memberof AuthenticationTokenDto
      */
     'confirmUrl'?: string | null;
 }

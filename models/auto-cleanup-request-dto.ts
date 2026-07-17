@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,21 +24,12 @@ import type { DateToAutoCleanUp } from './date-to-auto-clean-up';
 
 /**
  * The request parameters for updating the trash bin auto-clearing setting.
- * @export
- * @interface AutoCleanupRequestDto
  */
 export interface AutoCleanupRequestDto {
     /**
      * Specifies whether to enable the auto-clearing or not.
-     * @type {boolean}
-     * @memberof AutoCleanupRequestDto
      */
     'set'?: boolean;
-    /**
-     * 
-     * @type {DateToAutoCleanUp}
-     * @memberof AutoCleanupRequestDto
-     */
     'gap'?: DateToAutoCleanUp;
 }
 

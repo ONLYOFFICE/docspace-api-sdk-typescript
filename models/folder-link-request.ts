@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,56 +27,32 @@ import type { FileShare } from './file-share';
 
 /**
  * The folder link parameters.
- * @export
- * @interface FolderLinkRequest
  */
 export interface FolderLinkRequest {
     /**
      * The folder link ID.
-     * @type {string}
-     * @memberof FolderLinkRequest
      */
     'linkId'?: string;
-    /**
-     * 
-     * @type {FileShare}
-     * @memberof FolderLinkRequest
-     */
     'access'?: FileShare;
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof FolderLinkRequest
-     */
     'expirationDate'?: ApiDateTime;
     /**
      * The link name.
-     * @type {string}
-     * @memberof FolderLinkRequest
      */
     'title'?: string | null;
     /**
      * The link password.
-     * @type {string}
-     * @memberof FolderLinkRequest
      */
     'password'?: string | null;
     /**
      * Specifies if downloading the file from the link is disabled or not.
-     * @type {boolean}
-     * @memberof FolderLinkRequest
      */
     'denyDownload'?: boolean;
     /**
      * The link scope, whether it is internal or not.
-     * @type {boolean}
-     * @memberof FolderLinkRequest
      */
     'internal'?: boolean;
     /**
      * Specifies whether the folder link is primary or not.
-     * @type {boolean}
-     * @memberof FolderLinkRequest
      */
     'primary'?: boolean;
 }

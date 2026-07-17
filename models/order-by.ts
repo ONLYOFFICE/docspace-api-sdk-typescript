@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,21 +24,12 @@ import type { SortedByType } from './sorted-by-type';
 
 /**
  * The sorting parameters.
- * @export
- * @interface OrderBy
  */
 export interface OrderBy {
     /**
      * Specifies if the order is ascending.
-     * @type {boolean}
-     * @memberof OrderBy
      */
     'is_asc'?: boolean;
-    /**
-     * 
-     * @type {SortedByType}
-     * @memberof OrderBy
-     */
     'property'?: SortedByType;
 }
 

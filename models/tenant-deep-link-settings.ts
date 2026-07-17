@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,20 +24,11 @@ import type { DeepLinkHandlingMode } from './deep-link-handling-mode';
 
 /**
  * The deep link settings.
- * @export
- * @interface TenantDeepLinkSettings
  */
 export interface TenantDeepLinkSettings {
-    /**
-     * 
-     * @type {DeepLinkHandlingMode}
-     * @memberof TenantDeepLinkSettings
-     */
     'handlingMode'?: DeepLinkHandlingMode;
     /**
-     * 
-     * @type {string}
-     * @memberof TenantDeepLinkSettings
+     * The timestamp indicating when the settings were last modified.
      */
     'lastModified'?: string;
 }

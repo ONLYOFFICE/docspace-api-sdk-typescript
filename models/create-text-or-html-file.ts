@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,26 +21,18 @@
 
 /**
  * The parameters for creating an HTML or text file.
- * @export
- * @interface CreateTextOrHtmlFile
  */
 export interface CreateTextOrHtmlFile {
     /**
      * The file title for text or HTML file.
-     * @type {string}
-     * @memberof CreateTextOrHtmlFile
      */
     'title': string | null;
     /**
      * The text or HTML file contents.
-     * @type {string}
-     * @memberof CreateTextOrHtmlFile
      */
     'content'?: string | null;
     /**
      * Specifies whether to create a new text or HTML file if it exists or not.
-     * @type {boolean}
-     * @memberof CreateTextOrHtmlFile
      */
     'createNewIfExist'?: boolean;
 }

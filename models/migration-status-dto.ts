@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,32 +24,19 @@ import type { MigrationApiInfo } from './migration-api-info';
 
 /**
  * The migration status parameters.
- * @export
- * @interface MigrationStatusDto
  */
 export interface MigrationStatusDto {
     /**
      * The migration progress.
-     * @type {number}
-     * @memberof MigrationStatusDto
      */
     'progress'?: number;
     /**
      * The migration error.
-     * @type {string}
-     * @memberof MigrationStatusDto
      */
     'error'?: string | null;
-    /**
-     * 
-     * @type {MigrationApiInfo}
-     * @memberof MigrationStatusDto
-     */
     'parseResult'?: MigrationApiInfo;
     /**
      * Specifies whether the migration is completed or not.
-     * @type {boolean}
-     * @memberof MigrationStatusDto
      */
     'isCompleted'?: boolean;
 }

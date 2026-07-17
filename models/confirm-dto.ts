@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,38 +24,23 @@ import type { ValidationResult } from './validation-result';
 
 /**
  * The confirmation parameters.
- * @export
- * @interface ConfirmDto
  */
 export interface ConfirmDto {
-    /**
-     * 
-     * @type {ValidationResult}
-     * @memberof ConfirmDto
-     */
     'result': ValidationResult;
     /**
      * The confirmation room ID.
-     * @type {string}
-     * @memberof ConfirmDto
      */
     'roomId'?: string | null;
     /**
      * The confirmation title.
-     * @type {string}
-     * @memberof ConfirmDto
      */
     'title'?: string | null;
     /**
      * The confirmation email.
-     * @type {string}
-     * @memberof ConfirmDto
      */
     'email'?: string | null;
     /**
      * The confirmation is agent.
-     * @type {boolean}
-     * @memberof ConfirmDto
      */
     'isAgent'?: boolean;
 }

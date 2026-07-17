@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,23 +21,12 @@
 
 /**
  * [0 - None, 1 - Custom, 2 - All]
- * @export
- * @enum {number}
  */
 
 export const TenantTrustedDomainsType = {
-    /**
-    * None
-    */
     None: 0,
-    /**
-    * Custom
-    */
     Custom: 1,
-    /**
-    * All
-    */
-    All: 2
+    All: 2,
 } as const;
 
 export type TenantTrustedDomainsType = typeof TenantTrustedDomainsType[keyof typeof TenantTrustedDomainsType];

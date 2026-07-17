@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,14 +21,10 @@
 
 /**
  * The parameters required for the mobile phone verification.
- * @export
- * @interface MobileRequestsDto
  */
 export interface MobileRequestsDto {
     /**
      * The user\'s mobile phone number.
-     * @type {string}
-     * @memberof MobileRequestsDto
      */
     'mobilePhone'?: string | null;
 }

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,20 +21,14 @@
 
 /**
  * The external resource parameters.
- * @export
- * @interface CultureSpecificExternalResource
  */
 export interface CultureSpecificExternalResource {
     /**
      * The external resource domain.
-     * @type {string}
-     * @memberof CultureSpecificExternalResource
      */
     'domain'?: string | null;
     /**
      * The external resource entries.
-     * @type {{ [key: string]: string | null; }}
-     * @memberof CultureSpecificExternalResource
      */
     'entries'?: { [key: string]: string | null; } | null;
 }

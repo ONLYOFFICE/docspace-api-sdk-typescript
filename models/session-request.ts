@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,44 +24,27 @@ import type { ApiDateTime } from './api-date-time';
 
 /**
  * The session request parameters.
- * @export
- * @interface SessionRequest
  */
 export interface SessionRequest {
     /**
      * The file name.
-     * @type {string}
-     * @memberof SessionRequest
      */
     'fileName': string | null;
     /**
      * The file size.
-     * @type {number}
-     * @memberof SessionRequest
      */
     'fileSize'?: number;
     /**
      * The relative path to the file.
-     * @type {string}
-     * @memberof SessionRequest
      */
     'relativePath'?: string | null;
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof SessionRequest
-     */
     'createOn'?: ApiDateTime;
     /**
      * Specifies whether the file is encrypted or not.
-     * @type {boolean}
-     * @memberof SessionRequest
      */
     'encrypted'?: boolean;
     /**
      * Specifies whether to create a new file if it already exists.
-     * @type {boolean}
-     * @memberof SessionRequest
      */
     'createNewIfExist'?: boolean;
 }

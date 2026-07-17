@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,20 +21,14 @@
 
 /**
  * The request parameters for managing cookie settings.
- * @export
- * @interface CookieSettingsRequestsDto
  */
 export interface CookieSettingsRequestsDto {
     /**
      * The cookie lifetime in minutes.
-     * @type {number}
-     * @memberof CookieSettingsRequestsDto
      */
     'lifeTime'?: number;
     /**
      * Specifies whether the cookie settings are enabled or disabled.
-     * @type {boolean}
-     * @memberof CookieSettingsRequestsDto
      */
     'enabled'?: boolean;
 }

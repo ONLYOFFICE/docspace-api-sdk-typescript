@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,20 +21,14 @@
 
 /**
  * Represents a sub-account with a specific currency and balance.
- * @export
- * @interface SubAccount
  */
 export interface SubAccount {
     /**
      * The three-character ISO 4217 currency symbol of the sub-account.
-     * @type {string}
-     * @memberof SubAccount
      */
     'currency'?: string | null;
     /**
      * The balance of the sub-account in the specified currency.
-     * @type {number}
-     * @memberof SubAccount
      */
     'amount'?: number;
 }

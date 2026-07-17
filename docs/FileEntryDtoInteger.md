@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **ownedBy** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] [default to undefined]
 **shared** | **boolean** | Specifies if the file entry is shared via link or not. | [optional] [default to undefined]
 **sharedForUser** | **boolean** | Specifies if the file entry is shared for user or not. | [optional] [default to undefined]
+**sharedExternal** | **boolean** | Specifies if the file entry is shared via a public (non-internal) external link. | [optional] [default to undefined]
 **parentShared** | **boolean** | Indicates whether the parent entity is shared. | [optional] [default to undefined]
 **shortWebUrl** | **string** | The short Web URL. | [optional] [default to undefined]
 **created** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
@@ -54,6 +55,7 @@ const instance: FileEntryDtoInteger = {
     ownedBy,
     shared,
     sharedForUser,
+    sharedExternal,
     parentShared,
     shortWebUrl,
     created,

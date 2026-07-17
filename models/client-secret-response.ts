@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,14 +21,10 @@
 
 /**
  * The response containing the regenerated client secret.
- * @export
- * @interface ClientSecretResponse
  */
 export interface ClientSecretResponse {
     /**
      * The newly generated client secret.
-     * @type {string}
-     * @memberof ClientSecretResponse
      */
     'client_secret'?: string;
 }

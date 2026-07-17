@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,23 +19,8 @@
  */
 
 
-/**
- * 
- * @export
- * @interface ItemKeyValuePairStringBoolean
- */
 export interface ItemKeyValuePairStringBoolean {
-    /**
-     * 
-     * @type {string}
-     * @memberof ItemKeyValuePairStringBoolean
-     */
     'key'?: string | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ItemKeyValuePairStringBoolean
-     */
     'value'?: boolean;
 }
 

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,44 +33,18 @@ import type { HistoryData } from './history-data';
 
 /**
  * The file history information.
- * @export
- * @interface HistoryDto
  */
 export interface HistoryDto {
     /**
      * The unique identifier for the file history entry.
-     * @type {number}
-     * @memberof HistoryDto
      */
     'id': number;
-    /**
-     * 
-     * @type {HistoryAction}
-     * @memberof HistoryDto
-     */
     'action': HistoryAction;
-    /**
-     * 
-     * @type {EmployeeDto}
-     * @memberof HistoryDto
-     */
     'initiator': EmployeeDto;
-    /**
-     * 
-     * @type {ApiDateTime}
-     * @memberof HistoryDto
-     */
     'date': ApiDateTime;
-    /**
-     * 
-     * @type {HistoryData}
-     * @memberof HistoryDto
-     */
     'data': HistoryData;
     /**
      * The list of related history.
-     * @type {Array<HistoryDto>}
-     * @memberof HistoryDto
      */
     'related'?: Array<HistoryDto> | null;
 }

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,19 +21,11 @@
 
 /**
  * [0 - Owner, 1 - Member]
- * @export
- * @enum {number}
  */
 
 export const SubjectFilter = {
-    /**
-    * Owner
-    */
     Owner: 0,
-    /**
-    * Member
-    */
-    Member: 1
+    Member: 1,
 } as const;
 
 export type SubjectFilter = typeof SubjectFilter[keyof typeof SubjectFilter];

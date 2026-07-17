@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,44 +21,30 @@
 
 /**
  * The request parameters for initial configuration of the setup wizard.
- * @export
- * @interface WizardRequestsDto
  */
 export interface WizardRequestsDto {
     /**
      * The user\'s email address for authentication and communication.
-     * @type {string}
-     * @memberof WizardRequestsDto
      */
     'email': string | null;
     /**
      * The hashed representation of the user\'s password.
-     * @type {string}
-     * @memberof WizardRequestsDto
      */
     'passwordHash': string | null;
     /**
      * The user\'s preferred interface language code.
-     * @type {string}
-     * @memberof WizardRequestsDto
      */
     'lng'?: string | null;
     /**
      * The user\'s time zone identifier.
-     * @type {string}
-     * @memberof WizardRequestsDto
      */
     'timeZone'?: string | null;
     /**
      * The Amazon Machine Image (AMI) identifier.
-     * @type {string}
-     * @memberof WizardRequestsDto
      */
     'amiId'?: string | null;
     /**
      * Specifies whether the user opted in for site communications.
-     * @type {boolean}
-     * @memberof WizardRequestsDto
      */
     'subscribeFromSite'?: boolean;
 }

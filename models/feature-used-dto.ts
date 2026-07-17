@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,20 +21,14 @@
 
 /**
  * The used space parameters of the tenant quota feature.
- * @export
- * @interface FeatureUsedDto
  */
 export interface FeatureUsedDto {
     /**
      * The used space value.
-     * @type {any}
-     * @memberof FeatureUsedDto
      */
     'value': any | null;
     /**
      * The used space title.
-     * @type {string}
-     * @memberof FeatureUsedDto
      */
     'title'?: string | null;
 }

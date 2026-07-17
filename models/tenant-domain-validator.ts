@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,26 +21,18 @@
 
 /**
  * The domain validator.
- * @export
- * @interface TenantDomainValidator
  */
 export interface TenantDomainValidator {
     /**
      * The regex string to validate a domain.
-     * @type {string}
-     * @memberof TenantDomainValidator
      */
     'regex'?: string | null;
     /**
      * The minimum length of the valid domain.
-     * @type {number}
-     * @memberof TenantDomainValidator
      */
     'minLength'?: number;
     /**
      * The maximum length of the valid domain.
-     * @type {number}
-     * @memberof TenantDomainValidator
      */
     'maxLength'?: number;
 }

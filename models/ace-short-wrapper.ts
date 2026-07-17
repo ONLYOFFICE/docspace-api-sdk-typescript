@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,26 +21,18 @@
 
 /**
  * The information about the settings which allow to share the document with other users.
- * @export
- * @interface AceShortWrapper
  */
 export interface AceShortWrapper {
     /**
      * The name of the user the document will be shared with.
-     * @type {string}
-     * @memberof AceShortWrapper
      */
     'user'?: string | null;
     /**
      * The access rights for the user with the name above.  Can be Full Access, Read Only, or Deny Access.
-     * @type {string}
-     * @memberof AceShortWrapper
      */
     'permissions'?: string | null;
     /**
      * Specifies whether to change the user icon to the link icon.
-     * @type {boolean}
-     * @memberof AceShortWrapper
      */
     'isLink'?: boolean;
 }

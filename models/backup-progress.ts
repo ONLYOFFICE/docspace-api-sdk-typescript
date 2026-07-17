@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,59 +21,42 @@
 // May contain unused imports in some cases
 // @ts-ignore
 import type { BackupProgressEnum } from './backup-progress-enum';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { DistributedTaskStatus } from './distributed-task-status';
 
 /**
- * 
- * @export
- * @interface BackupProgress
+ * The backup progress parameters.
  */
 export interface BackupProgress {
     /**
-     * 
-     * @type {boolean}
-     * @memberof BackupProgress
+     * Specifies if the backup is completed or not.
      */
     'isCompleted'?: boolean;
     /**
-     * 
-     * @type {number}
-     * @memberof BackupProgress
+     * The backup progress in percentage.
      */
     'progress'?: number;
     /**
-     * 
-     * @type {string}
-     * @memberof BackupProgress
+     * The backup error message.
      */
     'error'?: string | null;
     /**
-     * 
-     * @type {string}
-     * @memberof BackupProgress
+     * The backup warning message.
      */
     'warning'?: string | null;
     /**
-     * 
-     * @type {string}
-     * @memberof BackupProgress
+     * The backup link.
      */
     'link'?: string | null;
     /**
-     * 
-     * @type {number}
-     * @memberof BackupProgress
+     * The tenant ID.
      */
     'tenantId'?: number;
-    /**
-     * 
-     * @type {BackupProgressEnum}
-     * @memberof BackupProgress
-     */
     'backupProgressEnum'?: BackupProgressEnum;
+    'status'?: DistributedTaskStatus;
     /**
-     * 
-     * @type {string}
-     * @memberof BackupProgress
+     * The task ID.
      */
     'taskId'?: string | null;
 }

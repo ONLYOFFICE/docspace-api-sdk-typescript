@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,27 +24,16 @@ import type { CoEditingConfigMode } from './co-editing-config-mode';
 
 /**
  * The co-editing configuration parameters.
- * @export
- * @interface CoEditingConfig
  */
 export interface CoEditingConfig {
     /**
      * Specifies if the co-editing mode can be changed in the editor interface or not.
-     * @type {boolean}
-     * @memberof CoEditingConfig
      */
     'change'?: boolean;
     /**
      * Specifies if the co-editing mode is fast.
-     * @type {boolean}
-     * @memberof CoEditingConfig
      */
     'fast'?: boolean;
-    /**
-     * 
-     * @type {CoEditingConfigMode}
-     * @memberof CoEditingConfig
-     */
     'mode'?: CoEditingConfigMode;
 }
 

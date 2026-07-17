@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,42 +23,24 @@
 import type { ActiveConnectionsDto } from './active-connections-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ActiveConnectionsWrapperLinksInner } from './active-connections-wrapper-links-inner';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
-/**
- * 
- * @export
- * @interface ActiveConnectionsWrapper
- */
 export interface ActiveConnectionsWrapper {
-    /**
-     * 
-     * @type {ActiveConnectionsDto}
-     * @memberof ActiveConnectionsWrapper
-     */
     'response'?: ActiveConnectionsDto;
     /**
-     * 
-     * @type {number}
-     * @memberof ActiveConnectionsWrapper
+     * The total number of items in the response
      */
     'count'?: number;
     /**
-     * 
-     * @type {Array<ActiveConnectionsWrapperLinksInner>}
-     * @memberof ActiveConnectionsWrapper
+     * List of links related to the response
      */
-    'links'?: Array<ActiveConnectionsWrapperLinksInner>;
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
     /**
-     * 
-     * @type {number}
-     * @memberof ActiveConnectionsWrapper
+     * HTTP status code of the response
      */
     'status'?: number;
     /**
-     * 
-     * @type {number}
-     * @memberof ActiveConnectionsWrapper
+     * HTTP status code of the response (duplicate of status)
      */
     'statusCode'?: number;
 }

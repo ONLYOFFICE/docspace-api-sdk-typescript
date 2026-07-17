@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,20 +21,14 @@
 
 /**
  * The notification channel information.
- * @export
- * @interface NotificationChannelDto
  */
 export interface NotificationChannelDto {
     /**
      * The notification channel name.
-     * @type {string}
-     * @memberof NotificationChannelDto
      */
     'name': string | null;
     /**
      * Specifies whether the notification channel is enabled.
-     * @type {boolean}
-     * @memberof NotificationChannelDto
      */
     'isEnabled': boolean;
 }

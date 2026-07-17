@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,21 +24,12 @@ import type { FormFillingManageAction } from './form-filling-manage-action';
 
 /**
  * The parameters for managing form filling.
- * @export
- * @interface ManageFormFillingDtoInteger
  */
 export interface ManageFormFillingDtoInteger {
     /**
      * The ID of the form to manage.
-     * @type {number}
-     * @memberof ManageFormFillingDtoInteger
      */
     'formId': number;
-    /**
-     * 
-     * @type {FormFillingManageAction}
-     * @memberof ManageFormFillingDtoInteger
-     */
     'action'?: FormFillingManageAction;
 }
 

@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,20 +21,14 @@
 
 /**
  * The request parameters for the theme-specific logo configurations.
- * @export
- * @interface LogoRequestsDto
  */
 export interface LogoRequestsDto {
     /**
      * The URL or base64-encoded image data for the light theme logo.
-     * @type {string}
-     * @memberof LogoRequestsDto
      */
     'light'?: string | null;
     /**
      * The URL or base64-encoded image data for the dark theme logo.
-     * @type {string}
-     * @memberof LogoRequestsDto
      */
     'dark'?: string | null;
 }

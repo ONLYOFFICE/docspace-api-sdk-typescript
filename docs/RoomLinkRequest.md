@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **linkType** | [**LinkType**](LinkType.md) |  | [optional] [default to undefined]
 **password** | **string** | The link password. | [optional] [default to undefined]
 **denyDownload** | **boolean** | Specifies if downloading the file from the link is disabled or not. | [optional] [default to undefined]
+**maxUseCount** | **number** | The maximum number of times the invitation link can be used. | [optional] [default to undefined]
+**currentUseCount** | **number** | The current number of times the invitation link has been used. | [optional] [default to undefined]
 
 ## Example
 
@@ -29,6 +31,8 @@ const instance: RoomLinkRequest = {
     linkType,
     password,
     denyDownload,
+    maxUseCount,
+    currentUseCount,
 };
 ```
 

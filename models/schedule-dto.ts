@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,45 +26,25 @@ import type { BackupStorageType } from './backup-storage-type';
 import type { CronParams } from './cron-params';
 
 /**
- * 
- * @export
- * @interface ScheduleDto
+ * The backup schedule parameters.
  */
 export interface ScheduleDto {
-    /**
-     * 
-     * @type {BackupStorageType}
-     * @memberof ScheduleDto
-     */
     'storageType': BackupStorageType;
     /**
-     * 
-     * @type {{ [key: string]: string | null; }}
-     * @memberof ScheduleDto
+     * The backup storage parameters.
      */
     'storageParams': { [key: string]: string | null; } | null;
-    /**
-     * 
-     * @type {CronParams}
-     * @memberof ScheduleDto
-     */
     'cronParams': CronParams;
     /**
-     * 
-     * @type {number}
-     * @memberof ScheduleDto
+     * The maximum number of the stored backup copies.
      */
     'backupsStored'?: number | null;
     /**
-     * 
-     * @type {string}
-     * @memberof ScheduleDto
+     * The date and time when the last backup was reated.
      */
     'lastBackupTime': string;
     /**
-     * 
-     * @type {boolean}
-     * @memberof ScheduleDto
+     * Specifies if a dump will be created or not.
      */
     'dump': boolean;
 }

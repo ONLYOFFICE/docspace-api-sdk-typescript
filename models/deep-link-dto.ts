@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,26 +21,18 @@
 
 /**
  * The deep link parameters.
- * @export
- * @interface DeepLinkDto
  */
 export interface DeepLinkDto {
     /**
      * The Android package name.
-     * @type {string}
-     * @memberof DeepLinkDto
      */
     'androidPackageName': string | null;
     /**
      * The deep link URL.
-     * @type {string}
-     * @memberof DeepLinkDto
      */
     'url': string | null;
     /**
      * The deep link IOS package ID.
-     * @type {string}
-     * @memberof DeepLinkDto
      */
     'iosPackageId': string | null;
 }

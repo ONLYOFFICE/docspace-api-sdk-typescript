@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +22,6 @@
 /**
  * @type CopyAsJsonElementDestFolderId
  * The destination folder ID of the copied file.
- * @export
  */
 export type CopyAsJsonElementDestFolderId = number | string;
 

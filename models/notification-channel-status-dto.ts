@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,14 +24,10 @@ import type { NotificationChannelDto } from './notification-channel-dto';
 
 /**
  * The notification channel settings.
- * @export
- * @interface NotificationChannelStatusDto
  */
 export interface NotificationChannelStatusDto {
     /**
      * The list of notification channels.
-     * @type {Array<NotificationChannelDto>}
-     * @memberof NotificationChannelStatusDto
      */
     'channels'?: Array<NotificationChannelDto> | null;
 }

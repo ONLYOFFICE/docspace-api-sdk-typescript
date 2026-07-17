@@ -1,6 +1,8 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,38 +21,26 @@
 
 /**
  * The configuration parameters of the user currently viewing or editing the document.
- * @export
- * @interface UserConfig
  */
 export interface UserConfig {
     /**
      * The user ID.
-     * @type {string}
-     * @memberof UserConfig
      */
     'id'?: string | null;
     /**
      * The full name of the user.
-     * @type {string}
-     * @memberof UserConfig
      */
     'name'?: string | null;
     /**
      * The path to the user\'s avatar.
-     * @type {string}
-     * @memberof UserConfig
      */
     'image'?: string | null;
     /**
      * Roles
-     * @type {Array<string>}
-     * @memberof UserConfig
      */
     'roles'?: Array<string> | null;
     /**
-     * 
-     * @type {string}
-     * @memberof UserConfig
+     * Customer identifier associated with the user.
      */
     'customerId'?: string | null;
 }

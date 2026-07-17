@@ -1,6 +1,6 @@
 /**
  *
- * (c) Copyright Ascensio System SIA 2025
+ * (c) Copyright Ascensio System SIA 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import type { Configuration } from '../../configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -130,17 +129,31 @@ export const SecurityAccessToDevToolsApiFactory = function (configuration?: Conf
         /**
          * Sets the Developer Tools access settings for the portal.
          * @summary Set the Developer Tools access settings
-         * @param {TenantDevToolsAccessSettingsDto} [tenantDevToolsAccessSettingsDto] 
+         * @param {SecurityAccessToDevToolsApiSetTenantDevToolsAccessSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setTenantDevToolsAccessSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-dev-tools-access-settings/
          * @throws {RequiredError}
          */
-        setTenantDevToolsAccessSettings(tenantDevToolsAccessSettingsDto?: TenantDevToolsAccessSettingsDto, options?: RawAxiosRequestConfig): AxiosPromise<TenantDevToolsAccessSettingsWrapper> {
-            return localVarFp.setTenantDevToolsAccessSettings(tenantDevToolsAccessSettingsDto, options).then((request) => request(axios, basePath));
+        setTenantDevToolsAccessSettings(requestParameters: SecurityAccessToDevToolsApiSetTenantDevToolsAccessSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantDevToolsAccessSettingsWrapper> {
+            return localVarFp.setTenantDevToolsAccessSettings(requestParameters.tenantDevToolsAccessSettingsDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for setTenantDevToolsAccessSettings operation in SecurityAccessToDevToolsApi.
+ * @export
+ * @interface SecurityAccessToDevToolsApiSetTenantDevToolsAccessSettingsRequest
+ */
+export interface SecurityAccessToDevToolsApiSetTenantDevToolsAccessSettingsRequest {
+    /**
+     * 
+     * @type {TenantDevToolsAccessSettingsDto}
+     * @memberof SecurityAccessToDevToolsApiSetTenantDevToolsAccessSettings
+     */
+    readonly tenantDevToolsAccessSettingsDto?: TenantDevToolsAccessSettingsDto
+}
 
 /**
  * SecurityAccessToDevToolsApi - object-oriented interface
@@ -152,13 +165,13 @@ export class SecurityAccessToDevToolsApi extends BaseAPI {
     /**
      * Sets the Developer Tools access settings for the portal.
      * @summary Set the Developer Tools access settings
-     * @param {TenantDevToolsAccessSettingsDto} [tenantDevToolsAccessSettingsDto] 
+     * @param {SecurityAccessToDevToolsApiSetTenantDevToolsAccessSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SecurityAccessToDevToolsApi
      */
-    public setTenantDevToolsAccessSettings(tenantDevToolsAccessSettingsDto?: TenantDevToolsAccessSettingsDto, options?: RawAxiosRequestConfig) {
-        return SecurityAccessToDevToolsApiFp(this.configuration).setTenantDevToolsAccessSettings(tenantDevToolsAccessSettingsDto, options).then((request) => request(this.axios, this.basePath));
+    public setTenantDevToolsAccessSettings(requestParameters: SecurityAccessToDevToolsApiSetTenantDevToolsAccessSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return SecurityAccessToDevToolsApiFp(this.configuration).setTenantDevToolsAccessSettings(requestParameters.tenantDevToolsAccessSettingsDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
