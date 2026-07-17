@@ -26,6 +26,10 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { AiSettingsWrapper } from '../../models';
 // @ts-ignore
+import type { AiUserSettingsWrapper } from '../../models';
+// @ts-ignore
+import type { SetAiUserSettingsRequestDto } from '../../models';
+// @ts-ignore
 import type { SetEmbeddingConfigRequestBody } from '../../models';
 // @ts-ignore
 import type { SetWebSearchSettingsRequestBody } from '../../models';
@@ -52,6 +56,58 @@ export const SettingsApiAxiosParamCreator = function (configuration?: Configurat
         getAiSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/ai/config`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Retrieves the current user\'s AI settings, including the recommended model banner visibility preference.
+         * @summary Get per-user AI settings
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getAiUserSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-ai-user-settings/
+         */
+        getAiUserSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/ai/config/user`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -191,6 +247,62 @@ export const SettingsApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Updates the current user\'s AI recommended model banner visibility preferences.  Each user\'s settings are stored independently.
+         * @summary Update per-user AI settings
+         * @param {SetAiUserSettingsRequestDto} [setAiUserSettingsRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setAiUserSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-ai-user-settings/
+         */
+        setAiUserSettings: async (setAiUserSettingsRequestDto?: SetAiUserSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/ai/config/user`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(setAiUserSettingsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -338,6 +450,20 @@ export const SettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Retrieves the current user\'s AI settings, including the recommended model banner visibility preference.
+         * @summary Get per-user AI settings
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getAiUserSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-ai-user-settings/
+         */
+        async getAiUserSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiUserSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAiUserSettings(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SettingsApi.getAiUserSettings']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Retrieves the current embedding provider settings used for document vectorization,  including the configured provider type and whether the API key needs to be reset.
          * @summary Get vectorization settings
          * @param {*} [options] Override http request option.
@@ -363,6 +489,21 @@ export const SettingsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getWebSearchSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SettingsApi.getWebSearchSettings']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Updates the current user\'s AI recommended model banner visibility preferences.  Each user\'s settings are stored independently.
+         * @summary Update per-user AI settings
+         * @param {SetAiUserSettingsRequestDto} [setAiUserSettingsRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setAiUserSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-ai-user-settings/
+         */
+        async setAiUserSettings(setAiUserSettingsRequestDto?: SetAiUserSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiUserSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setAiUserSettings(setAiUserSettingsRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SettingsApi.setAiUserSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -417,6 +558,17 @@ export const SettingsApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.getAiSettings(options).then((request) => request(axios, basePath));
         },
         /**
+         * Retrieves the current user\'s AI settings, including the recommended model banner visibility preference.
+         * @summary Get per-user AI settings
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getAiUserSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-ai-user-settings/
+         * @throws {RequiredError}
+         */
+        getAiUserSettings(options?: RawAxiosRequestConfig): AxiosPromise<AiUserSettingsWrapper> {
+            return localVarFp.getAiUserSettings(options).then((request) => request(axios, basePath));
+        },
+        /**
          * Retrieves the current embedding provider settings used for document vectorization,  including the configured provider type and whether the API key needs to be reset.
          * @summary Get vectorization settings
          * @param {*} [options] Override http request option.
@@ -437,6 +589,18 @@ export const SettingsApiFactory = function (configuration?: Configuration, baseP
          */
         getWebSearchSettings(options?: RawAxiosRequestConfig): AxiosPromise<WebSearchSettingsWrapper> {
             return localVarFp.getWebSearchSettings(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Updates the current user\'s AI recommended model banner visibility preferences.  Each user\'s settings are stored independently.
+         * @summary Update per-user AI settings
+         * @param {SettingsApiSetAiUserSettingsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for setAiUserSettings operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-ai-user-settings/
+         * @throws {RequiredError}
+         */
+        setAiUserSettings(requestParameters: SettingsApiSetAiUserSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<AiUserSettingsWrapper> {
+            return localVarFp.setAiUserSettings(requestParameters.setAiUserSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Configures the embedding provider used for document vectorization at the portal level.  Vectorization enables semantic search and knowledge retrieval capabilities in AI chat sessions.  Allows selecting the embedding provider type and providing the API key for the chosen provider.  Only portal administrators can modify these settings.
@@ -464,6 +628,20 @@ export const SettingsApiFactory = function (configuration?: Configuration, baseP
         },
     };
 };
+
+/**
+ * Request parameters for setAiUserSettings operation in SettingsApi.
+ * @export
+ * @interface SettingsApiSetAiUserSettingsRequest
+ */
+export interface SettingsApiSetAiUserSettingsRequest {
+    /**
+     * 
+     * @type {SetAiUserSettingsRequestDto}
+     * @memberof SettingsApiSetAiUserSettings
+     */
+    readonly setAiUserSettingsRequestDto?: SetAiUserSettingsRequestDto
+}
 
 /**
  * Request parameters for setVectorizationSettings operation in SettingsApi.
@@ -512,6 +690,17 @@ export class SettingsApi extends BaseAPI {
     }
 
     /**
+     * Retrieves the current user\'s AI settings, including the recommended model banner visibility preference.
+     * @summary Get per-user AI settings
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SettingsApi
+     */
+    public getAiUserSettings(options?: RawAxiosRequestConfig) {
+        return SettingsApiFp(this.configuration).getAiUserSettings(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Retrieves the current embedding provider settings used for document vectorization,  including the configured provider type and whether the API key needs to be reset.
      * @summary Get vectorization settings
      * @param {*} [options] Override http request option.
@@ -531,6 +720,18 @@ export class SettingsApi extends BaseAPI {
      */
     public getWebSearchSettings(options?: RawAxiosRequestConfig) {
         return SettingsApiFp(this.configuration).getWebSearchSettings(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Updates the current user\'s AI recommended model banner visibility preferences.  Each user\'s settings are stored independently.
+     * @summary Update per-user AI settings
+     * @param {AISettingsApiSetAiUserSettingsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SettingsApi
+     */
+    public setAiUserSettings(requestParameters: SettingsApiSetAiUserSettingsRequest = {}, options?: RawAxiosRequestConfig) {
+        return SettingsApiFp(this.configuration).setAiUserSettings(requestParameters.setAiUserSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **generateFormToolName** | **string** | The tool name used by the AI assistant to launch form creation in the editor. | [default to undefined]
 **generatePresentationToolName** | **string** | The tool name used by the AI assistant to launch presentation creation in the editor. | [default to undefined]
 **systemAiEnabled** | **boolean** | Indicates whether the system-level AI provider is enabled. | [optional] [default to undefined]
+**recommendedModelForForms** | **string** | The identifier of the model recommended for form generation. | [optional] [default to undefined]
 
 ## Example
 
@@ -45,6 +46,7 @@ const instance: AiSettingsDto = {
     generateFormToolName,
     generatePresentationToolName,
     systemAiEnabled,
+    recommendedModelForForms,
 };
 ```
 

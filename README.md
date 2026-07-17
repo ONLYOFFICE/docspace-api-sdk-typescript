@@ -112,6 +112,17 @@ Authentication schemes defined for the API:
 - **Location**: Cookie
 
 
+## Rate Limiting
+
+All API responses may include the following rate limiting headers:
+
+| Header | Description |
+|--------|-------------|
+| `X-RateLimit-Limit` | Sliding window rate limit: 1500 requests per minute per user/IP. |
+| `X-RateLimit-Remaining` | Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. |
+| `X-RateLimit-Reset` | Unix timestamp (seconds) when the current sliding window rate limit resets. |
+| `Retry-After` | Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). |
+
 ### Documentation for API Endpoints
 
 All URIs are relative to *https://your-docspace.onlyoffice.com*
@@ -377,6 +388,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get AI settings</td>
       </tr>
       <tr>
+        <td><a href="docs/AISettingsApi.md#getaiusersettings"><strong>getAiUserSettings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/config/user</td>
+        <td>Get per-user AI settings</td>
+      </tr>
+      <tr>
         <td><a href="docs/AISettingsApi.md#getvectorizationsettings"><strong>getVectorizationSettings</strong></a></td>
         <td><strong>GET</strong> /api/2.0/ai/config/vectorization</td>
         <td>Get vectorization settings</td>
@@ -385,6 +401,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td><a href="docs/AISettingsApi.md#getwebsearchsettings"><strong>getWebSearchSettings</strong></a></td>
         <td><strong>GET</strong> /api/2.0/ai/config/web-search</td>
         <td>Get web search settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AISettingsApi.md#setaiusersettings"><strong>setAiUserSettings</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/config/user</td>
+        <td>Update per-user AI settings</td>
       </tr>
       <tr>
         <td><a href="docs/AISettingsApi.md#setvectorizationsettings"><strong>setVectorizationSettings</strong></a></td>
@@ -3558,6 +3579,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [AiProviderWrapper](docs/AiProviderWrapper.md)
  - [AiSettingsDto](docs/AiSettingsDto.md)
  - [AiSettingsWrapper](docs/AiSettingsWrapper.md)
+ - [AiUserSettingsDto](docs/AiUserSettingsDto.md)
+ - [AiUserSettingsWrapper](docs/AiUserSettingsWrapper.md)
  - [AiWebSearchPricing](docs/AiWebSearchPricing.md)
  - [AnonymousConfigDto](docs/AnonymousConfigDto.md)
  - [ApiDateTime](docs/ApiDateTime.md)
@@ -4101,6 +4124,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [ServicePayment](docs/ServicePayment.md)
  - [ServicePaymentWrapper](docs/ServicePaymentWrapper.md)
  - [SessionRequest](docs/SessionRequest.md)
+ - [SetAiUserSettingsRequestDto](docs/SetAiUserSettingsRequestDto.md)
  - [SetDefaultProviderRequestDto](docs/SetDefaultProviderRequestDto.md)
  - [SetEmbeddingConfigRequestBody](docs/SetEmbeddingConfigRequestBody.md)
  - [SetManagerRequest](docs/SetManagerRequest.md)

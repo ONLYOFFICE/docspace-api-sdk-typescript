@@ -87,5 +87,9 @@ export interface AiSettingsDto {
      * Indicates whether the system-level AI provider is enabled.
      */
     'systemAiEnabled'?: boolean;
+    /**
+     * The identifier of the model recommended for form generation.
+     */
+    'recommendedModelForForms'?: string | null;
 }
 
