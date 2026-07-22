@@ -6,7 +6,7 @@ The request parameters for generating a report on client operations.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**serviceName** | **string** | The service name. | [optional] [default to undefined]
+**serviceName** | **Array&lt;string&gt;** | The service name list. A single string is also accepted for backward compatibility. | [optional] [default to undefined]
 **startDate** | **string** | The report start date. | [optional] [default to undefined]
 **endDate** | **string** | The report end date. | [optional] [default to undefined]
 **participantName** | **string** | The participant name. | [optional] [default to undefined]

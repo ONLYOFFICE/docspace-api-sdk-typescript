@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **createUrl** | **string** | The creation URL of the editor. | [optional] [default to undefined]
 **customization** | [**CustomizationConfigDto**](CustomizationConfigDto.md) |  | [optional] [default to undefined]
 **embedded** | [**EmbeddedConfig**](EmbeddedConfig.md) |  | [optional] [default to undefined]
-**encryptionKeys** | [**EncryptionKeysConfig**](EncryptionKeysConfig.md) |  | [optional] [default to undefined]
+**encryptionKeys** | [**Array&lt;EncryptionKeyDto&gt;**](EncryptionKeyDto.md) | The encryption keys of the editor configuration. | [optional] [default to undefined]
 **lang** | **string** | The language of the editor configuration. | [default to undefined]
 **mode** | **string** | The mode of the editor configuration. | [default to undefined]
 **modeWrite** | **boolean** | Specifies if the mode is write of the editor configuration. | [optional] [default to undefined]

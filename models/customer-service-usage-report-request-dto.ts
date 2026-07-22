@@ -1,0 +1,61 @@
+/* tslint:disable */
+/* eslint-disable */
+/**
+ *
+ * (c) Copyright Ascensio System SIA 2026
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+// May contain unused imports in some cases
+// @ts-ignore
+import type { OperationOrderType } from './operation-order-type';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { OperationStatus } from './operation-status';
+
+/**
+ * The request parameters for generating a customer service usage report.
+ */
+export interface CustomerServiceUsageReportRequestDto {
+    /**
+     * The service name list. A single string is also accepted for backward compatibility.
+     */
+    'serviceName'?: Array<string> | null;
+    /**
+     * The report start date.
+     */
+    'startDate'?: string | null;
+    /**
+     * The report end date.
+     */
+    'endDate'?: string | null;
+    /**
+     * The participant name.
+     */
+    'participantName'?: string | null;
+    'status'?: OperationStatus;
+    /**
+     * Metadata key-value pairs to filter by.
+     */
+    'metadata'?: { [key: string]: string | null; } | null;
+    /**
+     * The field to order by.
+     */
+    'orderBy'?: string | null;
+    'orderType'?: OperationOrderType;
+}
+
+
+

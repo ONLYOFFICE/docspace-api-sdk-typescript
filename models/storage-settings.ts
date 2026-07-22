@@ -18,15 +18,10 @@
  *
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { BaseStorageSettingsStorageSettings } from './base-storage-settings-storage-settings';
 
-/**
- * @type StorageSettings
- * @export
- */
-export type StorageSettings = BaseStorageSettingsStorageSettings &  {
-};
-
+export interface StorageSettings {
+    'module'?: string | null;
+    'props'?: { [key: string]: string | null; } | null;
+    'lastModified'?: string;
+}
 

@@ -26,14 +26,14 @@ export interface SalesRequestsDto {
     /**
      * The name of the user submitting the sales request.
      */
-    'userName'?: string | null;
+    'userName': string;
     /**
      * The contact email address for the sales inquiry.
      */
-    'email': string | null;
+    'email': string;
     /**
      * The details of the sales inquiry or payment request.
      */
-    'message': string | null;
+    'message': string;
 }
 

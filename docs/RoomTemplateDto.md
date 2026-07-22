@@ -7,7 +7,7 @@ The room template parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **roomId** | **number** | The room template ID. | [default to undefined]
-**title** | **string** | The room template title. | [optional] [default to undefined]
+**title** | **string** | The room template title. | [default to undefined]
 **logo** | [**LogoRequest**](LogoRequest.md) |  | [optional] [default to undefined]
 **copyLogo** | **boolean** | Specifies whether to copy room logo or not. | [optional] [default to undefined]
 **share** | **Array&lt;string&gt;** | The collection of email addresses of users with whom to share a room. | [optional] [default to undefined]

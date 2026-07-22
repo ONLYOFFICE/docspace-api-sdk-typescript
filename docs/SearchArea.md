@@ -1,6 +1,6 @@
 # SearchArea
 
-[0 - Active, 1 - Archive, 2 - Any, 3 - Recent by links, 4 - Template, 5 - Knowledge, 6 - Result storage, 7 - AiAgents]
+[0 - Active, 1 - Archive, 2 - Any, 3 - Recent by links, 4 - Template, 5 - Knowledge, 6 - Result storage, 7 - AiAgents, 8 - Forms, 9 - Form templates]
 
 ## Enum
 
@@ -19,5 +19,9 @@
 * `ResultStorage` (value: `6`)
 
 * `AiAgents` (value: `7`)
+
+* `Forms` (value: `8`)
+
+* `FormTemplates` (value: `9`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

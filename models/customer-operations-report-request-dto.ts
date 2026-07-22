@@ -33,9 +33,9 @@ import type { OperationType } from './operation-type';
  */
 export interface CustomerOperationsReportRequestDto {
     /**
-     * The service name.
+     * The service name list. A single string is also accepted for backward compatibility.
      */
-    'serviceName'?: string | null;
+    'serviceName'?: Array<string> | null;
     /**
      * The report start date.
      */

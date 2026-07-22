@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **cover** | **string** | The room cover. | [optional] [default to undefined]
 **_private** | **boolean** | Specifies whether the room to be created is private or not. | [optional] [default to undefined]
 **share** | [**Array&lt;FileShareParams&gt;**](FileShareParams.md) | The collection of sharing parameters. | [optional] [default to undefined]
-**chatSettings** | [**ChatSettings**](ChatSettings.md) |  | [default to undefined]
+**chatSettings** | [**ChatSettings**](ChatSettings.md) |  | [optional] [default to undefined]
 **attachDefaultTools** | **boolean** | Specifies whether to attach default tools to the agent or not. | [optional] [default to undefined]
 
 ## Example

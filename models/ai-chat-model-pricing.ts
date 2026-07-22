@@ -27,6 +27,7 @@ export interface AiChatModelPricing {
     'alias'?: string | null;
     'ownedBy'?: string | null;
     'provider'?: string | null;
+    'link'?: string | null;
     'price': AiChatPrice;
 }
 

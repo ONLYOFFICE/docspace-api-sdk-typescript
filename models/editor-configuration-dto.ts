@@ -29,7 +29,7 @@ import type { CustomizationConfigDto } from './customization-config-dto';
 import type { EmbeddedConfig } from './embedded-config';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { EncryptionKeysConfig } from './encryption-keys-config';
+import type { EncryptionKeyDto } from './encryption-key-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { PluginsConfig } from './plugins-config';
@@ -58,7 +58,10 @@ export interface EditorConfigurationDto {
     'createUrl'?: string | null;
     'customization'?: CustomizationConfigDto;
     'embedded'?: EmbeddedConfig;
-    'encryptionKeys'?: EncryptionKeysConfig;
+    /**
+     * The encryption keys of the editor configuration.
+     */
+    'encryptionKeys'?: Array<EncryptionKeyDto> | null;
     /**
      * The language of the editor configuration.
      */

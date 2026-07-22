@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **settings** | **string** | The web plugin settings. | [default to undefined]
 **nameLocale** | **{ [key: string]: string | null; }** | The web plugin localized name. | [optional] [default to undefined]
 **descriptionLocale** | **{ [key: string]: string | null; }** | The web plugin localized description. | [optional] [default to undefined]
+**runtime** | **string** | The web plugin loading method | [optional] [default to undefined]
 
 ## Example
 
@@ -51,6 +52,7 @@ const instance: WebPluginDto = {
     settings,
     nameLocale,
     descriptionLocale,
+    runtime,
 };
 ```
 

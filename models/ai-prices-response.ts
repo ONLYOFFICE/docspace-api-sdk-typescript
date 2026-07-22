@@ -26,6 +26,9 @@ import type { AiChatModelPricing } from './ai-chat-model-pricing';
 import type { AiEmbeddingModelPricing } from './ai-embedding-model-pricing';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { AiImageModelPricing } from './ai-image-model-pricing';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { AiWebSearchPricing } from './ai-web-search-pricing';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -34,7 +37,8 @@ import type { CurrencyInfo } from './currency-info';
 export interface AiPricesResponse {
     'chat': Array<AiChatModelPricing> | null;
     'embedding': Array<AiEmbeddingModelPricing> | null;
-    'webSearch': AiWebSearchPricing;
+    'image': Array<AiImageModelPricing> | null;
+    'search': Array<AiWebSearchPricing> | null;
     'currency': CurrencyInfo;
 }
 

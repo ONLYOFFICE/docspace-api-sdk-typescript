@@ -24,6 +24,8 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
+import type { AccessRequestKeyDto } from '../../models';
+// @ts-ignore
 import type { ApiDateTime } from '../../models';
 // @ts-ignore
 import type { BaseBatchRequestDto } from '../../models';
@@ -55,6 +57,8 @@ import type { EditHistoryArrayWrapper } from '../../models';
 import type { EditHistoryDataWrapper } from '../../models';
 // @ts-ignore
 import type { EditorType } from '../../models';
+// @ts-ignore
+import type { FileEncryptionInfoWrapper } from '../../models';
 // @ts-ignore
 import type { FileEntryBaseWrapper } from '../../models';
 // @ts-ignore
@@ -1287,6 +1291,62 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
+         * Returns the encryption information for a file with the specified identifier, including user encryption keys and file-specific encryption keys.
+         * @summary Get file encryption information
+         * @param {number} fileId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getEncryptionInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-encryption-info/
+         */
+        getEncryptionInfo: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'fileId' is not null or undefined
+            assertParamExists('getEncryptionInfo', 'fileId', fileId)
+
+            const localVarPath = `/api/2.0/files/{fileId}/access`
+                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns the list of actions performed on the file with the specified identifier.
          * @summary Get file history
          * @param {number} fileId The file ID of the history request.
@@ -2480,6 +2540,66 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
+         * Sets or updates the encryption keys for a file with the specified identifier. This allows updating the file\'s encryption configuration.
+         * @summary Set file encryption information
+         * @param {number} fileId File ID
+         * @param {Array<AccessRequestKeyDto>} [accessRequestKeyDto] Collection of encryption key data for users with access to the file
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setEncryptionInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-encryption-info/
+         */
+        setEncryptionInfo: async (fileId: number, accessRequestKeyDto?: Array<AccessRequestKeyDto>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'fileId' is not null or undefined
+            assertParamExists('setEncryptionInfo', 'fileId', fileId)
+
+            const localVarPath = `/api/2.0/files/{fileId}/access`
+                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(accessRequestKeyDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Sets an external link to a file with the ID specified in the request.
          * @summary Set an external link
          * @param {number} id The file ID.
@@ -3249,6 +3369,21 @@ export const FilesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns the encryption information for a file with the specified identifier, including user encryption keys and file-specific encryption keys.
+         * @summary Get file encryption information
+         * @param {number} fileId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getEncryptionInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-encryption-info/
+         */
+        async getEncryptionInfo(fileId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileEncryptionInfoWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getEncryptionInfo(fileId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesApi.getEncryptionInfo']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns the list of actions performed on the file with the specified identifier.
          * @summary Get file history
          * @param {number} fileId The file ID of the history request.
@@ -3586,6 +3721,22 @@ export const FilesApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setCustomFilterTag(fileId, customFilterParameters, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.setCustomFilterTag']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Sets or updates the encryption keys for a file with the specified identifier. This allows updating the file\'s encryption configuration.
+         * @summary Set file encryption information
+         * @param {number} fileId File ID
+         * @param {Array<AccessRequestKeyDto>} [accessRequestKeyDto] Collection of encryption key data for users with access to the file
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setEncryptionInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-encryption-info/
+         */
+        async setEncryptionInfo(fileId: number, accessRequestKeyDto?: Array<AccessRequestKeyDto>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setEncryptionInfo(fileId, accessRequestKeyDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesApi.setEncryptionInfo']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -3979,6 +4130,18 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.getEditHistory(requestParameters.fileId, options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns the encryption information for a file with the specified identifier, including user encryption keys and file-specific encryption keys.
+         * @summary Get file encryption information
+         * @param {FilesApiGetEncryptionInfoRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getEncryptionInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-encryption-info/
+         * @throws {RequiredError}
+         */
+        getEncryptionInfo(requestParameters: FilesApiGetEncryptionInfoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileEncryptionInfoWrapper> {
+            return localVarFp.getEncryptionInfo(requestParameters.fileId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns the list of actions performed on the file with the specified identifier.
          * @summary Get file history
          * @param {FilesApiGetFileHistoryRequest} requestParameters Request parameters.
@@ -4229,6 +4392,18 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          */
         setCustomFilterTag(requestParameters: FilesApiSetCustomFilterTagRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
             return localVarFp.setCustomFilterTag(requestParameters.fileId, requestParameters.customFilterParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Sets or updates the encryption keys for a file with the specified identifier. This allows updating the file\'s encryption configuration.
+         * @summary Set file encryption information
+         * @param {FilesApiSetEncryptionInfoRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for setEncryptionInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-encryption-info/
+         * @throws {RequiredError}
+         */
+        setEncryptionInfo(requestParameters: FilesApiSetEncryptionInfoRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.setEncryptionInfo(requestParameters.fileId, requestParameters.accessRequestKeyDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Sets an external link to a file with the ID specified in the request.
@@ -4696,6 +4871,20 @@ export interface FilesApiGetEditHistoryRequest {
      * The file unique identifier.
      * @type {number}
      * @memberof FilesApiGetEditHistory
+     */
+    readonly fileId: number
+}
+
+/**
+ * Request parameters for getEncryptionInfo operation in FilesApi.
+ * @export
+ * @interface FilesApiGetEncryptionInfoRequest
+ */
+export interface FilesApiGetEncryptionInfoRequest {
+    /**
+     * 
+     * @type {number}
+     * @memberof FilesApiGetEncryptionInfo
      */
     readonly fileId: number
 }
@@ -5170,6 +5359,27 @@ export interface FilesApiSetCustomFilterTagRequest {
 }
 
 /**
+ * Request parameters for setEncryptionInfo operation in FilesApi.
+ * @export
+ * @interface FilesApiSetEncryptionInfoRequest
+ */
+export interface FilesApiSetEncryptionInfoRequest {
+    /**
+     * File ID
+     * @type {number}
+     * @memberof FilesApiSetEncryptionInfo
+     */
+    readonly fileId: number
+
+    /**
+     * Collection of encryption key data for users with access to the file
+     * @type {Array<AccessRequestKeyDto>}
+     * @memberof FilesApiSetEncryptionInfo
+     */
+    readonly accessRequestKeyDto?: Array<AccessRequestKeyDto>
+}
+
+/**
  * Request parameters for setFileExternalLink operation in FilesApi.
  * @export
  * @interface FilesApiSetFileExternalLinkRequest
@@ -5597,6 +5807,18 @@ export class FilesApi extends BaseAPI {
     }
 
     /**
+     * Returns the encryption information for a file with the specified identifier, including user encryption keys and file-specific encryption keys.
+     * @summary Get file encryption information
+     * @param {FilesFilesApiGetEncryptionInfoRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesApi
+     */
+    public getEncryptionInfo(requestParameters: FilesApiGetEncryptionInfoRequest, options?: RawAxiosRequestConfig) {
+        return FilesApiFp(this.configuration).getEncryptionInfo(requestParameters.fileId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Returns the list of actions performed on the file with the specified identifier.
      * @summary Get file history
      * @param {FilesFilesApiGetFileHistoryRequest} requestParameters Request parameters.
@@ -5846,6 +6068,18 @@ export class FilesApi extends BaseAPI {
      */
     public setCustomFilterTag(requestParameters: FilesApiSetCustomFilterTagRequest, options?: RawAxiosRequestConfig) {
         return FilesApiFp(this.configuration).setCustomFilterTag(requestParameters.fileId, requestParameters.customFilterParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Sets or updates the encryption keys for a file with the specified identifier. This allows updating the file\'s encryption configuration.
+     * @summary Set file encryption information
+     * @param {FilesFilesApiSetEncryptionInfoRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesApi
+     */
+    public setEncryptionInfo(requestParameters: FilesApiSetEncryptionInfoRequest, options?: RawAxiosRequestConfig) {
+        return FilesApiFp(this.configuration).setEncryptionInfo(requestParameters.fileId, requestParameters.accessRequestKeyDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

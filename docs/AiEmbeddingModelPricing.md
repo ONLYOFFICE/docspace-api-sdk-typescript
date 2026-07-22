@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **alias** | **string** |  | [optional] [default to undefined]
 **ownedBy** | **string** |  | [optional] [default to undefined]
 **provider** | **string** |  | [optional] [default to undefined]
+**link** | **string** |  | [optional] [default to undefined]
 **price** | [**AiEmbeddingPrice**](AiEmbeddingPrice.md) |  | [default to undefined]
 
 ## Example
@@ -21,6 +22,7 @@ const instance: AiEmbeddingModelPricing = {
     alias,
     ownedBy,
     provider,
+    link,
     price,
 };
 ```

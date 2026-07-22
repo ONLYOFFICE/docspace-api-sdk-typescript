@@ -42,8 +42,6 @@ import type { QuotaFilter } from '../../models';
 // @ts-ignore
 import type { SortOrder } from '../../models';
 // @ts-ignore
-import type { SubjectFilter } from '../../models';
-// @ts-ignore
 import type { UpdateRoomRequest } from '../../models';
 // @ts-ignore
 import type { UpdateRoomsQuotaRequestDtoInteger } from '../../models';
@@ -71,7 +69,7 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
          */
         createAgent: async (createAgentRequestDto?: CreateAgentRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
-            const localVarPath = `/api/2.0/ai/agents`;
+            const localVarPath = `/internal/ai/integration/agents`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -132,7 +130,7 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
             // verify required parameter 'deleteRoomRequest' is not null or undefined
             assertParamExists('deleteAgent', 'deleteRoomRequest', deleteRoomRequest)
 
-            const localVarPath = `/api/2.0/ai/agents/{id}`
+            const localVarPath = `/internal/ai/integration/agents/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -191,7 +189,7 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getAgentInfo', 'id', id)
 
-            const localVarPath = `/api/2.0/ai/agents/{id}`
+            const localVarPath = `/internal/ai/integration/agents/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -242,7 +240,6 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {boolean} [withoutTags] Specifies whether to search by tags or not.
          * @param {string} [tags] The tags in the serialized format.
          * @param {boolean} [excludeSubject] Specifies whether to exclude search by user or group ID.
-         * @param {SubjectFilter} [subjectFilter] The filter by user (Owner - 0, Member - 1).
          * @param {QuotaFilter} [quotaFilter] The filter by quota (All - 0, Default - 1, Custom - 2).
          * @param {number} [count] Specifies the maximum number of items to retrieve.
          * @param {number} [startIndex] The index from which to start retrieving the room content.
@@ -254,9 +251,9 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
          * REST API Reference for getAgents operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-agents/
          */
-        getAgents: async (subjectId?: string, subjectOwnerId?: string, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAgents: async (subjectId?: string, subjectOwnerId?: string, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, quotaFilter?: QuotaFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
-            const localVarPath = `/api/2.0/ai/agents`;
+            const localVarPath = `/internal/ai/integration/agents`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -307,10 +304,6 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
                 localVarQueryParameter['excludeSubject'] = excludeSubject;
             }
 
-            if (subjectFilter !== undefined) {
-                localVarQueryParameter['subjectFilter'] = subjectFilter;
-            }
-
             if (quotaFilter !== undefined) {
                 localVarQueryParameter['quotaFilter'] = quotaFilter;
             }
@@ -359,7 +352,7 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
          */
         getAgentsNewItems: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
-            const localVarPath = `/api/2.0/ai/agents/news`;
+            const localVarPath = `/internal/ai/integration/agents/news`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -412,7 +405,7 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
          */
         resetAgentsQuota: async (updateRoomsRoomIdsRequestDtoInteger?: UpdateRoomsRoomIdsRequestDtoInteger, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
-            const localVarPath = `/api/2.0/ai/agents/resetquota`;
+            const localVarPath = `/internal/ai/integration/agents/resetquota`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -473,7 +466,7 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
             // verify required parameter 'updateRoomRequest' is not null or undefined
             assertParamExists('updateAgent', 'updateRoomRequest', updateRoomRequest)
 
-            const localVarPath = `/api/2.0/ai/agents/{id}`
+            const localVarPath = `/internal/ai/integration/agents/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -530,7 +523,7 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
          */
         updateAgentsQuota: async (updateRoomsQuotaRequestDtoInteger?: UpdateRoomsQuotaRequestDtoInteger, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
-            const localVarPath = `/api/2.0/ai/agents/agentquota`;
+            const localVarPath = `/internal/ai/integration/agents/agentquota`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -639,7 +632,6 @@ export const AgentsApiFp = function(configuration?: Configuration) {
          * @param {boolean} [withoutTags] Specifies whether to search by tags or not.
          * @param {string} [tags] The tags in the serialized format.
          * @param {boolean} [excludeSubject] Specifies whether to exclude search by user or group ID.
-         * @param {SubjectFilter} [subjectFilter] The filter by user (Owner - 0, Member - 1).
          * @param {QuotaFilter} [quotaFilter] The filter by quota (All - 0, Default - 1, Custom - 2).
          * @param {number} [count] Specifies the maximum number of items to retrieve.
          * @param {number} [startIndex] The index from which to start retrieving the room content.
@@ -651,8 +643,8 @@ export const AgentsApiFp = function(configuration?: Configuration) {
          * REST API Reference for getAgents operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-agents/
          */
-        async getAgents(subjectId?: string, subjectOwnerId?: string, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAgents(subjectId, subjectOwnerId, withoutTags, tags, excludeSubject, subjectFilter, quotaFilter, count, startIndex, sortBy, sortOrder, filterValue, options);
+        async getAgents(subjectId?: string, subjectOwnerId?: string, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, quotaFilter?: QuotaFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAgents(subjectId, subjectOwnerId, withoutTags, tags, excludeSubject, quotaFilter, count, startIndex, sortBy, sortOrder, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AgentsApi.getAgents']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -773,7 +765,7 @@ export const AgentsApiFactory = function (configuration?: Configuration, basePat
          * @throws {RequiredError}
          */
         getAgents(requestParameters: AgentsApiGetAgentsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
-            return localVarFp.getAgents(requestParameters.subjectId, requestParameters.subjectOwnerId, requestParameters.withoutTags, requestParameters.tags, requestParameters.excludeSubject, requestParameters.subjectFilter, requestParameters.quotaFilter, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(axios, basePath));
+            return localVarFp.getAgents(requestParameters.subjectId, requestParameters.subjectOwnerId, requestParameters.withoutTags, requestParameters.tags, requestParameters.excludeSubject, requestParameters.quotaFilter, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the room new items.
@@ -914,13 +906,6 @@ export interface AgentsApiGetAgentsRequest {
      * @memberof AgentsApiGetAgents
      */
     readonly excludeSubject?: boolean
-
-    /**
-     * The filter by user (Owner - 0, Member - 1).
-     * @type {SubjectFilter}
-     * @memberof AgentsApiGetAgents
-     */
-    readonly subjectFilter?: SubjectFilter
 
     /**
      * The filter by quota (All - 0, Default - 1, Custom - 2).
@@ -1066,7 +1051,7 @@ export class AgentsApi extends BaseAPI {
      * @memberof AgentsApi
      */
     public getAgents(requestParameters: AgentsApiGetAgentsRequest = {}, options?: RawAxiosRequestConfig) {
-        return AgentsApiFp(this.configuration).getAgents(requestParameters.subjectId, requestParameters.subjectOwnerId, requestParameters.withoutTags, requestParameters.tags, requestParameters.excludeSubject, requestParameters.subjectFilter, requestParameters.quotaFilter, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
+        return AgentsApiFp(this.configuration).getAgents(requestParameters.subjectId, requestParameters.subjectOwnerId, requestParameters.withoutTags, requestParameters.tags, requestParameters.excludeSubject, requestParameters.quotaFilter, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

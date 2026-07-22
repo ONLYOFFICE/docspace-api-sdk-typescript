@@ -7,7 +7,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **chat** | [**Array&lt;AiChatModelPricing&gt;**](AiChatModelPricing.md) |  | [default to undefined]
 **embedding** | [**Array&lt;AiEmbeddingModelPricing&gt;**](AiEmbeddingModelPricing.md) |  | [default to undefined]
-**webSearch** | [**AiWebSearchPricing**](AiWebSearchPricing.md) |  | [default to undefined]
+**image** | [**Array&lt;AiImageModelPricing&gt;**](AiImageModelPricing.md) |  | [default to undefined]
+**search** | [**Array&lt;AiWebSearchPricing&gt;**](AiWebSearchPricing.md) |  | [default to undefined]
 **currency** | [**CurrencyInfo**](CurrencyInfo.md) |  | [default to undefined]
 
 ## Example
@@ -18,7 +19,8 @@ import { AiPricesResponse } from '@onlyoffice/docspace-api-sdk';
 const instance: AiPricesResponse = {
     chat,
     embedding,
-    webSearch,
+    image,
+    search,
     currency,
 };
 ```

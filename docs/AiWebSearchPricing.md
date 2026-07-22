@@ -5,9 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **string** |  | [optional] [default to undefined]
 **provider** | **string** |  | [optional] [default to undefined]
-**search** | **number** |  | [optional] [default to undefined]
-**contents** | **number** |  | [optional] [default to undefined]
+**price** | **number** |  | [optional] [default to undefined]
+**link** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -15,9 +16,10 @@ Name | Type | Description | Notes
 import { AiWebSearchPricing } from '@onlyoffice/docspace-api-sdk';
 
 const instance: AiWebSearchPricing = {
+    id,
     provider,
-    search,
-    contents,
+    price,
+    link,
 };
 ```
 

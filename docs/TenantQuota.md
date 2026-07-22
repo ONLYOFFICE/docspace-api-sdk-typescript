@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **serviceGroup** | **string** | The service group. | [optional] [default to undefined]
 **visible** | **boolean** | Specifies if the tenant quota is visible or not. | [optional] [default to undefined]
 **wallet** | **boolean** | Specifies if the tenant quota applies to the wallet or not | [optional] [default to undefined]
+**additional** | **boolean** | Specifies if the tenant quota is primary or additional. | [optional] [default to undefined]
 **dueDate** | **string** | The quota due date. | [optional] [default to undefined]
 **features** | **string** | The tenant quota features. | [optional] [default to undefined]
 **maxFileSize** | **number** | The tenant maximum file size. | [optional] [default to undefined]
@@ -47,6 +48,10 @@ Name | Type | Description | Notes
 **backup** | **boolean** | Specifies if the backup enabled as a wallet service or not. | [optional] [default to undefined]
 **countAIAgent** | **number** | The number of AI agents. | [optional] [default to undefined]
 **aiTools** | **boolean** | Specifies if the AI tools enabled as a wallet service or not. | [optional] [default to undefined]
+**aiSearch** | **boolean** | Specifies if the AI search enabled as a wallet service or not. | [optional] [default to undefined]
+**docsCloud** | **number** | The number of DocsCloud users. | [optional] [default to undefined]
+**docsCloudDevPack** | **boolean** | Specifies if the DocsCloudDevPack enabled or not. | [optional] [default to undefined]
+**docsCloudTrial** | **boolean** | Specifies if the DocsCloudTrial enabled or not. | [optional] [default to undefined]
 
 ## Example
 
@@ -64,6 +69,7 @@ const instance: TenantQuota = {
     serviceGroup,
     visible,
     wallet,
+    additional,
     dueDate,
     features,
     maxFileSize,
@@ -95,6 +101,10 @@ const instance: TenantQuota = {
     backup,
     countAIAgent,
     aiTools,
+    aiSearch,
+    docsCloud,
+    docsCloudDevPack,
+    docsCloudTrial,
 };
 ```
 

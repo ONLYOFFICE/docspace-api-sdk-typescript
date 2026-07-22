@@ -24,11 +24,11 @@
  */
 export interface SubAccount {
     /**
-     * The three-character ISO 4217 currency symbol of the sub-account.
+     * The three-character ISO 4217 currency symbol.
      */
     'currency'?: string | null;
     /**
-     * The balance of the sub-account in the specified currency.
+     * The amount in the specified currency.
      */
     'amount'?: number;
 }

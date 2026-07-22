@@ -20,9 +20,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**getFolderPath**](#getfolderpath) | **GET** /api/2.0/files/folder/{folderId}/path | Get the folder path|
 |[**getFolderPrimaryExternalLink**](#getfolderprimaryexternallink) | **GET** /api/2.0/files/folder/{id}/link | Get primary external link|
 |[**getFolders**](#getfolders) | **GET** /api/2.0/files/{folderId}/subfolders | Get subfolders|
+|[**getFormsFolder**](#getformsfolder) | **GET** /api/2.0/files/@forms | Get the Forms section|
 |[**getMyFolder**](#getmyfolder) | **GET** /api/2.0/files/@my | Get the My documents section|
 |[**getNewFolderItems**](#getnewfolderitems) | **GET** /api/2.0/files/{folderId}/news | Get new folder items|
-|[**getPrivacyFolder**](#getprivacyfolder) | **GET** /api/2.0/files/@privacy | Get the Private Room section|
 |[**getRecentFolder**](#getrecentfolder) | **GET** /api/2.0/files/recent | Get the Recent section|
 |[**getRootFolders**](#getrootfolders) | **GET** /api/2.0/files/@root | Get filtered sections|
 |[**getTrashFolder**](#gettrashfolder) | **GET** /api/2.0/files/@trash | Get the Trash section|
@@ -597,6 +597,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 | **sharedBy** | [**string**] | The identifier of the user who shared the folder or file. | (optional) defaults to undefined|
 | **filterType** | **FilterType** | The filter type. | (optional) defaults to undefined|
 | **roomId** | [**number**] | The room ID. | (optional) defaults to undefined|
+| **folderType** | **Array<0 &#124; 1 &#124; 2 &#124; 3 &#124; 5 &#124; 6 &#124; 8 &#124; 10 &#124; 11 &#124; 12 &#124; 13 &#124; 14 &#124; 15 &#124; 16 &#124; 19 &#124; 20 &#124; 21 &#124; 22 &#124; 25 &#124; 26 &#124; 27 &#124; 28 &#124; 29 &#124; 30 &#124; 31 &#124; 32 &#124; 33 &#124; 34 &#124; 35 &#124; 36>** | The parent folder types used to filter the folder contents by folder type. | (optional) defaults to undefined|
 | **excludeSubject** | [**boolean**] | Specifies whether to exclude search by user or group ID. | (optional) defaults to undefined|
 | **applyFilterOption** | **ApplyFilterOption** | Specifies whether to return only files, only folders, or all elements from the specified folder. | (optional) defaults to undefined|
 | **withSubFolders** | [**boolean**] | Specifies whether to include files from subfolders in the results. | (optional) defaults to undefined|
@@ -636,6 +637,7 @@ let userIdOrGroupId: string; //The user or group ID. (optional) (default to unde
 let sharedBy: string; //The identifier of the user who shared the folder or file. (optional) (default to undefined)
 let filterType: FilterType; //The filter type. (optional) (default to undefined)
 let roomId: number; //The room ID. (optional) (default to undefined)
+let folderType: Array<0 | 1 | 2 | 3 | 5 | 6 | 8 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 19 | 20 | 21 | 22 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36>; //The parent folder types used to filter the folder contents by folder type. (optional) (default to undefined)
 let excludeSubject: boolean; //Specifies whether to exclude search by user or group ID. (optional) (default to undefined)
 let applyFilterOption: ApplyFilterOption; //Specifies whether to return only files, only folders, or all elements from the specified folder. (optional) (default to undefined)
 let withSubFolders: boolean; //Specifies whether to include files from subfolders in the results. (optional) (default to undefined)
@@ -656,6 +658,7 @@ const { status, data } = await apiInstance.getFolderByFolderId(
     sharedBy,
     filterType,
     roomId,
+    folderType,
     excludeSubject,
     applyFilterOption,
     withSubFolders,
@@ -1056,6 +1059,83 @@ const { status, data } = await apiInstance.getFolders(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **getFormsFolder**
+> FolderContentIntegerWrapper getFormsFolder()
+
+Returns the detailed list of rooms used for filling out forms located in the Forms section.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-forms-folder/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **userIdOrGroupId** | [**string**] | The user or group ID. | (optional) defaults to undefined|
+| **filterType** | **FilterType** | The filter type. | (optional) defaults to undefined|
+| **count** | [**number**] | The maximum number of items to retrieve in the request. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The zero-based index of the first item to retrieve in a paginated list. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | Specifies the field by which the folder content should be sorted. | (optional) defaults to undefined|
+| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The text used as a filter or search criterion for folder content queries. | (optional) defaults to undefined|
+
+
+### Return type
+
+**FolderContentIntegerWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    FilesFoldersApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new FilesFoldersApi(configuration);
+
+let userIdOrGroupId: string; //The user or group ID. (optional) (default to undefined)
+let filterType: FilterType; //The filter type. (optional) (default to undefined)
+let count: number; //The maximum number of items to retrieve in the request. (optional) (default to undefined)
+let startIndex: number; //The zero-based index of the first item to retrieve in a paginated list. (optional) (default to undefined)
+let sortBy: string; //Specifies the field by which the folder content should be sorted. (optional) (default to undefined)
+let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
+let filterValue: string; //The text used as a filter or search criterion for folder content queries. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getFormsFolder(
+    userIdOrGroupId,
+    filterType,
+    count,
+    startIndex,
+    sortBy,
+    sortOrder,
+    filterValue
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The Forms section contents |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+|**403** | You don\'t have enough permission to view the folder content |  -  |
+|**404** | The required folder was not found |  -  |
+|**401** | Unauthorized |  -  |
+|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **getMyFolder**
 > FolderContentIntegerWrapper getMyFolder()
 
@@ -1187,83 +1267,6 @@ const { status, data } = await apiInstance.getNewFolderItems(
 |-------------|-------------|------------------|
 |**200** | List of file entry information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
 |**403** | You don\'t have enough permission to view the folder content |  -  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **getPrivacyFolder**
-> FolderContentIntegerWrapper getPrivacyFolder()
-
-Returns the detailed list of files and folders located in the Private Room section.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-privacy-folder/).
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **userIdOrGroupId** | [**string**] | The user or group ID. | (optional) defaults to undefined|
-| **filterType** | **FilterType** | The filter type. | (optional) defaults to undefined|
-| **count** | [**number**] | The maximum number of items to retrieve in the request. | (optional) defaults to undefined|
-| **startIndex** | [**number**] | The zero-based index of the first item to retrieve in a paginated list. | (optional) defaults to undefined|
-| **sortBy** | [**string**] | Specifies the field by which the folder content should be sorted. | (optional) defaults to undefined|
-| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
-| **filterValue** | [**string**] | The text used as a filter or search criterion for folder content queries. | (optional) defaults to undefined|
-
-
-### Return type
-
-**FolderContentIntegerWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-```typescript
-import {
-    FilesFoldersApi,
-    Configuration
-} from '@onlyoffice/docspace-api-sdk';
-
-const configuration = new Configuration();
-const apiInstance = new FilesFoldersApi(configuration);
-
-let userIdOrGroupId: string; //The user or group ID. (optional) (default to undefined)
-let filterType: FilterType; //The filter type. (optional) (default to undefined)
-let count: number; //The maximum number of items to retrieve in the request. (optional) (default to undefined)
-let startIndex: number; //The zero-based index of the first item to retrieve in a paginated list. (optional) (default to undefined)
-let sortBy: string; //Specifies the field by which the folder content should be sorted. (optional) (default to undefined)
-let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
-let filterValue: string; //The text used as a filter or search criterion for folder content queries. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.getPrivacyFolder(
-    userIdOrGroupId,
-    filterType,
-    count,
-    startIndex,
-    sortBy,
-    sortOrder,
-    filterValue
-);
-```
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | The Private Room section contents |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-|**403** | You don\'t have enough permission to view the folder content |  -  |
-|**404** | The required folder was not found |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |

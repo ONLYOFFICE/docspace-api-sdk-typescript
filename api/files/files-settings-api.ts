@@ -1129,58 +1129,6 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Checks if the Private Room settings are available or not.
-         * @summary Check the Private Room availability
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for isAvailablePrivacyRoomSettings operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/is-available-privacy-room-settings/
-         */
-        isAvailablePrivacyRoomSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-
-            const localVarPath = `/api/2.0/files/@privacy/available`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Specifies whether to ask a user for a file name on creation or not.
          * @summary Ask a new file name
          * @param {SettingsRequestDto} [settingsRequestDto] 
@@ -2000,20 +1948,6 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Checks if the Private Room settings are available or not.
-         * @summary Check the Private Room availability
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for isAvailablePrivacyRoomSettings operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/is-available-privacy-room-settings/
-         */
-        async isAvailablePrivacyRoomSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.isAvailablePrivacyRoomSettings(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesSettingsApi.isAvailablePrivacyRoomSettings']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
          * Specifies whether to ask a user for a file name on creation or not.
          * @summary Ask a new file name
          * @param {SettingsRequestDto} [settingsRequestDto] 
@@ -2392,17 +2326,6 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
          */
         hideConfirmRoomLifetime(requestParameters: FilesSettingsApiHideConfirmRoomLifetimeRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
             return localVarFp.hideConfirmRoomLifetime(requestParameters.settingsRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Checks if the Private Room settings are available or not.
-         * @summary Check the Private Room availability
-         * @param {*} [options] Override http request option.
-         * REST API Reference for isAvailablePrivacyRoomSettings operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/is-available-privacy-room-settings/
-         * @throws {RequiredError}
-         */
-        isAvailablePrivacyRoomSettings(options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.isAvailablePrivacyRoomSettings(options).then((request) => request(axios, basePath));
         },
         /**
          * Specifies whether to ask a user for a file name on creation or not.
@@ -3083,17 +3006,6 @@ export class FilesSettingsApi extends BaseAPI {
      */
     public hideConfirmRoomLifetime(requestParameters: FilesSettingsApiHideConfirmRoomLifetimeRequest = {}, options?: RawAxiosRequestConfig) {
         return FilesSettingsApiFp(this.configuration).hideConfirmRoomLifetime(requestParameters.settingsRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Checks if the Private Room settings are available or not.
-     * @summary Check the Private Room availability
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesSettingsApi
-     */
-    public isAvailablePrivacyRoomSettings(options?: RawAxiosRequestConfig) {
-        return FilesSettingsApiFp(this.configuration).isAvailablePrivacyRoomSettings(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

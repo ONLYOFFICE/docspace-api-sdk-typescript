@@ -68,5 +68,6 @@ export interface FileEntryDtoIntegerAllOfSecurity {
     'UseChat'?: boolean;
     'UpdateXlsx'?: boolean;
     'AnalyzeResponses'?: boolean;
+    'CanUseAi'?: boolean;
 }
 

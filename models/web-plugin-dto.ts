@@ -99,5 +99,9 @@ export interface WebPluginDto {
      * The web plugin localized description.
      */
     'descriptionLocale'?: { [key: string]: string | null; } | null;
+    /**
+     * The web plugin loading method
+     */
+    'runtime'?: string | null;
 }
 

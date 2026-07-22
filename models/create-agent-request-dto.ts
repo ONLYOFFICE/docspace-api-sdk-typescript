@@ -77,7 +77,7 @@ export interface CreateAgentRequestDto {
      * The collection of sharing parameters.
      */
     'share'?: Array<FileShareParams> | null;
-    'chatSettings': ChatSettings;
+    'chatSettings'?: ChatSettings;
     /**
      * Specifies whether to attach default tools to the agent or not.
      */

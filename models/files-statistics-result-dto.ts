@@ -31,5 +31,6 @@ export interface FilesStatisticsResultDto {
     'archiveUsedSpace'?: FilesStatisticsFolder;
     'roomsUsedSpace'?: FilesStatisticsFolder;
     'aiAgentsUsedSpace'?: FilesStatisticsFolder;
+    'formsUsedSpace'?: FilesStatisticsFolder;
 }
 

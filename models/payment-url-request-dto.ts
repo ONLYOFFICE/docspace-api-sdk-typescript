@@ -34,6 +34,6 @@ export interface PaymentUrlRequestDto {
     /**
      * The payment quantity.
      */
-    'quantity'?: { [key: string]: number; } | null;
+    'quantity': { [key: string]: number; };
 }
 

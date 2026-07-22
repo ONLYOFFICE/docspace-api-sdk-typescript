@@ -1467,9 +1467,9 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 | **tags** | [**string**] | The tags in the serialized format. | (optional) defaults to undefined|
 | **excludeSubject** | [**boolean**] | Specifies whether to exclude search by user or group ID. | (optional) defaults to undefined|
 | **provider** | **ProviderFilter** | The filter by provider name (None, Box, DropBox, GoogleDrive, kDrive, OneDrive, SharePoint, WebDav, Yandex, Storage). | (optional) defaults to undefined|
-| **subjectFilter** | **SubjectFilter** | The filter by user (Owner - 0, Member - 1). | (optional) defaults to undefined|
 | **quotaFilter** | **QuotaFilter** | The filter by quota (All - 0, Default - 1, Custom - 2). | (optional) defaults to undefined|
 | **storageFilter** | **StorageFilter** | The filter by storage (None - 0, Internal - 1, ThirdParty - 2). | (optional) defaults to undefined|
+| **privacyFilter** | **RoomPrivacyFilter** | The filter by room privacy (None - 0, Private - 1, NotPrivate - 2). When omitted, all rooms are returned. | (optional) defaults to undefined|
 | **count** | [**number**] | Specifies the maximum number of items to retrieve. | (optional) defaults to undefined|
 | **startIndex** | [**number**] | The index from which to start retrieving the room content. | (optional) defaults to undefined|
 | **sortBy** | [**string**] | Specifies the field by which the room content should be sorted. | (optional) defaults to undefined|
@@ -1505,9 +1505,9 @@ let withoutTags: boolean; //Specifies whether to search by tags or not. (optiona
 let tags: string; //The tags in the serialized format. (optional) (default to undefined)
 let excludeSubject: boolean; //Specifies whether to exclude search by user or group ID. (optional) (default to undefined)
 let provider: ProviderFilter; //The filter by provider name (None, Box, DropBox, GoogleDrive, kDrive, OneDrive, SharePoint, WebDav, Yandex, Storage). (optional) (default to undefined)
-let subjectFilter: SubjectFilter; //The filter by user (Owner - 0, Member - 1). (optional) (default to undefined)
 let quotaFilter: QuotaFilter; //The filter by quota (All - 0, Default - 1, Custom - 2). (optional) (default to undefined)
 let storageFilter: StorageFilter; //The filter by storage (None - 0, Internal - 1, ThirdParty - 2). (optional) (default to undefined)
+let privacyFilter: RoomPrivacyFilter; //The filter by room privacy (None - 0, Private - 1, NotPrivate - 2). When omitted, all rooms are returned. (optional) (default to undefined)
 let count: number; //Specifies the maximum number of items to retrieve. (optional) (default to undefined)
 let startIndex: number; //The index from which to start retrieving the room content. (optional) (default to undefined)
 let sortBy: string; //Specifies the field by which the room content should be sorted. (optional) (default to undefined)
@@ -1524,9 +1524,9 @@ const { status, data } = await apiInstance.getRoomsFolder(
     tags,
     excludeSubject,
     provider,
-    subjectFilter,
     quotaFilter,
     storageFilter,
+    privacyFilter,
     count,
     startIndex,
     sortBy,

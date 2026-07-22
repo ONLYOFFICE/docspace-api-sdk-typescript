@@ -20,8 +20,9 @@
 
 
 export interface AiWebSearchPricing {
+    'id'?: string | null;
     'provider'?: string | null;
-    'search'?: number;
-    'contents'?: number;
+    'price'?: number;
+    'link'?: string | null;
 }
 

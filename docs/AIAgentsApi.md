@@ -4,14 +4,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**createAgent**](#createagent) | **POST** /api/2.0/ai/agents | Create an ai agent|
-|[**deleteAgent**](#deleteagent) | **DELETE** /api/2.0/ai/agents/{id} | Remove an ai agent|
-|[**getAgentInfo**](#getagentinfo) | **GET** /api/2.0/ai/agents/{id} | Return an ai agent|
-|[**getAgents**](#getagents) | **GET** /api/2.0/ai/agents | Get ai agents|
-|[**getAgentsNewItems**](#getagentsnewitems) | **GET** /api/2.0/ai/agents/news | Get the room new items|
-|[**resetAgentsQuota**](#resetagentsquota) | **PUT** /api/2.0/ai/agents/resetquota | Reset the AI agents quota limit|
-|[**updateAgent**](#updateagent) | **PUT** /api/2.0/ai/agents/{id} | Update an ai agent|
-|[**updateAgentsQuota**](#updateagentsquota) | **PUT** /api/2.0/ai/agents/agentquota | Change the AI agent quota limit|
+|[**createAgent**](#createagent) | **POST** /internal/ai/integration/agents | Create an ai agent|
+|[**deleteAgent**](#deleteagent) | **DELETE** /internal/ai/integration/agents/{id} | Remove an ai agent|
+|[**getAgentInfo**](#getagentinfo) | **GET** /internal/ai/integration/agents/{id} | Return an ai agent|
+|[**getAgents**](#getagents) | **GET** /internal/ai/integration/agents | Get ai agents|
+|[**getAgentsNewItems**](#getagentsnewitems) | **GET** /internal/ai/integration/agents/news | Get the room new items|
+|[**resetAgentsQuota**](#resetagentsquota) | **PUT** /internal/ai/integration/agents/resetquota | Reset the AI agents quota limit|
+|[**updateAgent**](#updateagent) | **PUT** /internal/ai/integration/agents/{id} | Update an ai agent|
+|[**updateAgentsQuota**](#updateagentsquota) | **PUT** /internal/ai/integration/agents/agentquota | Change the AI agent quota limit|
 
 # **createAgent**
 > FolderIntegerWrapper createAgent()
@@ -205,7 +205,6 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 | **withoutTags** | [**boolean**] | Specifies whether to search by tags or not. | (optional) defaults to undefined|
 | **tags** | [**string**] | The tags in the serialized format. | (optional) defaults to undefined|
 | **excludeSubject** | [**boolean**] | Specifies whether to exclude search by user or group ID. | (optional) defaults to undefined|
-| **subjectFilter** | **SubjectFilter** | The filter by user (Owner - 0, Member - 1). | (optional) defaults to undefined|
 | **quotaFilter** | **QuotaFilter** | The filter by quota (All - 0, Default - 1, Custom - 2). | (optional) defaults to undefined|
 | **count** | [**number**] | Specifies the maximum number of items to retrieve. | (optional) defaults to undefined|
 | **startIndex** | [**number**] | The index from which to start retrieving the room content. | (optional) defaults to undefined|
@@ -238,7 +237,6 @@ let subjectOwnerId: string; //The filter by room owner ID. (optional) (default t
 let withoutTags: boolean; //Specifies whether to search by tags or not. (optional) (default to undefined)
 let tags: string; //The tags in the serialized format. (optional) (default to undefined)
 let excludeSubject: boolean; //Specifies whether to exclude search by user or group ID. (optional) (default to undefined)
-let subjectFilter: SubjectFilter; //The filter by user (Owner - 0, Member - 1). (optional) (default to undefined)
 let quotaFilter: QuotaFilter; //The filter by quota (All - 0, Default - 1, Custom - 2). (optional) (default to undefined)
 let count: number; //Specifies the maximum number of items to retrieve. (optional) (default to undefined)
 let startIndex: number; //The index from which to start retrieving the room content. (optional) (default to undefined)
@@ -252,7 +250,6 @@ const { status, data } = await apiInstance.getAgents(
     withoutTags,
     tags,
     excludeSubject,
-    subjectFilter,
     quotaFilter,
     count,
     startIndex,

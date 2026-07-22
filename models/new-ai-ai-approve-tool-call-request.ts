@@ -1,0 +1,54 @@
+/* tslint:disable */
+/* eslint-disable */
+/**
+ *
+ * (c) Copyright Ascensio System SIA 2026
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+// May contain unused imports in some cases
+// @ts-ignore
+import type { NewAiAiActionArgs } from './new-ai-ai-action-args';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { NewAiThreadMessageLike } from './new-ai-thread-message-like';
+
+export interface NewAiAiApproveToolCallRequest {
+    /**
+     * Final result of the tool call, as the model should see it.
+     */
+    'result': any;
+    /**
+     * Persist auto-approve for this tool\'s name.
+     */
+    'allowAlways'?: boolean;
+    /**
+     * Thread the assistant message belongs to.
+     */
+    'threadId': string;
+    /**
+     * Storage id of the assistant message holding the tool call.
+     */
+    'messageId': string;
+    /**
+     * Index of the tool-call content part inside `message.content`.
+     */
+    'idx': number;
+    'message': NewAiThreadMessageLike;
+    'actionArgs'?: NewAiAiActionArgs;
+    'entityId'?: string;
+    'profileId'?: string;
+}
+
