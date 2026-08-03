@@ -35,21 +35,18 @@ Please follow the [building](#building) instruction and execute the following TS
 
 ```typescript
 
-import { Configuration, ApiKeysApi } from '@onlyoffice/docspace-api-sdk';
+import { Configuration, AIAIApi } from '@onlyoffice/docspace-api-sdk';
 
 const config = new Configuration ({
     basePath: "https://your-docspace.onlyoffice.com",
-    accessToken: "YOUR ACCESS TOKEN",
 });
 
-const apiInstance = new ApiKeysApi(config);
+const apiInstance = new AIAIApi(config);
 
-const opts: any = {
-  'createApiKeyRequestDto':  // 
-};
+const aiAiApproveToolCallRequest: AiAiApproveToolCallRequest = ; // 
 try {
-    const result = await apiInstance.createApiKey(
-      opts
+    const result = await apiInstance.aiAiApproveToolCall(
+      aiAiApproveToolCallRequest
     );
     console.log('API called successfully. Returned data: ', result.data);
   } catch (error) {
@@ -141,6 +138,544 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 ### API Endoints tables:
 
+<details>
+  <summary>AI</summary>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>Method</th>
+        <th>HTTP request</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>AIApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAIApi.md#aiaiapprovetoolcall"><strong>aiAiApproveToolCall</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/ai/approve-tool-call</td>
+        <td>Approve tool call</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAIApi.md#aiaidenytoolcall"><strong>aiAiDenyToolCall</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/ai/deny-tool-call</td>
+        <td>Deny tool call</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAIApi.md#aiairegeneratestream"><strong>aiAiRegenerateStream</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/ai/regenerate-stream</td>
+        <td>Regenerate stream</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAIApi.md#aiaisend"><strong>aiAiSend</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/ai/send</td>
+        <td>Send</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAIApi.md#aiaisendcustom"><strong>aiAiSendCustom</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/ai/send-custom</td>
+        <td>Send custom</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAIApi.md#aiaisendwithstream"><strong>aiAiSendWithStream</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/ai/send-with-stream</td>
+        <td>Send with stream</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAIApi.md#aiaisendwithstreamopenai"><strong>aiAiSendWithStreamOpenAI</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/ai/send-with-stream-openai</td>
+        <td>Send with stream open ai</td>
+      </tr>
+    <tr>
+        <td colspan="3" style="text-align: center;"><strong>AgentsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAgentsApi.md#aiagentscreate"><strong>aiAgentsCreate</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/agents</td>
+        <td>Create an agent</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAgentsApi.md#aiagentsdelete"><strong>aiAgentsDelete</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/agents/{id}</td>
+        <td>Delete an agent</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAgentsApi.md#aiagentsget"><strong>aiAgentsGet</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/agents/{id}</td>
+        <td>Get an agent</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAgentsApi.md#aiagentslist"><strong>aiAgentsList</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/agents</td>
+        <td>List agents</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAgentsApi.md#aiagentsnews"><strong>aiAgentsNews</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/agents/news</td>
+        <td>List agent news items</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAgentsApi.md#aiagentsresetquota"><strong>aiAgentsResetQuota</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/agents/resetquota</td>
+        <td>Reset agents\' quota</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAgentsApi.md#aiagentsupdate"><strong>aiAgentsUpdate</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/agents/{id}</td>
+        <td>Update an agent</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAgentsApi.md#aiagentsupdatequota"><strong>aiAgentsUpdateQuota</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/agents/agentquota</td>
+        <td>Update agents\' quota</td>
+      </tr>
+    <tr>
+        <td colspan="3" style="text-align: center;"><strong>AssignmentsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAssignmentsApi.md#aiassignmentsassign"><strong>aiAssignmentsAssign</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/assignments/assign</td>
+        <td>Assign</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAssignmentsApi.md#aiassignmentsbulkassign"><strong>aiAssignmentsBulkAssign</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/assignments/bulk-assign</td>
+        <td>Bulk assign</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAssignmentsApi.md#aiassignmentscascadeprofiledelete"><strong>aiAssignmentsCascadeProfileDelete</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/assignments/cascade-profile-delete</td>
+        <td>Cascade profile delete</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAssignmentsApi.md#aiassignmentsgetallassignments"><strong>aiAssignmentsGetAllAssignments</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/assignments/get-all-assignments</td>
+        <td>Get all assignments</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAssignmentsApi.md#aiassignmentsgetassignment"><strong>aiAssignmentsGetAssignment</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/assignments/get-assignment</td>
+        <td>Get assignment</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAssignmentsApi.md#aiassignmentsresolveforaction"><strong>aiAssignmentsResolveForAction</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/assignments/resolve-for-action</td>
+        <td>Resolve for action</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAssignmentsApi.md#aiassignmentstryresolveforaction"><strong>aiAssignmentsTryResolveForAction</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/assignments/try-resolve-for-action</td>
+        <td>Try resolve for action</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAssignmentsApi.md#aiassignmentsunassign"><strong>aiAssignmentsUnassign</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/assignments/unassign</td>
+        <td>Unassign</td>
+      </tr>
+    <tr>
+        <td colspan="3" style="text-align: center;"><strong>AttachmentsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAttachmentsApi.md#aiattachmentsdelete"><strong>aiAttachmentsDelete</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/attachments/delete</td>
+        <td>Delete</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAttachmentsApi.md#aiattachmentsdeletemany"><strong>aiAttachmentsDeleteMany</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/attachments/delete-many</td>
+        <td>Delete many</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAttachmentsApi.md#aiattachmentsget"><strong>aiAttachmentsGet</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/attachments/get</td>
+        <td>Get</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAttachmentsApi.md#aiattachmentsgetmany"><strong>aiAttachmentsGetMany</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/attachments/get-many</td>
+        <td>Get many</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAttachmentsApi.md#aiattachmentslinktomessage"><strong>aiAttachmentsLinkToMessage</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/attachments/link-to-message</td>
+        <td>Link to message</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAttachmentsApi.md#aiattachmentssavefile"><strong>aiAttachmentsSaveFile</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/attachments/save-file</td>
+        <td>Save file</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAttachmentsApi.md#aiattachmentssavefilesmany"><strong>aiAttachmentsSaveFilesMany</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/attachments/save-files-many</td>
+        <td>Save files many</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAttachmentsApi.md#aiattachmentssaveimage"><strong>aiAttachmentsSaveImage</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/attachments/save-image</td>
+        <td>Save image</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAttachmentsApi.md#aiattachmentssaveimagesmany"><strong>aiAttachmentsSaveImagesMany</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/attachments/save-images-many</td>
+        <td>Save images many</td>
+      </tr>
+    <tr>
+        <td colspan="3" style="text-align: center;"><strong>ExportApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIExportApi.md#aiexporttexttodocx"><strong>aiExportTextToDocx</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/text-to-docx</td>
+        <td>Start markdown → docx export</td>
+      </tr>
+    <tr>
+        <td colspan="3" style="text-align: center;"><strong>PreferencesApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPreferencesApi.md#aipreferencescleardeepmode"><strong>aiPreferencesClearDeepMode</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/preferences/clear-deep-mode</td>
+        <td>Clear deep mode</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPreferencesApi.md#aipreferencesgetdeepmode"><strong>aiPreferencesGetDeepMode</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/preferences/get-deep-mode</td>
+        <td>Get deep mode</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPreferencesApi.md#aipreferencesisdeepmodeset"><strong>aiPreferencesIsDeepModeSet</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/preferences/is-deep-mode-set</td>
+        <td>Is deep mode set</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPreferencesApi.md#aipreferencessetdeepmode"><strong>aiPreferencesSetDeepMode</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/preferences/set-deep-mode</td>
+        <td>Set deep mode</td>
+      </tr>
+    <tr>
+        <td colspan="3" style="text-align: center;"><strong>ProfilesApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIProfilesApi.md#aiprofilescreate"><strong>aiProfilesCreate</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/profiles/create</td>
+        <td>Create</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIProfilesApi.md#aiprofilesdelete"><strong>aiProfilesDelete</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/profiles/delete</td>
+        <td>Delete</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIProfilesApi.md#aiprofilesgetbyid"><strong>aiProfilesGetById</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/profiles/get-by-id</td>
+        <td>Get by id</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIProfilesApi.md#aiprofileslist"><strong>aiProfilesList</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/profiles/list</td>
+        <td>List</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIProfilesApi.md#aiprofileslistmodels"><strong>aiProfilesListModels</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/profiles/list-models</td>
+        <td>List models</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIProfilesApi.md#aiprofileslistprovidermodels"><strong>aiProfilesListProviderModels</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/profiles/list-provider-models</td>
+        <td>List provider models</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIProfilesApi.md#aiprofilestestconnection"><strong>aiProfilesTestConnection</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/profiles/test-connection</td>
+        <td>Test connection</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIProfilesApi.md#aiprofilesupdate"><strong>aiProfilesUpdate</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/profiles/update</td>
+        <td>Update</td>
+      </tr>
+    <tr>
+        <td colspan="3" style="text-align: center;"><strong>PromptsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPromptsApi.md#aipromptscreate"><strong>aiPromptsCreate</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/prompts/create</td>
+        <td>Create</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPromptsApi.md#aipromptscreatefolder"><strong>aiPromptsCreateFolder</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/prompts/create-folder</td>
+        <td>Create folder</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPromptsApi.md#aipromptsdelete"><strong>aiPromptsDelete</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/prompts/delete</td>
+        <td>Delete</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPromptsApi.md#aipromptsdeletefolder"><strong>aiPromptsDeleteFolder</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/prompts/delete-folder</td>
+        <td>Delete folder</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPromptsApi.md#aipromptsexport"><strong>aiPromptsExport</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/prompts/export</td>
+        <td>Export</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPromptsApi.md#aipromptsgetbyid"><strong>aiPromptsGetById</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/prompts/get-by-id</td>
+        <td>Get by id</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPromptsApi.md#aipromptsgetfolderbyid"><strong>aiPromptsGetFolderById</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/prompts/get-folder-by-id</td>
+        <td>Get folder by id</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPromptsApi.md#aipromptsimportbundle"><strong>aiPromptsImportBundle</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/prompts/import-bundle</td>
+        <td>Import bundle</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPromptsApi.md#aipromptslist"><strong>aiPromptsList</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/prompts/list</td>
+        <td>List</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPromptsApi.md#aipromptslistfolders"><strong>aiPromptsListFolders</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/prompts/list-folders</td>
+        <td>List folders</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPromptsApi.md#aipromptsmove"><strong>aiPromptsMove</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/prompts/move</td>
+        <td>Move</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPromptsApi.md#aipromptsrenamefolder"><strong>aiPromptsRenameFolder</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/prompts/rename-folder</td>
+        <td>Rename folder</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPromptsApi.md#aipromptsupdate"><strong>aiPromptsUpdate</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/prompts/update</td>
+        <td>Update</td>
+      </tr>
+    <tr>
+        <td colspan="3" style="text-align: center;"><strong>AISettingsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AISettingsApi.md#aisettingsget"><strong>aiSettingsGet</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/config</td>
+        <td>Get AI settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AISettingsApi.md#aisettingsgetuser"><strong>aiSettingsGetUser</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/config/user</td>
+        <td>Get user AI settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AISettingsApi.md#aisettingsgetvectorization"><strong>aiSettingsGetVectorization</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/config/vectorization</td>
+        <td>Get vectorization settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AISettingsApi.md#aisettingssetuser"><strong>aiSettingsSetUser</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/config/user</td>
+        <td>Update user AI settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AISettingsApi.md#aisettingssetvectorization"><strong>aiSettingsSetVectorization</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/config/vectorization</td>
+        <td>Update vectorization settings</td>
+      </tr>
+    <tr>
+        <td colspan="3" style="text-align: center;"><strong>ThreadsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#aithreadsappendusermessage"><strong>aiThreadsAppendUserMessage</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/threads/append-user-message</td>
+        <td>Append user message</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#aithreadsclearmessages"><strong>aiThreadsClearMessages</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/threads/clear-messages</td>
+        <td>Clear messages</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#aithreadscreate"><strong>aiThreadsCreate</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/threads/create</td>
+        <td>Create</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#aithreadsdelete"><strong>aiThreadsDelete</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/threads/delete</td>
+        <td>Delete</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#aithreadsdeletemessage"><strong>aiThreadsDeleteMessage</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/threads/delete-message</td>
+        <td>Delete message</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#aithreadsgetbyid"><strong>aiThreadsGetById</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/threads/get-by-id</td>
+        <td>Get by id</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#aithreadsgetmessagebyid"><strong>aiThreadsGetMessageById</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/threads/get-message-by-id</td>
+        <td>Get message by id</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#aithreadslist"><strong>aiThreadsList</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/threads/list</td>
+        <td>List</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#aithreadsopenorcreate"><strong>aiThreadsOpenOrCreate</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/threads/open-or-create</td>
+        <td>Open or create</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#aithreadsreadmessages"><strong>aiThreadsReadMessages</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/threads/read-messages</td>
+        <td>Read messages</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#aithreadsregeneratetitle"><strong>aiThreadsRegenerateTitle</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/threads/regenerate-title</td>
+        <td>Regenerate title</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#aithreadsrename"><strong>aiThreadsRename</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/threads/rename</td>
+        <td>Rename</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#aithreadstouch"><strong>aiThreadsTouch</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/threads/touch</td>
+        <td>Touch</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#aithreadsupdatemessage"><strong>aiThreadsUpdateMessage</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/threads/update-message</td>
+        <td>Update message</td>
+      </tr>
+    <tr>
+        <td colspan="3" style="text-align: center;"><strong>ToolsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIToolsApi.md#aitoolsaddcustomserver"><strong>aiToolsAddCustomServer</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/tools/add-custom-server</td>
+        <td>Add custom server</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIToolsApi.md#aitoolsgetallowalways"><strong>aiToolsGetAllowAlways</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/tools/get-allow-always</td>
+        <td>Get allow always</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIToolsApi.md#aitoolsgetcustomserver"><strong>aiToolsGetCustomServer</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/tools/get-custom-server</td>
+        <td>Get custom server</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIToolsApi.md#aitoolsgetdisabled"><strong>aiToolsGetDisabled</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/tools/get-disabled</td>
+        <td>Get disabled</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIToolsApi.md#aitoolsisallowalways"><strong>aiToolsIsAllowAlways</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/tools/is-allow-always</td>
+        <td>Is allow always</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIToolsApi.md#aitoolsistooldisabled"><strong>aiToolsIsToolDisabled</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/tools/is-tool-disabled</td>
+        <td>Is tool disabled</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIToolsApi.md#aitoolslistcustomservers"><strong>aiToolsListCustomServers</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/tools/list-custom-servers</td>
+        <td>List custom servers</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIToolsApi.md#aitoolslistsystemtools"><strong>aiToolsListSystemTools</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/tools/list-system-tools</td>
+        <td>List system tools</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIToolsApi.md#aitoolsremovecustomserver"><strong>aiToolsRemoveCustomServer</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/tools/remove-custom-server</td>
+        <td>Remove custom server</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIToolsApi.md#aitoolsreplaceallcustomservers"><strong>aiToolsReplaceAllCustomServers</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/tools/replace-all-custom-servers</td>
+        <td>Replace all custom servers</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIToolsApi.md#aitoolssetallowalways"><strong>aiToolsSetAllowAlways</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/tools/set-allow-always</td>
+        <td>Set allow always</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIToolsApi.md#aitoolssetdisabled"><strong>aiToolsSetDisabled</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/tools/set-disabled</td>
+        <td>Set disabled</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIToolsApi.md#aitoolsupdatecustomserver"><strong>aiToolsUpdateCustomServer</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/tools/update-custom-server</td>
+        <td>Update custom server</td>
+      </tr>
+    <tr>
+        <td colspan="3" style="text-align: center;"><strong>VectorizationApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIVectorizationApi.md#aivectorizationstarttask"><strong>aiVectorizationStartTask</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/vectorization/tasks</td>
+        <td>Start a vectorization task</td>
+      </tr>
+    <tr>
+        <td colspan="3" style="text-align: center;"><strong>WebSearchApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIWebSearchApi.md#aiwebsearchclear"><strong>aiWebSearchClear</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/web-search/clear</td>
+        <td>Clear</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIWebSearchApi.md#aiwebsearchconfigure"><strong>aiWebSearchConfigure</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/web-search/configure</td>
+        <td>Configure</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIWebSearchApi.md#aiwebsearchgetactiveconfig"><strong>aiWebSearchGetActiveConfig</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/web-search/get-active-config</td>
+        <td>Get active config</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIWebSearchApi.md#aiwebsearchisconfigured"><strong>aiWebSearchIsConfigured</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/web-search/is-configured</td>
+        <td>Is configured</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIWebSearchApi.md#aiwebsearchsetactiveconfig"><strong>aiWebSearchSetActiveConfig</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/web-search/set-active-config</td>
+        <td>Set active config</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIWebSearchApi.md#aiwebsearchtestconnection"><strong>aiWebSearchTestConnection</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/web-search/test-connection</td>
+        <td>Test connection</td>
+      </tr>
+    </tbody>
+  </table>
+
+</details>
 <details>
   <summary>ApiKeys</summary>
 
@@ -1363,544 +1898,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td><a href="docs/MigrationApi.md#uploadandinitializemigration"><strong>uploadAndInitializeMigration</strong></a></td>
         <td><strong>POST</strong> /api/2.0/migration/init/{migratorName}</td>
         <td>Upload and initialize migration</td>
-      </tr>
-    </tbody>
-  </table>
-
-</details>
-<details>
-  <summary>NewAI</summary>
-
-  <table>
-    <tbody>
-      <tr>
-        <th>Method</th>
-        <th>HTTP request</th>
-        <th>Description</th>
-      </tr>
-      <tr>
-        <td colspan="3" style="text-align: center;"><strong>AIApi</strong></td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAIApi.md#newaiaiapprovetoolcall"><strong>newAiAiApproveToolCall</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/ai/approve-tool-call</td>
-        <td>Approve tool call</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAIApi.md#newaiaidenytoolcall"><strong>newAiAiDenyToolCall</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/ai/deny-tool-call</td>
-        <td>Deny tool call</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAIApi.md#newaiairegeneratestream"><strong>newAiAiRegenerateStream</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/ai/regenerate-stream</td>
-        <td>Regenerate stream</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAIApi.md#newaiaisend"><strong>newAiAiSend</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/ai/send</td>
-        <td>Send</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAIApi.md#newaiaisendcustom"><strong>newAiAiSendCustom</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/ai/send-custom</td>
-        <td>Send custom</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAIApi.md#newaiaisendwithstream"><strong>newAiAiSendWithStream</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/ai/send-with-stream</td>
-        <td>Send with stream</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAIApi.md#newaiaisendwithstreamopenai"><strong>newAiAiSendWithStreamOpenAI</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/ai/send-with-stream-openai</td>
-        <td>Send with stream open ai</td>
-      </tr>
-    <tr>
-        <td colspan="3" style="text-align: center;"><strong>AgentsApi</strong></td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAgentsApi.md#newaiagentscreate"><strong>newAiAgentsCreate</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/agents</td>
-        <td>Create an agent</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAgentsApi.md#newaiagentsdelete"><strong>newAiAgentsDelete</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/ai/agents/{id}</td>
-        <td>Delete an agent</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAgentsApi.md#newaiagentsget"><strong>newAiAgentsGet</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/agents/{id}</td>
-        <td>Get an agent</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAgentsApi.md#newaiagentslist"><strong>newAiAgentsList</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/agents</td>
-        <td>List agents</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAgentsApi.md#newaiagentsnews"><strong>newAiAgentsNews</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/agents/news</td>
-        <td>List agent news items</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAgentsApi.md#newaiagentsresetquota"><strong>newAiAgentsResetQuota</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/agents/resetquota</td>
-        <td>Reset agents\' quota</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAgentsApi.md#newaiagentsupdate"><strong>newAiAgentsUpdate</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/agents/{id}</td>
-        <td>Update an agent</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAgentsApi.md#newaiagentsupdatequota"><strong>newAiAgentsUpdateQuota</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/agents/agentquota</td>
-        <td>Update agents\' quota</td>
-      </tr>
-    <tr>
-        <td colspan="3" style="text-align: center;"><strong>AssignmentsApi</strong></td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAssignmentsApi.md#newaiassignmentsassign"><strong>newAiAssignmentsAssign</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/assignments/assign</td>
-        <td>Assign</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAssignmentsApi.md#newaiassignmentsbulkassign"><strong>newAiAssignmentsBulkAssign</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/assignments/bulk-assign</td>
-        <td>Bulk assign</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAssignmentsApi.md#newaiassignmentscascadeprofiledelete"><strong>newAiAssignmentsCascadeProfileDelete</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/ai/assignments/cascade-profile-delete</td>
-        <td>Cascade profile delete</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAssignmentsApi.md#newaiassignmentsgetallassignments"><strong>newAiAssignmentsGetAllAssignments</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/assignments/get-all-assignments</td>
-        <td>Get all assignments</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAssignmentsApi.md#newaiassignmentsgetassignment"><strong>newAiAssignmentsGetAssignment</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/assignments/get-assignment</td>
-        <td>Get assignment</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAssignmentsApi.md#newaiassignmentsresolveforaction"><strong>newAiAssignmentsResolveForAction</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/assignments/resolve-for-action</td>
-        <td>Resolve for action</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAssignmentsApi.md#newaiassignmentstryresolveforaction"><strong>newAiAssignmentsTryResolveForAction</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/assignments/try-resolve-for-action</td>
-        <td>Try resolve for action</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAssignmentsApi.md#newaiassignmentsunassign"><strong>newAiAssignmentsUnassign</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/ai/assignments/unassign</td>
-        <td>Unassign</td>
-      </tr>
-    <tr>
-        <td colspan="3" style="text-align: center;"><strong>AttachmentsApi</strong></td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAttachmentsApi.md#newaiattachmentsdelete"><strong>newAiAttachmentsDelete</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/ai/attachments/delete</td>
-        <td>Delete</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAttachmentsApi.md#newaiattachmentsdeletemany"><strong>newAiAttachmentsDeleteMany</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/ai/attachments/delete-many</td>
-        <td>Delete many</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAttachmentsApi.md#newaiattachmentsget"><strong>newAiAttachmentsGet</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/attachments/get</td>
-        <td>Get</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAttachmentsApi.md#newaiattachmentsgetmany"><strong>newAiAttachmentsGetMany</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/attachments/get-many</td>
-        <td>Get many</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAttachmentsApi.md#newaiattachmentslinktomessage"><strong>newAiAttachmentsLinkToMessage</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/attachments/link-to-message</td>
-        <td>Link to message</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAttachmentsApi.md#newaiattachmentssavefile"><strong>newAiAttachmentsSaveFile</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/attachments/save-file</td>
-        <td>Save file</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAttachmentsApi.md#newaiattachmentssavefilesmany"><strong>newAiAttachmentsSaveFilesMany</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/attachments/save-files-many</td>
-        <td>Save files many</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAttachmentsApi.md#newaiattachmentssaveimage"><strong>newAiAttachmentsSaveImage</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/attachments/save-image</td>
-        <td>Save image</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIAttachmentsApi.md#newaiattachmentssaveimagesmany"><strong>newAiAttachmentsSaveImagesMany</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/attachments/save-images-many</td>
-        <td>Save images many</td>
-      </tr>
-    <tr>
-        <td colspan="3" style="text-align: center;"><strong>ExportApi</strong></td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIExportApi.md#newaiexporttexttodocx"><strong>newAiExportTextToDocx</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/text-to-docx</td>
-        <td>Start markdown → docx export</td>
-      </tr>
-    <tr>
-        <td colspan="3" style="text-align: center;"><strong>PreferencesApi</strong></td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIPreferencesApi.md#newaipreferencescleardeepmode"><strong>newAiPreferencesClearDeepMode</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/ai/preferences/clear-deep-mode</td>
-        <td>Clear deep mode</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIPreferencesApi.md#newaipreferencesgetdeepmode"><strong>newAiPreferencesGetDeepMode</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/preferences/get-deep-mode</td>
-        <td>Get deep mode</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIPreferencesApi.md#newaipreferencesisdeepmodeset"><strong>newAiPreferencesIsDeepModeSet</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/preferences/is-deep-mode-set</td>
-        <td>Is deep mode set</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIPreferencesApi.md#newaipreferencessetdeepmode"><strong>newAiPreferencesSetDeepMode</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/preferences/set-deep-mode</td>
-        <td>Set deep mode</td>
-      </tr>
-    <tr>
-        <td colspan="3" style="text-align: center;"><strong>ProfilesApi</strong></td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIProfilesApi.md#newaiprofilescreate"><strong>newAiProfilesCreate</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/profiles/create</td>
-        <td>Create</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIProfilesApi.md#newaiprofilesdelete"><strong>newAiProfilesDelete</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/ai/profiles/delete</td>
-        <td>Delete</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIProfilesApi.md#newaiprofilesgetbyid"><strong>newAiProfilesGetById</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/profiles/get-by-id</td>
-        <td>Get by id</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIProfilesApi.md#newaiprofileslist"><strong>newAiProfilesList</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/profiles/list</td>
-        <td>List</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIProfilesApi.md#newaiprofileslistmodels"><strong>newAiProfilesListModels</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/profiles/list-models</td>
-        <td>List models</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIProfilesApi.md#newaiprofileslistprovidermodels"><strong>newAiProfilesListProviderModels</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/profiles/list-provider-models</td>
-        <td>List provider models</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIProfilesApi.md#newaiprofilestestconnection"><strong>newAiProfilesTestConnection</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/profiles/test-connection</td>
-        <td>Test connection</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIProfilesApi.md#newaiprofilesupdate"><strong>newAiProfilesUpdate</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/profiles/update</td>
-        <td>Update</td>
-      </tr>
-    <tr>
-        <td colspan="3" style="text-align: center;"><strong>PromptsApi</strong></td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIPromptsApi.md#newaipromptscreate"><strong>newAiPromptsCreate</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/prompts/create</td>
-        <td>Create</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIPromptsApi.md#newaipromptscreatefolder"><strong>newAiPromptsCreateFolder</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/prompts/create-folder</td>
-        <td>Create folder</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIPromptsApi.md#newaipromptsdelete"><strong>newAiPromptsDelete</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/ai/prompts/delete</td>
-        <td>Delete</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIPromptsApi.md#newaipromptsdeletefolder"><strong>newAiPromptsDeleteFolder</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/ai/prompts/delete-folder</td>
-        <td>Delete folder</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIPromptsApi.md#newaipromptsexport"><strong>newAiPromptsExport</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/prompts/export</td>
-        <td>Export</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIPromptsApi.md#newaipromptsgetbyid"><strong>newAiPromptsGetById</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/prompts/get-by-id</td>
-        <td>Get by id</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIPromptsApi.md#newaipromptsgetfolderbyid"><strong>newAiPromptsGetFolderById</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/prompts/get-folder-by-id</td>
-        <td>Get folder by id</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIPromptsApi.md#newaipromptsimportbundle"><strong>newAiPromptsImportBundle</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/prompts/import-bundle</td>
-        <td>Import bundle</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIPromptsApi.md#newaipromptslist"><strong>newAiPromptsList</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/prompts/list</td>
-        <td>List</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIPromptsApi.md#newaipromptslistfolders"><strong>newAiPromptsListFolders</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/prompts/list-folders</td>
-        <td>List folders</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIPromptsApi.md#newaipromptsmove"><strong>newAiPromptsMove</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/prompts/move</td>
-        <td>Move</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIPromptsApi.md#newaipromptsrenamefolder"><strong>newAiPromptsRenameFolder</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/prompts/rename-folder</td>
-        <td>Rename folder</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIPromptsApi.md#newaipromptsupdate"><strong>newAiPromptsUpdate</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/prompts/update</td>
-        <td>Update</td>
-      </tr>
-    <tr>
-        <td colspan="3" style="text-align: center;"><strong>NewAISettingsApi</strong></td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAISettingsApi.md#newaisettingsget"><strong>newAiSettingsGet</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/config</td>
-        <td>Get AI settings</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAISettingsApi.md#newaisettingsgetuser"><strong>newAiSettingsGetUser</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/config/user</td>
-        <td>Get user AI settings</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAISettingsApi.md#newaisettingsgetvectorization"><strong>newAiSettingsGetVectorization</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/config/vectorization</td>
-        <td>Get vectorization settings</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAISettingsApi.md#newaisettingssetuser"><strong>newAiSettingsSetUser</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/config/user</td>
-        <td>Update user AI settings</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAISettingsApi.md#newaisettingssetvectorization"><strong>newAiSettingsSetVectorization</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/config/vectorization</td>
-        <td>Update vectorization settings</td>
-      </tr>
-    <tr>
-        <td colspan="3" style="text-align: center;"><strong>ThreadsApi</strong></td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIThreadsApi.md#newaithreadsappendusermessage"><strong>newAiThreadsAppendUserMessage</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/threads/append-user-message</td>
-        <td>Append user message</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIThreadsApi.md#newaithreadsclearmessages"><strong>newAiThreadsClearMessages</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/ai/threads/clear-messages</td>
-        <td>Clear messages</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIThreadsApi.md#newaithreadscreate"><strong>newAiThreadsCreate</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/threads/create</td>
-        <td>Create</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIThreadsApi.md#newaithreadsdelete"><strong>newAiThreadsDelete</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/ai/threads/delete</td>
-        <td>Delete</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIThreadsApi.md#newaithreadsdeletemessage"><strong>newAiThreadsDeleteMessage</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/ai/threads/delete-message</td>
-        <td>Delete message</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIThreadsApi.md#newaithreadsgetbyid"><strong>newAiThreadsGetById</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/threads/get-by-id</td>
-        <td>Get by id</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIThreadsApi.md#newaithreadsgetmessagebyid"><strong>newAiThreadsGetMessageById</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/threads/get-message-by-id</td>
-        <td>Get message by id</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIThreadsApi.md#newaithreadslist"><strong>newAiThreadsList</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/threads/list</td>
-        <td>List</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIThreadsApi.md#newaithreadsopenorcreate"><strong>newAiThreadsOpenOrCreate</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/threads/open-or-create</td>
-        <td>Open or create</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIThreadsApi.md#newaithreadsreadmessages"><strong>newAiThreadsReadMessages</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/threads/read-messages</td>
-        <td>Read messages</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIThreadsApi.md#newaithreadsregeneratetitle"><strong>newAiThreadsRegenerateTitle</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/threads/regenerate-title</td>
-        <td>Regenerate title</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIThreadsApi.md#newaithreadsrename"><strong>newAiThreadsRename</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/threads/rename</td>
-        <td>Rename</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIThreadsApi.md#newaithreadstouch"><strong>newAiThreadsTouch</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/threads/touch</td>
-        <td>Touch</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIThreadsApi.md#newaithreadsupdatemessage"><strong>newAiThreadsUpdateMessage</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/threads/update-message</td>
-        <td>Update message</td>
-      </tr>
-    <tr>
-        <td colspan="3" style="text-align: center;"><strong>ToolsApi</strong></td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIToolsApi.md#newaitoolsaddcustomserver"><strong>newAiToolsAddCustomServer</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/tools/add-custom-server</td>
-        <td>Add custom server</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIToolsApi.md#newaitoolsgetallowalways"><strong>newAiToolsGetAllowAlways</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/tools/get-allow-always</td>
-        <td>Get allow always</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIToolsApi.md#newaitoolsgetcustomserver"><strong>newAiToolsGetCustomServer</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/tools/get-custom-server</td>
-        <td>Get custom server</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIToolsApi.md#newaitoolsgetdisabled"><strong>newAiToolsGetDisabled</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/tools/get-disabled</td>
-        <td>Get disabled</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIToolsApi.md#newaitoolsisallowalways"><strong>newAiToolsIsAllowAlways</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/tools/is-allow-always</td>
-        <td>Is allow always</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIToolsApi.md#newaitoolsistooldisabled"><strong>newAiToolsIsToolDisabled</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/tools/is-tool-disabled</td>
-        <td>Is tool disabled</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIToolsApi.md#newaitoolslistcustomservers"><strong>newAiToolsListCustomServers</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/tools/list-custom-servers</td>
-        <td>List custom servers</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIToolsApi.md#newaitoolslistsystemtools"><strong>newAiToolsListSystemTools</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/tools/list-system-tools</td>
-        <td>List system tools</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIToolsApi.md#newaitoolsremovecustomserver"><strong>newAiToolsRemoveCustomServer</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/ai/tools/remove-custom-server</td>
-        <td>Remove custom server</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIToolsApi.md#newaitoolsreplaceallcustomservers"><strong>newAiToolsReplaceAllCustomServers</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/tools/replace-all-custom-servers</td>
-        <td>Replace all custom servers</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIToolsApi.md#newaitoolssetallowalways"><strong>newAiToolsSetAllowAlways</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/tools/set-allow-always</td>
-        <td>Set allow always</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIToolsApi.md#newaitoolssetdisabled"><strong>newAiToolsSetDisabled</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/tools/set-disabled</td>
-        <td>Set disabled</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIToolsApi.md#newaitoolsupdatecustomserver"><strong>newAiToolsUpdateCustomServer</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/tools/update-custom-server</td>
-        <td>Update custom server</td>
-      </tr>
-    <tr>
-        <td colspan="3" style="text-align: center;"><strong>VectorizationApi</strong></td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIVectorizationApi.md#newaivectorizationstarttask"><strong>newAiVectorizationStartTask</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/vectorization/tasks</td>
-        <td>Start a vectorization task</td>
-      </tr>
-    <tr>
-        <td colspan="3" style="text-align: center;"><strong>WebSearchApi</strong></td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIWebSearchApi.md#newaiwebsearchclear"><strong>newAiWebSearchClear</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/ai/web-search/clear</td>
-        <td>Clear</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIWebSearchApi.md#newaiwebsearchconfigure"><strong>newAiWebSearchConfigure</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/web-search/configure</td>
-        <td>Configure</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIWebSearchApi.md#newaiwebsearchgetactiveconfig"><strong>newAiWebSearchGetActiveConfig</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/web-search/get-active-config</td>
-        <td>Get active config</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIWebSearchApi.md#newaiwebsearchisconfigured"><strong>newAiWebSearchIsConfigured</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/web-search/is-configured</td>
-        <td>Is configured</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIWebSearchApi.md#newaiwebsearchsetactiveconfig"><strong>newAiWebSearchSetActiveConfig</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/web-search/set-active-config</td>
-        <td>Set active config</td>
-      </tr>
-      <tr>
-        <td><a href="docs/NewAIWebSearchApi.md#newaiwebsearchtestconnection"><strong>newAiWebSearchTestConnection</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/web-search/test-connection</td>
-        <td>Test connection</td>
       </tr>
     </tbody>
   </table>
@@ -4037,14 +4034,146 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [AdditionalWhiteLabelSettingsWrapper](docs/AdditionalWhiteLabelSettingsWrapper.md)
  - [AdminMessageBaseSettingsRequestsDto](docs/AdminMessageBaseSettingsRequestsDto.md)
  - [AdminMessageSettingsRequestsDto](docs/AdminMessageSettingsRequestsDto.md)
+ - [AiActionType](docs/AiActionType.md)
+ - [AiAgentNewItemsDto](docs/AiAgentNewItemsDto.md)
+ - [AiAgentsCreateRequest](docs/AiAgentsCreateRequest.md)
+ - [AiAgentsDeleteRequest](docs/AiAgentsDeleteRequest.md)
+ - [AiAgentsResetQuotaRequest](docs/AiAgentsResetQuotaRequest.md)
+ - [AiAgentsUpdateQuotaRequest](docs/AiAgentsUpdateQuotaRequest.md)
+ - [AiAgentsUpdateQuotaRequestRoomIdsInner](docs/AiAgentsUpdateQuotaRequestRoomIdsInner.md)
+ - [AiAgentsUpdateRequest](docs/AiAgentsUpdateRequest.md)
+ - [AiAiActionArgs](docs/AiAiActionArgs.md)
+ - [AiAiActionArgsPrompt](docs/AiAiActionArgsPrompt.md)
+ - [AiAiApproveToolCallRequest](docs/AiAiApproveToolCallRequest.md)
+ - [AiAiRegenerateStreamRequest](docs/AiAiRegenerateStreamRequest.md)
+ - [AiAiSendCustomRequest](docs/AiAiSendCustomRequest.md)
+ - [AiAiSendRequest](docs/AiAiSendRequest.md)
+ - [AiAiSendStreamBody](docs/AiAiSendStreamBody.md)
+ - [AiAiSettingsDto](docs/AiAiSettingsDto.md)
+ - [AiAiSettingsWrapper](docs/AiAiSettingsWrapper.md)
+ - [AiAiToolCallData](docs/AiAiToolCallData.md)
+ - [AiAiUserSettingsDto](docs/AiAiUserSettingsDto.md)
+ - [AiAiUserSettingsWrapper](docs/AiAiUserSettingsWrapper.md)
+ - [AiApiDateTime](docs/AiApiDateTime.md)
+ - [AiAssignmentMutationResult](docs/AiAssignmentMutationResult.md)
+ - [AiAssignmentsAssignRequest](docs/AiAssignmentsAssignRequest.md)
+ - [AiAttachment](docs/AiAttachment.md)
+ - [AiAttachmentFormKeysInner](docs/AiAttachmentFormKeysInner.md)
+ - [AiAttachmentsLinkToMessageRequest](docs/AiAttachmentsLinkToMessageRequest.md)
+ - [AiAttachmentsSaveFileRequest](docs/AiAttachmentsSaveFileRequest.md)
+ - [AiAttachmentsSaveFileRequestInput](docs/AiAttachmentsSaveFileRequestInput.md)
+ - [AiAttachmentsSaveFilesManyRequest](docs/AiAttachmentsSaveFilesManyRequest.md)
+ - [AiAttachmentsSaveImageRequest](docs/AiAttachmentsSaveImageRequest.md)
+ - [AiAttachmentsSaveImageRequestInput](docs/AiAttachmentsSaveImageRequestInput.md)
+ - [AiAttachmentsSaveImagesManyRequest](docs/AiAttachmentsSaveImagesManyRequest.md)
+ - [AiBuiltinProviderType](docs/AiBuiltinProviderType.md)
+ - [AiBulkAssignmentResult](docs/AiBulkAssignmentResult.md)
+ - [AiBulkAssignmentResultErrorsInner](docs/AiBulkAssignmentResultErrorsInner.md)
+ - [AiChatEvent](docs/AiChatEvent.md)
  - [AiChatModelPricing](docs/AiChatModelPricing.md)
  - [AiChatPrice](docs/AiChatPrice.md)
+ - [AiChatSettingsDto](docs/AiChatSettingsDto.md)
+ - [AiCreateProfileInput](docs/AiCreateProfileInput.md)
+ - [AiCreatePromptInput](docs/AiCreatePromptInput.md)
+ - [AiDistributedTaskStatus](docs/AiDistributedTaskStatus.md)
  - [AiEmbeddingModelPricing](docs/AiEmbeddingModelPricing.md)
  - [AiEmbeddingPrice](docs/AiEmbeddingPrice.md)
+ - [AiEmbeddingProviderType](docs/AiEmbeddingProviderType.md)
+ - [AiEmployeeDto](docs/AiEmployeeDto.md)
+ - [AiErrorResponse](docs/AiErrorResponse.md)
+ - [AiExportTextToDocx200Response](docs/AiExportTextToDocx200Response.md)
+ - [AiExportTextToDocxRequest](docs/AiExportTextToDocxRequest.md)
+ - [AiExportTextToDocxRequestFolderId](docs/AiExportTextToDocxRequestFolderId.md)
+ - [AiFileEntryBaseDto](docs/AiFileEntryBaseDto.md)
+ - [AiFileEntryDtoInteger](docs/AiFileEntryDtoInteger.md)
+ - [AiFileEntryType](docs/AiFileEntryType.md)
+ - [AiFileOperationDto](docs/AiFileOperationDto.md)
+ - [AiFileOperationType](docs/AiFileOperationType.md)
+ - [AiFileOperationWrapper](docs/AiFileOperationWrapper.md)
+ - [AiFileShare](docs/AiFileShare.md)
+ - [AiFolderContentDtoInteger](docs/AiFolderContentDtoInteger.md)
+ - [AiFolderContentIntegerWrapper](docs/AiFolderContentIntegerWrapper.md)
+ - [AiFolderDtoInteger](docs/AiFolderDtoInteger.md)
+ - [AiFolderIntegerArrayWrapper](docs/AiFolderIntegerArrayWrapper.md)
+ - [AiFolderIntegerWrapper](docs/AiFolderIntegerWrapper.md)
+ - [AiFolderMutationResult](docs/AiFolderMutationResult.md)
+ - [AiFolderType](docs/AiFolderType.md)
  - [AiImageModelPricing](docs/AiImageModelPricing.md)
  - [AiImagePrice](docs/AiImagePrice.md)
+ - [AiImportError](docs/AiImportError.md)
+ - [AiImportMode](docs/AiImportMode.md)
+ - [AiImportResult](docs/AiImportResult.md)
+ - [AiImportResultImported](docs/AiImportResultImported.md)
+ - [AiLogo](docs/AiLogo.md)
+ - [AiLogoCover](docs/AiLogoCover.md)
+ - [AiModel](docs/AiModel.md)
+ - [AiNewItemsAgentNewItemsArrayWrapper](docs/AiNewItemsAgentNewItemsArrayWrapper.md)
+ - [AiNewItemsDtoAgentNewItemsDto](docs/AiNewItemsDtoAgentNewItemsDto.md)
+ - [AiOpenAIChatCompletionChunk](docs/AiOpenAIChatCompletionChunk.md)
+ - [AiOpenAIChoiceDelta](docs/AiOpenAIChoiceDelta.md)
+ - [AiOpenAIChunkChoice](docs/AiOpenAIChunkChoice.md)
+ - [AiOpenAIFinishReason](docs/AiOpenAIFinishReason.md)
+ - [AiOpenAIStreamChunk](docs/AiOpenAIStreamChunk.md)
+ - [AiOpenAIStreamError](docs/AiOpenAIStreamError.md)
+ - [AiOpenAIStreamErrorError](docs/AiOpenAIStreamErrorError.md)
+ - [AiOpenAIToolCallDelta](docs/AiOpenAIToolCallDelta.md)
+ - [AiOpenAIToolCallDeltaFunction](docs/AiOpenAIToolCallDeltaFunction.md)
+ - [AiOpenOrCreateInput](docs/AiOpenOrCreateInput.md)
+ - [AiOpenOrCreateResult](docs/AiOpenOrCreateResult.md)
+ - [AiPreferencesSetDeepModeRequest](docs/AiPreferencesSetDeepModeRequest.md)
  - [AiPricesResponse](docs/AiPricesResponse.md)
  - [AiPricesResponseWrapper](docs/AiPricesResponseWrapper.md)
+ - [AiProfile](docs/AiProfile.md)
+ - [AiProfileMutationResult](docs/AiProfileMutationResult.md)
+ - [AiProfilesListProviderModelsRequest](docs/AiProfilesListProviderModelsRequest.md)
+ - [AiProfilesTestConnection200Response](docs/AiProfilesTestConnection200Response.md)
+ - [AiProfilesTestConnection200ResponseAnyOf](docs/AiProfilesTestConnection200ResponseAnyOf.md)
+ - [AiPrompt](docs/AiPrompt.md)
+ - [AiPromptBundle](docs/AiPromptBundle.md)
+ - [AiPromptFolder](docs/AiPromptFolder.md)
+ - [AiPromptMutationResult](docs/AiPromptMutationResult.md)
+ - [AiPromptsImportBundleRequest](docs/AiPromptsImportBundleRequest.md)
+ - [AiPromptsImportBundleRequestOptions](docs/AiPromptsImportBundleRequestOptions.md)
+ - [AiPromptsMoveRequest](docs/AiPromptsMoveRequest.md)
+ - [AiPromptsRenameFolderRequest](docs/AiPromptsRenameFolderRequest.md)
+ - [AiPromptsUpdateRequest](docs/AiPromptsUpdateRequest.md)
+ - [AiPromptsUpdateRequestUpdates](docs/AiPromptsUpdateRequestUpdates.md)
+ - [AiProviderType](docs/AiProviderType.md)
+ - [AiResolvedAssignment](docs/AiResolvedAssignment.md)
+ - [AiRoomDataLifetimeDto](docs/AiRoomDataLifetimeDto.md)
+ - [AiRoomDataLifetimePeriod](docs/AiRoomDataLifetimePeriod.md)
+ - [AiRoomType](docs/AiRoomType.md)
+ - [AiSuccessResponse](docs/AiSuccessResponse.md)
+ - [AiTErrorData](docs/AiTErrorData.md)
+ - [AiTMCPItem](docs/AiTMCPItem.md)
+ - [AiTProvider](docs/AiTProvider.md)
+ - [AiThread](docs/AiThread.md)
+ - [AiThreadMessageLike](docs/AiThreadMessageLike.md)
+ - [AiThreadMessageLikeContent](docs/AiThreadMessageLikeContent.md)
+ - [AiThreadMessageLikeContentAnyOfInner](docs/AiThreadMessageLikeContentAnyOfInner.md)
+ - [AiThreadMessageLikeStatus](docs/AiThreadMessageLikeStatus.md)
+ - [AiThreadsAppendUserMessageRequest](docs/AiThreadsAppendUserMessageRequest.md)
+ - [AiThreadsCreateRequest](docs/AiThreadsCreateRequest.md)
+ - [AiThreadsRegenerateTitleRequest](docs/AiThreadsRegenerateTitleRequest.md)
+ - [AiThreadsRenameRequest](docs/AiThreadsRenameRequest.md)
+ - [AiThreadsTouchRequest](docs/AiThreadsTouchRequest.md)
+ - [AiThreadsUpdateMessageRequest](docs/AiThreadsUpdateMessageRequest.md)
+ - [AiToolsAddCustomServerRequest](docs/AiToolsAddCustomServerRequest.md)
+ - [AiToolsBulkResult](docs/AiToolsBulkResult.md)
+ - [AiToolsBulkResultErrorsInner](docs/AiToolsBulkResultErrorsInner.md)
+ - [AiToolsMutationResult](docs/AiToolsMutationResult.md)
+ - [AiToolsRemoveCustomServerRequest](docs/AiToolsRemoveCustomServerRequest.md)
+ - [AiToolsReplaceAllCustomServersRequest](docs/AiToolsReplaceAllCustomServersRequest.md)
+ - [AiToolsSetAllowAlwaysRequest](docs/AiToolsSetAllowAlwaysRequest.md)
+ - [AiToolsSetDisabledRequest](docs/AiToolsSetDisabledRequest.md)
+ - [AiToolsUpdateCustomServerRequest](docs/AiToolsUpdateCustomServerRequest.md)
+ - [AiVectorizationSettingsDto](docs/AiVectorizationSettingsDto.md)
+ - [AiVectorizationSettingsWrapper](docs/AiVectorizationSettingsWrapper.md)
+ - [AiWatermarkAdditions](docs/AiWatermarkAdditions.md)
+ - [AiWatermarkDto](docs/AiWatermarkDto.md)
+ - [AiWebSearchConfig](docs/AiWebSearchConfig.md)
+ - [AiWebSearchConfigureRequest](docs/AiWebSearchConfigureRequest.md)
+ - [AiWebSearchMutationResult](docs/AiWebSearchMutationResult.md)
  - [AiWebSearchPricing](docs/AiWebSearchPricing.md)
  - [AnonymousConfigDto](docs/AnonymousConfigDto.md)
  - [ApiDateTime](docs/ApiDateTime.md)
@@ -4463,137 +4592,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [Module](docs/Module.md)
  - [ModuleWrapper](docs/ModuleWrapper.md)
  - [MultiSizeLogoCover](docs/MultiSizeLogoCover.md)
- - [NewAiActionType](docs/NewAiActionType.md)
- - [NewAiAgentNewItemsDto](docs/NewAiAgentNewItemsDto.md)
- - [NewAiAgentsCreateRequest](docs/NewAiAgentsCreateRequest.md)
- - [NewAiAgentsDeleteRequest](docs/NewAiAgentsDeleteRequest.md)
- - [NewAiAgentsResetQuotaRequest](docs/NewAiAgentsResetQuotaRequest.md)
- - [NewAiAgentsUpdateQuotaRequest](docs/NewAiAgentsUpdateQuotaRequest.md)
- - [NewAiAgentsUpdateQuotaRequestRoomIdsInner](docs/NewAiAgentsUpdateQuotaRequestRoomIdsInner.md)
- - [NewAiAgentsUpdateRequest](docs/NewAiAgentsUpdateRequest.md)
- - [NewAiAiActionArgs](docs/NewAiAiActionArgs.md)
- - [NewAiAiActionArgsPrompt](docs/NewAiAiActionArgsPrompt.md)
- - [NewAiAiApproveToolCallRequest](docs/NewAiAiApproveToolCallRequest.md)
- - [NewAiAiRegenerateStreamRequest](docs/NewAiAiRegenerateStreamRequest.md)
- - [NewAiAiSendCustomRequest](docs/NewAiAiSendCustomRequest.md)
- - [NewAiAiSendRequest](docs/NewAiAiSendRequest.md)
- - [NewAiAiSendStreamBody](docs/NewAiAiSendStreamBody.md)
- - [NewAiAiSettingsDto](docs/NewAiAiSettingsDto.md)
- - [NewAiAiSettingsWrapper](docs/NewAiAiSettingsWrapper.md)
- - [NewAiAiToolCallData](docs/NewAiAiToolCallData.md)
- - [NewAiAiUserSettingsDto](docs/NewAiAiUserSettingsDto.md)
- - [NewAiAiUserSettingsWrapper](docs/NewAiAiUserSettingsWrapper.md)
- - [NewAiApiDateTime](docs/NewAiApiDateTime.md)
- - [NewAiAssignmentMutationResult](docs/NewAiAssignmentMutationResult.md)
- - [NewAiAssignmentsAssignRequest](docs/NewAiAssignmentsAssignRequest.md)
- - [NewAiAttachment](docs/NewAiAttachment.md)
- - [NewAiAttachmentsLinkToMessageRequest](docs/NewAiAttachmentsLinkToMessageRequest.md)
- - [NewAiAttachmentsSaveFileRequest](docs/NewAiAttachmentsSaveFileRequest.md)
- - [NewAiAttachmentsSaveFileRequestInput](docs/NewAiAttachmentsSaveFileRequestInput.md)
- - [NewAiAttachmentsSaveFilesManyRequest](docs/NewAiAttachmentsSaveFilesManyRequest.md)
- - [NewAiAttachmentsSaveImageRequest](docs/NewAiAttachmentsSaveImageRequest.md)
- - [NewAiAttachmentsSaveImageRequestInput](docs/NewAiAttachmentsSaveImageRequestInput.md)
- - [NewAiAttachmentsSaveImagesManyRequest](docs/NewAiAttachmentsSaveImagesManyRequest.md)
- - [NewAiBuiltinProviderType](docs/NewAiBuiltinProviderType.md)
- - [NewAiBulkAssignmentResult](docs/NewAiBulkAssignmentResult.md)
- - [NewAiBulkAssignmentResultErrorsInner](docs/NewAiBulkAssignmentResultErrorsInner.md)
- - [NewAiChatEvent](docs/NewAiChatEvent.md)
- - [NewAiChatSettingsDto](docs/NewAiChatSettingsDto.md)
- - [NewAiCreateProfileInput](docs/NewAiCreateProfileInput.md)
- - [NewAiCreatePromptInput](docs/NewAiCreatePromptInput.md)
- - [NewAiDistributedTaskStatus](docs/NewAiDistributedTaskStatus.md)
- - [NewAiEmbeddingProviderType](docs/NewAiEmbeddingProviderType.md)
- - [NewAiEmployeeDto](docs/NewAiEmployeeDto.md)
- - [NewAiErrorResponse](docs/NewAiErrorResponse.md)
- - [NewAiExportTextToDocx200Response](docs/NewAiExportTextToDocx200Response.md)
- - [NewAiExportTextToDocxRequest](docs/NewAiExportTextToDocxRequest.md)
- - [NewAiExportTextToDocxRequestFolderId](docs/NewAiExportTextToDocxRequestFolderId.md)
- - [NewAiFileEntryBaseDto](docs/NewAiFileEntryBaseDto.md)
- - [NewAiFileEntryDtoInteger](docs/NewAiFileEntryDtoInteger.md)
- - [NewAiFileEntryType](docs/NewAiFileEntryType.md)
- - [NewAiFileOperationDto](docs/NewAiFileOperationDto.md)
- - [NewAiFileOperationType](docs/NewAiFileOperationType.md)
- - [NewAiFileOperationWrapper](docs/NewAiFileOperationWrapper.md)
- - [NewAiFileShare](docs/NewAiFileShare.md)
- - [NewAiFolderContentDtoInteger](docs/NewAiFolderContentDtoInteger.md)
- - [NewAiFolderContentIntegerWrapper](docs/NewAiFolderContentIntegerWrapper.md)
- - [NewAiFolderDtoInteger](docs/NewAiFolderDtoInteger.md)
- - [NewAiFolderIntegerArrayWrapper](docs/NewAiFolderIntegerArrayWrapper.md)
- - [NewAiFolderIntegerWrapper](docs/NewAiFolderIntegerWrapper.md)
- - [NewAiFolderMutationResult](docs/NewAiFolderMutationResult.md)
- - [NewAiFolderType](docs/NewAiFolderType.md)
- - [NewAiImportError](docs/NewAiImportError.md)
- - [NewAiImportMode](docs/NewAiImportMode.md)
- - [NewAiImportResult](docs/NewAiImportResult.md)
- - [NewAiImportResultImported](docs/NewAiImportResultImported.md)
- - [NewAiLogo](docs/NewAiLogo.md)
- - [NewAiLogoCover](docs/NewAiLogoCover.md)
- - [NewAiModel](docs/NewAiModel.md)
- - [NewAiNewItemsAgentNewItemsArrayWrapper](docs/NewAiNewItemsAgentNewItemsArrayWrapper.md)
- - [NewAiNewItemsDtoAgentNewItemsDto](docs/NewAiNewItemsDtoAgentNewItemsDto.md)
- - [NewAiOpenAIChatCompletionChunk](docs/NewAiOpenAIChatCompletionChunk.md)
- - [NewAiOpenAIChoiceDelta](docs/NewAiOpenAIChoiceDelta.md)
- - [NewAiOpenAIChunkChoice](docs/NewAiOpenAIChunkChoice.md)
- - [NewAiOpenAIFinishReason](docs/NewAiOpenAIFinishReason.md)
- - [NewAiOpenAIStreamChunk](docs/NewAiOpenAIStreamChunk.md)
- - [NewAiOpenAIStreamError](docs/NewAiOpenAIStreamError.md)
- - [NewAiOpenAIStreamErrorError](docs/NewAiOpenAIStreamErrorError.md)
- - [NewAiOpenAIToolCallDelta](docs/NewAiOpenAIToolCallDelta.md)
- - [NewAiOpenAIToolCallDeltaFunction](docs/NewAiOpenAIToolCallDeltaFunction.md)
- - [NewAiOpenOrCreateInput](docs/NewAiOpenOrCreateInput.md)
- - [NewAiOpenOrCreateResult](docs/NewAiOpenOrCreateResult.md)
- - [NewAiPreferencesSetDeepModeRequest](docs/NewAiPreferencesSetDeepModeRequest.md)
- - [NewAiProfile](docs/NewAiProfile.md)
- - [NewAiProfileMutationResult](docs/NewAiProfileMutationResult.md)
- - [NewAiProfilesListProviderModelsRequest](docs/NewAiProfilesListProviderModelsRequest.md)
- - [NewAiProfilesTestConnection200Response](docs/NewAiProfilesTestConnection200Response.md)
- - [NewAiProfilesTestConnection200ResponseAnyOf](docs/NewAiProfilesTestConnection200ResponseAnyOf.md)
- - [NewAiPrompt](docs/NewAiPrompt.md)
- - [NewAiPromptBundle](docs/NewAiPromptBundle.md)
- - [NewAiPromptFolder](docs/NewAiPromptFolder.md)
- - [NewAiPromptMutationResult](docs/NewAiPromptMutationResult.md)
- - [NewAiPromptsImportBundleRequest](docs/NewAiPromptsImportBundleRequest.md)
- - [NewAiPromptsImportBundleRequestOptions](docs/NewAiPromptsImportBundleRequestOptions.md)
- - [NewAiPromptsMoveRequest](docs/NewAiPromptsMoveRequest.md)
- - [NewAiPromptsRenameFolderRequest](docs/NewAiPromptsRenameFolderRequest.md)
- - [NewAiPromptsUpdateRequest](docs/NewAiPromptsUpdateRequest.md)
- - [NewAiPromptsUpdateRequestUpdates](docs/NewAiPromptsUpdateRequestUpdates.md)
- - [NewAiProviderType](docs/NewAiProviderType.md)
- - [NewAiResolvedAssignment](docs/NewAiResolvedAssignment.md)
- - [NewAiRoomDataLifetimeDto](docs/NewAiRoomDataLifetimeDto.md)
- - [NewAiRoomDataLifetimePeriod](docs/NewAiRoomDataLifetimePeriod.md)
- - [NewAiRoomType](docs/NewAiRoomType.md)
- - [NewAiSuccessResponse](docs/NewAiSuccessResponse.md)
- - [NewAiTErrorData](docs/NewAiTErrorData.md)
- - [NewAiTMCPItem](docs/NewAiTMCPItem.md)
- - [NewAiTProvider](docs/NewAiTProvider.md)
- - [NewAiThread](docs/NewAiThread.md)
- - [NewAiThreadMessageLike](docs/NewAiThreadMessageLike.md)
- - [NewAiThreadMessageLikeContent](docs/NewAiThreadMessageLikeContent.md)
- - [NewAiThreadMessageLikeContentAnyOfInner](docs/NewAiThreadMessageLikeContentAnyOfInner.md)
- - [NewAiThreadMessageLikeStatus](docs/NewAiThreadMessageLikeStatus.md)
- - [NewAiThreadsAppendUserMessageRequest](docs/NewAiThreadsAppendUserMessageRequest.md)
- - [NewAiThreadsCreateRequest](docs/NewAiThreadsCreateRequest.md)
- - [NewAiThreadsRegenerateTitleRequest](docs/NewAiThreadsRegenerateTitleRequest.md)
- - [NewAiThreadsRenameRequest](docs/NewAiThreadsRenameRequest.md)
- - [NewAiThreadsTouchRequest](docs/NewAiThreadsTouchRequest.md)
- - [NewAiThreadsUpdateMessageRequest](docs/NewAiThreadsUpdateMessageRequest.md)
- - [NewAiToolsAddCustomServerRequest](docs/NewAiToolsAddCustomServerRequest.md)
- - [NewAiToolsBulkResult](docs/NewAiToolsBulkResult.md)
- - [NewAiToolsBulkResultErrorsInner](docs/NewAiToolsBulkResultErrorsInner.md)
- - [NewAiToolsMutationResult](docs/NewAiToolsMutationResult.md)
- - [NewAiToolsRemoveCustomServerRequest](docs/NewAiToolsRemoveCustomServerRequest.md)
- - [NewAiToolsReplaceAllCustomServersRequest](docs/NewAiToolsReplaceAllCustomServersRequest.md)
- - [NewAiToolsSetAllowAlwaysRequest](docs/NewAiToolsSetAllowAlwaysRequest.md)
- - [NewAiToolsSetDisabledRequest](docs/NewAiToolsSetDisabledRequest.md)
- - [NewAiToolsUpdateCustomServerRequest](docs/NewAiToolsUpdateCustomServerRequest.md)
- - [NewAiVectorizationSettingsDto](docs/NewAiVectorizationSettingsDto.md)
- - [NewAiVectorizationSettingsWrapper](docs/NewAiVectorizationSettingsWrapper.md)
- - [NewAiWatermarkAdditions](docs/NewAiWatermarkAdditions.md)
- - [NewAiWatermarkDto](docs/NewAiWatermarkDto.md)
- - [NewAiWebSearchConfig](docs/NewAiWebSearchConfig.md)
- - [NewAiWebSearchConfigureRequest](docs/NewAiWebSearchConfigureRequest.md)
- - [NewAiWebSearchMutationResult](docs/NewAiWebSearchMutationResult.md)
  - [NewItemsDtoFileEntryBaseDto](docs/NewItemsDtoFileEntryBaseDto.md)
  - [NewItemsDtoRoomNewItemsDto](docs/NewItemsDtoRoomNewItemsDto.md)
  - [NewItemsFileEntryBaseArrayWrapper](docs/NewItemsFileEntryBaseArrayWrapper.md)

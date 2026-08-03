@@ -4,36 +4,35 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**createAgent**](#createagent) | **POST** /internal/ai/integration/agents | Create an ai agent|
-|[**deleteAgent**](#deleteagent) | **DELETE** /internal/ai/integration/agents/{id} | Remove an ai agent|
-|[**getAgentInfo**](#getagentinfo) | **GET** /internal/ai/integration/agents/{id} | Return an ai agent|
-|[**getAgents**](#getagents) | **GET** /internal/ai/integration/agents | Get ai agents|
-|[**getAgentsNewItems**](#getagentsnewitems) | **GET** /internal/ai/integration/agents/news | Get the room new items|
-|[**resetAgentsQuota**](#resetagentsquota) | **PUT** /internal/ai/integration/agents/resetquota | Reset the AI agents quota limit|
-|[**updateAgent**](#updateagent) | **PUT** /internal/ai/integration/agents/{id} | Update an ai agent|
-|[**updateAgentsQuota**](#updateagentsquota) | **PUT** /internal/ai/integration/agents/agentquota | Change the AI agent quota limit|
+|[**aiAgentsCreate**](#aiagentscreate) | **POST** /api/2.0/ai/agents | Create an agent|
+|[**aiAgentsDelete**](#aiagentsdelete) | **DELETE** /api/2.0/ai/agents/{id} | Delete an agent|
+|[**aiAgentsGet**](#aiagentsget) | **GET** /api/2.0/ai/agents/{id} | Get an agent|
+|[**aiAgentsList**](#aiagentslist) | **GET** /api/2.0/ai/agents | List agents|
+|[**aiAgentsNews**](#aiagentsnews) | **GET** /api/2.0/ai/agents/news | List agent news items|
+|[**aiAgentsResetQuota**](#aiagentsresetquota) | **PUT** /api/2.0/ai/agents/resetquota | Reset agents\' quota|
+|[**aiAgentsUpdate**](#aiagentsupdate) | **PUT** /api/2.0/ai/agents/{id} | Update an agent|
+|[**aiAgentsUpdateQuota**](#aiagentsupdatequota) | **PUT** /api/2.0/ai/agents/agentquota | Update agents\' quota|
 
-# **createAgent**
-> FolderIntegerWrapper createAgent()
+# **aiAgentsCreate**
+> AiFolderIntegerWrapper aiAgentsCreate(aiAgentsCreateRequest)
 
-Creates an ai agent.
 
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-agent/).
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-create/).
 
 ### Parameters
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **createAgentRequestDto** | **CreateAgentRequestDto**|  | |
+| **aiAgentsCreateRequest** | **AiAgentsCreateRequest**|  | |
 
 
 ### Return type
 
-**FolderIntegerWrapper**
+**AiFolderIntegerWrapper**
 
 ### Authorization
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+No authorization required
 
 ### Example
 
@@ -41,16 +40,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     AIAgentsApi,
     Configuration,
-    CreateAgentRequestDto
+    AiAgentsCreateRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new AIAgentsApi(configuration);
 
-let createAgentRequestDto: CreateAgentRequestDto; // (optional)
+let aiAgentsCreateRequest: AiAgentsCreateRequest; //
 
-const { status, data } = await apiInstance.createAgent(
-    createAgentRequestDto
+const { status, data } = await apiInstance.aiAgentsCreate(
+    aiAgentsCreateRequest
 );
 ```
 
@@ -63,36 +62,32 @@ const { status, data } = await apiInstance.createAgent(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Agent information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**200** | Success. |  -  |
+|**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **deleteAgent**
-> FileOperationWrapper deleteAgent(deleteRoomRequest)
+# **aiAgentsDelete**
+> AiFileOperationWrapper aiAgentsDelete(aiAgentsDeleteRequest)
 
-Removes an ai agent.
 
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-agent/).
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-delete/).
 
 ### Parameters
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **deleteRoomRequest** | **DeleteRoomRequest**| The parameters for deleting a room. | |
-| **id** | [**number**] | The room ID. | defaults to undefined|
+| **aiAgentsDeleteRequest** | **AiAgentsDeleteRequest**|  | |
+| **id** | [**string**] |  | defaults to undefined|
 
 
 ### Return type
 
-**FileOperationWrapper**
+**AiFileOperationWrapper**
 
 ### Authorization
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+No authorization required
 
 ### Example
 
@@ -100,18 +95,18 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     AIAgentsApi,
     Configuration,
-    DeleteRoomRequest
+    AiAgentsDeleteRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new AIAgentsApi(configuration);
 
-let id: number; //The room ID. (default to undefined)
-let deleteRoomRequest: DeleteRoomRequest; //The parameters for deleting a room.
+let id: string; // (default to undefined)
+let aiAgentsDeleteRequest: AiAgentsDeleteRequest; //
 
-const { status, data } = await apiInstance.deleteAgent(
+const { status, data } = await apiInstance.aiAgentsDelete(
     id,
-    deleteRoomRequest
+    aiAgentsDeleteRequest
 );
 ```
 
@@ -124,35 +119,31 @@ const { status, data } = await apiInstance.deleteAgent(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | File operation |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**200** | Success. |  -  |
+|**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getAgentInfo**
-> FolderIntegerWrapper getAgentInfo()
+# **aiAgentsGet**
+> AiFolderIntegerWrapper aiAgentsGet()
 
-Returns an ai agent.
 
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-agent-info/).
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-get/).
 
 ### Parameters
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] | The room ID. | defaults to undefined|
+| **id** | [**string**] |  | defaults to undefined|
 
 
 ### Return type
 
-**FolderIntegerWrapper**
+**AiFolderIntegerWrapper**
 
 ### Authorization
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+No authorization required
 
 ### Example
 
@@ -165,9 +156,9 @@ import {
 const configuration = new Configuration();
 const apiInstance = new AIAgentsApi(configuration);
 
-let id: number; //The room ID. (default to undefined)
+let id: string; // (default to undefined)
 
-const { status, data } = await apiInstance.getAgentInfo(
+const { status, data } = await apiInstance.aiAgentsGet(
     id
 );
 ```
@@ -181,107 +172,16 @@ const { status, data } = await apiInstance.getAgentInfo(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Agent information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**200** | Success. |  -  |
+|**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getAgents**
-> FolderContentIntegerWrapper getAgents()
-
-Get ai agents
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-agents/).
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **subjectId** | [**string**] | The filter by user ID. | (optional) defaults to undefined|
-| **subjectOwnerId** | [**string**] | The filter by room owner ID. | (optional) defaults to undefined|
-| **withoutTags** | [**boolean**] | Specifies whether to search by tags or not. | (optional) defaults to undefined|
-| **tags** | [**string**] | The tags in the serialized format. | (optional) defaults to undefined|
-| **excludeSubject** | [**boolean**] | Specifies whether to exclude search by user or group ID. | (optional) defaults to undefined|
-| **quotaFilter** | **QuotaFilter** | The filter by quota (All - 0, Default - 1, Custom - 2). | (optional) defaults to undefined|
-| **count** | [**number**] | Specifies the maximum number of items to retrieve. | (optional) defaults to undefined|
-| **startIndex** | [**number**] | The index from which to start retrieving the room content. | (optional) defaults to undefined|
-| **sortBy** | [**string**] | Specifies the field by which the room content should be sorted. | (optional) defaults to undefined|
-| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
-| **filterValue** | [**string**] | The text filter value used to refine search or query operations. | (optional) defaults to undefined|
+# **aiAgentsList**
+> AiFolderContentIntegerWrapper aiAgentsList()
 
 
-### Return type
-
-**FolderContentIntegerWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-```typescript
-import {
-    AIAgentsApi,
-    Configuration
-} from '@onlyoffice/docspace-api-sdk';
-
-const configuration = new Configuration();
-const apiInstance = new AIAgentsApi(configuration);
-
-let subjectId: string; //The filter by user ID. (optional) (default to undefined)
-let subjectOwnerId: string; //The filter by room owner ID. (optional) (default to undefined)
-let withoutTags: boolean; //Specifies whether to search by tags or not. (optional) (default to undefined)
-let tags: string; //The tags in the serialized format. (optional) (default to undefined)
-let excludeSubject: boolean; //Specifies whether to exclude search by user or group ID. (optional) (default to undefined)
-let quotaFilter: QuotaFilter; //The filter by quota (All - 0, Default - 1, Custom - 2). (optional) (default to undefined)
-let count: number; //Specifies the maximum number of items to retrieve. (optional) (default to undefined)
-let startIndex: number; //The index from which to start retrieving the room content. (optional) (default to undefined)
-let sortBy: string; //Specifies the field by which the room content should be sorted. (optional) (default to undefined)
-let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
-let filterValue: string; //The text filter value used to refine search or query operations. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.getAgents(
-    subjectId,
-    subjectOwnerId,
-    withoutTags,
-    tags,
-    excludeSubject,
-    quotaFilter,
-    count,
-    startIndex,
-    sortBy,
-    sortOrder,
-    filterValue
-);
-```
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Agent information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **getAgentsNewItems**
-> NewItemsAgentNewItemsArrayWrapper getAgentsNewItems()
-
-Returns the room new items.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-agents-new-items/).
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-list/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -289,11 +189,11 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**NewItemsAgentNewItemsArrayWrapper**
+**AiFolderContentIntegerWrapper**
 
 ### Authorization
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+No authorization required
 
 ### Example
 
@@ -306,7 +206,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new AIAgentsApi(configuration);
 
-const { status, data } = await apiInstance.getAgentsNewItems();
+const { status, data } = await apiInstance.aiAgentsList();
 ```
 
 ### HTTP request headers
@@ -318,35 +218,77 @@ const { status, data } = await apiInstance.getAgentsNewItems();
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | List of new items |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**200** | Success. |  -  |
+|**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **resetAgentsQuota**
-> FolderIntegerArrayWrapper resetAgentsQuota()
+# **aiAgentsNews**
+> AiNewItemsAgentNewItemsArrayWrapper aiAgentsNews()
 
-Resets the quota limit for the AI agents with the IDs specified in the request.
 
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-agents-quota/).
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-news/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**AiNewItemsAgentNewItemsArrayWrapper**
+
+### Authorization
+
+No authorization required
+
+### Example
+
+```typescript
+import {
+    AIAgentsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new AIAgentsApi(configuration);
+
+const { status, data } = await apiInstance.aiAgentsNews();
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Success. |  -  |
+|**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **aiAgentsResetQuota**
+> AiFolderIntegerArrayWrapper aiAgentsResetQuota(aiAgentsResetQuotaRequest)
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-reset-quota/).
 
 ### Parameters
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **updateRoomsRoomIdsRequestDtoInteger** | **UpdateRoomsRoomIdsRequestDtoInteger**|  | |
+| **aiAgentsResetQuotaRequest** | **AiAgentsResetQuotaRequest**|  | |
 
 
 ### Return type
 
-**FolderIntegerArrayWrapper**
+**AiFolderIntegerArrayWrapper**
 
 ### Authorization
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+No authorization required
 
 ### Example
 
@@ -354,16 +296,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     AIAgentsApi,
     Configuration,
-    UpdateRoomsRoomIdsRequestDtoInteger
+    AiAgentsResetQuotaRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new AIAgentsApi(configuration);
 
-let updateRoomsRoomIdsRequestDtoInteger: UpdateRoomsRoomIdsRequestDtoInteger; // (optional)
+let aiAgentsResetQuotaRequest: AiAgentsResetQuotaRequest; //
 
-const { status, data } = await apiInstance.resetAgentsQuota(
-    updateRoomsRoomIdsRequestDtoInteger
+const { status, data } = await apiInstance.aiAgentsResetQuota(
+    aiAgentsResetQuotaRequest
 );
 ```
 
@@ -376,36 +318,32 @@ const { status, data } = await apiInstance.resetAgentsQuota(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | List of AI agents with the detailed information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**200** | Success. |  -  |
+|**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **updateAgent**
-> FolderIntegerWrapper updateAgent(updateRoomRequest)
+# **aiAgentsUpdate**
+> AiFolderIntegerWrapper aiAgentsUpdate(aiAgentsUpdateRequest)
 
-Updates an ai agent.
 
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-agent/).
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-update/).
 
 ### Parameters
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **updateRoomRequest** | **UpdateRoomRequest**| The request parameters for updating a room. | |
-| **id** | [**number**] | The room ID. | defaults to undefined|
+| **aiAgentsUpdateRequest** | **AiAgentsUpdateRequest**|  | |
+| **id** | [**string**] |  | defaults to undefined|
 
 
 ### Return type
 
-**FolderIntegerWrapper**
+**AiFolderIntegerWrapper**
 
 ### Authorization
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+No authorization required
 
 ### Example
 
@@ -413,18 +351,18 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     AIAgentsApi,
     Configuration,
-    UpdateRoomRequest
+    AiAgentsUpdateRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new AIAgentsApi(configuration);
 
-let id: number; //The room ID. (default to undefined)
-let updateRoomRequest: UpdateRoomRequest; //The request parameters for updating a room.
+let id: string; // (default to undefined)
+let aiAgentsUpdateRequest: AiAgentsUpdateRequest; //
 
-const { status, data } = await apiInstance.updateAgent(
+const { status, data } = await apiInstance.aiAgentsUpdate(
     id,
-    updateRoomRequest
+    aiAgentsUpdateRequest
 );
 ```
 
@@ -437,35 +375,31 @@ const { status, data } = await apiInstance.updateAgent(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Updated agent information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**200** | Success. |  -  |
+|**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **updateAgentsQuota**
-> FolderIntegerArrayWrapper updateAgentsQuota()
+# **aiAgentsUpdateQuota**
+> AiFolderIntegerArrayWrapper aiAgentsUpdateQuota(aiAgentsUpdateQuotaRequest)
 
-Changes the quota limit for the AI agents with the IDs specified in the request.
 
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-agents-quota/).
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-update-quota/).
 
 ### Parameters
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **updateRoomsQuotaRequestDtoInteger** | **UpdateRoomsQuotaRequestDtoInteger**|  | |
+| **aiAgentsUpdateQuotaRequest** | **AiAgentsUpdateQuotaRequest**|  | |
 
 
 ### Return type
 
-**FolderIntegerArrayWrapper**
+**AiFolderIntegerArrayWrapper**
 
 ### Authorization
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+No authorization required
 
 ### Example
 
@@ -473,16 +407,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     AIAgentsApi,
     Configuration,
-    UpdateRoomsQuotaRequestDtoInteger
+    AiAgentsUpdateQuotaRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new AIAgentsApi(configuration);
 
-let updateRoomsQuotaRequestDtoInteger: UpdateRoomsQuotaRequestDtoInteger; // (optional)
+let aiAgentsUpdateQuotaRequest: AiAgentsUpdateQuotaRequest; //
 
-const { status, data } = await apiInstance.updateAgentsQuota(
-    updateRoomsQuotaRequestDtoInteger
+const { status, data } = await apiInstance.aiAgentsUpdateQuota(
+    aiAgentsUpdateQuotaRequest
 );
 ```
 
@@ -495,11 +429,8 @@ const { status, data } = await apiInstance.updateAgentsQuota(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | List of AI agents with the detailed information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**200** | Success. |  -  |
+|**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

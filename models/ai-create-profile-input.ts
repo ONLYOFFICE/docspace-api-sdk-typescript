@@ -1,0 +1,81 @@
+/* tslint:disable */
+/* eslint-disable */
+/**
+ *
+ * (c) Copyright Ascensio System SIA 2026
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+// May contain unused imports in some cases
+// @ts-ignore
+import type { AiBuiltinProviderType } from './ai-builtin-provider-type';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { AiProviderType } from './ai-provider-type';
+
+/**
+ * Input for creating a new profile — the same shape as  {@link  Profile }  without the engine-generated fields (`id`, `createdAt`).
+ */
+export interface AiCreateProfileInput {
+    /**
+     * User-defined profile display name.
+     */
+    'name': string;
+    'providerType': AiProviderType;
+    'basedOn'?: AiBuiltinProviderType;
+    /**
+     * Base URL of the provider API.
+     */
+    'baseUrl': string;
+    /**
+     * API key or token. Optional for local providers.
+     */
+    'key'?: string;
+    /**
+     * Extra HTTP headers sent with every request to this provider. Merged into the SDK client\'s default headers; an explicit `Authorization` here wins over the one derived from  {@link  key  } . Honoured by the OpenAI-family providers.
+     */
+    'headers'?: { [key: string]: string; };
+    /**
+     * Selected model ID within this provider.
+     */
+    'modelId': string;
+    /**
+     * Whether extended thinking is enabled for this profile\'s model.
+     */
+    'reasoning'?: boolean;
+    /**
+     * Bitmask of capabilities supported by the selected model.
+     */
+    'capabilities'?: number;
+    /**
+     * Result of the live tool-capability probe performed at create time and on changes to `modelId` / `providerType` / `baseUrl`. `undefined` means the probe has never run for this profile (legacy record).
+     */
+    'canUseTool'?: boolean;
+    /**
+     * Result of the live Responses-API probe (parallel to  {@link  canUseTool  } ). `true` means the model speaks `/v1/responses` and the OpenAI provider must route through `client.responses.create` — required for gpt-5+ reasoning models that reject `reasoning_effort` together with `tools` on `/v1/chat/completions`. Probed at create time and whenever `modelId` / `providerType` / `baseUrl` change. `undefined` means the probe never ran (legacy record) — readers treat that as `false`.
+     */
+    'useResponsesApi'?: boolean;
+    /**
+     * Whether this profile uses a cloud-hosted provider (e.g. ONLYOFFICE DocSpace).
+     */
+    'isCloudProvider'?: boolean;
+    /**
+     * Route every provider request through the host\'s `fetchProxy` instead of the global `fetch`. Useful when the host runs the widget in a sandbox without direct network access (CORS, custom auth, etc.). Has no effect when the  {@link  PlatformAdapter.fetchProxy  }  is not configured.
+     */
+    'useProxy'?: boolean;
+}
+
+
+

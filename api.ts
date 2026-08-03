@@ -19,6 +19,19 @@
  */
 
 
+export * from './api/ai/aiapi';
+export * from './api/ai/agents-api';
+export * from './api/ai/assignments-api';
+export * from './api/ai/attachments-api';
+export * from './api/ai/export-api';
+export * from './api/ai/preferences-api';
+export * from './api/ai/profiles-api';
+export * from './api/ai/prompts-api';
+export * from './api/ai/aisettings-api';
+export * from './api/ai/threads-api';
+export * from './api/ai/tools-api';
+export * from './api/ai/vectorization-api';
+export * from './api/ai/web-search-api';
 export * from './api/api-keys/api-keys-api';
 export * from './api/apps/apps-api';
 export * from './api/authentication/authentication-api';
@@ -34,19 +47,6 @@ export * from './api/files/third-party-integration-api';
 export * from './api/group/group-api';
 export * from './api/group/search-api';
 export * from './api/migration/migration-api';
-export * from './api/new-ai/aiapi';
-export * from './api/new-ai/agents-api';
-export * from './api/new-ai/assignments-api';
-export * from './api/new-ai/attachments-api';
-export * from './api/new-ai/export-api';
-export * from './api/new-ai/preferences-api';
-export * from './api/new-ai/profiles-api';
-export * from './api/new-ai/prompts-api';
-export * from './api/new-ai/new-aisettings-api';
-export * from './api/new-ai/threads-api';
-export * from './api/new-ai/tools-api';
-export * from './api/new-ai/vectorization-api';
-export * from './api/new-ai/web-search-api';
 export * from './api/oauth20/authorization-api';
 export * from './api/oauth20/client-management-api';
 export * from './api/oauth20/client-querying-api';
