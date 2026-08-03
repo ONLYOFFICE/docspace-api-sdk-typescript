@@ -4,13 +4,13 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**newAiAiApproveToolCall**](#newaiaiapprovetoolcall) | **POST** /api/2.0/new-ai/ai/approve-tool-call | Approve tool call|
-|[**newAiAiDenyToolCall**](#newaiaidenytoolcall) | **POST** /api/2.0/new-ai/ai/deny-tool-call | Deny tool call|
-|[**newAiAiRegenerateStream**](#newaiairegeneratestream) | **POST** /api/2.0/new-ai/ai/regenerate-stream | Regenerate stream|
-|[**newAiAiSend**](#newaiaisend) | **POST** /api/2.0/new-ai/ai/send | Send|
-|[**newAiAiSendCustom**](#newaiaisendcustom) | **POST** /api/2.0/new-ai/ai/send-custom | Send custom|
-|[**newAiAiSendWithStream**](#newaiaisendwithstream) | **POST** /api/2.0/new-ai/ai/send-with-stream | Send with stream|
-|[**newAiAiSendWithStreamOpenAI**](#newaiaisendwithstreamopenai) | **POST** /api/2.0/new-ai/ai/send-with-stream-openai | Send with stream open ai|
+|[**newAiAiApproveToolCall**](#newaiaiapprovetoolcall) | **POST** /api/2.0/ai/ai/approve-tool-call | Approve tool call|
+|[**newAiAiDenyToolCall**](#newaiaidenytoolcall) | **POST** /api/2.0/ai/ai/deny-tool-call | Deny tool call|
+|[**newAiAiRegenerateStream**](#newaiairegeneratestream) | **POST** /api/2.0/ai/ai/regenerate-stream | Regenerate stream|
+|[**newAiAiSend**](#newaiaisend) | **POST** /api/2.0/ai/ai/send | Send|
+|[**newAiAiSendCustom**](#newaiaisendcustom) | **POST** /api/2.0/ai/ai/send-custom | Send custom|
+|[**newAiAiSendWithStream**](#newaiaisendwithstream) | **POST** /api/2.0/ai/ai/send-with-stream | Send with stream|
+|[**newAiAiSendWithStreamOpenAI**](#newaiaisendwithstreamopenai) | **POST** /api/2.0/ai/ai/send-with-stream-openai | Send with stream open ai|
 
 # **newAiAiApproveToolCall**
 > NewAiChatEvent newAiAiApproveToolCall(newAiAiApproveToolCallRequest)

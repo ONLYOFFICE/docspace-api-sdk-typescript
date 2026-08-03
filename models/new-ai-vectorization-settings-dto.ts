@@ -20,19 +20,18 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { DuplicateRequestDtoAllOfFileIds } from './duplicate-request-dto-all-of-file-ids';
+import type { NewAiEmbeddingProviderType } from './new-ai-embedding-provider-type';
 
 /**
- * The request parameters for updating the room quota.
+ * The vectorization settings.
  */
-export interface UpdateRoomsQuotaRequestDtoInteger {
+export interface NewAiVectorizationSettingsDto {
+    'type'?: NewAiEmbeddingProviderType;
     /**
-     * The list of room IDs.
+     * Indicates whether the embedding provider API key needs to be reconfigured.
      */
-    'roomIds'?: Array<DuplicateRequestDtoAllOfFileIds> | null;
-    /**
-     * The room quota.
-     */
-    'quota'?: number;
+    'needReset'?: boolean;
 }
+
+
 

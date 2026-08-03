@@ -1,4 +1,4 @@
-# SettingsMessagesApi
+# MessagesApi
 
 All URIs are relative to *https://your-docspace.onlyoffice.com*
 

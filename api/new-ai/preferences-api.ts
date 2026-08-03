@@ -50,7 +50,7 @@ export const PreferencesApiAxiosParamCreator = function (configuration?: Configu
             // verify required parameter 'body' is not null or undefined
             assertParamExists('newAiPreferencesClearDeepMode', 'body', body)
 
-            const localVarPath = `/api/2.0/new-ai/preferences/clear-deep-mode`;
+            const localVarPath = `/api/2.0/ai/preferences/clear-deep-mode`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -89,7 +89,7 @@ export const PreferencesApiAxiosParamCreator = function (configuration?: Configu
             // verify required parameter 'entityId' is not null or undefined
             assertParamExists('newAiPreferencesGetDeepMode', 'entityId', entityId)
 
-            const localVarPath = `/api/2.0/new-ai/preferences/get-deep-mode`;
+            const localVarPath = `/api/2.0/ai/preferences/get-deep-mode`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -129,7 +129,7 @@ export const PreferencesApiAxiosParamCreator = function (configuration?: Configu
             // verify required parameter 'entityId' is not null or undefined
             assertParamExists('newAiPreferencesIsDeepModeSet', 'entityId', entityId)
 
-            const localVarPath = `/api/2.0/new-ai/preferences/is-deep-mode-set`;
+            const localVarPath = `/api/2.0/ai/preferences/is-deep-mode-set`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -169,7 +169,7 @@ export const PreferencesApiAxiosParamCreator = function (configuration?: Configu
             // verify required parameter 'newAiPreferencesSetDeepModeRequest' is not null or undefined
             assertParamExists('newAiPreferencesSetDeepMode', 'newAiPreferencesSetDeepModeRequest', newAiPreferencesSetDeepModeRequest)
 
-            const localVarPath = `/api/2.0/new-ai/preferences/set-deep-mode`;
+            const localVarPath = `/api/2.0/ai/preferences/set-deep-mode`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;

@@ -60,7 +60,7 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'newAiCreateProfileInput' is not null or undefined
             assertParamExists('newAiProfilesCreate', 'newAiCreateProfileInput', newAiCreateProfileInput)
 
-            const localVarPath = `/api/2.0/new-ai/profiles/create`;
+            const localVarPath = `/api/2.0/ai/profiles/create`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -99,7 +99,7 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'body' is not null or undefined
             assertParamExists('newAiProfilesDelete', 'body', body)
 
-            const localVarPath = `/api/2.0/new-ai/profiles/delete`;
+            const localVarPath = `/api/2.0/ai/profiles/delete`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -138,7 +138,7 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'id' is not null or undefined
             assertParamExists('newAiProfilesGetById', 'id', id)
 
-            const localVarPath = `/api/2.0/new-ai/profiles/get-by-id`;
+            const localVarPath = `/api/2.0/ai/profiles/get-by-id`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -175,7 +175,7 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
          */
         newAiProfilesList: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
-            const localVarPath = `/api/2.0/new-ai/profiles/list`;
+            const localVarPath = `/api/2.0/ai/profiles/list`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -211,7 +211,7 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'profileId' is not null or undefined
             assertParamExists('newAiProfilesListModels', 'profileId', profileId)
 
-            const localVarPath = `/api/2.0/new-ai/profiles/list-models`;
+            const localVarPath = `/api/2.0/ai/profiles/list-models`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -251,7 +251,7 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'newAiProfilesListProviderModelsRequest' is not null or undefined
             assertParamExists('newAiProfilesListProviderModels', 'newAiProfilesListProviderModelsRequest', newAiProfilesListProviderModelsRequest)
 
-            const localVarPath = `/api/2.0/new-ai/profiles/list-provider-models`;
+            const localVarPath = `/api/2.0/ai/profiles/list-provider-models`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -290,7 +290,7 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'body' is not null or undefined
             assertParamExists('newAiProfilesTestConnection', 'body', body)
 
-            const localVarPath = `/api/2.0/new-ai/profiles/test-connection`;
+            const localVarPath = `/api/2.0/ai/profiles/test-connection`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -329,7 +329,7 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'newAiProfile' is not null or undefined
             assertParamExists('newAiProfilesUpdate', 'newAiProfile', newAiProfile)
 
-            const localVarPath = `/api/2.0/new-ai/profiles/update`;
+            const localVarPath = `/api/2.0/ai/profiles/update`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;

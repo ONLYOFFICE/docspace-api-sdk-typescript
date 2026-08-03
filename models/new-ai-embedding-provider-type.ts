@@ -18,21 +18,19 @@
  *
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { DuplicateRequestDtoAllOfFileIds } from './duplicate-request-dto-all-of-file-ids';
 
 /**
- * The request parameters for updating the room quota.
+ * [0 - None, 1 - OpenAi, 2 - OpenRouter, 3 - PortalAi]
  */
-export interface UpdateRoomsQuotaRequestDtoInteger {
-    /**
-     * The list of room IDs.
-     */
-    'roomIds'?: Array<DuplicateRequestDtoAllOfFileIds> | null;
-    /**
-     * The room quota.
-     */
-    'quota'?: number;
-}
+
+export const NewAiEmbeddingProviderType = {
+    None: 0,
+    OpenAi: 1,
+    OpenRouter: 2,
+    PortalAi: 3,
+} as const;
+
+export type NewAiEmbeddingProviderType = typeof NewAiEmbeddingProviderType[keyof typeof NewAiEmbeddingProviderType];
+
+
 

@@ -20,19 +20,28 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { DuplicateRequestDtoAllOfFileIds } from './duplicate-request-dto-all-of-file-ids';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { NewAiAiSettingsDto } from './new-ai-ai-settings-dto';
 
-/**
- * The request parameters for updating the room quota.
- */
-export interface UpdateRoomsQuotaRequestDtoInteger {
+export interface NewAiAiSettingsWrapper {
+    'response'?: NewAiAiSettingsDto;
     /**
-     * The list of room IDs.
+     * The total number of items in the response
      */
-    'roomIds'?: Array<DuplicateRequestDtoAllOfFileIds> | null;
+    'count'?: number;
     /**
-     * The room quota.
+     * List of links related to the response
      */
-    'quota'?: number;
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
+    /**
+     * HTTP status code of the response
+     */
+    'status'?: number;
+    /**
+     * HTTP status code of the response (duplicate of status)
+     */
+    'statusCode'?: number;
 }
 

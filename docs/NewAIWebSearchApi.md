@@ -4,12 +4,12 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**newAiWebSearchClear**](#newaiwebsearchclear) | **DELETE** /api/2.0/new-ai/web-search/clear | Clear|
-|[**newAiWebSearchConfigure**](#newaiwebsearchconfigure) | **PUT** /api/2.0/new-ai/web-search/configure | Configure|
-|[**newAiWebSearchGetActiveConfig**](#newaiwebsearchgetactiveconfig) | **GET** /api/2.0/new-ai/web-search/get-active-config | Get active config|
-|[**newAiWebSearchIsConfigured**](#newaiwebsearchisconfigured) | **GET** /api/2.0/new-ai/web-search/is-configured | Is configured|
-|[**newAiWebSearchSetActiveConfig**](#newaiwebsearchsetactiveconfig) | **PUT** /api/2.0/new-ai/web-search/set-active-config | Set active config|
-|[**newAiWebSearchTestConnection**](#newaiwebsearchtestconnection) | **POST** /api/2.0/new-ai/web-search/test-connection | Test connection|
+|[**newAiWebSearchClear**](#newaiwebsearchclear) | **DELETE** /api/2.0/ai/web-search/clear | Clear|
+|[**newAiWebSearchConfigure**](#newaiwebsearchconfigure) | **PUT** /api/2.0/ai/web-search/configure | Configure|
+|[**newAiWebSearchGetActiveConfig**](#newaiwebsearchgetactiveconfig) | **GET** /api/2.0/ai/web-search/get-active-config | Get active config|
+|[**newAiWebSearchIsConfigured**](#newaiwebsearchisconfigured) | **GET** /api/2.0/ai/web-search/is-configured | Is configured|
+|[**newAiWebSearchSetActiveConfig**](#newaiwebsearchsetactiveconfig) | **PUT** /api/2.0/ai/web-search/set-active-config | Set active config|
+|[**newAiWebSearchTestConnection**](#newaiwebsearchtestconnection) | **POST** /api/2.0/ai/web-search/test-connection | Test connection|
 
 # **newAiWebSearchClear**
 > NewAiSuccessResponse newAiWebSearchClear(body)

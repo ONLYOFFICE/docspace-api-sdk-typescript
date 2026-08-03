@@ -4,14 +4,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**newAiAssignmentsAssign**](#newaiassignmentsassign) | **PUT** /api/2.0/new-ai/assignments/assign | Assign|
-|[**newAiAssignmentsBulkAssign**](#newaiassignmentsbulkassign) | **PUT** /api/2.0/new-ai/assignments/bulk-assign | Bulk assign|
-|[**newAiAssignmentsCascadeProfileDelete**](#newaiassignmentscascadeprofiledelete) | **DELETE** /api/2.0/new-ai/assignments/cascade-profile-delete | Cascade profile delete|
-|[**newAiAssignmentsGetAllAssignments**](#newaiassignmentsgetallassignments) | **GET** /api/2.0/new-ai/assignments/get-all-assignments | Get all assignments|
-|[**newAiAssignmentsGetAssignment**](#newaiassignmentsgetassignment) | **GET** /api/2.0/new-ai/assignments/get-assignment | Get assignment|
-|[**newAiAssignmentsResolveForAction**](#newaiassignmentsresolveforaction) | **GET** /api/2.0/new-ai/assignments/resolve-for-action | Resolve for action|
-|[**newAiAssignmentsTryResolveForAction**](#newaiassignmentstryresolveforaction) | **GET** /api/2.0/new-ai/assignments/try-resolve-for-action | Try resolve for action|
-|[**newAiAssignmentsUnassign**](#newaiassignmentsunassign) | **DELETE** /api/2.0/new-ai/assignments/unassign | Unassign|
+|[**newAiAssignmentsAssign**](#newaiassignmentsassign) | **PUT** /api/2.0/ai/assignments/assign | Assign|
+|[**newAiAssignmentsBulkAssign**](#newaiassignmentsbulkassign) | **PUT** /api/2.0/ai/assignments/bulk-assign | Bulk assign|
+|[**newAiAssignmentsCascadeProfileDelete**](#newaiassignmentscascadeprofiledelete) | **DELETE** /api/2.0/ai/assignments/cascade-profile-delete | Cascade profile delete|
+|[**newAiAssignmentsGetAllAssignments**](#newaiassignmentsgetallassignments) | **GET** /api/2.0/ai/assignments/get-all-assignments | Get all assignments|
+|[**newAiAssignmentsGetAssignment**](#newaiassignmentsgetassignment) | **GET** /api/2.0/ai/assignments/get-assignment | Get assignment|
+|[**newAiAssignmentsResolveForAction**](#newaiassignmentsresolveforaction) | **GET** /api/2.0/ai/assignments/resolve-for-action | Resolve for action|
+|[**newAiAssignmentsTryResolveForAction**](#newaiassignmentstryresolveforaction) | **GET** /api/2.0/ai/assignments/try-resolve-for-action | Try resolve for action|
+|[**newAiAssignmentsUnassign**](#newaiassignmentsunassign) | **DELETE** /api/2.0/ai/assignments/unassign | Unassign|
 
 # **newAiAssignmentsAssign**
 > NewAiAssignmentMutationResult newAiAssignmentsAssign(newAiAssignmentsAssignRequest)

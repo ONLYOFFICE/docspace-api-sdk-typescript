@@ -4,20 +4,20 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**newAiThreadsAppendUserMessage**](#newaithreadsappendusermessage) | **POST** /api/2.0/new-ai/threads/append-user-message | Append user message|
-|[**newAiThreadsClearMessages**](#newaithreadsclearmessages) | **DELETE** /api/2.0/new-ai/threads/clear-messages | Clear messages|
-|[**newAiThreadsCreate**](#newaithreadscreate) | **POST** /api/2.0/new-ai/threads/create | Create|
-|[**newAiThreadsDelete**](#newaithreadsdelete) | **DELETE** /api/2.0/new-ai/threads/delete | Delete|
-|[**newAiThreadsDeleteMessage**](#newaithreadsdeletemessage) | **DELETE** /api/2.0/new-ai/threads/delete-message | Delete message|
-|[**newAiThreadsGetById**](#newaithreadsgetbyid) | **GET** /api/2.0/new-ai/threads/get-by-id | Get by id|
-|[**newAiThreadsGetMessageById**](#newaithreadsgetmessagebyid) | **GET** /api/2.0/new-ai/threads/get-message-by-id | Get message by id|
-|[**newAiThreadsList**](#newaithreadslist) | **GET** /api/2.0/new-ai/threads/list | List|
-|[**newAiThreadsOpenOrCreate**](#newaithreadsopenorcreate) | **POST** /api/2.0/new-ai/threads/open-or-create | Open or create|
-|[**newAiThreadsReadMessages**](#newaithreadsreadmessages) | **GET** /api/2.0/new-ai/threads/read-messages | Read messages|
-|[**newAiThreadsRegenerateTitle**](#newaithreadsregeneratetitle) | **POST** /api/2.0/new-ai/threads/regenerate-title | Regenerate title|
-|[**newAiThreadsRename**](#newaithreadsrename) | **PUT** /api/2.0/new-ai/threads/rename | Rename|
-|[**newAiThreadsTouch**](#newaithreadstouch) | **POST** /api/2.0/new-ai/threads/touch | Touch|
-|[**newAiThreadsUpdateMessage**](#newaithreadsupdatemessage) | **PUT** /api/2.0/new-ai/threads/update-message | Update message|
+|[**newAiThreadsAppendUserMessage**](#newaithreadsappendusermessage) | **POST** /api/2.0/ai/threads/append-user-message | Append user message|
+|[**newAiThreadsClearMessages**](#newaithreadsclearmessages) | **DELETE** /api/2.0/ai/threads/clear-messages | Clear messages|
+|[**newAiThreadsCreate**](#newaithreadscreate) | **POST** /api/2.0/ai/threads/create | Create|
+|[**newAiThreadsDelete**](#newaithreadsdelete) | **DELETE** /api/2.0/ai/threads/delete | Delete|
+|[**newAiThreadsDeleteMessage**](#newaithreadsdeletemessage) | **DELETE** /api/2.0/ai/threads/delete-message | Delete message|
+|[**newAiThreadsGetById**](#newaithreadsgetbyid) | **GET** /api/2.0/ai/threads/get-by-id | Get by id|
+|[**newAiThreadsGetMessageById**](#newaithreadsgetmessagebyid) | **GET** /api/2.0/ai/threads/get-message-by-id | Get message by id|
+|[**newAiThreadsList**](#newaithreadslist) | **GET** /api/2.0/ai/threads/list | List|
+|[**newAiThreadsOpenOrCreate**](#newaithreadsopenorcreate) | **POST** /api/2.0/ai/threads/open-or-create | Open or create|
+|[**newAiThreadsReadMessages**](#newaithreadsreadmessages) | **GET** /api/2.0/ai/threads/read-messages | Read messages|
+|[**newAiThreadsRegenerateTitle**](#newaithreadsregeneratetitle) | **POST** /api/2.0/ai/threads/regenerate-title | Regenerate title|
+|[**newAiThreadsRename**](#newaithreadsrename) | **PUT** /api/2.0/ai/threads/rename | Rename|
+|[**newAiThreadsTouch**](#newaithreadstouch) | **POST** /api/2.0/ai/threads/touch | Touch|
+|[**newAiThreadsUpdateMessage**](#newaithreadsupdatemessage) | **PUT** /api/2.0/ai/threads/update-message | Update message|
 
 # **newAiThreadsAppendUserMessage**
 > NewAiThreadMessageLike newAiThreadsAppendUserMessage(newAiThreadsAppendUserMessageRequest)
@@ -403,6 +403,9 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **entityId** | [**string**] |  | defaults to undefined|
+| **count** | [**string**] |  | defaults to undefined|
+| **cursor** | [**string**] |  | defaults to undefined|
+| **query** | [**string**] |  | defaults to undefined|
 
 
 ### Return type
@@ -425,9 +428,15 @@ const configuration = new Configuration();
 const apiInstance = new NewAIThreadsApi(configuration);
 
 let entityId: string; // (default to undefined)
+let count: string; // (default to undefined)
+let cursor: string; // (default to undefined)
+let query: string; // (default to undefined)
 
 const { status, data } = await apiInstance.newAiThreadsList(
-    entityId
+    entityId,
+    count,
+    cursor,
+    query
 );
 ```
 
@@ -510,8 +519,8 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **threadId** | [**string**] |  | defaults to undefined|
-| **limit** | [**number**] |  | (optional) defaults to undefined|
-| **startIndex** | [**number**] |  | (optional) defaults to undefined|
+| **count** | [**string**] |  | defaults to undefined|
+| **cursor** | [**string**] |  | defaults to undefined|
 
 
 ### Return type
@@ -534,13 +543,13 @@ const configuration = new Configuration();
 const apiInstance = new NewAIThreadsApi(configuration);
 
 let threadId: string; // (default to undefined)
-let limit: number; // (optional) (default to undefined)
-let startIndex: number; // (optional) (default to undefined)
+let count: string; // (default to undefined)
+let cursor: string; // (default to undefined)
 
 const { status, data } = await apiInstance.newAiThreadsReadMessages(
     threadId,
-    limit,
-    startIndex
+    count,
+    cursor
 );
 ```
 

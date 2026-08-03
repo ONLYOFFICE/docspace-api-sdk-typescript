@@ -1,17 +1,17 @@
-# NewAIAgentsApi
+# AgentsApi
 
 All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**newAiAgentsCreate**](#newaiagentscreate) | **POST** /api/2.0/new-ai/agents | Create an agent|
-|[**newAiAgentsDelete**](#newaiagentsdelete) | **DELETE** /api/2.0/new-ai/agents/{id} | Delete an agent|
-|[**newAiAgentsGet**](#newaiagentsget) | **GET** /api/2.0/new-ai/agents/{id} | Get an agent|
-|[**newAiAgentsList**](#newaiagentslist) | **GET** /api/2.0/new-ai/agents | List agents|
-|[**newAiAgentsNews**](#newaiagentsnews) | **GET** /api/2.0/new-ai/agents/news | List agent news items|
-|[**newAiAgentsResetQuota**](#newaiagentsresetquota) | **PUT** /api/2.0/new-ai/agents/resetquota | Reset agents\' quota|
-|[**newAiAgentsUpdate**](#newaiagentsupdate) | **PUT** /api/2.0/new-ai/agents/{id} | Update an agent|
-|[**newAiAgentsUpdateQuota**](#newaiagentsupdatequota) | **PUT** /api/2.0/new-ai/agents/agentquota | Update agents\' quota|
+|[**newAiAgentsCreate**](#newaiagentscreate) | **POST** /api/2.0/ai/agents | Create an agent|
+|[**newAiAgentsDelete**](#newaiagentsdelete) | **DELETE** /api/2.0/ai/agents/{id} | Delete an agent|
+|[**newAiAgentsGet**](#newaiagentsget) | **GET** /api/2.0/ai/agents/{id} | Get an agent|
+|[**newAiAgentsList**](#newaiagentslist) | **GET** /api/2.0/ai/agents | List agents|
+|[**newAiAgentsNews**](#newaiagentsnews) | **GET** /api/2.0/ai/agents/news | List agent news items|
+|[**newAiAgentsResetQuota**](#newaiagentsresetquota) | **PUT** /api/2.0/ai/agents/resetquota | Reset agents\' quota|
+|[**newAiAgentsUpdate**](#newaiagentsupdate) | **PUT** /api/2.0/ai/agents/{id} | Update an agent|
+|[**newAiAgentsUpdateQuota**](#newaiagentsupdatequota) | **PUT** /api/2.0/ai/agents/agentquota | Update agents\' quota|
 
 # **newAiAgentsCreate**
 > NewAiFolderIntegerWrapper newAiAgentsCreate(newAiAgentsCreateRequest)

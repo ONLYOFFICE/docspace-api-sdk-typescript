@@ -7,7 +7,7 @@ The quota information.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **number** | The quota ID. | [default to undefined]
-**title** | **string** | The quota title. | [default to undefined]
+**title** | **string** | The quota title. | [optional] [default to undefined]
 **price** | [**PriceDto**](PriceDto.md) |  | [default to undefined]
 **nonProfit** | **boolean** | Specifies if the quota is nonprofit or not. | [default to undefined]
 **free** | **boolean** | Specifies if the quota is free or not. | [default to undefined]

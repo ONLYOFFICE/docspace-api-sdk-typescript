@@ -52,9 +52,12 @@ import type { NewAiThreadsUpdateMessageRequest } from '../../models';
  * @export
  */
 export const ThreadsApiAxiosParamCreator = function (configuration?: Configuration) {
-    
+    let fields: string | undefined;
     
     return {
+        withFields: (f: string) => {
+            fields = f;
+        },
         /**
          * 
          * @summary Append user message
@@ -68,7 +71,7 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'newAiThreadsAppendUserMessageRequest' is not null or undefined
             assertParamExists('newAiThreadsAppendUserMessage', 'newAiThreadsAppendUserMessageRequest', newAiThreadsAppendUserMessageRequest)
 
-            const localVarPath = `/api/2.0/new-ai/threads/append-user-message`;
+            const localVarPath = `/api/2.0/ai/threads/append-user-message`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -107,7 +110,7 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'body' is not null or undefined
             assertParamExists('newAiThreadsClearMessages', 'body', body)
 
-            const localVarPath = `/api/2.0/new-ai/threads/clear-messages`;
+            const localVarPath = `/api/2.0/ai/threads/clear-messages`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -146,7 +149,7 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'newAiThreadsCreateRequest' is not null or undefined
             assertParamExists('newAiThreadsCreate', 'newAiThreadsCreateRequest', newAiThreadsCreateRequest)
 
-            const localVarPath = `/api/2.0/new-ai/threads/create`;
+            const localVarPath = `/api/2.0/ai/threads/create`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -185,7 +188,7 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'body' is not null or undefined
             assertParamExists('newAiThreadsDelete', 'body', body)
 
-            const localVarPath = `/api/2.0/new-ai/threads/delete`;
+            const localVarPath = `/api/2.0/ai/threads/delete`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -224,7 +227,7 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'body' is not null or undefined
             assertParamExists('newAiThreadsDeleteMessage', 'body', body)
 
-            const localVarPath = `/api/2.0/new-ai/threads/delete-message`;
+            const localVarPath = `/api/2.0/ai/threads/delete-message`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -263,7 +266,7 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'threadId' is not null or undefined
             assertParamExists('newAiThreadsGetById', 'threadId', threadId)
 
-            const localVarPath = `/api/2.0/new-ai/threads/get-by-id`;
+            const localVarPath = `/api/2.0/ai/threads/get-by-id`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -303,7 +306,7 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'messageId' is not null or undefined
             assertParamExists('newAiThreadsGetMessageById', 'messageId', messageId)
 
-            const localVarPath = `/api/2.0/new-ai/threads/get-message-by-id`;
+            const localVarPath = `/api/2.0/ai/threads/get-message-by-id`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -334,16 +337,25 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
          * 
          * @summary List
          * @param {string} entityId 
+         * @param {string} count 
+         * @param {string} cursor 
+         * @param {string} query 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for newAiThreadsList operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/new-ai-threads-list/
          */
-        newAiThreadsList: async (entityId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        newAiThreadsList: async (entityId: string, count: string, cursor: string, query: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'entityId' is not null or undefined
             assertParamExists('newAiThreadsList', 'entityId', entityId)
+            // verify required parameter 'count' is not null or undefined
+            assertParamExists('newAiThreadsList', 'count', count)
+            // verify required parameter 'cursor' is not null or undefined
+            assertParamExists('newAiThreadsList', 'cursor', cursor)
+            // verify required parameter 'query' is not null or undefined
+            assertParamExists('newAiThreadsList', 'query', query)
 
-            const localVarPath = `/api/2.0/new-ai/threads/list`;
+            const localVarPath = `/api/2.0/ai/threads/list`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -359,8 +371,23 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['entityId'] = entityId;
             }
 
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (cursor !== undefined) {
+                localVarQueryParameter['cursor'] = cursor;
+            }
+
+            if (query !== undefined) {
+                localVarQueryParameter['query'] = query;
+            }
+
 
     
+            if(fields !== undefined) {
+                localVarHeaderParameter['fields'] = fields;
+            }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -383,7 +410,7 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'newAiOpenOrCreateInput' is not null or undefined
             assertParamExists('newAiThreadsOpenOrCreate', 'newAiOpenOrCreateInput', newAiOpenOrCreateInput)
 
-            const localVarPath = `/api/2.0/new-ai/threads/open-or-create`;
+            const localVarPath = `/api/2.0/ai/threads/open-or-create`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -413,18 +440,22 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
          * 
          * @summary Read messages
          * @param {string} threadId 
-         * @param {number} [limit] 
-         * @param {number} [startIndex] 
+         * @param {string} count 
+         * @param {string} cursor 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for newAiThreadsReadMessages operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/new-ai-threads-read-messages/
          */
-        newAiThreadsReadMessages: async (threadId: string, limit?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        newAiThreadsReadMessages: async (threadId: string, count: string, cursor: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'threadId' is not null or undefined
             assertParamExists('newAiThreadsReadMessages', 'threadId', threadId)
+            // verify required parameter 'count' is not null or undefined
+            assertParamExists('newAiThreadsReadMessages', 'count', count)
+            // verify required parameter 'cursor' is not null or undefined
+            assertParamExists('newAiThreadsReadMessages', 'cursor', cursor)
 
-            const localVarPath = `/api/2.0/new-ai/threads/read-messages`;
+            const localVarPath = `/api/2.0/ai/threads/read-messages`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -440,16 +471,19 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['threadId'] = threadId;
             }
 
-            if (limit !== undefined) {
-                localVarQueryParameter['limit'] = limit;
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
             }
 
-            if (startIndex !== undefined) {
-                localVarQueryParameter['startIndex'] = startIndex;
+            if (cursor !== undefined) {
+                localVarQueryParameter['cursor'] = cursor;
             }
 
 
     
+            if(fields !== undefined) {
+                localVarHeaderParameter['fields'] = fields;
+            }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -472,7 +506,7 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'newAiThreadsRegenerateTitleRequest' is not null or undefined
             assertParamExists('newAiThreadsRegenerateTitle', 'newAiThreadsRegenerateTitleRequest', newAiThreadsRegenerateTitleRequest)
 
-            const localVarPath = `/api/2.0/new-ai/threads/regenerate-title`;
+            const localVarPath = `/api/2.0/ai/threads/regenerate-title`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -511,7 +545,7 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'newAiThreadsRenameRequest' is not null or undefined
             assertParamExists('newAiThreadsRename', 'newAiThreadsRenameRequest', newAiThreadsRenameRequest)
 
-            const localVarPath = `/api/2.0/new-ai/threads/rename`;
+            const localVarPath = `/api/2.0/ai/threads/rename`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -550,7 +584,7 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'newAiThreadsTouchRequest' is not null or undefined
             assertParamExists('newAiThreadsTouch', 'newAiThreadsTouchRequest', newAiThreadsTouchRequest)
 
-            const localVarPath = `/api/2.0/new-ai/threads/touch`;
+            const localVarPath = `/api/2.0/ai/threads/touch`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -589,7 +623,7 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'newAiThreadsUpdateMessageRequest' is not null or undefined
             assertParamExists('newAiThreadsUpdateMessage', 'newAiThreadsUpdateMessageRequest', newAiThreadsUpdateMessageRequest)
 
-            const localVarPath = `/api/2.0/new-ai/threads/update-message`;
+            const localVarPath = `/api/2.0/ai/threads/update-message`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -734,13 +768,16 @@ export const ThreadsApiFp = function(configuration?: Configuration) {
          * 
          * @summary List
          * @param {string} entityId 
+         * @param {string} count 
+         * @param {string} cursor 
+         * @param {string} query 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for newAiThreadsList operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/new-ai-threads-list/
          */
-        async newAiThreadsList(entityId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<NewAiThread>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.newAiThreadsList(entityId, options);
+        async newAiThreadsList(entityId: string, count: string, cursor: string, query: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<NewAiThread>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.newAiThreadsList(entityId, count, cursor, query, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ThreadsApi.newAiThreadsList']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -764,15 +801,15 @@ export const ThreadsApiFp = function(configuration?: Configuration) {
          * 
          * @summary Read messages
          * @param {string} threadId 
-         * @param {number} [limit] 
-         * @param {number} [startIndex] 
+         * @param {string} count 
+         * @param {string} cursor 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for newAiThreadsReadMessages operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/new-ai-threads-read-messages/
          */
-        async newAiThreadsReadMessages(threadId: string, limit?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<NewAiThreadMessageLike>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.newAiThreadsReadMessages(threadId, limit, startIndex, options);
+        async newAiThreadsReadMessages(threadId: string, count: string, cursor: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<NewAiThreadMessageLike>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.newAiThreadsReadMessages(threadId, count, cursor, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ThreadsApi.newAiThreadsReadMessages']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -941,7 +978,7 @@ export const ThreadsApiFactory = function (configuration?: Configuration, basePa
          * @throws {RequiredError}
          */
         newAiThreadsList(requestParameters: ThreadsApiNewAiThreadsListRequest, options?: RawAxiosRequestConfig): AxiosPromise<Array<NewAiThread>> {
-            return localVarFp.newAiThreadsList(requestParameters.entityId, options).then((request) => request(axios, basePath));
+            return localVarFp.newAiThreadsList(requestParameters.entityId, requestParameters.count, requestParameters.cursor, requestParameters.query, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -965,7 +1002,7 @@ export const ThreadsApiFactory = function (configuration?: Configuration, basePa
          * @throws {RequiredError}
          */
         newAiThreadsReadMessages(requestParameters: ThreadsApiNewAiThreadsReadMessagesRequest, options?: RawAxiosRequestConfig): AxiosPromise<Array<NewAiThreadMessageLike>> {
-            return localVarFp.newAiThreadsReadMessages(requestParameters.threadId, requestParameters.limit, requestParameters.startIndex, options).then((request) => request(axios, basePath));
+            return localVarFp.newAiThreadsReadMessages(requestParameters.threadId, requestParameters.count, requestParameters.cursor, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -1128,6 +1165,27 @@ export interface ThreadsApiNewAiThreadsListRequest {
      * @memberof ThreadsApiNewAiThreadsList
      */
     readonly entityId: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof ThreadsApiNewAiThreadsList
+     */
+    readonly count: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof ThreadsApiNewAiThreadsList
+     */
+    readonly cursor: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof ThreadsApiNewAiThreadsList
+     */
+    readonly query: string
 }
 
 /**
@@ -1159,17 +1217,17 @@ export interface ThreadsApiNewAiThreadsReadMessagesRequest {
 
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof ThreadsApiNewAiThreadsReadMessages
      */
-    readonly limit?: number
+    readonly count: string
 
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof ThreadsApiNewAiThreadsReadMessages
      */
-    readonly startIndex?: number
+    readonly cursor: string
 }
 
 /**
@@ -1328,7 +1386,7 @@ export class ThreadsApi extends BaseAPI {
      * @memberof ThreadsApi
      */
     public newAiThreadsList(requestParameters: ThreadsApiNewAiThreadsListRequest, options?: RawAxiosRequestConfig) {
-        return ThreadsApiFp(this.configuration).newAiThreadsList(requestParameters.entityId, options).then((request) => request(this.axios, this.basePath));
+        return ThreadsApiFp(this.configuration).newAiThreadsList(requestParameters.entityId, requestParameters.count, requestParameters.cursor, requestParameters.query, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1352,7 +1410,7 @@ export class ThreadsApi extends BaseAPI {
      * @memberof ThreadsApi
      */
     public newAiThreadsReadMessages(requestParameters: ThreadsApiNewAiThreadsReadMessagesRequest, options?: RawAxiosRequestConfig) {
-        return ThreadsApiFp(this.configuration).newAiThreadsReadMessages(requestParameters.threadId, requestParameters.limit, requestParameters.startIndex, options).then((request) => request(this.axios, this.basePath));
+        return ThreadsApiFp(this.configuration).newAiThreadsReadMessages(requestParameters.threadId, requestParameters.count, requestParameters.cursor, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

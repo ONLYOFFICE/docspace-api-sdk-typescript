@@ -4,15 +4,15 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**newAiAttachmentsDelete**](#newaiattachmentsdelete) | **DELETE** /api/2.0/new-ai/attachments/delete | Delete|
-|[**newAiAttachmentsDeleteMany**](#newaiattachmentsdeletemany) | **DELETE** /api/2.0/new-ai/attachments/delete-many | Delete many|
-|[**newAiAttachmentsGet**](#newaiattachmentsget) | **POST** /api/2.0/new-ai/attachments/get | Get|
-|[**newAiAttachmentsGetMany**](#newaiattachmentsgetmany) | **POST** /api/2.0/new-ai/attachments/get-many | Get many|
-|[**newAiAttachmentsLinkToMessage**](#newaiattachmentslinktomessage) | **POST** /api/2.0/new-ai/attachments/link-to-message | Link to message|
-|[**newAiAttachmentsSaveFile**](#newaiattachmentssavefile) | **POST** /api/2.0/new-ai/attachments/save-file | Save file|
-|[**newAiAttachmentsSaveFilesMany**](#newaiattachmentssavefilesmany) | **POST** /api/2.0/new-ai/attachments/save-files-many | Save files many|
-|[**newAiAttachmentsSaveImage**](#newaiattachmentssaveimage) | **POST** /api/2.0/new-ai/attachments/save-image | Save image|
-|[**newAiAttachmentsSaveImagesMany**](#newaiattachmentssaveimagesmany) | **POST** /api/2.0/new-ai/attachments/save-images-many | Save images many|
+|[**newAiAttachmentsDelete**](#newaiattachmentsdelete) | **DELETE** /api/2.0/ai/attachments/delete | Delete|
+|[**newAiAttachmentsDeleteMany**](#newaiattachmentsdeletemany) | **DELETE** /api/2.0/ai/attachments/delete-many | Delete many|
+|[**newAiAttachmentsGet**](#newaiattachmentsget) | **POST** /api/2.0/ai/attachments/get | Get|
+|[**newAiAttachmentsGetMany**](#newaiattachmentsgetmany) | **POST** /api/2.0/ai/attachments/get-many | Get many|
+|[**newAiAttachmentsLinkToMessage**](#newaiattachmentslinktomessage) | **POST** /api/2.0/ai/attachments/link-to-message | Link to message|
+|[**newAiAttachmentsSaveFile**](#newaiattachmentssavefile) | **POST** /api/2.0/ai/attachments/save-file | Save file|
+|[**newAiAttachmentsSaveFilesMany**](#newaiattachmentssavefilesmany) | **POST** /api/2.0/ai/attachments/save-files-many | Save files many|
+|[**newAiAttachmentsSaveImage**](#newaiattachmentssaveimage) | **POST** /api/2.0/ai/attachments/save-image | Save image|
+|[**newAiAttachmentsSaveImagesMany**](#newaiattachmentssaveimagesmany) | **POST** /api/2.0/ai/attachments/save-images-many | Save images many|
 
 # **newAiAttachmentsDelete**
 > NewAiSuccessResponse newAiAttachmentsDelete(body)

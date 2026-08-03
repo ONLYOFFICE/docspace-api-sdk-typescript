@@ -4,19 +4,19 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**newAiToolsAddCustomServer**](#newaitoolsaddcustomserver) | **POST** /api/2.0/new-ai/tools/add-custom-server | Add custom server|
-|[**newAiToolsGetAllowAlways**](#newaitoolsgetallowalways) | **GET** /api/2.0/new-ai/tools/get-allow-always | Get allow always|
-|[**newAiToolsGetCustomServer**](#newaitoolsgetcustomserver) | **GET** /api/2.0/new-ai/tools/get-custom-server | Get custom server|
-|[**newAiToolsGetDisabled**](#newaitoolsgetdisabled) | **GET** /api/2.0/new-ai/tools/get-disabled | Get disabled|
-|[**newAiToolsIsAllowAlways**](#newaitoolsisallowalways) | **GET** /api/2.0/new-ai/tools/is-allow-always | Is allow always|
-|[**newAiToolsIsToolDisabled**](#newaitoolsistooldisabled) | **GET** /api/2.0/new-ai/tools/is-tool-disabled | Is tool disabled|
-|[**newAiToolsListCustomServers**](#newaitoolslistcustomservers) | **GET** /api/2.0/new-ai/tools/list-custom-servers | List custom servers|
-|[**newAiToolsListSystemTools**](#newaitoolslistsystemtools) | **GET** /api/2.0/new-ai/tools/list-system-tools | List system tools|
-|[**newAiToolsRemoveCustomServer**](#newaitoolsremovecustomserver) | **DELETE** /api/2.0/new-ai/tools/remove-custom-server | Remove custom server|
-|[**newAiToolsReplaceAllCustomServers**](#newaitoolsreplaceallcustomservers) | **PUT** /api/2.0/new-ai/tools/replace-all-custom-servers | Replace all custom servers|
-|[**newAiToolsSetAllowAlways**](#newaitoolssetallowalways) | **PUT** /api/2.0/new-ai/tools/set-allow-always | Set allow always|
-|[**newAiToolsSetDisabled**](#newaitoolssetdisabled) | **PUT** /api/2.0/new-ai/tools/set-disabled | Set disabled|
-|[**newAiToolsUpdateCustomServer**](#newaitoolsupdatecustomserver) | **PUT** /api/2.0/new-ai/tools/update-custom-server | Update custom server|
+|[**newAiToolsAddCustomServer**](#newaitoolsaddcustomserver) | **POST** /api/2.0/ai/tools/add-custom-server | Add custom server|
+|[**newAiToolsGetAllowAlways**](#newaitoolsgetallowalways) | **GET** /api/2.0/ai/tools/get-allow-always | Get allow always|
+|[**newAiToolsGetCustomServer**](#newaitoolsgetcustomserver) | **GET** /api/2.0/ai/tools/get-custom-server | Get custom server|
+|[**newAiToolsGetDisabled**](#newaitoolsgetdisabled) | **GET** /api/2.0/ai/tools/get-disabled | Get disabled|
+|[**newAiToolsIsAllowAlways**](#newaitoolsisallowalways) | **GET** /api/2.0/ai/tools/is-allow-always | Is allow always|
+|[**newAiToolsIsToolDisabled**](#newaitoolsistooldisabled) | **GET** /api/2.0/ai/tools/is-tool-disabled | Is tool disabled|
+|[**newAiToolsListCustomServers**](#newaitoolslistcustomservers) | **GET** /api/2.0/ai/tools/list-custom-servers | List custom servers|
+|[**newAiToolsListSystemTools**](#newaitoolslistsystemtools) | **GET** /api/2.0/ai/tools/list-system-tools | List system tools|
+|[**newAiToolsRemoveCustomServer**](#newaitoolsremovecustomserver) | **DELETE** /api/2.0/ai/tools/remove-custom-server | Remove custom server|
+|[**newAiToolsReplaceAllCustomServers**](#newaitoolsreplaceallcustomservers) | **PUT** /api/2.0/ai/tools/replace-all-custom-servers | Replace all custom servers|
+|[**newAiToolsSetAllowAlways**](#newaitoolssetallowalways) | **PUT** /api/2.0/ai/tools/set-allow-always | Set allow always|
+|[**newAiToolsSetDisabled**](#newaitoolssetdisabled) | **PUT** /api/2.0/ai/tools/set-disabled | Set disabled|
+|[**newAiToolsUpdateCustomServer**](#newaitoolsupdatecustomserver) | **PUT** /api/2.0/ai/tools/update-custom-server | Update custom server|
 
 # **newAiToolsAddCustomServer**
 > NewAiToolsMutationResult newAiToolsAddCustomServer(newAiToolsAddCustomServerRequest)

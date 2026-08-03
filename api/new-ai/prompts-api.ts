@@ -70,7 +70,7 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'newAiCreatePromptInput' is not null or undefined
             assertParamExists('newAiPromptsCreate', 'newAiCreatePromptInput', newAiCreatePromptInput)
 
-            const localVarPath = `/api/2.0/new-ai/prompts/create`;
+            const localVarPath = `/api/2.0/ai/prompts/create`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -109,7 +109,7 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'body' is not null or undefined
             assertParamExists('newAiPromptsCreateFolder', 'body', body)
 
-            const localVarPath = `/api/2.0/new-ai/prompts/create-folder`;
+            const localVarPath = `/api/2.0/ai/prompts/create-folder`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -148,7 +148,7 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'body' is not null or undefined
             assertParamExists('newAiPromptsDelete', 'body', body)
 
-            const localVarPath = `/api/2.0/new-ai/prompts/delete`;
+            const localVarPath = `/api/2.0/ai/prompts/delete`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -187,7 +187,7 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'body' is not null or undefined
             assertParamExists('newAiPromptsDeleteFolder', 'body', body)
 
-            const localVarPath = `/api/2.0/new-ai/prompts/delete-folder`;
+            const localVarPath = `/api/2.0/ai/prompts/delete-folder`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -223,7 +223,7 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
          */
         newAiPromptsExport: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
-            const localVarPath = `/api/2.0/new-ai/prompts/export`;
+            const localVarPath = `/api/2.0/ai/prompts/export`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -259,7 +259,7 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'id' is not null or undefined
             assertParamExists('newAiPromptsGetById', 'id', id)
 
-            const localVarPath = `/api/2.0/new-ai/prompts/get-by-id`;
+            const localVarPath = `/api/2.0/ai/prompts/get-by-id`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -299,7 +299,7 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'id' is not null or undefined
             assertParamExists('newAiPromptsGetFolderById', 'id', id)
 
-            const localVarPath = `/api/2.0/new-ai/prompts/get-folder-by-id`;
+            const localVarPath = `/api/2.0/ai/prompts/get-folder-by-id`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -339,7 +339,7 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'newAiPromptsImportBundleRequest' is not null or undefined
             assertParamExists('newAiPromptsImportBundle', 'newAiPromptsImportBundleRequest', newAiPromptsImportBundleRequest)
 
-            const localVarPath = `/api/2.0/new-ai/prompts/import-bundle`;
+            const localVarPath = `/api/2.0/ai/prompts/import-bundle`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -378,7 +378,7 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('newAiPromptsList', 'folderId', folderId)
 
-            const localVarPath = `/api/2.0/new-ai/prompts/list`;
+            const localVarPath = `/api/2.0/ai/prompts/list`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -415,7 +415,7 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
          */
         newAiPromptsListFolders: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
-            const localVarPath = `/api/2.0/new-ai/prompts/list-folders`;
+            const localVarPath = `/api/2.0/ai/prompts/list-folders`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -451,7 +451,7 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'newAiPromptsMoveRequest' is not null or undefined
             assertParamExists('newAiPromptsMove', 'newAiPromptsMoveRequest', newAiPromptsMoveRequest)
 
-            const localVarPath = `/api/2.0/new-ai/prompts/move`;
+            const localVarPath = `/api/2.0/ai/prompts/move`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -490,7 +490,7 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'newAiPromptsRenameFolderRequest' is not null or undefined
             assertParamExists('newAiPromptsRenameFolder', 'newAiPromptsRenameFolderRequest', newAiPromptsRenameFolderRequest)
 
-            const localVarPath = `/api/2.0/new-ai/prompts/rename-folder`;
+            const localVarPath = `/api/2.0/ai/prompts/rename-folder`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -529,7 +529,7 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'newAiPromptsUpdateRequest' is not null or undefined
             assertParamExists('newAiPromptsUpdate', 'newAiPromptsUpdateRequest', newAiPromptsUpdateRequest)
 
-            const localVarPath = `/api/2.0/new-ai/prompts/update`;
+            const localVarPath = `/api/2.0/ai/prompts/update`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;

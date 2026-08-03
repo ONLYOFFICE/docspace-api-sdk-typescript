@@ -50,7 +50,7 @@ export const ExportApiAxiosParamCreator = function (configuration?: Configuratio
             // verify required parameter 'newAiExportTextToDocxRequest' is not null or undefined
             assertParamExists('newAiExportTextToDocx', 'newAiExportTextToDocxRequest', newAiExportTextToDocxRequest)
 
-            const localVarPath = `/api/2.0/new-ai/text-to-docx`;
+            const localVarPath = `/api/2.0/ai/text-to-docx`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;

@@ -4,19 +4,19 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**newAiPromptsCreate**](#newaipromptscreate) | **POST** /api/2.0/new-ai/prompts/create | Create|
-|[**newAiPromptsCreateFolder**](#newaipromptscreatefolder) | **POST** /api/2.0/new-ai/prompts/create-folder | Create folder|
-|[**newAiPromptsDelete**](#newaipromptsdelete) | **DELETE** /api/2.0/new-ai/prompts/delete | Delete|
-|[**newAiPromptsDeleteFolder**](#newaipromptsdeletefolder) | **DELETE** /api/2.0/new-ai/prompts/delete-folder | Delete folder|
-|[**newAiPromptsExport**](#newaipromptsexport) | **GET** /api/2.0/new-ai/prompts/export | Export|
-|[**newAiPromptsGetById**](#newaipromptsgetbyid) | **GET** /api/2.0/new-ai/prompts/get-by-id | Get by id|
-|[**newAiPromptsGetFolderById**](#newaipromptsgetfolderbyid) | **GET** /api/2.0/new-ai/prompts/get-folder-by-id | Get folder by id|
-|[**newAiPromptsImportBundle**](#newaipromptsimportbundle) | **POST** /api/2.0/new-ai/prompts/import-bundle | Import bundle|
-|[**newAiPromptsList**](#newaipromptslist) | **GET** /api/2.0/new-ai/prompts/list | List|
-|[**newAiPromptsListFolders**](#newaipromptslistfolders) | **GET** /api/2.0/new-ai/prompts/list-folders | List folders|
-|[**newAiPromptsMove**](#newaipromptsmove) | **PUT** /api/2.0/new-ai/prompts/move | Move|
-|[**newAiPromptsRenameFolder**](#newaipromptsrenamefolder) | **PUT** /api/2.0/new-ai/prompts/rename-folder | Rename folder|
-|[**newAiPromptsUpdate**](#newaipromptsupdate) | **PUT** /api/2.0/new-ai/prompts/update | Update|
+|[**newAiPromptsCreate**](#newaipromptscreate) | **POST** /api/2.0/ai/prompts/create | Create|
+|[**newAiPromptsCreateFolder**](#newaipromptscreatefolder) | **POST** /api/2.0/ai/prompts/create-folder | Create folder|
+|[**newAiPromptsDelete**](#newaipromptsdelete) | **DELETE** /api/2.0/ai/prompts/delete | Delete|
+|[**newAiPromptsDeleteFolder**](#newaipromptsdeletefolder) | **DELETE** /api/2.0/ai/prompts/delete-folder | Delete folder|
+|[**newAiPromptsExport**](#newaipromptsexport) | **GET** /api/2.0/ai/prompts/export | Export|
+|[**newAiPromptsGetById**](#newaipromptsgetbyid) | **GET** /api/2.0/ai/prompts/get-by-id | Get by id|
+|[**newAiPromptsGetFolderById**](#newaipromptsgetfolderbyid) | **GET** /api/2.0/ai/prompts/get-folder-by-id | Get folder by id|
+|[**newAiPromptsImportBundle**](#newaipromptsimportbundle) | **POST** /api/2.0/ai/prompts/import-bundle | Import bundle|
+|[**newAiPromptsList**](#newaipromptslist) | **GET** /api/2.0/ai/prompts/list | List|
+|[**newAiPromptsListFolders**](#newaipromptslistfolders) | **GET** /api/2.0/ai/prompts/list-folders | List folders|
+|[**newAiPromptsMove**](#newaipromptsmove) | **PUT** /api/2.0/ai/prompts/move | Move|
+|[**newAiPromptsRenameFolder**](#newaipromptsrenamefolder) | **PUT** /api/2.0/ai/prompts/rename-folder | Rename folder|
+|[**newAiPromptsUpdate**](#newaipromptsupdate) | **PUT** /api/2.0/ai/prompts/update | Update|
 
 # **newAiPromptsCreate**
 > NewAiPromptMutationResult newAiPromptsCreate(newAiCreatePromptInput)

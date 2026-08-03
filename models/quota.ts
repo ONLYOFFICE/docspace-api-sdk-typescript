@@ -50,6 +50,10 @@ export interface Quota {
      * Indicates whether the quota is primary or additional.
      */
     'additional'?: boolean;
+    /**
+     * The quota ID to switch to at the next period.
+     */
+    'nextQuota'?: number | null;
     'state'?: QuotaState;
 }
 

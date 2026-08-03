@@ -42,7 +42,7 @@ export interface QuotaDto {
     /**
      * The quota title.
      */
-    'title': string | null;
+    'title'?: string | null;
     'price': PriceDto;
     /**
      * Specifies if the quota is nonprofit or not.

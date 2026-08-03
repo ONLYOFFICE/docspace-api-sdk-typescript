@@ -58,7 +58,7 @@ export const AssignmentsApiAxiosParamCreator = function (configuration?: Configu
             // verify required parameter 'newAiAssignmentsAssignRequest' is not null or undefined
             assertParamExists('newAiAssignmentsAssign', 'newAiAssignmentsAssignRequest', newAiAssignmentsAssignRequest)
 
-            const localVarPath = `/api/2.0/new-ai/assignments/assign`;
+            const localVarPath = `/api/2.0/ai/assignments/assign`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -97,7 +97,7 @@ export const AssignmentsApiAxiosParamCreator = function (configuration?: Configu
             // verify required parameter 'requestBody' is not null or undefined
             assertParamExists('newAiAssignmentsBulkAssign', 'requestBody', requestBody)
 
-            const localVarPath = `/api/2.0/new-ai/assignments/bulk-assign`;
+            const localVarPath = `/api/2.0/ai/assignments/bulk-assign`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -136,7 +136,7 @@ export const AssignmentsApiAxiosParamCreator = function (configuration?: Configu
             // verify required parameter 'body' is not null or undefined
             assertParamExists('newAiAssignmentsCascadeProfileDelete', 'body', body)
 
-            const localVarPath = `/api/2.0/new-ai/assignments/cascade-profile-delete`;
+            const localVarPath = `/api/2.0/ai/assignments/cascade-profile-delete`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -175,7 +175,7 @@ export const AssignmentsApiAxiosParamCreator = function (configuration?: Configu
             // verify required parameter 'entityId' is not null or undefined
             assertParamExists('newAiAssignmentsGetAllAssignments', 'entityId', entityId)
 
-            const localVarPath = `/api/2.0/new-ai/assignments/get-all-assignments`;
+            const localVarPath = `/api/2.0/ai/assignments/get-all-assignments`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -215,7 +215,7 @@ export const AssignmentsApiAxiosParamCreator = function (configuration?: Configu
             // verify required parameter 'actionType' is not null or undefined
             assertParamExists('newAiAssignmentsGetAssignment', 'actionType', actionType)
 
-            const localVarPath = `/api/2.0/new-ai/assignments/get-assignment`;
+            const localVarPath = `/api/2.0/ai/assignments/get-assignment`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -258,7 +258,7 @@ export const AssignmentsApiAxiosParamCreator = function (configuration?: Configu
             // verify required parameter 'entityId' is not null or undefined
             assertParamExists('newAiAssignmentsResolveForAction', 'entityId', entityId)
 
-            const localVarPath = `/api/2.0/new-ai/assignments/resolve-for-action`;
+            const localVarPath = `/api/2.0/ai/assignments/resolve-for-action`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -305,7 +305,7 @@ export const AssignmentsApiAxiosParamCreator = function (configuration?: Configu
             // verify required parameter 'entityId' is not null or undefined
             assertParamExists('newAiAssignmentsTryResolveForAction', 'entityId', entityId)
 
-            const localVarPath = `/api/2.0/new-ai/assignments/try-resolve-for-action`;
+            const localVarPath = `/api/2.0/ai/assignments/try-resolve-for-action`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -349,7 +349,7 @@ export const AssignmentsApiAxiosParamCreator = function (configuration?: Configu
             // verify required parameter 'body' is not null or undefined
             assertParamExists('newAiAssignmentsUnassign', 'body', body)
 
-            const localVarPath = `/api/2.0/new-ai/assignments/unassign`;
+            const localVarPath = `/api/2.0/ai/assignments/unassign`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;

@@ -27,10 +27,6 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 import type { EncryptionKeyArrayWrapper } from '../../models';
 // @ts-ignore
 import type { EncryptionKeyRequestDto } from '../../models';
-// @ts-ignore
-import type { EncryptionKeyType } from '../../models';
-// @ts-ignore
-import type { EncryptionKeyWrapper } from '../../models';
 /**
  * PrivacyroomApi - axios parameter creator
  * @export
@@ -135,83 +131,6 @@ export const PrivacyroomApiAxiosParamCreator = function (configuration?: Configu
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Retrieves a specific user encryption key based on the provided filter conditions.
-         * @summary Retrieves a specific user encryption key based on the provided filter conditions.
-         * @param {string} [id] The optional identifier of the encryption key to filter by.
-         * @param {EncryptionKeyType} [type] The optional type of the encryption key to filter by.
-         * @param {string} [version] The optional version of the encryption key to filter by.
-         * @param {string} [publicKey] The optional public key to filter by.
-         * @param {string} [privateKeyEnc] The optional encrypted private key to filter by.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getUserKeysByFilter operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-keys-by-filter/
-         */
-        getUserKeysByFilter: async (id?: string, type?: EncryptionKeyType, version?: string, publicKey?: string, privateKeyEnc?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-
-            const localVarPath = `/api/2.0/privacyroom/keys/filter`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-            if (id !== undefined) {
-                localVarQueryParameter['id'] = id;
-            }
-
-            if (type !== undefined) {
-                localVarQueryParameter['type'] = type;
-            }
-
-            if (version !== undefined) {
-                localVarQueryParameter['version'] = version;
-            }
-
-            if (publicKey !== undefined) {
-                localVarQueryParameter['publicKey'] = publicKey;
-            }
-
-            if (privateKeyEnc !== undefined) {
-                localVarQueryParameter['privateKeyEnc'] = privateKeyEnc;
-            }
 
 
     
@@ -432,25 +351,6 @@ export const PrivacyroomApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Retrieves a specific user encryption key based on the provided filter conditions.
-         * @summary Retrieves a specific user encryption key based on the provided filter conditions.
-         * @param {string} [id] The optional identifier of the encryption key to filter by.
-         * @param {EncryptionKeyType} [type] The optional type of the encryption key to filter by.
-         * @param {string} [version] The optional version of the encryption key to filter by.
-         * @param {string} [publicKey] The optional public key to filter by.
-         * @param {string} [privateKeyEnc] The optional encrypted private key to filter by.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getUserKeysByFilter operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-keys-by-filter/
-         */
-        async getUserKeysByFilter(id?: string, type?: EncryptionKeyType, version?: string, publicKey?: string, privateKeyEnc?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EncryptionKeyWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserKeysByFilter(id, type, version, publicKey, privateKeyEnc, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PrivacyroomApi.getUserKeysByFilter']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
          * Retrieves the encryption keys associated with a specific privacy room.
          * @summary Retrieves the encryption keys associated with a specific privacy room.
          * @param {number} roomId The identifier of the privacy room.
@@ -529,18 +429,6 @@ export const PrivacyroomApiFactory = function (configuration?: Configuration, ba
             return localVarFp.getUserKeys(options).then((request) => request(axios, basePath));
         },
         /**
-         * Retrieves a specific user encryption key based on the provided filter conditions.
-         * @summary Retrieves a specific user encryption key based on the provided filter conditions.
-         * @param {PrivacyroomApiGetUserKeysByFilterRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for getUserKeysByFilter operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-keys-by-filter/
-         * @throws {RequiredError}
-         */
-        getUserKeysByFilter(requestParameters: PrivacyroomApiGetUserKeysByFilterRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<EncryptionKeyWrapper> {
-            return localVarFp.getUserKeysByFilter(requestParameters.id, requestParameters.type, requestParameters.version, requestParameters.publicKey, requestParameters.privateKeyEnc, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Retrieves the encryption keys associated with a specific privacy room.
          * @summary Retrieves the encryption keys associated with a specific privacy room.
          * @param {PrivacyroomApiGetUserKeysForRoomRequest} requestParameters Request parameters.
@@ -591,48 +479,6 @@ export interface PrivacyroomApiDeleteKeysRequest {
      * @memberof PrivacyroomApiDeleteKeys
      */
     readonly id: string
-}
-
-/**
- * Request parameters for getUserKeysByFilter operation in PrivacyroomApi.
- * @export
- * @interface PrivacyroomApiGetUserKeysByFilterRequest
- */
-export interface PrivacyroomApiGetUserKeysByFilterRequest {
-    /**
-     * The optional identifier of the encryption key to filter by.
-     * @type {string}
-     * @memberof PrivacyroomApiGetUserKeysByFilter
-     */
-    readonly id?: string
-
-    /**
-     * The optional type of the encryption key to filter by.
-     * @type {EncryptionKeyType}
-     * @memberof PrivacyroomApiGetUserKeysByFilter
-     */
-    readonly type?: EncryptionKeyType
-
-    /**
-     * The optional version of the encryption key to filter by.
-     * @type {string}
-     * @memberof PrivacyroomApiGetUserKeysByFilter
-     */
-    readonly version?: string
-
-    /**
-     * The optional public key to filter by.
-     * @type {string}
-     * @memberof PrivacyroomApiGetUserKeysByFilter
-     */
-    readonly publicKey?: string
-
-    /**
-     * The optional encrypted private key to filter by.
-     * @type {string}
-     * @memberof PrivacyroomApiGetUserKeysByFilter
-     */
-    readonly privateKeyEnc?: string
 }
 
 /**
@@ -705,18 +551,6 @@ export class PrivacyroomApi extends BaseAPI {
      */
     public getUserKeys(options?: RawAxiosRequestConfig) {
         return PrivacyroomApiFp(this.configuration).getUserKeys(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Retrieves a specific user encryption key based on the provided filter conditions.
-     * @summary Retrieves a specific user encryption key based on the provided filter conditions.
-     * @param {PrivacyroomApiGetUserKeysByFilterRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PrivacyroomApi
-     */
-    public getUserKeysByFilter(requestParameters: PrivacyroomApiGetUserKeysByFilterRequest = {}, options?: RawAxiosRequestConfig) {
-        return PrivacyroomApiFp(this.configuration).getUserKeysByFilter(requestParameters.id, requestParameters.type, requestParameters.version, requestParameters.publicKey, requestParameters.privateKeyEnc, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

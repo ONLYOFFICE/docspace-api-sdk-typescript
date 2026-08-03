@@ -40,9 +40,9 @@ import type { DocsCloudTenantWrapper } from '../../models';
 // @ts-ignore
 import type { DocsCloudUsageWrapper } from '../../models';
 // @ts-ignore
-import type { PaymentCalculationWrapper } from '../../models';
+import type { DocumentBuilderTaskWrapper } from '../../models';
 // @ts-ignore
-import type { StringWrapper } from '../../models';
+import type { PaymentCalculationWrapper } from '../../models';
 /**
  * DocsCloudApi - axios parameter creator
  * @export
@@ -160,8 +160,8 @@ export const DocsCloudApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * Generates the DocsCloud user quota report as a CSV file and saves it in My Documents.
-         * @summary Generate the DocsCloud tenant quota report
+         * Starts generating the DocsCloud user quota report as an xlsx file and saves it in My Documents.
+         * @summary Start the DocsCloud tenant quota report generation
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createTenantQuotaReport operation
@@ -440,6 +440,58 @@ export const DocsCloudApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
+         * Returns the status of generating the DocsCloud user quota report.
+         * @summary Get the status of the DocsCloud tenant quota report generation
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getTenantQuotaReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-quota-report/
+         */
+        getTenantQuotaReport: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/settings/docscloud/tenant/quota/report`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns the DocsCloud usage statistics of the current portal.
          * @summary Get the DocsCloud tenant usage
          * @param {boolean} [refresh] 
@@ -605,6 +657,58 @@ export const DocsCloudApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
+         * Terminates generating the DocsCloud user quota report.
+         * @summary Terminate the DocsCloud tenant quota report generation
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for terminateTenantQuotaReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-tenant-quota-report/
+         */
+        terminateTenantQuotaReport: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/settings/docscloud/tenant/quota/report`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Updates the DocsCloud tenant configuration of the current portal with the parameters specified in the request.
          * @summary Update the DocsCloud tenant configuration
          * @param {DocsCloudConfig} [docsCloudConfig] 
@@ -700,14 +804,14 @@ export const DocsCloudApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Generates the DocsCloud user quota report as a CSV file and saves it in My Documents.
-         * @summary Generate the DocsCloud tenant quota report
+         * Starts generating the DocsCloud user quota report as an xlsx file and saves it in My Documents.
+         * @summary Start the DocsCloud tenant quota report generation
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createTenantQuotaReport operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-tenant-quota-report/
          */
-        async createTenantQuotaReport(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+        async createTenantQuotaReport(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentBuilderTaskWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createTenantQuotaReport(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['DocsCloudApi.createTenantQuotaReport']?.[localVarOperationServerIndex]?.url;
@@ -774,6 +878,20 @@ export const DocsCloudApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns the status of generating the DocsCloud user quota report.
+         * @summary Get the status of the DocsCloud tenant quota report generation
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getTenantQuotaReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-quota-report/
+         */
+        async getTenantQuotaReport(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentBuilderTaskWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getTenantQuotaReport(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DocsCloudApi.getTenantQuotaReport']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns the DocsCloud usage statistics of the current portal.
          * @summary Get the DocsCloud tenant usage
          * @param {boolean} [refresh] 
@@ -815,6 +933,20 @@ export const DocsCloudApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.switchToDevPack(docsCloudDevPackRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['DocsCloudApi.switchToDevPack']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Terminates generating the DocsCloud user quota report.
+         * @summary Terminate the DocsCloud tenant quota report generation
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for terminateTenantQuotaReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-tenant-quota-report/
+         */
+        async terminateTenantQuotaReport(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.terminateTenantQuotaReport(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DocsCloudApi.terminateTenantQuotaReport']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -866,14 +998,14 @@ export const DocsCloudApiFactory = function (configuration?: Configuration, base
             return localVarFp.checkHealth(options).then((request) => request(axios, basePath));
         },
         /**
-         * Generates the DocsCloud user quota report as a CSV file and saves it in My Documents.
-         * @summary Generate the DocsCloud tenant quota report
+         * Starts generating the DocsCloud user quota report as an xlsx file and saves it in My Documents.
+         * @summary Start the DocsCloud tenant quota report generation
          * @param {*} [options] Override http request option.
          * REST API Reference for createTenantQuotaReport operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-tenant-quota-report/
          * @throws {RequiredError}
          */
-        createTenantQuotaReport(options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+        createTenantQuotaReport(options?: RawAxiosRequestConfig): AxiosPromise<DocumentBuilderTaskWrapper> {
             return localVarFp.createTenantQuotaReport(options).then((request) => request(axios, basePath));
         },
         /**
@@ -925,6 +1057,17 @@ export const DocsCloudApiFactory = function (configuration?: Configuration, base
             return localVarFp.getTenantQuota(requestParameters.refresh, options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns the status of generating the DocsCloud user quota report.
+         * @summary Get the status of the DocsCloud tenant quota report generation
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getTenantQuotaReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-quota-report/
+         * @throws {RequiredError}
+         */
+        getTenantQuotaReport(options?: RawAxiosRequestConfig): AxiosPromise<DocumentBuilderTaskWrapper> {
+            return localVarFp.getTenantQuotaReport(options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns the DocsCloud usage statistics of the current portal.
          * @summary Get the DocsCloud tenant usage
          * @param {DocsCloudApiGetTenantUsageRequest} requestParameters Request parameters.
@@ -958,6 +1101,17 @@ export const DocsCloudApiFactory = function (configuration?: Configuration, base
          */
         switchToDevPack(requestParameters: DocsCloudApiSwitchToDevPackRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
             return localVarFp.switchToDevPack(requestParameters.docsCloudDevPackRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Terminates generating the DocsCloud user quota report.
+         * @summary Terminate the DocsCloud tenant quota report generation
+         * @param {*} [options] Override http request option.
+         * REST API Reference for terminateTenantQuotaReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-tenant-quota-report/
+         * @throws {RequiredError}
+         */
+        terminateTenantQuotaReport(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.terminateTenantQuotaReport(options).then((request) => request(axios, basePath));
         },
         /**
          * Updates the DocsCloud tenant configuration of the current portal with the parameters specified in the request.
@@ -1117,8 +1271,8 @@ export class DocsCloudApi extends BaseAPI {
     }
 
     /**
-     * Generates the DocsCloud user quota report as a CSV file and saves it in My Documents.
-     * @summary Generate the DocsCloud tenant quota report
+     * Starts generating the DocsCloud user quota report as an xlsx file and saves it in My Documents.
+     * @summary Start the DocsCloud tenant quota report generation
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DocsCloudApi
@@ -1176,6 +1330,17 @@ export class DocsCloudApi extends BaseAPI {
     }
 
     /**
+     * Returns the status of generating the DocsCloud user quota report.
+     * @summary Get the status of the DocsCloud tenant quota report generation
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DocsCloudApi
+     */
+    public getTenantQuotaReport(options?: RawAxiosRequestConfig) {
+        return DocsCloudApiFp(this.configuration).getTenantQuotaReport(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Returns the DocsCloud usage statistics of the current portal.
      * @summary Get the DocsCloud tenant usage
      * @param {SettingsDocsCloudApiGetTenantUsageRequest} requestParameters Request parameters.
@@ -1208,6 +1373,17 @@ export class DocsCloudApi extends BaseAPI {
      */
     public switchToDevPack(requestParameters: DocsCloudApiSwitchToDevPackRequest = {}, options?: RawAxiosRequestConfig) {
         return DocsCloudApiFp(this.configuration).switchToDevPack(requestParameters.docsCloudDevPackRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Terminates generating the DocsCloud user quota report.
+     * @summary Terminate the DocsCloud tenant quota report generation
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DocsCloudApi
+     */
+    public terminateTenantQuotaReport(options?: RawAxiosRequestConfig) {
+        return DocsCloudApiFp(this.configuration).terminateTenantQuotaReport(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

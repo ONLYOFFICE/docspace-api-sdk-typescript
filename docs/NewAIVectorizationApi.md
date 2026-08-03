@@ -1,27 +1,27 @@
-# ExportApi
+# VectorizationApi
 
 All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**newAiExportTextToDocx**](#newaiexporttexttodocx) | **POST** /api/2.0/ai/text-to-docx | Start markdown → docx export|
+|[**newAiVectorizationStartTask**](#newaivectorizationstarttask) | **POST** /api/2.0/ai/vectorization/tasks | Start a vectorization task|
 
-# **newAiExportTextToDocx**
-> NewAiExportTextToDocx200Response newAiExportTextToDocx(newAiExportTextToDocxRequest)
+# **newAiVectorizationStartTask**
+> NewAiSuccessResponse newAiVectorizationStartTask(requestBody)
 
 
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/new-ai-export-text-to-docx/).
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/new-ai-vectorization-start-task/).
 
 ### Parameters
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **newAiExportTextToDocxRequest** | **NewAiExportTextToDocxRequest**|  | |
+| **requestBody** | **{ [key: string]: any; }**|  | |
 
 
 ### Return type
 
-**NewAiExportTextToDocx200Response**
+**NewAiSuccessResponse**
 
 ### Authorization
 
@@ -31,18 +31,17 @@ No authorization required
 
 ```typescript
 import {
-    NewAIExportApi,
-    Configuration,
-    NewAiExportTextToDocxRequest
+    NewAIVectorizationApi,
+    Configuration
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
-const apiInstance = new NewAIExportApi(configuration);
+const apiInstance = new NewAIVectorizationApi(configuration);
 
-let newAiExportTextToDocxRequest: NewAiExportTextToDocxRequest; //
+let requestBody: { [key: string]: any; }; //
 
-const { status, data } = await apiInstance.newAiExportTextToDocx(
-    newAiExportTextToDocxRequest
+const { status, data } = await apiInstance.newAiVectorizationStartTask(
+    requestBody
 );
 ```
 

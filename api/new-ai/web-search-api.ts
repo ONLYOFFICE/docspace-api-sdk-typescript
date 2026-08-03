@@ -56,7 +56,7 @@ export const WebSearchApiAxiosParamCreator = function (configuration?: Configura
             // verify required parameter 'body' is not null or undefined
             assertParamExists('newAiWebSearchClear', 'body', body)
 
-            const localVarPath = `/api/2.0/new-ai/web-search/clear`;
+            const localVarPath = `/api/2.0/ai/web-search/clear`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -95,7 +95,7 @@ export const WebSearchApiAxiosParamCreator = function (configuration?: Configura
             // verify required parameter 'newAiWebSearchConfigureRequest' is not null or undefined
             assertParamExists('newAiWebSearchConfigure', 'newAiWebSearchConfigureRequest', newAiWebSearchConfigureRequest)
 
-            const localVarPath = `/api/2.0/new-ai/web-search/configure`;
+            const localVarPath = `/api/2.0/ai/web-search/configure`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -134,7 +134,7 @@ export const WebSearchApiAxiosParamCreator = function (configuration?: Configura
             // verify required parameter 'entityId' is not null or undefined
             assertParamExists('newAiWebSearchGetActiveConfig', 'entityId', entityId)
 
-            const localVarPath = `/api/2.0/new-ai/web-search/get-active-config`;
+            const localVarPath = `/api/2.0/ai/web-search/get-active-config`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -174,7 +174,7 @@ export const WebSearchApiAxiosParamCreator = function (configuration?: Configura
             // verify required parameter 'entityId' is not null or undefined
             assertParamExists('newAiWebSearchIsConfigured', 'entityId', entityId)
 
-            const localVarPath = `/api/2.0/new-ai/web-search/is-configured`;
+            const localVarPath = `/api/2.0/ai/web-search/is-configured`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -214,7 +214,7 @@ export const WebSearchApiAxiosParamCreator = function (configuration?: Configura
             // verify required parameter 'newAiWebSearchConfigureRequest' is not null or undefined
             assertParamExists('newAiWebSearchSetActiveConfig', 'newAiWebSearchConfigureRequest', newAiWebSearchConfigureRequest)
 
-            const localVarPath = `/api/2.0/new-ai/web-search/set-active-config`;
+            const localVarPath = `/api/2.0/ai/web-search/set-active-config`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -253,7 +253,7 @@ export const WebSearchApiAxiosParamCreator = function (configuration?: Configura
             // verify required parameter 'newAiWebSearchConfig' is not null or undefined
             assertParamExists('newAiWebSearchTestConnection', 'newAiWebSearchConfig', newAiWebSearchConfig)
 
-            const localVarPath = `/api/2.0/new-ai/web-search/test-connection`;
+            const localVarPath = `/api/2.0/ai/web-search/test-connection`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;

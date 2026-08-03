@@ -60,7 +60,7 @@ export const AttachmentsApiAxiosParamCreator = function (configuration?: Configu
             // verify required parameter 'body' is not null or undefined
             assertParamExists('newAiAttachmentsDelete', 'body', body)
 
-            const localVarPath = `/api/2.0/new-ai/attachments/delete`;
+            const localVarPath = `/api/2.0/ai/attachments/delete`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -99,7 +99,7 @@ export const AttachmentsApiAxiosParamCreator = function (configuration?: Configu
             // verify required parameter 'requestBody' is not null or undefined
             assertParamExists('newAiAttachmentsDeleteMany', 'requestBody', requestBody)
 
-            const localVarPath = `/api/2.0/new-ai/attachments/delete-many`;
+            const localVarPath = `/api/2.0/ai/attachments/delete-many`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -138,7 +138,7 @@ export const AttachmentsApiAxiosParamCreator = function (configuration?: Configu
             // verify required parameter 'body' is not null or undefined
             assertParamExists('newAiAttachmentsGet', 'body', body)
 
-            const localVarPath = `/api/2.0/new-ai/attachments/get`;
+            const localVarPath = `/api/2.0/ai/attachments/get`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -177,7 +177,7 @@ export const AttachmentsApiAxiosParamCreator = function (configuration?: Configu
             // verify required parameter 'requestBody' is not null or undefined
             assertParamExists('newAiAttachmentsGetMany', 'requestBody', requestBody)
 
-            const localVarPath = `/api/2.0/new-ai/attachments/get-many`;
+            const localVarPath = `/api/2.0/ai/attachments/get-many`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -216,7 +216,7 @@ export const AttachmentsApiAxiosParamCreator = function (configuration?: Configu
             // verify required parameter 'newAiAttachmentsLinkToMessageRequest' is not null or undefined
             assertParamExists('newAiAttachmentsLinkToMessage', 'newAiAttachmentsLinkToMessageRequest', newAiAttachmentsLinkToMessageRequest)
 
-            const localVarPath = `/api/2.0/new-ai/attachments/link-to-message`;
+            const localVarPath = `/api/2.0/ai/attachments/link-to-message`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -255,7 +255,7 @@ export const AttachmentsApiAxiosParamCreator = function (configuration?: Configu
             // verify required parameter 'newAiAttachmentsSaveFileRequest' is not null or undefined
             assertParamExists('newAiAttachmentsSaveFile', 'newAiAttachmentsSaveFileRequest', newAiAttachmentsSaveFileRequest)
 
-            const localVarPath = `/api/2.0/new-ai/attachments/save-file`;
+            const localVarPath = `/api/2.0/ai/attachments/save-file`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -294,7 +294,7 @@ export const AttachmentsApiAxiosParamCreator = function (configuration?: Configu
             // verify required parameter 'newAiAttachmentsSaveFilesManyRequest' is not null or undefined
             assertParamExists('newAiAttachmentsSaveFilesMany', 'newAiAttachmentsSaveFilesManyRequest', newAiAttachmentsSaveFilesManyRequest)
 
-            const localVarPath = `/api/2.0/new-ai/attachments/save-files-many`;
+            const localVarPath = `/api/2.0/ai/attachments/save-files-many`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -333,7 +333,7 @@ export const AttachmentsApiAxiosParamCreator = function (configuration?: Configu
             // verify required parameter 'newAiAttachmentsSaveImageRequest' is not null or undefined
             assertParamExists('newAiAttachmentsSaveImage', 'newAiAttachmentsSaveImageRequest', newAiAttachmentsSaveImageRequest)
 
-            const localVarPath = `/api/2.0/new-ai/attachments/save-image`;
+            const localVarPath = `/api/2.0/ai/attachments/save-image`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -372,7 +372,7 @@ export const AttachmentsApiAxiosParamCreator = function (configuration?: Configu
             // verify required parameter 'newAiAttachmentsSaveImagesManyRequest' is not null or undefined
             assertParamExists('newAiAttachmentsSaveImagesMany', 'newAiAttachmentsSaveImagesManyRequest', newAiAttachmentsSaveImagesManyRequest)
 
-            const localVarPath = `/api/2.0/new-ai/attachments/save-images-many`;
+            const localVarPath = `/api/2.0/ai/attachments/save-images-many`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;

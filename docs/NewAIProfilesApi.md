@@ -4,14 +4,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**newAiProfilesCreate**](#newaiprofilescreate) | **POST** /api/2.0/new-ai/profiles/create | Create|
-|[**newAiProfilesDelete**](#newaiprofilesdelete) | **DELETE** /api/2.0/new-ai/profiles/delete | Delete|
-|[**newAiProfilesGetById**](#newaiprofilesgetbyid) | **GET** /api/2.0/new-ai/profiles/get-by-id | Get by id|
-|[**newAiProfilesList**](#newaiprofileslist) | **GET** /api/2.0/new-ai/profiles/list | List|
-|[**newAiProfilesListModels**](#newaiprofileslistmodels) | **GET** /api/2.0/new-ai/profiles/list-models | List models|
-|[**newAiProfilesListProviderModels**](#newaiprofileslistprovidermodels) | **POST** /api/2.0/new-ai/profiles/list-provider-models | List provider models|
-|[**newAiProfilesTestConnection**](#newaiprofilestestconnection) | **POST** /api/2.0/new-ai/profiles/test-connection | Test connection|
-|[**newAiProfilesUpdate**](#newaiprofilesupdate) | **PUT** /api/2.0/new-ai/profiles/update | Update|
+|[**newAiProfilesCreate**](#newaiprofilescreate) | **POST** /api/2.0/ai/profiles/create | Create|
+|[**newAiProfilesDelete**](#newaiprofilesdelete) | **DELETE** /api/2.0/ai/profiles/delete | Delete|
+|[**newAiProfilesGetById**](#newaiprofilesgetbyid) | **GET** /api/2.0/ai/profiles/get-by-id | Get by id|
+|[**newAiProfilesList**](#newaiprofileslist) | **GET** /api/2.0/ai/profiles/list | List|
+|[**newAiProfilesListModels**](#newaiprofileslistmodels) | **GET** /api/2.0/ai/profiles/list-models | List models|
+|[**newAiProfilesListProviderModels**](#newaiprofileslistprovidermodels) | **POST** /api/2.0/ai/profiles/list-provider-models | List provider models|
+|[**newAiProfilesTestConnection**](#newaiprofilestestconnection) | **POST** /api/2.0/ai/profiles/test-connection | Test connection|
+|[**newAiProfilesUpdate**](#newaiprofilesupdate) | **PUT** /api/2.0/ai/profiles/update | Update|
 
 # **newAiProfilesCreate**
 > NewAiProfileMutationResult newAiProfilesCreate(newAiCreateProfileInput)

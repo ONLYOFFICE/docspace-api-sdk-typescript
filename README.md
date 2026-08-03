@@ -35,20 +35,20 @@ Please follow the [building](#building) instruction and execute the following TS
 
 ```typescript
 
-import { Configuration, AIAgentsApi } from '@onlyoffice/docspace-api-sdk';
+import { Configuration, ApiKeysApi } from '@onlyoffice/docspace-api-sdk';
 
 const config = new Configuration ({
     basePath: "https://your-docspace.onlyoffice.com",
     accessToken: "YOUR ACCESS TOKEN",
 });
 
-const apiInstance = new AIAgentsApi(config);
+const apiInstance = new ApiKeysApi(config);
 
 const opts: any = {
-  'createAgentRequestDto':  // 
+  'createApiKeyRequestDto':  // 
 };
 try {
-    const result = await apiInstance.createAgent(
+    const result = await apiInstance.createApiKey(
       opts
     );
     console.log('API called successfully. Returned data: ', result.data);
@@ -130,10 +130,10 @@ All API responses may include the following rate limiting headers:
 
 | Header | Description |
 |--------|-------------|
-| `` |  |
-| `` |  |
-| `` |  |
-| `` |  |
+| `X-RateLimit-Limit` | Sliding window rate limit: 1500 requests per minute per user/IP. |
+| `X-RateLimit-Remaining` | Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. |
+| `X-RateLimit-Reset` | Unix timestamp (seconds) when the current sliding window rate limit resets. |
+| `Retry-After` | Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). |
 
 ### Documentation for API Endpoints
 
@@ -141,306 +141,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 ### API Endoints tables:
 
-<details>
-  <summary>AI</summary>
-
-  <table>
-    <tbody>
-      <tr>
-        <th>Method</th>
-        <th>HTTP request</th>
-        <th>Description</th>
-      </tr>
-      <tr>
-        <td colspan="3" style="text-align: center;"><strong>AgentsApi</strong></td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIAgentsApi.md#createagent"><strong>createAgent</strong></a></td>
-        <td><strong>POST</strong> /internal/ai/integration/agents</td>
-        <td>Create an ai agent</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIAgentsApi.md#deleteagent"><strong>deleteAgent</strong></a></td>
-        <td><strong>DELETE</strong> /internal/ai/integration/agents/{id}</td>
-        <td>Remove an ai agent</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIAgentsApi.md#getagentinfo"><strong>getAgentInfo</strong></a></td>
-        <td><strong>GET</strong> /internal/ai/integration/agents/{id}</td>
-        <td>Return an ai agent</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIAgentsApi.md#getagents"><strong>getAgents</strong></a></td>
-        <td><strong>GET</strong> /internal/ai/integration/agents</td>
-        <td>Get ai agents</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIAgentsApi.md#getagentsnewitems"><strong>getAgentsNewItems</strong></a></td>
-        <td><strong>GET</strong> /internal/ai/integration/agents/news</td>
-        <td>Get the room new items</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIAgentsApi.md#resetagentsquota"><strong>resetAgentsQuota</strong></a></td>
-        <td><strong>PUT</strong> /internal/ai/integration/agents/resetquota</td>
-        <td>Reset the AI agents quota limit</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIAgentsApi.md#updateagent"><strong>updateAgent</strong></a></td>
-        <td><strong>PUT</strong> /internal/ai/integration/agents/{id}</td>
-        <td>Update an ai agent</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIAgentsApi.md#updateagentsquota"><strong>updateAgentsQuota</strong></a></td>
-        <td><strong>PUT</strong> /internal/ai/integration/agents/agentquota</td>
-        <td>Change the AI agent quota limit</td>
-      </tr>
-    <tr>
-        <td colspan="3" style="text-align: center;"><strong>ChatApi</strong></td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIChatApi.md#continuechat"><strong>continueChat</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/chats/{chatId}/messages</td>
-        <td>Send a message to an existing AI chat</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIChatApi.md#deletechat"><strong>deleteChat</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/ai/chats/{chatId}</td>
-        <td>Delete an AI chat</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIChatApi.md#exportchat"><strong>exportChat</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/chats/{chatId}/messages/export</td>
-        <td>Export AI chat messages to a file</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIChatApi.md#getchat"><strong>getChat</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/chats/{chatId}</td>
-        <td>Get an AI chat by ID</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIChatApi.md#getchatmodels"><strong>getChatModels</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/chats/models</td>
-        <td>Get available AI models</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIChatApi.md#getchats"><strong>getChats</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/rooms/{roomId}/chats</td>
-        <td>Get AI chats in a room</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIChatApi.md#getmessages"><strong>getMessages</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/chats/{chatId}/messages</td>
-        <td>Get messages of an AI chat</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIChatApi.md#getuserchatssettings"><strong>getUserChatsSettings</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/rooms/{roomId}/chats/config</td>
-        <td>Get user chat settings for a room</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIChatApi.md#providepermission"><strong>providePermission</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/chats/tool-permissions/{callId}/decision</td>
-        <td>Submit a tool execution permission decision</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIChatApi.md#renamechat"><strong>renameChat</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/chats/{chatId}</td>
-        <td>Rename an AI chat</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIChatApi.md#resolveeditortool"><strong>resolveEditorTool</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/chats/tool-files/{callId}/decision</td>
-        <td>Resolve a pending editor file-generation tool</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIChatApi.md#setuserchatssettings"><strong>setUserChatsSettings</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/rooms/{roomId}/chats/config</td>
-        <td>Update user chat settings for a room</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIChatApi.md#startnewchat"><strong>startNewChat</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/rooms/{roomId}/chats</td>
-        <td>Start a new AI chat</td>
-      </tr>
-    <tr>
-        <td colspan="3" style="text-align: center;"><strong>MCPApi</strong></td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIMCPApi.md#addroomservers"><strong>addRoomServers</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/rooms/{roomId}/servers</td>
-        <td>Assign MCP servers to a room</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIMCPApi.md#addserver"><strong>addServer</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/servers</td>
-        <td>Register a custom MCP server</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIMCPApi.md#connectserver"><strong>connectServer</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/rooms/{roomId}/servers/{serverId}/connect</td>
-        <td>Connect an OAuth-based MCP server in a room</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIMCPApi.md#deleteroomservers"><strong>deleteRoomServers</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/ai/rooms/{roomId}/servers</td>
-        <td>Remove MCP servers from a room</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIMCPApi.md#deleteserver"><strong>deleteServer</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/ai/servers</td>
-        <td>Delete MCP servers</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIMCPApi.md#disconnectserver"><strong>disconnectServer</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/rooms/{roomId}/servers/{serverId}/disconnect</td>
-        <td>Disconnect an MCP server in a room</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIMCPApi.md#getavailableservers"><strong>getAvailableServers</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/servers/available</td>
-        <td>Get available MCP servers</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIMCPApi.md#getroomservers"><strong>getRoomServers</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/rooms/{roomId}/servers</td>
-        <td>Get MCP servers assigned to a room</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIMCPApi.md#getserver"><strong>getServer</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/servers/{id}</td>
-        <td>Get an MCP server by ID</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIMCPApi.md#getservers"><strong>getServers</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/servers</td>
-        <td>Get all MCP servers</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIMCPApi.md#gettools"><strong>getTools</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/rooms/{roomId}/servers/{serverId}/tools</td>
-        <td>Get MCP server tools in a room</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIMCPApi.md#setserverstatus"><strong>setServerStatus</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/servers/{id}/status</td>
-        <td>Enable or disable an MCP server</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIMCPApi.md#settools"><strong>setTools</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/rooms/{roomId}/servers/{serverId}/tools</td>
-        <td>Configure MCP server tools in a room</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIMCPApi.md#updateserver"><strong>updateServer</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/servers/{id}</td>
-        <td>Update a custom MCP server</td>
-      </tr>
-    <tr>
-        <td colspan="3" style="text-align: center;"><strong>MessagesApi</strong></td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIMessagesApi.md#exportmessage"><strong>exportMessage</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/messages/{messageId}/export</td>
-        <td>Export a single AI message to a document</td>
-      </tr>
-    <tr>
-        <td colspan="3" style="text-align: center;"><strong>ProvidersApi</strong></td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIProvidersApi.md#addprovider"><strong>addProvider</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/providers</td>
-        <td>Add an AI provider</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIProvidersApi.md#deleteproviders"><strong>deleteProviders</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/ai/providers</td>
-        <td>Delete AI providers</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIProvidersApi.md#getavailableproviders"><strong>getAvailableProviders</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/providers/available</td>
-        <td>Get available AI provider types</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIProvidersApi.md#getdefaultprovider"><strong>getDefaultProvider</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/providers/default</td>
-        <td>Get the default AI provider</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIProvidersApi.md#getprovidermodels"><strong>getProviderModels</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/providers/{providerId}/models</td>
-        <td>Get all models for a provider with their settings</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIProvidersApi.md#getproviders"><strong>getProviders</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/providers</td>
-        <td>Get AI providers</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIProvidersApi.md#previewprovidermodels"><strong>previewProviderModels</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/providers/models/preview</td>
-        <td>Preview models for a new AI provider</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIProvidersApi.md#setdefaultprovider"><strong>setDefaultProvider</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/providers/default</td>
-        <td>Set the default AI provider</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIProvidersApi.md#updateprovider"><strong>updateProvider</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/providers/{id}</td>
-        <td>Update an AI provider</td>
-      </tr>
-    <tr>
-        <td colspan="3" style="text-align: center;"><strong>SettingsApi</strong></td>
-      </tr>
-      <tr>
-        <td><a href="docs/AISettingsApi.md#getaisettings"><strong>getAiSettings</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/config</td>
-        <td>Get AI settings</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AISettingsApi.md#getaiusersettings"><strong>getAiUserSettings</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/config/user</td>
-        <td>Get per-user AI settings</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AISettingsApi.md#getvectorizationsettings"><strong>getVectorizationSettings</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/config/vectorization</td>
-        <td>Get vectorization settings</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AISettingsApi.md#getwebsearchsettings"><strong>getWebSearchSettings</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/config/web-search</td>
-        <td>Get web search settings</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AISettingsApi.md#setaiusersettings"><strong>setAiUserSettings</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/config/user</td>
-        <td>Update per-user AI settings</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AISettingsApi.md#setvectorizationsettings"><strong>setVectorizationSettings</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/config/vectorization</td>
-        <td>Update vectorization settings</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AISettingsApi.md#setwebsearchsettings"><strong>setWebSearchSettings</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/config/web-search</td>
-        <td>Update web search settings</td>
-      </tr>
-    <tr>
-        <td colspan="3" style="text-align: center;"><strong>VectorizationApi</strong></td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIVectorizationApi.md#starttask"><strong>startTask</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/vectorization/tasks</td>
-        <td>Start a vectorization task</td>
-      </tr>
-    </tbody>
-  </table>
-
-</details>
 <details>
   <summary>ApiKeys</summary>
 
@@ -1249,7 +949,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Change the room quota limit</td>
       </tr>
     <tr>
-        <td colspan="3" style="text-align: center;"><strong>FilesSettingsApi</strong></td>
+        <td colspan="3" style="text-align: center;"><strong>SettingsApi</strong></td>
       </tr>
       <tr>
         <td><a href="docs/FilesSettingsApi.md#changeaccesstothirdparty"><strong>changeAccessToThirdparty</strong></a></td>
@@ -1683,80 +1383,80 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       </tr>
       <tr>
         <td><a href="docs/NewAIAIApi.md#newaiaiapprovetoolcall"><strong>newAiAiApproveToolCall</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/ai/approve-tool-call</td>
+        <td><strong>POST</strong> /api/2.0/ai/ai/approve-tool-call</td>
         <td>Approve tool call</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAIApi.md#newaiaidenytoolcall"><strong>newAiAiDenyToolCall</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/ai/deny-tool-call</td>
+        <td><strong>POST</strong> /api/2.0/ai/ai/deny-tool-call</td>
         <td>Deny tool call</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAIApi.md#newaiairegeneratestream"><strong>newAiAiRegenerateStream</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/ai/regenerate-stream</td>
+        <td><strong>POST</strong> /api/2.0/ai/ai/regenerate-stream</td>
         <td>Regenerate stream</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAIApi.md#newaiaisend"><strong>newAiAiSend</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/ai/send</td>
+        <td><strong>POST</strong> /api/2.0/ai/ai/send</td>
         <td>Send</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAIApi.md#newaiaisendcustom"><strong>newAiAiSendCustom</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/ai/send-custom</td>
+        <td><strong>POST</strong> /api/2.0/ai/ai/send-custom</td>
         <td>Send custom</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAIApi.md#newaiaisendwithstream"><strong>newAiAiSendWithStream</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/ai/send-with-stream</td>
+        <td><strong>POST</strong> /api/2.0/ai/ai/send-with-stream</td>
         <td>Send with stream</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAIApi.md#newaiaisendwithstreamopenai"><strong>newAiAiSendWithStreamOpenAI</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/ai/send-with-stream-openai</td>
+        <td><strong>POST</strong> /api/2.0/ai/ai/send-with-stream-openai</td>
         <td>Send with stream open ai</td>
       </tr>
     <tr>
-        <td colspan="3" style="text-align: center;"><strong>NewAIAgentsApi</strong></td>
+        <td colspan="3" style="text-align: center;"><strong>AgentsApi</strong></td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAgentsApi.md#newaiagentscreate"><strong>newAiAgentsCreate</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/agents</td>
+        <td><strong>POST</strong> /api/2.0/ai/agents</td>
         <td>Create an agent</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAgentsApi.md#newaiagentsdelete"><strong>newAiAgentsDelete</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/new-ai/agents/{id}</td>
+        <td><strong>DELETE</strong> /api/2.0/ai/agents/{id}</td>
         <td>Delete an agent</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAgentsApi.md#newaiagentsget"><strong>newAiAgentsGet</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/agents/{id}</td>
+        <td><strong>GET</strong> /api/2.0/ai/agents/{id}</td>
         <td>Get an agent</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAgentsApi.md#newaiagentslist"><strong>newAiAgentsList</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/agents</td>
+        <td><strong>GET</strong> /api/2.0/ai/agents</td>
         <td>List agents</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAgentsApi.md#newaiagentsnews"><strong>newAiAgentsNews</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/agents/news</td>
+        <td><strong>GET</strong> /api/2.0/ai/agents/news</td>
         <td>List agent news items</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAgentsApi.md#newaiagentsresetquota"><strong>newAiAgentsResetQuota</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/new-ai/agents/resetquota</td>
+        <td><strong>PUT</strong> /api/2.0/ai/agents/resetquota</td>
         <td>Reset agents\' quota</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAgentsApi.md#newaiagentsupdate"><strong>newAiAgentsUpdate</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/new-ai/agents/{id}</td>
+        <td><strong>PUT</strong> /api/2.0/ai/agents/{id}</td>
         <td>Update an agent</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAgentsApi.md#newaiagentsupdatequota"><strong>newAiAgentsUpdateQuota</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/new-ai/agents/agentquota</td>
+        <td><strong>PUT</strong> /api/2.0/ai/agents/agentquota</td>
         <td>Update agents\' quota</td>
       </tr>
     <tr>
@@ -1764,42 +1464,42 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       </tr>
       <tr>
         <td><a href="docs/NewAIAssignmentsApi.md#newaiassignmentsassign"><strong>newAiAssignmentsAssign</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/new-ai/assignments/assign</td>
+        <td><strong>PUT</strong> /api/2.0/ai/assignments/assign</td>
         <td>Assign</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAssignmentsApi.md#newaiassignmentsbulkassign"><strong>newAiAssignmentsBulkAssign</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/new-ai/assignments/bulk-assign</td>
+        <td><strong>PUT</strong> /api/2.0/ai/assignments/bulk-assign</td>
         <td>Bulk assign</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAssignmentsApi.md#newaiassignmentscascadeprofiledelete"><strong>newAiAssignmentsCascadeProfileDelete</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/new-ai/assignments/cascade-profile-delete</td>
+        <td><strong>DELETE</strong> /api/2.0/ai/assignments/cascade-profile-delete</td>
         <td>Cascade profile delete</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAssignmentsApi.md#newaiassignmentsgetallassignments"><strong>newAiAssignmentsGetAllAssignments</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/assignments/get-all-assignments</td>
+        <td><strong>GET</strong> /api/2.0/ai/assignments/get-all-assignments</td>
         <td>Get all assignments</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAssignmentsApi.md#newaiassignmentsgetassignment"><strong>newAiAssignmentsGetAssignment</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/assignments/get-assignment</td>
+        <td><strong>GET</strong> /api/2.0/ai/assignments/get-assignment</td>
         <td>Get assignment</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAssignmentsApi.md#newaiassignmentsresolveforaction"><strong>newAiAssignmentsResolveForAction</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/assignments/resolve-for-action</td>
+        <td><strong>GET</strong> /api/2.0/ai/assignments/resolve-for-action</td>
         <td>Resolve for action</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAssignmentsApi.md#newaiassignmentstryresolveforaction"><strong>newAiAssignmentsTryResolveForAction</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/assignments/try-resolve-for-action</td>
+        <td><strong>GET</strong> /api/2.0/ai/assignments/try-resolve-for-action</td>
         <td>Try resolve for action</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAssignmentsApi.md#newaiassignmentsunassign"><strong>newAiAssignmentsUnassign</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/new-ai/assignments/unassign</td>
+        <td><strong>DELETE</strong> /api/2.0/ai/assignments/unassign</td>
         <td>Unassign</td>
       </tr>
     <tr>
@@ -1807,47 +1507,47 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       </tr>
       <tr>
         <td><a href="docs/NewAIAttachmentsApi.md#newaiattachmentsdelete"><strong>newAiAttachmentsDelete</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/new-ai/attachments/delete</td>
+        <td><strong>DELETE</strong> /api/2.0/ai/attachments/delete</td>
         <td>Delete</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAttachmentsApi.md#newaiattachmentsdeletemany"><strong>newAiAttachmentsDeleteMany</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/new-ai/attachments/delete-many</td>
+        <td><strong>DELETE</strong> /api/2.0/ai/attachments/delete-many</td>
         <td>Delete many</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAttachmentsApi.md#newaiattachmentsget"><strong>newAiAttachmentsGet</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/attachments/get</td>
+        <td><strong>POST</strong> /api/2.0/ai/attachments/get</td>
         <td>Get</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAttachmentsApi.md#newaiattachmentsgetmany"><strong>newAiAttachmentsGetMany</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/attachments/get-many</td>
+        <td><strong>POST</strong> /api/2.0/ai/attachments/get-many</td>
         <td>Get many</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAttachmentsApi.md#newaiattachmentslinktomessage"><strong>newAiAttachmentsLinkToMessage</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/attachments/link-to-message</td>
+        <td><strong>POST</strong> /api/2.0/ai/attachments/link-to-message</td>
         <td>Link to message</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAttachmentsApi.md#newaiattachmentssavefile"><strong>newAiAttachmentsSaveFile</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/attachments/save-file</td>
+        <td><strong>POST</strong> /api/2.0/ai/attachments/save-file</td>
         <td>Save file</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAttachmentsApi.md#newaiattachmentssavefilesmany"><strong>newAiAttachmentsSaveFilesMany</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/attachments/save-files-many</td>
+        <td><strong>POST</strong> /api/2.0/ai/attachments/save-files-many</td>
         <td>Save files many</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAttachmentsApi.md#newaiattachmentssaveimage"><strong>newAiAttachmentsSaveImage</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/attachments/save-image</td>
+        <td><strong>POST</strong> /api/2.0/ai/attachments/save-image</td>
         <td>Save image</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIAttachmentsApi.md#newaiattachmentssaveimagesmany"><strong>newAiAttachmentsSaveImagesMany</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/attachments/save-images-many</td>
+        <td><strong>POST</strong> /api/2.0/ai/attachments/save-images-many</td>
         <td>Save images many</td>
       </tr>
     <tr>
@@ -1855,7 +1555,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       </tr>
       <tr>
         <td><a href="docs/NewAIExportApi.md#newaiexporttexttodocx"><strong>newAiExportTextToDocx</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/text-to-docx</td>
+        <td><strong>POST</strong> /api/2.0/ai/text-to-docx</td>
         <td>Start markdown → docx export</td>
       </tr>
     <tr>
@@ -1863,22 +1563,22 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       </tr>
       <tr>
         <td><a href="docs/NewAIPreferencesApi.md#newaipreferencescleardeepmode"><strong>newAiPreferencesClearDeepMode</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/new-ai/preferences/clear-deep-mode</td>
+        <td><strong>DELETE</strong> /api/2.0/ai/preferences/clear-deep-mode</td>
         <td>Clear deep mode</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIPreferencesApi.md#newaipreferencesgetdeepmode"><strong>newAiPreferencesGetDeepMode</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/preferences/get-deep-mode</td>
+        <td><strong>GET</strong> /api/2.0/ai/preferences/get-deep-mode</td>
         <td>Get deep mode</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIPreferencesApi.md#newaipreferencesisdeepmodeset"><strong>newAiPreferencesIsDeepModeSet</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/preferences/is-deep-mode-set</td>
+        <td><strong>GET</strong> /api/2.0/ai/preferences/is-deep-mode-set</td>
         <td>Is deep mode set</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIPreferencesApi.md#newaipreferencessetdeepmode"><strong>newAiPreferencesSetDeepMode</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/new-ai/preferences/set-deep-mode</td>
+        <td><strong>PUT</strong> /api/2.0/ai/preferences/set-deep-mode</td>
         <td>Set deep mode</td>
       </tr>
     <tr>
@@ -1886,42 +1586,42 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       </tr>
       <tr>
         <td><a href="docs/NewAIProfilesApi.md#newaiprofilescreate"><strong>newAiProfilesCreate</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/profiles/create</td>
+        <td><strong>POST</strong> /api/2.0/ai/profiles/create</td>
         <td>Create</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIProfilesApi.md#newaiprofilesdelete"><strong>newAiProfilesDelete</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/new-ai/profiles/delete</td>
+        <td><strong>DELETE</strong> /api/2.0/ai/profiles/delete</td>
         <td>Delete</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIProfilesApi.md#newaiprofilesgetbyid"><strong>newAiProfilesGetById</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/profiles/get-by-id</td>
+        <td><strong>GET</strong> /api/2.0/ai/profiles/get-by-id</td>
         <td>Get by id</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIProfilesApi.md#newaiprofileslist"><strong>newAiProfilesList</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/profiles/list</td>
+        <td><strong>GET</strong> /api/2.0/ai/profiles/list</td>
         <td>List</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIProfilesApi.md#newaiprofileslistmodels"><strong>newAiProfilesListModels</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/profiles/list-models</td>
+        <td><strong>GET</strong> /api/2.0/ai/profiles/list-models</td>
         <td>List models</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIProfilesApi.md#newaiprofileslistprovidermodels"><strong>newAiProfilesListProviderModels</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/profiles/list-provider-models</td>
+        <td><strong>POST</strong> /api/2.0/ai/profiles/list-provider-models</td>
         <td>List provider models</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIProfilesApi.md#newaiprofilestestconnection"><strong>newAiProfilesTestConnection</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/profiles/test-connection</td>
+        <td><strong>POST</strong> /api/2.0/ai/profiles/test-connection</td>
         <td>Test connection</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIProfilesApi.md#newaiprofilesupdate"><strong>newAiProfilesUpdate</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/new-ai/profiles/update</td>
+        <td><strong>PUT</strong> /api/2.0/ai/profiles/update</td>
         <td>Update</td>
       </tr>
     <tr>
@@ -1929,140 +1629,168 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       </tr>
       <tr>
         <td><a href="docs/NewAIPromptsApi.md#newaipromptscreate"><strong>newAiPromptsCreate</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/prompts/create</td>
+        <td><strong>POST</strong> /api/2.0/ai/prompts/create</td>
         <td>Create</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIPromptsApi.md#newaipromptscreatefolder"><strong>newAiPromptsCreateFolder</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/prompts/create-folder</td>
+        <td><strong>POST</strong> /api/2.0/ai/prompts/create-folder</td>
         <td>Create folder</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIPromptsApi.md#newaipromptsdelete"><strong>newAiPromptsDelete</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/new-ai/prompts/delete</td>
+        <td><strong>DELETE</strong> /api/2.0/ai/prompts/delete</td>
         <td>Delete</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIPromptsApi.md#newaipromptsdeletefolder"><strong>newAiPromptsDeleteFolder</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/new-ai/prompts/delete-folder</td>
+        <td><strong>DELETE</strong> /api/2.0/ai/prompts/delete-folder</td>
         <td>Delete folder</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIPromptsApi.md#newaipromptsexport"><strong>newAiPromptsExport</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/prompts/export</td>
+        <td><strong>GET</strong> /api/2.0/ai/prompts/export</td>
         <td>Export</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIPromptsApi.md#newaipromptsgetbyid"><strong>newAiPromptsGetById</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/prompts/get-by-id</td>
+        <td><strong>GET</strong> /api/2.0/ai/prompts/get-by-id</td>
         <td>Get by id</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIPromptsApi.md#newaipromptsgetfolderbyid"><strong>newAiPromptsGetFolderById</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/prompts/get-folder-by-id</td>
+        <td><strong>GET</strong> /api/2.0/ai/prompts/get-folder-by-id</td>
         <td>Get folder by id</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIPromptsApi.md#newaipromptsimportbundle"><strong>newAiPromptsImportBundle</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/prompts/import-bundle</td>
+        <td><strong>POST</strong> /api/2.0/ai/prompts/import-bundle</td>
         <td>Import bundle</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIPromptsApi.md#newaipromptslist"><strong>newAiPromptsList</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/prompts/list</td>
+        <td><strong>GET</strong> /api/2.0/ai/prompts/list</td>
         <td>List</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIPromptsApi.md#newaipromptslistfolders"><strong>newAiPromptsListFolders</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/prompts/list-folders</td>
+        <td><strong>GET</strong> /api/2.0/ai/prompts/list-folders</td>
         <td>List folders</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIPromptsApi.md#newaipromptsmove"><strong>newAiPromptsMove</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/new-ai/prompts/move</td>
+        <td><strong>PUT</strong> /api/2.0/ai/prompts/move</td>
         <td>Move</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIPromptsApi.md#newaipromptsrenamefolder"><strong>newAiPromptsRenameFolder</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/new-ai/prompts/rename-folder</td>
+        <td><strong>PUT</strong> /api/2.0/ai/prompts/rename-folder</td>
         <td>Rename folder</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIPromptsApi.md#newaipromptsupdate"><strong>newAiPromptsUpdate</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/new-ai/prompts/update</td>
+        <td><strong>PUT</strong> /api/2.0/ai/prompts/update</td>
         <td>Update</td>
+      </tr>
+    <tr>
+        <td colspan="3" style="text-align: center;"><strong>NewAISettingsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/NewAISettingsApi.md#newaisettingsget"><strong>newAiSettingsGet</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/config</td>
+        <td>Get AI settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/NewAISettingsApi.md#newaisettingsgetuser"><strong>newAiSettingsGetUser</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/config/user</td>
+        <td>Get user AI settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/NewAISettingsApi.md#newaisettingsgetvectorization"><strong>newAiSettingsGetVectorization</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/config/vectorization</td>
+        <td>Get vectorization settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/NewAISettingsApi.md#newaisettingssetuser"><strong>newAiSettingsSetUser</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/config/user</td>
+        <td>Update user AI settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/NewAISettingsApi.md#newaisettingssetvectorization"><strong>newAiSettingsSetVectorization</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/config/vectorization</td>
+        <td>Update vectorization settings</td>
       </tr>
     <tr>
         <td colspan="3" style="text-align: center;"><strong>ThreadsApi</strong></td>
       </tr>
       <tr>
         <td><a href="docs/NewAIThreadsApi.md#newaithreadsappendusermessage"><strong>newAiThreadsAppendUserMessage</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/threads/append-user-message</td>
+        <td><strong>POST</strong> /api/2.0/ai/threads/append-user-message</td>
         <td>Append user message</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIThreadsApi.md#newaithreadsclearmessages"><strong>newAiThreadsClearMessages</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/new-ai/threads/clear-messages</td>
+        <td><strong>DELETE</strong> /api/2.0/ai/threads/clear-messages</td>
         <td>Clear messages</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIThreadsApi.md#newaithreadscreate"><strong>newAiThreadsCreate</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/threads/create</td>
+        <td><strong>POST</strong> /api/2.0/ai/threads/create</td>
         <td>Create</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIThreadsApi.md#newaithreadsdelete"><strong>newAiThreadsDelete</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/new-ai/threads/delete</td>
+        <td><strong>DELETE</strong> /api/2.0/ai/threads/delete</td>
         <td>Delete</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIThreadsApi.md#newaithreadsdeletemessage"><strong>newAiThreadsDeleteMessage</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/new-ai/threads/delete-message</td>
+        <td><strong>DELETE</strong> /api/2.0/ai/threads/delete-message</td>
         <td>Delete message</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIThreadsApi.md#newaithreadsgetbyid"><strong>newAiThreadsGetById</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/threads/get-by-id</td>
+        <td><strong>GET</strong> /api/2.0/ai/threads/get-by-id</td>
         <td>Get by id</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIThreadsApi.md#newaithreadsgetmessagebyid"><strong>newAiThreadsGetMessageById</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/threads/get-message-by-id</td>
+        <td><strong>GET</strong> /api/2.0/ai/threads/get-message-by-id</td>
         <td>Get message by id</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIThreadsApi.md#newaithreadslist"><strong>newAiThreadsList</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/threads/list</td>
+        <td><strong>GET</strong> /api/2.0/ai/threads/list</td>
         <td>List</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIThreadsApi.md#newaithreadsopenorcreate"><strong>newAiThreadsOpenOrCreate</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/threads/open-or-create</td>
+        <td><strong>POST</strong> /api/2.0/ai/threads/open-or-create</td>
         <td>Open or create</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIThreadsApi.md#newaithreadsreadmessages"><strong>newAiThreadsReadMessages</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/threads/read-messages</td>
+        <td><strong>GET</strong> /api/2.0/ai/threads/read-messages</td>
         <td>Read messages</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIThreadsApi.md#newaithreadsregeneratetitle"><strong>newAiThreadsRegenerateTitle</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/threads/regenerate-title</td>
+        <td><strong>POST</strong> /api/2.0/ai/threads/regenerate-title</td>
         <td>Regenerate title</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIThreadsApi.md#newaithreadsrename"><strong>newAiThreadsRename</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/new-ai/threads/rename</td>
+        <td><strong>PUT</strong> /api/2.0/ai/threads/rename</td>
         <td>Rename</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIThreadsApi.md#newaithreadstouch"><strong>newAiThreadsTouch</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/threads/touch</td>
+        <td><strong>POST</strong> /api/2.0/ai/threads/touch</td>
         <td>Touch</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIThreadsApi.md#newaithreadsupdatemessage"><strong>newAiThreadsUpdateMessage</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/new-ai/threads/update-message</td>
+        <td><strong>PUT</strong> /api/2.0/ai/threads/update-message</td>
         <td>Update message</td>
       </tr>
     <tr>
@@ -2070,100 +1798,108 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       </tr>
       <tr>
         <td><a href="docs/NewAIToolsApi.md#newaitoolsaddcustomserver"><strong>newAiToolsAddCustomServer</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/tools/add-custom-server</td>
+        <td><strong>POST</strong> /api/2.0/ai/tools/add-custom-server</td>
         <td>Add custom server</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIToolsApi.md#newaitoolsgetallowalways"><strong>newAiToolsGetAllowAlways</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/tools/get-allow-always</td>
+        <td><strong>GET</strong> /api/2.0/ai/tools/get-allow-always</td>
         <td>Get allow always</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIToolsApi.md#newaitoolsgetcustomserver"><strong>newAiToolsGetCustomServer</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/tools/get-custom-server</td>
+        <td><strong>GET</strong> /api/2.0/ai/tools/get-custom-server</td>
         <td>Get custom server</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIToolsApi.md#newaitoolsgetdisabled"><strong>newAiToolsGetDisabled</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/tools/get-disabled</td>
+        <td><strong>GET</strong> /api/2.0/ai/tools/get-disabled</td>
         <td>Get disabled</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIToolsApi.md#newaitoolsisallowalways"><strong>newAiToolsIsAllowAlways</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/tools/is-allow-always</td>
+        <td><strong>GET</strong> /api/2.0/ai/tools/is-allow-always</td>
         <td>Is allow always</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIToolsApi.md#newaitoolsistooldisabled"><strong>newAiToolsIsToolDisabled</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/tools/is-tool-disabled</td>
+        <td><strong>GET</strong> /api/2.0/ai/tools/is-tool-disabled</td>
         <td>Is tool disabled</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIToolsApi.md#newaitoolslistcustomservers"><strong>newAiToolsListCustomServers</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/tools/list-custom-servers</td>
+        <td><strong>GET</strong> /api/2.0/ai/tools/list-custom-servers</td>
         <td>List custom servers</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIToolsApi.md#newaitoolslistsystemtools"><strong>newAiToolsListSystemTools</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/tools/list-system-tools</td>
+        <td><strong>GET</strong> /api/2.0/ai/tools/list-system-tools</td>
         <td>List system tools</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIToolsApi.md#newaitoolsremovecustomserver"><strong>newAiToolsRemoveCustomServer</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/new-ai/tools/remove-custom-server</td>
+        <td><strong>DELETE</strong> /api/2.0/ai/tools/remove-custom-server</td>
         <td>Remove custom server</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIToolsApi.md#newaitoolsreplaceallcustomservers"><strong>newAiToolsReplaceAllCustomServers</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/new-ai/tools/replace-all-custom-servers</td>
+        <td><strong>PUT</strong> /api/2.0/ai/tools/replace-all-custom-servers</td>
         <td>Replace all custom servers</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIToolsApi.md#newaitoolssetallowalways"><strong>newAiToolsSetAllowAlways</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/new-ai/tools/set-allow-always</td>
+        <td><strong>PUT</strong> /api/2.0/ai/tools/set-allow-always</td>
         <td>Set allow always</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIToolsApi.md#newaitoolssetdisabled"><strong>newAiToolsSetDisabled</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/new-ai/tools/set-disabled</td>
+        <td><strong>PUT</strong> /api/2.0/ai/tools/set-disabled</td>
         <td>Set disabled</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIToolsApi.md#newaitoolsupdatecustomserver"><strong>newAiToolsUpdateCustomServer</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/new-ai/tools/update-custom-server</td>
+        <td><strong>PUT</strong> /api/2.0/ai/tools/update-custom-server</td>
         <td>Update custom server</td>
+      </tr>
+    <tr>
+        <td colspan="3" style="text-align: center;"><strong>VectorizationApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/NewAIVectorizationApi.md#newaivectorizationstarttask"><strong>newAiVectorizationStartTask</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/vectorization/tasks</td>
+        <td>Start a vectorization task</td>
       </tr>
     <tr>
         <td colspan="3" style="text-align: center;"><strong>WebSearchApi</strong></td>
       </tr>
       <tr>
         <td><a href="docs/NewAIWebSearchApi.md#newaiwebsearchclear"><strong>newAiWebSearchClear</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/new-ai/web-search/clear</td>
+        <td><strong>DELETE</strong> /api/2.0/ai/web-search/clear</td>
         <td>Clear</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIWebSearchApi.md#newaiwebsearchconfigure"><strong>newAiWebSearchConfigure</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/new-ai/web-search/configure</td>
+        <td><strong>PUT</strong> /api/2.0/ai/web-search/configure</td>
         <td>Configure</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIWebSearchApi.md#newaiwebsearchgetactiveconfig"><strong>newAiWebSearchGetActiveConfig</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/web-search/get-active-config</td>
+        <td><strong>GET</strong> /api/2.0/ai/web-search/get-active-config</td>
         <td>Get active config</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIWebSearchApi.md#newaiwebsearchisconfigured"><strong>newAiWebSearchIsConfigured</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/new-ai/web-search/is-configured</td>
+        <td><strong>GET</strong> /api/2.0/ai/web-search/is-configured</td>
         <td>Is configured</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIWebSearchApi.md#newaiwebsearchsetactiveconfig"><strong>newAiWebSearchSetActiveConfig</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/new-ai/web-search/set-active-config</td>
+        <td><strong>PUT</strong> /api/2.0/ai/web-search/set-active-config</td>
         <td>Set active config</td>
       </tr>
       <tr>
         <td><a href="docs/NewAIWebSearchApi.md#newaiwebsearchtestconnection"><strong>newAiWebSearchTestConnection</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/new-ai/web-search/test-connection</td>
+        <td><strong>POST</strong> /api/2.0/ai/web-search/test-connection</td>
         <td>Test connection</td>
       </tr>
     </tbody>
@@ -3007,11 +2743,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Retrieves encryption keys associated with the current user.</td>
       </tr>
       <tr>
-        <td><a href="docs/PrivacyroomApi.md#getuserkeysbyfilter"><strong>getUserKeysByFilter</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/privacyroom/keys/filter</td>
-        <td>Retrieves a specific user encryption key based on the provided filter conditions.</td>
-      </tr>
-      <tr>
         <td><a href="docs/PrivacyroomApi.md#getuserkeysforroom"><strong>getUserKeysForRoom</strong></a></td>
         <td><strong>GET</strong> /api/2.0/privacyroom/{roomId}/access</td>
         <td>Retrieves the encryption keys associated with a specific privacy room.</td>
@@ -3652,7 +3383,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       <tr>
         <td><a href="docs/SettingsDocsCloudApi.md#createtenantquotareport"><strong>createTenantQuotaReport</strong></a></td>
         <td><strong>POST</strong> /api/2.0/settings/docscloud/tenant/quota/report</td>
-        <td>Generate the DocsCloud tenant quota report</td>
+        <td>Start the DocsCloud tenant quota report generation</td>
       </tr>
       <tr>
         <td><a href="docs/SettingsDocsCloudApi.md#gettenant"><strong>getTenant</strong></a></td>
@@ -3675,6 +3406,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get the DocsCloud tenant quota</td>
       </tr>
       <tr>
+        <td><a href="docs/SettingsDocsCloudApi.md#gettenantquotareport"><strong>getTenantQuotaReport</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/docscloud/tenant/quota/report</td>
+        <td>Get the status of the DocsCloud tenant quota report generation</td>
+      </tr>
+      <tr>
         <td><a href="docs/SettingsDocsCloudApi.md#gettenantusage"><strong>getTenantUsage</strong></a></td>
         <td><strong>GET</strong> /api/2.0/settings/docscloud/tenant/usage</td>
         <td>Get the DocsCloud tenant usage</td>
@@ -3688,6 +3424,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td><a href="docs/SettingsDocsCloudApi.md#switchtodevpack"><strong>switchToDevPack</strong></a></td>
         <td><strong>POST</strong> /api/2.0/settings/docscloud/switchtodevpack</td>
         <td>Switch the DocsCloud subscription to DocsCloudDevPack</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsDocsCloudApi.md#terminatetenantquotareport"><strong>terminateTenantQuotaReport</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/settings/docscloud/tenant/quota/report</td>
+        <td>Terminate the DocsCloud tenant quota report generation</td>
       </tr>
       <tr>
         <td><a href="docs/SettingsDocsCloudApi.md#updatetenantconfig"><strong>updateTenantConfig</strong></a></td>
@@ -3800,7 +3541,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Update the login settings</td>
       </tr>
     <tr>
-        <td colspan="3" style="text-align: center;"><strong>SettingsMessagesApi</strong></td>
+        <td colspan="3" style="text-align: center;"><strong>MessagesApi</strong></td>
       </tr>
       <tr>
         <td><a href="docs/SettingsMessagesApi.md#enableadminmessagesettings"><strong>enableAdminMessageSettings</strong></a></td>
@@ -4291,30 +4032,19 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [ActiveConnectionsDto](docs/ActiveConnectionsDto.md)
  - [ActiveConnectionsItemDto](docs/ActiveConnectionsItemDto.md)
  - [ActiveConnectionsWrapper](docs/ActiveConnectionsWrapper.md)
- - [AddMcpServerRequestBody](docs/AddMcpServerRequestBody.md)
- - [AddRoomServersRequestBody](docs/AddRoomServersRequestBody.md)
  - [AdditionalWhiteLabelSettings](docs/AdditionalWhiteLabelSettings.md)
  - [AdditionalWhiteLabelSettingsDto](docs/AdditionalWhiteLabelSettingsDto.md)
  - [AdditionalWhiteLabelSettingsWrapper](docs/AdditionalWhiteLabelSettingsWrapper.md)
  - [AdminMessageBaseSettingsRequestsDto](docs/AdminMessageBaseSettingsRequestsDto.md)
  - [AdminMessageSettingsRequestsDto](docs/AdminMessageSettingsRequestsDto.md)
- - [AgentNewItemsDto](docs/AgentNewItemsDto.md)
  - [AiChatModelPricing](docs/AiChatModelPricing.md)
  - [AiChatPrice](docs/AiChatPrice.md)
  - [AiEmbeddingModelPricing](docs/AiEmbeddingModelPricing.md)
  - [AiEmbeddingPrice](docs/AiEmbeddingPrice.md)
  - [AiImageModelPricing](docs/AiImageModelPricing.md)
  - [AiImagePrice](docs/AiImagePrice.md)
- - [AiModelCapabilities](docs/AiModelCapabilities.md)
  - [AiPricesResponse](docs/AiPricesResponse.md)
  - [AiPricesResponseWrapper](docs/AiPricesResponseWrapper.md)
- - [AiProviderArrayWrapper](docs/AiProviderArrayWrapper.md)
- - [AiProviderDto](docs/AiProviderDto.md)
- - [AiProviderWrapper](docs/AiProviderWrapper.md)
- - [AiSettingsDto](docs/AiSettingsDto.md)
- - [AiSettingsWrapper](docs/AiSettingsWrapper.md)
- - [AiUserSettingsDto](docs/AiUserSettingsDto.md)
- - [AiUserSettingsWrapper](docs/AiUserSettingsWrapper.md)
  - [AiWebSearchPricing](docs/AiWebSearchPricing.md)
  - [AnonymousConfigDto](docs/AnonymousConfigDto.md)
  - [ApiDateTime](docs/ApiDateTime.md)
@@ -4377,12 +4107,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [ChangeOwnerRequestDto](docs/ChangeOwnerRequestDto.md)
  - [ChangePasswordRequest](docs/ChangePasswordRequest.md)
  - [ChangeWalletServiceStateRequestDto](docs/ChangeWalletServiceStateRequestDto.md)
- - [ChatArrayWrapper](docs/ChatArrayWrapper.md)
- - [ChatDto](docs/ChatDto.md)
- - [ChatReasoningEffort](docs/ChatReasoningEffort.md)
  - [ChatSettings](docs/ChatSettings.md)
  - [ChatSettingsDto](docs/ChatSettingsDto.md)
- - [ChatWrapper](docs/ChatWrapper.md)
  - [CheckConversionRequestDtoInteger](docs/CheckConversionRequestDtoInteger.md)
  - [CheckDestFolderDto](docs/CheckDestFolderDto.md)
  - [CheckDestFolderResult](docs/CheckDestFolderResult.md)
@@ -4409,12 +4135,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [ConfirmDto](docs/ConfirmDto.md)
  - [ConfirmType](docs/ConfirmType.md)
  - [ConfirmWrapper](docs/ConfirmWrapper.md)
- - [ConnectServerRequestBody](docs/ConnectServerRequestBody.md)
  - [ConnectionTestResult](docs/ConnectionTestResult.md)
  - [ConnectionTestResultWrapper](docs/ConnectionTestResultWrapper.md)
  - [Contact](docs/Contact.md)
- - [ContinueChatBody](docs/ContinueChatBody.md)
- - [ContinueChatBodyFilesInner](docs/ContinueChatBodyFilesInner.md)
  - [ConversationResultArrayWrapper](docs/ConversationResultArrayWrapper.md)
  - [ConversationResultDto](docs/ConversationResultDto.md)
  - [CookieSettingsDto](docs/CookieSettingsDto.md)
@@ -4425,13 +4148,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [CoverRequestDto](docs/CoverRequestDto.md)
  - [CoversResultArrayWrapper](docs/CoversResultArrayWrapper.md)
  - [CoversResultDto](docs/CoversResultDto.md)
- - [CreateAgentRequestDto](docs/CreateAgentRequestDto.md)
  - [CreateApiKeyRequestDto](docs/CreateApiKeyRequestDto.md)
  - [CreateClientRequest](docs/CreateClientRequest.md)
  - [CreateFileJsonElement](docs/CreateFileJsonElement.md)
  - [CreateFileJsonElementTemplateId](docs/CreateFileJsonElementTemplateId.md)
  - [CreateFolder](docs/CreateFolder.md)
- - [CreateProviderRequestDto](docs/CreateProviderRequestDto.md)
  - [CreateRoomFromTemplateDto](docs/CreateRoomFromTemplateDto.md)
  - [CreateRoomRequestDto](docs/CreateRoomRequestDto.md)
  - [CreateTagRequestDto](docs/CreateTagRequestDto.md)
@@ -4482,8 +4203,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DeepLinkDto](docs/DeepLinkDto.md)
  - [DeepLinkHandlingMode](docs/DeepLinkHandlingMode.md)
  - [DefaultProductRequestDto](docs/DefaultProductRequestDto.md)
- - [DefaultProviderDto](docs/DefaultProviderDto.md)
- - [DefaultProviderWrapper](docs/DefaultProviderWrapper.md)
  - [DefaultTemplateItemDto](docs/DefaultTemplateItemDto.md)
  - [DefaultTemplateSettingsDto](docs/DefaultTemplateSettingsDto.md)
  - [DefaultTemplateSettingsRequestDto](docs/DefaultTemplateSettingsRequestDto.md)
@@ -4496,8 +4215,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DeleteBatchRequestDtoAllOfFolderIds](docs/DeleteBatchRequestDtoAllOfFolderIds.md)
  - [DeleteFolder](docs/DeleteFolder.md)
  - [DeleteRoomRequest](docs/DeleteRoomRequest.md)
- - [DeleteRoomServersRequestBody](docs/DeleteRoomServersRequestBody.md)
- - [DeleteServersRequestBody](docs/DeleteServersRequestBody.md)
  - [DeleteVersionBatchRequestDto](docs/DeleteVersionBatchRequestDto.md)
  - [DisplayRequestDto](docs/DisplayRequestDto.md)
  - [DistributedTaskStatus](docs/DistributedTaskStatus.md)
@@ -4550,7 +4267,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [EditHistoryUrl](docs/EditHistoryUrl.md)
  - [EditorConfigurationDto](docs/EditorConfigurationDto.md)
  - [EditorToolCallStateDto](docs/EditorToolCallStateDto.md)
- - [EditorToolDecisionRequestBody](docs/EditorToolDecisionRequestBody.md)
  - [EditorType](docs/EditorType.md)
  - [EmailActivationSettings](docs/EmailActivationSettings.md)
  - [EmailActivationSettingsWrapper](docs/EmailActivationSettingsWrapper.md)
@@ -4558,7 +4274,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [EmailMemberRequestDto](docs/EmailMemberRequestDto.md)
  - [EmailValidationKeyModel](docs/EmailValidationKeyModel.md)
  - [EmbeddedConfig](docs/EmbeddedConfig.md)
- - [EmbeddingProviderType](docs/EmbeddingProviderType.md)
  - [EmployeeActivationStatus](docs/EmployeeActivationStatus.md)
  - [EmployeeArrayWrapper](docs/EmployeeArrayWrapper.md)
  - [EmployeeDto](docs/EmployeeDto.md)
@@ -4572,16 +4287,10 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [EncryptionKeyArrayWrapper](docs/EncryptionKeyArrayWrapper.md)
  - [EncryptionKeyDto](docs/EncryptionKeyDto.md)
  - [EncryptionKeyRequestDto](docs/EncryptionKeyRequestDto.md)
- - [EncryptionKeyType](docs/EncryptionKeyType.md)
- - [EncryptionKeyWrapper](docs/EncryptionKeyWrapper.md)
  - [EncryptionSettings](docs/EncryptionSettings.md)
  - [EncryptionSettingsWrapper](docs/EncryptionSettingsWrapper.md)
- - [EngineType](docs/EngineType.md)
  - [EntryType](docs/EntryType.md)
  - [ExchangeToken200Response](docs/ExchangeToken200Response.md)
- - [ExportChatRequestBody](docs/ExportChatRequestBody.md)
- - [ExportChatRequestBodyFolderId](docs/ExportChatRequestBodyFolderId.md)
- - [ExportMessageRequestBody](docs/ExportMessageRequestBody.md)
  - [ExternalDatabaseSettings](docs/ExternalDatabaseSettings.md)
  - [ExternalDatabaseType](docs/ExternalDatabaseType.md)
  - [ExternalDbSyncFormResultDto](docs/ExternalDbSyncFormResultDto.md)
@@ -4672,8 +4381,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [FormsItemArrayWrapper](docs/FormsItemArrayWrapper.md)
  - [FormsItemData](docs/FormsItemData.md)
  - [FormsItemDto](docs/FormsItemDto.md)
- - [GeneratedFileDto](docs/GeneratedFileDto.md)
- - [GeneratedFileWrapper](docs/GeneratedFileWrapper.md)
  - [GetPortalPrices200Response](docs/GetPortalPrices200Response.md)
  - [GetPortalPrices200ResponseLinksInner](docs/GetPortalPrices200ResponseLinksInner.md)
  - [GetReferenceDataDtoInteger](docs/GetReferenceDataDtoInteger.md)
@@ -4698,7 +4405,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [IPRestrictionArrayWrapper](docs/IPRestrictionArrayWrapper.md)
  - [IPRestrictionsSettings](docs/IPRestrictionsSettings.md)
  - [IPRestrictionsSettingsWrapper](docs/IPRestrictionsSettingsWrapper.md)
- - [Icon](docs/Icon.md)
  - [IconRequest](docs/IconRequest.md)
  - [ImportableApiEntity](docs/ImportableApiEntity.md)
  - [InfoConfigDto](docs/InfoConfigDto.md)
@@ -4740,27 +4446,12 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [LogoRequestsDto](docs/LogoRequestsDto.md)
  - [MailDomainSettingsRequestsDto](docs/MailDomainSettingsRequestsDto.md)
  - [ManageFormFillingDtoInteger](docs/ManageFormFillingDtoInteger.md)
- - [McpServerArrayWrapper](docs/McpServerArrayWrapper.md)
- - [McpServerDto](docs/McpServerDto.md)
- - [McpServerShortArrayWrapper](docs/McpServerShortArrayWrapper.md)
- - [McpServerShortDto](docs/McpServerShortDto.md)
- - [McpServerShortWrapper](docs/McpServerShortWrapper.md)
- - [McpServerStatusArrayWrapper](docs/McpServerStatusArrayWrapper.md)
- - [McpServerStatusDto](docs/McpServerStatusDto.md)
- - [McpServerStatusWrapper](docs/McpServerStatusWrapper.md)
- - [McpServerWrapper](docs/McpServerWrapper.md)
- - [McpToolArrayWrapper](docs/McpToolArrayWrapper.md)
- - [McpToolDto](docs/McpToolDto.md)
  - [MemberRequestDto](docs/MemberRequestDto.md)
  - [MembersRequest](docs/MembersRequest.md)
  - [MentionMessageWrapper](docs/MentionMessageWrapper.md)
  - [MentionWrapper](docs/MentionWrapper.md)
  - [MentionWrapperArrayWrapper](docs/MentionWrapperArrayWrapper.md)
  - [MessageAction](docs/MessageAction.md)
- - [MessageArrayWrapper](docs/MessageArrayWrapper.md)
- - [MessageContentDto](docs/MessageContentDto.md)
- - [MessageContentType](docs/MessageContentType.md)
- - [MessageDto](docs/MessageDto.md)
  - [MigratingApiFiles](docs/MigratingApiFiles.md)
  - [MigratingApiGroup](docs/MigratingApiGroup.md)
  - [MigratingApiUser](docs/MigratingApiUser.md)
@@ -4769,11 +4460,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [MigrationStatusWrapper](docs/MigrationStatusWrapper.md)
  - [MobilePhoneActivationStatus](docs/MobilePhoneActivationStatus.md)
  - [MobileRequestsDto](docs/MobileRequestsDto.md)
- - [ModelArrayWrapper](docs/ModelArrayWrapper.md)
- - [ModelDto](docs/ModelDto.md)
- - [ModelSettingsArrayWrapper](docs/ModelSettingsArrayWrapper.md)
- - [ModelSettingsDto](docs/ModelSettingsDto.md)
- - [ModelSettingsItemDto](docs/ModelSettingsItemDto.md)
  - [Module](docs/Module.md)
  - [ModuleWrapper](docs/ModuleWrapper.md)
  - [MultiSizeLogoCover](docs/MultiSizeLogoCover.md)
@@ -4792,7 +4478,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [NewAiAiSendCustomRequest](docs/NewAiAiSendCustomRequest.md)
  - [NewAiAiSendRequest](docs/NewAiAiSendRequest.md)
  - [NewAiAiSendStreamBody](docs/NewAiAiSendStreamBody.md)
+ - [NewAiAiSettingsDto](docs/NewAiAiSettingsDto.md)
+ - [NewAiAiSettingsWrapper](docs/NewAiAiSettingsWrapper.md)
  - [NewAiAiToolCallData](docs/NewAiAiToolCallData.md)
+ - [NewAiAiUserSettingsDto](docs/NewAiAiUserSettingsDto.md)
+ - [NewAiAiUserSettingsWrapper](docs/NewAiAiUserSettingsWrapper.md)
  - [NewAiApiDateTime](docs/NewAiApiDateTime.md)
  - [NewAiAssignmentMutationResult](docs/NewAiAssignmentMutationResult.md)
  - [NewAiAssignmentsAssignRequest](docs/NewAiAssignmentsAssignRequest.md)
@@ -4812,6 +4502,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [NewAiCreateProfileInput](docs/NewAiCreateProfileInput.md)
  - [NewAiCreatePromptInput](docs/NewAiCreatePromptInput.md)
  - [NewAiDistributedTaskStatus](docs/NewAiDistributedTaskStatus.md)
+ - [NewAiEmbeddingProviderType](docs/NewAiEmbeddingProviderType.md)
  - [NewAiEmployeeDto](docs/NewAiEmployeeDto.md)
  - [NewAiErrorResponse](docs/NewAiErrorResponse.md)
  - [NewAiExportTextToDocx200Response](docs/NewAiExportTextToDocx200Response.md)
@@ -4896,13 +4587,13 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [NewAiToolsSetAllowAlwaysRequest](docs/NewAiToolsSetAllowAlwaysRequest.md)
  - [NewAiToolsSetDisabledRequest](docs/NewAiToolsSetDisabledRequest.md)
  - [NewAiToolsUpdateCustomServerRequest](docs/NewAiToolsUpdateCustomServerRequest.md)
+ - [NewAiVectorizationSettingsDto](docs/NewAiVectorizationSettingsDto.md)
+ - [NewAiVectorizationSettingsWrapper](docs/NewAiVectorizationSettingsWrapper.md)
  - [NewAiWatermarkAdditions](docs/NewAiWatermarkAdditions.md)
  - [NewAiWatermarkDto](docs/NewAiWatermarkDto.md)
  - [NewAiWebSearchConfig](docs/NewAiWebSearchConfig.md)
  - [NewAiWebSearchConfigureRequest](docs/NewAiWebSearchConfigureRequest.md)
  - [NewAiWebSearchMutationResult](docs/NewAiWebSearchMutationResult.md)
- - [NewItemsAgentNewItemsArrayWrapper](docs/NewItemsAgentNewItemsArrayWrapper.md)
- - [NewItemsDtoAgentNewItemsDto](docs/NewItemsDtoAgentNewItemsDto.md)
  - [NewItemsDtoFileEntryBaseDto](docs/NewItemsDtoFileEntryBaseDto.md)
  - [NewItemsDtoRoomNewItemsDto](docs/NewItemsDtoRoomNewItemsDto.md)
  - [NewItemsFileEntryBaseArrayWrapper](docs/NewItemsFileEntryBaseArrayWrapper.md)
@@ -4949,7 +4640,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [PermissionsConfig](docs/PermissionsConfig.md)
  - [PluginsConfig](docs/PluginsConfig.md)
  - [PluginsDto](docs/PluginsDto.md)
- - [PreviewProviderModelsRequestDto](docs/PreviewProviderModelsRequestDto.md)
  - [PriceDto](docs/PriceDto.md)
  - [ProblemDetail](docs/ProblemDetail.md)
  - [ProductAdministratorDto](docs/ProductAdministratorDto.md)
@@ -4959,9 +4649,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [ProviderArrayWrapper](docs/ProviderArrayWrapper.md)
  - [ProviderDto](docs/ProviderDto.md)
  - [ProviderFilter](docs/ProviderFilter.md)
- - [ProviderSettingsArrayWrapper](docs/ProviderSettingsArrayWrapper.md)
- - [ProviderSettingsDto](docs/ProviderSettingsDto.md)
- - [ProviderType](docs/ProviderType.md)
  - [QuantityRequestDto](docs/QuantityRequestDto.md)
  - [Quota](docs/Quota.md)
  - [QuotaArrayWrapper](docs/QuotaArrayWrapper.md)
@@ -4975,14 +4662,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [RecaptchaType](docs/RecaptchaType.md)
  - [RecentConfig](docs/RecentConfig.md)
  - [RegStatus](docs/RegStatus.md)
- - [RemoveProviderRequestDto](docs/RemoveProviderRequestDto.md)
- - [RenameChatBody](docs/RenameChatBody.md)
  - [ReportDto](docs/ReportDto.md)
  - [ReportWrapper](docs/ReportWrapper.md)
  - [RestrictedModelsResponse](docs/RestrictedModelsResponse.md)
  - [RestrictedModelsResponseWrapper](docs/RestrictedModelsResponseWrapper.md)
  - [ReviewConfig](docs/ReviewConfig.md)
- - [Role](docs/Role.md)
  - [RoomDataLifetimeDto](docs/RoomDataLifetimeDto.md)
  - [RoomDataLifetimePeriod](docs/RoomDataLifetimePeriod.md)
  - [RoomFromTemplateStatusDto](docs/RoomFromTemplateStatusDto.md)
@@ -5020,23 +4704,15 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [SecurityInfoRequestDto](docs/SecurityInfoRequestDto.md)
  - [SecurityInfoSimpleRequestDto](docs/SecurityInfoSimpleRequestDto.md)
  - [SecurityRequestsDto](docs/SecurityRequestsDto.md)
- - [ServerType](docs/ServerType.md)
  - [ServicePayment](docs/ServicePayment.md)
  - [ServicePaymentWrapper](docs/ServicePaymentWrapper.md)
  - [SessionRequest](docs/SessionRequest.md)
- - [SetAiUserSettingsRequestDto](docs/SetAiUserSettingsRequestDto.md)
  - [SetAppEnabledBody](docs/SetAppEnabledBody.md)
  - [SetAppSettingsBody](docs/SetAppSettingsBody.md)
  - [SetAppSettingsBodySettings](docs/SetAppSettingsBodySettings.md)
- - [SetDefaultProviderRequestDto](docs/SetDefaultProviderRequestDto.md)
- - [SetEmbeddingConfigRequestBody](docs/SetEmbeddingConfigRequestBody.md)
  - [SetManagerRequest](docs/SetManagerRequest.md)
- - [SetMcpToolsRequestBody](docs/SetMcpToolsRequestBody.md)
  - [SetPublicDto](docs/SetPublicDto.md)
  - [SetRestrictedAiModelsRequestDto](docs/SetRestrictedAiModelsRequestDto.md)
- - [SetServerStatusRequestBody](docs/SetServerStatusRequestBody.md)
- - [SetUserChatSettingsRequestBody](docs/SetUserChatSettingsRequestBody.md)
- - [SetWebSearchSettingsRequestBody](docs/SetWebSearchSettingsRequestBody.md)
  - [SettingsDto](docs/SettingsDto.md)
  - [SettingsRequestDto](docs/SettingsRequestDto.md)
  - [SettingsWrapper](docs/SettingsWrapper.md)
@@ -5062,7 +4738,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [StartEdit](docs/StartEdit.md)
  - [StartFillingForm](docs/StartFillingForm.md)
  - [StartFillingMode](docs/StartFillingMode.md)
- - [StartNewChatBody](docs/StartNewChatBody.md)
  - [StartReassignRequestDto](docs/StartReassignRequestDto.md)
  - [StartUpdateUserTypeDto](docs/StartUpdateUserTypeDto.md)
  - [Status](docs/Status.md)
@@ -5150,8 +4825,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [ThumbnailsRequest](docs/ThumbnailsRequest.md)
  - [TimezonesRequestsArrayWrapper](docs/TimezonesRequestsArrayWrapper.md)
  - [TimezonesRequestsDto](docs/TimezonesRequestsDto.md)
- - [ToolDecisionRequestBody](docs/ToolDecisionRequestBody.md)
- - [ToolExecutionDecision](docs/ToolExecutionDecision.md)
  - [TopUpDepositRequestDto](docs/TopUpDepositRequestDto.md)
  - [TransactionInfo](docs/TransactionInfo.md)
  - [TurnOnAdminMessageSettingsRequestDto](docs/TurnOnAdminMessageSettingsRequestDto.md)
@@ -5167,12 +4840,10 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [UpdateMembersQuotaRequestDtoQuota](docs/UpdateMembersQuotaRequestDtoQuota.md)
  - [UpdateMembersRequestDto](docs/UpdateMembersRequestDto.md)
  - [UpdatePhotoMemberRequest](docs/UpdatePhotoMemberRequest.md)
- - [UpdateProviderBody](docs/UpdateProviderBody.md)
  - [UpdateRoomGroupRequest](docs/UpdateRoomGroupRequest.md)
  - [UpdateRoomRequest](docs/UpdateRoomRequest.md)
  - [UpdateRoomsQuotaRequestDtoInteger](docs/UpdateRoomsQuotaRequestDtoInteger.md)
  - [UpdateRoomsRoomIdsRequestDtoInteger](docs/UpdateRoomsRoomIdsRequestDtoInteger.md)
- - [UpdateServerRequestBody](docs/UpdateServerRequestBody.md)
  - [UpdateTagRequestDto](docs/UpdateTagRequestDto.md)
  - [UpdateWebhooksConfigRequestsDto](docs/UpdateWebhooksConfigRequestsDto.md)
  - [UploadResultDto](docs/UploadResultDto.md)
@@ -5181,8 +4852,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [UploadSessionResponseIntegerWrapper](docs/UploadSessionResponseIntegerWrapper.md)
  - [UsageSpaceStatItemArrayWrapper](docs/UsageSpaceStatItemArrayWrapper.md)
  - [UsageSpaceStatItemDto](docs/UsageSpaceStatItemDto.md)
- - [UserChatSettingsDto](docs/UserChatSettingsDto.md)
- - [UserChatSettingsWrapper](docs/UserChatSettingsWrapper.md)
  - [UserConfig](docs/UserConfig.md)
  - [UserExistsResponseDto](docs/UserExistsResponseDto.md)
  - [UserExistsResponseWrapper](docs/UserExistsResponseWrapper.md)
@@ -5191,9 +4860,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [UserInvitation](docs/UserInvitation.md)
  - [UserInvitationRequestDto](docs/UserInvitationRequestDto.md)
  - [ValidationResult](docs/ValidationResult.md)
- - [VectorizationSettingsDto](docs/VectorizationSettingsDto.md)
- - [VectorizationSettingsWrapper](docs/VectorizationSettingsWrapper.md)
- - [VectorizationStartRequestBody](docs/VectorizationStartRequestBody.md)
  - [VectorizationStatus](docs/VectorizationStatus.md)
  - [WalletQuantityRequestDto](docs/WalletQuantityRequestDto.md)
  - [WalletServiceArrayWrapper](docs/WalletServiceArrayWrapper.md)
@@ -5209,8 +4875,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [WebPluginDto](docs/WebPluginDto.md)
  - [WebPluginRequests](docs/WebPluginRequests.md)
  - [WebPluginWrapper](docs/WebPluginWrapper.md)
- - [WebSearchSettingsDto](docs/WebSearchSettingsDto.md)
- - [WebSearchSettingsWrapper](docs/WebSearchSettingsWrapper.md)
  - [WebhookGroupStatus](docs/WebhookGroupStatus.md)
  - [WebhookRetryRequestsDto](docs/WebhookRetryRequestsDto.md)
  - [WebhookTrigger](docs/WebhookTrigger.md)

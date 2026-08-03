@@ -4,10 +4,10 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**newAiPreferencesClearDeepMode**](#newaipreferencescleardeepmode) | **DELETE** /api/2.0/new-ai/preferences/clear-deep-mode | Clear deep mode|
-|[**newAiPreferencesGetDeepMode**](#newaipreferencesgetdeepmode) | **GET** /api/2.0/new-ai/preferences/get-deep-mode | Get deep mode|
-|[**newAiPreferencesIsDeepModeSet**](#newaipreferencesisdeepmodeset) | **GET** /api/2.0/new-ai/preferences/is-deep-mode-set | Is deep mode set|
-|[**newAiPreferencesSetDeepMode**](#newaipreferencessetdeepmode) | **PUT** /api/2.0/new-ai/preferences/set-deep-mode | Set deep mode|
+|[**newAiPreferencesClearDeepMode**](#newaipreferencescleardeepmode) | **DELETE** /api/2.0/ai/preferences/clear-deep-mode | Clear deep mode|
+|[**newAiPreferencesGetDeepMode**](#newaipreferencesgetdeepmode) | **GET** /api/2.0/ai/preferences/get-deep-mode | Get deep mode|
+|[**newAiPreferencesIsDeepModeSet**](#newaipreferencesisdeepmodeset) | **GET** /api/2.0/ai/preferences/is-deep-mode-set | Is deep mode set|
+|[**newAiPreferencesSetDeepMode**](#newaipreferencessetdeepmode) | **PUT** /api/2.0/ai/preferences/set-deep-mode | Set deep mode|
 
 # **newAiPreferencesClearDeepMode**
 > NewAiSuccessResponse newAiPreferencesClearDeepMode(body)

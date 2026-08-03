@@ -64,7 +64,7 @@ export const AIApiAxiosParamCreator = function (configuration?: Configuration) {
             // verify required parameter 'newAiAiApproveToolCallRequest' is not null or undefined
             assertParamExists('newAiAiApproveToolCall', 'newAiAiApproveToolCallRequest', newAiAiApproveToolCallRequest)
 
-            const localVarPath = `/api/2.0/new-ai/ai/approve-tool-call`;
+            const localVarPath = `/api/2.0/ai/ai/approve-tool-call`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -103,7 +103,7 @@ export const AIApiAxiosParamCreator = function (configuration?: Configuration) {
             // verify required parameter 'newAiAiToolCallData' is not null or undefined
             assertParamExists('newAiAiDenyToolCall', 'newAiAiToolCallData', newAiAiToolCallData)
 
-            const localVarPath = `/api/2.0/new-ai/ai/deny-tool-call`;
+            const localVarPath = `/api/2.0/ai/ai/deny-tool-call`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -142,7 +142,7 @@ export const AIApiAxiosParamCreator = function (configuration?: Configuration) {
             // verify required parameter 'newAiAiRegenerateStreamRequest' is not null or undefined
             assertParamExists('newAiAiRegenerateStream', 'newAiAiRegenerateStreamRequest', newAiAiRegenerateStreamRequest)
 
-            const localVarPath = `/api/2.0/new-ai/ai/regenerate-stream`;
+            const localVarPath = `/api/2.0/ai/ai/regenerate-stream`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -181,7 +181,7 @@ export const AIApiAxiosParamCreator = function (configuration?: Configuration) {
             // verify required parameter 'newAiAiSendRequest' is not null or undefined
             assertParamExists('newAiAiSend', 'newAiAiSendRequest', newAiAiSendRequest)
 
-            const localVarPath = `/api/2.0/new-ai/ai/send`;
+            const localVarPath = `/api/2.0/ai/ai/send`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -220,7 +220,7 @@ export const AIApiAxiosParamCreator = function (configuration?: Configuration) {
             // verify required parameter 'newAiAiSendCustomRequest' is not null or undefined
             assertParamExists('newAiAiSendCustom', 'newAiAiSendCustomRequest', newAiAiSendCustomRequest)
 
-            const localVarPath = `/api/2.0/new-ai/ai/send-custom`;
+            const localVarPath = `/api/2.0/ai/ai/send-custom`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -259,7 +259,7 @@ export const AIApiAxiosParamCreator = function (configuration?: Configuration) {
             // verify required parameter 'newAiAiSendStreamBody' is not null or undefined
             assertParamExists('newAiAiSendWithStream', 'newAiAiSendStreamBody', newAiAiSendStreamBody)
 
-            const localVarPath = `/api/2.0/new-ai/ai/send-with-stream`;
+            const localVarPath = `/api/2.0/ai/ai/send-with-stream`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -298,7 +298,7 @@ export const AIApiAxiosParamCreator = function (configuration?: Configuration) {
             // verify required parameter 'newAiAiSendStreamBody' is not null or undefined
             assertParamExists('newAiAiSendWithStreamOpenAI', 'newAiAiSendStreamBody', newAiAiSendStreamBody)
 
-            const localVarPath = `/api/2.0/new-ai/ai/send-with-stream-openai`;
+            const localVarPath = `/api/2.0/ai/ai/send-with-stream-openai`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;

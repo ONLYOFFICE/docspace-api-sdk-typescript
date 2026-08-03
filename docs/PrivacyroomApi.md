@@ -6,7 +6,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |------------- | ------------- | -------------|
 |[**deleteKeys**](#deletekeys) | **DELETE** /api/2.0/privacyroom/keys/{id} | Deletes an encryption key and removes it from the system.|
 |[**getUserKeys**](#getuserkeys) | **GET** /api/2.0/privacyroom/keys | Retrieves encryption keys associated with the current user.|
-|[**getUserKeysByFilter**](#getuserkeysbyfilter) | **GET** /api/2.0/privacyroom/keys/filter | Retrieves a specific user encryption key based on the provided filter conditions.|
 |[**getUserKeysForRoom**](#getuserkeysforroom) | **GET** /api/2.0/privacyroom/{roomId}/access | Retrieves the encryption keys associated with a specific privacy room.|
 |[**replaceKey**](#replacekey) | **PUT** /api/2.0/privacyroom/keys | Replaces an existing encryption key with a new one for the user.|
 |[**setKeys**](#setkeys) | **POST** /api/2.0/privacyroom/keys | Creates and sets encryption keys for the user.|
@@ -99,75 +98,6 @@ const configuration = new Configuration();
 const apiInstance = new PrivacyroomApi(configuration);
 
 const { status, data } = await apiInstance.getUserKeys();
-```
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | OK |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **getUserKeysByFilter**
-> EncryptionKeyWrapper getUserKeysByFilter()
-
-Retrieves a specific user encryption key based on the provided filter conditions.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-keys-by-filter/).
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **id** | [**string**] | The optional identifier of the encryption key to filter by. | (optional) defaults to undefined|
-| **type** | **EncryptionKeyType** | The optional type of the encryption key to filter by. | (optional) defaults to undefined|
-| **version** | [**string**] | The optional version of the encryption key to filter by. | (optional) defaults to undefined|
-| **publicKey** | [**string**] | The optional public key to filter by. | (optional) defaults to undefined|
-| **privateKeyEnc** | [**string**] | The optional encrypted private key to filter by. | (optional) defaults to undefined|
-
-
-### Return type
-
-**EncryptionKeyWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-```typescript
-import {
-    PrivacyroomApi,
-    Configuration
-} from '@onlyoffice/docspace-api-sdk';
-
-const configuration = new Configuration();
-const apiInstance = new PrivacyroomApi(configuration);
-
-let id: string; //The optional identifier of the encryption key to filter by. (optional) (default to undefined)
-let type: EncryptionKeyType; //The optional type of the encryption key to filter by. (optional) (default to undefined)
-let version: string; //The optional version of the encryption key to filter by. (optional) (default to undefined)
-let publicKey: string; //The optional public key to filter by. (optional) (default to undefined)
-let privateKeyEnc: string; //The optional encrypted private key to filter by. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.getUserKeysByFilter(
-    id,
-    type,
-    version,
-    publicKey,
-    privateKeyEnc
-);
 ```
 
 ### HTTP request headers

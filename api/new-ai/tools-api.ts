@@ -66,7 +66,7 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             // verify required parameter 'newAiToolsAddCustomServerRequest' is not null or undefined
             assertParamExists('newAiToolsAddCustomServer', 'newAiToolsAddCustomServerRequest', newAiToolsAddCustomServerRequest)
 
-            const localVarPath = `/api/2.0/new-ai/tools/add-custom-server`;
+            const localVarPath = `/api/2.0/ai/tools/add-custom-server`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -105,7 +105,7 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             // verify required parameter 'entityId' is not null or undefined
             assertParamExists('newAiToolsGetAllowAlways', 'entityId', entityId)
 
-            const localVarPath = `/api/2.0/new-ai/tools/get-allow-always`;
+            const localVarPath = `/api/2.0/ai/tools/get-allow-always`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -148,7 +148,7 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             // verify required parameter 'entityId' is not null or undefined
             assertParamExists('newAiToolsGetCustomServer', 'entityId', entityId)
 
-            const localVarPath = `/api/2.0/new-ai/tools/get-custom-server`;
+            const localVarPath = `/api/2.0/ai/tools/get-custom-server`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -192,7 +192,7 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             // verify required parameter 'entityId' is not null or undefined
             assertParamExists('newAiToolsGetDisabled', 'entityId', entityId)
 
-            const localVarPath = `/api/2.0/new-ai/tools/get-disabled`;
+            const localVarPath = `/api/2.0/ai/tools/get-disabled`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -238,7 +238,7 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             // verify required parameter 'entityId' is not null or undefined
             assertParamExists('newAiToolsIsAllowAlways', 'entityId', entityId)
 
-            const localVarPath = `/api/2.0/new-ai/tools/is-allow-always`;
+            const localVarPath = `/api/2.0/ai/tools/is-allow-always`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -292,7 +292,7 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             // verify required parameter 'entityId' is not null or undefined
             assertParamExists('newAiToolsIsToolDisabled', 'entityId', entityId)
 
-            const localVarPath = `/api/2.0/new-ai/tools/is-tool-disabled`;
+            const localVarPath = `/api/2.0/ai/tools/is-tool-disabled`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -340,7 +340,7 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             // verify required parameter 'entityId' is not null or undefined
             assertParamExists('newAiToolsListCustomServers', 'entityId', entityId)
 
-            const localVarPath = `/api/2.0/new-ai/tools/list-custom-servers`;
+            const localVarPath = `/api/2.0/ai/tools/list-custom-servers`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -380,7 +380,7 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             // verify required parameter 'entityId' is not null or undefined
             assertParamExists('newAiToolsListSystemTools', 'entityId', entityId)
 
-            const localVarPath = `/api/2.0/new-ai/tools/list-system-tools`;
+            const localVarPath = `/api/2.0/ai/tools/list-system-tools`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -420,7 +420,7 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             // verify required parameter 'newAiToolsRemoveCustomServerRequest' is not null or undefined
             assertParamExists('newAiToolsRemoveCustomServer', 'newAiToolsRemoveCustomServerRequest', newAiToolsRemoveCustomServerRequest)
 
-            const localVarPath = `/api/2.0/new-ai/tools/remove-custom-server`;
+            const localVarPath = `/api/2.0/ai/tools/remove-custom-server`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -459,7 +459,7 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             // verify required parameter 'newAiToolsReplaceAllCustomServersRequest' is not null or undefined
             assertParamExists('newAiToolsReplaceAllCustomServers', 'newAiToolsReplaceAllCustomServersRequest', newAiToolsReplaceAllCustomServersRequest)
 
-            const localVarPath = `/api/2.0/new-ai/tools/replace-all-custom-servers`;
+            const localVarPath = `/api/2.0/ai/tools/replace-all-custom-servers`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -498,7 +498,7 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             // verify required parameter 'newAiToolsSetAllowAlwaysRequest' is not null or undefined
             assertParamExists('newAiToolsSetAllowAlways', 'newAiToolsSetAllowAlwaysRequest', newAiToolsSetAllowAlwaysRequest)
 
-            const localVarPath = `/api/2.0/new-ai/tools/set-allow-always`;
+            const localVarPath = `/api/2.0/ai/tools/set-allow-always`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -537,7 +537,7 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             // verify required parameter 'newAiToolsSetDisabledRequest' is not null or undefined
             assertParamExists('newAiToolsSetDisabled', 'newAiToolsSetDisabledRequest', newAiToolsSetDisabledRequest)
 
-            const localVarPath = `/api/2.0/new-ai/tools/set-disabled`;
+            const localVarPath = `/api/2.0/ai/tools/set-disabled`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -576,7 +576,7 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             // verify required parameter 'newAiToolsUpdateCustomServerRequest' is not null or undefined
             assertParamExists('newAiToolsUpdateCustomServer', 'newAiToolsUpdateCustomServerRequest', newAiToolsUpdateCustomServerRequest)
 
-            const localVarPath = `/api/2.0/new-ai/tools/update-custom-server`;
+            const localVarPath = `/api/2.0/ai/tools/update-custom-server`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;

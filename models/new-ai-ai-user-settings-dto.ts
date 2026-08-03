@@ -18,21 +18,14 @@
  *
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { DuplicateRequestDtoAllOfFileIds } from './duplicate-request-dto-all-of-file-ids';
 
 /**
- * The request parameters for updating the room quota.
+ * The per-user AI settings.
  */
-export interface UpdateRoomsQuotaRequestDtoInteger {
+export interface NewAiAiUserSettingsDto {
     /**
-     * The list of room IDs.
+     * Indicates whether the recommended model banner is visible in the AI chat for the current user.
      */
-    'roomIds'?: Array<DuplicateRequestDtoAllOfFileIds> | null;
-    /**
-     * The room quota.
-     */
-    'quota'?: number;
+    'chatRecommendedModelVisible'?: boolean;
 }
 
