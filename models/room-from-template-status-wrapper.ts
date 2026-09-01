@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { RoomFromTemplateStatusDto } from './room-from-template-status-dto';
 
+/**
+ * The successful API response containing the RoomFromTemplateStatusDto object.
+ */
 export interface RoomFromTemplateStatusWrapper {
+    /**
+     * The RoomFromTemplateStatusDto object returned by the operation.
+     */
     'response'?: RoomFromTemplateStatusDto;
     /**
      * The total number of items in the response

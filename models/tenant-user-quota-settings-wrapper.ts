@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { TenantUserQuotaSettings } from './tenant-user-quota-settings';
 
+/**
+ * The successful API response containing the TenantUserQuotaSettings object.
+ */
 export interface TenantUserQuotaSettingsWrapper {
+    /**
+     * The TenantUserQuotaSettings object returned by the operation.
+     */
     'response'?: TenantUserQuotaSettings;
     /**
      * The total number of items in the response

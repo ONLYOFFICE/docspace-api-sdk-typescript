@@ -26,6 +26,9 @@ import type { EmployeeType } from './employee-type';
  * The request parameters for creating an invitation link.
  */
 export interface InvitationLinkCreateRequestDto {
+    /**
+     * The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User).
+     */
     'employeeType': EmployeeType;
     /**
      * The expiration date of the invitation link.

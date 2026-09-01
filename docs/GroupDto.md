@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **id** | **string** | The group ID. | [default to undefined]
 **isLDAP** | **boolean** | Specifies if the LDAP settings are enabled for the group or not. | [default to undefined]
 **isSystem** | **boolean** | Indicates whether the group is a system group. | [optional] [default to undefined]
-**manager** | [**EmployeeFullDto**](EmployeeFullDto.md) |  | [optional] [default to undefined]
+**manager** | [**EmployeeFullDto**](EmployeeFullDto.md) | The group manager full information. | [optional] [default to undefined]
 **members** | [**Array&lt;EmployeeFullDto&gt;**](EmployeeFullDto.md) | The list of group members. | [optional] [default to undefined]
 **shared** | **boolean** | Specifies whether the group can be shared or not. | [optional] [default to undefined]
 **membersCount** | **number** | The number of group members. | [optional] [default to undefined]

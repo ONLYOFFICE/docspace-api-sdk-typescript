@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **accountName** | **string** | The account name. | [optional] [default to undefined]
 **accountCurrency** | **string** | The account currency. | [optional] [default to undefined]
 **subAccounts** | [**Array&lt;SubAccount&gt;**](SubAccount.md) | A list of sub-accounts. | [optional] [default to undefined]
-**lastCredit** | [**TransactionInfo**](TransactionInfo.md) |  | [optional] [default to undefined]
+**lastCredit** | [**TransactionInfo**](TransactionInfo.md) | The most recent credit transaction applied to the account. | [optional] [default to undefined]
 
 ## Example
 

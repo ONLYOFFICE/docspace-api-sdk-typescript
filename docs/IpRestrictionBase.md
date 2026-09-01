@@ -1,12 +1,13 @@
 # IpRestrictionBase
 
+The IP restiction base parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ip** | **string** |  | [default to undefined]
-**forAdmin** | **boolean** |  | [optional] [default to undefined]
+**ip** | **string** | The IP address. | [default to undefined]
+**forAdmin** | **boolean** | Specifies if the IP address is for administrator users only or not. | [optional] [default to undefined]
 
 ## Example
 

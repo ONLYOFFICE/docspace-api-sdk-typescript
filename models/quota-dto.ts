@@ -42,7 +42,10 @@ export interface QuotaDto {
     /**
      * The quota title.
      */
-    'title': string | null;
+    'title'?: string | null;
+    /**
+     * The price parameters.
+     */
     'price': PriceDto;
     /**
      * Specifies if the quota is nonprofit or not.
@@ -60,9 +63,21 @@ export interface QuotaDto {
      * The list of tenant quota features.
      */
     'features': Array<TenantQuotaFeatureDto> | null;
+    /**
+     * The user quota.
+     */
     'usersQuota'?: TenantEntityQuotaSettings;
+    /**
+     * The room quota.
+     */
     'roomsQuota'?: TenantEntityQuotaSettings;
+    /**
+     * The ai agent quota.
+     */
     'aiAgentsQuota'?: TenantEntityQuotaSettings;
+    /**
+     * The tenant custom quota.
+     */
     'tenantCustomQuota'?: TenantQuotaSettings;
     /**
      * The due date.

@@ -26,6 +26,9 @@ import type { WebhooksConfigDto } from './webhooks-config-dto';
  * The webhook configuration with its status.
  */
 export interface WebhooksConfigWithStatusDto {
+    /**
+     * The webhook configuration.
+     */
     'configs'?: WebhooksConfigDto;
     /**
      * The webhook status.

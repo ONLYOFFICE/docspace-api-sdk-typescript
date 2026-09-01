@@ -39,6 +39,9 @@ export interface DocumentConfigDto {
      * The file type of the document.
      */
     'fileType'?: string | null;
+    /**
+     * The configuration information of the document.
+     */
     'info'?: InfoConfigDto;
     /**
      * Specifies if the documnet is linked for current user.
@@ -48,6 +51,9 @@ export interface DocumentConfigDto {
      * The document key.
      */
     'key'?: string | null;
+    /**
+     * The document permissions.
+     */
     'permissions'?: PermissionsConfig;
     /**
      * The shared link parameter of the document.
@@ -57,6 +63,9 @@ export interface DocumentConfigDto {
      * The shared link key of the document.
      */
     'sharedLinkKey'?: string | null;
+    /**
+     * The reference data of the document.
+     */
     'referenceData'?: FileReferenceData;
     /**
      * The document title.
@@ -70,6 +79,9 @@ export interface DocumentConfigDto {
      * Indicates whether this is a form.
      */
     'isForm'?: boolean;
+    /**
+     * The options of the document.
+     */
     'options'?: Options;
 }
 

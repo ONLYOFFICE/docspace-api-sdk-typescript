@@ -30,6 +30,9 @@ export interface ChunkedUploadSessionResponseWrapperInteger {
      * Gets or sets a value indicating whether the operation was successful.
      */
     'success'?: boolean;
+    /**
+     * Gets or sets the data of the chunked upload session response.
+     */
     'data'?: ChunkedUploadSessionResponseInteger;
 }
 

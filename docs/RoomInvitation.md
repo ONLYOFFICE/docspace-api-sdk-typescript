@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **email** | **string** | The email address. | [optional] [default to undefined]
 **id** | **string** | The ID of the user to share a room with. | [optional] [default to undefined]
-**access** | [**FileShare**](FileShare.md) |  | [optional] [default to undefined]
+**access** | [**FileShare**](FileShare.md) | The room sharing rights. | [optional] [default to undefined]
 
 ## Example
 

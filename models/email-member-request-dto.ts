@@ -30,6 +30,9 @@ export interface EmailMemberRequestDto {
      * The user email address.
      */
     'email': string;
+    /**
+     * The type of CAPTCHA validation used.
+     */
     'recaptchaType'?: RecaptchaType;
     /**
      * The user\'s response to the CAPTCHA challenge.

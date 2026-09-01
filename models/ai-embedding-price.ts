@@ -19,7 +19,13 @@
  */
 
 
+/**
+ * The price of an embedding model, per token.
+ */
 export interface AiEmbeddingPrice {
+    /**
+     * The price of a single input token.
+     */
     'prompt'?: number;
 }
 

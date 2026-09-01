@@ -34,6 +34,9 @@ export interface MigrationStatusDto {
      * The migration error.
      */
     'error'?: string | null;
+    /**
+     * The migration API information.
+     */
     'parseResult'?: MigrationApiInfo;
     /**
      * Specifies whether the migration is completed or not.

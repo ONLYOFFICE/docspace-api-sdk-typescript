@@ -38,7 +38,7 @@ export type RoomInvitation = EmailInvitationDto &  {
      */
     'id'?: string;
     /**
-     * 
+     * The room sharing rights.
      * @type {FileShare}
      * @memberof RoomInvitation
      */

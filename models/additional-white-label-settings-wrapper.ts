@@ -26,6 +26,9 @@ import type { AdditionalWhiteLabelSettings } from './additional-white-label-sett
  * The additional white label settings wrapper.
  */
 export interface AdditionalWhiteLabelSettingsWrapper {
+    /**
+     * The additional white label settings.
+     */
     'settings'?: AdditionalWhiteLabelSettings;
 }
 

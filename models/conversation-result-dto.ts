@@ -30,6 +30,9 @@ export interface ConversationResultDto {
      * The conversion operation ID.
      */
     'id': string | null;
+    /**
+     * The conversion operation type.
+     */
     'Operation': FileOperationType;
     /**
      * The conversion operation progress.
@@ -39,10 +42,7 @@ export interface ConversationResultDto {
      * The source file for the conversion.
      */
     'source'?: string | null;
-    /**
-     * The resulting file after the conversion.
-     */
-    'result'?: any | null;
+    'result'?: any;
     /**
      * The conversion operation error message.
      */

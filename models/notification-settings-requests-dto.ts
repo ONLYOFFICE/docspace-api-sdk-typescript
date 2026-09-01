@@ -26,6 +26,9 @@ import type { NotificationType } from './notification-type';
  * The request parameters for configuring notification settings.
  */
 export interface NotificationSettingsRequestsDto {
+    /**
+     * The notification to be configured.
+     */
     'type': NotificationType;
     /**
      * Specifies if the specified notification type is enabled or not.

@@ -4,28 +4,33 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**createAuditTrailReport**](#createaudittrailreport) | **POST** /api/2.0/security/audit/events/report | Generate the audit trail report|
+|[**createAuditTrailReport**](#createaudittrailreport) | **POST** /api/2.0/security/audit/events/report | Start the audit trail report generation|
 |[**getAuditEventsByFilter**](#getauditeventsbyfilter) | **GET** /api/2.0/security/audit/events/filter | Get filtered audit trail data|
 |[**getAuditSettings**](#getauditsettings) | **GET** /api/2.0/security/audit/settings/lifetime | Get the audit trail settings|
 |[**getAuditTrailMappers**](#getaudittrailmappers) | **GET** /api/2.0/security/audit/mappers | Get audit trail mappers|
+|[**getAuditTrailReport**](#getaudittrailreport) | **GET** /api/2.0/security/audit/events/report | Get the audit trail report generation status|
 |[**getAuditTrailTypes**](#getaudittrailtypes) | **GET** /api/2.0/security/audit/types | Get audit trail types|
 |[**getLastAuditEvents**](#getlastauditevents) | **GET** /api/2.0/security/audit/events/last | Get audit trail data|
 |[**setAuditSettings**](#setauditsettings) | **POST** /api/2.0/security/audit/settings/lifetime | Set the audit trail settings|
+|[**terminateAuditTrailReport**](#terminateaudittrailreport) | **DELETE** /api/2.0/security/audit/events/report | Terminate the audit trail report generation|
 
 # **createAuditTrailReport**
-> StringWrapper createAuditTrailReport()
+> DocumentBuilderTaskWrapper createAuditTrailReport()
 
-Generates the audit trail report.
+Starts generating the audit trail report (XLSX by default, or CSV) and saves it to My documents.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-audit-trail-report/).
 
 ### Parameters
-This endpoint does not have any parameters.
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **format** | **AuditReportFormat** | The output file format of the report. Defaults to XLSX. | (optional) defaults to undefined|
 
 
 ### Return type
 
-**StringWrapper**
+**DocumentBuilderTaskWrapper**
 
 ### Authorization
 
@@ -42,7 +47,11 @@ import {
 const configuration = new Configuration();
 const apiInstance = new SecurityAuditTrailDataApi(configuration);
 
-const { status, data } = await apiInstance.createAuditTrailReport();
+let format: AuditReportFormat; //The output file format of the report. Defaults to XLSX. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.createAuditTrailReport(
+    format
+);
 ```
 
 ### HTTP request headers
@@ -54,11 +63,13 @@ const { status, data } = await apiInstance.createAuditTrailReport();
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | URL to the xlsx report file |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+|**200** | Operation execution status |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**402** | Your pricing plan does not support this option |  -  |
 |**403** | You don\'t have enough permission to create |  -  |
 |**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**429** | Too Many Requests. |  * Retry-After -  <br>  |
+|**500** | Internal Server Error. |  -  |
+|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -81,8 +92,8 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 | **action** | **MessageAction** | The specific action that occurred within the audit event. | (optional) defaults to undefined|
 | **entryType** | **EntryType** | The type of audit entry (e.g., Folder, User, File). | (optional) defaults to undefined|
 | **target** | [**string**] | The target object affected by the audit event (e.g., document ID, user account). | (optional) defaults to undefined|
-| **from** | **ApiDateTime** | The starting date and time for filtering audit events. | (optional) defaults to undefined|
-| **to** | **ApiDateTime** | The ending date and time for filtering audit events. | (optional) defaults to undefined|
+| **from** | [**string**] | The starting date and time for filtering audit events. | (optional) defaults to undefined|
+| **to** | [**string**] | The ending date and time for filtering audit events. | (optional) defaults to undefined|
 | **count** | [**number**] | The maximum number of audit event records to retrieve. | (optional) defaults to undefined|
 | **startIndex** | [**number**] | The index of the first audit event record to retrieve in a paged query. | (optional) defaults to undefined|
 
@@ -100,9 +111,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ```typescript
 import {
     SecurityAuditTrailDataApi,
-    Configuration,
-    ApiDateTime,
-    ApiDateTime
+    Configuration
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
@@ -114,8 +123,8 @@ let actionType: ActionType; //The type of action performed in the audit event (e
 let action: MessageAction; //The specific action that occurred within the audit event. (optional) (default to undefined)
 let entryType: EntryType; //The type of audit entry (e.g., Folder, User, File). (optional) (default to undefined)
 let target: string; //The target object affected by the audit event (e.g., document ID, user account). (optional) (default to undefined)
-let from: ApiDateTime; //The starting date and time for filtering audit events. (optional) (default to undefined)
-let to: ApiDateTime; //The ending date and time for filtering audit events. (optional) (default to undefined)
+let from: string; //The starting date and time for filtering audit events. (optional) (default to undefined)
+let to: string; //The ending date and time for filtering audit events. (optional) (default to undefined)
 let count: number; //The maximum number of audit event records to retrieve. (optional) (default to undefined)
 let startIndex: number; //The index of the first audit event record to retrieve in a paged query. (optional) (default to undefined)
 
@@ -142,18 +151,20 @@ const { status, data } = await apiInstance.getAuditEventsByFilter(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | List of filtered audit trail data |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+|**200** | List of filtered audit trail data |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**402** | Your pricing plan does not support this option |  -  |
 |**403** | No permissions to perform this action |  -  |
 |**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**429** | Too Many Requests. |  * Retry-After -  <br>  |
+|**500** | Internal Server Error. |  -  |
+|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getAuditSettings**
-> TenantAuditSettingsWrapper getAuditSettings()
+> TenantAuditSettingsResponseWrapper getAuditSettings()
 
 Returns the audit trail settings.
 
@@ -165,7 +176,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**TenantAuditSettingsWrapper**
+**TenantAuditSettingsResponseWrapper**
 
 ### Authorization
 
@@ -194,11 +205,12 @@ const { status, data } = await apiInstance.getAuditSettings();
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Audit settings |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+|**200** | Audit settings |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**402** | Your pricing plan does not support this option |  -  |
 |**403** | No permissions to perform this action |  -  |
 |**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**429** | Too Many Requests. |  * Retry-After -  <br>  |
+|**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -256,10 +268,65 @@ const { status, data } = await apiInstance.getAuditTrailMappers(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Audit trail mappers |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+|**200** | Audit trail mappers |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**403** | No permissions to perform this action |  -  |
 |**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**429** | Too Many Requests. |  * Retry-After -  <br>  |
+|**500** | Internal Server Error. |  -  |
+|**400** | Bad Request. |  -  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getAuditTrailReport**
+> DocumentBuilderTaskWrapper getAuditTrailReport()
+
+Returns the status of generating the audit trail report.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-trail-report/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**DocumentBuilderTaskWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SecurityAuditTrailDataApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SecurityAuditTrailDataApi(configuration);
+
+const { status, data } = await apiInstance.getAuditTrailReport();
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Operation execution status |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**402** | Your pricing plan does not support this option |  -  |
+|**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
+|**429** | Too Many Requests. |  * Retry-After -  <br>  |
+|**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -307,10 +374,11 @@ const { status, data } = await apiInstance.getAuditTrailTypes();
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Audit trail types |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+|**200** | Audit trail types |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**403** | No permissions to perform this action |  -  |
 |**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**429** | Too Many Requests. |  * Retry-After -  <br>  |
+|**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -358,18 +426,19 @@ const { status, data } = await apiInstance.getLastAuditEvents();
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | List of audit trail data |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+|**200** | List of audit trail data |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**402** | Your pricing plan does not support this option |  -  |
 |**403** | No permissions to perform this action |  -  |
 |**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**429** | Too Many Requests. |  * Retry-After -  <br>  |
+|**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **setAuditSettings**
-> TenantAuditSettingsWrapper setAuditSettings()
+> TenantAuditSettingsResponseWrapper setAuditSettings()
 
 Sets the audit trail settings for the current portal.
 
@@ -384,7 +453,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-**TenantAuditSettingsWrapper**
+**TenantAuditSettingsResponseWrapper**
 
 ### Authorization
 
@@ -418,12 +487,66 @@ const { status, data } = await apiInstance.setAuditSettings(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Audit trail settings |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+|**200** | Audit trail settings |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**400** | Exception in LoginHistoryLifeTime or AuditTrailLifeTime |  -  |
 |**402** | Your pricing plan does not support this option |  -  |
 |**403** | No permissions to perform this action |  -  |
 |**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**429** | Too Many Requests. |  * Retry-After -  <br>  |
+|**500** | Internal Server Error. |  -  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **terminateAuditTrailReport**
+> terminateAuditTrailReport()
+
+Terminates generating the audit trail report.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-audit-trail-report/).
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    SecurityAuditTrailDataApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new SecurityAuditTrailDataApi(configuration);
+
+const { status, data } = await apiInstance.terminateAuditTrailReport();
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Ok |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**402** | Your pricing plan does not support this option |  -  |
+|**403** | No permissions to perform this action |  -  |
+|**401** | Unauthorized |  -  |
+|**429** | Too Many Requests. |  * Retry-After -  <br>  |
+|**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **password** | **string** | The user password. | [optional] [default to undefined]
 **passwordHash** | **string** | The user password hash. | [optional] [default to undefined]
 **email** | **string** | The user email address. | [optional] [default to undefined]
-**type** | [**EmployeeType**](EmployeeType.md) |  | [optional] [default to undefined]
+**type** | [**EmployeeType**](EmployeeType.md) | The user type. | [optional] [default to undefined]
 **isUser** | **boolean** | Specifies if this is a guest or a user. | [optional] [default to undefined]
 **firstName** | **string** | The user first name. | [optional] [default to undefined]
 **lastName** | **string** | The user last name. | [optional] [default to undefined]

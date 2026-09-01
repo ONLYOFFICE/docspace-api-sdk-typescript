@@ -25,7 +25,13 @@ import type { AuthServiceRequestsDto } from './auth-service-requests-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the list of AuthServiceRequestsDto objects.
+ */
 export interface AuthServiceRequestsArrayWrapper {
+    /**
+     * The list of AuthServiceRequestsDto objects returned by the operation.
+     */
     'response'?: Array<AuthServiceRequestsDto>;
     /**
      * The total number of items in the response

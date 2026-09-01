@@ -1,18 +1,19 @@
 # OAuth20Token
 
+The OAuth 2.0 token issued by a third-party provider.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**access_token** | **string** |  | [optional] [default to undefined]
-**refresh_token** | **string** |  | [optional] [default to undefined]
-**expires_in** | **number** |  | [optional] [default to undefined]
-**client_id** | **string** |  | [optional] [default to undefined]
-**client_secret** | **string** |  | [optional] [default to undefined]
-**redirect_uri** | **string** |  | [optional] [default to undefined]
-**timestamp** | **string** |  | [optional] [default to undefined]
-**isExpired** | **boolean** |  | [optional] [readonly] [default to undefined]
+**access_token** | **string** | Access token | [optional] [default to undefined]
+**refresh_token** | **string** | Refresh token | [optional] [default to undefined]
+**expires_in** | **number** | Expires in | [optional] [default to undefined]
+**client_id** | **string** | Client id | [optional] [default to undefined]
+**client_secret** | **string** | Client secret | [optional] [default to undefined]
+**redirect_uri** | **string** | Redirect uri | [optional] [default to undefined]
+**timestamp** | **string** | Timestamp | [optional] [default to undefined]
+**isExpired** | **boolean** | Is expired | [optional] [readonly] [default to undefined]
 
 ## Example
 

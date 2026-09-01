@@ -26,7 +26,7 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { BooleanWrapper } from '../../models';
 // @ts-ignore
-import type { SetupCodeWrapper } from '../../models';
+import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
 import type { StringWrapper } from '../../models';
 // @ts-ignore
@@ -37,6 +37,8 @@ import type { TfaConfirmDataWrapper } from '../../models';
 import type { TfaRequestsDto } from '../../models';
 // @ts-ignore
 import type { TfaSettingsArrayWrapper } from '../../models';
+// @ts-ignore
+import type { TfaSetupCodeWrapper } from '../../models';
 // @ts-ignore
 import type { TfaValidateRequestsDto } from '../../models';
 /**
@@ -591,7 +593,7 @@ export const TFASettingsApiFp = function(configuration?: Configuration) {
          * REST API Reference for tfaAppGenerateSetupCode operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/tfa-app-generate-setup-code/
          */
-        async tfaAppGenerateSetupCode(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SetupCodeWrapper>> {
+        async tfaAppGenerateSetupCode(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TfaSetupCodeWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.tfaAppGenerateSetupCode(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TFASettingsApi.tfaAppGenerateSetupCode']?.[localVarOperationServerIndex]?.url;
@@ -722,7 +724,7 @@ export const TFASettingsApiFactory = function (configuration?: Configuration, ba
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/tfa-app-generate-setup-code/
          * @throws {RequiredError}
          */
-        tfaAppGenerateSetupCode(options?: RawAxiosRequestConfig): AxiosPromise<SetupCodeWrapper> {
+        tfaAppGenerateSetupCode(options?: RawAxiosRequestConfig): AxiosPromise<TfaSetupCodeWrapper> {
             return localVarFp.tfaAppGenerateSetupCode(options).then((request) => request(axios, basePath));
         },
         /**

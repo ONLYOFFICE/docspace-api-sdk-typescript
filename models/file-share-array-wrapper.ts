@@ -25,7 +25,13 @@ import type { FileShareDto } from './file-share-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the list of FileShareDto objects.
+ */
 export interface FileShareArrayWrapper {
+    /**
+     * The list of FileShareDto objects returned by the operation.
+     */
     'response'?: Array<FileShareDto>;
     /**
      * The total number of items in the response

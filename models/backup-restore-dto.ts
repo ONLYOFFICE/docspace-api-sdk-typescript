@@ -33,6 +33,9 @@ export interface BackupRestoreDto {
      * The backup ID.
      */
     'backupId': string | null;
+    /**
+     * The backup storage type.
+     */
     'storageType'?: BackupStorageType;
     /**
      * The backup storage parameters.

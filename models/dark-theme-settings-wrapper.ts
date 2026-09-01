@@ -25,7 +25,13 @@ import type { DarkThemeSettings } from './dark-theme-settings';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the DarkThemeSettings object.
+ */
 export interface DarkThemeSettingsWrapper {
+    /**
+     * The DarkThemeSettings object returned by the operation.
+     */
     'response'?: DarkThemeSettings;
     /**
      * The total number of items in the response

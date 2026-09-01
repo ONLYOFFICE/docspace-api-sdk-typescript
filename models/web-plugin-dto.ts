@@ -66,6 +66,9 @@ export interface WebPluginDto {
      * The web plugin image.
      */
     'image': string | null;
+    /**
+     * The user who created the web plugin.
+     */
     'createBy': EmployeeDto;
     /**
      * The date and time when the web plugin was created.
@@ -94,10 +97,14 @@ export interface WebPluginDto {
     /**
      * The web plugin localized name.
      */
-    'nameLocale'?: { [key: string]: string | null; } | null;
+    'nameLocale'?: { [key: string]: string | null; };
     /**
      * The web plugin localized description.
      */
-    'descriptionLocale'?: { [key: string]: string | null; } | null;
+    'descriptionLocale'?: { [key: string]: string | null; };
+    /**
+     * The web plugin loading method
+     */
+    'runtime'?: string | null;
 }
 

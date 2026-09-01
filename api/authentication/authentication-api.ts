@@ -36,6 +36,8 @@ import type { ConfirmWrapper } from '../../models';
 // @ts-ignore
 import type { EmailValidationKeyModel } from '../../models';
 // @ts-ignore
+import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
 import type { MobileRequestsDto } from '../../models';
 // @ts-ignore
 import type { StringWrapper } from '../../models';
@@ -87,7 +89,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
         /**
          * Authenticates the current user by SMS or two-factor authentication code.
          * @summary Authenticate a user by code
-         * @param {string} code 
+         * @param {string} code The two-factor authentication code. Send the same value as the `code` of the request body, which is the one the handler reads.
          * @param {AuthWithCodeRequestsDto} [authWithCodeRequestsDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -349,7 +351,7 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
         /**
          * Authenticates the current user by SMS or two-factor authentication code.
          * @summary Authenticate a user by code
-         * @param {string} code 
+         * @param {string} code The two-factor authentication code. Send the same value as the `code` of the request body, which is the one the handler reads.
          * @param {AuthWithCodeRequestsDto} [authWithCodeRequestsDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -551,7 +553,7 @@ export interface AuthenticationApiAuthenticateMeRequest {
  */
 export interface AuthenticationApiAuthenticateMeFromBodyWithCodeRequest {
     /**
-     * 
+     * The two-factor authentication code. Send the same value as the `code` of the request body, which is the one the handler reads.
      * @type {string}
      * @memberof AuthenticationApiAuthenticateMeFromBodyWithCode
      */

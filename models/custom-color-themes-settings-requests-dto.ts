@@ -26,6 +26,9 @@ import type { CustomColorThemesSettingsItem } from './custom-color-themes-settin
  * The request parameters for managing the portal theme settings.
  */
 export interface CustomColorThemesSettingsRequestsDto {
+    /**
+     * The custom color theme configuration.
+     */
     'theme'?: CustomColorThemesSettingsItem;
     /**
      * Specifies the optional value indicating the selected custom color theme.

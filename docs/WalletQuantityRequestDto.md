@@ -6,8 +6,8 @@ The request parameters for specifying wallet payment quantity.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**quantity** | **{ [key: string]: number | null; }** | The mapping of item identifiers to their respective quantities in the payment. | [optional] [default to undefined]
-**productQuantityType** | [**ProductQuantityType**](ProductQuantityType.md) |  | [optional] [default to undefined]
+**quantity** | **{ [key: string]: number | null; }** | The mapping of item identifiers to their respective quantities in the payment. | [default to undefined]
+**productQuantityType** | [**ProductQuantityType**](ProductQuantityType.md) | The type of action performed on a product\'s quantity. | [optional] [default to undefined]
 
 ## Example
 

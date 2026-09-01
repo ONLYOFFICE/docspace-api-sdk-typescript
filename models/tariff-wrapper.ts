@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { Tariff } from './tariff';
 
+/**
+ * The successful API response containing the Tariff object.
+ */
 export interface TariffWrapper {
+    /**
+     * The Tariff object returned by the operation.
+     */
     'response'?: Tariff;
     /**
      * The total number of items in the response

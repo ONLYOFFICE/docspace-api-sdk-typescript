@@ -25,6 +25,9 @@ import type { FormMetadata } from './form-metadata';
 // @ts-ignore
 import type { FormResultsDto } from './form-results-dto';
 
+/**
+ * All submissions of a form, together with the metadata of its fields.
+ */
 export interface FormSubmissionsDto {
     /**
      * The form field metadata.

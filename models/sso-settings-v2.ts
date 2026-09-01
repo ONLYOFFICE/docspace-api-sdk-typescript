@@ -46,11 +46,17 @@ export interface SsoSettingsV2 {
      * Specifies if the SSO settings are enabled or not.
      */
     'enableSso'?: boolean | null;
+    /**
+     * The SSO IdP settings.
+     */
     'idpSettings'?: SsoIdpSettings;
     /**
      * The list of the IdP certificates.
      */
     'idpCertificates'?: Array<SsoCertificate> | null;
+    /**
+     * The IdP advanced certificate.
+     */
     'idpCertificateAdvanced'?: SsoIdpCertificateAdvanced;
     /**
      * The SP login label.
@@ -60,7 +66,13 @@ export interface SsoSettingsV2 {
      * The list of the SP certificates.
      */
     'spCertificates'?: Array<SsoCertificate> | null;
+    /**
+     * The SP advanced certificate.
+     */
     'spCertificateAdvanced'?: SsoSpCertificateAdvanced;
+    /**
+     * The SSO field mapping.
+     */
     'fieldMapping'?: SsoFieldMapping;
     /**
      * Specifies if the authentication page will be hidden or not.

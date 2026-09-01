@@ -37,6 +37,9 @@ export interface FormRoleDto {
      * The role color.
      */
     'roleColor'?: string | null;
+    /**
+     * The user of the role.
+     */
     'user'?: EmployeeFullDto;
     /**
      * The role sequence.
@@ -46,11 +49,17 @@ export interface FormRoleDto {
      * Specifies if the role is submitted.
      */
     'submitted': boolean;
+    /**
+     * The user who stopped the role.
+     */
     'stopedBy'?: EmployeeFullDto;
     /**
      * The role history.
      */
-    'history'?: { [key: string]: string; } | null;
+    'history'?: { [key: string]: string; };
+    /**
+     * The role status.
+     */
     'roleStatus'?: FormFillingStatus;
 }
 

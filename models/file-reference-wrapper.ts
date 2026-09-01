@@ -25,7 +25,13 @@ import type { FileReference } from './file-reference';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the FileReference object.
+ */
 export interface FileReferenceWrapper {
+    /**
+     * The FileReference object returned by the operation.
+     */
     'response'?: FileReference;
     /**
      * The total number of items in the response

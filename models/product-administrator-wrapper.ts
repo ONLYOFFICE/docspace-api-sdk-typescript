@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { ProductAdministratorDto } from './product-administrator-dto';
 
+/**
+ * The successful API response containing the ProductAdministratorDto object.
+ */
 export interface ProductAdministratorWrapper {
+    /**
+     * The ProductAdministratorDto object returned by the operation.
+     */
     'response'?: ProductAdministratorDto;
     /**
      * The total number of items in the response

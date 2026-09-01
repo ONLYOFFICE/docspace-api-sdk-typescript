@@ -1,5 +1,6 @@
 # FormResultsDto
 
+A single filled-in form submission.
 
 ## Properties
 

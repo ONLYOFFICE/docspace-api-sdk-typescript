@@ -6,7 +6,7 @@ The backup parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**storageType** | [**BackupStorageType**](BackupStorageType.md) |  | [optional] [default to undefined]
+**storageType** | [**BackupStorageType**](BackupStorageType.md) | The backup storage type. | [optional] [default to undefined]
 **storageParams** | [**Array&lt;ItemKeyValuePairObjectObject&gt;**](ItemKeyValuePairObjectObject.md) | The backup storage parameters. | [optional] [default to undefined]
 **dump** | **boolean** | Specifies if a dump will be created or not. | [optional] [default to undefined]
 

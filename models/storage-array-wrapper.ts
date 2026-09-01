@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { StorageDto } from './storage-dto';
 
+/**
+ * The successful API response containing the list of StorageDto objects.
+ */
 export interface StorageArrayWrapper {
+    /**
+     * The list of StorageDto objects returned by the operation.
+     */
     'response'?: Array<StorageDto>;
     /**
      * The total number of items in the response

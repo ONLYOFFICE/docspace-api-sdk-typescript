@@ -24,17 +24,18 @@ import type { IpRestrictionBase } from './ip-restriction-base';
 
 /**
  * @type IPRestriction
+ * The IP restiction parameters.
  * @export
  */
 export type IPRestriction = IpRestrictionBase &  {
     /**
-     * 
+     * The IP restiction ID.
      * @type {number}
      * @memberof IPRestriction
      */
     'id'?: number;
     /**
-     * 
+     * The tenant ID.
      * @type {number}
      * @memberof IPRestriction
      */

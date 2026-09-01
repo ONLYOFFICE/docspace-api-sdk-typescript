@@ -7,7 +7,7 @@ The sorting parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **is_asc** | **boolean** | Specifies if the order is ascending. | [optional] [default to undefined]
-**property** | [**SortedByType**](SortedByType.md) |  | [optional] [default to undefined]
+**property** | [**SortedByType**](SortedByType.md) | The parameters by which the files will be sorted. | [optional] [default to undefined]
 
 ## Example
 

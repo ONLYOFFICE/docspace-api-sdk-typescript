@@ -37,6 +37,9 @@ export interface RoomGroupDto {
      * Group name
      */
     'name'?: string | null;
+    /**
+     * Group icon
+     */
     'icon'?: MultiSizeLogoCover;
     /**
      * The user ID.

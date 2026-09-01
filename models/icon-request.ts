@@ -19,6 +19,9 @@
  */
 
 
+/**
+ * The icon to set on a room group.
+ */
 export interface IconRequest {
     /**
      * Group icon

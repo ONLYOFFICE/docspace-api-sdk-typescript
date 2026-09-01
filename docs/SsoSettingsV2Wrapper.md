@@ -1,11 +1,12 @@
 # SsoSettingsV2Wrapper
 
+The successful API response containing the SsoSettingsV2 object.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**SsoSettingsV2**](SsoSettingsV2.md) |  | [optional] [default to undefined]
+**response** | [**SsoSettingsV2**](SsoSettingsV2.md) | The SsoSettingsV2 object returned by the operation. | [optional] [default to undefined]
 **count** | **number** | The total number of items in the response | [optional] [default to undefined]
 **links** | [**Array&lt;GetPortalPrices200ResponseLinksInner&gt;**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] [default to undefined]
 **status** | **number** | HTTP status code of the response | [optional] [default to undefined]

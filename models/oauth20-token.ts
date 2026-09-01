@@ -19,14 +19,41 @@
  */
 
 
+/**
+ * The OAuth 2.0 token issued by a third-party provider.
+ */
 export interface OAuth20Token {
+    /**
+     * Access token
+     */
     'access_token'?: string | null;
+    /**
+     * Refresh token
+     */
     'refresh_token'?: string | null;
+    /**
+     * Expires in
+     */
     'expires_in'?: number;
+    /**
+     * Client id
+     */
     'client_id'?: string | null;
+    /**
+     * Client secret
+     */
     'client_secret'?: string | null;
+    /**
+     * Redirect uri
+     */
     'redirect_uri'?: string | null;
+    /**
+     * Timestamp
+     */
     'timestamp'?: string;
+    /**
+     * Is expired
+     */
     'isExpired'?: boolean;
 }
 

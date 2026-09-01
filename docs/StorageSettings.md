@@ -1,13 +1,14 @@
 # StorageSettings
 
+The storage settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**module** | **string** |  | [optional] [default to undefined]
-**props** | **{ [key: string]: string | null; }** |  | [optional] [default to undefined]
-**lastModified** | **string** |  | [optional] [default to undefined]
+**module** | **string** | The storage name. | [optional] [default to undefined]
+**props** | **{ [key: string]: string | null; }** | The storage properties. | [optional] [default to undefined]
+**lastModified** | **string** | The date and time when the storage settings were last modified. | [optional] [default to undefined]
 
 ## Example
 

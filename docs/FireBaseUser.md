@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **firebaseDeviceToken** | **string** | The Firebase device token. | [optional] [default to undefined]
 **application** | **string** | The Firebase application. | [optional] [default to undefined]
 **isSubscribed** | **boolean** | Specifies if the user is subscribed to the push notifications or not. | [optional] [default to undefined]
-**tenant** | [**DbTenant**](DbTenant.md) |  | [optional] [default to undefined]
+**tenant** | [**DbTenant**](DbTenant.md) | The database tenant parameters. | [optional] [default to undefined]
 
 ## Example
 

@@ -7,7 +7,7 @@ The request parameters for updating the trash bin auto-clearing setting.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **set** | **boolean** | Specifies whether to enable the auto-clearing or not. | [optional] [default to undefined]
-**gap** | [**DateToAutoCleanUp**](DateToAutoCleanUp.md) |  | [optional] [default to undefined]
+**gap** | [**DateToAutoCleanUp**](DateToAutoCleanUp.md) | The time interval when the auto-clearing will be performed. | [optional] [default to undefined]
 
 ## Example
 

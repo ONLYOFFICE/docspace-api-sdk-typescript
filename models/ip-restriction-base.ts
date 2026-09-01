@@ -19,8 +19,17 @@
  */
 
 
+/**
+ * The IP restiction base parameters.
+ */
 export interface IpRestrictionBase {
+    /**
+     * The IP address.
+     */
     'ip': string | null;
+    /**
+     * Specifies if the IP address is for administrator users only or not.
+     */
     'forAdmin'?: boolean;
 }
 

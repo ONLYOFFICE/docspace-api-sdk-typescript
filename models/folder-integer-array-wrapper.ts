@@ -25,7 +25,13 @@ import type { FolderDtoInteger } from './folder-dto-integer';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the list of FolderDtoInteger objects.
+ */
 export interface FolderIntegerArrayWrapper {
+    /**
+     * The list of FolderDtoInteger objects returned by the operation.
+     */
     'response'?: Array<FolderDtoInteger>;
     /**
      * The total number of items in the response

@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { TaskProgressResponseDto } from './task-progress-response-dto';
 
+/**
+ * The successful API response containing the TaskProgressResponseDto object.
+ */
 export interface TaskProgressResponseWrapper {
+    /**
+     * The TaskProgressResponseDto object returned by the operation.
+     */
     'response'?: TaskProgressResponseDto;
     /**
      * The total number of items in the response

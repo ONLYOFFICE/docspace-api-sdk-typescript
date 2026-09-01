@@ -45,6 +45,9 @@ export interface InfoConfigDto {
      * The sharing settings of the file.
      */
     'sharingSettings'?: Array<AceShortWrapper> | null;
+    /**
+     * The editor type of the file.
+     */
     'type'?: EditorType;
     /**
      * The uploaded file.

@@ -45,6 +45,9 @@ export interface ExternalDbSyncTaskDto {
      * Specifies whether the synchronization is completed or not.
      */
     'isCompleted': boolean;
+    /**
+     * The status of the synchronization task.
+     */
     'status': DistributedTaskStatus;
     /**
      * The synchronization results for all original forms in the room.

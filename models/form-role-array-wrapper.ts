@@ -25,7 +25,13 @@ import type { FormRoleDto } from './form-role-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the list of FormRoleDto objects.
+ */
 export interface FormRoleArrayWrapper {
+    /**
+     * The list of FormRoleDto objects returned by the operation.
+     */
     'response'?: Array<FormRoleDto>;
     /**
      * The total number of items in the response

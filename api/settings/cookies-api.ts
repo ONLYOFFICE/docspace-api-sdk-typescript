@@ -28,6 +28,8 @@ import type { CookieSettingsRequestsDto } from '../../models';
 // @ts-ignore
 import type { CookieSettingsWrapper } from '../../models';
 // @ts-ignore
+import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
 import type { StringWrapper } from '../../models';
 /**
  * CookiesApi - axios parameter creator

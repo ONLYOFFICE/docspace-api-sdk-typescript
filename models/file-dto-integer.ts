@@ -20,9 +20,6 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ApiDateTime } from './api-date-time';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { DraftLocationInteger } from './draft-location-integer';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -107,7 +104,7 @@ export type FileDtoInteger = FileEntryDtoInteger &  {
      */
     'pureContentLength'?: number | null;
     /**
-     * 
+     * The current status of the file.
      * @type {FileStatus}
      * @memberof FileDtoInteger
      */
@@ -117,7 +114,7 @@ export type FileDtoInteger = FileEntryDtoInteger &  {
      * @type {{ [key: string]: string | null; }}
      * @memberof FileDtoInteger
      */
-    'editingBy'?: { [key: string]: string | null; } | null;
+    'editingBy'?: { [key: string]: string | null; };
     /**
      * Specifies if the file is muted or not.
      * @type {boolean}
@@ -137,7 +134,7 @@ export type FileDtoInteger = FileEntryDtoInteger &  {
      */
     'webUrl'?: string | null;
     /**
-     * 
+     * The file type.
      * @type {FileType}
      * @memberof FileDtoInteger
      */
@@ -167,7 +164,7 @@ export type FileDtoInteger = FileEntryDtoInteger &  {
      */
     'thumbnailUrl'?: string | null;
     /**
-     * 
+     * The current thumbnail status of the file.
      * @type {Thumbnail}
      * @memberof FileDtoInteger
      */
@@ -191,7 +188,7 @@ export type FileDtoInteger = FileEntryDtoInteger &  {
      */
     'hasDraft'?: boolean | null;
     /**
-     * 
+     * The status of the form filling process.
      * @type {FormFillingStatus}
      * @memberof FileDtoInteger
      */
@@ -245,7 +242,7 @@ export type FileDtoInteger = FileEntryDtoInteger &  {
      */
     'resultsFolderId'?: number | null;
     /**
-     * 
+     * The file draft information with its location.
      * @type {DraftLocationInteger}
      * @memberof FileDtoInteger
      */
@@ -257,19 +254,19 @@ export type FileDtoInteger = FileEntryDtoInteger &  {
      */
     'viewAccessibility'?: FileDtoIntegerAllOfViewAccessibility | null;
     /**
-     * 
-     * @type {ApiDateTime}
+     * The time when the file was last opened.
+     * @type {string}
      * @memberof FileDtoInteger
      */
-    'lastOpened'?: ApiDateTime;
+    'lastOpened'?: string | null;
     /**
-     * 
-     * @type {ApiDateTime}
+     * The date when the file will be expired.
+     * @type {string}
      * @memberof FileDtoInteger
      */
-    'expired'?: ApiDateTime;
+    'expired'?: string | null;
     /**
-     * 
+     * The vectorization status of the file.
      * @type {VectorizationStatus}
      * @memberof FileDtoInteger
      */
@@ -281,7 +278,7 @@ export type FileDtoInteger = FileEntryDtoInteger &  {
      */
     'externalDbTableName'?: string | null;
     /**
-     * 
+     * The dimensions (width and height) of the image file in pixels.  This property is populated only for image files that can be viewed (supported formats like PNG, JPEG, GIF, BMP, etc.).  For non-image files, this property remains null.
      * @type {Size}
      * @memberof FileDtoInteger
      */

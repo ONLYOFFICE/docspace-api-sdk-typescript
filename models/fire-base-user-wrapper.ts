@@ -25,7 +25,13 @@ import type { FireBaseUser } from './fire-base-user';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the FireBaseUser object.
+ */
 export interface FireBaseUserWrapper {
+    /**
+     * The FireBaseUser object returned by the operation.
+     */
     'response'?: FireBaseUser;
     /**
      * The total number of items in the response

@@ -26,6 +26,9 @@ import type { EmployeeType } from './employee-type';
  * The request parameters for creating a third-party account.
  */
 export interface SignupAccountRequestDto {
+    /**
+     * The user type.
+     */
     'employeeType'?: EmployeeType;
     /**
      * The user link key.

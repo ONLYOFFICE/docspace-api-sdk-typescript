@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { QuotaDto } from './quota-dto';
 
+/**
+ * The successful API response containing the QuotaDto object.
+ */
 export interface QuotaWrapper {
+    /**
+     * The QuotaDto object returned by the operation.
+     */
     'response'?: QuotaDto;
     /**
      * The total number of items in the response

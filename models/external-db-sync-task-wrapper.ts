@@ -25,7 +25,13 @@ import type { ExternalDbSyncTaskDto } from './external-db-sync-task-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the ExternalDbSyncTaskDto object.
+ */
 export interface ExternalDbSyncTaskWrapper {
+    /**
+     * The ExternalDbSyncTaskDto object returned by the operation.
+     */
     'response'?: ExternalDbSyncTaskDto;
     /**
      * The total number of items in the response

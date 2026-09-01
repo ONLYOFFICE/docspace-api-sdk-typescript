@@ -7,8 +7,8 @@ The invitation link parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** | The ID of the invitation link. | [optional] [default to undefined]
-**employeeType** | [**EmployeeType**](EmployeeType.md) |  | [default to undefined]
-**expiration** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
+**employeeType** | [**EmployeeType**](EmployeeType.md) | The type of employee role for the invitation link. | [default to undefined]
+**expiration** | **string** | The expiration date of the invitation link. | [optional] [default to undefined]
 **isExpired** | **boolean** | Indicates whether the invitation link has expired. | [optional] [default to undefined]
 **maxUseCount** | **number** | The maximum number of times the invitation link can be used. | [optional] [default to undefined]
 **currentUseCount** | **number** | The current number of times the invitation link has been used. | [optional] [default to undefined]

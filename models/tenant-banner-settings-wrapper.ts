@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { TenantBannerSettings } from './tenant-banner-settings';
 
+/**
+ * The successful API response containing the TenantBannerSettings object.
+ */
 export interface TenantBannerSettingsWrapper {
+    /**
+     * The TenantBannerSettings object returned by the operation.
+     */
     'response'?: TenantBannerSettings;
     /**
      * The total number of items in the response

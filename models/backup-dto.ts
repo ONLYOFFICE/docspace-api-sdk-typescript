@@ -29,6 +29,9 @@ import type { ItemKeyValuePairObjectObject } from './item-key-value-pair-object-
  * The backup parameters.
  */
 export interface BackupDto {
+    /**
+     * The backup storage type.
+     */
     'storageType'?: BackupStorageType;
     /**
      * The backup storage parameters.

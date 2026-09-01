@@ -26,6 +26,9 @@ import type { ActionLinkConfig } from './action-link-config';
  * The mention message parameters.
  */
 export interface MentionMessageWrapper {
+    /**
+     * The config parameter which contains the information about the action in the document that will be scrolled to.
+     */
     'actionLink'?: ActionLinkConfig;
     /**
      * A list of emails that will receive the mention message.

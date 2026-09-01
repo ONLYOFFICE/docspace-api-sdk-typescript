@@ -26,6 +26,9 @@ import type { FileEntryBaseDto } from './file-entry-base-dto';
  * The room new items information.
  */
 export interface RoomNewItemsDto {
+    /**
+     * The room file entry.
+     */
     'room'?: FileEntryBaseDto;
     /**
      * The list of file entry items.

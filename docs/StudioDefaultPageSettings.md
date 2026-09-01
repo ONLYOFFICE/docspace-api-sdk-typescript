@@ -1,11 +1,12 @@
 # StudioDefaultPageSettings
 
+The settings that define the folder opened by default after sign-in.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**defaultFolderType** | [**FolderType**](FolderType.md) |  | [optional] [default to undefined]
+**defaultFolderType** | [**FolderType**](FolderType.md) | Specifies the type of the default folder associated with the settings. | [optional] [default to undefined]
 **lastModified** | **string** | The timestamp indicating when the settings were last modified. | [optional] [default to undefined]
 
 ## Example

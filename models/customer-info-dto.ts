@@ -33,11 +33,17 @@ export interface CustomerInfoDto {
      * The portal ID.
      */
     'portalId'?: string | null;
+    /**
+     * The customer\'s payment method.
+     */
     'paymentMethodStatus'?: PaymentMethodStatus;
     /**
      * The customer email address.
      */
     'email'?: string | null;
+    /**
+     * The paying user.
+     */
     'payer'?: EmployeeDto;
 }
 

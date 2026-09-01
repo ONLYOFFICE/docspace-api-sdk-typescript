@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { GroupSummaryDto } from './group-summary-dto';
 
+/**
+ * The successful API response containing the list of GroupSummaryDto objects.
+ */
 export interface GroupSummaryArrayWrapper {
+    /**
+     * The list of GroupSummaryDto objects returned by the operation.
+     */
     'response'?: Array<GroupSummaryDto>;
     /**
      * The total number of items in the response

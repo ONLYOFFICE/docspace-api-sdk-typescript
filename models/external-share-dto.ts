@@ -29,6 +29,9 @@ import type { Status } from './status';
  * The external sharing information and validation data.
  */
 export interface ExternalShareDto {
+    /**
+     * The external data status.
+     */
     'status': Status;
     /**
      * The external data ID.
@@ -38,6 +41,9 @@ export interface ExternalShareDto {
      * The external data title.
      */
     'title'?: string | null;
+    /**
+     * The type of the external data.
+     */
     'type'?: FileEntryType;
     /**
      * The tenant ID.
@@ -51,6 +57,9 @@ export interface ExternalShareDto {
      * The title of the shared entity.
      */
     'entityTitle'?: string | null;
+    /**
+     * The entry type of the external data.
+     */
     'entityType'?: FileEntryType;
     /**
      * Indicates whether the entity represents a room.

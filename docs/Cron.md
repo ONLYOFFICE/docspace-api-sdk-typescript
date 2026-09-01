@@ -6,7 +6,7 @@ The backup cron parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**period** | [**BackupPeriod**](BackupPeriod.md) |  | [optional] [default to undefined]
+**period** | [**BackupPeriod**](BackupPeriod.md) | The backup period type. | [optional] [default to undefined]
 **hour** | **number** | The time of the day to start the backup process. | [optional] [default to undefined]
 **day** | **number** | The day of the week to start the backup process. | [optional] [default to undefined]
 

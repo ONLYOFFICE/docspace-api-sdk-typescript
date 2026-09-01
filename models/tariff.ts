@@ -33,6 +33,9 @@ export interface Tariff {
      * The tariff ID.
      */
     'id'?: number;
+    /**
+     * The tariff state.
+     */
     'state'?: TariffState;
     /**
      * The tariff due date.

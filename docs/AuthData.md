@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **rawToken** | **string** | The authentication raw token. | [optional] [default to undefined]
 **url** | **string** | The authentication URL. | [optional] [default to undefined]
 **provider** | **string** | The authentication provider. | [optional] [default to undefined]
-**token** | [**OAuth20Token**](OAuth20Token.md) |  | [optional] [default to undefined]
+**token** | [**OAuth20Token**](OAuth20Token.md) | The authentication token. | [optional] [default to undefined]
 
 ## Example
 

@@ -34,6 +34,9 @@ export interface BackupHistoryRecord {
      * The backup file name.
      */
     'fileName': string | null;
+    /**
+     * The backup storage type.
+     */
     'storageType': BackupStorageType;
     /**
      * The backup creation date.

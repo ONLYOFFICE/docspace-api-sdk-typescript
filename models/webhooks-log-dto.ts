@@ -34,6 +34,9 @@ export interface WebhooksLogDto {
      * The webhook configuration name.
      */
     'configName'?: string | null;
+    /**
+     * The webhook trigger type.
+     */
     'trigger'?: WebhookTrigger;
     /**
      * The webhook creation time.

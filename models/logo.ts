@@ -46,6 +46,9 @@ export interface Logo {
      * The logo color.
      */
     'color'?: string | null;
+    /**
+     * The logo cover.
+     */
     'cover'?: LogoCover;
 }
 

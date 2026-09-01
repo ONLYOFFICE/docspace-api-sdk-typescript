@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { StorageSettings } from './storage-settings';
 
+/**
+ * The successful API response containing the StorageSettings object.
+ */
 export interface StorageSettingsWrapper {
+    /**
+     * The StorageSettings object returned by the operation.
+     */
     'response'?: StorageSettings;
     /**
      * The total number of items in the response

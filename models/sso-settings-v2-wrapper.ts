@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { SsoSettingsV2 } from './sso-settings-v2';
 
+/**
+ * The successful API response containing the SsoSettingsV2 object.
+ */
 export interface SsoSettingsV2Wrapper {
+    /**
+     * The SsoSettingsV2 object returned by the operation.
+     */
     'response'?: SsoSettingsV2;
     /**
      * The total number of items in the response

@@ -20,9 +20,6 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ApiDateTime } from './api-date-time';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { MessageAction } from './message-action';
 
 /**
@@ -33,7 +30,10 @@ export interface LoginEventDto {
      * The login event ID.
      */
     'id'?: number;
-    'date'?: ApiDateTime;
+    /**
+     * The login event date.
+     */
+    'date'?: string | null;
     /**
      * The user name of the login event.
      */
@@ -50,6 +50,9 @@ export interface LoginEventDto {
      * The login event action.
      */
     'action'?: string | null;
+    /**
+     * The login-related action to filter events by.
+     */
     'actionId'?: MessageAction;
     /**
      * The login event IP.

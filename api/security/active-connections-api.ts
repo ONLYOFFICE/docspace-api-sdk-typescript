@@ -28,6 +28,8 @@ import type { ActiveConnectionsWrapper } from '../../models';
 // @ts-ignore
 import type { BooleanWrapper } from '../../models';
 // @ts-ignore
+import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
 import type { StringWrapper } from '../../models';
 /**
  * ActiveConnectionsApi - axios parameter creator

@@ -6,16 +6,16 @@ The request parameters for generating a report on client operations.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**serviceName** | **string** | The service name. | [optional] [default to undefined]
+**serviceName** | **Array&lt;string&gt;** | The service name list. A single string is also accepted for backward compatibility. | [optional] [default to undefined]
 **startDate** | **string** | The report start date. | [optional] [default to undefined]
 **endDate** | **string** | The report end date. | [optional] [default to undefined]
 **participantName** | **string** | The participant name. | [optional] [default to undefined]
 **credit** | **boolean** | Specifies whether to include credit operations in the report. | [optional] [default to undefined]
 **debit** | **boolean** | Specifies whether to include debit operations in the report. | [optional] [default to undefined]
-**type** | [**OperationType**](OperationType.md) |  | [optional] [default to undefined]
-**status** | [**OperationStatus**](OperationStatus.md) |  | [optional] [default to undefined]
+**type** | [**OperationType**](OperationType.md) | The operation type to filter by. | [optional] [default to undefined]
+**status** | [**OperationStatus**](OperationStatus.md) | The operation status to filter by. | [optional] [default to undefined]
 **orderBy** | **string** | The field to order by. | [optional] [default to undefined]
-**orderType** | [**OperationOrderType**](OperationOrderType.md) |  | [optional] [default to undefined]
+**orderType** | [**OperationOrderType**](OperationOrderType.md) | Order direction: Ascending or Descending. | [optional] [default to undefined]
 
 ## Example
 

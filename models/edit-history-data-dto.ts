@@ -34,6 +34,9 @@ export interface EditHistoryDataDto {
      * The document identifier used to unambiguously identify the document file.
      */
     'key': string | null;
+    /**
+     * The object of the previous version of the document.
+     */
     'previous'?: EditHistoryUrl;
     /**
      * The encrypted signature added to the parameter in the form of a token.

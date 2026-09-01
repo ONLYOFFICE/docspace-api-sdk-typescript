@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **folderIds** | [**Array&lt;BatchRequestDtoAllOfFolderIds&gt;**](BatchRequestDtoAllOfFolderIds.md) | The list of folder IDs to be copied/moved. | [optional] [default to undefined]
 **fileIds** | [**Array&lt;BatchRequestDtoAllOfFileIds&gt;**](BatchRequestDtoAllOfFileIds.md) | The list of file IDs to be copied/moved. | [optional] [default to undefined]
 **destFolderId** | [**BatchRequestDtoAllOfDestFolderId**](BatchRequestDtoAllOfDestFolderId.md) |  | [optional] [default to undefined]
-**conflictResolveType** | [**FileConflictResolveType**](FileConflictResolveType.md) |  | [optional] [default to undefined]
+**conflictResolveType** | [**FileConflictResolveType**](FileConflictResolveType.md) | The overwriting behavior of the file copying or moving. | [optional] [default to undefined]
 **deleteAfter** | **boolean** | Specifies whether to delete the source files/folders after they are moved or copied to the destination folder. | [optional] [default to undefined]
 **content** | **boolean** | Specifies whether to copy or move the folder content or not. | [optional] [default to undefined]
 **toFillOut** | **boolean** | Specifies whether the file is copied for filling out | [optional] [default to undefined]

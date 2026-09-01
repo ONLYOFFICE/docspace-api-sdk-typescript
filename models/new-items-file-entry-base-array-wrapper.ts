@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { NewItemsDtoFileEntryBaseDto } from './new-items-dto-file-entry-base-dto';
 
+/**
+ * The successful API response containing the list of NewItemsDtoFileEntryBaseDto objects.
+ */
 export interface NewItemsFileEntryBaseArrayWrapper {
+    /**
+     * The list of NewItemsDtoFileEntryBaseDto objects returned by the operation.
+     */
     'response'?: Array<NewItemsDtoFileEntryBaseDto>;
     /**
      * The total number of items in the response

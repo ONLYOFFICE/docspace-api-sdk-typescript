@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { NotificationChannelStatusDto } from './notification-channel-status-dto';
 
+/**
+ * The successful API response containing the NotificationChannelStatusDto object.
+ */
 export interface NotificationChannelStatusWrapper {
+    /**
+     * The NotificationChannelStatusDto object returned by the operation.
+     */
     'response'?: NotificationChannelStatusDto;
     /**
      * The total number of items in the response

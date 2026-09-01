@@ -25,7 +25,13 @@ import type { EmailActivationSettings } from './email-activation-settings';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the EmailActivationSettings object.
+ */
 export interface EmailActivationSettingsWrapper {
+    /**
+     * The EmailActivationSettings object returned by the operation.
+     */
     'response'?: EmailActivationSettings;
     /**
      * The total number of items in the response

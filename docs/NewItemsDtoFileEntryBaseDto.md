@@ -6,7 +6,7 @@ The new item parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**date** | [**ApiDateTime**](ApiDateTime.md) |  | [default to undefined]
+**date** | **string** | The date and time when the new item was created. | [default to undefined]
 **items** | [**Array&lt;FileEntryBaseDto&gt;**](FileEntryBaseDto.md) | The list of items. | [default to undefined]
 
 ## Example

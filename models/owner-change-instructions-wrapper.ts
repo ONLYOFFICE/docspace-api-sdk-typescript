@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { OwnerChangeInstructionsDto } from './owner-change-instructions-dto';
 
+/**
+ * The successful API response containing the OwnerChangeInstructionsDto object.
+ */
 export interface OwnerChangeInstructionsWrapper {
+    /**
+     * The OwnerChangeInstructionsDto object returned by the operation.
+     */
     'response'?: OwnerChangeInstructionsDto;
     /**
      * The total number of items in the response

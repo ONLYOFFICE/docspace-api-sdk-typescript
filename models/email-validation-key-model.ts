@@ -33,6 +33,9 @@ export interface EmailValidationKeyModel {
      * The email validation key.
      */
     'key'?: string | null;
+    /**
+     * The user type.
+     */
     'emplType'?: EmployeeType;
     /**
      * The email address.
@@ -46,6 +49,9 @@ export interface EmailValidationKeyModel {
      * The user ID.
      */
     'uiD'?: string | null;
+    /**
+     * The confirmation email type.
+     */
     'type'?: ConfirmType;
     /**
      * Specifies whether it is the first time account access or not.

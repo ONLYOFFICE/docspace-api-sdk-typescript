@@ -25,7 +25,13 @@ import type { ConfigurationDtoInteger } from './configuration-dto-integer';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the ConfigurationDtoInteger object.
+ */
 export interface ConfigurationIntegerWrapper {
+    /**
+     * The ConfigurationDtoInteger object returned by the operation.
+     */
     'response'?: ConfigurationDtoInteger;
     /**
      * The total number of items in the response

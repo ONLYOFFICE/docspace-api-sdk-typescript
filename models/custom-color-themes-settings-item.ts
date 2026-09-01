@@ -34,7 +34,13 @@ export interface CustomColorThemesSettingsItem {
      * The custom color theme name.
      */
     'name'?: string | null;
+    /**
+     * The custom color theme main colors.
+     */
     'main'?: CustomColorThemesSettingsColorItem;
+    /**
+     * The custom color theme text colors.
+     */
     'text'?: CustomColorThemesSettingsColorItem;
 }
 

@@ -26,6 +26,9 @@ import type { CompanyWhiteLabelSettings } from './company-white-label-settings';
  * The company white label settings wrapper.
  */
 export interface CompanyWhiteLabelSettingsWrapper {
+    /**
+     * The company white label settings.
+     */
     'settings'?: CompanyWhiteLabelSettings;
 }
 

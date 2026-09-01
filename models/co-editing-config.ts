@@ -34,6 +34,9 @@ export interface CoEditingConfig {
      * Specifies if the co-editing mode is fast.
      */
     'fast'?: boolean;
+    /**
+     * The co-editing mode (fast or strict).
+     */
     'mode'?: CoEditingConfigMode;
 }
 

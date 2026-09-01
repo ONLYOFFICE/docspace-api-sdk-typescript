@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { MigrationStatusDto } from './migration-status-dto';
 
+/**
+ * The successful API response containing the MigrationStatusDto object.
+ */
 export interface MigrationStatusWrapper {
+    /**
+     * The MigrationStatusDto object returned by the operation.
+     */
     'response'?: MigrationStatusDto;
     /**
      * The total number of items in the response

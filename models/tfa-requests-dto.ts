@@ -26,13 +26,16 @@ import type { TfaRequestsDtoType } from './tfa-requests-dto-type';
  * The request parameters for configuring the Two-Factor Authentication (TFA) settings.
  */
 export interface TfaRequestsDto {
+    /**
+     * The two-factor authentication type.
+     */
     'type'?: TfaRequestsDtoType;
     /**
      * The ID of the user for whom the TFA settings are being configured.
      */
     'id'?: string;
     /**
-     * The list of IP addresses that bypass TFA verification.
+     * The list of IP addresses that bypass TFA verification. Each entry is a single address, an inclusive  from-to range or a CIDR block.
      */
     'trustedIps'?: Array<string> | null;
     /**

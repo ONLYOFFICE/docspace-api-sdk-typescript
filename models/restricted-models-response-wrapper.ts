@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { RestrictedModelsResponse } from './restricted-models-response';
 
+/**
+ * The successful API response containing the RestrictedModelsResponse object.
+ */
 export interface RestrictedModelsResponseWrapper {
+    /**
+     * The RestrictedModelsResponse object returned by the operation.
+     */
     'response'?: RestrictedModelsResponse;
     /**
      * The total number of items in the response

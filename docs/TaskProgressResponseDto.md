@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **error** | **string** | The task progress error message. | [optional] [default to undefined]
 **percentage** | **number** | The percentage of the task progress. | [default to undefined]
 **isCompleted** | **boolean** | Specifies if the task peogress is completed or not. | [default to undefined]
-**status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) |  | [default to undefined]
+**status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) | The status of the distributed task. | [default to undefined]
 
 ## Example
 

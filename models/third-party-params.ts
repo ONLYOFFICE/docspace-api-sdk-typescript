@@ -26,6 +26,9 @@ import type { AuthData } from './auth-data';
  * The third-party account parameters.
  */
 export interface ThirdPartyParams {
+    /**
+     * The authentication data.
+     */
     'auth_data'?: AuthData;
     /**
      * Specifies if this is a corporate account or not.

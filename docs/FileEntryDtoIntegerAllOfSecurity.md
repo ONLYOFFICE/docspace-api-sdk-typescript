@@ -51,6 +51,8 @@ Name | Type | Description | Notes
 **UseChat** | **boolean** |  | [optional] [default to undefined]
 **UpdateXlsx** | **boolean** |  | [optional] [default to undefined]
 **AnalyzeResponses** | **boolean** |  | [optional] [default to undefined]
+**CanUseAi** | **boolean** |  | [optional] [default to undefined]
+**HistoryExport** | **boolean** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -103,6 +105,8 @@ const instance: FileEntryDtoIntegerAllOfSecurity = {
     UseChat,
     UpdateXlsx,
     AnalyzeResponses,
+    CanUseAi,
+    HistoryExport,
 };
 ```
 

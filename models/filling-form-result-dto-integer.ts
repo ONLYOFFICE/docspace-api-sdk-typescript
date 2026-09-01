@@ -33,8 +33,17 @@ export interface FillingFormResultDtoInteger {
      * The filling form number.
      */
     'formNumber': number;
+    /**
+     * The file with the completed forms.
+     */
     'completedForm'?: FileDtoInteger;
+    /**
+     * The file with the original forms.
+     */
     'originalForm'?: FileDtoInteger;
+    /**
+     * The manager who is filling the form.
+     */
     'manager'?: EmployeeFullDto;
     /**
      * The room ID where filling the form.

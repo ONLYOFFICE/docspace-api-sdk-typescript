@@ -61,7 +61,13 @@ export interface AuthRequestsDto {
      * Specifies whether the authentication is session-based.
      */
     'session'?: boolean;
+    /**
+     * The additional confirmation data required for authentication.
+     */
     'confirmData'?: ConfirmData;
+    /**
+     * The type of CAPTCHA validation used.
+     */
     'recaptchaType'?: RecaptchaType;
     /**
      * The user\'s response to the CAPTCHA challenge.

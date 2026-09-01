@@ -22,8 +22,17 @@
 // @ts-ignore
 import type { LogoRequestsDto } from './logo-requests-dto';
 
+/**
+ * A key-value pair of a list item.
+ */
 export interface ItemKeyValuePairStringLogoRequestsDto {
+    /**
+     * The key that identifies the item within the list.
+     */
     'key'?: string | null;
+    /**
+     * The value associated with the key.
+     */
     'value'?: LogoRequestsDto;
 }
 

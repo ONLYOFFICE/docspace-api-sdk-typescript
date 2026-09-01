@@ -22,11 +22,33 @@
 // @ts-ignore
 import type { AiChatPrice } from './ai-chat-price';
 
+/**
+ * The pricing of a single chat model.
+ */
 export interface AiChatModelPricing {
+    /**
+     * The identifier of the model, as the provider expects it on the wire.
+     */
     'id': string | null;
+    /**
+     * The display name of the model.
+     */
     'alias'?: string | null;
+    /**
+     * The owner of the model, as reported by the provider.
+     */
     'ownedBy'?: string | null;
+    /**
+     * The provider that serves the model.
+     */
     'provider'?: string | null;
+    /**
+     * The link to the pricing page of the model.
+     */
+    'link'?: string | null;
+    /**
+     * The price of a chat model, per token.
+     */
     'price': AiChatPrice;
 }
 

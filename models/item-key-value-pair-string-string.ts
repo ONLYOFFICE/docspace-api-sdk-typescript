@@ -19,8 +19,17 @@
  */
 
 
+/**
+ * A key-value pair of a list item.
+ */
 export interface ItemKeyValuePairStringString {
+    /**
+     * The key that identifies the item within the list.
+     */
     'key'?: string | null;
+    /**
+     * The value associated with the key.
+     */
     'value'?: string | null;
 }
 

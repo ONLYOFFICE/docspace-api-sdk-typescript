@@ -26,14 +26,41 @@ import type { CultureSpecificExternalResource } from './culture-specific-externa
  * The external resources settings.
  */
 export interface CultureSpecificExternalResources {
+    /**
+     * The link to the product API.
+     */
     'api'?: CultureSpecificExternalResource;
+    /**
+     * The link to the common product information.
+     */
     'common'?: CultureSpecificExternalResource;
+    /**
+     * The link to the forum.
+     */
     'forum'?: CultureSpecificExternalResource;
+    /**
+     * The link to the Help Center.
+     */
     'helpcenter'?: CultureSpecificExternalResource;
+    /**
+     * The link to the product integrations.
+     */
     'integrations'?: CultureSpecificExternalResource;
+    /**
+     * The link to the product website.
+     */
     'site'?: CultureSpecificExternalResource;
+    /**
+     * The link to the product social nerworks.
+     */
     'socialNetworks'?: CultureSpecificExternalResource;
+    /**
+     * The link to the product support.
+     */
     'support'?: CultureSpecificExternalResource;
+    /**
+     * The link to the video guides.
+     */
     'videoguides'?: CultureSpecificExternalResource;
 }
 

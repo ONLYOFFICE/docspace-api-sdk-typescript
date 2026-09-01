@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **medium** | **string** | The medium logo. | [default to undefined]
 **small** | **string** | The small logo. | [default to undefined]
 **color** | **string** | The logo color. | [optional] [default to undefined]
-**cover** | [**LogoCover**](LogoCover.md) |  | [optional] [default to undefined]
+**cover** | [**LogoCover**](LogoCover.md) | The logo cover. | [optional] [default to undefined]
 
 ## Example
 

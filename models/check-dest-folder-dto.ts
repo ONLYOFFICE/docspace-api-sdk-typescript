@@ -29,6 +29,9 @@ import type { FileEntryBaseDto } from './file-entry-base-dto';
  * The result of checking whether files can be moved or copied to the specified folder.
  */
 export interface CheckDestFolderDto {
+    /**
+     * The result of the validation operation.
+     */
     'result'?: CheckDestFolderResult;
     /**
      * The list of files in the destination folder.

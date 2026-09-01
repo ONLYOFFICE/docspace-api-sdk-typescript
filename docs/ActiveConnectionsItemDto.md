@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **city** | **string** | The active connection city. | [optional] [default to undefined]
 **browser** | **string** | The active connection browser. | [optional] [default to undefined]
 **platform** | **string** | The active connection platform. | [optional] [default to undefined]
-**date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
+**date** | **string** | The active connection date. | [optional] [default to undefined]
 **page** | **string** | The active connection page. | [optional] [default to undefined]
 
 ## Example

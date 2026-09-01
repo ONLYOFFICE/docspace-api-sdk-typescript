@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **error** | **string** | The error message if the synchronization failed. | [optional] [default to undefined]
 **percentage** | **number** | The progress percentage of the synchronization. | [default to undefined]
 **isCompleted** | **boolean** | Specifies whether the synchronization is completed or not. | [default to undefined]
-**status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) |  | [default to undefined]
+**status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) | The status of the synchronization task. | [default to undefined]
 **forms** | [**Array&lt;ExternalDbSyncFormResultDto&gt;**](ExternalDbSyncFormResultDto.md) | The synchronization results for all original forms in the room. | [default to undefined]
 
 ## Example

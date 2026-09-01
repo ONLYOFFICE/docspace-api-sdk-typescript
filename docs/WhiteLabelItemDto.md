@@ -6,10 +6,10 @@ The white label item parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | [**WhiteLabelLogoType**](WhiteLabelLogoType.md) |  | [optional] [default to undefined]
+**type** | [**WhiteLabelLogoType**](WhiteLabelLogoType.md) | The white label logo type. | [optional] [default to undefined]
 **name** | **string** | The white label file name. | [optional] [default to undefined]
-**size** | [**IMagickGeometry**](IMagickGeometry.md) |  | [optional] [default to undefined]
-**path** | [**WhiteLabelItemPathDto**](WhiteLabelItemPathDto.md) |  | [optional] [default to undefined]
+**size** | [**WhiteLabelItemSizeDto**](WhiteLabelItemSizeDto.md) | The white label file size. | [optional] [default to undefined]
+**path** | [**WhiteLabelItemPathDto**](WhiteLabelItemPathDto.md) | The white label file path. | [optional] [default to undefined]
 
 ## Example
 

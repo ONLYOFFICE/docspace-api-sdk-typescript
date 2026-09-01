@@ -19,6 +19,9 @@
  */
 
 
+/**
+ * The metadata of a single form field.
+ */
 export interface FormMetadata {
     /**
      * The form field key.

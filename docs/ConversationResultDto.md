@@ -7,10 +7,10 @@ The result of file convertion operation.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** | The conversion operation ID. | [default to undefined]
-**Operation** | [**FileOperationType**](FileOperationType.md) |  | [default to undefined]
+**Operation** | [**FileOperationType**](FileOperationType.md) | The conversion operation type. | [default to undefined]
 **progress** | **number** | The conversion operation progress. | [default to undefined]
 **source** | **string** | The source file for the conversion. | [optional] [default to undefined]
-**result** | **any** | The resulting file after the conversion. | [optional] [default to undefined]
+**result** | **any** |  | [optional] [default to undefined]
 **error** | **string** | The conversion operation error message. | [optional] [default to undefined]
 **processed** | **string** | Specifies if the conversion operation is processed or not. | [optional] [default to undefined]
 

@@ -28,6 +28,8 @@ import type { BooleanWrapper } from '../../models';
 // @ts-ignore
 import type { EmployeeType } from '../../models';
 // @ts-ignore
+import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
 import type { StartReassignRequestDto } from '../../models';
 // @ts-ignore
 import type { StringWrapper } from '../../models';

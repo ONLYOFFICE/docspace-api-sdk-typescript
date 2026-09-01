@@ -30,6 +30,9 @@ export interface OrderBy {
      * Specifies if the order is ascending.
      */
     'is_asc'?: boolean;
+    /**
+     * The parameters by which the files will be sorted.
+     */
     'property'?: SortedByType;
 }
 

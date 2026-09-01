@@ -7,7 +7,7 @@ The room data lifetime information.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **deletePermanently** | **boolean** | Specifies whether to permanently delete the room data or not. | [optional] [default to undefined]
-**period** | [**RoomDataLifetimePeriod**](RoomDataLifetimePeriod.md) |  | [optional] [default to undefined]
+**period** | [**RoomDataLifetimePeriod**](RoomDataLifetimePeriod.md) | Specifies the time period type of the room data lifetime. | [optional] [default to undefined]
 **value** | **number** | Specifies the time period value of the room data lifetime. | [optional] [default to undefined]
 **enabled** | **boolean** | Specifies whether the room data lifetime setting is enabled or not. | [optional] [default to undefined]
 

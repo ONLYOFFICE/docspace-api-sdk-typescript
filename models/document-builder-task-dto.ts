@@ -42,11 +42,11 @@ export interface DocumentBuilderTaskDto {
      * Specifies whether the document building process is completed or not.
      */
     'isCompleted': boolean;
-    'status': DistributedTaskStatus;
     /**
-     * The result file ID.
+     * The status of the document building process.
      */
-    'resultFileId': any | null;
+    'status': DistributedTaskStatus;
+    'resultFileId': any;
     /**
      * The result file name.
      */

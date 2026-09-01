@@ -33,7 +33,10 @@ export interface RoomTemplateDto {
     /**
      * The room template title.
      */
-    'title'?: string | null;
+    'title': string;
+    /**
+     * The room template logo.
+     */
     'logo'?: LogoRequest;
     /**
      * Specifies whether to copy room logo or not.

@@ -29,7 +29,13 @@ import type { FileDtoInteger } from './file-dto-integer';
  * The XLSX report task response parameters.
  */
 export interface XlsxReportResponseDto {
+    /**
+     * The original form file information.
+     */
     'form'?: FileDtoInteger;
+    /**
+     * The Document Builder task information.
+     */
     'task'?: DocumentBuilderTaskDto;
     /**
      * Specifies whether the XLSX report file is newly created or an existing file will be updated.

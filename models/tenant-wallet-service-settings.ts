@@ -34,6 +34,10 @@ export interface TenantWalletServiceSettings {
 }
 
 export const TenantWalletServiceSettingsEnabledServicesEnum = {
+    AISearch: -18,
+    DocsCloudDevPack: -16,
+    DocsCloud: -15,
+    Admin: -14,
     AITools: -13,
     Backup: -12,
     Storage: -11,

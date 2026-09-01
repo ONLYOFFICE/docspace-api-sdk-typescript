@@ -19,8 +19,17 @@
  */
 
 
+/**
+ * The price of a chat model, per token.
+ */
 export interface AiChatPrice {
+    /**
+     * The price of a single prompt token.
+     */
     'prompt'?: number;
+    /**
+     * The price of a single completion token.
+     */
     'completion'?: number;
 }
 

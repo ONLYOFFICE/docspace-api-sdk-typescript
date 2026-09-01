@@ -28,6 +28,8 @@ import type { CdnStorageSettingsWrapper } from '../../models';
 // @ts-ignore
 import type { DoubleWrapper } from '../../models';
 // @ts-ignore
+import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
 import type { ObjectWrapper } from '../../models';
 // @ts-ignore
 import type { StorageArrayWrapper } from '../../models';

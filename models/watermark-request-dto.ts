@@ -30,6 +30,9 @@ export interface WatermarkRequestDto {
      * Specifies whether watermarks are on or off.
      */
     'enabled'?: boolean | null;
+    /**
+     * Specifies whether to display the following addditional information or not: username, user email, user IP address, current date and room name.
+     */
     'additions'?: WatermarkAdditions;
     /**
      * The watermark text.

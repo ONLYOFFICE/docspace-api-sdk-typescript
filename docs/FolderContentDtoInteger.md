@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **files** | [**Array&lt;FileEntryBaseDto&gt;**](FileEntryBaseDto.md) | The list of files in the folder. | [optional] [default to undefined]
 **folders** | [**Array&lt;FileEntryBaseDto&gt;**](FileEntryBaseDto.md) | The list of folders in the folder. | [optional] [default to undefined]
-**current** | [**FolderDtoInteger**](FolderDtoInteger.md) |  | [optional] [default to undefined]
-**pathParts** | **any** | The folder path. | [default to undefined]
+**current** | [**FolderDtoInteger**](FolderDtoInteger.md) | The current folder information. | [optional] [default to undefined]
+**pathParts** | **any** |  | [default to undefined]
 **startIndex** | **number** | The folder start index. | [optional] [default to undefined]
 **count** | **number** | The number of folder elements. | [optional] [default to undefined]
 **total** | **number** | The total number of elements in the folder. | [default to undefined]

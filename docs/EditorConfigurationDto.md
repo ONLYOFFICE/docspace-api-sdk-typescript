@@ -7,18 +7,18 @@ The editor configuration parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **callbackUrl** | **string** | The callback URL of the editor. | [optional] [default to undefined]
-**coEditing** | [**CoEditingConfig**](CoEditingConfig.md) |  | [optional] [default to undefined]
+**coEditing** | [**CoEditingConfig**](CoEditingConfig.md) | The co-editing configuration parameters. | [optional] [default to undefined]
 **createUrl** | **string** | The creation URL of the editor. | [optional] [default to undefined]
-**customization** | [**CustomizationConfigDto**](CustomizationConfigDto.md) |  | [optional] [default to undefined]
-**embedded** | [**EmbeddedConfig**](EmbeddedConfig.md) |  | [optional] [default to undefined]
-**encryptionKeys** | [**EncryptionKeysConfig**](EncryptionKeysConfig.md) |  | [optional] [default to undefined]
+**customization** | [**CustomizationConfigDto**](CustomizationConfigDto.md) | The customization configuration. | [optional] [default to undefined]
+**embedded** | [**EmbeddedConfig**](EmbeddedConfig.md) | The embedded configuration parameters for embedded documents. | [optional] [default to undefined]
+**encryptionKeys** | [**Array&lt;EncryptionKeyDto&gt;**](EncryptionKeyDto.md) | The encryption keys of the editor configuration. | [optional] [default to undefined]
 **lang** | **string** | The language of the editor configuration. | [default to undefined]
 **mode** | **string** | The mode of the editor configuration. | [default to undefined]
 **modeWrite** | **boolean** | Specifies if the mode is write of the editor configuration. | [optional] [default to undefined]
-**plugins** | [**PluginsConfig**](PluginsConfig.md) |  | [optional] [default to undefined]
+**plugins** | [**PluginsConfig**](PluginsConfig.md) | The plugins configuration. | [optional] [default to undefined]
 **recent** | [**Array&lt;RecentConfig&gt;**](RecentConfig.md) | The recent configuration of the editor. | [optional] [default to undefined]
 **templates** | [**Array&lt;TemplatesConfig&gt;**](TemplatesConfig.md) | The templates of the editor configuration. | [optional] [default to undefined]
-**user** | [**UserConfig**](UserConfig.md) |  | [optional] [default to undefined]
+**user** | [**UserConfig**](UserConfig.md) | The user configuration of the editor. | [optional] [default to undefined]
 
 ## Example
 

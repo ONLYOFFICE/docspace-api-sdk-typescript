@@ -7,7 +7,7 @@ The request parameters for the user email.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **email** | **string** | The user email address. | [default to undefined]
-**recaptchaType** | [**RecaptchaType**](RecaptchaType.md) |  | [optional] [default to undefined]
+**recaptchaType** | [**RecaptchaType**](RecaptchaType.md) | The type of CAPTCHA validation used. | [optional] [default to undefined]
 **recaptchaResponse** | **string** | The user\'s response to the CAPTCHA challenge. | [optional] [default to undefined]
 
 ## Example

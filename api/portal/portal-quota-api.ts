@@ -26,9 +26,13 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { DoubleWrapper } from '../../models';
 // @ts-ignore
+import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
 import type { TariffWrapper } from '../../models';
 // @ts-ignore
 import type { TenantQuotaWrapper } from '../../models';
+// @ts-ignore
+import type { UpcomingPaymentArrayWrapper } from '../../models';
 /**
  * PortalQuotaApi - axios parameter creator
  * @export
@@ -250,6 +254,63 @@ export const PortalQuotaApiAxiosParamCreator = function (configuration?: Configu
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Returns the list of upcoming payments based on the active quotas of the current portal tariff.
+         * @summary Get upcoming payments
+         * @param {boolean} [refresh] The value indicating whether the current portal tariff information should be refreshed.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getUpcomingPayments operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-upcoming-payments/
+         */
+        getUpcomingPayments: async (refresh?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/portal/tariff/upcoming`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (refresh !== undefined) {
+                localVarQueryParameter['refresh'] = refresh;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -317,6 +378,21 @@ export const PortalQuotaApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['PortalQuotaApi.getRightQuota']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * Returns the list of upcoming payments based on the active quotas of the current portal tariff.
+         * @summary Get upcoming payments
+         * @param {boolean} [refresh] The value indicating whether the current portal tariff information should be refreshed.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getUpcomingPayments operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-upcoming-payments/
+         */
+        async getUpcomingPayments(refresh?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpcomingPaymentArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUpcomingPayments(refresh, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PortalQuotaApi.getUpcomingPayments']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -372,6 +448,18 @@ export const PortalQuotaApiFactory = function (configuration?: Configuration, ba
         getRightQuota(options?: RawAxiosRequestConfig): AxiosPromise<TenantQuotaWrapper> {
             return localVarFp.getRightQuota(options).then((request) => request(axios, basePath));
         },
+        /**
+         * Returns the list of upcoming payments based on the active quotas of the current portal tariff.
+         * @summary Get upcoming payments
+         * @param {PortalQuotaApiGetUpcomingPaymentsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getUpcomingPayments operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-upcoming-payments/
+         * @throws {RequiredError}
+         */
+        getUpcomingPayments(requestParameters: PortalQuotaApiGetUpcomingPaymentsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<UpcomingPaymentArrayWrapper> {
+            return localVarFp.getUpcomingPayments(requestParameters.refresh, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -385,6 +473,20 @@ export interface PortalQuotaApiGetPortalTariffRequest {
      * The value indicating whether the current portal tariff information should be refreshed.
      * @type {boolean}
      * @memberof PortalQuotaApiGetPortalTariff
+     */
+    readonly refresh?: boolean
+}
+
+/**
+ * Request parameters for getUpcomingPayments operation in PortalQuotaApi.
+ * @export
+ * @interface PortalQuotaApiGetUpcomingPaymentsRequest
+ */
+export interface PortalQuotaApiGetUpcomingPaymentsRequest {
+    /**
+     * The value indicating whether the current portal tariff information should be refreshed.
+     * @type {boolean}
+     * @memberof PortalQuotaApiGetUpcomingPayments
      */
     readonly refresh?: boolean
 }
@@ -439,6 +541,18 @@ export class PortalQuotaApi extends BaseAPI {
      */
     public getRightQuota(options?: RawAxiosRequestConfig) {
         return PortalQuotaApiFp(this.configuration).getRightQuota(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the list of upcoming payments based on the active quotas of the current portal tariff.
+     * @summary Get upcoming payments
+     * @param {PortalQuotaApiGetUpcomingPaymentsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortalQuotaApi
+     */
+    public getUpcomingPayments(requestParameters: PortalQuotaApiGetUpcomingPaymentsRequest = {}, options?: RawAxiosRequestConfig) {
+        return PortalQuotaApiFp(this.configuration).getUpcomingPayments(requestParameters.refresh, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

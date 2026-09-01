@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { LoginEventDto } from './login-event-dto';
 
+/**
+ * The successful API response containing the list of LoginEventDto objects.
+ */
 export interface LoginEventArrayWrapper {
+    /**
+     * The list of LoginEventDto objects returned by the operation.
+     */
     'response'?: Array<LoginEventDto>;
     /**
      * The total number of items in the response

@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 **warning** | **string** | The backup warning message. | [optional] [default to undefined]
 **link** | **string** | The backup link. | [optional] [default to undefined]
 **tenantId** | **number** | The tenant ID. | [optional] [default to undefined]
-**backupProgressEnum** | [**BackupProgressEnum**](BackupProgressEnum.md) |  | [optional] [default to undefined]
-**status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) |  | [optional] [default to undefined]
+**backupProgressEnum** | [**BackupProgressEnum**](BackupProgressEnum.md) | The backup progress type. | [optional] [default to undefined]
+**status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) | The backup progress status. | [optional] [default to undefined]
 **taskId** | **string** | The task ID. | [optional] [default to undefined]
 
 ## Example

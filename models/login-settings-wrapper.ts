@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { LoginSettingsDto } from './login-settings-dto';
 
+/**
+ * The successful API response containing the LoginSettingsDto object.
+ */
 export interface LoginSettingsWrapper {
+    /**
+     * The LoginSettingsDto object returned by the operation.
+     */
     'response'?: LoginSettingsDto;
     /**
      * The total number of items in the response

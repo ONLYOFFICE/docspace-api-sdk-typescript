@@ -40,6 +40,9 @@ export interface CreateRoomFromTemplateDto {
      * The room title.
      */
     'title': string | null;
+    /**
+     * The logo request parameters.
+     */
     'logo'?: LogoRequest;
     /**
      * Specifies whether to copy a logo or not.
@@ -69,7 +72,13 @@ export interface CreateRoomFromTemplateDto {
      * Specifies whether to deny downloads from the room.
      */
     'denyDownload'?: boolean | null;
+    /**
+     * The room data lifetime information.
+     */
     'lifetime'?: RoomDataLifetimeDto;
+    /**
+     * The watermark settings.
+     */
     'watermark'?: WatermarkRequestDto;
     /**
      * Specifies whether the room to be created is private or not.

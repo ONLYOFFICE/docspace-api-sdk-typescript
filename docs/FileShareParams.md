@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **email** | **string** | The email address. | [optional] [default to undefined]
 **shareTo** | **string** | The ID of the user to whom the file will be shared. | [optional] [default to undefined]
-**access** | [**FileShare**](FileShare.md) |  | [optional] [default to undefined]
+**access** | [**FileShare**](FileShare.md) | The sharing access rights. | [optional] [default to undefined]
 
 ## Example
 

@@ -7,10 +7,10 @@ The file history information.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **number** | The unique identifier for the file history entry. | [default to undefined]
-**action** | [**HistoryAction**](HistoryAction.md) |  | [default to undefined]
-**initiator** | [**EmployeeDto**](EmployeeDto.md) |  | [default to undefined]
-**date** | [**ApiDateTime**](ApiDateTime.md) |  | [default to undefined]
-**data** | [**HistoryData**](HistoryData.md) |  | [default to undefined]
+**action** | [**HistoryAction**](HistoryAction.md) | The action performed on the file. | [default to undefined]
+**initiator** | [**EmployeeDto**](EmployeeDto.md) | The action initiator. | [default to undefined]
+**date** | **string** | The date and time when an action on the file was performed. | [default to undefined]
+**data** | [**HistoryData**](HistoryData.md) | The history data. | [default to undefined]
 **related** | [**Array&lt;HistoryDto&gt;**](HistoryDto.md) | The list of related history. | [optional] [default to undefined]
 
 ## Example

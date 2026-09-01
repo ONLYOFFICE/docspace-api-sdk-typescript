@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { TfaSettingsDto } from './tfa-settings-dto';
 
+/**
+ * The successful API response containing the list of TfaSettingsDto objects.
+ */
 export interface TfaSettingsArrayWrapper {
+    /**
+     * The list of TfaSettingsDto objects returned by the operation.
+     */
     'response'?: Array<TfaSettingsDto>;
     /**
      * The total number of items in the response

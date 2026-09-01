@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { ThirdPartyParams } from './third-party-params';
 
+/**
+ * The successful API response containing the list of ThirdPartyParams objects.
+ */
 export interface ThirdPartyParamsArrayWrapper {
+    /**
+     * The list of ThirdPartyParams objects returned by the operation.
+     */
     'response'?: Array<ThirdPartyParams>;
     /**
      * The total number of items in the response

@@ -25,7 +25,13 @@ import type { AceShortWrapper } from './ace-short-wrapper';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the list of AceShortWrapper objects.
+ */
 export interface AceShortWrapperArrayWrapper {
+    /**
+     * The list of AceShortWrapper objects returned by the operation.
+     */
     'response'?: Array<AceShortWrapper>;
     /**
      * The total number of items in the response

@@ -49,6 +49,9 @@ export interface Balance {
      * A list of sub-accounts.
      */
     'subAccounts'?: Array<SubAccount> | null;
+    /**
+     * The most recent credit transaction applied to the account.
+     */
     'lastCredit'?: TransactionInfo;
 }
 

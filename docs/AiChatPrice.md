@@ -1,12 +1,13 @@
 # AiChatPrice
 
+The price of a chat model, per token.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**prompt** | **number** |  | [optional] [default to undefined]
-**completion** | **number** |  | [optional] [default to undefined]
+**prompt** | **number** | The price of a single prompt token. | [optional] [default to undefined]
+**completion** | **number** | The price of a single completion token. | [optional] [default to undefined]
 
 ## Example
 

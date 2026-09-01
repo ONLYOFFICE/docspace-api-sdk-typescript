@@ -32,6 +32,9 @@ import type { ItemKeyValuePairObjectObject } from './item-key-value-pair-object-
  * The backup schedule parameters.
  */
 export interface BackupScheduleDto {
+    /**
+     * The backup storage type.
+     */
     'storageType'?: BackupStorageType;
     /**
      * The backup storage parameters.
@@ -41,6 +44,9 @@ export interface BackupScheduleDto {
      * The maximum number of the stored backup copies.
      */
     'backupsStored'?: number | null;
+    /**
+     * The backup cron parameters.
+     */
     'cronParams'?: Cron;
     /**
      * Specifies if a dump will be created or not.

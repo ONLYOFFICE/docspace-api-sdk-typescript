@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { TfaAppCodeDto } from './tfa-app-code-dto';
 
+/**
+ * The successful API response containing the list of TfaAppCodeDto objects.
+ */
 export interface TfaAppCodeArrayWrapper {
+    /**
+     * The list of TfaAppCodeDto objects returned by the operation.
+     */
     'response'?: Array<TfaAppCodeDto>;
     /**
      * The total number of items in the response

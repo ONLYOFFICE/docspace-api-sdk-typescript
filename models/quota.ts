@@ -23,7 +23,7 @@
 import type { QuotaState } from './quota-state';
 
 /**
- * The quota parameters.  <example>  {    id: 1,    quantity: 50,    wallet: false,    dueDate: 2026-03-31T00:00:00Z,    nextQuantity: 100,    state: Active  }  </example>
+ * The quota parameters.  <example>  {    id: 1,    quantity: 50,    wallet: false,    additional: false,    dueDate: 2026-03-31T00:00:00Z,    nextQuantity: 100,    state: Active  }  </example>
  */
 export interface Quota {
     /**
@@ -46,6 +46,17 @@ export interface Quota {
      * The quota next quantity.
      */
     'nextQuantity'?: number | null;
+    /**
+     * Indicates whether the quota is primary or additional.
+     */
+    'additional'?: boolean;
+    /**
+     * The quota ID to switch to at the next period.
+     */
+    'nextQuota'?: number | null;
+    /**
+     * The quota state.
+     */
     'state'?: QuotaState;
 }
 

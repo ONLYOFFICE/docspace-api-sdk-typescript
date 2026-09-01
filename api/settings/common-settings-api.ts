@@ -38,6 +38,8 @@ import type { EmailActivationSettings } from '../../models';
 // @ts-ignore
 import type { EmailActivationSettingsWrapper } from '../../models';
 // @ts-ignore
+import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
 import type { MailDomainSettingsRequestsDto } from '../../models';
 // @ts-ignore
 import type { ObjectWrapper } from '../../models';

@@ -20,7 +20,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ContinueChatBodyFilesInner } from './continue-chat-body-files-inner';
+import type { DuplicateRequestDtoAllOfFileIds } from './duplicate-request-dto-all-of-file-ids';
 
 /**
  * The request parameters for updating the room quota.
@@ -29,7 +29,7 @@ export interface UpdateRoomsQuotaRequestDtoInteger {
     /**
      * The list of room IDs.
      */
-    'roomIds'?: Array<ContinueChatBodyFilesInner> | null;
+    'roomIds'?: Array<DuplicateRequestDtoAllOfFileIds> | null;
     /**
      * The room quota.
      */

@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { WizardSettings } from './wizard-settings';
 
+/**
+ * The successful API response containing the WizardSettings object.
+ */
 export interface WizardSettingsWrapper {
+    /**
+     * The WizardSettings object returned by the operation.
+     */
     'response'?: WizardSettings;
     /**
      * The total number of items in the response

@@ -50,6 +50,9 @@ export interface UploadSessionResponseDtoInteger {
      * Specifies whether the file has been uploaded.
      */
     'uploaded'?: boolean;
+    /**
+     * The uploaded file information.
+     */
     'file'?: FileDtoInteger;
 }
 

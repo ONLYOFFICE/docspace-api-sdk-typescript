@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { UserExistsResponseDto } from './user-exists-response-dto';
 
+/**
+ * The successful API response containing the UserExistsResponseDto object.
+ */
 export interface UserExistsResponseWrapper {
+    /**
+     * The UserExistsResponseDto object returned by the operation.
+     */
     'response'?: UserExistsResponseDto;
     /**
      * The total number of items in the response

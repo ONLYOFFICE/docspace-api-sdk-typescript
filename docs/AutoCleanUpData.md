@@ -7,7 +7,7 @@ The auto-clearing setting parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **isAutoCleanUp** | **boolean** | Specifies whether to permanently delete files in the Trash folder. | [optional] [default to undefined]
-**gap** | [**DateToAutoCleanUp**](DateToAutoCleanUp.md) |  | [optional] [default to undefined]
+**gap** | [**DateToAutoCleanUp**](DateToAutoCleanUp.md) | The period when the trash bin will be cleared. | [optional] [default to undefined]
 
 ## Example
 

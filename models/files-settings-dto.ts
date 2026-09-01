@@ -79,7 +79,7 @@ export interface FilesSettingsDto {
     /**
      * The list of the convertible extensions.
      */
-    'extsConvertible'?: { [key: string]: Array<string> | null; } | null;
+    'extsConvertible'?: { [key: string]: Array<string> | null; };
     /**
      * The list of the uploadable extensions.
      */
@@ -205,6 +205,9 @@ export interface FilesSettingsDto {
      * Specifies whether to hide the confirmation dialog about the file lifetime in the room.
      */
     'hideConfirmRoomLifetime'?: boolean;
+    /**
+     * The default order of files.
+     */
     'defaultOrder'?: OrderBy;
     /**
      * Specifies whether to forcesave the files or not.
@@ -230,6 +233,9 @@ export interface FilesSettingsDto {
      * Specifies whether to download the .tar.gz files or not.
      */
     'downloadTarGz'?: boolean;
+    /**
+     * The auto-clearing setting parameters.
+     */
     'automaticallyCleanUp'?: AutoCleanUpData;
     /**
      * Specifies whether the file can be searched by its content or not.

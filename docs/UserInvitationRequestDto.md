@@ -7,7 +7,7 @@ The user invitation parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **email** | **string** | The email address. | [optional] [default to undefined]
-**type** | [**EmployeeType**](EmployeeType.md) |  | [optional] [default to undefined]
+**type** | [**EmployeeType**](EmployeeType.md) | The user type. | [optional] [default to undefined]
 
 ## Example
 

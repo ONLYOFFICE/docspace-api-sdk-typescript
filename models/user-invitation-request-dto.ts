@@ -32,7 +32,7 @@ import type { EmployeeType } from './employee-type';
  */
 export type UserInvitationRequestDto = EmailInvitationDto &  {
     /**
-     * 
+     * The user type.
      * @type {EmployeeType}
      * @memberof UserInvitationRequestDto
      */

@@ -40,6 +40,14 @@ export interface TenantWalletSettings {
      */
     'currency'?: string | null;
     /**
+     * The wallet balance below which a low-balance notification is sent. Set internally, not user-configurable.
+     */
+    'lowBalanceThreshold'?: number;
+    /**
+     * Specifies whether a low-balance notification has already been sent for the current dip below ASC.Core.Tenants.TenantWalletSettings.LowBalanceThreshold.
+     */
+    'lowBalanceNotified'?: boolean;
+    /**
      * The date and time when the tenant wallet settings were last modified.
      */
     'lastModified'?: string;

@@ -1,5 +1,6 @@
 # UpdateRoomGroupRequest
 
+The changes to apply to a room group: its name and the rooms to add or remove.
 
 ## Properties
 

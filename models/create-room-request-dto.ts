@@ -57,21 +57,33 @@ export interface CreateRoomRequestDto {
      * Specifies whether to deny downloads from the room.
      */
     'denyDownload'?: boolean | null;
+    /**
+     * The room data lifetime information.
+     */
     'lifetime'?: RoomDataLifetimeDto;
+    /**
+     * The watermark settings.
+     */
     'watermark'?: WatermarkRequestDto;
+    /**
+     * The room logo.
+     */
     'logo'?: LogoRequest;
     /**
      * The list of tags.
      */
     'tags'?: Array<string> | null;
     /**
-     * The room color.
+     * The room color, as a six-digit hexadecimal value without a leading \'#\'.
      */
     'color'?: string | null;
     /**
      * The room cover.
      */
     'cover'?: string | null;
+    /**
+     * The room type.
+     */
     'roomType': RoomType;
     /**
      * Specifies whether the room to be created is private or not.
@@ -81,6 +93,9 @@ export interface CreateRoomRequestDto {
      * The collection of sharing parameters.
      */
     'share'?: Array<FileShareParams> | null;
+    /**
+     * The chat settings.
+     */
     'chatSettings'?: ChatSettings;
     /**
      * Specifies whether to send form data to external database.

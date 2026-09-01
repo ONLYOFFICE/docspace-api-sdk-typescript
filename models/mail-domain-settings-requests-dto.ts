@@ -26,6 +26,9 @@ import type { TenantTrustedDomainsType } from './tenant-trusted-domains-type';
  * The request parameters for configuring trusted mail domains and visitor invitation settings.
  */
 export interface MailDomainSettingsRequestsDto {
+    /**
+     * Defines how trusted domains are handled and validated.
+     */
     'type': TenantTrustedDomainsType;
     /**
      * The list of authorized email domains that are considered trusted.

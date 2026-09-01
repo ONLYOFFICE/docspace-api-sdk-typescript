@@ -24,6 +24,8 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
+import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
 import type { IconRequest } from '../../models';
 // @ts-ignore
 import type { RoomGroupArrayWrapper } from '../../models';
@@ -282,19 +284,15 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * Returns a list of all room groups for the current user.
          * @summary List room groups
-         * @param {number} id The group unique identifier.
          * @param {boolean} [includeMembers] Whether to include group members.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getRoomGroups operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-groups/
          */
-        getRoomGroups: async (id: number, includeMembers?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('getRoomGroups', 'id', id)
+        getRoomGroups: async (includeMembers?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
-            const localVarPath = `/api/2.0/files/group`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarPath = `/api/2.0/files/group`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -478,15 +476,14 @@ export const GroupsApiFp = function(configuration?: Configuration) {
         /**
          * Returns a list of all room groups for the current user.
          * @summary List room groups
-         * @param {number} id The group unique identifier.
          * @param {boolean} [includeMembers] Whether to include group members.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getRoomGroups operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-groups/
          */
-        async getRoomGroups(id: number, includeMembers?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RoomGroupArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomGroups(id, includeMembers, options);
+        async getRoomGroups(includeMembers?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RoomGroupArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomGroups(includeMembers, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupsApi.getRoomGroups']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -574,8 +571,8 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-groups/
          * @throws {RequiredError}
          */
-        getRoomGroups(requestParameters: GroupsApiGetRoomGroupsRequest, options?: RawAxiosRequestConfig): AxiosPromise<RoomGroupArrayWrapper> {
-            return localVarFp.getRoomGroups(requestParameters.id, requestParameters.includeMembers, options).then((request) => request(axios, basePath));
+        getRoomGroups(requestParameters: GroupsApiGetRoomGroupsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<RoomGroupArrayWrapper> {
+            return localVarFp.getRoomGroups(requestParameters.includeMembers, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates room group properties and adds or removes rooms.
@@ -676,13 +673,6 @@ export interface GroupsApiGetRoomGroupInfoRequest {
  */
 export interface GroupsApiGetRoomGroupsRequest {
     /**
-     * The group unique identifier.
-     * @type {number}
-     * @memberof GroupsApiGetRoomGroups
-     */
-    readonly id: number
-
-    /**
      * Whether to include group members.
      * @type {boolean}
      * @memberof GroupsApiGetRoomGroups
@@ -774,8 +764,8 @@ export class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    public getRoomGroups(requestParameters: GroupsApiGetRoomGroupsRequest, options?: RawAxiosRequestConfig) {
-        return GroupsApiFp(this.configuration).getRoomGroups(requestParameters.id, requestParameters.includeMembers, options).then((request) => request(this.axios, this.basePath));
+    public getRoomGroups(requestParameters: GroupsApiGetRoomGroupsRequest = {}, options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).getRoomGroups(requestParameters.includeMembers, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

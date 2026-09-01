@@ -25,7 +25,13 @@ import type { CustomerInfoDto } from './customer-info-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the CustomerInfoDto object.
+ */
 export interface CustomerInfoWrapper {
+    /**
+     * The CustomerInfoDto object returned by the operation.
+     */
     'response'?: CustomerInfoDto;
     /**
      * The total number of items in the response

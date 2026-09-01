@@ -26,6 +26,9 @@ import type { WatermarkAdditions } from './watermark-additions';
  * The watermark settings.
  */
 export interface WatermarkDto {
+    /**
+     * Specifies whether to display in the watermark: username, user email, user ip-adress, current date, and room name.
+     */
     'additions': WatermarkAdditions;
     /**
      * The watermark text.

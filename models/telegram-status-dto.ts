@@ -26,6 +26,9 @@ import type { RegStatus } from './reg-status';
  * The Telegram connection status parameters.
  */
 export interface TelegramStatusDto {
+    /**
+     * The Telegram registration status.
+     */
     'status': RegStatus;
     /**
      * The Telegram username.

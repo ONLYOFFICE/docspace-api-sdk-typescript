@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { TenantUserInvitationSettingsDto } from './tenant-user-invitation-settings-dto';
 
+/**
+ * The successful API response containing the TenantUserInvitationSettingsDto object.
+ */
 export interface TenantUserInvitationSettingsWrapper {
+    /**
+     * The TenantUserInvitationSettingsDto object returned by the operation.
+     */
     'response'?: TenantUserInvitationSettingsDto;
     /**
      * The total number of items in the response

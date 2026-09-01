@@ -19,8 +19,17 @@
  */
 
 
+/**
+ * The IP restriction settings.
+ */
 export interface IPRestrictionsSettings {
+    /**
+     * Specifies if the IP restrictions are enabled or not.
+     */
     'enable'?: boolean;
+    /**
+     * The date and time when the settings were last modified.
+     */
     'lastModified'?: string;
 }
 

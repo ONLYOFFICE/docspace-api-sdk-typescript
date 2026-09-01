@@ -60,6 +60,9 @@ export interface TenantDto {
      * The tenant ID.
      */
     'tenantId'?: number;
+    /**
+     * The tenant industry.
+     */
     'industry'?: TenantIndustry;
     /**
      * The tenant language.
@@ -89,6 +92,9 @@ export interface TenantDto {
      * Specifies if the ONLYOFFICE newsletter is allowed or not.
      */
     'spam'?: boolean;
+    /**
+     * The tenant status.
+     */
     'status'?: TenantStatus;
     /**
      * The date and time when the tenant status was changed.
@@ -106,6 +112,9 @@ export interface TenantDto {
      * The tenant trusted domains in the string format.
      */
     'trustedDomainsRaw'?: string | null;
+    /**
+     * The type of the tenant trusted domains.
+     */
     'trustedDomainsType'?: TenantTrustedDomainsType;
     /**
      * The tenant version

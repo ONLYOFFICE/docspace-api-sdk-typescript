@@ -30,6 +30,9 @@ export interface RoomDataLifetimeDto {
      * Specifies whether to permanently delete the room data or not.
      */
     'deletePermanently'?: boolean;
+    /**
+     * Specifies the time period type of the room data lifetime.
+     */
     'period'?: RoomDataLifetimePeriod;
     /**
      * Specifies the time period value of the room data lifetime.

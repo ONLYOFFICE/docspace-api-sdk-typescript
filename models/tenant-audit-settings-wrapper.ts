@@ -26,6 +26,9 @@ import type { TenantAuditSettings } from './tenant-audit-settings';
  * The tenant audit settings wrapper.
  */
 export interface TenantAuditSettingsWrapper {
+    /**
+     * The tenant audit settings parameters.
+     */
     'settings'?: TenantAuditSettings;
 }
 

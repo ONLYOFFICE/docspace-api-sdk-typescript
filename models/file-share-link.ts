@@ -20,9 +20,6 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ApiDateTime } from './api-date-time';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { LinkType } from './link-type';
 
 /**
@@ -41,7 +38,13 @@ export interface FileShareLink {
      * The URL for accessing the shared content.
      */
     'shareLink'?: string | null;
-    'expirationDate'?: ApiDateTime;
+    /**
+     * The date when the shared link expires.
+     */
+    'expirationDate'?: string | null;
+    /**
+     * The sharing link type (e.g., Invitation).
+     */
     'linkType'?: LinkType;
     /**
      * The password protection for accessing the shared content.

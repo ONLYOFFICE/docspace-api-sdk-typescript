@@ -25,7 +25,13 @@ import type { Balance } from './balance';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the Balance object.
+ */
 export interface BalanceWrapper {
+    /**
+     * The Balance object returned by the operation.
+     */
     'response'?: Balance;
     /**
      * The total number of items in the response

@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { TimezonesRequestsDto } from './timezones-requests-dto';
 
+/**
+ * The successful API response containing the list of TimezonesRequestsDto objects.
+ */
 export interface TimezonesRequestsArrayWrapper {
+    /**
+     * The list of TimezonesRequestsDto objects returned by the operation.
+     */
     'response'?: Array<TimezonesRequestsDto>;
     /**
      * The total number of items in the response

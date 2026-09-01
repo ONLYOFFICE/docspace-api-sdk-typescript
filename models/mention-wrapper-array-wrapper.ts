@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { MentionWrapper } from './mention-wrapper';
 
+/**
+ * The successful API response containing the list of MentionWrapper objects.
+ */
 export interface MentionWrapperArrayWrapper {
+    /**
+     * The list of MentionWrapper objects returned by the operation.
+     */
     'response'?: Array<MentionWrapper>;
     /**
      * The total number of items in the response

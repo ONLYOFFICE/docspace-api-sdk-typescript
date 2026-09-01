@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { PaymentCalculation } from './payment-calculation';
 
+/**
+ * The successful API response containing the PaymentCalculation object.
+ */
 export interface PaymentCalculationWrapper {
+    /**
+     * The PaymentCalculation object returned by the operation.
+     */
     'response'?: PaymentCalculation;
     /**
      * The total number of items in the response

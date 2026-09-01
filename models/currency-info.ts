@@ -19,8 +19,17 @@
  */
 
 
+/**
+ * The currency the AI prices are quoted in.
+ */
 export interface CurrencyInfo {
+    /**
+     * The ISO 4217 code of the currency the prices are quoted in.
+     */
     'code': string | null;
+    /**
+     * The display symbol of the currency.
+     */
     'symbol': string | null;
 }
 

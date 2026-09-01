@@ -20,9 +20,6 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ApiDateTime } from './api-date-time';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { Contact } from './contact';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -80,23 +77,23 @@ export type EmployeeFullDto = EmployeeDto &  {
      */
     'contacts'?: Array<Contact> | null;
     /**
-     * 
+     * The user status.
      * @type {EmployeeStatus}
      * @memberof EmployeeFullDto
      */
     'status'?: EmployeeStatus;
     /**
-     * 
+     * The user activation status.
      * @type {EmployeeActivationStatus}
      * @memberof EmployeeFullDto
      */
     'activationStatus'?: EmployeeActivationStatus;
     /**
-     * 
-     * @type {ApiDateTime}
+     * The date when the user account was terminated.
+     * @type {string}
      * @memberof EmployeeFullDto
      */
-    'terminated'?: ApiDateTime;
+    'terminated'?: string | null;
     /**
      * The user department.
      * @type {string}
@@ -176,7 +173,7 @@ export type EmployeeFullDto = EmployeeDto &  {
      */
     'mobilePhone'?: string | null;
     /**
-     * 
+     * The mobile phone activation status.
      * @type {MobilePhoneActivationStatus}
      * @memberof EmployeeFullDto
      */
@@ -188,7 +185,7 @@ export type EmployeeFullDto = EmployeeDto &  {
      */
     'isSSO'?: boolean;
     /**
-     * 
+     * The user theme settings.
      * @type {DarkThemeSettingsType}
      * @memberof EmployeeFullDto
      */
@@ -230,17 +227,17 @@ export type EmployeeFullDto = EmployeeDto &  {
      */
     'authCookieLifetime'?: number | null;
     /**
-     * 
+     * The user who created the current user.
      * @type {EmployeeDto}
      * @memberof EmployeeFullDto
      */
     'createdBy'?: EmployeeDto;
     /**
-     * 
-     * @type {ApiDateTime}
+     * The user registration date.
+     * @type {string}
      * @memberof EmployeeFullDto
      */
-    'registrationDate'?: ApiDateTime;
+    'registrationDate'?: string | null;
     /**
      * Specifies if the user has a personal folder or not.
      * @type {boolean}

@@ -26,6 +26,8 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { EmployeeFullArrayWrapper } from '../../models';
 // @ts-ignore
+import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
 import type { UpdateMembersQuotaRequestDto } from '../../models';
 /**
  * PeopleQuotaApi - axios parameter creator

@@ -53,7 +53,13 @@ export interface BackupProgress {
      * The tenant ID.
      */
     'tenantId'?: number;
+    /**
+     * The backup progress type.
+     */
     'backupProgressEnum'?: BackupProgressEnum;
+    /**
+     * The backup progress status.
+     */
     'status'?: DistributedTaskStatus;
     /**
      * The task ID.

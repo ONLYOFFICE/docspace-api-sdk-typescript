@@ -6,7 +6,7 @@ The Telegram connection status parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | [**RegStatus**](RegStatus.md) |  | [default to undefined]
+**status** | [**RegStatus**](RegStatus.md) | The Telegram registration status. | [default to undefined]
 **username** | **string** | The Telegram username. | [optional] [default to undefined]
 
 ## Example

@@ -38,7 +38,7 @@ export type FileShareParams = EmailInvitationDto &  {
      */
     'shareTo'?: string;
     /**
-     * 
+     * The sharing access rights.
      * @type {FileShare}
      * @memberof FileShareParams
      */

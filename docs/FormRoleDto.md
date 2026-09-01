@@ -8,12 +8,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **roleName** | **string** | The role name. | [default to undefined]
 **roleColor** | **string** | The role color. | [optional] [default to undefined]
-**user** | [**EmployeeFullDto**](EmployeeFullDto.md) |  | [optional] [default to undefined]
+**user** | [**EmployeeFullDto**](EmployeeFullDto.md) | The user of the role. | [optional] [default to undefined]
 **sequence** | **number** | The role sequence. | [default to undefined]
 **submitted** | **boolean** | Specifies if the role is submitted. | [default to undefined]
-**stopedBy** | [**EmployeeFullDto**](EmployeeFullDto.md) |  | [optional] [default to undefined]
+**stopedBy** | [**EmployeeFullDto**](EmployeeFullDto.md) | The user who stopped the role. | [optional] [default to undefined]
 **history** | **{ [key: string]: string; }** | The role history. | [optional] [default to undefined]
-**roleStatus** | [**FormFillingStatus**](FormFillingStatus.md) |  | [optional] [default to undefined]
+**roleStatus** | [**FormFillingStatus**](FormFillingStatus.md) | The role status. | [optional] [default to undefined]
 
 ## Example
 

@@ -26,6 +26,9 @@ import type { MessageAction } from './message-action';
  * The action performed on the file.
  */
 export interface HistoryAction {
+    /**
+     * The action performed on the file.
+     */
     'id'?: MessageAction;
     /**
      * The action performed on the file.

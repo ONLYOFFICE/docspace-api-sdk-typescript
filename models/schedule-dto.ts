@@ -29,11 +29,17 @@ import type { CronParams } from './cron-params';
  * The backup schedule parameters.
  */
 export interface ScheduleDto {
+    /**
+     * The backup storage type.
+     */
     'storageType': BackupStorageType;
     /**
      * The backup storage parameters.
      */
-    'storageParams': { [key: string]: string | null; } | null;
+    'storageParams': { [key: string]: string | null; };
+    /**
+     * The backup cron parameters.
+     */
     'cronParams': CronParams;
     /**
      * The maximum number of the stored backup copies.

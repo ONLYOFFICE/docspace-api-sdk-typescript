@@ -20,9 +20,6 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ApiDateTime } from './api-date-time';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { FileShare } from './file-share';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -36,8 +33,14 @@ export interface RoomLinkRequest {
      * The room link ID.
      */
     'linkId'?: string;
+    /**
+     * The link sharing rights.
+     */
     'access'?: FileShare;
-    'expirationDate'?: ApiDateTime;
+    /**
+     * The link expiration date.
+     */
+    'expirationDate'?: string | null;
     /**
      * The link scope, whether it is internal or not.
      */
@@ -46,6 +49,9 @@ export interface RoomLinkRequest {
      * The link name.
      */
     'title'?: string | null;
+    /**
+     * The link type.
+     */
     'linkType'?: LinkType;
     /**
      * The link password.

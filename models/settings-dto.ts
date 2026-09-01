@@ -64,6 +64,9 @@ export interface SettingsDto {
      * The list of the trusted domains.
      */
     'trustedDomains'?: Array<string> | null;
+    /**
+     * The type of the trusted domains.
+     */
     'trustedDomainsType'?: TenantTrustedDomainsType;
     /**
      * The language.
@@ -121,12 +124,21 @@ export interface SettingsDto {
      * The wizard token.
      */
     'wizardToken'?: string | null;
+    /**
+     * The password hash.
+     */
     'passwordHash'?: PasswordHasher;
+    /**
+     * The Firebase parameters.
+     */
     'firebase'?: FirebaseDto;
     /**
      * The portal version.
      */
     'version'?: string | null;
+    /**
+     * The type of CAPTCHA validation used.
+     */
     'recaptchaType'?: RecaptchaType;
     /**
      * The ReCAPTCHA public key.
@@ -140,6 +152,9 @@ export interface SettingsDto {
      * The socket URL.
      */
     'socketUrl'?: string | null;
+    /**
+     * The tenant status.
+     */
     'tenantStatus'?: TenantStatus;
     /**
      * The tenant alias.
@@ -149,6 +164,9 @@ export interface SettingsDto {
      * Specifies whether to display the About portal section.
      */
     'displayAbout'?: boolean;
+    /**
+     * The domain validator.
+     */
     'domainValidator'?: TenantDomainValidator;
     /**
      * The Zendesk key.
@@ -179,6 +197,10 @@ export interface SettingsDto {
      */
     'aiEnabled'?: boolean;
     /**
+     * Specifies whether the tenant wallet balance is currently below the low-balance threshold. Only returned to portal administrators.
+     */
+    'walletLowBalance'?: boolean | null;
+    /**
      * The user name validation regex.
      */
     'userNameRegex'?: string | null;
@@ -186,8 +208,17 @@ export interface SettingsDto {
      * The maximum number of invitations to the portal.
      */
     'invitationLimit'?: number | null;
+    /**
+     * The plugins settings.
+     */
     'plugins'?: PluginsDto;
+    /**
+     * The deep link settings.
+     */
     'deepLink': DeepLinkDto;
+    /**
+     * The form gallery settings.
+     */
     'formGallery'?: FormGalleryDto;
     /**
      * The maximum image upload size.
@@ -197,7 +228,13 @@ export interface SettingsDto {
      * The white label logo text.
      */
     'logoText'?: string | null;
+    /**
+     * The external resources settings.
+     */
     'externalResources'?: CultureSpecificExternalResources;
+    /**
+     * Specifies the default folder type for the current settings.
+     */
     'defaultFolderType'?: FolderType;
     /**
      * Specifies if an external database is connected for storing form results.

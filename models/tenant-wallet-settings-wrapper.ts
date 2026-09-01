@@ -26,6 +26,9 @@ import type { TenantWalletSettings } from './tenant-wallet-settings';
  * The wrapper for the tenant wallet settings.
  */
 export interface TenantWalletSettingsWrapper {
+    /**
+     * The tenant wallet settings.
+     */
     'settings'?: TenantWalletSettings;
 }
 

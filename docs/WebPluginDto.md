@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **pluginName** | **string** | The name by which the web plugin is registered in the window object. | [default to undefined]
 **scopes** | **string** | The web plugin scopes. | [default to undefined]
 **image** | **string** | The web plugin image. | [default to undefined]
-**createBy** | [**EmployeeDto**](EmployeeDto.md) |  | [default to undefined]
+**createBy** | [**EmployeeDto**](EmployeeDto.md) | The user who created the web plugin. | [default to undefined]
 **createOn** | **string** | The date and time when the web plugin was created. | [default to undefined]
 **enabled** | **boolean** | Specifies if the web plugin is enabled or not. | [default to undefined]
 **system** | **boolean** | Specifies if the web plugin is system or not. | [default to undefined]
@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **settings** | **string** | The web plugin settings. | [default to undefined]
 **nameLocale** | **{ [key: string]: string | null; }** | The web plugin localized name. | [optional] [default to undefined]
 **descriptionLocale** | **{ [key: string]: string | null; }** | The web plugin localized description. | [optional] [default to undefined]
+**runtime** | **string** | The web plugin loading method | [optional] [default to undefined]
 
 ## Example
 
@@ -51,6 +52,7 @@ const instance: WebPluginDto = {
     settings,
     nameLocale,
     descriptionLocale,
+    runtime,
 };
 ```
 

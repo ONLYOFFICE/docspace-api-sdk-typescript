@@ -51,21 +51,33 @@ export interface UpdateRoomRequest {
      * Specifies whether to deny downloads from the third-party room.
      */
     'denyDownload'?: boolean | null;
+    /**
+     * The room data lifetime information.
+     */
     'lifetime'?: RoomDataLifetimeDto;
+    /**
+     * The watermark settings.
+     */
     'watermark'?: WatermarkRequestDto;
+    /**
+     * The room logo.
+     */
     'logo'?: LogoRequest;
     /**
      * The list of tags.
      */
     'tags'?: Array<string> | null;
     /**
-     * The room color.
+     * The room color, as a six-digit hexadecimal value without a leading \'#\'.
      */
     'color'?: string | null;
     /**
      * The room cover.
      */
     'cover'?: string | null;
+    /**
+     * The chat settings.
+     */
     'chatSettings'?: ChatSettings;
     /**
      * Specifies whether to send form data to external database.

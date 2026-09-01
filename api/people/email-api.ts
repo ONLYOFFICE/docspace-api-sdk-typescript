@@ -28,6 +28,8 @@ import type { ChangeEmailRequest } from '../../models';
 // @ts-ignore
 import type { EmployeeFullWrapper } from '../../models';
 // @ts-ignore
+import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
 import type { StringWrapper } from '../../models';
 // @ts-ignore
 import type { UpdateMemberRequestDto } from '../../models';

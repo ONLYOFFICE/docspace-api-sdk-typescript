@@ -25,7 +25,13 @@ import type { BackupProgress } from './backup-progress';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the BackupProgress object.
+ */
 export interface BackupProgressWrapper {
+    /**
+     * The BackupProgress object returned by the operation.
+     */
     'response'?: BackupProgress;
     /**
      * The total number of items in the response

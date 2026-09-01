@@ -19,8 +19,11 @@
  */
 
 
+/**
+ * A key-value pair of a list item.
+ */
 export interface ItemKeyValuePairObjectObject {
-    'key'?: any | null;
-    'value'?: any | null;
+    'key'?: any;
+    'value'?: any;
 }
 

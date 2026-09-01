@@ -30,47 +30,48 @@ import type { MigratingApiFiles } from './migrating-api-files';
 
 /**
  * @type MigratingApiUser
+ * The migrating user parameters.
  * @export
  */
 export type MigratingApiUser = ImportableApiEntity &  {
     /**
-     * 
+     * The user key.
      * @type {string}
      * @memberof MigratingApiUser
      */
     'key'?: string | null;
     /**
-     * 
+     * The user email.
      * @type {string}
      * @memberof MigratingApiUser
      */
     'email'?: string | null;
     /**
-     * 
+     * The user display name.
      * @type {string}
      * @memberof MigratingApiUser
      */
     'displayName'?: string | null;
     /**
-     * 
+     * The user first name.
      * @type {string}
      * @memberof MigratingApiUser
      */
     'firstName'?: string | null;
     /**
-     * 
+     * The user last name.
      * @type {string}
      * @memberof MigratingApiUser
      */
     'lastName'?: string | null;
     /**
-     * 
+     * The user type.
      * @type {EmployeeType}
      * @memberof MigratingApiUser
      */
     'userType'?: EmployeeType;
     /**
-     * 
+     * The user\'s migrating files.
      * @type {MigratingApiFiles}
      * @memberof MigratingApiUser
      */

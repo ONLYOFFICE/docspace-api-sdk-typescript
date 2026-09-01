@@ -75,7 +75,13 @@ export interface DbTenant {
      * The tenant trusted domains raw.
      */
     'trustedDomainsRaw'?: string | null;
+    /**
+     * The type of the tenant trusted domains.
+     */
     'trustedDomainsEnabled'?: TenantTrustedDomainsType;
+    /**
+     * The tenant status.
+     */
     'status'?: TenantStatus;
     /**
      * The date and time when the tenant status was changed.
@@ -97,6 +103,9 @@ export interface DbTenant {
      * The tenant payment ID.
      */
     'paymentId'?: string | null;
+    /**
+     * The tenant industry.
+     */
     'industry'?: TenantIndustry;
     /**
      * The date and time when the tenant was last modified.
@@ -106,6 +115,9 @@ export interface DbTenant {
      * Specifies if the calls are available for the current tenant or not.
      */
     'calls'?: boolean;
+    /**
+     * The database tenant partner parameters.
+     */
     'partner'?: DbTenantPartner;
 }
 

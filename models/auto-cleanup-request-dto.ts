@@ -30,6 +30,9 @@ export interface AutoCleanupRequestDto {
      * Specifies whether to enable the auto-clearing or not.
      */
     'set'?: boolean;
+    /**
+     * The time interval when the auto-clearing will be performed.
+     */
     'gap'?: DateToAutoCleanUp;
 }
 

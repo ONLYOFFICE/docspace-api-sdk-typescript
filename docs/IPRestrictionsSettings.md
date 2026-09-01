@@ -1,12 +1,13 @@
 # IPRestrictionsSettings
 
+The IP restriction settings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**enable** | **boolean** |  | [optional] [default to undefined]
-**lastModified** | **string** |  | [optional] [default to undefined]
+**enable** | **boolean** | Specifies if the IP restrictions are enabled or not. | [optional] [default to undefined]
+**lastModified** | **string** | The date and time when the settings were last modified. | [optional] [default to undefined]
 
 ## Example
 

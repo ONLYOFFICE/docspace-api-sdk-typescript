@@ -1,12 +1,13 @@
 # CurrencyInfo
 
+The currency the AI prices are quoted in.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**code** | **string** |  | [default to undefined]
-**symbol** | **string** |  | [default to undefined]
+**code** | **string** | The ISO 4217 code of the currency the prices are quoted in. | [default to undefined]
+**symbol** | **string** | The display symbol of the currency. | [default to undefined]
 
 ## Example
 

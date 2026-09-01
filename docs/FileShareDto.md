@@ -6,11 +6,11 @@ The file sharing information and access rights.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**access** | [**FileShare**](FileShare.md) |  | [optional] [default to undefined]
-**sharedTo** | **any** | The user who has the access to the specified file. | [optional] [default to undefined]
-**sharedToUser** | [**EmployeeFullDto**](EmployeeFullDto.md) |  | [optional] [default to undefined]
-**sharedToGroup** | [**GroupSummaryDto**](GroupSummaryDto.md) |  | [optional] [default to undefined]
-**sharedLink** | [**FileShareLink**](FileShareLink.md) |  | [optional] [default to undefined]
+**access** | [**FileShare**](FileShare.md) | The access rights type. | [optional] [default to undefined]
+**sharedTo** | **any** |  | [optional] [default to undefined]
+**sharedToUser** | [**EmployeeFullDto**](EmployeeFullDto.md) | The user who has the access to the specified file. | [optional] [default to undefined]
+**sharedToGroup** | [**GroupSummaryDto**](GroupSummaryDto.md) | The user who has the access to the specified file. | [optional] [default to undefined]
+**sharedLink** | [**FileShareLink**](FileShareLink.md) | The user who has the access to the specified file. | [optional] [default to undefined]
 **isLocked** | **boolean** | Specifies if the access right is locked or not. | [default to undefined]
 **isOwner** | **boolean** | Specifies if the user is an owner of the specified file or not. | [default to undefined]
 **canEditAccess** | **boolean** | Specifies if the user can edit the access to the specified file or not. | [default to undefined]
@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **canEditDenyDownload** | **boolean** | Determines whether the user has permission to modify the deny download setting for the file share. | [default to undefined]
 **canEditExpirationDate** | **boolean** | Indicates whether the expiration date of access permissions can be edited. | [default to undefined]
 **canRevoke** | **boolean** | Specifies whether the file sharing access can be revoked by the current user. | [default to undefined]
-**subjectType** | [**SubjectType**](SubjectType.md) |  | [default to undefined]
+**subjectType** | [**SubjectType**](SubjectType.md) | The subject type. | [default to undefined]
 
 ## Example
 

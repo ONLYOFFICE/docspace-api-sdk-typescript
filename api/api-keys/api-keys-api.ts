@@ -32,6 +32,8 @@ import type { BooleanWrapper } from '../../models';
 // @ts-ignore
 import type { CreateApiKeyRequestDto } from '../../models';
 // @ts-ignore
+import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
 import type { STRINGArrayWrapper } from '../../models';
 // @ts-ignore
 import type { UpdateApiKeyRequest } from '../../models';

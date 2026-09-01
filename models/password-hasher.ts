@@ -19,9 +19,21 @@
  */
 
 
+/**
+ * The password hash parameters.
+ */
 export interface PasswordHasher {
+    /**
+     * The password hash size.
+     */
     'size'?: number;
+    /**
+     * The number of iterations to generate the ppassword hash.
+     */
     'iterations'?: number;
+    /**
+     * The salt to generate the ppassword hash.
+     */
     'salt'?: string | null;
 }
 

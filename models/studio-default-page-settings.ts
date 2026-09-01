@@ -22,7 +22,13 @@
 // @ts-ignore
 import type { FolderType } from './folder-type';
 
+/**
+ * The settings that define the folder opened by default after sign-in.
+ */
 export interface StudioDefaultPageSettings {
+    /**
+     * Specifies the type of the default folder associated with the settings.
+     */
     'defaultFolderType'?: FolderType;
     /**
      * The timestamp indicating when the settings were last modified.

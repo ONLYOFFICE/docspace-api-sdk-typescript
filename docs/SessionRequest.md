@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **fileName** | **string** | The file name. | [default to undefined]
 **fileSize** | **number** | The file size. | [optional] [default to undefined]
 **relativePath** | **string** | The relative path to the file. | [optional] [default to undefined]
-**createOn** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
+**createOn** | **string** | The date and time when the file was created. | [optional] [default to undefined]
 **encrypted** | **boolean** | Specifies whether the file is encrypted or not. | [optional] [default to undefined]
 **createNewIfExist** | **boolean** | Specifies whether to create a new file if it already exists. | [optional] [default to undefined]
 

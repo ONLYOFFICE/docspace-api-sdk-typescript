@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { ProviderDto } from './provider-dto';
 
+/**
+ * The successful API response containing the list of ProviderDto objects.
+ */
 export interface ProviderArrayWrapper {
+    /**
+     * The list of ProviderDto objects returned by the operation.
+     */
     'response'?: Array<ProviderDto>;
     /**
      * The total number of items in the response

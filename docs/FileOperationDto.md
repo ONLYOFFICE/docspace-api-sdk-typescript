@@ -7,7 +7,7 @@ The file operation information.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** | The file operation ID. | [default to undefined]
-**Operation** | [**FileOperationType**](FileOperationType.md) |  | [default to undefined]
+**Operation** | [**FileOperationType**](FileOperationType.md) | The file operation type. | [default to undefined]
 **progress** | **number** | The file operation progress in percentage. | [default to undefined]
 **error** | **string** | The file operation error message. | [default to undefined]
 **processed** | **string** | The file operation processing status. | [default to undefined]
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **url** | **string** | The file operation URL. | [optional] [default to undefined]
 **files** | [**Array&lt;FileEntryBaseDto&gt;**](FileEntryBaseDto.md) | The list of files of the file operation. | [optional] [default to undefined]
 **folders** | [**Array&lt;FileEntryBaseDto&gt;**](FileEntryBaseDto.md) | The list of folders of the file operation. | [optional] [default to undefined]
-**status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) |  | [optional] [default to undefined]
+**status** | [**DistributedTaskStatus**](DistributedTaskStatus.md) | The status of the distributed task related to the file operation. | [optional] [default to undefined]
 
 ## Example
 

@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { StudioDefaultPageSettings } from './studio-default-page-settings';
 
+/**
+ * The successful API response containing the StudioDefaultPageSettings object.
+ */
 export interface StudioDefaultPageSettingsWrapper {
+    /**
+     * The StudioDefaultPageSettings object returned by the operation.
+     */
     'response'?: StudioDefaultPageSettings;
     /**
      * The total number of items in the response

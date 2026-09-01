@@ -22,15 +22,45 @@
 // @ts-ignore
 import type { ExternalDatabaseType } from './external-database-type';
 
+/**
+ * The connection parameters of an external database.
+ */
 export interface ExternalDatabaseSettings {
+    /**
+     * The engine of the external database.
+     */
     'databaseType'?: string | null;
+    /**
+     * The engine of an external database.
+     */
     'databaseTypeEnum'?: ExternalDatabaseType;
+    /**
+     * The host name or the IP address of the database server.
+     */
     'dbHost'?: string | null;
+    /**
+     * The port the database server listens on.
+     */
     'dbPort'?: number;
+    /**
+     * The name of the database to connect to.
+     */
     'dbName'?: string | null;
+    /**
+     * The user name to connect with.
+     */
     'dbUser'?: string | null;
+    /**
+     * The password to connect with.
+     */
     'dbPassword'?: string | null;
+    /**
+     * Specifies whether the connection to the database is secured with SSL.
+     */
     'dbSsl'?: boolean;
+    /**
+     * The path to the database file, used by the SQLite engine only.
+     */
     'sqliteFilePath'?: string | null;
 }
 

@@ -24,6 +24,8 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
+import type { ActiveServiceArrayWrapper } from '../../models';
+// @ts-ignore
 import type { AiPricesResponseWrapper } from '../../models';
 // @ts-ignore
 import type { BalanceWrapper } from '../../models';
@@ -32,15 +34,23 @@ import type { BooleanWrapper } from '../../models';
 // @ts-ignore
 import type { ChangeWalletServiceStateRequestDto } from '../../models';
 // @ts-ignore
-import type { CreditAiBalanceRequestDto } from '../../models';
-// @ts-ignore
 import type { CurrenciesArrayWrapper } from '../../models';
 // @ts-ignore
 import type { CustomerInfoWrapper } from '../../models';
 // @ts-ignore
+import type { CustomerMonthlyUsageArrayWrapper } from '../../models';
+// @ts-ignore
+import type { CustomerMonthlyUsageReportRequestDto } from '../../models';
+// @ts-ignore
 import type { CustomerOperationsReportRequestDto } from '../../models';
 // @ts-ignore
+import type { CustomerServiceUsageReportRequestDto } from '../../models';
+// @ts-ignore
+import type { CustomerServiceUsageReportWrapper } from '../../models';
+// @ts-ignore
 import type { DocumentBuilderTaskWrapper } from '../../models';
+// @ts-ignore
+import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
 import type { GetPortalPrices200Response } from '../../models';
 // @ts-ignore
@@ -66,15 +76,17 @@ import type { RestrictedModelsResponseWrapper } from '../../models';
 // @ts-ignore
 import type { SalesRequestsDto } from '../../models';
 // @ts-ignore
-import type { ServicePaymentWrapper } from '../../models';
-// @ts-ignore
 import type { SetRestrictedAiModelsRequestDto } from '../../models';
 // @ts-ignore
 import type { StringWrapper } from '../../models';
 // @ts-ignore
+import type { SubscriptionBalanceInfoWrapper } from '../../models';
+// @ts-ignore
 import type { TenantWalletService } from '../../models';
 // @ts-ignore
 import type { TenantWalletServiceSettingsWrapper } from '../../models';
+// @ts-ignore
+import type { TenantWalletSettingsResponseWrapper } from '../../models';
 // @ts-ignore
 import type { TenantWalletSettingsWrapper } from '../../models';
 // @ts-ignore
@@ -206,6 +218,62 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * Starts generating a customer monthly usage report as an xlsx file and saves it in Documents.
+         * @summary Start the customer monthly usage report generation
+         * @param {CustomerMonthlyUsageReportRequestDto} [customerMonthlyUsageReportRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for createCustomerMonthlyUsageReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-customer-monthly-usage-report/
+         */
+        createCustomerMonthlyUsageReport: async (customerMonthlyUsageReportRequestDto?: CustomerMonthlyUsageReportRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/portal/payment/customer/usage/monthly/report`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(customerMonthlyUsageReportRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Starts generating a customer operations report as an xlsx file and saves it in Documents.
          * @summary Start the customer operations report generation
          * @param {CustomerOperationsReportRequestDto} [customerOperationsReportRequestDto] 
@@ -262,17 +330,17 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Credits AI quota to the customer AI sub-account from their main balance.  Requires the customer to have a configured payment method.
-         * @summary Credit AI balance
-         * @param {CreditAiBalanceRequestDto} [creditAiBalanceRequestDto] 
+         * Starts generating a customer service usage report as an xlsx file and saves it in Documents.
+         * @summary Start the customer service usage report generation
+         * @param {CustomerServiceUsageReportRequestDto} [customerServiceUsageReportRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for creditAiBalance operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/credit-ai-balance/
+         * REST API Reference for createCustomerServiceUsageReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-customer-service-usage-report/
          */
-        creditAiBalance: async (creditAiBalanceRequestDto?: CreditAiBalanceRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createCustomerServiceUsageReport: async (customerServiceUsageReportRequestDto?: CustomerServiceUsageReportRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
-            const localVarPath = `/api/2.0/portal/payment/creditaibalance`;
+            const localVarPath = `/api/2.0/portal/payment/customer/usage/report`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -310,7 +378,59 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(creditAiBalanceRequestDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(customerServiceUsageReportRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns all the active wallet services (quotas) of the current portal: the active additional quotas  from the tariff, plus the services enabled manually via the wallet service settings.
+         * @summary Get the active wallet services
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getActiveServices operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-active-services/
+         */
+        getActiveServices: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/portal/payment/activeservices`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -422,63 +542,6 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
 
             if (successUrl !== undefined) {
                 localVarQueryParameter['SuccessUrl'] = successUrl;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns the AI quota balance of a customer from the accounting service.
-         * @summary Get the customer AI balance
-         * @param {boolean} [refresh] Specifies whether to refresh the payment information cache or not.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getCustomerAiBalance operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-ai-balance/
-         */
-        getCustomerAiBalance: async (refresh?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-
-            const localVarPath = `/api/2.0/portal/payment/customer/aibalance`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-            if (refresh !== undefined) {
-                localVarQueryParameter['refresh'] = refresh;
             }
 
 
@@ -607,11 +670,129 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * Returns the customer spending aggregated per calendar month from the accounting service.
+         * @summary Get the customer monthly usage
+         * @param {string} [startDate] Start of the period (inclusive).
+         * @param {string} [endDate] End of the period (inclusive).
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getCustomerMonthlyUsage operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-monthly-usage/
+         */
+        getCustomerMonthlyUsage: async (startDate?: string, endDate?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/portal/payment/customer/usage/monthly`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (startDate !== undefined) {
+                localVarQueryParameter['startDate'] = (startDate as any instanceof Date) ?
+                    (startDate as any).toISOString() :
+                    startDate;
+            }
+
+            if (endDate !== undefined) {
+                localVarQueryParameter['endDate'] = (endDate as any instanceof Date) ?
+                    (endDate as any).toISOString() :
+                    endDate;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the status of generating a customer monthly usage report.
+         * @summary Get the status of the customer monthly usage report generation
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getCustomerMonthlyUsageReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-monthly-usage-report/
+         */
+        getCustomerMonthlyUsageReport: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/portal/payment/customer/usage/monthly/report`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns the report of customer operations from the accounting service.
          * @summary Get the customer operations
          * @param {number} [offset] The number of items to skip for pagination. The default value is 0.
          * @param {number} [limit] The maximum number of items to return for pagination. The default value is 25.
-         * @param {string} [serviceName] The service name.
+         * @param {Array<string>} [serviceName] The service name list. A single string is also accepted for backward compatibility.
          * @param {string} [startDate] The report start date.
          * @param {string} [endDate] The report end date.
          * @param {string} [participantName] The participant name.
@@ -626,7 +807,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * REST API Reference for getCustomerOperations operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-operations/
          */
-        getCustomerOperations: async (offset?: number, limit?: number, serviceName?: string, startDate?: string, endDate?: string, participantName?: string, credit?: boolean, debit?: boolean, type?: OperationType, status?: OperationStatus, orderBy?: string, orderType?: OperationOrderType, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getCustomerOperations: async (offset?: number, limit?: number, serviceName?: Array<string>, startDate?: string, endDate?: string, participantName?: string, credit?: boolean, debit?: boolean, type?: OperationType, status?: OperationStatus, orderBy?: string, orderType?: OperationOrderType, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/portal/payment/customer/operations`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -667,7 +848,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['limit'] = limit;
             }
 
-            if (serviceName !== undefined) {
+            if (serviceName) {
                 localVarQueryParameter['ServiceName'] = serviceName;
             }
 
@@ -733,6 +914,164 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
         getCustomerOperationsReport: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/portal/payment/customer/operationsreport`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the customer usage statistics aggregated per service from the accounting service.
+         * @summary Get the customer service usage
+         * @param {Array<string>} [serviceName] The service name list.
+         * @param {string} [participantName] The participant name.
+         * @param {OperationStatus} [status] The operation status to filter by.
+         * @param {string} [startDate] Start of the period (inclusive).
+         * @param {string} [endDate] End of the period (inclusive).
+         * @param {{ [key: string]: string; }} [metadata] Metadata key-value pairs to filter by.
+         * @param {number} [offset] The number of items to skip for pagination. The default value is 0.
+         * @param {number} [limit] The maximum number of items to return for pagination. The default value is 25.
+         * @param {string} [orderBy] The field to order by.
+         * @param {OperationOrderType} [orderType] Order direction: Ascending or Descending.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getCustomerServiceUsage operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-service-usage/
+         */
+        getCustomerServiceUsage: async (serviceName?: Array<string>, participantName?: string, status?: OperationStatus, startDate?: string, endDate?: string, metadata?: { [key: string]: string; }, offset?: number, limit?: number, orderBy?: string, orderType?: OperationOrderType, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/portal/payment/customer/usage`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (serviceName) {
+                localVarQueryParameter['ServiceName'] = serviceName;
+            }
+
+            if (participantName !== undefined) {
+                localVarQueryParameter['ParticipantName'] = participantName;
+            }
+
+            if (status !== undefined) {
+                localVarQueryParameter['Status'] = status;
+            }
+
+            if (startDate !== undefined) {
+                localVarQueryParameter['StartDate'] = (startDate as any instanceof Date) ?
+                    (startDate as any).toISOString() :
+                    startDate;
+            }
+
+            if (endDate !== undefined) {
+                localVarQueryParameter['EndDate'] = (endDate as any instanceof Date) ?
+                    (endDate as any).toISOString() :
+                    endDate;
+            }
+
+            if (metadata !== undefined) {
+                localVarQueryParameter['Metadata'] = metadata;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (orderBy !== undefined) {
+                localVarQueryParameter['OrderBy'] = orderBy;
+            }
+
+            if (orderType !== undefined) {
+                localVarQueryParameter['OrderType'] = orderType;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the status of generating a customer service usage report.
+         * @summary Get the status of the customer service usage report generation
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getCustomerServiceUsageReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-service-usage-report/
+         */
+        getCustomerServiceUsageReport: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/portal/payment/customer/usage/report`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -887,12 +1226,13 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * Returns the available portal quotas.
          * @summary Get quotas
          * @param {boolean} [wallet] Specifies whether to return the wallet quotas only.
+         * @param {boolean} [additional] Specifies whether to return additional quotas only.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getPaymentQuotas operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-quotas/
          */
-        getPaymentQuotas: async (wallet?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getPaymentQuotas: async (wallet?: boolean, additional?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/portal/payment/quotas`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -927,6 +1267,10 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
 
             if (wallet !== undefined) {
                 localVarQueryParameter['wallet'] = wallet;
+            }
+
+            if (additional !== undefined) {
+                localVarQueryParameter['additional'] = additional;
             }
 
 
@@ -1116,6 +1460,58 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
         getRestrictedAiModels: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/portal/payment/ai-model/restrictions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the information about the current subscription and its unused (prorated) balance.
+         * @summary Get the subscription balance information
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getSubscriptionBalanceInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-subscription-balance-info/
+         */
+        getSubscriptionBalanceInfo: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/portal/payment/subscription/balance`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1373,6 +1769,62 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * Cancels the current subscription, moves its unused balance to the wallet, and purchases the requested number of  admins from the wallet. If the wallet balance is not enough, it is topped up for the missing amount first  (with several attempts, as the balance may be consumed concurrently).
+         * @summary Move the subscription balance to the wallet and purchase admins
+         * @param {QuantityRequestDto} [quantityRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for moveSubscriptionToWallet operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/move-subscription-to-wallet/
+         */
+        moveSubscriptionToWallet: async (quantityRequestDto?: QuantityRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/portal/payment/subscription/movetowallet`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(quantityRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Sends a request for the portal payment.
          * @summary Send a payment request
          * @param {SalesRequestsDto} [salesRequestsDto] 
@@ -1429,7 +1881,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Overwrites the entire set of restricted AI model IDs for the current tenant.  The request body must contain the complete desired set — to add a restriction, include the new model alongside existing ones;  to remove one, omit it. An empty set lifts all restrictions. Only the portal payer can perform this action.
+         * Overwrites the entire set of restricted AI model IDs for the current tenant.  The request body must contain the complete desired set — to add a restriction, include the new model alongside existing ones;  to remove one, omit it. An empty set lifts all restrictions. Only portal administrators can perform this action.
          * @summary Set restricted AI models
          * @param {SetRestrictedAiModelsRequestDto} [setRestrictedAiModelsRequestDto] 
          * @param {*} [options] Override http request option.
@@ -1541,6 +1993,58 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * Terminates generating a customer monthly usage report.
+         * @summary Terminate the customer monthly usage report generation
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for terminateCustomerMonthlyUsageReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-customer-monthly-usage-report/
+         */
+        terminateCustomerMonthlyUsageReport: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/portal/payment/customer/usage/monthly/report`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Terminates generating a customer operations report.
          * @summary Terminate the customer operations report generation
          * @param {*} [options] Override http request option.
@@ -1551,6 +2055,58 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
         terminateCustomerOperationsReport: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/portal/payment/customer/operationsreport`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Terminates generating a customer service usage report.
+         * @summary Terminate the customer service usage report generation
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for terminateCustomerServiceUsageReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-customer-service-usage-report/
+         */
+        terminateCustomerServiceUsageReport: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/portal/payment/customer/usage/report`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1801,6 +2357,21 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Starts generating a customer monthly usage report as an xlsx file and saves it in Documents.
+         * @summary Start the customer monthly usage report generation
+         * @param {CustomerMonthlyUsageReportRequestDto} [customerMonthlyUsageReportRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for createCustomerMonthlyUsageReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-customer-monthly-usage-report/
+         */
+        async createCustomerMonthlyUsageReport(customerMonthlyUsageReportRequestDto?: CustomerMonthlyUsageReportRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentBuilderTaskWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createCustomerMonthlyUsageReport(customerMonthlyUsageReportRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.createCustomerMonthlyUsageReport']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Starts generating a customer operations report as an xlsx file and saves it in Documents.
          * @summary Start the customer operations report generation
          * @param {CustomerOperationsReportRequestDto} [customerOperationsReportRequestDto] 
@@ -1816,18 +2387,32 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Credits AI quota to the customer AI sub-account from their main balance.  Requires the customer to have a configured payment method.
-         * @summary Credit AI balance
-         * @param {CreditAiBalanceRequestDto} [creditAiBalanceRequestDto] 
+         * Starts generating a customer service usage report as an xlsx file and saves it in Documents.
+         * @summary Start the customer service usage report generation
+         * @param {CustomerServiceUsageReportRequestDto} [customerServiceUsageReportRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for creditAiBalance operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/credit-ai-balance/
+         * REST API Reference for createCustomerServiceUsageReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-customer-service-usage-report/
          */
-        async creditAiBalance(creditAiBalanceRequestDto?: CreditAiBalanceRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServicePaymentWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.creditAiBalance(creditAiBalanceRequestDto, options);
+        async createCustomerServiceUsageReport(customerServiceUsageReportRequestDto?: CustomerServiceUsageReportRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentBuilderTaskWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createCustomerServiceUsageReport(customerServiceUsageReportRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PaymentApi.creditAiBalance']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.createCustomerServiceUsageReport']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns all the active wallet services (quotas) of the current portal: the active additional quotas  from the tariff, plus the services enabled manually via the wallet service settings.
+         * @summary Get the active wallet services
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getActiveServices operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-active-services/
+         */
+        async getActiveServices(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ActiveServiceArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getActiveServices(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.getActiveServices']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1861,21 +2446,6 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the AI quota balance of a customer from the accounting service.
-         * @summary Get the customer AI balance
-         * @param {boolean} [refresh] Specifies whether to refresh the payment information cache or not.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getCustomerAiBalance operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-ai-balance/
-         */
-        async getCustomerAiBalance(refresh?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BalanceWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getCustomerAiBalance(refresh, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PaymentApi.getCustomerAiBalance']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
          * Returns the customer balance from the accounting service.
          * @summary Get the customer balance
          * @param {boolean} [refresh] Specifies whether to refresh the payment information cache or not.
@@ -1906,11 +2476,41 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns the customer spending aggregated per calendar month from the accounting service.
+         * @summary Get the customer monthly usage
+         * @param {string} [startDate] Start of the period (inclusive).
+         * @param {string} [endDate] End of the period (inclusive).
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getCustomerMonthlyUsage operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-monthly-usage/
+         */
+        async getCustomerMonthlyUsage(startDate?: string, endDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomerMonthlyUsageArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCustomerMonthlyUsage(startDate, endDate, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.getCustomerMonthlyUsage']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the status of generating a customer monthly usage report.
+         * @summary Get the status of the customer monthly usage report generation
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getCustomerMonthlyUsageReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-monthly-usage-report/
+         */
+        async getCustomerMonthlyUsageReport(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentBuilderTaskWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCustomerMonthlyUsageReport(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.getCustomerMonthlyUsageReport']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns the report of customer operations from the accounting service.
          * @summary Get the customer operations
          * @param {number} [offset] The number of items to skip for pagination. The default value is 0.
          * @param {number} [limit] The maximum number of items to return for pagination. The default value is 25.
-         * @param {string} [serviceName] The service name.
+         * @param {Array<string>} [serviceName] The service name list. A single string is also accepted for backward compatibility.
          * @param {string} [startDate] The report start date.
          * @param {string} [endDate] The report end date.
          * @param {string} [participantName] The participant name.
@@ -1925,7 +2525,7 @@ export const PaymentApiFp = function(configuration?: Configuration) {
          * REST API Reference for getCustomerOperations operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-operations/
          */
-        async getCustomerOperations(offset?: number, limit?: number, serviceName?: string, startDate?: string, endDate?: string, participantName?: string, credit?: boolean, debit?: boolean, type?: OperationType, status?: OperationStatus, orderBy?: string, orderType?: OperationOrderType, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ReportWrapper>> {
+        async getCustomerOperations(offset?: number, limit?: number, serviceName?: Array<string>, startDate?: string, endDate?: string, participantName?: string, credit?: boolean, debit?: boolean, type?: OperationType, status?: OperationStatus, orderBy?: string, orderType?: OperationOrderType, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ReportWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCustomerOperations(offset, limit, serviceName, startDate, endDate, participantName, credit, debit, type, status, orderBy, orderType, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaymentApi.getCustomerOperations']?.[localVarOperationServerIndex]?.url;
@@ -1943,6 +2543,44 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCustomerOperationsReport(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaymentApi.getCustomerOperationsReport']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the customer usage statistics aggregated per service from the accounting service.
+         * @summary Get the customer service usage
+         * @param {Array<string>} [serviceName] The service name list.
+         * @param {string} [participantName] The participant name.
+         * @param {OperationStatus} [status] The operation status to filter by.
+         * @param {string} [startDate] Start of the period (inclusive).
+         * @param {string} [endDate] End of the period (inclusive).
+         * @param {{ [key: string]: string; }} [metadata] Metadata key-value pairs to filter by.
+         * @param {number} [offset] The number of items to skip for pagination. The default value is 0.
+         * @param {number} [limit] The maximum number of items to return for pagination. The default value is 25.
+         * @param {string} [orderBy] The field to order by.
+         * @param {OperationOrderType} [orderType] Order direction: Ascending or Descending.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getCustomerServiceUsage operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-service-usage/
+         */
+        async getCustomerServiceUsage(serviceName?: Array<string>, participantName?: string, status?: OperationStatus, startDate?: string, endDate?: string, metadata?: { [key: string]: string; }, offset?: number, limit?: number, orderBy?: string, orderType?: OperationOrderType, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomerServiceUsageReportWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCustomerServiceUsage(serviceName, participantName, status, startDate, endDate, metadata, offset, limit, orderBy, orderType, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.getCustomerServiceUsage']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the status of generating a customer service usage report.
+         * @summary Get the status of the customer service usage report generation
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getCustomerServiceUsageReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-service-usage-report/
+         */
+        async getCustomerServiceUsageReport(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentBuilderTaskWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCustomerServiceUsageReport(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.getCustomerServiceUsageReport']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1978,13 +2616,14 @@ export const PaymentApiFp = function(configuration?: Configuration) {
          * Returns the available portal quotas.
          * @summary Get quotas
          * @param {boolean} [wallet] Specifies whether to return the wallet quotas only.
+         * @param {boolean} [additional] Specifies whether to return additional quotas only.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getPaymentQuotas operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-quotas/
          */
-        async getPaymentQuotas(wallet?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QuotaArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getPaymentQuotas(wallet, options);
+        async getPaymentQuotas(wallet?: boolean, additional?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QuotaArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPaymentQuotas(wallet, additional, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaymentApi.getPaymentQuotas']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -2048,6 +2687,20 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns the information about the current subscription and its unused (prorated) balance.
+         * @summary Get the subscription balance information
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getSubscriptionBalanceInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-subscription-balance-info/
+         */
+        async getSubscriptionBalanceInfo(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionBalanceInfoWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSubscriptionBalanceInfo(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.getSubscriptionBalanceInfo']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Retrieves configuration settings related to the wallet service associated with the current tenant.
          * @summary Gets the wallet service settings for the tenant.
          * @param {*} [options] Override http request option.
@@ -2069,7 +2722,7 @@ export const PaymentApiFp = function(configuration?: Configuration) {
          * REST API Reference for getTenantWalletSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-wallet-settings/
          */
-        async getTenantWalletSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantWalletSettingsWrapper>> {
+        async getTenantWalletSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantWalletSettingsResponseWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTenantWalletSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaymentApi.getTenantWalletSettings']?.[localVarOperationServerIndex]?.url;
@@ -2105,6 +2758,21 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Cancels the current subscription, moves its unused balance to the wallet, and purchases the requested number of  admins from the wallet. If the wallet balance is not enough, it is topped up for the missing amount first  (with several attempts, as the balance may be consumed concurrently).
+         * @summary Move the subscription balance to the wallet and purchase admins
+         * @param {QuantityRequestDto} [quantityRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for moveSubscriptionToWallet operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/move-subscription-to-wallet/
+         */
+        async moveSubscriptionToWallet(quantityRequestDto?: QuantityRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.moveSubscriptionToWallet(quantityRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.moveSubscriptionToWallet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Sends a request for the portal payment.
          * @summary Send a payment request
          * @param {SalesRequestsDto} [salesRequestsDto] 
@@ -2120,7 +2788,7 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Overwrites the entire set of restricted AI model IDs for the current tenant.  The request body must contain the complete desired set — to add a restriction, include the new model alongside existing ones;  to remove one, omit it. An empty set lifts all restrictions. Only the portal payer can perform this action.
+         * Overwrites the entire set of restricted AI model IDs for the current tenant.  The request body must contain the complete desired set — to add a restriction, include the new model alongside existing ones;  to remove one, omit it. An empty set lifts all restrictions. Only portal administrators can perform this action.
          * @summary Set restricted AI models
          * @param {SetRestrictedAiModelsRequestDto} [setRestrictedAiModelsRequestDto] 
          * @param {*} [options] Override http request option.
@@ -2143,10 +2811,24 @@ export const PaymentApiFp = function(configuration?: Configuration) {
          * REST API Reference for setTenantWalletSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-wallet-settings/
          */
-        async setTenantWalletSettings(tenantWalletSettingsWrapper?: TenantWalletSettingsWrapper, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantWalletSettingsWrapper>> {
+        async setTenantWalletSettings(tenantWalletSettingsWrapper?: TenantWalletSettingsWrapper, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantWalletSettingsResponseWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setTenantWalletSettings(tenantWalletSettingsWrapper, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaymentApi.setTenantWalletSettings']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Terminates generating a customer monthly usage report.
+         * @summary Terminate the customer monthly usage report generation
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for terminateCustomerMonthlyUsageReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-customer-monthly-usage-report/
+         */
+        async terminateCustomerMonthlyUsageReport(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.terminateCustomerMonthlyUsageReport(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.terminateCustomerMonthlyUsageReport']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2161,6 +2843,20 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.terminateCustomerOperationsReport(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaymentApi.terminateCustomerOperationsReport']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Terminates generating a customer service usage report.
+         * @summary Terminate the customer service usage report generation
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for terminateCustomerServiceUsageReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-customer-service-usage-report/
+         */
+        async terminateCustomerServiceUsageReport(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.terminateCustomerServiceUsageReport(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.terminateCustomerServiceUsageReport']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2243,6 +2939,18 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.changeTenantWalletServiceState(requestParameters.changeWalletServiceStateRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
+         * Starts generating a customer monthly usage report as an xlsx file and saves it in Documents.
+         * @summary Start the customer monthly usage report generation
+         * @param {PaymentApiCreateCustomerMonthlyUsageReportRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for createCustomerMonthlyUsageReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-customer-monthly-usage-report/
+         * @throws {RequiredError}
+         */
+        createCustomerMonthlyUsageReport(requestParameters: PaymentApiCreateCustomerMonthlyUsageReportRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<DocumentBuilderTaskWrapper> {
+            return localVarFp.createCustomerMonthlyUsageReport(requestParameters.customerMonthlyUsageReportRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Starts generating a customer operations report as an xlsx file and saves it in Documents.
          * @summary Start the customer operations report generation
          * @param {PaymentApiCreateCustomerOperationsReportRequest} requestParameters Request parameters.
@@ -2255,16 +2963,27 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.createCustomerOperationsReport(requestParameters.customerOperationsReportRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Credits AI quota to the customer AI sub-account from their main balance.  Requires the customer to have a configured payment method.
-         * @summary Credit AI balance
-         * @param {PaymentApiCreditAiBalanceRequest} requestParameters Request parameters.
+         * Starts generating a customer service usage report as an xlsx file and saves it in Documents.
+         * @summary Start the customer service usage report generation
+         * @param {PaymentApiCreateCustomerServiceUsageReportRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
-         * REST API Reference for creditAiBalance operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/credit-ai-balance/
+         * REST API Reference for createCustomerServiceUsageReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-customer-service-usage-report/
          * @throws {RequiredError}
          */
-        creditAiBalance(requestParameters: PaymentApiCreditAiBalanceRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ServicePaymentWrapper> {
-            return localVarFp.creditAiBalance(requestParameters.creditAiBalanceRequestDto, options).then((request) => request(axios, basePath));
+        createCustomerServiceUsageReport(requestParameters: PaymentApiCreateCustomerServiceUsageReportRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<DocumentBuilderTaskWrapper> {
+            return localVarFp.createCustomerServiceUsageReport(requestParameters.customerServiceUsageReportRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns all the active wallet services (quotas) of the current portal: the active additional quotas  from the tariff, plus the services enabled manually via the wallet service settings.
+         * @summary Get the active wallet services
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getActiveServices operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-active-services/
+         * @throws {RequiredError}
+         */
+        getActiveServices(options?: RawAxiosRequestConfig): AxiosPromise<ActiveServiceArrayWrapper> {
+            return localVarFp.getActiveServices(options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieves the pricing information for AI models including chat, embedding, and web search services.  The prices are returned in the configured currency and normalized per million tokens.  Requires administrator permissions to access.
@@ -2288,18 +3007,6 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          */
         getCheckoutSetupUrl(requestParameters: PaymentApiGetCheckoutSetupUrlRequest, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
             return localVarFp.getCheckoutSetupUrl(requestParameters.backUrl, requestParameters.successUrl, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns the AI quota balance of a customer from the accounting service.
-         * @summary Get the customer AI balance
-         * @param {PaymentApiGetCustomerAiBalanceRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for getCustomerAiBalance operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-ai-balance/
-         * @throws {RequiredError}
-         */
-        getCustomerAiBalance(requestParameters: PaymentApiGetCustomerAiBalanceRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BalanceWrapper> {
-            return localVarFp.getCustomerAiBalance(requestParameters.refresh, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the customer balance from the accounting service.
@@ -2326,6 +3033,29 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getCustomerInfo(requestParameters.refresh, options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns the customer spending aggregated per calendar month from the accounting service.
+         * @summary Get the customer monthly usage
+         * @param {PaymentApiGetCustomerMonthlyUsageRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getCustomerMonthlyUsage operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-monthly-usage/
+         * @throws {RequiredError}
+         */
+        getCustomerMonthlyUsage(requestParameters: PaymentApiGetCustomerMonthlyUsageRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<CustomerMonthlyUsageArrayWrapper> {
+            return localVarFp.getCustomerMonthlyUsage(requestParameters.startDate, requestParameters.endDate, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the status of generating a customer monthly usage report.
+         * @summary Get the status of the customer monthly usage report generation
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getCustomerMonthlyUsageReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-monthly-usage-report/
+         * @throws {RequiredError}
+         */
+        getCustomerMonthlyUsageReport(options?: RawAxiosRequestConfig): AxiosPromise<DocumentBuilderTaskWrapper> {
+            return localVarFp.getCustomerMonthlyUsageReport(options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns the report of customer operations from the accounting service.
          * @summary Get the customer operations
          * @param {PaymentApiGetCustomerOperationsRequest} requestParameters Request parameters.
@@ -2347,6 +3077,29 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          */
         getCustomerOperationsReport(options?: RawAxiosRequestConfig): AxiosPromise<DocumentBuilderTaskWrapper> {
             return localVarFp.getCustomerOperationsReport(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the customer usage statistics aggregated per service from the accounting service.
+         * @summary Get the customer service usage
+         * @param {PaymentApiGetCustomerServiceUsageRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getCustomerServiceUsage operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-service-usage/
+         * @throws {RequiredError}
+         */
+        getCustomerServiceUsage(requestParameters: PaymentApiGetCustomerServiceUsageRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<CustomerServiceUsageReportWrapper> {
+            return localVarFp.getCustomerServiceUsage(requestParameters.serviceName, requestParameters.participantName, requestParameters.status, requestParameters.startDate, requestParameters.endDate, requestParameters.metadata, requestParameters.offset, requestParameters.limit, requestParameters.orderBy, requestParameters.orderType, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the status of generating a customer service usage report.
+         * @summary Get the status of the customer service usage report generation
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getCustomerServiceUsageReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-service-usage-report/
+         * @throws {RequiredError}
+         */
+        getCustomerServiceUsageReport(options?: RawAxiosRequestConfig): AxiosPromise<DocumentBuilderTaskWrapper> {
+            return localVarFp.getCustomerServiceUsageReport(options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the URL to the payment account.
@@ -2381,7 +3134,7 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          * @throws {RequiredError}
          */
         getPaymentQuotas(requestParameters: PaymentApiGetPaymentQuotasRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<QuotaArrayWrapper> {
-            return localVarFp.getPaymentQuotas(requestParameters.wallet, options).then((request) => request(axios, basePath));
+            return localVarFp.getPaymentQuotas(requestParameters.wallet, requestParameters.additional, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the URL to the payment page.
@@ -2430,6 +3183,17 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getRestrictedAiModels(options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns the information about the current subscription and its unused (prorated) balance.
+         * @summary Get the subscription balance information
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getSubscriptionBalanceInfo operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-subscription-balance-info/
+         * @throws {RequiredError}
+         */
+        getSubscriptionBalanceInfo(options?: RawAxiosRequestConfig): AxiosPromise<SubscriptionBalanceInfoWrapper> {
+            return localVarFp.getSubscriptionBalanceInfo(options).then((request) => request(axios, basePath));
+        },
+        /**
          * Retrieves configuration settings related to the wallet service associated with the current tenant.
          * @summary Gets the wallet service settings for the tenant.
          * @param {*} [options] Override http request option.
@@ -2448,7 +3212,7 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-wallet-settings/
          * @throws {RequiredError}
          */
-        getTenantWalletSettings(options?: RawAxiosRequestConfig): AxiosPromise<TenantWalletSettingsWrapper> {
+        getTenantWalletSettings(options?: RawAxiosRequestConfig): AxiosPromise<TenantWalletSettingsResponseWrapper> {
             return localVarFp.getTenantWalletSettings(options).then((request) => request(axios, basePath));
         },
         /**
@@ -2475,6 +3239,18 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getWalletServices(options).then((request) => request(axios, basePath));
         },
         /**
+         * Cancels the current subscription, moves its unused balance to the wallet, and purchases the requested number of  admins from the wallet. If the wallet balance is not enough, it is topped up for the missing amount first  (with several attempts, as the balance may be consumed concurrently).
+         * @summary Move the subscription balance to the wallet and purchase admins
+         * @param {PaymentApiMoveSubscriptionToWalletRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for moveSubscriptionToWallet operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/move-subscription-to-wallet/
+         * @throws {RequiredError}
+         */
+        moveSubscriptionToWallet(requestParameters: PaymentApiMoveSubscriptionToWalletRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
+            return localVarFp.moveSubscriptionToWallet(requestParameters.quantityRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Sends a request for the portal payment.
          * @summary Send a payment request
          * @param {PaymentApiSendPaymentRequestRequest} requestParameters Request parameters.
@@ -2487,7 +3263,7 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.sendPaymentRequest(requestParameters.salesRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Overwrites the entire set of restricted AI model IDs for the current tenant.  The request body must contain the complete desired set — to add a restriction, include the new model alongside existing ones;  to remove one, omit it. An empty set lifts all restrictions. Only the portal payer can perform this action.
+         * Overwrites the entire set of restricted AI model IDs for the current tenant.  The request body must contain the complete desired set — to add a restriction, include the new model alongside existing ones;  to remove one, omit it. An empty set lifts all restrictions. Only portal administrators can perform this action.
          * @summary Set restricted AI models
          * @param {PaymentApiSetRestrictedAiModelsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -2507,8 +3283,19 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-wallet-settings/
          * @throws {RequiredError}
          */
-        setTenantWalletSettings(requestParameters: PaymentApiSetTenantWalletSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantWalletSettingsWrapper> {
+        setTenantWalletSettings(requestParameters: PaymentApiSetTenantWalletSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantWalletSettingsResponseWrapper> {
             return localVarFp.setTenantWalletSettings(requestParameters.tenantWalletSettingsWrapper, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Terminates generating a customer monthly usage report.
+         * @summary Terminate the customer monthly usage report generation
+         * @param {*} [options] Override http request option.
+         * REST API Reference for terminateCustomerMonthlyUsageReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-customer-monthly-usage-report/
+         * @throws {RequiredError}
+         */
+        terminateCustomerMonthlyUsageReport(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.terminateCustomerMonthlyUsageReport(options).then((request) => request(axios, basePath));
         },
         /**
          * Terminates generating a customer operations report.
@@ -2520,6 +3307,17 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          */
         terminateCustomerOperationsReport(options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.terminateCustomerOperationsReport(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Terminates generating a customer service usage report.
+         * @summary Terminate the customer service usage report generation
+         * @param {*} [options] Override http request option.
+         * REST API Reference for terminateCustomerServiceUsageReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-customer-service-usage-report/
+         * @throws {RequiredError}
+         */
+        terminateCustomerServiceUsageReport(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.terminateCustomerServiceUsageReport(options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the result of putting money on deposit.
@@ -2589,6 +3387,20 @@ export interface PaymentApiChangeTenantWalletServiceStateRequest {
 }
 
 /**
+ * Request parameters for createCustomerMonthlyUsageReport operation in PaymentApi.
+ * @export
+ * @interface PaymentApiCreateCustomerMonthlyUsageReportRequest
+ */
+export interface PaymentApiCreateCustomerMonthlyUsageReportRequest {
+    /**
+     * 
+     * @type {CustomerMonthlyUsageReportRequestDto}
+     * @memberof PaymentApiCreateCustomerMonthlyUsageReport
+     */
+    readonly customerMonthlyUsageReportRequestDto?: CustomerMonthlyUsageReportRequestDto
+}
+
+/**
  * Request parameters for createCustomerOperationsReport operation in PaymentApi.
  * @export
  * @interface PaymentApiCreateCustomerOperationsReportRequest
@@ -2603,17 +3415,17 @@ export interface PaymentApiCreateCustomerOperationsReportRequest {
 }
 
 /**
- * Request parameters for creditAiBalance operation in PaymentApi.
+ * Request parameters for createCustomerServiceUsageReport operation in PaymentApi.
  * @export
- * @interface PaymentApiCreditAiBalanceRequest
+ * @interface PaymentApiCreateCustomerServiceUsageReportRequest
  */
-export interface PaymentApiCreditAiBalanceRequest {
+export interface PaymentApiCreateCustomerServiceUsageReportRequest {
     /**
      * 
-     * @type {CreditAiBalanceRequestDto}
-     * @memberof PaymentApiCreditAiBalance
+     * @type {CustomerServiceUsageReportRequestDto}
+     * @memberof PaymentApiCreateCustomerServiceUsageReport
      */
-    readonly creditAiBalanceRequestDto?: CreditAiBalanceRequestDto
+    readonly customerServiceUsageReportRequestDto?: CustomerServiceUsageReportRequestDto
 }
 
 /**
@@ -2635,20 +3447,6 @@ export interface PaymentApiGetCheckoutSetupUrlRequest {
      * @memberof PaymentApiGetCheckoutSetupUrl
      */
     readonly successUrl: string
-}
-
-/**
- * Request parameters for getCustomerAiBalance operation in PaymentApi.
- * @export
- * @interface PaymentApiGetCustomerAiBalanceRequest
- */
-export interface PaymentApiGetCustomerAiBalanceRequest {
-    /**
-     * Specifies whether to refresh the payment information cache or not.
-     * @type {boolean}
-     * @memberof PaymentApiGetCustomerAiBalance
-     */
-    readonly refresh?: boolean
 }
 
 /**
@@ -2680,6 +3478,27 @@ export interface PaymentApiGetCustomerInfoRequest {
 }
 
 /**
+ * Request parameters for getCustomerMonthlyUsage operation in PaymentApi.
+ * @export
+ * @interface PaymentApiGetCustomerMonthlyUsageRequest
+ */
+export interface PaymentApiGetCustomerMonthlyUsageRequest {
+    /**
+     * Start of the period (inclusive).
+     * @type {string}
+     * @memberof PaymentApiGetCustomerMonthlyUsage
+     */
+    readonly startDate?: string
+
+    /**
+     * End of the period (inclusive).
+     * @type {string}
+     * @memberof PaymentApiGetCustomerMonthlyUsage
+     */
+    readonly endDate?: string
+}
+
+/**
  * Request parameters for getCustomerOperations operation in PaymentApi.
  * @export
  * @interface PaymentApiGetCustomerOperationsRequest
@@ -2700,11 +3519,11 @@ export interface PaymentApiGetCustomerOperationsRequest {
     readonly limit?: number
 
     /**
-     * The service name.
-     * @type {string}
+     * The service name list. A single string is also accepted for backward compatibility.
+     * @type {Array<string>}
      * @memberof PaymentApiGetCustomerOperations
      */
-    readonly serviceName?: string
+    readonly serviceName?: Array<string>
 
     /**
      * The report start date.
@@ -2771,6 +3590,83 @@ export interface PaymentApiGetCustomerOperationsRequest {
 }
 
 /**
+ * Request parameters for getCustomerServiceUsage operation in PaymentApi.
+ * @export
+ * @interface PaymentApiGetCustomerServiceUsageRequest
+ */
+export interface PaymentApiGetCustomerServiceUsageRequest {
+    /**
+     * The service name list.
+     * @type {Array<string>}
+     * @memberof PaymentApiGetCustomerServiceUsage
+     */
+    readonly serviceName?: Array<string>
+
+    /**
+     * The participant name.
+     * @type {string}
+     * @memberof PaymentApiGetCustomerServiceUsage
+     */
+    readonly participantName?: string
+
+    /**
+     * The operation status to filter by.
+     * @type {OperationStatus}
+     * @memberof PaymentApiGetCustomerServiceUsage
+     */
+    readonly status?: OperationStatus
+
+    /**
+     * Start of the period (inclusive).
+     * @type {string}
+     * @memberof PaymentApiGetCustomerServiceUsage
+     */
+    readonly startDate?: string
+
+    /**
+     * End of the period (inclusive).
+     * @type {string}
+     * @memberof PaymentApiGetCustomerServiceUsage
+     */
+    readonly endDate?: string
+
+    /**
+     * Metadata key-value pairs to filter by.
+     * @type {{ [key: string]: string; }}
+     * @memberof PaymentApiGetCustomerServiceUsage
+     */
+    readonly metadata?: { [key: string]: string; }
+
+    /**
+     * The number of items to skip for pagination. The default value is 0.
+     * @type {number}
+     * @memberof PaymentApiGetCustomerServiceUsage
+     */
+    readonly offset?: number
+
+    /**
+     * The maximum number of items to return for pagination. The default value is 25.
+     * @type {number}
+     * @memberof PaymentApiGetCustomerServiceUsage
+     */
+    readonly limit?: number
+
+    /**
+     * The field to order by.
+     * @type {string}
+     * @memberof PaymentApiGetCustomerServiceUsage
+     */
+    readonly orderBy?: string
+
+    /**
+     * Order direction: Ascending or Descending.
+     * @type {OperationOrderType}
+     * @memberof PaymentApiGetCustomerServiceUsage
+     */
+    readonly orderType?: OperationOrderType
+}
+
+/**
  * Request parameters for getPaymentAccount operation in PaymentApi.
  * @export
  * @interface PaymentApiGetPaymentAccountRequest
@@ -2796,6 +3692,13 @@ export interface PaymentApiGetPaymentQuotasRequest {
      * @memberof PaymentApiGetPaymentQuotas
      */
     readonly wallet?: boolean
+
+    /**
+     * Specifies whether to return additional quotas only.
+     * @type {boolean}
+     * @memberof PaymentApiGetPaymentQuotas
+     */
+    readonly additional?: boolean
 }
 
 /**
@@ -2838,6 +3741,20 @@ export interface PaymentApiGetWalletServiceRequest {
      * @memberof PaymentApiGetWalletService
      */
     readonly service: TenantWalletService
+}
+
+/**
+ * Request parameters for moveSubscriptionToWallet operation in PaymentApi.
+ * @export
+ * @interface PaymentApiMoveSubscriptionToWalletRequest
+ */
+export interface PaymentApiMoveSubscriptionToWalletRequest {
+    /**
+     * 
+     * @type {QuantityRequestDto}
+     * @memberof PaymentApiMoveSubscriptionToWallet
+     */
+    readonly quantityRequestDto?: QuantityRequestDto
 }
 
 /**
@@ -2956,6 +3873,18 @@ export class PaymentApi extends BaseAPI {
     }
 
     /**
+     * Starts generating a customer monthly usage report as an xlsx file and saves it in Documents.
+     * @summary Start the customer monthly usage report generation
+     * @param {PortalPaymentApiCreateCustomerMonthlyUsageReportRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentApi
+     */
+    public createCustomerMonthlyUsageReport(requestParameters: PaymentApiCreateCustomerMonthlyUsageReportRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).createCustomerMonthlyUsageReport(requestParameters.customerMonthlyUsageReportRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Starts generating a customer operations report as an xlsx file and saves it in Documents.
      * @summary Start the customer operations report generation
      * @param {PortalPaymentApiCreateCustomerOperationsReportRequest} requestParameters Request parameters.
@@ -2968,15 +3897,26 @@ export class PaymentApi extends BaseAPI {
     }
 
     /**
-     * Credits AI quota to the customer AI sub-account from their main balance.  Requires the customer to have a configured payment method.
-     * @summary Credit AI balance
-     * @param {PortalPaymentApiCreditAiBalanceRequest} requestParameters Request parameters.
+     * Starts generating a customer service usage report as an xlsx file and saves it in Documents.
+     * @summary Start the customer service usage report generation
+     * @param {PortalPaymentApiCreateCustomerServiceUsageReportRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
      */
-    public creditAiBalance(requestParameters: PaymentApiCreditAiBalanceRequest = {}, options?: RawAxiosRequestConfig) {
-        return PaymentApiFp(this.configuration).creditAiBalance(requestParameters.creditAiBalanceRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public createCustomerServiceUsageReport(requestParameters: PaymentApiCreateCustomerServiceUsageReportRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).createCustomerServiceUsageReport(requestParameters.customerServiceUsageReportRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns all the active wallet services (quotas) of the current portal: the active additional quotas  from the tariff, plus the services enabled manually via the wallet service settings.
+     * @summary Get the active wallet services
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentApi
+     */
+    public getActiveServices(options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).getActiveServices(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3000,18 +3940,6 @@ export class PaymentApi extends BaseAPI {
      */
     public getCheckoutSetupUrl(requestParameters: PaymentApiGetCheckoutSetupUrlRequest, options?: RawAxiosRequestConfig) {
         return PaymentApiFp(this.configuration).getCheckoutSetupUrl(requestParameters.backUrl, requestParameters.successUrl, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns the AI quota balance of a customer from the accounting service.
-     * @summary Get the customer AI balance
-     * @param {PortalPaymentApiGetCustomerAiBalanceRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PaymentApi
-     */
-    public getCustomerAiBalance(requestParameters: PaymentApiGetCustomerAiBalanceRequest = {}, options?: RawAxiosRequestConfig) {
-        return PaymentApiFp(this.configuration).getCustomerAiBalance(requestParameters.refresh, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3039,6 +3967,29 @@ export class PaymentApi extends BaseAPI {
     }
 
     /**
+     * Returns the customer spending aggregated per calendar month from the accounting service.
+     * @summary Get the customer monthly usage
+     * @param {PortalPaymentApiGetCustomerMonthlyUsageRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentApi
+     */
+    public getCustomerMonthlyUsage(requestParameters: PaymentApiGetCustomerMonthlyUsageRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).getCustomerMonthlyUsage(requestParameters.startDate, requestParameters.endDate, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the status of generating a customer monthly usage report.
+     * @summary Get the status of the customer monthly usage report generation
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentApi
+     */
+    public getCustomerMonthlyUsageReport(options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).getCustomerMonthlyUsageReport(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Returns the report of customer operations from the accounting service.
      * @summary Get the customer operations
      * @param {PortalPaymentApiGetCustomerOperationsRequest} requestParameters Request parameters.
@@ -3059,6 +4010,29 @@ export class PaymentApi extends BaseAPI {
      */
     public getCustomerOperationsReport(options?: RawAxiosRequestConfig) {
         return PaymentApiFp(this.configuration).getCustomerOperationsReport(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the customer usage statistics aggregated per service from the accounting service.
+     * @summary Get the customer service usage
+     * @param {PortalPaymentApiGetCustomerServiceUsageRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentApi
+     */
+    public getCustomerServiceUsage(requestParameters: PaymentApiGetCustomerServiceUsageRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).getCustomerServiceUsage(requestParameters.serviceName, requestParameters.participantName, requestParameters.status, requestParameters.startDate, requestParameters.endDate, requestParameters.metadata, requestParameters.offset, requestParameters.limit, requestParameters.orderBy, requestParameters.orderType, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the status of generating a customer service usage report.
+     * @summary Get the status of the customer service usage report generation
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentApi
+     */
+    public getCustomerServiceUsageReport(options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).getCustomerServiceUsageReport(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3093,7 +4067,7 @@ export class PaymentApi extends BaseAPI {
      * @memberof PaymentApi
      */
     public getPaymentQuotas(requestParameters: PaymentApiGetPaymentQuotasRequest = {}, options?: RawAxiosRequestConfig) {
-        return PaymentApiFp(this.configuration).getPaymentQuotas(requestParameters.wallet, options).then((request) => request(this.axios, this.basePath));
+        return PaymentApiFp(this.configuration).getPaymentQuotas(requestParameters.wallet, requestParameters.additional, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3143,6 +4117,17 @@ export class PaymentApi extends BaseAPI {
     }
 
     /**
+     * Returns the information about the current subscription and its unused (prorated) balance.
+     * @summary Get the subscription balance information
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentApi
+     */
+    public getSubscriptionBalanceInfo(options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).getSubscriptionBalanceInfo(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Retrieves configuration settings related to the wallet service associated with the current tenant.
      * @summary Gets the wallet service settings for the tenant.
      * @param {*} [options] Override http request option.
@@ -3188,6 +4173,18 @@ export class PaymentApi extends BaseAPI {
     }
 
     /**
+     * Cancels the current subscription, moves its unused balance to the wallet, and purchases the requested number of  admins from the wallet. If the wallet balance is not enough, it is topped up for the missing amount first  (with several attempts, as the balance may be consumed concurrently).
+     * @summary Move the subscription balance to the wallet and purchase admins
+     * @param {PortalPaymentApiMoveSubscriptionToWalletRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentApi
+     */
+    public moveSubscriptionToWallet(requestParameters: PaymentApiMoveSubscriptionToWalletRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).moveSubscriptionToWallet(requestParameters.quantityRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Sends a request for the portal payment.
      * @summary Send a payment request
      * @param {PortalPaymentApiSendPaymentRequestRequest} requestParameters Request parameters.
@@ -3200,7 +4197,7 @@ export class PaymentApi extends BaseAPI {
     }
 
     /**
-     * Overwrites the entire set of restricted AI model IDs for the current tenant.  The request body must contain the complete desired set — to add a restriction, include the new model alongside existing ones;  to remove one, omit it. An empty set lifts all restrictions. Only the portal payer can perform this action.
+     * Overwrites the entire set of restricted AI model IDs for the current tenant.  The request body must contain the complete desired set — to add a restriction, include the new model alongside existing ones;  to remove one, omit it. An empty set lifts all restrictions. Only portal administrators can perform this action.
      * @summary Set restricted AI models
      * @param {PortalPaymentApiSetRestrictedAiModelsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -3224,6 +4221,17 @@ export class PaymentApi extends BaseAPI {
     }
 
     /**
+     * Terminates generating a customer monthly usage report.
+     * @summary Terminate the customer monthly usage report generation
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentApi
+     */
+    public terminateCustomerMonthlyUsageReport(options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).terminateCustomerMonthlyUsageReport(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Terminates generating a customer operations report.
      * @summary Terminate the customer operations report generation
      * @param {*} [options] Override http request option.
@@ -3232,6 +4240,17 @@ export class PaymentApi extends BaseAPI {
      */
     public terminateCustomerOperationsReport(options?: RawAxiosRequestConfig) {
         return PaymentApiFp(this.configuration).terminateCustomerOperationsReport(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Terminates generating a customer service usage report.
+     * @summary Terminate the customer service usage report generation
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentApi
+     */
+    public terminateCustomerServiceUsageReport(options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).terminateCustomerServiceUsageReport(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

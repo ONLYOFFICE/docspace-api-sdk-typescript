@@ -7,7 +7,7 @@ The tariff parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **number** | The tariff ID. | [optional] [default to undefined]
-**state** | [**TariffState**](TariffState.md) |  | [optional] [default to undefined]
+**state** | [**TariffState**](TariffState.md) | The tariff state. | [optional] [default to undefined]
 **dueDate** | **string** | The tariff due date. | [default to undefined]
 **delayDueDate** | **string** | The tariff delay due date. | [optional] [default to undefined]
 **licenseDate** | **string** | The tariff license date. | [optional] [default to undefined]

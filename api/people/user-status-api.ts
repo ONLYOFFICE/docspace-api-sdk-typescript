@@ -30,6 +30,8 @@ import type { EmployeeFullArrayWrapper } from '../../models';
 // @ts-ignore
 import type { EmployeeStatus } from '../../models';
 // @ts-ignore
+import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
 import type { SortOrder } from '../../models';
 // @ts-ignore
 import type { UpdateMembersRequestDto } from '../../models';

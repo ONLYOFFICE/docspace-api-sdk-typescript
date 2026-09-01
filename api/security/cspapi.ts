@@ -27,6 +27,8 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 import type { CspRequestsDto } from '../../models';
 // @ts-ignore
 import type { CspWrapper } from '../../models';
+// @ts-ignore
+import type { ErrorApiResponse } from '../../models';
 /**
  * CSPApi - axios parameter creator
  * @export

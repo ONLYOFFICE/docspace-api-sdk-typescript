@@ -41,6 +41,9 @@ export interface MemberRequestDto {
      * The user email address.
      */
     'email'?: string | null;
+    /**
+     * The user type.
+     */
     'type'?: EmployeeType;
     /**
      * Specifies if this is a guest or a user.

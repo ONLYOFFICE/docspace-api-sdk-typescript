@@ -6,7 +6,7 @@ Represents an operation.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
+**date** | **string** | The date when the operation took place. | [optional] [default to undefined]
 **service** | **string** | The service related to the operation. | [optional] [default to undefined]
 **description** | **string** | The brief operation description. | [optional] [default to undefined]
 **details** | **string** | The detailed information about the operation. | [optional] [default to undefined]
@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **participantDisplayName** | **string** | The participant display name. | [optional] [default to undefined]
 **agentId** | **string** | AI Agent id. | [optional] [default to undefined]
 **agentTitle** | **string** | AI Agent name. | [optional] [default to undefined]
-**type** | [**OperationType**](OperationType.md) |  | [optional] [default to undefined]
+**type** | [**OperationType**](OperationType.md) | Type of the operation | [optional] [default to undefined]
 
 ## Example
 

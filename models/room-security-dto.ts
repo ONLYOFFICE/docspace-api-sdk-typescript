@@ -37,6 +37,9 @@ export interface RoomSecurityDto {
      * The warning message.
      */
     'warning'?: string | null;
+    /**
+     * The error type.
+     */
     'error'?: RoomSecurityError;
 }
 

@@ -46,6 +46,9 @@ export interface CreateWebhooksConfigRequestsDto {
      * Specifies whether the SSL certificate verification is required or not.
      */
     'ssl'?: boolean;
+    /**
+     * Defines which events will trigger webhook notifications.
+     */
     'triggers'?: WebhookTrigger;
     /**
      * Target ID

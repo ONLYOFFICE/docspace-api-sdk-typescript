@@ -24,6 +24,8 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
+import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
 import type { GroupArrayWrapper } from '../../models';
 // @ts-ignore
 import type { GroupRequestDto } from '../../models';
@@ -33,8 +35,6 @@ import type { GroupSummaryArrayWrapper } from '../../models';
 import type { GroupWrapper } from '../../models';
 // @ts-ignore
 import type { MembersRequest } from '../../models';
-// @ts-ignore
-import type { NoContentResultWrapper } from '../../models';
 // @ts-ignore
 import type { SetManagerRequest } from '../../models';
 // @ts-ignore
@@ -791,7 +791,7 @@ export const GroupApiFp = function(configuration?: Configuration) {
          * REST API Reference for deleteGroup operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-group/
          */
-        async deleteGroup(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NoContentResultWrapper>> {
+        async deleteGroup(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteGroup(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupApi.deleteGroup']?.[localVarOperationServerIndex]?.url;
@@ -972,7 +972,7 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-group/
          * @throws {RequiredError}
          */
-        deleteGroup(requestParameters: GroupApiDeleteGroupRequest, options?: RawAxiosRequestConfig): AxiosPromise<NoContentResultWrapper> {
+        deleteGroup(requestParameters: GroupApiDeleteGroupRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.deleteGroup(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**

@@ -30,6 +30,8 @@ import type { DoubleNullableWrapper } from '../../models';
 // @ts-ignore
 import type { EncryptionSettingsWrapper } from '../../models';
 // @ts-ignore
+import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
 import type { StorageEncryptionRequestsDto } from '../../models';
 /**
  * EncryptionApi - axios parameter creator

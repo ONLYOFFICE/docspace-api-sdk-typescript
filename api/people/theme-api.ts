@@ -27,6 +27,8 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 import type { DarkThemeSettingsRequestDto } from '../../models';
 // @ts-ignore
 import type { DarkThemeSettingsWrapper } from '../../models';
+// @ts-ignore
+import type { ErrorApiResponse } from '../../models';
 /**
  * ThemeApi - axios parameter creator
  * @export

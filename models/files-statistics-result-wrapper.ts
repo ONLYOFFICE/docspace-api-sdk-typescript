@@ -25,7 +25,13 @@ import type { FilesStatisticsResultDto } from './files-statistics-result-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the FilesStatisticsResultDto object.
+ */
 export interface FilesStatisticsResultWrapper {
+    /**
+     * The FilesStatisticsResultDto object returned by the operation.
+     */
     'response'?: FilesStatisticsResultDto;
     /**
      * The total number of items in the response

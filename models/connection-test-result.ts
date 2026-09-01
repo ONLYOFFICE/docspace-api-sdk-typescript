@@ -19,8 +19,17 @@
  */
 
 
+/**
+ * The outcome of a connection test against an external database.
+ */
 export interface ConnectionTestResult {
+    /**
+     * Specifies whether the connection to the database succeeded.
+     */
     'success'?: boolean;
+    /**
+     * The reason the connection failed, or null when it succeeded.
+     */
     'error'?: string | null;
 }
 

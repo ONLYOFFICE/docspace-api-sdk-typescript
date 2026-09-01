@@ -25,7 +25,13 @@ import type { ChunkedUploadSessionResponseInteger } from './chunked-upload-sessi
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the ChunkedUploadSessionResponseInteger object.
+ */
 export interface ChunkedUploadSessionResponseIntegerWrapper {
+    /**
+     * The ChunkedUploadSessionResponseInteger object returned by the operation.
+     */
     'response'?: ChunkedUploadSessionResponseInteger;
     /**
      * The total number of items in the response

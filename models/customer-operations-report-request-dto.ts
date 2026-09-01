@@ -33,9 +33,9 @@ import type { OperationType } from './operation-type';
  */
 export interface CustomerOperationsReportRequestDto {
     /**
-     * The service name.
+     * The service name list. A single string is also accepted for backward compatibility.
      */
-    'serviceName'?: string | null;
+    'serviceName'?: Array<string> | null;
     /**
      * The report start date.
      */
@@ -56,12 +56,21 @@ export interface CustomerOperationsReportRequestDto {
      * Specifies whether to include debit operations in the report.
      */
     'debit'?: boolean | null;
+    /**
+     * The operation type to filter by.
+     */
     'type'?: OperationType;
+    /**
+     * The operation status to filter by.
+     */
     'status'?: OperationStatus;
     /**
      * The field to order by.
      */
     'orderBy'?: string | null;
+    /**
+     * Order direction: Ascending or Descending.
+     */
     'orderType'?: OperationOrderType;
 }
 

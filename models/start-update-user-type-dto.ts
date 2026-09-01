@@ -26,6 +26,9 @@ import type { EmployeeType } from './employee-type';
  * The parameters for updating the type of the user or guest when reassigning rooms and shared files.
  */
 export interface StartUpdateUserTypeDto {
+    /**
+     * The new user type.
+     */
     'type'?: EmployeeType;
     /**
      * The user ID.

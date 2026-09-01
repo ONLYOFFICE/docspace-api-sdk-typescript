@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { TenantDeepLinkSettings } from './tenant-deep-link-settings';
 
+/**
+ * The successful API response containing the TenantDeepLinkSettings object.
+ */
 export interface TenantDeepLinkSettingsWrapper {
+    /**
+     * The TenantDeepLinkSettings object returned by the operation.
+     */
     'response'?: TenantDeepLinkSettings;
     /**
      * The total number of items in the response

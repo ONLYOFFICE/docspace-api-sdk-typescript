@@ -59,7 +59,7 @@ export type BatchRequestDto = FileOperationRequestBaseDto &  {
      */
     'destFolderId'?: BatchRequestDtoAllOfDestFolderId;
     /**
-     * 
+     * The overwriting behavior of the file copying or moving.
      * @type {FileConflictResolveType}
      * @memberof BatchRequestDto
      */

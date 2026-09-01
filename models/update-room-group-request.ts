@@ -22,6 +22,9 @@
 // @ts-ignore
 import type { DuplicateRequestDtoAllOfFileIds } from './duplicate-request-dto-all-of-file-ids';
 
+/**
+ * The changes to apply to a room group: its name and the rooms to add or remove.
+ */
 export interface UpdateRoomGroupRequest {
     /**
      * The list of room IDs to add to the group.

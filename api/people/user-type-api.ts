@@ -28,6 +28,8 @@ import type { EmployeeFullArrayWrapper } from '../../models';
 // @ts-ignore
 import type { EmployeeType } from '../../models';
 // @ts-ignore
+import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
 import type { StartUpdateUserTypeDto } from '../../models';
 // @ts-ignore
 import type { TaskProgressResponseWrapper } from '../../models';

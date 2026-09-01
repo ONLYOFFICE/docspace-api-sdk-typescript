@@ -7,7 +7,7 @@ The editor tool call state. Used to run the agent flow in the editor.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **toolName** | **string** | The tool name. | [default to undefined]
-**parameters** | **object** | The editor tool call parameters. | [default to undefined]
+**parameters** | **object** | The tool call parameters. | [default to undefined]
 
 ## Example
 

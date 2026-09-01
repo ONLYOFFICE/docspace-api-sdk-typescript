@@ -64,6 +64,10 @@ export interface TenantQuota {
      */
     'wallet'?: boolean;
     /**
+     * Specifies if the tenant quota is primary or additional.
+     */
+    'additional'?: boolean;
+    /**
      * The quota due date.
      */
     'dueDate'?: string | null;
@@ -187,5 +191,21 @@ export interface TenantQuota {
      * Specifies if the AI tools enabled as a wallet service or not.
      */
     'aiTools'?: boolean;
+    /**
+     * Specifies if the AI search enabled as a wallet service or not.
+     */
+    'aiSearch'?: boolean;
+    /**
+     * The number of DocsCloud users.
+     */
+    'docsCloud'?: number;
+    /**
+     * Specifies if the DocsCloudDevPack enabled or not.
+     */
+    'docsCloudDevPack'?: boolean;
+    /**
+     * Specifies if the DocsCloudTrial enabled or not.
+     */
+    'docsCloudTrial'?: boolean;
 }
 

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **number** | The webhook log ID. | [default to undefined]
 **configName** | **string** | The webhook configuration name. | [optional] [default to undefined]
-**trigger** | [**WebhookTrigger**](WebhookTrigger.md) |  | [optional] [default to undefined]
+**trigger** | [**WebhookTrigger**](WebhookTrigger.md) | The webhook trigger type. | [optional] [default to undefined]
 **creationTime** | **string** | The webhook creation time. | [optional] [default to undefined]
 **method** | **string** | The webhook method. | [optional] [default to undefined]
 **route** | **string** | The webhook route. | [optional] [default to undefined]

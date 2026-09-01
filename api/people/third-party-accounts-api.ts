@@ -28,6 +28,8 @@ import type { AccountInfoArrayWrapper } from '../../models';
 // @ts-ignore
 import type { EmployeeWrapper } from '../../models';
 // @ts-ignore
+import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
 import type { LinkAccountRequestDto } from '../../models';
 // @ts-ignore
 import type { SignupAccountRequestDto } from '../../models';

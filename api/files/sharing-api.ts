@@ -32,6 +32,10 @@ import type { BooleanWrapper } from '../../models';
 // @ts-ignore
 import type { ChangeOwnerRequestDto } from '../../models';
 // @ts-ignore
+import type { EncryptionKeyArrayWrapper } from '../../models';
+// @ts-ignore
+import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
 import type { ExternalShareRequestParam } from '../../models';
 // @ts-ignore
 import type { ExternalShareWrapper } from '../../models';
@@ -150,6 +154,62 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(changeOwnerRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the encryption keys to access a file with the ID specified in the request.
+         * @summary Get file encryption keys
+         * @param {number} fileId The file unique identifier.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getEncryptionAccess operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-encryption-access/
+         */
+        getEncryptionAccess: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'fileId' is not null or undefined
+            assertParamExists('getEncryptionAccess', 'fileId', fileId)
+
+            const localVarPath = `/api/2.0/files/file/{fileId}/publickeys`
+                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -716,21 +776,21 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Sets the sharing settings to a file with the ID specified in the request.
          * @summary Share a file
-         * @param {number} fileId The file ID.
+         * @param {number} id The file ID.
          * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The parameters of the security information simple request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setFileSecurityInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-security-info/
          */
-        setFileSecurityInfo: async (fileId: number, securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('setFileSecurityInfo', 'fileId', fileId)
+        setFileSecurityInfo: async (id: number, securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('setFileSecurityInfo', 'id', id)
             // verify required parameter 'securityInfoSimpleRequestDto' is not null or undefined
             assertParamExists('setFileSecurityInfo', 'securityInfoSimpleRequestDto', securityInfoSimpleRequestDto)
 
-            const localVarPath = `/api/2.0/files/file/{fileId}/share`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
+            const localVarPath = `/api/2.0/files/file/{id}/share`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -778,21 +838,21 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Sets the sharing settings to a folder with the ID specified in the request.
          * @summary Share a folder
-         * @param {number} folderId The folder ID.
+         * @param {number} id The folder ID.
          * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The parameters of the security information simple request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setFolderSecurityInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-security-info/
          */
-        setFolderSecurityInfo: async (folderId: number, securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'folderId' is not null or undefined
-            assertParamExists('setFolderSecurityInfo', 'folderId', folderId)
+        setFolderSecurityInfo: async (id: number, securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('setFolderSecurityInfo', 'id', id)
             // verify required parameter 'securityInfoSimpleRequestDto' is not null or undefined
             assertParamExists('setFolderSecurityInfo', 'securityInfoSimpleRequestDto', securityInfoSimpleRequestDto)
 
-            const localVarPath = `/api/2.0/files/folder/{folderId}/share`
-                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
+            const localVarPath = `/api/2.0/files/folder/{id}/share`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -932,6 +992,21 @@ export const SharingApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.changeFileOwner(changeOwnerRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SharingApi.changeFileOwner']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the encryption keys to access a file with the ID specified in the request.
+         * @summary Get file encryption keys
+         * @param {number} fileId The file unique identifier.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getEncryptionAccess operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-encryption-access/
+         */
+        async getEncryptionAccess(fileId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EncryptionKeyArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getEncryptionAccess(fileId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SharingApi.getEncryptionAccess']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1087,15 +1162,15 @@ export const SharingApiFp = function(configuration?: Configuration) {
         /**
          * Sets the sharing settings to a file with the ID specified in the request.
          * @summary Share a file
-         * @param {number} fileId The file ID.
+         * @param {number} id The file ID.
          * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The parameters of the security information simple request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setFileSecurityInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-security-info/
          */
-        async setFileSecurityInfo(fileId: number, securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setFileSecurityInfo(fileId, securityInfoSimpleRequestDto, options);
+        async setFileSecurityInfo(id: number, securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setFileSecurityInfo(id, securityInfoSimpleRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SharingApi.setFileSecurityInfo']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1103,15 +1178,15 @@ export const SharingApiFp = function(configuration?: Configuration) {
         /**
          * Sets the sharing settings to a folder with the ID specified in the request.
          * @summary Share a folder
-         * @param {number} folderId The folder ID.
+         * @param {number} id The folder ID.
          * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The parameters of the security information simple request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setFolderSecurityInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-security-info/
          */
-        async setFolderSecurityInfo(folderId: number, securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setFolderSecurityInfo(folderId, securityInfoSimpleRequestDto, options);
+        async setFolderSecurityInfo(id: number, securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setFolderSecurityInfo(id, securityInfoSimpleRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SharingApi.setFolderSecurityInfo']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1164,6 +1239,18 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
          */
         changeFileOwner(requestParameters: SharingApiChangeFileOwnerRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileEntryBaseArrayWrapper> {
             return localVarFp.changeFileOwner(requestParameters.changeOwnerRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the encryption keys to access a file with the ID specified in the request.
+         * @summary Get file encryption keys
+         * @param {SharingApiGetEncryptionAccessRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getEncryptionAccess operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-encryption-access/
+         * @throws {RequiredError}
+         */
+        getEncryptionAccess(requestParameters: SharingApiGetEncryptionAccessRequest, options?: RawAxiosRequestConfig): AxiosPromise<EncryptionKeyArrayWrapper> {
+            return localVarFp.getEncryptionAccess(requestParameters.fileId, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the external data by the key specified in the request.
@@ -1283,7 +1370,7 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
          * @throws {RequiredError}
          */
         setFileSecurityInfo(requestParameters: SharingApiSetFileSecurityInfoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
-            return localVarFp.setFileSecurityInfo(requestParameters.fileId, requestParameters.securityInfoSimpleRequestDto, options).then((request) => request(axios, basePath));
+            return localVarFp.setFileSecurityInfo(requestParameters.id, requestParameters.securityInfoSimpleRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Sets the sharing settings to a folder with the ID specified in the request.
@@ -1295,7 +1382,7 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
          * @throws {RequiredError}
          */
         setFolderSecurityInfo(requestParameters: SharingApiSetFolderSecurityInfoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
-            return localVarFp.setFolderSecurityInfo(requestParameters.folderId, requestParameters.securityInfoSimpleRequestDto, options).then((request) => request(axios, basePath));
+            return localVarFp.setFolderSecurityInfo(requestParameters.id, requestParameters.securityInfoSimpleRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Sets the sharing rights to all the files and folders specified in the request.
@@ -1345,6 +1432,20 @@ export interface SharingApiChangeFileOwnerRequest {
      * @memberof SharingApiChangeFileOwner
      */
     readonly changeOwnerRequestDto?: ChangeOwnerRequestDto
+}
+
+/**
+ * Request parameters for getEncryptionAccess operation in SharingApi.
+ * @export
+ * @interface SharingApiGetEncryptionAccessRequest
+ */
+export interface SharingApiGetEncryptionAccessRequest {
+    /**
+     * The file unique identifier.
+     * @type {number}
+     * @memberof SharingApiGetEncryptionAccess
+     */
+    readonly fileId: number
 }
 
 /**
@@ -1589,7 +1690,7 @@ export interface SharingApiSetFileSecurityInfoRequest {
      * @type {number}
      * @memberof SharingApiSetFileSecurityInfo
      */
-    readonly fileId: number
+    readonly id: number
 
     /**
      * The parameters of the security information simple request.
@@ -1610,7 +1711,7 @@ export interface SharingApiSetFolderSecurityInfoRequest {
      * @type {number}
      * @memberof SharingApiSetFolderSecurityInfo
      */
-    readonly folderId: number
+    readonly id: number
 
     /**
      * The parameters of the security information simple request.
@@ -1663,6 +1764,18 @@ export class SharingApi extends BaseAPI {
      */
     public changeFileOwner(requestParameters: SharingApiChangeFileOwnerRequest = {}, options?: RawAxiosRequestConfig) {
         return SharingApiFp(this.configuration).changeFileOwner(requestParameters.changeOwnerRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the encryption keys to access a file with the ID specified in the request.
+     * @summary Get file encryption keys
+     * @param {FilesSharingApiGetEncryptionAccessRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SharingApi
+     */
+    public getEncryptionAccess(requestParameters: SharingApiGetEncryptionAccessRequest, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).getEncryptionAccess(requestParameters.fileId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1782,7 +1895,7 @@ export class SharingApi extends BaseAPI {
      * @memberof SharingApi
      */
     public setFileSecurityInfo(requestParameters: SharingApiSetFileSecurityInfoRequest, options?: RawAxiosRequestConfig) {
-        return SharingApiFp(this.configuration).setFileSecurityInfo(requestParameters.fileId, requestParameters.securityInfoSimpleRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return SharingApiFp(this.configuration).setFileSecurityInfo(requestParameters.id, requestParameters.securityInfoSimpleRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1794,7 +1907,7 @@ export class SharingApi extends BaseAPI {
      * @memberof SharingApi
      */
     public setFolderSecurityInfo(requestParameters: SharingApiSetFolderSecurityInfoRequest, options?: RawAxiosRequestConfig) {
-        return SharingApiFp(this.configuration).setFolderSecurityInfo(requestParameters.folderId, requestParameters.securityInfoSimpleRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return SharingApiFp(this.configuration).setFolderSecurityInfo(requestParameters.id, requestParameters.securityInfoSimpleRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

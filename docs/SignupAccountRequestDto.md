@@ -6,7 +6,7 @@ The request parameters for creating a third-party account.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**employeeType** | [**EmployeeType**](EmployeeType.md) |  | [optional] [default to undefined]
+**employeeType** | [**EmployeeType**](EmployeeType.md) | The user type. | [optional] [default to undefined]
 **key** | **string** | The user link key. | [default to undefined]
 **culture** | **string** | The user culture code. | [optional] [default to undefined]
 **serializedProfile** | **string** | The third-party profile in the serialized format | [default to undefined]

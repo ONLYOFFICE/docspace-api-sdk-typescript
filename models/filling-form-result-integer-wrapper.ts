@@ -25,7 +25,13 @@ import type { FillingFormResultDtoInteger } from './filling-form-result-dto-inte
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the FillingFormResultDtoInteger object.
+ */
 export interface FillingFormResultIntegerWrapper {
+    /**
+     * The FillingFormResultDtoInteger object returned by the operation.
+     */
     'response'?: FillingFormResultDtoInteger;
     /**
      * The total number of items in the response

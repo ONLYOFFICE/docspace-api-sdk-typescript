@@ -30,6 +30,6 @@ export interface CultureSpecificExternalResource {
     /**
      * The external resource entries.
      */
-    'entries'?: { [key: string]: string | null; } | null;
+    'entries'?: { [key: string]: string | null; };
 }
 

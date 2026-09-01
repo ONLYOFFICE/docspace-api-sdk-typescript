@@ -18,9 +18,6 @@
  *
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { ApiDateTime } from './api-date-time';
 
 /**
  * The session request parameters.
@@ -38,7 +35,10 @@ export interface SessionRequest {
      * The relative path to the file.
      */
     'relativePath'?: string | null;
-    'createOn'?: ApiDateTime;
+    /**
+     * The date and time when the file was created.
+     */
+    'createOn'?: string | null;
     /**
      * Specifies whether the file is encrypted or not.
      */

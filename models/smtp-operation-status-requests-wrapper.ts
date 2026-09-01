@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { SmtpOperationStatusRequestsDto } from './smtp-operation-status-requests-dto';
 
+/**
+ * The successful API response containing the SmtpOperationStatusRequestsDto object.
+ */
 export interface SmtpOperationStatusRequestsWrapper {
+    /**
+     * The SmtpOperationStatusRequestsDto object returned by the operation.
+     */
     'response'?: SmtpOperationStatusRequestsDto;
     /**
      * The total number of items in the response

@@ -42,6 +42,9 @@ export interface PaymentSettingsDto {
      * Indicates whether the system is running in standalone mode.
      */
     'standalone': boolean;
+    /**
+     * The current license information.
+     */
     'currentLicense': CurrentLicenseInfo;
     /**
      * The maximum quota quantity.

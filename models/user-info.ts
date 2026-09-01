@@ -56,7 +56,13 @@ export interface UserInfo {
      * The user sex (male or female).
      */
     'sex'?: boolean | null;
+    /**
+     * The user status.
+     */
     'status'?: EmployeeStatus;
+    /**
+     * The user activation status.
+     */
     'activationStatus'?: EmployeeActivationStatus;
     /**
      * The date and time when the user account was terminated.
@@ -114,6 +120,9 @@ export interface UserInfo {
      * The user mobile phone.
      */
     'mobilePhone'?: string | null;
+    /**
+     * The user mobile phone activation status.
+     */
     'mobilePhoneActivationStatus'?: MobilePhoneActivationStatus;
     /**
      * The LDAP user identifier.

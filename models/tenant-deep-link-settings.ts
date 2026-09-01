@@ -26,6 +26,9 @@ import type { DeepLinkHandlingMode } from './deep-link-handling-mode';
  * The deep link settings.
  */
 export interface TenantDeepLinkSettings {
+    /**
+     * The deep link handling mode.
+     */
     'handlingMode'?: DeepLinkHandlingMode;
     /**
      * The timestamp indicating when the settings were last modified.

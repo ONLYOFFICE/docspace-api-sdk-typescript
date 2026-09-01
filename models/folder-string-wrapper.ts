@@ -25,7 +25,13 @@ import type { FolderDtoString } from './folder-dto-string';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the FolderDtoString object.
+ */
 export interface FolderStringWrapper {
+    /**
+     * The FolderDtoString object returned by the operation.
+     */
     'response'?: FolderDtoString;
     /**
      * The total number of items in the response

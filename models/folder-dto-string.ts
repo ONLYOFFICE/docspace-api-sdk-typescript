@@ -20,9 +20,6 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ApiDateTime } from './api-date-time';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { ChatSettingsDto } from './chat-settings-dto';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -110,7 +107,7 @@ export type FolderDtoString = FileEntryDtoString &  {
      */
     'tags'?: Array<string> | null;
     /**
-     * 
+     * The folder logo.
      * @type {Logo}
      * @memberof FolderDtoString
      */
@@ -122,7 +119,7 @@ export type FolderDtoString = FileEntryDtoString &  {
      */
     'pinned'?: boolean;
     /**
-     * 
+     * The room type of the folder.
      * @type {RoomType}
      * @memberof FolderDtoString
      */
@@ -146,19 +143,19 @@ export type FolderDtoString = FileEntryDtoString &  {
      */
     'denyDownload'?: boolean;
     /**
-     * 
+     * The room data lifetime settings of the folder.
      * @type {RoomDataLifetimeDto}
      * @memberof FolderDtoString
      */
     'lifetime'?: RoomDataLifetimeDto;
     /**
-     * 
+     * The watermark settings of the folder.
      * @type {WatermarkDto}
      * @memberof FolderDtoString
      */
     'watermark'?: WatermarkDto;
     /**
-     * 
+     * The folder type.
      * @type {FolderType}
      * @memberof FolderDtoString
      */
@@ -201,13 +198,13 @@ export type FolderDtoString = FileEntryDtoString &  {
      */
     'expired'?: boolean | null;
     /**
-     * 
+     * The AI chat settings for the folder room. Contains configuration for AI provider, model selection, and custom prompts.  Only applicable to rooms with AI chat functionality enabled. Null if the room does not have chat settings configured.
      * @type {ChatSettingsDto}
      * @memberof FolderDtoString
      */
     'chatSettings'?: ChatSettingsDto;
     /**
-     * 
+     * The room type of the root folder. Indicates the type of the parent room if the current folder is nested within a room hierarchy.  This property helps identify the context in which a nested folder exists.
      * @type {RoomType}
      * @memberof FolderDtoString
      */

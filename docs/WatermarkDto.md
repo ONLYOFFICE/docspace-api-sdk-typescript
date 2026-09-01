@@ -6,7 +6,7 @@ The watermark settings.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**additions** | [**WatermarkAdditions**](WatermarkAdditions.md) |  | [default to undefined]
+**additions** | [**WatermarkAdditions**](WatermarkAdditions.md) | Specifies whether to display in the watermark: username, user email, user ip-adress, current date, and room name. | [default to undefined]
 **text** | **string** | The watermark text. | [optional] [default to undefined]
 **rotate** | **number** | The watermark text and image rotate. | [default to undefined]
 **imageScale** | **number** | The watermark image scale. | [default to undefined]

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **progress** | **number** | The migration progress. | [optional] [default to undefined]
 **error** | **string** | The migration error. | [optional] [default to undefined]
-**parseResult** | [**MigrationApiInfo**](MigrationApiInfo.md) |  | [optional] [default to undefined]
+**parseResult** | [**MigrationApiInfo**](MigrationApiInfo.md) | The migration API information. | [optional] [default to undefined]
 **isCompleted** | **boolean** | Specifies whether the migration is completed or not. | [optional] [default to undefined]
 
 ## Example

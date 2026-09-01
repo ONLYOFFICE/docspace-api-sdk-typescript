@@ -25,7 +25,13 @@ import type { ChunkedUploadSessionResponseWrapperInteger } from './chunked-uploa
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the ChunkedUploadSessionResponseWrapperInteger object.
+ */
 export interface ChunkedUploadSessionResponseWrapperIntegerWrapper {
+    /**
+     * The ChunkedUploadSessionResponseWrapperInteger object returned by the operation.
+     */
     'response'?: ChunkedUploadSessionResponseWrapperInteger;
     /**
      * The total number of items in the response

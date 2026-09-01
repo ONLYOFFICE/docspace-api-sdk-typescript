@@ -11,10 +11,10 @@ Name | Type | Description | Notes
 **key** | **string** | The full API key value (only returned when creating a new key). | [default to undefined]
 **keyPostfix** | **string** | The API key postfix (used for identification). | [optional] [default to undefined]
 **permissions** | **Array&lt;string&gt;** | The list of permissions granted to the API key. | [default to undefined]
-**lastUsed** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
-**createOn** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
-**createBy** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] [default to undefined]
-**expiresAt** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
+**lastUsed** | **string** | The date and time when the API key was last used. | [optional] [default to undefined]
+**createOn** | **string** | The date and time when the API key was created. | [optional] [default to undefined]
+**createBy** | [**EmployeeDto**](EmployeeDto.md) | The identifier of the user who created the API key. | [optional] [default to undefined]
+**expiresAt** | **string** | The date and time when the API key expires. | [optional] [default to undefined]
 **isActive** | **boolean** | Indicates whether the API key is active or not. | [default to undefined]
 
 ## Example

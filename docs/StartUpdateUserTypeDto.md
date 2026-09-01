@@ -6,7 +6,7 @@ The parameters for updating the type of the user or guest when reassigning rooms
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | [**EmployeeType**](EmployeeType.md) |  | [optional] [default to undefined]
+**type** | [**EmployeeType**](EmployeeType.md) | The new user type. | [optional] [default to undefined]
 **userId** | **string** | The user ID. | [optional] [default to undefined]
 **reassignUserId** | **string** | The user ID to reassign. | [optional] [default to undefined]
 

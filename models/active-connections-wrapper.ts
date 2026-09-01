@@ -25,7 +25,13 @@ import type { ActiveConnectionsDto } from './active-connections-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the ActiveConnectionsDto object.
+ */
 export interface ActiveConnectionsWrapper {
+    /**
+     * The ActiveConnectionsDto object returned by the operation.
+     */
     'response'?: ActiveConnectionsDto;
     /**
      * The total number of items in the response

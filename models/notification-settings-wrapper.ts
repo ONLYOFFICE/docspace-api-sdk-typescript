@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { NotificationSettingsDto } from './notification-settings-dto';
 
+/**
+ * The successful API response containing the NotificationSettingsDto object.
+ */
 export interface NotificationSettingsWrapper {
+    /**
+     * The NotificationSettingsDto object returned by the operation.
+     */
     'response'?: NotificationSettingsDto;
     /**
      * The total number of items in the response

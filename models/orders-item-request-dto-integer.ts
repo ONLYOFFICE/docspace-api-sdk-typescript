@@ -30,6 +30,9 @@ export interface OrdersItemRequestDtoInteger {
      * The entry unique identifier (file or folder).
      */
     'entryId': number;
+    /**
+     * The entry type (file or folder).
+     */
     'entryType': FileEntryType;
     /**
      * The order value.

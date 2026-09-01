@@ -7,17 +7,17 @@ The document config parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **fileType** | **string** | The file type of the document. | [optional] [default to undefined]
-**info** | [**InfoConfigDto**](InfoConfigDto.md) |  | [optional] [default to undefined]
+**info** | [**InfoConfigDto**](InfoConfigDto.md) | The configuration information of the document. | [optional] [default to undefined]
 **isLinkedForMe** | **boolean** | Specifies if the documnet is linked for current user. | [optional] [default to undefined]
 **key** | **string** | The document key. | [optional] [default to undefined]
-**permissions** | [**PermissionsConfig**](PermissionsConfig.md) |  | [optional] [default to undefined]
+**permissions** | [**PermissionsConfig**](PermissionsConfig.md) | The document permissions. | [optional] [default to undefined]
 **sharedLinkParam** | **string** | The shared link parameter of the document. | [optional] [default to undefined]
 **sharedLinkKey** | **string** | The shared link key of the document. | [optional] [default to undefined]
-**referenceData** | [**FileReferenceData**](FileReferenceData.md) |  | [optional] [default to undefined]
+**referenceData** | [**FileReferenceData**](FileReferenceData.md) | The reference data of the document. | [optional] [default to undefined]
 **title** | **string** | The document title. | [optional] [default to undefined]
 **url** | **string** | The document url. | [optional] [default to undefined]
 **isForm** | **boolean** | Indicates whether this is a form. | [optional] [default to undefined]
-**_options** | [**Options**](Options.md) |  | [optional] [default to undefined]
+**_options** | [**Options**](Options.md) | The options of the document. | [optional] [default to undefined]
 
 ## Example
 

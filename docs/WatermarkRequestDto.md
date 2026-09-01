@@ -7,7 +7,7 @@ The request parameters for adding watermarks.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **enabled** | **boolean** | Specifies whether watermarks are on or off. | [optional] [default to undefined]
-**additions** | [**WatermarkAdditions**](WatermarkAdditions.md) |  | [optional] [default to undefined]
+**additions** | [**WatermarkAdditions**](WatermarkAdditions.md) | Specifies whether to display the following addditional information or not: username, user email, user IP address, current date and room name. | [optional] [default to undefined]
 **text** | **string** | The watermark text. | [optional] [default to undefined]
 **rotate** | **number** | The watermark text and image rotate angle. | [optional] [default to undefined]
 **imageScale** | **number** | The watermark image scale. | [optional] [default to undefined]

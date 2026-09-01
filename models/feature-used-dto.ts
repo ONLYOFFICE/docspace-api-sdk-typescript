@@ -23,10 +23,7 @@
  * The used space parameters of the tenant quota feature.
  */
 export interface FeatureUsedDto {
-    /**
-     * The used space value.
-     */
-    'value': any | null;
+    'value': any;
     /**
      * The used space title.
      */

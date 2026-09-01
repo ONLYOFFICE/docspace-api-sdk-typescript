@@ -6,8 +6,8 @@ The XLSX report task response parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**form** | [**FileDtoInteger**](FileDtoInteger.md) |  | [optional] [default to undefined]
-**task** | [**DocumentBuilderTaskDto**](DocumentBuilderTaskDto.md) |  | [optional] [default to undefined]
+**form** | [**FileDtoInteger**](FileDtoInteger.md) | The original form file information. | [optional] [default to undefined]
+**task** | [**DocumentBuilderTaskDto**](DocumentBuilderTaskDto.md) | The Document Builder task information. | [optional] [default to undefined]
 **isNewFile** | **boolean** | Specifies whether the XLSX report file is newly created or an existing file will be updated. | [optional] [default to undefined]
 
 ## Example

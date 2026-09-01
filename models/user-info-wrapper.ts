@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { UserInfo } from './user-info';
 
+/**
+ * The successful API response containing the UserInfo object.
+ */
 export interface UserInfoWrapper {
+    /**
+     * The UserInfo object returned by the operation.
+     */
     'response'?: UserInfo;
     /**
      * The total number of items in the response

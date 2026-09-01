@@ -7,7 +7,7 @@ The encryption settings.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **password** | **string** | The encryption password. | [optional] [default to undefined]
-**status** | [**EncryprtionStatus**](EncryprtionStatus.md) |  | [optional] [default to undefined]
+**status** | [**EncryprtionStatus**](EncryprtionStatus.md) | The encryption status. | [optional] [default to undefined]
 **notifyUsers** | **boolean** | Specifies if the users will be notified about the encryption operation or not. | [optional] [default to undefined]
 
 ## Example

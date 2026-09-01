@@ -19,7 +19,13 @@
  */
 
 
+/**
+ * The parameters of an importable API entity.
+ */
 export interface ImportableApiEntity {
+    /**
+     * Specifies whether the API entity should be imported.
+     */
     'shouldImport'?: boolean;
 }
 

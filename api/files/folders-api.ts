@@ -24,15 +24,19 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
-import type { ApiDateTime } from '../../models';
-// @ts-ignore
 import type { ApplyFilterOption } from '../../models';
+// @ts-ignore
+import type { AuditReportFormat } from '../../models';
 // @ts-ignore
 import type { CheckUploadRequest } from '../../models';
 // @ts-ignore
 import type { CreateFolder } from '../../models';
 // @ts-ignore
 import type { DeleteFolder } from '../../models';
+// @ts-ignore
+import type { DocumentBuilderTaskWrapper } from '../../models';
+// @ts-ignore
+import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
 import type { FileEntryBaseArrayWrapper } from '../../models';
 // @ts-ignore
@@ -71,8 +75,6 @@ import type { STRINGArrayWrapper } from '../../models';
 import type { SearchArea } from '../../models';
 // @ts-ignore
 import type { SortOrder } from '../../models';
-// @ts-ignore
-import type { StringWrapper } from '../../models';
 // @ts-ignore
 import type { XlsxReportResponseWrapper } from '../../models';
 /**
@@ -276,15 +278,18 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Generates the activity history of a folder.
-         * @summary Generates folder history
-         * @param {number} folderId 
+         * Starts generating the activity history report of a folder (XLSX by default, or CSV) and saves it to My documents.
+         * @summary Start the folder history report generation
+         * @param {number} folderId The folder ID whose history is exported.
+         * @param {AuditReportFormat} [format] The output file format of the report. Defaults to XLSX.
+         * @param {string} [from] The start date of the history period to export.
+         * @param {string} [to] The end date of the history period to export.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createReportFolderHistory operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-report-folder-history/
          */
-        createReportFolderHistory: async (folderId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createReportFolderHistory: async (folderId: number, format?: AuditReportFormat, from?: string, to?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('createReportFolderHistory', 'folderId', folderId)
 
@@ -319,6 +324,22 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             // authentication OpenId required
+
+            if (format !== undefined) {
+                localVarQueryParameter['format'] = format;
+            }
+
+            if (from !== undefined) {
+                localVarQueryParameter['from'] = (from as any instanceof Date) ?
+                    (from as any).toISOString() :
+                    from;
+            }
+
+            if (to !== undefined) {
+                localVarQueryParameter['to'] = (to as any instanceof Date) ?
+                    (to as any).toISOString() :
+                    to;
+            }
 
 
     
@@ -636,6 +657,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} [sharedBy] The identifier of the user who shared the folder or file.
          * @param {FilterType} [filterType] The filter type.
          * @param {number} [roomId] The room ID.
+         * @param {Array<GetFolderByFolderIdFolderTypeEnum>} [folderType] The parent folder types used to filter the folder contents by folder type.
          * @param {boolean} [excludeSubject] Specifies whether to exclude search by user or group ID.
          * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders, or all elements from the specified folder.
          * @param {boolean} [withSubFolders] Specifies whether to include files from subfolders in the results.
@@ -654,7 +676,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
          * REST API Reference for getFolderByFolderId operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-by-folder-id/
          */
-        getFolderByFolderId: async (folderId: number, userIdOrGroupId?: string, sharedBy?: string, filterType?: FilterType, roomId?: number, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, withSubFolders?: boolean, extension?: string, searchArea?: SearchArea, formsItemKey?: string, formsItemType?: string, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, location?: Location, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getFolderByFolderId: async (folderId: number, userIdOrGroupId?: string, sharedBy?: string, filterType?: FilterType, roomId?: number, folderType?: Array<GetFolderByFolderIdFolderTypeEnum>, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, withSubFolders?: boolean, extension?: string, searchArea?: SearchArea, formsItemKey?: string, formsItemType?: string, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, location?: Location, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('getFolderByFolderId', 'folderId', folderId)
 
@@ -685,6 +707,10 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
 
             if (roomId !== undefined) {
                 localVarQueryParameter['roomId'] = roomId;
+            }
+
+            if (folderType) {
+                localVarQueryParameter['folderType'] = folderType;
             }
 
             if (excludeSubject !== undefined) {
@@ -754,8 +780,8 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
          * Returns the activity history of a folder with a specified identifier.
          * @summary Get folder history
          * @param {number} folderId The folder ID of the history request.
-         * @param {ApiDateTime} [fromDate] The start date of the history request.
-         * @param {ApiDateTime} [toDate] The end date of the history request.
+         * @param {string} [fromDate] The start date of the history request.
+         * @param {string} [toDate] The end date of the history request.
          * @param {number} [count] The number of records to retrieve for the folder history.
          * @param {number} [startIndex] The starting index from which the history records are retrieved in the request.
          * @param {*} [options] Override http request option.
@@ -763,7 +789,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
          * REST API Reference for getFolderHistory operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-history/
          */
-        getFolderHistory: async (folderId: number, fromDate?: ApiDateTime, toDate?: ApiDateTime, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getFolderHistory: async (folderId: number, fromDate?: string, toDate?: string, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('getFolderHistory', 'folderId', folderId)
 
@@ -800,11 +826,15 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             // authentication OpenId required
 
             if (fromDate !== undefined) {
-                localVarQueryParameter['fromDate'] = fromDate;
+                localVarQueryParameter['fromDate'] = (fromDate as any instanceof Date) ?
+                    (fromDate as any).toISOString() :
+                    fromDate;
             }
 
             if (toDate !== undefined) {
-                localVarQueryParameter['toDate'] = toDate;
+                localVarQueryParameter['toDate'] = (toDate as any instanceof Date) ?
+                    (toDate as any).toISOString() :
+                    toDate;
             }
 
             if (count !== undefined) {
@@ -1079,6 +1109,96 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * Returns the detailed list of rooms used for filling out forms located in the Forms section.
+         * @summary Get the Forms section
+         * @param {string} [userIdOrGroupId] The user or group ID.
+         * @param {FilterType} [filterType] The filter type.
+         * @param {number} [count] The maximum number of items to retrieve in the request.
+         * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated list.
+         * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterValue] The text used as a filter or search criterion for folder content queries.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getFormsFolder operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-forms-folder/
+         */
+        getFormsFolder: async (userIdOrGroupId?: string, filterType?: FilterType, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/files/@forms`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (userIdOrGroupId !== undefined) {
+                localVarQueryParameter['userIdOrGroupId'] = userIdOrGroupId;
+            }
+
+            if (filterType !== undefined) {
+                localVarQueryParameter['filterType'] = filterType;
+            }
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sortBy'] = sortBy;
+            }
+
+            if (sortOrder !== undefined) {
+                localVarQueryParameter['sortOrder'] = sortOrder;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
+            }
+
+
+    
+            if(fields !== undefined) {
+                localVarHeaderParameter['fields'] = fields;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns the detailed list of files and folders located in the My documents section.
          * @summary Get the My documents section
          * @param {string} [userIdOrGroupId] The user or group ID.
@@ -1230,96 +1350,6 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the detailed list of files and folders located in the Private Room section.
-         * @summary Get the Private Room section
-         * @param {string} [userIdOrGroupId] The user or group ID.
-         * @param {FilterType} [filterType] The filter type.
-         * @param {number} [count] The maximum number of items to retrieve in the request.
-         * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated list.
-         * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text used as a filter or search criterion for folder content queries.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getPrivacyFolder operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-privacy-folder/
-         */
-        getPrivacyFolder: async (userIdOrGroupId?: string, filterType?: FilterType, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-
-            const localVarPath = `/api/2.0/files/@privacy`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-            if (userIdOrGroupId !== undefined) {
-                localVarQueryParameter['userIdOrGroupId'] = userIdOrGroupId;
-            }
-
-            if (filterType !== undefined) {
-                localVarQueryParameter['filterType'] = filterType;
-            }
-
-            if (count !== undefined) {
-                localVarQueryParameter['count'] = count;
-            }
-
-            if (startIndex !== undefined) {
-                localVarQueryParameter['startIndex'] = startIndex;
-            }
-
-            if (sortBy !== undefined) {
-                localVarQueryParameter['sortBy'] = sortBy;
-            }
-
-            if (sortOrder !== undefined) {
-                localVarQueryParameter['sortOrder'] = sortOrder;
-            }
-
-            if (filterValue !== undefined) {
-                localVarQueryParameter['filterValue'] = filterValue;
-            }
-
-
-    
-            if(fields !== undefined) {
-                localVarHeaderParameter['fields'] = fields;
-            }
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Returns the detailed list of files located in the Recent section.
          * @summary Get the Recent section
          * @param {string} [userIdOrGroupId] The user or group ID.
@@ -1421,6 +1451,62 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             if(fields !== undefined) {
                 localVarHeaderParameter['fields'] = fields;
             }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the status of generating the folder history report.
+         * @summary Get the folder history report generation status
+         * @param {number} folderId The folder unique identifier.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getReportFolderHistory operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-report-folder-history/
+         */
+        getReportFolderHistory: async (folderId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'folderId' is not null or undefined
+            assertParamExists('getReportFolderHistory', 'folderId', folderId)
+
+            const localVarPath = `/api/2.0/files/folder/{folderId}/log/report`
+                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -2041,6 +2127,62 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * Terminates generating the folder history report.
+         * @summary Terminate the folder history report generation
+         * @param {number} folderId The folder unique identifier.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for terminateReportFolderHistory operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-report-folder-history/
+         */
+        terminateReportFolderHistory: async (folderId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'folderId' is not null or undefined
+            assertParamExists('terminateReportFolderHistory', 'folderId', folderId)
+
+            const localVarPath = `/api/2.0/files/folder/{folderId}/log/report`
+                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
          * @summary Upload a file
          * @param {number} folderId The folder ID to upload a file.
@@ -2255,16 +2397,19 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Generates the activity history of a folder.
-         * @summary Generates folder history
-         * @param {number} folderId 
+         * Starts generating the activity history report of a folder (XLSX by default, or CSV) and saves it to My documents.
+         * @summary Start the folder history report generation
+         * @param {number} folderId The folder ID whose history is exported.
+         * @param {AuditReportFormat} [format] The output file format of the report. Defaults to XLSX.
+         * @param {string} [from] The start date of the history period to export.
+         * @param {string} [to] The end date of the history period to export.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createReportFolderHistory operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-report-folder-history/
          */
-        async createReportFolderHistory(folderId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createReportFolderHistory(folderId, options);
+        async createReportFolderHistory(folderId: number, format?: AuditReportFormat, from?: string, to?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentBuilderTaskWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createReportFolderHistory(folderId, format, from, to, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.createReportFolderHistory']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -2358,6 +2503,7 @@ export const FoldersApiFp = function(configuration?: Configuration) {
          * @param {string} [sharedBy] The identifier of the user who shared the folder or file.
          * @param {FilterType} [filterType] The filter type.
          * @param {number} [roomId] The room ID.
+         * @param {Array<GetFolderByFolderIdFolderTypeEnum>} [folderType] The parent folder types used to filter the folder contents by folder type.
          * @param {boolean} [excludeSubject] Specifies whether to exclude search by user or group ID.
          * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders, or all elements from the specified folder.
          * @param {boolean} [withSubFolders] Specifies whether to include files from subfolders in the results.
@@ -2376,8 +2522,8 @@ export const FoldersApiFp = function(configuration?: Configuration) {
          * REST API Reference for getFolderByFolderId operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-by-folder-id/
          */
-        async getFolderByFolderId(folderId: number, userIdOrGroupId?: string, sharedBy?: string, filterType?: FilterType, roomId?: number, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, withSubFolders?: boolean, extension?: string, searchArea?: SearchArea, formsItemKey?: string, formsItemType?: string, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, location?: Location, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getFolderByFolderId(folderId, userIdOrGroupId, sharedBy, filterType, roomId, excludeSubject, applyFilterOption, withSubFolders, extension, searchArea, formsItemKey, formsItemType, count, startIndex, sortBy, sortOrder, filterValue, location, options);
+        async getFolderByFolderId(folderId: number, userIdOrGroupId?: string, sharedBy?: string, filterType?: FilterType, roomId?: number, folderType?: Array<GetFolderByFolderIdFolderTypeEnum>, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, withSubFolders?: boolean, extension?: string, searchArea?: SearchArea, formsItemKey?: string, formsItemType?: string, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, location?: Location, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getFolderByFolderId(folderId, userIdOrGroupId, sharedBy, filterType, roomId, folderType, excludeSubject, applyFilterOption, withSubFolders, extension, searchArea, formsItemKey, formsItemType, count, startIndex, sortBy, sortOrder, filterValue, location, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.getFolderByFolderId']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -2386,8 +2532,8 @@ export const FoldersApiFp = function(configuration?: Configuration) {
          * Returns the activity history of a folder with a specified identifier.
          * @summary Get folder history
          * @param {number} folderId The folder ID of the history request.
-         * @param {ApiDateTime} [fromDate] The start date of the history request.
-         * @param {ApiDateTime} [toDate] The end date of the history request.
+         * @param {string} [fromDate] The start date of the history request.
+         * @param {string} [toDate] The end date of the history request.
          * @param {number} [count] The number of records to retrieve for the folder history.
          * @param {number} [startIndex] The starting index from which the history records are retrieved in the request.
          * @param {*} [options] Override http request option.
@@ -2395,7 +2541,7 @@ export const FoldersApiFp = function(configuration?: Configuration) {
          * REST API Reference for getFolderHistory operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-history/
          */
-        async getFolderHistory(folderId: number, fromDate?: ApiDateTime, toDate?: ApiDateTime, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<HistoryArrayWrapper>> {
+        async getFolderHistory(folderId: number, fromDate?: string, toDate?: string, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<HistoryArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getFolderHistory(folderId, fromDate, toDate, count, startIndex, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.getFolderHistory']?.[localVarOperationServerIndex]?.url;
@@ -2479,6 +2625,27 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns the detailed list of rooms used for filling out forms located in the Forms section.
+         * @summary Get the Forms section
+         * @param {string} [userIdOrGroupId] The user or group ID.
+         * @param {FilterType} [filterType] The filter type.
+         * @param {number} [count] The maximum number of items to retrieve in the request.
+         * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated list.
+         * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
+         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
+         * @param {string} [filterValue] The text used as a filter or search criterion for folder content queries.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getFormsFolder operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-forms-folder/
+         */
+        async getFormsFolder(userIdOrGroupId?: string, filterType?: FilterType, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getFormsFolder(userIdOrGroupId, filterType, count, startIndex, sortBy, sortOrder, filterValue, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.getFormsFolder']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns the detailed list of files and folders located in the My documents section.
          * @summary Get the My documents section
          * @param {string} [userIdOrGroupId] The user or group ID.
@@ -2516,27 +2683,6 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the detailed list of files and folders located in the Private Room section.
-         * @summary Get the Private Room section
-         * @param {string} [userIdOrGroupId] The user or group ID.
-         * @param {FilterType} [filterType] The filter type.
-         * @param {number} [count] The maximum number of items to retrieve in the request.
-         * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated list.
-         * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text used as a filter or search criterion for folder content queries.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getPrivacyFolder operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-privacy-folder/
-         */
-        async getPrivacyFolder(userIdOrGroupId?: string, filterType?: FilterType, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getPrivacyFolder(userIdOrGroupId, filterType, count, startIndex, sortBy, sortOrder, filterValue, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FoldersApi.getPrivacyFolder']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
          * Returns the detailed list of files located in the Recent section.
          * @summary Get the Recent section
          * @param {string} [userIdOrGroupId] The user or group ID.
@@ -2559,6 +2705,21 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRecentFolder(userIdOrGroupId, filterType, excludeSubject, applyFilterOption, searchArea, extension, count, startIndex, sortBy, sortOrder, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.getRecentFolder']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the status of generating the folder history report.
+         * @summary Get the folder history report generation status
+         * @param {number} folderId The folder unique identifier.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getReportFolderHistory operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-report-folder-history/
+         */
+        async getReportFolderHistory(folderId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentBuilderTaskWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getReportFolderHistory(folderId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.getReportFolderHistory']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2707,6 +2868,21 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Terminates generating the folder history report.
+         * @summary Terminate the folder history report generation
+         * @param {number} folderId The folder unique identifier.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for terminateReportFolderHistory operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-report-folder-history/
+         */
+        async terminateReportFolderHistory(folderId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.terminateReportFolderHistory(folderId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.terminateReportFolderHistory']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
          * @summary Upload a file
          * @param {number} folderId The folder ID to upload a file.
@@ -2790,16 +2966,16 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.createFolderPrimaryExternalLink(requestParameters.id, requestParameters.folderLinkRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Generates the activity history of a folder.
-         * @summary Generates folder history
+         * Starts generating the activity history report of a folder (XLSX by default, or CSV) and saves it to My documents.
+         * @summary Start the folder history report generation
          * @param {FoldersApiCreateReportFolderHistoryRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for createReportFolderHistory operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-report-folder-history/
          * @throws {RequiredError}
          */
-        createReportFolderHistory(requestParameters: FoldersApiCreateReportFolderHistoryRequest, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.createReportFolderHistory(requestParameters.folderId, options).then((request) => request(axios, basePath));
+        createReportFolderHistory(requestParameters: FoldersApiCreateReportFolderHistoryRequest, options?: RawAxiosRequestConfig): AxiosPromise<DocumentBuilderTaskWrapper> {
+            return localVarFp.createReportFolderHistory(requestParameters.folderId, requestParameters.format, requestParameters.from, requestParameters.to, options).then((request) => request(axios, basePath));
         },
         /**
          * Deletes a folder with the ID specified in the request.
@@ -2870,7 +3046,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
          * @throws {RequiredError}
          */
         getFolderByFolderId(requestParameters: FoldersApiGetFolderByFolderIdRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
-            return localVarFp.getFolderByFolderId(requestParameters.folderId, requestParameters.userIdOrGroupId, requestParameters.sharedBy, requestParameters.filterType, requestParameters.roomId, requestParameters.excludeSubject, requestParameters.applyFilterOption, requestParameters.withSubFolders, requestParameters.extension, requestParameters.searchArea, requestParameters.formsItemKey, requestParameters.formsItemType, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, requestParameters.location, options).then((request) => request(axios, basePath));
+            return localVarFp.getFolderByFolderId(requestParameters.folderId, requestParameters.userIdOrGroupId, requestParameters.sharedBy, requestParameters.filterType, requestParameters.roomId, requestParameters.folderType, requestParameters.excludeSubject, requestParameters.applyFilterOption, requestParameters.withSubFolders, requestParameters.extension, requestParameters.searchArea, requestParameters.formsItemKey, requestParameters.formsItemType, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, requestParameters.location, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the activity history of a folder with a specified identifier.
@@ -2945,6 +3121,18 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getFolders(requestParameters.folderId, options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns the detailed list of rooms used for filling out forms located in the Forms section.
+         * @summary Get the Forms section
+         * @param {FoldersApiGetFormsFolderRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getFormsFolder operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-forms-folder/
+         * @throws {RequiredError}
+         */
+        getFormsFolder(requestParameters: FoldersApiGetFormsFolderRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
+            return localVarFp.getFormsFolder(requestParameters.userIdOrGroupId, requestParameters.filterType, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns the detailed list of files and folders located in the My documents section.
          * @summary Get the My documents section
          * @param {FoldersApiGetMyFolderRequest} requestParameters Request parameters.
@@ -2969,18 +3157,6 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getNewFolderItems(requestParameters.folderId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the detailed list of files and folders located in the Private Room section.
-         * @summary Get the Private Room section
-         * @param {FoldersApiGetPrivacyFolderRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for getPrivacyFolder operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-privacy-folder/
-         * @throws {RequiredError}
-         */
-        getPrivacyFolder(requestParameters: FoldersApiGetPrivacyFolderRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
-            return localVarFp.getPrivacyFolder(requestParameters.userIdOrGroupId, requestParameters.filterType, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Returns the detailed list of files located in the Recent section.
          * @summary Get the Recent section
          * @param {FoldersApiGetRecentFolderRequest} requestParameters Request parameters.
@@ -2991,6 +3167,18 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
          */
         getRecentFolder(requestParameters: FoldersApiGetRecentFolderRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
             return localVarFp.getRecentFolder(requestParameters.userIdOrGroupId, requestParameters.filterType, requestParameters.excludeSubject, requestParameters.applyFilterOption, requestParameters.searchArea, requestParameters.extension, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the status of generating the folder history report.
+         * @summary Get the folder history report generation status
+         * @param {FoldersApiGetReportFolderHistoryRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getReportFolderHistory operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-report-folder-history/
+         * @throws {RequiredError}
+         */
+        getReportFolderHistory(requestParameters: FoldersApiGetReportFolderHistoryRequest, options?: RawAxiosRequestConfig): AxiosPromise<DocumentBuilderTaskWrapper> {
+            return localVarFp.getReportFolderHistory(requestParameters.folderId, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns all the sections matching the parameters specified in the request.
@@ -3075,6 +3263,18 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
          */
         setFolderPrimaryExternalLink(requestParameters: FoldersApiSetFolderPrimaryExternalLinkRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
             return localVarFp.setFolderPrimaryExternalLink(requestParameters.id, requestParameters.folderLinkRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Terminates generating the folder history report.
+         * @summary Terminate the folder history report generation
+         * @param {FoldersApiTerminateReportFolderHistoryRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for terminateReportFolderHistory operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-report-folder-history/
+         * @throws {RequiredError}
+         */
+        terminateReportFolderHistory(requestParameters: FoldersApiTerminateReportFolderHistoryRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.terminateReportFolderHistory(requestParameters.folderId, options).then((request) => request(axios, basePath));
         },
         /**
          * Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
@@ -3173,11 +3373,32 @@ export interface FoldersApiCreateFolderPrimaryExternalLinkRequest {
  */
 export interface FoldersApiCreateReportFolderHistoryRequest {
     /**
-     * 
+     * The folder ID whose history is exported.
      * @type {number}
      * @memberof FoldersApiCreateReportFolderHistory
      */
     readonly folderId: number
+
+    /**
+     * The output file format of the report. Defaults to XLSX.
+     * @type {AuditReportFormat}
+     * @memberof FoldersApiCreateReportFolderHistory
+     */
+    readonly format?: AuditReportFormat
+
+    /**
+     * The start date of the history period to export.
+     * @type {string}
+     * @memberof FoldersApiCreateReportFolderHistory
+     */
+    readonly from?: string
+
+    /**
+     * The end date of the history period to export.
+     * @type {string}
+     * @memberof FoldersApiCreateReportFolderHistory
+     */
+    readonly to?: string
 }
 
 /**
@@ -3327,6 +3548,13 @@ export interface FoldersApiGetFolderByFolderIdRequest {
     readonly roomId?: number
 
     /**
+     * The parent folder types used to filter the folder contents by folder type.
+     * @type {Array<0 | 1 | 2 | 3 | 5 | 6 | 8 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 19 | 20 | 21 | 22 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36>}
+     * @memberof FoldersApiGetFolderByFolderId
+     */
+    readonly folderType?: Array<GetFolderByFolderIdFolderTypeEnum>
+
+    /**
      * Specifies whether to exclude search by user or group ID.
      * @type {boolean}
      * @memberof FoldersApiGetFolderByFolderId
@@ -3433,17 +3661,17 @@ export interface FoldersApiGetFolderHistoryRequest {
 
     /**
      * The start date of the history request.
-     * @type {ApiDateTime}
+     * @type {string}
      * @memberof FoldersApiGetFolderHistory
      */
-    readonly fromDate?: ApiDateTime
+    readonly fromDate?: string
 
     /**
      * The end date of the history request.
-     * @type {ApiDateTime}
+     * @type {string}
      * @memberof FoldersApiGetFolderHistory
      */
-    readonly toDate?: ApiDateTime
+    readonly toDate?: string
 
     /**
      * The number of records to retrieve for the folder history.
@@ -3545,6 +3773,62 @@ export interface FoldersApiGetFoldersRequest {
 }
 
 /**
+ * Request parameters for getFormsFolder operation in FoldersApi.
+ * @export
+ * @interface FoldersApiGetFormsFolderRequest
+ */
+export interface FoldersApiGetFormsFolderRequest {
+    /**
+     * The user or group ID.
+     * @type {string}
+     * @memberof FoldersApiGetFormsFolder
+     */
+    readonly userIdOrGroupId?: string
+
+    /**
+     * The filter type.
+     * @type {FilterType}
+     * @memberof FoldersApiGetFormsFolder
+     */
+    readonly filterType?: FilterType
+
+    /**
+     * The maximum number of items to retrieve in the request.
+     * @type {number}
+     * @memberof FoldersApiGetFormsFolder
+     */
+    readonly count?: number
+
+    /**
+     * The zero-based index of the first item to retrieve in a paginated list.
+     * @type {number}
+     * @memberof FoldersApiGetFormsFolder
+     */
+    readonly startIndex?: number
+
+    /**
+     * Specifies the field by which the folder content should be sorted.
+     * @type {string}
+     * @memberof FoldersApiGetFormsFolder
+     */
+    readonly sortBy?: string
+
+    /**
+     * The order in which the results are sorted.
+     * @type {SortOrder}
+     * @memberof FoldersApiGetFormsFolder
+     */
+    readonly sortOrder?: SortOrder
+
+    /**
+     * The text used as a filter or search criterion for folder content queries.
+     * @type {string}
+     * @memberof FoldersApiGetFormsFolder
+     */
+    readonly filterValue?: string
+}
+
+/**
  * Request parameters for getMyFolder operation in FoldersApi.
  * @export
  * @interface FoldersApiGetMyFolderRequest
@@ -3619,62 +3903,6 @@ export interface FoldersApiGetNewFolderItemsRequest {
      * @memberof FoldersApiGetNewFolderItems
      */
     readonly folderId: number
-}
-
-/**
- * Request parameters for getPrivacyFolder operation in FoldersApi.
- * @export
- * @interface FoldersApiGetPrivacyFolderRequest
- */
-export interface FoldersApiGetPrivacyFolderRequest {
-    /**
-     * The user or group ID.
-     * @type {string}
-     * @memberof FoldersApiGetPrivacyFolder
-     */
-    readonly userIdOrGroupId?: string
-
-    /**
-     * The filter type.
-     * @type {FilterType}
-     * @memberof FoldersApiGetPrivacyFolder
-     */
-    readonly filterType?: FilterType
-
-    /**
-     * The maximum number of items to retrieve in the request.
-     * @type {number}
-     * @memberof FoldersApiGetPrivacyFolder
-     */
-    readonly count?: number
-
-    /**
-     * The zero-based index of the first item to retrieve in a paginated list.
-     * @type {number}
-     * @memberof FoldersApiGetPrivacyFolder
-     */
-    readonly startIndex?: number
-
-    /**
-     * Specifies the field by which the folder content should be sorted.
-     * @type {string}
-     * @memberof FoldersApiGetPrivacyFolder
-     */
-    readonly sortBy?: string
-
-    /**
-     * The order in which the results are sorted.
-     * @type {SortOrder}
-     * @memberof FoldersApiGetPrivacyFolder
-     */
-    readonly sortOrder?: SortOrder
-
-    /**
-     * The text used as a filter or search criterion for folder content queries.
-     * @type {string}
-     * @memberof FoldersApiGetPrivacyFolder
-     */
-    readonly filterValue?: string
 }
 
 /**
@@ -3759,6 +3987,20 @@ export interface FoldersApiGetRecentFolderRequest {
      * @memberof FoldersApiGetRecentFolder
      */
     readonly filterValue?: string
+}
+
+/**
+ * Request parameters for getReportFolderHistory operation in FoldersApi.
+ * @export
+ * @interface FoldersApiGetReportFolderHistoryRequest
+ */
+export interface FoldersApiGetReportFolderHistoryRequest {
+    /**
+     * The folder unique identifier.
+     * @type {number}
+     * @memberof FoldersApiGetReportFolderHistory
+     */
+    readonly folderId: number
 }
 
 /**
@@ -4140,6 +4382,20 @@ export interface FoldersApiSetFolderPrimaryExternalLinkRequest {
 }
 
 /**
+ * Request parameters for terminateReportFolderHistory operation in FoldersApi.
+ * @export
+ * @interface FoldersApiTerminateReportFolderHistoryRequest
+ */
+export interface FoldersApiTerminateReportFolderHistoryRequest {
+    /**
+     * The folder unique identifier.
+     * @type {number}
+     * @memberof FoldersApiTerminateReportFolderHistory
+     */
+    readonly folderId: number
+}
+
+/**
  * Request parameters for uploadFile operation in FoldersApi.
  * @export
  * @interface FoldersApiUploadFileRequest
@@ -4260,15 +4516,15 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Generates the activity history of a folder.
-     * @summary Generates folder history
+     * Starts generating the activity history report of a folder (XLSX by default, or CSV) and saves it to My documents.
+     * @summary Start the folder history report generation
      * @param {FilesFoldersApiCreateReportFolderHistoryRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FoldersApi
      */
     public createReportFolderHistory(requestParameters: FoldersApiCreateReportFolderHistoryRequest, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).createReportFolderHistory(requestParameters.folderId, options).then((request) => request(this.axios, this.basePath));
+        return FoldersApiFp(this.configuration).createReportFolderHistory(requestParameters.folderId, requestParameters.format, requestParameters.from, requestParameters.to, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4339,7 +4595,7 @@ export class FoldersApi extends BaseAPI {
      * @memberof FoldersApi
      */
     public getFolderByFolderId(requestParameters: FoldersApiGetFolderByFolderIdRequest, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).getFolderByFolderId(requestParameters.folderId, requestParameters.userIdOrGroupId, requestParameters.sharedBy, requestParameters.filterType, requestParameters.roomId, requestParameters.excludeSubject, requestParameters.applyFilterOption, requestParameters.withSubFolders, requestParameters.extension, requestParameters.searchArea, requestParameters.formsItemKey, requestParameters.formsItemType, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, requestParameters.location, options).then((request) => request(this.axios, this.basePath));
+        return FoldersApiFp(this.configuration).getFolderByFolderId(requestParameters.folderId, requestParameters.userIdOrGroupId, requestParameters.sharedBy, requestParameters.filterType, requestParameters.roomId, requestParameters.folderType, requestParameters.excludeSubject, requestParameters.applyFilterOption, requestParameters.withSubFolders, requestParameters.extension, requestParameters.searchArea, requestParameters.formsItemKey, requestParameters.formsItemType, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, requestParameters.location, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4415,6 +4671,18 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
+     * Returns the detailed list of rooms used for filling out forms located in the Forms section.
+     * @summary Get the Forms section
+     * @param {FilesFoldersApiGetFormsFolderRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public getFormsFolder(requestParameters: FoldersApiGetFormsFolderRequest = {}, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).getFormsFolder(requestParameters.userIdOrGroupId, requestParameters.filterType, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Returns the detailed list of files and folders located in the My documents section.
      * @summary Get the My documents section
      * @param {FilesFoldersApiGetMyFolderRequest} requestParameters Request parameters.
@@ -4439,18 +4707,6 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns the detailed list of files and folders located in the Private Room section.
-     * @summary Get the Private Room section
-     * @param {FilesFoldersApiGetPrivacyFolderRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FoldersApi
-     */
-    public getPrivacyFolder(requestParameters: FoldersApiGetPrivacyFolderRequest = {}, options?: RawAxiosRequestConfig) {
-        return FoldersApiFp(this.configuration).getPrivacyFolder(requestParameters.userIdOrGroupId, requestParameters.filterType, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Returns the detailed list of files located in the Recent section.
      * @summary Get the Recent section
      * @param {FilesFoldersApiGetRecentFolderRequest} requestParameters Request parameters.
@@ -4460,6 +4716,18 @@ export class FoldersApi extends BaseAPI {
      */
     public getRecentFolder(requestParameters: FoldersApiGetRecentFolderRequest = {}, options?: RawAxiosRequestConfig) {
         return FoldersApiFp(this.configuration).getRecentFolder(requestParameters.userIdOrGroupId, requestParameters.filterType, requestParameters.excludeSubject, requestParameters.applyFilterOption, requestParameters.searchArea, requestParameters.extension, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the status of generating the folder history report.
+     * @summary Get the folder history report generation status
+     * @param {FilesFoldersApiGetReportFolderHistoryRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public getReportFolderHistory(requestParameters: FoldersApiGetReportFolderHistoryRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).getReportFolderHistory(requestParameters.folderId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4547,6 +4815,18 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
+     * Terminates generating the folder history report.
+     * @summary Terminate the folder history report generation
+     * @param {FilesFoldersApiTerminateReportFolderHistoryRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public terminateReportFolderHistory(requestParameters: FoldersApiTerminateReportFolderHistoryRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).terminateReportFolderHistory(requestParameters.folderId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
      * @summary Upload a file
      * @param {FilesFoldersApiUploadFileRequest} requestParameters Request parameters.
@@ -4571,3 +4851,39 @@ export class FoldersApi extends BaseAPI {
     }
 }
 
+/**
+ * @export
+ */
+export const GetFolderByFolderIdFolderTypeEnum = {
+    DEFAULT: 0,
+    COMMON: 1,
+    BUNCH: 2,
+    TRASH: 3,
+    USER: 5,
+    SHARE: 6,
+    Projects: 8,
+    Favorites: 10,
+    Recent: 11,
+    Templates: 12,
+    Privacy: 13,
+    VirtualRooms: 14,
+    FillingFormsRoom: 15,
+    EditingRoom: 16,
+    CustomRoom: 19,
+    Archive: 20,
+    ThirdpartyBackup: 21,
+    PublicRoom: 22,
+    ReadyFormFolder: 25,
+    InProcessFormFolder: 26,
+    FormFillingFolderDone: 27,
+    FormFillingFolderInProgress: 28,
+    VirtualDataRoom: 29,
+    RoomTemplates: 30,
+    AiRoom: 31,
+    Knowledge: 32,
+    ResultStorage: 33,
+    AiAgents: 34,
+    DefaultTemplates: 35,
+    Forms: 36
+} as const;
+export type GetFolderByFolderIdFolderTypeEnum = typeof GetFolderByFolderIdFolderTypeEnum[keyof typeof GetFolderByFolderIdFolderTypeEnum];

@@ -20,9 +20,6 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ApiDateTime } from './api-date-time';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { EmployeeDto } from './employee-dto';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -39,9 +36,21 @@ export interface HistoryDto {
      * The unique identifier for the file history entry.
      */
     'id': number;
+    /**
+     * The action performed on the file.
+     */
     'action': HistoryAction;
+    /**
+     * The action initiator.
+     */
     'initiator': EmployeeDto;
-    'date': ApiDateTime;
+    /**
+     * The date and time when an action on the file was performed.
+     */
+    'date': string | null;
+    /**
+     * The history data.
+     */
     'data': HistoryData;
     /**
      * The list of related history.

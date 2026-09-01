@@ -26,6 +26,9 @@ import type { FolderType } from './folder-type';
  * The request parameters for setting the default product configuration.
  */
 export interface DefaultProductRequestDto {
+    /**
+     * The ID of the product to be set as default.
+     */
     'defaultFolderType': FolderType;
 }
 

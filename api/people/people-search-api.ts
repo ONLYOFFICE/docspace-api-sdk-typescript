@@ -38,6 +38,8 @@ import type { EmployeeStatus } from '../../models';
 // @ts-ignore
 import type { EmployeeType } from '../../models';
 // @ts-ignore
+import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
 import type { ObjectArrayWrapper } from '../../models';
 // @ts-ignore
 import type { Payments } from '../../models';

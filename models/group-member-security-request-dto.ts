@@ -29,8 +29,17 @@ import type { FileShare } from './file-share';
  * The group member security information.
  */
 export interface GroupMemberSecurityRequestDto {
+    /**
+     * The group member parameters.
+     */
     'user': EmployeeFullDto;
+    /**
+     * The group access rights to the files.
+     */
     'groupAccess': FileShare;
+    /**
+     * The group member access rights to the files.
+     */
     'userAccess'?: FileShare;
     /**
      * Specifies if the group access rights are overridden or not.

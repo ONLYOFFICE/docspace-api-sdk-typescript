@@ -1,0 +1,27 @@
+# AiRoomDataLifetimeDto
+
+The room data lifetime information.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**deletePermanently** | **boolean** | Specifies whether to permanently delete the room data or not. | [optional] [default to undefined]
+**period** | [**AiRoomDataLifetimePeriod**](AiRoomDataLifetimePeriod.md) | Specifies the time period type of the room data lifetime. | [optional] [default to undefined]
+**value** | **number** | Specifies the time period value of the room data lifetime. | [optional] [default to undefined]
+**enabled** | **boolean** | Specifies whether the room data lifetime setting is enabled or not. | [optional] [default to undefined]
+
+## Example
+
+```typescript
+import { AiRoomDataLifetimeDto } from '@onlyoffice/docspace-api-sdk';
+
+const instance: AiRoomDataLifetimeDto = {
+    deletePermanently,
+    period,
+    value,
+    enabled,
+};
+```
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

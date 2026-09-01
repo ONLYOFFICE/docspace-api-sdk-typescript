@@ -26,6 +26,9 @@ import type { DarkThemeSettingsType } from './dark-theme-settings-type';
  * The theme parameters.
  */
 export interface DarkThemeSettings {
+    /**
+     * The theme type.
+     */
     'theme'?: DarkThemeSettingsType;
     /**
      * The last modified date.

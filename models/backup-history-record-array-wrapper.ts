@@ -25,7 +25,13 @@ import type { BackupHistoryRecord } from './backup-history-record';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the list of BackupHistoryRecord objects.
+ */
 export interface BackupHistoryRecordArrayWrapper {
+    /**
+     * The list of BackupHistoryRecord objects returned by the operation.
+     */
     'response'?: Array<BackupHistoryRecord>;
     /**
      * The total number of items in the response

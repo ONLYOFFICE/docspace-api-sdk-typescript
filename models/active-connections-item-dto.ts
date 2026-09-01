@@ -18,9 +18,6 @@
  *
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { ApiDateTime } from './api-date-time';
 
 /**
  * The active connection item parameters.
@@ -62,7 +59,10 @@ export interface ActiveConnectionsItemDto {
      * The active connection platform.
      */
     'platform'?: string | null;
-    'date'?: ApiDateTime;
+    /**
+     * The active connection date.
+     */
+    'date'?: string | null;
     /**
      * The active connection page.
      */

@@ -7,9 +7,9 @@ The parameters of the form filling result.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **formNumber** | **number** | The filling form number. | [default to undefined]
-**completedForm** | [**FileDtoInteger**](FileDtoInteger.md) |  | [optional] [default to undefined]
-**originalForm** | [**FileDtoInteger**](FileDtoInteger.md) |  | [optional] [default to undefined]
-**manager** | [**EmployeeFullDto**](EmployeeFullDto.md) |  | [optional] [default to undefined]
+**completedForm** | [**FileDtoInteger**](FileDtoInteger.md) | The file with the completed forms. | [optional] [default to undefined]
+**originalForm** | [**FileDtoInteger**](FileDtoInteger.md) | The file with the original forms. | [optional] [default to undefined]
+**manager** | [**EmployeeFullDto**](EmployeeFullDto.md) | The manager who is filling the form. | [optional] [default to undefined]
 **roomId** | **number** | The room ID where filling the form. | [default to undefined]
 **isRoomMember** | **boolean** | Specifies if the manager who fills the form is a room member or not. | [optional] [default to undefined]
 

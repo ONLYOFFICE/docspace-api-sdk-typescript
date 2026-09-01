@@ -30,6 +30,9 @@ export interface ManageFormFillingDtoInteger {
      * The ID of the form to manage.
      */
     'formId': number;
+    /**
+     * The action to perform on the form.
+     */
     'action'?: FormFillingManageAction;
 }
 

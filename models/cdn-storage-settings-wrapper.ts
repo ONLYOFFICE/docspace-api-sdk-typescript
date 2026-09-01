@@ -25,7 +25,13 @@ import type { CdnStorageSettings } from './cdn-storage-settings';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the CdnStorageSettings object.
+ */
 export interface CdnStorageSettingsWrapper {
+    /**
+     * The CdnStorageSettings object returned by the operation.
+     */
     'response'?: CdnStorageSettings;
     /**
      * The total number of items in the response

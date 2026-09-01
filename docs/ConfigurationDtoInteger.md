@@ -6,21 +6,21 @@ The configuration parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**document** | [**DocumentConfigDto**](DocumentConfigDto.md) |  | [default to undefined]
+**document** | [**DocumentConfigDto**](DocumentConfigDto.md) | The document configuration. | [default to undefined]
 **documentType** | **string** | The document type. | [default to undefined]
-**editorConfig** | [**EditorConfigurationDto**](EditorConfigurationDto.md) |  | [default to undefined]
-**editorType** | [**EditorType**](EditorType.md) |  | [default to undefined]
+**editorConfig** | [**EditorConfigurationDto**](EditorConfigurationDto.md) | The editor configuration. | [default to undefined]
+**editorType** | [**EditorType**](EditorType.md) | The editor type. | [default to undefined]
 **editorUrl** | **string** | The editor URL. | [default to undefined]
 **token** | **string** | The token of the file configuration. | [optional] [default to undefined]
 **type** | **string** | The platform type. | [optional] [default to undefined]
-**file** | [**FileDtoInteger**](FileDtoInteger.md) |  | [default to undefined]
+**file** | [**FileDtoInteger**](FileDtoInteger.md) | The file parameters. | [default to undefined]
 **errorMessage** | **string** | The error message. | [optional] [default to undefined]
 **startFilling** | **boolean** | Specifies if the file filling has started or not. | [optional] [default to undefined]
 **fillingStatus** | **boolean** | The file filling status. | [optional] [default to undefined]
-**startFillingMode** | [**StartFillingMode**](StartFillingMode.md) |  | [optional] [default to undefined]
+**startFillingMode** | [**StartFillingMode**](StartFillingMode.md) | The start filling mode. | [optional] [default to undefined]
 **fillingSessionId** | **string** | The file filling session ID. | [optional] [default to undefined]
-**quotaExceededScope** | [**QuotaScope**](QuotaScope.md) |  | [optional] [default to undefined]
-**generationToolCallState** | [**EditorToolCallStateDto**](EditorToolCallStateDto.md) |  | [optional] [default to undefined]
+**quotaExceededScope** | [**QuotaScope**](QuotaScope.md) | Indicates which quota scope has been exceeded. | [optional] [default to undefined]
+**generationToolCallState** | [**EditorToolCallStateDto**](EditorToolCallStateDto.md) | The generation tool call state. Used to run the agent flow in the editor. | [optional] [default to undefined]
 
 ## Example
 

@@ -6,7 +6,7 @@ The request parameters for managing the portal theme settings.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**theme** | [**CustomColorThemesSettingsItem**](CustomColorThemesSettingsItem.md) |  | [optional] [default to undefined]
+**theme** | [**CustomColorThemesSettingsItem**](CustomColorThemesSettingsItem.md) | The custom color theme configuration. | [optional] [default to undefined]
 **selected** | **number** | Specifies the optional value indicating the selected custom color theme. | [optional] [default to undefined]
 
 ## Example

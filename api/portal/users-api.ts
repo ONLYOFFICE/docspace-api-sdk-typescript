@@ -26,6 +26,8 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { EmployeeType } from '../../models';
 // @ts-ignore
+import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
 import type { Int64Wrapper } from '../../models';
 // @ts-ignore
 import type { InvitationLinkCreateRequestDto } from '../../models';

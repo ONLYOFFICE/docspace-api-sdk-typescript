@@ -19,9 +19,25 @@
  */
 
 
+/**
+ * The pricing of a single web search provider, per request.
+ */
 export interface AiWebSearchPricing {
+    /**
+     * The identifier of the web search provider.
+     */
+    'id'?: string | null;
+    /**
+     * The provider that serves the web search requests.
+     */
     'provider'?: string | null;
-    'search'?: number;
-    'contents'?: number;
+    /**
+     * The price of a single web search request.
+     */
+    'price'?: number;
+    /**
+     * The link to the pricing page of the provider.
+     */
+    'link'?: string | null;
 }
 

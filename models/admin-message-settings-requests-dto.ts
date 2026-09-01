@@ -38,6 +38,9 @@ export interface AdminMessageSettingsRequestsDto {
      * Culture
      */
     'culture'?: string | null;
+    /**
+     * The type of CAPTCHA validation used.
+     */
     'recaptchaType'?: RecaptchaType;
     /**
      * The user\'s response to the CAPTCHA challenge.

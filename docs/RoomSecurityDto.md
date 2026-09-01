@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **members** | [**Array&lt;FileShareDto&gt;**](FileShareDto.md) | The list of room members. | [optional] [default to undefined]
 **warning** | **string** | The warning message. | [optional] [default to undefined]
-**error** | [**RoomSecurityError**](RoomSecurityError.md) |  | [optional] [default to undefined]
+**error** | [**RoomSecurityError**](RoomSecurityError.md) | The error type. | [optional] [default to undefined]
 
 ## Example
 

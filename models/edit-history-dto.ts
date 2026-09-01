@@ -20,9 +20,6 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ApiDateTime } from './api-date-time';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { EditHistoryAuthor } from './edit-history-author';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -48,8 +45,14 @@ export interface EditHistoryDto {
      * The document version group.
      */
     'versionGroup'?: number;
+    /**
+     * The user who updated a file.
+     */
     'user'?: EditHistoryAuthor;
-    'created'?: ApiDateTime;
+    /**
+     * The document version creation date.
+     */
+    'created'?: string | null;
     /**
      * The file history changes in the string format.
      */

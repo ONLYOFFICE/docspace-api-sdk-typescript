@@ -6,9 +6,9 @@ The backup schedule parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**storageType** | [**BackupStorageType**](BackupStorageType.md) |  | [default to undefined]
+**storageType** | [**BackupStorageType**](BackupStorageType.md) | The backup storage type. | [default to undefined]
 **storageParams** | **{ [key: string]: string | null; }** | The backup storage parameters. | [default to undefined]
-**cronParams** | [**CronParams**](CronParams.md) |  | [default to undefined]
+**cronParams** | [**CronParams**](CronParams.md) | The backup cron parameters. | [default to undefined]
 **backupsStored** | **number** | The maximum number of the stored backup copies. | [optional] [default to undefined]
 **lastBackupTime** | **string** | The date and time when the last backup was reated. | [default to undefined]
 **dump** | **boolean** | Specifies if a dump will be created or not. | [default to undefined]

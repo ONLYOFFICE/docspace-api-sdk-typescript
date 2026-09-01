@@ -25,7 +25,13 @@ import type { CookieSettingsDto } from './cookie-settings-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the CookieSettingsDto object.
+ */
 export interface CookieSettingsWrapper {
+    /**
+     * The CookieSettingsDto object returned by the operation.
+     */
     'response'?: CookieSettingsDto;
     /**
      * The total number of items in the response

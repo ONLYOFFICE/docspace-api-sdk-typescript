@@ -18,15 +18,22 @@
  *
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { BaseStorageSettingsCdnStorageSettings } from './base-storage-settings-cdn-storage-settings';
 
 /**
- * @type CdnStorageSettings
- * @export
+ * The CDN storage settings.
  */
-export type CdnStorageSettings = BaseStorageSettingsCdnStorageSettings &  {
-};
-
+export interface CdnStorageSettings {
+    /**
+     * The storage name.
+     */
+    'module'?: string | null;
+    /**
+     * The storage properties.
+     */
+    'props'?: { [key: string]: string | null; };
+    /**
+     * The date and time when the storage settings were last modified.
+     */
+    'lastModified'?: string;
+}
 

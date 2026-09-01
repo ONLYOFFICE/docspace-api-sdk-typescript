@@ -20,9 +20,6 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ApiDateTime } from './api-date-time';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { EmployeeDto } from './employee-dto';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -125,11 +122,11 @@ export type FileEntryDtoString = FileEntryBaseDto &  {
      */
     'external'?: boolean | null;
     /**
-     * 
-     * @type {ApiDateTime}
+     * Represents the expiration date of the file entry.
+     * @type {string}
      * @memberof FileEntryDtoString
      */
-    'expirationDate'?: ApiDateTime;
+    'expirationDate'?: string | null;
     /**
      * Indicates whether the shareable link associated with the file or folder has expired.
      * @type {boolean}

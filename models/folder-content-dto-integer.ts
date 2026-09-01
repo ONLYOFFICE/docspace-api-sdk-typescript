@@ -37,11 +37,11 @@ export interface FolderContentDtoInteger {
      * The list of folders in the folder.
      */
     'folders'?: Array<FileEntryBaseDto> | null;
-    'current'?: FolderDtoInteger;
     /**
-     * The folder path.
+     * The current folder information.
      */
-    'pathParts': any | null;
+    'current'?: FolderDtoInteger;
+    'pathParts': any;
     /**
      * The folder start index.
      */

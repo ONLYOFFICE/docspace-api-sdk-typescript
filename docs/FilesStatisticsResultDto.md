@@ -6,11 +6,12 @@ The file statistics result parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**myDocumentsUsedSpace** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) |  | [optional] [default to undefined]
-**trashUsedSpace** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) |  | [optional] [default to undefined]
-**archiveUsedSpace** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) |  | [optional] [default to undefined]
-**roomsUsedSpace** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) |  | [optional] [default to undefined]
-**aiAgentsUsedSpace** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) |  | [optional] [default to undefined]
+**myDocumentsUsedSpace** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) | The used space of files in the \\My Documents\\ section. | [optional] [default to undefined]
+**trashUsedSpace** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) | The used space of files in the \\Trash\\ section. | [optional] [default to undefined]
+**archiveUsedSpace** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) | The used space of files in the \\Archive\\ section. | [optional] [default to undefined]
+**roomsUsedSpace** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) | The used space of files in the \\Rooms\\ section. | [optional] [default to undefined]
+**aiAgentsUsedSpace** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) | The used space of files in the \\AI agents\\ section. | [optional] [default to undefined]
+**formsUsedSpace** | [**FilesStatisticsFolder**](FilesStatisticsFolder.md) | The used space of files in the \\Forms\\ section. | [optional] [default to undefined]
 
 ## Example
 
@@ -23,6 +24,7 @@ const instance: FilesStatisticsResultDto = {
     archiveUsedSpace,
     roomsUsedSpace,
     aiAgentsUsedSpace,
+    formsUsedSpace,
 };
 ```
 

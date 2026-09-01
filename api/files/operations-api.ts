@@ -48,6 +48,8 @@ import type { DownloadRequestDto } from '../../models';
 // @ts-ignore
 import type { DuplicateRequestDto } from '../../models';
 // @ts-ignore
+import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
 import type { FileEntryBaseArrayWrapper } from '../../models';
 // @ts-ignore
 import type { FileOperationArrayWrapper } from '../../models';
@@ -809,15 +811,16 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Deletes all the files and folders from the Trash folder.
+         * Deletes all the files and folders from the Trash folder. If the folder types are specified, only the items originally located in the sections of these types are deleted.
          * @summary Empty the Trash folder
          * @param {boolean} [single] Specifies whether to return only the current operation
+         * @param {Array<EmptyTrashFolderTypeEnum>} [folderType] The parent folder types used to empty the trash only from the items originally located in the sections of the specified types.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for emptyTrash operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/empty-trash/
          */
-        emptyTrash: async (single?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        emptyTrash: async (single?: boolean, folderType?: Array<EmptyTrashFolderTypeEnum>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/files/fileops/emptytrash`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -852,6 +855,10 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
 
             if (single !== undefined) {
                 localVarQueryParameter['Single'] = single;
+            }
+
+            if (folderType) {
+                localVarQueryParameter['folderType'] = folderType;
             }
 
 
@@ -1630,16 +1637,17 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Deletes all the files and folders from the Trash folder.
+         * Deletes all the files and folders from the Trash folder. If the folder types are specified, only the items originally located in the sections of these types are deleted.
          * @summary Empty the Trash folder
          * @param {boolean} [single] Specifies whether to return only the current operation
+         * @param {Array<EmptyTrashFolderTypeEnum>} [folderType] The parent folder types used to empty the trash only from the items originally located in the sections of the specified types.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for emptyTrash operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/empty-trash/
          */
-        async emptyTrash(single?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.emptyTrash(single, options);
+        async emptyTrash(single?: boolean, folderType?: Array<EmptyTrashFolderTypeEnum>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.emptyTrash(single, folderType, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OperationsApi.emptyTrash']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1971,7 +1979,7 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.duplicateBatchItems(requestParameters.duplicateRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Deletes all the files and folders from the Trash folder.
+         * Deletes all the files and folders from the Trash folder. If the folder types are specified, only the items originally located in the sections of these types are deleted.
          * @summary Empty the Trash folder
          * @param {OperationsApiEmptyTrashRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1980,7 +1988,7 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
          * @throws {RequiredError}
          */
         emptyTrash(requestParameters: OperationsApiEmptyTrashRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
-            return localVarFp.emptyTrash(requestParameters.single, options).then((request) => request(axios, basePath));
+            return localVarFp.emptyTrash(requestParameters.single, requestParameters.folderType, options).then((request) => request(axios, basePath));
         },
         /**
          * Finalizes the upload session by processing the uploaded file chunks and marking the upload as complete.  This method consolidates chunked uploads into a complete file if required, sends notifications about the upload event,  and performs any additional cleanup or related actions, such as socket updates and webhook publishing.
@@ -2327,6 +2335,13 @@ export interface OperationsApiEmptyTrashRequest {
      * @memberof OperationsApiEmptyTrash
      */
     readonly single?: boolean
+
+    /**
+     * The parent folder types used to empty the trash only from the items originally located in the sections of the specified types.
+     * @type {Array<0 | 1 | 2 | 3 | 5 | 6 | 8 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 19 | 20 | 21 | 22 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36>}
+     * @memberof OperationsApiEmptyTrash
+     */
+    readonly folderType?: Array<EmptyTrashFolderTypeEnum>
 }
 
 /**
@@ -2697,7 +2712,7 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * Deletes all the files and folders from the Trash folder.
+     * Deletes all the files and folders from the Trash folder. If the folder types are specified, only the items originally located in the sections of these types are deleted.
      * @summary Empty the Trash folder
      * @param {FilesOperationsApiEmptyTrashRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -2705,7 +2720,7 @@ export class OperationsApi extends BaseAPI {
      * @memberof OperationsApi
      */
     public emptyTrash(requestParameters: OperationsApiEmptyTrashRequest = {}, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).emptyTrash(requestParameters.single, options).then((request) => request(this.axios, this.basePath));
+        return OperationsApiFp(this.configuration).emptyTrash(requestParameters.single, requestParameters.folderType, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2829,3 +2844,39 @@ export class OperationsApi extends BaseAPI {
     }
 }
 
+/**
+ * @export
+ */
+export const EmptyTrashFolderTypeEnum = {
+    DEFAULT: 0,
+    COMMON: 1,
+    BUNCH: 2,
+    TRASH: 3,
+    USER: 5,
+    SHARE: 6,
+    Projects: 8,
+    Favorites: 10,
+    Recent: 11,
+    Templates: 12,
+    Privacy: 13,
+    VirtualRooms: 14,
+    FillingFormsRoom: 15,
+    EditingRoom: 16,
+    CustomRoom: 19,
+    Archive: 20,
+    ThirdpartyBackup: 21,
+    PublicRoom: 22,
+    ReadyFormFolder: 25,
+    InProcessFormFolder: 26,
+    FormFillingFolderDone: 27,
+    FormFillingFolderInProgress: 28,
+    VirtualDataRoom: 29,
+    RoomTemplates: 30,
+    AiRoom: 31,
+    Knowledge: 32,
+    ResultStorage: 33,
+    AiAgents: 34,
+    DefaultTemplates: 35,
+    Forms: 36
+} as const;
+export type EmptyTrashFolderTypeEnum = typeof EmptyTrashFolderTypeEnum[keyof typeof EmptyTrashFolderTypeEnum];

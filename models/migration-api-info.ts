@@ -25,23 +25,77 @@ import type { MigratingApiGroup } from './migrating-api-group';
 // @ts-ignore
 import type { MigratingApiUser } from './migrating-api-user';
 
+/**
+ * The migration API information.
+ */
 export interface MigrationApiInfo {
+    /**
+     * The migrator name.
+     */
     'migratorName'?: string | null;
+    /**
+     * The migration operation.
+     */
     'operation'?: string | null;
+    /**
+     * The list of failed archives.
+     */
     'failedArchives'?: Array<string> | null;
+    /**
+     * The list of migrating users.
+     */
     'users'?: Array<MigratingApiUser> | null;
+    /**
+     * The list of migrating users without email.
+     */
     'withoutEmailUsers'?: Array<MigratingApiUser> | null;
+    /**
+     * The list of existing migrating users.
+     */
     'existUsers'?: Array<MigratingApiUser> | null;
+    /**
+     * The list of migrating groups.
+     */
     'groups'?: Array<MigratingApiGroup> | null;
+    /**
+     * Specifies whether to import personal files or not.
+     */
     'importPersonalFiles'?: boolean;
+    /**
+     * Specifies whether to import shared files or not.
+     */
     'importSharedFiles'?: boolean;
+    /**
+     * Specifies whether to import shared folders or not.
+     */
     'importSharedFolders'?: boolean;
+    /**
+     * Specifies whether to import common files or not.
+     */
     'importCommonFiles'?: boolean;
+    /**
+     * Specifies whether to import project files or not.
+     */
     'importProjectFiles'?: boolean;
+    /**
+     * Specifies whether to import groups or not.
+     */
     'importGroups'?: boolean;
+    /**
+     * The number of successfully migrated users.
+     */
     'successedUsers'?: number;
+    /**
+     * The number of unsuccessfully migrated users.
+     */
     'failedUsers'?: number;
+    /**
+     * The list of migrated files.
+     */
     'files'?: Array<string> | null;
+    /**
+     * The list of migration errors.
+     */
     'errors'?: Array<string> | null;
 }
 

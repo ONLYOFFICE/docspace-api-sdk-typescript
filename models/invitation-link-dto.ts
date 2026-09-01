@@ -20,9 +20,6 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ApiDateTime } from './api-date-time';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { EmployeeType } from './employee-type';
 
 /**
@@ -33,8 +30,14 @@ export interface InvitationLinkDto {
      * The ID of the invitation link.
      */
     'id'?: string;
+    /**
+     * The type of employee role for the invitation link.
+     */
     'employeeType': EmployeeType;
-    'expiration'?: ApiDateTime;
+    /**
+     * The expiration date of the invitation link.
+     */
+    'expiration'?: string | null;
     /**
      * Indicates whether the invitation link has expired.
      */

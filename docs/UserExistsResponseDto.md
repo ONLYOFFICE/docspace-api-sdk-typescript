@@ -7,7 +7,7 @@ The user existence check response parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **exists** | **boolean** | Specifies whether the user exists or not. | [default to undefined]
-**status** | [**EmployeeStatus**](EmployeeStatus.md) |  | [optional] [default to undefined]
+**status** | [**EmployeeStatus**](EmployeeStatus.md) | The user status, if the user exists. | [optional] [default to undefined]
 
 ## Example
 

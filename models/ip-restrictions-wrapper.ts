@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { IpRestrictionsDto } from './ip-restrictions-dto';
 
+/**
+ * The successful API response containing the IpRestrictionsDto object.
+ */
 export interface IpRestrictionsWrapper {
+    /**
+     * The IpRestrictionsDto object returned by the operation.
+     */
     'response'?: IpRestrictionsDto;
     /**
      * The total number of items in the response

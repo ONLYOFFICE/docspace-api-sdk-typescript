@@ -36,6 +36,9 @@ export interface FileOperationDto {
      * The file operation ID.
      */
     'id': string | null;
+    /**
+     * The file operation type.
+     */
     'Operation': FileOperationType;
     /**
      * The file operation progress in percentage.
@@ -65,6 +68,9 @@ export interface FileOperationDto {
      * The list of folders of the file operation.
      */
     'folders'?: Array<FileEntryBaseDto> | null;
+    /**
+     * The status of the distributed task related to the file operation.
+     */
     'status'?: DistributedTaskStatus;
 }
 

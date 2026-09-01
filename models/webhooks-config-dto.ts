@@ -49,16 +49,25 @@ export interface WebhooksConfigDto {
      * The webhook SSL verification (enabled or not).
      */
     'ssl'?: boolean;
+    /**
+     * The webhook trigger type.
+     */
     'triggers'?: WebhookTrigger;
     /**
      * The webhook target ID.
      */
     'targetId'?: string | null;
+    /**
+     * The user who created the webhook.
+     */
     'createdBy'?: EmployeeDto;
     /**
      * The date and time when the webhook was created.
      */
     'createdOn'?: string | null;
+    /**
+     * The user who modified the webhook.
+     */
     'modifiedBy'?: EmployeeDto;
     /**
      * The date and time when the webhook was modified.

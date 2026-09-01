@@ -25,7 +25,13 @@ import type { FileEntryDtoInteger } from './file-entry-dto-integer';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the list of FileEntryDtoInteger objects.
+ */
 export interface FileEntryIntegerArrayWrapper {
+    /**
+     * The list of FileEntryDtoInteger objects returned by the operation.
+     */
     'response'?: Array<FileEntryDtoInteger>;
     /**
      * The total number of items in the response

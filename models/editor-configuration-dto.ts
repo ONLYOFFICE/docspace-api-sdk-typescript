@@ -29,7 +29,7 @@ import type { CustomizationConfigDto } from './customization-config-dto';
 import type { EmbeddedConfig } from './embedded-config';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { EncryptionKeysConfig } from './encryption-keys-config';
+import type { EncryptionKeyDto } from './encryption-key-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { PluginsConfig } from './plugins-config';
@@ -51,14 +51,26 @@ export interface EditorConfigurationDto {
      * The callback URL of the editor.
      */
     'callbackUrl'?: string | null;
+    /**
+     * The co-editing configuration parameters.
+     */
     'coEditing'?: CoEditingConfig;
     /**
      * The creation URL of the editor.
      */
     'createUrl'?: string | null;
+    /**
+     * The customization configuration.
+     */
     'customization'?: CustomizationConfigDto;
+    /**
+     * The embedded configuration parameters for embedded documents.
+     */
     'embedded'?: EmbeddedConfig;
-    'encryptionKeys'?: EncryptionKeysConfig;
+    /**
+     * The encryption keys of the editor configuration.
+     */
+    'encryptionKeys'?: Array<EncryptionKeyDto> | null;
     /**
      * The language of the editor configuration.
      */
@@ -71,6 +83,9 @@ export interface EditorConfigurationDto {
      * Specifies if the mode is write of the editor configuration.
      */
     'modeWrite'?: boolean;
+    /**
+     * The plugins configuration.
+     */
     'plugins'?: PluginsConfig;
     /**
      * The recent configuration of the editor.
@@ -80,6 +95,9 @@ export interface EditorConfigurationDto {
      * The templates of the editor configuration.
      */
     'templates'?: Array<TemplatesConfig> | null;
+    /**
+     * The user configuration of the editor.
+     */
     'user'?: UserConfig;
 }
 

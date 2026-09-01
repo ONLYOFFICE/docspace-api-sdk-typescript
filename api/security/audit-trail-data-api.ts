@@ -26,11 +26,15 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { ActionType } from '../../models';
 // @ts-ignore
-import type { ApiDateTime } from '../../models';
-// @ts-ignore
 import type { AuditEventArrayWrapper } from '../../models';
 // @ts-ignore
+import type { AuditReportFormat } from '../../models';
+// @ts-ignore
+import type { DocumentBuilderTaskWrapper } from '../../models';
+// @ts-ignore
 import type { EntryType } from '../../models';
+// @ts-ignore
+import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
 import type { LocationType } from '../../models';
 // @ts-ignore
@@ -40,7 +44,7 @@ import type { ObjectWrapper } from '../../models';
 // @ts-ignore
 import type { ProductType } from '../../models';
 // @ts-ignore
-import type { StringWrapper } from '../../models';
+import type { TenantAuditSettingsResponseWrapper } from '../../models';
 // @ts-ignore
 import type { TenantAuditSettingsWrapper } from '../../models';
 /**
@@ -55,14 +59,15 @@ export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Conf
             fields = f;
         },
         /**
-         * Generates the audit trail report.
-         * @summary Generate the audit trail report
+         * Starts generating the audit trail report (XLSX by default, or CSV) and saves it to My documents.
+         * @summary Start the audit trail report generation
+         * @param {AuditReportFormat} [format] The output file format of the report. Defaults to XLSX.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createAuditTrailReport operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-audit-trail-report/
          */
-        createAuditTrailReport: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createAuditTrailReport: async (format?: AuditReportFormat, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/security/audit/events/report`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -95,6 +100,10 @@ export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Conf
 
             // authentication OpenId required
 
+            if (format !== undefined) {
+                localVarQueryParameter['format'] = format;
+            }
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -115,8 +124,8 @@ export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Conf
          * @param {MessageAction} [action] The specific action that occurred within the audit event.
          * @param {EntryType} [entryType] The type of audit entry (e.g., Folder, User, File).
          * @param {string} [target] The target object affected by the audit event (e.g., document ID, user account).
-         * @param {ApiDateTime} [from] The starting date and time for filtering audit events.
-         * @param {ApiDateTime} [to] The ending date and time for filtering audit events.
+         * @param {string} [from] The starting date and time for filtering audit events.
+         * @param {string} [to] The ending date and time for filtering audit events.
          * @param {number} [count] The maximum number of audit event records to retrieve.
          * @param {number} [startIndex] The index of the first audit event record to retrieve in a paged query.
          * @param {*} [options] Override http request option.
@@ -124,7 +133,7 @@ export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Conf
          * REST API Reference for getAuditEventsByFilter operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-events-by-filter/
          */
-        getAuditEventsByFilter: async (userId?: string, moduleType?: LocationType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAuditEventsByFilter: async (userId?: string, moduleType?: LocationType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: string, to?: string, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/security/audit/events/filter`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -182,11 +191,15 @@ export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Conf
             }
 
             if (from !== undefined) {
-                localVarQueryParameter['from'] = from;
+                localVarQueryParameter['from'] = (from as any instanceof Date) ?
+                    (from as any).toISOString() :
+                    from;
             }
 
             if (to !== undefined) {
-                localVarQueryParameter['to'] = to;
+                localVarQueryParameter['to'] = (to as any instanceof Date) ?
+                    (to as any).toISOString() :
+                    to;
             }
 
             if (count !== undefined) {
@@ -313,6 +326,58 @@ export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Conf
             if (moduleType !== undefined) {
                 localVarQueryParameter['moduleType'] = moduleType;
             }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the status of generating the audit trail report.
+         * @summary Get the audit trail report generation status
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getAuditTrailReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-trail-report/
+         */
+        getAuditTrailReport: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/security/audit/events/report`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
 
 
     
@@ -485,6 +550,58 @@ export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Conf
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Terminates generating the audit trail report.
+         * @summary Terminate the audit trail report generation
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for terminateAuditTrailReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-audit-trail-report/
+         */
+        terminateAuditTrailReport: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/security/audit/events/report`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -496,15 +613,16 @@ export const AuditTrailDataApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = AuditTrailDataApiAxiosParamCreator(configuration)
     return {
         /**
-         * Generates the audit trail report.
-         * @summary Generate the audit trail report
+         * Starts generating the audit trail report (XLSX by default, or CSV) and saves it to My documents.
+         * @summary Start the audit trail report generation
+         * @param {AuditReportFormat} [format] The output file format of the report. Defaults to XLSX.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createAuditTrailReport operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-audit-trail-report/
          */
-        async createAuditTrailReport(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createAuditTrailReport(options);
+        async createAuditTrailReport(format?: AuditReportFormat, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentBuilderTaskWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createAuditTrailReport(format, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AuditTrailDataApi.createAuditTrailReport']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -518,8 +636,8 @@ export const AuditTrailDataApiFp = function(configuration?: Configuration) {
          * @param {MessageAction} [action] The specific action that occurred within the audit event.
          * @param {EntryType} [entryType] The type of audit entry (e.g., Folder, User, File).
          * @param {string} [target] The target object affected by the audit event (e.g., document ID, user account).
-         * @param {ApiDateTime} [from] The starting date and time for filtering audit events.
-         * @param {ApiDateTime} [to] The ending date and time for filtering audit events.
+         * @param {string} [from] The starting date and time for filtering audit events.
+         * @param {string} [to] The ending date and time for filtering audit events.
          * @param {number} [count] The maximum number of audit event records to retrieve.
          * @param {number} [startIndex] The index of the first audit event record to retrieve in a paged query.
          * @param {*} [options] Override http request option.
@@ -527,7 +645,7 @@ export const AuditTrailDataApiFp = function(configuration?: Configuration) {
          * REST API Reference for getAuditEventsByFilter operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-events-by-filter/
          */
-        async getAuditEventsByFilter(userId?: string, moduleType?: LocationType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuditEventArrayWrapper>> {
+        async getAuditEventsByFilter(userId?: string, moduleType?: LocationType, actionType?: ActionType, action?: MessageAction, entryType?: EntryType, target?: string, from?: string, to?: string, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuditEventArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAuditEventsByFilter(userId, moduleType, actionType, action, entryType, target, from, to, count, startIndex, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AuditTrailDataApi.getAuditEventsByFilter']?.[localVarOperationServerIndex]?.url;
@@ -541,7 +659,7 @@ export const AuditTrailDataApiFp = function(configuration?: Configuration) {
          * REST API Reference for getAuditSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-settings/
          */
-        async getAuditSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantAuditSettingsWrapper>> {
+        async getAuditSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantAuditSettingsResponseWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAuditSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AuditTrailDataApi.getAuditSettings']?.[localVarOperationServerIndex]?.url;
@@ -561,6 +679,20 @@ export const AuditTrailDataApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAuditTrailMappers(productType, moduleType, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AuditTrailDataApi.getAuditTrailMappers']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the status of generating the audit trail report.
+         * @summary Get the audit trail report generation status
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getAuditTrailReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-trail-report/
+         */
+        async getAuditTrailReport(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentBuilderTaskWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAuditTrailReport(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AuditTrailDataApi.getAuditTrailReport']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -600,10 +732,24 @@ export const AuditTrailDataApiFp = function(configuration?: Configuration) {
          * REST API Reference for setAuditSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-audit-settings/
          */
-        async setAuditSettings(tenantAuditSettingsWrapper?: TenantAuditSettingsWrapper, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantAuditSettingsWrapper>> {
+        async setAuditSettings(tenantAuditSettingsWrapper?: TenantAuditSettingsWrapper, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantAuditSettingsResponseWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setAuditSettings(tenantAuditSettingsWrapper, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AuditTrailDataApi.setAuditSettings']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Terminates generating the audit trail report.
+         * @summary Terminate the audit trail report generation
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for terminateAuditTrailReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-audit-trail-report/
+         */
+        async terminateAuditTrailReport(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.terminateAuditTrailReport(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AuditTrailDataApi.terminateAuditTrailReport']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -617,15 +763,16 @@ export const AuditTrailDataApiFactory = function (configuration?: Configuration,
     const localVarFp = AuditTrailDataApiFp(configuration)
     return {
         /**
-         * Generates the audit trail report.
-         * @summary Generate the audit trail report
+         * Starts generating the audit trail report (XLSX by default, or CSV) and saves it to My documents.
+         * @summary Start the audit trail report generation
+         * @param {AuditTrailDataApiCreateAuditTrailReportRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for createAuditTrailReport operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-audit-trail-report/
          * @throws {RequiredError}
          */
-        createAuditTrailReport(options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.createAuditTrailReport(options).then((request) => request(axios, basePath));
+        createAuditTrailReport(requestParameters: AuditTrailDataApiCreateAuditTrailReportRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<DocumentBuilderTaskWrapper> {
+            return localVarFp.createAuditTrailReport(requestParameters.format, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of the audit events by the parameters specified in the request.
@@ -647,7 +794,7 @@ export const AuditTrailDataApiFactory = function (configuration?: Configuration,
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-settings/
          * @throws {RequiredError}
          */
-        getAuditSettings(options?: RawAxiosRequestConfig): AxiosPromise<TenantAuditSettingsWrapper> {
+        getAuditSettings(options?: RawAxiosRequestConfig): AxiosPromise<TenantAuditSettingsResponseWrapper> {
             return localVarFp.getAuditSettings(options).then((request) => request(axios, basePath));
         },
         /**
@@ -661,6 +808,17 @@ export const AuditTrailDataApiFactory = function (configuration?: Configuration,
          */
         getAuditTrailMappers(requestParameters: AuditTrailDataApiGetAuditTrailMappersRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
             return localVarFp.getAuditTrailMappers(requestParameters.productType, requestParameters.moduleType, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the status of generating the audit trail report.
+         * @summary Get the audit trail report generation status
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getAuditTrailReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-trail-report/
+         * @throws {RequiredError}
+         */
+        getAuditTrailReport(options?: RawAxiosRequestConfig): AxiosPromise<DocumentBuilderTaskWrapper> {
+            return localVarFp.getAuditTrailReport(options).then((request) => request(axios, basePath));
         },
         /**
          * Returns all the available audit trail types.
@@ -693,11 +851,36 @@ export const AuditTrailDataApiFactory = function (configuration?: Configuration,
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-audit-settings/
          * @throws {RequiredError}
          */
-        setAuditSettings(requestParameters: AuditTrailDataApiSetAuditSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantAuditSettingsWrapper> {
+        setAuditSettings(requestParameters: AuditTrailDataApiSetAuditSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantAuditSettingsResponseWrapper> {
             return localVarFp.setAuditSettings(requestParameters.tenantAuditSettingsWrapper, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Terminates generating the audit trail report.
+         * @summary Terminate the audit trail report generation
+         * @param {*} [options] Override http request option.
+         * REST API Reference for terminateAuditTrailReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-audit-trail-report/
+         * @throws {RequiredError}
+         */
+        terminateAuditTrailReport(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.terminateAuditTrailReport(options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for createAuditTrailReport operation in AuditTrailDataApi.
+ * @export
+ * @interface AuditTrailDataApiCreateAuditTrailReportRequest
+ */
+export interface AuditTrailDataApiCreateAuditTrailReportRequest {
+    /**
+     * The output file format of the report. Defaults to XLSX.
+     * @type {AuditReportFormat}
+     * @memberof AuditTrailDataApiCreateAuditTrailReport
+     */
+    readonly format?: AuditReportFormat
+}
 
 /**
  * Request parameters for getAuditEventsByFilter operation in AuditTrailDataApi.
@@ -749,17 +932,17 @@ export interface AuditTrailDataApiGetAuditEventsByFilterRequest {
 
     /**
      * The starting date and time for filtering audit events.
-     * @type {ApiDateTime}
+     * @type {string}
      * @memberof AuditTrailDataApiGetAuditEventsByFilter
      */
-    readonly from?: ApiDateTime
+    readonly from?: string
 
     /**
      * The ending date and time for filtering audit events.
-     * @type {ApiDateTime}
+     * @type {string}
      * @memberof AuditTrailDataApiGetAuditEventsByFilter
      */
-    readonly to?: ApiDateTime
+    readonly to?: string
 
     /**
      * The maximum number of audit event records to retrieve.
@@ -819,14 +1002,15 @@ export interface AuditTrailDataApiSetAuditSettingsRequest {
  */
 export class AuditTrailDataApi extends BaseAPI {
     /**
-     * Generates the audit trail report.
-     * @summary Generate the audit trail report
+     * Starts generating the audit trail report (XLSX by default, or CSV) and saves it to My documents.
+     * @summary Start the audit trail report generation
+     * @param {SecurityAuditTrailDataApiCreateAuditTrailReportRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuditTrailDataApi
      */
-    public createAuditTrailReport(options?: RawAxiosRequestConfig) {
-        return AuditTrailDataApiFp(this.configuration).createAuditTrailReport(options).then((request) => request(this.axios, this.basePath));
+    public createAuditTrailReport(requestParameters: AuditTrailDataApiCreateAuditTrailReportRequest = {}, options?: RawAxiosRequestConfig) {
+        return AuditTrailDataApiFp(this.configuration).createAuditTrailReport(requestParameters.format, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -865,6 +1049,17 @@ export class AuditTrailDataApi extends BaseAPI {
     }
 
     /**
+     * Returns the status of generating the audit trail report.
+     * @summary Get the audit trail report generation status
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuditTrailDataApi
+     */
+    public getAuditTrailReport(options?: RawAxiosRequestConfig) {
+        return AuditTrailDataApiFp(this.configuration).getAuditTrailReport(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Returns all the available audit trail types.
      * @summary Get audit trail types
      * @param {*} [options] Override http request option.
@@ -896,6 +1091,17 @@ export class AuditTrailDataApi extends BaseAPI {
      */
     public setAuditSettings(requestParameters: AuditTrailDataApiSetAuditSettingsRequest = {}, options?: RawAxiosRequestConfig) {
         return AuditTrailDataApiFp(this.configuration).setAuditSettings(requestParameters.tenantAuditSettingsWrapper, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Terminates generating the audit trail report.
+     * @summary Terminate the audit trail report generation
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuditTrailDataApi
+     */
+    public terminateAuditTrailReport(options?: RawAxiosRequestConfig) {
+        return AuditTrailDataApiFp(this.configuration).terminateAuditTrailReport(options).then((request) => request(this.axios, this.basePath));
     }
 }
 

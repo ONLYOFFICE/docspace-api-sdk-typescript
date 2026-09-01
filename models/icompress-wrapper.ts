@@ -22,9 +22,12 @@
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the ICompress object.
+ */
 export interface ICompressWrapper {
     /**
-     * The archiving class unification interface.
+     * The ICompress object returned by the operation.
      */
     'response'?: object;
     /**

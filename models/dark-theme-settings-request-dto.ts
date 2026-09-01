@@ -26,6 +26,9 @@ import type { DarkThemeSettingsType } from './dark-theme-settings-type';
  * The theme settings request parameters.
  */
 export interface DarkThemeSettingsRequestDto {
+    /**
+     * The portal theme settings type.
+     */
     'theme': DarkThemeSettingsType;
 }
 

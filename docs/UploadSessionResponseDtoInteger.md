@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **title** | **string** | The file title. | [optional] [default to undefined]
 **providerKey** | **string** | The third-party provider key. | [optional] [default to undefined]
 **uploaded** | **boolean** | Specifies whether the file has been uploaded. | [optional] [default to undefined]
-**file** | [**FileDtoInteger**](FileDtoInteger.md) |  | [optional] [default to undefined]
+**file** | [**FileDtoInteger**](FileDtoInteger.md) | The uploaded file information. | [optional] [default to undefined]
 
 ## Example
 

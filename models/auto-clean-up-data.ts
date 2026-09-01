@@ -30,6 +30,9 @@ export interface AutoCleanUpData {
      * Specifies whether to permanently delete files in the Trash folder.
      */
     'isAutoCleanUp'?: boolean;
+    /**
+     * The period when the trash bin will be cleared.
+     */
     'gap'?: DateToAutoCleanUp;
 }
 

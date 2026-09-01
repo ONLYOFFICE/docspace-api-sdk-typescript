@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **secretKey** | **string** | The webhook secret key used to sign the webhook payloads for the security verification. | [optional] [default to undefined]
 **enabled** | **boolean** | Specifies whether the webhook configuration is active or not. | [optional] [default to undefined]
 **ssl** | **boolean** | Specifies whether the SSL certificate verification is required or not. | [optional] [default to undefined]
-**triggers** | [**WebhookTrigger**](WebhookTrigger.md) |  | [optional] [default to undefined]
+**triggers** | [**WebhookTrigger**](WebhookTrigger.md) | Defines which events will trigger webhook notifications. | [optional] [default to undefined]
 **targetId** | **string** | Target ID | [optional] [default to undefined]
 
 ## Example

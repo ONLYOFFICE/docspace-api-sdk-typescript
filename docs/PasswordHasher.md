@@ -1,13 +1,14 @@
 # PasswordHasher
 
+The password hash parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**size** | **number** |  | [optional] [readonly] [default to undefined]
-**iterations** | **number** |  | [optional] [readonly] [default to undefined]
-**salt** | **string** |  | [optional] [readonly] [default to undefined]
+**size** | **number** | The password hash size. | [optional] [readonly] [default to undefined]
+**iterations** | **number** | The number of iterations to generate the ppassword hash. | [optional] [readonly] [default to undefined]
+**salt** | **string** | The salt to generate the ppassword hash. | [optional] [readonly] [default to undefined]
 
 ## Example
 

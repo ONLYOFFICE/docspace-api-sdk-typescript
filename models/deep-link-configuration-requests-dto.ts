@@ -26,6 +26,9 @@ import type { TenantDeepLinkSettings } from './tenant-deep-link-settings';
  * The request parameters for managing the deep link configuration.
  */
 export interface DeepLinkConfigurationRequestsDto {
+    /**
+     * The deep link settings for the specified tenant.
+     */
     'deepLinkSettings'?: TenantDeepLinkSettings;
 }
 

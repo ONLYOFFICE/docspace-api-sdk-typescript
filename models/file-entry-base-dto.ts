@@ -20,9 +20,6 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ApiDateTime } from './api-date-time';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { EmployeeDto } from './employee-dto';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -42,8 +39,17 @@ export interface FileEntryBaseDto {
      * The file entry title.
      */
     'title'?: string | null;
+    /**
+     * The access rights to the file entry.
+     */
     'access'?: FileShare;
+    /**
+     * Provides information about the employee who shared the file or folder.
+     */
     'sharedBy'?: EmployeeDto;
+    /**
+     * The information about the employee who owns the file entry.
+     */
     'ownedBy'?: EmployeeDto;
     /**
      * Specifies if the file entry is shared via link or not.
@@ -65,12 +71,33 @@ export interface FileEntryBaseDto {
      * The short Web URL.
      */
     'shortWebUrl'?: string | null;
-    'created'?: ApiDateTime;
+    /**
+     * The creation date and time of the file entry.
+     */
+    'created'?: string | null;
+    /**
+     * The file entry author.
+     */
     'createdBy'?: EmployeeDto;
-    'updated'?: ApiDateTime;
-    'autoDelete'?: ApiDateTime;
+    /**
+     * The last date and time when the file entry was updated.
+     */
+    'updated'?: string | null;
+    /**
+     * The date and time when the file entry will be automatically deleted.
+     */
+    'autoDelete'?: string | null;
+    /**
+     * The root folder type of the file entry.
+     */
     'rootFolderType'?: FolderType;
+    /**
+     * The parent room type of the file entry.
+     */
     'parentRoomType'?: FolderType;
+    /**
+     * The user who updated the file entry.
+     */
     'updatedBy'?: EmployeeDto;
     /**
      * Specifies if the file entry provider is specified or not.
@@ -92,6 +119,9 @@ export interface FileEntryBaseDto {
      * Specifies if the file is a favorite or not.
      */
     'isFavorite'?: boolean | null;
+    /**
+     * The file entry type.
+     */
     'fileEntryType'?: FileEntryType;
 }
 

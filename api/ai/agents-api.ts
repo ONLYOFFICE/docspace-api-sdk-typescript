@@ -24,52 +24,47 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
-import type { CreateAgentRequestDto } from '../../models';
+import type { AiAgentsCreateRequest } from '../../models';
 // @ts-ignore
-import type { DeleteRoomRequest } from '../../models';
+import type { AiAgentsDeleteRequest } from '../../models';
 // @ts-ignore
-import type { FileOperationWrapper } from '../../models';
+import type { AiAgentsResetQuotaRequest } from '../../models';
 // @ts-ignore
-import type { FolderContentIntegerWrapper } from '../../models';
+import type { AiAgentsUpdateQuotaRequest } from '../../models';
 // @ts-ignore
-import type { FolderIntegerArrayWrapper } from '../../models';
+import type { AiAgentsUpdateRequest } from '../../models';
 // @ts-ignore
-import type { FolderIntegerWrapper } from '../../models';
+import type { AiErrorResponse } from '../../models';
 // @ts-ignore
-import type { NewItemsAgentNewItemsArrayWrapper } from '../../models';
+import type { AiFileOperationWrapper } from '../../models';
 // @ts-ignore
-import type { QuotaFilter } from '../../models';
+import type { AiFolderContentIntegerWrapper } from '../../models';
 // @ts-ignore
-import type { SortOrder } from '../../models';
+import type { AiFolderIntegerArrayWrapper } from '../../models';
 // @ts-ignore
-import type { SubjectFilter } from '../../models';
+import type { AiFolderIntegerWrapper } from '../../models';
 // @ts-ignore
-import type { UpdateRoomRequest } from '../../models';
-// @ts-ignore
-import type { UpdateRoomsQuotaRequestDtoInteger } from '../../models';
-// @ts-ignore
-import type { UpdateRoomsRoomIdsRequestDtoInteger } from '../../models';
+import type { AiNewItemsAgentNewItemsArrayWrapper } from '../../models';
 /**
  * AgentsApi - axios parameter creator
  * @export
  */
 export const AgentsApiAxiosParamCreator = function (configuration?: Configuration) {
-    let fields: string | undefined;
+    
     
     return {
-        withFields: (f: string) => {
-            fields = f;
-        },
         /**
-         * Creates an ai agent.
-         * @summary Create an ai agent
-         * @param {CreateAgentRequestDto} [createAgentRequestDto] 
+         * Creates an AI agent room in the .NET AI service and binds the supplied `profileId` to it as a `Chat` assignment. The instruction is stored on the room as a prompt-only chat setting; a failed binding is reported as an error even though the room already exists.
+         * @summary Create an agent
+         * @param {AiAgentsCreateRequest} aiAgentsCreateRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for createAgent operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-agent/
+         * REST API Reference for aiAgentsCreate operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-create/
          */
-        createAgent: async (createAgentRequestDto?: CreateAgentRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        aiAgentsCreate: async (aiAgentsCreateRequest: AiAgentsCreateRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiAgentsCreateRequest' is not null or undefined
+            assertParamExists('aiAgentsCreate', 'aiAgentsCreateRequest', aiAgentsCreateRequest)
 
             const localVarPath = `/api/2.0/ai/agents`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -83,25 +78,6 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -109,7 +85,7 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createAgentRequestDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiAgentsCreateRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -117,20 +93,20 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * Removes an ai agent.
-         * @summary Remove an ai agent
-         * @param {number} id The room ID.
-         * @param {DeleteRoomRequest} deleteRoomRequest The parameters for deleting a room.
+         * Deletes an AI agent room.
+         * @summary Delete an agent
+         * @param {string} id The agent identifier.
+         * @param {AiAgentsDeleteRequest} aiAgentsDeleteRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for deleteAgent operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-agent/
+         * REST API Reference for aiAgentsDelete operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-delete/
          */
-        deleteAgent: async (id: number, deleteRoomRequest: DeleteRoomRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        aiAgentsDelete: async (id: string, aiAgentsDeleteRequest: AiAgentsDeleteRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('deleteAgent', 'id', id)
-            // verify required parameter 'deleteRoomRequest' is not null or undefined
-            assertParamExists('deleteAgent', 'deleteRoomRequest', deleteRoomRequest)
+            assertParamExists('aiAgentsDelete', 'id', id)
+            // verify required parameter 'aiAgentsDeleteRequest' is not null or undefined
+            assertParamExists('aiAgentsDelete', 'aiAgentsDeleteRequest', aiAgentsDeleteRequest)
 
             const localVarPath = `/api/2.0/ai/agents/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -145,25 +121,6 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -171,7 +128,7 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(deleteRoomRequest, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiAgentsDeleteRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -179,17 +136,17 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * Returns an ai agent.
-         * @summary Return an ai agent
-         * @param {number} id The room ID.
+         * Returns one AI agent room, enriched with the `profileId` bound to it so an edit form can prefill the profile selector. A missing assignment simply leaves `profileId` out.
+         * @summary Get an agent
+         * @param {string} id The agent identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for getAgentInfo operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-agent-info/
+         * REST API Reference for aiAgentsGet operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-get/
          */
-        getAgentInfo: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        aiAgentsGet: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('getAgentInfo', 'id', id)
+            assertParamExists('aiAgentsGet', 'id', id)
 
             const localVarPath = `/api/2.0/ai/agents/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -204,25 +161,6 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -235,26 +173,14 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * Get ai agents
-         * @summary Get ai agents
-         * @param {string} [subjectId] The filter by user ID.
-         * @param {string} [subjectOwnerId] The filter by room owner ID.
-         * @param {boolean} [withoutTags] Specifies whether to search by tags or not.
-         * @param {string} [tags] The tags in the serialized format.
-         * @param {boolean} [excludeSubject] Specifies whether to exclude search by user or group ID.
-         * @param {SubjectFilter} [subjectFilter] The filter by user (Owner - 0, Member - 1).
-         * @param {QuotaFilter} [quotaFilter] The filter by quota (All - 0, Default - 1, Custom - 2).
-         * @param {number} [count] Specifies the maximum number of items to retrieve.
-         * @param {number} [startIndex] The index from which to start retrieving the room content.
-         * @param {string} [sortBy] Specifies the field by which the room content should be sorted.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text filter value used to refine search or query operations.
+         * Lists the portal\'s AI agent rooms. Query parameters are forwarded unchanged to the .NET AI service, which answers with its folder-content payload.
+         * @summary List agents
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for getAgents operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-agents/
+         * REST API Reference for aiAgentsList operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-list/
          */
-        getAgents: async (subjectId?: string, subjectOwnerId?: string, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        aiAgentsList: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/ai/agents`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -268,78 +194,8 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-            if (subjectId !== undefined) {
-                localVarQueryParameter['subjectId'] = subjectId;
-            }
-
-            if (subjectOwnerId !== undefined) {
-                localVarQueryParameter['subjectOwnerId'] = subjectOwnerId;
-            }
-
-            if (withoutTags !== undefined) {
-                localVarQueryParameter['withoutTags'] = withoutTags;
-            }
-
-            if (tags !== undefined) {
-                localVarQueryParameter['tags'] = tags;
-            }
-
-            if (excludeSubject !== undefined) {
-                localVarQueryParameter['excludeSubject'] = excludeSubject;
-            }
-
-            if (subjectFilter !== undefined) {
-                localVarQueryParameter['subjectFilter'] = subjectFilter;
-            }
-
-            if (quotaFilter !== undefined) {
-                localVarQueryParameter['quotaFilter'] = quotaFilter;
-            }
-
-            if (count !== undefined) {
-                localVarQueryParameter['count'] = count;
-            }
-
-            if (startIndex !== undefined) {
-                localVarQueryParameter['startIndex'] = startIndex;
-            }
-
-            if (sortBy !== undefined) {
-                localVarQueryParameter['sortBy'] = sortBy;
-            }
-
-            if (sortOrder !== undefined) {
-                localVarQueryParameter['sortOrder'] = sortOrder;
-            }
-
-            if (filterValue !== undefined) {
-                localVarQueryParameter['filterValue'] = filterValue;
-            }
-
 
     
-            if(fields !== undefined) {
-                localVarHeaderParameter['fields'] = fields;
-            }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -350,14 +206,14 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * Returns the room new items.
-         * @summary Get the room new items
+         * Lists the new items across the caller\'s AI agent rooms.
+         * @summary List agent news items
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for getAgentsNewItems operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-agents-new-items/
+         * REST API Reference for aiAgentsNews operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-news/
          */
-        getAgentsNewItems: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        aiAgentsNews: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/ai/agents/news`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -371,25 +227,6 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -402,15 +239,17 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * Resets the quota limit for the AI agents with the IDs specified in the request.
-         * @summary Reset the AI agents quota limit
-         * @param {UpdateRoomsRoomIdsRequestDtoInteger} [updateRoomsRoomIdsRequestDtoInteger] 
+         * Resets the storage quota of the given AI agent rooms.
+         * @summary Reset agents\' quota
+         * @param {AiAgentsResetQuotaRequest} aiAgentsResetQuotaRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for resetAgentsQuota operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-agents-quota/
+         * REST API Reference for aiAgentsResetQuota operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-reset-quota/
          */
-        resetAgentsQuota: async (updateRoomsRoomIdsRequestDtoInteger?: UpdateRoomsRoomIdsRequestDtoInteger, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        aiAgentsResetQuota: async (aiAgentsResetQuotaRequest: AiAgentsResetQuotaRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiAgentsResetQuotaRequest' is not null or undefined
+            assertParamExists('aiAgentsResetQuota', 'aiAgentsResetQuotaRequest', aiAgentsResetQuotaRequest)
 
             const localVarPath = `/api/2.0/ai/agents/resetquota`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -424,25 +263,6 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -450,7 +270,7 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateRoomsRoomIdsRequestDtoInteger, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiAgentsResetQuotaRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -458,20 +278,20 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * Updates an ai agent.
-         * @summary Update an ai agent
-         * @param {number} id The room ID.
-         * @param {UpdateRoomRequest} updateRoomRequest The request parameters for updating a room.
+         * Updates an AI agent room - title, tags, instruction. `profileId` is not part of the room contract: it is stripped from the forwarded body and re-bound as the agent\'s assignment afterwards.
+         * @summary Update an agent
+         * @param {string} id The agent identifier.
+         * @param {AiAgentsUpdateRequest} aiAgentsUpdateRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for updateAgent operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-agent/
+         * REST API Reference for aiAgentsUpdate operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-update/
          */
-        updateAgent: async (id: number, updateRoomRequest: UpdateRoomRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        aiAgentsUpdate: async (id: string, aiAgentsUpdateRequest: AiAgentsUpdateRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('updateAgent', 'id', id)
-            // verify required parameter 'updateRoomRequest' is not null or undefined
-            assertParamExists('updateAgent', 'updateRoomRequest', updateRoomRequest)
+            assertParamExists('aiAgentsUpdate', 'id', id)
+            // verify required parameter 'aiAgentsUpdateRequest' is not null or undefined
+            assertParamExists('aiAgentsUpdate', 'aiAgentsUpdateRequest', aiAgentsUpdateRequest)
 
             const localVarPath = `/api/2.0/ai/agents/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -486,25 +306,6 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -512,7 +313,7 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateRoomRequest, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiAgentsUpdateRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -520,15 +321,17 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * Changes the quota limit for the AI agents with the IDs specified in the request.
-         * @summary Change the AI agent quota limit
-         * @param {UpdateRoomsQuotaRequestDtoInteger} [updateRoomsQuotaRequestDtoInteger] 
+         * Changes the storage quota of the given AI agent rooms.
+         * @summary Update agents\' quota
+         * @param {AiAgentsUpdateQuotaRequest} aiAgentsUpdateQuotaRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for updateAgentsQuota operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-agents-quota/
+         * REST API Reference for aiAgentsUpdateQuota operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-update-quota/
          */
-        updateAgentsQuota: async (updateRoomsQuotaRequestDtoInteger?: UpdateRoomsQuotaRequestDtoInteger, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        aiAgentsUpdateQuota: async (aiAgentsUpdateQuotaRequest: AiAgentsUpdateQuotaRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiAgentsUpdateQuotaRequest' is not null or undefined
+            assertParamExists('aiAgentsUpdateQuota', 'aiAgentsUpdateQuotaRequest', aiAgentsUpdateQuotaRequest)
 
             const localVarPath = `/api/2.0/ai/agents/agentquota`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -542,25 +345,6 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -568,7 +352,7 @@ export const AgentsApiAxiosParamCreator = function (configuration?: Configuratio
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateRoomsQuotaRequestDtoInteger, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiAgentsUpdateQuotaRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -586,135 +370,123 @@ export const AgentsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = AgentsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Creates an ai agent.
-         * @summary Create an ai agent
-         * @param {CreateAgentRequestDto} [createAgentRequestDto] 
+         * Creates an AI agent room in the .NET AI service and binds the supplied `profileId` to it as a `Chat` assignment. The instruction is stored on the room as a prompt-only chat setting; a failed binding is reported as an error even though the room already exists.
+         * @summary Create an agent
+         * @param {AiAgentsCreateRequest} aiAgentsCreateRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for createAgent operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-agent/
+         * REST API Reference for aiAgentsCreate operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-create/
          */
-        async createAgent(createAgentRequestDto?: CreateAgentRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createAgent(createAgentRequestDto, options);
+        async aiAgentsCreate(aiAgentsCreateRequest: AiAgentsCreateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiFolderIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAgentsCreate(aiAgentsCreateRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AgentsApi.createAgent']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AgentsApi.aiAgentsCreate']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Removes an ai agent.
-         * @summary Remove an ai agent
-         * @param {number} id The room ID.
-         * @param {DeleteRoomRequest} deleteRoomRequest The parameters for deleting a room.
+         * Deletes an AI agent room.
+         * @summary Delete an agent
+         * @param {string} id The agent identifier.
+         * @param {AiAgentsDeleteRequest} aiAgentsDeleteRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for deleteAgent operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-agent/
+         * REST API Reference for aiAgentsDelete operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-delete/
          */
-        async deleteAgent(id: number, deleteRoomRequest: DeleteRoomRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteAgent(id, deleteRoomRequest, options);
+        async aiAgentsDelete(id: string, aiAgentsDeleteRequest: AiAgentsDeleteRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiFileOperationWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAgentsDelete(id, aiAgentsDeleteRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AgentsApi.deleteAgent']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AgentsApi.aiAgentsDelete']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns an ai agent.
-         * @summary Return an ai agent
-         * @param {number} id The room ID.
+         * Returns one AI agent room, enriched with the `profileId` bound to it so an edit form can prefill the profile selector. A missing assignment simply leaves `profileId` out.
+         * @summary Get an agent
+         * @param {string} id The agent identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for getAgentInfo operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-agent-info/
+         * REST API Reference for aiAgentsGet operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-get/
          */
-        async getAgentInfo(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAgentInfo(id, options);
+        async aiAgentsGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiFolderIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAgentsGet(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AgentsApi.getAgentInfo']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AgentsApi.aiAgentsGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Get ai agents
-         * @summary Get ai agents
-         * @param {string} [subjectId] The filter by user ID.
-         * @param {string} [subjectOwnerId] The filter by room owner ID.
-         * @param {boolean} [withoutTags] Specifies whether to search by tags or not.
-         * @param {string} [tags] The tags in the serialized format.
-         * @param {boolean} [excludeSubject] Specifies whether to exclude search by user or group ID.
-         * @param {SubjectFilter} [subjectFilter] The filter by user (Owner - 0, Member - 1).
-         * @param {QuotaFilter} [quotaFilter] The filter by quota (All - 0, Default - 1, Custom - 2).
-         * @param {number} [count] Specifies the maximum number of items to retrieve.
-         * @param {number} [startIndex] The index from which to start retrieving the room content.
-         * @param {string} [sortBy] Specifies the field by which the room content should be sorted.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text filter value used to refine search or query operations.
+         * Lists the portal\'s AI agent rooms. Query parameters are forwarded unchanged to the .NET AI service, which answers with its folder-content payload.
+         * @summary List agents
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for getAgents operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-agents/
+         * REST API Reference for aiAgentsList operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-list/
          */
-        async getAgents(subjectId?: string, subjectOwnerId?: string, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, subjectFilter?: SubjectFilter, quotaFilter?: QuotaFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAgents(subjectId, subjectOwnerId, withoutTags, tags, excludeSubject, subjectFilter, quotaFilter, count, startIndex, sortBy, sortOrder, filterValue, options);
+        async aiAgentsList(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiFolderContentIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAgentsList(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AgentsApi.getAgents']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AgentsApi.aiAgentsList']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the room new items.
-         * @summary Get the room new items
+         * Lists the new items across the caller\'s AI agent rooms.
+         * @summary List agent news items
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for getAgentsNewItems operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-agents-new-items/
+         * REST API Reference for aiAgentsNews operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-news/
          */
-        async getAgentsNewItems(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NewItemsAgentNewItemsArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAgentsNewItems(options);
+        async aiAgentsNews(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiNewItemsAgentNewItemsArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAgentsNews(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AgentsApi.getAgentsNewItems']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AgentsApi.aiAgentsNews']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Resets the quota limit for the AI agents with the IDs specified in the request.
-         * @summary Reset the AI agents quota limit
-         * @param {UpdateRoomsRoomIdsRequestDtoInteger} [updateRoomsRoomIdsRequestDtoInteger] 
+         * Resets the storage quota of the given AI agent rooms.
+         * @summary Reset agents\' quota
+         * @param {AiAgentsResetQuotaRequest} aiAgentsResetQuotaRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for resetAgentsQuota operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-agents-quota/
+         * REST API Reference for aiAgentsResetQuota operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-reset-quota/
          */
-        async resetAgentsQuota(updateRoomsRoomIdsRequestDtoInteger?: UpdateRoomsRoomIdsRequestDtoInteger, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.resetAgentsQuota(updateRoomsRoomIdsRequestDtoInteger, options);
+        async aiAgentsResetQuota(aiAgentsResetQuotaRequest: AiAgentsResetQuotaRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiFolderIntegerArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAgentsResetQuota(aiAgentsResetQuotaRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AgentsApi.resetAgentsQuota']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AgentsApi.aiAgentsResetQuota']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Updates an ai agent.
-         * @summary Update an ai agent
-         * @param {number} id The room ID.
-         * @param {UpdateRoomRequest} updateRoomRequest The request parameters for updating a room.
+         * Updates an AI agent room - title, tags, instruction. `profileId` is not part of the room contract: it is stripped from the forwarded body and re-bound as the agent\'s assignment afterwards.
+         * @summary Update an agent
+         * @param {string} id The agent identifier.
+         * @param {AiAgentsUpdateRequest} aiAgentsUpdateRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for updateAgent operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-agent/
+         * REST API Reference for aiAgentsUpdate operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-update/
          */
-        async updateAgent(id: number, updateRoomRequest: UpdateRoomRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateAgent(id, updateRoomRequest, options);
+        async aiAgentsUpdate(id: string, aiAgentsUpdateRequest: AiAgentsUpdateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiFolderIntegerWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAgentsUpdate(id, aiAgentsUpdateRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AgentsApi.updateAgent']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AgentsApi.aiAgentsUpdate']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Changes the quota limit for the AI agents with the IDs specified in the request.
-         * @summary Change the AI agent quota limit
-         * @param {UpdateRoomsQuotaRequestDtoInteger} [updateRoomsQuotaRequestDtoInteger] 
+         * Changes the storage quota of the given AI agent rooms.
+         * @summary Update agents\' quota
+         * @param {AiAgentsUpdateQuotaRequest} aiAgentsUpdateQuotaRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for updateAgentsQuota operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-agents-quota/
+         * REST API Reference for aiAgentsUpdateQuota operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-update-quota/
          */
-        async updateAgentsQuota(updateRoomsQuotaRequestDtoInteger?: UpdateRoomsQuotaRequestDtoInteger, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateAgentsQuota(updateRoomsQuotaRequestDtoInteger, options);
+        async aiAgentsUpdateQuota(aiAgentsUpdateQuotaRequest: AiAgentsUpdateQuotaRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiFolderIntegerArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAgentsUpdateQuota(aiAgentsUpdateQuotaRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AgentsApi.updateAgentsQuota']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AgentsApi.aiAgentsUpdateQuota']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -728,290 +500,198 @@ export const AgentsApiFactory = function (configuration?: Configuration, basePat
     const localVarFp = AgentsApiFp(configuration)
     return {
         /**
-         * Creates an ai agent.
-         * @summary Create an ai agent
-         * @param {AgentsApiCreateAgentRequest} requestParameters Request parameters.
+         * Creates an AI agent room in the .NET AI service and binds the supplied `profileId` to it as a `Chat` assignment. The instruction is stored on the room as a prompt-only chat setting; a failed binding is reported as an error even though the room already exists.
+         * @summary Create an agent
+         * @param {AgentsApiAiAgentsCreateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
-         * REST API Reference for createAgent operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-agent/
+         * REST API Reference for aiAgentsCreate operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-create/
          * @throws {RequiredError}
          */
-        createAgent(requestParameters: AgentsApiCreateAgentRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
-            return localVarFp.createAgent(requestParameters.createAgentRequestDto, options).then((request) => request(axios, basePath));
+        aiAgentsCreate(requestParameters: AgentsApiAiAgentsCreateRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiFolderIntegerWrapper> {
+            return localVarFp.aiAgentsCreate(requestParameters.aiAgentsCreateRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Removes an ai agent.
-         * @summary Remove an ai agent
-         * @param {AgentsApiDeleteAgentRequest} requestParameters Request parameters.
+         * Deletes an AI agent room.
+         * @summary Delete an agent
+         * @param {AgentsApiAiAgentsDeleteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
-         * REST API Reference for deleteAgent operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-agent/
+         * REST API Reference for aiAgentsDelete operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-delete/
          * @throws {RequiredError}
          */
-        deleteAgent(requestParameters: AgentsApiDeleteAgentRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationWrapper> {
-            return localVarFp.deleteAgent(requestParameters.id, requestParameters.deleteRoomRequest, options).then((request) => request(axios, basePath));
+        aiAgentsDelete(requestParameters: AgentsApiAiAgentsDeleteRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiFileOperationWrapper> {
+            return localVarFp.aiAgentsDelete(requestParameters.id, requestParameters.aiAgentsDeleteRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns an ai agent.
-         * @summary Return an ai agent
-         * @param {AgentsApiGetAgentInfoRequest} requestParameters Request parameters.
+         * Returns one AI agent room, enriched with the `profileId` bound to it so an edit form can prefill the profile selector. A missing assignment simply leaves `profileId` out.
+         * @summary Get an agent
+         * @param {AgentsApiAiAgentsGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
-         * REST API Reference for getAgentInfo operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-agent-info/
+         * REST API Reference for aiAgentsGet operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-get/
          * @throws {RequiredError}
          */
-        getAgentInfo(requestParameters: AgentsApiGetAgentInfoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
-            return localVarFp.getAgentInfo(requestParameters.id, options).then((request) => request(axios, basePath));
+        aiAgentsGet(requestParameters: AgentsApiAiAgentsGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiFolderIntegerWrapper> {
+            return localVarFp.aiAgentsGet(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Get ai agents
-         * @summary Get ai agents
-         * @param {AgentsApiGetAgentsRequest} requestParameters Request parameters.
+         * Lists the portal\'s AI agent rooms. Query parameters are forwarded unchanged to the .NET AI service, which answers with its folder-content payload.
+         * @summary List agents
          * @param {*} [options] Override http request option.
-         * REST API Reference for getAgents operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-agents/
+         * REST API Reference for aiAgentsList operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-list/
          * @throws {RequiredError}
          */
-        getAgents(requestParameters: AgentsApiGetAgentsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
-            return localVarFp.getAgents(requestParameters.subjectId, requestParameters.subjectOwnerId, requestParameters.withoutTags, requestParameters.tags, requestParameters.excludeSubject, requestParameters.subjectFilter, requestParameters.quotaFilter, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(axios, basePath));
+        aiAgentsList(options?: RawAxiosRequestConfig): AxiosPromise<AiFolderContentIntegerWrapper> {
+            return localVarFp.aiAgentsList(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the room new items.
-         * @summary Get the room new items
+         * Lists the new items across the caller\'s AI agent rooms.
+         * @summary List agent news items
          * @param {*} [options] Override http request option.
-         * REST API Reference for getAgentsNewItems operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-agents-new-items/
+         * REST API Reference for aiAgentsNews operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-news/
          * @throws {RequiredError}
          */
-        getAgentsNewItems(options?: RawAxiosRequestConfig): AxiosPromise<NewItemsAgentNewItemsArrayWrapper> {
-            return localVarFp.getAgentsNewItems(options).then((request) => request(axios, basePath));
+        aiAgentsNews(options?: RawAxiosRequestConfig): AxiosPromise<AiNewItemsAgentNewItemsArrayWrapper> {
+            return localVarFp.aiAgentsNews(options).then((request) => request(axios, basePath));
         },
         /**
-         * Resets the quota limit for the AI agents with the IDs specified in the request.
-         * @summary Reset the AI agents quota limit
-         * @param {AgentsApiResetAgentsQuotaRequest} requestParameters Request parameters.
+         * Resets the storage quota of the given AI agent rooms.
+         * @summary Reset agents\' quota
+         * @param {AgentsApiAiAgentsResetQuotaRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
-         * REST API Reference for resetAgentsQuota operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-agents-quota/
+         * REST API Reference for aiAgentsResetQuota operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-reset-quota/
          * @throws {RequiredError}
          */
-        resetAgentsQuota(requestParameters: AgentsApiResetAgentsQuotaRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerArrayWrapper> {
-            return localVarFp.resetAgentsQuota(requestParameters.updateRoomsRoomIdsRequestDtoInteger, options).then((request) => request(axios, basePath));
+        aiAgentsResetQuota(requestParameters: AgentsApiAiAgentsResetQuotaRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiFolderIntegerArrayWrapper> {
+            return localVarFp.aiAgentsResetQuota(requestParameters.aiAgentsResetQuotaRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Updates an ai agent.
-         * @summary Update an ai agent
-         * @param {AgentsApiUpdateAgentRequest} requestParameters Request parameters.
+         * Updates an AI agent room - title, tags, instruction. `profileId` is not part of the room contract: it is stripped from the forwarded body and re-bound as the agent\'s assignment afterwards.
+         * @summary Update an agent
+         * @param {AgentsApiAiAgentsUpdateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
-         * REST API Reference for updateAgent operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-agent/
+         * REST API Reference for aiAgentsUpdate operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-update/
          * @throws {RequiredError}
          */
-        updateAgent(requestParameters: AgentsApiUpdateAgentRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
-            return localVarFp.updateAgent(requestParameters.id, requestParameters.updateRoomRequest, options).then((request) => request(axios, basePath));
+        aiAgentsUpdate(requestParameters: AgentsApiAiAgentsUpdateRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiFolderIntegerWrapper> {
+            return localVarFp.aiAgentsUpdate(requestParameters.id, requestParameters.aiAgentsUpdateRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Changes the quota limit for the AI agents with the IDs specified in the request.
-         * @summary Change the AI agent quota limit
-         * @param {AgentsApiUpdateAgentsQuotaRequest} requestParameters Request parameters.
+         * Changes the storage quota of the given AI agent rooms.
+         * @summary Update agents\' quota
+         * @param {AgentsApiAiAgentsUpdateQuotaRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
-         * REST API Reference for updateAgentsQuota operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-agents-quota/
+         * REST API Reference for aiAgentsUpdateQuota operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-update-quota/
          * @throws {RequiredError}
          */
-        updateAgentsQuota(requestParameters: AgentsApiUpdateAgentsQuotaRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerArrayWrapper> {
-            return localVarFp.updateAgentsQuota(requestParameters.updateRoomsQuotaRequestDtoInteger, options).then((request) => request(axios, basePath));
+        aiAgentsUpdateQuota(requestParameters: AgentsApiAiAgentsUpdateQuotaRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiFolderIntegerArrayWrapper> {
+            return localVarFp.aiAgentsUpdateQuota(requestParameters.aiAgentsUpdateQuotaRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * Request parameters for createAgent operation in AgentsApi.
+ * Request parameters for aiAgentsCreate operation in AgentsApi.
  * @export
- * @interface AgentsApiCreateAgentRequest
+ * @interface AgentsApiAiAgentsCreateRequest
  */
-export interface AgentsApiCreateAgentRequest {
+export interface AgentsApiAiAgentsCreateRequest {
     /**
      * 
-     * @type {CreateAgentRequestDto}
-     * @memberof AgentsApiCreateAgent
+     * @type {AiAgentsCreateRequest}
+     * @memberof AgentsApiAiAgentsCreate
      */
-    readonly createAgentRequestDto?: CreateAgentRequestDto
+    readonly aiAgentsCreateRequest: AiAgentsCreateRequest
 }
 
 /**
- * Request parameters for deleteAgent operation in AgentsApi.
+ * Request parameters for aiAgentsDelete operation in AgentsApi.
  * @export
- * @interface AgentsApiDeleteAgentRequest
+ * @interface AgentsApiAiAgentsDeleteRequest
  */
-export interface AgentsApiDeleteAgentRequest {
+export interface AgentsApiAiAgentsDeleteRequest {
     /**
-     * The room ID.
-     * @type {number}
-     * @memberof AgentsApiDeleteAgent
-     */
-    readonly id: number
-
-    /**
-     * The parameters for deleting a room.
-     * @type {DeleteRoomRequest}
-     * @memberof AgentsApiDeleteAgent
-     */
-    readonly deleteRoomRequest: DeleteRoomRequest
-}
-
-/**
- * Request parameters for getAgentInfo operation in AgentsApi.
- * @export
- * @interface AgentsApiGetAgentInfoRequest
- */
-export interface AgentsApiGetAgentInfoRequest {
-    /**
-     * The room ID.
-     * @type {number}
-     * @memberof AgentsApiGetAgentInfo
-     */
-    readonly id: number
-}
-
-/**
- * Request parameters for getAgents operation in AgentsApi.
- * @export
- * @interface AgentsApiGetAgentsRequest
- */
-export interface AgentsApiGetAgentsRequest {
-    /**
-     * The filter by user ID.
+     * The agent identifier.
      * @type {string}
-     * @memberof AgentsApiGetAgents
+     * @memberof AgentsApiAiAgentsDelete
      */
-    readonly subjectId?: string
+    readonly id: string
 
-    /**
-     * The filter by room owner ID.
-     * @type {string}
-     * @memberof AgentsApiGetAgents
-     */
-    readonly subjectOwnerId?: string
-
-    /**
-     * Specifies whether to search by tags or not.
-     * @type {boolean}
-     * @memberof AgentsApiGetAgents
-     */
-    readonly withoutTags?: boolean
-
-    /**
-     * The tags in the serialized format.
-     * @type {string}
-     * @memberof AgentsApiGetAgents
-     */
-    readonly tags?: string
-
-    /**
-     * Specifies whether to exclude search by user or group ID.
-     * @type {boolean}
-     * @memberof AgentsApiGetAgents
-     */
-    readonly excludeSubject?: boolean
-
-    /**
-     * The filter by user (Owner - 0, Member - 1).
-     * @type {SubjectFilter}
-     * @memberof AgentsApiGetAgents
-     */
-    readonly subjectFilter?: SubjectFilter
-
-    /**
-     * The filter by quota (All - 0, Default - 1, Custom - 2).
-     * @type {QuotaFilter}
-     * @memberof AgentsApiGetAgents
-     */
-    readonly quotaFilter?: QuotaFilter
-
-    /**
-     * Specifies the maximum number of items to retrieve.
-     * @type {number}
-     * @memberof AgentsApiGetAgents
-     */
-    readonly count?: number
-
-    /**
-     * The index from which to start retrieving the room content.
-     * @type {number}
-     * @memberof AgentsApiGetAgents
-     */
-    readonly startIndex?: number
-
-    /**
-     * Specifies the field by which the room content should be sorted.
-     * @type {string}
-     * @memberof AgentsApiGetAgents
-     */
-    readonly sortBy?: string
-
-    /**
-     * The order in which the results are sorted.
-     * @type {SortOrder}
-     * @memberof AgentsApiGetAgents
-     */
-    readonly sortOrder?: SortOrder
-
-    /**
-     * The text filter value used to refine search or query operations.
-     * @type {string}
-     * @memberof AgentsApiGetAgents
-     */
-    readonly filterValue?: string
-}
-
-/**
- * Request parameters for resetAgentsQuota operation in AgentsApi.
- * @export
- * @interface AgentsApiResetAgentsQuotaRequest
- */
-export interface AgentsApiResetAgentsQuotaRequest {
     /**
      * 
-     * @type {UpdateRoomsRoomIdsRequestDtoInteger}
-     * @memberof AgentsApiResetAgentsQuota
+     * @type {AiAgentsDeleteRequest}
+     * @memberof AgentsApiAiAgentsDelete
      */
-    readonly updateRoomsRoomIdsRequestDtoInteger?: UpdateRoomsRoomIdsRequestDtoInteger
+    readonly aiAgentsDeleteRequest: AiAgentsDeleteRequest
 }
 
 /**
- * Request parameters for updateAgent operation in AgentsApi.
+ * Request parameters for aiAgentsGet operation in AgentsApi.
  * @export
- * @interface AgentsApiUpdateAgentRequest
+ * @interface AgentsApiAiAgentsGetRequest
  */
-export interface AgentsApiUpdateAgentRequest {
+export interface AgentsApiAiAgentsGetRequest {
     /**
-     * The room ID.
-     * @type {number}
-     * @memberof AgentsApiUpdateAgent
+     * The agent identifier.
+     * @type {string}
+     * @memberof AgentsApiAiAgentsGet
      */
-    readonly id: number
-
-    /**
-     * The request parameters for updating a room.
-     * @type {UpdateRoomRequest}
-     * @memberof AgentsApiUpdateAgent
-     */
-    readonly updateRoomRequest: UpdateRoomRequest
+    readonly id: string
 }
 
 /**
- * Request parameters for updateAgentsQuota operation in AgentsApi.
+ * Request parameters for aiAgentsResetQuota operation in AgentsApi.
  * @export
- * @interface AgentsApiUpdateAgentsQuotaRequest
+ * @interface AgentsApiAiAgentsResetQuotaRequest
  */
-export interface AgentsApiUpdateAgentsQuotaRequest {
+export interface AgentsApiAiAgentsResetQuotaRequest {
     /**
      * 
-     * @type {UpdateRoomsQuotaRequestDtoInteger}
-     * @memberof AgentsApiUpdateAgentsQuota
+     * @type {AiAgentsResetQuotaRequest}
+     * @memberof AgentsApiAiAgentsResetQuota
      */
-    readonly updateRoomsQuotaRequestDtoInteger?: UpdateRoomsQuotaRequestDtoInteger
+    readonly aiAgentsResetQuotaRequest: AiAgentsResetQuotaRequest
+}
+
+/**
+ * Request parameters for aiAgentsUpdate operation in AgentsApi.
+ * @export
+ * @interface AgentsApiAiAgentsUpdateRequest
+ */
+export interface AgentsApiAiAgentsUpdateRequest {
+    /**
+     * The agent identifier.
+     * @type {string}
+     * @memberof AgentsApiAiAgentsUpdate
+     */
+    readonly id: string
+
+    /**
+     * 
+     * @type {AiAgentsUpdateRequest}
+     * @memberof AgentsApiAiAgentsUpdate
+     */
+    readonly aiAgentsUpdateRequest: AiAgentsUpdateRequest
+}
+
+/**
+ * Request parameters for aiAgentsUpdateQuota operation in AgentsApi.
+ * @export
+ * @interface AgentsApiAiAgentsUpdateQuotaRequest
+ */
+export interface AgentsApiAiAgentsUpdateQuotaRequest {
+    /**
+     * 
+     * @type {AiAgentsUpdateQuotaRequest}
+     * @memberof AgentsApiAiAgentsUpdateQuota
+     */
+    readonly aiAgentsUpdateQuotaRequest: AiAgentsUpdateQuotaRequest
 }
 
 /**
@@ -1022,98 +702,97 @@ export interface AgentsApiUpdateAgentsQuotaRequest {
  */
 export class AgentsApi extends BaseAPI {
     /**
-     * Creates an ai agent.
-     * @summary Create an ai agent
-     * @param {AIAgentsApiCreateAgentRequest} requestParameters Request parameters.
+     * Creates an AI agent room in the .NET AI service and binds the supplied `profileId` to it as a `Chat` assignment. The instruction is stored on the room as a prompt-only chat setting; a failed binding is reported as an error even though the room already exists.
+     * @summary Create an agent
+     * @param {AIAgentsApiAiAgentsCreateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AgentsApi
      */
-    public createAgent(requestParameters: AgentsApiCreateAgentRequest = {}, options?: RawAxiosRequestConfig) {
-        return AgentsApiFp(this.configuration).createAgent(requestParameters.createAgentRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public aiAgentsCreate(requestParameters: AgentsApiAiAgentsCreateRequest, options?: RawAxiosRequestConfig) {
+        return AgentsApiFp(this.configuration).aiAgentsCreate(requestParameters.aiAgentsCreateRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Removes an ai agent.
-     * @summary Remove an ai agent
-     * @param {AIAgentsApiDeleteAgentRequest} requestParameters Request parameters.
+     * Deletes an AI agent room.
+     * @summary Delete an agent
+     * @param {AIAgentsApiAiAgentsDeleteRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AgentsApi
      */
-    public deleteAgent(requestParameters: AgentsApiDeleteAgentRequest, options?: RawAxiosRequestConfig) {
-        return AgentsApiFp(this.configuration).deleteAgent(requestParameters.id, requestParameters.deleteRoomRequest, options).then((request) => request(this.axios, this.basePath));
+    public aiAgentsDelete(requestParameters: AgentsApiAiAgentsDeleteRequest, options?: RawAxiosRequestConfig) {
+        return AgentsApiFp(this.configuration).aiAgentsDelete(requestParameters.id, requestParameters.aiAgentsDeleteRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Returns an ai agent.
-     * @summary Return an ai agent
-     * @param {AIAgentsApiGetAgentInfoRequest} requestParameters Request parameters.
+     * Returns one AI agent room, enriched with the `profileId` bound to it so an edit form can prefill the profile selector. A missing assignment simply leaves `profileId` out.
+     * @summary Get an agent
+     * @param {AIAgentsApiAiAgentsGetRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AgentsApi
      */
-    public getAgentInfo(requestParameters: AgentsApiGetAgentInfoRequest, options?: RawAxiosRequestConfig) {
-        return AgentsApiFp(this.configuration).getAgentInfo(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    public aiAgentsGet(requestParameters: AgentsApiAiAgentsGetRequest, options?: RawAxiosRequestConfig) {
+        return AgentsApiFp(this.configuration).aiAgentsGet(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Get ai agents
-     * @summary Get ai agents
-     * @param {AIAgentsApiGetAgentsRequest} requestParameters Request parameters.
+     * Lists the portal\'s AI agent rooms. Query parameters are forwarded unchanged to the .NET AI service, which answers with its folder-content payload.
+     * @summary List agents
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AgentsApi
      */
-    public getAgents(requestParameters: AgentsApiGetAgentsRequest = {}, options?: RawAxiosRequestConfig) {
-        return AgentsApiFp(this.configuration).getAgents(requestParameters.subjectId, requestParameters.subjectOwnerId, requestParameters.withoutTags, requestParameters.tags, requestParameters.excludeSubject, requestParameters.subjectFilter, requestParameters.quotaFilter, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
+    public aiAgentsList(options?: RawAxiosRequestConfig) {
+        return AgentsApiFp(this.configuration).aiAgentsList(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Returns the room new items.
-     * @summary Get the room new items
+     * Lists the new items across the caller\'s AI agent rooms.
+     * @summary List agent news items
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AgentsApi
      */
-    public getAgentsNewItems(options?: RawAxiosRequestConfig) {
-        return AgentsApiFp(this.configuration).getAgentsNewItems(options).then((request) => request(this.axios, this.basePath));
+    public aiAgentsNews(options?: RawAxiosRequestConfig) {
+        return AgentsApiFp(this.configuration).aiAgentsNews(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Resets the quota limit for the AI agents with the IDs specified in the request.
-     * @summary Reset the AI agents quota limit
-     * @param {AIAgentsApiResetAgentsQuotaRequest} requestParameters Request parameters.
+     * Resets the storage quota of the given AI agent rooms.
+     * @summary Reset agents\' quota
+     * @param {AIAgentsApiAiAgentsResetQuotaRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AgentsApi
      */
-    public resetAgentsQuota(requestParameters: AgentsApiResetAgentsQuotaRequest = {}, options?: RawAxiosRequestConfig) {
-        return AgentsApiFp(this.configuration).resetAgentsQuota(requestParameters.updateRoomsRoomIdsRequestDtoInteger, options).then((request) => request(this.axios, this.basePath));
+    public aiAgentsResetQuota(requestParameters: AgentsApiAiAgentsResetQuotaRequest, options?: RawAxiosRequestConfig) {
+        return AgentsApiFp(this.configuration).aiAgentsResetQuota(requestParameters.aiAgentsResetQuotaRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Updates an ai agent.
-     * @summary Update an ai agent
-     * @param {AIAgentsApiUpdateAgentRequest} requestParameters Request parameters.
+     * Updates an AI agent room - title, tags, instruction. `profileId` is not part of the room contract: it is stripped from the forwarded body and re-bound as the agent\'s assignment afterwards.
+     * @summary Update an agent
+     * @param {AIAgentsApiAiAgentsUpdateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AgentsApi
      */
-    public updateAgent(requestParameters: AgentsApiUpdateAgentRequest, options?: RawAxiosRequestConfig) {
-        return AgentsApiFp(this.configuration).updateAgent(requestParameters.id, requestParameters.updateRoomRequest, options).then((request) => request(this.axios, this.basePath));
+    public aiAgentsUpdate(requestParameters: AgentsApiAiAgentsUpdateRequest, options?: RawAxiosRequestConfig) {
+        return AgentsApiFp(this.configuration).aiAgentsUpdate(requestParameters.id, requestParameters.aiAgentsUpdateRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Changes the quota limit for the AI agents with the IDs specified in the request.
-     * @summary Change the AI agent quota limit
-     * @param {AIAgentsApiUpdateAgentsQuotaRequest} requestParameters Request parameters.
+     * Changes the storage quota of the given AI agent rooms.
+     * @summary Update agents\' quota
+     * @param {AIAgentsApiAiAgentsUpdateQuotaRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AgentsApi
      */
-    public updateAgentsQuota(requestParameters: AgentsApiUpdateAgentsQuotaRequest = {}, options?: RawAxiosRequestConfig) {
-        return AgentsApiFp(this.configuration).updateAgentsQuota(requestParameters.updateRoomsQuotaRequestDtoInteger, options).then((request) => request(this.axios, this.basePath));
+    public aiAgentsUpdateQuota(requestParameters: AgentsApiAiAgentsUpdateQuotaRequest, options?: RawAxiosRequestConfig) {
+        return AgentsApiFp(this.configuration).aiAgentsUpdateQuota(requestParameters.aiAgentsUpdateQuotaRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

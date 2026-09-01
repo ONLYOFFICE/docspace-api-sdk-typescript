@@ -6,7 +6,7 @@ The document options.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**watermark_on_draw** | [**WatermarkOnDraw**](WatermarkOnDraw.md) |  | [optional] [default to undefined]
+**watermark_on_draw** | [**WatermarkOnDraw**](WatermarkOnDraw.md) | The document watermark parameters. | [optional] [default to undefined]
 
 ## Example
 

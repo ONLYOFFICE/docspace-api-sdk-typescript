@@ -25,7 +25,13 @@ import type { FileLink } from './file-link';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the FileLink object.
+ */
 export interface FileLinkWrapper {
+    /**
+     * The FileLink object returned by the operation.
+     */
     'response'?: FileLink;
     /**
      * The total number of items in the response

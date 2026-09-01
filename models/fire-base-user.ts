@@ -50,6 +50,9 @@ export interface FireBaseUser {
      * Specifies if the user is subscribed to the push notifications or not.
      */
     'isSubscribed'?: boolean | null;
+    /**
+     * The database tenant parameters.
+     */
     'tenant'?: DbTenant;
 }
 

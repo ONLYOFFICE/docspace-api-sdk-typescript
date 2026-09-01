@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { RoomGroupDto } from './room-group-dto';
 
+/**
+ * The successful API response containing the RoomGroupDto object.
+ */
 export interface RoomGroupWrapper {
+    /**
+     * The RoomGroupDto object returned by the operation.
+     */
     'response'?: RoomGroupDto;
     /**
      * The total number of items in the response

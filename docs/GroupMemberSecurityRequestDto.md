@@ -6,9 +6,9 @@ The group member security information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user** | [**EmployeeFullDto**](EmployeeFullDto.md) |  | [default to undefined]
-**groupAccess** | [**FileShare**](FileShare.md) |  | [default to undefined]
-**userAccess** | [**FileShare**](FileShare.md) |  | [optional] [default to undefined]
+**user** | [**EmployeeFullDto**](EmployeeFullDto.md) | The group member parameters. | [default to undefined]
+**groupAccess** | [**FileShare**](FileShare.md) | The group access rights to the files. | [default to undefined]
+**userAccess** | [**FileShare**](FileShare.md) | The group member access rights to the files. | [optional] [default to undefined]
 **overridden** | **boolean** | Specifies if the group access rights are overridden or not. | [default to undefined]
 **canEditAccess** | **boolean** | Specifies if the group member can edit the group access rights or not. | [default to undefined]
 **owner** | **boolean** | Specifies if the group member is a group owner or not. | [default to undefined]

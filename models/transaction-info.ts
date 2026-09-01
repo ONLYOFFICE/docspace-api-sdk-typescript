@@ -18,22 +18,22 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { CurrencyAmount } from './currency-amount';
 
 /**
+ * @type TransactionInfo
  * Represents information about the transaction applied to an account.
+ * @export
  */
-export interface TransactionInfo {
+export type TransactionInfo = CurrencyAmount &  {
     /**
      * The date and time when the credit transaction occurred.
+     * @type {string}
+     * @memberof TransactionInfo
      */
     'date'?: string;
-    /**
-     * The three-character ISO 4217 currency symbol of the transaction.
-     */
-    'currency'?: string | null;
-    /**
-     * Amount of the transaction.
-     */
-    'amount'?: number;
-}
+};
+
 

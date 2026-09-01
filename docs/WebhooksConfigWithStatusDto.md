@@ -6,7 +6,7 @@ The webhook configuration with its status.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**configs** | [**WebhooksConfigDto**](WebhooksConfigDto.md) |  | [optional] [default to undefined]
+**configs** | [**WebhooksConfigDto**](WebhooksConfigDto.md) | The webhook configuration. | [optional] [default to undefined]
 **status** | **number** | The webhook status. | [optional] [default to undefined]
 
 ## Example

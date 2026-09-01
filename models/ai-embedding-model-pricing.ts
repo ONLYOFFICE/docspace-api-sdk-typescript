@@ -22,11 +22,33 @@
 // @ts-ignore
 import type { AiEmbeddingPrice } from './ai-embedding-price';
 
+/**
+ * The pricing of a single embedding model.
+ */
 export interface AiEmbeddingModelPricing {
+    /**
+     * The identifier of the model, as the provider expects it on the wire.
+     */
     'id': string | null;
+    /**
+     * The display name of the model.
+     */
     'alias'?: string | null;
+    /**
+     * The owner of the model, as reported by the provider.
+     */
     'ownedBy'?: string | null;
+    /**
+     * The provider that serves the model.
+     */
     'provider'?: string | null;
+    /**
+     * The link to the pricing page of the model.
+     */
+    'link'?: string | null;
+    /**
+     * The price of an embedding model, per token.
+     */
     'price': AiEmbeddingPrice;
 }
 

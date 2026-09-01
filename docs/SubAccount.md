@@ -6,8 +6,8 @@ Represents a sub-account with a specific currency and balance.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**currency** | **string** | The three-character ISO 4217 currency symbol of the sub-account. | [optional] [default to undefined]
-**amount** | **number** | The balance of the sub-account in the specified currency. | [optional] [default to undefined]
+**currency** | **string** | The three-character ISO 4217 currency symbol. | [optional] [default to undefined]
+**amount** | **number** | The amount in the specified currency. | [optional] [default to undefined]
 
 ## Example
 

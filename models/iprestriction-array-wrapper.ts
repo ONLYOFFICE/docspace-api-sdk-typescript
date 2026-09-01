@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { IPRestriction } from './iprestriction';
 
+/**
+ * The successful API response containing the list of IPRestriction objects.
+ */
 export interface IPRestrictionArrayWrapper {
+    /**
+     * The list of IPRestriction objects returned by the operation.
+     */
     'response'?: Array<IPRestriction>;
     /**
      * The total number of items in the response

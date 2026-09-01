@@ -6,7 +6,7 @@ The theme parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**theme** | [**DarkThemeSettingsType**](DarkThemeSettingsType.md) |  | [optional] [default to undefined]
+**theme** | [**DarkThemeSettingsType**](DarkThemeSettingsType.md) | The theme type. | [optional] [default to undefined]
 **lastModified** | **string** | The last modified date. | [optional] [default to undefined]
 
 ## Example

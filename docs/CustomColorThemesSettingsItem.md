@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **number** | The custom color theme ID. | [optional] [default to undefined]
 **name** | **string** | The custom color theme name. | [optional] [default to undefined]
-**main** | [**CustomColorThemesSettingsColorItem**](CustomColorThemesSettingsColorItem.md) |  | [optional] [default to undefined]
-**text** | [**CustomColorThemesSettingsColorItem**](CustomColorThemesSettingsColorItem.md) |  | [optional] [default to undefined]
+**main** | [**CustomColorThemesSettingsColorItem**](CustomColorThemesSettingsColorItem.md) | The custom color theme main colors. | [optional] [default to undefined]
+**text** | [**CustomColorThemesSettingsColorItem**](CustomColorThemesSettingsColorItem.md) | The custom color theme text colors. | [optional] [default to undefined]
 
 ## Example
 

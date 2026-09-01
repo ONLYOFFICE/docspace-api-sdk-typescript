@@ -28,6 +28,8 @@ import type { BooleanWrapper } from '../../models';
 // @ts-ignore
 import type { EmployeeArrayWrapper } from '../../models';
 // @ts-ignore
+import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
 import type { ObjectWrapper } from '../../models';
 // @ts-ignore
 import type { PasswordSettingsRequestsDto } from '../../models';

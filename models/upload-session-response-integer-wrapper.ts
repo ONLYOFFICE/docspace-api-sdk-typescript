@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { UploadSessionResponseDtoInteger } from './upload-session-response-dto-integer';
 
+/**
+ * The successful API response containing the UploadSessionResponseDtoInteger object.
+ */
 export interface UploadSessionResponseIntegerWrapper {
+    /**
+     * The UploadSessionResponseDtoInteger object returned by the operation.
+     */
     'response'?: UploadSessionResponseDtoInteger;
     /**
      * The total number of items in the response

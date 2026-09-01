@@ -7,7 +7,7 @@ An item in the ordering request with its entry type and ID.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **entryId** | **number** | The entry unique identifier (file or folder). | [default to undefined]
-**entryType** | [**FileEntryType**](FileEntryType.md) |  | [default to undefined]
+**entryType** | [**FileEntryType**](FileEntryType.md) | The entry type (file or folder). | [default to undefined]
 **order** | **number** | The order value. | [default to undefined]
 
 ## Example

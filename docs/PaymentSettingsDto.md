@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **feedbackAndSupportUrl** | **string** | The URL for accessing the feedback and support resources. | [optional] [default to undefined]
 **buyUrl** | **string** | The URL for purchasing or upgrading the product. | [default to undefined]
 **standalone** | **boolean** | Indicates whether the system is running in standalone mode. | [default to undefined]
-**currentLicense** | [**CurrentLicenseInfo**](CurrentLicenseInfo.md) |  | [default to undefined]
+**currentLicense** | [**CurrentLicenseInfo**](CurrentLicenseInfo.md) | The current license information. | [default to undefined]
 **max** | **number** | The maximum quota quantity. | [default to undefined]
 
 ## Example

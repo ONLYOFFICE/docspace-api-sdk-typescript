@@ -22,6 +22,9 @@
 // @ts-ignore
 import type { FormsItemData } from './forms-item-data';
 
+/**
+ * A single filled-in form submission.
+ */
 export interface FormResultsDto {
     /**
      * The date and time when the form was created.

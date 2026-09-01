@@ -26,10 +26,29 @@ import type { FilesStatisticsFolder } from './files-statistics-folder';
  * The file statistics result parameters.
  */
 export interface FilesStatisticsResultDto {
+    /**
+     * The used space of files in the \\My Documents\\ section.
+     */
     'myDocumentsUsedSpace'?: FilesStatisticsFolder;
+    /**
+     * The used space of files in the \\Trash\\ section.
+     */
     'trashUsedSpace'?: FilesStatisticsFolder;
+    /**
+     * The used space of files in the \\Archive\\ section.
+     */
     'archiveUsedSpace'?: FilesStatisticsFolder;
+    /**
+     * The used space of files in the \\Rooms\\ section.
+     */
     'roomsUsedSpace'?: FilesStatisticsFolder;
+    /**
+     * The used space of files in the \\AI agents\\ section.
+     */
     'aiAgentsUsedSpace'?: FilesStatisticsFolder;
+    /**
+     * The used space of files in the \\Forms\\ section.
+     */
+    'formsUsedSpace'?: FilesStatisticsFolder;
 }
 

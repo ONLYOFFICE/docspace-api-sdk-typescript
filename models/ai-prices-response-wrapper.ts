@@ -25,7 +25,13 @@ import type { AiPricesResponse } from './ai-prices-response';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the AiPricesResponse object.
+ */
 export interface AiPricesResponseWrapper {
+    /**
+     * The AiPricesResponse object returned by the operation.
+     */
     'response'?: AiPricesResponse;
     /**
      * The total number of items in the response

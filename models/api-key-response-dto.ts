@@ -20,9 +20,6 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ApiDateTime } from './api-date-time';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { EmployeeDto } from './employee-dto';
 
 /**
@@ -49,10 +46,22 @@ export interface ApiKeyResponseDto {
      * The list of permissions granted to the API key.
      */
     'permissions': Array<string> | null;
-    'lastUsed'?: ApiDateTime;
-    'createOn'?: ApiDateTime;
+    /**
+     * The date and time when the API key was last used.
+     */
+    'lastUsed'?: string | null;
+    /**
+     * The date and time when the API key was created.
+     */
+    'createOn'?: string | null;
+    /**
+     * The identifier of the user who created the API key.
+     */
     'createBy'?: EmployeeDto;
-    'expiresAt'?: ApiDateTime;
+    /**
+     * The date and time when the API key expires.
+     */
+    'expiresAt'?: string | null;
     /**
      * Indicates whether the API key is active or not.
      */

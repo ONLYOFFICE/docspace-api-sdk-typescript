@@ -42,6 +42,9 @@ export interface TaskProgressResponseDto {
      * Specifies if the task peogress is completed or not.
      */
     'isCompleted': boolean;
+    /**
+     * The status of the distributed task.
+     */
     'status': DistributedTaskStatus;
 }
 

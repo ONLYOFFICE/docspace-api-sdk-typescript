@@ -24,13 +24,23 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
+import type { AdditionalWhiteLabelSettingsDtoWrapper } from '../../models';
+// @ts-ignore
+import type { AdditionalWhiteLabelSettingsResponseWrapper } from '../../models';
+// @ts-ignore
 import type { AdditionalWhiteLabelSettingsWrapper } from '../../models';
 // @ts-ignore
 import type { BooleanWrapper } from '../../models';
 // @ts-ignore
 import type { CompanyWhiteLabelSettingsArrayWrapper } from '../../models';
 // @ts-ignore
+import type { CompanyWhiteLabelSettingsDtoWrapper } from '../../models';
+// @ts-ignore
+import type { CompanyWhiteLabelSettingsResponseWrapper } from '../../models';
+// @ts-ignore
 import type { CompanyWhiteLabelSettingsWrapper } from '../../models';
+// @ts-ignore
+import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
 import type { IsDefaultWhiteLabelLogosArrayWrapper } from '../../models';
 // @ts-ignore
@@ -1038,7 +1048,7 @@ export const RebrandingApiFp = function(configuration?: Configuration) {
          * REST API Reference for deleteAdditionalWhiteLabelSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-additional-white-label-settings/
          */
-        async deleteAdditionalWhiteLabelSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AdditionalWhiteLabelSettingsWrapper>> {
+        async deleteAdditionalWhiteLabelSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AdditionalWhiteLabelSettingsResponseWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteAdditionalWhiteLabelSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RebrandingApi.deleteAdditionalWhiteLabelSettings']?.[localVarOperationServerIndex]?.url;
@@ -1052,7 +1062,7 @@ export const RebrandingApiFp = function(configuration?: Configuration) {
          * REST API Reference for deleteCompanyWhiteLabelSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-company-white-label-settings/
          */
-        async deleteCompanyWhiteLabelSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CompanyWhiteLabelSettingsWrapper>> {
+        async deleteCompanyWhiteLabelSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CompanyWhiteLabelSettingsResponseWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteCompanyWhiteLabelSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RebrandingApi.deleteCompanyWhiteLabelSettings']?.[localVarOperationServerIndex]?.url;
@@ -1066,7 +1076,7 @@ export const RebrandingApiFp = function(configuration?: Configuration) {
          * REST API Reference for getAdditionalWhiteLabelSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-additional-white-label-settings/
          */
-        async getAdditionalWhiteLabelSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AdditionalWhiteLabelSettingsWrapper>> {
+        async getAdditionalWhiteLabelSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AdditionalWhiteLabelSettingsDtoWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAdditionalWhiteLabelSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RebrandingApi.getAdditionalWhiteLabelSettings']?.[localVarOperationServerIndex]?.url;
@@ -1080,7 +1090,7 @@ export const RebrandingApiFp = function(configuration?: Configuration) {
          * REST API Reference for getCompanyWhiteLabelSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-company-white-label-settings/
          */
-        async getCompanyWhiteLabelSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CompanyWhiteLabelSettingsWrapper>> {
+        async getCompanyWhiteLabelSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CompanyWhiteLabelSettingsDtoWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCompanyWhiteLabelSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RebrandingApi.getCompanyWhiteLabelSettings']?.[localVarOperationServerIndex]?.url;
@@ -1308,7 +1318,7 @@ export const RebrandingApiFactory = function (configuration?: Configuration, bas
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-additional-white-label-settings/
          * @throws {RequiredError}
          */
-        deleteAdditionalWhiteLabelSettings(options?: RawAxiosRequestConfig): AxiosPromise<AdditionalWhiteLabelSettingsWrapper> {
+        deleteAdditionalWhiteLabelSettings(options?: RawAxiosRequestConfig): AxiosPromise<AdditionalWhiteLabelSettingsResponseWrapper> {
             return localVarFp.deleteAdditionalWhiteLabelSettings(options).then((request) => request(axios, basePath));
         },
         /**
@@ -1319,7 +1329,7 @@ export const RebrandingApiFactory = function (configuration?: Configuration, bas
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-company-white-label-settings/
          * @throws {RequiredError}
          */
-        deleteCompanyWhiteLabelSettings(options?: RawAxiosRequestConfig): AxiosPromise<CompanyWhiteLabelSettingsWrapper> {
+        deleteCompanyWhiteLabelSettings(options?: RawAxiosRequestConfig): AxiosPromise<CompanyWhiteLabelSettingsResponseWrapper> {
             return localVarFp.deleteCompanyWhiteLabelSettings(options).then((request) => request(axios, basePath));
         },
         /**
@@ -1330,7 +1340,7 @@ export const RebrandingApiFactory = function (configuration?: Configuration, bas
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-additional-white-label-settings/
          * @throws {RequiredError}
          */
-        getAdditionalWhiteLabelSettings(options?: RawAxiosRequestConfig): AxiosPromise<AdditionalWhiteLabelSettingsWrapper> {
+        getAdditionalWhiteLabelSettings(options?: RawAxiosRequestConfig): AxiosPromise<AdditionalWhiteLabelSettingsDtoWrapper> {
             return localVarFp.getAdditionalWhiteLabelSettings(options).then((request) => request(axios, basePath));
         },
         /**
@@ -1341,7 +1351,7 @@ export const RebrandingApiFactory = function (configuration?: Configuration, bas
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-company-white-label-settings/
          * @throws {RequiredError}
          */
-        getCompanyWhiteLabelSettings(options?: RawAxiosRequestConfig): AxiosPromise<CompanyWhiteLabelSettingsWrapper> {
+        getCompanyWhiteLabelSettings(options?: RawAxiosRequestConfig): AxiosPromise<CompanyWhiteLabelSettingsDtoWrapper> {
             return localVarFp.getCompanyWhiteLabelSettings(options).then((request) => request(axios, basePath));
         },
         /**

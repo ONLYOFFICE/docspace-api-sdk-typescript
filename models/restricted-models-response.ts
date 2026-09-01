@@ -19,7 +19,13 @@
  */
 
 
+/**
+ * The AI models the portal is not allowed to use.
+ */
 export interface RestrictedModelsResponse {
+    /**
+     * The identifiers of the models the portal is not allowed to use.
+     */
     'models': Array<string> | null;
 }
 

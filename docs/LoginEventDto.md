@@ -7,12 +7,12 @@ The login event parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **number** | The login event ID. | [optional] [default to undefined]
-**date** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
+**date** | **string** | The login event date. | [optional] [default to undefined]
 **user** | **string** | The user name of the login event. | [optional] [default to undefined]
 **userId** | **string** | The user ID of the login event. | [optional] [default to undefined]
 **login** | **string** | The user login of the login event. | [optional] [default to undefined]
 **action** | **string** | The login event action. | [optional] [default to undefined]
-**actionId** | [**MessageAction**](MessageAction.md) |  | [optional] [default to undefined]
+**actionId** | [**MessageAction**](MessageAction.md) | The login-related action to filter events by. | [optional] [default to undefined]
 **ip** | **string** | The login event IP. | [optional] [default to undefined]
 **country** | **string** | The login event country. | [optional] [default to undefined]
 **city** | **string** | The login event city. | [optional] [default to undefined]

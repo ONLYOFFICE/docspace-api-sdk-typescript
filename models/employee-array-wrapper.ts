@@ -25,7 +25,13 @@ import type { EmployeeDto } from './employee-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the list of EmployeeDto objects.
+ */
 export interface EmployeeArrayWrapper {
+    /**
+     * The list of EmployeeDto objects returned by the operation.
+     */
     'response'?: Array<EmployeeDto>;
     /**
      * The total number of items in the response

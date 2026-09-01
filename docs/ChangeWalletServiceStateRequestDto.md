@@ -6,7 +6,7 @@ The request parameters for changing the tenant wallet service state.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**service** | [**TenantWalletService**](TenantWalletService.md) |  | [optional] [default to undefined]
+**service** | [**TenantWalletService**](TenantWalletService.md) | The wallet service type. | [optional] [default to undefined]
 **enabled** | **boolean** | Specifies whether the wallet service is enabled. | [optional] [default to undefined]
 
 ## Example

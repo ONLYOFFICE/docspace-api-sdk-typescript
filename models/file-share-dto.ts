@@ -38,14 +38,22 @@ import type { SubjectType } from './subject-type';
  * The file sharing information and access rights.
  */
 export interface FileShareDto {
+    /**
+     * The access rights type.
+     */
     'access'?: FileShare;
+    'sharedTo'?: any;
     /**
      * The user who has the access to the specified file.
-     * @deprecated
      */
-    'sharedTo'?: any | null;
     'sharedToUser'?: EmployeeFullDto;
+    /**
+     * The user who has the access to the specified file.
+     */
     'sharedToGroup'?: GroupSummaryDto;
+    /**
+     * The user who has the access to the specified file.
+     */
     'sharedLink'?: FileShareLink;
     /**
      * Specifies if the access right is locked or not.
@@ -75,6 +83,9 @@ export interface FileShareDto {
      * Specifies whether the file sharing access can be revoked by the current user.
      */
     'canRevoke': boolean;
+    /**
+     * The subject type.
+     */
     'subjectType': SubjectType;
 }
 

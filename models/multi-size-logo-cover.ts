@@ -19,6 +19,9 @@
  */
 
 
+/**
+ * The logo cover information, with the cover data in every available size.
+ */
 export interface MultiSizeLogoCover {
     /**
      * The logo cover ID.
@@ -27,6 +30,6 @@ export interface MultiSizeLogoCover {
     /**
      * The logo cover data.
      */
-    'data': { [key: string]: string | null; } | null;
+    'data': { [key: string]: string | null; };
 }
 

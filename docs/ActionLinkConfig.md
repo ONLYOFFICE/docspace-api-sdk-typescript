@@ -6,7 +6,7 @@ The config parameter which contains the information about the action in the docu
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**action** | [**ActionConfig**](ActionConfig.md) |  | [optional] [default to undefined]
+**action** | [**ActionConfig**](ActionConfig.md) | The information about the action in the document that will be scrolled to. | [optional] [default to undefined]
 
 ## Example
 

@@ -28,6 +28,8 @@ import type { EmailMemberRequestDto } from '../../models';
 // @ts-ignore
 import type { EmployeeFullWrapper } from '../../models';
 // @ts-ignore
+import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
 import type { UpdateMembersRequestDto } from '../../models';
 /**
  * GuestsApi - axios parameter creator

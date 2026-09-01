@@ -25,7 +25,13 @@ import type { EditHistoryDto } from './edit-history-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the list of EditHistoryDto objects.
+ */
 export interface EditHistoryArrayWrapper {
+    /**
+     * The list of EditHistoryDto objects returned by the operation.
+     */
     'response'?: Array<EditHistoryDto>;
     /**
      * The total number of items in the response

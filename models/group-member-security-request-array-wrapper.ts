@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { GroupMemberSecurityRequestDto } from './group-member-security-request-dto';
 
+/**
+ * The successful API response containing the list of GroupMemberSecurityRequestDto objects.
+ */
 export interface GroupMemberSecurityRequestArrayWrapper {
+    /**
+     * The list of GroupMemberSecurityRequestDto objects returned by the operation.
+     */
     'response'?: Array<GroupMemberSecurityRequestDto>;
     /**
      * The total number of items in the response

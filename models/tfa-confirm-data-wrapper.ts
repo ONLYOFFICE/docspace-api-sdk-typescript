@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { TfaConfirmDataDto } from './tfa-confirm-data-dto';
 
+/**
+ * The successful API response containing the TfaConfirmDataDto object.
+ */
 export interface TfaConfirmDataWrapper {
+    /**
+     * The TfaConfirmDataDto object returned by the operation.
+     */
     'response'?: TfaConfirmDataDto;
     /**
      * The total number of items in the response

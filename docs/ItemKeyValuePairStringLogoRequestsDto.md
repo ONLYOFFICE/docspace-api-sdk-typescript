@@ -1,12 +1,13 @@
 # ItemKeyValuePairStringLogoRequestsDto
 
+A key-value pair of a list item.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**key** | **string** |  | [optional] [default to undefined]
-**value** | [**LogoRequestsDto**](LogoRequestsDto.md) |  | [optional] [default to undefined]
+**key** | **string** | The key that identifies the item within the list. | [optional] [default to undefined]
+**value** | [**LogoRequestsDto**](LogoRequestsDto.md) | The value associated with the key. | [optional] [default to undefined]
 
 ## Example
 

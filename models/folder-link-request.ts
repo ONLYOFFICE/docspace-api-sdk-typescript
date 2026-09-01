@@ -20,9 +20,6 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ApiDateTime } from './api-date-time';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { FileShare } from './file-share';
 
 /**
@@ -33,8 +30,14 @@ export interface FolderLinkRequest {
      * The folder link ID.
      */
     'linkId'?: string;
+    /**
+     * The link sharing rights.
+     */
     'access'?: FileShare;
-    'expirationDate'?: ApiDateTime;
+    /**
+     * The link expiration date.
+     */
+    'expirationDate'?: string | null;
     /**
      * The link name.
      */

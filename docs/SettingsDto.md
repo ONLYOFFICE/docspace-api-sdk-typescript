@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **timezone** | **string** | The time zone. | [optional] [default to undefined]
 **trustedDomains** | **Array&lt;string&gt;** | The list of the trusted domains. | [optional] [default to undefined]
-**trustedDomainsType** | [**TenantTrustedDomainsType**](TenantTrustedDomainsType.md) |  | [optional] [default to undefined]
+**trustedDomainsType** | [**TenantTrustedDomainsType**](TenantTrustedDomainsType.md) | The type of the trusted domains. | [optional] [default to undefined]
 **culture** | **string** | The language. | [default to undefined]
 **utcOffset** | **string** | The UTC offset in the TimeSpan format. | [optional] [default to undefined]
 **utcHoursOffset** | **number** | The UTC offset in hours. | [optional] [default to undefined]
@@ -23,17 +23,17 @@ Name | Type | Description | Notes
 **isAmi** | **boolean** | Specifies if this portal is the AMI instance or not. | [optional] [default to undefined]
 **baseDomain** | **string** | The base domain. | [default to undefined]
 **wizardToken** | **string** | The wizard token. | [optional] [default to undefined]
-**passwordHash** | [**PasswordHasher**](PasswordHasher.md) |  | [optional] [default to undefined]
-**firebase** | [**FirebaseDto**](FirebaseDto.md) |  | [optional] [default to undefined]
+**passwordHash** | [**PasswordHasher**](PasswordHasher.md) | The password hash. | [optional] [default to undefined]
+**firebase** | [**FirebaseDto**](FirebaseDto.md) | The Firebase parameters. | [optional] [default to undefined]
 **version** | **string** | The portal version. | [optional] [default to undefined]
-**recaptchaType** | [**RecaptchaType**](RecaptchaType.md) |  | [optional] [default to undefined]
+**recaptchaType** | [**RecaptchaType**](RecaptchaType.md) | The type of CAPTCHA validation used. | [optional] [default to undefined]
 **recaptchaPublicKey** | **string** | The ReCAPTCHA public key. | [optional] [default to undefined]
 **debugInfo** | **boolean** | Specifies if the debug information will be sent or not. | [optional] [default to undefined]
 **socketUrl** | **string** | The socket URL. | [optional] [default to undefined]
-**tenantStatus** | [**TenantStatus**](TenantStatus.md) |  | [optional] [default to undefined]
+**tenantStatus** | [**TenantStatus**](TenantStatus.md) | The tenant status. | [optional] [default to undefined]
 **tenantAlias** | **string** | The tenant alias. | [optional] [default to undefined]
 **displayAbout** | **boolean** | Specifies whether to display the About portal section. | [optional] [default to undefined]
-**domainValidator** | [**TenantDomainValidator**](TenantDomainValidator.md) |  | [optional] [default to undefined]
+**domainValidator** | [**TenantDomainValidator**](TenantDomainValidator.md) | The domain validator. | [optional] [default to undefined]
 **zendeskKey** | **string** | The Zendesk key. | [optional] [default to undefined]
 **tagManagerId** | **string** | The tag manager ID. | [optional] [default to undefined]
 **cookieSettingsEnabled** | **boolean** | Specifies whether the cookie settings are enabled. | [default to undefined]
@@ -41,15 +41,16 @@ Name | Type | Description | Notes
 **limitedAccessDevToolsForUsers** | **boolean** | Specifies whether the access to the Developer Tools is limited for users or not. | [optional] [default to undefined]
 **displayBanners** | **boolean** | Specifies whether to display the promotional banners. | [optional] [default to undefined]
 **aiEnabled** | **boolean** | Specifies whether AI functionality (chat, agents, vectorization) is enabled for the current tenant.  When `false`, all AI features are disabled and the AI Agents folder is hidden. | [optional] [default to undefined]
+**walletLowBalance** | **boolean** | Specifies whether the tenant wallet balance is currently below the low-balance threshold. Only returned to portal administrators. | [optional] [default to undefined]
 **userNameRegex** | **string** | The user name validation regex. | [optional] [default to undefined]
 **invitationLimit** | **number** | The maximum number of invitations to the portal. | [optional] [default to undefined]
-**plugins** | [**PluginsDto**](PluginsDto.md) |  | [optional] [default to undefined]
-**deepLink** | [**DeepLinkDto**](DeepLinkDto.md) |  | [default to undefined]
-**formGallery** | [**FormGalleryDto**](FormGalleryDto.md) |  | [optional] [default to undefined]
+**plugins** | [**PluginsDto**](PluginsDto.md) | The plugins settings. | [optional] [default to undefined]
+**deepLink** | [**DeepLinkDto**](DeepLinkDto.md) | The deep link settings. | [default to undefined]
+**formGallery** | [**FormGalleryDto**](FormGalleryDto.md) | The form gallery settings. | [optional] [default to undefined]
 **maxImageUploadSize** | **number** | The maximum image upload size. | [optional] [default to undefined]
 **logoText** | **string** | The white label logo text. | [optional] [default to undefined]
-**externalResources** | [**CultureSpecificExternalResources**](CultureSpecificExternalResources.md) |  | [optional] [default to undefined]
-**defaultFolderType** | [**FolderType**](FolderType.md) |  | [optional] [default to undefined]
+**externalResources** | [**CultureSpecificExternalResources**](CultureSpecificExternalResources.md) | The external resources settings. | [optional] [default to undefined]
+**defaultFolderType** | [**FolderType**](FolderType.md) | Specifies the default folder type for the current settings. | [optional] [default to undefined]
 **externalDbEnabled** | **boolean** | Specifies if an external database is connected for storing form results. | [optional] [default to undefined]
 
 ## Example
@@ -93,6 +94,7 @@ const instance: SettingsDto = {
     limitedAccessDevToolsForUsers,
     displayBanners,
     aiEnabled,
+    walletLowBalance,
     userNameRegex,
     invitationLimit,
     plugins,

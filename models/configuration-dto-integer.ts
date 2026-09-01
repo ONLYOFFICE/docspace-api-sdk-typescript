@@ -44,12 +44,21 @@ import type { StartFillingMode } from './start-filling-mode';
  * The configuration parameters.
  */
 export interface ConfigurationDtoInteger {
+    /**
+     * The document configuration.
+     */
     'document': DocumentConfigDto;
     /**
      * The document type.
      */
     'documentType': string | null;
+    /**
+     * The editor configuration.
+     */
     'editorConfig': EditorConfigurationDto;
+    /**
+     * The editor type.
+     */
     'editorType': EditorType;
     /**
      * The editor URL.
@@ -63,6 +72,9 @@ export interface ConfigurationDtoInteger {
      * The platform type.
      */
     'type'?: string | null;
+    /**
+     * The file parameters.
+     */
     'file': FileDtoInteger;
     /**
      * The error message.
@@ -76,12 +88,21 @@ export interface ConfigurationDtoInteger {
      * The file filling status.
      */
     'fillingStatus'?: boolean | null;
+    /**
+     * The start filling mode.
+     */
     'startFillingMode'?: StartFillingMode;
     /**
      * The file filling session ID.
      */
     'fillingSessionId'?: string | null;
+    /**
+     * Indicates which quota scope has been exceeded.
+     */
     'quotaExceededScope'?: QuotaScope;
+    /**
+     * The generation tool call state. Used to run the agent flow in the editor.
+     */
     'generationToolCallState'?: EditorToolCallStateDto;
 }
 

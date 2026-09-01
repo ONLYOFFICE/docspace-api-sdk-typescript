@@ -24,13 +24,15 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
-import type { ApiDateTime } from '../../models';
+import type { AuditReportFormat } from '../../models';
+// @ts-ignore
+import type { DocumentBuilderTaskWrapper } from '../../models';
+// @ts-ignore
+import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
 import type { LoginEventArrayWrapper } from '../../models';
 // @ts-ignore
 import type { MessageAction } from '../../models';
-// @ts-ignore
-import type { StringWrapper } from '../../models';
 /**
  * LoginHistoryApi - axios parameter creator
  * @export
@@ -43,14 +45,15 @@ export const LoginHistoryApiAxiosParamCreator = function (configuration?: Config
             fields = f;
         },
         /**
-         * Generates the login history report.
-         * @summary Generate the login history report
+         * Starts generating the login history report (XLSX by default, or CSV) and saves it to My documents.
+         * @summary Start the login history report generation
+         * @param {AuditReportFormat} [format] The output file format of the report. Defaults to XLSX.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createLoginHistoryReport operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-login-history-report/
          */
-        createLoginHistoryReport: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createLoginHistoryReport: async (format?: AuditReportFormat, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/security/audit/login/report`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -82,6 +85,10 @@ export const LoginHistoryApiAxiosParamCreator = function (configuration?: Config
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             // authentication OpenId required
+
+            if (format !== undefined) {
+                localVarQueryParameter['format'] = format;
+            }
 
 
     
@@ -151,8 +158,8 @@ export const LoginHistoryApiAxiosParamCreator = function (configuration?: Config
          * @summary Get filtered login events
          * @param {string} [userId] The ID of the user whose login events are being queried.
          * @param {MessageAction} [action] The login-related action to filter events by.
-         * @param {ApiDateTime} [from] The starting date and time for filtering login events.
-         * @param {ApiDateTime} [to] The ending date and time for filtering login events.
+         * @param {string} [from] The starting date and time for filtering login events.
+         * @param {string} [to] The ending date and time for filtering login events.
          * @param {number} [count] The number of login events to retrieve in the query.
          * @param {number} [startIndex] The starting index for fetching a subset of login events from the query results.
          * @param {*} [options] Override http request option.
@@ -160,7 +167,7 @@ export const LoginHistoryApiAxiosParamCreator = function (configuration?: Config
          * REST API Reference for getLoginEventsByFilter operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-login-events-by-filter/
          */
-        getLoginEventsByFilter: async (userId?: string, action?: MessageAction, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getLoginEventsByFilter: async (userId?: string, action?: MessageAction, from?: string, to?: string, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/security/audit/login/filter`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -202,11 +209,15 @@ export const LoginHistoryApiAxiosParamCreator = function (configuration?: Config
             }
 
             if (from !== undefined) {
-                localVarQueryParameter['from'] = from;
+                localVarQueryParameter['from'] = (from as any instanceof Date) ?
+                    (from as any).toISOString() :
+                    from;
             }
 
             if (to !== undefined) {
-                localVarQueryParameter['to'] = to;
+                localVarQueryParameter['to'] = (to as any instanceof Date) ?
+                    (to as any).toISOString() :
+                    to;
             }
 
             if (count !== undefined) {
@@ -231,6 +242,110 @@ export const LoginHistoryApiAxiosParamCreator = function (configuration?: Config
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Returns the status of generating the login history report.
+         * @summary Get the login history report generation status
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getLoginHistoryReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-login-history-report/
+         */
+        getLoginHistoryReport: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/security/audit/login/report`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Terminates generating the login history report.
+         * @summary Terminate the login history report generation
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for terminateLoginHistoryReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-login-history-report/
+         */
+        terminateLoginHistoryReport: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/security/audit/login/report`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -242,15 +357,16 @@ export const LoginHistoryApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = LoginHistoryApiAxiosParamCreator(configuration)
     return {
         /**
-         * Generates the login history report.
-         * @summary Generate the login history report
+         * Starts generating the login history report (XLSX by default, or CSV) and saves it to My documents.
+         * @summary Start the login history report generation
+         * @param {AuditReportFormat} [format] The output file format of the report. Defaults to XLSX.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createLoginHistoryReport operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-login-history-report/
          */
-        async createLoginHistoryReport(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createLoginHistoryReport(options);
+        async createLoginHistoryReport(format?: AuditReportFormat, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentBuilderTaskWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createLoginHistoryReport(format, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['LoginHistoryApi.createLoginHistoryReport']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -274,8 +390,8 @@ export const LoginHistoryApiFp = function(configuration?: Configuration) {
          * @summary Get filtered login events
          * @param {string} [userId] The ID of the user whose login events are being queried.
          * @param {MessageAction} [action] The login-related action to filter events by.
-         * @param {ApiDateTime} [from] The starting date and time for filtering login events.
-         * @param {ApiDateTime} [to] The ending date and time for filtering login events.
+         * @param {string} [from] The starting date and time for filtering login events.
+         * @param {string} [to] The ending date and time for filtering login events.
          * @param {number} [count] The number of login events to retrieve in the query.
          * @param {number} [startIndex] The starting index for fetching a subset of login events from the query results.
          * @param {*} [options] Override http request option.
@@ -283,10 +399,38 @@ export const LoginHistoryApiFp = function(configuration?: Configuration) {
          * REST API Reference for getLoginEventsByFilter operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-login-events-by-filter/
          */
-        async getLoginEventsByFilter(userId?: string, action?: MessageAction, from?: ApiDateTime, to?: ApiDateTime, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoginEventArrayWrapper>> {
+        async getLoginEventsByFilter(userId?: string, action?: MessageAction, from?: string, to?: string, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoginEventArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getLoginEventsByFilter(userId, action, from, to, count, startIndex, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['LoginHistoryApi.getLoginEventsByFilter']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the status of generating the login history report.
+         * @summary Get the login history report generation status
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getLoginHistoryReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-login-history-report/
+         */
+        async getLoginHistoryReport(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentBuilderTaskWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getLoginHistoryReport(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['LoginHistoryApi.getLoginHistoryReport']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Terminates generating the login history report.
+         * @summary Terminate the login history report generation
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for terminateLoginHistoryReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-login-history-report/
+         */
+        async terminateLoginHistoryReport(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.terminateLoginHistoryReport(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['LoginHistoryApi.terminateLoginHistoryReport']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -300,15 +444,16 @@ export const LoginHistoryApiFactory = function (configuration?: Configuration, b
     const localVarFp = LoginHistoryApiFp(configuration)
     return {
         /**
-         * Generates the login history report.
-         * @summary Generate the login history report
+         * Starts generating the login history report (XLSX by default, or CSV) and saves it to My documents.
+         * @summary Start the login history report generation
+         * @param {LoginHistoryApiCreateLoginHistoryReportRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for createLoginHistoryReport operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-login-history-report/
          * @throws {RequiredError}
          */
-        createLoginHistoryReport(options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.createLoginHistoryReport(options).then((request) => request(axios, basePath));
+        createLoginHistoryReport(requestParameters: LoginHistoryApiCreateLoginHistoryReportRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<DocumentBuilderTaskWrapper> {
+            return localVarFp.createLoginHistoryReport(requestParameters.format, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns all the latest user login activity, including successful logins and error logs.
@@ -333,8 +478,44 @@ export const LoginHistoryApiFactory = function (configuration?: Configuration, b
         getLoginEventsByFilter(requestParameters: LoginHistoryApiGetLoginEventsByFilterRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<LoginEventArrayWrapper> {
             return localVarFp.getLoginEventsByFilter(requestParameters.userId, requestParameters.action, requestParameters.from, requestParameters.to, requestParameters.count, requestParameters.startIndex, options).then((request) => request(axios, basePath));
         },
+        /**
+         * Returns the status of generating the login history report.
+         * @summary Get the login history report generation status
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getLoginHistoryReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-login-history-report/
+         * @throws {RequiredError}
+         */
+        getLoginHistoryReport(options?: RawAxiosRequestConfig): AxiosPromise<DocumentBuilderTaskWrapper> {
+            return localVarFp.getLoginHistoryReport(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Terminates generating the login history report.
+         * @summary Terminate the login history report generation
+         * @param {*} [options] Override http request option.
+         * REST API Reference for terminateLoginHistoryReport operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-login-history-report/
+         * @throws {RequiredError}
+         */
+        terminateLoginHistoryReport(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.terminateLoginHistoryReport(options).then((request) => request(axios, basePath));
+        },
     };
 };
+
+/**
+ * Request parameters for createLoginHistoryReport operation in LoginHistoryApi.
+ * @export
+ * @interface LoginHistoryApiCreateLoginHistoryReportRequest
+ */
+export interface LoginHistoryApiCreateLoginHistoryReportRequest {
+    /**
+     * The output file format of the report. Defaults to XLSX.
+     * @type {AuditReportFormat}
+     * @memberof LoginHistoryApiCreateLoginHistoryReport
+     */
+    readonly format?: AuditReportFormat
+}
 
 /**
  * Request parameters for getLoginEventsByFilter operation in LoginHistoryApi.
@@ -358,17 +539,17 @@ export interface LoginHistoryApiGetLoginEventsByFilterRequest {
 
     /**
      * The starting date and time for filtering login events.
-     * @type {ApiDateTime}
+     * @type {string}
      * @memberof LoginHistoryApiGetLoginEventsByFilter
      */
-    readonly from?: ApiDateTime
+    readonly from?: string
 
     /**
      * The ending date and time for filtering login events.
-     * @type {ApiDateTime}
+     * @type {string}
      * @memberof LoginHistoryApiGetLoginEventsByFilter
      */
-    readonly to?: ApiDateTime
+    readonly to?: string
 
     /**
      * The number of login events to retrieve in the query.
@@ -393,14 +574,15 @@ export interface LoginHistoryApiGetLoginEventsByFilterRequest {
  */
 export class LoginHistoryApi extends BaseAPI {
     /**
-     * Generates the login history report.
-     * @summary Generate the login history report
+     * Starts generating the login history report (XLSX by default, or CSV) and saves it to My documents.
+     * @summary Start the login history report generation
+     * @param {SecurityLoginHistoryApiCreateLoginHistoryReportRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof LoginHistoryApi
      */
-    public createLoginHistoryReport(options?: RawAxiosRequestConfig) {
-        return LoginHistoryApiFp(this.configuration).createLoginHistoryReport(options).then((request) => request(this.axios, this.basePath));
+    public createLoginHistoryReport(requestParameters: LoginHistoryApiCreateLoginHistoryReportRequest = {}, options?: RawAxiosRequestConfig) {
+        return LoginHistoryApiFp(this.configuration).createLoginHistoryReport(requestParameters.format, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -424,6 +606,28 @@ export class LoginHistoryApi extends BaseAPI {
      */
     public getLoginEventsByFilter(requestParameters: LoginHistoryApiGetLoginEventsByFilterRequest = {}, options?: RawAxiosRequestConfig) {
         return LoginHistoryApiFp(this.configuration).getLoginEventsByFilter(requestParameters.userId, requestParameters.action, requestParameters.from, requestParameters.to, requestParameters.count, requestParameters.startIndex, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the status of generating the login history report.
+     * @summary Get the login history report generation status
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LoginHistoryApi
+     */
+    public getLoginHistoryReport(options?: RawAxiosRequestConfig) {
+        return LoginHistoryApiFp(this.configuration).getLoginHistoryReport(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Terminates generating the login history report.
+     * @summary Terminate the login history report generation
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LoginHistoryApi
+     */
+    public terminateLoginHistoryReport(options?: RawAxiosRequestConfig) {
+        return LoginHistoryApiFp(this.configuration).terminateLoginHistoryReport(options).then((request) => request(this.axios, this.basePath));
     }
 }
 

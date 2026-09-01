@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { XlsxReportResponseDto } from './xlsx-report-response-dto';
 
+/**
+ * The successful API response containing the XlsxReportResponseDto object.
+ */
 export interface XlsxReportResponseWrapper {
+    /**
+     * The XlsxReportResponseDto object returned by the operation.
+     */
     'response'?: XlsxReportResponseDto;
     /**
      * The total number of items in the response

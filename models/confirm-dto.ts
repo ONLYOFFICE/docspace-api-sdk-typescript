@@ -26,6 +26,9 @@ import type { ValidationResult } from './validation-result';
  * The confirmation parameters.
  */
 export interface ConfirmDto {
+    /**
+     * The confirmation result.
+     */
     'result': ValidationResult;
     /**
      * The confirmation room ID.

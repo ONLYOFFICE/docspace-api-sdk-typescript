@@ -6,7 +6,7 @@ The third-party account parameters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**auth_data** | [**AuthData**](AuthData.md) |  | [optional] [default to undefined]
+**auth_data** | [**AuthData**](AuthData.md) | The authentication data. | [optional] [default to undefined]
 **corporate** | **boolean** | Specifies if this is a corporate account or not. | [optional] [default to undefined]
 **roomsStorage** | **boolean** | Specifies if this is a room storage or not. | [optional] [default to undefined]
 **customer_title** | **string** | The customer title. | [optional] [default to undefined]

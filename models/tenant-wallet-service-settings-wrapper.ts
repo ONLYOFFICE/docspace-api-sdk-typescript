@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { TenantWalletServiceSettings } from './tenant-wallet-service-settings';
 
+/**
+ * The successful API response containing the TenantWalletServiceSettings object.
+ */
 export interface TenantWalletServiceSettingsWrapper {
+    /**
+     * The TenantWalletServiceSettings object returned by the operation.
+     */
     'response'?: TenantWalletServiceSettings;
     /**
      * The total number of items in the response

@@ -37,6 +37,9 @@ export interface CreateThirdPartyRoom {
      * The third-party room name to be created.
      */
     'title': string | null;
+    /**
+     * The third-party room type to be created.
+     */
     'roomType': RoomType;
     /**
      * Specifies whether to create the private third-party room or not.
@@ -62,6 +65,9 @@ export interface CreateThirdPartyRoom {
      * The list of tags of the third-party room.
      */
     'tags'?: Array<string> | null;
+    /**
+     * The logo request parameters of the third-party room.
+     */
     'logo'?: LogoRequest;
 }
 

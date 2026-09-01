@@ -20,16 +20,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ApiDateTime } from './api-date-time';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { RoomNewItemsDto } from './room-new-items-dto';
 
 /**
  * The new item parameters.
  */
 export interface NewItemsDtoRoomNewItemsDto {
-    'date': ApiDateTime;
+    /**
+     * The date and time when the new item was created.
+     */
+    'date': string | null;
     /**
      * The list of items.
      */

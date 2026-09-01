@@ -7,7 +7,7 @@ The parameters for managing form filling.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **formId** | **number** | The ID of the form to manage. | [default to undefined]
-**action** | [**FormFillingManageAction**](FormFillingManageAction.md) |  | [optional] [default to undefined]
+**action** | [**FormFillingManageAction**](FormFillingManageAction.md) | The action to perform on the form. | [optional] [default to undefined]
 
 ## Example
 

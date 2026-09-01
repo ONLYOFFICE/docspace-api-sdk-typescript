@@ -38,14 +38,14 @@ export interface TenantQuotaFeatureDto {
      * The image URL of the tenant quota feature.
      */
     'image'?: string | null;
-    /**
-     * The value of the tenant quota feature.
-     */
-    'value'?: any | null;
+    'value'?: any;
     /**
      * The type of the tenant quota feature.
      */
     'type'?: string | null;
+    /**
+     * The used space parameters of the tenant quota feature.
+     */
     'used'?: FeatureUsedDto;
     /**
      * The price title of the tenant quota feature.

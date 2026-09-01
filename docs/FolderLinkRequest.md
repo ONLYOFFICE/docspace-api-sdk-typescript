@@ -7,8 +7,8 @@ The folder link parameters.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **linkId** | **string** | The folder link ID. | [optional] [default to undefined]
-**access** | [**FileShare**](FileShare.md) |  | [optional] [default to undefined]
-**expirationDate** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] [default to undefined]
+**access** | [**FileShare**](FileShare.md) | The link sharing rights. | [optional] [default to undefined]
+**expirationDate** | **string** | The link expiration date. | [optional] [default to undefined]
 **title** | **string** | The link name. | [optional] [default to undefined]
 **password** | **string** | The link password. | [optional] [default to undefined]
 **denyDownload** | **boolean** | Specifies if downloading the file from the link is disabled or not. | [optional] [default to undefined]

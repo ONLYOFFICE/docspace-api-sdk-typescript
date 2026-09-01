@@ -26,6 +26,9 @@ import type { UserInfo } from './user-info';
  * The parameters of a user mentioned in a message.
  */
 export interface MentionWrapper {
+    /**
+     * The user information.
+     */
     'user'?: UserInfo;
     /**
      * The user email address.

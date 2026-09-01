@@ -32,6 +32,8 @@ import type { BooleanWrapper } from '../../models';
 // @ts-ignore
 import type { ConnectionTestResultWrapper } from '../../models';
 // @ts-ignore
+import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
 import type { ExternalDatabaseSettings } from '../../models';
 /**
  * SettingsAuthorizationApi - axios parameter creator

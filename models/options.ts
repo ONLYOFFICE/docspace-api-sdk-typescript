@@ -26,6 +26,9 @@ import type { WatermarkOnDraw } from './watermark-on-draw';
  * The document options.
  */
 export interface Options {
+    /**
+     * The document watermark parameters.
+     */
     'watermark_on_draw'?: WatermarkOnDraw;
 }
 

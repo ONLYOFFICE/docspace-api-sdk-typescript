@@ -46,6 +46,9 @@ export interface AuthData {
      * The authentication provider.
      */
     'provider'?: string | null;
+    /**
+     * The authentication token.
+     */
     'token'?: OAuth20Token;
 }
 

@@ -51,21 +51,45 @@ export interface CustomizationConfigDto {
      * Specifies if the customization is about.
      */
     'about'?: boolean;
+    /**
+     * The customization customer configuration.
+     */
     'customer'?: CustomerConfigDto;
+    /**
+     * The anonymous configuration of the customization.
+     */
     'anonymous'?: AnonymousConfigDto;
+    /**
+     * The feedback configuration of the customization.
+     */
     'feedback'?: FeedbackConfig;
     /**
      * Specifies if the customization should be force saved.
      */
     'forcesave'?: boolean | null;
+    /**
+     * The go back configuration of the customization.
+     */
     'goback'?: GobackConfig;
+    /**
+     * The review configuration of the customization.
+     */
     'review'?: ReviewConfig;
+    /**
+     * The logo of the customization.
+     */
     'logo'?: LogoConfigDto;
     /**
      * Specifies if the share should be mentioned.
      */
     'mentionShare'?: boolean;
+    /**
+     * The Complete & Submit button settings.
+     */
     'submitForm'?: SubmitForm;
+    /**
+     * The parameters of the button that starts filling out the form.
+     */
     'startFillingForm'?: StartFillingForm;
 }
 

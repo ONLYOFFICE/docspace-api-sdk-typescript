@@ -16,17 +16,17 @@ Name | Type | Description | Notes
 **language** | **string** | The tenant language. | [optional] [default to undefined]
 **timeZone** | **string** | The tenant time zone. | [optional] [default to undefined]
 **trustedDomainsRaw** | **string** | The tenant trusted domains raw. | [optional] [default to undefined]
-**trustedDomainsEnabled** | [**TenantTrustedDomainsType**](TenantTrustedDomainsType.md) |  | [optional] [default to undefined]
-**status** | [**TenantStatus**](TenantStatus.md) |  | [optional] [default to undefined]
+**trustedDomainsEnabled** | [**TenantTrustedDomainsType**](TenantTrustedDomainsType.md) | The type of the tenant trusted domains. | [optional] [default to undefined]
+**status** | [**TenantStatus**](TenantStatus.md) | The tenant status. | [optional] [default to undefined]
 **statusChanged** | **string** | The date and time when the tenant status was changed. | [optional] [default to undefined]
 **statusChangedHack** | **string** | The hacked date and time when the tenant status was changed. | [optional] [default to undefined]
 **creationDateTime** | **string** | The tenant creation date. | [optional] [default to undefined]
 **ownerId** | **string** | The tenant owner ID. | [optional] [default to undefined]
 **paymentId** | **string** | The tenant payment ID. | [optional] [default to undefined]
-**industry** | [**TenantIndustry**](TenantIndustry.md) |  | [optional] [default to undefined]
+**industry** | [**TenantIndustry**](TenantIndustry.md) | The tenant industry. | [optional] [default to undefined]
 **lastModified** | **string** | The date and time when the tenant was last modified. | [optional] [default to undefined]
 **calls** | **boolean** | Specifies if the calls are available for the current tenant or not. | [optional] [default to undefined]
-**partner** | [**DbTenantPartner**](DbTenantPartner.md) |  | [optional] [default to undefined]
+**partner** | [**DbTenantPartner**](DbTenantPartner.md) | The database tenant partner parameters. | [optional] [default to undefined]
 
 ## Example
 

@@ -26,6 +26,9 @@ import type { BackupPeriod } from './backup-period';
  * The backup cron parameters.
  */
 export interface CronParams {
+    /**
+     * The backup period type.
+     */
     'period'?: BackupPeriod;
     /**
      * The time of the day to start the backup process.

@@ -25,7 +25,13 @@ import type { AuditEventDto } from './audit-event-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the list of AuditEventDto objects.
+ */
 export interface AuditEventArrayWrapper {
+    /**
+     * The list of AuditEventDto objects returned by the operation.
+     */
     'response'?: Array<AuditEventDto>;
     /**
      * The total number of items in the response

@@ -29,7 +29,10 @@ export interface WalletQuantityRequestDto {
     /**
      * The mapping of item identifiers to their respective quantities in the payment.
      */
-    'quantity'?: { [key: string]: number | null; } | null;
+    'quantity': { [key: string]: number | null; };
+    /**
+     * The type of action performed on a product\'s quantity.
+     */
     'productQuantityType'?: ProductQuantityType;
 }
 

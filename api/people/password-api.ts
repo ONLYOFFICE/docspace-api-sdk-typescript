@@ -30,6 +30,8 @@ import type { EmailMemberRequestDto } from '../../models';
 // @ts-ignore
 import type { EmployeeFullWrapper } from '../../models';
 // @ts-ignore
+import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
 import type { StringWrapper } from '../../models';
 /**
  * PasswordApi - axios parameter creator

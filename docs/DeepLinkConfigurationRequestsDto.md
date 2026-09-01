@@ -6,7 +6,7 @@ The request parameters for managing the deep link configuration.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**deepLinkSettings** | [**TenantDeepLinkSettings**](TenantDeepLinkSettings.md) |  | [optional] [default to undefined]
+**deepLinkSettings** | [**TenantDeepLinkSettings**](TenantDeepLinkSettings.md) | The deep link settings for the specified tenant. | [optional] [default to undefined]
 
 ## Example
 
